@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!-- This view entity contains any information needed to display the claims in the recent claims list displayed under
+    the claim tab. If you want to change how claims are displayed in this list then make sure the columns you need
+    are present in this view entity and then change the display name for this entity to display the information you
+    want. -->
+<viewEntityExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ClaimRecentView">
+  <viewEntityColumn
+    name="ClaimNumber"
+    path="ClaimNumber"/>
+  <viewEntityTypekey
+    name="LossType"
+    path="LossType"/>
+  <viewEntityName
+    name="InsuredDenorm"
+    path="InsuredDenorm"/>
+  <viewEntityName
+    name="ClaimantDenorm"
+    path="ClaimantDenorm"/>
+</viewEntityExtension>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="CustomerServiceTiersLV">
+    <Require
+      name="customerServiceTierSpecialHandlingList"
+      type="CustomerServiceTierSpecialHandling[]"/>
+    <ExposeIterator
+      valueType="entity.CustomerServiceTierSpecialHandling"
+      widget="CustomerServiceTiersLV"/>
+    <RowIterator
+      checkBoxVisible="perm.System.custsvctiermng"
+      editable="false"
+      elementName="aCustServiceTierSpecialHandling"
+      hasCheckBoxes="true"
+      value="customerServiceTierSpecialHandlingList"
+      valueType="entity.CustomerServiceTierSpecialHandling[]">
+      <Row>
+        <TypeKeyCell
+          action="CustomerServiceTierDetail.drilldown(aCustServiceTierSpecialHandling)"
+          id="CustomerServiceTierName"
+          label="DisplayKey.get(&quot;Web.Admin.CustomerServiceTier.Name&quot;)"
+          value="aCustServiceTierSpecialHandling.CustomerServiceTier"
+          valueType="typekey.CustomerServiceTier"/>
+        <TextCell
+          id="CustomerServiceTierDescription"
+          label="DisplayKey.get(&quot;Web.Admin.CustomerServiceTier.Description&quot;)"
+          value="aCustServiceTierSpecialHandling.CustomerServiceTier.Description"
+          width="500"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

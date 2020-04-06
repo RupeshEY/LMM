@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    editable="false"
+    id="ClaimTransactionsLV">
+    <Require
+      name="ecfMessages"
+      type="java.util.List&lt;entity.ECFMessageClaimData_Ext&gt;"/>
+    <RowIterator
+      editable="false"
+      elementName="ecfMessage"
+      id="ecfMessageIterator"
+      type="entity.ECFMessageClaimData_Ext"
+      value="ecfMessages"
+      valueType="java.util.List&lt;entity.ECFMessageClaimData_Ext&gt;">
+      <Row
+        id="ecfMessage">
+        <LinkCell
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimTransactions.Response&quot;)">
+          <Link
+            action="ECFTransactionDetailsPopup.push(ecfMessage, true)"
+            available="ecfMessage.Respondable"
+            id="responseButton"
+            label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimMessages.CreateResponse.Button&quot;)"
+            styleClass="bigButton"/>
+        </LinkCell>
+        <TextCell
+          action="ECFTransactionDetailsPopup.push(ecfMessage)"
+          id="tr"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimTransactions.TR&quot;)"
+          value="ecfMessage.TR"/>
+        <TextCell
+          id="transactionStatus"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimTransactions.TransactionStatus&quot;)"
+          value="ecfMessage.TransactionStatus?.DisplayName ?: &quot;&quot;"/>
+        <TextCell
+          groupedOnEnter="true"
+          id="messageSyndicate"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimTransactions.SyndicateIdAndRole&quot;)"
+          value="ecfMessage.SyndicateID+&quot; - &quot;+ecfMessage.BureauType.DisplayName+&quot; - &quot;+ecfMessage.Role.DisplayName"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

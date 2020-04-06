@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Formulas specifying which days to include in calculating the Target Date of a denial period"
+  name="JurisdictionalFormula">
+  <typecode
+    code="AfterLossDate"
+    desc="x days after Loss Date"
+    name="x days after Loss Date"/>
+  <typecode
+    code="AfterNoticeDate"
+    desc="y days after Notice Date"
+    name="y days after Notice Date"/>
+  <typecode
+    code="AfterLossAndNotice"
+    desc="Greater of x days after Loss Date or y days after Notice Date"
+    name="Greater of x days after Loss Date or y days after Notice Date"/>
+  <typefilter
+    desc="Typecodes relevant to a denial due date"
+    name="DenialDueDate">
+    <include
+      code="AfterLossDate"/>
+    <include
+      code="AfterNoticeDate"/>
+    <include
+      code="AfterLossAndNotice"/>
+  </typefilter>
+</typelistextension>

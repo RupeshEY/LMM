@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <!-- Used where the claim could possibly be archived -->
+  <Forward
+    canVisit="gw.api.claim.ClaimNumberSearchUtil.isArchived(ClaimInfo) ? perm.ClaimInfo.view(ClaimInfo) : (perm.Claim.view(ClaimInfo.Claim) and perm.System.viewclaimsummary)"
+    id="ClaimInfoForward"
+    parent="ClaimTabForward()">
+    <LocationEntryPoint
+      signature="ClaimInfoForward(ClaimInfo : ClaimInfo)"/>
+    <Variable
+      name="ClaimInfo"
+      type="ClaimInfo"/>
+    <ForwardCondition
+      action="ArchivedClaim.go(ClaimInfo)"
+      condition="gw.api.claim.ClaimNumberSearchUtil.isArchived(ClaimInfo)"/>
+    <ForwardCondition
+      action="FNOLWizard.go(ClaimInfo.Claim)"
+      condition="ClaimInfo.Claim.State == TC_DRAFT"/>
+    <ForwardCondition
+      action="pcf.Claim.go(ClaimInfo.Claim)"/>
+    <ForwardCondition
+      action="pcf.CannotViewClaim.go()"/>
+  </Forward>
+</PCF>

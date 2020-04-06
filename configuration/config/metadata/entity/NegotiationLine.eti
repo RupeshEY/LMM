@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A negotiation line for a negotiation e.g., a demand, offer, or couteroffer."
+  entity="NegotiationLine"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="negotiationline"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.NegotiationLine"
+    impl="com.guidewire.cc.domain.claim.impl.NegotiationLineImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Represents a single line amount discussed in a Negotiation. A Negotiation contains an array of NegotiationLine
+        entities representing the back-and-forth financial values discussed.
+      
+    ]]></fulldescription>
+  <column
+    desc="Date the negotiation line was made."
+    name="NegotiationDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Amount of the demand, offer, or counteroffer. Not always applicable."
+    name="Amount"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Notes or comments explaining the reasoning behind this negotiation line."
+    name="Note"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    columnName="NegotiationID"
+    desc="Related negotiation."
+    exportable="false"
+    fkentity="Negotiation"
+    name="Negotiation"
+    nullok="false"/>
+  <typekey
+    desc="The type of this negotiation line."
+    name="Type"
+    nullok="true"
+    typelist="NegotiationType"/>
+</entity>

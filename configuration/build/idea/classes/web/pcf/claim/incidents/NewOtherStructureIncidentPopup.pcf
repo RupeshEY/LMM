@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="claim != null and perm.Claim.createincident(claim)"
+    id="NewOtherStructureIncidentPopup"
+    returnType="OtherStructureIncident"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.OtherStructureIncident.PopupHeader&quot;)">
+    <LocationEntryPoint
+      signature="NewOtherStructureIncidentPopup(claim : Claim)"/>
+    <Variable
+      initialValue="createIncident()"
+      name="incident"
+      type="entity.OtherStructureIncident"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Screen
+      id="NewOtherStructureIncidentScreen">
+      <TitleBar
+        icon="incident.HeaderIcon"/>
+      <Toolbar>
+        <EditButtons
+          pickValue="incident"/>
+      </Toolbar>
+      <PanelRef
+        def="OtherStructureIncidentCV(incident)"/>
+    </Screen>
+    <Code><![CDATA[
+function createIncident() : OtherStructureIncident {
+  var newIncident = claim.newIncident(entity.OtherStructureIncident) as OtherStructureIncident
+  return newIncident
+}
+      
+    ]]></Code>
+  </Popup>
+</PCF>

@@ -1,0 +1,261 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="ClaimSummaryHeadlinePanelSet">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <PanelRow
+      columnDivider="true">
+      <PanelColumn
+        id="BasicsPanel">
+        <DetailViewPanel>
+          <InputHeaderSection>
+            <Label
+              id="BasicsLabel"
+              label="DisplayKey.get(&quot;Web.ClaimSummary.Headline.Basics.Label&quot;)"/>
+          </InputHeaderSection>
+          <InputColumn>
+            <BarInput
+              highInclusive="!onlyTargetValueExists(claim.DaysOpenClaimMetric.Limit)"
+              highThreshold="HighThreshold"
+              id="DaysOpenProgressBar"
+              label="claim.State.DisplayName"
+              lowInclusive="noYellowValueExists(claim.DaysOpenClaimMetric.Limit)"
+              lowThreshold="LowThreshold"
+              percentage="DaysOpenPercentage"
+              status="OpenStatus"
+              switchHighLowStyle="true"
+              visible="!claim.Closed and showBarInput()"/>
+            <TextInput
+              id="DaysOpenText"
+              labelAbove="true"
+              value="DisplayKey.get(&quot;Web.ClaimSummary.Headline.Basics.ClaimOpenWithState&quot;,  claim.State.DisplayName, OpenStatus)"
+              visible="!claim.Closed and !showBarInput()"/>
+            <TextInput
+              id="ClaimClosedText"
+              label="claim.State.DisplayName"
+              value="getClaimClosedText()"
+              visible="claim.Closed"/>
+            <TextAreaInput
+              id="Description"
+              labelAbove="true"
+              maxChars="60"
+              numCols="30"
+              numRows="3"
+              value="claim.Description"
+              visible="claim.Description.HasContent"/>
+            <ContentInput
+              boldValue="true"
+              labelAbove="true"
+              visible="claim.hasOtherInstructions()">
+              <Link
+                action="ClaimOtherInstructionWorksheet.goInWorkspace(claim)"
+                id="ViewClaimOtherInstructions"
+                label="DisplayKey.get(&quot;NVV.Claim.SpecialHandling.OtherInstructions.ViewButton&quot;)"
+                styleClass="miniButton"/>
+            </ContentInput>
+            <ContentInput
+              id="ThreePointContactIcons"
+              label="DisplayKey.get(&quot;Web.ClaimSummary.Headline.ThreePointContact.Label&quot;)"
+              visible="claim.LossType == LossType.TC_WC and claim.shouldShowWCThreePointContactActivities()">
+              <Link
+                icon="claim.getWCContactEmployerActivityStatus().First"
+                id="EmployerThreePointContact"
+                tooltip="claim.getWCContactEmployerActivityStatus().Second"/>
+              <Link
+                icon="claim.getWCContactEmployeeActivityStatus().First"
+                id="EmployeeThreePointContact"
+                tooltip="claim.getWCContactEmployeeActivityStatus().Second"/>
+              <Link
+                icon="claim.getWCContactMedProviderActivityStatus().First"
+                id="MedicalProviderThreePointContact"
+                tooltip="claim.getWCContactMedProviderActivityStatus().Second"/>
+            </ContentInput>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelColumn>
+      <PanelColumn
+        id="FinancialsPanel">
+        <DetailViewPanel
+          columnDivider="false">
+          <InputHeaderSection>
+            <Label
+              id="FinancialsLabel"
+              label="DisplayKey.get(&quot;Web.ClaimSummary.Headline.Financials.Label&quot;)"/>
+          </InputHeaderSection>
+          <InputColumn
+            width="75">
+            <ContentInput
+              labelAbove="true">
+              <Link
+                icon="gw.api.financials.FinancialsPieChartIconUtil.getFinancialsPercentageIcon(claim)"
+                id="PieChartIcon"/>
+            </ContentInput>
+          </InputColumn>
+          <InputColumn>
+            <TextInput
+              id="TotalGrossIncurred"
+              label="DisplayKey.get(&quot;Web.ClaimSummary.Headline.Financials.GrossIncurred&quot;)"
+              value="gw.api.util.CurrencyUtil.renderAsCurrency(claim.ClaimRpt.TotalIncurredGross)"/>
+            <TextInput
+              id="Paid"
+              label="DisplayKey.get(&quot;Web.ClaimSummary.Headline.Financials.Paid&quot;)"
+              value="claim.TotalPaidClaimMetric.DisplayValue"/>
+            <TextInput
+              id="Recovered"
+              label="DisplayKey.get(&quot;Web.ClaimSummary.Headline.Financials.Recovered&quot;)"
+              value="gw.api.util.CurrencyUtil.renderAsCurrency(claim.ClaimRpt.TotalRecoveries)"/>
+            <InputIterator
+              elementName="deductible"
+              id="DeductibleIterator"
+              value="claim.getDeductibles()"
+              valueType="entity.Deductible[]">
+              <TextInput
+                id="DeductibleInput"
+                label="DisplayKey.get(&quot;Web.ClaimSummary.Headline.Financials.Deductible&quot;)"
+                value="deductible.DisplayAmount"/>
+            </InputIterator>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelColumn>
+      <PanelColumn
+        id="RiskIndicatorsPanel">
+        <DetailViewPanel>
+          <InputHeaderSection>
+            <Label
+              id="RiskIndicatorLabel"
+              label="DisplayKey.get(&quot;Web.ClaimSummary.Headline.RiskIndicators.Label&quot;)"/>
+          </InputHeaderSection>
+          <InputColumn>
+            <InputIterator
+              elementName="indicator"
+              id="RiskIndicatorIterator"
+              value="claim.ClaimIndicators.where( \ c -&gt; c.IsOn).orderBy( \ e -&gt; ((e.Subtype.Priority) as java.lang.Comparable&lt;java.lang.Object&gt;)).toTypedArray()"
+              valueType="entity.ClaimIndicator[]">
+              <ContentInput
+                labelAbove="true">
+                <Link
+                  icon="indicator.Icon"
+                  id="IndicatorIcon"
+                  tooltip="not (indicator typeis SubrogationClaimIndicator) ? indicator.HoverText : &quot;&quot;"/>
+                <Link
+                  id="IndicatorText"
+                  label="indicator.Text"/>
+              </ContentInput>
+            </InputIterator>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelColumn>
+    </PanelRow>
+    <Code><![CDATA[property get DaysOpenPercentage() : java.lang.Double {
+  var limit = claim.DaysOpenClaimMetric.Limit
+  var daysOpen = claim.DaysOpenClaimMetric.Value as java.lang.Integer
+  var result : java.lang.Double = null
+  if (limit != null) {
+    if (limit.RedValue != null) {
+      result = calculatePercentageValue(daysOpen, limit.RedValue)
+    } else if (limit.YellowValue != null) {
+      result = calculatePercentageValue(daysOpen, limit.YellowValue )
+    } else if (limit.TargetValue != null) {
+      result = calculatePercentageValue(daysOpen, limit.TargetValue )
+    }
+  }
+  return result
+}
+
+property get LowThreshold() : java.lang.Double {
+  var limit = claim.DaysOpenClaimMetric.Limit
+  var threshold : java.lang.Double = null
+  if (limit != null) {
+    if (limit.YellowValue != null and limit.RedValue != null) {
+      threshold = (new java.math.BigDecimal(limit.YellowValue as java.lang.Integer)).divide(new java.math.BigDecimal(limit.RedValue as java.lang.Integer), 2, gw.api.util.CurrencyUtil.getRoundingMode()).multiply( 100 ).doubleValue()
+    } else {
+      threshold = MaxPercentage
+    } 
+  }
+  return threshold
+}
+
+property get HighThreshold() : java.lang.Double {
+  var limit = claim.DaysOpenClaimMetric.Limit
+  var threshold : java.lang.Double = null
+  if (limit != null) {
+    if (limit.RedValue != null or onlyTargetValueExists(limit)) {
+      //when both yellow and red value is null but target is not null, set high threshold to 100
+      //this is done so that the progress bar can show green color
+      threshold = MaxPercentage
+    }
+  }
+  return threshold
+}
+
+property get OpenStatus() : String {
+  var status : String = null
+  var limit = claim.DaysOpenClaimMetric.Limit
+  var value = claim.DaysOpenClaimMetric.Value
+  if (value == (1 as java.lang.Comparable<java.lang.Object>)) {
+    if (limit.TargetValue != null and limit.TargetValue != (0 as java.lang.Comparable<java.lang.Object>)) {
+      status = DisplayKey.get("Web.ClaimSummary.Headline.Basics.ClaimOpenStringSingularWithTarget", value, limit.TargetValue )
+    } else {
+      status = DisplayKey.get("Web.ClaimSummary.Headline.Basics.ClaimOpenStringSingular", value )
+    }
+  } else {
+    if (limit.TargetValue != null and limit.TargetValue != (0 as java.lang.Comparable<java.lang.Object>)) {
+      status = DisplayKey.get("Web.ClaimSummary.Headline.Basics.ClaimOpenStringPluralWithTarget", value, limit.TargetValue )
+    } else {
+      status = DisplayKey.get("Web.ClaimSummary.Headline.Basics.ClaimOpenStringPlural", value )
+    }
+  }
+  return status
+}
+
+function showBarInput() : boolean {
+  var limit = claim.DaysOpenClaimMetric.Limit
+  if (limit != null) {
+    //if any of the red/yellow/target value is not null and not 0, show the progressbar
+    if ((limit.RedValue != null and limit.RedValue != (0 as java.lang.Comparable<java.lang.Object>)) 
+        or (limit.TargetValue != null and limit.TargetValue != (0 as java.lang.Comparable<java.lang.Object>))
+        or (limit.YellowValue != null and limit.YellowValue != (0 as java.lang.Comparable<java.lang.Object>))) {
+      return true
+    }
+  }
+  return false
+}
+
+function getClaimClosedText() : String {
+  var text : String = null
+  var closeDate = claim.CloseDate == null ? DisplayKey.get("Web.NA") : claim.CloseDate.format(gw.api.util.LocaleUtil.getCurrentLocale().DateFormat.Short)
+  if (claim.DaysOpenClaimMetric.Value == (1 as java.lang.Comparable<java.lang.Object>)) {
+    text = DisplayKey.get("Web.ClaimSummary.Headline.Basics.ClaimClosedStringSingular", closeDate , claim.DaysOpenClaimMetric.Value) 
+  } else {
+    text = DisplayKey.get("Web.ClaimSummary.Headline.Basics.ClaimClosedStringPlural", closeDate , claim.DaysOpenClaimMetric.Value)
+  }
+  return text
+}
+
+private function calculatePercentageValue(value : java.lang.Integer, threshold : java.lang.Comparable) : java.lang.Double {
+  var result : java.lang.Double = null
+  if (value >= threshold) {
+    result = MaxPercentage
+  } else {
+    result = (new java.math.BigDecimal(value)).divide(new java.math.BigDecimal(threshold as java.lang.Integer), 2, gw.api.util.CurrencyUtil.getRoundingMode() ).multiply( 100 ).doubleValue()
+  }
+  return result
+}
+
+function onlyTargetValueExists(limit : gw.api.metric.MetricLimitMethods ) : boolean {
+ return limit.YellowValue == null and limit.RedValue == null and limit.TargetValue != null
+}
+
+function noYellowValueExists(limit : gw.api.metric.MetricLimitMethods) : boolean {
+  return limit.YellowValue == null
+}
+
+property get MaxPercentage() : java.lang.Double {
+  return 100
+}]]></Code>
+  </PanelSet>
+</PCF>

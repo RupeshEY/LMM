@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Details of injured body parts."
+  entity="BodyPartDetails"
+  exportable="true"
+  extendable="true"
+  loadable="true"
+  platform="false"
+  table="bodypart"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.BodyPartDetails"
+    impl="com.guidewire.cc.domain.exposure.impl.BodyPartDetailsImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Collects details of body injury for an InjuryIncident. Each instance of this entity represents a
+        body part injured in the incident. An individual InjuryIncident can have multiple BodyPartDetails,
+        representing injured body parts of the Person (ClaimContact) with role of "injured" for the
+        InjuryIncident.
+      
+    ]]></fulldescription>
+  <foreignkey
+    columnName="IncidentID"
+    desc="The foreign key to the Indicent."
+    exportable="false"
+    fkentity="InjuryIncident"
+    name="Incident"
+    nullok="false"/>
+  <typekey
+    desc="Area of the body where the body part is located."
+    name="PrimaryBodyPart"
+    nullok="true"
+    typelist="BodyPartType"/>
+  <typekey
+    desc="Specific body part. Choices filtered by PrimaryBodyPart."
+    name="DetailedBodyPart"
+    nullok="true"
+    typelist="DetailedBodyPartType">
+    <keyfilters>
+      <keyfilter
+        name="PrimaryBodyPart"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="Decision on compensability for this body part."
+    name="CompensabilityDecision"
+    nullok="true"
+    typelist="CompensabilityDecision"/>
+  <column
+    desc="Decision Date of compensability."
+    name="CompensabilityDecisionDate"
+    nullok="true"
+    type="datetime"/>
+  <!-- Old "Compensability" column renamed "CompensabilityComments" -->
+  <column
+    desc="Comments on compensability of injury."
+    name="CompensabilityComments"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Order of the body parts (i.e. First BodyPart should be lowest), based on importance or order entered."
+    name="Ordering"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Percentage of Permanment Impairment"
+    name="ImpairmentPercentage"
+    nullok="true"
+    type="percentage"/>
+  <typekey
+    desc="Side Of Body"
+    name="SideOfBody"
+    nullok="true"
+    typelist="SideOfBody"/>
+  <typekey
+    desc="Description of Detailed Body Part"
+    name="DetailedBodyPartDesc"
+    nullok="true"
+    typelist="DetailedBodyPartDesc">
+    <keyfilters>
+      <keyfilter
+        name="DetailedBodyPart"/>
+    </keyfilters>
+  </typekey>
+</entity>

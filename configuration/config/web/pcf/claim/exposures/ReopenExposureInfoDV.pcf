@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_exposure.xml -->
+  <DetailViewPanel
+    id="ReopenExposureInfoDV">
+    <Require
+      name="ReopenExposureInfo"
+      type="ReopenExposureInfo"/>
+    <InputColumn>
+      <TextAreaInput
+        editable="true"
+        id="Note"
+        label="DisplayKey.get(&quot;NVV.Exposure.ReopenExposure.Note&quot;)"
+        numCols="30"
+        numRows="3"
+        value="ReopenExposureInfo.note"/>
+      <TypeKeyInput
+        editable="true"
+        id="Reason"
+        label="DisplayKey.get(&quot;NVV.Exposure.ReopenExposure.Reason&quot;)"
+        value="ReopenExposureInfo.reopenReason"
+        valueType="typekey.ExposureReopenedReason"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

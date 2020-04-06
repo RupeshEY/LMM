@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Line of business"
+  name="LOBCode">
+  <typecode
+    code="WorkersCompLine"
+    desc="Workers' Comp"
+    name="Workers' Comp Line">
+    <category
+      code="WorkersComp"
+      typelist="PolicyType"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="IMLine"
+    desc="Inland Marine Line"
+    name="Inland Marine Line">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="InlandMarine"
+      typelist="PolicyType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PersonalAutoLine"
+    desc="Personal Auto"
+    name="Personal Auto Line">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPLine"
+    desc="Commercial Property"
+    name="Commercial Property Line">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialProperty"
+      typelist="PolicyType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPLine"
+    desc="BusinessOwners"
+    name="Businessowners Line">
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLLine"
+    desc="General Liability"
+    name="General Liability Line">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BusinessAutoLine"
+    desc="Commercial Auto Line"
+    name="Commercial Auto Line">
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="HomeownersLine_HOE"
+    desc="Homeowners Line"
+    name="Homeowners Line">
+    <category
+      code="Homeowners"
+      typelist="PolicyType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="PC-PEL"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PersonalUmbrellaLine_PUE"
+    desc="Personal Umbrella Line"
+    name="Personal Umbrella Line">
+    <category
+      code="PersonalUmbrella"
+      typelist="PolicyType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="PC-PEL"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="other_liab"
+    desc="Other Liability"
+    name="Other Liability">
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="prof_liability"
+      typelist="PolicyType"/>
+    <category
+      code="farmowners"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="travel"
+    desc="Travel line"
+    name="Travel">
+    <category
+      code="TRAV"
+      typelist="LossType"/>
+    <category
+      code="travel_per"
+      typelist="PolicyType"/>
+  </typecode>
+</typelistextension>

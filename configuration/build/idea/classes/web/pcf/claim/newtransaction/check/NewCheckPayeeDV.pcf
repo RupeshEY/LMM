@@ -1,0 +1,263 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <DetailViewPanel
+    id="NewCheckPayeeDV">
+    <Require
+      name="Check"
+      type="Check"/>
+    <Require
+      name="Wizard"
+      type="gw.api.financials.CheckWizardInfo"/>
+    <Variable
+      initialValue="Check.ShowAddressFields"
+      name="showAddressFields"
+      type="boolean"/>
+    <InputColumn>
+      <!-- Customization Warning: the following fields are explicitly used by the code
+      and they should not be removed or have their names changed:
+      Check.PrimaryPayee.Type:    is used to decide on Check.Reportability
+      Check.JointPayee.Name:    is used to check that PrimaryPayee and JointPayee are not equal
+      Check.JointPayee.Type:    is used to decide on Check.Reportability -->
+      <Label
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.PrimaryPayee&quot;)"
+        visible="Check.Payees.length &lt;= 1"/>
+      <ClaimContactInput
+        claim="Check.Claim"
+        editable="true"
+        id="PrimaryPayee_Name"
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.PrimaryPayee.Name&quot;)"
+        onPick="Check.handleOnPickForPayee(Check.FirstPayee); showAddressFields = !Check.addressRequiredFieldsValid();"
+        required="true"
+        searchLocation="NewCheckWizardAddressBookPickerPopup.push(statictypeof(Check.FirstPayee.Payee), Check.Claim)"
+        value="Check.FirstPayee.Payee"
+        valueRange="Check.Claim.PayeeCandidates"
+        visible="Check.Payees.length &lt;= 1">
+        <PostOnChange
+          onChange="Check.handleOnPickForPayee(Check.FirstPayee); showAddressFields = !Check.addressRequiredFieldsValid();"/>
+      </ClaimContactInput>
+      <RangeInput
+        editable="true"
+        id="PrimaryPayee_Type"
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.PrimaryPayee.Type&quot;)"
+        required="true"
+        value="Check.FirstPayee.PayeeType"
+        valueRange="Check.getAllowedPayeeTypes(Check.FirstPayee.Payee)"
+        valueType="typekey.ContactRole"
+        visible="Check.Payees.length &lt;= 1"/>
+      <TypeKeyInput
+        id="PrimaryPayee_Currency"
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.Payee.Currency&quot;)"
+        value="Check.FirstPayee.Payee.PreferredCurrency"
+        valueType="typekey.Currency"
+        visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode() &amp;&amp; Check.Payees.length &lt;= 1"/>
+      <ButtonInput
+        action="Check.addNewPayee()"
+        id="AddJointPayees"
+        value="DisplayKey.get(&quot;NVV.Financials.Check.AddJointPayees&quot;)"
+        visible="Check.Payees.length &lt;= 1 "/>
+      <ListViewInput
+        boldLabel="true"
+        editable="true"
+        label="DisplayKey.get(&quot;NVV.Financials.Check.Payees&quot;)"
+        labelAbove="true"
+        visible="Check.Payees.length &gt; 1">
+        <Toolbar>
+          <IteratorButtons
+            iterator="NewCheckPayeeDVPayeesLV"/>
+        </Toolbar>
+        <ListViewPanel
+          id="NewCheckPayeeDVPayeesLV"
+          validationExpression="Check.validateCheckPayees(); return null">
+          <RowIterator
+            editable="true"
+            elementName="CheckPayee"
+            toCreateAndAdd="Check.addNewPayee()"
+            toRemove="Check.removeFromPayees(CheckPayee); Check.handleOnPickForPayee(null);"
+            value="Check.Payees"
+            valueType="entity.CheckPayee[]">
+            <Row>
+              <ClaimContactCell
+                claim="Check.Claim"
+                editable="true"
+                id="PayeeName"
+                label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.PrimaryPayee.Name&quot;)"
+                onPick="Check.handleOnPickForPayee(CheckPayee)"
+                required="true"
+                searchLocation="NewCheckWizardAddressBookPickerPopup.push(statictypeof(CheckPayee.Payee), Check.Claim)"
+                value="CheckPayee.Payee"
+                valueRange="Check.Claim.PayeeCandidates">
+                <PostOnChange
+                  onChange="Check.handleOnPickForPayee(CheckPayee)"/>
+              </ClaimContactCell>
+              <TypeKeyCell
+                editable="true"
+                id="PayeeType"
+                label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.PrimaryPayee.Type&quot;)"
+                required="true"
+                validationExpression="CheckPayee.PayeeType == TC_CLAIMANT &amp;&amp; !CheckPayee.ClaimContact.isClaimant() ? DisplayKey.get(&quot;Java.NewPayment.Error.PayeeIsNotClaimant&quot;) : null"
+                value="CheckPayee.PayeeType"
+                valueType="typekey.ContactRole"/>
+              <!-- NOTE pdalbora 18-Jun-2007: Removed the trigger, since PayeeName has postOnChange="true" -->
+              <TypeKeyCell
+                id="Payee_Currency"
+                label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.Payee.Currency&quot;)"
+                value="CheckPayee.Payee.PreferredCurrency"
+                valueType="typekey.Currency"
+                visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </ListViewInput>
+      <InputDivider/>
+      <RangeRadioInput
+        boldLabel="true"
+        editable="true"
+        filter="VALUE !=  PaymentMethod.TC_MANUAL"
+        id="PaymentMethod"
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentInstructions.Check.PaymentMethod&quot;)"
+        value="Check.PaymentMethod"
+        valueRange="PaymentMethod.getTypeKeys( false )"
+        valueType="typekey.PaymentMethod">
+        <PostOnChange
+          onChange="Check.handleOnPickForPayee(null)"/>
+      </RangeRadioInput>
+      <TextAreaInput
+        boldLabel="true"
+        editable="true"
+        id="PayTo"
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.PayTo&quot;)"
+        numRows="1"
+        required="Check.PaymentMethod != PaymentMethod.TC_EFT"
+        value="Check.PayTo"
+        visible="Check.PaymentMethod != PaymentMethod.TC_EFT"/>
+      <InputSet
+        id="EFTDataInputSet"
+        visible="Check.PaymentMethod == PaymentMethod.TC_EFT">
+        <RangeInput
+          editable="true"
+          id="EFTRecords"
+          label="DisplayKey.get(&quot;Web.Financials.Check.BankData.SelectEFT&quot;)"
+          value="Check.EFTData"
+          valueRange="Check.FirstPayee.Payee.EFTRecords"
+          valueType="entity.EFTData"/>
+        <TextAreaInput
+          editable="true"
+          id="PayTo"
+          label="DisplayKey.get(&quot;Web.Financials.Check.BankData.BankAcctHolderName&quot;)"
+          numRows="1"
+          required="true"
+          value="Check.PayTo">
+          <Reflect
+            triggerIds="EFTRecords"
+            value="VALUE.AccountName"/>
+        </TextAreaInput>
+        <TextInput
+          editable="true"
+          id="BankName"
+          label="DisplayKey.get(&quot;Web.Financials.Check.BankData.BankName&quot;)"
+          value="Check.BankName">
+          <Reflect
+            triggerIds="EFTRecords"
+            value="VALUE.BankName"/>
+        </TextInput>
+        <RangeRadioInput
+          editable="true"
+          id="BankAccountType"
+          label="DisplayKey.get(&quot;Web.Financials.Check.BankData.BankAccountType&quot;)"
+          required="true"
+          value="Check.BankAccountType"
+          valueRange="BankAccountType.getTypeKeys( false )"
+          valueType="typekey.BankAccountType">
+          <Reflect
+            triggerIds="EFTRecords"
+            value="VALUE.BankAccountType"/>
+        </RangeRadioInput>
+        <PrivacyInput
+          editable="true"
+          encryptionExpression="Check.maskBankAccountNumber(VALUE)"
+          id="BankAccountNumber"
+          label="DisplayKey.get(&quot;Web.Financials.Check.BankData.BankAccountNumber&quot;)"
+          required="true"
+          value="Check.BankAccountNumber">
+          <Reflect
+            triggerIds="EFTRecords"
+            value="VALUE.BankAccountNumber"/>
+        </PrivacyInput>
+        <TextInput
+          editable="true"
+          id="BankRoutingNumber"
+          label="DisplayKey.get(&quot;Web.Financials.Check.BankData.BankRoutingNumber&quot;)"
+          required="true"
+          value="Check.BankRoutingNumber">
+          <Reflect
+            triggerIds="EFTRecords"
+            value="VALUE.BankRoutingNumber"/>
+        </TextInput>
+      </InputSet>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.MailTo&quot;)"
+        visible="Check.PaymentMethod != PaymentMethod.TC_EFT"/>
+      <TypeKeyInput
+        editable="true"
+        id="DeliveryMethod"
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.DeliveryMethod&quot;)"
+        value="Check.DeliveryMethod"
+        valueType="typekey.DeliveryMethod"
+        visible="Check.PaymentMethod != PaymentMethod.TC_EFT"/>
+      <TextInput
+        editable="true"
+        id="MailToContact"
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.MailToContact&quot;)"
+        required="true"
+        value="Check.MailTo"
+        visible="Check.PaymentMethod != PaymentMethod.TC_EFT"/>
+      <TextInput
+        id="OldMailingAddress"
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.OldMailToAddress&quot;)"
+        value="Check.OldMailToAddress"
+        visible="Check.PaymentMethod != PaymentMethod.TC_EFT and Check.OldMailToAddress != null"/>
+      <TextInput
+        id="MailingAddress"
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.MailingAddress&quot;)"
+        value="Check.CheckAddressOwner.Address"
+        valueType="entity.Address"
+        visible="Check.PaymentMethod != PaymentMethod.TC_EFT"/>
+      <CheckBoxInput
+        editable="true"
+        id="ToggleAddressEdit"
+        labelAbove="true"
+        value="showAddressFields"
+        valueLabel="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.EditMailingAddress&quot;)"
+        visible="Check.PaymentMethod != PaymentMethod.TC_EFT and Check.FirstPayee.Payee != null">
+        <PostOnChange
+          target="MailingAddressInputSet"/>
+      </CheckBoxInput>
+      <InputSetRef
+        def="CCAddressInputSet(Check.CheckAddressOwner)"
+        id="MailingAddressInputSet"
+        visible="Check.PaymentMethod != PaymentMethod.TC_EFT and showAddressFields"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.TaxReporting&quot;)"/>
+      <TypeKeyInput
+        editable="true"
+        id="Reportability"
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.Reportability&quot;)"
+        value="Check.Reportability"
+        valueType="typekey.ReportabilityType">
+        <Reflect
+          triggerIds="PrimaryPayee_Type"
+          value="javascript:VALUE == 'vendor' ? 'reportable' : 'notreportable'"/>
+      </TypeKeyInput>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="ServiceRequestInvoiceInputSet(Wizard, true)"
+        mode="Wizard.Check.ServiceRequestInvoices.Count == 1 ? &quot;single&quot; : &quot;multiple&quot;"
+        visible="Wizard.Check.LinkedToServiceRequests"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="FNOLContactInputSet">
+    <Require
+      name="contactPerson"
+      type="Contact"/>
+    <Require
+      name="role"
+      type="ContactRole"/>
+    <Require
+      name="incident"
+      type="Incident"/>
+    <TypeKeyInput
+      editable="true"
+      id="DriverRelationToOwner"
+      label="DisplayKey.get(&quot;NVV.Claim.NewClaimPeople.Claim.DriverRelationToOwner&quot;)"
+      value="(incident as VehicleIncident).DriverRelation"
+      valueType="typekey.PersonRelationType"
+      visible="role == ContactRole.TC_DRIVER"/>
+    <InputSetRef
+      def="GlobalPersonNameInputSet(new gw.api.name.ContactNameOwner(new gw.api.name.PersonNameDelegate(contactPerson as Person)))"
+      mode="gw.api.name.NameLocaleSettings.PCFMode"/>
+    <InputSetRef
+      def="CCAddressInputSet(contactPerson.AddressOwner)"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(contactPerson, Contact#WorkPhone), DisplayKey.get(&quot;Web.FNOLContactPopup.ContactDV.BusinessPhone.Label&quot;), false))"
+      editable="true"
+      id="reporter_businessphone"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(contactPerson, Contact#HomePhone), DisplayKey.get(&quot;Web.FNOLContactPopup.ContactDV.HomePhone.Label&quot;), false))"
+      editable="true"
+      id="reporter_homephone"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(contactPerson, Person#CellPhone), DisplayKey.get(&quot;Web.FNOLContactPopup.ContactDV.Mobile.Label&quot;), false))"
+      editable="true"
+      id="reporter_mobile"/>
+    <TypeKeyInput
+      editable="true"
+      id="reporter_primarytype"
+      label="DisplayKey.get(&quot;Web.FNOLContactPopup.ContactDV.PrimaryPhone.Label&quot;)"
+      value="(contactPerson as Person).PrimaryPhone"
+      valueType="typekey.PrimaryPhoneType"/>
+    <TextInput
+      editable="true"
+      id="reporter_email"
+      label="DisplayKey.get(&quot;Web.FNOLContactPopup.ContactDV.Email.Label&quot;)"
+      value="(contactPerson as Person).EmailAddress1"/>
+    <TextInput
+      editable="true"
+      formatType="email"
+      id="Email2"
+      label="DisplayKey.get(&quot;Web.ContactDetail.PrimaryContact.Email2&quot;)"
+      value="(contactPerson as Person).EmailAddress2"/>
+    <InputDivider
+      visible="role == ContactRole.TC_DRIVER"/>
+    <TextInput
+      editable="true"
+      id="DriverLicense"
+      label="DisplayKey.get(&quot;Web.FNOLContactPopup.ContactDV.License.Label&quot;)"
+      value="(contactPerson as Person).LicenseNumber"
+      visible="role == ContactRole.TC_DRIVER"/>
+    <TypeKeyInput
+      editable="true"
+      filter="VALUE.hasCategory(JurisdictionType.TC_DRIVING_LIC)"
+      id="DriverLicenseState"
+      label="DisplayKey.get(&quot;Web.FNOLContactPopup.ContactDV.LicenseState.Label&quot;)"
+      value="(contactPerson as Person).LicenseState"
+      valueType="typekey.Jurisdiction"
+      visible="role == ContactRole.TC_DRIVER"/>
+    <TypeKeyInput
+      editable="true"
+      id="reason"
+      label="DisplayKey.get(&quot;Web.FNOLContactPopup.ContactDV.ReasonToUse.Label&quot;)"
+      value="(incident as VehicleIncident).VehicleUseReason"
+      valueType="typekey.ReasonForUse"
+      visible="role == ContactRole.TC_DRIVER"/>
+    <TextAreaInput
+      editable="true"
+      id="Notes"
+      label="DisplayKey.get(&quot;Web.FNOLContactPopup.ContactDV.Notes.Label&quot;)"
+      numRows="5"
+      value="(contactPerson as Person).Notes"/>
+  </InputSet>
+</PCF>

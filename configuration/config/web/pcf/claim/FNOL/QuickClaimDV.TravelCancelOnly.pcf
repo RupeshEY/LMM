@@ -1,0 +1,232 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- The following Name Value Views are for the claims loss details screens.
+They are organized by business line.  The screens are organized as follows:
+
+Auto
+Property
+General Liability
+Workers' Compensation
+
+Each Business Line has three name value view areas. Remember, the application
+specifically calls these name value views. Then you have complete control. The
+three areas for each business line are as follows:
+
+Quick claim
+New Claim Wizard
+Folder -->
+  <DetailViewPanel
+    id="QuickClaimDV"
+    mode="TravelCancelOnly">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Claim.ReportedBy&quot;)"/>
+      <ClaimContactInput
+        claim="Claim"
+        editable="true"
+        id="ReportedBy_Name"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Claim.ReportedBy.Name&quot;)"
+        newContactMenu="ClaimNewPersonOnlyPickerMenuItemSet"
+        required="true"
+        value="Claim.reporter"
+        valueRange="Claim.RelatedPersonArray"/>
+      <TypeKeyInput
+        editable="true"
+        id="Claim_ReportedByType"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Claim.ReportedByType&quot;)"
+        required="true"
+        value="Claim.ReportedByType"
+        valueType="typekey.PersonRelationType">
+        <Reflect
+          triggerIds="ReportedBy_Name">
+          <ReflectCondition
+            condition="VALUE==null"
+            value="&quot;&quot;"/>
+          <ReflectCondition
+            condition="VALUE==Claim.Insured"
+            value="&quot;self&quot;"/>
+          <ReflectCondition
+            condition="true"
+            value="&quot;&quot;"/>
+        </Reflect>
+      </TypeKeyInput>
+      <TextInput
+        id="ReportedBy_WorkPhone"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Claim.ReportedBy.WorkPhone&quot;)"
+        value="Claim.reporter.PrimaryPhoneValue">
+        <Reflect
+          triggerIds="ReportedBy_Name"
+          value="VALUE.PrimaryPhoneValue"/>
+      </TextInput>
+      <TextInput
+        id="ReportedBy_Address"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Claim.ReportedBy.Address&quot;)"
+        value="Claim.reporter.PrimaryAddressDisplayValue">
+        <Reflect
+          triggerIds="ReportedBy_Name"
+          value="VALUE.PrimaryAddressDisplayValue"/>
+      </TextInput>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Claim.Policy&quot;)"/>
+      <TextInput
+        id="Policy_PolicyNumber"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Policy.PolicyNumber&quot;)"
+        value="Claim.Policy.PolicyNumber"/>
+      <TypeKeyInput
+        id="Policy_Status"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Policy.Status&quot;)"
+        value="Claim.Policy.Status"
+        valueType="typekey.PolicyStatus"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Claim.General&quot;)"/>
+      <TypeKeyInput
+        editable="true"
+        id="Claim_LOBCode"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Claim.LOBCode&quot;)"
+        required="true"
+        value="Claim.LOBCode"
+        valueType="typekey.LOBCode"/>
+      <TypeKeyInput
+        id="Claim_LossType"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Claim.LossType&quot;)"
+        required="false"
+        value="Claim.LossType"
+        valueType="typekey.LossType"/>
+      <InputDivider/>
+      <TextAreaInput
+        boldLabel="true"
+        editable="true"
+        id="Claim_Description"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Claim.Description&quot;)"
+        numCols="50"
+        numRows="3"
+        value="Claim.Description"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Claim.LossDetails&quot;)"/>
+      <TypeKeyInput
+        editable="true"
+        id="Claim_LossCause"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Claim.LossCause&quot;)"
+        required="true"
+        value="Claim.LossCause"
+        valueType="typekey.LossCause"/>
+      <DateInput
+        dateFormat="short"
+        id="Claim_LossDate"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Claim.LossDate&quot;)"
+        timeFormat="short"
+        validationExpression="Claim.LossDate == null || Claim.LossDate &lt; gw.api.util.DateUtil.currentDate() ? null : DisplayKey.get(&quot;Java.Validation.Date.ForbidFuture&quot;)"
+        value="Claim.LossDate"/>
+      <DateInput
+        editable="true"
+        id="Notification_ReportedDate"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Claim.Notification.ReportedDate&quot;)"
+        required="true"
+        validationExpression="Claim.ReportedDate == null || Claim.ReportedDate &lt; gw.api.util.DateUtil.currentDate() ? null : DisplayKey.get(&quot;Java.Validation.Date.ForbidFuture&quot;)"
+        value="Claim.ReportedDate"/>
+      <BooleanRadioInput
+        editable="true"
+        id="Status_IncidentReport"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Claim.Status.IncidentReport&quot;)"
+        required="true"
+        value="Claim.IncidentReport"/>
+      <BooleanRadioInput
+        editable="true"
+        id="Status_CoverageQuestion"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Claim.Status.CoverageQuestion&quot;)"
+        required="false"
+        value="Claim.CoverageInQuestion"/>
+    </InputColumn>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Claim.LossLocation&quot;)"/>
+      <InputSetRef
+        def="CCAddressInputSet(Claim.AddressOwner)"
+        editable="true"/>
+      <InputDivider/>
+      <ListViewInput
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimTravel.Trips&quot;)"
+        labelAbove="true">
+        <Toolbar>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="Claim.cancelTrips( CheckedValues )"
+            flags="all activeTrip"
+            id="CancelTrips_ToolbarButton"
+            iterator="TripRULV"
+            label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimTravel.Trips.CancelSelectedTrips&quot;)"/>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="Claim.undoTripCancellation( CheckedValues )"
+            flags="all cancelledTrip"
+            id="UndoCancellations_ToolbarButton"
+            iterator="TripRULV"
+            label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimTravel.Trips.UndoTripCancellation&quot;)"/>
+        </Toolbar>
+        <ListViewPanel
+          id="TripRULV">
+          <RowIterator
+            editable="false"
+            elementName="aTripRU"
+            hasCheckBoxes="true"
+            value="Claim.Policy.RiskUnits.whereTypeIs(TripRU)"
+            valueType="entity.TripRU[]">
+            <ToolbarFlag
+              condition="Claim.TripIncidentsOnly.where( \ i -&gt; i.TripRU == aTripRU ).Count == 0"
+              name="activeTrip"/>
+            <IteratorSort
+              sortBy="aTripRU.DisplayName"
+              sortOrder="1"/>
+            <ToolbarFlag
+              condition="Claim.TripIncidentsOnly.where( \ i -&gt; i.TripRU == aTripRU ).Count &gt; 0"
+              name="cancelledTrip"/>
+            <Row>
+              <TextCell
+                action="TripRUPopup.push( Claim, aTripRU, false )"
+                actionAvailable="true"
+                available="true"
+                id="aTripRU"
+                value="aTripRU.DisplayName.length &gt; 60 ? aTripRU.DisplayName.substring( 0, 57 ) + &quot;...&quot; : aTripRU.DisplayName"
+                wrap="true"/>
+              <TextCell
+                id="CancelledTrip"
+                value="Claim.TripIncidentsOnly.where( \ i -&gt; i.TripRU == aTripRU ).Count &gt; 0 ? DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimTravel.Trips.CancelledTripLabel&quot;) : &quot;&quot;"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </ListViewInput>
+      <InputDivider
+        visible="Claim.TripIncidentsOnly.HasElements"/>
+      <ListViewInput
+        def="EditableTripIncidentsLV(Claim, true)"
+        editable="true"
+        id="EditableTripIncidentsLV"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimTravel.TripIncident&quot;)"
+        labelAbove="true"
+        visible="Claim.TripIncidentsOnly.HasElements">
+        <Toolbar/>
+      </ListViewInput>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimTravel.Claim.Assignment&quot;)"/>
+      <CCAssigneeInput
+        assignable="Claim"
+        claim="Claim"
+        editable="true"
+        id="CommonAssign"
+        label="DisplayKey.get(&quot;Web.NewClaimWizard.Assign.CommonAssign&quot;)"
+        required="Wizard.CommonAssignment"
+        sortValueRange="false"
+        value="Wizard.CommonAssignee"
+        valueRange="Claim.SuggestedAssignees"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

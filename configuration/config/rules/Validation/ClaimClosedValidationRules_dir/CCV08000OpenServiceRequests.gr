@@ -1,0 +1,20 @@
+package rules.Validation.ClaimClosedValidationRules_dir
+
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CCV08000 - Open Service Requests")
+internal class CCV08000OpenServiceRequests {
+  static function doCondition(claim  :  entity.Claim) : boolean {
+/*start00rule*/
+var srs = claim.ServiceRequests
+return claim.ServiceRequests.hasMatch( \ sr -> sr.IsActive and !sr.IsDone)
+/*end00rule*/
+}
+
+  static function doAction(claim  :  entity.Claim, actions : gw.rules.Action) {
+/*start00rule*/
+claim.reject(TC_NEWLOSS, DisplayKey.get("Rules.Validation.CloseClaim.CloseAllOpenServiceRequests"), null, null)
+/*end00rule*/
+  }
+}

@@ -1,0 +1,41 @@
+package rules.Preupdate.TransactionSetPreupdate_dir
+
+@gw.rules.RuleName("TPU03000 - Add BudgetLines to Matter")
+internal class TPU03000AddBudgetLinestoMatter {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+    return transactionSet.New
+        and transactionSet.Subtype ==  TC_CHECKSET
+        and ScriptParameters.UtilizeMatterBudget
+// The transactionset.new condition disallows the rule from executing for all 
+// transactions associated with the claim (because we want the rule to execute 
+// only for the new transactions that we are trying to add).
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+// If there is not a BudgetLine record for this LineCategory, then
+// create a new BudgetLine record.
+    for (litem in transactionSet.LineItems) {
+      if (litem.Transaction typeis Payment) {
+        if (litem.Transaction.CostCategory == TC_LEGAL) {
+          if (litem.Transaction.Matter == null
+              or litem.Transaction.Matter.BudgetLines.toList().hasMatch(\ budgetline -> budgetline.BudgetLineType == litem.LineCategory)) {
+            //no action
+          } else {
+            var bLine = new BudgetLine(litem.Transaction.Matter)
+            bLine.BudgetLineType = litem.LineCategory
+            bLine.Matter = litem.Transaction.Matter
+            bLine.OriginalEstimate = 0bd.ofCurrency(bLine.ClaimCurrency)
+          }
+        }
+      }
+    }
+/*end00rule*/
+
+  }
+}

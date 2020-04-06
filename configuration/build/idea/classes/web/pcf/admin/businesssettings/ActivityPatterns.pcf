@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.ActivityPattern.view"
+    id="ActivityPatterns"
+    title="DisplayKey.get(&quot;Web.Admin.ActivityPatterns&quot;)">
+    <LocationEntryPoint
+      signature="ActivityPatterns()"/>
+    <Variable
+      initialValue="gw.api.database.Query.make(entity.ActivityPattern).select()"
+      name="Patterns"
+      type="gw.api.database.IQueryBeanResult&lt;ActivityPattern&gt;"/>
+    <Screen
+      id="ActivityPatternsScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        id="ActivityPatternsTitle"
+        title="DisplayKey.get(&quot;Web.Admin.ActivityPatterns&quot;)"/>
+      <Toolbar>
+        <ToolbarButton
+          action="NewActivityPattern.go(gw.api.admin.ActivityPatternsUtil.getCurrentCategory())"
+          available="gw.api.admin.ActivityPatternsUtil.canAddPatternWithCategory(gw.api.admin.ActivityPatternsUtil.getCurrentCategory())"
+          id="ActivityPatterns_NewActivityPatternButton"
+          label="DisplayKey.get(&quot;Web.Admin.NewActivityPattern&quot;)"
+          shortcut="V"/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="gw.api.admin.BaseAdminUtil.deleteActivityPatterns(CheckedValues)"
+          available="perm.ActivityPattern.delete"
+          flags="all DeleteableActivityPattern"
+          id="ActivityPatterns_DeleteButton"
+          iterator="ActivityPatternsLV.ActivityPatternsLV"
+          label="DisplayKey.get(&quot;Button.Delete&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="ActivityPatternsLV(Patterns)"/>
+    </Screen>
+  </Page>
+</PCF>

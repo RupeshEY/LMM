@@ -1,0 +1,2254 @@
+<?xml version="1.0"?>
+<!-- Generated WSDL for gw.webservice.cc.cc900.vendormanagement.ServiceRequestAPI web service -->
+<wsdl:definitions targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestAPI" name="ServiceRequestAPI" xmlns:gwsoap="http://guidewire.com/ws/soapheaders" xmlns:gwwsdl="http://guidewire.com/pl/wsdl" xmlns:pogo="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria" xmlns:pogo10="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary" xmlns:pogo11="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement" xmlns:pogo12="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check" xmlns:pogo13="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView" xmlns:pogo14="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference" xmlns:pogo15="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message" xmlns:pogo16="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent" xmlns:pogo17="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent" xmlns:pogo18="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults" xmlns:pogo19="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions" xmlns:pogo2="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults" xmlns:pogo20="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem" xmlns:pogo3="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary" xmlns:pogo4="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary" xmlns:pogo5="http://guidewire.com/cc/typekey" xmlns:pogo6="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction" xmlns:pogo7="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service" xmlns:pogo8="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails" xmlns:pogo9="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestAPI" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestAPI" elementFormDefault="qualified" xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/ws/soapheaders" schemaLocation="../../../../../../../gw/xsd/guidewire/soapheaders.xsd"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <!-- searchForServiceRequests(String, ServiceRequestSearchCriteria) : ServiceRequestSearchResults -->
+      <xs:element name="searchForServiceRequests">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+            <xs:element name="searchCriteria" type="pogo:ServiceRequestSearchCriteria" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="searchForServiceRequestsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="pogo2:ServiceRequestSearchResults" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="IllegalArgumentException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="WsiAuthenticationException">
+        <xs:complexType/>
+      </xs:element>
+      <!-- getServiceRequest(String, String) : ServiceRequestDetails -->
+      <xs:element name="getServiceRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+            <xs:element name="serviceRequestNumber" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getServiceRequestResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="pogo8:ServiceRequestDetails" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- updateServiceRequestReferenceNumber(String, String, String) -->
+      <xs:element name="updateServiceRequestReferenceNumber">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+            <xs:element name="serviceRequestNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="newReferenceNumber" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateServiceRequestReferenceNumberResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- getDocumentContent(String, String, String) : DocumentWithContent -->
+      <xs:element name="getDocumentContent">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+            <xs:element name="serviceRequestNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="documentPublicId" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getDocumentContentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="pogo16:DocumentWithContent" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- getMessagesForSpecialist(String) : MessagesForSpecialistResults -->
+      <xs:element name="getMessagesForSpecialist">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getMessagesForSpecialistResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="pogo18:MessagesForSpecialistResults" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- sendMessage(String, String, String, String, ServiceRequestMessageType) -->
+      <xs:element name="sendMessage">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+            <xs:element name="serviceRequestNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="title" type="xs:string" minOccurs="0"/>
+            <xs:element name="body" type="xs:string" minOccurs="0"/>
+            <xs:element name="type" type="pogo5:ServiceRequestMessageType" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="sendMessageResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- addOrReplaceQuote(String, String, StatementCreationInstructions) : String -->
+      <xs:element name="addOrReplaceQuote">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+            <xs:element name="serviceRequestNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="creationInstructions" type="pogo19:StatementCreationInstructions" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addOrReplaceQuoteResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="IllegalStateException">
+        <xs:complexType/>
+      </xs:element>
+      <!-- addInvoiceToServiceRequest(String, String, StatementCreationInstructions) : String -->
+      <xs:element name="addInvoiceToServiceRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+            <xs:element name="serviceRequestNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="creationInstructions" type="pogo19:StatementCreationInstructions" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addInvoiceToServiceRequestResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- addInvoiceToClaim(String, String, String, String, List<String>, StatementCreationInstructions) : String -->
+      <xs:element name="addInvoiceToClaim">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+            <xs:element name="claimNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="incidentId" type="xs:string" minOccurs="0"/>
+            <xs:element name="exposureId" type="xs:string" minOccurs="0"/>
+            <xs:element name="services" minOccurs="0" gw:viewas="list">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Entry" type="xs:string" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element name="creationInstructions" type="pogo19:StatementCreationInstructions" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addInvoiceToClaimResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- updateExpectedQuoteCompletionDate(String, String, Date, String) -->
+      <xs:element name="updateExpectedQuoteCompletionDate">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+            <xs:element name="serviceRequestNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="expectedCompletionDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+            <xs:element name="changeReason" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateExpectedQuoteCompletionDateResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- updateExpectedServiceCompletionDate(String, String, Date, String) -->
+      <xs:element name="updateExpectedServiceCompletionDate">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+            <xs:element name="serviceRequestNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="expectedCompletionDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+            <xs:element name="changeReason" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateExpectedServiceCompletionDateResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- addDocument(String, String, DocumentContent, String) : String -->
+      <xs:element name="addDocument">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+            <xs:element name="serviceRequestNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="documentToUpload" type="pogo17:DocumentContent" minOccurs="0"/>
+            <xs:element name="documentToUploadName" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addDocumentResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- acceptWork(String, String, Date) -->
+      <xs:element name="acceptWork">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+            <xs:element name="serviceRequestNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="expectedCompletionDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="acceptWorkResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- declineWork(String, String, String) -->
+      <xs:element name="declineWork">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+            <xs:element name="serviceRequestNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="reason" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="declineWorkResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- recordWorkResumed(String, String) -->
+      <xs:element name="recordWorkResumed">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+            <xs:element name="serviceRequestNumber" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="recordWorkResumedResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- recordWaiting(String, String, String) -->
+      <xs:element name="recordWaiting">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+            <xs:element name="serviceRequestNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="reason" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="recordWaitingResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- recordWorkCompleted(String, String) -->
+      <xs:element name="recordWorkCompleted">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+            <xs:element name="serviceRequestNumber" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="recordWorkCompletedResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- cancelServiceRequest(String, String, String) -->
+      <xs:element name="cancelServiceRequest">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+            <xs:element name="serviceRequestNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="reason" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="cancelServiceRequestResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- withdrawInvoice(String, String, String, String) -->
+      <xs:element name="withdrawInvoice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="specialistId" type="xs:string" minOccurs="0"/>
+            <xs:element name="serviceRequestNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="invoicePublicID" type="xs:string" minOccurs="0"/>
+            <xs:element name="reason" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="withdrawInvoiceResponse">
+        <xs:complexType/>
+      </xs:element>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:complexType name="ServiceRequestSearchCriteria">
+        <xs:sequence>
+          <xs:element name="CanceledWithinDays" type="xs:int" minOccurs="0"/>
+          <xs:element name="ClaimNumber" type="xs:string" minOccurs="0"/>
+          <xs:element name="OnlyActive" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="OnlyCanceledAndDeclined" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="OnlyCompleteWaitingForInvoice" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="OnlyInactive" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="OnlyOverdue" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="OnlyRecentlyCanceled" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="OnlyUnpaidInvoices" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="OnlyWaiting" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="OnlyWaitingForQuote" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="ServiceRequestReferenceNumber" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:complexType name="ServiceRequestSearchResults">
+        <xs:sequence>
+          <xs:element name="Results" minOccurs="0" gw:viewas="list" xmlns:gw="http://guidewire.com/xsd">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="pogo3:ServiceRequestSummary" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="ResultsAreTruncated" type="xs:boolean" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary" elementFormDefault="qualified" xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:complexType name="ServiceRequestSummary">
+        <xs:sequence>
+          <xs:element name="Adjuster" type="pogo4:ContactSummary" minOccurs="0"/>
+          <xs:element name="ClaimNumber" type="xs:string" minOccurs="0"/>
+          <xs:element name="Currency" type="pogo5:Currency" minOccurs="0"/>
+          <xs:element name="CustomerContact" type="pogo4:ContactSummary" minOccurs="0"/>
+          <xs:element name="DefaultOperation" type="pogo5:ServiceRequestOperation" minOccurs="0"/>
+          <xs:element name="ExpectedQuoteCompletionDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="ExpectedQuoteCompletionDateApplies" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="ExpectedServiceCompletionDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="ExpectedServiceCompletionDateApplies" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="HasQuote" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="Kind" type="pogo5:ServiceRequestKind" minOccurs="0"/>
+          <xs:element name="KindName" type="xs:string" minOccurs="0"/>
+          <xs:element name="NextAction" type="pogo6:ServiceRequestNextAction" minOccurs="0"/>
+          <xs:element name="OtherOperations" minOccurs="0" gw:viewas="list">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="pogo5:ServiceRequestOperation" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="PolicyNumber" type="xs:string" minOccurs="0"/>
+          <xs:element name="Progress" type="pogo5:ServiceRequestProgress" minOccurs="0"/>
+          <xs:element name="ProgressName" type="xs:string" minOccurs="0"/>
+          <xs:element name="QuoteStatus" type="pogo5:ServiceRequestQuoteStatus" minOccurs="0"/>
+          <xs:element name="QuoteStatusName" type="xs:string" minOccurs="0"/>
+          <xs:element name="ServiceRequestNumber" type="xs:string" minOccurs="0"/>
+          <xs:element name="ServiceRequestReferenceNumber" type="xs:string" minOccurs="0"/>
+          <xs:element name="ServicesRequested" minOccurs="0" gw:viewas="list">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="pogo7:Service" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:complexType name="ContactSummary">
+        <xs:sequence>
+          <xs:element name="AddressBookUID" type="xs:string" minOccurs="0"/>
+          <xs:element name="Description" type="xs:string" minOccurs="0"/>
+          <xs:element name="Email" type="xs:string" minOccurs="0"/>
+          <xs:element name="Name" type="xs:string" minOccurs="0"/>
+          <xs:element name="Phone" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/typekey" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:simpleType name="Currency">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="usd"/>
+          <xs:enumeration value="eur"/>
+          <xs:enumeration value="gbp"/>
+          <xs:enumeration value="cad"/>
+          <xs:enumeration value="aud"/>
+          <xs:enumeration value="rub"/>
+          <xs:enumeration value="jpy"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ServiceRequestOperation">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="specialistacceptedwork"/>
+          <xs:enumeration value="specialistresumedwork"/>
+          <xs:enumeration value="specialistcompletedwork"/>
+          <xs:enumeration value="specialistwaiting"/>
+          <xs:enumeration value="addquote"/>
+          <xs:enumeration value="addinvoice"/>
+          <xs:enumeration value="specialistdeclined"/>
+          <xs:enumeration value="specialistcanceled"/>
+          <xs:enumeration value="submitinstruction"/>
+          <xs:enumeration value="approvequote"/>
+          <xs:enumeration value="requestrequote"/>
+          <xs:enumeration value="updatequoteecd"/>
+          <xs:enumeration value="updateserviceecd"/>
+          <xs:enumeration value="cancelservicerequest"/>
+          <xs:enumeration value="approveinvoice"/>
+          <xs:enumeration value="payinvoice"/>
+          <xs:enumeration value="rejectinvoice"/>
+          <xs:enumeration value="withdrawinvoice"/>
+          <xs:enumeration value="unpayinvoice"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ServiceRequestKind">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="quoteandservice"/>
+          <xs:enumeration value="quoteonly"/>
+          <xs:enumeration value="serviceonly"/>
+          <xs:enumeration value="unmanaged"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ServiceRequestProgress">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="draft"/>
+          <xs:enumeration value="requested"/>
+          <xs:enumeration value="specialistwaiting"/>
+          <xs:enumeration value="inprogress"/>
+          <xs:enumeration value="workcomplete"/>
+          <xs:enumeration value="declined"/>
+          <xs:enumeration value="canceled"/>
+          <xs:enumeration value="expired"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ServiceRequestQuoteStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="noquote"/>
+          <xs:enumeration value="waitingforquote"/>
+          <xs:enumeration value="waitingforapproval"/>
+          <xs:enumeration value="approved"/>
+          <xs:enumeration value="quoted"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="LanguageType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="en_US"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="TransactionStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="awaitingsubmission"/>
+          <xs:enumeration value="cleared"/>
+          <xs:enumeration value="denied"/>
+          <xs:enumeration value="draft"/>
+          <xs:enumeration value="issued"/>
+          <xs:enumeration value="notifying"/>
+          <xs:enumeration value="pendingapproval"/>
+          <xs:enumeration value="pendingrecode"/>
+          <xs:enumeration value="pendingstop"/>
+          <xs:enumeration value="pendingtransfer"/>
+          <xs:enumeration value="pendingvoid"/>
+          <xs:enumeration value="recoded"/>
+          <xs:enumeration value="rejected"/>
+          <xs:enumeration value="requested"/>
+          <xs:enumeration value="requesting"/>
+          <xs:enumeration value="stopped"/>
+          <xs:enumeration value="submitted"/>
+          <xs:enumeration value="submitting"/>
+          <xs:enumeration value="transferred"/>
+          <xs:enumeration value="voided"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ServiceRequestInvoiceStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="waitingforapproval"/>
+          <xs:enumeration value="approved"/>
+          <xs:enumeration value="checkcreated"/>
+          <xs:enumeration value="rejected"/>
+          <xs:enumeration value="withdrawn"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="StatementSource">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="gwportal"/>
+          <xs:enumeration value="manual"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ServiceRequestMessageType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="info"/>
+          <xs:enumeration value="question"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ServiceRequestStatementLineItemCategory">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="chiro"/>
+          <xs:enumeration value="CourtCosts"/>
+          <xs:enumeration value="Deposition"/>
+          <xs:enumeration value="doctor"/>
+          <xs:enumeration value="Hearing"/>
+          <xs:enumeration value="hospital"/>
+          <xs:enumeration value="inspection"/>
+          <xs:enumeration value="Investigation"/>
+          <xs:enumeration value="labor"/>
+          <xs:enumeration value="other"/>
+          <xs:enumeration value="parts"/>
+          <xs:enumeration value="pt"/>
+          <xs:enumeration value="towing"/>
+          <xs:enumeration value="diagnostic"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:simpleType name="ServiceRequestNextAction">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="SubmitRequest"/>
+          <xs:enumeration value="AcceptOrDeclineQuote"/>
+          <xs:enumeration value="AcceptOrDeclineQuoteAndService"/>
+          <xs:enumeration value="AcceptOrDeclineQuoteAndServicePromotion"/>
+          <xs:enumeration value="AcceptOrDeclineService"/>
+          <xs:enumeration value="AddQuote"/>
+          <xs:enumeration value="ReviseQuote"/>
+          <xs:enumeration value="ApproveQuote"/>
+          <xs:enumeration value="ResumeWork"/>
+          <xs:enumeration value="FinishWork"/>
+          <xs:enumeration value="AddInvoice"/>
+          <xs:enumeration value="ApproveInvoice"/>
+          <xs:enumeration value="PayInvoice"/>
+          <xs:enumeration value="None_Canceled"/>
+          <xs:enumeration value="None_QuotePromoted"/>
+          <xs:enumeration value="None_QuoteSubmitted"/>
+          <xs:enumeration value="None_InvoicesPaid"/>
+          <xs:enumeration value="ReassignWork_Expired"/>
+          <xs:enumeration value="ReassignWork_Declined"/>
+          <xs:enumeration value="FollowUp_SpecialistWaiting"/>
+          <xs:enumeration value="FollowUp_QuoteOverdue_HasQuote"/>
+          <xs:enumeration value="FollowUp_QuoteOverdue_NoQuote"/>
+          <xs:enumeration value="FollowUp_WorkOverdue"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:complexType name="Service">
+        <xs:sequence>
+          <xs:element name="Code" type="xs:string" minOccurs="0"/>
+          <xs:element name="Name" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails" elementFormDefault="qualified" xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:complexType name="ServiceRequestDetails">
+        <xs:sequence>
+          <xs:element name="AdjusterDetail" type="pogo9:ContactDetail" minOccurs="0"/>
+          <xs:element name="CanceledReason" type="xs:string" minOccurs="0"/>
+          <xs:element name="ClaimLossDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="Contacts" minOccurs="0" gw:viewas="list">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="pogo4:ContactSummary" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="CustomerContactDetail" type="pogo9:ContactDetail" minOccurs="0"/>
+          <xs:element name="Documents" minOccurs="0" gw:viewas="list">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="pogo10:DocumentSummary" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="InstructedDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="InstructionText" type="xs:string" minOccurs="0"/>
+          <xs:element name="Invoices" minOccurs="0" gw:viewas="list">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="pogo11:Statement" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="InvoicesTotalPaid" type="xs:decimal" minOccurs="0"/>
+          <xs:element name="InvoicesTotalUnpaid" type="xs:decimal" minOccurs="0"/>
+          <xs:element name="Messages" minOccurs="0" gw:viewas="list">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="pogo15:Message" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="Quote" type="pogo11:Statement" minOccurs="0"/>
+          <xs:element name="ServiceAddress" type="xs:string" minOccurs="0"/>
+          <xs:element name="ServiceRequestSummary" type="pogo3:ServiceRequestSummary" minOccurs="0"/>
+          <xs:element name="TerminationDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:complexType name="ContactDetail">
+        <xs:sequence>
+          <xs:element name="Address" type="xs:string" minOccurs="0"/>
+          <xs:element name="ContactSummary" type="pogo4:ContactSummary" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary" elementFormDefault="qualified" xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:complexType name="DocumentSummary">
+        <xs:sequence>
+          <xs:element name="Author" type="xs:string" minOccurs="0"/>
+          <xs:element name="DateModified" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="Description" type="xs:string" minOccurs="0"/>
+          <xs:element name="HasContent" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="Language" type="pogo5:LanguageType" minOccurs="0"/>
+          <xs:element name="Name" type="xs:string" minOccurs="0"/>
+          <xs:element name="PublicID" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement" elementFormDefault="qualified" xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:complexType name="Statement">
+        <xs:sequence>
+          <xs:element name="CreationDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="DeclinedReason" type="xs:string" minOccurs="0"/>
+          <xs:element name="Description" type="xs:string" minOccurs="0"/>
+          <xs:element name="Documents" minOccurs="0" gw:viewas="list">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="pogo10:DocumentSummary" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="InvoiceCheck" type="pogo12:Check" minOccurs="0"/>
+          <xs:element name="InvoicePaymentDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="InvoiceStatus" type="pogo5:ServiceRequestInvoiceStatus" minOccurs="0"/>
+          <xs:element name="InvoiceStatusName" type="xs:string" minOccurs="0"/>
+          <xs:element name="InvoiceWithdrawable" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="PublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="ReferenceNumber" type="xs:string" minOccurs="0"/>
+          <xs:element name="Source" type="pogo5:StatementSource" minOccurs="0"/>
+          <xs:element name="TotalAmount" type="xs:decimal" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check" elementFormDefault="qualified" xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:complexType name="Check">
+        <xs:sequence>
+          <xs:element name="CheckNumber" type="xs:string" minOccurs="0"/>
+          <xs:element name="GrossAmount" type="xs:decimal" minOccurs="0"/>
+          <xs:element name="NetAmount" type="xs:decimal" minOccurs="0"/>
+          <xs:element name="RelatedInvoices" minOccurs="0" gw:viewas="list">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="pogo13:InvoiceView" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="ScheduledSendDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="Status" type="pogo5:TransactionStatus" minOccurs="0"/>
+          <xs:element name="StatusName" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:complexType name="InvoiceView">
+        <xs:sequence>
+          <xs:element name="InvoiceAmount" type="xs:decimal" minOccurs="0"/>
+          <xs:element name="InvoicePublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="InvoiceReferenceNumber" type="xs:string" minOccurs="0"/>
+          <xs:element name="ServiceRequestReference" type="pogo14:ServiceRequestReference" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:complexType name="ServiceRequestReference">
+        <xs:sequence>
+          <xs:element name="ClaimNumber" type="xs:string" minOccurs="0"/>
+          <xs:element name="CustomerContact" type="pogo4:ContactSummary" minOccurs="0"/>
+          <xs:element name="ServiceRequestNumber" type="xs:string" minOccurs="0"/>
+          <xs:element name="ServiceRequestReferenceNumber" type="xs:string" minOccurs="0"/>
+          <xs:element name="ServicesRequested" minOccurs="0" gw:viewas="list" xmlns:gw="http://guidewire.com/xsd">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="pogo7:Service" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message" elementFormDefault="qualified" xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:complexType name="Message">
+        <xs:sequence>
+          <xs:element name="Body" type="xs:string" minOccurs="0"/>
+          <xs:element name="Date" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="Sender" type="pogo4:ContactSummary" minOccurs="0"/>
+          <xs:element name="SentFromPortal" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="ServiceRequestReference" type="pogo14:ServiceRequestReference" minOccurs="0"/>
+          <xs:element name="Title" type="xs:string" minOccurs="0"/>
+          <xs:element name="Type" type="pogo5:ServiceRequestMessageType" minOccurs="0"/>
+          <xs:element name="TypeName" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:complexType name="DocumentWithContent">
+        <xs:sequence>
+          <xs:element name="DocumentContent" type="pogo17:DocumentContent" minOccurs="0"/>
+          <xs:element name="DocumentSummary" type="pogo10:DocumentSummary" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:complexType name="DocumentContent">
+        <xs:sequence>
+          <xs:element name="Content" type="xs:hexBinary" minOccurs="0"/>
+          <xs:element name="MimeType" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:complexType name="MessagesForSpecialistResults">
+        <xs:sequence>
+          <xs:element name="Results" minOccurs="0" gw:viewas="list" xmlns:gw="http://guidewire.com/xsd">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="pogo15:Message" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="ResultsAreTruncated" type="xs:boolean" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions" elementFormDefault="qualified" xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:complexType name="StatementCreationInstructions">
+        <xs:sequence>
+          <xs:element name="Currency" type="pogo5:Currency" minOccurs="0"/>
+          <xs:element name="Description" type="xs:string" minOccurs="0"/>
+          <xs:element name="DocumentsToUpload" minOccurs="0" gw:viewas="list">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="pogo17:DocumentContent" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="DocumentsToUploadNames" minOccurs="0" gw:viewas="list">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="xs:string" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="ExistingDocumentsToLinkPublicIds" minOccurs="0" gw:viewas="list">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="xs:string" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="LineItems" minOccurs="0" gw:viewas="array">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="pogo20:ServiceRequestStatementLineItem" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="QuoteNumberOfDaysToPerformService" type="xs:int" minOccurs="0"/>
+          <xs:element name="ReferenceNumber" type="xs:string" minOccurs="0"/>
+          <xs:element name="Source" type="pogo5:StatementSource" minOccurs="0"/>
+          <xs:element name="StatementCreationTime" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestStatementLineItem" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/StatementCreationInstructions"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/MessagesForSpecialistResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentWithContent"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Message"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestReference"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/InvoiceView"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Check"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Statement"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/DocumentSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactDetail"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestDetails"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/Service"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/vendormanagement/servicerequeststate/ServiceRequestNextAction"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ContactSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSummary"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchResults"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/vendormanagement/ServiceRequestSearchCriteria"/>
+      <xs:complexType name="ServiceRequestStatementLineItem">
+        <xs:sequence>
+          <xs:element name="Amount" type="xs:decimal" minOccurs="0"/>
+          <xs:element name="Category" type="pogo5:ServiceRequestStatementLineItemCategory" minOccurs="0"/>
+          <xs:element name="Description" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:portType name="ServiceRequestAPIPortType">
+    <wsdl:operation name="searchForServiceRequests">
+      <wsdl:input name="searchForServiceRequests" message="tns:searchForServiceRequests"/>
+      <wsdl:output name="searchForServiceRequestsResponse" message="tns:searchForServiceRequestsResponse"/>
+      <!-- If a specialistId is not specified -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceRequest">
+      <wsdl:input name="getServiceRequest" message="tns:getServiceRequest"/>
+      <wsdl:output name="getServiceRequestResponse" message="tns:getServiceRequestResponse"/>
+      <!-- If a specialistId is not specified, or if the service request is not found or does not match specialistId -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="updateServiceRequestReferenceNumber">
+      <wsdl:input name="updateServiceRequestReferenceNumber" message="tns:updateServiceRequestReferenceNumber"/>
+      <wsdl:output name="updateServiceRequestReferenceNumberResponse" message="tns:updateServiceRequestReferenceNumberResponse"/>
+      <!-- If a specialistId is not specified, or if the service request is not found or does not match specialistId -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="getDocumentContent">
+      <wsdl:input name="getDocumentContent" message="tns:getDocumentContent"/>
+      <wsdl:output name="getDocumentContentResponse" message="tns:getDocumentContentResponse"/>
+      <!-- If a specialistId is not specified, or if the service request is not found or does not match specialistId, or if a visible document matching the PublicID is not found on the service request, or if the document does not have content -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="getMessagesForSpecialist">
+      <wsdl:input name="getMessagesForSpecialist" message="tns:getMessagesForSpecialist"/>
+      <wsdl:output name="getMessagesForSpecialistResponse" message="tns:getMessagesForSpecialistResponse"/>
+      <!-- If a specialistId is not specified -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="sendMessage">
+      <wsdl:input name="sendMessage" message="tns:sendMessage"/>
+      <wsdl:output name="sendMessageResponse" message="tns:sendMessageResponse"/>
+      <!-- If a specialistId is not specified, or if the service request is not found or does not match specialistId -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="addOrReplaceQuote">
+      <wsdl:input name="addOrReplaceQuote" message="tns:addOrReplaceQuote"/>
+      <wsdl:output name="addOrReplaceQuoteResponse" message="tns:addOrReplaceQuoteResponse"/>
+      <!-- If a specialistId is not specified, or if the service request is not found or does not match specialist id, or if Description or Amount are null, or if creationInstructions is invalid, that is (if a document identified by ExistingDocumentsToLinkPublicIds cannot be found on the service request, or if ExistingDocumentsToLinkPublicIds and DocumentsToUpload are both empty, or if DocumentsToUpload and DocumentsToUploadNames have different lengths, or if DocumentsToUpload or DocumentsToUploadNames have empty elements, or if DocumentsToUploadNames contains duplicate namesor if NumberOfDaysToPerformService is a negative number) -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <!-- If the service request state does not currently allow this operation -->
+      <wsdl:fault name="IllegalStateException" message="tns:IllegalStateException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="addInvoiceToServiceRequest">
+      <wsdl:input name="addInvoiceToServiceRequest" message="tns:addInvoiceToServiceRequest"/>
+      <wsdl:output name="addInvoiceToServiceRequestResponse" message="tns:addInvoiceToServiceRequestResponse"/>
+      <!-- If a specialistId is not specified, or if the service request is not found or does not match specialist id, or if Description or Amount are null, or if LineItems are empty, or if creationInstructions is invalid, that is (if a document identified by ExistingDocumentsToLinkPublicIds cannot be found on the service request, or if ExistingDocumentsToLinkPublicIds and DocumentsToUpload are both empty, or if DocumentsToUpload and DocumentsToUploadNames have different lengths, or if DocumentsToUpload or DocumentsToUploadNames have empty elements, or if DocumentsToUploadNames contains duplicate names) -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <!-- If the service request state does not currently allow this operation -->
+      <wsdl:fault name="IllegalStateException" message="tns:IllegalStateException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="addInvoiceToClaim">
+      <wsdl:input name="addInvoiceToClaim" message="tns:addInvoiceToClaim"/>
+      <wsdl:output name="addInvoiceToClaimResponse" message="tns:addInvoiceToClaimResponse"/>
+      <!-- If a specialistId is not specified, or if claimNumber is null or empty, or if there is not a claim with claimNumber, or if services is empty, or if there are services that do not match valid SpecialistServices performed, or if creationInstructions is invalid, that is (if a document identified by ExistingDocumentsToLinkPublicIds cannot be found on the service request, or if ExistingDocumentsToLinkPublicIds and DocumentsToUpload are both empty, or if DocumentsToUpload and DocumentsToUploadNames have different lengths, or if DocumentsToUpload or DocumentsToUploadNames have empty elements, or if DocumentsToUploadNames contains duplicate names, or if LineItems is empty) -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <!-- If the service request state does not currently allow this operation -->
+      <wsdl:fault name="IllegalStateException" message="tns:IllegalStateException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="updateExpectedQuoteCompletionDate">
+      <wsdl:input name="updateExpectedQuoteCompletionDate" message="tns:updateExpectedQuoteCompletionDate"/>
+      <wsdl:output name="updateExpectedQuoteCompletionDateResponse" message="tns:updateExpectedQuoteCompletionDateResponse"/>
+      <!-- If a specialistId is not specified, or if the service request is not found or does not match specialistId -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <!-- If the service request state does not currently allow this operation -->
+      <wsdl:fault name="IllegalStateException" message="tns:IllegalStateException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="updateExpectedServiceCompletionDate">
+      <wsdl:input name="updateExpectedServiceCompletionDate" message="tns:updateExpectedServiceCompletionDate"/>
+      <wsdl:output name="updateExpectedServiceCompletionDateResponse" message="tns:updateExpectedServiceCompletionDateResponse"/>
+      <!-- If a specialistId is not specified, or if the service request is not found or does not match specialistId -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <!-- If the service request state does not currently allow this operation -->
+      <wsdl:fault name="IllegalStateException" message="tns:IllegalStateException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="addDocument">
+      <wsdl:input name="addDocument" message="tns:addDocument"/>
+      <wsdl:output name="addDocumentResponse" message="tns:addDocumentResponse"/>
+      <!-- If a specialistId is not specified, or if the service request is not found or does not match specialist id, or if documentToUpload or documentsToUploadNames are missing content -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="acceptWork">
+      <wsdl:input name="acceptWork" message="tns:acceptWork"/>
+      <wsdl:output name="acceptWorkResponse" message="tns:acceptWorkResponse"/>
+      <!-- If a specialistId is not specified, or if the service request is not found or does not match specialist id -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <!-- If the service request state does not currently allow this operation -->
+      <wsdl:fault name="IllegalStateException" message="tns:IllegalStateException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="declineWork">
+      <wsdl:input name="declineWork" message="tns:declineWork"/>
+      <wsdl:output name="declineWorkResponse" message="tns:declineWorkResponse"/>
+      <!-- If a specialistId is not specified, or if the service request is not found or does not match specialist id -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <!-- If the service request state does not currently allow this operation -->
+      <wsdl:fault name="IllegalStateException" message="tns:IllegalStateException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="recordWorkResumed">
+      <wsdl:input name="recordWorkResumed" message="tns:recordWorkResumed"/>
+      <wsdl:output name="recordWorkResumedResponse" message="tns:recordWorkResumedResponse"/>
+      <!-- If a specialistId is not specified, or if the service request is not found or does not match specialist id -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <!-- If the service request state does not currently allow this operation -->
+      <wsdl:fault name="IllegalStateException" message="tns:IllegalStateException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="recordWaiting">
+      <wsdl:input name="recordWaiting" message="tns:recordWaiting"/>
+      <wsdl:output name="recordWaitingResponse" message="tns:recordWaitingResponse"/>
+      <!-- If a specialistId is not specified, or if the service request is not found or does not match specialist id -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <!-- If the service request state does not currently allow this operation -->
+      <wsdl:fault name="IllegalStateException" message="tns:IllegalStateException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="recordWorkCompleted">
+      <wsdl:input name="recordWorkCompleted" message="tns:recordWorkCompleted"/>
+      <wsdl:output name="recordWorkCompletedResponse" message="tns:recordWorkCompletedResponse"/>
+      <!-- If a specialistId is not specified, or if the service request is not found or does not match specialist id -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <!-- If the service request state does not currently allow this operation -->
+      <wsdl:fault name="IllegalStateException" message="tns:IllegalStateException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="cancelServiceRequest">
+      <wsdl:input name="cancelServiceRequest" message="tns:cancelServiceRequest"/>
+      <wsdl:output name="cancelServiceRequestResponse" message="tns:cancelServiceRequestResponse"/>
+      <!-- If a specialistId is not specified, or if the service request is not found or does not match specialist id -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <!-- If the service request state does not currently allow this operation -->
+      <wsdl:fault name="IllegalStateException" message="tns:IllegalStateException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="withdrawInvoice">
+      <wsdl:input name="withdrawInvoice" message="tns:withdrawInvoice"/>
+      <wsdl:output name="withdrawInvoiceResponse" message="tns:withdrawInvoiceResponse"/>
+      <!-- If a specialistId is not specified, or if the service request is not found or does not match specialist id, or if the invoice is not found -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <!-- If the invoice state does not currently allow this operation, or if there are multiple invoices that matches the same invoice ID -->
+      <wsdl:fault name="IllegalStateException" message="tns:IllegalStateException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ServiceRequestAPISoap12Binding" type="tns:ServiceRequestAPIPortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="searchForServiceRequests">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="searchForServiceRequests">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchForServiceRequestsResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceRequest">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="getServiceRequest">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getServiceRequestResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateServiceRequestReferenceNumber">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="updateServiceRequestReferenceNumber">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateServiceRequestReferenceNumberResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDocumentContent">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="getDocumentContent">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getDocumentContentResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getMessagesForSpecialist">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="getMessagesForSpecialist">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getMessagesForSpecialistResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="sendMessage">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="sendMessage">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sendMessageResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addOrReplaceQuote">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="addOrReplaceQuote">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addOrReplaceQuoteResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap12:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addInvoiceToServiceRequest">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="addInvoiceToServiceRequest">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addInvoiceToServiceRequestResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap12:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addInvoiceToClaim">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="addInvoiceToClaim">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addInvoiceToClaimResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap12:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateExpectedQuoteCompletionDate">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="updateExpectedQuoteCompletionDate">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateExpectedQuoteCompletionDateResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap12:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateExpectedServiceCompletionDate">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="updateExpectedServiceCompletionDate">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateExpectedServiceCompletionDateResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap12:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addDocument">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="addDocument">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addDocumentResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="acceptWork">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="acceptWork">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="acceptWorkResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap12:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="declineWork">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="declineWork">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="declineWorkResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap12:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="recordWorkResumed">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="recordWorkResumed">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="recordWorkResumedResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap12:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="recordWaiting">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="recordWaiting">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="recordWaitingResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap12:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="recordWorkCompleted">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="recordWorkCompleted">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="recordWorkCompletedResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap12:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="cancelServiceRequest">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="cancelServiceRequest">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cancelServiceRequestResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap12:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="withdrawInvoice">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="withdrawInvoice">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="withdrawInvoiceResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap12:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ServiceRequestAPISoap11Binding" type="tns:ServiceRequestAPIPortType">
+    <soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="searchForServiceRequests">
+      <soap11:operation style="document"/>
+      <wsdl:input name="searchForServiceRequests">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchForServiceRequestsResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getServiceRequest">
+      <soap11:operation style="document"/>
+      <wsdl:input name="getServiceRequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getServiceRequestResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateServiceRequestReferenceNumber">
+      <soap11:operation style="document"/>
+      <wsdl:input name="updateServiceRequestReferenceNumber">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateServiceRequestReferenceNumberResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getDocumentContent">
+      <soap11:operation style="document"/>
+      <wsdl:input name="getDocumentContent">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getDocumentContentResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getMessagesForSpecialist">
+      <soap11:operation style="document"/>
+      <wsdl:input name="getMessagesForSpecialist">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getMessagesForSpecialistResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="sendMessage">
+      <soap11:operation style="document"/>
+      <wsdl:input name="sendMessage">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="sendMessageResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addOrReplaceQuote">
+      <soap11:operation style="document"/>
+      <wsdl:input name="addOrReplaceQuote">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addOrReplaceQuoteResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap11:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addInvoiceToServiceRequest">
+      <soap11:operation style="document"/>
+      <wsdl:input name="addInvoiceToServiceRequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addInvoiceToServiceRequestResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap11:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addInvoiceToClaim">
+      <soap11:operation style="document"/>
+      <wsdl:input name="addInvoiceToClaim">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addInvoiceToClaimResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap11:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateExpectedQuoteCompletionDate">
+      <soap11:operation style="document"/>
+      <wsdl:input name="updateExpectedQuoteCompletionDate">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateExpectedQuoteCompletionDateResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap11:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateExpectedServiceCompletionDate">
+      <soap11:operation style="document"/>
+      <wsdl:input name="updateExpectedServiceCompletionDate">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateExpectedServiceCompletionDateResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap11:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addDocument">
+      <soap11:operation style="document"/>
+      <wsdl:input name="addDocument">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addDocumentResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="acceptWork">
+      <soap11:operation style="document"/>
+      <wsdl:input name="acceptWork">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="acceptWorkResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap11:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="declineWork">
+      <soap11:operation style="document"/>
+      <wsdl:input name="declineWork">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="declineWorkResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap11:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="recordWorkResumed">
+      <soap11:operation style="document"/>
+      <wsdl:input name="recordWorkResumed">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="recordWorkResumedResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap11:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="recordWaiting">
+      <soap11:operation style="document"/>
+      <wsdl:input name="recordWaiting">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="recordWaitingResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap11:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="recordWorkCompleted">
+      <soap11:operation style="document"/>
+      <wsdl:input name="recordWorkCompleted">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="recordWorkCompletedResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap11:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="cancelServiceRequest">
+      <soap11:operation style="document"/>
+      <wsdl:input name="cancelServiceRequest">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cancelServiceRequestResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap11:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="withdrawInvoice">
+      <soap11:operation style="document"/>
+      <wsdl:input name="withdrawInvoice">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="withdrawInvoiceResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalStateException">
+        <soap11:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ServiceRequestAPI">
+    <wsdl:port name="ServiceRequestAPISoap12Port" binding="tns:ServiceRequestAPISoap12Binding">
+      <soap12:address location="local:///gw/webservice/cc/cc900/vendormanagement/ServiceRequestAPI"/>
+    </wsdl:port>
+    <wsdl:port name="ServiceRequestAPISoap11Port" binding="tns:ServiceRequestAPISoap11Binding">
+      <soap11:address location="local:///gw/webservice/cc/cc900/vendormanagement/ServiceRequestAPI/soap11"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:message name="searchForServiceRequests">
+    <wsdl:part name="parameters" element="tns:searchForServiceRequests"/>
+  </wsdl:message>
+  <wsdl:message name="searchForServiceRequestsResponse">
+    <wsdl:part name="parameters" element="tns:searchForServiceRequestsResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IllegalArgumentException">
+    <wsdl:part name="IllegalArgumentException" element="tns:IllegalArgumentException"/>
+  </wsdl:message>
+  <wsdl:message name="WsiAuthenticationException">
+    <wsdl:part name="WsiAuthenticationException" element="tns:WsiAuthenticationException"/>
+  </wsdl:message>
+  <wsdl:message name="getServiceRequest">
+    <wsdl:part name="parameters" element="tns:getServiceRequest"/>
+  </wsdl:message>
+  <wsdl:message name="getServiceRequestResponse">
+    <wsdl:part name="parameters" element="tns:getServiceRequestResponse"/>
+  </wsdl:message>
+  <wsdl:message name="updateServiceRequestReferenceNumber">
+    <wsdl:part name="parameters" element="tns:updateServiceRequestReferenceNumber"/>
+  </wsdl:message>
+  <wsdl:message name="updateServiceRequestReferenceNumberResponse">
+    <wsdl:part name="parameters" element="tns:updateServiceRequestReferenceNumberResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getDocumentContent">
+    <wsdl:part name="parameters" element="tns:getDocumentContent"/>
+  </wsdl:message>
+  <wsdl:message name="getDocumentContentResponse">
+    <wsdl:part name="parameters" element="tns:getDocumentContentResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getMessagesForSpecialist">
+    <wsdl:part name="parameters" element="tns:getMessagesForSpecialist"/>
+  </wsdl:message>
+  <wsdl:message name="getMessagesForSpecialistResponse">
+    <wsdl:part name="parameters" element="tns:getMessagesForSpecialistResponse"/>
+  </wsdl:message>
+  <wsdl:message name="sendMessage">
+    <wsdl:part name="parameters" element="tns:sendMessage"/>
+  </wsdl:message>
+  <wsdl:message name="sendMessageResponse">
+    <wsdl:part name="parameters" element="tns:sendMessageResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addOrReplaceQuote">
+    <wsdl:part name="parameters" element="tns:addOrReplaceQuote"/>
+  </wsdl:message>
+  <wsdl:message name="addOrReplaceQuoteResponse">
+    <wsdl:part name="parameters" element="tns:addOrReplaceQuoteResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IllegalStateException">
+    <wsdl:part name="IllegalStateException" element="tns:IllegalStateException"/>
+  </wsdl:message>
+  <wsdl:message name="addInvoiceToServiceRequest">
+    <wsdl:part name="parameters" element="tns:addInvoiceToServiceRequest"/>
+  </wsdl:message>
+  <wsdl:message name="addInvoiceToServiceRequestResponse">
+    <wsdl:part name="parameters" element="tns:addInvoiceToServiceRequestResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addInvoiceToClaim">
+    <wsdl:part name="parameters" element="tns:addInvoiceToClaim"/>
+  </wsdl:message>
+  <wsdl:message name="addInvoiceToClaimResponse">
+    <wsdl:part name="parameters" element="tns:addInvoiceToClaimResponse"/>
+  </wsdl:message>
+  <wsdl:message name="updateExpectedQuoteCompletionDate">
+    <wsdl:part name="parameters" element="tns:updateExpectedQuoteCompletionDate"/>
+  </wsdl:message>
+  <wsdl:message name="updateExpectedQuoteCompletionDateResponse">
+    <wsdl:part name="parameters" element="tns:updateExpectedQuoteCompletionDateResponse"/>
+  </wsdl:message>
+  <wsdl:message name="updateExpectedServiceCompletionDate">
+    <wsdl:part name="parameters" element="tns:updateExpectedServiceCompletionDate"/>
+  </wsdl:message>
+  <wsdl:message name="updateExpectedServiceCompletionDateResponse">
+    <wsdl:part name="parameters" element="tns:updateExpectedServiceCompletionDateResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addDocument">
+    <wsdl:part name="parameters" element="tns:addDocument"/>
+  </wsdl:message>
+  <wsdl:message name="addDocumentResponse">
+    <wsdl:part name="parameters" element="tns:addDocumentResponse"/>
+  </wsdl:message>
+  <wsdl:message name="acceptWork">
+    <wsdl:part name="parameters" element="tns:acceptWork"/>
+  </wsdl:message>
+  <wsdl:message name="acceptWorkResponse">
+    <wsdl:part name="parameters" element="tns:acceptWorkResponse"/>
+  </wsdl:message>
+  <wsdl:message name="declineWork">
+    <wsdl:part name="parameters" element="tns:declineWork"/>
+  </wsdl:message>
+  <wsdl:message name="declineWorkResponse">
+    <wsdl:part name="parameters" element="tns:declineWorkResponse"/>
+  </wsdl:message>
+  <wsdl:message name="recordWorkResumed">
+    <wsdl:part name="parameters" element="tns:recordWorkResumed"/>
+  </wsdl:message>
+  <wsdl:message name="recordWorkResumedResponse">
+    <wsdl:part name="parameters" element="tns:recordWorkResumedResponse"/>
+  </wsdl:message>
+  <wsdl:message name="recordWaiting">
+    <wsdl:part name="parameters" element="tns:recordWaiting"/>
+  </wsdl:message>
+  <wsdl:message name="recordWaitingResponse">
+    <wsdl:part name="parameters" element="tns:recordWaitingResponse"/>
+  </wsdl:message>
+  <wsdl:message name="recordWorkCompleted">
+    <wsdl:part name="parameters" element="tns:recordWorkCompleted"/>
+  </wsdl:message>
+  <wsdl:message name="recordWorkCompletedResponse">
+    <wsdl:part name="parameters" element="tns:recordWorkCompletedResponse"/>
+  </wsdl:message>
+  <wsdl:message name="cancelServiceRequest">
+    <wsdl:part name="parameters" element="tns:cancelServiceRequest"/>
+  </wsdl:message>
+  <wsdl:message name="cancelServiceRequestResponse">
+    <wsdl:part name="parameters" element="tns:cancelServiceRequestResponse"/>
+  </wsdl:message>
+  <wsdl:message name="withdrawInvoice">
+    <wsdl:part name="parameters" element="tns:withdrawInvoice"/>
+  </wsdl:message>
+  <wsdl:message name="withdrawInvoiceResponse">
+    <wsdl:part name="parameters" element="tns:withdrawInvoiceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="gw-authentication">
+    <wsdl:part name="gw-authentication" element="gwsoap:authentication"/>
+  </wsdl:message>
+  <wsdl:message name="gw-locale-only">
+    <wsdl:part name="gw-locale-only" element="gwsoap:gw_locale"/>
+  </wsdl:message>
+  <wsdl:message name="gw-language-only">
+    <wsdl:part name="gw-language-only" element="gwsoap:gw_language"/>
+  </wsdl:message>
+  <wsdl:message name="gw-transaction-id">
+    <wsdl:part name="gw-transaction-id" element="gwsoap:transaction_id"/>
+  </wsdl:message>
+</wsdl:definitions>

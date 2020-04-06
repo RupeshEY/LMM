@@ -1,0 +1,34 @@
+package rules.Segmentation.ExposureSegmentationRules_dir.ESG01000Auto_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.util.Logger
+
+@gw.rules.RuleName("ESG01100 - Auto low")
+internal class ESG01100Autolow {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return (exposure.ExposureType == TC_VEHICLEDAMAGE 
+ or exposure.ExposureType == TC_BODILYINJURYDAMAGE
+ or exposure.ExposureType == TC_PIPDAMAGES
+ or exposure.ExposureType == TC_PROPERTYDAMAGE
+ or exposure.ExposureType == TC_TOWONLY)
+and
+(exposure.Incident.Severity == TC_MINOR
+ or exposure.Incident.Severity == TC_MODERATE_AUTO)
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.Segment = TC_AUTO_LOW
+Logger.logDebug(DisplayKey.get("Rules.Segmentation.Exposure", actions.ShortRuleName))
+Logger.logDebug(DisplayKey.get("Rules.Segmentation.Exposure.SegmentedTo", exposure.Segment))
+actions.exit()
+
+/*end00rule*/
+
+  }
+}

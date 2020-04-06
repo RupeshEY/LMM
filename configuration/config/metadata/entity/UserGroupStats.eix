@@ -1,0 +1,223 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="UserGroupStats">
+  <description><![CDATA[
+        Represents the combined statistics for a given user in a group. This entity aggregates claim, exposure, and activity
+        statistics. Refer to the DashboardStats entity for statistics displayed for a user or in the dashboard.
+    ]]></description>
+  <index
+    desc="Ensure uniqueness, only one entry per user/group pair"
+    name="usergroupstatsu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="UserID"/>
+    <indexcol
+      keyposition="2"
+      name="GroupID"/>
+  </index>
+  <!-- Claim statistics -->
+  <column
+    desc="Number of claims closed in the time window. Note that the window is now customizable, so this may not actually correspond to the current week, but the column name cannot be easily changed."
+    name="ClosedThisWeek"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of claims created in the time window. Note that the window is now customizable, so this may not actually correspond to the current week, but the column name cannot be easily changed."
+    name="NewThisWeek"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of open claims for the given user/group."
+    name="AllOpen"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of flagged claims for the given user/group."
+    name="Flagged"
+    nullok="true"
+    type="integer"/>
+  <!-- Exposure statistics -->
+  <column
+    desc="Number of open exposures for the given user/group."
+    name="AllSubOpen"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of exposures closed in the time window. Note that the window is now customizable, so this may not actually correspond to the current week, but the column name cannot be easily changed."
+    name="SubClosedThisWeek"
+    nullok="true"
+    type="integer"/>
+  <!-- Matter statistics -->
+  <column
+    default="0"
+    desc="Number of open matters for the given user/group."
+    name="AllMatterOpen"
+    nullok="true"
+    type="integer"/>
+  <column
+    default="0"
+    desc="Number of matters closed in the time window. Note that the window is now customizable, so this may not actually correspond to the current week, but the column name cannot be easily changed."
+    name="MatterClosedThisWeek"
+    nullok="true"
+    type="integer"/>
+  <!-- Activity statistics -->
+  <column
+    desc="Number of activities completed today."
+    name="CompletedToday"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of activities due today."
+    name="DueToday"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of overdue activities for the given user/group."
+    name="Overdue"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of open activities for the given user/group."
+    name="AllActOpen"
+    nullok="true"
+    type="integer"/>
+  <!-- Claim Aging Stats -->
+  <column
+    desc="Number of open claims falling into the first aging bucket (the divisions are customer-configurable)."
+    name="ClaimAgingOne"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of open claims falling into the second aging bucket (the divisions are customer-configurable)."
+    name="ClaimAgingTwo"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of open claims falling into the third aging bucket (the divisions are customer-configurable)."
+    name="ClaimAgingThree"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of open claims falling into the fourth aging bucket (the divisions are customer-configurable)."
+    name="ClaimAgingFour"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of open and litigated claims falling into the first aging bucket (the divisions are customer-configurable)."
+    name="LitAgingOne"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of open and litigated claims falling into the second aging bucket (the divisions are customer-configurable)."
+    name="LitAgingTwo"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of open and litigated claims falling into the third aging bucket (the divisions are customer-configurable)."
+    name="LitAgingThree"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of open and litigated claims falling into the fourth aging bucket (the divisions are customer-configurable)."
+    name="LitAgingFour"
+    nullok="true"
+    type="integer"/>
+  <!-- Exposure Aging Stats -->
+  <column
+    desc="Number of open exposures falling into the first aging bucket (the divisions are customer-configurable)."
+    name="ExpAgingOne"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of open exposures falling into the second aging bucket (the divisions are customer-configurable)."
+    name="ExpAgingTwo"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of open exposures falling into the third aging bucket (the divisions are customer-configurable)."
+    name="ExpAgingThree"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of open exposures falling into the fourth aging bucket (the divisions are customer-configurable)."
+    name="ExpAgingFour"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Total Claim Workload for Group/User"
+    name="ClaimWorkload"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Total Exposure Workload for Group/User"
+    name="ExposureWorkload"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Total Workload for Group/User"
+    name="TotalWorkload"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Active claim-level subrogations"
+    name="SubroActiveClaim"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Active exposure-level subrogations"
+    name="SubroActiveExposure"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Active subrogations"
+    name="SubroActiveAll"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Subrogations closed within the statistics window"
+    name="SubroClosed"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of active subrogations falling into the first aging bucket (the divisions are customer-configurable)."
+    name="SubAgingOne"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of active subrogations falling into the second aging bucket (the divisions are customer-configurable)."
+    name="SubAgingTwo"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of active subrogations falling into the third aging bucket (the divisions are customer-configurable)."
+    name="SubAgingThree"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of active subrogations falling into the fourth aging bucket (the divisions are customer-configurable)."
+    name="SubAgingFour"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of active subrogations with a related litigation falling into the first aging bucket (the divisions are customer-configurable)."
+    name="SubLitAgingOne"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of active subrogations with a related litigation falling into the second aging bucket (the divisions are customer-configurable)."
+    name="SubLitAgingTwo"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of active subrogations with a related litigation falling into the third aging bucket (the divisions are customer-configurable)."
+    name="SubLitAgingThree"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of active subrogations with a related litigation falling into the fourth aging bucket (the divisions are customer-configurable)."
+    name="SubLitAgingFour"
+    nullok="true"
+    type="integer"/>
+</internalExtension>

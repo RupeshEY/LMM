@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    editable="true"
+    id="CustomerServiceTierDetailScreen">
+    <Require
+      name="aCustomerServiceTierSpecialHandling"
+      type="CustomerServiceTierSpecialHandling"/>
+    <Require
+      name="showSpecialHandlingCardToStart"
+      type="boolean"/>
+    <Variable
+      initialValue="getAvailableServiceTiers()"
+      name="availableServiceTiers"
+      recalculateOnRefresh="true"
+      type="List&lt;CustomerServiceTier&gt;"/>
+    <CardViewPanel
+      id="CustomerServiceTiersTabsCV">
+      <Card
+        id="CustomerServiceTierDetailCard"
+        title="DisplayKey.get(&quot;Web.Admin.CustomerServiceTier.Detail&quot;)">
+        <PanelRef>
+          <Toolbar
+            visible="aCustomerServiceTierSpecialHandling.New">
+            <EditButtons/>
+          </Toolbar>
+          <DetailViewPanel>
+            <InputColumn>
+              <Label
+                label="DisplayKey.get(&quot;Web.Admin.CustomerServiceTier&quot;)"/>
+              <RangeInput
+                editable="aCustomerServiceTierSpecialHandling.New"
+                id="Code"
+                label="DisplayKey.get(&quot;Web.Admin.CustomerServiceTier.Name&quot;)"
+                required="true"
+                value="aCustomerServiceTierSpecialHandling.CustomerServiceTier"
+                valueRange="availableServiceTiers"
+                valueType="typekey.CustomerServiceTier">
+                <PostOnChange
+                  target="DATA_ONLY"/>
+              </RangeInput>
+              <TextInput
+                id="Description"
+                label="DisplayKey.get(&quot;Web.Admin.CustomerServiceTier.Description&quot;)"
+                value="aCustomerServiceTierSpecialHandling.CustomerServiceTier.Description"/>
+            </InputColumn>
+          </DetailViewPanel>
+        </PanelRef>
+      </Card>
+      <Card
+        id="CustomerServiceTierSpecialHandlingCard"
+        selectOnEnter="showSpecialHandlingCardToStart"
+        title="DisplayKey.get(&quot;Web.Admin.CustomerServiceTier.SpecialHandling&quot;)"
+        visible="aCustomerServiceTierSpecialHandling != null">
+        <PanelRef
+          def="SpecialHandlingAutomatedNotificationsLV(aCustomerServiceTierSpecialHandling, perm.System.custsvctiermng)"
+          id="CustomerServiceTierAutomatedNotificationsLVPanelRef">
+          <TitleBar
+            id="AutomatedNotificationsTitle"
+            title="DisplayKey.get(&quot;Web.Admin.CustomerServiceTierDetailScreen.AutomatedNotificationsTitle&quot;)"/>
+          <Toolbar
+            visible="perm.System.custsvctiermng">
+            <CheckedValuesToolbarButton
+              checkedRowAction="CheckedValue.remove()"
+              confirmMessage="DisplayKey.get(&quot;Web.Admin.CustomerServiceTierDetailScreen.AutomatedNotificationsDeleteConfirmation&quot;)"
+              id="AutomatedNotificationsDelete"
+              iterator="CustomerServiceTierAutomatedNotificationsLVPanelRef.AutomatedNotificationsRowIterator"
+              label="DisplayKey.get(&quot;Web.Admin.CustomerServiceTierDetailScreen.AutomatedNotificationsDelete&quot;)"/>
+            <ToolbarButton
+              id="AutomatedNotificationsAdd"
+              label="DisplayKey.get(&quot;Web.Admin.CustomerServiceTierDetailScreen.AutomatedNotificationsAdd&quot;)"
+              showConfirmMessage="false">
+              <MenuItemIterator
+                elementName="automatedHandlerSubtype"
+                id="AutomatedNotificationsAddMenuItemIterator"
+                value="(AutomatedNotificationHandler.Type as gw.entity.IEntityType).AllSubtypes.where(\ t -&gt; not t.Abstract).sortBy(\ t -&gt; t.DisplayName)"
+                valueType="java.util.List&lt;gw.entity.IEntityType&gt;">
+                <MenuItem
+                  action="NewAutomatedNotificationHandlerPopup.push(aCustomerServiceTierSpecialHandling, automatedHandlerSubtype)"
+                  id="AutomatedNotificationsAddClaimIndicatorHandler"
+                  label="DisplayKey.get(&quot;Web.Admin.CustomerServiceTierDetailScreen.AutomatedNotificationsAdd.MenuItemLabel.&quot; + (automatedHandlerSubtype.DisplayName))"/>
+              </MenuItemIterator>
+            </ToolbarButton>
+          </Toolbar>
+        </PanelRef>
+        <PanelRef
+          def="SpecialHandlingAutomatedActivitiesLV(aCustomerServiceTierSpecialHandling, perm.System.custsvctiermng)">
+          <TitleBar
+            id="AutomatedActivitiesTitle"
+            title="DisplayKey.get(&quot;Web.Admin.CustomerServiceTierDetailScreen.AutomatedActivitiesTitle&quot;)"/>
+          <Toolbar
+            visible="perm.System.custsvctiermng">
+            <CheckedValuesToolbarButton
+              checkedRowAction="CheckedValue.remove()"
+              confirmMessage="DisplayKey.get(&quot;Web.Admin.CustomerServiceTierDetailScreen.AutomatedActivitiesDeleteConfirmation&quot;)"
+              id="AutomatedActivitiesDelete"
+              iterator="SpecialHandlingAutomatedActivitiesLV.AutomatedActivitiesRowIterator"
+              label="DisplayKey.get(&quot;Web.Admin.CustomerServiceTierDetailScreen.AutomatedActivitiesDelete&quot;)"/>
+            <ToolbarButton
+              id="AutomatedActivitiesAdd"
+              label="DisplayKey.get(&quot;Web.Admin.CustomerServiceTierDetailScreen.AutomatedActivitiesAdd&quot;)"
+              showConfirmMessage="false">
+              <MenuItemIterator
+                elementName="automatedHandlerSubtype"
+                id="AutomatedActivitiesAddMenuItemIterator"
+                value="(AutomatedActivityHandler.Type as gw.entity.IEntityType).AllSubtypes.where(\ t -&gt; not t.Abstract).sortBy(\ t -&gt; t.DisplayName)"
+                valueType="java.util.List&lt;gw.entity.IEntityType&gt;">
+                <MenuItem
+                  action="NewAutomatedActivityHandlerPopup.push(aCustomerServiceTierSpecialHandling, automatedHandlerSubtype)"
+                  id="AutomatedActivitiesAddClaimIndicatorHandler"
+                  label="DisplayKey.get(&quot;Web.Admin.CustomerServiceTierDetailScreen.AutomatedActivitiesAdd.MenuItemLabel.&quot; + (automatedHandlerSubtype.DisplayName))"/>
+              </MenuItemIterator>
+            </ToolbarButton>
+          </Toolbar>
+        </PanelRef>
+        <PanelRef
+          def="OtherInstructionsPanelSet(aCustomerServiceTierSpecialHandling.OtherInstructions, null, perm.System.custsvctiermng)">
+          <TitleBar
+            id="OtherInstructionsTitle"
+            title="DisplayKey.get(&quot;Web.Admin.CustomerServiceTierDetailScreen.OtherInstructionsTitle&quot;)"/>
+          <Toolbar
+            visible="perm.System.custsvctiermng">
+            <ToolbarButton
+              action="OtherInstructionPopup.push(null, aCustomerServiceTierSpecialHandling, true, perm.System.custsvctiermng)"
+              id="ToolbarButtonaddOtherInstruction"
+              label="DisplayKey.get(&quot;Web.Admin.CustomerServiceTierDetailScreen.OtherInstruction.Add&quot;)"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+    </CardViewPanel>
+    <Code><![CDATA[
+      function getAvailableServiceTiers() : java.util.List<CustomerServiceTier> {
+        var result = new java.util.HashSet(CustomerServiceTier.getTypeKeys(false))
+        gw.api.database.Query.make(CustomerServiceTierSpecialHandling).select().each( \ elt -> result.remove(elt.CustomerServiceTier))
+
+        return result.toList() as java.util.List<CustomerServiceTier>
+      }
+    ]]></Code>
+  </Screen>
+</PCF>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="QuestionSetLV">
+    <Require
+      name="QuestionSet"
+      type="QuestionSet"/>
+    <Require
+      name="AnswerSetContainer"
+      type="gw.api.question.AnswerSetContainer"/>
+    <RowIterator
+      editable="true"
+      elementName="Question"
+      pageSize="0"
+      value="AnswerSetContainer.getQuestions(QuestionSet)"
+      valueType="entity.Question[]">
+      <RowSetRef
+        def="QuestionRowSet(Question, AnswerSetContainer);"
+        mode="Question.Format"/>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

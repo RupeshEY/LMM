@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wb:ClaimNotifyEventRs Sender="insurer" Receiver="serviceprovider"
+	xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1" xmlns:ac="http://www.ACORD.org/Standards/AcordMsgSvc/1"
+	xmlns:wb="http://www.xchanging.com/claimnotify/rs/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.xchanging.com/claimnotify/rs/1">
+	<UUId>20111803-7778-5558-bbbb-1aa00005b415</UUId>
+	<InsurerReference>InsurerReference</InsurerReference>
+	<CreationDate>2006-06-22T15:16:30+01:00</CreationDate>
+	<AcknowledgementTransactionType>response</AcknowledgementTransactionType>
+	<Insurer>
+		<Party>
+			<Id Agency="lloyds">urn:lloyds:0623</Id>
+			<Name>Name</Name>
+		</Party>
+	</Insurer>
+	<ServiceProvider>
+		<Party>
+			<Id Agency="DUNS_dun_and_bradstreet">urn:duns:236196817</Id>
+			<Name>Xchanging</Name>
+		</Party>
+	</ServiceProvider>
+	<wb:ReferredMessage>
+		<UUId>20142830-42b4-0709-0000-103501601105</UUId>
+		<wb:ServiceProviderReference>ServiceProviderRef</wb:ServiceProviderReference>
+	</wb:ReferredMessage>
+	<Response>
+		<AcknowledgementLevelIndicator>translation_validation</AcknowledgementLevelIndicator>
+		<AcknowledgementStatus>acknowledged</AcknowledgementStatus>
+	</Response>	
+</wb:ClaimNotifyEventRs>

@@ -1,0 +1,22 @@
+package rules.Validation.ClaimValidationRules_dir.CLV09000ISOValidation_dir.CLV09900Insured_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV09910 - Insured Exists")
+internal class CLV09910InsuredExists {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.Insured == null
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.rejectField("Insured", TC_ISO, DisplayKey.get("Rules.Validation.Claim.InsuredNotNull"), null, null)
+/*end00rule*/
+
+  }
+}

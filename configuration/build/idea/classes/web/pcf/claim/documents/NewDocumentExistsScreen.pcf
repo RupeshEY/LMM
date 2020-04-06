@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="NewDocumentExistsScreen">
+    <Require
+      name="DocumentCreationInfo"
+      type="gw.document.DocumentCreationInfo"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Toolbar>
+      <EditButtons/>
+    </Toolbar>
+    <DetailViewPanel>
+      <InputColumn>
+        <InputSetRef
+          def="DocumentExistenceDetailsInputSet(DocumentCreationInfo.Document)"/>
+      </InputColumn>
+    </DetailViewPanel>
+  </Screen>
+</PCF>

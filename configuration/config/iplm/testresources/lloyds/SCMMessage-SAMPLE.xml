@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Jv-Ins-Reinsurance xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1" xmlns:xis="http://www.xchanging.com/ACORD4ALLEDI/1" Version="2010-2">
+	<ClaimMovement Sender="broker" Receiver="reinsurer">
+		<UUId>385F4E4C-C991-4DC4-98E1-657AB0AC5D8E</UUId>
+		<BrokerReference>N7T2101/TestBrokRef2</BrokerReference>
+		<ServiceProviderReference>00006223 1083-20111103-09:52:48-1-1</ServiceProviderReference>
+		<CreationDate>2011-11-03</CreationDate>
+		<Explanation>FIGS AT 310510    </Explanation>
+		<GroupReference>M950602986-2011-11-03</GroupReference>
+		<ItemsInGroupTotal>
+			<Count>1</Count>
+		</ItemsInGroupTotal>
+		<ServiceProviderGroupReference>00006223 1083-2011-11-03</ServiceProviderGroupReference>
+		<ServiceProviderGroupItemsTotal>
+			<Count>266</Count>
+		</ServiceProviderGroupItemsTotal>
+		<LossDescription>VARIOUS LOSSES EXCLUDING LARGE LOSSES ADVISEDSEPARATELY</LossDescription>
+		<AsOfDate>2011-11-03</AsOfDate>
+		<ReceivedFromCedentDate>2011-12-04</ReceivedFromCedentDate> 
+		<AdvisedToLeadingReinsurerDate>2011-12-06</AdvisedToLeadingReinsurerDate>
+		<ClaimAdviceInitialOrSubsequentIndicator>subsequent_advice</ClaimAdviceInitialOrSubsequentIndicator>
+		<ClaimAmountsIndicator>claim_payment</ClaimAmountsIndicator>
+		<Cedent>
+			<Party>
+				<Name> A.I.U.</Name>
+			</Party>
+		</Cedent>
+		<Reinsurer>
+			<Party>
+				<Id Agency="lloyds">0079</Id>
+				<Name>Syn: 0079 - Line number: 002</Name>
+			</Party>
+		</Reinsurer>
+		<Broker>
+			<Party>
+				<Id Agency="lloyds">0623</Id>
+				<Name>WIL</Name>
+			</Party>
+			<Contact>
+				<PersonName>BRAD PAGE</PersonName>
+				<Telephone>23306</Telephone>
+			</Contact>
+		</Broker>
+		<ServiceProvider>
+			<Party>
+				<Id Agency="DUNS_dun_and_bradstreet">236196817</Id>
+				<Name>XCHANGING INS-SURE SERVICES</Name>
+			</Party>
+			<Contact>
+				<Description>VG</Description>
+			</Contact>
+		</ServiceProvider>
+		<BureauLeadingInsurerOrReinsurer>
+			<Party>
+				<Id Agency="lloyds">0488</Id>
+				<Name>Beazley</Name>
+			</Party>
+		</BureauLeadingInsurerOrReinsurer>
+		<BureauLeadingInsurerOrReinsurersComments>TestDataBureauLeadingInsurerOrReinsurersComments</BureauLeadingInsurerOrReinsurersComments>
+		<ClaimAgreementParty>
+			<Party>
+				<Id
+					Agency="lloyds">0999</Id>
+			</Party>
+			<ParticipantFunction>bureau_leader_lloyds</ParticipantFunction>
+		</ClaimAgreementParty>
+		<Contract>
+			<TreatyFac>treaty_or_fac</TreatyFac>
+			<BrokerReference>Not provided</BrokerReference>
+			<ReinsurerReference>test006/006</ReinsurerReference>
+			<ServiceProviderReference>1994122351020</ServiceProviderReference>
+		</Contract>
+		<ContractSection>
+			<UnderwritingYear>1994</UnderwritingYear>
+			<ReinsurerSharePercentage>
+				<Rate RateUnit="percentage">25.0000000</Rate>
+			</ReinsurerSharePercentage>
+			<BrokerSharePercentage>
+				<Rate RateUnit="percentage">100.0000000</Rate>
+			</BrokerSharePercentage>
+		</ContractSection>
+		<ClaimEntry>
+			<BrokerReference>AA1111/BTest</BrokerReference>
+			<ServiceProviderReference>M950602910</ServiceProviderReference>
+		</ClaimEntry>
+		<Claim>
+			<BrokerReference>TestUCR0</BrokerReference>
+			<ReinsurerReference>23-502012</ReinsurerReference>
+			<ServiceProviderReference>M950602999</ServiceProviderReference>
+			<BureauSigningReference>2011110251358</BureauSigningReference>
+			<LossPeriod>
+				<Description>VARS.</Description>
+				<StartDate>2017-09-01</StartDate>
+				<EndDate>2017-09-01</EndDate>
+			</LossPeriod>
+			<PcsReference>TPCF</PcsReference>
+			<LcoCatastropheReference>TestCatRef</LcoCatastropheReference>
+			<LossLocation>
+				<Location>
+					<Description>CANADA</Description>
+				</Location>
+			</LossLocation>
+		</Claim>
+		<ContractReferenceCurrency>
+			<Ccy>EUR</Ccy>
+		</ContractReferenceCurrency>
+		<JvClassOfBusiness>various_unspecified</JvClassOfBusiness>
+		<ClaimMovementAmtItem Type="outstanding_loss_and_expense_for_contract_after_retention">
+			<Amt Ccy="USD" Share="hundred_percent" CcyIndic="reference_currency">5000</Amt>
+		</ClaimMovementAmtItem>
+		<ClaimMovementAmtItem Type="professional_advisor_fees_outstanding">
+			<Amt Ccy="USD" Share="hundred_percent" CcyIndic="reference_currency">200.00</Amt>
+		</ClaimMovementAmtItem>
+		<ClaimMovementAmtItem Type="total_losses_plus_expense_paid_for_contract_after_retention">
+			<Amt Ccy="USD" Share="hundred_percent" CcyIndic="reference_currency">16852721.38</Amt>
+		</ClaimMovementAmtItem>
+		<ClaimMovementAmtItem Type="highest_estimate">
+			<Amt Ccy="USD" Share="hundred_percent" CcyIndic="reference_currency">19758127.32</Amt>
+		</ClaimMovementAmtItem>
+		<ClaimMovementAmtItem Type="current_payment_losses_and_expenses_for_contract">
+			<Amt Ccy="USD" Share="hundred_percent" CcyIndic="reference_currency">1247.73</Amt>
+		</ClaimMovementAmtItem>
+		<ClaimMovementAmtItem Type="professional_advisor_fees_current_payment">
+			<Amt Ccy="USD" Share="hundred_percent" CcyIndic="reference_currency">3000.00</Amt>
+		</ClaimMovementAmtItem>
+		<ClaimMovementAmtItem Type="total_losses_and_expenses_paid_for_contract_after_retention">
+			<Amt Ccy="USD" Share="hundred_percent" CcyIndic="reference_currency">3000.00</Amt>
+		</ClaimMovementAmtItem>
+		<ClaimMovementAmtItem Type="professional_advisor_fees_total_paid">
+			<Amt Ccy="USD" Share="hundred_percent" CcyIndic="reference_currency">3000.00</Amt>
+		</ClaimMovementAmtItem>
+		<Extension>
+			<Claim>
+				<Extension>
+					<lloydsClaimReference>00697887C</lloydsClaimReference>
+				</Extension>
+			</Claim>
+			<Claim>
+				<Extension>
+					<RiskCode>V</RiskCode>
+				</Extension>
+			</Claim>
+			<ServiceProviderShare>
+				<Rate RateUnit='percentage'>33.3750000</Rate>
+			</ServiceProviderShare>
+			<SignedIndicator>signed</SignedIndicator>
+			<ClaimTypeCode>marine_treaty</ClaimTypeCode>
+			<BlockIndicator>block_claim</BlockIndicator>
+			<FILMarketCode>5S</FILMarketCode>
+			<ContractSection>
+				<Extension>
+					<CoverPeriod>
+						<StartDate>1994-12-01</StartDate>
+					</CoverPeriod>
+				</Extension>
+			</ContractSection>
+			<ContractSection>
+				<Extension>
+					<CoverPeriod>
+						<EndDate>1995-11-30</EndDate>
+					</CoverPeriod>
+				</Extension>
+			</ContractSection>
+			<LimitsInsuredValueExcessDescription>TTY LIMITS USD 20M AODEC</LimitsInsuredValueExcessDescription>
+			<ExtendedPolicyDetails>R/I A.I.U.R/I A.I.U.CARGO SURPLUS TREATY AS ORIG INC WAR T 10370</ExtendedPolicyDetails>
+			<TransactionDetails>FMT/OL/    /         /           / /US</TransactionDetails>
+			<DateLastSeen>2011-11-02</DateLastSeen>
+			<TrustFundCountryCode>US</TrustFundCountryCode>
+			<TrustFundCode>OL</TrustFundCode>
+			<FILCode>USF4</FILCode>
+			<BureauPrimaryReference2>M950602986</BureauPrimaryReference2>
+			<MovementReference>BY1111</MovementReference>
+			<ROE>1</ROE>
+			<RXS>1</RXS>
+			<xis:SettlementCurrency>USD</xis:SettlementCurrency>
+		</Extension>
+	</ClaimMovement>
+</Jv-Ins-Reinsurance>

@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Describes the recurrence schedule for a check."
+  entity="CheckRecurrence"
+  final="false"
+  platform="false"
+  table="checkrecurrence"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.check.impl.CheckRecurrenceInternal"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckRecurrenceImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.check.entity.CheckRecurrence"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckRecurrenceImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+      Describes the frequency that Checks in a {@link RecurringCheck} are issued.
+      Abstract supertype of {@link MonthlyCheckRecurrence} and {@link WeeklyCheckRecurrence}.
+    ]]></fulldescription>
+  <column
+    default="0"
+    desc="Number of days before a check is due that it should be issued."
+    name="IssuanceDateOffset"
+    nullok="false"
+    type="integer"/>
+  <column
+    desc="Due date of the first check in the recurrence."
+    name="FirstDueDate"
+    nullok="false"
+    type="datetime"/>
+  <column
+    default="1"
+    desc="Number of checks in the recurrence."
+    name="NumChecks"
+    nullok="false"
+    type="positiveinteger"/>
+  <onetoone
+    desc="The CheckSet for which this CheckRecurrence defines the recurrence schedule"
+    exportable="false"
+    fkentity="CheckSet"
+    ignoreforevents="true"
+    name="CheckSet"
+    nullok="true"
+    setterScriptability="doesNotExist"/>
+  <typekey
+    desc="Day of the week the check is due."
+    name="RecurrenceDay"
+    nullok="true"
+    typelist="RecurrenceDay"/>
+</entity>

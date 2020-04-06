@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="UserAssignableDV"
+    mode="matter">
+    <Require
+      name="User"
+      type="User"/>
+    <InputColumn>
+      <ListViewInput
+        def="UserMattersLV(MatterUserView.finder.findAssignedToUser(User) )"
+        labelAbove="true">
+        <Toolbar>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="AssignMattersPopup.push(new gw.api.matter.MatterAssignmentPopup(CheckedValues))"
+            default="true"
+            flags="any Matter"
+            id="UserMattersPage_AssignButton"
+            iterator="UserMattersLV.UserMattersLV"
+            label="DisplayKey.get(&quot;Web.Admin.UserDetail.Matters.Assign&quot;)"
+            shortcut="G"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

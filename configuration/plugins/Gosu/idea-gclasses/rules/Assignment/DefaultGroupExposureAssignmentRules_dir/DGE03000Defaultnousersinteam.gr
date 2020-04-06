@@ -1,0 +1,27 @@
+package rules.Assignment.DefaultGroupExposureAssignmentRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+
+@gw.rules.RuleName("DGE03000 - Default - no users in team")
+internal class DGE03000Defaultnousersinteam {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/* Let the supervisor assign manually */
+exposure.CurrentAssignment.assignManually(exposure.CurrentAssignment.AssignedGroup.Supervisor)
+CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.DefaultGroup.Exposure", actions.ShortRuleName))
+CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.AssignedUserIs", exposure.AssignedUser))
+actions.exit()
+/*end00rule*/
+
+  }
+}

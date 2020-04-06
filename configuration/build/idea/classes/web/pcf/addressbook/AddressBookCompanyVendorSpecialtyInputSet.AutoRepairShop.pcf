@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AddressBookCompanyVendorSpecialtyInputSet"
+    mode="AutoRepairShop">
+    <Require
+      name="CompanyVendor"
+      type="CompanyVendor"/>
+    <TextInput
+      editable="true"
+      id="BusinessLicense"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AutoRepairShop.BusinessLicense&quot;)"
+      value="(CompanyVendor as AutoRepairShop).AutoRepairLicense"/>
+  </InputSet>
+</PCF>

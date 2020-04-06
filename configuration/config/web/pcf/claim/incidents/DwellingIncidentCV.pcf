@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <CardViewPanel
+    id="DwellingIncidentCV">
+    <Require
+      name="dwellingIncident"
+      type="DwellingIncident"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Card
+      id="Dwelling_DetailsCard"
+      title="DisplayKey.get(&quot;Web.DwellingIncident.Details&quot;)">
+      <PanelRef
+        def="DwellingIncidentPanelSet(dwellingIncident, unusedServiceRequests)"/>
+    </Card>
+    <Card
+      id="Dwelling_AssessmentCard"
+      title="DisplayKey.get(&quot;Web.DwellingIncident.Assessment&quot;)">
+      <PanelRef
+        def="IncidentAssessDV(dwellingIncident)"/>
+    </Card>
+  </CardViewPanel>
+</PCF>

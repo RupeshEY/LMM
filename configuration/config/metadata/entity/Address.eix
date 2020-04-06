@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Address">
+  <description><![CDATA[<p>
+      Represents a street or mailing address. Addresses are normally associated with
+      a Contact, either as a Primary Address for that Contact or via the ContactAddress table. Addresses can
+      have geographic location information stored for proximity searches.</p>
+      @see Contact
+      @see ContactAddress
+    ]]></description>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="OverlapTable"/>
+  <implementsInterface
+    iface="gw.api.address.AddressHandlingMethods"
+    impl="gw.entity.AddressHandlingMethodsImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.contact.impl.AddressCoreExtMethods"
+    impl="com.guidewire.cc.domain.contact.impl.AddressCoreExtMethodsImpl"/>
+</internalExtension>

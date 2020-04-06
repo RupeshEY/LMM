@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="CheckExchangeRateInputSet"
+    visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode() and check.Currency != check.ReservingCurrency">
+    <Require
+      name="check"
+      type="Check"/>
+    <Require
+      name="widgetLabel"
+      type="java.lang.String"/>
+    <Label
+      label="widgetLabel"
+      visible="widgetLabel != null"/>
+    <BooleanRadioInput
+      editable="perm.ExchangeRate.edit"
+      falseLabel="DisplayKey.get(&quot;Web.Claim.ExchangeRateInputSet.Automatic&quot;)"
+      id="Transaction_ExchangeRateOverride"
+      label="DisplayKey.get(&quot;Web.Claim.ExchangeRateInputSet.ExchangeRateMode&quot;)"
+      trueLabel="DisplayKey.get(&quot;Web.Claim.ExchangeRateInputSet.Manual&quot;)"
+      value="check.OverrideTransToReservingExchangeRate">
+      <PostOnChange/>
+    </BooleanRadioInput>
+    <TextInput
+      editable="check.OverrideTransToReservingExchangeRate"
+      format="var rate = check.TransToReservingExchangeRate; return &quot;1 &quot; + rate.BaseCurrency.DisplayName + &quot; = #.###### &quot; + rate.PriceCurrency.DisplayName;"
+      formatType="exactNumber"
+      id="Transaction_ExchangeRate"
+      label="DisplayKey.get(&quot;Web.Claim.ExchangeRateInputSet.ExchangeRate&quot;)"
+      numCols="8"
+      value="check.TransToReservingExchangeRateRate"
+      valueType="java.math.BigDecimal">
+      <PostOnChange/>
+    </TextInput>
+    <TextInput
+      editable="check.OverrideTransToReservingExchangeRate"
+      id="Transaction_RateSet_Description"
+      label="DisplayKey.get(&quot;Web.Claim.ExchangeRateInputSet.RateSetDescription&quot;)"
+      value="check.TransToReservingExchangeRate.ExchangeRateSet.Description"/>
+    <DateInput
+      id="Transaction_RateSet_Date"
+      label="DisplayKey.get(&quot;Web.Claim.ExchangeRateInputSet.ExchangeRateDate&quot;)"
+      value="check.TransToReservingExchangeRate.ExchangeRateSet.EffectiveDate"/>
+  </InputSet>
+</PCF>

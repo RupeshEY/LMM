@@ -1,0 +1,125 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <PanelSet
+    editable="true"
+    id="OtherInstructionsPanelSet">
+    <Require
+      name="otherInstructions"
+      type="OtherInstruction[]"/>
+    <Require
+      name="claimPolicyType"
+      type="PolicyType"/>
+    <Require
+      name="permEditOtherInstructions"
+      type="boolean"/>
+    <Variable
+      initialValue="getUniqueCategories()"
+      name="uniqueCategories"
+      recalculateOnRefresh="true"
+      type="typekey.InstructionCategory[]"/>
+    <Layout
+      columns="2"
+      type="table"/>
+    <PanelIterator
+      elementName="otherInstructionHeader"
+      pageSize="4"
+      value="uniqueCategories"
+      valueType="typekey.InstructionCategory[]">
+      <Variable
+        initialValue="otherInstructions.where(\ o -&gt; (o.InstructionCategory == otherInstructionHeader or o.InstructionCategory == null)).sortBy(\ o -&gt; o.PolicyType)"
+        name="otherInstructionByCategory"
+        type="entity.OtherInstruction[]"/>
+      <Variable
+        initialValue="claimPolicyType != null ? otherInstructionByCategory.where(\ o -&gt; (o.PolicyType == claimPolicyType or o.PolicyType == null)) : otherInstructionByCategory"
+        name="otherInstructionByPolicyType"
+        type="entity.OtherInstruction[]"/>
+      <PanelRef>
+        <TitleBar
+          title="otherInstructionHeader.DisplayName"/>
+        <PanelSet>
+          <!-- This DV/Hidden Input are necessary for testing purposes. If TitleBars become testable, this can be removed. -->
+          <DetailViewPanel>
+            <InputColumn>
+              <HiddenInput
+                id="instructionCategoryHeader"
+                value="otherInstructionHeader.DisplayName"
+                valueType="java.lang.String"/>
+            </InputColumn>
+          </DetailViewPanel>
+          <PanelIterator
+            elementName="otherInstructionTable"
+            id="otherInstructionTable"
+            value="otherInstructionByPolicyType"
+            valueType="entity.OtherInstruction[]">
+            <Variable
+              initialValue="otherInstructionTable.SpecialHandling"
+              name="specialHandling"
+              type="SpecialHandling"/>
+            <DetailViewPanel
+              editable="false">
+              <InputColumn>
+                <TextInput
+                  boldLabel="true"
+                  hideChildrenIfReadOnly="false"
+                  id="policyType"
+                  label="DisplayKey.get(&quot;Web.Admin.OtherInstructions.PolicyType&quot;)"
+                  value="otherInstructionTable.PolicyType == null ? DisplayKey.get(&quot;Web.Admin.OtherInstructions.PolicyType.NoneSelected&quot;) : otherInstructionTable.PolicyType"
+                  valueType="java.io.Serializable &amp; java.lang.Comparable&lt;java.lang.Object&gt;"/>
+                <TypeKeyInput
+                  action="OtherInstructionPopup.push(otherInstructionTable, specialHandling, false, permEditOtherInstructions)"
+                  boldLabel="true"
+                  hideChildrenIfReadOnly="false"
+                  id="instructionType"
+                  label="DisplayKey.get(&quot;Web.Admin.OtherInstructions.InstructionType&quot;)"
+                  value="otherInstructionTable.InstructionType"
+                  valueType="typekey.InstructionType"
+                  visible="claimPolicyType == null">
+                  <MenuItem
+                    action="OtherInstructionPopup.push(otherInstructionTable, specialHandling, true, permEditOtherInstructions)"
+                    id="edit"
+                    label="DisplayKey.get(&quot;Web.Admin.OtherInstructions.Edit&quot;)"
+                    visible="permEditOtherInstructions"/>
+                  <MenuItem
+                    action="removeOtherInstruction(otherInstructionTable)"
+                    confirmMessage="DisplayKey.get(&quot;Web.Admin.OtherInstructions.Remove.Message&quot;)"
+                    id="remove"
+                    label="DisplayKey.get(&quot;Web.Admin.OtherInstructions.Remove&quot;)"
+                    visible="permEditOtherInstructions"/>
+                </TypeKeyInput>
+                <TextAreaInput
+                  boldLabel="true"
+                  id="comment"
+                  label="DisplayKey.get(&quot;Web.Admin.OtherInstructions.Comment&quot;)"
+                  labelAbove="true"
+                  numCols="80"
+                  numRows="4"
+                  value="otherInstructionTable.Comments"/>
+              </InputColumn>
+            </DetailViewPanel>
+          </PanelIterator>
+        </PanelSet>
+      </PanelRef>
+    </PanelIterator>
+    <Code><![CDATA[function getUniqueCategories() : InstructionCategory[] {
+            var uniqueInstructionCategories : InstructionCategory[]
+
+            if(claimPolicyType != null) {
+                uniqueInstructionCategories = otherInstructions.where(\ oi -> (oi.PolicyType == claimPolicyType or oi.PolicyType == null)).partition(\ o -> o.InstructionCategory).Keys.order().toTypedArray()
+            } else {
+                uniqueInstructionCategories = otherInstructions.partition(\ o -> o.InstructionCategory).Keys.order().toTypedArray()
+            }
+
+            return uniqueInstructionCategories
+        }
+        
+function removeOtherInstruction(otherInstruction : OtherInstruction) {
+  gw.transaction.Transaction.runWithNewBundle(\ bundle -> {
+    otherInstruction = bundle.add(otherInstruction)
+    otherInstruction.remove()
+    bundle.commit() 
+  });
+}]]></Code>
+  </PanelSet>
+</PCF>

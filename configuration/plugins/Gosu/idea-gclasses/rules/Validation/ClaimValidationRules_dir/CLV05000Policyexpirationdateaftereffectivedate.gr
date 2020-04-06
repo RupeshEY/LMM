@@ -1,0 +1,27 @@
+package rules.Validation.ClaimValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV05000 - Policy expiration date after effective date")
+internal class CLV05000Policyexpirationdateaftereffectivedate {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.Policy.EffectiveDate > claim.Policy.ExpirationDate
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.rejectField("Policy.EffectiveDate",
+                     TC_NEWLOSS,
+                     DisplayKey.get("Rules.Validation.Claim.PolicyExpirationLaterThanEffectiveDate"),
+                     null,
+                     null)
+
+/*end00rule*/
+
+  }
+}

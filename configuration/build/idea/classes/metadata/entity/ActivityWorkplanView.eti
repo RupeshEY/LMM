@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Displays activities efficiently in the workplan page."
+  entity="ActivityWorkplanView"
+  exportable="false"
+  primaryEntity="Activity"
+  supertypeEntity="ActivitySearchView">
+  <implementsInterface
+    iface="gw.cc.activity.entity.ActivityWorkplanView"
+    impl="com.guidewire.cc.domain.activity.impl.ActivityWorkplanViewImpl"/>
+  <fulldescription><![CDATA[<p>Aggregates the information needed to display one activity row in the activity workplan page (subtype of ActivityView).</p>
+    ]]></fulldescription>
+  <viewEntityName
+    name="AssignedByUserName"
+    path="AssignedByUser"/>
+  <viewEntityName
+    name="ClaimClaimantName"
+    path="Claim.ClaimantDenorm"/>
+  <!-- unfortunately dups column in ActivityDesktopView -->
+  <viewEntityName
+    name="CloseUserName"
+    path="CloseUser"/>
+  <viewEntityName
+    name="ClaimContactName"
+    path="ClaimContact.Contact"/>
+  <!-- unfortunately dups column in ActivityDesktopView -->
+  <viewEntityName
+    name="ExposureClaimantName"
+    path="Exposure.ClaimantDenorm"/>
+</viewEntity>

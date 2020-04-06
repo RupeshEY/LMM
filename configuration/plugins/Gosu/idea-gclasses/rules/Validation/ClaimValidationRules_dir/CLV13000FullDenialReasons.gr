@@ -1,0 +1,20 @@
+package rules.Validation.ClaimValidationRules_dir
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV13000 - Full Denial Reasons")
+internal class CLV13000FullDenialReasons {
+  static function doCondition(claim : entity.Claim) : boolean {
+/*start00rule*/
+return claim.LossType == TC_WC
+/*end00rule*/
+}
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+/*start00rule*/
+ if (claim.FullDenialReasons.Count > 5) {
+  claim.rejectField("claim.FullDenialReasons", null, null,
+  TC_NEWLOSS, DisplayKey.get("Warning.ClaimCompensability.FullDenialReasonsExceedingLimit"))
+ }
+/*end00rule*/
+  }
+}

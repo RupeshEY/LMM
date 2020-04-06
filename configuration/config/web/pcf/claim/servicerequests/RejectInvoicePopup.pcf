@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <Popup
+    beforeCommit="rejectInvoice()"
+    canEdit="true"
+    canVisit="true"
+    id="RejectInvoicePopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ServiceRequest.StateTransition.RejectInvoicePopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="RejectInvoicePopup(invoice : ServiceRequestInvoice)"/>
+    <Variable
+      name="invoice"
+      type="ServiceRequestInvoice"/>
+    <Variable
+      name="rejectionReason"
+      type="String"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          cancelLabel="DisplayKey.get(&quot;Web.ServiceRequest.StateTransition.RejectInvoicePopup.CancelButton&quot;)"
+          updateLabel="DisplayKey.get(&quot;Web.ServiceRequest.StateTransition.RejectInvoicePopup.RejectButton&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel
+        editable="true">
+        <InputColumn>
+          <TextAreaInput
+            editable="true"
+            id="RejectionReason"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.StateTransition.RejectInvoicePopup.ChangeDescription&quot;)"
+            numRows="4"
+            required="true"
+            value="rejectionReason"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[uses gw.vendormanagement.servicerequeststate.ServiceRequestInvoiceOperationDefinition
+function rejectInvoice() {
+  var context = new ServiceRequestInvoiceOperationDefinition.OperationContext(){:Reason = rejectionReason}
+  invoice.performOperation(TC_REJECTINVOICE, context, false)
+}]]></Code>
+  </Popup>
+</PCF>

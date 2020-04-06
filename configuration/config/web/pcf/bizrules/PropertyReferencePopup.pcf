@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="PropertyReferencePopup"
+    startInEditMode="true"
+    title="fragment.PopupTitle">
+    <LocationEntryPoint
+      signature="PropertyReferencePopup(fragment : gw.bizrules.pcf.PropertyReferenceExpressionFragmentHolder)"/>
+    <Variable
+      name="fragment"
+      type="gw.bizrules.pcf.PropertyReferenceExpressionFragmentHolder"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            autoComplete="fragment.AutocompleteHandler"
+            enableAutoCompleteMarkup="true"
+            editable="true"
+            id="Property"
+            inputConversion="fragment.inputConversion(VALUE)"
+            label="DisplayKey.get('BizRules.PropertyReferencePopup.Property.Label')"
+            numCols="100"
+            outputConversion="fragment.outputConversion()"
+            value="fragment.Fragment"
+            valueType="entity.PropertyReferenceExpressionFragment">
+            <PostOnChange/>
+          </TextInput>
+          <InputSetRef
+            def="ValidationErrorsInputSet(fragment.validate(), false)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,262 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="ClaimSnapshotGeneral300DV"
+    mode="pr">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Snapshot"
+      type="dynamic.Dynamic"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.General&quot;)"/>
+      <TextInput
+        id="LossType"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.LossType&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;LossType&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="LOBCode"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.LOBCode&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;LOBCode&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="Contact"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.Contact&quot;)"
+        value="util.Snapshot.renderValue( util.Snapshot.getPropertyValue(Snapshot, &quot;AssignedUser&quot;)[&quot;Contact&quot;] )"/>
+      <TextInput
+        id="Catastrophe"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.Catastrophe&quot;)"
+        value="util.Snapshot.renderValue( util.Snapshot.renderValue(Snapshot.Catastrophe) )"/>
+      <TextInput
+        id="Segment"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.Segment&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;Segment&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="Strategy"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.Strategy&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;Strategy&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="PermissionRequired"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.PermissionRequired&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;PermissionRequired&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.Description&quot;)"/>
+      <TextAreaInput
+        id="Description"
+        numCols="30"
+        numRows="3"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;Description&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.Loss&quot;)"/>
+      <TextInput
+        id="LossCause"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.LossCause&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;LossCause&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="LossDate"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.LossDate&quot;)"
+        value="util.Snapshot.renderValue( util.Snapshot.getPropertyValue(Snapshot, &quot;LossDate&quot;) )"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.Loss_1&quot;)"/>
+      <TextInput
+        id="LossLocation"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.LossLocation&quot;)"
+        value="util.Snapshot.renderValue( util.Snapshot.getPropertyValue(Snapshot, &quot;LossLocation&quot;) )"/>
+      <TextInput
+        id="County"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.County&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;LossLocation&quot;)[&quot;County&quot;]"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="Country"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.Country&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;LossLocation&quot;)[&quot;Country&quot;]"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="LossLocationCode"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.LossLocationCode&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;LossLocationCode&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="JurisdictionState"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.JurisdictionState&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;JurisdictionState&quot;)"
+        valueType="dynamic.Dynamic"/>
+    </InputColumn>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.Notification&quot;)"/>
+      <TextInput
+        id="ReportedDate"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.ReportedDate&quot;)"
+        value="util.Snapshot.renderValue( util.Snapshot.getPropertyValue(Snapshot, &quot;ReportedDate&quot;) )"/>
+      <BooleanRadioInput
+        falseLabel="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.IncidentReport&quot;)"
+        id="FirstNoticeSuit"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.FirstNoticeSuit_1&quot;)"
+        trueLabel="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.IncidentReport_2&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;FirstNoticeSuit&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="HowReported"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.HowReported&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;HowReported&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="Reporter"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.Reporter&quot;)"
+        value="util.Snapshot.renderValue(util.Snapshot.getContactByRole(Snapshot, &quot;reporter&quot;))"/>
+      <TextInput
+        id="DriverRelation"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.DriverRelation&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;DriverRelation&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="MainContact"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.MainContact&quot;)"
+        value="util.Snapshot.renderValue(util.Snapshot.getContactByRole(Snapshot, &quot;maincontact&quot;))"/>
+      <TextInput
+        id="MainContactType"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.DriverRelation&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;MainContactType&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="DateRptdToAgent"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.DateRptdToAgent&quot;)"
+        value="util.Snapshot.renderValue( util.Snapshot.getPropertyValue(Snapshot, &quot;DateRptdToAgent&quot;) )"/>
+      <TextInput
+        id="FaultRating"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.FaultRating&quot;)"
+        value="util.Snapshot.renderValue( util.Snapshot.getPropertyValue(Snapshot, &quot;Fault&quot;) )"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.Claim&quot;)"/>
+      <TextInput
+        id="CreateTime"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.CreateTime&quot;)"
+        value="util.Snapshot.renderValue( util.Snapshot.getPropertyValue(Snapshot, &quot;CreateTime&quot;) )"/>
+      <TextInput
+        id="CloseDate"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.CloseDate&quot;)"
+        value="util.Snapshot.renderValue( util.Snapshot.getPropertyValue(Snapshot, &quot;CloseDate&quot;) )"/>
+      <TextInput
+        id="ClosedOutcome"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.ClosedOutcome&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;ClosedOutcome&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <BooleanRadioInput
+        falseLabel="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.IncidentReport&quot;)"
+        id="IncidentReport"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.IncidentReport_1&quot;)"
+        trueLabel="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.IncidentReport_2&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;IncidentReport&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <BooleanRadioInput
+        falseLabel="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.IncidentReport&quot;)"
+        id="CoverageInQuestion"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.CoverageInQuestion_1&quot;)"
+        trueLabel="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.IncidentReport_2&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;CoverageInQuestion&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="DeductibleStatus"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.DeductibleStatus&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;DeductibleStatus&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="LitigationStatus"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.LitigationStatus&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;LitigationStatus&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="SubrogationStatus"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.SubrogationStatus&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;SubrogationStatus&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="SalvageStatus"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.SalvageStatus&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;SalvageStatus&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="OtherRecovStatus"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.OtherRecovStatus&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;OtherRecovStatus&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="SIUStatus"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.SIUStatus&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;SIUStatus&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="ReinsuranceStatus"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.ReinsuranceStatus&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;ReinsuranceStatus&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.Flag&quot;)"/>
+      <TextInput
+        id="Flagged"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.Flagged&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;Flagged&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="FlaggedDate"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.FlaggedDate&quot;)"
+        value="util.Snapshot.renderValue( util.Snapshot.getPropertyValue(Snapshot, &quot;FlaggedDate&quot;) )"/>
+      <TextInput
+        id="FlaggedReason"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.FlaggedReason&quot;)"
+        value="util.Snapshot.getPropertyValue(Snapshot, &quot;FlaggedReason&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.Officials&quot;)"/>
+      <ListViewInput
+        labelAbove="true">
+        <Toolbar/>
+        <ListViewPanel
+          id="OfficialsLV">
+          <RowIterator
+            editable="false"
+            elementName="Official"
+            type="dynamic.Dynamic"
+            value="util.Snapshot.getPropertyValue(Snapshot, &quot;Officials&quot;) as Object[]"
+            valueType="java.lang.Object[]">
+            <Row>
+              <TextCell
+                id="Type"
+                label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.Type&quot;)"
+                value="Official.OfficialType"
+                valueType="dynamic.Dynamic"/>
+              <TextCell
+                id="Name"
+                label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.Name&quot;)"
+                value="Official.Name"
+                valueType="dynamic.Dynamic"/>
+              <TextCell
+                id="ReportNumber"
+                label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneral300DV.Pr.ReportNumber&quot;)"
+                value="Official.ReportNumber"
+                valueType="dynamic.Dynamic"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </ListViewInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

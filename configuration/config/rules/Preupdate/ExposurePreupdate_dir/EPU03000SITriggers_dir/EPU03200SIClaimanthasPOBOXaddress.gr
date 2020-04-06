@@ -1,0 +1,35 @@
+package rules.Preupdate.ExposurePreupdate_dir.EPU03000SITriggers_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("EPU03200 - SI - Claimant has POBOX address")
+internal class EPU03200SIClaimanthasPOBOXaddress {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.Claimant.PrimaryAddress.AddressLine1.indexOf("P.O.Box") >= 0
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+// IMPORTANT: When defining a new SIU Trigger rule, copy the entire contents of this Rule Action, 
+// but ONLY change the three values following the comment below.
+var TriggerDescription : String
+var AdditionalInformation : String
+var PointValue : int
+
+// Please only change the following three values:
+TriggerDescription = DisplayKey.get("Rules.PreUpdate.Exposure.POBoxListedForClaimantOnExposureNum", exposure.ClaimOrder)
+AdditionalInformation = DisplayKey.get("Rules.PreUpdate.Exposure.Claimant", exposure.Claimant.DisplayName)
+PointValue = 5   // The value/weight attributed to each rule can be modified by setting the PointValue as desired.  
+
+//DO NOT change the line below:
+exposure.siTriggersLogicExposure(TriggerDescription, AdditionalInformation, PointValue)
+/*end00rule*/
+
+  }
+}

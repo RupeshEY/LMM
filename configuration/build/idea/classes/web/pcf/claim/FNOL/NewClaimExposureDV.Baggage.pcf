@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <CardViewPanel
+    hideTabIfSingle="true"
+    id="NewClaimExposureDV"
+    mode="Baggage">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Card
+      id="NewExposureCard"
+      title="&quot;&quot;">
+      <PanelRef
+        def="NewClaimBaggageDamageDV(Exposure)"/>
+    </Card>
+    <Code><![CDATA[
+property get ContactProhibited() : boolean {
+    return Exposure.Claim.getClaimContact(Exposure.Claimant).ContactProhibited
+}
+
+property set ContactProhibited(prohibited : boolean) {
+  var claimContact = Exposure.Claim.getClaimContact(Exposure.Claimant)
+  if (claimContact != null) claimContact.ContactProhibited = prohibited
+}
+    ]]></Code>
+  </CardViewPanel>
+</PCF>

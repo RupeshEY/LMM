@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="DeductibleInputSet"
+    visible="deductibles.length &gt; 0">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="withCoverage"
+      type="boolean"/>
+    <Variable
+      initialValue="claim.getDeductibles()"
+      name="deductibles"
+      recalculateOnRefresh="true"
+      type="Deductible[]"/>
+    <Label
+      id="DeductibleLabel"
+      label="DisplayKey.get(&quot;Deductible.Label&quot;)"/>
+    <InputIterator
+      elementName="deductible"
+      id="DeductibleIterator"
+      value="deductibles"
+      valueType="entity.Deductible[]">
+      <TextInput
+        id="Deductible"
+        label="deductible.getDisplayLabel( withCoverage )"
+        value="deductible.DisplayAmount"/>
+    </InputIterator>
+  </InputSet>
+</PCF>

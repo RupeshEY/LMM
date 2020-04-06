@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Kind of service"
+  name="ServiceRequestKind">
+  <typecode
+    code="quoteandservice"
+    desc="Request Type for a Service that manages a quote, service performed, and invoices received."
+    name="Quote and Perform Service"
+    priority="1"/>
+  <typecode
+    code="quoteonly"
+    desc="Request Type for a Service that manages only a quote."
+    name="Quote Only"
+    priority="2"/>
+  <typecode
+    code="serviceonly"
+    desc="Request Type for a Service that manages the service performed and invoices received."
+    name="Service Only"
+    priority="3"/>
+  <typecode
+    code="unmanaged"
+    desc="Request Type for a Service that manages only the invoices received."
+    name="Unmanaged Service"/>
+</typelistextension>

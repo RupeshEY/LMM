@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    editable="true"
+    id="AdditionalTripSegmentLV">
+    <ExposeIterator
+      flags="approve_add_trav,deny_add_trav,review_add_trav,row_add_trav,clear_add_trav"
+      valueType="entity.AddnlTripSegment"
+      widget="TripSegmentIterator"/>
+    <Require
+      name="affectedTripSegment"
+      type="TripSegment"/>
+    <RowIterator
+      checkBoxVisible="true"
+      editable="true"
+      elementName="anAddnlTripSegment"
+      hasCheckBoxes="true"
+      hideCheckBoxesIfReadOnly="true"
+      id="TripSegmentIterator"
+      pickLocation="AdditionalTripSegmentPopup.push(affectedTripSegment, true)"
+      toAdd="affectedTripSegment.addToAddnlTripSegments(anAddnlTripSegment)"
+      toRemove="affectedTripSegment.removeFromAddnlTripSegments( anAddnlTripSegment )"
+      value="affectedTripSegment.AddnlTripSegments"
+      valueType="entity.AddnlTripSegment[]">
+      <ToolbarFlag
+        condition="anAddnlTripSegment.Assessment == TC_APPROVE"
+        name="approve_add_trav"/>
+      <ToolbarFlag
+        condition="anAddnlTripSegment.Assessment == TC_DENY"
+        name="deny_add_trav"/>
+      <ToolbarFlag
+        condition="anAddnlTripSegment.Assessment == TC_REVIEW"
+        name="review_add_trav"/>
+      <ToolbarFlag
+        name="row_add_trav"/>
+      <ToolbarFlag
+        condition="anAddnlTripSegment.Assessment == null"
+        name="clear_add_trav"/>
+      <Row>
+        <TypeKeyCell
+          action="AdditionalTripSegmentPopup.push( anAddnlTripSegment, anAddnlTripSegment.TripSegment, CurrentLocation.InEditMode )"
+          id="TransportType"
+          label="DisplayKey.get(&quot;Web.TripIncidentScreen.AdditionalTripSegmentLV.Type&quot;)"
+          value="anAddnlTripSegment.TransportType"
+          valueType="typekey.TransportType"/>
+        <TextCell
+          action="AdditionalTripSegmentPopup.push( anAddnlTripSegment, anAddnlTripSegment.TripSegment, CurrentLocation.InEditMode )"
+          id="AddnlTripSegment_DisplayName"
+          label="DisplayKey.get(&quot;Web.TripIncidentScreen.AdditionalTripSegmentLV.Description&quot;)"
+          value="anAddnlTripSegment.DisplayName"/>
+        <TypeKeyCell
+          formatType="general"
+          id="AddnlTripSegment_Assessment"
+          label="DisplayKey.get(&quot;Web.TripIncidentScreen.AdditionalTripSegmentLV.Approval&quot;)"
+          value="anAddnlTripSegment.Assessment"
+          valueType="typekey.AssessmentAction"/>
+        <CurrencyCell
+          formatType="currency"
+          id="AddnlTripSegment_TotalIncurred"
+          label="DisplayKey.get(&quot;Web.TripIncidentScreen.AdditionalTripSegmentLV.ApprovedAmt&quot;)"
+          value="anAddnlTripSegment.getFinancialImpact(AssessmentAction.TC_APPROVE)"/>
+        <TextCell
+          available="anAddnlTripSegment.ReasonForDenial == null or anAddnlTripSegment.ReasonForDenial.length == 0"
+          editable="anAddnlTripSegment.Assessment == TC_DENY ? true : false"
+          id="ReasonForDenial"
+          label="DisplayKey.get(&quot;Web.TripIncidentSegmentLV.ReasonForDenial&quot;)"
+          required="true"
+          value="anAddnlTripSegment.ReasonForDenial"
+          valueVisible="anAddnlTripSegment.Assessment == TC_DENY ? true : false"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+  <entity
+  exportable="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFClaimParticipantRole_Ext"
+  desc="Entity for use in an ECF Claim Response for recording changes in Participant Roles"
+  table="ecfclaimpartrole_ext"
+  type="retireable">
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Coded identification of a reinsurer/insurer on the claim."
+    name="PartyID"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Party Name of a reinsurer/insurer on the claim."
+    name="PartyName"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    desc="Bureau type of the insurer/reinsurer"
+    name="BureauType"
+    nullok="true"
+    typelist="ECFBureauType_Ext"/>
+  <typekey
+    desc="The ParticipantFunction the insurer or reinsurer will be set to"
+    name="NewParticipantFunction"
+    nullok="true"
+    typelist="ECFParticipantFunction_Ext"/>
+  <typekey
+    desc="The ParticipantFunction of the insurer or reinsurer on the most recent transaction update."
+    name="InitialParticipantFunction"
+    nullok="true"
+    typelist="ECFParticipantFunction_Ext"/>
+  <foreignkey
+    fkentity="ECFMessageClaimResponseRq_Ext"
+    name="ECFMessageClaimResponseRq_Ext"
+    nullok="true"/>
+</entity>

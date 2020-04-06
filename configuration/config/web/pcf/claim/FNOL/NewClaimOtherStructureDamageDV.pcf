@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="NewClaimOtherStructureDamageDV">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <InputColumn>
+      <InputSetRef
+        def="ExposureDetailInputSet(Exposure, true)"/>
+    </InputColumn>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.OtherStructureDamage.Exposure.IncidentOverview&quot;)"/>
+      <RangeInput
+        editable="true"
+        hideChildrenIfReadOnly="false"
+        id="Other_Structure_Incident"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.OtherStructureDamage.Exposure.OtherStructureIncident&quot;)"
+        required="true"
+        value="Exposure.OtherStructureIncident"
+        valueRange="Exposure.Claim.OtherStructureIncidentsOnly"
+        valueType="entity.OtherStructureIncident">
+        <MenuItem
+          action="NewOtherStructureIncidentPopup.push(Exposure.Claim)"
+          hideIfReadOnly="true"
+          id="OtherStructureDamageDV_NewIncidentMenuItem"
+          label="DisplayKey.get(&quot;NVV.Exposure.SubView.OtherStructureDamage.Exposure.NewIncident&quot;)"/>
+        <MenuItem
+          action="EditOtherStructureIncidentPopup.push(Exposure.OtherStructureIncident, true)"
+          hideIfReadOnly="true"
+          id="OtherStructureDamageDV_EditIncidentMenuItem"
+          label="DisplayKey.get(&quot;NVV.Exposure.SubView.OtherStructureDamage.Exposure.EditIncident&quot;)"/>
+        <MenuItem
+          action="EditOtherStructureIncidentPopup.push(Exposure.OtherStructureIncident, false)"
+          hideIfEditable="true"
+          id="OtherStructureDamageDV_ViewIncidentMenuItem"
+          label="DisplayKey.get(&quot;NVV.Exposure.SubView.OtherStructureDamage.Exposure.ViewIncident&quot;)"/>
+      </RangeInput>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="OtherCarrierInvolvementInputSet(Exposure)"/>
+    </InputFooterSection>
+    <Code><![CDATA[
+property get ContactProhibited() : boolean {
+    return Exposure.Claim.getClaimContact(Exposure.Claimant).ContactProhibited
+}
+  
+property set ContactProhibited(prohibited : boolean) {
+  var claimContact = Exposure.Claim.getClaimContact(Exposure.Claimant) 
+  if (claimContact != null) claimContact.ContactProhibited = prohibited 
+}
+    ]]></Code>
+  </DetailViewPanel>
+</PCF>

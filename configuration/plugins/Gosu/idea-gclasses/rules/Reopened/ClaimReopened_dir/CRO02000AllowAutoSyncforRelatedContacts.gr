@@ -1,0 +1,28 @@
+package rules.Reopened.ClaimReopened_dir
+
+@gw.rules.RuleName("CRO02000 - Allow AutoSync for Related Contacts")
+internal class CRO02000AllowAutoSyncforRelatedContacts {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+// Any contacts that have an AutoSync status of SUSPENDED, 
+//  should be changed to ALLOW because the contacts also need to remain in-sync.
+var preloadedContacts = claim.getContactsWithPreload()
+
+for (contact in preloadedContacts) {
+  if (contact.Contact.AutoSync == TC_SUSPENDED) {
+    contact.Contact.AutoSync = TC_ALLOW
+  }
+}
+/*end00rule*/
+
+  }
+}

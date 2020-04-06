@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterEnter="gw.api.financials.CheckUtil.displayAbilityToPayValidationErrors(canPayResult, CurrentLocation);"
+    id="NewCheckNoAbilityToPay"
+    parent="Claim(claim)"
+    title="DisplayKey.get(&quot;JSP.NewCheckAbilityToPayFailed.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewCheckNoAbilityToPay(claim : Claim, canPayResult : gw.api.financials.AbilityToPayResult)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      name="canPayResult"
+      type="gw.api.financials.AbilityToPayResult"/>
+    <Screen
+      id="NewCheckNoAbilityToPayScreen">
+      <Toolbar/>
+      <Verbatim
+        label="DisplayKey.get(&quot;JSP.NewCheckAbilityToPayFailed.Error&quot;)"/>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            action="ClaimSummary.go(claim)"
+            id="CreatePayment"
+            labelAbove="true"
+            value="DisplayKey.get(&quot;Web.NewCheckWizard.AbilityToPayFailed.BackToClaim&quot;, claim)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Page>
+</PCF>

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="ClaimSnapshotPolicyScreen"
+    mode="300">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="SnapshotParam"
+      type="dynamic.Dynamic"/>
+    <CardViewPanel>
+      <Card
+        id="ClaimSnapshotPolicyGeneral300Card"
+        title="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.General&quot;)">
+        <PanelRef
+          def="ClaimSnapshotPolicyGeneral300DV(Claim, SnapshotParam)"/>
+      </Card>
+      <Card
+        id="ClaimSnapshotPolicyVehicles300Card"
+        title="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.Vehicles&quot;)"
+        visible="gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_VEHICLES)">
+        <PanelRef
+          def="ClaimSnapshotPolicyVehicles300LV(Claim, SnapshotParam)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+      <Card
+        id="ClaimSnapshotPolicyLocations300Screen"
+        title=" gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_PROPERTIES) ?               DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.Locations&quot;) :               DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.ClassCodes&quot;)"
+        visible="gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_PROPERTIES) or               gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_CLASSCODES)">
+        <PanelRef
+          def="ClaimSnapshotPolicyLocations300LV(Claim, SnapshotParam)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+      <Card
+        id="ClaimSnapshotPolicyEndorsements300Card"
+        title="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.Endorsements&quot;)"
+        visible="gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_ENDORSEMENTS)">
+        <PanelRef
+          def="ClaimSnapshotPolicyEndorsements300LV(Claim, SnapshotParam)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+      <Card
+        id="ClaimSnapshotPolicyStatCodes300Card"
+        title="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.StatCodes&quot;)"
+        visible="gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_STATCODES)">
+        <PanelRef
+          def="ClaimSnapshotPolicyStatCodes300LV(Claim, SnapshotParam)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+    </CardViewPanel>
+  </Screen>
+</PCF>

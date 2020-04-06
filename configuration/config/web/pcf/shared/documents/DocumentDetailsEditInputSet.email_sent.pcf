@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_claim.xml -->
+  <InputSet
+    id="DocumentDetailsEditInputSet"
+    mode="email_sent">
+    <Require
+      name="documentDetailsCCHelper"
+      type="gw.document.DocumentDetailsCCHelper"/>
+    <Require
+      name="fromTemplate"
+      type="boolean"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Claim.DocumentDetails.Document.EmailSent&quot;)"/>
+    <TextInput
+      id="Author"
+      label="DisplayKey.get(&quot;NVV.Claim.DocumentDetails.Document.EmailFrom&quot;)"
+      value="documentDetailsCCHelper.Author"/>
+    <TextInput
+      id="Recipient"
+      label="DisplayKey.get(&quot;NVV.Claim.DocumentDetails.Document.EmailTo&quot;)"
+      value="documentDetailsCCHelper.Recipient"/>
+    <TextInput
+      id="Name"
+      label="DisplayKey.get(&quot;NVV.Claim.DocumentDetails.Document.EmailSubject&quot;)"
+      required="true"
+      value="documentDetailsCCHelper.Name"/>
+    <DateInput
+      id="CreateTime"
+      label="DisplayKey.get(&quot;NVV.Claim.DocumentDetails.Document.DateCreated&quot;)"
+      value="documentDetailsCCHelper.CreateTime"/>
+    <RangeInput
+      id="Language"
+      label="DisplayKey.get(&quot;NVV.Claim.DocumentDetails.Document.Language&quot;)"
+      value="documentDetailsCCHelper.Language"
+      valueRange="LanguageType.getTypeKeys( false )"
+      valueType="typekey.LanguageType"
+      visible="LanguageType.getTypeKeys( false ).Count &gt; 1"/>
+    <InputDivider/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Claim.DocumentDetails.DocumentInfo&quot;)"/>
+    <TextInput
+      editable="true"
+      id="Description"
+      label="DisplayKey.get(&quot;NVV.Claim.DocumentDetails.Document.Description&quot;)"
+      value="documentDetailsCCHelper.Description"/>
+    <TypeKeyInput
+      editable="true"
+      id="Section"
+      label="DisplayKey.get(&quot;NVV.Claim.DocumentDetails.Document.Section&quot;)"
+      value="documentDetailsCCHelper.Section"
+      valueType="typekey.DocumentSection"
+      visible="DocumentSection.getTypeKeys( false ).Count &gt; 1"/>
+    <TypeKeyInput
+      editable="true"
+      id="SecurityType"
+      label="DisplayKey.get(&quot;NVV.Claim.DocumentDetails.Document.SecurityType&quot;)"
+      value="documentDetailsCCHelper.SecurityType"
+      valueType="typekey.DocumentSecurityType"/>
+  </InputSet>
+</PCF>

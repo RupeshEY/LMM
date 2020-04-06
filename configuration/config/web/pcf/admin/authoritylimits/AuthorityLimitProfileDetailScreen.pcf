@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="AuthorityLimitProfileDetailScreen">
+    <Require
+      name="AuthorityLimitProfile"
+      type="AuthorityLimitProfile"/>
+    <Toolbar
+      visible="perm.AuthorityLimitProfile.edit">
+      <EditButtons
+        editVisible="perm.AuthorityLimitProfile.edit"/>
+    </Toolbar>
+    <PanelRef
+      def="AuthorityLimitProfileDV(AuthorityLimitProfile)"/>
+    <PanelRef
+      def="LocalizedValuesDV(AuthorityLimitProfile, { &quot;Name&quot;, &quot;Description&quot;}, { DisplayKey.get(&quot;NVV.Admin.AuthorityLimitProfileBasics.Name&quot;), DisplayKey.get(&quot;NVV.Admin.AuthorityLimitProfileBasics.Description&quot;) })"/>
+  </Screen>
+</PCF>

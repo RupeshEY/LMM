@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ReinsuranceThresholdLV">
+    <ExposeIterator
+      valueType="entity.ReinsuranceThreshold"
+      widget="ReinsuranceThresholdLV"/>
+    <Require
+      name="ReinsuranceThresholdList"
+      type="gw.api.database.IQueryBeanResult&lt;ReinsuranceThreshold&gt;"/>
+    <RowIterator
+      checkBoxVisible="CurrentLocation.InEditMode ? true : false"
+      editable="true"
+      elementName="ReinsuranceThreshold"
+      hideCheckBoxesIfReadOnly="true"
+      toCreateAndAdd="new ReinsuranceThreshold()"
+      toRemove="ReinsuranceThreshold.remove()"
+      value="ReinsuranceThresholdList"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.ReinsuranceThreshold&gt;">
+      <Row>
+        <TypeKeyCell
+          editable="true"
+          id="TreatyType"
+          label="DisplayKey.get(&quot;LV.ReinsuranceThreshold.TreatyType&quot;)"
+          required="true"
+          value="ReinsuranceThreshold.TreatyType"
+          valueType="typekey.ReinsuranceTreatyType">
+          <PostOnChange
+            onChange="if(ReinsuranceThreshold.TreatyType == TC_WC){ ReinsuranceThreshold.PolicyType = TC_WORKERSCOMP; ReinsuranceThreshold.LossType = TC_WC }"/>
+        </TypeKeyCell>
+        <TypeKeyCell
+          editable="ReinsuranceThreshold.TreatyType != null and ReinsuranceThreshold.TreatyType != TC_WC"
+          filter="if(ReinsuranceThreshold.TreatyType == TC_WC) { return VALUE == TC_WORKERSCOMP } else if (ReinsuranceThreshold.TreatyType == TC_PROP) { return VALUE != TC_WORKERSCOMP } else { return true }"
+          id="PolicyType"
+          label="DisplayKey.get(&quot;LV.ReinsuranceThreshold.PolicyType&quot;)"
+          required="true"
+          value="ReinsuranceThreshold.PolicyType"
+          valueType="typekey.PolicyType">
+          <PostOnChange
+            onChange="ReinsuranceThreshold.LossType = gw.api.policy.PolicyTypeUtil.getLossTypeForPolicyType( ReinsuranceThreshold.PolicyType )"/>
+        </TypeKeyCell>
+        <TextCell
+          editable="true"
+          id="ThresholdValue"
+          label="DisplayKey.get(&quot;LV.ReinsuranceThreshold.ThresholdValue&quot;)"
+          required="true"
+          value="ReinsuranceThreshold.ThresholdValue"
+          valueType="java.math.BigDecimal"/>
+        <TextCell
+          editable="true"
+          id="ReportingThreshold"
+          label="DisplayKey.get(&quot;LV.ReinsuranceThreshold.ReportingThreshold&quot;)"
+          required="true"
+          value="ReinsuranceThreshold.ReportingThreshold"
+          valueType="java.lang.Integer"/>
+        <DateCell
+          editable="true"
+          id="StartDate"
+          label="DisplayKey.get(&quot;LV.ReinsuranceThreshold.StartDate&quot;)"
+          required="false"
+          value="ReinsuranceThreshold.StartDate"/>
+        <DateCell
+          editable="true"
+          id="EndDate"
+          label="DisplayKey.get(&quot;LV.ReinsuranceThreshold.EndDate&quot;)"
+          required="false"
+          validationExpression="ReinsuranceThreshold.EndDate == null or ReinsuranceThreshold.StartDate == null or (ReinsuranceThreshold.StartDate.compareTo( ReinsuranceThreshold.EndDate ) &lt;= 0) ? null : DisplayKey.get(&quot;LV.ReinsuranceThreshold.EndDate.ValidationError&quot;)"
+          value="ReinsuranceThreshold.EndDate"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

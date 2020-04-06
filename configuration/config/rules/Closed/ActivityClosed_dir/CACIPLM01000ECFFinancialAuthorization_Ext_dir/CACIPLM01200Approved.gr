@@ -1,0 +1,17 @@
+package rules.Closed.ActivityClosed_dir.CACIPLM01000ECFFinancialAuthorization_Ext_dir
+
+@gw.rules.RuleName("CAC-IPLM01200 - Approved")
+internal class CACIPLM01200Approved {
+  static function doCondition(activity : entity.Activity) : boolean {
+/*start00rule*/
+    return activity.Approved
+/*end00rule*/
+}
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+/*start00rule*/
+    activity.LMMessage_Ext.Status = ECFMessageStatus_Ext.TC_PENDING
+    (activity.LMMessage_Ext as ECFMessageClaimResponseRq_Ext).sendResponse()
+/*end00rule*/
+  }
+}

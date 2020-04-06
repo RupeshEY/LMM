@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="ClaimIndicatorInputSet"
+    mode="LargeLossClaimIndicator">
+    <Require
+      name="indicator"
+      type="ClaimIndicator"/>
+    <ContentInput
+      id="LargeLoss"
+      label="DisplayKey.get(&quot;Web.Claim.LargeLossClaimIndicator.LargeLossLabel&quot;)">
+      <Link
+        icon="indicator.Icon"
+        id="LargeLossIcon"
+        visible="indicator.IsOn"/>
+      <Link
+        id="LargeLossText"
+        label="indicator.Text"/>
+    </ContentInput>
+    <TextInput
+      id="NetTotalIncurred"
+      label="DisplayKey.get(&quot;Web.Claim.LargeLossClaimIndicator.NetTotalIncurredLabel&quot;)"
+      value="getNetTotalIncurredDisplayValue()"/>
+    <Code><![CDATA[
+function getNetTotalIncurredDisplayValue() : String {
+  var value = (indicator as LargeLossClaimIndicator).NetTotalIncurred
+  if (value == null) {
+    return DisplayKey.get("Web.NA")
+  }
+  return gw.api.util.CurrencyUtil.renderAsCurrency(value)
+}
+      
+    ]]></Code>
+  </InputSet>
+</PCF>

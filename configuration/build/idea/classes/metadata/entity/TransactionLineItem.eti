@@ -1,0 +1,168 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A line item within a transaction (either reserve, recovery, or payment) for further categorization."
+  entity="TransactionLineItem"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="transactionlineitem"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionLineItemImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.impl.TransactionLineItemInternal"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionLineItemImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.entity.TransactionLineItem"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionLineItemImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.RemoveCallback"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionLineItemImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionLineItemImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+    TransactionLineItems provide a means to split the amount of a transaction into multiple
+    categories (e.g., Doctor, Hospital, Legal, Other, etc.).  Every transaction has one or more TransactionLineItems, and
+    the amount of the transaction is the aggregate amount of all its line items.
+    ]]></fulldescription>
+  <column
+    desc="The amount of this line item, in the transaction currency."
+    exportable="true"
+    getterScriptability="all"
+    name="TransactionAmount"
+    nullok="false"
+    setterScriptability="hidden"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="Currency"/>
+  </column>
+  <column
+    desc="The amount of this line item in the Currency of the ReserveLine (ReservingCurrency)."
+    exportable="true"
+    getterScriptability="all"
+    name="ReservingAmount"
+    nullok="false"
+    setterScriptability="hidden"
+    soapnullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ReservingCurrency"/>
+  </column>
+  <column
+    desc="The amount of this line item in the Claim's currency."
+    exportable="true"
+    getterScriptability="all"
+    name="ClaimAmount"
+    nullok="false"
+    setterScriptability="hidden"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="The amount of this line item in the app's default currency (reporting currency)."
+    exportable="true"
+    getterScriptability="all"
+    name="ReportingAmount"
+    nullok="false"
+    setterScriptability="hidden"
+    type="currencyamount"/>
+  <column
+    default="0"
+    desc="The foreign exchange adjustment for this line item in the claim currency. This stores the amount by which the current value of ClaimAmount exceeds its original value."
+    exportable="true"
+    loadable="false"
+    name="ClaimForExAmount"
+    nullok="false"
+    setterScriptability="hidden"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    default="0"
+    desc="The foreign exchange adjustment for this line item in the reserving currency. This stores the amount by which the current value of ReservingAmount exceeds its original value."
+    exportable="true"
+    loadable="false"
+    name="ReservingForExAmount"
+    nullok="false"
+    setterScriptability="hidden"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ReservingCurrency"/>
+  </column>
+  <column
+    default="0"
+    desc="The foreign exchange adjustment for this line item in the reporting currency. This stores the amount by which the current value of ReportingAmount exceeds its original value."
+    exportable="true"
+    loadable="false"
+    name="ReportingForExAmount"
+    nullok="false"
+    setterScriptability="hidden"
+    type="currencyamount"/>
+  <column
+    desc="A note or description of the line item."
+    exportable="true"
+    name="Comments"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    columnName="TransactionID"
+    desc="The parent transaction."
+    exportable="false"
+    fkentity="Transaction"
+    importableagainstexistingobject="false"
+    name="Transaction"
+    nullok="false"/>
+  <foreignkey
+    columnName="DeductibleID"
+    desc="The deductible for which this transaction line item is applied, if any."
+    fkentity="Deductible"
+    name="Deductible"
+    nullok="true"/>
+  <typekey
+    desc="The category of this line item."
+    exportable="true"
+    name="LineCategory"
+    nullok="true"
+    typelist="linecategory">
+    <keyfilters>
+      <keyfilter
+        name="Transaction.Exposure.PrimaryCoverage"/>
+      <keyfilter
+        name="Transaction.CostType"/>
+      <keyfilter
+        name="Transaction.CostCategory"/>
+      <keyfilter
+        name="Transaction.Subtype"/>
+    </keyfilters>
+  </typekey>
+  <index
+    desc="Index used to speed RecoverySearchLimitedByAmount perf action"
+    expectedtobecovering="true"
+    name="lineitem1"
+    unique="false">
+    <indexcol
+      keyposition="1"
+      name="TransactionID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="TransactionAmount"/>
+    <indexcol
+      keyposition="4"
+      name="ClaimAmount"/>
+  </index>
+</entity>

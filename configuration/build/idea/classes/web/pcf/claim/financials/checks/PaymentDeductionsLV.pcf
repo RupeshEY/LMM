@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_financials.xml -->
+  <ListViewPanel
+    id="PaymentDeductionsLV">
+    <Require
+      name="Check"
+      type="Check"/>
+    <RowIterator
+      editable="false"
+      elementName="Deduction"
+      value="Check.Deductions"
+      valueType="entity.Deduction[]">
+      <Row>
+        <TypeKeyCell
+          footerLabel="DisplayKey.get(&quot;LV.Financials.Total&quot;)"
+          id="DeductionType"
+          label="DisplayKey.get(&quot;LV.Financials.PaymentDeductions.DeductionType&quot;)"
+          value="Deduction.DeductionType"
+          valueType="typekey.DeductionType"/>
+        <TextCell
+          id="Comments"
+          label="DisplayKey.get(&quot;LV.Financials.PaymentDeductions.Comments&quot;)"
+          value="Deduction.Comments"/>
+        <CurrencyCell
+          align="center"
+          footerSumValue="Deduction.TransactionCurrencyAmountComponent"
+          formatType="currency"
+          id="Amount"
+          label="DisplayKey.get(&quot;LV.Financials.PaymentDeductions.Amount&quot;)"
+          value="Deduction.TransactionCurrencyAmountComponent"
+          valueType="gw.api.financials.CurrencyAmountPair"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

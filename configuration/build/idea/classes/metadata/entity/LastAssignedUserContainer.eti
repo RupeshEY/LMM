@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="LastAssignedUserContainer">
+  <implementsInterface
+    iface="gw.cc.assignment.entity.LastAssignedUserContainer"
+    impl="com.guidewire.cc.domain.assignment.impl.LastAssignedUserContainerImpl"/>
+  <foreignkey
+    columnName="LastClaimUserID"
+    desc="The id of the last user that was assigned a claim."
+    fkentity="User"
+    name="LastClaimUser"
+    nullok="true"/>
+  <foreignkey
+    columnName="LastExposureUserID"
+    desc="The id of the last user that was assigned an exposure."
+    fkentity="User"
+    name="LastExposureUser"
+    nullok="true"/>
+  <foreignkey
+    columnName="LastMatterUserID"
+    desc="The id of the last user that was assigned a matter."
+    fkentity="User"
+    name="LastMatterUser"
+    nullok="true"/>
+  <foreignkey
+    columnName="LastServiceRequestUserID"
+    desc="The id of the last user that was assigned a service request."
+    fkentity="User"
+    name="LastServiceRequestUser"
+    nullok="true"/>
+  <foreignkey
+    columnName="LastClaimGrpID"
+    desc="The id of the last group that was assigned a claim."
+    fkentity="Group"
+    name="LastClaimGrp"
+    nullok="true"/>
+  <foreignkey
+    columnName="LastExposureGrpID"
+    desc="The id of the last group that was assigned an exposure."
+    fkentity="Group"
+    name="LastExposureGrp"
+    nullok="true"/>
+  <foreignkey
+    columnName="LastMatterGrpID"
+    desc="The id of the last group that was assigned a matter."
+    fkentity="Group"
+    name="LastMatterGrp"
+    nullok="true"/>
+  <foreignkey
+    columnName="LastServiceRequestGrpID"
+    desc="The id of the last group that was assigned a service request."
+    fkentity="Group"
+    name="LastServiceRequestGrp"
+    nullok="true"/>
+  <foreignkey
+    columnName="LastSubrogationUserID"
+    desc="The id of the last user that was assigned a subrogation."
+    fkentity="User"
+    name="LastSubrogationUser"
+    nullok="true"/>
+  <foreignkey
+    columnName="LastSubrogationGrpID"
+    desc="The id of the last group that was assigned a subrogation."
+    fkentity="Group"
+    name="LastSubrogationGrp"
+    nullok="true"/>
+</delegate>

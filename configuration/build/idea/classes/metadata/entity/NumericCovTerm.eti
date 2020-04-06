@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents a numeric coverage term"
+  displayName="Numeric Coverage Term"
+  entity="NumericCovTerm"
+  supertype="CovTerm">
+  <implementsInterface
+    iface="gw.cc.policy.entity.NumericCovTerm"
+    impl="com.guidewire.cc.domain.policy.impl.NumericCovTermImpl"/>
+  <fulldescription/>
+  <column
+    desc="Numeric value"
+    name="NumericValue"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="4"/>
+    <columnParam
+      name="precision"
+      value="20"/>
+  </column>
+  <typekey
+    desc="Coverage term units"
+    name="Units"
+    nullok="true"
+    typelist="CovTermModelVal"/>
+</subtype>

@@ -1,0 +1,345 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Metro Reports"
+  name="MetroReportType">
+  <typecode
+    code="A"
+    desc="Auto Accident"
+    name="Auto Accident"
+    priority="1">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="B"
+    desc="Auto Theft"
+    name="Auto Theft"
+    priority="2">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="C"
+    desc="Auto Theft Recovery"
+    name="Auto Theft Recovery"
+    priority="3">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="D"
+    desc="Driving History"
+    name="Driving History"
+    priority="4">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="E"
+    desc="Coroner Reports"
+    name="Coroner Reports"
+    priority="5">
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="F"
+    desc="Fire Home"
+    name="Fire Home"
+    priority="6">
+    <category
+      code="PR"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="G"
+    desc="Burglary"
+    name="Burglary"
+    priority="7">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="H"
+    desc="Death Certificate"
+    name="Death Certificate"
+    priority="8">
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="I"
+    desc="Incident"
+    name="Incident"
+    priority="9">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="J"
+    desc="Locate Defendant/Witness"
+    name="Locate Defendant/Witness"
+    priority="10">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="K"
+    desc="EMS/Rescue Squad"
+    name="EMS/Rescue Squad"
+    priority="11">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="L"
+    desc="Supplemental/Addendum"
+    name="Supplemental/Addendum"
+    priority="12">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="M"
+    desc="MV-104 (NY Only)"
+    name="MV-104 (NY Only)"
+    priority="13">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="N"
+    desc="OSHA"
+    name="OSHA"
+    priority="14">
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="O"
+    desc="Other"
+    name="Other"
+    priority="15">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="P"
+    desc="Activities Fixed Rate"
+    name="Activities Fixed Rate"
+    priority="16">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="Q"
+    desc="Property and Judgments"
+    name="Property and Judgments"
+    priority="17">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="R"
+    desc="Registration Check/DMV"
+    name="Registration Check/DMV"
+    priority="18">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="S"
+    desc="Insurance Check"
+    name="Insurance Check"
+    priority="19">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="T"
+    desc="Title History"
+    name="Title History"
+    priority="20">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="U"
+    desc="Subrogation Financial/Assets"
+    name="Subrogation Financial/Assets"
+    priority="21">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="V"
+    desc="Vandalism/Auto"
+    name="Vandalism/Auto"
+    priority="22">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="W"
+    desc="Weather Report"
+    name="Weather Report"
+    priority="23">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="X"
+    desc="Fire-Auto"
+    name="Fire-Auto"
+    priority="24">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="Y"
+    desc="Photo"
+    name="Photo"
+    priority="25">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="Z"
+    desc="Disposition of Charges"
+    name="Disposition of Charges"
+    priority="26">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+</typelistextension>

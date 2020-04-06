@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="IPLMMessageXMLContentDV"
+    mode="default">
+    <Require
+      name="message"
+      type="LMMessage_Ext"/>
+    <InputColumn>
+      <TextAreaInput
+        id="XMLContent"
+        align="left"
+        labelAbove="true"
+        numRows="120"
+        numCols="120"
+        value="message.Content.ContentString?:DisplayKey.get(&quot;Accelerator.IPLM.Admin.MessageLog.XmlContent.Empty&quot;)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

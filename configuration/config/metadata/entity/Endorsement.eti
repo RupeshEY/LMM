@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Endorsement."
+  entity="Endorsement"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="endorsement"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.policy.entity.Endorsement"
+    impl="com.guidewire.cc.domain.policy.impl.EndorsementImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+Relates a legal form (endorsement) to the policy.  The actual form is not stored
+in this entity, only description of it and its form number, which should
+identify a specific form.
+    ]]></fulldescription>
+  <column
+    desc="Other notes on the endorsement."
+    name="Comments"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Description of the endorsement."
+    name="Description"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Date on which the endorsement is effective."
+    name="EffectiveDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date on which the endorsement expires."
+    name="ExpirationDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date and version of the legal document."
+    name="FormNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="64"/>
+  </column>
+  <column
+    desc="Identifier for the endorsement in an external policy system"
+    name="PolicySystemId"
+    nullok="true"
+    type="policysystemid"/>
+  <foreignkey
+    columnName="PolicyID"
+    desc="Policy with which the endorsement is associated."
+    exportable="false"
+    fkentity="Policy"
+    name="Policy"
+    nullok="false"/>
+  <datetimeordering
+    firstcolumnname="EffectiveDate"
+    operator="LE"
+    secondcolumnname="ExpirationDate"/>
+</entity>

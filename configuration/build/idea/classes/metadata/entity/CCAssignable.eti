@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- CCAssignable Delegate - This delegate contains all the methods that Assignable should have in CC. -->
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="CCAssignable">
+  <implementsInterface
+    iface="gw.cc.assignment.entity.CCAssignable"
+    impl="com.guidewire.cc.domain.assignment.impl.CCAssignableImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.assignment.AssignablePublicMethods"
+    impl="com.guidewire.cc.domain.assignment.impl.CCAssignableImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.assignment.impl.AssignableInternalMethods"
+    impl="com.guidewire.cc.domain.assignment.impl.CCAssignableImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.entity.PermissionAssignableCheck"
+    impl="com.guidewire.cc.domain.assignment.impl.CCAssignableImpl"/>
+  <implementsEntity
+    name="Assignable"/>
+</delegate>

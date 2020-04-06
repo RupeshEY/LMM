@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="PolicyRatingPlan">
+  <typecode
+    code="GuaranteedCost"
+    desc="Guaranteed cost"
+    name="Guaranteed cost"
+    priority="1"/>
+  <typecode
+    code="SlidingScaleDiv"
+    desc="Sliding scale dividend"
+    name="Sliding scale dividend"
+    priority="2"/>
+  <typecode
+    code="IncurredLossRat"
+    desc="Incurred loss ratio"
+    name="Incurred loss ratio"
+    priority="3"/>
+  <typecode
+    code="PaidLossRetro"
+    desc="Paid loss retroactive"
+    name="Paid loss retroactive"
+    priority="4"/>
+  <typecode
+    code="Deductible"
+    desc="Deductible"
+    name="Deductible"
+    priority="5"/>
+  <typecode
+    code="Par"
+    desc="Par (CA only)"
+    name="Par (CA only)"
+    priority="6"/>
+  <typecode
+    code="NonPar"
+    desc="Non-par (CA only)"
+    name="Non-par (CA only)"
+    priority="7"/>
+</typelistextension>

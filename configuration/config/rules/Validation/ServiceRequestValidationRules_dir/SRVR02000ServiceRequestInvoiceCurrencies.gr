@@ -1,0 +1,25 @@
+package rules.Validation.ServiceRequestValidationRules_dir
+
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("SRVR02000 - Service Request Invoice Currencies")
+internal class SRVR02000ServiceRequestInvoiceCurrencies {
+  static function doCondition(serviceRequest : entity.ServiceRequest) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(serviceRequest : entity.ServiceRequest, actions : gw.rules.Action) {
+/*start00rule*/
+for(sri in serviceRequest.Invoices) {
+  //Check if the service request invoice currency matches the currency of the linked check.
+  if(!sri.HasConsistentCheckCurrency) {
+    serviceRequest.rejectField("Currency", TC_LOADSAVE,
+            DisplayKey.get("Rules.Validation.ServiceRequest.InvalidInvoice", sri.ReferenceNumber ?: "", serviceRequest.ServiceRequestNumber), null, null)
+  }
+}
+/*end00rule*/
+  }
+}

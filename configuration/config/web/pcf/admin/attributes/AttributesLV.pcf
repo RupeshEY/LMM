@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_admin.xml -->
+  <ListViewPanel
+    id="AttributesLV">
+    <ExposeIterator
+      flags="Attribute"
+      valueType="entity.Attribute"
+      widget="AttributesLV"/>
+    <Require
+      name="AttributeList"
+      type="gw.api.database.IQueryBeanResult&lt;Attribute&gt;"/>
+    <RowIterator
+      editable="false"
+      elementName="Attribute"
+      hasCheckBoxes="true"
+      value="AttributeList"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.Attribute&gt;">
+      <ToolbarFlag
+        name="Attribute"/>
+      <Row>
+        <TextCell
+          action="AttributeDetail.go(Attribute)"
+          id="Name"
+          label="DisplayKey.get(&quot;LV.Admin.Attributes.Name&quot;)"
+          sortOrder="2"
+          value="Attribute.Name"/>
+        <TypeKeyCell
+          id="Type"
+          label="DisplayKey.get(&quot;LV.Admin.Attributes.Type&quot;)"
+          sortOrder="1"
+          value="Attribute.Type"
+          valueType="typekey.UserAttributeType"/>
+        <TextCell
+          id="Description"
+          label="DisplayKey.get(&quot;LV.Admin.Attributes.Description&quot;)"
+          sortOrder="3"
+          value="Attribute.Description"
+          width="500"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

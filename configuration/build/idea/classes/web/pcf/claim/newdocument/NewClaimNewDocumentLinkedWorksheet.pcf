@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Worksheet
+    canEdit="true"
+    canVisit="true"
+    id="NewClaimNewDocumentLinkedWorksheet"
+    startInEditMode="true"
+    tabLabel="DisplayKey.get(&quot;Web.Document.UploadDocuments&quot;)"
+    title="DisplayKey.get(&quot;Web.Document.UploadDocuments&quot;)"
+    validateOnBundleCommit="false">
+    <LocationEntryPoint
+      signature="NewClaimNewDocumentLinkedWorksheet(Claim : Claim)"/>
+    <Scope
+      location="*"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="new gw.document.DocumentCCContext(Claim, null, false)"
+      name="DocumentApplicationContext"
+      type="gw.document.DocumentApplicationContext"/>
+    <ScreenRef
+      def="UploadDocumentScreen(DocumentApplicationContext)"/>
+  </Worksheet>
+</PCF>

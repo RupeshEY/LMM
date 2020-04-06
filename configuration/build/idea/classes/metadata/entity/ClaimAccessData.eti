@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="ClaimAccessData">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.impl.ClaimAccessDataInternal"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimAccessDataImpl"/>
+  <implementsInterface
+    iface="gw.cc.claim.entity.ClaimAccessData"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimAccessDataImpl"/>
+  <fulldescription><![CDATA[
+        Data about claim-level permission for users and groups.
+      
+    ]]></fulldescription>
+  <foreignkey
+    columnName="GroupID"
+    desc="The permitted group.  Exactly one of GroupID, UserID, and SecurityZoneID should be non-null."
+    fkentity="Group"
+    name="Group"
+    nullok="true"/>
+  <foreignkey
+    columnName="UserID"
+    desc="The permitted user.  Exactly one of GroupID, UserID, and SecurityZoneID should be non-null."
+    fkentity="User"
+    name="User"
+    nullok="true"/>
+  <foreignkey
+    columnName="SecurityZoneID"
+    desc="The permitted security zone.  Exactly one of GroupID, UserID, and SecurityZoneID should be non-null."
+    fkentity="SecurityZone"
+    ignoreforevents="true"
+    name="SecurityZone"
+    nullok="true"/>
+  <column
+    default="false"
+    desc="Whether this permission should be granted to everyone.  If true then GroupID, UserID, and SecurityZoneID should be null."
+    name="Anyone"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    createhistogram="true"
+    desc="The type of permission being granted."
+    name="Permission"
+    nullok="false"
+    typelist="claimaccesstype"/>
+</delegate>

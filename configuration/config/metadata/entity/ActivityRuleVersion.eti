@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Activity Rule Version"
+  entity="ActivityRuleVersion"
+  final="true"
+  supertype="RuleVersion">
+  <implementsInterface
+    iface="com.guidewire.bizrules.management.RuleVersionAwareInternal"
+    impl="com.guidewire.cc.domain.bizrules.ActivityRuleVersionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.management.RuleVersionInternalMethods"
+    impl="com.guidewire.cc.domain.bizrules.ActivityRuleVersionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.RuleVersionDomainMethods"
+    impl="com.guidewire.cc.domain.bizrules.ActivityRuleVersionImpl"/>
+  <foreignkey
+    columnName="RuleID"
+    fkentity="ActivityRule"
+    name="Rule"
+    nullok="false"/>
+</subtype>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Group">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.community.impl.GroupCoreExtMethods"
+    impl="com.guidewire.cc.domain.community.impl.GroupCoreExtMethodsImpl"/>
+  <description><![CDATA[Groups of users.]]></description>
+  <index
+    desc="Index to help claim search query performance when searching by Assigned Group name"
+    name="groupu2"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="Name"/>
+  </index>
+  <events/>
+</internalExtension>

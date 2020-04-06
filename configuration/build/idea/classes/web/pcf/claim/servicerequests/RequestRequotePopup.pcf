@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="requestRequote()"
+    canEdit="true"
+    canVisit="true"
+    id="RequestRequotePopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ServiceRequest.StateTransition.RequestRequotePopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="RequestRequotePopup(serviceRequest : ServiceRequest)"/>
+    <Variable
+      name="serviceRequest"
+      type="ServiceRequest"/>
+    <Variable
+      initialValue="serviceRequest.DefaultRequestedQuoteCompletionDate"
+      name="requestedQuoteCompletionDate"
+      type="java.util.Date"/>
+    <Variable
+      name="requoteReason"
+      type="String"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextAreaInput
+            editable="true"
+            id="ReasonForRequestingRequote"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.StateTransition.RequestRequotePopup.ChangeDescription&quot;)"
+            numRows="4"
+            required="true"
+            value="requoteReason"/>
+          <DateInput
+            dateFormat="short"
+            editable="true"
+            id="RequestedQuoteCompletionDate"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.RequestedQuoteCompletionDate&quot;)"
+            required="true"
+            validationExpression="requestedQuoteCompletionDate &lt; gw.api.util.DateUtil.currentDate().trimToMidnight() ? DisplayKey.get(&quot;Web.ServiceRequest.DateInPast&quot;) : null"
+            value="requestedQuoteCompletionDate"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[uses gw.vendormanagement.servicerequeststate.ServiceRequestOperationDefinition
+function requestRequote() {
+  var context = new ServiceRequestOperationDefinition.OperationContext(){:Statement = serviceRequest.LatestQuote,
+                                                                         :Reason = requoteReason,
+                                                                         :RequestedCompletionDate = requestedQuoteCompletionDate.moveToEndOfDay()}
+  serviceRequest.performOperation(TC_REQUESTREQUOTE, context, false)
+}]]></Code>
+  </Popup>
+</PCF>

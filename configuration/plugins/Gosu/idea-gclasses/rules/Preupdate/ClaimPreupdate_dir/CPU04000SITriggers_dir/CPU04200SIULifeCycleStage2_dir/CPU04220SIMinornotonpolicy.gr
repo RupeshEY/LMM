@@ -1,0 +1,36 @@
+package rules.Preupdate.ClaimPreupdate_dir.CPU04000SITriggers_dir.CPU04200SIULifeCycleStage2_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("CPU04220 - SI - Minor not on policy")
+internal class CPU04220SIMinornotonpolicy {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return false
+//true
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+// IMPORTANT: When defining a new SI Trigger rule, copy the entire contents of this Rule Action, 
+// but ONLY change the three values following the comment below.
+var TriggerDescription : String
+var AdditionalInformation : String
+var PointValue : int
+
+// Please only change the following three values:
+TriggerDescription = DisplayKey.get("Rules.PreUpdate.Claim.SIU.MinorNotOnPolicy")
+AdditionalInformation = DisplayKey.get("Rules.PreUpdate.Claim.SIU.AdditionalInformation.Driver")  //+Claim.driver.Name
+PointValue = 1   // The value/weight attributed to each rule can be modified by setting the PointValue as desired.  
+
+//DO NOT change the line below:
+claim.siTriggersLogicClaim(TriggerDescription, AdditionalInformation, PointValue)
+/*end00rule*/
+
+  }
+}

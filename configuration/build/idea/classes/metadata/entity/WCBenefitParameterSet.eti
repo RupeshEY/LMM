@@ -1,0 +1,167 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="WCBenefitParameterSet"
+  table="WCBenefitParameterSet"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.WCBenefitParameterSet"
+    impl="com.guidewire.cc.domain.exposure.impl.WCBenefitParameterSetImpl"/>
+  <fulldescription><![CDATA[Reference table tracking state-specific temporary disability minimum and maximum
+      monetary benefits for particular date ranges.
+    ]]></fulldescription>
+  <typekey
+    desc="Jurisdiction State. The Jurisdiction must be associated with JurisdictionType.TC_INSURANCE."
+    name="JurisdictionState"
+    nullok="false"
+    typelist="Jurisdiction"/>
+  <column
+    desc="PD Benefit Effective Date"
+    name="StartDate"
+    nullok="false"
+    type="datetime"/>
+  <column
+    desc="PD Benefit Expiration Date"
+    name="EndDate"
+    nullok="false"
+    type="datetime"/>
+  <!-- TDD -->
+  <column
+    desc="The percentage of wages paid for Temporary Total Disability (e.g. 80%)"
+    name="TTDPercentOfWages"
+    nullok="true"
+    type="rate"/>
+  <column
+    desc="For TTD, if true and AWW is less than Min then set Min to AWW"
+    name="TTDMinAdjToAWW"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Min State TTD limit "
+    name="TTDMin"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Max State TTD limit"
+    name="TTDMax"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="The percentage of wages paid for Temporary Partial Disability (e.g. 80%)"
+    name="TPDPercentOfWages"
+    nullok="true"
+    type="rate"/>
+  <column
+    desc="For TPD, if true and AWW is less than Min then set Min to AWW"
+    name="TPDMinAdjToAWW"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="MinState TPD limit "
+    name="TPDMin"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Max State TPD limit"
+    name="TPDMax"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="The percentage of wages paid for Permanent Total Disability  (e.g. 80%)"
+    name="PTDPercentOfWages"
+    nullok="true"
+    type="rate"/>
+  <column
+    desc="For PTD, if true and AWW is less than Min then set Min to AWW"
+    name="PTDMinAdjToAWW"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="MinState PTD limit "
+    name="PTDMin"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Max State PTD limit"
+    name="PTDMax"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="The percentage of wages paid for  Permanent Partial Disability  (e.g. 80%)"
+    name="PPDPercentOfWages"
+    nullok="true"
+    type="rate"/>
+  <column
+    desc="For PPD, if true and AWW is less than Min then set Min to AWW"
+    name="PPDMinAdjToAWW"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="MinState PPD limit "
+    name="PPDMin"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Max State PPD limit"
+    name="PPDMax"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Number of days injured worker required to wait before benefits are paid."
+    name="WaitingPeriodDays"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="The number of days at which the injured worker reimbursed for the Waiting Period presuming worker is still unable to work."
+    name="RetroactivePeriod"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="If true, Waiting Period is not applied for PPD"
+    name="WPNotAppliedToPPD"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="If true, Waiting Period is not applied for PTD"
+    name="WPNotAppliedToPTD"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Additional comments."
+    name="RateComments"
+    nullok="true"
+    type="mediumtext"/>
+  <array
+    arrayentity="WCBenefitFactorDetail"
+    desc="Used to track comments, notes, special exceptions, etc"
+    name="WCBenefitFactors"
+    owner="true"/>
+  <index
+    desc="Eliminates duplicate entries"
+    name="WCBenefitIndex1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="JurisdictionState"/>
+    <indexcol
+      keyposition="2"
+      name="StartDate"/>
+    <indexcol
+      keyposition="3"
+      name="Retired"/>
+  </index>
+  <index
+    desc="Eliminates duplicate entries"
+    name="WCBenefitIndex2"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="JurisdictionState"/>
+    <indexcol
+      keyposition="2"
+      name="EndDate"/>
+    <indexcol
+      keyposition="3"
+      name="Retired"/>
+  </index>
+</entity>

@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Progress of a service"
+  name="ServiceRequestProgress">
+  <typecode
+    code="requested"
+    desc="Service request has been sent to the selected vendor, and has been acknowledged"
+    name="Requested"
+    priority="2"/>
+  <typecode
+    code="declined"
+    desc="The vendor has declined to accept the service request"
+    name="Declined"
+    priority="6"/>
+  <typecode
+    code="specialistwaiting"
+    desc="Vendor is blocked"
+    name="Vendor Waiting"
+    priority="3"/>
+  <typecode
+    code="inprogress"
+    desc="The vendor is authorized to perform the work"
+    name="In Progress"
+    priority="4"/>
+  <typecode
+    code="workcomplete"
+    desc="The work has been completed"
+    name="Work Complete"
+    priority="5"/>
+  <typecode
+    code="canceled"
+    desc="The service request has been canceled"
+    name="Canceled"
+    priority="7"/>
+  <typecode
+    code="draft"
+    desc="The service is still being edited and has not yet been sent to the vendor"
+    name="Draft"
+    priority="1"/>
+  <typecode
+    code="expired"
+    desc="The service has expired"
+    name="Expired"
+    priority="8"/>
+  <typefilter
+    desc="Progress values that are considered 'terminal', the name of this filter must match ServiceRequest.TERMINAL_PRGRESS_FILTER"
+    name="terminal">
+    <include
+      code="workcomplete"/>
+    <include
+      code="canceled"/>
+    <include
+      code="declined"/>
+    <include
+      code="expired"/>
+  </typefilter>
+</typelistextension>

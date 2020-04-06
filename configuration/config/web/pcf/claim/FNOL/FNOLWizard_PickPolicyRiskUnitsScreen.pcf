@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="FNOLWizard_PickPolicyRiskUnitsScreen">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Variable
+      initialValue="Claim.Policy == null or !Wizard.PolicySummary.hasSameRiskUnits( Claim.Policy )"
+      name="RiskUnitsEditable"
+      type="boolean"/>
+    <Toolbar>
+      <WizardButtons/>
+    </Toolbar>
+    <PanelRef
+      def="PolicySummaryVehicleLV( Wizard.PolicySummary, true, RiskUnitsEditable )"
+      editable="true"
+      visible="Wizard.PolicySummary.VehiclePolicyType">
+      <Toolbar>
+        <ToolbarButton
+          action="RiskUnitsEditable = true"
+          available="!RiskUnitsEditable"
+          confirmMessage="DisplayKey.get(&quot;Web.FNOLWizard.PickPolicyRiskUnitsScreen.EditSelectionsVehicleConfirm&quot;)"
+          id="EditSelectionsVehicle"
+          label="DisplayKey.get(&quot;Web.FNOLWizard.PickPolicyRiskUnitsScreen.EditSelectionsVehicle&quot;)"/>
+      </Toolbar>
+    </PanelRef>
+    <PanelRef
+      def="PolicySummaryPropertyLV( Wizard.PolicySummary, true, RiskUnitsEditable )"
+      editable="true"
+      visible="Wizard.PolicySummary.PropertyPolicyType">
+      <Toolbar>
+        <ToolbarButton
+          action="RiskUnitsEditable = true"
+          available="!RiskUnitsEditable"
+          confirmMessage="DisplayKey.get(&quot;Web.FNOLWizard.PickPolicyRiskUnitsScreen.EditSelectionsPropertyConfirm&quot;)"
+          id="EditSelectionsProperty"
+          label="DisplayKey.get(&quot;Web.FNOLWizard.PickPolicyRiskUnitsScreen.EditSelectionsProperty&quot;)"/>
+      </Toolbar>
+    </PanelRef>
+  </Screen>
+</PCF>

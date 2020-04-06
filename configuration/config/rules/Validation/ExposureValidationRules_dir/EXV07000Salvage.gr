@@ -1,0 +1,28 @@
+package rules.Validation.ExposureValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("EXV07000 - Salvage")
+internal class EXV07000Salvage {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.VehicleIncident.SalvageProceeds != null 
+and (exposure.VehicleIncident.SalvageProceeds.subtractAsSameCurrency( 
+      gw.api.util.Math.Nz(exposure.VehicleIncident.SalvageTow.Amount) - 
+       gw.api.util.Math.Nz(exposure.VehicleIncident.SalvageStorage.Amount)).Amount <= 0)
+
+//Check for negative net recovery amounts
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.reject(TC_NEWLOSS, 
+                DisplayKey.get("Rules.Validation.Exposure.SalvageRecoveryNotZeroOrNegative"), null, null)
+/*end00rule*/
+
+  }
+}

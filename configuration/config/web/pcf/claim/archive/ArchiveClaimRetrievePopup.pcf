@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    autosaveable="false"
+    canEdit="true"
+    countsAsWork="false"
+    id="ArchiveClaimRetrievePopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ClaimSearch.Restore.Title&quot;)">
+    <LocationEntryPoint
+      signature="ArchiveClaimRetrievePopup(restoreSet : gw.api.claim.ClaimArchiveRestoreSet)"/>
+    <Variable
+      name="restoreSet"
+      type="gw.api.claim.ClaimArchiveRestoreSet"/>
+    <Variable
+      initialValue="new ArchivedClaimInfo()"
+      name="retrieveClaimInfo"
+      type="ArchivedClaimInfo"/>
+    <Screen
+      id="ArchiveClaimRetrievePopupScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="restoreAction()"
+          default="true"
+          id="Restore"
+          label="DisplayKey.get(&quot;Web.Claim.Restore&quot;)"
+          shortcut="R"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="Done"
+          label="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          shortcut="C"/>
+      </Toolbar>
+      <PanelRef
+        def="RetrieveClaimInfoDV(retrieveClaimInfo)"/>
+      <ListViewPanel
+        id="ArchiveClaimRetrieveLV">
+        <RowIterator
+          checkBoxVisible="false"
+          editable="false"
+          elementName="ClaimInfoSearchView"
+          pageSize="0"
+          value="restoreSet.getClaimInfoSearchViews()"
+          valueType="entity.ClaimInfoSearchView[]">
+          <Variable
+            initialValue="ClaimInfoSearchView.getClaimantNames()"
+            name="claimantList"
+            type="java.lang.String[]"/>
+          <Row>
+            <TextCell
+              action="SimpleClaimForward.go(ClaimInfoSearchView.ClaimInfo)"
+              id="IDOrder"
+              label="DisplayKey.get(&quot;LV.Claim.ClaimSearchResults.Claims.ID&quot;)"
+              sortOrder="2"
+              value="ClaimInfoSearchView.ClaimNumber"/>
+            <TextCell
+              id="Insured"
+              label="DisplayKey.get(&quot;LV.Claim.ClaimSearchResults.Claims.Insured&quot;)"
+              value="ClaimInfoSearchView.Insured"
+              valueType="entity.ContactInfoView"/>
+            <TextCell
+              id="PolicyID"
+              label="DisplayKey.get(&quot;LV.Claim.ClaimSearchResults.Claims.PolicyID&quot;)"
+              value="ClaimInfoSearchView.PolicyNumber"/>
+            <LinkCell
+              id="Claimant"
+              label="DisplayKey.get(&quot;LV.Claim.ClaimSearchResults.Claims.Claimant&quot;)">
+              <LinkIterator
+                elementName="claimantName"
+                id="ClaimantInfoName"
+                value="claimantList"
+                valueType="java.lang.String[]">
+                <Link
+                  id="Claimant"
+                  label="claimantName"/>
+                <Link
+                  id="ClaimantSeperator"
+                  label="DisplayKey.get(&quot;Web.Claim.Claimant.Seperator&quot;)"
+                  visible="claimantList.length &gt; 1 and claimantName != claimantList[claimantList.length - 1]"/>
+              </LinkIterator>
+            </LinkCell>
+            <DateCell
+              id="LossDate"
+              label="DisplayKey.get(&quot;LV.Claim.ClaimSearchResults.Claims.LossDate&quot;)"
+              value="ClaimInfoSearchView.LossDate"/>
+            <TextCell
+              id="Assignee"
+              label="DisplayKey.get(&quot;LV.Claim.ClaimSearchResults.Claims.Assignee&quot;)"
+              value="ClaimInfoSearchView.ArchivedAdjuster"/>
+            <TypeKeyCell
+              id="Status"
+              label="DisplayKey.get(&quot;LV.Claim.ClaimSearchResults.Claims.Status&quot;)"
+              value="ClaimInfoSearchView.ArchiveState"
+              valueType="typekey.ArchiveState"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </Screen>
+    <Code><![CDATA[/**
+ * Restores and commits the archived claims
+ */
+function restoreAction() {
+  if(not retrieveClaimInfo.Comment.HasContent) {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Java.Validation.MissingRequired", DisplayKey.get("Web.ArchivedClaim.Comment")))
+  }
+  restoreSet.restore(retrieveClaimInfo)
+  CurrentLocation.commit()
+}]]></Code>
+  </Popup>
+</PCF>

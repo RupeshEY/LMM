@@ -1,0 +1,28 @@
+package rules.ApprovalRouting.ApprovalRules_dir
+
+@gw.rules.RuleName("ARR01000 - Western Regional Auto Supervisors")
+internal class ARR01000WesternRegionalAutoSupervisors {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return transactionSet.getLastApprovingUser() == util.RuleGroups.instance.getAuto1TeamASupervisor()
+or transactionSet.getLastApprovingUser() == util.RuleGroups.instance.getAuto1TeamBSupervisor()
+or transactionSet.getLastApprovingUser() == util.RuleGroups.instance.getAuto1TeamCSupervisor()
+
+/* The function calls are defined in RuleGroups.gs and are examples of how you can
+   use functions to avoid having the search details in the rules. 
+*/
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+transactionSet.setApprovingUser(util.RuleGroups.instance.getWesternAutoGroupSupervisor(), 
+                                util.RuleGroups.instance.getWesternAutoGroup())
+actions.exit()
+/*end00rule*/
+
+  }
+}

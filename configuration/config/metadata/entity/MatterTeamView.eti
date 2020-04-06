@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Displays matters efficiently in the team pages."
+  entity="MatterTeamView"
+  exportable="false"
+  final="true"
+  primaryEntity="Matter"
+  supertypeEntity="MatterView">
+  <implementsInterface
+    iface="gw.cc.matter.entity.MatterTeamView"
+    impl="com.guidewire.cc.domain.matter.impl.MatterTeamViewImpl"/>
+  <fulldescription><![CDATA[
+            Aggregates the information needed to display one matter row in the matter team page (subtype of MatterView).
+            
+    ]]></fulldescription>
+  <viewEntityLink
+    name="Claim"
+    path="Claim"/>
+</viewEntity>

@@ -1,0 +1,21 @@
+package rules.EventMessage.EventFired_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("EFR06000 - Policy System Notification")
+internal class EFR06000PolicySystemNotification {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return messageContext.DestID == 69
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet id="LirmaSAPRequestsInputSet">
+    <Require
+      name="claimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <Require
+      name="ecfClaimData"
+      type="ECFMessageClaimData_Ext"/>
+    <Label
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.Contact&quot;)"/>
+    <TextInput
+      desc="passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:InsurerOrReinsurerClaimReference1"
+      editable="true"
+      id="claimReference1"
+      inputConversion="VALUE == ecfClaimData.InsurerOrReinsurerClaimRef1 ? null : VALUE"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ClaimReference1&quot;)"
+      maxChars="15"
+      outputConversion="VALUE == null ? ecfClaimData.InsurerOrReinsurerClaimRef1 : VALUE"
+      value="claimResponseRq.InsurerOrReinsurerClaimRef1">
+    </TextInput>
+    <TextInput
+      desc="passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:InsurerOrReinsurerClaimReference2"
+      editable="true"
+      id="claimReference2"
+      inputConversion="VALUE == ecfClaimData.InsurerOrReinsurerClaimRef2 ? null : VALUE"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ClaimReference2&quot;)"
+      maxChars="15"
+      outputConversion="VALUE == null ? ecfClaimData.InsurerOrReinsurerClaimRef2 : VALUE"
+      value="claimResponseRq.InsurerOrReinsurerClaimRef2">
+    </TextInput>
+    <Label
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.Comments&quot;)"/>
+    <TextInput
+      desc="passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LirmaCompany/wb:RequestToBroker/wb:Request (first instance)"
+      editable="true"
+      id="requestToBroker"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.RequestToBroker&quot;)"
+      maxChars="50"
+      required="claimResponseRq.RequestToBrokerMandatory"
+      value="claimResponseRq.RequestToBroker1">
+    </TextInput>
+    <TextInput
+      desc="passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LirmaCompany/wb:RequestToBroker/wb:Request (second instance)"
+      editable="true"
+      id="requestToBroker2"
+      maxChars="50"
+      required="claimResponseRq.RequestToBrokerMandatory"
+      value="claimResponseRq.RequestToBroker2">
+    </TextInput>
+    <TextInput
+      desc="passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LirmaCompany/wb:PrivateFootnote"
+      editable="true"
+      id="privateFootnote"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.PrivateFootnote&quot;)"
+      maxChars="50"
+      value="claimResponseRq.PrivateFootnote">
+    </TextInput>
+  </InputSet>
+</PCF>

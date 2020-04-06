@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    id="NewClaimSaved"
+    parent="ClaimMessage()"
+    title="DisplayKey.get(&quot;Web.NewClaimWizard.Saved.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewClaimSaved(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="NewClaimSavedScreen">
+      <Toolbar/>
+      <PanelRef
+        def="NewClaimSavedDV(Claim)"/>
+    </Screen>
+  </Page>
+</PCF>

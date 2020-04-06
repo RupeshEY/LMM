@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <CardViewPanel
+    id="ExposureDetailDV"
+    mode="Towonly">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Card
+      id="TowOnly_DetailsCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.TowOnly.Details&quot;)">
+      <PanelRef
+        def="TowOnlyDV(Exposure)"/>
+    </Card>
+    <Card
+      id="SubView_AutoTotalLossCalculatorCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.SubView.AutoTotalLossCalculator&quot;)">
+      <PanelRef
+        def="TotalLossCalculatorDV(Exposure)"/>
+    </Card>
+    <Card
+      id="TowOnly_VehicleSalvageCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.TowOnly.VehicleSalvage&quot;)"
+      visible="Exposure.VehicleIncident.TotalLoss == true">
+      <PanelRef
+        def="VehicleSalvageDV(Exposure)"/>
+    </Card>
+  </CardViewPanel>
+</PCF>

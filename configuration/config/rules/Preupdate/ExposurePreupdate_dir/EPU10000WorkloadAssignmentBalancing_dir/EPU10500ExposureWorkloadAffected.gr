@@ -1,0 +1,40 @@
+package rules.Preupdate.ExposurePreupdate_dir.EPU10000WorkloadAssignmentBalancing_dir
+
+uses gw.assignment.workload.rules.ExposureWorkloadPreupdateRuleActions
+
+@gw.rules.RuleName("EPU10500 - Exposure Workload Affected")
+internal class EPU10500ExposureWorkloadAffected {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return
+/*
+ * Condition: A field on Exposure that affects workload has been altered,
+ * but the Exposure state is not affected.
+ * Assignment changes to the claim are also ignored.
+ */
+exposure.State == ExposureState.TC_OPEN
+  and
+not exposure.isFieldChanged("AssignedUser")  
+  and 
+not exposure.isFieldChanged("State")
+  and
+exposure.isWorkloadAffected()
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+// Logging of this rule will be categorized under "Assignment"
+var logger = gw.api.system.CCLoggerCategory.ASSIGNMENT_WEIGHTED_WORKLOAD
+if (logger.DebugEnabled) {
+  logger.debug(actions.getRule().DisplayName + " - Exposure '" + ExposureWorkloadPreupdateRuleActions.getExposureNameForLogging(exposure) + "' modified - updating user workload")
+}
+
+ExposureWorkloadPreupdateRuleActions.updateUserWorkloadOnExposureModification(exposure)
+/*end00rule*/
+
+  }
+}

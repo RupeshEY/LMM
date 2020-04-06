@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="Attributes.go()"
+    afterCommit="Attributes.go()"
+    canEdit="perm.Attribute.edit"
+    canVisit="perm.Attribute.view"
+    id="AttributeDetail"
+    parent="Attributes()"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.Admin.AttributeDetail&quot;, Attribute.Name)">
+    <LocationEntryPoint
+      signature="AttributeDetail(Attribute : Attribute)"/>
+    <Variable
+      name="Attribute"
+      type="Attribute"/>
+    <ScreenRef
+      def="AttributeDetailScreen(Attribute)"/>
+  </Page>
+</PCF>

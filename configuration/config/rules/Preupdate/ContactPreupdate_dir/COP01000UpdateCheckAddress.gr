@@ -1,0 +1,43 @@
+package rules.Preupdate.ContactPreupdate_dir
+
+uses gw.api.contact.ContactSystemUtil
+uses gw.api.system.CCLoggerCategory
+
+@gw.rules.RuleName("COP01000 - Update Check Address")
+internal class COP01000UpdateCheckAddress {
+  static function doCondition(contact: entity.Contact): boolean {
+    
+/*start00rule*/
+    // Note: this condition only evaluates to true when the address changes and the Contact is in sync. Therefore, it will
+    // only reliably execute for Contact changes that originate in the Address Book.
+
+    // In many configurations of ClaimCenter, only Contacts in the AddressBook are trusted. Therefore, only execute
+    // the rule if the contents of this Contact match what is in the Address Book (Contact.Synced == true)
+
+    // Moved the check of contact.Synced to the end of the conditions to reduce the number of
+    // roundtrips to AB to check sync status. Now we only check sync status if the address has changed
+
+    // This rule should be triggered whenever a Contact's Address changes because the Contact-Address foreign key
+    // is configured with triggersValidation="true".
+    // All of the fields used to construct an address' DisplayName should be tested here
+    return contact.PrimaryAddress != null and (
+        contact.PrimaryAddress.isFieldChanged("AddressLine1") or
+            contact.PrimaryAddress.isFieldChanged("AddressLine2") or
+            contact.PrimaryAddress.isFieldChanged("AddressLine3") or
+            contact.PrimaryAddress.isFieldChanged("City") or
+            contact.PrimaryAddress.isFieldChanged("State") or
+            contact.PrimaryAddress.isFieldChanged("PostalCode")) and
+        ContactSystemUtil.INSTANCE.contactIsSynced(contact)
+/*end00rule*/
+
+  }
+
+  static function doAction(contact: entity.Contact, actions: gw.rules.Action) {
+
+/*start00rule*/
+    CCLoggerCategory.AB_CONTACT_PLUGIN.info("Updating check addresses for contact ${contact} to address ${contact.PrimaryAddress}")
+    new gw.financials.CheckUpdater(gw.transaction.Transaction.getCurrent()).updateMailingAddress(contact)
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="HomeownersPanelSet">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="incident"
+      type="PropertyIncident"/>
+    <Require
+      name="incomingOtherServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;entity.ServiceRequest&gt;"/>
+    <Variable
+      initialValue="incident != null ? incident : claim.Incidents.whereTypeIs(DwellingIncident).first()"
+      name="primaryIncident"
+      type="PropertyIncident"/>
+    <Variable
+      initialValue="createOtherServiceRequests()"
+      name="localOtherServiceRequests"
+      recalculateOnRefresh="true"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Variable
+      initialValue="incomingOtherServiceRequests ?: localOtherServiceRequests"
+      name="otherServiceRequests"
+      recalculateOnRefresh="true"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <PanelRef
+      def="HomeownersEmergencyMakeSafeDV(EMSMakeSafeServiceRequest, claim, primaryIncident, unusedServiceRequests)"/>
+    <PanelRef
+      def="HomeownersEmergencyDebrisRemovalDV(EMSDebrisRemovalServiceRequest, claim, primaryIncident, unusedServiceRequests)"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <InputSetRef
+          def="OtherServicesLVInputGroupInputSet(claim, incident, localOtherServiceRequests, otherServiceRequests, unusedServiceRequests, {})"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <Code><![CDATA[uses java.util.Set
+uses java.util.HashSet
+uses com.google.common.collect.Iterables
+uses java.util.Set
+
+/**
+ * Chooses a ServiceRequest to be attached to a specific DV that is a referenced from this panel set. It should not
+ * be any of the "other" ServiceRequests, since ServiceRequests created through the "other" LV should stay in that LV.
+ */
+function findServiceRequest(serviceCode : String) : ServiceRequest {
+  return claim.ServiceRequests.firstWhere(\ sr -> 
+         sr.Incident == primaryIncident
+         and sr.Instruction.Services.Count == 1
+         and sr.Instruction.Services.single().Service.Code == serviceCode
+         // exclude any ServiceRequests in the "other" set
+         and (otherServiceRequests == null or not otherServiceRequests.contains(sr))
+    )
+}
+
+property get EMSMakeSafeServiceRequest() : ServiceRequest{
+  return findServiceRequest(gw.vendormanagement.SpecialistServiceCodeConstants.PROPEMSMAKESAFE)
+}
+
+property get EMSDebrisRemovalServiceRequest() : ServiceRequest{
+  return findServiceRequest(gw.vendormanagement.SpecialistServiceCodeConstants.PROPEMSDEBRISREMOVAL)
+}
+
+function createOtherServiceRequests() :  Set<ServiceRequest> {
+  return claim.ServiceRequests.where(\ sr -> (incident == null or sr.Incident == incident) 
+      and sr != EMSMakeSafeServiceRequest and sr != EMSDebrisRemovalServiceRequest).toSet()
+}]]></Code>
+  </PanelSet>
+</PCF>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<Entity
+  name="Check">
+  <Columns>
+    <Column
+      beanPath="Check.CheckNumber"
+      name="checkNumber"/>
+    <Column
+      beanPath="Check.Currency"
+      name="currency"/>
+    <Column
+      beanPath="Check.Payees"
+      name="checkPayees"/>
+    <Column
+      beanPath="Check.CheckRpt.GrossAmount"
+      name="grossAmount"/>
+  </Columns>
+  <DisplayName><![CDATA[
+              uses java.lang.StringBuilder
+              uses gw.api.util.CurrencyUtil
+
+              var checkDesc = new StringBuilder()
+              checkDesc.append(gw.api.locale.DisplayKey.get("DisplayName.Claim.Check"))
+              if (checkNumber.HasContent) {
+                  checkDesc.append(" #").append(checkNumber)
+              }
+              checkDesc.append(": ")
+              checkDesc.append(checkPayees*.ClaimContact*.DisplayName.join(", "))
+              checkDesc.append(" -- ")
+              checkDesc.append(CurrencyUtil.renderAsCurrency(grossAmount, currency))
+              return checkDesc.toString()
+      ]]></DisplayName>
+</Entity>

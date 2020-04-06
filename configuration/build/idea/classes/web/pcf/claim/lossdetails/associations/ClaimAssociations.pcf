@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="true"
+    canVisit="perm.Claim.view(Claim) and perm.ClaimAssociation.view"
+    id="ClaimAssociations"
+    title="DisplayKey.get(&quot;Web.Claim.Associations&quot;)">
+    <LocationEntryPoint
+      signature="ClaimAssociations(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="ClaimAssociationsScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="NewClaimAssociation.go(Claim)"
+          id="ClaimAssociations_NewButton"
+          label="DisplayKey.get(&quot;Button.Association.New&quot;)"
+          shortcut="E"
+          visible="perm.Claim.createassociation"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="CheckedValue.remove()"
+          confirmMessage="DisplayKey.get(&quot;Web.Claim.AssociationDeleteConfirm&quot;)"
+          id="ClaimAssociations_DeleteButton"
+          iterator="AssociatedClaimsLV.AssociatedClaimsLV"
+          label="DisplayKey.get(&quot;Button.Delete&quot;)"
+          shortcut="L"
+          visible="perm.ClaimAssociation.delete"/>
+        <PickerToolbarButton
+          action="ClaimAssociationSearchPopup.push(Claim)"
+          id="ClaimAssociations_FindButton"
+          label="DisplayKey.get(&quot;Button.Association.Find&quot;)"
+          onPick="ClaimAssociationDetail.go(Claim, PickedValue, true)"
+          shortcut="I"/>
+      </Toolbar>
+      <PanelRef
+        def="AssociatedClaimsLV(Claim, Claim.Associations)"/>
+    </Screen>
+  </Page>
+</PCF>

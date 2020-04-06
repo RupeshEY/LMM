@@ -1,0 +1,23 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("CPU05000 - SI - Create Supervisor Review Activity")
+internal class CPU05000SICreateSupervisorReviewActivity {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return util.SIUTotalScore.getSIUTotalScore(claim) >= 
+    ScriptParameters.SpecialInvestigation_CreateActivityForSupervisorThreshold
+and not claim.Activities.toList().hasMatch(\ act -> act.ActivityPattern.Code == "SI_review")
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.createActivityFromPattern(null, ActivityPattern.finder.getActivityPatternByCode("SI_review"))
+/*end00rule*/
+
+  }
+}

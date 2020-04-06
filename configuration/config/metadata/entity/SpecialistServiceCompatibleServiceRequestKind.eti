@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Indicates that a SpecialistService is compatible with the specified ServiceRequestKind."
+  entity="SpecialistServiceCompatibleServiceRequestKind"
+  extendable="true"
+  final="true"
+  loadable="false"
+  table="specsvccompsvcreqkind"
+  type="joinarray">
+  <fulldescription><![CDATA[
+    The presence of an instance of this entity indicates that the related SpecialistService can be used
+    on Service Requests with the specified Kind. In the base configuration, instances of this entity
+    must only be linked to leaf SpecialistServices.
+  ]]></fulldescription>
+  <foreignkey
+    columnName="SpecialistServiceID"
+    desc="The service that is compatible with the Kind."
+    fkentity="SpecialistService"
+    name="Service"
+    nullok="false"/>
+  <typekey
+    columnName="Kind"
+    desc="The Kind with which the related SpecialistService is compatible."
+    name="Kind"
+    nullok="false"
+    typelist="ServiceRequestKind"/>
+  <index
+    desc="Prevents the same Kind from being recorded twice for the same service."
+    name="kind"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="SpecialistServiceID"/>
+    <indexcol
+      keyposition="2"
+      name="Kind"/>
+  </index>
+</entity>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="validate(aWCBenefitParameterSet)"
+    canEdit="true"
+    canVisit="true"
+    id="WCBenefitParameterSetPopup"
+    returnType="WCBenefitParameterSet"
+    startInEditMode="willStartInEditMode"
+    title="DisplayKey.get(&quot;Web.Admin.WCBenefitParameterSetDetail&quot;)">
+    <LocationEntryPoint
+      signature="WCBenefitParameterSetPopup()"/>
+    <LocationEntryPoint
+      signature="WCBenefitParameterSetPopup( specificWCBenefitParameterSet: WCBenefitParameterSet, willStartInEditMode : boolean)"/>
+    <Variable
+      initialValue="true"
+      name="willStartInEditMode"
+      type="boolean"/>
+    <Variable
+      name="specificWCBenefitParameterSet"
+      type="WCBenefitParameterSet"/>
+    <Variable
+      initialValue="specificWCBenefitParameterSet == null ? new WCBenefitParameterSet() : specificWCBenefitParameterSet"
+      name="aWCBenefitParameterSet"
+      type="WCBenefitParameterSet"/>
+    <Screen>
+      <PanelRef
+        def="WCBenefitParameterSetDV(aWCBenefitParameterSet)">
+        <Toolbar>
+          <EditButtons
+            pickValue="aWCBenefitParameterSet"/>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+    <Code><![CDATA[uses gw.api.database.Query
+
+function validate(wcbp : WCBenefitParameterSet) {
+  var startDate = wcbp.StartDate
+  var endDate = wcbp.EndDate
+  var jurisdiction = wcbp.JurisdictionState
+
+  var overlaps = Query.make(entity.WCBenefitParameterSet).compare("JurisdictionState", Equals, jurisdiction)
+                                          .compare("ID", NotEquals, wcbp.ID)
+                                          .compare("StartDate", LessThanOrEquals, endDate)
+                                          .compare("EndDate", GreaterThanOrEquals, startDate).select()
+        
+  if (overlaps.Count > 0) {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Web.Admin.WCParams.BenefitParameters.ConflictWarning"))
+  }
+}]]></Code>
+  </Popup>
+</PCF>

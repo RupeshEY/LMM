@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Worksheet
+    canEdit="true"
+    canVisit="perm.Activity.view(Activity)"
+    id="BulkInvoiceApprovalDetailWorksheet"
+    tabLabel="DisplayKey.get(&quot;Web.Claim.ApprovalDetailWorksheet.Tab&quot;)"
+    title="DisplayKey.get(&quot;JSP.ApprovalActivityDetailHeader.Detail.Title&quot;, Activity.Claim.ClaimNumber)">
+    <LocationEntryPoint
+      signature="BulkInvoiceApprovalDetailWorksheet(Activity : Activity)"/>
+    <Scope
+      location="Claim(Activity.Claim)"/>
+    <Variable
+      initialValue="new gw.api.financials.BulkPayHelper()"
+      name="PageHelper"
+      type="gw.api.financials.BulkPayHelper"/>
+    <Variable
+      name="Activity"
+      type="Activity"/>
+    <Screen
+      id="ApprovalDetailScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="buttonAction(\ -&gt; Activity.approve())"
+          id="BulkInvoiceApprovalDetailWorksheet_ApproveButton"
+          label="DisplayKey.get(&quot;JSP.ApprovalActivityDetailHeader.Toolbar.Approve&quot;)"
+          visible="Activity.canApprove()"/>
+        <ToolbarButton
+          action="buttonAction(\ -&gt; Activity.reject())"
+          id="BulkInvoiceApprovalDetailWorksheet_RejectButton"
+          label="DisplayKey.get(&quot;JSP.ApprovalActivityDetailHeader.Toolbar.Reject&quot;)"
+          visible="Activity.canApprove()"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="BulkInvoiceApprovalDetailWorksheet_CancelButton"
+          label="DisplayKey.get(&quot;JSP.ApprovalActivityDetailHeader.Toolbar.Cancel&quot;)"/>
+        <ToolbarDivider/>
+        <EditButtons
+          cancelVisible="false"/>
+      </Toolbar>
+      <PanelRef
+        def="BulkInvoiceApprovalDetailDV(Activity, PageHelper)"/>
+    </Screen>
+    <Code><![CDATA[function buttonAction(action()) {
+  if (!CurrentLocation.InEditMode) {
+    CurrentLocation.startEditing()
+  } 
+  
+  action()
+  CurrentLocation.commit()
+}]]></Code>
+  </Worksheet>
+</PCF>

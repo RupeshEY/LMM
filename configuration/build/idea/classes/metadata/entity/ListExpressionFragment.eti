@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="ExpressionFragment for arbitrary list expression"
+  entity="ListExpressionFragment"
+  final="true"
+  platform="true"
+  supertype="ExpressionFragment">
+  <implementsInterface
+    iface="com.guidewire.bizrules.codegenerator.GosuTextBuilder"
+    impl="com.guidewire.bizrules.codegenerator.ListExpressionFragmentGosuTextBuilder"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.ExpressionFragmentDomainMethods"
+    impl="com.guidewire.bizrules.domain.ListExpressionFragmentImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.ListExpressionFragmentDomainMethods"
+    impl="com.guidewire.bizrules.domain.ListExpressionFragmentImpl"/>
+  <array
+    arrayentity="ListExpressionFragmentJoin"
+    arrayfield="ListExpressionFragment"
+    getterScriptability="hidden"
+    name="Elements"
+    owner="true"
+    setterScriptability="hidden"/>
+  <column
+    default="false"
+    desc="Whether or not this represents an array instead of a list"
+    name="GenerateArray"
+    nullok="false"
+    type="bit"/>
+</subtype>

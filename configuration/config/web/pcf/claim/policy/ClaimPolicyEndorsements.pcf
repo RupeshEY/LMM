@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Endorsements&quot;) and perm.Claim.edit(Claim) and perm.Policy.edit(Claim)"
+    canVisit="gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Endorsements&quot;) and perm.Policy.view(Claim) and perm.System.viewpolicy"
+    id="ClaimPolicyEndorsements"
+    title="DisplayKey.get(&quot;JSP.ClaimPolicy.Policy.Endorsements&quot;)">
+    <LocationEntryPoint
+      signature="ClaimPolicyEndorsements(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="ClaimPolicyEndorsementsScreen">
+      <Toolbar>
+        <IteratorButtons
+          addVisible="!Claim.Policy.Verified and perm.Claim.edit(Claim) and perm.Policy.edit(Claim)"
+          hideIfReadOnly="false"
+          iterator="EndorsementsLV.EndorsementsLV"
+          removeLabel="DisplayKey.get(&quot;Button.Delete&quot;)"
+          removeVisible="!Claim.Policy.Verified and perm.Claim.edit(Claim) and perm.Policy.edit(Claim)"/>
+        <!-- Deverify policy button -->
+        <ToolbarButton
+          action="gw.api.policy.ClaimPolicyMakeEditableUtil.makePolicyEditable(CurrentLocation, Claim)"
+          confirmMessage="DisplayKey.get(&quot;JSP.ClaimPolicyGeneral.EditVerifiedPolicy&quot;)"
+          id="ClaimPolicyEndorsements_AddMoreEndorsementsButton"
+          label="DisplayKey.get(&quot;Button.AddMoreEndorsements&quot;)"
+          visible="Claim.Policy.Verified and perm.Policy.makeeditable(Claim)"/>
+      </Toolbar>
+      <ListDetailPanel
+        selectionName="Endorsement"
+        selectionType="Endorsement">
+        <PanelRef
+          def="EndorsementsLV(Claim.Policy.Endorsements, Claim)"/>
+        <CardViewPanel>
+          <Card
+            id="EndorsementDetailCard"
+            title="DisplayKey.get(&quot;Web.ClaimPolicy.EndorsementDetail&quot;)">
+            <PanelRef
+              def="EndorsementDetailDV(Endorsement)">
+              <Toolbar>
+                <!-- EDF this is an edit button which will deverify the policy and put the page into edit mode.
+                This button doesn't appear in the struts version: the user has to deverify the policy in some other way,
+                i.e. on the ClaimPolicyGeneral page. -->
+                <ToolbarButton
+                  action="gw.api.policy.ClaimPolicyMakeEditableUtil.makePolicyEditable(CurrentLocation, Claim, true);"
+                  confirmMessage="DisplayKey.get(&quot;JSP.ClaimPolicyGeneral.EditVerifiedPolicy&quot;)"
+                  id="ClaimPolicyEndorsements_EditButton"
+                  label="DisplayKey.get(&quot;Button.Edit&quot;)"
+                  visible="Claim.Policy.Verified and perm.Claim.edit(Claim) and perm.Policy.edit(Claim) and perm.Policy.makeeditable(Claim)"/>
+                <!-- standard edit buttons only visible for unverified policy -->
+                <EditButtons
+                  cancelVisible="!Claim.Policy.Verified"
+                  editVisible="!Claim.Policy.Verified"
+                  updateVisible="!Claim.Policy.Verified"/>
+              </Toolbar>
+            </PanelRef>
+          </Card>
+        </CardViewPanel>
+      </ListDetailPanel>
+    </Screen>
+  </Page>
+</PCF>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    id="IPLMLocationGroup"
+    menuActions="ClaimMenuActions(Claim)"
+    parent="Claim(Claim)"
+    title="DisplayKey.get(&quot;Accelerator.IPLM.Menu.LocationGroup.LondonMarket&quot;)">
+    <LocationEntryPoint
+      signature="IPLMLocationGroup(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Menu.LocationGroup.ECF&quot;)"
+      location="ECFLocationGroup(Claim)"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Menu.LocationGroup.SCM&quot;)"
+      location="SCMLocationGroup(Claim)"/>
+  </LocationGroup>
+</PCF>

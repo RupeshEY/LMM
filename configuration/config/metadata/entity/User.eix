@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="User">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.community.impl.UserCoreExtInternalMethods"
+    impl="com.guidewire.cc.domain.community.impl.UserCoreExtMethodsImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.community.impl.UserCoreExtMethods"
+    impl="com.guidewire.cc.domain.community.impl.UserCoreExtMethodsImpl"/>
+  <description><![CDATA[Internal system users.]]></description>
+  <foreignkey
+    columnName="AuthorityProfileID"
+    desc="Authority limit profile for this user"
+    fkentity="AuthorityLimitProfile"
+    name="AuthorityProfile"
+    nullok="true"/>
+  <onetoone
+    exportable="false"
+    fkentity="SuperviseesCache"
+    linkField="User"
+    name="SuperviseesCache"
+    nullok="true"
+    setterScriptability="doesNotExist"/>
+  <events/>
+  <column
+    desc="Denormalized column from UserContact.PrimaryAddress.SpatialPoint"
+    loadable="false"
+    name="SpatialPointDenorm"
+    nullok="true"
+    setterScriptability="hidden"
+    type="spatialpoint"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.user.dbchecks.UserSpatialPointDenormDBCheck"/>
+</internalExtension>

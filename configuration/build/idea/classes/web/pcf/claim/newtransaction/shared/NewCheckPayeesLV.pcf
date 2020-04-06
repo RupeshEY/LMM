@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_financials.xml -->
+  <ListViewPanel
+    id="NewCheckPayeesLV">
+    <ExposeIterator
+      flags="NonPrimaryCheck"
+      valueType="entity.Check"
+      widget="NewCheckPayeesLV"/>
+    <Require
+      name="CheckGroup"
+      type="CheckGroup"/>
+    <Require
+      name="Wizard"
+      type="gw.api.financials.CheckWizardInfo"/>
+    <RowIterator
+      checkBoxVisible="not Wizard.Check.LinkedToServiceRequests"
+      editable="false"
+      elementName="Check"
+      pageSize="6"
+      toCreateAndAdd="Wizard.addAdditionalPayee(CheckGroup)"
+      toRemove="Wizard.deleteCheck(Check)"
+      value="CheckGroup != null ? CheckGroup.DisplayableChecks : new Check[]{Wizard.Check}"
+      valueType="entity.Check[]">
+      <ToolbarFlag
+        condition="!Check.Primary"
+        name="NonPrimaryCheck"/>
+      <Row>
+        <BooleanRadioCell
+          icon="&quot;new.png&quot;"
+          iconLabel="DisplayKey.get(&quot;LV.Financials.Check.Primary.Tip&quot;)"
+          id="Check_Primary"
+          label="DisplayKey.get(&quot;LV.Financials.Check.Primary&quot;)"
+          sortDirection="descending"
+          sortOrder="1"
+          tooltip="DisplayKey.get(&quot;LV.Financials.Check.Primary.Tip&quot;)"
+          value="Check.Primary"/>
+        <TextCell
+          id="Check_PayTo"
+          label="DisplayKey.get(&quot;LV.Financials.NewCheckPayees.Check.PayTo&quot;)"
+          sortOrder="2"
+          value="Check.PayTo"/>
+        <TypeKeyCell
+          id="Check_DeductionType"
+          label="DisplayKey.get(&quot;LV.Financials.NewCheckPayees.Check.DeductionType&quot;)"
+          value="Check.DeductionType"
+          valueType="typekey.DeductionType"
+          visible="not Wizard.Check.LinkedToServiceRequests"/>
+        <TypeKeyCell
+          id="Check_DeliverMethod"
+          label="DisplayKey.get(&quot;LV.Financials.NewCheckPayees.Check.DeliverMethod&quot;)"
+          value="Check.DeliveryMethod"
+          valueType="typekey.DeliveryMethod"/>
+        <TextCell
+          helpText="DisplayKey.get(&quot;LV.Financials.Check.Portion.Tip&quot;)"
+          id="Check_Portion"
+          label="DisplayKey.get(&quot;LV.Financials.NewCheckPayees.Check.Portion&quot;)"
+          value="Check.Portion.DisplayName"
+          visible="not Wizard.Check.LinkedToServiceRequests"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

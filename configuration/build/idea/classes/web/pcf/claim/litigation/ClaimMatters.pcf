@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Matter.view(Claim) and perm.System.viewmatters and (Claim.State != ClaimState.TC_DRAFT)"
+    id="ClaimMatters"
+    title="DisplayKey.get(&quot;Web.Claim.ClaimMatter&quot;)">
+    <LocationEntryPoint
+      signature="ClaimMatters(Claim : Claim)"/>
+    <Variable
+      initialValue="new gw.api.matter.ClaimMattersHelper()"
+      name="PageHelper"
+      type="gw.api.matter.ClaimMattersHelper"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="ClaimMatterScreen">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.ClaimMatters.Title&quot;)"/>
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="AssignMattersPopup.push(new gw.api.matter.MatterAssignmentPopup(CheckedValues))"
+          flags="any Matter"
+          id="ClaimMatters_AssignButton"
+          iterator="MattersLV.MattersLV"
+          label="DisplayKey.get(&quot;Web.ClaimMatters.Assign&quot;)"
+          shortcut="G"
+          visible="perm.Matter.genericassign"/>
+        <ToolbarButton
+          action="null"
+          id="ClaimMatters_RefreshButton"
+          label="DisplayKey.get(&quot;Web.ClaimMatters.Refresh&quot;)"
+          shortcut="F"/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="CloseMatterPopup.push(CheckedValues[0])"
+          flags="one CanCloseMatter, one Matter"
+          id="ClaimMatters_CloseMatterButton"
+          iterator="MattersLV.MattersLV"
+          label="DisplayKey.get(&quot;Web.ClaimMatters.CloseMatter&quot;)"
+          shortcut="S"
+          visible="perm.Claim.closematter(Claim)"/>
+        <ToolbarButton
+          action="NewMatter.go(Claim)"
+          available="!Claim.Closed"
+          id="ClaimMatters_NewMatterButton"
+          label="DisplayKey.get(&quot;Web.ClaimMatters.NewMatter&quot;)"
+          shortcut="N"
+          visible="perm.Claim.creatematter(Claim)"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="ClaimAllMattersCalendar.go(Claim)"
+          id="ClaimMatters_CalendarButton"
+          label="DisplayKey.get(&quot;JSP.LitigationCalendar.General.Tab&quot;)"
+          shortcut="Y"/>
+        <ToolbarButton
+          action="SupervisorClaimAllMattersCalendar.go(Claim)"
+          id="ClaimMatters_SupervisorCalendarButton"
+          label="DisplayKey.get(&quot;JSP.LitigationCalendar.Supervisor.Tab&quot;)"
+          shortcut="V"
+          visible="perm.System.viewsupcalendar"/>
+      </Toolbar>
+      <PanelRef
+        def="MattersLV(Claim.Matters, Claim, PageHelper)"
+        editable="perm.Matter.edit(Claim)"/>
+    </Screen>
+  </Page>
+</PCF>

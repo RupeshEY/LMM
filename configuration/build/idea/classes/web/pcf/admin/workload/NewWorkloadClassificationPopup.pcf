@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="validate(classification); clean(classification)"
+    canEdit="gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value and perm.System.wwlcmanage"
+    id="NewWorkloadClassificationPopup"
+    parent="WorkloadClassifications()"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Admin.Workload.NewWorkloadClassification&quot;, entityType.TypeInfo.DisplayName)">
+    <LocationEntryPoint
+      signature="NewWorkloadClassificationPopup(entityType : Type)"/>
+    <Variable
+      name="entityType"
+      type="Type"/>
+    <Variable
+      initialValue="createAssignmentEntity()"
+      name="classification"
+      type="WorkloadClassification"/>
+    <ScreenRef
+      def="WorkloadClassificationDetailScreen(classification)"/>
+    <Code><![CDATA[function createAssignmentEntity() : WorkloadClassification {
+  var result : WorkloadClassification
+  switch(entityType) {
+    case ClaimWorkloadClassification:
+      result = new ClaimWorkloadClassification()
+      result.addToConditions(new CustomerServiceTierCondition())
+      result.addToConditions(new LossCauseCondition())
+      break
+      
+    case entity.ExposureWorkloadClassification:
+      result = new ExposureWorkloadClassification()
+      result.addToConditions(new JurisdictionCondition())
+      result.addToConditions(new IncidentSeverityCondition())
+      break
+    
+    default:
+      throw new gw.api.util.DisplayableException(DisplayKey.get("Web.Admin.Workload.WorkloadClassification.NewClassification.UnknownType", entityType))
+  }
+
+  // these are common to both Claim and Exposure type classifications
+  result.addToConditions(new ExposureCondition())
+  result.addToConditions(new SegmentCondition())
+  
+  return result
+}
+
+function validate(cls : WorkloadClassification) {
+  if (not gw.api.database.Query.make(WorkloadClassification)
+          .compare("Priority", Equals, cls.Priority)
+          .compare("Subtype", Equals, cls.Subtype)
+          .select().Empty) {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Web.Admin.Workload.WorkloadClassification.NewClassification.AlreadyExistsException", cls.Subtype.DisplayName, cls.Priority))
+  }
+}
+
+function clean(cls : WorkloadClassification) {
+   // Clean out extraneous Condition Filters if "All" option is selected 
+  for (condition in cls.Conditions) {
+    if (condition.IncludeAll) {
+      condition.clearFilters()
+    }
+  }
+}]]></Code>
+  </Popup>
+</PCF>

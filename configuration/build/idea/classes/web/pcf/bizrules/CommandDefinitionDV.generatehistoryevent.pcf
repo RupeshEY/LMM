@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="CommandDefinitionDV"
+    mode="generatehistoryevent">
+    <Require
+      name="commandDefinition"
+      type="gw.bizrules.pcf.RuleCommandDefinitionHolder"/>
+    <Variable
+      initialValue="new gw.bizrules.ruleaction.generatehistoryevent.GenerateHistoryEventCommandDefinitionState(commandDefinition)"
+      name="state"
+      recalculateOnRefresh="true"
+      type="gw.bizrules.ruleaction.generatehistoryevent.GenerateHistoryEventCommandDefinitionState"/>
+    <Variable
+      initialValue="gw.bizrules.ruleaction.generatehistoryevent.config.GenerateHistoryEventCommandParameterSet.Config"
+      name="config"
+      type="gw.bizrules.ruleaction.generatehistoryevent.config.GenerateHistoryEventCommandParameterConfig"/>
+    <InputColumn>
+      <RangeInput
+        editable="true"
+        id="TypeInput"
+        label="DisplayKey.get('Web.ActivityRules.Action.GenerateHistoryEvent.Type')"
+        value="state.TypeField"
+        valueRange="gw.bizrules.ruleaction.generatehistoryevent.HistoryTypeWrapper.PossibleValues"
+        valueType="gw.bizrules.ruleaction.generatehistoryevent.HistoryTypeWrapper">
+        <PostOnChange
+          target="ValidationErrorsType"/>
+      </RangeInput>
+      <InputSetRef
+        def="ValidationErrorsInputSet(state.validateTypeField(), true)"
+        id="ValidationErrorsType"/>
+      <InputSetRef
+        def="RelatedToInputSet(state,commandDefinition, config.RELATED_TO)"
+        id="RelatedToRef"/>
+      <InputSetRef
+        def="ValidatingCommandParameterInputSet(commandDefinition.getParameterHolder(config.DESCRIPTION.Name))"
+        id="Description"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

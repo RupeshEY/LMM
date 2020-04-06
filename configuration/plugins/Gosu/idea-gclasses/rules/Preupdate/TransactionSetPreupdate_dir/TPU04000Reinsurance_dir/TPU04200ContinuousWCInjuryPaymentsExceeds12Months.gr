@@ -1,0 +1,21 @@
+package rules.Preupdate.TransactionSetPreupdate_dir.TPU04000Reinsurance_dir
+
+@gw.rules.RuleName("TPU04200 - Continuous WC Injury Payments Exceeds 12 Months")
+internal class TPU04200ContinuousWCInjuryPaymentsExceeds12Months {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return transactionSet.Claim.LossType == TC_WC
+and transactionSet.Subtype == TC_CHECKSET
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+transactionSet.Claim.setReinsuranceIfContinuousWCInjuryPaymentsExceed12Months()
+/*end00rule*/
+
+  }
+}

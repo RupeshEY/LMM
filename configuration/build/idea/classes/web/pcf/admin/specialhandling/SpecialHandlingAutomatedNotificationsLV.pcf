@@ -1,0 +1,123 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="SpecialHandlingAutomatedNotificationsLV">
+    <Require
+      name="specialHandling"
+      type="SpecialHandling"/>
+    <Require
+      name="permEditNotifications"
+      type="boolean"/>
+    <Variable
+      initialValue="initializeHandlersForListView()"
+      name="specialHandlers"
+      recalculateOnRefresh="true"
+      type="AutomatedNotificationHandler[]"/>
+    <Variable
+      initialValue="generateEmailTemplateDisplayNameMap()"
+      name="templateNameMap"
+      recalculateOnRefresh="true"
+      type="java.util.Map&lt;String, String&gt;"/>
+    <ExposeIterator
+      valueType="entity.AutomatedNotificationHandler"
+      widget="AutomatedNotificationsRowIterator"/>
+    <RowIterator
+      checkBoxVisible="permEditNotifications"
+      editable="false"
+      elementName="automatedNotification"
+      id="AutomatedNotificationsRowIterator"
+      toRemove="automatedNotification.remove()"
+      value="specialHandlers"
+      valueType="entity.AutomatedNotificationHandler[]">
+      <Row>
+        <TextCell
+          id="Type"
+          label="DisplayKey.get(&quot;Web.Admin.SpecialHandlingAutomatedNotifications.TypeHeader&quot;)"
+          required="true"
+          value="automatedNotification.Trigger.Type"/>
+        <TextCell
+          action="AutomatedNotificationHandlerDetailPopup.push(automatedNotification, CurrentLocation.InEditMode, permEditNotifications)"
+          id="Event"
+          label="DisplayKey.get(&quot;Web.Admin.SpecialHandlingAutomatedNotifications.EventHeader&quot;)"
+          required="true"
+          value="automatedNotification.Trigger.Event"/>
+        <TextCell
+          id="PolicyType"
+          label="DisplayKey.get(&quot;Web.Admin.SpecialHandlingAutomatedNotifications.PolicyTypeHeader&quot;)"
+          outputConversion="convertPolicyTypeForOutput(VALUE)"
+          required="false"
+          sortOrder="1"
+          value="automatedNotification.PolicyType"
+          valueType="typekey.PolicyType"/>
+        <TextCell
+          id="EmailTemplate"
+          label="DisplayKey.get(&quot;Web.Admin.SpecialHandlingAutomatedNotifications.EmailTemplateHeader&quot;)"
+          required="true"
+          value="templateNameMap.get(automatedNotification.EmailTemplate)"/>
+        <TextCell
+          id="EmailAddress"
+          label="DisplayKey.get(&quot;Web.Admin.SpecialHandlingAutomatedNotifications.EmailAddressHeader&quot;)"
+          required="true"
+          value="showEmailAddressesForNotificationRules(automatedNotification)"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[uses gw.api.util.DisplayableException
+uses gw.pcf.specialhandling.EmailTemplateUtil
+uses gw.util.GosuStringUtil
+
+uses java.util.Map
+uses java.util.ArrayList
+
+function generateEmailTemplateDisplayNameMap() : Map<String, String> {
+  var templateNames = new ArrayList<String>()
+  for (specialHandler in specialHandlers) {
+    templateNames.add(specialHandler.EmailTemplate)
+  }
+
+  return EmailTemplateUtil.buildEmailTemplateDisplayNameMap(templateNames)
+}
+
+function initializeHandlersForListView() : AutomatedNotificationHandler[] {
+  var allHandlers = specialHandling.AutomatedHandlers
+  var notificationHandlers : AutomatedNotificationHandler[] = null
+  if (null != allHandlers) {
+    notificationHandlers = allHandlers.whereTypeIs(AutomatedNotificationHandler)
+  } else {
+    notificationHandlers = new AutomatedNotificationHandler[0]
+  }
+  
+  return notificationHandlers
+}
+
+function convertPolicyTypeForOutput(policyType : PolicyType) : String {
+  if (null == policyType) {
+    return DisplayKey.get("Web.Admin.SpecialHandlingAutomatedNotifications.AllPolicyTypes")
+  } else {
+    return policyType.DisplayName
+  }
+}
+
+function showEmailAddressesForNotificationRules(anh : AutomatedNotificationHandler) : String {
+  var emailAddresses : String
+  switch (anh.NotificationType) {
+   case NotificationType.TC_MULTI_EMAIL:
+    emailAddresses = GosuStringUtil.join(anh.EmailAddresses, ", ")
+    break
+
+  case NotificationType.TC_CONTACTROLE:
+    emailAddresses = anh.EmailRole.Description
+    break
+
+  case NotificationType.TC_EMAIL:
+    emailAddresses = anh.EmailAddress
+    break
+
+  default:
+    throw new DisplayableException(DisplayKey.get("Web.Admin.SpecialHandlingAutomatedNotifications.UnknownNotificationType", anh.NotificationType))
+  }
+  return emailAddresses
+}]]></Code>
+  </ListViewPanel>
+</PCF>

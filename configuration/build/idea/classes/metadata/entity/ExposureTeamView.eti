@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Team Exposure view entity."
+  entity="ExposureTeamView"
+  exportable="false"
+  primaryEntity="Exposure"
+  supertypeEntity="ExposureAssignmentView">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.ExposureTeamView"
+    impl="com.guidewire.cc.domain.exposure.impl.ExposureTeamViewImpl"/>
+</viewEntity>

@@ -1,0 +1,51 @@
+<html> 
+<head> 
+<title>Notification Email Sample Template</title> 
+</head> 
+<body> 
+<H1>Claim Notification Sample Email</H1> 
+<pre> 
+Your claim has been CLOSED. 
+
+The data in this claim record is: 
+
+Claim Number: <b>$!claim.ClaimNumber</b>
+Description: <b>$!claim.Description</b>
+
+Policy Number: <b>$!claim.policy.PolicyNumber</b>
+Is The Coverage In Question: #if ($claim.isCoverageInQuestionFactorsNotEmpty()) <b>Yes</b><br>#else <b>No</b><br>#end
+
+Subrogation Status: <b>$!claim.SubrogationStatus</b>
+Litigation Status: <b>$!claim.LitigationStatus</b>
+
+Loss Date: <b>$!claim.LossDate</b>
+
+Reported Date: <b>$!claim.ReportedDate</b>
+Reported By: <b>$!claim.ReportedByType</b>
+Reported Method: <b>$!claim.HowReported</b>
+
+Assigned User: <b>$!claim.AssignedUser.DisplayName</b>
+Assigned Group: <b>$!claim.AssignedGroup.Name</b>
+Assigned On: <b>$!claim.AssignmentDate</b>
+
+Closed Date: <b>$!claim.CloseDate</b>
+Closed Outcome: <b>$!claim.ClosedOutcome</b>
+
+Police Dept Info: <b>$!claim.PoliceDeptInfo</b>
+Fire Dept Info: <b>$!claim.FireDeptInfo</b>
+Incident Report Done: #if ($claim.isIncidentReport()) <b>Yes</b><br>#else <b>No</b><br>#end
+
+Flagged: <b>$!claim.Flagged</b>
+#if ($!claim.Flagged.toString() == "Never flagged") #else 
+Flagged Date: <b>$!claim.FlaggedDate</b>
+Flagged Reason: <b>$!claim.FlaggedReason</b>
+#end
+
+Accident Type: <b>$!claim.AccidentType</b>
+Segment: <b>$!claim.Segment</b>
+Strategy: <b>$!claim.Strategy</b>
+
+Catastrophe Number: <b>$!claim.Catastrophe.Number</b>
+Catastrophe Name: <b>$!claim.Catastrophe.Name</b>
+</pre> 
+</body> 

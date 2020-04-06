@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Special Handling for a Service Tier"
+  entity="CustomerServiceTierSpecialHandling"
+  final="true"
+  supertype="SpecialHandling">
+  <fulldescription><![CDATA[
+    The special handling to follow for claims linked to a given Service Tier.
+  ]]></fulldescription>
+  <typekey
+    name="CustomerServiceTier"
+    nullok="false"
+    typelist="CustomerServiceTier"/>
+  <index
+    desc="Ensures each service tier is uniquely identified by CustomerServiceTier code"
+    name="cstsh_unq_1"
+    trackUsage="true"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="CustomerServiceTier"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+  </index>
+</subtype>

@@ -1,0 +1,30 @@
+package rules.Validation.ClaimClosedValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CCV02000 - Open activities")
+internal class CCV02000Openactivities {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.Activities.toList().hasMatch(\ act -> (act.Status == TC_OPEN and
+               act.ActivityPattern != null and
+               act.ActivityPattern.ClosedClaimAvlble == false)
+)
+
+/* Prevent closure if the claim has open activities unless those activities are
+ * known to be allowed on closed claims 
+ */
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.reject(TC_NEWLOSS, DisplayKey.get("Rules.Validation.CloseExposure.CloseAllOpenActivities"), null, null)
+
+/*end00rule*/
+
+  }
+}

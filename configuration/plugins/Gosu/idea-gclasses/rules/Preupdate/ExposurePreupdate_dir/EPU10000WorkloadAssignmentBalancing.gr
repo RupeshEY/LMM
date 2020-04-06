@@ -1,0 +1,25 @@
+package rules.Preupdate.ExposurePreupdate_dir
+
+@gw.rules.RuleName("EPU10000 - Workload Assignment Balancing")
+internal class EPU10000WorkloadAssignmentBalancing {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return
+/**
+ * These rules are activated only if the weighted workload
+ * assignment feature is enabled in configuration.
+ */
+gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

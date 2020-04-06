@@ -1,0 +1,29 @@
+package rules.Segmentation.ExposureSegmentationRules_dir.ESG04000GL_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.util.Logger
+
+@gw.rules.RuleName("ESG04100 - GL Low")
+internal class ESG04100GLLow {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ExposureType == TC_GENERALDAMAGE
+or exposure.ExposureType == TC_LOSSOFUSEDAMAGE 
+or exposure.Incident.Severity == TC_MINOR
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.Segment = TC_LIAB_LOW 
+Logger.logDebug(DisplayKey.get("Rules.Segmentation.Exposure", actions.ShortRuleName))
+Logger.logDebug(DisplayKey.get("Rules.Segmentation.Exposure.SegmentedTo", exposure.Segment))
+actions.exit()
+
+/*end00rule*/
+
+  }
+}

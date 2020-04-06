@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <DetailViewPanel
+    id="NewPaymentInstructionsDV"
+    mode="default">
+    <Require
+      name="Check"
+      type="Check"/>
+    <Require
+      name="Wizard"
+      type="gw.api.financials.CheckWizardInfo"/>
+    <InputColumn>
+      <InputSetRef
+        def="CheckWizardCheckSummaryInputSet(Check, Wizard)"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentInstructions.Check.Instructions&quot;)"/>
+      <TypeKeyInput
+        filter="VALUE !=  PaymentMethod.TC_MANUAL"
+        id="PaymentMethod"
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentInstructions.Check.PaymentMethod&quot;)"
+        value="Check.PaymentMethod"
+        valueType="typekey.PaymentMethod"/>
+      <TypeKeyInput
+        editable="true"
+        id="CheckBatching"
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentInstructions.Check.CheckBatching&quot;)"
+        value="Check.CheckBatching"
+        valueType="typekey.CheckBatching"/>
+      <TypeKeyInput
+        editable="true"
+        id="CheckInstructions"
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentInstructions.Check.CheckInstructions&quot;)"
+        value="Check.CheckInstructions"
+        valueType="typekey.CheckHandlingInstructions"/>
+      <InputSetRef
+        def="CheckRecurrenceInputSet(Check)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

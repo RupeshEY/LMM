@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="FNOLWizard_NotesScreen">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Toolbar>
+      <WizardButtons/>
+    </Toolbar>
+    <ListViewPanel
+      id="ClaimNotesLV">
+      <RowIterator
+        editable="false"
+        elementName="Note"
+        value="Claim.Notes"
+        valueType="entity.Note[]">
+        <Row>
+          <FormatCell
+            id="col1"
+            width="200">
+            <ContentInput
+              align="left"
+              id="Edit"
+              labelAbove="true">
+              <Link
+                action="FNOLWizard_EditNotePopup.push(Note, Claim)"
+                id="EditLink"
+                label="DisplayKey.get(&quot;Java.Note.Edit&quot;)"/>
+              <Link
+                desc="spacer link"
+                id="SpacerLink0"
+                label="&quot; &quot;"
+                visible="true"/>
+              <Link
+                action="gw.api.print.PrintNoteAction.printNote(Note)"
+                available="Claim.State != ClaimState.TC_DRAFT"
+                download="true"
+                hideIfEditable="true"
+                id="PrintLink"
+                label="DisplayKey.get(&quot;Java.Note.Print&quot;)"/>
+            </ContentInput>
+            <TextInput
+              align="left"
+              boldLabel="true"
+              id="Author"
+              label="DisplayKey.get(&quot;NVV.Claim.NoteDetail.Note.Author&quot;)"
+              value="Note.Author"
+              valueType="entity.User"/>
+            <TextInput
+              align="left"
+              boldLabel="true"
+              id="Topic"
+              label="DisplayKey.get(&quot;NVV.Claim.NoteDetail.Note.Topic&quot;)"
+              value="Note.Topic"
+              valueType="typekey.NoteTopicType"/>
+            <TextInput
+              align="left"
+              boldLabel="true"
+              id="RelatedTo"
+              label="DisplayKey.get(&quot;NVV.Claim.NoteDetail.Note.RelatedTo&quot;)"
+              value="Note.getNoteRelatedTo()"/>
+            <TextInput
+              id="Confidential"
+              labelAbove="true"
+              value="DisplayKey.get(&quot;Java.Note.Confidential&quot;)"
+              visible="Note.Confidential"/>
+          </FormatCell>
+          <FormatCell
+            id="col2"
+            wrap="true">
+            <TextInput
+              boldLabel="true"
+              id="AuthoringDate"
+              label="gw.api.util.StringUtil.formatDate(Note.AuthoringDate, &quot;medium&quot;)"
+              value="gw.api.util.StringUtil.formatTime(Note.AuthoringDate, &quot;short&quot;)"/>
+            <TextInput
+              boldLabel="true"
+              id="Subject"
+              label="DisplayKey.get(&quot;NVV.Claim.NoteDetail.Note.Subject&quot;)"
+              value="Note.Subject"
+              visible="Note.Subject != null"/>
+            <NoteBodyInput
+              id="Body"
+              labelAbove="true"
+              value="Note.Body"/>
+          </FormatCell>
+        </Row>
+      </RowIterator>
+    </ListViewPanel>
+  </Screen>
+</PCF>

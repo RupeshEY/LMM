@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<!-- Typelists related to security -->
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Defines all permissions that can be granted to users via privileges and roles"
+  name="SystemPermissionType">
+  <typecode
+    code="eventmessageview"
+    desc="Permission to view the event messages page"
+    name="View event messages"/>
+  <typecode
+    code="ownsensclaim"
+    desc="Permission to own sensitive claims"
+    name="Own sensitive claims"/>
+  <typecode
+    code="ownsensclaimsub"
+    desc="Permission to own subobjects on sensitive claims"
+    name="Own sensitive claim subobjects"/>
+  <typecode
+    code="viewsensdoc"
+    desc="Permission to view a sensitive document"
+    name="View sensitive documents"/>
+  <typecode
+    code="editsensdoc"
+    desc="Permission to edit a sensitive document"
+    name="Edit sensitive documents"/>
+  <typecode
+    code="delsensdoc"
+    desc="Permission to delete a sensitive document"
+    name="Delete sensitive documents"/>
+  <typecode
+    code="viewprivnote"
+    desc="Permission to view a private note"
+    name="View private note"/>
+  <typecode
+    code="editprivnote"
+    desc="Permission to edit a private note"
+    name="Edit private note"/>
+  <typecode
+    code="delprivnote"
+    desc="Permission to delete a private note"
+    name="Delete private note"/>
+  <typecode
+    code="viewsensnote"
+    desc="Permission to view a sensitive note"
+    name="View sensitive note"/>
+  <typecode
+    code="editsensnote"
+    desc="Permission to edit a sensitive note"
+    name="Edit sensitive note"/>
+  <typecode
+    code="delsensnote"
+    desc="Permission to delete a sensitive note"
+    name="Delete sensitive note"/>
+  <typecode
+    code="viewmednote"
+    desc="Permission to view a medical note"
+    name="View medical note"/>
+  <typecode
+    code="editmednote"
+    desc="Permission to edit a medical note"
+    name="Edit medical note"/>
+  <typecode
+    code="delmednote"
+    desc="Permission to delete a medical note"
+    name="Delete medical note"/>
+  <typecode
+    code="viewSensSIUdetails"
+    desc="Permission to view sensitive SIU details"
+    name="View sensitive SIU details"/>
+  <typecode
+    code="editSensSIUdetails"
+    desc="Permission to edit sensitive SIU details"
+    name="Edit sensitive SIU details"/>
+  <typecode
+    code="viewSensMCMdetails"
+    desc="Permission to view sensitive Medical Case Management details"
+    name="View sensitive Med Case Mgmt details"/>
+  <typecode
+    code="editSensMCMdetails"
+    desc="Permission to edit sensitive Medical Case Management details"
+    name="Edit sensitive Med Case Mgmt details"/>
+  <typecode
+    code="StorageUpdate"
+    desc="Permission to edit claim storage information"
+    name="Edit claim storage information"/>
+  <typecode
+    code="viewsubrodetails"
+    desc="Permission to view Subrogation-related information"
+    name="View Subrogation details"/>
+  <typecode
+    code="editsubrodetails"
+    desc="Permission to edit Subrogation-related information"
+    name="Edit Subrogation details"/>
+  <typecode
+    code="report_user"
+    desc="Permission to view reports in report server"
+    name="Show reports"/>
+  <typecode
+    code="report_manager"
+    desc="Permission to view reports and dashboard in report server"
+    name="Show reports and dashboard"/>
+  <typecode
+    code="viewrefdata"
+    desc="Permission to view administration reference data"
+    name="View reference data"/>
+  <typecode
+    code="editrefdata"
+    desc="Permission to edit administration reference data"
+    name="Edit reference data"/>
+  <typecode
+    code="viewpolicysystem"
+    desc="Permission to view policy in policy system"
+    name="View policy system"/>
+  <typecode
+    code="riedit"
+    desc="Permission to edit RI transactions &amp; agreements"
+    name="Edit RI transactions &amp; agreements"/>
+  <typecode
+    code="riview"
+    desc="Permission to view RI transactions &amp; agreements "
+    name="View RI transactions &amp; agreements"/>
+  <typecode
+    code="verifyFNOL"
+    desc="(Obsolete)"
+    name="Verify FNOLs (Obsolete)"
+    retired="true"/>
+</typelistextension>

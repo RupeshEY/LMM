@@ -1,0 +1,20 @@
+package rules.Validation.ExposureClosedValidationRules_dir
+
+@gw.rules.RuleName("ECV02000 - Injury-specific checks")
+internal class ECV02000Injuryspecificchecks {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ExposureType == TC_BODILYINJURYDAMAGE
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* Child rules, if any, will be specific checks for bodily injury exposures */
+/*end00rule*/
+
+  }
+}

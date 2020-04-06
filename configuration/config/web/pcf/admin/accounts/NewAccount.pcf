@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="AccountAdmin.go()"
+    afterCommit="AccountAdmin.go()"
+    beforeCommit="verifyNoDuplicate()"
+    canEdit="true"
+    id="NewAccount"
+    parent="AccountAdmin()"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Admin.Account.NewAccount&quot;)">
+    <Variable
+      initialValue="initializeNewAccount()"
+      name="account"
+      type="Account"/>
+    <ScreenRef
+      def="AccountDetailScreen(account, false)"/>
+    <Code><![CDATA[uses gw.api.database.Query
+
+function verifyNoDuplicate() {
+  if(Query.make(entity.Account).compare("AccountNumber", Equals, account.AccountNumber).select().Count > 0) {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Web.Admin.Account.Duplicate", account.AccountNumber))
+  }
+}
+
+function initializeNewAccount() : Account {
+  var acct = new Account()
+  acct.SpecialHandling = new AccountSpecialHandling()
+  return acct
+}]]></Code>
+  </Page>
+</PCF>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Saves the orig values xml from ContactManager for comparison in FNOL"
+  entity="ContactOrigValue"
+  extendable="false"
+  table="contactorigvalue"
+  type="editable">
+  <foreignkey
+    createbackingindex="false"
+    fkentity="Contact"
+    name="Contact"
+    nullok="false"/>
+  <column
+    desc="the original values XML from CM saved for the contact"
+    name="OrigValue"
+    nullok="false"
+    type="longtext"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="OverlapTable"/>
+  <column
+    desc="the original values XMLElement type for the contact"
+    name="OrigType"
+    nullok="false"
+    type="longtext"/>
+  <index
+    desc="Index for the contact's AddressBookUID"
+    name="AddressBookUID"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Contact"/>
+  </index>
+</entity>

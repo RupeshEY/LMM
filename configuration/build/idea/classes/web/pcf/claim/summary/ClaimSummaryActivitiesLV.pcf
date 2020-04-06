@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_activity.xml -->
+  <ListViewPanel
+    id="ClaimSummaryActivitiesLV">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="gw.api.claim.ClaimUtil.getActivities(Claim)"
+      name="ActivityList"
+      type="gw.api.database.IQueryBeanResult&lt;Activity&gt;"/>
+    <RowIterator
+      editable="false"
+      elementName="Activity"
+      value="ActivityList"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.Activity&gt;">
+      <Row>
+        <DateCell
+          fontColor="Activity.Overdue ? &quot;Red&quot; : &quot;&quot;"
+          id="DueDate"
+          label="DisplayKey.get(&quot;LV.Activity.ClaimSummaryActivities.Activities.DueDate&quot;)"
+          sortOrder="2"
+          value="Activity.TargetDate"
+          width="90"/>
+        <TypeKeyCell
+          id="Priority"
+          label="DisplayKey.get(&quot;LV.Activity.ClaimSummaryActivities.Activities.Priority&quot;)"
+          sortOrder="1"
+          value="Activity.Priority"
+          valueType="typekey.Priority"/>
+        <TextCell
+          action="ClaimWorkplan.go(Claim); ActivityDetailForward.goInWorkspace(Claim, Activity)"
+          available="perm.Activity.view(Activity)"
+          id="Subject"
+          label="DisplayKey.get(&quot;LV.Activity.ClaimSummaryActivities.Activities.Subject&quot;)"
+          printWidth="3.5"
+          sortBy="Activity.Subject"
+          value="String.isEmpty(Activity.Subject) ? DisplayKey.get(&quot;LV.Activity.Activities.NoSubject&quot;) : Activity.Subject"
+          width="240"/>
+        <!-- Sort on user, then on queue, then on manual -->
+        <TextCell
+          action="UserContactDetailPopup.push(Activity.AssignedUser)"
+          id="AssignedUser"
+          label="DisplayKey.get(&quot;LV.Activity.ClaimSummaryActivities.Activities.AssignedUser&quot;)"
+          sortBy="Activity.AssignmentStatus, Activity.AssignedUser, Activity.AssignedQueue"
+          value="Activity.AssigneeDisplayString"
+          width="120"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Decimal based claim metric limit."
+  entity="DecimalClaimMetricLimit"
+  final="false"
+  priority="2"
+  supertype="ClaimMetricLimit">
+  <implementsInterface
+    iface="gw.cc.claim.metric.entity.ClaimMetricLimit"
+    impl="com.guidewire.cc.domain.claim.metric.impl.DecimalClaimMetricLimitImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.metric.impl.ClaimMetricLimitInternal"
+    impl="com.guidewire.cc.domain.claim.metric.impl.DecimalClaimMetricLimitImpl"/>
+  <implementsInterface
+    iface="gw.cc.claim.metric.entity.DecimalClaimMetricLimit"
+    impl="com.guidewire.cc.domain.claim.metric.impl.DecimalClaimMetricLimitImpl"/>
+  <implementsInterface
+    iface="gw.api.metric.MetricLimit"
+    impl="gw.api.claim.metric.DecimalClaimMetricLimitMethodsImpl"/>
+  <implementsEntity
+    name="DecimalMetricLimitDelegate"/>
+</subtype>

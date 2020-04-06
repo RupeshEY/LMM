@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- The next area controls the Claim Search -->
+  <DetailViewPanel
+    id="SimpleClaimSearchDV">
+    <Require
+      name="ClaimSearchCriteria"
+      type="ClaimSearchCriteria"/>
+    <InputColumn
+      width="500">
+      <TextInput
+        editable="true"
+        id="ClaimNumber"
+        label="DisplayKey.get(&quot;JSP.ClaimSearch.Claims.ClaimNumber&quot;)"
+        required="false"
+        value="ClaimSearchCriteria.ClaimNumber"/>
+      <TextInput
+        editable="true"
+        id="PolicyNumber"
+        label="DisplayKey.get(&quot;JSP.ClaimSearch.Claims.PolicyNumber&quot;)"
+        required="false"
+        value="ClaimSearchCriteria.PolicyNumber"/>
+      <TextInput
+        editable="true"
+        id="UMRNumber"
+        label="DisplayKey.get(&quot;Accelerator.IPLM.Search.ClaimSearch.ECF.UMR&quot;)"
+        required="false"
+        value="ClaimSearchCriteria.UMR_Ext"/>
+      <TextInput
+        editable="true"
+        id="UCRNumber"
+        label="DisplayKey.get(&quot;Accelerator.IPLM.Search.ClaimSearch.ECF.UCR&quot;)"
+        required="false"
+        value="ClaimSearchCriteria.UCR_Ext"/>
+    </InputColumn>
+    <InputColumn>
+      <TypeKeyInput
+        editable="true"
+        id="SearchFor"
+        label="DisplayKey.get(&quot;JSP.ClaimSearch.Claims.SearchFor&quot;)"
+        required="false"
+        value="ClaimSearchCriteria.NameSearchType"
+        valueType="typekey.ClaimSearchNameSearchType"/>
+      <InputSetRef
+        def="GlobalPersonNameInputSet(new gw.api.name.SearchNameOwner(ClaimSearchCriteria.NameCriteria))"
+        mode="gw.api.name.NameLocaleSettings.PCFMode"/>
+      <InputSetRef
+        def="GlobalContactNameInputSet(new gw.api.name.SearchNameOwner(ClaimSearchCriteria.NameCriteria))"
+        mode="gw.api.name.NameLocaleSettings.PCFMode"/>
+      <TextInput
+        editable="true"
+        id="TaxID"
+        label="DisplayKey.get(&quot;JSP.ClaimSearch.Claims.TaxID&quot;)"
+        required="false"
+        value="ClaimSearchCriteria.NameCriteria.TaxId"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="ClaimSearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

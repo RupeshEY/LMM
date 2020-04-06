@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  AuthorityLimit  ==================================================================== -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  admin="true"
+  desc="Describes the authority a user has to make payments and reserves."
+  entity="AuthorityLimit"
+  exportable="true"
+  table="authoritylimit"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.community.impl.AuthorityLimitInternal"
+    impl="com.guidewire.cc.domain.community.impl.AuthorityLimitImpl"/>
+  <implementsInterface
+    iface="gw.cc.community.entity.AuthorityLimit"
+    impl="com.guidewire.cc.domain.community.impl.AuthorityLimitImpl"/>
+  <fulldescription><![CDATA[
+      Defines a dollar amount limiting a particular financial authority within the system. An AuthorityLimit has an
+      associated LimitType indicating what the limit applies to, for example, setting reserves. You can also restrict
+      limits to a particular CoverageType or CostType. Each AuthorityLimit belongs to a particular AuthorityProfile. 
+      
+    ]]></fulldescription>
+  <column
+    desc="The amount of the limit, in whole dollars."
+    name="LimitAmount"
+    nullok="false"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="Currency"/>
+  </column>
+  <foreignkey
+    columnName="ProfileID"
+    desc="The authority limit profile this limit is a part of."
+    exportable="false"
+    fkentity="AuthorityLimitProfile"
+    name="Profile"
+    nullok="true"/>
+  <typekey
+    desc="The limit type."
+    name="LimitType"
+    nullok="false"
+    typelist="AuthorityLimitType"/>
+  <typekey
+    desc="If non-null, the limit applies only to this policy type."
+    name="PolicyType"
+    nullok="true"
+    typelist="PolicyType"/>
+  <typekey
+    desc="If non-null, the limit applies only to this coverage type."
+    name="CoverageType"
+    nullok="true"
+    typelist="CoverageType">
+    <keyfilters>
+      <keyfilter
+        name="PolicyType"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="If non-null, the limit applies only to this cost type."
+    name="CostType"
+    nullok="true"
+    typelist="CostType"/>
+  <checkconstraint
+    desc="An authority limit must have a non-null ProfileID"
+    predicate="ProfileID IS NOT NULL"/>
+</entity>

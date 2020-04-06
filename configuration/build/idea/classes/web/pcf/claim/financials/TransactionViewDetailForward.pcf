@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Forward
+    id="TransactionViewDetailForward"
+    parent="ClaimFinancialsTransactions(Claim)">
+    <LocationEntryPoint
+      signature="TransactionViewDetailForward(Claim : Claim, TransactionView : TransactionView)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="TransactionView"
+      type="TransactionView"/>
+    <Variable
+      initialValue="TransactionView.Transaction"
+      name="Transaction"
+      type="Transaction"/>
+    <ForwardCondition
+      action="ClaimFinancialsTransactionsDetail.go(Claim, Transaction)"/>
+  </Forward>
+</PCF>

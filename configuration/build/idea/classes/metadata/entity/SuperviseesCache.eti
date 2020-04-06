@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  admin="true"
+  desc="Contains caches of the supervised users and groups for the given user."
+  entity="SuperviseesCache"
+  exportable="false"
+  final="true"
+  platform="false"
+  table="superviseescache"
+  type="editable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.community.impl.SuperviseesCacheInternal"
+    impl="com.guidewire.cc.domain.community.impl.SuperviseesCacheImpl"/>
+  <implementsInterface
+    iface="gw.cc.community.entity.SuperviseesCache"
+    impl="com.guidewire.cc.domain.community.impl.SuperviseesCacheImpl"/>
+  <foreignkey
+    columnName="UserID"
+    desc="Owner of this cache"
+    fkentity="User"
+    name="User"
+    nullok="false"/>
+  <column
+    desc="Fingerprint of the currently cached supervised groups"
+    exportable="false"
+    name="SupervisedGroupFP"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Fingerprint of the currently cached supervised users"
+    exportable="false"
+    name="SupervisedUserFP"
+    nullok="true"
+    type="shorttext"/>
+  <array
+    arrayentity="SupervisedGroup"
+    desc="Cache of supervised groups"
+    exportable="false"
+    name="SupervisedGroups"
+    owner="true"/>
+  <array
+    arrayentity="SupervisedUser"
+    desc="Cache of supervised users"
+    exportable="false"
+    name="SupervisedUsers"
+    owner="true"/>
+</entity>

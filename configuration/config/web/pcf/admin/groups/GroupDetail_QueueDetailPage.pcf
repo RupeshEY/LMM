@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="perm.Group.edit"
+    canVisit="perm.Group.view"
+    id="GroupDetail_QueueDetailPage"
+    parent="GroupDetailPage(Group)"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.Admin.GroupDetail.Queue&quot;, AssignableQueue.Name)">
+    <LocationEntryPoint
+      signature="GroupDetail_QueueDetailPage(Group : Group, AssignableQueue : AssignableQueue)"/>
+    <Variable
+      name="Group"
+      type="Group"/>
+    <Variable
+      name="AssignableQueue"
+      type="AssignableQueue"/>
+    <ScreenRef
+      def="GroupDetail_QueueDetailScreen(AssignableQueue, Group)"/>
+  </Page>
+</PCF>

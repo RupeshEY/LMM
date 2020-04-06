@@ -1,0 +1,40 @@
+package rules.Assignment.DefaultGroupExposureAssignmentRules_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+
+@gw.rules.RuleName("DGE00500 - Balance workload within group")
+internal class DGE00500Balanceworkloadwithingroup {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return // weighted workload assignment enabled?
+  gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value
+
+and 
+
+// Checks if there are users who are active, members and whose vacation status is at work
+exposure.CurrentAssignment.AssignedGroup.Users.toList().hasMatch(\ aUser -> aUser.User.Credential.Active 
+  and aUser.Member 
+  and aUser.User.VacationStatus == VacationStatusType.TC_ATWORK)
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+// try assignment by workload. Do not cascade into subgroups
+var assignmentSuccess = exposure.assignUserByWorkload(false, exposure.CurrentAssignment.AssignedGroup)
+
+// debug logging
+if (CCLoggerCategory.ASSIGNMENT_WEIGHTED_WORKLOAD.DebugEnabled and assignmentSuccess) {
+  CCLoggerCategory.ASSIGNMENT_WEIGHTED_WORKLOAD.debug(DisplayKey.get("Rules.Assignment.DefaultGroup.Exposure", actions.getRule().DisplayName))
+  CCLoggerCategory.ASSIGNMENT_WEIGHTED_WORKLOAD.debug(DisplayKey.get("Rules.Assignment.AssignedUserIs", exposure.AssignedUser))
+}
+
+actions.exit()
+/*end00rule*/
+
+  }
+}

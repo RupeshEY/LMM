@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="perm.Claim.managepartiesinvolved(claim) and perm.Contact.createlocal"
+    id="AddSelectedDuplicatePartiesInvolvedPopup"
+    returnType="Contact"
+    startInEditMode="true"
+    title="gw.api.contact.NewContactUtil.getDisplayKeyForContactSubtype(tempContact.Subtype.Code)">
+    <LocationEntryPoint
+      signature="AddSelectedDuplicatePartiesInvolvedPopup(claim : Claim, tempContact : gw.api.contact.TemporaryContact, roles : gw.api.contact.ClaimContactRoleWrapper)"/>
+    <Variable
+      initialValue="createClaimContact()"
+      name="claimContact"
+      type="ClaimContact"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      name="tempContact"
+      type="gw.api.contact.TemporaryContact"/>
+    <Variable
+      name="roles"
+      type="gw.api.contact.ClaimContactRoleWrapper"/>
+    <Variable
+      initialValue="gw.api.contact.ContactSystemUtil.INSTANCE.generateLinkStatus(claimContact.Contact)"
+      name="linkStatus"
+      type="gw.api.contact.ContactSystemLinkStatus"/>
+    <ScreenRef
+      def="ContactDetailScreen(claimContact, true, true, linkStatus, claimContact.Claim, true, false, true)"/>
+    <Code><![CDATA[uses gw.api.contact.ContactUtil
+
+function createClaimContact() : ClaimContact {
+  var cc = gw.api.claimparties.ClaimContactUtil.createClaimContact(claim, tempContact)  
+  cc = roles.addRolesToClaimContact(cc)  
+  return cc;
+}]]></Code>
+  </Popup>
+</PCF>

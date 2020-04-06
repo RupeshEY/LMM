@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    id="Search"
+    menuActions="SearchMenuActions()"
+    title="DisplayKey.get(&quot;Web.TabBar.Search&quot;)">
+    <LocationEntryPoint
+      signature="Search()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.TabBar.Search.Claims&quot;)"
+      location="ClaimSearchesGroup()"
+      shortcut="1"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.TabBar.Search.Activities&quot;)"
+      location="ActivitySearch()"
+      shortcut="2"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.TabBar.Search.Checks&quot;)"
+      location="PaymentSearch()"
+      shortcut="3"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.TabBar.Search.Recoveries&quot;)"
+      location="RecoverySearch()"
+      shortcut="4"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.TabBar.Search.BulkInvoices&quot;)"
+      location="BulkInvoiceSearch()"
+      shortcut="5"/>
+  </LocationGroup>
+</PCF>

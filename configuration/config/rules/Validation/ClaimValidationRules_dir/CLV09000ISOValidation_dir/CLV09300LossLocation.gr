@@ -1,0 +1,22 @@
+package rules.Validation.ClaimValidationRules_dir.CLV09000ISOValidation_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV09300 - LossLocation")
+internal class CLV09300LossLocation {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.LossLocation == null
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.rejectField("LossLocation", TC_ISO, DisplayKey.get("Rules.Validation.Claim.LossLocNotNull"), null, null)
+/*end00rule*/
+
+  }
+}

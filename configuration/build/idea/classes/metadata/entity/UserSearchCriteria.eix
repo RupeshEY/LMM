@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="UserSearchCriteria">
+  <implementsInterface
+    iface="com.guidewire.pl.domain.community.impl.UserSearchCriteriaInternalMethods"
+    impl="com.guidewire.cc.domain.community.impl.UserSearchCriteriaCoreExtMethodsImpl"/>
+  <description><![CDATA[
+        Encapsulates ClaimCenter-specific extensions to the UserSearchCriteria. This is a UserSearchCriteria subtype.
+        This entity exists only to support a search, the system does not store it.         
+      
+    ]]></description>
+  <foreignkey
+    columnName="GroupID"
+    desc="Match the group that a user might belong."
+    fkentity="Group"
+    name="Group"
+    nullok="true"/>
+  <column
+    desc="Match the attribute name with those a user might possess."
+    name="AttributeName"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Match the attribute value with those a user might possess."
+    name="AttributeValue"
+    nullok="true"
+    type="integer"/>
+  <typekey
+    desc="Match the attribute state with those a user might possess."
+    name="AttributeState"
+    nullok="true"
+    typelist="State"/>
+</internalExtension>

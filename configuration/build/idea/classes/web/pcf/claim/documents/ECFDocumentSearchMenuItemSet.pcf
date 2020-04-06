@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <MenuItemSet
+    id="ECFDocumentSearchMenuItemSet">
+    <Require
+      name="claim"
+      type="entity.Claim"/>
+    <Require
+      name="transactionReferences"
+      type="List&lt;String&gt;"/>
+    <MenuItemIterator
+      elementName="transactionReference"
+      id="transactionReferenceIterator"
+      value="transactionReferences"
+      valueType="List&lt;String&gt;">
+      <MenuItem
+        action="new gw.acc.iplm.controller.IMRMessageController().sendRepositorySearchRequestForClaim(claim, transactionReference as String)"
+        id="transactionReferenceID"
+        label="DisplayKey.get(&quot;Accelerator.IPLM.Web.DocumentsLV.Button.IMRDocumentSearch.TR&quot;, transactionReference)"/>
+    </MenuItemIterator>
+  </MenuItemSet>
+</PCF>

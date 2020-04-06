@@ -1,0 +1,158 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="NewTemplateDocumentDV">
+    <Require
+      name="documentCCContext"
+      type="gw.document.DocumentCCContext"/>
+    <Require
+      name="documentCreationInfo"
+      type="gw.document.DocumentCreationInfo"/>
+    <Require
+      name="document"
+      type="Document"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="activity"
+      type="Activity"/>
+    <Variable
+      initialValue="document.Language"
+      name="languageType"
+      type="LanguageType"/>
+    <Variable
+      name="Step3Label"
+      type="String"
+      initialValue="DisplayKey.get(&quot;Java.Document.Creation.Template.Step3&quot;)"/>
+    <Variable
+      name="initialized"
+      type="boolean"
+      initialValue="return initDV()"/>
+    <ReferencedWidget
+      widget="DocumentCreationScreen"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.DocumentCreation.DocumentContents.Header&quot;)"/>
+      <Label
+        label="DisplayKey.get(&quot;Java.Document.Creation.Template.Step1&quot;)"/>
+      <DocumentTemplateInput
+        clearEnabled="false"
+        editable="documentCCContext.DocumentCreationReadOnly"
+        freeInputEnabled="false"
+        id="TemplatePicker"
+        label="DisplayKey.get(&quot;Java.Document.Creation.Template&quot;)"
+        onPick="documentCCContext.resetTemplateBasedInfo(documentCreationInfo, documentCreationInfo.DocumentTemplateDescriptor); documentCreationInfo.evaluateDynamicWidgets()"
+        pickLocation="DocumentTemplateSearchPopup.push(claim, documentCreationInfo)"
+        required="true"
+        value="documentCreationInfo.DocumentTemplateDescriptor"
+        valueType="gw.plugin.document.IDocumentTemplateDescriptor"/>
+      <TypeKeyInput
+        editable="documentCCContext.DocumentCreationReadOnly"
+        id="Language"
+        label="DisplayKey.get(&quot;NVV.Claim.DocTemplateSearch.Language&quot;)"
+        value="languageType"
+        valueType="typekey.LanguageType"
+        visible="LanguageType.getTypeKeys( false ).Count &gt; 1 and activity != null and activity.DocumentTemplate != null">
+        <PostOnChange
+          target="DocumentCreationScreen"
+          onChange="changeLanguage()"/>
+      </TypeKeyInput>
+      <InputSet
+        visible="documentCreationInfo.DocumentTemplateDescriptor != null">
+        <Label
+          label="DisplayKey.get(&quot;Java.Document.Creation.Template.Step2&quot;)"/>
+        <RangeInput
+          editable="documentCCContext.DocumentCreationReadOnly"
+          id="RelatedTo"
+          label="DisplayKey.get(&quot;NVV.Claim.ClaimDocumentsFilter.RelatedTo&quot;)"
+          optionGroupLabel="gw.pcf.RelatedToUtil.getOptionGroupLabel(VALUE as KeyableBean)"
+          optionLabel="gw.pcf.RelatedToUtil.getOptionLabel(VALUE as KeyableBean)"
+          required="true"
+          sortValueRange="false"
+          value="document.RelatedTo"
+          valueRange="claim.getRelatedToCandidates()"
+          valueType="gw.pl.persistence.core.Bean">
+          <PostOnChange
+            onChange="addRelatedToSymbols(); documentCreationInfo.evaluateDynamicWidgets(); documentCCContext.DocumentCreationResetState.execute()"
+            target="DocumentCreationScreen"/>
+        </RangeInput>
+        <InputSetRef
+          def="DocumentTemplateContextObjectIteratorInputSet(documentCCContext,documentCreationInfo)"
+          mode="documentCreationInfo.DocumentTemplateDescriptor.TemplateId"
+          widgets="DocumentCreationScreen"/>
+        <InputSetRef
+          def="DocumentCreationInputSet(documentCCContext,documentCreationInfo,Step3Label)"
+          widgets="DocumentCreationScreen"/>
+      </InputSet>
+    </InputColumn>
+    <Code><![CDATA[uses gw.pl.persistence.core.Bean
+      uses gw.document.SimpleSymbol
+      uses gw.api.util.LocaleUtil
+      uses gw.document.DocumentsUtil
+
+      function initDV(): boolean {
+        documentCreationInfo.addSymbols({
+          // Full set of symbols available to Template Descriptors in earlier versions of CC
+          // Included for backwards compatibility and can likely be pruned
+          "DocumentCreationInfo"->documentCreationInfo,
+          "Document"->document,
+          "language"->languageType,
+
+          // The following are added with explicit types to facilitate
+          // null-safe access within template descriptor Gosu expressions.
+          // Otherwise, null values would be mapped to the Object type.
+          "Claim"->new SimpleSymbol(Claim, claim),
+          "Activity"->new SimpleSymbol(Activity, activity)
+        })
+        addRelatedToSymbols()
+        if (documentCreationInfo.DocumentTemplateDescriptor != null) {
+          documentCreationInfo.evaluateDynamicWidgets()
+        }
+        return true
+      }
+
+      function addRelatedToSymbols() {
+        // Also for backwards compatibility, if "RelatedTo" is an Exposure, Contact or Matter,
+        // make sure that the appropriate symbols are injected
+
+        // This logic was moved here from gw.document.DocumentsUtil.java to collect
+        // all the symbol mapping for document creation into one central place
+
+        // Remove prior mappings first
+        documentCreationInfo.removeSymbols({"RelatedToTypeName", "RelatedTo", "Exposure", "Claimant", "Matter"})
+
+        var relatedToValue = document.RelatedTo
+        if (relatedToValue != null) {
+          documentCreationInfo.addSymbols({
+            "RelatedToTypeName" -> relatedToValue.IntrinsicType.getName(),
+            "RelatedTo" -> relatedToValue
+          })
+
+          if (relatedToValue typeis Exposure)
+            documentCreationInfo.addSymbol("Exposure", relatedToValue);
+          else if (relatedToValue typeis Contact)
+            documentCreationInfo.addSymbol("Claimant", relatedToValue);
+          else if (relatedToValue typeis Matter)
+            documentCreationInfo.addSymbol("Matter", relatedToValue);
+        } else {
+          // Make sure RelatedTo, even if null, is mapped to a Bean type for null-safety
+          documentCreationInfo.addSymbols({
+            "RelatedToTypeName" -> "",
+            "RelatedTo" -> new SimpleSymbol(Bean, null)
+          })
+        }
+      }
+
+      function changeLanguage() {
+        documentCCContext.resetTemplateBasedInfo(documentCreationInfo,
+          DocumentsUtil.fetchDocumentTemplate(documentCreationInfo.DocumentTemplateDescriptor.TemplateId,
+            LocaleUtil.toLanguage(languageType), CurrentLocation))
+        documentCreationInfo.evaluateDynamicWidgets()
+      }
+
+    ]]></Code>
+  </DetailViewPanel>
+</PCF>

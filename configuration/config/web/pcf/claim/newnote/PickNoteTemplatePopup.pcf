@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    id="PickNoteTemplatePopup"
+    returnType="NoteTemplateSearchResults"
+    title="DisplayKey.get(&quot;Web.Note.FindNoteTemplate&quot;)">
+    <LocationEntryPoint
+      signature="PickNoteTemplatePopup(lob : LossType)"/>
+    <LocationEntryPoint
+      signature="PickNoteTemplatePopup(searchCriteria : NoteTemplateSearchCriteria)"/>
+    <Variable
+      name="lob"
+      type="LossType"/>
+    <Variable
+      initialValue="initializeSearchCriteria()"
+      name="searchCriteria"
+      type="NoteTemplateSearchCriteria"/>
+    <Screen
+      id="PickNoteTemplateScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="CurrentLocation.cancel();"
+          id="PickNoteTemplatePopup_CancelButton"
+          label="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          shortcut="L"/>
+      </Toolbar>
+      <SearchPanel
+        criteriaName="NoteTemplateSearchCriteria"
+        resultsName="NoteTemplateSearchResultsList"
+        search="NoteTemplateSearchCriteria.performSearch()"
+        searchCriteria="searchCriteria.copy() as NoteTemplateSearchCriteria"
+        searchCriteriaType="entity.NoteTemplateSearchCriteria"
+        searchResultsType="NoteTemplateSearchResults[]">
+        <PanelRef
+          def="NoteTemplateSearchDV(NoteTemplateSearchCriteria)"/>
+        <PanelRef
+          def="NoteTemplateSearchResultLV(NoteTemplateSearchResultsList)"/>
+      </SearchPanel>
+    </Screen>
+    <Code><![CDATA[function initializeSearchCriteria() : NoteTemplateSearchCriteria {
+  var rtn = new NoteTemplateSearchCriteria(); 
+  if (lob != null) {
+    rtn.Lob = lob;
+  }
+  rtn.Language = gw.api.util.LocaleUtil.toLanguageType(User.util.CurrentLocale)
+  return rtn
+}]]></Code>
+  </Popup>
+</PCF>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Metrics related to a service request"
+  entity="ServiceRequestMetric"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="servreqmetric"
+  type="editable">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsInterface
+    iface="gw.api.metric.MetricMethods"
+    impl="gw.api.vendormanagement.metric.ServiceRequestMetricMethodsImpl"/>
+  <implementsEntity
+    name="MetricLimitTimeDelegate"/>
+  <implementsEntity
+    name="DecimalMetricLimitDelegate"/>
+  <foreignkey
+    columnName="ServiceRequestID"
+    desc="Service Request to which this metric is related."
+    exportable="false"
+    fkentity="ServiceRequest"
+    name="ServiceRequest"
+    nullok="false"/>
+  <typekey
+    desc="Units for this type of metric."
+    name="MetricUnit"
+    nullok="true"
+    typelist="MetricUnit"/>
+</entity>

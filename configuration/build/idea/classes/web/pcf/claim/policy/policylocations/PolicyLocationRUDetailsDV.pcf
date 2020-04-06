@@ -1,0 +1,108 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="PolicyLocationRUDetailsDV">
+    <Require
+      name="RU"
+      type="LocationBasedRU"/>
+    <InputColumn>
+      <TextInput
+        editable="true"
+        helpText="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Risks.Add.Tooltip&quot;)"
+        id="RUNumber"
+        label="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Risks.Number&quot;)"
+        value="RU.RUNumber"
+        valueType="java.lang.Integer"/>
+      <TypeKeyInput
+        editable="true"
+        helpText="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Risks.Add.Tooltip&quot;)"
+        id="MiscRUType"
+        label="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Risks.MiscType&quot;)"
+        required="RU typeis entity.LocationMiscRU"
+        value="(RU as entity.LocationMiscRU).OtherRiskType"
+        valueType="typekey.OtherRiskType"
+        visible="RU typeis entity.LocationMiscRU"/>
+      <TextAreaInput
+        editable="true"
+        id="RUDescription"
+        label="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Risks.Description&quot;)"
+        numRows="4"
+        value="RU.Description"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSet
+        visible="RU typeis LocationBasedRU and RU.Policy.PolicyType != PolicyType.TC_WORKERSCOMP">
+        <ContentInput
+          boldLabel="true"
+          hideIfReadOnly="true"
+          label="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Building&quot;)">
+          <Link
+            action="RU.Policy.createNewBuilding(RU)"
+            id="AddBuilding"
+            label="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Building.Add&quot;)"
+            styleClass="miniButton"
+            tooltip="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Building.Add.Tooltip&quot;)"
+            visible="RU.Building == null"/>
+          <Link
+            action="RU.Policy.removeBuilding(RU)"
+            id="RemoveBuilding"
+            label="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Building.Remove&quot;)"
+            styleClass="miniButton"
+            tooltip="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Building.Remove.Tooltip&quot;)"
+            visible="RU.Building != null"/>
+        </ContentInput>
+        <InputSet
+          visible="RU.Building != null">
+          <Label
+            label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyLocationDV.Building&quot;)"/>
+          <TextInput
+            editable="true"
+            helpText="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Building.Number.Tooltip&quot;)"
+            id="BuildingNumber"
+            label="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Building.Number&quot;)"
+            required="true"
+            value="RU.Building.BuildingNumber"/>
+          <TextAreaInput
+            editable="true"
+            id="BuildingNotes"
+            label="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Building.Notes&quot;)"
+            numRows="4"
+            value="RU.Building.Notes"/>
+        </InputSet>
+      </InputSet>
+      <InputDivider
+        visible="RU.Building != null and CurrentLocation.InEditMode == false"/>
+      <ListViewInput
+        boldLabel="true"
+        def="EditableRULienholdersLV(RU, RU.Policy.Claim)"
+        editable="true"
+        label="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Lienholders&quot;)"
+        labelAbove="true"
+        visible="RU.Policy.PolicyType != PolicyType.TC_WORKERSCOMP">
+        <Toolbar>
+          <IteratorButtons
+            iterator="EditableRULienholdersLV.EditableRULienholdersLV"/>
+        </Toolbar>
+      </ListViewInput>
+      <InputGroup
+        childrenVisible="RU.ClassCode != null"
+        id="ClassCodeInputGroup"
+        label="DisplayKey.get(&quot;NVV.Policy.WCLocationDetail.Property.ClassCodes&quot;)"
+        onToggle="toggleClassCode()"
+        visible="RU.Policy.PolicyType == PolicyType.TC_WORKERSCOMP">
+        <InputSetRef
+          def="ClassCodeInputSet(RU.ClassCode)"/>
+      </InputGroup>
+    </InputColumn>
+    <Code><![CDATA[function toggleClassCode() {
+  if(RU.ClassCode != null) {
+    RU.removeClassCode()
+  }  
+  else {
+    RU.addNewClassCode() 
+  }
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

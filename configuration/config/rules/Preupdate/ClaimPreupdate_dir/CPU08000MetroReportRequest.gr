@@ -1,0 +1,21 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+@gw.rules.RuleName("CPU08000 - Metro Report Request")
+internal class CPU08000MetroReportRequest {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.State !=TC_DRAFT
+and libraries.Metro.hasNewMetroRequest(claim)
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+libraries.Metro.validateAndStartReportFlows(claim)
+/*end00rule*/
+
+  }
+}

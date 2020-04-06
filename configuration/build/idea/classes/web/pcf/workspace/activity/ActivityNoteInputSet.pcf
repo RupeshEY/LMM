@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_activity.xml -->
+  <InputSet
+    id="ActivityNoteInputSet"
+    visible="perm.Note.create">
+    <Require
+      name="Activity"
+      type="Activity"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityNote.Activity.Note&quot;)"/>
+    <TypeKeyInput
+      editable="true"
+      id="Topic"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityNote.Activity.Note.Topic&quot;)"
+      required="false"
+      value="Activity.NewNote.Topic"
+      valueType="typekey.NoteTopicType"/>
+    <TypeKeyInput
+      editable="true"
+      id="SecurityType"
+      label="DisplayKey.get(&quot;NVV.Claim.NoteDetail.Note.SecurityType&quot;)"
+      value="Activity.NewNote.SecurityType"
+      valueType="typekey.NoteSecurityType"/>
+    <TextInput
+      editable="true"
+      id="Subject"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityNote.Activity.Note.Subject&quot;)"
+      required="false"
+      value="Activity.NewNote.Subject"/>
+    <RangeInput
+      editable="true"
+      id="RelatedTo"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityNote.Activity.Note.RelatedTo&quot;)"
+      optionGroupLabel="gw.pcf.RelatedToUtil.getOptionGroupLabel(VALUE as KeyableBean)"
+      optionLabel="gw.pcf.RelatedToUtil.getOptionLabel(VALUE as KeyableBean)"
+      required="true"
+      sortValueRange="false"
+      value="Activity.NewNote.RelatedTo"
+      valueRange="Activity.NewNote.Claim.RelatedToCandidates"
+      valueType="gw.pl.persistence.core.Bean"/>
+    <BooleanRadioInput
+      editable="true"
+      id="Confidential"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityNote.Activity.Note.Confidential&quot;)"
+      required="false"
+      value="Activity.NewNote.Confidential"/>
+    <TextAreaInput
+      editable="true"
+      id="Text"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityNote.Activity.Note.Text&quot;)"
+      numCols="30"
+      numRows="10"
+      required="false"
+      value="Activity.NewNote.Body"/>
+  </InputSet>
+</PCF>

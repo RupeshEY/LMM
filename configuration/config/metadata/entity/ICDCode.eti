@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!-- ICDCode reference table -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="ICDCode"
+  table="icdcode"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.ICDCode"
+    impl="com.guidewire.cc.domain.exposure.impl.ICDCodeImpl"/>
+  <fulldescription><![CDATA[
+        Represents a collection of valid ICD codes (International Statistical Classification of
+        Diseases and Related Health Problems) used for medical diagnoses on an injury incident.
+
+    ]]></fulldescription>
+  <column
+    desc="ICD 9 or 10 Code"
+    name="Code"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="8"/>
+  </column>
+  <column
+    desc="ICD code description"
+    name="CodeDesc"
+    nullok="false"
+    type="varchar">
+    <localization
+      nullok="false"
+      tableName="icdcod_desc_i18n"/>
+    <columnParam
+      name="size"
+      value="250"/>
+  </column>
+  <typekey
+    desc="Broad classification of diagnosis types"
+    name="BodySystem"
+    nullok="false"
+    typelist="ICDBodySystem"/>
+  <column
+    desc="Is the condition chronic"
+    name="Chronic"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="The date this code expires"
+    name="ExpiryDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The date this code becomes available"
+    name="AvailabilityDate"
+    nullok="true"
+    type="datetime"/>
+</entity>

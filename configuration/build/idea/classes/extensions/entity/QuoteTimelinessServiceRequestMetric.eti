@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Actual vs. expected quote completion time.  Only applicable to quote and service and quote-only service requests."
+  entity="QuoteTimelinessServiceRequestMetric"
+  final="false"
+  priority="2"
+  supertype="TimeBasedServiceRequestMetric">
+  <implementsInterface
+    iface="gw.api.metric.MetricMethods"
+    impl="gw.vendormanagement.metric.QuoteTimelinessServiceRequestMetricMethodsImpl"/>
+  <implementsInterface
+    iface="gw.api.metric.CalculatedLimitMethods"
+    impl="gw.vendormanagement.metric.QuoteTimelinessServiceRequestMetricMethodsImpl"/>
+  <implementsEntity
+    name="ServiceRequestMetricEscalationDelegate"/>
+  <column
+    desc="Difference (in business days or hours) between the actual quote completion date and the expected quote completion date. Only filled out when service request is complete"
+    name="DaysDifferentFromExpected"
+    nullok="true"
+    type="integer"/>
+</subtype>

@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Worksheet
+    beforeCommit="if (beforeCommitAction != null) { beforeCommitAction() }"
+    canEdit="true"
+    canVisit="perm.Activity.view(Activity)"
+    id="ApprovalDetailWorksheet"
+    startInEditMode="true"
+    tabLabel="DisplayKey.get(&quot;Web.Claim.ApprovalDetailWorksheet.Tab&quot;)"
+    title="DisplayKey.get(&quot;JSP.ApprovalActivityDetailHeader.Detail.Title&quot;, Activity.Claim.ClaimNumber)">
+    <LocationEntryPoint
+      signature="ApprovalDetailWorksheet(Claim : Claim, Activity : Activity)"/>
+    <Scope
+      location="Claim(Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Activity"
+      type="Activity"/>
+    <Variable
+      initialValue="null"
+      name="beforeCommitAction"
+      type="block()"/>
+    <Screen
+      id="ApprovalDetailScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="beforeCommitAction = \-&gt; Activity.approve(); CurrentLocation.commit()"
+          id="ApprovalDetailWorksheet_ApproveButton"
+          label="DisplayKey.get(&quot;JSP.ApprovalActivityDetailHeader.Toolbar.Approve&quot;)"
+          visible="Activity.canApprove()"/>
+        <ToolbarButton
+          action="beforeCommitAction = \-&gt; Activity.reject(); CurrentLocation.commit()"
+          id="ApprovalDetailWorksheet_RejectButton"
+          label="DisplayKey.get(&quot;JSP.ApprovalActivityDetailHeader.Toolbar.Reject&quot;)"
+          visible="Activity.canApprove()"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="ApprovalDetailWorksheet_CancelButton"
+          label="DisplayKey.get(&quot;JSP.ApprovalActivityDetailHeader.Toolbar.Cancel&quot;)"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel();ClaimFinancialsChecksDetail.goInMain(Activity.Claim, (Activity.TransactionSet as CheckSet).PrimaryCheck)"
+          available="(Activity.TransactionSet.Subtype == TC_CHECKSET)"
+          id="ApprovalDetailWorksheet_ViewCheckButton"
+          label="DisplayKey.get(&quot;JSP.ApprovalActivityDetailHeader.Toolbar.Check.View&quot;)"
+          visible="(Activity.TransactionSet.Subtype == TC_CHECKSET ? perm.Payment.view((Activity.TransactionSet as CheckSet).PrimaryCheck):false)"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel();ClaimFinancialsTransactionsDetail.goInMain(Activity.Claim, (Activity.TransactionSet as ReserveSet).AllTransactions[0])"
+          available="reserveButtonsAvailable()"
+          id="ApprovalDetailWorksheet_ViewReserveRequestButton"
+          label="DisplayKey.get(&quot;JSP.ApprovalActivityDetailHeader.Toolbar.ReserveRequest.View&quot;)"
+          visible="reserveButtonsVisible()"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel();NewReserveSet.goInMain(Activity.Claim)"
+          available="reserveButtonsAvailable()"
+          id="ApprovalDetailWorksheet_ViewAllReservesButton"
+          label="DisplayKey.get(&quot;JSP.ApprovalActivityDetailHeader.Toolbar.AllReserves.View&quot;)"
+          visible="reserveButtonsVisible()"/>
+      </Toolbar>
+      <PanelRef
+        def="ApprovalDetailDV(Activity)"
+        mode="Activity.TransactionSet.Subtype.Code"/>
+    </Screen>
+    <Code><![CDATA[function reserveButtonsAvailable() : boolean {
+  return reserveButtonsVisible() and not Activity.Claim.Closed
+}
+function reserveButtonsVisible() : boolean {
+  return Activity.TransactionSet typeis ReserveSet and 
+         Activity.TransactionSet.AllTransactions.length > 0 and 
+         perm.Reserve.edit(Activity.TransactionSet.AllTransactions[0])
+}]]></Code>
+  </Worksheet>
+</PCF>

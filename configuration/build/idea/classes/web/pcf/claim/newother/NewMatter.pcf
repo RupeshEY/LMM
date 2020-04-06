@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="ClaimMatterForward.go(Claim, null)"
+    afterCommit="ClaimMatterForward.go(Claim, Matter)"
+    beforeCommit="assignMatter(AssigneeHolder[0], Matter)"
+    canEdit="true"
+    canVisit="perm.Claim.creatematter(Claim)"
+    id="NewMatter"
+    parent="Claim(Claim)"
+    startEditing="Matter.setInitialValues()"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ClaimMatters.NewMatter&quot;)">
+    <LocationEntryPoint
+      signature="NewMatter(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="Claim.newMatter()"
+      name="Matter"
+      type="Matter"/>
+    <Variable
+      initialValue="new gw.api.assignment.Assignee[] {gw.api.assignment.AutoAssignAssignee.INSTANCE}"
+      name="AssigneeHolder"
+      type="gw.api.assignment.Assignee[]"/>
+    <Screen
+      id="NewMatterScreen">
+      <Toolbar/>
+      <PanelRef
+        def="NewMatterDV(Matter, AssigneeHolder)">
+        <Toolbar>
+          <EditButtons
+            cancelLabel="DisplayKey.get(&quot;Button.Cancel&quot;)"
+            updateLabel="DisplayKey.get(&quot;Button.Update&quot;)"/>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+    <Code><![CDATA[
+        function assignMatter(Assignee : gw.api.assignment.Assignee, aMatter : Matter){
+          Assignee.assignToThis(aMatter);
+          aMatter.saveAndSetup();
+        }
+      
+    ]]></Code>
+  </Page>
+</PCF>

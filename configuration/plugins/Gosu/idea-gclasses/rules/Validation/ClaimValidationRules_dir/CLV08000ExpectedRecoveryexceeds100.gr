@@ -1,0 +1,49 @@
+package rules.Validation.ClaimValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV08000 - Expected Recovery exceeds 100")
+internal class CLV08000ExpectedRecoveryexceeds100 {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.SubrogationSummary != null 
+and claim.SubrogationSummary.SubroAdverseParties.length > 0
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+var ChangeToExpectedRecovery = false
+
+for (thisParty in claim.SubrogationSummary.SubroAdverseParties) {
+  if (thisParty.getOriginalValue("ExpectedRecovery") != thisParty.ExpectedRecovery) {
+    ChangeToExpectedRecovery = true
+    break
+  }
+}
+
+if (ChangeToExpectedRecovery and claim.AdversePartyExpectedRecoveryPercent() > 100) {
+  var ruleName = gw.api.util.StringUtil.substring(actions.getRule() as java.lang.String, 0, 8)
+  claim.reject(null, null, TC_NEWLOSS, 
+               DisplayKey.get("Rules.Validation.Claim.TotalExpectedRecoveryExceeded", ruleName))
+}
+
+for (var subrogation in claim.SubrogationSummary.Subrogations) {
+  if (subrogation.Exposure != null and subrogation.TotalExpectedRecoveryPercent > 100) {
+    claim.rejectSubField(
+      subrogation,
+      "OverridesForAllParties",
+      null,
+      null,
+      TC_NEWLOSS,
+      DisplayKey.get("Subrogation.Validation.Claim.ExpectedRecoveryExceeds100ForExposure", subrogation.Exposure)
+    )
+  }
+}
+/*end00rule*/
+
+  }
+}

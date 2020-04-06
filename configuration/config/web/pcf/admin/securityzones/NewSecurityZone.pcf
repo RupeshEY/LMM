@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="SecurityZones.go()"
+    afterCommit="SecurityZones.go()"
+    canEdit="true"
+    canVisit="perm.SecurityZone.create"
+    id="NewSecurityZone"
+    parent="SecurityZones()"
+    showUpLink="true"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Admin.NewSecurityZone&quot;)">
+    <LocationEntryPoint
+      signature="NewSecurityZone()"/>
+    <Variable
+      initialValue="new SecurityZone()"
+      name="SecurityZone"
+      type="SecurityZone"/>
+    <ScreenRef
+      def="SecurityZoneDetailScreen(SecurityZone)"/>
+  </Page>
+</PCF>

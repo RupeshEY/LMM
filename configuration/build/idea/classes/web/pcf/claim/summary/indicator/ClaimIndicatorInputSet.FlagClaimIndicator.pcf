@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="ClaimIndicatorInputSet"
+    mode="FlagClaimIndicator">
+    <Require
+      name="indicator"
+      type="ClaimIndicator"/>
+    <ContentInput
+      id="FlagIndicatorLabel"
+      label="DisplayKey.get(&quot;Web.Claim.FlagClaimIndicator.FlaggedLabel&quot;)">
+      <Link
+        icon="indicator.Icon"
+        id="FlagIndicatorIcon"
+        tooltip="indicator.HoverText"
+        visible="indicator.IsOn"/>
+      <Link
+        id="FlagIndicatorText"
+        label="indicator.Text"/>
+    </ContentInput>
+    <DateInput
+      id="FlaggedDate"
+      label="DisplayKey.get(&quot;Web.Claim.FlagClaimIndicator.DateFlagged&quot;)"
+      value="indicator.Claim.FlaggedDate"
+      visible="isFlagged"/>
+    <TextAreaInput
+      id="FlaggedReason"
+      label="DisplayKey.get(&quot;Web.Claim.FlagClaimIndicator.FlaggedReason&quot;)"
+      numCols="30"
+      numRows="3"
+      value="indicator.Claim.FlaggedReason"
+      visible="isFlagged"/>
+    <Code><![CDATA[
+property get isFlagged() : boolean {
+  return indicator.Claim.Flagged == FlaggedType.TC_ISFLAGGED
+}
+    ]]></Code>
+  </InputSet>
+</PCF>

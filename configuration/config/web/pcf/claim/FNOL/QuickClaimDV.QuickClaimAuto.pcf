@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- The following Name Value Views are for the claims loss details screens.
+They are organized by business line.  The screens are organized as follows:
+
+Auto
+Property
+General Liability
+Workers' Compensation
+
+Each Business Line has three name value view areas. Remember, the application
+specifically calls these name value views. Then you have complete control. The
+three areas for each business line are as follows:
+
+Quick claim
+New Claim Wizard
+Folder -->
+  <DetailViewPanel
+    id="QuickClaimDV"
+    mode="QuickClaimAuto">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Variable
+      initialValue="initializeStep()"
+      name="initialized"
+      type="boolean"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.ReportedBy&quot;)"/>
+      <ClaimContactInput
+        claim="Claim"
+        editable="true"
+        id="ReportedBy_Name"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.ReportedBy.Name&quot;)"
+        newContactMenu="ClaimNewPersonOnlyPickerMenuItemSet"
+        required="true"
+        value="Claim.reporter"
+        valueRange="Claim.RelatedPersonArray"/>
+      <TypeKeyInput
+        editable="true"
+        id="Claim_ReportedByType"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.ReportedByType&quot;)"
+        required="true"
+        value="Claim.ReportedByType"
+        valueType="typekey.PersonRelationType">
+        <Reflect
+          triggerIds="ReportedBy_Name">
+          <ReflectCondition
+            condition="VALUE==null"
+            value="&quot;&quot;"/>
+          <ReflectCondition
+            condition="VALUE==Claim.Insured"
+            value="&quot;self&quot;"/>
+          <ReflectCondition
+            condition="true"
+            value="&quot;&quot;"/>
+        </Reflect>
+      </TypeKeyInput>
+      <TextInput
+        id="ReportedBy_WorkPhone"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.ReportedBy.WorkPhone&quot;)"
+        value="Claim.reporter.PrimaryPhoneValue">
+        <Reflect
+          triggerIds="ReportedBy_Name"
+          value="VALUE.PrimaryPhoneValue"/>
+      </TextInput>
+      <TextInput
+        id="ReportedBy_Address"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.ReportedBy.Address&quot;)"
+        value="Claim.reporter.PrimaryAddressDisplayValue">
+        <Reflect
+          triggerIds="ReportedBy_Name"
+          value="VALUE.PrimaryAddressDisplayValue"/>
+      </TextInput>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Claim.NewQuickClaimClaimAuto.Claim.Policy&quot;)"/>
+      <TextInput
+        id="Policy_PolicyNumber"
+        label="DisplayKey.get(&quot;NVV.Claim.NewQuickClaimClaimAuto.Policy.PolicyNumber&quot;)"
+        value="Claim.Policy.PolicyNumber"/>
+      <TypeKeyInput
+        id="Policy_Status"
+        label="DisplayKey.get(&quot;NVV.Claim.NewQuickClaimClaimAuto.Policy.Status&quot;)"
+        value="Claim.Policy.Status"
+        valueType="typekey.PolicyStatus"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim&quot;)"/>
+      <TypeKeyInput
+        editable="true"
+        id="Claim_LOBCode"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.LOBCode&quot;)"
+        required="true"
+        value="Claim.LOBCode"
+        valueType="typekey.LOBCode"/>
+      <TypeKeyInput
+        id="Claim_LossType"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.LossType&quot;)"
+        required="false"
+        value="Claim.LossType"
+        valueType="typekey.LossType"/>
+      <InputDivider/>
+      <TextAreaInput
+        boldLabel="true"
+        editable="true"
+        id="Claim_Description"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.Description&quot;)"
+        numCols="50"
+        numRows="3"
+        value="Claim.Description"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.LossDetails&quot;)"/>
+      <TypeKeyInput
+        editable="true"
+        id="Claim_LossCause"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.LossCause&quot;)"
+        required="true"
+        value="Claim.LossCause"
+        valueType="typekey.LossCause"/>
+      <TypeKeyInput
+        editable="true"
+        id="Notification_Fault"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.Notification.Fault&quot;)"
+        value="Claim.FaultRating"
+        valueType="typekey.FaultRating">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <DateInput
+        dateFormat="short"
+        id="Claim_LossDate"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.LossDate&quot;)"
+        timeFormat="short"
+        validationExpression="Claim.LossDate == null || Claim.LossDate &lt; gw.api.util.DateUtil.currentDate() ? null : DisplayKey.get(&quot;Java.Validation.Date.ForbidFuture&quot;)"
+        value="Claim.LossDate"/>
+      <TextInput
+        editable="true"
+        id="Notification_AtFaultPercentage"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.Notification.AtFaultPercentage&quot;)"
+        value="Claim.Fault"
+        valueType="java.math.BigDecimal"
+        visible=" Claim.FaultRating == TC_1 "/>
+      <DateInput
+        editable="true"
+        id="Notification_ReportedDate"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.Notification.ReportedDate&quot;)"
+        required="true"
+        validationExpression="Claim.ReportedDate == null || Claim.ReportedDate &lt; gw.api.util.DateUtil.currentDate() ? null : DisplayKey.get(&quot;Java.Validation.Date.ForbidFuture&quot;)"
+        value="Claim.ReportedDate"/>
+      <BooleanRadioInput
+        editable="true"
+        id="Status_IncidentReport"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.Status.IncidentReport&quot;)"
+        required="true"
+        value="Claim.IncidentReport"/>
+      <BooleanRadioInput
+        editable="true"
+        id="Status_CoverageQuestion"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.Status.CoverageQuestion&quot;)"
+        required="false"
+        value="Claim.CoverageInQuestion"/>
+    </InputColumn>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.LossLocation&quot;)"/>
+      <InputSetRef
+        def="CCAddressInputSet(Claim.AddressOwner)"/>
+      <InputDivider/>
+      <ListViewInput
+        boldLabel="true"
+        def="EditableVehicleIncidentsLV(Claim)"
+        editable="true"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.Vehicles&quot;)"
+        labelAbove="true">
+        <Toolbar>
+          <IteratorButtons
+            iterator="EditableVehicleIncidentsLV.EditableVehicleIncidentsLV"
+            removeFlags="all Removeable"/>
+        </Toolbar>
+      </ListViewInput>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.NewQuickClaimClaimAuto.Claim.Assignment&quot;)"/>
+      <AssigneeInput
+        assignable="Claim"
+        editable="true"
+        id="CommonAssign"
+        label="DisplayKey.get(&quot;Web.NewClaimWizard.Assign.CommonAssign&quot;)"
+        required="Wizard.CommonAssignment"
+        sortValueRange="false"
+        value="Wizard.CommonAssignee"
+        valueRange="Claim.SuggestedAssignees"
+        valueType="gw.api.assignment.Assignee"/>
+    </InputColumn>
+    <Code><![CDATA[function initializeStep() : boolean {
+  if (!Claim.areInitialValuesSet()) {
+    Claim.setInitialValues()
+  }
+  return true
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Type of claim association"
+  name="ClaimAssocType">
+  <typecode
+    code="general"
+    desc="General claim association"
+    name="General"
+    priority="1"/>
+  <typecode
+    code="parentchild"
+    desc="Where primary claim is the parent"
+    name="Parent/child"/>
+  <typecode
+    code="eventrelated"
+    desc="Claims related to one event, including environmental claims"
+    name="Event-related"/>
+  <typecode
+    code="priorclaims"
+    desc="Prior claims related to the primary claim"
+    name="Prior claims"/>
+  <typecode
+    code="reinsurancerelated"
+    desc="Claims related by reinsurance"
+    name="Reinsurance-related"/>
+</typelistextension>

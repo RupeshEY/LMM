@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="dwellingIncident.Claim.cleanAndFinishServiceRequests(unusedServiceRequests); dwellingIncident.Claim.instructNewServiceRequests()"
+    canEdit="true"
+    canVisit="perm.Claim.createincident(claim)"
+    id="NewDwellingIncidentPopup"
+    returnType="DwellingIncident"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.NewDwellingIncident.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewDwellingIncidentPopup(claim : Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="claim.newIncident(entity.DwellingIncident) as DwellingIncident"
+      name="dwellingIncident"
+      type="entity.DwellingIncident"/>
+    <Variable
+      initialValue="new java.util.HashSet&lt;ServiceRequest&gt;()"
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Screen
+      id="NewDwellingIncidentScreen">
+      <TitleBar
+        icon="dwellingIncident.HeaderIcon"/>
+      <Toolbar>
+        <EditButtons
+          pickValue="dwellingIncident"/>
+      </Toolbar>
+      <PanelRef
+        def="DwellingIncidentCV(dwellingIncident, unusedServiceRequests)"/>
+    </Screen>
+  </Popup>
+</PCF>

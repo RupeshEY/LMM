@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <DetailViewPanel
+    id="DeleteReserveSetDV">
+    <Require
+      name="TransactionSet"
+      type="TransactionSet"/>
+    <InputColumn>
+      <ListViewInput
+        boldLabel="true"
+        def="ReserveSetLV((TransactionSet as ReserveSet).Reserves)"
+        label="DisplayKey.get(&quot;NVV.Financials.DeleteReserveSet.ReserveSet.Reserves&quot;)">
+        <Toolbar/>
+      </ListViewInput>
+      <InputDivider/>
+      <InputSetRef
+        def="TransactionSetSummaryInputSet(TransactionSet)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

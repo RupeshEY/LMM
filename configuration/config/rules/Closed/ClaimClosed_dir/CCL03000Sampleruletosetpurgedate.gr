@@ -1,0 +1,25 @@
+package rules.Closed.ClaimClosed_dir
+
+uses gw.api.util.DateUtil
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("CCL03000 - Sample rule to set purge date")
+internal class CCL03000Sampleruletosetpurgedate {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+var purgeDate = DateUtil.addYears(claim.CloseDate, 7)
+claim.PurgeDate = purgeDate
+claim.ClaimInfo.PurgeDate = purgeDate
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,13 @@
+package rules.Exception
+
+@gw.rules.RuleName("Activity Escalation Rules")
+@gw.rules.RuleSetDescription("This is the Activity Escalation rule set. This rule sets is triggered for all activities when they are marked as escalated (because their escalation date has passed.) These rules determine what is done for these newly escalated activities.")
+class ActivityEscalationRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Activity) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Activity) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Activity Escalation Rules", ActivityEscalationRules )
+  }
+}

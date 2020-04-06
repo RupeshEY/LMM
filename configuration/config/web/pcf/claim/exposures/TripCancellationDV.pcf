@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="TripCancellationDV">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <InputColumn>
+      <InputSetRef
+        def="ExposureDetailInputSet(Exposure, false)"/>
+      <InputSetRef
+        def="ExposureWorkloadInputSet(Exposure)"/>
+    </InputColumn>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.Trip.Exposure.IncidentOverview&quot;)"/>
+      <RangeInput
+        editable="true"
+        hideChildrenIfReadOnly="false"
+        id="TripIncident"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.Trip.Exposure.Incident&quot;)"
+        optionLabel="VALUE.TripRU.DisplayName"
+        required="true"
+        value="Exposure.TripIncident"
+        valueRange="Exposure.Claim.TripIncidentsOnly"
+        valueType="entity.TripIncident">
+        <MenuItem
+          action="TripIncidentPopup.push(Exposure.Claim)"
+          hideIfReadOnly="true"
+          id="NewIncidentMenuItem"
+          label="DisplayKey.get(&quot;NVV.Exposure.SubView.VehicleDamage.Exposure.NewIncident&quot;)"/>
+        <MenuItem
+          action="TripIncidentPopup.push( Exposure.TripIncident, true )"
+          hideIfReadOnly="true"
+          id="EditIncidentMenuItem"
+          label="DisplayKey.get(&quot;NVV.Exposure.SubView.VehicleDamage.Exposure.EditIncident&quot;)"
+          visible="Exposure.TripIncident != null"/>
+        <MenuItem
+          action="TripIncidentPopup.push( Exposure.TripIncident, false )"
+          hideIfEditable="true"
+          id="ViewIncidentMenuItem"
+          label="DisplayKey.get(&quot;NVV.Exposure.SubView.VehicleDamage.Exposure.ViewIncident&quot;)"/>
+        <PostOnChange/>
+      </RangeInput>
+      <TextInput
+        id="IncidentDescription"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.Trip.Exposure.Description&quot;)"
+        value="Exposure.Incident.Description"/>
+      <InputDivider/>
+      <InputSetRef
+        def="ExposureCodingFinancialsInputSet(Exposure)"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="OtherCarrierInvolvementInputSet(Exposure)"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

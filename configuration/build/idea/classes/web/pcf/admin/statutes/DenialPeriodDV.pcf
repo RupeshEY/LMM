@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="DenialPeriodDV">
+    <Require
+      name="WCDenialPeriod"
+      type="WCDenialPeriod"/>
+    <Variable
+      name="symbolProvider"
+      type="gw.document.SymbolProvider"
+      initialValue="createSymbolProvider()"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;DV.Admin.DenialPeriodDV.General&quot;)"/>
+      <TypeKeyInput
+        editable="true"
+        filter="VALUE.hasCategory(JurisdictionType.TC_INSURANCE)"
+        id="JurisdictionState"
+        label="DisplayKey.get(&quot;DV.Admin.DenialPeriods.JurisdictionState&quot;)"
+        required="true"
+        value="WCDenialPeriod.JurisdictionState"
+        valueType="typekey.Jurisdiction"/>
+      <DateInput
+        editable="true"
+        id="EffectiveDate"
+        label="DisplayKey.get(&quot;DV.Admin.DenialPeriods.EffectiveDate&quot;)"
+        required="true"
+        validationExpression="validateDate()"
+        value="WCDenialPeriod.EffectiveDate"/>
+      <DateInput
+        editable="true"
+        id="ExpiryDate"
+        label="DisplayKey.get(&quot;DV.Admin.DenialPeriods.ExpiryDate&quot;)"
+        required="true"
+        validationExpression="validateDate()"
+        value="WCDenialPeriod.ExpiryDate"/>
+      <BooleanRadioInput
+        editable="true"
+        id="BenefitPaymentAcceptance"
+        label="DisplayKey.get(&quot;DV.Admin.DenialPeriods.BenefitPaymentAcceptance&quot;)"
+        value="WCDenialPeriod.BenefitPaymentAcceptance"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;DV.Admin.DenialPeriodDV.DenialPeriod&quot;)"/>
+      <TypeKeyInput
+        editable="true"
+        id="DueDateFormula"
+        label="DisplayKey.get(&quot;DV.Admin.DenialPeriods.DueDateFormula&quot;)"
+        required="true"
+        value="WCDenialPeriod.DueDateFormula"
+        valueType="typekey.JurisdictionalFormula">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <TextInput
+        editable="true"
+        id="TargetDaysFromLoss"
+        label="DisplayKey.get(&quot;DV.Admin.DenialPeriods.TargetDaysFromLoss&quot;)"
+        required="WCDenialPeriod.DueDateFormula == TC_AFTERLOSSDATE or  WCDenialPeriod.DueDateFormula == TC_AFTERLOSSANDNOTICE "
+        validationExpression="(WCDenialPeriod.TargetDaysFromNotice &lt; 0 ? DisplayKey.get(&quot;Rules.Validation.Admin.Denial.NoNegativeValue&quot;) : null)"
+        value="WCDenialPeriod.TargetDaysFromLoss"
+        valueType="java.lang.Integer"/>
+      <TextInput
+        editable="true"
+        id="TargetDaysFromNotice"
+        label="DisplayKey.get(&quot;DV.Admin.DenialPeriods.TargetDaysFromNotice&quot;)"
+        required="WCDenialPeriod.DueDateFormula == TC_AFTERNOTICEDATE or  WCDenialPeriod.DueDateFormula == TC_AFTERLOSSANDNOTICE"
+        validationExpression="(WCDenialPeriod.TargetDaysFromNotice &lt; 0 ? DisplayKey.get(&quot;Rules.Validation.Admin.Denial.NoNegativeValue&quot;) : null)"
+        value="WCDenialPeriod.TargetDaysFromNotice"
+        valueType="java.lang.Integer"/>
+      <TypeKeyInput
+        editable="true"
+        id="TargetIncludeDays"
+        label="DisplayKey.get(&quot;DV.Admin.DenialPeriods.TargetIncludeDays&quot;)"
+        required="true"
+        value="WCDenialPeriod.TargetIncludeDays"
+        valueType="typekey.IncludeDaysType"/>
+      <DocumentTemplateInput
+        conversionExpression="PickedValue.TemplateId"
+        editable="true"
+        freeInputEnabled="false"
+        id="AcceptDocumentTemplate"
+        label="DisplayKey.get(&quot;DV.Admin.DenialPeriods.AcceptDocumentTemplate&quot;)"
+        pickLocation="DocumentTemplateSearchPopup.push(symbolProvider)"
+        value="WCDenialPeriod.AcceptDocumentTemplate"
+        valueType="java.lang.String"/>
+      <DocumentTemplateInput
+        conversionExpression="PickedValue.TemplateId"
+        editable="true"
+        freeInputEnabled="false"
+        id="RejectDocumentTemplate"
+        label="DisplayKey.get(&quot;DV.Admin.DenialPeriods.RejectDocumentTemplate&quot;)"
+        pickLocation="DocumentTemplateSearchPopup.push(symbolProvider)"
+        value="WCDenialPeriod.RejectDocumentTemplate"
+        valueType="java.lang.String"/>
+    </InputColumn>
+    <Code><![CDATA[uses gw.document.SymbolProvider
+      uses gw.document.GosuCaseInsensitiveBackwardsCompatibleSymbolProvider
+
+      function createSymbolProvider(): SymbolProvider {
+        return new GosuCaseInsensitiveBackwardsCompatibleSymbolProvider({
+          "WCDenialPeriod"->WCDenialPeriod
+        })
+      }
+
+      function validateDate(): String {
+        if (WCDenialPeriod.EffectiveDate > WCDenialPeriod.ExpiryDate) {
+          return DisplayKey.get("Rules.Validation.Admin.EffDateGTExpiryDate")
+        } else {
+          return null
+        }
+      }
+      
+    ]]></Code>
+  </DetailViewPanel>
+</PCF>

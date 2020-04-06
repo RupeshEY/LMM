@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <DetailViewPanel
+    id="PaymentDeductionsDV">
+    <Require
+      name="Check"
+      type="Check"/>
+    <Require
+      name="Wizard"
+      type="gw.api.financials.CheckWizardInfo"/>
+    <InputColumn>
+      <CurrencyInput
+        id="Amount_Gross"
+        label="DisplayKey.get(&quot;NVV.Financials.PaymentDeductions.Check.Amount.Gross&quot;)"
+        value="Check.GrossAmountPair"
+        valueType="gw.api.financials.CurrencyAmountPair"/>
+      <TextInput
+        id="Vendor"
+        label="DisplayKey.get(&quot;NVV.Financials.PaymentDeductions.Check.Vendor&quot;)"
+        value="Check.Vendor"
+        valueType="entity.Contact"/>
+      <CurrencyInput
+        editable="Check.isEditable()"
+        formatType="currency"
+        id="Amount_Reportable"
+        label="DisplayKey.get(&quot;NVV.Financials.PaymentDeductions.Check.Amount.Reportable&quot;)"
+        required="true"
+        validationExpression="Check.ReportableAmount &lt;= Check.GrossAmount ? null : DisplayKey.get(&quot;Java.NewPayment.Error.ReportableAmountToLarge&quot;)"
+        value="Check.ReportableAmountSettableComponent"
+        valueType="gw.api.financials.IMoney"/>
+      <ListViewInput
+        def="PaymentDeductionsLV(Check)"
+        label="DisplayKey.get(&quot;NVV.Financials.PaymentDeductions.Check.Deductions&quot;)">
+        <Toolbar/>
+      </ListViewInput>
+      <CurrencyInput
+        id="Amount_Net"
+        label="DisplayKey.get(&quot;NVV.Financials.PaymentDeductions.Check.Amount.Net&quot;)"
+        value="Check.NetAmountPair"
+        valueType="gw.api.financials.CurrencyAmountPair"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

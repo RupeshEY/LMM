@@ -1,0 +1,48 @@
+package rules.Assignment.DefaultGroupActivityAssignmentRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+
+@gw.rules.RuleName("DGA07000 - Assign activity to named user")
+internal class DGA07000Assignactivitytonameduser {
+  static function doCondition(activity : entity.Activity) : boolean {
+    
+/*start00rule*/
+return true
+/* This rule is misnamed. The rule doesn't assign the activity to a named user. Instead, it
+ * assigns to a user with the proper role, assuming that the activity to be assigned has
+ * a particular user role associated with it, AND there is already a user with that role
+ * on the claim.
+ * Filed jira CLM-16225 to fix the rule name
+*/
+/*end00rule*/
+
+  }
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+// Find the role associated with owning this activity
+var result = libraries.Activityassignment.getUserRoleGroupTypeBasedonActivityPattern(
+                                activity.ActivityPattern.Code)
+var userrole = result[0]
+
+/* If there is a role associated with this activity, see if there is already a user
+ * with that role on the claim. If there is, assign to that user. If not, this rule 
+ * will not assign the activity.
+*/
+if (userrole != null) {
+  for (roleAssignment in activity.Claim.RoleAssignments) {
+    if (roleAssignment.Role == typekey.UserRole.get(userrole)) {
+      if (activity.CurrentAssignment.assign(roleAssignment.AssignedGroup, roleAssignment.AssignedUser)) {
+        CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.DefaultGroup.Activity", actions.ShortRuleName))
+        CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.AssignedUserIs", activity.AssignedUser))
+        actions.exit()
+      }
+    }
+  }
+}
+/*end00rule*/
+
+  }
+}

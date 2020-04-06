@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Types of rooms in a property"
+  name="RoomType">
+  <typecode
+    code="kitchen"
+    desc="Kitchen"
+    name="Kitchen"/>
+  <typecode
+    code="livingroom"
+    desc="Living Room"
+    name="Living Room"/>
+  <typecode
+    code="bedroom"
+    desc="Bedroom"
+    name="Bedroom"/>
+  <typecode
+    code="bathroom"
+    desc="Bathroom"
+    name="Bathroom"/>
+  <typecode
+    code="garage"
+    desc="Garage"
+    name="Garage"
+    priority="100"/>
+  <typecode
+    code="other"
+    desc="Other"
+    name="Other"
+    priority="200"/>
+</typelistextension>

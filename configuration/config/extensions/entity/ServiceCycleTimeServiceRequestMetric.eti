@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Initial Response Time from Specialist"
+  entity="ServiceCycleTimeServiceRequestMetric"
+  final="false"
+  priority="6"
+  supertype="TimeBasedServiceRequestMetric">
+  <implementsInterface
+    iface="gw.api.metric.MetricMethods"
+    impl="gw.vendormanagement.metric.ServiceCycleTimeServiceRequestMetricMethodsImpl"/>
+  <column
+    default="0"
+    desc="The aggregate time spent NOT in progress state Specialist Waiting"
+    name="TimeSpentWorking"
+    nullok="false"
+    type="integer"/>
+  <column
+    desc="The time the current waiting state was entered, null if not waiting"
+    name="WaitingStartTime"
+    nullok="true"
+    type="datetime"/>
+</subtype>

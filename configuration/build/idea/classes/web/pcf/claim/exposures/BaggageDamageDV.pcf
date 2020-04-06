@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="BaggageDamageDV">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <InputColumn>
+      <InputSetRef
+        def="ExposureDetailInputSet(Exposure, false)"/>
+      <InputSetRef
+        def="ExposureWorkloadInputSet(Exposure)"/>
+    </InputColumn>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.LivingExpenses.Exposure.IncidentOverview&quot;)"/>
+      <RangeInput
+        editable="true"
+        hideChildrenIfReadOnly="false"
+        id="BaggageIncident"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.Baggage.Exposure.Incident&quot;)"
+        required="true"
+        value="Exposure.BaggageIncident"
+        valueRange="Exposure.Claim.BaggageIncidentsOnly"
+        valueType="entity.BaggageIncident">
+        <MenuItem
+          action="BaggageIncidentPopup.push(Exposure.Claim)"
+          hideIfReadOnly="true"
+          id="NewIncidentMenuItem"
+          label="DisplayKey.get(&quot;NVV.Exposure.SubView.Baggage.Exposure.NewIncident&quot;)"/>
+        <MenuItem
+          action="BaggageIncidentPopup.push( Exposure.BaggageIncident, true )"
+          hideIfReadOnly="true"
+          id="EditIncidentMenuItem"
+          label="DisplayKey.get(&quot;NVV.Exposure.SubView.Baggage.Exposure.EditIncident&quot;)"/>
+        <MenuItem
+          action="BaggageIncidentPopup.push( Exposure.BaggageIncident, false )"
+          hideIfEditable="true"
+          id="ViewIncidentMenuItem"
+          label="DisplayKey.get(&quot;NVV.Exposure.SubView.Baggage.Exposure.ViewIncident&quot;)"/>
+        <PostOnChange/>
+      </RangeInput>
+      <TextInput
+        id="IncidentDescription"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.Baggage.Exposure.Description&quot;)"
+        value="Exposure.Incident.Description"/>
+      <InputDivider/>
+      <InputSetRef
+        def="ExposureCodingFinancialsInputSet(Exposure)"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="OtherCarrierInvolvementInputSet(Exposure)"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

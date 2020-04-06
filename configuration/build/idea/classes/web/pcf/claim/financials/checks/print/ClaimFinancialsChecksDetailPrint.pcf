@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <!-- This page is designed only for use with Claim File printing and specifically for the purposes of check detail output -->
+  <Page
+    canEdit="false"
+    canVisit="perm.Check.view(checkView.Check)"
+    id="ClaimFinancialsChecksDetailPrint"
+    parent="ClaimPrintout(claim)"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;JSP.CheckDetail.ViewCheck.Title&quot;)">
+    <LocationEntryPoint
+      signature="ClaimFinancialsChecksDetailPrint(claim : Claim, checkView : CheckView)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      name="checkView"
+      type="CheckView"/>
+    <Screen
+      id="ClaimFinancialsChecksDetailPrintScreen">
+      <PanelRef
+        def="CheckDV(checkView.Check)"/>
+    </Screen>
+  </Page>
+</PCF>

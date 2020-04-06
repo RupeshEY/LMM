@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ExposureConditionsLV">
+    <ExposeIterator
+      valueType="ExposureConditionFilter"
+      widget="ExposureConditionsLV"/>
+    <Require
+      name="classification"
+      type="WorkloadClassification"/>
+    <RowIterator
+      editable="true"
+      elementName="exposure"
+      hideCheckBoxesIfReadOnly="true"
+      toAdd="classification.ExposureCondition.addToConditionFilters(exposure)"
+      toRemove="classification.ExposureCondition.removeFromConditionFilters(exposure)"
+      value="classification.ExposureCondition.ConditionFilters"
+      valueType="entity.ExposureConditionFilter[]">
+      <Row>
+        <RangeCell
+          editable="true"
+          id="CoverageType"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.ExposuresLV.CoverageType&quot;)"
+          required="true"
+          value="exposure.CoverageType"
+          valueRange="getValidCoverageTypeRange(classification.ClaimPolicyType)"
+          valueType="typekey.CoverageType">
+          <PostOnChange
+            onChange="gw.api.assignment.workload.util.WorkloadClassificationUIHelper.validateAndUpdateExposureCondition(exposure)"/>
+        </RangeCell>
+        <TypeKeyCell
+          editable="true"
+          id="CoverageSubtype"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.ExposuresLV.CoverageSubType&quot;)"
+          required="true"
+          value="exposure.CoverageSubType"
+          valueType="typekey.CoverageSubtype">
+          <PostOnChange
+            onChange="gw.api.assignment.workload.util.WorkloadClassificationUIHelper.validateAndUpdateExposureCondition(exposure)"
+            target="DATA_ONLY"/>
+        </TypeKeyCell>
+        <TypeKeyCell
+          editable="true"
+          id="LossPartyType"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.ExposuresLV.LossParty&quot;)"
+          required="true"
+          value="exposure.LossPartyType"
+          valueType="typekey.LossPartyType"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function getValidCoverageTypeRange(policyType : PolicyType) : java.util.List<CoverageType> {
+    var allCoverageTypes = typekey.CoverageType.getTypeKeys(false)
+    if (policyType != null) {
+      return allCoverageTypes.where(\ ct -> ct.hasCategory(policyType))
+    }
+    return allCoverageTypes
+}]]></Code>
+  </ListViewPanel>
+</PCF>

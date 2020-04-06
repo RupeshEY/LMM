@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.User.viewteam and GroupInfo.Group != null"
+    id="TeamGroupExposures"
+    title="DisplayKey.get(&quot;Web.Team.GroupExposuresTitle&quot;, GroupInfo.DisplayName)">
+    <LocationEntryPoint
+      signature="TeamGroupExposures(GroupInfo : gw.api.admin.TreeGroupInfo)"/>
+    <Variable
+      name="GroupInfo"
+      type="gw.api.admin.TreeGroupInfo"/>
+    <Variable
+      initialValue="new gw.api.team.TeamGroupExposureFilterSet(GroupInfo.Group)"
+      name="FilterSet"
+      type="gw.api.team.TeamExposureFilterSet"/>
+    <Variable
+      initialValue="ExposureTeamView.finder.findAll()"
+      name="ExposureTeamViewList"
+      recalculateOnRefresh="true"
+      type="gw.api.database.IQueryBeanResult&lt;gw.pl.persistence.core.Bean&gt;"/>
+    <Variable
+      initialValue="&quot;TeamExposuresLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <Screen
+      id="TeamGroupExposuresScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.Team.GroupExposuresTitle&quot;, GroupInfo.DisplayName)"/>
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="AssignExposuresPopup.push(new gw.api.exposure.ExposureAssignmentPopup(CheckedValues))"
+          flags="any ExposureTeamView"
+          id="TeamGroupExposures_Assign"
+          iterator="TeamExposuresLV.TeamExposuresLV"
+          label="DisplayKey.get(&quot;Web.Team.Toolbar.Assign&quot;)"
+          shortcut="G"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="gw.api.print.ListViewPrintOptionPopupAction.printListViewWithOptions(PrintTargetLV)"
+          available="perm.User.printlistviews"
+          id="TeamGroupExposures_Print"
+          label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="TeamExposuresLV(ExposureTeamViewList, FilterSet)"/>
+    </Screen>
+  </Page>
+</PCF>

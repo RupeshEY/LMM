@@ -1,0 +1,28 @@
+package rules.Segmentation.ExposureSegmentationRules_dir.ESG01000Auto_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.util.Logger
+
+@gw.rules.RuleName("ESG01200 - Auto Medium")
+internal class ESG01200AutoMedium {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ExposureType == TC_PIPDAMAGES
+or exposure.LossParty == TC_THIRD_PARTY
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.Segment = TC_AUTO_MID 
+Logger.logDebug(DisplayKey.get("Rules.Segmentation.Exposure", actions.ShortRuleName))
+Logger.logDebug(DisplayKey.get("Rules.Segmentation.Exposure.SegmentedTo", exposure.Segment))
+actions.exit()
+
+/*end00rule*/
+
+  }
+}

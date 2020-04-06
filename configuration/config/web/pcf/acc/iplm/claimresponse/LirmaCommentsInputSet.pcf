@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    editable="true"
+    id="LirmaCommentsInputSet">
+    <Require
+      name="claimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <Variable
+      initialValue="claimResponseRq.PublicComments.Count + claimResponseRq.ClaimDataResponded.PublicComments.Count"
+      name="publicCommentCount"
+      recalculateOnRefresh="true"
+      type="int"/>
+    <Label
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.CommentsTitle&quot;)"/>
+    <TextInput
+      id="PreviousComments"
+      labelAbove="true"
+      labelStyleClass="x-hide-display"
+      value="claimResponseRq.ClaimDataResponded.FormattedPublicComments"/>
+    <InputSet
+      id="CommentEditableInputSet"
+      visible="claimResponseRq.PublicCommentEditable">
+      <TextAreaInput
+        desc="Not having PostOnChange target a specific field may hurt performance. However, by using a target and a regex at the same time, when inserting an invalid character here and loosing focus of this Text Area, all the changes were being erased and the text area was reverted to the previous text."
+        editable="true"
+        id="CommentInput"
+        labelAbove="true"
+        numCols="50"
+        numRows="6"
+        regex="&quot;[a-zA-Z0-9,.\\-_+&lt;&gt;!?%&amp;@*()\\\\/'\&quot;:;=\\n ]*&quot;"
+        required="true"
+        validationExpression="claimResponseRq.validatePublicComments()"
+        value="claimResponseRq.NewPublicComments">
+        <PostOnChange/>
+      </TextAreaInput>
+      <TextInput
+        boldValue="true"
+        id="RemainingCommentsCount"
+        labelAbove="true"
+        value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.CommentLinesRemaining&quot;,claimResponseRq.RemainingPublicLineCount,claimResponseRq.PublicCommentsLimit)"/>
+    </InputSet>
+    <TextInput
+      boldValue="true"
+      id="CommentNotEditable"
+      labelAbove="true"
+      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFClaimResponse.LirmaCommentNotEditable&quot;)"
+      visible="not claimResponseRq.PublicCommentEditable"/>
+  </InputSet>
+</PCF>

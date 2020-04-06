@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table for Athena to Nozomi upgrade to change which t-account certain taccountlineitems are pointing to"
+  entity="TmpSrcTargetTAccounts"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="tmpsrctargettaccounts"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.TmpSrcTargetTAccounts"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TmpSrcTargetTAccountsImpl"/>
+  <column
+    desc="The taccountlineitem to update"
+    name="LineItemID"
+    nullok="false"
+    type="softentityreference"/>
+  <column
+    desc="The ID of the new TAccount to set into the lineitem"
+    name="TargetTAccountID"
+    nullok="false"
+    type="softentityreference"/>
+  <index
+    desc="Each TAccountLineItem/TargetTAccount pair should be unique."
+    name="tmpsrctargetu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="LineItemID"/>
+    <indexcol
+      keyposition="2"
+      name="TargetTAccountID"/>
+  </index>
+  <index
+    desc="Each TAccountLineItem should be updated at most once."
+    name="tmpsrctargetu2"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="LineItemID"/>
+  </index>
+</entity>

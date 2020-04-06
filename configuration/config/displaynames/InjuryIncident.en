@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<Entity
+  name="InjuryIncident">
+  <Columns>
+    <Column
+      beanPath="InjuryIncident.Severity"
+      name="Severity"
+      sortOrder="1"/>
+    <Column
+      beanPath="InjuryIncident.DetailedInjuryType"
+      name="DetailedInjuryType"
+      sortOrder="2"/>
+  </Columns>
+  <DisplayName><![CDATA[
+if (Severity != null && DetailedInjuryType != null) {
+  return Severity.DisplayName + " " + DetailedInjuryType.DisplayName
+} else if (Severity != null) {
+  return Severity.DisplayName
+} else if (DetailedInjuryType != null) {
+  return DetailedInjuryType.DisplayName
+} else {
+  return ""
+}
+
+  ]]></DisplayName>
+  <DisplayName
+    type="ContactRoleMessage"><![CDATA[
+(Severity == null ? "" : Severity.DisplayName) + " - " + (DetailedInjuryType == null ? "" : DetailedInjuryType.DisplayName)
+  ]]></DisplayName>
+</Entity>

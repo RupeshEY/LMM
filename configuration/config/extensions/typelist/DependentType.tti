@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Type of dependent - spouse, child etc."
+  final="false"
+  name="DependentType">
+  <typecode
+    code="spouse"
+    desc="Spouse"
+    name="Spouse"
+    priority="1"/>
+  <typecode
+    code="childunder18"
+    desc="Child under 18"
+    name="Child under 18"
+    priority="2"/>
+  <typecode
+    code="fulltimestudent"
+    desc="Full-time student"
+    name="Full-time student"
+    priority="3"/>
+  <typecode
+    code="other"
+    desc="Other"
+    name="Other"
+    priority="4"/>
+</typelist>

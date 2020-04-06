@@ -1,0 +1,29 @@
+package rules.Segmentation.ExposureSegmentationRules_dir.ESG05000Travel_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.util.Logger
+
+@gw.rules.RuleName("ESG05200 - Travel Medium")
+internal class ESG05200TravelMedium {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ExposureType == TC_MEDPAY 
+or exposure.ExposureType == TC_PERSONALPROPERTYDAMAGE
+or exposure.Incident.Severity == TC_MODERATE_GEN
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.Segment = TC_TRAVEL_MID
+Logger.logDebug(DisplayKey.get("Rules.Segmentation.Exposure", actions.ShortRuleName))
+Logger.logDebug(DisplayKey.get("Rules.Segmentation.Exposure.SegmentedTo", exposure.Segment))
+actions.exit()
+
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<Entity
+  name="PolicyLocation">
+  <Columns>
+    <Column
+      beanPath="PolicyLocation.LocationNumber"
+      name="location"
+      sortOrder="1"/>
+    <Column
+      beanPath="PolicyLocation.Address"
+      displayName="true"
+      name="address"
+      sortOrder="none"/>
+  </Columns>
+  <DisplayName><![CDATA[
+var retString = "";
+
+if (location != null and location.length() > 0) {
+  retString = retString + location + " ";
+}
+
+if (address != null) {
+  var wrapAddress = retString != null and retString.length() > 0;
+  if (wrapAddress) {
+    retString = retString + "(";
+  }
+  retString = retString + address;
+  if (wrapAddress) {
+    retString = retString + ")";
+  }
+}
+
+if (gw.api.util.StringUtil.length( retString ) == 0) {
+  retString = gw.api.locale.DisplayKey.get("Java.DisplayName.NewlyCreated");
+}
+
+return retString;
+  ]]></DisplayName>
+</Entity>

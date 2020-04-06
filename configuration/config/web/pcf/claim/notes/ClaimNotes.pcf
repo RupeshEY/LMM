@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Claim.view(Claim) and perm.System.viewclaimnotes and (Claim.State != ClaimState.TC_DRAFT)"
+    id="ClaimNotes"
+    title="DisplayKey.get(&quot;Web.ClaimNotes.NotesSearch&quot;)">
+    <LocationEntryPoint
+      signature="ClaimNotes(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <ScreenRef
+      def="NotesSearchScreen(Claim, null)"/>
+  </Page>
+</PCF>

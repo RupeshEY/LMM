@@ -1,0 +1,38 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.pl.persistence.core.Key
+
+@gw.rules.RuleName("CPU13000 - Catastrophe History")
+internal class CPU13000CatastropheHistory {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.getOriginalValue("Catastrophe") as Key != claim.Catastrophe?.ID
+
+// If user changes the Catastrophe field, update History.
+// Mark the "Review for Catastrophe" Activity complete if still open 
+
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+if (claim.Catastrophe != null) {
+  claim.createCustomHistoryEvent(TC_CATASTROPHE, 
+              DisplayKey.get("Rules.PreUpdate.Claim.Catastrophe", claim.Catastrophe.DisplayName))
+  for (act in claim.Activities) {
+    if (act.ActivityPattern.Code == "catastrophe_review"
+        and act.Status == TC_OPEN) { 
+          act.complete() 
+    }
+  }
+} else { 
+  claim.createCustomHistoryEvent(TC_CATASTROPHE, DisplayKey.get("Rules.PreUpdate.Claim.UnrelatedToCatastrophe"))
+}
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,20 @@
+package rules.Validation.RIAgreementValidationRules_dir
+
+@gw.rules.RuleName("RIAV01000 - Required Fields")
+internal class RIAV01000RequiredFields {
+  static function doCondition(rIAgreement : entity.RIAgreement) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(rIAgreement : entity.RIAgreement, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

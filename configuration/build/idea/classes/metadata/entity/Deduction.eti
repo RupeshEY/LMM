@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A deduction from a check, usually for tax purposes."
+  entity="Deduction"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="deduction"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.check.impl.DeductionInternal"
+    impl="com.guidewire.cc.domain.financials.check.impl.DeductionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.financials.check.impl.DeductionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.financials.check.impl.DeductionImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.check.entity.Deduction"
+    impl="com.guidewire.cc.domain.financials.check.impl.DeductionImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Amount of the deduction in the claim currency."
+    exportable="true"
+    name="ClaimAmount"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Amount of the deduction in the transaction/check currency."
+    exportable="true"
+    name="TransactionAmount"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="CheckCurrency"/>
+  </column>
+  <column
+    desc="Amount of the deduction in the reserving currency."
+    exportable="true"
+    name="ReservingAmount"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ReservingCurrency"/>
+  </column>
+  <column
+    desc="Amount of the deduction in the reporting currency)."
+    exportable="true"
+    name="ReportingAmount"
+    nullok="false"
+    type="currencyamount"/>
+  <column
+    desc="Description of the deduction."
+    exportable="true"
+    name="Comments"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    columnName="CheckID"
+    desc="Check to which the deduction belongs."
+    exportable="false"
+    fkentity="Check"
+    importableagainstexistingobject="false"
+    name="Check"
+    nullok="false"/>
+  <typekey
+    desc="Type of deduction."
+    exportable="true"
+    name="DeductionType"
+    nullok="true"
+    typelist="DeductionType"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.financials.dbchecks.DeductionDBCheckBuilder"/>
+</entity>

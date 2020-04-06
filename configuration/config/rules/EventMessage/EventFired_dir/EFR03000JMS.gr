@@ -1,0 +1,21 @@
+package rules.EventMessage.EventFired_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("EFR03000 - JMS")
+internal class EFR03000JMS {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

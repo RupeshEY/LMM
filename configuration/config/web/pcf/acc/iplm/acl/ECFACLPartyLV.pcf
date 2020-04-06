@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ECFACLPartyLV">
+    <Require
+      name="partySet"
+      type="java.util.List&lt;ECFMessageDocumentUploadAccessParty_Ext&gt;"/>
+    <RowIterator
+      editable="true"
+      elementName="accessParty"
+      value="partySet.sortBy(\ party -&gt; party.PartyRole)"
+      valueType="java.util.List&lt;ECFMessageDocumentUploadAccessParty_Ext&gt;">
+      <Row>
+        <CheckBoxCell
+          editable="true"
+          id="Banned"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFACLPartyLV.Cell.CanAccess&quot;)"
+          value="accessParty.CanAccess"/>
+        <TextCell
+          id="Name"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFACLPartyLV.Cell.PartyName&quot;)"
+          value="accessParty.PartyName"/>
+        <TextCell
+          id="Role"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFACLPartyLV.Cell.PartyRole&quot;)"
+          value="accessParty.PartyRole"/>
+      </Row>
+    </RowIterator>
+
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,369 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:gwsoap="http://guidewire.com/ws/soapheaders" xmlns:gwwsdl="http://guidewire.com/pl/wsdl" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://guidewire.com/pc/ws/gw/webservice/pc/pc800/ccintegration/PolicyLocationSearchAPI" name="PolicyLocationSearchAPI" targetNamespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc800/ccintegration/PolicyLocationSearchAPI">
+  <wsdl:types>
+    <xs:schema xmlns:gw="http://guidewire.com/xsd" xmlns:imported="http://guidewire.com/pc/ccintegration" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc800/ccintegration/PolicyLocationSearchAPI">
+      <xs:import namespace="http://guidewire.com/ws/soapheaders" schemaLocation="soapheaders.xsd"/>
+      <xs:import namespace="http://guidewire.com/pc/ccintegration" schemaLocation="entities.xsd"/>
+      <!-- findPolicyLocationsWithinBoundingBox(Date, String[], BigDecimal, BigDecimal, BigDecimal, BigDecimal, String, int, int) : PolicyLocationInfo[] -->
+      <xs:element name="findPolicyLocationsWithinBoundingBox">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element gw:type="java.util.Date" minOccurs="0" name="effDate" type="xs:dateTime"/>
+            <xs:element gw:viewas="array" minOccurs="0" name="productCodes">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="xs:string"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="topLeftLat" type="xs:decimal"/>
+            <xs:element minOccurs="0" name="topLeftLong" type="xs:decimal"/>
+            <xs:element minOccurs="0" name="bottomRightLat" type="xs:decimal"/>
+            <xs:element minOccurs="0" name="bottomRightLong" type="xs:decimal"/>
+            <xs:element minOccurs="0" name="refCon" type="xs:string"/>
+            <xs:element name="start" type="xs:int"/>
+            <xs:element name="count" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="findPolicyLocationsWithinBoundingBoxResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element gw:viewas="array" minOccurs="0" name="return">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="imported:PolicyLocationInfo"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SOAPException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="RequiredFieldException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="BadIdentifierException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="WsiAuthenticationException">
+        <xs:complexType/>
+      </xs:element>
+      <!-- findPolicyLocationByEffDateAndProductsWithinBoundingBox(Date, String[], BigDecimal, BigDecimal, BigDecimal, BigDecimal) : PolicyLocationInfo[] -->
+      <xs:element name="findPolicyLocationByEffDateAndProductsWithinBoundingBox">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element gw:type="java.util.Date" minOccurs="0" name="effDate" type="xs:dateTime"/>
+            <xs:element gw:viewas="array" minOccurs="0" name="productCodes">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="xs:string"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="topLeftLat" type="xs:decimal"/>
+            <xs:element minOccurs="0" name="topLeftLong" type="xs:decimal"/>
+            <xs:element minOccurs="0" name="bottomRightLat" type="xs:decimal"/>
+            <xs:element minOccurs="0" name="bottomRightLong" type="xs:decimal"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="findPolicyLocationByEffDateAndProductsWithinBoundingBoxResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element gw:viewas="array" minOccurs="0" name="return">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="imported:PolicyLocationInfo"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- cancelFindPolicyLocations(String) -->
+      <xs:element name="cancelFindPolicyLocations">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="refCon" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="cancelFindPolicyLocationsResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- isFindPolicyLocationsCached(String) : boolean -->
+      <xs:element name="isFindPolicyLocationsCached">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="refCon" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="isFindPolicyLocationsCachedResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:portType name="PolicyLocationSearchAPIPortType">
+    <wsdl:operation name="findPolicyLocationsWithinBoundingBox">
+      <wsdl:input message="tns:findPolicyLocationsWithinBoundingBox" name="findPolicyLocationsWithinBoundingBox"/>
+      <wsdl:output message="tns:findPolicyLocationsWithinBoundingBoxResponse" name="findPolicyLocationsWithinBoundingBoxResponse"/>
+      <!-- If communication errors occur -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- If required field is missing -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <!-- If cannot find entity with given identifier -->
+      <wsdl:fault message="tns:BadIdentifierException" name="BadIdentifierException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="findPolicyLocationByEffDateAndProductsWithinBoundingBox">
+      <wsdl:input message="tns:findPolicyLocationByEffDateAndProductsWithinBoundingBox" name="findPolicyLocationByEffDateAndProductsWithinBoundingBox"/>
+      <wsdl:output message="tns:findPolicyLocationByEffDateAndProductsWithinBoundingBoxResponse" name="findPolicyLocationByEffDateAndProductsWithinBoundingBoxResponse"/>
+      <!-- If communication errors occur -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- If required field is missing -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <!-- If cannot find entity with given identifier -->
+      <wsdl:fault message="tns:BadIdentifierException" name="BadIdentifierException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="cancelFindPolicyLocations">
+      <wsdl:input message="tns:cancelFindPolicyLocations" name="cancelFindPolicyLocations"/>
+      <wsdl:output message="tns:cancelFindPolicyLocationsResponse" name="cancelFindPolicyLocationsResponse"/>
+      <!-- If the search reference is null -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="isFindPolicyLocationsCached">
+      <wsdl:input message="tns:isFindPolicyLocationsCached" name="isFindPolicyLocationsCached"/>
+      <wsdl:output message="tns:isFindPolicyLocationsCachedResponse" name="isFindPolicyLocationsCachedResponse"/>
+      <!-- If the search reference is null -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="PolicyLocationSearchAPISoap12Binding" type="tns:PolicyLocationSearchAPIPortType">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="findPolicyLocationsWithinBoundingBox">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="findPolicyLocationsWithinBoundingBox">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findPolicyLocationsWithinBoundingBoxResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findPolicyLocationByEffDateAndProductsWithinBoundingBox">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="findPolicyLocationByEffDateAndProductsWithinBoundingBox">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findPolicyLocationByEffDateAndProductsWithinBoundingBoxResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="cancelFindPolicyLocations">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="cancelFindPolicyLocations">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cancelFindPolicyLocationsResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="isFindPolicyLocationsCached">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="isFindPolicyLocationsCached">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="isFindPolicyLocationsCachedResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="PolicyLocationSearchAPISoap11Binding" type="tns:PolicyLocationSearchAPIPortType">
+    <soap11:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="findPolicyLocationsWithinBoundingBox">
+      <soap11:operation style="document"/>
+      <wsdl:input name="findPolicyLocationsWithinBoundingBox">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findPolicyLocationsWithinBoundingBoxResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findPolicyLocationByEffDateAndProductsWithinBoundingBox">
+      <soap11:operation style="document"/>
+      <wsdl:input name="findPolicyLocationByEffDateAndProductsWithinBoundingBox">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findPolicyLocationByEffDateAndProductsWithinBoundingBoxResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="cancelFindPolicyLocations">
+      <soap11:operation style="document"/>
+      <wsdl:input name="cancelFindPolicyLocations">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="cancelFindPolicyLocationsResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="isFindPolicyLocationsCached">
+      <soap11:operation style="document"/>
+      <wsdl:input name="isFindPolicyLocationsCached">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="isFindPolicyLocationsCachedResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="PolicyLocationSearchAPI">
+    <wsdl:port binding="tns:PolicyLocationSearchAPISoap12Binding" name="PolicyLocationSearchAPISoap12Port">
+      <soap12:address location="http://localhost:8180/pc/ws/gw/webservice/pc/pc800/ccintegration/PolicyLocationSearchAPI"/>
+      <gwwsdl:address location="${pc}/ws/gw/webservice/pc/pc800/ccintegration/PolicyLocationSearchAPI"/>
+    </wsdl:port>
+    <wsdl:port binding="tns:PolicyLocationSearchAPISoap11Binding" name="PolicyLocationSearchAPISoap11Port">
+      <soap11:address location="http://localhost:8180/pc/ws/gw/webservice/pc/pc800/ccintegration/PolicyLocationSearchAPI/soap11"/>
+      <gwwsdl:address location="${pc}/ws/gw/webservice/pc/pc800/ccintegration/PolicyLocationSearchAPI/soap11"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:message name="findPolicyLocationsWithinBoundingBox">
+    <wsdl:part element="tns:findPolicyLocationsWithinBoundingBox" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="findPolicyLocationsWithinBoundingBoxResponse">
+    <wsdl:part element="tns:findPolicyLocationsWithinBoundingBoxResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="SOAPException">
+    <wsdl:part element="tns:SOAPException" name="SOAPException"/>
+  </wsdl:message>
+  <wsdl:message name="RequiredFieldException">
+    <wsdl:part element="tns:RequiredFieldException" name="RequiredFieldException"/>
+  </wsdl:message>
+  <wsdl:message name="BadIdentifierException">
+    <wsdl:part element="tns:BadIdentifierException" name="BadIdentifierException"/>
+  </wsdl:message>
+  <wsdl:message name="WsiAuthenticationException">
+    <wsdl:part element="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+  </wsdl:message>
+  <wsdl:message name="findPolicyLocationByEffDateAndProductsWithinBoundingBox">
+    <wsdl:part element="tns:findPolicyLocationByEffDateAndProductsWithinBoundingBox" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="findPolicyLocationByEffDateAndProductsWithinBoundingBoxResponse">
+    <wsdl:part element="tns:findPolicyLocationByEffDateAndProductsWithinBoundingBoxResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="cancelFindPolicyLocations">
+    <wsdl:part element="tns:cancelFindPolicyLocations" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="cancelFindPolicyLocationsResponse">
+    <wsdl:part element="tns:cancelFindPolicyLocationsResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="isFindPolicyLocationsCached">
+    <wsdl:part element="tns:isFindPolicyLocationsCached" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="isFindPolicyLocationsCachedResponse">
+    <wsdl:part element="tns:isFindPolicyLocationsCachedResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="gw-authentication">
+    <wsdl:part element="gwsoap:authentication" name="gw-authentication"/>
+  </wsdl:message>
+  <wsdl:message name="gw-locale">
+    <wsdl:part element="gwsoap:locale" name="gw-locale"/>
+  </wsdl:message>
+</wsdl:definitions>

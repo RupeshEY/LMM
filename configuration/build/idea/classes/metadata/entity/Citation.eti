@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="Citation"
+  exportable="true"
+  extendable="true"
+  loadable="true"
+  platform="false"
+  table="citation"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.Citation"
+    impl="com.guidewire.cc.domain.claim.impl.CitationImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Captures a citation information associated with a VehicleIncident. This information includes ticket number,
+        code, and type.
+      
+    ]]></fulldescription>
+  <foreignkey
+    columnName="IncidentID"
+    desc="The incident to which this Citation belongs."
+    fkentity="Incident"
+    name="Incident"
+    nullok="false"/>
+  <column
+    desc="The ticket number."
+    name="CitationNumber"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="20"/>
+  </column>
+  <column
+    desc="Authority who issued the citation."
+    name="CitationAuthority"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <column
+    desc="Citation code."
+    name="CitationCode"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="20"/>
+  </column>
+  <typekey
+    desc="The type of citation."
+    name="CitationType"
+    nullok="true"
+    typelist="CitationType"/>
+  <index
+    desc="Enforce uniqueness of citation number, must be unique per incident"
+    name="drivercitation1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="IncidentID"/>
+    <indexcol
+      keyposition="2"
+      name="CitationNumber"/>
+  </index>
+</entity>

@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="WCBenefitPPDInputSet">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="claim.findWCBeneCalcRef() != null"
+      name="ReferenceDataAvailable"
+      recalculateOnRefresh="true"
+      type="Boolean"/>
+    <Variable
+      initialValue="claim.getLossTimeExposure()"
+      name="exposure"
+      type="Exposure"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.PPD&quot;)"/>
+    <TextInput
+      formatType="percentagePoints"
+      id="PPDPercentOfWages"
+      label="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.PPD.PercentOfWages&quot;)"
+      value="claim.getPPDBenefitsCalculator().PercentOfWages * 100"
+      valueType="java.math.BigDecimal"
+      visible="ReferenceDataAvailable"/>
+    <TextInput
+      formatType="currency"
+      id="PPD_MaxStateCompRate"
+      label="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.PPD.MaxStateCompRate&quot;)"
+      value="claim.getPPDBenefitsCalculator().MaxCompRate"
+      valueType="java.math.BigDecimal"
+      visible="ReferenceDataAvailable"/>
+    <TextInput
+      formatType="currency"
+      id="PPD_MinStateCompRate"
+      label="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.PPD.MinStateCompRate&quot;)"
+      value="claim.getPPDBenefitsCalculator().MinCompRate"
+      valueType="java.math.BigDecimal"
+      visible="ReferenceDataAvailable"/>
+    <TextAreaInput
+      id="MinStateCompRateAdj"
+      label="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.PPD.MinStateCompRateAdj&quot;)"
+      numRows="3"
+      value="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.TPD.MinStateCompRateAdj.Message&quot;)"
+      visible="claim.getPPDBenefitsCalculator().MinAwwAdjustment "/>
+    <TextInput
+      formatType="currency"
+      id="PPDRefData"
+      label="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.PPD.ReferenceData&quot;)"
+      value="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.PPD.ReferenceData.Message&quot;)"
+      visible="not ReferenceDataAvailable"/>
+    <TextInput
+      formatType="currency"
+      id="PPDCompRateUnavailable"
+      label="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.PPD.NoCompRate&quot;)"
+      value="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.PPD.NoCompRate.Message&quot;)"
+      visible="ReferenceDataAvailable and claim.getPPDBenefitsCalculator().CompRate == null"/>
+    <TextInput
+      formatType="currency"
+      id="PPDCR"
+      label="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.PPD.WeeklyCompRate&quot;)"
+      value="claim.getPPDBenefitsCalculator().CompRate"
+      valueType="java.math.BigDecimal"
+      visible="ReferenceDataAvailable and claim.getPPDBenefitsCalculator().CompRate != null"/>
+    <CurrencyInput
+      editable="true"
+      id="ManualCompRate"
+      label="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.PPD.WeeklyCompRateManual&quot;)"
+      value="exposure.PPDBenefits.WeeklyCompRate"
+      visible="claim.getPPDBenefitsCalculator().CompRate == null"/>
+    <TextInput
+      id="PPDWeeks"
+      label="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.PPD.PPDWeeks&quot;)"
+      value="claim.getPPDBenefitsCalculator().MaxWeeksToPay"
+      valueType="java.lang.Integer"
+      visible="claim.getPPDBenefitsCalculator().CompRate != null"/>
+    <TextInput
+      formatType="currency"
+      id="MaxTotalPPD"
+      label="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.PPD.MaxTotalPPD&quot;)"
+      value="claim.getPPDBenefitsCalculator().MaxWeeksToPay * claim.getPPDBenefitsCalculator().CompRate"
+      valueType="java.math.BigDecimal"
+      visible="claim.getPPDBenefitsCalculator().CompRate != null and claim.getPPDBenefitsCalculator().MaxWeeksToPay != null"/>
+  </InputSet>
+</PCF>

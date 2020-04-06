@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.System.workflowview"
+    countsAsWork="false"
+    id="MetroFlows"
+    parent="ServerTools()"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.InternalTools.MetroFlows&quot;)">
+    <Screen
+      id="MetroFlowsScreen">
+      <SearchPanel
+        criteriaName="SearchCriteria"
+        resultsName="WorkflowsResults"
+        search="SearchCriteria.performSearch() as gw.api.database.IQueryBeanResult&lt;Workflow&gt;"
+        searchCriteria="new WorkflowSearchCriteria()"
+        searchCriteriaType="entity.WorkflowSearchCriteria"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;Workflow&gt;">
+        <PanelRef
+          def="MetroFlowsDV(SearchCriteria)"/>
+        <PanelRef
+          def="MetroFlowsLV(WorkflowsResults)">
+          <TitleBar
+            appendListViewPaging="true"
+            title="DisplayKey.get(&quot;Web.InternalTools.MetroFlows.Results&quot;)"/>
+          <Toolbar>
+            <CheckedValuesToolbarButton
+              allCheckedRowsAction="gw.api.admin.WorkflowUtil.resumeWorkflows(CheckedValues)"
+              flags="all InErrorWorkflow"
+              id="MetroFlows_ResumeButton"
+              iterator="MetroFlowsLV.MetroFlowsLV"
+              label="DisplayKey.get(&quot;Button.Resume&quot;)"
+              shortcut="E"/>
+            <ToolbarButton
+              action="gw.api.admin.WorkflowUtil.resumeAllWorkflows()"
+              confirmMessage="DisplayKey.get(&quot;Web.InternalTools.MetroFlows.ConfirmRestartAll&quot;)"
+              id="MetroFlows_ResumeAllButton"
+              label="DisplayKey.get(&quot;Button.ResumeAll&quot;)"
+              shortcut="A"/>
+          </Toolbar>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Page>
+</PCF>

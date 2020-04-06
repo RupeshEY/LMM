@@ -1,0 +1,13 @@
+package rules.Exception
+
+@gw.rules.RuleName("Claim Exception Rules")
+@gw.rules.RuleSetDescription("This is the Claim Exception rule set. These rules are run on a scheduled basis to look for certain conditions on claims that might require further attention and to define the follow-up actions for each exception found. The system identifies claims that have been changed or which have not been inspected for a certain period of time, and runs these rules on each claim identified.")
+class ClaimExceptionRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Claim) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Claim) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Claim Exception Rules", ClaimExceptionRules )
+  }
+}

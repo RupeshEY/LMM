@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents the investigation that a user must perform to determine whether subrogation should be pursued on the associated Exposure or Claim. "
+  entity="Subrogation"
+  exportable="true"
+  table="subrogation"
+  type="retireable">
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="SubrogationSummaryID"
+    desc="Associated SubrogationSummary"
+    fkentity="SubrogationSummary"
+    name="SubrogationSummary"
+    nullok="false"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="The associated Exposure. If null, this subrogation is a claim-level subrogation."
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="true"/>
+  <typekey
+    columnName="Status"
+    desc="Status of this subrogation"
+    name="Status"
+    nullok="true"
+    typelist="SubrogationStatus"/>
+  <column
+    desc="Comment upon close of Subrogation opportunity"
+    name="CloseComment"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    desc="SubroClosedOutcome"
+    name="Outcome"
+    nullok="true"
+    typelist="SubroClosedOutcome"/>
+  <array
+    arrayentity="SubroAdversePartyOverride"
+    cascadeDelete="true"
+    name="SubroAdversePartyOverrides"
+    triggersValidation="true"/>
+  <implementsEntity
+    name="CCAssignable"/>
+  <implementsInterface
+    iface="gw.api.assignment.CCAssignableMethods"
+    impl="gw.assignment.SubrogationAssignableMethodsImpl"/>
+  <implementsEntity
+    name="Validatable"/>
+  <implementsInterface
+    iface="gw.cc.assignment.entity.CCAssignable"
+    impl="com.guidewire.cc.domain.claim.impl.SubrogationImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.assignment.AssignablePublicMethods"
+    impl="com.guidewire.cc.domain.claim.impl.SubrogationImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.assignment.impl.AssignableInternalMethods"
+    impl="com.guidewire.cc.domain.claim.impl.SubrogationImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.entity.PermissionAssignableCheck"
+    impl="com.guidewire.cc.domain.claim.impl.SubrogationImpl"/>
+</entity>

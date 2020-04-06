@@ -1,0 +1,253 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    editable="false"
+    id="AddressBookContactDetailScreen"
+    mode="default">
+    <Require
+      name="abcHelper"
+      type="gw.pcf.AddressBookContactHelper"/>
+    <Variable
+      initialValue="abcHelper.Contact"
+      name="contact"
+      type="entity.Contact"/>
+    <Variable
+      initialValue="abcHelper.ExternalContactSource"
+      name="externalContactSource"
+      type="gw.api.contact.ExternalContactSource"/>
+    <Variable
+      initialValue="externalContactSource.supportsLinking() and not externalContactSource.isNewContact(contact)"
+      name="showRelatedObjects"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="&quot;AddressBookContactDetailPrint(contact, externalContactSource)&quot;"
+      name="AddressBookContactDetailPrint"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="false"
+      name="hasLoadedRelatedContacts"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.api.contact.ContactDetailHelper(contact.IsHighlyLinked)"
+      name="helper"
+      type="gw.api.contact.ContactDetailHelper"/>
+    <Variable
+      initialValue="new gw.api.addressbook.ContactManager()"
+      name="RemoteSystem"
+      type="gw.api.addressbook.ABSystem"/>
+    <Toolbar
+      id="ContactDetailToolbar">
+      <ToolbarButton
+        action="viewInContactManger(contact)"
+        id="ViewInCM"
+        label="DisplayKey.get(&quot;Web.AddressBook.Button.EditInContactManager&quot;)"
+        tooltip="DisplayKey.get(&quot;Web.AddressBook.Button.EditInContactManager.Tooltip&quot;)"
+        visible="gw.api.suite.GuidewireSuiteUtil.getProductInfo(&quot;ab&quot;).Url!=null and perm.Contact.editab(contact)"/>
+    </Toolbar>
+    <CardViewPanel>
+      <Card
+        id="AddressBookContactBasicsCard"
+        onSelect="helper.CurrentCard = BASICS"
+        title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Basics&quot;)">
+        <PanelRef
+          def="AddressBookContactBasicsDV(contact, externalContactSource, abcHelper.AllowEditContact)"
+          mode="contact.Subtype">
+          <Toolbar>
+            <PrintToolbarButton
+              hideIfEditable="true"
+              id="PrintButton"
+              label="DisplayKey.get(&quot;Button.Print&quot;)"
+              locationRef="AddressBookContactDetailPrint(externalContactSource.wrap(contact))"
+              shortcut="N"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AddressBookContactAddressesCard"
+        onSelect="helper.CurrentCard = ADDRESSES"
+        title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Addresses&quot;)"
+        visible="!(contact typeis Place)">
+        <PanelRef
+          def="AddressBookAddressesPanelSet(contact)">
+          <Toolbar>
+            <PrintToolbarButton
+              hideIfEditable="true"
+              id="PrintButton"
+              label="DisplayKey.get(&quot;Button.Print&quot;)"
+              locationRef="AddressBookContactDetailPrint(externalContactSource.wrap(contact))"
+              shortcut="N"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AddressBookContactDocumentsCard"
+        title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Documents&quot;)"
+        visible="new gw.contact.ContactDocumentsUIHelper().isVendorDocumentsSupported(contact)">
+        <PanelRef
+          def="AddressBookContactDocumentsLV(contact)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AddressBookContactRelatedContactsCard"
+        onSelect="helper.CurrentCard = RELATED_CONTACTS"
+        title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.RelatedContacts&quot;)">
+        <PanelRef
+          def="AddressBookRelatedContactsLV(contact, externalContactSource, abcHelper.AllowEditContact)">
+          <Toolbar>
+            <PrintToolbarButton
+              hideIfEditable="true"
+              id="PrintButton"
+              label="DisplayKey.get(&quot;Button.Print&quot;)"
+              locationRef="AddressBookContactDetailPrint(externalContactSource.wrap(contact))"
+              shortcut="N"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AddressBookContactActivitiesCard"
+        onSelect="helper.CurrentCard = ACTIVITIES"
+        title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Activities&quot;)"
+        visible=" showRelatedObjects and perm.Claim.genericviewactivity">
+        <DetailViewPanel
+          editable="true"
+          visible="helper.isWarningVisible(ACTIVITIES)">
+          <InputColumn>
+            <ButtonInput
+              action="helper.revealContent(ACTIVITIES)"
+              hideIfDisabled="false"
+              id="ShowActivitiesButton"
+              label="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.HighlyLinkedContactActivityWarning&quot;)"
+              value="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.HighlyLinkedContactActivityButton&quot;)"/>
+          </InputColumn>
+        </DetailViewPanel>
+        <PanelRef
+          def="AddressBookContactActivitiesLV(contact)"
+          visible="helper.isContentVisible(ACTIVITIES)">
+          <Toolbar>
+            <PrintToolbarButton
+              hideIfEditable="true"
+              id="PrintButton"
+              label="DisplayKey.get(&quot;Button.Print&quot;)"
+              locationRef="AddressBookContactDetailPrint(externalContactSource.wrap(contact))"
+              shortcut="N"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AddressBookContactClaimsCard"
+        onSelect="helper.CurrentCard = CLAIMS"
+        title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Claims&quot;)"
+        visible=" showRelatedObjects and perm.Claim.genericviewclaim">
+        <DetailViewPanel
+          editable="true"
+          visible="helper.isWarningVisible(CLAIMS)">
+          <InputColumn>
+            <ButtonInput
+              action="helper.revealContent(CLAIMS)"
+              hideIfDisabled="false"
+              id="ShowClaimsButton"
+              label="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.HighlyLinkedContactClaimWarning&quot;)"
+              value="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.HighlyLinkedContactClaimButton&quot;)"/>
+          </InputColumn>
+        </DetailViewPanel>
+        <PanelRef
+          def="AddressBookContactClaimsLV(contact)"
+          visible="helper.isContentVisible(CLAIMS)">
+          <Toolbar>
+            <PrintToolbarButton
+              hideIfEditable="true"
+              id="PrintButton"
+              label="DisplayKey.get(&quot;Button.Print&quot;)"
+              locationRef="AddressBookContactDetailPrint(externalContactSource.wrap(contact))"
+              shortcut="N"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AddressBookContactExposuresCard"
+        onSelect="helper.CurrentCard = EXPOSURES"
+        title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Exposures&quot;)"
+        visible="showRelatedObjects and perm.Claim.genericviewexposure">
+        <DetailViewPanel
+          editable="true"
+          visible="helper.isWarningVisible(EXPOSURES)">
+          <InputColumn>
+            <ButtonInput
+              action="helper.revealContent(EXPOSURES)"
+              hideIfDisabled="false"
+              id="ShowExposuresButton"
+              label="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.HighlyLinkedContactExposureWarning&quot;)"
+              value="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.HighlyLinkedContactExposureButton&quot;)"/>
+          </InputColumn>
+        </DetailViewPanel>
+        <PanelRef
+          def="AddressBookContactExposuresLV(contact)"
+          visible="helper.isContentVisible(EXPOSURES)">
+          <Toolbar>
+            <PrintToolbarButton
+              hideIfEditable="true"
+              id="PrintButton"
+              label="DisplayKey.get(&quot;Button.Print&quot;)"
+              locationRef="AddressBookContactDetailPrint(externalContactSource.wrap(contact))"
+              shortcut="N"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AddressBookContactMattersCard"
+        onSelect="helper.CurrentCard = MATTERS"
+        title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Matters&quot;)"
+        visible="showRelatedObjects and perm.Claim.genericviewmatter">
+        <DetailViewPanel
+          editable="true"
+          visible="helper.isWarningVisible(MATTERS)">
+          <InputColumn>
+            <ButtonInput
+              action="helper.revealContent(MATTERS)"
+              hideIfDisabled="false"
+              id="ShowMattersButton"
+              label="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.HighlyLinkedContactMatterWarning&quot;)"
+              value="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.HighlyLinkedContactMatterButton&quot;)"/>
+          </InputColumn>
+        </DetailViewPanel>
+        <PanelRef
+          def="AddressBookContactMattersLV(contact)"
+          visible="helper.isContentVisible(MATTERS)">
+          <Toolbar>
+            <PrintToolbarButton
+              hideIfEditable="true"
+              id="PrintButton"
+              label="DisplayKey.get(&quot;Button.Print&quot;)"
+              locationRef="AddressBookContactDetailPrint(externalContactSource.wrap(contact))"
+              shortcut="N"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="ReviewsCard"
+        onSelect="helper.CurrentCard = REVIEWS"
+        title="DisplayKey.get(&quot;Web.ClaimContacts.ContactDetails.Reviews&quot;)"
+        visible="util.ReviewPageHelper.shouldDisplayReviewTab(contact) and showRelatedObjects and perm.Claim.genericviewclaim and perm.Review.list">
+        <PanelRef
+          def="ReviewsPanelSet(null,contact,false,true)"/>
+      </Card>
+    </CardViewPanel>
+    <Code><![CDATA[function viewInContactManger(viewContact:Contact) {
+  var error = false
+  if(viewContact.AddressBookUID==null) {
+    error = true
+    gw.api.util.LocationUtil.addRequestScopedErrorMessage(DisplayKey.get("Web.AddressBook.ContactNotInAB", viewContact))
+  }
+  if(not RemoteSystem.Enabled) {
+    gw.api.util.LocationUtil.addRequestScopedErrorMessage(DisplayKey.get("Web.AddressBook.RemoteSystemNotEnabled"))
+  }
+  if(not error) {
+    pcf.ViewContact.push(RemoteSystem.getContactDetailURL(viewContact), viewContact.AddressBookUID)
+  }
+}]]></Code>
+  </Screen>
+</PCF>

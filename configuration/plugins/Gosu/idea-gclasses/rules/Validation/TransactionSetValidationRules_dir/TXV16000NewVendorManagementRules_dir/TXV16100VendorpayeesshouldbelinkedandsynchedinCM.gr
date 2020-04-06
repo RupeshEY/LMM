@@ -1,0 +1,47 @@
+package rules.Validation.TransactionSetValidationRules_dir.TXV16000NewVendorManagementRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.contact.ContactSystemUtil
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("TXV16100 - Vendor payees should be linked and synched in CM")
+internal class TXV16100VendorpayeesshouldbelinkedandsynchedinCM {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return transactionSet.New 
+or transactionSet.ChangedFields.contains("Payee")
+or (transactionSet.ChangedFields.contains("ApprovalStatus")
+    and transactionSet.ApprovalStatus == ApprovalStatus.TC_APPROVED)
+// We do not want to rerun this rule for every minute change to a check.
+//
+// Restrict the rule to run for:
+// 1) New check
+// 2) Changes in the payee
+// 3) Checks being approved
+
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+// Are all the vendor-type payees on the check linked and synchronized 
+// with ContactManager?
+for (eachCheck in (transactionSet as CheckSet).Checks) {
+
+    // There can only be one vendor payee on a check.
+    var vendorPayee = eachCheck.Vendor
+
+    // Is there a vendor payee on this check?
+    if (vendorPayee != null) {
+        if (!(ContactSystemUtil.INSTANCE.contactIsSynced(vendorPayee) and ContactSystemUtil.INSTANCE.contactIsLinked(vendorPayee))) {
+            var message = DisplayKey.get("Rules.Validation.Transaction.VendorManagement.PayeeNotSynchronizedWithCM", vendorPayee.Name)
+            transactionSet.reject(ValidationLevel.TC_LOADSAVE, message, null, null)
+        }      
+    }
+}
+/*end00rule*/
+
+  }
+}

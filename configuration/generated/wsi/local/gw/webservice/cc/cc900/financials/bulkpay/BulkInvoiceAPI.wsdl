@@ -1,0 +1,1960 @@
+<?xml version="1.0"?>
+<!-- Generated WSDL for gw.webservice.cc.cc900.financials.bulkpay.BulkInvoiceAPI web service -->
+<wsdl:definitions targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/financials/bulkpay/BulkInvoiceAPI" name="BulkInvoiceAPI" xmlns:gwsoap="http://guidewire.com/ws/soapheaders" xmlns:gwwsdl="http://guidewire.com/pl/wsdl" xmlns:pogo="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceDTO" xmlns:pogo2="http://guidewire.com/cc/typekey" xmlns:pogo3="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/AddressDTO" xmlns:pogo4="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceItemDTO" xmlns:pogo5="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceItemInfoDTO" xmlns:pogo6="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BIValidationAlertDTO" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/financials/bulkpay/BulkInvoiceAPI" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/financials/bulkpay/BulkInvoiceAPI" elementFormDefault="qualified" xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/ws/soapheaders" schemaLocation="../../../../../../../../gw/xsd/guidewire/soapheaders.xsd"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BIValidationAlertDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceItemInfoDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceItemDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/AddressDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceDTO"/>
+      <!-- getBulkInvoice(String) : BulkInvoiceDTO -->
+      <xs:element name="getBulkInvoice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="invoiceID" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getBulkInvoiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="pogo:BulkInvoiceDTO" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="BadIdentifierException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="WsiAuthenticationException">
+        <xs:complexType/>
+      </xs:element>
+      <!-- getItemsForInvoice(String) : BulkInvoiceItemDTO[] -->
+      <xs:element name="getItemsForInvoice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="invoiceID" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getItemsForInvoiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" minOccurs="0" gw:viewas="array">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Entry" type="pogo4:BulkInvoiceItemDTO" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- getItemsForInvoiceAndClaim(String, String) : BulkInvoiceItemDTO[] -->
+      <xs:element name="getItemsForInvoiceAndClaim">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="invoiceID" type="xs:string" minOccurs="0"/>
+            <xs:element name="claimID" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getItemsForInvoiceAndClaimResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" minOccurs="0" gw:viewas="array">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Entry" type="pogo4:BulkInvoiceItemDTO" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- getItemsForInvoiceAndClaimAndAmount(String, String, BigDecimal) : BulkInvoiceItemDTO[] -->
+      <xs:element name="getItemsForInvoiceAndClaimAndAmount">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="invoiceID" type="xs:string" minOccurs="0"/>
+            <xs:element name="claimID" type="xs:string" minOccurs="0"/>
+            <xs:element name="amount" type="xs:decimal" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getItemsForInvoiceAndClaimAndAmountResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" minOccurs="0" gw:viewas="array">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Entry" type="pogo4:BulkInvoiceItemDTO" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- createBulkInvoice(BulkInvoiceDTO) : String -->
+      <xs:element name="createBulkInvoice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="bulkInvoiceDTO" type="pogo:BulkInvoiceDTO" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createBulkInvoiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- addItemsToInvoice(String, BulkInvoiceItemDTO[]) : String[] -->
+      <xs:element name="addItemsToInvoice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="invoiceID" type="xs:string" minOccurs="0"/>
+            <xs:element name="itemDTOsToAdd" minOccurs="0" gw:viewas="array">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Entry" type="pogo4:BulkInvoiceItemDTO" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addItemsToInvoiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" minOccurs="0" gw:viewas="array">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Entry" type="xs:string" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="IllegalArgumentException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="RuntimeException">
+        <xs:complexType/>
+      </xs:element>
+      <!-- updateItemsOnInvoice(String, BulkInvoiceItemDTO[]) -->
+      <xs:element name="updateItemsOnInvoice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="invoiceID" type="xs:string" minOccurs="0"/>
+            <xs:element name="itemDTOsToUpdate" minOccurs="0" gw:viewas="array">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Entry" type="pogo4:BulkInvoiceItemDTO" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateItemsOnInvoiceResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- deleteItemsFromInvoice(String, String[]) -->
+      <xs:element name="deleteItemsFromInvoice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="invoiceID" type="xs:string" minOccurs="0"/>
+            <xs:element name="invoiceItemIDsToDelete" minOccurs="0" gw:viewas="array">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Entry" type="xs:string" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteItemsFromInvoiceResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- validateBulkInvoice(String) : BIValidationAlertDTO[] -->
+      <xs:element name="validateBulkInvoice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="invoiceID" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="validateBulkInvoiceResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" minOccurs="0" gw:viewas="array">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element name="Entry" type="pogo6:BIValidationAlertDTO" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- submitBulkInvoice(String) -->
+      <xs:element name="submitBulkInvoice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="invoiceID" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="submitBulkInvoiceResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- requestBulkInvoice(String) -->
+      <xs:element name="requestBulkInvoice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="invoiceID" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="requestBulkInvoiceResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- voidBulkInvoice(String) -->
+      <xs:element name="voidBulkInvoice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="invoiceID" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="voidBulkInvoiceResponse">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="EntityStateException">
+        <xs:complexType/>
+      </xs:element>
+      <!-- stopBulkInvoice(String) -->
+      <xs:element name="stopBulkInvoice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="invoiceID" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="stopBulkInvoiceResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- placeDownstreamHoldOnInvoice(String) -->
+      <xs:element name="placeDownstreamHoldOnInvoice">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="invoiceID" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="placeDownstreamHoldOnInvoiceResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- updateBulkInvoiceStatus(String, String, Date, BulkInvoiceStatus) -->
+      <xs:element name="updateBulkInvoiceStatus">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="invoiceID" type="xs:string" minOccurs="0"/>
+            <xs:element name="checkNumber" type="xs:string" minOccurs="0"/>
+            <xs:element name="issueDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+            <xs:element name="status" type="pogo2:BulkInvoiceStatus" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateBulkInvoiceStatusResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- createContactByLinkID(String) : String -->
+      <xs:element name="createContactByLinkID">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="contactLinkID" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createContactByLinkIDResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:string" minOccurs="0"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceDTO" elementFormDefault="qualified" xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BIValidationAlertDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceItemInfoDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceItemDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/AddressDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:complexType name="BulkInvoiceDTO">
+        <xs:sequence>
+          <xs:element name="AccountName" type="xs:string" minOccurs="0"/>
+          <xs:element name="ApprovalDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="ApprovalStatus" type="pogo2:ApprovalStatus" minOccurs="0"/>
+          <xs:element name="ApprovedReportingAmount" type="xs:string" minOccurs="0" gw:type="gw.api.financials.CurrencyAmount"/>
+          <xs:element name="ApprovedTransactionAmount" type="xs:string" minOccurs="0" gw:type="gw.api.financials.CurrencyAmount"/>
+          <xs:element name="BankAccountNumber" type="xs:string" minOccurs="0"/>
+          <xs:element name="BankAccountType" type="pogo2:BankAccountType" minOccurs="0"/>
+          <xs:element name="BankName" type="xs:string" minOccurs="0"/>
+          <xs:element name="BankRoutingNumber" type="xs:string" minOccurs="0"/>
+          <xs:element name="BulkInvoiceTotal" type="xs:string" minOccurs="0" gw:type="gw.api.financials.CurrencyAmount"/>
+          <xs:element name="CheckInstructions" type="pogo2:CheckHandlingInstructions" minOccurs="0"/>
+          <xs:element name="CheckNumber" type="xs:string" minOccurs="0"/>
+          <xs:element name="Comments" type="xs:string" minOccurs="0"/>
+          <xs:element name="CreateTime" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="CreateUserPublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="Currency" type="pogo2:Currency" minOccurs="0"/>
+          <xs:element name="CustomExchangeRate" type="xs:decimal" minOccurs="0"/>
+          <xs:element name="CustomExchangeRateDescription" type="xs:string" minOccurs="0"/>
+          <xs:element name="DefaultCostCategory" type="pogo2:CostCategory" minOccurs="0"/>
+          <xs:element name="DefaultCostType" type="pogo2:CostType" minOccurs="0"/>
+          <xs:element name="DefaultPaymentType" type="pogo2:PaymentType" minOccurs="0"/>
+          <xs:element name="Deletable" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="DeliveryMethod" type="pogo2:DeliveryMethod" minOccurs="0"/>
+          <xs:element name="Editable" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="InvoiceItemPublicIDs" minOccurs="0" gw:viewas="array">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="xs:string" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="InvoiceNumber" type="xs:string" minOccurs="0"/>
+          <xs:element name="IsPrimary" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="IssueDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="LastValidatedDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="MailTo" type="xs:string" minOccurs="0"/>
+          <xs:element name="MailingAddress" type="pogo3:AddressDTO" minOccurs="0"/>
+          <xs:element name="Memo" type="xs:string" minOccurs="0"/>
+          <xs:element name="NewInvoiceItems" minOccurs="0" gw:viewas="array">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="pogo4:BulkInvoiceItemDTO" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="PayTo" type="xs:string" minOccurs="0"/>
+          <xs:element name="PayeeChangeable" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="PayeePublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="PaymentMethod" type="pogo2:PaymentMethod" minOccurs="0"/>
+          <xs:element name="PendingItemValidation" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="PublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="ReceivedDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="Reportability" type="pogo2:ReportabilityType" minOccurs="0"/>
+          <xs:element name="RequestingUserPublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="ScheduledSendDate" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="SplitEqually" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="Status" type="pogo2:BulkInvoiceStatus" minOccurs="0"/>
+          <xs:element name="Stoppable" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="Submittable" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="TotalReportingAmount" type="xs:string" minOccurs="0" gw:type="gw.api.financials.CurrencyAmount"/>
+          <xs:element name="TotalTransactionAmount" type="xs:string" minOccurs="0" gw:type="gw.api.financials.CurrencyAmount"/>
+          <xs:element name="UpdateTime" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="UpdateUserPublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="Valid" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="Validateable" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="ValidationAlerts" minOccurs="0" gw:viewas="array">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element name="Entry" type="pogo6:BIValidationAlertDTO" minOccurs="0" maxOccurs="unbounded" nillable="true"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element name="Voidable" type="xs:boolean" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/typekey" elementFormDefault="qualified" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BIValidationAlertDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceItemInfoDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceItemDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/AddressDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceDTO"/>
+      <xs:simpleType name="ApprovalStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="approved"/>
+          <xs:enumeration value="rejected"/>
+          <xs:enumeration value="unapproved"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="BankAccountType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="checking"/>
+          <xs:enumeration value="savings"/>
+          <xs:enumeration value="other"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="CheckHandlingInstructions">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="default"/>
+          <xs:enumeration value="hold"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Currency">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="usd"/>
+          <xs:enumeration value="eur"/>
+          <xs:enumeration value="gbp"/>
+          <xs:enumeration value="cad"/>
+          <xs:enumeration value="aud"/>
+          <xs:enumeration value="rub"/>
+          <xs:enumeration value="jpy"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="CostCategory">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="unspecified"/>
+          <xs:enumeration value="addnl_living_expenses"/>
+          <xs:enumeration value="body"/>
+          <xs:enumeration value="autoparts"/>
+          <xs:enumeration value="baggage"/>
+          <xs:enumeration value="burial"/>
+          <xs:enumeration value="casemgmt"/>
+          <xs:enumeration value="contents"/>
+          <xs:enumeration value="death"/>
+          <xs:enumeration value="ems"/>
+          <xs:enumeration value="autoglass"/>
+          <xs:enumeration value="indemnity"/>
+          <xs:enumeration value="labor"/>
+          <xs:enumeration value="legal"/>
+          <xs:enumeration value="lifetime"/>
+          <xs:enumeration value="lostwages"/>
+          <xs:enumeration value="medical"/>
+          <xs:enumeration value="mileage"/>
+          <xs:enumeration value="wcmileage"/>
+          <xs:enumeration value="other"/>
+          <xs:enumeration value="ppd"/>
+          <xs:enumeration value="ptd"/>
+          <xs:enumeration value="property_inspection"/>
+          <xs:enumeration value="property_repair"/>
+          <xs:enumeration value="reimbursement"/>
+          <xs:enumeration value="rental"/>
+          <xs:enumeration value="salvage"/>
+          <xs:enumeration value="settlement"/>
+          <xs:enumeration value="supplemental"/>
+          <xs:enumeration value="tpd"/>
+          <xs:enumeration value="ttd"/>
+          <xs:enumeration value="towing"/>
+          <xs:enumeration value="trip_cancel_delay"/>
+          <xs:enumeration value="autoappraisal"/>
+          <xs:enumeration value="inspection"/>
+          <xs:enumeration value="vocational"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="CostType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="unspecified"/>
+          <xs:enumeration value="claimcost"/>
+          <xs:enumeration value="aoexpense"/>
+          <xs:enumeration value="dccexpense"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="PaymentType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="partial"/>
+          <xs:enumeration value="final"/>
+          <xs:enumeration value="supplement"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="DeliveryMethod">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="hold"/>
+          <xs:enumeration value="no_check_needed"/>
+          <xs:enumeration value="send"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="AddressType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="billing"/>
+          <xs:enumeration value="business"/>
+          <xs:enumeration value="home"/>
+          <xs:enumeration value="other"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="Country">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="US"/>
+          <xs:enumeration value="CA"/>
+          <xs:enumeration value="AF"/>
+          <xs:enumeration value="AL"/>
+          <xs:enumeration value="DZ"/>
+          <xs:enumeration value="AS"/>
+          <xs:enumeration value="AD"/>
+          <xs:enumeration value="AO"/>
+          <xs:enumeration value="AI"/>
+          <xs:enumeration value="AQ"/>
+          <xs:enumeration value="AG"/>
+          <xs:enumeration value="AR"/>
+          <xs:enumeration value="AM"/>
+          <xs:enumeration value="AW"/>
+          <xs:enumeration value="AU"/>
+          <xs:enumeration value="AT"/>
+          <xs:enumeration value="AZ"/>
+          <xs:enumeration value="BS"/>
+          <xs:enumeration value="BH"/>
+          <xs:enumeration value="BD"/>
+          <xs:enumeration value="BB"/>
+          <xs:enumeration value="BY"/>
+          <xs:enumeration value="BE"/>
+          <xs:enumeration value="BZ"/>
+          <xs:enumeration value="BJ"/>
+          <xs:enumeration value="BM"/>
+          <xs:enumeration value="BT"/>
+          <xs:enumeration value="BO"/>
+          <xs:enumeration value="BA"/>
+          <xs:enumeration value="BW"/>
+          <xs:enumeration value="BV"/>
+          <xs:enumeration value="BR"/>
+          <xs:enumeration value="IO"/>
+          <xs:enumeration value="VG"/>
+          <xs:enumeration value="BN"/>
+          <xs:enumeration value="BG"/>
+          <xs:enumeration value="BF"/>
+          <xs:enumeration value="BI"/>
+          <xs:enumeration value="KH"/>
+          <xs:enumeration value="CM"/>
+          <xs:enumeration value="CV"/>
+          <xs:enumeration value="KY"/>
+          <xs:enumeration value="CF"/>
+          <xs:enumeration value="TD"/>
+          <xs:enumeration value="CL"/>
+          <xs:enumeration value="CN"/>
+          <xs:enumeration value="CX"/>
+          <xs:enumeration value="CC"/>
+          <xs:enumeration value="CO"/>
+          <xs:enumeration value="KM"/>
+          <xs:enumeration value="CG"/>
+          <xs:enumeration value="CD"/>
+          <xs:enumeration value="CK"/>
+          <xs:enumeration value="CR"/>
+          <xs:enumeration value="HR"/>
+          <xs:enumeration value="CU"/>
+          <xs:enumeration value="CY"/>
+          <xs:enumeration value="CZ"/>
+          <xs:enumeration value="DK"/>
+          <xs:enumeration value="DJ"/>
+          <xs:enumeration value="DM"/>
+          <xs:enumeration value="DO"/>
+          <xs:enumeration value="EC"/>
+          <xs:enumeration value="EG"/>
+          <xs:enumeration value="SV"/>
+          <xs:enumeration value="GQ"/>
+          <xs:enumeration value="ER"/>
+          <xs:enumeration value="EE"/>
+          <xs:enumeration value="ET"/>
+          <xs:enumeration value="FK"/>
+          <xs:enumeration value="FO"/>
+          <xs:enumeration value="FJ"/>
+          <xs:enumeration value="FI"/>
+          <xs:enumeration value="FR"/>
+          <xs:enumeration value="GF"/>
+          <xs:enumeration value="PF"/>
+          <xs:enumeration value="TF"/>
+          <xs:enumeration value="GA"/>
+          <xs:enumeration value="GM"/>
+          <xs:enumeration value="GE"/>
+          <xs:enumeration value="DE"/>
+          <xs:enumeration value="GH"/>
+          <xs:enumeration value="GI"/>
+          <xs:enumeration value="GR"/>
+          <xs:enumeration value="GL"/>
+          <xs:enumeration value="GD"/>
+          <xs:enumeration value="GP"/>
+          <xs:enumeration value="GU"/>
+          <xs:enumeration value="GT"/>
+          <xs:enumeration value="GN"/>
+          <xs:enumeration value="GW"/>
+          <xs:enumeration value="GY"/>
+          <xs:enumeration value="HT"/>
+          <xs:enumeration value="HM"/>
+          <xs:enumeration value="HN"/>
+          <xs:enumeration value="HK"/>
+          <xs:enumeration value="HU"/>
+          <xs:enumeration value="IS"/>
+          <xs:enumeration value="IN"/>
+          <xs:enumeration value="ID"/>
+          <xs:enumeration value="IR"/>
+          <xs:enumeration value="IQ"/>
+          <xs:enumeration value="IE"/>
+          <xs:enumeration value="IL"/>
+          <xs:enumeration value="IT"/>
+          <xs:enumeration value="CI"/>
+          <xs:enumeration value="JM"/>
+          <xs:enumeration value="JP"/>
+          <xs:enumeration value="JO"/>
+          <xs:enumeration value="KZ"/>
+          <xs:enumeration value="KE"/>
+          <xs:enumeration value="KI"/>
+          <xs:enumeration value="KP"/>
+          <xs:enumeration value="KR"/>
+          <xs:enumeration value="KW"/>
+          <xs:enumeration value="KG"/>
+          <xs:enumeration value="LA"/>
+          <xs:enumeration value="LV"/>
+          <xs:enumeration value="LB"/>
+          <xs:enumeration value="LS"/>
+          <xs:enumeration value="LR"/>
+          <xs:enumeration value="LY"/>
+          <xs:enumeration value="LI"/>
+          <xs:enumeration value="LT"/>
+          <xs:enumeration value="LU"/>
+          <xs:enumeration value="MO"/>
+          <xs:enumeration value="MK"/>
+          <xs:enumeration value="MG"/>
+          <xs:enumeration value="MW"/>
+          <xs:enumeration value="MY"/>
+          <xs:enumeration value="MV"/>
+          <xs:enumeration value="ML"/>
+          <xs:enumeration value="MT"/>
+          <xs:enumeration value="MH"/>
+          <xs:enumeration value="MQ"/>
+          <xs:enumeration value="MR"/>
+          <xs:enumeration value="MU"/>
+          <xs:enumeration value="YT"/>
+          <xs:enumeration value="MX"/>
+          <xs:enumeration value="FM"/>
+          <xs:enumeration value="MD"/>
+          <xs:enumeration value="MC"/>
+          <xs:enumeration value="MN"/>
+          <xs:enumeration value="ME"/>
+          <xs:enumeration value="MS"/>
+          <xs:enumeration value="MA"/>
+          <xs:enumeration value="MZ"/>
+          <xs:enumeration value="MM"/>
+          <xs:enumeration value="NA"/>
+          <xs:enumeration value="NR"/>
+          <xs:enumeration value="NP"/>
+          <xs:enumeration value="NL"/>
+          <xs:enumeration value="AN"/>
+          <xs:enumeration value="NC"/>
+          <xs:enumeration value="NZ"/>
+          <xs:enumeration value="NI"/>
+          <xs:enumeration value="NE"/>
+          <xs:enumeration value="NG"/>
+          <xs:enumeration value="NU"/>
+          <xs:enumeration value="NF"/>
+          <xs:enumeration value="MP"/>
+          <xs:enumeration value="NO"/>
+          <xs:enumeration value="OM"/>
+          <xs:enumeration value="PK"/>
+          <xs:enumeration value="PW"/>
+          <xs:enumeration value="PS"/>
+          <xs:enumeration value="PA"/>
+          <xs:enumeration value="PG"/>
+          <xs:enumeration value="PY"/>
+          <xs:enumeration value="PE"/>
+          <xs:enumeration value="PH"/>
+          <xs:enumeration value="PN"/>
+          <xs:enumeration value="PL"/>
+          <xs:enumeration value="PT"/>
+          <xs:enumeration value="PR"/>
+          <xs:enumeration value="QA"/>
+          <xs:enumeration value="RE"/>
+          <xs:enumeration value="RO"/>
+          <xs:enumeration value="RU"/>
+          <xs:enumeration value="RW"/>
+          <xs:enumeration value="BL"/>
+          <xs:enumeration value="MF"/>
+          <xs:enumeration value="WS"/>
+          <xs:enumeration value="SM"/>
+          <xs:enumeration value="ST"/>
+          <xs:enumeration value="SA"/>
+          <xs:enumeration value="SN"/>
+          <xs:enumeration value="RS"/>
+          <xs:enumeration value="SC"/>
+          <xs:enumeration value="SL"/>
+          <xs:enumeration value="SG"/>
+          <xs:enumeration value="SK"/>
+          <xs:enumeration value="SI"/>
+          <xs:enumeration value="SB"/>
+          <xs:enumeration value="SO"/>
+          <xs:enumeration value="ZA"/>
+          <xs:enumeration value="GS"/>
+          <xs:enumeration value="ES"/>
+          <xs:enumeration value="LK"/>
+          <xs:enumeration value="SH"/>
+          <xs:enumeration value="KN"/>
+          <xs:enumeration value="LC"/>
+          <xs:enumeration value="PM"/>
+          <xs:enumeration value="VC"/>
+          <xs:enumeration value="SD"/>
+          <xs:enumeration value="SR"/>
+          <xs:enumeration value="SJ"/>
+          <xs:enumeration value="SZ"/>
+          <xs:enumeration value="SE"/>
+          <xs:enumeration value="CH"/>
+          <xs:enumeration value="SY"/>
+          <xs:enumeration value="TW"/>
+          <xs:enumeration value="TJ"/>
+          <xs:enumeration value="TZ"/>
+          <xs:enumeration value="TH"/>
+          <xs:enumeration value="TL"/>
+          <xs:enumeration value="TG"/>
+          <xs:enumeration value="TK"/>
+          <xs:enumeration value="TO"/>
+          <xs:enumeration value="TT"/>
+          <xs:enumeration value="TN"/>
+          <xs:enumeration value="TR"/>
+          <xs:enumeration value="TM"/>
+          <xs:enumeration value="TC"/>
+          <xs:enumeration value="TV"/>
+          <xs:enumeration value="UM"/>
+          <xs:enumeration value="VI"/>
+          <xs:enumeration value="UG"/>
+          <xs:enumeration value="UA"/>
+          <xs:enumeration value="AE"/>
+          <xs:enumeration value="GB"/>
+          <xs:enumeration value="UY"/>
+          <xs:enumeration value="UZ"/>
+          <xs:enumeration value="VU"/>
+          <xs:enumeration value="VA"/>
+          <xs:enumeration value="VE"/>
+          <xs:enumeration value="VN"/>
+          <xs:enumeration value="WF"/>
+          <xs:enumeration value="EH"/>
+          <xs:enumeration value="YE"/>
+          <xs:enumeration value="ZM"/>
+          <xs:enumeration value="ZW"/>
+          <xs:enumeration value="unknown"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="GeocodeStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="city"/>
+          <xs:enumeration value="exact"/>
+          <xs:enumeration value="failure"/>
+          <xs:enumeration value="none"/>
+          <xs:enumeration value="postalcode"/>
+          <xs:enumeration value="street"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="State">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="Hokkaido"/>
+          <xs:enumeration value="Aomori"/>
+          <xs:enumeration value="Iwate"/>
+          <xs:enumeration value="Miyagi"/>
+          <xs:enumeration value="Akita"/>
+          <xs:enumeration value="Yamagata"/>
+          <xs:enumeration value="Fukushima"/>
+          <xs:enumeration value="Ibaraki"/>
+          <xs:enumeration value="AU_JBT"/>
+          <xs:enumeration value="Tochigi"/>
+          <xs:enumeration value="Gumma"/>
+          <xs:enumeration value="Saitama"/>
+          <xs:enumeration value="Chiba"/>
+          <xs:enumeration value="Tokyo"/>
+          <xs:enumeration value="Kanagawa"/>
+          <xs:enumeration value="Niigata"/>
+          <xs:enumeration value="Toyama"/>
+          <xs:enumeration value="Ishikawa"/>
+          <xs:enumeration value="Fukui"/>
+          <xs:enumeration value="Yamanashi"/>
+          <xs:enumeration value="Nagano"/>
+          <xs:enumeration value="Gifu"/>
+          <xs:enumeration value="Shizuoka"/>
+          <xs:enumeration value="Aichi"/>
+          <xs:enumeration value="Mie"/>
+          <xs:enumeration value="Shiga"/>
+          <xs:enumeration value="Kyoto"/>
+          <xs:enumeration value="Osaka"/>
+          <xs:enumeration value="Hyogo"/>
+          <xs:enumeration value="Nara"/>
+          <xs:enumeration value="Wakayama"/>
+          <xs:enumeration value="Tottori"/>
+          <xs:enumeration value="Shimane"/>
+          <xs:enumeration value="Okayama"/>
+          <xs:enumeration value="Hiroshima"/>
+          <xs:enumeration value="Yamaguchi"/>
+          <xs:enumeration value="Tokushima"/>
+          <xs:enumeration value="Kagawa"/>
+          <xs:enumeration value="Ehime"/>
+          <xs:enumeration value="Kochi"/>
+          <xs:enumeration value="Fukuoka"/>
+          <xs:enumeration value="Saga"/>
+          <xs:enumeration value="Nagasaki"/>
+          <xs:enumeration value="Kumamoto"/>
+          <xs:enumeration value="Oita"/>
+          <xs:enumeration value="Miyazaki"/>
+          <xs:enumeration value="Kagoshima"/>
+          <xs:enumeration value="Okinawa"/>
+          <xs:enumeration value="AU_ACT"/>
+          <xs:enumeration value="AL"/>
+          <xs:enumeration value="AK"/>
+          <xs:enumeration value="AB"/>
+          <xs:enumeration value="AZ"/>
+          <xs:enumeration value="AR"/>
+          <xs:enumeration value="DE_BW"/>
+          <xs:enumeration value="DE_BY"/>
+          <xs:enumeration value="DE_BE"/>
+          <xs:enumeration value="DE_BB"/>
+          <xs:enumeration value="DE_HB"/>
+          <xs:enumeration value="BC"/>
+          <xs:enumeration value="CA"/>
+          <xs:enumeration value="CO"/>
+          <xs:enumeration value="CT"/>
+          <xs:enumeration value="DE"/>
+          <xs:enumeration value="DC"/>
+          <xs:enumeration value="FM"/>
+          <xs:enumeration value="FL"/>
+          <xs:enumeration value="GA"/>
+          <xs:enumeration value="GU"/>
+          <xs:enumeration value="DE_HH"/>
+          <xs:enumeration value="HI"/>
+          <xs:enumeration value="DE_HE"/>
+          <xs:enumeration value="ID"/>
+          <xs:enumeration value="IL"/>
+          <xs:enumeration value="IN"/>
+          <xs:enumeration value="IA"/>
+          <xs:enumeration value="KS"/>
+          <xs:enumeration value="KY"/>
+          <xs:enumeration value="LA"/>
+          <xs:enumeration value="DE_NI"/>
+          <xs:enumeration value="ME"/>
+          <xs:enumeration value="MB"/>
+          <xs:enumeration value="MH"/>
+          <xs:enumeration value="MD"/>
+          <xs:enumeration value="MA"/>
+          <xs:enumeration value="DE_MV"/>
+          <xs:enumeration value="MI"/>
+          <xs:enumeration value="MN"/>
+          <xs:enumeration value="MS"/>
+          <xs:enumeration value="MO"/>
+          <xs:enumeration value="MT"/>
+          <xs:enumeration value="NE"/>
+          <xs:enumeration value="NV"/>
+          <xs:enumeration value="NB"/>
+          <xs:enumeration value="NH"/>
+          <xs:enumeration value="NJ"/>
+          <xs:enumeration value="NM"/>
+          <xs:enumeration value="AU_NSW"/>
+          <xs:enumeration value="NY"/>
+          <xs:enumeration value="NL"/>
+          <xs:enumeration value="NC"/>
+          <xs:enumeration value="ND"/>
+          <xs:enumeration value="DE_NW"/>
+          <xs:enumeration value="MP"/>
+          <xs:enumeration value="AU_NT"/>
+          <xs:enumeration value="NT"/>
+          <xs:enumeration value="NS"/>
+          <xs:enumeration value="NU"/>
+          <xs:enumeration value="OH"/>
+          <xs:enumeration value="OK"/>
+          <xs:enumeration value="ON"/>
+          <xs:enumeration value="OR"/>
+          <xs:enumeration value="PA"/>
+          <xs:enumeration value="PE"/>
+          <xs:enumeration value="PR"/>
+          <xs:enumeration value="QC"/>
+          <xs:enumeration value="AU_QLD"/>
+          <xs:enumeration value="DE_RP"/>
+          <xs:enumeration value="RI"/>
+          <xs:enumeration value="DE_SL"/>
+          <xs:enumeration value="SK"/>
+          <xs:enumeration value="DE_SN"/>
+          <xs:enumeration value="DE_ST"/>
+          <xs:enumeration value="DE_SH"/>
+          <xs:enumeration value="AU_SA"/>
+          <xs:enumeration value="SC"/>
+          <xs:enumeration value="SD"/>
+          <xs:enumeration value="AU_TAS"/>
+          <xs:enumeration value="TN"/>
+          <xs:enumeration value="TX"/>
+          <xs:enumeration value="DE_TH"/>
+          <xs:enumeration value="UT"/>
+          <xs:enumeration value="VT"/>
+          <xs:enumeration value="AU_VIC"/>
+          <xs:enumeration value="VI"/>
+          <xs:enumeration value="VA"/>
+          <xs:enumeration value="WA"/>
+          <xs:enumeration value="WV"/>
+          <xs:enumeration value="AU_WA"/>
+          <xs:enumeration value="WI"/>
+          <xs:enumeration value="WY"/>
+          <xs:enumeration value="YT"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="BulkInvoiceItemStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="awaitingsubmission"/>
+          <xs:enumeration value="checkpendingapproval"/>
+          <xs:enumeration value="draft"/>
+          <xs:enumeration value="inreview"/>
+          <xs:enumeration value="approved"/>
+          <xs:enumeration value="notvalid"/>
+          <xs:enumeration value="pendingstop"/>
+          <xs:enumeration value="pendingtransfer"/>
+          <xs:enumeration value="pendingvoid"/>
+          <xs:enumeration value="rejected"/>
+          <xs:enumeration value="stopped"/>
+          <xs:enumeration value="submitted"/>
+          <xs:enumeration value="submitting"/>
+          <xs:enumeration value="transferred"/>
+          <xs:enumeration value="voided"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="PaymentMethod">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="manual"/>
+          <xs:enumeration value="check"/>
+          <xs:enumeration value="eft"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="ReportabilityType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="notreportable"/>
+          <xs:enumeration value="reportable"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="BulkInvoiceStatus">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="awaitingsubmission"/>
+          <xs:enumeration value="cleared"/>
+          <xs:enumeration value="draft"/>
+          <xs:enumeration value="inreview"/>
+          <xs:enumeration value="invaliditems"/>
+          <xs:enumeration value="issued"/>
+          <xs:enumeration value="onhold"/>
+          <xs:enumeration value="pendingitemvalidation"/>
+          <xs:enumeration value="pendingstop"/>
+          <xs:enumeration value="pendingvoid"/>
+          <xs:enumeration value="rejected"/>
+          <xs:enumeration value="requested"/>
+          <xs:enumeration value="requesting"/>
+          <xs:enumeration value="stopped"/>
+          <xs:enumeration value="voided"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="BIValidationAlertType">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="unspecified"/>
+          <xs:enumeration value="itemwitharchivedclaim"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/AddressDTO" elementFormDefault="qualified" xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BIValidationAlertDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceItemInfoDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceItemDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceDTO"/>
+      <xs:complexType name="AddressDTO">
+        <xs:sequence>
+          <xs:element name="AddressBookUID" type="xs:string" minOccurs="0"/>
+          <xs:element name="AddressLine1" type="xs:string" minOccurs="0"/>
+          <xs:element name="AddressLine1Kanji" type="xs:string" minOccurs="0"/>
+          <xs:element name="AddressLine2" type="xs:string" minOccurs="0"/>
+          <xs:element name="AddressLine2Kanji" type="xs:string" minOccurs="0"/>
+          <xs:element name="AddressLine3" type="xs:string" minOccurs="0"/>
+          <xs:element name="AddressType" type="pogo2:AddressType" minOccurs="0"/>
+          <xs:element name="BatchGeocode" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="BeanVersion" type="xs:int" minOccurs="0"/>
+          <xs:element name="CEDEX" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="CEDEXBureau" type="xs:string" minOccurs="0"/>
+          <xs:element name="City" type="xs:string" minOccurs="0"/>
+          <xs:element name="CityKanji" type="xs:string" minOccurs="0"/>
+          <xs:element name="CityStateZip" type="xs:string" minOccurs="0"/>
+          <xs:element name="Country" type="pogo2:Country" minOccurs="0"/>
+          <xs:element name="County" type="xs:string" minOccurs="0"/>
+          <xs:element name="CreateTime" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="CreateUserPublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="Description" type="xs:string" minOccurs="0"/>
+          <xs:element name="FailureGeocoding" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="GeocodeStatus" type="pogo2:GeocodeStatus" minOccurs="0"/>
+          <xs:element name="Latitude" type="xs:decimal" minOccurs="0"/>
+          <xs:element name="LoadCommandID" type="xs:long" minOccurs="0"/>
+          <xs:element name="Longitude" type="xs:decimal" minOccurs="0"/>
+          <xs:element name="NeverGeocoded" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="PostalCode" type="xs:string" minOccurs="0"/>
+          <xs:element name="PublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="State" type="pogo2:State" minOccurs="0"/>
+          <xs:element name="SuccessfullyGeocoded" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="UpdateTime" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="UpdateUserPublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="ValidUntil" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceItemDTO" elementFormDefault="qualified" xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BIValidationAlertDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceItemInfoDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/AddressDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceDTO"/>
+      <xs:complexType name="BulkInvoiceItemDTO">
+        <xs:sequence>
+          <xs:element name="Amount" type="xs:string" minOccurs="0" gw:type="gw.api.financials.CurrencyAmount"/>
+          <xs:element name="BulkInvoiceItemInfo" type="pogo5:BulkInvoiceItemInfoDTO" minOccurs="0"/>
+          <xs:element name="BulkInvoiceOrder" type="xs:int" minOccurs="0"/>
+          <xs:element name="BulkInvoicePublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="ClaimPublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="CostCategory" type="pogo2:CostCategory" minOccurs="0"/>
+          <xs:element name="CostType" type="pogo2:CostType" minOccurs="0"/>
+          <xs:element name="CreateTime" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="CreateUserPublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="DateOfService" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="DeductionsAmount" type="xs:string" minOccurs="0" gw:type="gw.api.financials.CurrencyAmount"/>
+          <xs:element name="Description" type="xs:string" minOccurs="0"/>
+          <xs:element name="Explanation" type="xs:string" minOccurs="0"/>
+          <xs:element name="ExposurePublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="NonEroding" type="xs:boolean" minOccurs="0"/>
+          <xs:element name="PaymentType" type="pogo2:PaymentType" minOccurs="0"/>
+          <xs:element name="PublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="ReservingCurrency" type="pogo2:Currency" minOccurs="0"/>
+          <xs:element name="ServicePdEnd" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="ServicePdStart" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="Status" type="pogo2:BulkInvoiceItemStatus" minOccurs="0"/>
+          <xs:element name="UpdateTime" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="UpdateUserPublicID" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceItemInfoDTO" elementFormDefault="qualified" xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BIValidationAlertDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceItemDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/AddressDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceDTO"/>
+      <xs:complexType name="BulkInvoiceItemInfoDTO">
+        <xs:sequence>
+          <xs:element name="CheckPublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="CreateTime" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="CreateUserPublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="PublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="ReserveLineID" type="xs:string" minOccurs="0"/>
+          <xs:element name="UpdateTime" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="UpdateUserPublicID" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema targetNamespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BIValidationAlertDTO" elementFormDefault="qualified" xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceItemInfoDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceItemDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/AddressDTO"/>
+      <xs:import namespace="http://guidewire.com/cc/typekey"/>
+      <xs:import namespace="http://guidewire.com/cc/ws/gw/webservice/cc/cc900/dto/BulkInvoiceDTO"/>
+      <xs:complexType name="BIValidationAlertDTO">
+        <xs:sequence>
+          <xs:element name="AlertMsg" type="xs:string" minOccurs="0"/>
+          <xs:element name="AlertType" type="pogo2:BIValidationAlertType" minOccurs="0"/>
+          <xs:element name="BulkInvoicePublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="CreateTime" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="CreateUserPublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="PublicID" type="xs:string" minOccurs="0"/>
+          <xs:element name="UpdateTime" type="xs:dateTime" minOccurs="0" gw:type="java.util.Date"/>
+          <xs:element name="UpdateUserPublicID" type="xs:string" minOccurs="0"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:portType name="BulkInvoiceAPIPortType">
+    <wsdl:operation name="getBulkInvoice">
+      <wsdl:input name="getBulkInvoice" message="tns:getBulkInvoice"/>
+      <wsdl:output name="getBulkInvoiceResponse" message="tns:getBulkInvoiceResponse"/>
+      <!-- If the invoiceID doesn't correspond to an existing BulkInvoice. -->
+      <wsdl:fault name="BadIdentifierException" message="tns:BadIdentifierException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="getItemsForInvoice">
+      <wsdl:input name="getItemsForInvoice" message="tns:getItemsForInvoice"/>
+      <wsdl:output name="getItemsForInvoiceResponse" message="tns:getItemsForInvoiceResponse"/>
+      <!-- If the invoiceID doesn't correspond to an existing BulkInvoice. -->
+      <wsdl:fault name="BadIdentifierException" message="tns:BadIdentifierException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="getItemsForInvoiceAndClaim">
+      <wsdl:input name="getItemsForInvoiceAndClaim" message="tns:getItemsForInvoiceAndClaim"/>
+      <wsdl:output name="getItemsForInvoiceAndClaimResponse" message="tns:getItemsForInvoiceAndClaimResponse"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="getItemsForInvoiceAndClaimAndAmount">
+      <wsdl:input name="getItemsForInvoiceAndClaimAndAmount" message="tns:getItemsForInvoiceAndClaimAndAmount"/>
+      <wsdl:output name="getItemsForInvoiceAndClaimAndAmountResponse" message="tns:getItemsForInvoiceAndClaimAndAmountResponse"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="createBulkInvoice">
+      <wsdl:input name="createBulkInvoice" message="tns:createBulkInvoice"/>
+      <wsdl:output name="createBulkInvoiceResponse" message="tns:createBulkInvoiceResponse"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="addItemsToInvoice">
+      <wsdl:input name="addItemsToInvoice" message="tns:addItemsToInvoice"/>
+      <wsdl:output name="addItemsToInvoiceResponse" message="tns:addItemsToInvoiceResponse"/>
+      <!-- If the invoiceID doesn't correspond to an existing BulkInvoice. -->
+      <wsdl:fault name="BadIdentifierException" message="tns:BadIdentifierException"/>
+      <!-- If the BulkInvoiceItemDTOs array is null or empty. -->
+      <wsdl:fault name="IllegalArgumentException" message="tns:IllegalArgumentException"/>
+      <!-- If the BulkInvoice is not editable. -->
+      <wsdl:fault name="RuntimeException" message="tns:RuntimeException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="updateItemsOnInvoice">
+      <wsdl:input name="updateItemsOnInvoice" message="tns:updateItemsOnInvoice"/>
+      <wsdl:output name="updateItemsOnInvoiceResponse" message="tns:updateItemsOnInvoiceResponse"/>
+      <!-- [If the invoiceID doesn't correspond to an existing BulkInvoice., If any of the BulkInvoiceItemDTOs are referring to a non-existent BulkInvoiceItem.] -->
+      <wsdl:fault name="BadIdentifierException" message="tns:BadIdentifierException"/>
+      <!-- [If the BulkInvoice is not editable., If any of the BulkInvoiceItemDTOs does not have its PublicID field set.] -->
+      <wsdl:fault name="RuntimeException" message="tns:RuntimeException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="deleteItemsFromInvoice">
+      <wsdl:input name="deleteItemsFromInvoice" message="tns:deleteItemsFromInvoice"/>
+      <wsdl:output name="deleteItemsFromInvoiceResponse" message="tns:deleteItemsFromInvoiceResponse"/>
+      <!-- If the invoiceID doesn't correspond to an existing BulkInvoice. -->
+      <wsdl:fault name="BadIdentifierException" message="tns:BadIdentifierException"/>
+      <!-- If any of the invoice items does not belong to the BulkInvoice having ID invoiceID. -->
+      <wsdl:fault name="RuntimeException" message="tns:RuntimeException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="validateBulkInvoice">
+      <wsdl:input name="validateBulkInvoice" message="tns:validateBulkInvoice"/>
+      <wsdl:output name="validateBulkInvoiceResponse" message="tns:validateBulkInvoiceResponse"/>
+      <!-- If the invoiceID doesn't correspond to an existing BulkInvoice. -->
+      <wsdl:fault name="BadIdentifierException" message="tns:BadIdentifierException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="submitBulkInvoice">
+      <wsdl:input name="submitBulkInvoice" message="tns:submitBulkInvoice"/>
+      <wsdl:output name="submitBulkInvoiceResponse" message="tns:submitBulkInvoiceResponse"/>
+      <!-- If the invoiceID doesn't correspond to an existing BulkInvoice. -->
+      <wsdl:fault name="BadIdentifierException" message="tns:BadIdentifierException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="requestBulkInvoice">
+      <wsdl:input name="requestBulkInvoice" message="tns:requestBulkInvoice"/>
+      <wsdl:output name="requestBulkInvoiceResponse" message="tns:requestBulkInvoiceResponse"/>
+      <!-- If the invoiceID doesn't correspond to an existing BulkInvoice. -->
+      <wsdl:fault name="BadIdentifierException" message="tns:BadIdentifierException"/>
+      <!-- If the invoice is currently not having a status of TC_AWAITINGSUBMISSION. -->
+      <wsdl:fault name="RuntimeException" message="tns:RuntimeException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="voidBulkInvoice">
+      <wsdl:input name="voidBulkInvoice" message="tns:voidBulkInvoice"/>
+      <wsdl:output name="voidBulkInvoiceResponse" message="tns:voidBulkInvoiceResponse"/>
+      <!-- If the invoiceID doesn't correspond to an existing BulkInvoice. -->
+      <wsdl:fault name="BadIdentifierException" message="tns:BadIdentifierException"/>
+      <!-- If the status of the BulkInvoice does not allow for it to be voided. -->
+      <wsdl:fault name="EntityStateException" message="tns:EntityStateException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="stopBulkInvoice">
+      <wsdl:input name="stopBulkInvoice" message="tns:stopBulkInvoice"/>
+      <wsdl:output name="stopBulkInvoiceResponse" message="tns:stopBulkInvoiceResponse"/>
+      <!-- If the invoiceID doesn't correspond to an existing BulkInvoice. -->
+      <wsdl:fault name="BadIdentifierException" message="tns:BadIdentifierException"/>
+      <!-- If the status of the BulkInvoice does not allow for it to be stopped -->
+      <wsdl:fault name="EntityStateException" message="tns:EntityStateException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="placeDownstreamHoldOnInvoice">
+      <wsdl:input name="placeDownstreamHoldOnInvoice" message="tns:placeDownstreamHoldOnInvoice"/>
+      <wsdl:output name="placeDownstreamHoldOnInvoiceResponse" message="tns:placeDownstreamHoldOnInvoiceResponse"/>
+      <!-- If the invoiceID doesn't correspond to an existing BulkInvoice. -->
+      <wsdl:fault name="BadIdentifierException" message="tns:BadIdentifierException"/>
+      <!-- If the invoice status was not requesting or requested -->
+      <wsdl:fault name="EntityStateException" message="tns:EntityStateException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="updateBulkInvoiceStatus">
+      <wsdl:input name="updateBulkInvoiceStatus" message="tns:updateBulkInvoiceStatus"/>
+      <wsdl:output name="updateBulkInvoiceStatusResponse" message="tns:updateBulkInvoiceStatusResponse"/>
+      <!-- If the invoiceID doesn't correspond to an existing BulkInvoice. -->
+      <wsdl:fault name="BadIdentifierException" message="tns:BadIdentifierException"/>
+      <!-- If the new status is invalid -->
+      <wsdl:fault name="EntityStateException" message="tns:EntityStateException"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="createContactByLinkID">
+      <wsdl:input name="createContactByLinkID" message="tns:createContactByLinkID"/>
+      <wsdl:output name="createContactByLinkIDResponse" message="tns:createContactByLinkIDResponse"/>
+      <wsdl:fault name="WsiAuthenticationException" message="tns:WsiAuthenticationException"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BulkInvoiceAPISoap12Binding" type="tns:BulkInvoiceAPIPortType">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="getBulkInvoice">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="getBulkInvoice">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getBulkInvoiceResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getItemsForInvoice">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="getItemsForInvoice">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getItemsForInvoiceResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getItemsForInvoiceAndClaim">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="getItemsForInvoiceAndClaim">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getItemsForInvoiceAndClaimResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getItemsForInvoiceAndClaimAndAmount">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="getItemsForInvoiceAndClaimAndAmount">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getItemsForInvoiceAndClaimAndAmountResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createBulkInvoice">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="createBulkInvoice">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createBulkInvoiceResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addItemsToInvoice">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="addItemsToInvoice">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addItemsToInvoiceResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap12:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeException">
+        <soap12:fault name="RuntimeException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateItemsOnInvoice">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="updateItemsOnInvoice">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateItemsOnInvoiceResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeException">
+        <soap12:fault name="RuntimeException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteItemsFromInvoice">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="deleteItemsFromInvoice">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteItemsFromInvoiceResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeException">
+        <soap12:fault name="RuntimeException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="validateBulkInvoice">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="validateBulkInvoice">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="validateBulkInvoiceResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="submitBulkInvoice">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="submitBulkInvoice">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="submitBulkInvoiceResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="requestBulkInvoice">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="requestBulkInvoice">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="requestBulkInvoiceResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeException">
+        <soap12:fault name="RuntimeException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="voidBulkInvoice">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="voidBulkInvoice">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="voidBulkInvoiceResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="EntityStateException">
+        <soap12:fault name="EntityStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="stopBulkInvoice">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="stopBulkInvoice">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stopBulkInvoiceResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="EntityStateException">
+        <soap12:fault name="EntityStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="placeDownstreamHoldOnInvoice">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="placeDownstreamHoldOnInvoice">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="placeDownstreamHoldOnInvoiceResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="EntityStateException">
+        <soap12:fault name="EntityStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateBulkInvoiceStatus">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="updateBulkInvoiceStatus">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateBulkInvoiceStatusResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="EntityStateException">
+        <soap12:fault name="EntityStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createContactByLinkID">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="createContactByLinkID">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap12:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createContactByLinkIDResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="BulkInvoiceAPISoap11Binding" type="tns:BulkInvoiceAPIPortType">
+    <soap11:binding transport="http://schemas.xmlsoap.org/soap/http" style="document"/>
+    <wsdl:operation name="getBulkInvoice">
+      <soap11:operation style="document"/>
+      <wsdl:input name="getBulkInvoice">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getBulkInvoiceResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getItemsForInvoice">
+      <soap11:operation style="document"/>
+      <wsdl:input name="getItemsForInvoice">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getItemsForInvoiceResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getItemsForInvoiceAndClaim">
+      <soap11:operation style="document"/>
+      <wsdl:input name="getItemsForInvoiceAndClaim">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getItemsForInvoiceAndClaimResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getItemsForInvoiceAndClaimAndAmount">
+      <soap11:operation style="document"/>
+      <wsdl:input name="getItemsForInvoiceAndClaimAndAmount">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getItemsForInvoiceAndClaimAndAmountResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createBulkInvoice">
+      <soap11:operation style="document"/>
+      <wsdl:input name="createBulkInvoice">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createBulkInvoiceResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="addItemsToInvoice">
+      <soap11:operation style="document"/>
+      <wsdl:input name="addItemsToInvoice">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addItemsToInvoiceResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="IllegalArgumentException">
+        <soap11:fault name="IllegalArgumentException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeException">
+        <soap11:fault name="RuntimeException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateItemsOnInvoice">
+      <soap11:operation style="document"/>
+      <wsdl:input name="updateItemsOnInvoice">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateItemsOnInvoiceResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeException">
+        <soap11:fault name="RuntimeException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteItemsFromInvoice">
+      <soap11:operation style="document"/>
+      <wsdl:input name="deleteItemsFromInvoice">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteItemsFromInvoiceResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeException">
+        <soap11:fault name="RuntimeException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="validateBulkInvoice">
+      <soap11:operation style="document"/>
+      <wsdl:input name="validateBulkInvoice">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="validateBulkInvoiceResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="submitBulkInvoice">
+      <soap11:operation style="document"/>
+      <wsdl:input name="submitBulkInvoice">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="submitBulkInvoiceResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="requestBulkInvoice">
+      <soap11:operation style="document"/>
+      <wsdl:input name="requestBulkInvoice">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="requestBulkInvoiceResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RuntimeException">
+        <soap11:fault name="RuntimeException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="voidBulkInvoice">
+      <soap11:operation style="document"/>
+      <wsdl:input name="voidBulkInvoice">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="voidBulkInvoiceResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="EntityStateException">
+        <soap11:fault name="EntityStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="stopBulkInvoice">
+      <soap11:operation style="document"/>
+      <wsdl:input name="stopBulkInvoice">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="stopBulkInvoiceResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="EntityStateException">
+        <soap11:fault name="EntityStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="placeDownstreamHoldOnInvoice">
+      <soap11:operation style="document"/>
+      <wsdl:input name="placeDownstreamHoldOnInvoice">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="placeDownstreamHoldOnInvoiceResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="EntityStateException">
+        <soap11:fault name="EntityStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateBulkInvoiceStatus">
+      <soap11:operation style="document"/>
+      <wsdl:input name="updateBulkInvoiceStatus">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateBulkInvoiceStatusResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="EntityStateException">
+        <soap11:fault name="EntityStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createContactByLinkID">
+      <soap11:operation style="document"/>
+      <wsdl:input name="createContactByLinkID">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-transaction-id" part="gw-transaction-id" use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-language-only" part="gw-language-only" use="literal"/>
+        <soap11:header message="tns:gw-locale-only" part="gw-locale-only" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createContactByLinkIDResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BulkInvoiceAPI">
+    <wsdl:port name="BulkInvoiceAPISoap12Port" binding="tns:BulkInvoiceAPISoap12Binding">
+      <soap12:address location="local:///gw/webservice/cc/cc900/financials/bulkpay/BulkInvoiceAPI"/>
+    </wsdl:port>
+    <wsdl:port name="BulkInvoiceAPISoap11Port" binding="tns:BulkInvoiceAPISoap11Binding">
+      <soap11:address location="local:///gw/webservice/cc/cc900/financials/bulkpay/BulkInvoiceAPI/soap11"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:message name="getBulkInvoice">
+    <wsdl:part name="parameters" element="tns:getBulkInvoice"/>
+  </wsdl:message>
+  <wsdl:message name="getBulkInvoiceResponse">
+    <wsdl:part name="parameters" element="tns:getBulkInvoiceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="BadIdentifierException">
+    <wsdl:part name="BadIdentifierException" element="tns:BadIdentifierException"/>
+  </wsdl:message>
+  <wsdl:message name="WsiAuthenticationException">
+    <wsdl:part name="WsiAuthenticationException" element="tns:WsiAuthenticationException"/>
+  </wsdl:message>
+  <wsdl:message name="getItemsForInvoice">
+    <wsdl:part name="parameters" element="tns:getItemsForInvoice"/>
+  </wsdl:message>
+  <wsdl:message name="getItemsForInvoiceResponse">
+    <wsdl:part name="parameters" element="tns:getItemsForInvoiceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getItemsForInvoiceAndClaim">
+    <wsdl:part name="parameters" element="tns:getItemsForInvoiceAndClaim"/>
+  </wsdl:message>
+  <wsdl:message name="getItemsForInvoiceAndClaimResponse">
+    <wsdl:part name="parameters" element="tns:getItemsForInvoiceAndClaimResponse"/>
+  </wsdl:message>
+  <wsdl:message name="getItemsForInvoiceAndClaimAndAmount">
+    <wsdl:part name="parameters" element="tns:getItemsForInvoiceAndClaimAndAmount"/>
+  </wsdl:message>
+  <wsdl:message name="getItemsForInvoiceAndClaimAndAmountResponse">
+    <wsdl:part name="parameters" element="tns:getItemsForInvoiceAndClaimAndAmountResponse"/>
+  </wsdl:message>
+  <wsdl:message name="createBulkInvoice">
+    <wsdl:part name="parameters" element="tns:createBulkInvoice"/>
+  </wsdl:message>
+  <wsdl:message name="createBulkInvoiceResponse">
+    <wsdl:part name="parameters" element="tns:createBulkInvoiceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="addItemsToInvoice">
+    <wsdl:part name="parameters" element="tns:addItemsToInvoice"/>
+  </wsdl:message>
+  <wsdl:message name="addItemsToInvoiceResponse">
+    <wsdl:part name="parameters" element="tns:addItemsToInvoiceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="IllegalArgumentException">
+    <wsdl:part name="IllegalArgumentException" element="tns:IllegalArgumentException"/>
+  </wsdl:message>
+  <wsdl:message name="RuntimeException">
+    <wsdl:part name="RuntimeException" element="tns:RuntimeException"/>
+  </wsdl:message>
+  <wsdl:message name="updateItemsOnInvoice">
+    <wsdl:part name="parameters" element="tns:updateItemsOnInvoice"/>
+  </wsdl:message>
+  <wsdl:message name="updateItemsOnInvoiceResponse">
+    <wsdl:part name="parameters" element="tns:updateItemsOnInvoiceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="deleteItemsFromInvoice">
+    <wsdl:part name="parameters" element="tns:deleteItemsFromInvoice"/>
+  </wsdl:message>
+  <wsdl:message name="deleteItemsFromInvoiceResponse">
+    <wsdl:part name="parameters" element="tns:deleteItemsFromInvoiceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="validateBulkInvoice">
+    <wsdl:part name="parameters" element="tns:validateBulkInvoice"/>
+  </wsdl:message>
+  <wsdl:message name="validateBulkInvoiceResponse">
+    <wsdl:part name="parameters" element="tns:validateBulkInvoiceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="submitBulkInvoice">
+    <wsdl:part name="parameters" element="tns:submitBulkInvoice"/>
+  </wsdl:message>
+  <wsdl:message name="submitBulkInvoiceResponse">
+    <wsdl:part name="parameters" element="tns:submitBulkInvoiceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="requestBulkInvoice">
+    <wsdl:part name="parameters" element="tns:requestBulkInvoice"/>
+  </wsdl:message>
+  <wsdl:message name="requestBulkInvoiceResponse">
+    <wsdl:part name="parameters" element="tns:requestBulkInvoiceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="voidBulkInvoice">
+    <wsdl:part name="parameters" element="tns:voidBulkInvoice"/>
+  </wsdl:message>
+  <wsdl:message name="voidBulkInvoiceResponse">
+    <wsdl:part name="parameters" element="tns:voidBulkInvoiceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="EntityStateException">
+    <wsdl:part name="EntityStateException" element="tns:EntityStateException"/>
+  </wsdl:message>
+  <wsdl:message name="stopBulkInvoice">
+    <wsdl:part name="parameters" element="tns:stopBulkInvoice"/>
+  </wsdl:message>
+  <wsdl:message name="stopBulkInvoiceResponse">
+    <wsdl:part name="parameters" element="tns:stopBulkInvoiceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="placeDownstreamHoldOnInvoice">
+    <wsdl:part name="parameters" element="tns:placeDownstreamHoldOnInvoice"/>
+  </wsdl:message>
+  <wsdl:message name="placeDownstreamHoldOnInvoiceResponse">
+    <wsdl:part name="parameters" element="tns:placeDownstreamHoldOnInvoiceResponse"/>
+  </wsdl:message>
+  <wsdl:message name="updateBulkInvoiceStatus">
+    <wsdl:part name="parameters" element="tns:updateBulkInvoiceStatus"/>
+  </wsdl:message>
+  <wsdl:message name="updateBulkInvoiceStatusResponse">
+    <wsdl:part name="parameters" element="tns:updateBulkInvoiceStatusResponse"/>
+  </wsdl:message>
+  <wsdl:message name="createContactByLinkID">
+    <wsdl:part name="parameters" element="tns:createContactByLinkID"/>
+  </wsdl:message>
+  <wsdl:message name="createContactByLinkIDResponse">
+    <wsdl:part name="parameters" element="tns:createContactByLinkIDResponse"/>
+  </wsdl:message>
+  <wsdl:message name="gw-authentication">
+    <wsdl:part name="gw-authentication" element="gwsoap:authentication"/>
+  </wsdl:message>
+  <wsdl:message name="gw-locale-only">
+    <wsdl:part name="gw-locale-only" element="gwsoap:gw_locale"/>
+  </wsdl:message>
+  <wsdl:message name="gw-language-only">
+    <wsdl:part name="gw-language-only" element="gwsoap:gw_language"/>
+  </wsdl:message>
+  <wsdl:message name="gw-transaction-id">
+    <wsdl:part name="gw-transaction-id" element="gwsoap:transaction_id"/>
+  </wsdl:message>
+</wsdl:definitions>

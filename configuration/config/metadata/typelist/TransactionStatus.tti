@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The status of a transaction, from draft through approval to submission"
+  final="true"
+  name="TransactionStatus">
+  <typecode
+    code="draft"
+    desc="Draft; not yet submitted to a back-end accounting system"
+    name="Draft"/>
+  <typecode
+    code="pendingapproval"
+    desc="Pending approval"
+    name="Pending approval"/>
+  <typecode
+    code="awaitingsubmission"
+    desc="Awaiting for the send date to arrive, at which point the status will change to Submitting (applicable only to payments)"
+    name="Awaiting submission"/>
+  <typecode
+    code="submitting"
+    desc="In the process of being submitted to the accounting system"
+    name="Submitting"/>
+  <typecode
+    code="requesting"
+    desc="In the process of being requested from the accounting system (applicable only to checks)"
+    name="Requesting"/>
+  <typecode
+    code="submitted"
+    desc="Submitted to the accounting system"
+    name="Submitted"/>
+  <typecode
+    code="requested"
+    desc="Requested of the accounting system (applicable only to checks)"
+    name="Requested"/>
+  <typecode
+    code="rejected"
+    desc="Rejected by the user assigned to approve the transaction"
+    name="Rejected"/>
+  <typecode
+    code="denied"
+    desc="Denied by the downstream system"
+    name="Denied"/>
+  <typecode
+    code="pendingvoid"
+    desc="A void transaction request is pending (applicable only to payments and recoveries)"
+    name="Pending void"/>
+  <typecode
+    code="voided"
+    desc="The transaction is voided (applicable only to payments and recoveries)"
+    name="Voided"/>
+  <typecode
+    code="pendingstop"
+    desc="A stop payment request is pending (applicable only to payments)"
+    name="Pending stop"/>
+  <typecode
+    code="stopped"
+    desc="A stop payment has been issued for this payment's check (applicable only to payments)"
+    name="Stopped"/>
+  <typecode
+    code="issued"
+    desc="Check has been issued"
+    name="Issued"/>
+  <typecode
+    code="cleared"
+    desc="Check has cleared"
+    name="Cleared"/>
+  <typecode
+    code="pendingrecode"
+    desc="Transaction that is pending recode"
+    name="Pending recode"/>
+  <typecode
+    code="recoded"
+    desc="Transaction that is recoded"
+    name="Recoded"/>
+  <typecode
+    code="pendingtransfer"
+    desc="Transaction that is pending transfer from one claim to another claim"
+    name="Pending transfer"/>
+  <typecode
+    code="transferred"
+    desc="Transaction that is transferred from one claim to another claim"
+    name="Transferred"/>
+  <typecode
+    code="notifying"
+    desc="In the process of notifying the accounting system of a new manual check"
+    name="Notifying"/>
+  <typefilter
+    desc="All status codes that apply to transactions"
+    name="transaction">
+    <include
+      code="draft"/>
+    <include
+      code="pendingapproval"/>
+    <include
+      code="awaitingsubmission"/>
+    <include
+      code="submitting"/>
+    <include
+      code="submitted"/>
+    <include
+      code="rejected"/>
+    <include
+      code="pendingvoid"/>
+    <include
+      code="voided"/>
+    <include
+      code="pendingstop"/>
+    <include
+      code="stopped"/>
+    <include
+      code="pendingrecode"/>
+    <include
+      code="recoded"/>
+    <include
+      code="pendingtransfer"/>
+    <include
+      code="transferred"/>
+    <include
+      code="denied"/>
+  </typefilter>
+  <typefilter
+    desc="All status codes that apply to checks"
+    name="check">
+    <include
+      code="draft"/>
+    <include
+      code="pendingapproval"/>
+    <include
+      code="awaitingsubmission"/>
+    <include
+      code="requesting"/>
+    <include
+      code="requested"/>
+    <include
+      code="rejected"/>
+    <include
+      code="pendingvoid"/>
+    <include
+      code="voided"/>
+    <include
+      code="pendingstop"/>
+    <include
+      code="stopped"/>
+    <include
+      code="pendingtransfer"/>
+    <include
+      code="transferred"/>
+    <include
+      code="issued"/>
+    <include
+      code="cleared"/>
+    <include
+      code="notifying"/>
+    <include
+      code="denied"/>
+  </typefilter>
+  <typefilter
+    desc="All status codes that apply to recovery"
+    name="recovery">
+    <include
+      code="draft"/>
+    <include
+      code="submitting"/>
+    <include
+      code="submitted"/>
+    <include
+      code="pendingvoid"/>
+    <include
+      code="voided"/>
+    <include
+      code="pendingtransfer"/>
+    <include
+      code="transferred"/>
+    <include
+      code="denied"/>
+  </typefilter>
+</typelist>

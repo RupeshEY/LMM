@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSpy v2005 rel. 3 U (http://www.altova.com) by Serge Cayron (ACORD) -->
+<!--
+
+This is the ACORD Document Repository Interface
+
+**** version 1.2.0 Schema slice for RLC **** 
+
+Generated: August 17, 2006                                                        
+
+COPYRIGHT NOTICE:
+(c) 2001-2006 ACORD.  All Rights Reserved.
+
+   Use of this Schema and its documentation are covered by the terms and
+   conditions file that was included in the distribution file in which you
+   found this Schema.
+
+   http://www.acord.org
+
+-->
+<xs:schema
+	xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0"
+	targetNamespace="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0"
+	elementFormDefault="qualified"
+	attributeFormDefault="unqualified">
+	<xs:include schemaLocation="AcordMsgSvc_base_v-1-4-0.xsd"/>
+	<!--Simple and complex types-->
+	<xs:simpleType name="DocumentRelationTypeCdType">
+		<xs:restriction base="EnumType"/>
+	</xs:simpleType>
+	<xs:complexType name="ParentDocumentType">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element ref="DocumentId"/>
+				<xs:element ref="DocumentReference"/>
+			</xs:choice>
+			<xs:element ref="DocumentVersion" minOccurs="0"/>
+			<xs:element ref="DocumentURL" minOccurs="0"/>
+			<xs:element ref="DocumentRelationTypeCd" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SupportingDocument_Type">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element ref="DocumentId"/>
+				<xs:element ref="DocumentReference"/>
+			</xs:choice>
+			<xs:element ref="DocumentVersion" minOccurs="0"/>
+			<xs:element ref="DocumentVersionDtTime" minOccurs="0"/>
+			<xs:element ref="DocumentURL" minOccurs="0"/>
+			<xs:element ref="FileId" minOccurs="0"/>
+			<xs:element ref="FileFormatCd" minOccurs="0"/>
+			<xs:element ref="FileSize" minOccurs="0"/>
+			<xs:element ref="DocumentTypeCd" minOccurs="0"/>
+			<xs:element ref="Description" minOccurs="0"/>
+			<xs:element ref="ParentDocument" minOccurs="0"/>
+			<xs:element ref="Owner" minOccurs="0"/>
+			<xs:element ref="Originator" minOccurs="0"/>
+			<xs:element ref="CommunicationChannelCd" minOccurs="0"/>
+			<xs:element ref="Operator" minOccurs="0"/>
+			<xs:element ref="RepositoryService" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<!--Elements-->
+	<xs:element name="DocumentRelationTypeCd" type="DocumentRelationTypeCdType"/>
+	<xs:element name="DocumentURL" type="xs:anyURI"/>
+	<xs:element name="Originator" type="GENERALPARTY_Type"/>
+	<xs:element name="ParentDocument" type="ParentDocumentType"/>
+	<!--Root element-->
+	<xs:element name="SupportingDocument" type="SupportingDocument_Type"/>
+</xs:schema>

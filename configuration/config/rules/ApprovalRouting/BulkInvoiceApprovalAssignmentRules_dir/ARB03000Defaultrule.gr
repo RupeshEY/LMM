@@ -1,0 +1,27 @@
+package rules.ApprovalRouting.BulkInvoiceApprovalAssignmentRules_dir
+
+@gw.rules.RuleName("ARB03000 - Default rule")
+internal class ARB03000Defaultrule {
+  static function doCondition(bulkInvoice : entity.BulkInvoice) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(bulkInvoice : entity.BulkInvoice, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* For group supervisors not covered by the first rule,
+ * assign directly to a higher-up supervisor. We assume
+ * Super Visor has (practically) unlimited approval
+ * authority, so this rule set should never be called
+ * with Super Visor as the submitting user.
+ */
+bulkInvoice.setApprovingUser(util.RuleGroups.instance.getHeadquartersSupervisor(), 
+                             util.RuleGroups.instance.getHeadquarters())
+/*end00rule*/
+
+  }
+}

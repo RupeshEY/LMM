@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="FNOLWizard_EditNoteScreen">
+    <Require
+      name="Note"
+      type="Note"/>
+    <Require
+      name="ClaimTest"
+      type="Claim"/>
+    <TitleBar
+      title="DisplayKey.get(&quot;Web.Note.EditNote&quot;)"/>
+    <Toolbar>
+      <EditButtons
+        cancelLabel="DisplayKey.get(&quot;Web.Note.Cancel&quot;)"
+        updateLabel="DisplayKey.get(&quot;Web.Note.Update&quot;)"/>
+      <ToolbarButton
+        action="ClaimTest.removeFromNotes(Note); CurrentLocation.commit();"
+        confirmMessage="DisplayKey.get(&quot;Web.Note.ConfirmDelete&quot;)"
+        id="EditNote_DeleteButton"
+        label="DisplayKey.get(&quot;Web.Note.Delete&quot;)"
+        visible="true"/>
+    </Toolbar>
+    <PanelRef
+      def="NoteDetailDV(Note, true, true)"/>
+  </Screen>
+</PCF>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Contact.viewab(externalContact.Contact)"
+    id="AddressBookContactDetailPrint"
+    parent="AddressBookSearch()"
+    title="DisplayKey.get(&quot;Web.ContactDetail.Title&quot;, externalContact.Contact)">
+    <LocationEntryPoint
+      signature="AddressBookContactDetailPrint(externalContact : gw.api.contact.ExternalContact)"/>
+    <Variable
+      initialValue="new gw.api.contact.ProximitySearchPageHelper()"
+      name="PageHelper"
+      type="gw.api.contact.ProximitySearchPageHelper"/>
+    <Variable
+      name="externalContact"
+      type="gw.api.contact.ExternalContact"/>
+    <Variable
+      initialValue="externalContact.Source.loadContact(externalContact.Contact, true)"
+      name="contact"
+      type="Contact"/>
+    <ScreenRef
+      def="AddressBookContactDetailScreen(new gw.pcf.AddressBookContactHelper(contact, externalContact.Source, null))"/>
+  </Page>
+</PCF>

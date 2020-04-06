@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="AddressBookContactDetailScreen"
+    mode="error">
+    <Require
+      name="abcHelper"
+      type="gw.pcf.AddressBookContactHelper"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <Label
+          label="DisplayKey.get(&quot;Web.AddressBook.Error.ContactNotFound&quot;)"/>
+      </InputColumn>
+    </DetailViewPanel>
+  </Screen>
+</PCF>

@@ -1,0 +1,37 @@
+package rules.Preupdate.ClaimPreupdate_dir.CPU04000SITriggers_dir.CPU04100SIULifeCycleStage1_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CPU04110 - SI - Unreasonable delay in reporting loss")
+internal class CPU04110SIUnreasonabledelayinreportingloss {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return //claim.DateRptdToAgent !=null
+  claim.ReportedDate !=null
+  and claim.LossDate !=null
+  and gw.api.util.DateUtil.differenceInDays(claim.LossDate, claim.ReportedDate) > 30
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+// IMPORTANT: When defining a new SIU Trigger rule, copy the entire contents of this Rule Action, 
+// but ONLY change the three values following the comment below.
+var TriggerDescription : String
+var AdditionalInformation : String
+var PointValue : int
+
+// Please only change the following three values:
+TriggerDescription = DisplayKey.get("Rules.PreUpdate.Claim.SIU.UnreasonableDelay", 30)
+AdditionalInformation = DisplayKey.get("Rules.PreUpdate.Claim.SIU.AdditionalInformation")
+PointValue = 1   // The value/weight attributed to each rule can be modified by setting the PointValue as desired.  
+
+//DO NOT change the line below:
+claim.siTriggersLogicClaim(TriggerDescription, AdditionalInformation, PointValue)
+/*end00rule*/
+
+  }
+}

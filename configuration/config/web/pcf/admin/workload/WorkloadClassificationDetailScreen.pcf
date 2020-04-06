@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="WorkloadClassificationDetailScreen">
+    <Require
+      name="classification"
+      type="WorkloadClassification"/>
+    <Toolbar>
+      <EditButtons
+        updateConfirmMessage="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.ReRunCompleteWorkloadBatchProcess&quot;)"/>
+    </Toolbar>
+    <PanelRef
+      def="WeightedWorkloadAdminPanelSet(classification)">
+      <TitleBar
+        title="DisplayKey.get(&quot;Admin.Workload.WorkloadClassification.General&quot;)"/>
+    </PanelRef>
+  </Screen>
+</PCF>

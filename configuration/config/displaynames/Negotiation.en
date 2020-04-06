@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<Entity
+  name="Negotiation">
+  <Columns>
+    <Column
+      beanPath="Negotiation.Name"
+      name="name"
+      sortOrder="1"/>
+  </Columns>
+  <DisplayName><![CDATA[name != null ? name : gw.api.locale.DisplayKey.get("Java.DisplayName.NewlyCreated")]]></DisplayName>
+  <DisplayName
+    type="ContactRoleMessage"><![CDATA[name]]></DisplayName>
+</Entity>

@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_financials.xml -->
+  <ListViewPanel
+    id="EditablePaymentLineItemsLV"
+    mode="default">
+    <ExposeIterator
+      valueType="entity.TransactionLineItem"
+      widget="EditablePaymentLineItemsLV"/>
+    <Require
+      name="Transaction"
+      type="Transaction"/>
+    <RowIterator
+      autoAdd="Transaction.LineItems.length == 0"
+      editable="true"
+      elementName="TransactionLineItem"
+      toAdd="Transaction.addToLineItems(TransactionLineItem)"
+      toRemove="remove(TransactionLineItem)"
+      value="Transaction.LineItems"
+      valueType="entity.TransactionLineItem[]">
+      <Row
+        editable="TransactionLineItem.LineCategory != LineCategory.TC_DEDUCTIBLE and TransactionLineItem.LineCategory != LineCategory.TC_FORMERDEDUCTIBLE">
+        <TypeKeyCell
+          editable="true"
+          filter="TransactionLineItem.ValidLineCategories.contains(VALUE)"
+          id="LineCategory"
+          label="DisplayKey.get(&quot;LV.Financials.EditablePaymentLineItems.PaymentLineItem.LineCategory&quot;)"
+          required="ScriptParameters.UtilizeMatterBudget and Transaction.CostCategory==typekey.CostCategory.TC_LEGAL"
+          value="TransactionLineItem.LineCategory"
+          valueType="typekey.LineCategory"/>
+        <CurrencyCell
+          editable="true"
+          footerSumValue="TransactionLineItem.TransactionAmountReservingAmountPair"
+          formatType="currency"
+          id="Amount"
+          label="DisplayKey.get(&quot;LV.Financials.EditablePaymentLineItems.PaymentLineItem.Amount&quot;)"
+          required="true"
+          value="TransactionLineItem.TransactionAmountReservingAmountPair"
+          valueType="gw.api.financials.IPairedMoney">
+          <PostOnChange
+            target="DATA_ONLY"/>
+        </CurrencyCell>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[
+function remove(tli : TransactionLineItem) {
+  if (tli.LineCategory == TC_DEDUCTIBLE) {
+    (Transaction as Payment).removeDeductibleLineItem(tli)
+  } else {
+    Transaction.removeFromLineItemsIfEditable(tli)
+  }
+}
+    ]]></Code>
+  </ListViewPanel>
+</PCF>

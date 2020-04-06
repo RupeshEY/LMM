@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="An assessment detail line"
+  entity="AssessmentItem"
+  exportable="true"
+  platform="false"
+  table="assessmentitem"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.AssessmentItem"
+    impl="com.guidewire.cc.domain.exposure.impl.AssessmentItemImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Assessment Amount"
+    name="EstimateAmount"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Assessment line."
+    name="Description"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Assessment Item Comment"
+    name="ItemComment"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    columnName="IncidentID"
+    desc="Related Incident"
+    exportable="false"
+    fkentity="Incident"
+    name="Incident"
+    nullok="false"/>
+  <typekey
+    desc="AssessmentAction"
+    name="Action"
+    nullok="true"
+    typelist="AssessmentAction"/>
+  <foreignkey
+    columnName="AssessmentSourceID"
+    desc="Related AssessmentSource if applicable"
+    exportable="false"
+    fkentity="AssessmentSource"
+    name="AssessmentSource"
+    nullok="true"/>
+  <typekey
+    desc="Assessment Category for Property"
+    name="PropertyCategory"
+    nullok="true"
+    typelist="PropertyLineItemCategory"/>
+  <typekey
+    desc="AssessmentCatetory for Vehicles"
+    name="VehicleCategory"
+    nullok="true"
+    typelist="VehicleLineItemCategory"/>
+</entity>

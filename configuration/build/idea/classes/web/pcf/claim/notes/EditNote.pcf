@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="ClaimNotes.go(Claim)"
+    afterCommit="ClaimNotes.go(Claim)"
+    canEdit="true"
+    id="EditNote"
+    parent="ClaimNotes(Claim)"
+    showUpLink="true"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Note.EditNote&quot;)">
+    <LocationEntryPoint
+      signature="EditNote(Note : Note, Claim : Claim)"/>
+    <Variable
+      name="Note"
+      type="Note"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="EditNoteScreen">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.Note.EditNote&quot;)"/>
+      <Toolbar>
+        <EditButtons
+          cancelLabel="DisplayKey.get(&quot;Web.Note.Cancel&quot;)"
+          updateLabel="DisplayKey.get(&quot;Web.Note.Update&quot;)"/>
+        <ToolbarButton
+          action="Claim.removeFromNotes(Note); CurrentLocation.commit()"
+          confirmMessage="DisplayKey.get(&quot;Web.Note.ConfirmDelete&quot;)"
+          id="EditNote_DeleteButton"
+          label="DisplayKey.get(&quot;Web.Note.Delete&quot;)"
+          visible="perm.Note.delete(Note)"/>
+      </Toolbar>
+      <PanelRef
+        def="NoteDetailDV(Note, true, true)"/>
+    </Screen>
+  </Page>
+</PCF>

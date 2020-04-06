@@ -1,0 +1,22 @@
+package rules.EventMessage.EventFired_dir.EFR06000PolicySystemNotification_dir.EFR06100Claim_dir
+
+@gw.rules.RuleName("EFR06120 - Notification")
+internal class EFR06120Notification {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return gw.policy.notification.PolicySystemNotifications
+        .present(messageContext.EventName)
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+gw.policy.notification.PolicySystemNotifications
+        .get(messageContext.EventName).createMessage(messageContext)
+/*end00rule*/
+
+  }
+}

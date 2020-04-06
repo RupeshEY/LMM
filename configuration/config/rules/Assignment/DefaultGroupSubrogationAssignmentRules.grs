@@ -1,0 +1,13 @@
+package rules.Assignment
+
+@gw.rules.RuleName("DefaultGroupSubrogationAssignmentRules")
+@gw.rules.RuleSetDescription("This is the Default Group Subrogation Assignment rule set. These rules determine how subrogations are assigned within a group.")
+class DefaultGroupSubrogationAssignmentRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Subrogation) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Subrogation) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "DefaultGroupSubrogationAssignmentRules", DefaultGroupSubrogationAssignmentRules )
+  }
+}

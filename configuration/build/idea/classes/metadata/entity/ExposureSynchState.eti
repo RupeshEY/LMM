@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents the current state of synchronization between an Exposure and a MessageSink."
+  entity="ExposureSynchState"
+  loadable="false"
+  platform="false"
+  table="exposuresynchst"
+  type="versionable">
+  <implementsInterface
+    iface="gw.cc.messaging.entity.ExposureSynchState"
+    impl="com.guidewire.cc.domain.messaging.impl.ExposureSynchStateImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[<p>
+Represents the synchronization state of an <code>Exposure</code> with respect to a particular
+<code>MessageSink</code>. As part of the work of integrating your Guidewire application with other external and/or legacy
+systems, <code>MessageSink</code> entities will be set up to receive messages and update those systems to reflect the
+new state of the <code>Exposure</code> in the system.</p><p>
+Due to the asynchronous nature of messaging, those messages may not be transmitted immeditately, so the <code>ExposureSynchState</code>
+entity exists to track whether the external system represented by a particular <code>MessageSink</code> can be considered to
+be up-to-date with the system changes.</p>
+<p>See {@link com.guidewire.pl.system.typelist.tl.SynchState} for the available synchronization states.</p>
+@see Exposure#getExposureSynchStates
+      
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ExposureID"
+    desc="The Exposure to which the synchronization state applies."
+    exportable="false"
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="false"/>
+  <column
+    desc="Identifies the message sink to which the synchronization state applies."
+    name="MessageSink"
+    nullok="false"
+    type="integer"/>
+  <typekey
+    desc="The synchronization state of the given Exposure with respect to the given message sink."
+    name="SynchState"
+    nullok="true"
+    typelist="SynchState"/>
+  <index
+    desc="Enforce uniqueness, only one entry per message sink per exposure"
+    name="exposuresynchstu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ExposureID"/>
+    <indexcol
+      keyposition="2"
+      name="MessageSink"/>
+  </index>
+</entity>

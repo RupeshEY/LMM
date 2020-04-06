@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Types of authority limits"
+  name="AuthorityLimitType">
+  <typecode
+    code="ctr"
+    desc="The total reserves for all exposures on a claim"
+    name="Claim total reserves"/>
+  <typecode
+    code="etr"
+    desc="The total reserves for a single exposure"
+    name="Exposure total reserves"/>
+  <typecode
+    code="car"
+    desc="The available reserves for all exposures on a claim"
+    name="Claim available reserves"/>
+  <typecode
+    code="ear"
+    desc="The available reserves for a single exposure"
+    name="Exposure available reserves"/>
+  <typecode
+    code="rcs"
+    desc="The size of a single reserve change"
+    name="Reserve change size"/>
+  <typecode
+    code="cptd"
+    desc="The total amount of payments to date for the claim"
+    name="Claim payments to date"/>
+  <typecode
+    code="eptd"
+    desc="The total amount of payments to date for a single exposure"
+    name="Exposure payments to date"/>
+  <typecode
+    code="pa"
+    desc="The amount of a single payment"
+    name="Payment amount"/>
+  <typecode
+    code="per"
+    desc="The amount by which payments are allowed to exceed reserves on a claim"
+    name="Payments exceed reserves"/>
+</typelist>

@@ -1,0 +1,169 @@
+<?xml version="1.0"?>
+<!-- ********************************************************************************************************************
+    Denormalized financial calculation tables
+  ******************************************************************************************************************** -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Denormalized financial calculations for exposures."
+  entity="ExposureRpt"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="exposurerpt"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.ExposureRpt"
+    impl="com.guidewire.cc.domain.exposure.impl.ExposureRptImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.exposure.impl.ExposureRptInternal"
+    impl="com.guidewire.cc.domain.exposure.impl.ExposureRptImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+      Denormalized financial calculations for exposures.  These values are kept
+      up-to-date as financials are recorded in the system.  They can be recalculated
+      if necessary through a batch process when the server is in maintenance mode.
+    ]]></fulldescription>
+  <column
+    default="0"
+    desc="The open reserves."
+    name="OpenReserves"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    columnName="OpenReservesRprtng"
+    default="0"
+    desc="The open reserves on an exposure, in Reporting/Default Currency."
+    name="OpenReservesReporting"
+    nullok="false"
+    type="currencyamount"/>
+  <column
+    default="0"
+    desc="The available reserves on an exposure."
+    name="AvailableReserves"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    columnName="AvailableResrvRprtng"
+    default="0"
+    desc="The available reserves on an exposure, in Reporting/Default Currency."
+    name="AvailableReservesReporting"
+    nullok="false"
+    type="currencyamount"/>
+  <column
+    default="0"
+    desc="The remaining reserves on an exposure."
+    name="RemainingReserves"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    columnName="RemainingResrvRprtng"
+    default="0"
+    desc="The remaining reserves on an exposure, in Reporting/Default Currency."
+    name="RemainingReservesReporting"
+    nullok="false"
+    type="currencyamount"/>
+  <column
+    default="0"
+    desc="The total payments."
+    name="TotalPayments"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    columnName="TotalPaymentsRprtng"
+    default="0"
+    desc="The total payments on an exposure, in Reporting/Default Currency."
+    name="TotalPaymentsReporting"
+    nullok="false"
+    type="currencyamount"/>
+  <column
+    default="0"
+    desc="The total of awaiting submission payments scheduled to be sent after today."
+    name="FuturePayments"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    columnName="FuturePaymentsRprtng"
+    default="0"
+    desc="The total of awaiting submission payments scheduled to be sent after today, in Reporting/Default Currency."
+    name="FuturePaymentsReporting"
+    nullok="false"
+    type="currencyamount"/>
+  <column
+    default="0"
+    desc="The total recoveries on an exposure."
+    name="TotalRecoveries"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    columnName="TotalRecoveriesRprtng"
+    default="0"
+    desc="The total recoveries on a claim, in Reporting/Default Currency."
+    name="TotalRecoveriesReporting"
+    nullok="false"
+    type="currencyamount"/>
+  <column
+    default="0"
+    desc="The open recovery reserves on an exposure."
+    name="OpenRecoveryReserves"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    columnName="OpenRecoveryResRprtng"
+    default="0"
+    desc="The open recovery reserves on a claim, in Reporting/Default Currency."
+    name="OpenRecoveryReservesReporting"
+    nullok="false"
+    type="currencyamount"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="The exposure that the calculations are on."
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="false"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The exposure's claim."
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <!-- Unique index on ExposureID, ClaimID -->
+  <index
+    desc="One and only one exposurerpt is associated with a given exposure."
+    name="exposurerptu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ExposureID"/>
+  </index>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.financials.dbchecks.ExposureRptDBCheckBuilder"/>
+</entity>

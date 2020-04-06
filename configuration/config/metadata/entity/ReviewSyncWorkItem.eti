@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Queue of Reviews to be sent to ContactManager. This is a system-internal entity."
+  entity="ReviewSyncWorkItem"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  table="reviewsyncworkitem"
+  type="keyable">
+  <implementsInterface
+    iface="gw.cc.contact.entity.ReviewSyncWorkItem"
+    impl="com.guidewire.cc.domain.contact.impl.ReviewSyncWorkItemImpl"/>
+  <implementsEntity
+    name="WorkItem"/>
+  <fulldescription><![CDATA[Queue of Reviews to be sent to ContactManager, part of Service Provider Management. Work items are recorded as the ID value of (ClaimCenter) Review entities. This is a system-internal entity.
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ReviewID"
+    desc="Review to be transmitted."
+    fkentity="Review"
+    name="Review"
+    nullok="false"/>
+</entity>

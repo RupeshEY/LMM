@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Records a fact that the RuleVersion or DeployedRuleTag was imported from another system."
+  entity="RuleImportAuditRecord"
+  extendable="false"
+  loadable="false"
+  platform="true"
+  table="bizimportauditrecord"
+  type="versionable">
+  <foreignkey
+    fkentity="RuleVersion"
+    name="RuleVersion"
+    nullok="true"/>
+  <foreignkey
+    fkentity="DeployedRuleTag"
+    name="DeploymentTag"
+    nullok="true"/>
+  <column
+    name="GlobalRuleID"
+    nullok="false"
+    type="publicid"/>
+  <column
+    name="ImportTime"
+    nullok="true"
+    type="datetime"/>
+  <column
+    name="ImportUserName"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="30"/>
+  </column>
+</entity>

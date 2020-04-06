@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value and perm.System.wwlcmanage"
+    canVisit="gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value and perm.System.wwlcview"
+    id="WorkloadClassifications"
+    title="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification&quot;)">
+    <Variable
+      initialValue="gw.api.database.Query.make(WorkloadClassification).select()"
+      name="weights"
+      recalculateOnRefresh="true"
+      type="gw.api.database.IQueryBeanResult&lt;WorkloadClassification&gt;"/>
+    <Screen
+      editable="perm.System.wwlcmanage"
+      id="WeightedAssignmentScreen">
+      <TitleBar
+        id="WeightedAssignmentTitle"
+        title="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.Title&quot;)"/>
+      <Toolbar>
+        <ToolbarButton
+          available="perm.System.wwlcmanage"
+          confirmMessage="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.ReRunCompleteWorkloadBatchProcess&quot;)"
+          id="AddClassificationButton"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.NewClassification.Title&quot;)">
+          <MenuItem
+            action="NewWorkloadClassificationPopup.push(entity.ClaimWorkloadClassification)"
+            id="NewClaimMenuItem"
+            label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.NewClassification.NewClaimAssignment&quot;)"/>
+          <MenuItem
+            action="NewWorkloadClassificationPopup.push(entity.ExposureWorkloadClassification)"
+            id="NewExposureMenuItem"
+            label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.NewClassification.NewExposureAssignment&quot;)"/>
+        </ToolbarButton>
+        <CheckedValuesToolbarButton
+          available="perm.System.wwlcmanage"
+          checkedRowAction="CheckedValue.remove()"
+          confirmMessage="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.ReRunCompleteWorkloadBatchProcess&quot;)"
+          flags="all Row"
+          id="RemoveClassificationsButton"
+          iterator="WorkloadClassificationLV.WorkloadClassificationLV"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.DeleteClassification&quot;)"/>
+        <ToolbarDivider/>
+        <CheckedValuesToolbarButton
+          available="perm.System.wwlcmanage"
+          checkedRowAction="CheckedValue.Active = true"
+          confirmMessage="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.ReRunCompleteWorkloadBatchProcess&quot;)"
+          flags="all InactiveClassification"
+          id="EnableClassificationsButton"
+          iterator="WorkloadClassificationLV.WorkloadClassificationLV"
+          label="DisplayKey.get(&quot;Button.Activate&quot;)"
+          shortcut="V"/>
+        <CheckedValuesToolbarButton
+          available="perm.System.wwlcmanage"
+          checkedRowAction="CheckedValue.Active = false"
+          confirmMessage="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.ReRunCompleteWorkloadBatchProcess&quot;)"
+          flags="all ActiveClassification"
+          id="DisableClassificationsButton"
+          iterator="WorkloadClassificationLV.WorkloadClassificationLV"
+          label="DisplayKey.get(&quot;Button.Deactivate&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="WorkloadClassificationLV(weights)"
+        editable="perm.System.wwlcmanage"/>
+    </Screen>
+  </Page>
+</PCF>

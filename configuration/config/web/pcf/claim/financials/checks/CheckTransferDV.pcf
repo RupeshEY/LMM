@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <DetailViewPanel
+    id="CheckTransferDV">
+    <Require
+      name="NewCheck"
+      type="Check"/>
+    <Require
+      name="OldCheck"
+      type="Check"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="reserveLineInputSetHelper"
+      type="gw.api.financials.ReserveLineInputSetHelper"/>
+    <Variable
+      initialValue="false"
+      name="displayLink"
+      type="boolean"/>
+    <Variable
+      name="targetReservingCurrency"
+      type="Currency"/>
+    <InputColumn>
+      <TextInput
+        boldLabel="true"
+        id="LinkedServiceRequestInvoicesMessage"
+        label="DisplayKey.get(&quot;NVV.Financials.CheckTransfer.Check.InvoicesTip&quot;, ServiceRequestInvoiceStatus.TC_APPROVED.DisplayName, OldCheck.BulletedListOfServiceRequestInvoicesForWarning)"
+        labelAbove="true"
+        value="&quot;&quot;"
+        visible="OldCheck.ServiceRequestInvoices.HasElements"/>
+      <TextInput
+        id="CheckNumber"
+        label="DisplayKey.get(&quot;NVV.Financials.CheckTransfer.Check.CheckNumber&quot;)"
+        value="NewCheck.CheckNumber"/>
+      <PickerInput
+        conversionExpression="(PickedValue as ClaimSearchView).Claim.ClaimInfo"
+        editable="true"
+        freeInputEnabled="false"
+        id="Claim"
+        label="DisplayKey.get(&quot;NVV.Financials.CheckTransfer.Check.Claim&quot;)"
+        onPick="claimNumberOnPick()"
+        pickLocation="ClaimSearchPopup.push()"
+        required="true"
+        value="NewCheck.ClaimInfo"
+        valueType="entity.ClaimInfo"/>
+      <TypeKeyInput
+        editable="true"
+        id="TargetReservingCurrency"
+        label="DisplayKey.get(&quot;NVV.Financials.CheckTransfer.Check.ReservingCurrency&quot;)"
+        required="true"
+        value="targetReservingCurrency"
+        valueType="typekey.Currency"
+        visible="NewCheck.ClaimInfo != null and gw.util.CCConfigUtil.AllowExplicitReservingCurrency">
+        <PostOnChange
+          onChange="prepareTransfer()"/>
+      </TypeKeyInput>
+      <TextInput
+        editable="true"
+        id="Comments"
+        label="DisplayKey.get(&quot;NVV.Financials.CheckTransfer.Check.Comments&quot;)"
+        value="NewCheck.Comments"/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Financials.CheckTransfer.Check.Payments.Tip&quot;)"/>
+      <ListViewInput
+        def="CheckTransferPaymentsLV(NewCheck, Claim, displayLink, reserveLineInputSetHelper)"
+        label="DisplayKey.get(&quot;NVV.Financials.CheckTransfer.Check.Payments&quot;)">
+        <Toolbar/>
+      </ListViewInput>
+      <InputSetRef
+        def="CheckExchangeRateInputSet(NewCheck,DisplayKey.get(&quot;NVV.Financials.CheckTransfer.Check.SelectExchangeRate&quot;))"
+        visible="NewCheck.Claim != null and NewCheck.ReservingCurrency != OldCheck.ReservingCurrency and NewCheck.ReservingCurrency != NewCheck.Currency and NewCheck.ReservingCurrency != gw.api.util.CurrencyUtil.getReportingCurrency()"/>
+    </InputColumn>
+    <Code><![CDATA[function claimNumberOnPick() {
+  displayLink = (NewCheck.ClaimInfo.ClaimNumber != Claim.ClaimNumber);
+  targetReservingCurrency = OldCheck.getDefaultTargetReservingCurrencyForTransfer(NewCheck.Claim)
+  prepareTransfer()
+}
+
+function prepareTransfer() {
+  NewCheck.updateCheckForTransfer(NewCheck.Claim, OldCheck, targetReservingCurrency)
+  NewCheck.Claim.freezeCurrency()
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

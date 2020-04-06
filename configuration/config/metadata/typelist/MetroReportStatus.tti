@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<!-- ****************************************************************************
+   Metro Report Status Typelist
+  **************************************************************************** -->
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  final="true"
+  name="MetroReportStatus">
+  <typecode
+    code="new"
+    desc="The initial status of the report request"
+    name="New"
+    priority="1"/>
+  <typecode
+    code="insufficientdata"
+    desc="Some of the required fields are missing"
+    name="InsufficientData"
+    priority="2"/>
+  <typecode
+    code="validated"
+    desc="The request is validated and ready to be sent out"
+    name="Validated"
+    priority="3"/>
+  <typecode
+    code="sendingorder"
+    desc="The request is sent and waiting for the response from Metro"
+    name="SendingOrder"
+    priority="4"/>
+  <typecode
+    code="orderfailed"
+    desc="The order request is failed based on the result sent back from Metro"
+    name="OrderFailed"
+    priority="5"/>
+  <typecode
+    code="accepted"
+    desc="The Report Order File is sent and accepted by Metro"
+    name="Accepted"
+    priority="6"/>
+  <typecode
+    code="pending"
+    desc="The order was received and in process"
+    name="Pending"
+    priority="7"/>
+  <typecode
+    code="hold"
+    desc="The order is awaiting additional information from the customer"
+    name="Hold"
+    priority="8"/>
+  <typecode
+    code="deferred"
+    desc="An image was returned with a notice that the data source will take some additional time to provide the requested information"
+    name="Deferred"
+    priority="9"/>
+  <typecode
+    code="sendinginquiry"
+    desc="The Report Inquiry File is sent and waiting for the response from Metro"
+    name="SendingInquiry"
+    priority="10"/>
+  <typecode
+    code="hasreport"
+    desc="The Report is ready on the external server"
+    name="HasReport"
+    priority="11"/>
+  <typecode
+    code="downloadingreport"
+    desc="The system is in the process of downloading the report"
+    name="DownloadingReport"
+    priority="12"/>
+  <typecode
+    code="received"
+    desc="The Report is received (download) to our server"
+    name="Received"
+    priority="13"/>
+  <typecode
+    code="inquiryfailed"
+    desc="The inquiry request is failed based on the result sent back from Metro"
+    name="InquiryFailed"
+    priority="14"/>
+  <typecode
+    code="closed"
+    desc="The Report is Closed"
+    name="Closed"
+    priority="15"/>
+  <typecode
+    code="error"
+    desc="The Report request has errors"
+    name="Error"
+    priority="16"/>
+  <typecode
+    code="duplicate"
+    desc="The Report request failed due to a duplicate request"
+    name="Duplicate"
+    priority="17"/>
+</typelist>

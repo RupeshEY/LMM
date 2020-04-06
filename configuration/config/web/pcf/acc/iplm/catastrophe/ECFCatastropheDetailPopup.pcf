@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    id="ECFCatastropheDetailPopup"
+    afterCancel="Catastrophes.go()"
+    afterCommit="catastropheService.associateCatastropheWithECFClaims(catastrophe); CatastropheDetailPage.go(catastrophe)"
+    beforeCommit="catastrophe.removeNullZones()"
+    canEdit="perm.Catastrophe.edit"
+    canVisit="perm.Catastrophe.view"
+    parent="Catastrophes()"
+    title="DisplayKey.get(&quot;Accelerator.IPLM.Web.Admin.CatastropheDetail&quot;)">
+    <LocationEntryPoint
+      signature="ECFCatastropheDetailPopup(catastrophe:Catastrophe, showRelatedClaimsFinder:boolean)"/>
+    <Variable
+      name="catastrophe"
+      type="Catastrophe"/>
+    <Variable
+      name="showRelatedClaimsFinder"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.acc.iplm.services.catastrophe.CatastropheService()"
+      name="catastropheService"
+      type="gw.acc.iplm.services.catastrophe.CatastropheService"/>
+    <ScreenRef
+      def="CatastropheDetailScreen(catastrophe, true)"/>
+  </Popup>
+</PCF>

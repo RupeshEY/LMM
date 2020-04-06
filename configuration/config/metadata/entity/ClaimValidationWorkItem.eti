@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Workitems for claims to be bulk-validated using distributed work queue."
+  entity="ClaimValidationWorkItem"
+  loadable="false"
+  platform="false"
+  table="validationworkitem"
+  type="keyable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.ClaimValidationWorkItem"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimValidationWorkItemImpl"/>
+  <implementsEntity
+    name="WorkItem"/>
+  <fulldescription><![CDATA[
+        Represents a unit of validation work pending for a claim. Claims are bulk-validated using the distributed work
+        queue. A ClaimValidationWorkItem entity is created for each Claim to be validated and the queue worker threads
+        process work items as they become available.
+      
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The claim to be validated."
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+</entity>

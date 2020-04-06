@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="SecurityZones.go()"
+    afterCommit="SecurityZones.go()"
+    canEdit="perm.SecurityZone.edit"
+    canVisit="perm.SecurityZone.view"
+    id="SecurityZoneDetail"
+    parent="SecurityZones()"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.Admin.SecurityZoneDetail&quot;, securityZone.Name)">
+    <LocationEntryPoint
+      signature="SecurityZoneDetail(securityZone : SecurityZone)"/>
+    <Variable
+      name="securityZone"
+      type="SecurityZone"/>
+    <ScreenRef
+      def="SecurityZoneDetailScreen(securityZone)"/>
+  </Page>
+</PCF>

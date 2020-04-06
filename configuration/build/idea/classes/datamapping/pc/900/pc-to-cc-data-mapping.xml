@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataMapping
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../data-mapping.xsd">
+
+  <EntityMapping source="CCPolicy" target="Policy">
+    <FieldMapping source="Account" mapperClassName="gw.plugin.integration.mapping.NameTranslatingFieldMapper">
+      <MapperProperty name="NewFieldName" value="AccountNumber"/>
+    </FieldMapping>
+    <FieldMapping source="AltContact" mapperClassName="gw.plugin.pcintegration.pc900.mapping.ContactArrayFieldMapper"/>
+    <FieldMapping source="CoveredParty" mapperClassName="gw.plugin.pcintegration.pc900.mapping.ContactArrayFieldMapper"/>
+    <FieldMapping source="ExcludedParty" mapperClassName="gw.plugin.pcintegration.pc900.mapping.ContactArrayFieldMapper"/>
+    <FieldMapping source="FormerAgent" mapperClassName="gw.plugin.pcintegration.pc900.mapping.ContactArrayFieldMapper"/>
+    <FieldMapping source="FormerCoveredParty" mapperClassName="gw.plugin.pcintegration.pc900.mapping.ContactArrayFieldMapper"/>
+    <FieldMapping source="FormerDoingBusinessAs" mapperClassName="gw.plugin.pcintegration.pc900.mapping.ContactArrayFieldMapper"/>
+    <FieldMapping source="FormerExcludedParty" mapperClassName="gw.plugin.pcintegration.pc900.mapping.ContactArrayFieldMapper"/>
+    <FieldMapping source="FormerInsured" mapperClassName="gw.plugin.pcintegration.pc900.mapping.ContactArrayFieldMapper"/>
+    <FieldMapping source="FormerPolicyHolder" mapperClassName="gw.plugin.pcintegration.pc900.mapping.ContactArrayFieldMapper"/>
+    <FieldMapping source="FormerUnderwriter" mapperClassName="gw.plugin.pcintegration.pc900.mapping.ContactArrayFieldMapper"/>
+    <FieldMapping source="InsuredRep" mapperClassName="gw.plugin.pcintegration.pc900.mapping.ContactArrayFieldMapper"/>
+    <FieldMapping source="MainContact" mapperClassName="gw.plugin.pcintegration.pc900.mapping.ContactArrayFieldMapper"/>
+    <FieldMapping source="Other" mapperClassName="gw.plugin.pcintegration.pc900.mapping.ContactArrayFieldMapper"/>
+    <FieldMapping source="WCCarrier" mapperClassName="gw.plugin.pcintegration.pc900.mapping.ContactArrayFieldMapper"/>
+  </EntityMapping>
+
+  <!-- Since PolicyCenter uses gw.pl.currency.MonetaryAmount, need to translate this to gw.api.financials.CurrencyAmount
+       for appropriate fields -->
+  <EntityMapping source="CCFinancialCovTerm" target="FinancialCovTerm">
+    <FieldMapping source="FinancialAmount" mapperClassName="gw.plugin.pcintegration.pc900.mapping.MonetaryToCurrencyAmountMapper"/>
+  </EntityMapping>
+
+  <EntityMapping source="CCCoverage" target="Coverage">
+    <FieldMapping source="Deductible" mapperClassName="gw.plugin.pcintegration.pc900.mapping.MonetaryToCurrencyAmountMapper"/>
+    <FieldMapping source="ExposureLimit" mapperClassName="gw.plugin.pcintegration.pc900.mapping.MonetaryToCurrencyAmountMapper"/>
+    <FieldMapping source="IncidentLimit" mapperClassName="gw.plugin.pcintegration.pc900.mapping.MonetaryToCurrencyAmountMapper"/>
+  </EntityMapping>
+
+  <!--
+  This mapping handles a difference between PC and CC out-of-the-box configurations.
+  PC has classcodes as 4-digit strings but CC has them as 6-digit strings.  This
+  mapping pads PC's classcodes so they are legal in CC.  If there is a custom
+  configuration that changes the classcode formats, don't use this mapping.
+  -->
+  <EntityMapping source="CCClassCode" target="ClassCode">
+    <FieldMapping source="Code" mapperClassName="gw.plugin.pcintegration.pc900.mapping.ClassCodeMapper"/>
+  </EntityMapping>
+
+  <!-- Maps the CoverableID to the RiskUnit's external risk ID -->
+  <EntityMapping source="CCRiskUnit" target="RiskUnit">
+      <FieldMapping source="PolicySystemID" mapperClassName="gw.plugin.integration.mapping.NameTranslatingFieldMapper">
+          <MapperProperty name="NewFieldName" value="PolicySystemId"/>
+      </FieldMapping>
+  </EntityMapping>
+
+  <!--
+  This is an example of how to map incongruous typelists.  This mapping applies
+  when trying to coerce a String field to an UnderwritingCompanyType field.  T
+  he mapping here is as an example only; these codes are not really equivalent.
+  -->
+<!--
+  <TypeListMapping typeList="UnderwritingCompanyType">
+    <TypeCodeMapping source="1111_11111" target="child1"/>
+  </TypeListMapping>
+-->
+
+</DataMapping>

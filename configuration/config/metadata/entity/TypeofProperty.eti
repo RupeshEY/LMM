@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="TypeofProperty"
+  exportable="true"
+  platform="false"
+  table="typeofproperty"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.TypeofProperty"
+    impl="com.guidewire.cc.domain.claim.impl.TypeofPropertyImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Type of property affected in a property incident. A single incident can affect multiple types of property.
+      
+    ]]></fulldescription>
+  <foreignkey
+    columnName="IncidentID"
+    exportable="true"
+    fkentity="incident"
+    name="Incident"
+    nullok="true"/>
+  <typekey
+    desc="The type of property affected."
+    name="TypeofProperty"
+    nullok="false"
+    typelist="TypeofProperty"/>
+</entity>

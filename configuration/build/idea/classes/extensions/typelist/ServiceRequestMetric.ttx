@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Subtype typelist for entity ServiceRequestMetric"
+  name="ServiceRequestMetric">
+  <typecode
+    code="ServiceTimelinessServiceRequestMetric"
+    desc="Service Timeliness Service Metric"
+    name="Service Timeliness"
+    priority="3"/>
+  <typecode
+    code="SpecialistInitialResponseTimeServiceRequestMetric"
+    desc="Vendor Initial Response Time Service Metric"
+    name="Response Time"
+    priority="1"/>
+  <typecode
+    code="InvoiceVarianceVsQuoteServiceRequestMetric"
+    desc="Invoice Variance vs. Quote Service Metric"
+    name="Invoice Variance vs. Quote"
+    priority="4"/>
+  <typecode
+    code="QuoteTimelinessServiceRequestMetric"
+    desc="Quote Timeliness Service Metric"
+    name="Quote Timeliness"
+    priority="2"/>
+  <typecode
+    code="NumberOfDelaysServiceRequestMetric"
+    desc="NumberOfDelaysServiceRequestMetric"
+    name="Number Of Delays"
+    priority="5"/>
+  <typecode
+    code="ServiceCycleTimeServiceRequestMetric"
+    desc="Service Cycle Time Service Metric"
+    name="Cycle Time"
+    priority="6"/>
+</typelistextension>

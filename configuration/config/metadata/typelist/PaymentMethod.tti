@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Method of payment"
+  final="false"
+  name="PaymentMethod">
+  <typecode
+    code="manual"
+    desc="Manual check"
+    name="Manual check"
+    priority="1"/>
+  <typecode
+    code="check"
+    desc="Check"
+    name="Check"
+    priority="2"/>
+  <typecode
+    code="eft"
+    desc="Electronic funds transfer"
+    name="Electronic funds transfer"
+    priority="3"/>
+</typelist>

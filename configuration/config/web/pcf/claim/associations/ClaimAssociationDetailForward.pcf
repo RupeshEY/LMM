@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- Used after editing claim association - show association if claim is still part of it else go to
+    claim's association list -->
+  <Forward
+    canVisit="perm.Claim.view(Claim) and perm.ClaimAssociation.view"
+    id="ClaimAssociationDetailForward"
+    parent="ClaimAssociations(Claim)">
+    <LocationEntryPoint
+      signature="ClaimAssociationDetailForward(Claim : Claim, ClaimAssociation : ClaimAssociation)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="ClaimAssociation"
+      type="ClaimAssociation"/>
+    <ForwardCondition
+      action="ClaimAssociationDetail.go(Claim, ClaimAssociation)"
+      condition="ClaimAssociation.containsClaim(Claim)"/>
+    <ForwardCondition
+      action="ClaimAssociations.go(Claim)"/>
+  </Forward>
+</PCF>

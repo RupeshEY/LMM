@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="ClaimTransactionsScreen">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <PanelRef
+      def="ClaimTransactionsLV(claim.LatestMessagePerTransaction)"
+      id="ClaimNotifyPanel">
+      <TitleBar
+        title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimTransactions.ListViewTitle&quot;)"/>
+      <Toolbar/>
+    </PanelRef>
+  </Screen>
+</PCF>

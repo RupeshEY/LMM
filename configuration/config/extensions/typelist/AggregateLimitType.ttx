@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Aggregate limit types"
+  name="AggregateLimitType">
+  <typecode
+    code="lossdate"
+    desc="Annual limit by loss date"
+    name="Loss date"
+    priority="2"/>
+  <typecode
+    code="reporteddate"
+    desc="Annual limit by reported date"
+    name="Reported date"
+    priority="3"/>
+  <typecode
+    code="none"
+    desc="Annual limit without restrictions"
+    name="None"
+    priority="1"/>
+</typelistextension>

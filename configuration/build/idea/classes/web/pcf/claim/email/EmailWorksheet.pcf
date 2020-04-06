@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Worksheet
+    canEdit="true"
+    canVisit="perm.System.sendemail"
+    id="EmailWorksheet"
+    startInEditMode="true"
+    tabLabel="DisplayKey.get(&quot;Web.NewEmail.Email&quot;)"
+    title="DisplayKey.get(&quot;Web.NewEmail.Email&quot;)">
+    <LocationEntryPoint
+      signature="EmailWorksheet(claim : Claim)"/>
+    <LocationEntryPoint
+      signature="EmailWorksheet(activity : Activity)"/>
+    <Scope
+      location="*"/>
+    <Variable
+      name="activity"
+      type="Activity"/>
+    <Variable
+      initialValue="activity != null ? activity.Claim : null"
+      name="claim"
+      type="Claim"/>
+    <ScreenRef
+      def="CreateEmailScreen(activity, claim, activity.EmailTemplate, null)"/>
+  </Worksheet>
+</PCF>

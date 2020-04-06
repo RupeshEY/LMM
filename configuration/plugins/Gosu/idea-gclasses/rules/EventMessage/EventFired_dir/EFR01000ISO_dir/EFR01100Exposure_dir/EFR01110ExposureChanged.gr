@@ -1,0 +1,24 @@
+package rules.EventMessage.EventFired_dir.EFR01000ISO_dir.EFR01100Exposure_dir
+
+@gw.rules.RuleName("EFR01110 - Exposure Changed")
+internal class EFR01110ExposureChanged {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return messageContext.EventName == "ExposureAdded" or 
+messageContext.EventName == "ExposureChanged" or 
+messageContext.EventName == "ExposureValid"
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+var exposure = messageContext.Root as Exposure
+libraries.ISO.checkForExposureChanges(messageContext, exposure)
+
+/*end00rule*/
+
+  }
+}

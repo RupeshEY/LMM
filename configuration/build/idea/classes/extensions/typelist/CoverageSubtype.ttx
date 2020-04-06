@@ -1,0 +1,4605 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Subtype of coverage, filtered by CoverageType"
+  name="CoverageSubtype">
+  <typecode
+    code="WCFedEmpLiabCov"
+    desc="Federal Employer's Liability"
+    name="Federal Employer's Liability">
+    <category
+      code="WCFedEmpLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="EmployerLiability"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="WCEmpLiabCov"
+    desc="Workers' Comp Employer's Liability"
+    name="Workers' Comp Employer's Liability">
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="EmployerLiability"
+      typelist="ExposureType"/>
+    <category
+      code="WCEmpLiabCov"
+      typelist="CoverageType"/>
+  </typecode>
+  <typecode
+    code="WCOtherStatesMED"
+    desc="Other States Insurance - Med Only"
+    name="Other States Insurance - Med Only"
+    priority="1">
+    <category
+      code="WCOtherStatesInsurance"
+      typelist="CoverageType"/>
+    <category
+      code="WCInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="WCOtherStatesWAGES"
+    desc="Other States Insurance - Other than Med"
+    name="Other States Insurance - Other than Med"
+    priority="2">
+    <category
+      code="WCOtherStatesInsurance"
+      typelist="CoverageType"/>
+    <category
+      code="LostWages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="WCWorkersCompMED"
+    desc="WC Coverage -Med Only"
+    name="WC Coverage -Med Only"
+    priority="1">
+    <category
+      code="WCWorkersCompCov"
+      typelist="CoverageType"/>
+    <category
+      code="WCInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="WCWorkersCompWAGES"
+    desc="WC Coverage - Other than Med"
+    name="WC Coverage - Other than Med"
+    priority="2">
+    <category
+      code="WCWorkersCompCov"
+      typelist="CoverageType"/>
+    <category
+      code="LostWages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="WCWorkCompDeductMED"
+    desc="State Specific Deductible - Med Only"
+    name="State Specific Deductible - Med Only"
+    priority="1">
+    <category
+      code="WCWorkCompDeductCov"
+      typelist="CoverageType"/>
+    <category
+      code="WCInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="WCWorkCompDeductNOTMED"
+    desc="State Specific Deductible - Other than Med"
+    name="State Specific Deductible - Other than Med"
+    priority="2">
+    <category
+      code="WCWorkCompDeductCov"
+      typelist="CoverageType"/>
+    <category
+      code="LostWages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="IMSignCov"
+    desc="Inland Marine Sign"
+    name="Sign">
+    <category
+      code="IMSignCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipSchedCov"
+    desc="Scheduled Equipment"
+    name="Scheduled Equipment">
+    <category
+      code="ContractorsEquipSchedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipAdditionallyAcquiredProperty"
+    desc="Additionally Acquired Property"
+    name="Additionally Acquired Property">
+    <category
+      code="ContractorsEquipAdditionallyAcquiredProperty"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipDebrisRemoval"
+    desc="Debris Removal"
+    name="Debris Removal">
+    <category
+      code="ContractorsEquipDebrisRemoval"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipPollutionCleanup"
+    desc="Pollution Cleanup"
+    name="Pollution Cleanup">
+    <category
+      code="ContractorsEquipPollutionCleanup"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipPreservationOfProperty"
+    desc="Preservation Of Property"
+    name="Preservation Of Property">
+    <category
+      code="ContractorsEquipPreservationOfProperty"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipRentalReibursement"
+    desc="Rental Reimbursement"
+    name="Rental Reimbursement">
+    <category
+      code="ContractorsEquipRentalReibursement"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipRentedEquipment"
+    desc="Rented Equipment - per occurrence"
+    name="Rented Equipment">
+    <category
+      code="ContractorsEquipRentedEquipment"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipEmployeesTools"
+    desc="Employees Tools - per occurrence"
+    name="Employees Tools">
+    <category
+      code="ContractorsEquipEmployeesTools"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipMiscUnscheduledCov"
+    desc="Misc Unscheduled Items - per occurrence"
+    name="Misc Unscheduled Items">
+    <category
+      code="ContractorsEquipMiscUnscheduledCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="AccountsRecOffPremisesProperty"
+    desc="Off Premises Property"
+    name="Off Premises Property">
+    <category
+      code="AccountsRecOffPremisesProperty"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="IMAccountReceivableCov"
+    desc="Accounts Receivable"
+    name="Accounts Receivable">
+    <category
+      code="IMAccountReceivableCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAExcessElectronicsCov"
+    desc="Electronic Equipment"
+    name="Electronic Equipment">
+    <category
+      code="PAExcessElectronicsCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PALossOfUseCov"
+    desc="Rental Car Loss of Use"
+    name="Rental Car Loss of Use">
+    <category
+      code="PALossOfUseCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="LossOfUseDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PATapeDiscMediaCov"
+    desc="Tape / Disc Media"
+    name="Tape / Disc Media">
+    <category
+      code="PATapeDiscMediaCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PersonalPropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PALiabilityCov_vd"
+    desc="Liability - Vehicle Damage"
+    name="Liability - Vehicle Damage">
+    <category
+      code="PALiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PALiabilityCov_pd"
+    desc="Liability - Property Damage"
+    name="Liability - Property Damage">
+    <category
+      code="PALiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PALiabilityCov_bi"
+    desc="Liability - Bodily Injury"
+    name="Liability - Bodily Injury">
+    <category
+      code="PALiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAMexicoCovBI"
+    desc="Mexico Cov - BI"
+    name="Mexico Cov - BI"
+    priority="1">
+    <category
+      code="PALimitedMexicoCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAMexicoCovPD"
+    desc="Mexico Cov - PD"
+    name="Mexico Cov - PD"
+    priority="2">
+    <category
+      code="PALimitedMexicoCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAMexicoCovVEH"
+    desc="Mexico Cov - Vehicle Damage"
+    name="Mexico Cov - Vehicle Damage"
+    priority="2">
+    <category
+      code="PALimitedMexicoCov"
+      typelist="CoverageType"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAMexicoCovGEN"
+    desc="Mexico Coverage - Gen. Damages"
+    name="Mexico Cov - Gen. Damages"
+    priority="3">
+    <category
+      code="PALimitedMexicoCov"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAMedPayCov"
+    desc="Medical Payments"
+    name="Medical Payments">
+    <category
+      code="PAMedPayCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="MedPay"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPropProtectionCov"
+    desc="Property Protection Insurance"
+    name="Property Protection Insurance">
+    <category
+      code="PAPropProtectionCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAUIMBICov"
+    desc="Underinsured Motorist - Bodily Injury"
+    name="Underinsured Motorist - Bodily Injury">
+    <category
+      code="PAUIMBICov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAUIMPDCov"
+    desc="Underinsured Motorist - Property Damage"
+    name="Underinsured Motorist - Property Damage">
+    <category
+      code="PAUIMPDCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAUMBICov"
+    desc="Uninsured Motorist - Bodily Injury"
+    name="Uninsured Motorist - Bodily Injury">
+    <category
+      code="PAUMBICov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAUMPDCov"
+    desc="Uninsured Motorist - Property Damage"
+    name="Uninsured Motorist - Property Damage">
+    <category
+      code="PAUMPDCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PACollisionCov"
+    desc="Collision"
+    name="Collision">
+    <category
+      code="PACollisionCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PACollision_MA_MI_Limited"
+    desc="Collision - Limited Coverage"
+    name="Collision - Limited Coverage">
+    <category
+      code="PACollision_MA_MI_Limited"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAComprehensiveCov"
+    desc="Comprehensive"
+    name="Comprehensive">
+    <category
+      code="PAComprehensiveCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PARentalCov"
+    desc="Rental Reimbursement"
+    name="Rental Reimbursement">
+    <category
+      code="PARentalCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PATowingLaborCov"
+    desc="Towing and Labor"
+    name="Towing and Labor">
+    <category
+      code="PATowingLaborCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="TowOnly"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PADeathDisabilityCov"
+    desc="Auto Death and Disability Benefit"
+    name="Death and Disability Benefit">
+    <category
+      code="PADeathDisabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_AR"
+    desc="PIP - Arkansas"
+    name="PIP - Arkansas">
+    <category
+      code="PAPIP_AR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_DC"
+    desc="PIP - District of Columbia"
+    name="PIP - District of Columbia">
+    <category
+      code="PAPIP_DC"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_DE"
+    desc="PIP - Delaware"
+    name="PIP - Delaware">
+    <category
+      code="PAPIP_DE"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_FL"
+    desc="PIP - Florida"
+    name="PIP - Florida">
+    <category
+      code="PAPIP_FL"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_HI"
+    desc="PIP - Hawaii"
+    name="PIP - Hawaii">
+    <category
+      code="PAPIP_HI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_KS"
+    desc="PIP - Kansas"
+    name="PIP - Kansas">
+    <category
+      code="PAPIP_KS"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_KY"
+    desc="PIP - Kentucky"
+    name="PIP - Kentucky">
+    <category
+      code="PAPIP_KY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_MA"
+    desc="PIP - Massachusetts"
+    name="PIP - Massachusetts">
+    <category
+      code="PAPIP_MA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_MD"
+    desc="PIP - Maryland"
+    name="PIP - Maryland">
+    <category
+      code="PAPIP_MD"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_MI"
+    desc="PIP - Michigan"
+    name="PIP - Michigan">
+    <category
+      code="PAPIP_MI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_MN"
+    desc="PIP - Minnesota"
+    name="PIP - Minnesota">
+    <category
+      code="PAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_ND"
+    desc="PIP - North Dakota"
+    name="PIP - North Dakota">
+    <category
+      code="PAPIP_ND"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_NJ"
+    desc="PIP - New Jersey"
+    name="PIP - New Jersey">
+    <category
+      code="PAPIP_NJ"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_NY"
+    desc="PIP - New York"
+    name="PIP - New York">
+    <category
+      code="PAPIP_NY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_OR"
+    desc="PIP - Oregon"
+    name="PIP - Oregon">
+    <category
+      code="PAPIP_OR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_PA"
+    desc="PIP - Pennsylvania"
+    name="PIP - Pennsylvania">
+    <category
+      code="PAPIP_PA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_TX"
+    desc="PIP - Texas"
+    name="PIP - Texas">
+    <category
+      code="PAPIP_TX"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_UT"
+    desc="PIP - Utah"
+    name="PIP - Utah">
+    <category
+      code="PAPIP_UT"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PAPIP_WA"
+    desc="PIP - Washington"
+    name="PIP - Washington">
+    <category
+      code="PAPIP_WA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CPBldgCov"
+    desc="Building Coverage"
+    name="Building Coverage">
+    <category
+      code="CPBldgCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CPBPPCov"
+    desc="Business Personal Property Coverage"
+    name="Business Personal Property Coverage">
+    <category
+      code="CPBPPCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="Content"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CPBldgBusIncomeCov"
+    desc="Business Income Coverage"
+    name="Business Income Coverage">
+    <category
+      code="CPBldgBusIncomeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="LossOfUseDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CPBldgExtraExpenseCov"
+    desc="Extra Expense Coverage"
+    name="Extra Expense Coverage">
+    <category
+      code="CPBldgExtraExpenseCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="LossOfUseDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CPBldgStockCov"
+    desc="Business Personal Property - Separation of Coverage (Stock)"
+    name="Business Personal Property - Separation of Coverage (Stock)">
+    <category
+      code="CPBldgStockCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="Content"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CPBlanketCov"
+    desc="CPBlanket Coverage"
+    name="CPBlanket Coverage">
+    <category
+      code="CPBlanketCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPBuildingCov"
+    desc="Building"
+    name="Building">
+    <category
+      code="BOPBuildingCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPOrdinanceCov"
+    desc="Ordinance or Law"
+    name="Ordinance or Law">
+    <category
+      code="BOPOrdinanceCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPPersonalPropCov"
+    desc="Business Personal Property"
+    name="Business Personal Property">
+    <category
+      code="BOPPersonalPropCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="Content"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPReceivablesCov"
+    desc="Accounts Receivable"
+    name="Accounts Receivable">
+    <category
+      code="BOPReceivablesCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPValuablePapersCov"
+    desc="Valuable Papers"
+    name="Valuable Papers">
+    <category
+      code="BOPValuablePapersCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPCondoUnitOwnCov"
+    desc="Condo Unit Owner"
+    name="Condo Unit Owner">
+    <category
+      code="BOPCondoUnitOwnCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPElectricalSchedCov"
+    desc="Electrical Equipment - Scheduled"
+    name="Electrical Equipment - Scheduled">
+    <category
+      code="BOPElectricalSchedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPFuncPerPropCov"
+    desc="Functional Business Personal Property"
+    name="Functional Business Personal Property">
+    <category
+      code="BOPFuncPerPropCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="Content"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPTenantsLiabilityCovPD"
+    desc="Tenant's Liability - PD"
+    name="Tenant's Liability - PD"
+    priority="1">
+    <category
+      code="BOPTenantsLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPTenantsLiabilityCovGEN"
+    desc="Tenant's Liability - Gen. Damages"
+    name="Tenant's Liability - Gen. Damages"
+    priority="2">
+    <category
+      code="BOPTenantsLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPVacancyChangeCov"
+    desc="Vacancy Changes/Conditions"
+    name="Vacancy Change Coverage">
+    <category
+      code="BOPVacancyChangeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPVacancyCov"
+    desc="Vacancy Permit"
+    name="Vacancy Permit">
+    <category
+      code="BOPVacancyCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPMechBreakdownCov"
+    desc="Mechanical Breakdown"
+    name="Mechanical Breakdown">
+    <category
+      code="BOPMechBreakdownCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPUtilDirectCovPD"
+    desc="Utilities Direct Damage - Building"
+    name="Utilities Direct Damage - Building"
+    priority="1">
+    <category
+      code="BOPUtilDirectCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPUtilDirectCovCON"
+    desc="Utilities Direct Damage - Contents"
+    name="Utilities Direct Damage - Contents"
+    priority="2">
+    <category
+      code="BOPUtilDirectCov"
+      typelist="CoverageType"/>
+    <category
+      code="Content"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPUtilTimeCov"
+    desc="Utilities - Time Element"
+    name="Utilities - Time Element">
+    <category
+      code="BOPUtilTimeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="LossOfUseDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPAggLimitProjCov"
+    desc="Aggregate Limits of Insurance - Projects"
+    name="Aggregate Limits of Insurance - Projects">
+    <category
+      code="BOPAggLimitProjCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPDesigPremProj"
+    desc="Designated Premises or Project Limitation"
+    name="Designated Premises or Project Limitation">
+    <category
+      code="BOPDesigPremProj"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPPesticideApplicaorCovBI"
+    desc="Pesticide Applicator Cov - BI"
+    name="Pesticide Applicator Cov - BI"
+    priority="1">
+    <category
+      code="BOPPesticideApplicatorCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPPesticideApplicatorCovGEN"
+    desc="Pesticide Applicator Cov - Gen. Damages"
+    name="Pesticide Applicator Cov - Gen. Damages"
+    priority="2">
+    <category
+      code="BOPPesticideApplicatorCov"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPToolsSchedCov"
+    desc="Contractors Tools - Scheduled"
+    name="Contractors Tools - Scheduled">
+    <category
+      code="BOPToolsSchedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPBurgRobCov"
+    desc="Burglary and Robbery"
+    name="Burglary and Robbery">
+    <category
+      code="BOPBurgRobCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PersonalPropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPComputerFraudCov"
+    desc="Computer/Funds Transfer Fraud"
+    name="Computer/Funds Transfer Fraud">
+    <category
+      code="BOPComputerFraudCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PersonalPropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPForgeAltCov"
+    desc="Forgery and Alteration"
+    name="Forgery and Alteration">
+    <category
+      code="BOPForgeAltCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PersonalPropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPMoneySecCov"
+    desc="Money and Securities"
+    name="Money and Securities">
+    <category
+      code="BOPMoneySecCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PersonalPropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPBusIncDepPrpCov"
+    desc="Business Income - Dependent Prop"
+    name="Business Income - Dependent Property">
+    <category
+      code="BOPBusIncDepPrpCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="LossOfUseDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPBusIncExtCov"
+    desc="Business Income - Extended Period"
+    name="Business Income - Extended Period">
+    <category
+      code="BOPBusIncExtCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="LossOfUseDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPBusIncPayrollCov"
+    desc="BOP Business Income - Ordinary Payroll"
+    name="Business Income - Ordinary Payroll">
+    <category
+      code="BOPBusIncPayrollCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="LossOfUseDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPY2KIncomeExpenseCov"
+    desc="Income/Expense - Electronic Equip."
+    name="Income/Expense - Electronic Equip.">
+    <category
+      code="BOPY2KIncomeExpenseCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="LossOfUseDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPAdditionalCov"
+    desc="Special Coverage Packages"
+    name="Special Coverage Packages">
+    <category
+      code="BOPAdditionalCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPLiabilityBI"
+    desc="Liability - BI"
+    name="Liability - BI"
+    priority="1">
+    <category
+      code="BOPLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPLiabilityPD"
+    desc="Liability - PD"
+    name="Liability - PD"
+    priority="2">
+    <category
+      code="BOPLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPLiabilityGEN"
+    desc="Liability - Gen. Damages"
+    name="Liability - Gen. Damages"
+    priority="3">
+    <category
+      code="BOPLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPMedExpCov"
+    desc="Premises Medical Expense"
+    name="Premises Medical Expense">
+    <category
+      code="BOPMedExpCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPPersAdvertInj"
+    desc="Personal and Advertising Injury"
+    name="Personal and Advertising Injury">
+    <category
+      code="BOPPersAdvertInj"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPTenantFireCov"
+    desc="Tenants Fire Liability"
+    name="Tenants Fire Liability">
+    <category
+      code="BOPTenantFireCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPEmpBenefits"
+    desc="Employee Benefits Liability"
+    name="Employee Benefits Liability">
+    <category
+      code="BOPEmpBenefits"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPEmpBenExtRpting"
+    desc="Employee Benefits Extended Reporting"
+    name="Employee Benefits Extended Reporting">
+    <category
+      code="BOPEmpBenExtRpting"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPLeasedWorkerInjBI"
+    desc="Leased Workers Injury - BI"
+    name="Leased Workers Injury - BI">
+    <category
+      code="BOPLeasedWorkerInjCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPLeasedWorkerInjCovGEN"
+    desc="Leased Workers Injury - Gen. Damages"
+    name="Leased Workers Injury - Gen. Damages"
+    priority="2">
+    <category
+      code="BOPLeasedWorkerInjCov"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPPollutionCov"
+    desc="Limited Pollution Liability Extension"
+    name="Pollution - Limited Liability Extension">
+    <category
+      code="BOPPollutionCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPY2KLimitedCov"
+    desc="Computer Limited Liability Coverage"
+    name="Computer Limited Liability Coverage">
+    <category
+      code="BOPY2KLimitedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPY2KPremOnlyCov"
+    desc="Computer Liability-Premises Only"
+    name="Computer Liability-Premises Only">
+    <category
+      code="BOPY2KPremOnlyCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPFDService"
+    desc="FD Service Contract"
+    name="FD Service Contract">
+    <category
+      code="BOPFDService"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPFoodContamCovINCOME"
+    desc="Food Contamination Cov - Bus. Income"
+    name="Food Contamination Cov - Bus. Income"
+    priority="1">
+    <category
+      code="BOPFoodContamCov"
+      typelist="CoverageType"/>
+    <category
+      code="LossOfUseDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPFoodContamCovGEN"
+    desc="Food Contamination Cov - Gen. Damages"
+    name="Food Contamination Cov - Gen. Damages"
+    priority="2">
+    <category
+      code="BOPFoodContamCov"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPFungiPropCov"
+    desc="Limited Fungi Coverage (Property)"
+    name="Limited Fungi Coverage (Property)">
+    <category
+      code="BOPFungiPropCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPNewAcquiredOrgCov"
+    desc="Newly Acquired Organization Coverage"
+    name="Newly Acquired Organization Coverage">
+    <category
+      code="BOPNewAcquiredOrgCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BusIncChangeCov"
+    desc="Bus. Inc. Waiting Period Change"
+    name="Bus. Inc. Waiting Period Change">
+    <category
+      code="BusIncChangeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="LossOfUseDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPLiquorCovBI"
+    desc="Liquor Liability Cov - BI"
+    name="Liquor Liability Cov - BI "
+    priority="1">
+    <category
+      code="BOPLiquorCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPLiquorCovGEN"
+    desc="Liquor Liability Cov - Gen. Damages"
+    name="Liquor Liability Cov - Gen. Damages"
+    priority="2">
+    <category
+      code="BOPLiquorCov"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPLiquorEventsBI"
+    desc="Liquor Liability - Events - BI"
+    name="Liquor Liability - Events - BI"
+    priority="1">
+    <category
+      code="BOPLiquorEvents"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPLiquorEventsGEN"
+    desc="Liquor Liability - Events - Gen. Damages"
+    name="Liquor Liability - Events - Gen. Damages"
+    priority="2">
+    <category
+      code="BOPLiquorEvents"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPLiquorRemoveExc"
+    desc="Liquor Liability - Remove Exclusion"
+    name="Liquor Liability - Remove Exclusion">
+    <category
+      code="BOPLiquorRemoveExc"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPLocWindHailCov"
+    desc="Windstorm/Hail"
+    name="Windstorm/Hail">
+    <category
+      code="BOPLocWindHailCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPOutdoorProp"
+    desc="Outdoor Property"
+    name="Outdoor Property">
+    <category
+      code="BOPOutdoorProp"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPOutSignCov"
+    desc="Outdoor Signs"
+    name="Outdoor Signs">
+    <category
+      code="BOPOutSignCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPOverflowCovPD"
+    desc="Water Backup/Sump Overflow - Building"
+    name="Water Backup/Sump Overflow - Building"
+    priority="1">
+    <category
+      code="BOPOverflowCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPOverflowCovCON"
+    desc="Water Backup/Sump Overflow - Contents"
+    name="Water Backup/Sump Overflow - Contents"
+    priority="2">
+    <category
+      code="BOPOverflowCov"
+      typelist="CoverageType"/>
+    <category
+      code="Content"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPPersonalEffects"
+    desc="Personal Effects"
+    name="Personal Effects">
+    <category
+      code="BOPPersonalEffects"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PersonalPropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPPersPropOffPrem"
+    desc="Personal Property Off Premises"
+    name="Personal Property Off Premises">
+    <category
+      code="BOPPersPropOffPrem"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PersonalPropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPSpoilageCov"
+    desc="Spoilage"
+    name="Spoilage">
+    <category
+      code="BOPSpoilageCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="Content"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPBarberCovBI"
+    desc="Barber/Beautician Liability - BI"
+    name="Barber/Beautician Liability - BI"
+    priority="1">
+    <category
+      code="BOPBarberCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPBarberCovGEN"
+    desc="Barber/Beautician Liability - Gen. Damages"
+    name="Barber/Beautician Liability - Gen. Damages"
+    priority="2">
+    <category
+      code="BOPBarberCov"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPFuneralDirCov"
+    desc="Funeral Director Liability"
+    name="Funeral Director Liability">
+    <category
+      code="BOPFuneralDirCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPHearingAidCov"
+    desc="Hearing Aid / Optician Liability"
+    name="Hearing Aid / Optician Liability">
+    <category
+      code="BOPHearingAidCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPPharmacistCov"
+    desc="Pharmacist Limited Liability Coverage"
+    name="Pharmacist Limited Liability Coverage">
+    <category
+      code="BOPPharmacistCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPPrinterCov"
+    desc="Printers Errors and Omissions"
+    name="Printers Errors and Omissions">
+    <category
+      code="BOPPrinterCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPVetCov"
+    desc="Veterinarian Liability"
+    name="Veterinarian Liability">
+    <category
+      code="BOPVetCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPCondoAssnCov"
+    desc="Condo Association Coverage"
+    name="Condo Association Coverage">
+    <category
+      code="BOPCondoAssnCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPMotelCov"
+    desc="BOP Motel Coverage"
+    name="Motel Coverage">
+    <category
+      code="BOPMotelCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPSelfStorCov"
+    desc="Self Storage Coverage"
+    name="Self Storage Coverage">
+    <category
+      code="BOPSelfStorCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPToolsInstallUnschedCov"
+    desc="Contractors Tools/Installation"
+    name="Contractors Tools/Installation">
+    <category
+      code="BOPToolsInstallUnschedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPAlaskaAFGLCov"
+    desc="Alaska Attorney Fees - GL"
+    name="AK - Attorney Fees - GL">
+    <category
+      code="BOPAlaskaAFGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPCAEqBldgRecCov"
+    desc="CA - EQ Reconstruction"
+    name="CA - EQ Reconstruction">
+    <category
+      code="BOPCAEqBldgRecCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPCAEqBldgSubCov"
+    desc="CA Earthquake - Building Sublimits"
+    name="CA EQ - Building Sublimits">
+    <category
+      code="BOPCAEqBldgSubCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPMALeadPoisonCov"
+    desc="MA -  Lead Poisoning"
+    name="MA - Lead Poisoning">
+    <category
+      code="BOPMALeadPoisonCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPMATenantReloCov"
+    desc="MA - Apartment Coverage"
+    name="MA - Apartment Coverage">
+    <category
+      code="BOPMATenantReloCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPCertTerrorCap"
+    desc="Terror - Cap on Cert. Acts"
+    name="Terror - Cap on Cert. Acts">
+    <category
+      code="BOPCertTerrorCap"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPPropertyCov"
+    desc="Policywide Property Deductible"
+    name="Policywide Property Deductible">
+    <category
+      code="BOPPropertyCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPEqBldgCov"
+    desc="Earthquake"
+    name="Earthquake">
+    <category
+      code="BOPEqBldgCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPEQSpLeakBuilding"
+    desc="EQ Sprinkler Leakage - Building"
+    name="EQ Sprinkler Leakage - Building"
+    priority="1">
+    <category
+      code="BOPEqSpBldgCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPEQSpLeakBPP"
+    desc="EQ Sprinkler Leakage - Contents"
+    name="EQ Sprinkler Leakage - Contents"
+    priority="2">
+    <category
+      code="BOPEqSpBldgCov"
+      typelist="CoverageType"/>
+    <category
+      code="Content"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPMineSubCov"
+    desc="Mine Subsidence"
+    name="Mine Subsidence">
+    <category
+      code="BOPMineSubCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPEmpDisCov"
+    desc="Employee Dishonesty"
+    name="Employee Dishonesty">
+    <category
+      code="BOPEmpDisCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PersonalPropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPHiredAutoBI"
+    desc="Hired Auto - BI"
+    name="Hired Auto - BI"
+    priority="1">
+    <category
+      code="BOPHiredAuto"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPHiredAutoVEH"
+    desc="Hired Auto - Vehicle Damage"
+    name="Hired Auto - Vehicle Damage"
+    priority="2">
+    <category
+      code="BOPHiredAuto"
+      typelist="CoverageType"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPHiredAutoGEN"
+    desc="Hired Auto - Gen. Damages"
+    name="Hired Auto - Gen. Damages"
+    priority="3">
+    <category
+      code="BOPHiredAuto"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPNonOwnedAutoCovBI"
+    desc="Non owned auto - BI"
+    name="Non owned auto - BI"
+    priority="1">
+    <category
+      code="BOPNonOwnedAutoCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPNonOwnedAutoVEH"
+    desc="Non owned auto - Vehicle Damage"
+    name="Non owned auto - Vehicle Damage"
+    priority="2">
+    <category
+      code="BOPNonOwnedAutoCov"
+      typelist="CoverageType"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPNonOwnedAutoCovGEN"
+    desc="Non owned auto - Gen. Damages"
+    name="Non owned auto - Gen. Damages"
+    priority="3">
+    <category
+      code="BOPNonOwnedAutoCov"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPGuestPropCov"
+    desc="Guest's Property Liability"
+    name="Guest's Property">
+    <category
+      code="BOPGuestPropCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="Content"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BOPGuestSafeDepCov"
+    desc="Guests Property In Safe Deposit"
+    name="Guests Property In Safe Deposit">
+    <category
+      code="BOPGuestSafeDepCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PersonalPropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLCGLCov_ops_bi"
+    desc="General Liability Premises/Operations - Bodily Injury"
+    name="GL Premise/Ops - Bodily Injury">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLCGLCov_ops_pd"
+    desc="General Liability Premises/Operations - Property Damage"
+    name="GL Premise/Ops - Property Damage">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLCGLCov_ops_mp"
+    desc="General Liability Premises/Operations - Med Pay"
+    name="GL Premise/Ops - Med Pay">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="MedPay"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLCGLCov_ops_gd"
+    desc="General Liability Premises/Operations - General Damage"
+    name="GL Premise/Ops - General Damage">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLCGLCov_prod_bi"
+    desc="General Liability Products/Completed Operations - Bodily Injury"
+    name="GL Prod/Comp Ops - Bodily Injury">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLCGLCov_prod_pd"
+    desc="General Liability Products/Completed Operations - Property Damage"
+    name="GL Prod/Comp Ops - Property Damage">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLCGLCov_prod_mp"
+    desc="General Liability Products/Completed Operations - Med Pay"
+    name="GL Prod/Comp Ops - Med Pay">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="MedPay"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLCGLCov_prod_gd"
+    desc="General Liability Products/Completed Operations - General Damage"
+    name="GL Prod/Comp Ops - General Damage">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLCGLCov_adv_gd"
+    desc="General Liability Personal/Advertising Injury"
+    name="GL Personal/Advertising Injury">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLDeductible-BI"
+    desc="Optional GL Deductible - BI"
+    name="Optional GL Deductible - BI"
+    priority="1">
+    <category
+      code="GLDeductible"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLDeductible-PD"
+    desc="Optional GL Deductible - PD"
+    name="Optional GL Deductible - PD"
+    priority="2">
+    <category
+      code="GLDeductible"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLDeductible-GEN"
+    desc="Optional GL Deductible - Gen. Damage"
+    name="Optional GL Deductible - Gen. Damage"
+    priority="3">
+    <category
+      code="GLDeductible"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLPollutionDesignatedCovBI"
+    desc="Designated Pollutant Cov - BI"
+    name="Designated Pollutant Cov - BI"
+    priority="1">
+    <category
+      code="GLPollutionDesignatedCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLPollutionDesignatedCovPD"
+    desc="Designated Pollutant Cov - PD"
+    name="Designated Pollutant Cov - PD"
+    priority="2">
+    <category
+      code="GLPollutionDesignatedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLPollutionDesignatedCovGEN"
+    desc="Designated Pollutant Cov - General Damages"
+    name="Designated Pollutant Cov - Gen. Damages"
+    priority="2">
+    <category
+      code="GLPollutionDesignatedCov"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLPollutionShortTermCovBI"
+    desc="Short Term Pollution - BI"
+    name="Short Term Pollution - BI"
+    priority="1">
+    <category
+      code="GLPollutionShortTermCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLPollutionShortTermCovPD"
+    desc="Short Term Pollution - PD"
+    name="Short Term Pollution - PD"
+    priority="2">
+    <category
+      code="GLPollutionShortTermCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLPollutionShortTermCovGEN"
+    desc="Short Term Pollution - Gen. Damages"
+    name="Short Term Pollution - Gen. Damages"
+    priority="3">
+    <category
+      code="GLPollutionShortTermCov"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLPollutionBI"
+    desc="Pollution Coverage - BI"
+    name="Pollution Coverage - BI">
+    <category
+      code="PollutionBroadLimited"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLPollutionPD"
+    desc="Pollution Coverage - PD"
+    name="Pollution Coverage - PD"
+    priority="2">
+    <category
+      code="PollutionBroadLimited"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLPollutionGEN"
+    desc="Pollution Coverage - Gen. Damage"
+    name="Pollution Coverage - Gen. Damage"
+    priority="3">
+    <category
+      code="PollutionBroadLimited"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLLiquorLiabilityCovBI"
+    desc="Liquor Liability Cov - BI"
+    name="Liquor Liability Cov - BI"
+    priority="1">
+    <category
+      code="GLLiquorEndorsement"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLLiquorLiabilityCovPD"
+    desc="Liquor Liability Cov - PD"
+    name="Liquor Liability Cov - PD"
+    priority="2">
+    <category
+      code="GLLiquorEndorsement"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLLiquorLiabilityCovGEN"
+    desc="Liquor Liability Cov - Gen. Damages"
+    name="Liquor Liability Cov - Gen. Damages"
+    priority="3">
+    <category
+      code="GLLiquorEndorsement"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLContractLiabRRBI"
+    desc="Contract Liability - RR -BI"
+    name="Contract Liability - RR  -BI"
+    priority="1">
+    <category
+      code="GLContractualLiabRR"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLContracdtLiabRRPD"
+    desc="Contract Liability - RR -PD"
+    name="Contract Liability - RR -PD"
+    priority="3">
+    <category
+      code="GLContractualLiabRR"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="ContractLiabRRGEN"
+    desc="Contract Liability - RR -Gen Damage"
+    name="Contract Liability - RR -Gen Damage"
+    priority="1">
+    <category
+      code="GLContractualLiabRR"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLLimitedPAandInjuryCov"
+    desc="Ltd Contractual Liab for Personal Advertising and Injury: CG 22 74"
+    name="Ltd Contractual Liab for Personal Advertising and Injury">
+    <category
+      code="GLLimitedPAandInjuryCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLAddCondoCovBI"
+    desc="Condominium - B"
+    name="Condominium - BI"
+    priority="1">
+    <category
+      code="GLAddCondoCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLAddCondoCovPD"
+    desc="Condominium PD"
+    name="Condominium PD"
+    priority="2">
+    <category
+      code="GLAddCondoCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLAddCondoCovGEN"
+    desc="Condominium - Gen Damage"
+    name="Condominium - Gen Damages"
+    priority="3">
+    <category
+      code="GLAddCondoCov"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLElectronicDataLiability"
+    desc="Electronic Data Liability: CG 04 37"
+    name="Electronic Data Liability">
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GLElectronicDataLiability"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLGovSubdivisionsBI"
+    desc="Gov't. Subdivisions - BI"
+    name="Gov't. Subdivisions - BI"
+    priority="1">
+    <category
+      code="GLGovSubdivisions"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLGovSubdivisionsPD"
+    desc="Gov't. Subdivisions - PD"
+    name="Gov't. Subdivisions - PD"
+    priority="2">
+    <category
+      code="GLGovSubdivisions"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLGovSubdivisionsGEN"
+    desc="Gov't. Subdivisions Gen. Damage"
+    name="Gov't. Subdivisions Gen. Damage"
+    priority="3">
+    <category
+      code="GLGovSubdivisions"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLLawnCareBI"
+    desc="Lawn Care - BI"
+    name="Lawn Care - BI"
+    priority="1">
+    <category
+      code="GLLawnCare"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLLawnCarePD"
+    desc="Lawn Care - PD"
+    name="Lawn Care - PD"
+    priority="2">
+    <category
+      code="GLLawnCare"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLLawnCareGEN"
+    desc="Lawn Care - Gen. Damages"
+    name="Lawn Care - Gen. Damages"
+    priority="3">
+    <category
+      code="GLLawnCare"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLLtdFungiCovBI"
+    desc="Limited Fungi Cov - BI"
+    name="Limited Fungi Cov - BI"
+    priority="1">
+    <category
+      code="GLLtdFungiBacteriaCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLLtdFungiCovPD"
+    desc="Limited Fungi Cov - PD"
+    name="Limited Fungi Cov - PD"
+    priority="2">
+    <category
+      code="GLLtdFungiBacteriaCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLLtdFungiCovGEN"
+    desc="Limited Fungi Cov - Gen. Damages"
+    name="Limited Fungi Cov - Gen. Damages"
+    priority="3">
+    <category
+      code="GLLtdFungiBacteriaCov"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLPestHerbicideApplicatorSchedule"
+    desc="Pesticide Or Herbicide Applicator Coverage"
+    name="Pesticide Or Herbicide Applicator Coverage">
+    <category
+      code="GLPestHerbicideApplicatorSchedule"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLUGResourcesCovBI"
+    desc="Underground Resources Cov - BI"
+    name="Underground Resources Cov - BI"
+    priority="1">
+    <category
+      code="GLUndergroundResourceCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLUGResourcesCovPD"
+    desc="Underground Resources Cov - PD"
+    name="Underground Resources Cov - PD"
+    priority="2">
+    <category
+      code="GLUndergroundResourceCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLUGResourcesCovGEN"
+    desc="Underground Resources Cov - Gen. Damages"
+    name="Underground Resources Cov - Gen. Damages"
+    priority="3">
+    <category
+      code="GLUndergroundResourceCov"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="ProductWithdrawalLtd"
+    desc="Limited Coverage for Product Withdrawal: CG 04 36"
+    name="Product Withdrawal - Limited">
+    <category
+      code="ProductWithdrawalLtd"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLAddInjuryLeasedWorkers"
+    desc="Coverage for Injury to Leased Workers: CG 04 24"
+    name="Coverage for Injury to Leased Workers">
+    <category
+      code="GLAddInjuryLeasedWorkers"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="GLEmpBenefitsLiabilityCov"
+    desc="Employee Benefits Liability: CG 04 35"
+    name="Employee Benefits Liability">
+    <category
+      code="GLEmpBenefitsLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="Y2KLimitedCov"
+    desc="Y2K / Computer Limited Cov: CG 04 31"
+    name="Y2K/Computer - Limited">
+    <category
+      code="Y2KLimitedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="XCUSpecifiedBI"
+    desc="XCU - Specified - BI"
+    name="XCU - Specified - BI"
+    priority="1">
+    <category
+      code="XCUSpecified"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="XCUSpecifiedPD"
+    desc="XCU - Specified - PD"
+    name="XCU - Specified - PD"
+    priority="2">
+    <category
+      code="XCUSpecified"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="XCUSpecifiedGEN"
+    desc="XCU - Specified - Gen. Damages"
+    name="XCU - Specified - Gen. Damages"
+    priority="3">
+    <category
+      code="XCUSpecified"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BADOCCollisionCov"
+    desc="Collision for Drive Other Car"
+    name="Collision - DOC">
+    <category
+      code="BADOCCollisionCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BADOCCompCov"
+    desc="Comprehensive for Drive Other Car"
+    name="Comprehensive - DOC">
+    <category
+      code="BADOCCompCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BADOCLiabilityCovBI"
+    desc="Liability (Drive Other Car) - Bodily Injury"
+    name="Liability DOC - Bodily Injury">
+    <category
+      code="BADOCLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BADOCLiabilityCovPD"
+    desc="Liability DOC - Property Damage"
+    name="Liability DOC - Property Damage"
+    priority="2">
+    <category
+      code="BADOCLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BADOCLiabilityCovVEH"
+    desc="Liability DOC - Vehicle Damage"
+    name="Liability DOC - Vehicle Damage"
+    priority="3">
+    <category
+      code="BADOCLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BADOCMedPayCov"
+    desc="Medical Payments"
+    name="Medical Payments - DOC">
+    <category
+      code="BADOCMedPayCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="MedPay"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BADOCUnderinsCov"
+    desc="Underinsured Motorist for Drive Other Car"
+    name="Underinsured Motorist - DOC">
+    <category
+      code="BADOCUnderinsCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BADOCUninsuredBI"
+    desc="Uninsured Motorist - DOC - BI"
+    name="Uninsured Motorist - DOC - BI"
+    priority="1">
+    <category
+      code="BADOCUninsuredCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BADOCUninsuredPD"
+    desc="Uninsured Motorist - DOC - PD"
+    name="Uninsured Motorist - DOC - PD"
+    priority="2">
+    <category
+      code="BADOCUninsuredCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BADOCUninsuredVEH"
+    desc="Uninsured Motorist - DOC - Vehicle Damage"
+    name="Uninsured Motorist - DOC - Vehicle Damage"
+    priority="3">
+    <category
+      code="BADOCUninsuredCov"
+      typelist="CoverageType"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAAudVisDataEqip2Cov"
+    desc="Audio Visual Data Equipment"
+    name="Audio, Visual, Data Electronic Equipment- Stated Amt.">
+    <category
+      code="BAAudVisDataEqip2Cov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAFellowEmployeesCov"
+    desc="Fellow Employees"
+    name="Fellow Employees">
+    <category
+      code="BAFellowEmployeesCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAHiredCollisionCov"
+    desc="Hired Auto Collision"
+    name="Hired Auto Collision">
+    <category
+      code="BAHiredCollisionCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAHiredCompCov"
+    desc="Hired Auto Comprehensive"
+    name="Hired Auto Comprehensive">
+    <category
+      code="BAHiredCompCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAHiredLiabilityCovBI"
+    desc="Hired Auto Liability - BI"
+    name="Hired Auto Liability - BI"
+    priority="1">
+    <category
+      code="BAHiredLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAHiredLiabilityCovVEH"
+    desc="Hired Auto Liability - Vehicle Damage"
+    name="Hired Auto Liability - Vehicle Damage"
+    priority="2">
+    <category
+      code="BAHiredLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAHiredLiabilityCovPD"
+    desc="Hired Auto Liability - PD"
+    name="Hired Auto Liability - PD"
+    priority="3">
+    <category
+      code="BAHiredLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAHiredSpecPerilCov"
+    desc="Hired Auto Specified Causes of Loss"
+    name="Hired Auto Specified Causes of Loss">
+    <category
+      code="BAHiredSpecPerilCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAHiredUIMBI"
+    desc="Hired Auto Underinsured Motorist - BI"
+    name="Hired Auto Underinsured Motorist - BI"
+    priority="1">
+    <category
+      code="BAHiredUIMCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAHiredUIMPD"
+    desc="Hired Auto Underinsured Motorist - PD"
+    name="Hired Auto Underinsured Motorist -PD"
+    priority="2">
+    <category
+      code="BAHiredUIMCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAHiredUIMVEH"
+    desc="Hired Auto Underinsured Motorist - Vehicle Damage"
+    name="Hired Auto Underinsured Motorist - Vehicle Damage"
+    priority="3">
+    <category
+      code="BAHiredUIMCov"
+      typelist="CoverageType"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAHiredUMCovBI"
+    desc="Hired Auto Uninsured Motorist - BI"
+    name="Hired Auto Uninsured Motorist - BI"
+    priority="1">
+    <category
+      code="BAHiredUMCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAHiredUMCovPD"
+    desc="Hired Auto Uninsured Motorist - PD"
+    name="Hired Auto Uninsured Motorist -PD"
+    priority="2">
+    <category
+      code="BAHiredUMCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAHiredUMCovVEH"
+    desc="Hired Auto Uninsured Motorist - Vehicle Damage"
+    name="Hired Auto Uninsured Motorist - Vehicle Damage"
+    priority="3">
+    <category
+      code="BAHiredUMCov"
+      typelist="CoverageType"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BALoanLeaseGapCov"
+    desc="Loan Lease Gap"
+    name="Loan Lease Gap">
+    <category
+      code="BALoanLeaseGapCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BALossOfUseCov"
+    desc="Loss of Use"
+    name="Loss of Use">
+    <category
+      code="BALossOfUseCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="LossOfUseDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BANonownedLiabCov_bi"
+    desc="Non-Owned Auto Liability - Bodily Injury"
+    name="Non-Owned Auto Liability - Bodily Injury">
+    <category
+      code="BANonownedLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BANonownedLiabCov_pd"
+    desc="Non-Owned Auto Liability - Property Damage"
+    name="Non-Owned Auto Liability - Property Damage">
+    <category
+      code="BANonownedLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BANonownedLiabCov_vd"
+    desc="Non-Owned Auto Liability - Vehicle Damage"
+    name="Non-Owned Auto Liability - Vehicle Damage">
+    <category
+      code="BANonownedLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BANonOwndSSExtendedBI"
+    desc="Non-owned Social Srv Extended - BI"
+    name="Non-owned Social Srv Extended - BI"
+    priority="1">
+    <category
+      code="BANonOwndSSExtendCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BANonOwndSSExtendedPD"
+    desc="Non-owned Social Srv Extended - PD"
+    name="Non-owned Social Srv Extended - PD"
+    priority="1">
+    <category
+      code="BANonOwndSSExtendCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BANonOwnSSExtendCovVEH"
+    desc="Non-owned Social Srv Extended - Vehicle Damage"
+    name="Non-owned Social Srv Extended - Vehicle Damage"
+    priority="3">
+    <category
+      code="BANonOwndSSExtendCov"
+      typelist="CoverageType"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BABobtailLiabCov_bi"
+    desc="Bobtail Liability - Bodily Injury"
+    name="Bobtail Liability - Bodily Injury">
+    <category
+      code="BABobtailLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BABobtailLiabCov_pd"
+    desc="Bobtail Liability - Property Damage"
+    name="Bobtail Liability - Property Damage">
+    <category
+      code="BABobtailLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BABobtailLiabCov_vd"
+    desc="Bobtail Liability - Vehicle Damage"
+    name="Bobtail Liability - Vehicle Damage">
+    <category
+      code="BABobtailLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BADealerLimitLiabCov_bi"
+    desc="Auto Dealer Limited Liability - Bodily Injury"
+    name="Auto Dealer Limited Liability - Bodily Injury">
+    <category
+      code="BADealerLimitLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BADealerLimitLiabCov_pd"
+    desc="Auto Dealer Limited Liability - Property Damage"
+    name="Auto Dealer Limited Liability - Property Damage">
+    <category
+      code="BADealerLimitLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BADealerLimitLiabCov_vd"
+    desc="Auto Dealer Limited Liability - Vehicle Damage"
+    name="Auto Dealer Limited Liability - Vehicle Damage">
+    <category
+      code="BADealerLimitLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAOwnedLiabilityCov_bi"
+    desc="Liability - Bodily Injury"
+    name="Liability - Bodily Injury">
+    <category
+      code="BAOwnedLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAOwnedLiabilityCov_vd"
+    desc="Liability - Vehicle Damage"
+    name="Liability - Vehicle Damage">
+    <category
+      code="BAOwnedLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAOwnedLiabilityCov_pd"
+    desc="Liability - PD"
+    name="Liability - PD"
+    priority="3">
+    <category
+      code="BAOwnedLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAOwnedMedPayCov"
+    desc="Medical Payments"
+    name="Medical Payments">
+    <category
+      code="BAOwnedMedPayCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="MedPay"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BASeasonTrailerLiabCov_bi"
+    desc="Seasonal Trailer Liability - Bodily Injury"
+    name="Seasonal Trailer Liability - Bodily Injury">
+    <category
+      code="BASeasonTrailerLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BASeasonTrailerLiabCov_pd"
+    desc="Seasonal Trailer Liability - Property Damage"
+    name="Seasonal Trailer Liability - Property Damage">
+    <category
+      code="BASeasonTrailerLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BASeasonTrailerLiabCov_vd"
+    desc="Seasonal Trailer Liability - Vehicle Damage"
+    name="Seasonal Trailer Liability - Vehicle Damage">
+    <category
+      code="BASeasonTrailerLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BACollisionCov"
+    desc="Collision"
+    name="Collision">
+    <category
+      code="BACollisionCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BACollisionLimited_MAMI"
+    desc="Collision - Limited Coverage"
+    name="Collision - Limited Coverage">
+    <category
+      code="BACollisionLimited_MAMI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAComprehensiveCov"
+    desc="Comprehensive"
+    name="Comprehensive">
+    <category
+      code="BAComprehensiveCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BASpecCausesLossCov"
+    desc="Specified Causes of Loss"
+    name="Specified Causes of Loss">
+    <category
+      code="BASpecCausesLossCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BATowingLaborCov"
+    desc="Towing and Labor"
+    name="Towing and Labor">
+    <category
+      code="BATowingLaborCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAPollutLiabBasicBI"
+    desc="Pollution Liability Basic- BI"
+    name="Pollution Liability Basic- BI"
+    priority="1">
+    <category
+      code="BAPollutLiabBasicCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAPollutLiabBasicPD"
+    desc="Pollution Liability Basic - PD"
+    name="Pollution Liability Basic - PD"
+    priority="2">
+    <category
+      code="BAPollutLiabBasicCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAPollutLiabBasicGEN"
+    desc="Pollution Liability Basic - Gen. Damages"
+    name="Pollution Liability Basic - Gen. Damages"
+    priority="3">
+    <category
+      code="BAPollutLiabBasicCov"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAPollutLiabBoardBI"
+    desc="Pollution Liability Broad - BI"
+    name="Pollution Liability Broad - BI"
+    priority="1">
+    <category
+      code="BAPollutLiabBoardCov"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAPollutLiabBoardGEN"
+    desc="Pollution Liability Broad - General Damage"
+    name="Pollution Liability Broad - General Damage"
+    priority="3">
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+    <category
+      code="BAPollutLiabBoardCov"
+      typelist="CoverageType"/>
+  </typecode>
+  <typecode
+    code="BAPollutLiabBoardPD"
+    desc="Pollution Liability Broad - PD"
+    name="Pollution Liability Broad - PD"
+    priority="2">
+    <category
+      code="BAPollutLiabBoardCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BARentalCov"
+    desc="Rental Reimbursement"
+    name="Rental Reimbursement">
+    <category
+      code="BARentalCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BATapeDiscRecordCov"
+    desc="Tape Disc Record"
+    name="Tape Disc Record">
+    <category
+      code="BATapeDiscRecordCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PersonalPropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BALimitedPropDamCov"
+    desc="Limited Property Damage"
+    name="Limited Property Damage">
+    <category
+      code="BALimitedPropDamCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAOwnedUIMBICov"
+    desc="Underinsured Motorist - Bodily Injury"
+    name="Underinsured Motorist - Bodily Injury">
+    <category
+      code="BAOwnedUIMBICov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAOwnedUIMPDCov"
+    desc="Underinsured Motorist - Property Damage"
+    name="Underinsured Motorist - Property Damage">
+    <category
+      code="BAOwnedUIMPDCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAOwnedUMBICov"
+    desc="Uninsured Motorist - Bodily Injury"
+    name="Uninsured Motorist - Bodily Injury">
+    <category
+      code="BAOwnedUMBICov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAOwnedUMBISuppCov"
+    desc="Uninsured Motorist - Supplemental BI"
+    name="Uninsured Motorist - Supplemental BI">
+    <category
+      code="BAOwnedUMBISuppCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAOwnedUMPDCovPD"
+    desc="Uninsured Motorist -PD"
+    name="Uninsured Motorist -PD"
+    priority="2">
+    <category
+      code="BAOwnedUMPDCov"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAOwnedUMPDCovVEH"
+    desc="Uninsured Motorist - Vehicle Damage"
+    name="Uninsured Motorist - Vehicle Damage"
+    priority="2">
+    <category
+      code="BAOwnedUMPDCov"
+      typelist="CoverageType"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="BAPropProtectionCov"
+    desc="Property Protection Insurance"
+    name="Property Protection Insurance">
+    <category
+      code="BAPropProtectionCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CADeathDisabilityCov"
+    desc="Auto Death and Disability Benefit"
+    name="Auto Death and Disability Benefit">
+    <category
+      code="CADeathDisabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CAPIP_DE"
+    desc="PIP - Delaware"
+    name="PIP - Delaware">
+    <category
+      code="CAPIP_DE"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CAPIP_FL"
+    desc="PIP - Florida"
+    name="PIP - Florida">
+    <category
+      code="CAPIP_FL"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CAPIP_HI"
+    desc="PIP - Hawaii"
+    name="PIP - Hawaii">
+    <category
+      code="CAPIP_HI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CAPIP_KS"
+    desc="PIP - Kansas"
+    name="PIP - Kansas">
+    <category
+      code="CAPIP_KS"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CAPIP_KY"
+    desc="PIP - Kentucky"
+    name="PIP - Kentucky">
+    <category
+      code="CAPIP_KY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CAPIP_MA"
+    desc="PIP - Massachusetts"
+    name="PIP - Massachusetts">
+    <category
+      code="CAPIP_MA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CAPIP_MD"
+    desc="PIP - Maryland"
+    name="PIP - Maryland">
+    <category
+      code="CAPIP_MD"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CAPIP_MI"
+    desc="PIP - Michigan"
+    name="PIP - Michigan">
+    <category
+      code="CAPIP_MI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CAPIP_MN"
+    desc="PIP - Minnesota"
+    name="PIP - Minnesota">
+    <category
+      code="CAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CAPIP_ND"
+    desc="PIP - North Dakota"
+    name="PIP - North Dakota">
+    <category
+      code="CAPIP_ND"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CAPIP_NJ"
+    desc="PIP - New Jersey"
+    name="PIP - New Jersey">
+    <category
+      code="CAPIP_NJ"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CAPIP_NY"
+    desc="PIP - New York"
+    name="PIP - New York">
+    <category
+      code="CAPIP_NY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CAPIP_OR"
+    desc="PIP - Oregon"
+    name="PIP - Oregon">
+    <category
+      code="CAPIP_OR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CAPIP_PA"
+    desc="PIP - Pennsylvania"
+    name="PIP - Pennsylvania">
+    <category
+      code="CAPIP_PA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CAPIP_TX"
+    desc="PIP - Texas"
+    name="PIP - Texas">
+    <category
+      code="CAPIP_TX"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CAPIP_UT"
+    desc="PIP - Utah"
+    name="PIP - Utah">
+    <category
+      code="CAPIP_UT"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CAPIP_WA"
+    desc="PIP - Washington"
+    name="PIP - Washington">
+    <category
+      code="CAPIP_WA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CA_PIP_AR"
+    desc="PIP - Arkansas"
+    name="PIP - Arkansas">
+    <category
+      code="CA_PIP_AR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="CA_PIP_DC"
+    desc="PIP - District Of Columbia"
+    name="PIP - District Of Columbia">
+    <category
+      code="CA_PIP_DC"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+    <category
+      code="PIPDamages"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="DPDWTheft_Contents"
+    desc="Dwelling Theft"
+    name="Dwelling Theft"
+    priority="2">
+    <category
+      code="DPDW_Theft_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="Content"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HODWEarthQuake_PD"
+    desc="Earthquake - Property Damage"
+    name="Earthquake - Property Damage"
+    priority="1">
+    <category
+      code="HODW_Earthquake_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="Dwelling"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HODWEarthQuake_OS"
+    desc="Earthquake - Other Structures"
+    name="Earthquake - Other Structures"
+    priority="2">
+    <category
+      code="HODW_Earthquake_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="OtherStructure"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HODWEarthQuake_PPD"
+    desc="Earthquake - Personal Property"
+    name="Earthquake - Personal Property"
+    priority="3">
+    <category
+      code="HODW_Earthquake_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="Content"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="DPDWLossOfUse"
+    desc="Dwelling Fire - Loss of Use"
+    name="Dwelling Fire - Loss of Use"
+    priority="1">
+    <category
+      code="DPDW_Loss_Of_Use_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="LivingExpenses"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="DPDWDwellingDWLG"
+    desc="Dwelling Fire - Dwelling"
+    name="Dwelling Fire - Dwelling"
+    priority="2">
+    <category
+      code="DPDW_Dwelling_Cov_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="Dwelling"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="DPLIMedPay"
+    desc="Dwelling Med Pay"
+    name="Dwelling Med Pay"
+    priority="1">
+    <category
+      code="DPLI_Med_Pay_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="MedPay"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="DPDWOrdinanceLaw"
+    desc="Dwelling - Ordinance or Law"
+    name="Dwelling - Ordinance or Law"
+    priority="1">
+    <category
+      code="DPDW_OrdinanceCov_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="DPDWOtherStructures"
+    desc="Dwelling - Other Structures"
+    name="Dwelling - Other Structures"
+    priority="1">
+    <category
+      code="DPDW_Other_Structures_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="OtherStructure"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="DPLIPersonalLiabilityBI"
+    desc="Personal Liability - BI"
+    name="Personal Liability - BI"
+    priority="1">
+    <category
+      code="DPLI_Personal_Liability_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="DPLIPersonalLiabilityPD"
+    desc="Personal Liability - PD"
+    name="Personal Liability - PD"
+    priority="2">
+    <category
+      code="DPLI_Personal_Liability_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="DPLIPersonalLiabilityGEN"
+    desc="Personal Liability - Gen. Damages"
+    name="Personal Liability - Gen. Damages"
+    priority="3">
+    <category
+      code="DPLI_Personal_Liability_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="DPDWPersonalProperty"
+    desc="Dwelling - Personal Property"
+    name="Dwelling - Personal Property"
+    priority="1">
+    <category
+      code="DPDW_Personal_Property_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="Content"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HOLIPersonalInjury"
+    desc="HO Personal/Advertising  Injury"
+    name="HO Personal/Advertising  Injury"
+    priority="1">
+    <category
+      code="HOLI_PersonalInjury_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HODWDwelling"
+    desc="HO - Dwelling"
+    name="HO - Dwelling"
+    priority="1">
+    <category
+      code="HODW_Dwelling_Cov_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="Dwelling"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HODWLossOfUse"
+    desc="HO  Loss of Use"
+    name="HO - Loss of Use"
+    priority="1">
+    <category
+      code="HODW_Loss_Of_Use_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="LivingExpenses"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HOLIMed"
+    desc="HO - Med Pay"
+    name="HO - Med Pay"
+    priority="1">
+    <category
+      code="HOLI_Med_Pay_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="MedPay"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HODWOrdinanceLaw"
+    desc="HO - Ordinance or Law"
+    name="HO - Ordinance or Law"
+    priority="1">
+    <category
+      code="HODW_OrdinanceCov_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HODWOtherStructures"
+    desc="HO  Other Structures"
+    name="HO  Other Structures"
+    priority="1">
+    <category
+      code="HODW_Other_Structures_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="OtherStructure"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HOLIPersonalLiabBI"
+    desc="HO Liability - BI"
+    name="HO Liability - BI"
+    priority="1">
+    <category
+      code="HOLI_Personal_Liability_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HOLIPersonalLiabPD"
+    desc="HO Liability PD"
+    name="HO Liability PD"
+    priority="2">
+    <category
+      code="HOLI_Personal_Liability_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HOLIPersonalLiabGEN"
+    desc="HO Liability - Gen. Damages"
+    name="HO Liability - Gen. Damages"
+    priority="3">
+    <category
+      code="HOLI_Personal_Liability_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HODWPersonalProp"
+    desc="HO Personal Property"
+    name="HO Personal Property"
+    priority="1">
+    <category
+      code="HODW_Personal_Property_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="Content"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HODWInflation"
+    desc="HO Inflation Guard"
+    name="HO Inflation Guard"
+    priority="1">
+    <category
+      code="HODW_InflationGaurd_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HODWFungi"
+    desc="HO Fungi etal"
+    name="HO Fungi etal"
+    priority="1">
+    <category
+      code="HODW_FungiCov_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HOFungi"
+    desc="HO Fungi - FL cov"
+    name="HO Fungi - FL cov"
+    priority="1">
+    <category
+      code="HODW_FungiCovFlorida_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HOLIOtherInsuredRes"
+    desc="HO Other Insured Residences"
+    name="HO Other Insured Residences"
+    priority="1">
+    <category
+      code="HOLI_OtherInsuredResidence_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="OtherStructure"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HODWOtherStructureOffPremises"
+    desc="HO Off Premises Structures"
+    name="HO Off Premises Structures"
+    priority="1">
+    <category
+      code="HODW_OtherStructuresOffPremise_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="OtherStructure"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HODWOtherStructureOnPremises"
+    desc="HO Other Structures on Premises"
+    name="HO Other Structures on Premises"
+    priority="1">
+    <category
+      code="HODW_OtherStructuresOnPremise_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="OtherStructure"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HODWPersPropAtOthResidences"
+    desc="HO Personal Prop at Other Residences"
+    name="HO Personal Prop at Other Residences"
+    priority="1">
+    <category
+      code="HODW_PersonalPropertyOffResidence_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="Content"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HODWSchedPersProperty"
+    desc="HO Scheduled Personal Property"
+    name="HO Scheduled Personal Property"
+    priority="1">
+    <category
+      code="HODW_ScheduledProperty_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="Content"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HODWSecIDeduct"
+    desc="HO Property Deductibles"
+    name="HO Property Deductibles"
+    priority="1">
+    <category
+      code="HODW_SectionI_Ded_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HOLILtdComputerLiability"
+    desc="HO Ltd. Computer Liability"
+    name="HO Ltd. Computer Liability"
+    priority="1">
+    <category
+      code="HOLI_LimitedComputer_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HOLIFungi"
+    desc="HO Ltd. Fungi Liability"
+    name="HO Ltd. Fungi Liability"
+    priority="1">
+    <category
+      code="HOLI_FungiCov_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HODWSpecLimitsCovC"
+    desc="HO Special Limits - Personal Property"
+    name="HO Special Limits - Personal Property"
+    priority="1">
+    <category
+      code="HODW_SpecialLimitsCovC_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="Content"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="HODWSpecStrucOffPremises"
+    desc="HO Specific Structures Off Premises"
+    name="HO Specific Structures Off Premises"
+    priority="1">
+    <category
+      code="HODW_SpecificStructuresOffPremise_HOE"
+      typelist="CoverageType"/>
+    <category
+      code="OtherStructure"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PUPLiabilityBI"
+    desc="Personal Umbrella - BI"
+    name="Personal Umbrella - BI"
+    priority="1">
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+    <category
+      code="PUP_Primary_LiabilityCov_PUE"
+      typelist="CoverageType"/>
+  </typecode>
+  <typecode
+    code="PUPLiabilityPD"
+    desc="Personal Umbrella - PD"
+    name="Personal Umbrella - PD"
+    priority="2">
+    <category
+      code="PUP_Primary_LiabilityCov_PUE"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PUPLiabilityGEN"
+    desc="Personal Umbrella - Gen. Damages"
+    name="Personal Umbrella - Gen. Damages"
+    priority="3">
+    <category
+      code="PUP_Primary_LiabilityCov_PUE"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="PUPWorldWide"
+    desc="Personal Umbrella - Worldwide Cov"
+    name="Personal Umbrella - Worldwide Cov"
+    priority="1">
+    <category
+      code="PUP_WorldWideCov_PUE"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="gl_gd2"
+    desc="General Liability - General Damage 2"
+    name="General Liability - General Damage 2">
+    <category
+      code="EANDO"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="eando_gd"
+    desc="E and O - General Damage"
+    name="E and O - General Damage">
+    <category
+      code="EANDO"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="dando_gd"
+    desc="Directors and Officers - General Damage"
+    name="Directors and Officers - General Damage">
+    <category
+      code="DandO"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="malp_bid"
+    desc="General liability - Bodily Injury"
+    name="General liability - Bodily Injury">
+    <category
+      code="MALP"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="farm_pd"
+    desc="Farmowners - Property Damage"
+    name="Farmowners - Property Damage">
+    <category
+      code="FARM"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="farm_bid"
+    desc="Farmowners - Bodily Injury"
+    name="Farmowners - Bodily Injury">
+    <category
+      code="FARM"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="bag_loss_damg_dly"
+    desc="Loss, damage or delay of baggage"
+    name="Baggage - Loss, Damage or Delay">
+    <category
+      code="baggage"
+      typelist="CoverageType"/>
+    <category
+      code="Baggage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="mpay_travel"
+    desc="Medical expenses for the travel line"
+    name="Travel - Medical Expenses">
+    <category
+      code="health_travel"
+      typelist="CoverageType"/>
+    <category
+      code="MedPay"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="hiredauto_dmg_travel"
+    desc="Hired or rented auto damages"
+    name="Hired Auto Damages">
+    <category
+      code="hiredauto_travel"
+      typelist="CoverageType"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="liab_trav_ad"
+    desc="Auto damage liability"
+    name="Liability - Auto Damages">
+    <category
+      code="liab_travel"
+      typelist="CoverageType"/>
+    <category
+      code="VehicleDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="liab_trav_bi"
+    desc="Bodily injury damage liability"
+    name="Liability - Bodily Injury Damage">
+    <category
+      code="liab_travel"
+      typelist="CoverageType"/>
+    <category
+      code="BodilyInjuryDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="liab_trav_gd"
+    desc="General damage liability"
+    name="Liability - General Damage">
+    <category
+      code="liab_travel"
+      typelist="CoverageType"/>
+    <category
+      code="GeneralDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="liab_trav_pr"
+    desc="Property damage liability"
+    name="Liability - Property Damage">
+    <category
+      code="liab_travel"
+      typelist="CoverageType"/>
+    <category
+      code="PropertyDamage"
+      typelist="ExposureType"/>
+  </typecode>
+  <typecode
+    code="TripCancelDelay"
+    desc="Trip - Cancellation or Delay"
+    name="Trip - Cancellation or Delay">
+    <category
+      code="trip"
+      typelist="CoverageType"/>
+    <category
+      code="TripCancellationDelay"
+      typelist="ExposureType"/>
+  </typecode>
+</typelistextension>

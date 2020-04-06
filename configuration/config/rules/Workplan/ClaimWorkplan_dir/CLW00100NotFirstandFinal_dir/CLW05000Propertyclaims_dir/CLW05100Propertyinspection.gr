@@ -1,0 +1,22 @@
+package rules.Workplan.ClaimWorkplan_dir.CLW00100NotFirstandFinal_dir.CLW05000Propertyclaims_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("CLW05100 - Property inspection")
+internal class CLW05100Propertyinspection {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.Strategy == TC_PROP_NORMAL
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.createActivityFromPattern(
+    null, ActivityPattern.finder.getActivityPatternByCode("property_inspection"))
+/*end00rule*/
+
+  }
+}

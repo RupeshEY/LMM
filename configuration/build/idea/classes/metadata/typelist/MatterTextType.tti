@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<!-- MatterTextType -->
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The type of matter text."
+  final="true"
+  name="MatterTextType">
+  <typecode
+    code="SettlementPlan"
+    desc="The current settlement plan."
+    name="Settlement plan"/>
+  <typecode
+    code="AltToSettlement"
+    desc="Describes the current alternative to settling; e.g., what is the cost of settling and the likelihood that the defense can win?"
+    name="Alternative to settlement"/>
+  <typecode
+    code="DefenseArgument"
+    desc="The basics of the current defense argument. Allows busy adjusters to quickly see negotiating points while disrupted by outside plaintiff's counsel."
+    name="Defense argument"/>
+  <typecode
+    code="PlaintiffArgument"
+    desc="The corollary to the defense argument."
+    name="Plaintiff argument"/>
+  <typecode
+    code="RecommendedActions"
+    desc="Actions currently recommended by ClaimCenter or by third-party decision support systems."
+    name="Recommended actions"/>
+</typelist>

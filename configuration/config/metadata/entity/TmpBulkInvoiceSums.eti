@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table for upgrade to bulk invoices."
+  entity="TmpBulkInvoiceSums"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="tmpbulkinvoicesums"
+  temporary="true"
+  type="keyable">
+  <implementsInterface
+    iface="gw.cc.financials.bulkpay.entity.TmpBulkInvoiceSums"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.TmpBulkInvoiceSumsImpl"/>
+  <column
+    desc="Temp BulkInvoice Total Amount."
+    exportable="false"
+    name="TotalAmount"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Temp BulkInvoice Approved Amount."
+    exportable="false"
+    name="ApprovedAmount"
+    nullok="true"
+    type="money"/>
+  <typekey
+    desc="Temp BulkInvoice Currency."
+    exportable="false"
+    name="TmpCurrency"
+    nullok="true"
+    typelist="currency"/>
+</entity>

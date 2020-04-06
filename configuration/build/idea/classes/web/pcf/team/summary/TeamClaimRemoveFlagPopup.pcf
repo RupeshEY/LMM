@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="Claim.clearFlag(RemoveFlagInfo.note)"
+    canEdit="true"
+    id="TeamClaimRemoveFlagPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Team.RemoveFlag&quot;)">
+    <LocationEntryPoint
+      signature="TeamClaimRemoveFlagPopup(Claim : Claim)"/>
+    <LocationEntryPoint
+      signature="TeamClaimRemoveFlagPopup(Claim : Claim, ViaTeamScreen : Boolean)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="new RemoveFlagInfo()"
+      name="RemoveFlagInfo"
+      type="RemoveFlagInfo"/>
+    <Variable
+      initialValue="true"
+      name="ViaTeamScreen"
+      type="Boolean"/>
+    <Screen
+      id="RemoveFlagScreen">
+      <Toolbar>
+        <EditButtons
+          updateLabel="DisplayKey.get(&quot;Web.Claim.RemoveFlag.UpdateButton&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="RemoveFlagInfoDV(RemoveFlagInfo, Claim, ViaTeamScreen)"/>
+    </Screen>
+  </Popup>
+</PCF>

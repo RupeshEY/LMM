@@ -1,0 +1,885 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Third column of Contributing factors array"
+  name="ResContributingFactors">
+  <!-- Environment Factors Weather Conditions -->
+  <typecode
+    code="Rain"
+    desc="Rain"
+    name="Rain">
+    <category
+      code="Weather"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Snow"
+    desc="Snow"
+    name="Snow">
+    <category
+      code="Weather"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Sleet"
+    desc="Sleet"
+    name="Sleet">
+    <category
+      code="Weather"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Hail"
+    desc="Hail"
+    name="Hail">
+    <category
+      code="Weather"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="HighWind"
+    desc="High Wind/Wind Gust"
+    name="High Wind/Wind Gust">
+    <category
+      code="Weather"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="WthOther"
+    desc="Other"
+    name="Other Weather">
+    <category
+      code="Weather"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- Road Surface Conditions -->
+  <typecode
+    code="Dry"
+    desc="Dry"
+    name="Dry">
+    <category
+      code="RoadSurface"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Wet"
+    desc="Wet"
+    name="Wet">
+    <category
+      code="RoadSurface"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Ice"
+    desc="Ice"
+    name="Ice">
+    <category
+      code="RoadSurface"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="SnowSlush"
+    desc="Snow or Slush"
+    name="Snow or Slush">
+    <category
+      code="RoadSurface"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="SandMudDirt"
+    desc="Sand / Mud / Dirt"
+    name="Sand / Mud / Dirt">
+    <category
+      code="RoadSurface"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Oil"
+    desc="Oil"
+    name="Oil">
+    <category
+      code="RoadSurface"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Gravel"
+    desc="Gravel"
+    name="Gravel">
+    <category
+      code="RoadSurface"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="RDOther"
+    desc="Other"
+    name="Other Road Surface">
+    <category
+      code="RoadSurface"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- Light Conditions -->
+  <typecode
+    code="Daylight"
+    desc="Daylight"
+    name="Daylight">
+    <category
+      code="LightCond"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Dusk"
+    desc="Dusk"
+    name="Dusk">
+    <category
+      code="LightCond"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Dawn"
+    desc="Dawn"
+    name="Dawn">
+    <category
+      code="LightCond"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="NightLight"
+    desc="Night lighted"
+    name="Night lighted">
+    <category
+      code="LightCond"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="nghtnolght"
+    desc="Night not lighted"
+    name="Night not lighted">
+    <category
+      code="LightCond"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="lgtOther"
+    desc="Other Light Condition"
+    name="Other Light Condition">
+    <category
+      code="LightCond"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- Visiblity -->
+  <typecode
+    code="solarglare"
+    desc="Solar glare"
+    name="Solar glare">
+    <category
+      code="Visibility"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="blowdebris"
+    desc="Blowing debris"
+    name="Blowing debris">
+    <category
+      code="Visibility"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Smoke"
+    desc="Smoke"
+    name="Smoke">
+    <category
+      code="Visibility"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Fog"
+    desc="Fog"
+    name="Fog">
+    <category
+      code="Visibility"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Othervis"
+    desc="Other Visibility"
+    name="Other Visibility">
+    <category
+      code="Visibility"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- Highway Type -->
+  <typecode
+    code="notphysdiv"
+    desc="Not physically divided"
+    name="Not physically divided">
+    <category
+      code="HwyType"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="divwobarrier"
+    desc="Divided without barrier"
+    name="Divided without barrier">
+    <category
+      code="HwyType"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="divwbarrier"
+    desc="Divided with barrier"
+    name="Divided with barrier">
+    <category
+      code="HwyType"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="oneway"
+    desc="One way"
+    name="One way">
+    <category
+      code="HwyType"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="uncontinter"
+    desc="uncontrolled intersection"
+    name="uncontrolled intersection">
+    <category
+      code="HwyType"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="onramp"
+    desc="on ramp"
+    name="on ramp">
+    <category
+      code="HwyType"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="offramp"
+    desc="off ramp"
+    name="off ramp">
+    <category
+      code="HwyType"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="otherhwy"
+    desc="Other Highway Type"
+    name="Other Highway Type">
+    <category
+      code="HwyType"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- Driver Factors Hours on Duty Conditions -->
+  <typecode
+    code="lessthan1"
+    desc="Less Than One Hour"
+    name="&lt; 1 hr"
+    priority="1">
+    <category
+      code="HoursOnDuty"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="1to4hours"
+    desc="One hour to 4 hours and 59 minutes"
+    name="1hr - 04:59hrs"
+    priority="2">
+    <category
+      code="HoursOnDuty"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="5to9hours"
+    desc="Five hours to 9 hours and 59 minutes"
+    name="5hrs - 09:59hrs"
+    priority="3">
+    <category
+      code="HoursOnDuty"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="tenhours"
+    desc="Ten hours or more"
+    name="10 hours or more"
+    priority="4">
+    <category
+      code="HoursOnDuty"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- Days on Duty -->
+  <typecode
+    code="lessoneday"
+    desc="less than one day"
+    name="&lt; 1 day"
+    priority="1">
+    <category
+      code="DaysOnDuty"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="onetothree"
+    desc="1-3 days"
+    name="1-3 days"
+    priority="2">
+    <category
+      code="DaysOnDuty"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="fourtoseven"
+    desc="4-7 days"
+    name="4-7 days"
+    priority="3">
+    <category
+      code="DaysOnDuty"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="lessseven"
+    desc="greater than 7 days"
+    name="&gt; 7days"
+    priority="4">
+    <category
+      code="DaysOnDuty"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- Miles per hour -->
+  <typecode
+    code="zerotonine"
+    desc="0 - 9"
+    name="0 - 9">
+    <category
+      code="Milesph"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="tentwentyfive"
+    desc="10 to 25"
+    name="10 to 25">
+    <category
+      code="Milesph"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="twentyfivefourty"
+    desc="25 to 40"
+    name="25 to 40">
+    <category
+      code="Milesph"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="fourtyonesixty"
+    desc="41 to 60"
+    name="41 to 60">
+    <category
+      code="Milesph"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="sixtyoneplus"
+    desc="61 or greater"
+    name="61 or greater">
+    <category
+      code="Milesph"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- Housekeeping -->
+  <typecode
+    code="OrdinaryComb"
+    desc="Ordinary Combustibles"
+    name="Ordinary Combustibles">
+    <category
+      code="Housekeeping"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="GreaseFlameLiq"
+    desc="Grease/Flammable Liquid"
+    name="Grease/Flammable Liquid">
+    <category
+      code="Housekeeping"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="LintDust"
+    desc="Lint/Dust"
+    name="Lint/Dust">
+    <category
+      code="Housekeeping"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Otherhouse"
+    desc="Other"
+    name="Other Housekeeping">
+    <category
+      code="Housekeeping"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- Storage -->
+  <typecode
+    code="SolidPiles"
+    desc="Solid Piles"
+    name="Solid Piles">
+    <category
+      code="Storage"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Racks"
+    desc="Racks"
+    name="Racks">
+    <category
+      code="Storage"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Otherstore"
+    desc="Other Storage"
+    name="Other Storage">
+    <category
+      code="Storage"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- Physical Features -->
+  <typecode
+    code="IneffFireWalls"
+    desc="Ineffective Fire Walls/Doors"
+    name="Ineffective Fire Walls/Doors">
+    <category
+      code="PhysFeatures"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="UnprotVertOpen"
+    desc="Unprotected Verticle Openings"
+    name="Unprotected Verticle Openings">
+    <category
+      code="PhysFeatures"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="ImproperDucts"
+    desc="Improperly Spaced Ducts"
+    name="Improperly Spaced Ducts">
+    <category
+      code="PhysFeatures"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="OtherPhs"
+    desc="Other Physical Features"
+    name="Other Physical Features">
+    <category
+      code="PhysFeatures"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- Discovery -->
+  <typecode
+    code="Delayed"
+    desc="Delayed"
+    name="Delayed">
+    <category
+      code="Discovery"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Inappropriate"
+    desc="Inappropriate"
+    name="Inappropriate">
+    <category
+      code="Discovery"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="otherdiscov"
+    desc="Other Discovery"
+    name="Other Discovery">
+    <category
+      code="Discovery"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- InstructionsGL -->
+  <typecode
+    code="defectinstr"
+    desc="Defective instructions"
+    name="Defective instructions">
+    <category
+      code="Instructions"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="insuffinstr"
+    desc="Insufficient instructions"
+    name="Insufficient instructions">
+    <category
+      code="Instructions"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="inapproplang"
+    desc="anguage inappropriate for foreign speaking market"
+    name="Language inappropriate for foreign speaking market">
+    <category
+      code="Instructions"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="misleadinstr"
+    desc="Misleading instructions"
+    name="Misleading instructions">
+    <category
+      code="Instructions"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="noinstr"
+    desc="No instructions"
+    name="No instructions">
+    <category
+      code="Instructions"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- MarketingSales GL -->
+  <typecode
+    code="encourage"
+    desc="Encouraged misuse"
+    name="Encouraged misuse">
+    <category
+      code="MarketingSales"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="failnotify"
+    desc="Failure to notify of defect/recall/retrofit"
+    name="Failure to notify of defect/recall/retrofit">
+    <category
+      code="MarketingSales"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="misrep"
+    desc="Misrepresentation"
+    name="Misrepresentation">
+    <category
+      code="MarketingSales"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- Warnings GL -->
+  <typecode
+    code="failwarn"
+    desc="Failure to warn"
+    name="Failure to warn">
+    <category
+      code="Warnings"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="inadequate"
+    desc="Inadequate warnings"
+    name="Inadequate warnings">
+    <category
+      code="Warnings"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="misleading"
+    desc="Misleading warnings"
+    name="Misleading warnings">
+    <category
+      code="Warnings"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- NonFood GL -->
+  <typecode
+    code="design"
+    desc="Design"
+    name="Design">
+    <category
+      code="NonFood"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="manufacture"
+    desc="Manufacture"
+    name="Manufacture">
+    <category
+      code="NonFood"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="warranty"
+    desc="Warranty/Performance"
+    name="Warranty/Performance">
+    <category
+      code="NonFood"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="repairs"
+    desc="Repairs/Maintanence"
+    name="Repairs/Maintanence">
+    <category
+      code="NonFood"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="installation"
+    desc="Installation"
+    name="Installation">
+    <category
+      code="NonFood"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="othernon"
+    desc="Other"
+    name="Other">
+    <category
+      code="NonFood"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- Food GL -->
+  <typecode
+    code="foreign"
+    desc="Foreign substance"
+    name="Foreign substance">
+    <category
+      code="Food"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="spoiled"
+    desc="Spoiled"
+    name="Spoiled">
+    <category
+      code="Food"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="bacterial"
+    desc="Bacterial"
+    name="Bacterial">
+    <category
+      code="Food"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="bornchem"
+    desc="foodborne chemical toxin"
+    name="Foodborne chemical toxin">
+    <category
+      code="Food"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="otherfood"
+    desc="Other"
+    name="Other Food">
+    <category
+      code="Food"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- SurfaceArea GL -->
+  <typecode
+    code="curb"
+    desc="Curb"
+    name="Curb">
+    <category
+      code="SurfaceArea"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="elevcha"
+    desc="Elevation Change"
+    name="Elevation Change">
+    <category
+      code="SurfaceArea"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="floor"
+    desc="Floor Defect"
+    name="Floor Defect">
+    <category
+      code="SurfaceArea"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="grmusa"
+    desc="Grass / Mud / Sand"
+    name="Grass / Mud / Sand">
+    <category
+      code="SurfaceArea"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="incline"
+    desc="Incline"
+    name="Incline">
+    <category
+      code="SurfaceArea"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="protrud"
+    desc="Protruding object"
+    name="Protruding object">
+    <category
+      code="SurfaceArea"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="surdef"
+    desc="Surface Defect"
+    name="Surface Defect">
+    <category
+      code="SurfaceArea"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="othersurf"
+    desc="Other Surface"
+    name="Other Surface">
+    <category
+      code="SurfaceArea"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- ObjectSub - GL object substance -->
+  <typecode
+    code="display"
+    desc="Display"
+    name="Display">
+    <category
+      code="ObjectSub"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="furnfix"
+    desc="Furniture / Fixture"
+    name="Furniture / Fixture">
+    <category
+      code="ObjectSub"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="icesnow"
+    desc="Ice/Snow"
+    name="Ice/Snow">
+    <category
+      code="ObjectSub"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="water"
+    desc="Water"
+    name="Water">
+    <category
+      code="ObjectSub"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="othersub"
+    desc="Other"
+    name="Other Substance">
+    <category
+      code="ObjectSub"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- ProtectFact GL Protection Factors -->
+  <typecode
+    code="unguarded"
+    desc="Unguarded"
+    name="Unguarded">
+    <category
+      code="ProtectFact"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="inadguard"
+    desc="Inadequate guarding/protection"
+    name="Inadequate guarding/protection">
+    <category
+      code="ProtectFact"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="guardtamp"
+    desc="Guarding was tampered with/ removed/bypassed"
+    name="Guarding was tampered with/ removed/bypassed">
+    <category
+      code="ProtectFact"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- UseApp GL Use/Application -->
+  <typecode
+    code="uservio"
+    desc="User violated instructions"
+    name="User violated instructions">
+    <category
+      code="UseApp"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="warnig"
+    desc="Warnings were ignored"
+    name="Warnings were ignored">
+    <category
+      code="UseApp"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="bothinst"
+    desc="Both instructions and warnings were ignored"
+    name="Both instructions and warnings were ignored">
+    <category
+      code="UseApp"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="warntrue"
+    desc="No instructions or warnings against this use"
+    name="No instructions or warnings against this use">
+    <category
+      code="UseApp"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- not applicabble -->
+  <typecode
+    code="notapplic"
+    desc="Not Applicable"
+    name="Not Applicable">
+    <category
+      code="NotApplic"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <!-- GL Contacts -->
+  <typecode
+    code="holdharmless"
+    desc="Hold Harmless/Indemnity"
+    name="Hold Harmless/Indemnity">
+    <category
+      code="LegalOblig"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="addinsured"
+    desc="Additional Insured"
+    name="Additional Insured">
+    <category
+      code="LegalOblig"
+      typelist="SecContributingFactors"/>
+  </typecode>
+  <typecode
+    code="other"
+    desc="Other"
+    name="Other">
+    <category
+      code="LegalOblig"
+      typelist="SecContributingFactors"/>
+  </typecode>
+</typelistextension>

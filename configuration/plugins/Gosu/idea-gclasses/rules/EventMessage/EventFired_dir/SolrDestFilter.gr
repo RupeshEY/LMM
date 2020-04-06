@@ -1,0 +1,25 @@
+package rules.EventMessage.EventFired_dir
+
+uses gw.api.solr.CCSolrConfig
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("SolrDestFilter")
+internal class SolrDestFilter {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+
+/*start00rule*/
+var messageDestName = DisplayKey.get("Java.MessageDestination.SolrMessageTransport.ClaimContact.Name")
+return messageContext.DestID == CCSolrConfig.getMessagingDestinationIDFor(messageDestName) and gw.api.system.PLConfigParameters.FreeTextSearchEnabled.Value
+
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+//print("\ninside SolrDestFilter rule")
+/*end00rule*/
+
+  }
+}

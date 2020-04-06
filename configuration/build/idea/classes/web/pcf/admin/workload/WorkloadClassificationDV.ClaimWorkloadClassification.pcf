@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="WorkloadClassificationDV"
+    mode="ClaimWorkloadClassification">
+    <Require
+      name="assignmentClassification"
+      type="WorkloadClassification"/>
+    <Variable
+      initialValue="assignmentClassification as ClaimWorkloadClassification"
+      name="classification"
+      recalculateOnRefresh="true"
+      type="ClaimWorkloadClassification"/>
+    <InputColumn>
+      <InputSetRef
+        def="WorkloadClassificationCommonInputSet(classification)"/>
+    </InputColumn>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.Criteria.Label&quot;)"/>
+      <InputDivider/>
+      <BooleanRadioInput
+        editable="true"
+        falseLabel="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.RestrictedTo&quot;)"
+        id="AllExposures"
+        label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.AllExposures&quot;)"
+        required="true"
+        trueLabel="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.All&quot;)"
+        value="classification.ExposureCondition.IncludeAll">
+        <PostOnChange/>
+      </BooleanRadioInput>
+      <Label/>
+      <ListViewInput
+        def="ExposureConditionsLV(classification)"
+        editable="not classification.ExposureCondition.IncludeAll"
+        id="ExposureConditions"
+        labelAbove="true"
+        visible="not classification.ExposureCondition.IncludeAll">
+        <Toolbar>
+          <IteratorButtons
+            iterator="ExposureConditions.ExposureConditionsLV"/>
+        </Toolbar>
+      </ListViewInput>
+      <InputDivider/>
+      <BooleanRadioInput
+        editable="true"
+        falseLabel="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.RestrictedTo&quot;)"
+        id="AllSegments"
+        label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.AllClaimSegments&quot;)"
+        required="true"
+        trueLabel="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.All&quot;)"
+        value="classification.SegmentCondition.IncludeAll">
+        <PostOnChange/>
+      </BooleanRadioInput>
+      <ListViewInput
+        def="SegmentConditionsLV(classification)"
+        editable="not classification.SegmentCondition.IncludeAll"
+        id="SegmentConditions"
+        labelAbove="true"
+        visible="not classification.SegmentCondition.IncludeAll">
+        <Toolbar>
+          <IteratorButtons
+            iterator="SegmentConditions.SegmentConditionsLV"/>
+        </Toolbar>
+      </ListViewInput>
+      <InputDivider/>
+      <BooleanRadioInput
+        editable="true"
+        falseLabel="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.RestrictedTo&quot;)"
+        id="AllLossCauses"
+        label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.AllClaimLossCauses&quot;)"
+        required="true"
+        trueLabel="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.All&quot;)"
+        value="classification.LossCauseCondition.IncludeAll">
+        <PostOnChange/>
+      </BooleanRadioInput>
+      <ListViewInput
+        def="LossCauseConditionsLV(classification)"
+        editable="not classification.LossCauseCondition.IncludeAll"
+        id="LossCauseConditions"
+        labelAbove="true"
+        visible="not classification.LossCauseCondition.IncludeAll">
+        <Toolbar>
+          <IteratorButtons
+            iterator="LossCauseConditions.LossCauseConditionsLV"/>
+        </Toolbar>
+      </ListViewInput>
+      <InputDivider/>
+      <BooleanRadioInput
+        editable="true"
+        falseLabel="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.RestrictedTo&quot;)"
+        id="AllCustomerServiceTiers"
+        label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.AllCustomerServiceTiers&quot;)"
+        required="true"
+        trueLabel="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.All&quot;)"
+        value="classification.CustomerServiceTierCondition.IncludeAll">
+        <PostOnChange/>
+      </BooleanRadioInput>
+      <ListViewInput
+        def="CustomerServiceTierConditionsLV(classification)"
+        editable="not classification.CustomerServiceTierCondition.IncludeAll"
+        id="CustomerServiceTierConditions"
+        labelAbove="true"
+        visible="not classification.CustomerServiceTierCondition.IncludeAll">
+        <Toolbar>
+          <IteratorButtons
+            iterator="CustomerServiceTierConditions.CustomerServiceTierConditionsLV"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

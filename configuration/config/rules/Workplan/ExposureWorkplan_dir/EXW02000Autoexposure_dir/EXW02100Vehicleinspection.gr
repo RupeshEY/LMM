@@ -1,0 +1,22 @@
+package rules.Workplan.ExposureWorkplan_dir.EXW02000Autoexposure_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("EXW02100 - Vehicle inspection")
+internal class EXW02100Vehicleinspection {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.Claim.createActivityFromPattern(
+    exposure, ActivityPattern.finder.getActivityPatternByCode("vehicle_inspection"))
+/*end00rule*/
+
+  }
+}

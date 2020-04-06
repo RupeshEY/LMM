@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    editable="false"
+    id="AllPolicyLocationLienHoldersLV">
+    <Require
+      name="PolicyLocation"
+      type="PolicyLocation"/>
+    <RowIterator
+      editable="false"
+      elementName="PropertyOwner"
+      hasCheckBoxes="true"
+      hideCheckBoxesIfReadOnly="true"
+      value="PolicyLocation.Lienholders"
+      valueType="entity.PropertyOwner[]">
+      <Row>
+        <ClaimContactCell
+          claim="PropertyOwner.Property.Policy.Claim"
+          id="Lienholder"
+          label="DisplayKey.get(&quot;LV.Policy.EditablePropertyLienholders.Lienholder&quot;)"
+          required="true"
+          sortOrder="1"
+          sortValueRange="false"
+          value="PropertyOwner.Lienholder"
+          valueRange="PropertyOwner.Property.Policy.Claim.RelatedContacts"/>
+        <TypeKeyCell
+          id="OwnerType"
+          label="DisplayKey.get(&quot;LV.Policy.EditablePropertyLienholders.OwnerType&quot;)"
+          required="true"
+          value="PropertyOwner.OwnerType"
+          valueType="typekey.OwnerType"/>
+        <TextCell
+          id="AssociatedWith"
+          label="DisplayKey.get(&quot;LV.Policy.EditablePropertyLienholders.AssociatedWith&quot;)"
+          required="true"
+          value="((PropertyOwner.LocationBasedRU != null) ? PropertyOwner.LocationBasedRU.Description : DisplayKey.get(&quot;LV.Policy.EditablePropertyLienholders.PolicyLocation&quot;))"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

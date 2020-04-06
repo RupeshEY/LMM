@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="incident != null and perm.Incident.view(incident)"
+    id="PropertyContentsIncidentPrint"
+    parent="ClaimPrintout(c)"
+    title="DisplayKey.get(&quot;Web.EditPropertyContentsIncident.Title&quot;)">
+    <LocationEntryPoint
+      signature="PropertyContentsIncidentPrint(c : Claim, incident : PropertyContentsIncident)"/>
+    <Variable
+      name="c"
+      type="Claim"/>
+    <Variable
+      name="incident"
+      type="PropertyContentsIncident"/>
+    <Screen>
+      <PanelRef
+        def="PropertyContentsIncidentPanelSet(incident)"/>
+    </Screen>
+  </Page>
+</PCF>

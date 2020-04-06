@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="CompanyVendorSpecialtyInputSet"
+    mode="AutoTowingAgcy">
+    <Require
+      name="contactHandle"
+      type="gw.api.contact.ContactHandle"/>
+    <TextInput
+      editable="true"
+      id="BusinessLicense"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AutoTowingAgcy.BusinessLicense&quot;)"
+      value="AutoTowingAgcy.AutoTowingLicense"/>
+    <Code><![CDATA[
+      property get AutoTowingAgcy() : AutoTowingAgcy { return contactHandle.Contact as AutoTowingAgcy; }
+    ]]></Code>
+  </InputSet>
+</PCF>

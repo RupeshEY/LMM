@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="perm.Claim.managepartiesinvolved(claim) and perm.Contact.createlocal"
+    id="AddExistingPartyInvolvedPopup"
+    returnType="Contact"
+    startInEditMode="true"
+    title="gw.api.contact.NewContactUtil.getDisplayKeyForContactSubtype(tempContact.Subtype.Code)">
+    <LocationEntryPoint
+      signature="AddExistingPartyInvolvedPopup(claim : Claim, tempContact : gw.api.contact.TemporaryContact)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      name="tempContact"
+      type="gw.api.contact.TemporaryContact"/>
+    <Variable
+      initialValue="gw.api.claimparties.ClaimContactUtil.createClaimContact(claim, tempContact)"
+      name="claimContact"
+      type="entity.ClaimContact"/>
+    <Variable
+      initialValue="gw.api.contact.ContactSystemUtil.INSTANCE.generateLinkStatus(claimContact.Contact)"
+      name="linkStatus"
+      recalculateOnRefresh="true"
+      type="gw.api.contact.ContactSystemLinkStatus"/>
+    <ScreenRef
+      def="ContactDetailScreen(claimContact, true, true, linkStatus, claim, true, false, true)"/>
+  </Popup>
+</PCF>

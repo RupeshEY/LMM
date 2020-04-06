@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Lodging provider for loss of use"
+  entity="LodgingProvider"
+  exportable="true"
+  final="false"
+  platform="false"
+  table="LodgingProvider"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.LodgingProvider"
+    impl="com.guidewire.cc.domain.exposure.impl.LodgingProviderImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="PropertyIncident"
+    desc="PropertyIncident"
+    fkentity="PropertyIncident"
+    name="PropertyIncident"
+    nullok="true"/>
+</entity>

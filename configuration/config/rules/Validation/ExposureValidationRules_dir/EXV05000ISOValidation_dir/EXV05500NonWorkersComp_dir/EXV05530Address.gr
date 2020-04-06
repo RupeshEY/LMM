@@ -1,0 +1,31 @@
+package rules.Validation.ExposureValidationRules_dir.EXV05000ISOValidation_dir.EXV05500NonWorkersComp_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("EXV05530 - Address")
+internal class EXV05530Address {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ClaimantDenorm != null
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+var address = exposure.ClaimantDenorm.PrimaryAddress
+
+if (address == null 
+    or address.AddressLine1 == null
+    or address.City == null 
+    or (address.State == null 
+        and (address.Country == null or address.Country == TC_US or address.Country == TC_CA))) {
+  exposure.rejectSubField(exposure.ClaimantDenorm, "PrimaryAddress", TC_ISO, 
+                          DisplayKey.get("Rules.Validation.Exposure.ClaimantAddressMustBeComplete"), null, null)
+}
+/*end00rule*/
+
+  }
+}

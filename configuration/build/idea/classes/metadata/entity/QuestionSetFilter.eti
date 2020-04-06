@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A filter that controls the visibility of the question set based on the answer to a given question."
+  entity="QuestionSetFilter"
+  exportable="true"
+  extendable="false"
+  ignoreForEvents="true"
+  platform="false"
+  readOnly="false"
+  table="qsetfilter"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.question.entity.QuestionSetFilter"
+    impl="com.guidewire.cc.domain.question.impl.QuestionSetFilterImpl"/>
+  <fulldescription><![CDATA[
+    A filter that controls the visibility of the question set based on the answer to a given question. While the QuestionSetFilter
+    entity exists in the product, it is no longer in use and may be removed in a future release.  QuestionSetFilter can be added 
+    as an extension for customers that still require it if and when it is removed.
+  ]]></fulldescription>
+  <foreignkey
+    columnName="QuestionSetID"
+    desc="Fk to support the array from QuestionSet"
+    fkentity="QuestionSet"
+    name="QuestionSet"
+    nullok="false"/>
+  <foreignkey
+    columnName="FilterQuestionID"
+    fkentity="Question"
+    name="FilterQuestion"
+    nullok="false"/>
+  <column
+    name="Answer"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="1024"/>
+  </column>
+</entity>

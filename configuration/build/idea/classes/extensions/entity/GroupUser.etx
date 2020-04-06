@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="GroupUser">
+  <column-override
+    name="LoadFactor">
+    <columnParam
+      name="validator"
+      value="LoadFactor"/>
+  </column-override>
+  <foreignkey
+    columnName="GroupUserWorkloadID"
+    desc="Assigned workload information for this group user"
+    exportable="false"
+    fkentity="GroupUserWorkload"
+    name="GroupUserWorkload"
+    nullok="true"/>
+  <index
+    desc="Enforce uniqueness, must be only one entry joining a particular group and user"
+    name="groupuseru2"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="UserID"/>
+    <indexcol
+      keyposition="2"
+      name="GroupID"/>
+  </index>
+</extension>

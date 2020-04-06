@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    id="ActivityRulePopup"
+    title="DisplayKey.get('Web.ActivityRules.Rule.Title',ruleVersion.Rule.Name)">
+    <LocationEntryPoint
+      signature="ActivityRulePopup(ruleVersion: ActivityRuleVersion, importing : boolean)"/>
+    <Variable
+      name="ruleVersion"
+      type="ActivityRuleVersion"/>
+    <Variable
+      name="importing"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.bizrules.pcf.RulePageController(ruleVersion, gw.bizrules.ActivityRulePanelSetHelper.UIConfigs, CurrentLocation, gw.bizrules.ActivityRuleDetailsStateHolder.SwitchableModes)"
+      name="controller"
+      type="gw.bizrules.pcf.RulePageController"/>
+    <Screen>
+      <PanelRef
+        def="ActivityRulePanelSet(ruleVersion, importing, controller)"/>
+    </Screen>
+  </Popup>
+</PCF>

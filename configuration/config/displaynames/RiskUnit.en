@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Entity
+  name="RiskUnit">
+  <Columns>
+    <Column
+      beanPath="RiskUnit.Subtype"
+      name="subtype"
+      sortOrder="1"/>
+    <Column
+      beanPath="RiskUnit.RUNumber"
+      name="number"
+      sortOrder="2"/>
+  </Columns>
+  <DisplayName><![CDATA[
+
+  var retString = "";
+
+
+  if (subtype != null) {
+
+    retString = retString + subtype;
+
+      }
+  retString = retString + number;
+
+  return retString;
+
+]]></DisplayName>
+</Entity>

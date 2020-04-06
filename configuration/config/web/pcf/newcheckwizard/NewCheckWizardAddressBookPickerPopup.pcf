@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    afterReturnFromPopup="if (popupCommitted) { CurrentLocation.pickValueAndCommit(pickedContact) }"
+    autosaveable="false"
+    canVisit="perm.Contact.viewsearchab"
+    countsAsWork="false"
+    id="NewCheckWizardAddressBookPickerPopup"
+    returnType="Contact"
+    title="DisplayKey.get(&quot;Web.AddressBookSearch.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewCheckWizardAddressBookPickerPopup(requiredContactType : Type, claim : Claim)"/>
+    <Variable
+      name="requiredContactType"
+      type="Type"/>
+    <Variable
+      initialValue="true"
+      name="externalSearchEnabled"
+      type="boolean"/>
+    <Variable
+      initialValue="null"
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="true"
+      name="showCancel"
+      type="boolean"/>
+    <Variable
+      name="pickedContact"
+      type="Contact"/>
+    <Screen
+      id="NewCheckWizardAddressBookSearchScreen">
+      <Variable
+        initialValue="new gw.api.contact.CCProximitySearchPageHelper()"
+        name="PageHelper"
+        type="gw.api.contact.CCProximitySearchPageHelper"/>
+      <Variable
+        initialValue="&quot;AddressBookSearchLV&quot;"
+        name="PrintTargetLV"
+        type="java.lang.String"/>
+      <Toolbar>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="cancel"
+          label="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          visible="showCancel"/>
+      </Toolbar>
+      <SearchPanel
+        cachingEnabled="false"
+        clearInvisibleInputs="true"
+        criteriaName="searchCriteria"
+        maxSearchResults="gw.api.search.MaxSearchResults.forContacts()"
+        resultsName="searchResults"
+        search="PageHelper.performProximitySearch(CurrentLocation,searchCriteria)"
+        searchCriteria="newSearchCriteria()"
+        searchCriteriaType="entity.ContactSearchCriteria"
+        searchOnRefresh="false"
+        searchResultsType="gw.api.database.IQueryBeanResult">
+        <PanelRef
+          def="AddressBookSearchDV(searchCriteria, PageHelper, requiredContactType, externalSearchEnabled, claim, false)"/>
+        <PanelRef
+          def="AddressBookSearchLV(null, PageHelper, searchCriteria.ExternalContactSource, searchResults, searchCriteria)">
+          <TitleBar
+            appendListViewPaging="true"
+            title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+          <Toolbar>
+            <CheckedValuesToolbarButton
+              allCheckedRowsAction="PageHelper.getDrivingDirectionsCache().getSelectedDirections(CheckedValues, searchCriteria);"
+              flags="any ExternalContact"
+              id="RetrieveRequested"
+              iterator="AddressBookSearchLV.AddressBookSearchLV"
+              label="DisplayKey.get(&quot;Web.AddressBook.Search.Result.GetRequested&quot;)"
+              visible="searchCriteria.isProximitySearch()"/>
+            <ToolbarDivider/>
+            <ToolbarButton
+              action="gw.api.print.ListViewPrintOptionPopupAction.printListViewOnlyWithOptions(PrintTargetLV, DisplayKey.get(&quot;Web.Search.Results&quot;), null)"
+              available="perm.User.printlistviews"
+              id="ClaimSearchScreen_PrintButton"
+              label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+              shortcut="N"/>
+            <ToolbarDivider/>
+            <PickerToolbarButton
+              action="AddressBookSearchNewContactPopup.push(searchCriteria, searchCriteria.ContactSubtype, null, claim)"
+              id="ClaimSearchScreen_CreateNewContactButton"
+              label="DisplayKey.get(&quot;Web.AddressBook.Search.Toolbar.CreateNewContact&quot;)"
+              onPick="pickedContact = PickedValue"
+              shortcut="N"
+              visible="claim != null and isLeafSearch(searchCriteria) and perm.Claim.managepartiesinvolved(claim) and perm.Contact.createlocal"/>
+            <ToolbarButton
+              id="ClaimContacts_CreateNewContactButton"
+              label="DisplayKey.get(&quot;Web.AddressBook.Search.Toolbar.CreateNewContact&quot;)"
+              shortcut="N"
+              visible="claim != null and (!isLeafSearch(searchCriteria)) and perm.Claim.managepartiesinvolved(claim) and perm.Contact.createlocal">
+              <PickerMenuItem
+                action="AddressBookSearchNewContactPopup.push(searchCriteria, typekey.Contact.TC_PERSON, null, claim)"
+                id="ClaimContacts_NewPerson"
+                label="DisplayKey.get(&quot;Web.NewContactMenu.Person&quot;)"
+                onPick="pickedContact = PickedValue"/>
+              <MenuItem
+                id="ClaimContacts_NewVendor"
+                label="DisplayKey.get(&quot;Web.NewContactMenu.Vendor&quot;)">
+                <PickerMenuItem
+                  action="AddressBookSearchNewContactPopup.push(searchCriteria, typekey.Contact.TC_AUTOREPAIRSHOP, null, claim)"
+                  id="ClaimContacts_AutoRepairShop"
+                  label="DisplayKey.get(&quot;Web.NewContactMenu.AutoRepairShop&quot;)"
+                  onPick="pickedContact = PickedValue"/>
+                <PickerMenuItem
+                  action="AddressBookSearchNewContactPopup.push(searchCriteria, typekey.Contact.TC_AUTOTOWINGAGCY, null, claim)"
+                  id="ClaimContacts_AutoTowingAgcy"
+                  label="DisplayKey.get(&quot;Web.NewContactMenu.AutoTowingAgcy&quot;)"
+                  onPick="pickedContact = PickedValue"/>
+                <PickerMenuItem
+                  action="AddressBookSearchNewContactPopup.push(searchCriteria, typekey.Contact.TC_DOCTOR, null, claim)"
+                  id="ClaimContacts_Doctor"
+                  label="DisplayKey.get(&quot;Web.NewContactMenu.Doctor&quot;)"
+                  onPick="pickedContact = PickedValue"/>
+                <PickerMenuItem
+                  action="AddressBookSearchNewContactPopup.push(searchCriteria, typekey.Contact.TC_MEDICALCAREORG, null, claim)"
+                  id="ClaimContacts_MedicalCareOrg"
+                  label="DisplayKey.get(&quot;Web.NewContactMenu.MedicalCareOrg&quot;)"
+                  onPick="pickedContact = PickedValue"/>
+                <PickerMenuItem
+                  action="AddressBookSearchNewContactPopup.push(searchCriteria, typekey.Contact.TC_COMPANYVENDOR, null, claim)"
+                  id="ClaimContacts_CompanyVendor"
+                  label="DisplayKey.get(&quot;Web.NewContactMenu.CompanyVendor&quot;)"
+                  onPick="pickedContact = PickedValue"/>
+              </MenuItem>
+              <PickerMenuItem
+                action="AddressBookSearchNewContactPopup.push(searchCriteria, typekey.Contact.TC_COMPANY, null, claim)"
+                id="ClaimContacts_Company"
+                label="DisplayKey.get(&quot;Web.NewContactMenu.Company&quot;)"
+                onPick="pickedContact = PickedValue"/>
+              <MenuItem
+                id="ClaimContacts_NewLegal"
+                label="DisplayKey.get(&quot;Web.NewContactMenu.Legal&quot;)">
+                <PickerMenuItem
+                  action="AddressBookSearchNewContactPopup.push(searchCriteria, typekey.Contact.TC_ADJUDICATOR, null, claim)"
+                  id="ClaimContacts_Adjudicator"
+                  label="DisplayKey.get(&quot;Web.NewContactMenu.Adjudicator&quot;)"
+                  onPick="pickedContact = PickedValue"/>
+                <PickerMenuItem
+                  action="AddressBookSearchNewContactPopup.push(searchCriteria, typekey.Contact.TC_ATTORNEY, null, claim)"
+                  id="ClaimContacts_Attorney"
+                  label="DisplayKey.get(&quot;Web.NewContactMenu.Attorney&quot;)"
+                  onPick="pickedContact = PickedValue"/>
+                <PickerMenuItem
+                  action="AddressBookSearchNewContactPopup.push(searchCriteria, typekey.Contact.TC_LAWFIRM, null, claim)"
+                  id="ClaimContacts_LawFirm"
+                  label="DisplayKey.get(&quot;Web.NewContactMenu.LawFirm&quot;)"
+                  onPick="pickedContact = PickedValue"/>
+                <PickerMenuItem
+                  action="AddressBookSearchNewContactPopup.push(searchCriteria, typekey.Contact.TC_LEGALVENUE, null, claim)"
+                  id="ClaimContacts_LegalVenue"
+                  label="DisplayKey.get(&quot;Web.NewContactMenu.LegalVenue&quot;)"
+                  onPick="pickedContact = PickedValue"/>
+              </MenuItem>
+            </ToolbarButton>
+          </Toolbar>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+    <Code><![CDATA[
+      function newSearchCriteria() : ContactSearchCriteria {
+        var aCriteria = new ContactSearchCriteria();
+        aCriteria.ContactSubtype = typekey.Contact.get(requiredContactType.RelativeName);
+        aCriteria.SearchType = TC_INTERNAL;
+        if (claim != null) {
+          aCriteria.initializeProximitySearch(claim.Addresses?.toList(), claim.LossLocation);
+        }
+        return aCriteria;
+      }
+
+      function isLeafSearch(searchCriteria : ContactSearchCriteria) : Boolean {
+        return searchCriteria == null ? false
+                                      : searchCriteria.ContactIntrinsicType != Contact
+                                        and searchCriteria.ContactIntrinsicType != Person
+                                        and searchCriteria.ContactIntrinsicType != PersonVendor
+                                        and searchCriteria.ContactIntrinsicType != Company
+                                        and searchCriteria.ContactIntrinsicType != CompanyVendor
+                                        and searchCriteria.ContactIntrinsicType != Place
+                                      ;
+      }
+
+    ]]></Code>
+  </Popup>
+</PCF>

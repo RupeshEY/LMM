@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Person">
+  <index
+    desc="Covering index for search by person last name"
+    expectedtobecovering="true"
+    name="PersonLastFirstN"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="LastNameDenorm"/>
+    <indexcol
+      keyposition="2"
+      name="FirstNameDenorm"/>
+    <indexcol
+      keyposition="3"
+      name="Subtype"/>
+    <indexcol
+      keyposition="4"
+      name="Retired"/>
+    <indexcol
+      keyposition="5"
+      name="ID"/>
+  </index>
+  <column
+    desc="Workers' Comp only. Employee Employment Visa Number"
+    name="VisaNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="15"/>
+  </column>
+  <column
+    desc="Workers' Comp only. Employee Green Card Number"
+    name="GreenCardNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="15"/>
+  </column>
+  <column
+    desc="Workers' Comp only. Employee Passport Number"
+    name="PassportNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="15"/>
+  </column>
+  <column
+    desc="Workers' Comp only. Employee ID Assigned by Jurisdiction"
+    name="JurisdictionAssignedID"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="15"/>
+  </column>
+  <column
+    desc="Workers' Comp only. SSN Release Authorized"
+    name="SSNReleaseAuthorized"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    desc="Workers' Comp only. Claimant ID Type"
+    name="ClaimantIDType"
+    nullok="true"
+    typelist="ClaimantIDType"/>
+  <column
+    desc="Workers' Comp only. Tax Exemptions Entitled."
+    name="TaxExemptionsEntitled"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="0"/>
+    <columnParam
+      name="precision"
+      value="2"/>
+    <columnParam
+      name="validator"
+      value="TaxExemption"/>
+  </column>
+  <column
+    desc=" A unique number designated by the jurisdiction to be used in conjunction with or in the place of the Employee ID. If the jurisdiction requires the Employee Security ID, the jurisdiction must return the Employee Security ID in the acknowledgment to promote future reporting of the designated value."
+    name="EmployeeSecurityID"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="15"/>
+  </column>
+  <column
+    desc="Workers' Comp only. The highest number of years or equivalency level of formal education completed."
+    name="EducationLevel"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="validator"
+      value="EducationLevel"/>
+    <columnParam
+      name="size"
+      value="2"/>
+  </column>
+  <!-- KanjiIndexDefinition: Uncomment if you use kanji name fields for Japanese.-->
+  <!--<index desc="Covering index for search by person Kanji last name" expectedtobecovering="true" name="PersonLastK" trackUsage="true" unique="true">-->
+    <!--<indexcol keyposition="1" name="LastNameKanji"/>-->
+    <!--<indexcol keyposition="2" name="Subtype"/>-->
+    <!--<indexcol keyposition="3" name="Retired"/>-->
+    <!--<indexcol keyposition="4" name="ID"/>-->
+  <!--</index>-->
+  <!--<index desc="Covering index for search by person Kanji first and last name" expectedtobecovering="true" name="PersonLastKFirstKN" trackUsage="true" unique="true">-->
+    <!--<indexcol keyposition="1" name="LastNameKanji"/>-->
+    <!--<indexcol keyposition="2" name="FirstNameKanji"/>-->
+    <!--<indexcol keyposition="3" name="Subtype"/>-->
+    <!--<indexcol keyposition="4" name="Retired"/>-->
+    <!--<indexcol keyposition="5" name="ID"/>-->
+  <!--</index>-->
+  <!--<index desc="Covering index for search by person kanji last name, furigana first name" expectedtobecovering="true" name="PersonLastKFirstN" trackUsage="true" unique="true">-->
+    <!--<indexcol keyposition="1" name="LastNameKanji"/>-->
+    <!--<indexcol keyposition="2" name="FirstNameDenorm"/>-->
+    <!--<indexcol keyposition="3" name="Subtype"/>-->
+    <!--<indexcol keyposition="4" name="Retired"/>-->
+    <!--<indexcol keyposition="5" name="ID"/>-->
+  <!--</index>-->
+  <!--<index desc="Covering index for search by person kanji first name, furigana last name" expectedtobecovering="true" name="PersonLastFirstKN" trackUsage="true" unique="true">-->
+    <!--<indexcol keyposition="2" name="LastNameDenorm"/>-->
+    <!--<indexcol keyposition="1" name="FirstNameKanji"/>-->
+    <!--<indexcol keyposition="3" name="Subtype"/>-->
+    <!--<indexcol keyposition="4" name="Retired"/>-->
+    <!--<indexcol keyposition="5" name="ID"/>-->
+  <!--</index>-->
+</extension>

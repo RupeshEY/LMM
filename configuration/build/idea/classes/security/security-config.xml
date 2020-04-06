@@ -1,0 +1,367 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SecurityConfig
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../security-config.xsd">
+
+  <AccessMapping claimAccessType="view" systemPermission="claimview"/>
+  <AccessMapping claimAccessType="view" systemPermission="plcyview"/>
+  <AccessMapping claimAccessType="view" systemPermission="claimviewres"/>
+  <AccessMapping claimAccessType="view" systemPermission="claimviewrec"/>
+  <AccessMapping claimAccessType="view" systemPermission="claimviewrecres"/>
+  <AccessMapping claimAccessType="view" systemPermission="claimviewpay"/>
+  <AccessMapping claimAccessType="view" systemPermission="noteviewconf"/>
+  <AccessMapping claimAccessType="view" systemPermission="actview"/>
+  <AccessMapping claimAccessType="view" systemPermission="expview"/>
+  <AccessMapping claimAccessType="view" systemPermission="docview"/>
+  <AccessMapping claimAccessType="view" systemPermission="noteview"/>
+  <AccessMapping claimAccessType="view" systemPermission="mttrview"/>
+  <AccessMapping claimAccessType="view" systemPermission="claimprint"/>
+  <AccessMapping claimAccessType="view" systemPermission="viewclaimsync"/>
+  <AccessMapping claimAccessType="view" systemPermission="ngtnview"/>
+  <AccessMapping claimAccessType="view" systemPermission="evalview"/>
+
+  <AccessMapping claimAccessType="edit" systemPermission="actcreate"/>
+  <AccessMapping claimAccessType="edit" systemPermission="actcreateclsd"/>
+  <AccessMapping claimAccessType="edit" systemPermission="checktransfer"/>
+  <AccessMapping claimAccessType="edit" systemPermission="claimclose"/>
+  <AccessMapping claimAccessType="edit" systemPermission="claimedit"/>
+  <AccessMapping claimAccessType="edit" systemPermission="claimeditclsd"/>
+  <AccessMapping claimAccessType="edit" systemPermission="claimreopen"/>
+  <AccessMapping claimAccessType="edit" systemPermission="doccreate"/>
+  <AccessMapping claimAccessType="edit" systemPermission="doccreateclsd"/>
+  <AccessMapping claimAccessType="edit" systemPermission="docedit"/>
+  <AccessMapping claimAccessType="edit" systemPermission="expedit"/>
+  <AccessMapping claimAccessType="edit" systemPermission="expeditclsd"/>
+  <AccessMapping claimAccessType="edit" systemPermission="expcreate"/>
+  <AccessMapping claimAccessType="edit" systemPermission="expclose"/>
+  <AccessMapping claimAccessType="edit" systemPermission="expreopen"/>
+  <AccessMapping claimAccessType="edit" systemPermission="notecreate"/>
+  <AccessMapping claimAccessType="edit" systemPermission="noteedit"/>
+  <AccessMapping claimAccessType="edit" systemPermission="notecreateclsd"/>
+  <AccessMapping claimAccessType="edit" systemPermission="paycreate"/>
+  <AccessMapping claimAccessType="edit" systemPermission="payedit"/>
+  <AccessMapping claimAccessType="edit" systemPermission="paydelete"/>
+  <AccessMapping claimAccessType="edit" systemPermission="manpaycreate"/>
+  <AccessMapping claimAccessType="edit" systemPermission="manpayedit"/>
+  <AccessMapping claimAccessType="edit" systemPermission="manpaydelete"/>
+  <AccessMapping claimAccessType="edit" systemPermission="payvoid"/>
+  <AccessMapping claimAccessType="edit" systemPermission="clearedpayvoid"/>
+  <AccessMapping claimAccessType="edit" systemPermission="paystop"/>
+  <AccessMapping claimAccessType="edit" systemPermission="payrecode"/>
+  <AccessMapping claimAccessType="edit" systemPermission="rescreate"/>
+  <AccessMapping claimAccessType="edit" systemPermission="resdelete"/>
+  <AccessMapping claimAccessType="edit" systemPermission="resedit"/>
+  <AccessMapping claimAccessType="edit" systemPermission="reccreate"/>
+  <AccessMapping claimAccessType="edit" systemPermission="recedit"/>
+  <AccessMapping claimAccessType="edit" systemPermission="recdelete"/>
+  <AccessMapping claimAccessType="edit" systemPermission="recvoid"/>
+  <AccessMapping claimAccessType="edit" systemPermission="recrescreate"/>
+  <AccessMapping claimAccessType="edit" systemPermission="recresedit"/>
+  <AccessMapping claimAccessType="edit" systemPermission="recresdelete"/>
+  <AccessMapping claimAccessType="edit" systemPermission="mttrcreate"/>
+  <AccessMapping claimAccessType="edit" systemPermission="mttredit"/>
+  <AccessMapping claimAccessType="edit" systemPermission="mttreditclsd"/>
+  <AccessMapping claimAccessType="edit" systemPermission="claimselectplcy"/>
+  <AccessMapping claimAccessType="edit" systemPermission="claimslplcyclsd"/>
+  <AccessMapping claimAccessType="edit" systemPermission="plcyedit"/>
+  <AccessMapping claimAccessType="edit" systemPermission="plcymakeeditable"/>
+  <AccessMapping claimAccessType="edit" systemPermission="claimvalidate"/>
+  <AccessMapping claimAccessType="edit" systemPermission="expvalidate"/>
+  <AccessMapping claimAccessType="edit" systemPermission="claimintegadmin"/>
+  <AccessMapping claimAccessType="edit" systemPermission="docdelete"/>
+  <AccessMapping claimAccessType="edit" systemPermission="docdeleteclsd"/>
+  <AccessMapping claimAccessType="edit" systemPermission="noteeditbody"/>
+  <AccessMapping claimAccessType="edit" systemPermission="notedelete"/>
+  <AccessMapping claimAccessType="edit" systemPermission="claimraown"/>
+  <AccessMapping claimAccessType="edit" systemPermission="claimraunown"/>
+  <AccessMapping claimAccessType="edit" systemPermission="actraown"/>
+  <AccessMapping claimAccessType="edit" systemPermission="actraunown"/>
+  <AccessMapping claimAccessType="edit" systemPermission="expraown"/>
+  <AccessMapping claimAccessType="edit" systemPermission="expraunown"/>
+  <AccessMapping claimAccessType="edit" systemPermission="mttrraown"/>
+  <AccessMapping claimAccessType="edit" systemPermission="mttrraunown"/>
+  <AccessMapping claimAccessType="edit" systemPermission="claimremflag"/>
+  <AccessMapping claimAccessType="edit" systemPermission="actmakemand"/>
+  <AccessMapping claimAccessType="edit" systemPermission="mttrclose"/>
+  <AccessMapping claimAccessType="edit" systemPermission="mttrreopen"/>
+  <AccessMapping claimAccessType="edit" systemPermission="claimprtsmanage"/>
+  <AccessMapping claimAccessType="edit" systemPermission="claimprtsmanclsd"/>
+  <AccessMapping claimAccessType="edit" systemPermission="evalcreate"/>
+  <AccessMapping claimAccessType="edit" systemPermission="evaledit"/>
+  <AccessMapping claimAccessType="edit" systemPermission="evaleditclsd"/>
+  <AccessMapping claimAccessType="edit" systemPermission="ngtncreate"/>
+  <AccessMapping claimAccessType="edit" systemPermission="ngtnedit"/>
+  <AccessMapping claimAccessType="edit" systemPermission="ngtneditclsd"/>
+  <AccessMapping claimAccessType="edit" systemPermission="claimusermanage"/>
+  <AccessMapping claimAccessType="edit" systemPermission="claimusermanclsd"/>
+
+  <AccessProfile securitylevel="unsecuredclaim">
+    <ClaimAccessLevels>
+      <AccessLevel level="securityzone" permission="view"/>
+      <AccessLevel level="securityzone" permission="edit"/>
+      <DraftClaimAccessLevel level="securityzone"/>
+      <ClaimUserAccessLevel role="subrogationowner" level="user" permission="view"/>
+      <ClaimUserAccessLevel role="subrogationowner" level="user" permission="edit"/>
+      <ClaimUserAccessLevel role="reinsmgr" level="group" permission="view"/>
+      <ClaimUserAccessLevel role="reinsmgr" level="group" permission="edit"/>
+      <ClaimUserAccessLevel role="relateduser" level="user" permission="view"/>
+    </ClaimAccessLevels>
+    <ActivityAccessLevels>
+      <AccessLevel level="user" permission="view"/>
+      <AccessLevel level="user" permission="edit"/>
+    </ActivityAccessLevels>
+    <ExposureAccessLevels>
+      <AccessLevel level="user" permission="view"/>
+      <AccessLevel level="user" permission="edit"/>
+    </ExposureAccessLevels>
+  </AccessProfile>
+
+  <AccessProfile securitylevel="employeeclaim">
+    <ClaimOwnPermission permission="ownsensclaim"/>
+    <SubObjectOwnPermission permission="ownsensclaimsub"/>
+    <ClaimAccessLevels>
+      <AccessLevel level="group" permission="view"/>
+      <AccessLevel level="group" permission="edit"/>
+      <DraftClaimAccessLevel level="group"/>
+    </ClaimAccessLevels>
+    <ActivityAccessLevels>
+      <AccessLevel level="user" permission="view"/>
+      <AccessLevel level="user" permission="edit"/>
+    </ActivityAccessLevels>
+    <ExposureAccessLevels>
+      <AccessLevel level="user" permission="view"/>
+      <AccessLevel level="user" permission="edit"/>
+    </ExposureAccessLevels>
+  </AccessProfile>
+
+  <AccessProfile securitylevel="fraudriskclaim">
+    <ClaimOwnPermission permission="ownsensclaim"/>
+    <SubObjectOwnPermission permission="ownsensclaimsub"/>
+    <ClaimAccessLevels>
+      <AccessLevel level="group" permission="view"/>
+      <AccessLevel level="group" permission="edit"/>
+      <DraftClaimAccessLevel level="group"/>
+    </ClaimAccessLevels>
+    <ActivityAccessLevels>
+      <AccessLevel level="user" permission="view"/>
+      <AccessLevel level="user" permission="edit"/>
+    </ActivityAccessLevels>
+    <ExposureAccessLevels>
+      <AccessLevel level="user" permission="view"/>
+      <AccessLevel level="user" permission="edit"/>
+    </ExposureAccessLevels>
+  </AccessProfile>
+
+  <AccessProfile securitylevel="sensitiveclaim">
+    <ClaimOwnPermission permission="ownsensclaim"/>
+    <SubObjectOwnPermission permission="ownsensclaimsub"/>
+    <ClaimAccessLevels>
+      <AccessLevel level="group" permission="view"/>
+      <AccessLevel level="group" permission="edit"/>
+      <DraftClaimAccessLevel level="group"/>
+    </ClaimAccessLevels>
+    <ActivityAccessLevels>
+      <AccessLevel level="user" permission="view"/>
+      <AccessLevel level="user" permission="edit"/>
+    </ActivityAccessLevels>
+    <ExposureAccessLevels>
+      <AccessLevel level="user" permission="view"/>
+      <AccessLevel level="user" permission="edit"/>
+    </ExposureAccessLevels>
+  </AccessProfile>
+
+  <AccessProfile securitylevel="underlitclaim">
+    <ClaimOwnPermission permission="ownsensclaim"/>
+    <SubObjectOwnPermission permission="ownsensclaimsub"/>
+    <ClaimAccessLevels>
+      <AccessLevel level="group" permission="view"/>
+      <AccessLevel level="group" permission="edit"/>
+      <DraftClaimAccessLevel level="group"/>
+    </ClaimAccessLevels>
+    <ActivityAccessLevels>
+      <AccessLevel level="user" permission="view"/>
+      <AccessLevel level="user" permission="edit"/>
+    </ActivityAccessLevels>
+    <ExposureAccessLevels>
+      <AccessLevel level="user" permission="view"/>
+      <AccessLevel level="user" permission="edit"/>
+    </ExposureAccessLevels>
+  </AccessProfile>
+
+  <DocumentPermissions>
+    <DocumentAccessProfile securitylevel="unrestricted"/>
+    <DocumentAccessProfile securitylevel="sensitive">
+      <DocumentViewPermission permission="viewsensdoc"/>
+      <DocumentEditPermission permission="editsensdoc"/>
+      <DocumentDeletePermission permission="delsensdoc"/>
+    </DocumentAccessProfile>
+  </DocumentPermissions>
+
+  <NotePermissions>
+    <NoteAccessProfile securitylevel="public">
+      <NoteViewPermission permission="noteview"/>
+      <NoteEditPermission permission="noteedit"/>
+      <NoteDeletePermission permission="notedelete"/>
+    </NoteAccessProfile>
+    <NoteAccessProfile securitylevel="private">
+      <NoteViewPermission permission="viewprivnote"/>
+      <NoteEditPermission permission="editprivnote"/>
+      <NoteDeletePermission permission="delprivnote"/>
+    </NoteAccessProfile>
+    <NoteAccessProfile securitylevel="sensitive">
+      <NoteViewPermission permission="viewsensnote"/>
+      <NoteEditPermission permission="editsensnote"/>
+      <NoteDeletePermission permission="delsensnote"/>
+    </NoteAccessProfile>
+    <NoteAccessProfile securitylevel="medical">
+      <NoteViewPermission permission="viewmednote"/>
+      <NoteEditPermission permission="editmednote"/>
+      <NoteDeletePermission permission="delmednote"/>
+    </NoteAccessProfile>
+  </NotePermissions>
+
+  <ContactPermissions>
+    <!--
+      Configuration controlling behavior of Address Book Contact security.
+
+      Use this file to map SystemPermissionType typecodes to a Contact subtype so that a user must be
+      granted the specified permissions in order to perform certain actions on that Contact subtype.
+
+      For example, the following element specifies that a user must have "personcreate" permission in
+      order to "Create" a contact of Person subtype.
+            <ContactSubtypeAccessProfile entity="Person">
+              <ContactCreatePermission permission="personcreate"/>
+              ...
+            </ContactSubtypeAccessProfile>
+
+      When multiple permissions are associated with an action, the user must be granted ALL of the
+      permissions to perform that action on the subtype. For example, the following element specifies
+      that a user must have "doctorcreate" and "doctoredit" in order to delete a contact of Doctor subtype.
+
+            <ContactSubtypeAccessProfile entity="Doctor">
+              <ContactDeletePermission permission="doctorcreate"/>
+              <ContactDeletePermission permission="doctoredit"/>
+              ...
+            </ContactSubtypeAccessProfile>
+    -->
+  </ContactPermissions>
+
+
+  <StaticHandler entity="User" permKey="ViewInfo">
+     <SystemPermType code="internaltools"/>
+    <SystemPermType code="toolsInfoview"/>
+  </StaticHandler>
+
+  <StaticHandler entity="User" permKey="ViewMBeans">
+     <SystemPermType code="internaltools"/>
+    <SystemPermType code="toolsJMXBeansview"/>
+  </StaticHandler>
+
+  <WrapHandler entity="User" permKey="EditMBeans" wrapPermKey="ViewMBeans">
+    <SystemPermType code="internaltools"/>
+    <SystemPermType code="toolsJMXBeansEdit"/>
+  </WrapHandler>
+
+  <StaticHandler entity="User" permKey="EditJProfiler">
+     <SystemPermType code="internaltools"/>
+    <SystemPermType code="toolsJProfileredit"/>
+  </StaticHandler>
+
+  <StaticHandler entity="User" permKey="ViewBatchProcess">
+     <SystemPermType code="internaltools"/>
+    <SystemPermType code="toolsBatchProcessview"/>
+  </StaticHandler>
+  <WrapHandler entity="User" permKey="EditBatchProcess" wrapPermKey="ViewBatchProcess">
+    <SystemPermType code="internaltools"/>
+    <SystemPermType code="toolsBatchProcessedit"/>
+  </WrapHandler>
+
+  <StaticHandler entity="User" permKey="ViewWorkQueue">
+     <SystemPermType code="internaltools"/>
+    <SystemPermType code="toolsWorkQueueview"/>
+  </StaticHandler>
+  <WrapHandler entity="User" permKey="EditWorkQueue" wrapPermKey="ViewWorkQueue">
+    <SystemPermType code="internaltools"/>
+    <SystemPermType code="toolsWorkQueueedit"/>
+  </WrapHandler>
+
+  <StaticHandler entity="User" permKey="ViewProfiler">
+     <SystemPermType code="internaltools"/>
+    <SystemPermType code="toolsProfilerview"/>
+  </StaticHandler>
+  <WrapHandler entity="User" permKey="EditProfiler" wrapPermKey="ViewProfiler">
+    <SystemPermType code="internaltools"/>
+    <SystemPermType code="toolsProfileredit"/>
+  </WrapHandler>
+
+  <StaticHandler entity="User" permKey="ViewCacheInfo">
+    <SystemPermType code="internaltools"/>
+    <SystemPermType code="toolsCacheinfoview"/>
+  </StaticHandler>
+
+  <StaticHandler entity="User" permKey="ViewPlugin">
+     <SystemPermType code="internaltools"/>
+    <SystemPermType code="toolsPluginview"/>
+  </StaticHandler>
+  <WrapHandler entity="User" permKey="EditPlugin" wrapPermKey="ViewPlugin">
+    <SystemPermType code="internaltools"/>
+    <SystemPermType code="toolsPluginedit"/>
+  </WrapHandler>
+
+  <StaticHandler entity="User" permKey="ViewLog">
+     <SystemPermType code="internaltools"/>
+    <SystemPermType code="toolsLogview"/>
+  </StaticHandler>
+
+  <StaticHandler entity="User" permKey="EditLog">
+    <SystemPermType code="internaltools"/>
+    <SystemPermType code="toolsLogedit"/>
+  </StaticHandler>
+
+  <StaticHandler entity="User" permKey="ViewCluster">
+    <SystemPermType code="internaltools"/>
+    <SystemPermType code="toolsClusterview"/>
+  </StaticHandler>
+  <WrapHandler entity="User" permKey="EditCluster" wrapPermKey="ViewCluster">
+    <SystemPermType code="internaltools"/>
+    <SystemPermType code="toolsClusteredit"/>
+  </WrapHandler>
+
+  <StaticHandler entity="User" permKey="ViewDataChange">
+    <SystemPermType code="admindatachangeview"/>
+  </StaticHandler>
+  <WrapHandler entity="User" permKey="ExecuteDataChange" wrapPermKey="ViewDataChange">
+    <SystemPermType code="admindatachangeexec"/>
+  </WrapHandler>
+
+  <StaticHandler entity="User" permKey="ServerTools" noPermissionDisplayKey="Web.ServerTools.NoPermission">
+    <SystemPermType code="internaltools"/>
+    <SystemPermType code="toolsInfoview"/>
+    <SystemPermType code="toolsJMXBeansview"/>
+    <SystemPermType code="toolsJProfileredit"/>
+    <SystemPermType code="toolsBatchProcessview"/>
+    <SystemPermType code="toolsWorkQueueview"/>
+    <SystemPermType code="toolsProfilerview"/>
+    <SystemPermType code="toolsPluginview"/>
+    <SystemPermType code="toolsLogview"/>
+    <SystemPermType code="toolsLogedit"/>
+    <SystemPermType code="toolsClusterview"/>
+  </StaticHandler>
+
+  <StaticHandler entity="ClaimMetricLimit" permKey="create">
+    <SystemPermType code="metriclimitmanage"/>
+  </StaticHandler>
+
+  <StaticHandler entity="ClaimMetricLimit" permKey="view">
+    <SystemPermType code="metriclimitmanage"/>
+  </StaticHandler>
+
+  <StaticHandler entity="ClaimMetricLimit" permKey="edit">
+    <SystemPermType code="metriclimitmanage"/>
+  </StaticHandler>
+
+  <StaticHandler entity="ClaimMetricLimit" permKey="delete">
+    <SystemPermType code="metriclimitmanage"/>
+  </StaticHandler>
+
+</SecurityConfig>

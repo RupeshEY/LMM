@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A line item from a ServiceRequestStatement"
+  entity="ServiceRequestStatementLineItem"
+  exportable="true"
+  loadable="false"
+  table="servicereqstatementline"
+  type="editable">
+  <implementsInterface
+    iface="gw.cc.vendormanagement.entity.ServiceRequestStatementLineItem"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestStatementLineItemImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <typekey
+    name="Category"
+    nullok="true"
+    typelist="ServiceRequestStatementLineItemCategory"/>
+  <column
+    name="Description"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="Amount"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ServiceRequestCurrency"/>
+  </column>
+  <foreignkey
+    fkentity="ServiceRequestStatement"
+    name="ServiceRequestStatement"
+    nullok="false"/>
+</entity>

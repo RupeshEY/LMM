@@ -1,0 +1,55 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+uses gw.api.locale.DisplayKey
+
+uses java.util.HashSet
+
+/**
+ * Create an activity reminding the user to review a statute of limitation deadline date.
+ */
+@gw.rules.RuleName("CPU33000 - Subro Statute Limitation Activity")
+internal class CPU33000SubroStatuteLimitationActivity {
+  static function doCondition(claim : entity.Claim) : boolean {
+/*start00rule*/
+return claim.SubrogationSummary != null and
+    (claim.SubrogationSummary.isArrayElementAddedOrRemoved(SubrogationSummary#StatuteLine)
+        or claim.SubrogationSummary.isArrayElementChanged(SubrogationSummary#StatuteLine))
+/*end00rule*/
+}
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+/*start00rule*/
+    var pattern = ActivityPattern.finder.getActivityPatternByCode("subro_statute_limitation_deadline")
+
+    // number of days ahead of statute deadline date for its activity to be due
+    var numDaysWarning = -3
+
+    for (var line in claim.SubrogationSummary.StatuteLine) {
+      if ((line.New or line.isFieldChanged(StatuteLimitationsLine#StatuteDate)) and line.StatuteDate != null) {
+        var deadline = line.StatuteDate.trimToMidnight()
+        var target = deadline.addDays(numDaysWarning)
+        var users = new HashSet<User>()
+
+        for (var assignment in claim.AllRoleAssignments.where(\a -> a.Role == typekey.UserRole.TC_SUBROGATIONOWNER)) {
+          if (not users.contains(assignment.AssignedUser)) {
+            var activity = claim.createActivityFromPattern(null, pattern)
+            activity.Subject = DisplayKey.get("Subrogation.Activity.StatuteDeadlineSubject", deadline.format("short"))
+            activity.Description = DisplayKey.get("Subrogation.Activity.StatuteDeadlineDescription", deadline.format("short"))
+            activity.TargetDate = target
+            activity.assign(assignment.AssignedGroup, assignment.AssignedUser)
+            users.add(assignment.AssignedUser)
+          }
+        }
+
+        if (users.Empty) {
+          var activity = claim.createActivityFromPattern(null, pattern)
+          activity.Subject = DisplayKey.get("Subrogation.Activity.StatuteDeadlineSubject", deadline.format("short"))
+          activity.Description = DisplayKey.get("Subrogation.Activity.StatuteDeadlineDescription", deadline.format("short"))
+          activity.TargetDate = target
+          activity.assign(claim.AssignedGroup, claim.AssignedUser)
+        }
+      }
+    }
+/*end00rule*/
+  }
+}

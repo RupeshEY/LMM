@@ -1,0 +1,13 @@
+package rules.Assignment
+
+@gw.rules.RuleName("DefaultGroupServiceRequestAssignmentRules")
+@gw.rules.RuleSetDescription("This is the Default Group Service Request Assignment rule set. These rules determine how service requests are assigned within a group.")
+class DefaultGroupServiceRequestAssignmentRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.ServiceRequest) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.ServiceRequest) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "DefaultGroupServiceRequestAssignmentRules", DefaultGroupServiceRequestAssignmentRules )
+  }
+}

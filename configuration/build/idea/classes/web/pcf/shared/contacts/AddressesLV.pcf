@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    desc="List of addresses"
+    id="AddressesLV">
+    <ExposeIterator
+      valueType="entity.Address"
+      widget="AddressesLV"/>
+    <!-- NOTE: This shared section requires a gw.api.contact.ContactHandle, rather than a Contact, because it's
+    possible for some actions on a contact detail screen to fundamentally change the contact. In particular, syncing
+    a contact that leads to a downcast of that contact to a more specific subtype causes the original contact to
+    become invalid. To protect against this, contacts on shared sections should be wrapped in a ContactHandle. If the
+    contact is fundamentally changed, then only the handle needs to be updated, and all existing references will see
+    the new contact.
+
+    As a shortcut for "contactHandle.Contact", this shared section defines a read-only property which can be used to
+    access the most current value of the contact. -->
+    <Require
+      name="contactHandle"
+      type="gw.api.contact.ContactHandle"/>
+    <RowIterator
+      editable="true"
+      elementName="address"
+      hasCheckBoxes="true"
+      hideCheckBoxesIfReadOnly="true"
+      pageSize="4"
+      toAdd="Contact.addAddress(address)"
+      toRemove="Contact.removeAddress(address)"
+      value="Contact.AllAddresses"
+      valueType="entity.Address[]">
+      <Row>
+        <RadioButtonCell
+          action="Contact.makePrimaryAddress(address)"
+          align="center"
+          editable="true"
+          id="Primary"
+          label="DisplayKey.get(&quot;Web.Addresses.Primary&quot;)"
+          radioButtonGroup="PrimaryAddress"
+          value="address == Contact.PrimaryAddress"/>
+        <TypeKeyCell
+          id="AddressType"
+          label="DisplayKey.get(&quot;Web.Addresses.AddressType&quot;)"
+          value="address.AddressType"
+          valueType="typekey.AddressType"/>
+        <TextCell
+          id="DisplayName"
+          value="address.DisplayName"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[   property get Contact() : Contact { return contactHandle.Contact; }
+    ]]></Code>
+  </ListViewPanel>
+</PCF>

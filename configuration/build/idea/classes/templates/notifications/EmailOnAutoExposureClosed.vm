@@ -1,0 +1,62 @@
+<html> 
+<head> 
+<title>Notification Email Sample Template</title> 
+</head> 
+<body> 
+<H1>Exposure Sample Notification Email</H1> 
+<pre> 
+Your Exposure has been CLOSED. 
+
+The data in this Exposure record is: 
+
+Exposure Description: <b>$!exposure.Description</b>
+
+Created Time: <b>$!exposure.CreateTime</b>
+Create By User: <b>$!exposure.CreateUser.DisplayName</b>
+
+Assigned User: <b>$!exposure.AssignedUser.DisplayName</b>
+Assigned Group: <b>$!exposure.AssignedGroup.Name</b>
+Last Assigned On: <b>$!exposure.AssignmentDate</b>
+
+Previous Assigned User: <b>$!exposure.PreviousUser.DisplayName</b>
+Previous Group: <b>$!exposure.PreviousGroup.Name</b>
+
+Last Updated Time: <b>$!exposure.UpdateTime</b>
+Last Updated By User: <b>$!exposure.UpdateUser.DisplayName</b>
+
+Closed Date: <b>$!exposure.CloseDate</b>
+Closed Outcome: <b>$!exposure.ClosedOutcome</b>
+
+Settle Date: <b>$!exposure.SettleDate</b>
+Settle Method: <b>$!exposure.SettleMethod</b>
+
+ClaimantType: <b>$!exposure.ClaimantType</b>
+
+Claim Number: <b>$!exposure.Claim.ClaimNumber</b>
+
+Loss Category: <b>$!exposure.LossCategory</b>
+Severity: <b>$!exposure.Severity</b>
+Loss Estimate: <b>$!exposure.Incident.LossEstimate</b>
+Loss Party: <b>$!exposure.LossParty</b>
+
+PrimaryCoverage: <b>$!exposure.PrimaryCoverage</b>
+Other Coverage: #if ($exposure.isOtherCoverage()) <b>Yes</b><br>#else <b>No</b><br>#end
+#if ($exposure.isOtherCoverage())
+Other Coverage Info: <b>$!exposure.OtherCoverageInfo</b> #end
+
+Segment: <b>$!exposure.Segment</b>
+Strategy: <b>$!exposure.Strategy</b>
+
+Direction of Travel: <b>$!exposure.VehicleDirection</b>
+Impact Speed: <b>$!exposure.Speed</b>
+
+Collision Point: <b>$!exposure.CollisionPoint</b>
+Total Loss  #if ($exposure.isTotalLoss()) <b>Yes</b><br>#else <b>No</b><br>#end
+#if ($exposure.isTotalLoss()) 
+Current Vehicle Location: <b>$!exposure.VehicleLocation</b> #end
+
+Relation To Driver: <b>$!exposure.DriverRelation</b>
+Owners Permission: #if ($exposure.isOwnersPermission()) <b>Yes</b><br>#else <b>No</b><br>#end
+State of Jurisdiction: <b>$!exposure.JurisdictionState</b>
+</pre> 
+</body> 

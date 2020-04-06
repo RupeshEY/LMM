@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="(Claim.State != ClaimState.TC_DRAFT) and (perm.Claim.view(Claim) and ((perm.System.viewfinsum or perm.Claim.viewtransactiondetails(Claim)) or perm.Claim.viewpayments(Claim)))"
+    id="ClaimFinancialsGroup"
+    title="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Financials&quot;)">
+    <LocationEntryPoint
+      signature="ClaimFinancialsGroup(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimFinancials.Financials.Summary&quot;)"
+      location="ClaimFinancialsSummary(Claim)"
+      shortcut="U"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimFinancials.Financials.Transactions&quot;)"
+      location="ClaimFinancialsTransactions(Claim)"
+      shortcut="I"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimFinancials.Financials.Checks&quot;)"
+      location="ClaimFinancialsChecks(Claim)"
+      shortcut="S"/>
+  </LocationGroup>
+</PCF>

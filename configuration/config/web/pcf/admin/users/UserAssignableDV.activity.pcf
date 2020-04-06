@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="UserAssignableDV"
+    mode="activity">
+    <Require
+      name="User"
+      type="User"/>
+    <InputColumn>
+      <ListViewInput
+        def="DesktopActivitiesLV(ActivityDesktopView.finder.findAssignedToUser(User))"
+        labelAbove="true">
+        <Toolbar>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="AssignActivitiesPopup.push(new gw.api.activity.ActivityAssignmentPopup(CheckedValues))"
+            flags="all CanAssignActivity"
+            id="UserActivitiesPage_AssignButton"
+            iterator="DesktopActivitiesLV.DesktopActivitiesLV"
+            label="DisplayKey.get(&quot;Web.DesktopActivities.Assign&quot;)"
+            shortcut="G"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

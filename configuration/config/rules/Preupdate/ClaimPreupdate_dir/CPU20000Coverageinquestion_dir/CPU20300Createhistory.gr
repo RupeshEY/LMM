@@ -1,0 +1,29 @@
+package rules.Preupdate.ClaimPreupdate_dir.CPU20000Coverageinquestion_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.upgrade.Coercions
+
+@gw.rules.RuleName("CPU20300 - Create history")
+internal class CPU20300Createhistory {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.isFieldChanged("CoverageInQuestion")
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+if(claim.CoverageInQuestion) {
+  claim.createCustomHistoryEvent(TC_DATACHANGE, DisplayKey.get("Rules.PreUpdate.Claim.CovInQuestion.True"))
+} else if(Coercions.makePBooleanFrom(claim.getOriginalValue("CoverageInQuestion")) == true){
+  claim.createCustomHistoryEvent(TC_DATACHANGE, DisplayKey.get("Rules.PreUpdate.Claim.CovInQuestion.False"))
+}
+
+
+/*end00rule*/
+
+  }
+}

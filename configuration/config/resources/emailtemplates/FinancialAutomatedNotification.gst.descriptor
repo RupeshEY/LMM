@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<serialization>
+
+  <emailtemplate-descriptor
+
+    name="Financial Automated Notification"
+    keywords="automatednotificationhandler, financialthresholdtrigger"
+    topic="Notification of Financial Threshold Change"
+    subject="${ trigger.FinancialThreshold.DisplayName } notification for Claim ${ clm.ClaimNumber }"
+    body="FinancialAutomatedNotification.gst"
+    requiredsymbols="trigger, clm"
+
+  />
+
+</serialization>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table used to set the severity value for non-injury incidents during the 4.0.x-5.0.x upgrade"
+  entity="TmpSeverityToIncCopy"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="tmpseveritytoinccopy"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.TmpSeverityToIncCopy"
+    impl="com.guidewire.cc.domain.exposure.impl.TmpSeverityToIncCopyImpl"/>
+  <column
+    desc="The ID of the incident to be updated by a join to this temp table"
+    name="IncidentID"
+    nullok="true"
+    type="softentityreference"/>
+  <typekey
+    desc="The SeverityType value to copy from cc_exposure to cc_incident"
+    name="SeverityTmp"
+    nullok="true"
+    typelist="SeverityType"/>
+  <index
+    desc="Primary key index of this temp table, used for join to cc_incident table during final update"
+    name="severitycopyu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="IncidentID"/>
+  </index>
+</entity>

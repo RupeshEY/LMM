@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    alwaysInEditMode="false"
+    beforeCommit="verifyNotADuplicate()"
+    canEdit="true"
+    id="NewAutomatedNotificationHandlerPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Admin.NewAutomatedNotificationHandlerPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewAutomatedNotificationHandlerPopup(specialHandling : SpecialHandling, handlerSubtype : gw.entity.IEntityType)"/>
+    <Variable
+      name="specialHandling"
+      type="SpecialHandling"/>
+    <Variable
+      name="handlerSubtype"
+      type="gw.entity.IEntityType"/>
+    <Variable
+      initialValue="specialHandling.createNewAutomatedHandler(handlerSubtype) as AutomatedNotificationHandler"
+      name="newHandler"
+      type="AutomatedNotificationHandler"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          editVisible="false"
+          showUpdateConfirmMessage="false"/>
+      </Toolbar>
+      <PanelRef
+        def="NewAutomatedHandlerDV(newHandler, &quot;notification&quot;)"
+        editable="true"/>
+    </Screen>
+    <Code><![CDATA[function verifyNotADuplicate() {
+  if (newHandler.isDuplicateOfExistingHandler()) {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Web.Admin.NewAutomatedNotificationHandlerPopup.DuplicateAutomatedNotification"))
+  }
+}]]></Code>
+  </Popup>
+</PCF>

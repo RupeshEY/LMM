@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Forward
+    id="ClaimStatusForward">
+    <LocationEntryPoint
+      signature="ClaimStatusForward(claim : Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <ForwardCondition
+      action="ClaimStatus.go(claim)"/>
+    <ForwardCondition
+      action="CannotViewClaim.go()"/>
+  </Forward>
+</PCF>

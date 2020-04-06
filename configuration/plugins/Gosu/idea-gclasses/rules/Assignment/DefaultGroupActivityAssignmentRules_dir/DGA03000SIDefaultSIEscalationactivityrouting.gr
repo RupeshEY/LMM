@@ -1,0 +1,22 @@
+package rules.Assignment.DefaultGroupActivityAssignmentRules_dir
+
+@gw.rules.RuleName("DGA03000 - SI Default SI Escalation activity routing")
+internal class DGA03000SIDefaultSIEscalationactivityrouting {
+  static function doCondition(activity : entity.Activity) : boolean {
+    
+/*start00rule*/
+return activity.ActivityPattern.Code == "SIU_escalation"
+/*end00rule*/
+
+  }
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+
+/*start00rule*/
+if (activity.CurrentAssignment.assignUserByRoundRobin(true, activity.CurrentAssignment.AssignedGroup)) {
+  actions.exit()
+}
+/*end00rule*/
+
+  }
+}

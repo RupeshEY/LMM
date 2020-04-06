@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="EditableTripIncidentsLV">
+    <ExposeIterator
+      flags="Removeable"
+      valueType="entity.TripIncident"
+      widget="EditableTripIncidentsLV"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="Boolean"/>
+    <RowIterator
+      checkBoxVisible="Wizard == false"
+      editable="true"
+      elementName="TripIncident"
+      hideCheckBoxesIfReadOnly="true"
+      pageSize="5"
+      pickLocation="TripIncidentPopup.push(Claim)"
+      toRemove="removeTripIncident(TripIncident)"
+      value="Claim.TripIncidentsOnly"
+      valueType="entity.TripIncident[]">
+      <ToolbarFlag
+        name="Removeable"/>
+      <Row>
+        <TextCell
+          action="TripIncidentPopup.push( TripIncident, CurrentLocation.InEditMode )"
+          id="TripRU"
+          label="DisplayKey.get(&quot;Web.EditableTripIncidentsLV.AffectedTrip&quot;)"
+          sortOrder="1"
+          value="TripIncident.TripRU.DisplayName.length &gt; 60 ? TripIncident.TripRU.DisplayName.substring( 0, 57 ) + &quot;...&quot; : TripIncident.TripRU.DisplayName"/>
+        <TextCell
+          editable="Wizard"
+          id="Description"
+          label="DisplayKey.get(&quot;Web.EditableTripIncidentsLV.Description&quot;)"
+          required="true"
+          value="TripIncident.Description"/>
+        <CurrencyCell
+          formatType="currency"
+          id="CostIncurred"
+          label="DisplayKey.get(&quot;Web.EditableTripIncidentsLV.CostIncurred&quot;)"
+          value="TripIncident.getTotalFinancialImpact( AssessmentAction.TC_APPROVE )"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function removeTripIncident(tripIncidentParam : TripIncident) {
+  if (tripIncidentParam.UsedByExposure) {
+      throw new gw.api.util.DisplayableException(DisplayKey.get("Web.NewLossDetailsScreen.CannotDeleteBaggageIncidentExposureLabel"))    
+  }  
+  Claim.removeNewServiceRequests(tripIncidentParam)
+  Claim.removeFromIncidents( tripIncidentParam )
+  
+}]]></Code>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ContactContact">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="OverlapTable"/>
+  <implementsInterface
+    iface="gw.api.contact.ContactRetireBean"
+    impl="gw.api.contact.ContactContactRetireBeanImpl"/>
+</internalExtension>

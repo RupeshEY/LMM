@@ -1,0 +1,22 @@
+package rules.Validation.ExposureReopenedValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("ERV01000 - Claim closed")
+internal class ERV01000Claimclosed {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.Claim.State != TC_OPEN
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.reject(TC_NEWLOSS, DisplayKey.get("Rules.Validation.ReopenExposure.OpenClaimRequired"), null, null)
+/*end00rule*/
+
+  }
+}

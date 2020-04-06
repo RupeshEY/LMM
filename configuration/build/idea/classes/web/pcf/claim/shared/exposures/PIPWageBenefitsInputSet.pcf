@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="PIPWageBenefitsInputSet">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Exposure.WageBenefits.PartialEmploymentBenefits&quot;)"/>
+    <BooleanRadioInput
+      editable="true"
+      id="WageBenefitCollected_Question"
+      label="DisplayKey.get(&quot;NVV.Exposure.WageBenefitCollected.Question&quot;)"
+      value="Exposure.WageBenefit">
+      <PostOnChange/>
+    </BooleanRadioInput>
+    <ClaimContactInput
+      claim="Exposure.Claim"
+      editable="true"
+      id="PIPDamages_Employer"
+      label="DisplayKey.get(&quot;NVV.Exposure.WageBenefitCollected.PIPDamages.Employer&quot;)"
+      value="Exposure.employer"
+      valueRange="Exposure.Claim.RelatedCompanyArray"
+      valueType="entity.Company"
+      visible=" Exposure.WageBenefit == true"/>
+    <TextInput
+      id="Employer_PrimaryAddress"
+      label="DisplayKey.get(&quot;NVV.Exposure.WageBenefits.PIPDamages.Employer.PrimaryAddress&quot;)"
+      value="Exposure.employer.PrimaryAddressDisplayValue"
+      visible=" Exposure.WageBenefit == true">
+      <Reflect
+        triggerIds="PIPDamages_Employer"
+        value="VALUE.PrimaryAddressDisplayValue"/>
+    </TextInput>
+    <TextInput
+      id="Employer_PrimaryContact"
+      label="DisplayKey.get(&quot;NVV.Exposure.WageBenefits.PIPDamages.Employer.PrimaryContact&quot;)"
+      value="Exposure.employer.PrimaryContact.DisplayName"
+      visible=" Exposure.WageBenefit == true">
+      <Reflect
+        triggerIds="PIPDamages_Employer"
+        value="VALUE.PrimaryContact.DisplayName"/>
+    </TextInput>
+    <TextInput
+      id="Employer_PrimaryPhone"
+      label="DisplayKey.get(&quot;NVV.Exposure.WageBenefits.PIPDamages.Employer.PrimaryPhone&quot;)"
+      value="Exposure.employer.PrimaryPhoneValue"
+      visible=" Exposure.WageBenefit == true">
+      <Reflect
+        triggerIds="PIPDamages_Employer"
+        value="VALUE.PrimaryPhoneValue"/>
+    </TextInput>
+    <TextInput
+      editable="true"
+      id="EmploymentData_NumHoursWorkedPerDay"
+      label="DisplayKey.get(&quot;NVV.Exposure.WageBenefits.EmploymentData.NumHoursWorkedPerDay&quot;)"
+      value="Exposure.NewEmpData.NumHoursWorked"
+      valueType="java.math.BigDecimal"
+      visible=" Exposure.WageBenefit == true"/>
+    <TextInput
+      editable="true"
+      id="EmploymentData_NumDaysWorkedPerWeek"
+      label="DisplayKey.get(&quot;NVV.Exposure.WageBenefits.EmploymentData.NumDaysWorkedPerWeek&quot;)"
+      value="Exposure.NewEmpData.NumDaysWorked"
+      valueType="java.math.BigDecimal"
+      visible=" Exposure.WageBenefit == true"/>
+    <CurrencyInput
+      editable="true"
+      id="EmploymentData_WageAmount"
+      label="DisplayKey.get(&quot;NVV.Exposure.WageBenefits.EmploymentData.WageAmount&quot;)"
+      value="Exposure.NewEmpData.WageAmount"
+      visible=" Exposure.WageBenefit == true"/>
+    <TypeKeyInput
+      editable="true"
+      id="EmploymentData_PayPeriod"
+      label="DisplayKey.get(&quot;NVV.Exposure.WageBenefits.EmploymentData.PayPeriod&quot;)"
+      value="Exposure.NewEmpData.PayPeriod"
+      valueType="typekey.PayPeriodType"
+      visible=" Exposure.WageBenefit == true"/>
+  </InputSet>
+</PCF>

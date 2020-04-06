@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- Used where user may not have permission to see matter; backs off to Claim if no permission -->
+  <Forward
+    id="ClaimMatterForward">
+    <LocationEntryPoint
+      signature="ClaimMatterForward(Claim : Claim, Matter : Matter)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Matter"
+      type="Matter"/>
+    <ForwardCondition
+      action="MatterDetailPage.go(Claim, Matter)"
+      condition="Matter != null"/>
+    <ForwardCondition
+      action="ClaimMatters.go(Claim)"/>
+    <ForwardCondition
+      action="pcf.Claim.go(Claim)"/>
+  </Forward>
+</PCF>

@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <PanelSet
+    id="ExportExclusionsPanelSet"
+    visible="exclusions.HasElements">
+    <Require
+      name="navigationSupport"
+      type="gw.bizrules.pcf.BizRulesPageNavigationSupport"/>
+    <Require
+      name="exclusions"
+      type="gw.bizrules.management.RuleExportRequest.ExcludedDraftInfo[]"/>
+    <Require
+      name="title"
+      type="String"/>
+    <Require
+      name="draftVersionColumnVisible"
+      type="boolean"/>
+    <Require
+      name="exportingVersionColumnVisible"
+      type="boolean"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <TextInput
+          id="Title"
+          labelAbove="true"
+          value="title"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <ListViewPanel
+      id="LV">
+      <RowIterator
+        editable="false"
+        elementName="entry"
+        pageSize="10"
+        value="exclusions"
+        valueType="gw.bizrules.management.RuleExportRequest.ExcludedDraftInfo[]">
+        <Row>
+          <TextCell
+            action="navigationSupport.pushRuleVersionDetailsPopup(entry.DraftVersion, false)"
+            id="Name"
+            label="DisplayKey.get('BizRules.RulesPage.LV.Name')"
+            sortOrder="1"
+            value="entry.DraftVersion.Rule.Name"/>
+          <BooleanRadioCell
+            icon="&quot;ok.png&quot;"
+            iconLabel="DisplayKey.get('Button.Yes')"
+            id="AvailableToRun"
+            label="DisplayKey.get('BizRules.RulesPage.LV.Available')"
+            showHeaderIcon="false"
+            value="entry.DraftVersion.Rule.AvailableToRun"/>
+          <TextCell
+            action="navigationSupport.pushRuleVersionDetailsPopup(entry.DraftVersion, false)"
+            enableSort="false"
+            id="DraftVersion"
+            label="DisplayKey.get('BizRules.RuleExportAllConfirmationPopup.LV.DraftVersion')"
+            value="navigationSupport.VersionController.getLabelForExistingVersion(entry.DraftVersion, false)"
+            visible="draftVersionColumnVisible"/>
+          <TextCell
+            action="navigationSupport.pushRuleVersionDetailsPopup(entry.ExportingVersion, false)"
+            enableSort="false"
+            id="ExportingVersion"
+            label="DisplayKey.get('BizRules.RuleExportAllConfirmationPopup.LV.VersionToBeExported')"
+            value="navigationSupport.VersionController.getLabelForExistingVersion(entry.ExportingVersion, false)"
+            visible="exportingVersionColumnVisible"/>
+        </Row>
+      </RowIterator>
+    </ListViewPanel>
+  </PanelSet>
+</PCF>

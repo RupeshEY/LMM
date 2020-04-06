@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table for Athena to Nozomi upgrade to use for speeding up population of the tmptacctbalancecopy table.  Aggregate contributing transaction counts here."
+  entity="TmpRejTAcctContribTxns"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="tmprejtacctcontribtxns"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.TmpRejTAcctContribTxns"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TmpRejTAcctContribTxnsImpl"/>
+  <column
+    desc="The ID of the t-account in question"
+    name="TAccountID"
+    nullok="false"
+    type="softentityreference"/>
+  <column
+    default="0"
+    desc="The number of transactions currently crediting this taccount"
+    name="NumCreditingTxns"
+    nullok="false"
+    type="integer"/>
+  <column
+    default="0"
+    desc="The number of transactions currently debiting this taccount"
+    name="NumDebitingTxns"
+    nullok="false"
+    type="integer"/>
+  <index
+    desc="A TAccount should be updated at most once."
+    name="tmprejecttxnsu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="TAccountID"/>
+  </index>
+</entity>

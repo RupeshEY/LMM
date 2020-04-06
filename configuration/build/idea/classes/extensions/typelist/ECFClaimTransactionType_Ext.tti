@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  name="ECFClaimTransactionType_Ext"
+  desc="Identifies the type of transaction and will notify if the message is a first advice (with or without settlement) and interim advice (with or without settlement)">
+  <typecode
+    code="FirstAdvice"
+    desc="First Advice"
+    name="First Advice"/>
+  <typecode
+    code="InterimAdvice"
+    desc="Interim Advice"
+    name="Interim Advice"/>
+  <typecode
+    code="FirstAdviceAndSettlement"
+    desc="First Advice and Settlement"
+    name="First Advice and Settlement"/>
+  <typecode
+    code="InterimAdviceAndSettlement"
+    desc="Interim Advice and Settlement"
+    name="Interim Advice and Settlement"/>
+</typelist>

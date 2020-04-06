@@ -1,0 +1,290 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <Popup
+    beforeCommit="saveSelectedValuesAndValidateCompatibility(pickedValue)"
+    canEdit="true"
+    id="SelectServicesPopup"
+    returnType="SpecialistService[]"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ServiceRequest.SelectServices.Title&quot;)">
+    <LocationEntryPoint
+      signature="SelectServicesPopup(serviceRequest: ServiceRequest)"/>
+    <LocationEntryPoint
+      signature="SelectServicesPopup(specialServicesParam : java.util.List&lt;SpecialistService&gt;)"/>
+    <Variable
+      name="serviceRequest"
+      type="ServiceRequest"/>
+    <Variable
+      name="specialServicesParam"
+      type="java.util.List&lt;SpecialistService&gt;"/>
+    <Variable
+      initialValue="serviceRequest.AvailableKinds"
+      name="initialAvailableKinds"
+      type="java.util.List&lt;typekey.ServiceRequestKind&gt;"/>
+    <Variable
+      initialValue="specialServicesParam != null ? specialServicesParam.toSet() : serviceRequest.Instruction.OrderedServices*.Service.toSet() "
+      name="initialServiceRequestSpecialistServices"
+      type="java.util.Set&lt;entity.SpecialistService&gt;"/>
+    <Variable
+      initialValue="new gw.api.tree.RowTreeRootNode(CategoriesMatchingIncident, \ss -&gt;  getServiceChildren(ss as SpecialistService), \ss -&gt; true)"
+      name="root"
+      type="gw.api.tree.RowTreeRootNode"/>
+    <Variable
+      initialValue="null"
+      name="keyword"
+      type="String"/>
+    <Variable
+      initialValue="new java.util.HashSet&lt;String&gt;()"
+      name="selectedValues"
+      type="java.util.HashSet&lt;java.lang.String&gt;"/>
+    <Variable
+      name="IncompatibleServicesAlertMessage"
+      type="String"/>
+    <Screen>
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          id="UpdateServiceRequestServices"
+          iterator="SpecialistServiceTree"
+          label="DisplayKey.get(&quot;Web.ServiceRequest.SelectServices.Add&quot;)"
+          pickValue="CheckedValues"/>
+        <EditButtons
+          editVisible="false"
+          updateVisible="false"/>
+        <ToolbarInput
+          editable="true"
+          focusOnStartEditing="true"
+          id="FilterKeyword"
+          labelAbove="true"
+          required="false"
+          value="keyword"
+          valueType="java.lang.String">
+          <PostOnChange
+            onChange="filterServicesByKeyword()"/>
+        </ToolbarInput>
+        <ToolbarButton
+          action="filterServicesByKeyword()"
+          default="true"
+          id="FilterServices"
+          label="DisplayKey.get(&quot;Web.ServiceRequest.SelectServices.FilterButton&quot;)"/>
+        <ToolbarButton
+          action="resetFilter()"
+          id="ResetFilter"
+          label="DisplayKey.get(&quot;Web.ServiceRequest.SelectServices.ResetFilter&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            id="AvailableServicesDescription"
+            labelAbove="true"
+            value="DisplayKey.get(&quot;Web.ServiceRequest.SelectServices.AvailableServicesDescription&quot;, serviceRequest.RelatedToName)"
+            visible="serviceRequest != null"/>
+          <TextInput
+            id="IncompatibleServicesAlert"
+            labelAbove="true"
+            value="IncompatibleServicesAlertMessage"
+            visible="not IncompatibleServicesAlertMessage.Empty"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <ListViewPanel
+        id="SpecialistServiceTreeLV">
+        <RowTree
+          canPick="false"
+          checkBoxVisible="specialistService.Leaf"
+          containerLabel="specialistService.Name"
+          containerType="SpecialistService"
+          contentType="SpecialistService"
+          elementName="specialistService"
+          hasCheckBoxes="true"
+          id="SpecialistServiceTree"
+          startChecked="selectedValues.contains(specialistService.Code) "
+          value="root">
+          <Row>
+            <TextCell
+              enableSort="false"
+              flex="1"
+              id="ServiceLeaf"
+              label="DisplayKey.get(&quot;Web.ServiceRequest.SelectServices.Tree.Label&quot;)"
+              required="false"
+              value="specialistService.Name"/>
+          </Row>
+        </RowTree>
+      </ListViewPanel>
+      <DetailViewPanel
+        visible="root.Children.Empty">
+        <InputColumn>
+          <TextInput
+            id="NoAvailableServicesMessage"
+            labelAbove="true"
+            value="DisplayKey.get(&quot;Web.ServiceRequest.SelectServices.NoAvailableServices&quot;)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[uses com.google.common.collect.Multimap
+uses com.google.common.collect.Ordering
+uses com.google.common.collect.TreeMultimap
+uses gw.api.database.Query
+uses gw.api.locale.DisplayKey
+uses gw.api.util.DisplayableException
+uses gw.vendormanagement.SpecialistServiceCodeConstants
+
+uses java.util.ArrayList
+uses java.util.Collections
+
+property get CategoriesMatchingIncident() : java.util.List<SpecialistService> {
+  var incident = serviceRequest.Incident
+  // load all SpecialistServices into the bundle and filter in memory, since the tree will access
+  // the descendants when rendering the tree
+  var compatibleServices = Query.make(SpecialistService).select()
+                            .where(\ s -> s.Parent==null  
+                                and (incident == null or s.CompatibleIncidentTypes.hasMatch( \ cit -> cit.IncidentType==incident.Subtype)) 
+                                and shouldShow(s))
+  Collections.sort(compatibleServices, SpecialistService.StandardComparator)
+  return compatibleServices
+}
+
+/**
+ * Gets all the children for a SpecialistService. It filters the children that are
+ * already part of the ServiceRequest.Instruction services
+ */
+function getServiceChildren(service: SpecialistService): java.util.List<SpecialistService> {
+  return service.OrderedChildren.where( \ ss -> shouldShow(ss))
+}
+
+/**
+ * Calculates whether a SpecialistService should be displayed in the tree. Returns true when all of the
+ * following conditions are satisfied:
+ * <ul>
+ *   <li>the service is active,</li>
+ *   <li>it is not already a service on the ServiceRequest, and</li>
+ *   <li>either (a) it is a leaf service and at least one of its compatible kinds is compatible with all of the
+ *       ServiceRequest's already-selected services and, if this ServiceRequest is being promoted, the ServiceRequest's
+  *      current kind, or (b) a recursive call to this method for one of its children returns true.</li>
+ * </ul>
+ */
+
+function shouldShow(service : SpecialistService) : boolean {
+  if (not service.Active or initialServiceRequestSpecialistServices.contains(service) or UnsupportedServiceCodes.contains(service.Code)) {
+    return false
+  }
+  if (service.Leaf) {
+    if (initialAvailableKinds != null and not initialAvailableKinds.hasMatch( \ k -> service.CompatibleKinds*.Kind.contains(k))) {
+      IncompatibleServicesAlertMessage = serviceRequest.IsPromotion ?
+                DisplayKey.get("Web.ServiceRequest.SelectServices.IncompatibleWithPromotedKindOrExistingServices") :
+                DisplayKey.get("Web.ServiceRequest.SelectServices.IncompatibleWithExistingServices")
+      return false
+    }
+    
+    return true   
+  } else {
+    return service.Children.hasMatch( \ child -> shouldShow(child))
+  }
+
+}
+
+/**
+ * Filter the initial SpecialistService Tree based on the keyword. It will show only the services
+ * that contains the keyword string.
+ */ 
+function filterServicesByKeyword() {
+  var filteredServicesMap = TreeMultimap<String, SpecialistService>
+      .create<String, SpecialistService>(Ordering.natural<String>(), SpecialistService.StandardComparator)
+  if (keyword.NotBlank) {
+    
+    CategoriesMatchingIncident.each( \ ss -> filterChildren(ss, filteredServicesMap))
+  
+    // Build the list of categories from the filtered services map and reassign to the root
+    root = new gw.api.tree.RowTreeRootNode(filteredServicesMap.get("").toList(), \ss ->  getFilteredServiceChildren(ss as SpecialistService, filteredServicesMap), \ss -> true)
+    
+  } else {
+    // If the keyword is empty, need to display the whole tree and show the previously selected services
+    root = new gw.api.tree.RowTreeRootNode(CategoriesMatchingIncident, \ss ->  getServiceChildren(ss as SpecialistService), \ss -> true)
+  }
+}
+
+/**
+ * Filter the specialist services that contains the keyword and adds their children to the filtered map.
+ * If the service does not contain the keyword, it tries to find a match in any of its children recursively.
+ * At all times all nodes in the filtered map have a path to get back to the root
+ */ 
+function filterChildren(node: SpecialistService, filteredMap : Multimap<String, SpecialistService>) {
+  if (node.Name.containsIgnoreCase(keyword)) {
+    if (shouldShow(node)) {
+      // Create a path in the map for each ancestry
+      for (ancestry in node.Ancestry) {
+        filteredMap.put(ancestry.Parent.Code ?: "", ancestry)
+      }
+
+      // Expand the children
+      expandChildren(node, filteredMap)  
+    }
+    
+  } else {
+    // Try to find a matching keyword in any of its children
+    for (child in node.OrderedChildren.where( \ s -> shouldShow(s))) {
+      filterChildren(child,filteredMap)
+    }
+  }
+}
+
+/**
+ * Adds to the filtered map a path for each one of the children of the node that matched the keyword
+ */ 
+function expandChildren(node: SpecialistService, filteredMap : Multimap<String, SpecialistService>) {
+  // Need to add the path for the node and its parent  
+  filteredMap.put(node.Parent.Code?: "", node)
+  
+  for (child in node.OrderedChildren) {
+    expandChildren(child, filteredMap)  
+  }
+}
+
+/**
+ * Gets all the children from the filtered map. It filters the children that are
+ * already part of the ServiceRequest.Instruction services 
+ */
+function getFilteredServiceChildren(service: SpecialistService, filteredMap : Multimap<String, SpecialistService>): java.util.List<SpecialistService> {
+  return filteredMap.containsKey(service.Code) ? 
+      filteredMap.get(service.Code).where( \ ss -> not initialServiceRequestSpecialistServices.contains(ss) and shouldShow(ss)) : 
+      new ArrayList<SpecialistService>()
+}
+
+/**
+ * Reset the filtered specialist services tree
+ */
+function resetFilter() {
+  keyword = null
+  root = new gw.api.tree.RowTreeRootNode(CategoriesMatchingIncident, \ss ->  getServiceChildren(ss as SpecialistService), \ss -> true)
+}
+
+/**
+ * Saves the currently-checked values into selectedValues so that they can be re-checked in the case of a validation
+ * error, then, if a ServiceRequest was provided, validates that the checked SpecialistServices are mutually compatible
+ * for use on one ServiceRequest (i.e., at least one ServiceRequestKind is compatible with all of them).
+ */
+function saveSelectedValuesAndValidateCompatibility(checkedServices: SpecialistService[]) {
+  selectedValues.clear()
+  checkedServices.each( \ s -> selectedValues.add(s.Code))
+
+  // if we are selecting services for a ServiceRequest, then they must be compatible with each other
+  if (serviceRequest != null and entity.ServiceRequest.calculateAvailableKinds(checkedServices).Empty) {
+    throw new DisplayableException(DisplayKey.get("Web.ServiceRequest.SelectServices.IncompatibleServices"))
+  }
+}
+
+/**
+ * Returns the codes of services that should not appear on this popup.
+ */
+property get UnsupportedServiceCodes(): String[] {
+  if (serviceRequest != null) {
+    // The auto rental service cannot be created via SelectServicesPopup, as it requires more information than can be
+    // collected by NewServiceRequestDV.  Instead, this service will normally be created by custom interfaces elsewhere;
+    // e.g., see RentalServiceInputSet
+    return {SpecialistServiceCodeConstants.AUTORENTAL}
+  } else {
+    return {}
+  }
+}]]></Code>
+  </Popup>
+</PCF>

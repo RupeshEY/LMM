@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wb:ClaimResponseRq  Sender="insurer"  Receiver="serviceprovider"  xmlns:wb="http://www.xchanging.com/claimResponse/rq/1"  xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1">
+  <UUId>c3a5bca7-9908-4239-b3f5-21fed58c9921</UUId>
+  <wb:AsOfDate>2017-06-26T10:47:36</wb:AsOfDate>
+  <wb:ReferredUUId>e7c9527a-4bb4-468c-8113-fa23f279d14a</wb:ReferredUUId>
+  <wb:InsurerTransactionReference>123456</wb:InsurerTransactionReference>
+  <CreationDate>2017-06-26T10:48:02+01:00  </CreationDate>
+  <wb:Insurer>
+    <Party>
+      <Id Agency="ilu">urn:ilu:402801</Id>
+      <Name>Zurich 402801</Name>
+    </Party>
+    <wb:Contact>
+      <PersonName>Super User</PersonName>
+      <Telephone>555-1234</Telephone>
+      <Email>su@guidewire.com</Email>
+      <wb:ClassUserId>1234</wb:ClassUserId>
+      <wb:AccountCode>5678</wb:AccountCode>
+    </wb:Contact>
+  </wb:Insurer>
+  <ServiceProvider>
+    <Party>
+      <Id Agency="DUNS_dun_and_bradstreet">urn:duns:236196817</Id>
+      <Name>Xchanging</Name>
+    </Party>
+  </ServiceProvider>
+  <wb:Contract>
+    <BrokerReference>UMR00012</BrokerReference>
+  </wb:Contract>
+  <wb:ContractSection>
+    <JvClassOfBusiness>AH</JvClassOfBusiness>
+  </wb:ContractSection>
+  <wb:ClaimEntry>
+    <BrokerReference>TR00012</BrokerReference>
+  </wb:ClaimEntry>
+  <wb:Claim>
+    <BrokerReference>UCR00012</BrokerReference>
+    <wb:ClaimType>000</wb:ClaimType>
+    <wb:Indicators>
+      <wb:CedantInLiquidationIndicator>Y</wb:CedantInLiquidationIndicator>
+      <wb:SimultaneousRIPIndicator>Y</wb:SimultaneousRIPIndicator>
+      <wb:ChaseUpIndicator>
+        <wb:Indicator>Y</wb:Indicator>
+        <wb:Interval>24</wb:Interval>
+      </wb:ChaseUpIndicator>
+    </wb:Indicators>
+  </wb:Claim>
+  <wb:ClaimResponse>
+    <wb:ParticipantFunction>Lead</wb:ParticipantFunction>
+    <wb:ClaimLineNo>1</wb:ClaimLineNo>
+    <wb:LeadResponse>
+      <wb:LeadContact>
+        <PersonName>Default Owner</PersonName>
+        <Telephone>555-1234</Telephone>
+        <Email>su@guidewire.com</Email>
+      </wb:LeadContact>
+      <wb:ContractMarket>
+        <wb:InsurerOrReinsurer>
+          <wb:AgreementPartyModifiedIndicator>add</wb:AgreementPartyModifiedIndicator>
+          <Party>
+            <Id Agency="ilu">GW2001</Id>
+            <Name>Felix Insurance</Name>
+          </Party>
+        </wb:InsurerOrReinsurer>
+      </wb:ContractMarket>
+      <wb:IluLead>
+        <wb:IluResponse>AUT</wb:IluResponse>
+        <wb:PrivateComments>
+          <wb:CommentDetails>This is a private comment.</wb:CommentDetails>
+        </wb:PrivateComments>
+        <wb:PublicComments>
+          <wb:CommentDetails>This is a public comment.</wb:CommentDetails>
+        </wb:PublicComments>
+      </wb:IluLead>
+      <wb:ClaimEntryAmounts Ccy="GBP">
+        <TargetCurrency>
+          <Ccy>GBP</Ccy>
+        </TargetCurrency>
+        <wb:VatAmount>4321.00</wb:VatAmount>
+        <wb:ImportedServicesAmount>1234.00</wb:ImportedServicesAmount>
+        <wb:ImportedServicesNarrative>Imported Services Na</wb:ImportedServicesNarrative>
+      </wb:ClaimEntryAmounts>
+    </wb:LeadResponse>
+  </wb:ClaimResponse>
+</wb:ClaimResponseRq>

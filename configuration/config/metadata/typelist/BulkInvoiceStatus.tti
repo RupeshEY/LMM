@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Possible statuses for BulkInvoice entities"
+  final="true"
+  name="BulkInvoiceStatus">
+  <typecode
+    code="draft"
+    desc="Bulk invoice is possibly committed to DB, but not yet ready for validation"
+    name="Draft"/>
+  <typecode
+    code="inreview"
+    desc="Bulk invoice is under review"
+    name="In review"/>
+  <typecode
+    code="pendingitemvalidation"
+    desc="Individual bulk invoice items are being validated"
+    name="Pending bulk invoice item validation"/>
+  <typecode
+    code="invaliditems"
+    desc="One or more approved items on the bulk invoice failed validation or had some problem with the associated check"
+    name="Invalid bulk invoice items"/>
+  <typecode
+    code="awaitingsubmission"
+    desc="Awaiting submission to the downstream system"
+    name="Awaiting submission"/>
+  <typecode
+    code="requesting"
+    desc="Queued for submission to the downstream system"
+    name="Requesting"/>
+  <typecode
+    code="requested"
+    desc="Sent to downstream system and acknowledged"
+    name="Requested"/>
+  <typecode
+    code="cleared"
+    desc="Bulk invoice's associated bulk check has been cleared"
+    name="Cleared"/>
+  <typecode
+    code="issued"
+    desc="Bulk invoice's associated bulk check has been issued"
+    name="Issued"/>
+  <typecode
+    code="rejected"
+    desc="Bulk invoice rejected by assigned approver"
+    name="Rejected"/>
+  <typecode
+    code="pendingvoid"
+    desc="Bulk invoice was voided, and confirmation of void is pending"
+    name="Pending void"/>
+  <typecode
+    code="pendingstop"
+    desc="Bulk invoice was stopped, and confirmation of stop is pending"
+    name="Pending stop"/>
+  <typecode
+    code="voided"
+    desc="Bulk invoice was voided"
+    name="Voided"/>
+  <typecode
+    code="stopped"
+    desc="Bulk invoice was stopped"
+    name="Stopped"/>
+  <typecode
+    code="onhold"
+    desc="Bulk invoice was put on hold by downstream system"
+    name="On hold"/>
+</typelist>

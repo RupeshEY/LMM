@@ -1,0 +1,214 @@
+<?xml version="1.0"?>
+<!-- Legal values for this type list can contain codes with the values:
+  0 - represents any date
+  <number> - represents +number days in the future.
+  n<number> - represents number days in the past. -->
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="The predetermined list of date ranges we can search for"
+  name="DateRangeChoiceType">
+  <typecode
+    code="n0"
+    desc="Today"
+    name="Today"
+    priority="2">
+    <category
+      code="payment"
+      typelist="SearchObjectType"/>
+    <category
+      code="claim"
+      typelist="SearchObjectType"/>
+    <category
+      code="claimInfo"
+      typelist="SearchObjectType"/>
+    <category
+      code="activity"
+      typelist="SearchObjectType"/>
+    <category
+      code="recovery"
+      typelist="SearchObjectType"/>
+    <category
+      code="note"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="n7"
+    desc="7 days before today"
+    name="Last 7 days"
+    priority="3">
+    <category
+      code="payment"
+      typelist="SearchObjectType"/>
+    <category
+      code="claim"
+      typelist="SearchObjectType"/>
+    <category
+      code="claimInfo"
+      typelist="SearchObjectType"/>
+    <category
+      code="activity"
+      typelist="SearchObjectType"/>
+    <category
+      code="recovery"
+      typelist="SearchObjectType"/>
+    <category
+      code="note"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="n14"
+    desc="14 days before today"
+    name="Last 14 days"
+    priority="4">
+    <category
+      code="claim"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="n30"
+    desc="30 days before today"
+    name="Last 30 days"
+    priority="5">
+    <category
+      code="payment"
+      typelist="SearchObjectType"/>
+    <category
+      code="claim"
+      typelist="SearchObjectType"/>
+    <category
+      code="claimInfo"
+      typelist="SearchObjectType"/>
+    <category
+      code="activity"
+      typelist="SearchObjectType"/>
+    <category
+      code="recovery"
+      typelist="SearchObjectType"/>
+    <category
+      code="note"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="n90"
+    desc="90 days before today"
+    name="Last 90 days"
+    priority="6">
+    <category
+      code="payment"
+      typelist="SearchObjectType"/>
+    <category
+      code="claim"
+      typelist="SearchObjectType"/>
+    <category
+      code="claimInfo"
+      typelist="SearchObjectType"/>
+    <category
+      code="activity"
+      typelist="SearchObjectType"/>
+    <category
+      code="recovery"
+      typelist="SearchObjectType"/>
+    <category
+      code="note"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="n180"
+    desc="180 days before today"
+    name="Last 180 days"
+    priority="7">
+    <category
+      code="payment"
+      typelist="SearchObjectType"/>
+    <category
+      code="claim"
+      typelist="SearchObjectType"/>
+    <category
+      code="claimInfo"
+      typelist="SearchObjectType"/>
+    <category
+      code="activity"
+      typelist="SearchObjectType"/>
+    <category
+      code="recovery"
+      typelist="SearchObjectType"/>
+    <category
+      code="note"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="n365"
+    desc="365 days before today"
+    name="Last 365 days"
+    priority="8">
+    <category
+      code="payment"
+      typelist="SearchObjectType"/>
+    <category
+      code="claim"
+      typelist="SearchObjectType"/>
+    <category
+      code="claimInfo"
+      typelist="SearchObjectType"/>
+    <category
+      code="activity"
+      typelist="SearchObjectType"/>
+    <category
+      code="recovery"
+      typelist="SearchObjectType"/>
+    <category
+      code="note"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="7"
+    desc="7 days from today"
+    name="Next 7 days"
+    priority="9">
+    <category
+      code="payment"
+      typelist="SearchObjectType"/>
+    <category
+      code="activity"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="30"
+    desc="30 days from today"
+    name="Next 30 days"
+    priority="10">
+    <category
+      code="payment"
+      typelist="SearchObjectType"/>
+    <category
+      code="activity"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="90"
+    desc="90 days from today"
+    name="Next 90 days"
+    priority="11">
+    <category
+      code="activity"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="180"
+    desc="180 days from today"
+    name="Next 180 days"
+    priority="12">
+    <category
+      code="activity"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="365"
+    desc="365 days from today"
+    name="Next 365 days"
+    priority="13">
+    <category
+      code="activity"
+      typelist="SearchObjectType"/>
+  </typecode>
+</typelistextension>

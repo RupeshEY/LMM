@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="MobilePropertyIncident">
+  <!-- It's important to remove the 4 Location* fields (LocationStreet,
+         LocationState, etc.) when merging this file. Those fields will be
+         upgraded to an Address entity and available as LocationAddress,
+         which is defined below. -->
+  <typekey
+    desc="Where Loss occurred"
+    name="LossOccured"
+    nullok="true"
+    typelist="LossOccured"/>
+  <column
+    desc="Loss occurred if Other is selected Description needed."
+    name="LossDesc"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="30"/>
+  </column>
+  <foreignkey
+    archivingOwner="source"
+    desc="Location address of the incident. Previous fields that made up this address described as 'Location of the Exposed Vehicle'."
+    fkentity="Address"
+    name="LocationAddress"
+    nullok="true"
+    triggersValidation="true"/>
+</extension>

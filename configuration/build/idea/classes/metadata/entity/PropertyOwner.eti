@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Links a lienholder to a property."
+  entity="PropertyOwner"
+  exportable="true"
+  platform="false"
+  table="propertyowner"
+  type="joinarray">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.policy.impl.PropertyOwnerImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.policy.impl.PropertyOwnerImpl"/>
+  <implementsInterface
+    iface="gw.cc.policy.entity.PropertyOwner"
+    impl="com.guidewire.cc.domain.policy.impl.PropertyOwnerImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <typekey
+    desc="Whether the lienholder is a partial owner or the sole owner."
+    name="OwnerType"
+    nullok="true"
+    typelist="OwnerType"/>
+  <foreignkey
+    columnName="PropertyID"
+    desc="The related property."
+    exportable="false"
+    fkentity="PolicyLocation"
+    name="Property"
+    nullok="false"
+    triggersValidation="true"/>
+  <foreignkey
+    columnName="LocationBasedRUID"
+    desc="The related risk unit/building."
+    exportable="false"
+    fkentity="LocationBasedRU"
+    name="LocationBasedRU"
+    nullok="true"
+    triggersValidation="true"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="LienholderID"
+    desc="The relevant lienholder."
+    fkentity="Contact"
+    name="Lienholder"
+    nullok="false"
+    triggersValidation="true"/>
+  <index
+    desc="Enforce uniqueness, only one lienholder of a given type per property"
+    name="propertyowneru1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="PropertyID"/>
+    <indexcol
+      keyposition="2"
+      name="LienholderID"/>
+    <indexcol
+      keyposition="3"
+      name="OwnerType"/>
+    <indexcol
+      keyposition="4"
+      name="LocationBasedRUID"/>
+  </index>
+</entity>

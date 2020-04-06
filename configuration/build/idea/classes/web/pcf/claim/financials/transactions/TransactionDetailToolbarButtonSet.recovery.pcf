@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    desc="Toolbar buttons for the Recovery Details Panel"
+    id="TransactionDetailToolbarButtonSet"
+    mode="recovery">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Transaction"
+      type="Transaction"/>
+    <ToolbarButton
+      action="VoidRecovery.go(Claim, (Transaction as Recovery))"
+      available="(Transaction as Recovery).Voidable and perm.Recovery.voidrec(Transaction)"
+      id="TransactionDetailToolbarButtons_VoidButton"
+      label="DisplayKey.get(&quot;Button.Recovery.Void&quot;)"
+      shortcut="I"
+      visible="(Transaction as Recovery).Voidable"/>
+    <ToolbarButton
+      action="resubmitRecovery(Transaction as Recovery)"
+      available="(Transaction as Recovery).Resubmittable and perm.Recovery.edit(Transaction)"
+      id="TransactionDetailToolbarButtons_ResubmitButton"
+      label="DisplayKey.get(&quot;Button.Recovery.Resubmit&quot;)"
+      shortcut="R"
+      visible="(Transaction as Recovery).Resubmittable"/>
+    <ToolbarButton
+      action="deleteRecovery(Transaction as Recovery)"
+      available="(Transaction as Recovery).Deletable and perm.Recovery.edit(Transaction)"
+      id="TransactionDetailToolbarButtons_DeleteButton"
+      label="DisplayKey.get(&quot;Button.Recovery.Delete&quot;)"
+      visible="(Transaction as Recovery).Deletable"/>
+    <ToolbarButton
+      action="RecodeRecovery.go(Transaction as Recovery)"
+      available="(Transaction as Recovery).Recodeable and perm.Recovery.edit(Transaction)"
+      id="TransactionDetailToolbarButtons_RecodeButton"
+      label="DisplayKey.get(&quot;Button.Recovery.Recode&quot;)"/>
+    <ToolbarButton
+      action="TransferRecovery.go(Transaction as Recovery)"
+      available="(Transaction as Recovery).Transferable and perm.Recovery.edit(Transaction)"
+      id="TransactionDetailToolbarButtons_TransferButton"
+      label="DisplayKey.get(&quot;Button.Recovery.Transfer&quot;)"/>
+    <Code><![CDATA[
+function resubmitRecovery(r : Recovery) {
+        CurrentLocation.startEditing();
+
+        var success =  false;
+        try {
+          r.resubmitRecovery();
+          CurrentLocation.commit();
+          success = true;
+        } finally {
+          if (!success) {
+            CurrentLocation.cancel();
+          }
+        }
+      }
+
+      function deleteRecovery(r : Recovery) {
+        CurrentLocation.startEditing();
+
+        var success =  false;
+        try {
+          r.deleteRecovery();
+          CurrentLocation.commit();
+          success = true;
+        } finally {
+          if (!success) {
+            CurrentLocation.cancel();
+          } else {
+            ClaimFinancialsTransactions.go(Claim, gw.api.financials.ClaimFinancialsTransactionsOption.RECOVERY);
+          }
+        }
+      }
+      
+    ]]></Code>
+  </ToolbarButtonSet>
+</PCF>

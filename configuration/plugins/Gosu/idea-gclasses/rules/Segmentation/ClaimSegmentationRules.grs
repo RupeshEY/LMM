@@ -1,0 +1,13 @@
+package rules.Segmentation
+
+@gw.rules.RuleName("Claim Segmentation Rules")
+@gw.rules.RuleSetDescription("This is the Claim Segmentation rule set. Claim segmentation rules are used to categorize each claim as a whole based on complexity, severity of damage and other attributes. The results set the segment field of a claim.")
+class ClaimSegmentationRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Claim) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Claim) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Claim Segmentation Rules", ClaimSegmentationRules )
+  }
+}

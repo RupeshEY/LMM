@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="View entity for efficiently displaying Claims on the Desktop page."
+  entity="ClaimVacationView"
+  exportable="false"
+  final="false"
+  primaryEntity="Claim"
+  supertypeEntity="ClaimAssignmentView">
+  <implementsInterface
+    iface="gw.cc.claim.entity.ClaimVacationView"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimVacationViewImpl"/>
+  <computedcolumn
+    expression="${1} + ${2} - ${3}"
+    name="TotalIncurredNet"
+    paths="ClaimRpt.OpenReserves, ClaimRpt.TotalPayments, ClaimRpt.TotalRecoveries"/>
+</viewEntity>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ModalCell
+    id="ContactPhoneDisplayCell"
+    mode="NullContact">
+    <Require
+      name="phoneOwner"
+      type="gw.api.phone.PhoneOwner"/>
+    <Require
+      name="aLodgingProvider"
+      type="entity.LodgingProvider"/>
+    <FormatCell
+      id="details">
+      <TextInput
+        id="Contact_PrimaryAddress"
+        value="aLodgingProvider.Contact.PrimaryAddress"
+        valueType="entity.Address"/>
+    </FormatCell>
+  </ModalCell>
+</PCF>

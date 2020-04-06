@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <MenuItemSet
+    desc="Used to construct the New Contact menu for Contact pickers"
+    id="ClaimNewContactPickerMenuItemSet">
+    <Require
+      name="requiredContactType"
+      type="Type"/>
+    <Require
+      name="parentContact"
+      type="Contact"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <MenuItem
+      action="NewContactPopup.push(typekey.Contact.TC_PERSON, parentContact, claim)"
+      id="NewContactPickerMenuItemSet_NewPerson"
+      label="DisplayKey.get(&quot;Web.NewContactMenu.NewPerson&quot;)"
+      visible="requiredContactType == entity.Contact or requiredContactType == entity.Person"/>
+    <MenuItem
+      id="NewContactPickerMenuItemSet_NewVendor"
+      label="DisplayKey.get(&quot;Web.NewContactMenu.NewVendor&quot;)"
+      visible="ShowNewVendor">
+      <MenuItem
+        action="NewContactPopup.push(typekey.Contact.TC_AUTOREPAIRSHOP, parentContact, claim)"
+        id="NewContactPickerMenuItemSet_AutoRepairShop"
+        label="DisplayKey.get(&quot;Web.NewContactMenu.AutoRepairShop&quot;)"
+        visible="requiredContactType.isAssignableFrom(entity.AutoRepairShop)"/>
+      <MenuItem
+        action="NewContactPopup.push(typekey.Contact.TC_AUTOTOWINGAGCY, parentContact, claim)"
+        id="NewContactPickerMenuItemSet_AutoTowingAgcy"
+        label="DisplayKey.get(&quot;Web.NewContactMenu.AutoTowingAgcy&quot;)"
+        visible="requiredContactType.isAssignableFrom(entity.AutoTowingAgcy)"/>
+      <MenuItem
+        action="NewContactPopup.push(typekey.Contact.TC_DOCTOR, parentContact, claim)"
+        id="NewContactPickerMenuItemSet_Doctor"
+        label="DisplayKey.get(&quot;Web.NewContactMenu.Doctor&quot;)"
+        visible="requiredContactType.isAssignableFrom(entity.Doctor)"/>
+      <MenuItem
+        action="NewContactPopup.push(typekey.Contact.TC_MEDICALCAREORG, parentContact, claim)"
+        id="NewContactPickerMenuItemSet_MedicalCareOrg"
+        label="DisplayKey.get(&quot;Web.NewContactMenu.MedicalCareOrg&quot;)"
+        visible="requiredContactType.isAssignableFrom(entity.MedicalCareOrg)"/>
+      <MenuItem
+        action="NewContactPopup.push(typekey.Contact.TC_COMPANYVENDOR, parentContact, claim)"
+        id="NewContactPickerMenuItemSet_CompanyVendor"
+        label="DisplayKey.get(&quot;Web.NewContactMenu.CompanyVendor&quot;)"
+        visible="requiredContactType.isAssignableFrom(entity.CompanyVendor)"/>
+    </MenuItem>
+    <MenuItem
+      action="NewContactPopup.push(typekey.Contact.TC_COMPANY, parentContact, claim)"
+      id="NewContactPickerMenuItemSet_NewCompany"
+      label="DisplayKey.get(&quot;Web.NewContactMenu.NewCompany&quot;)"
+      visible="requiredContactType.isAssignableFrom(entity.Company)"/>
+    <MenuItem
+      id="NewContactPickerMenuItemSet_NewLegal"
+      label="DisplayKey.get(&quot;Web.NewContactMenu.NewLegal&quot;)"
+      visible="ShowNewLegal">
+      <MenuItem
+        action="NewContactPopup.push(typekey.Contact.TC_ADJUDICATOR, parentContact, claim)"
+        id="NewContactPickerMenuItemSet_Adjudicator"
+        label="DisplayKey.get(&quot;Web.NewContactMenu.Adjudicator&quot;)"
+        visible="requiredContactType.isAssignableFrom(entity.Adjudicator)"/>
+      <MenuItem
+        action="NewContactPopup.push(typekey.Contact.TC_ATTORNEY, parentContact, claim)"
+        id="NewContactPickerMenuItemSet_Attorney"
+        label="DisplayKey.get(&quot;Web.NewContactMenu.Attorney&quot;)"
+        visible="requiredContactType.isAssignableFrom(entity.Attorney)"/>
+      <MenuItem
+        action="NewContactPopup.push(typekey.Contact.TC_LAWFIRM, parentContact, claim)"
+        id="NewContactPickerMenuItemSet_LawFirm"
+        label="DisplayKey.get(&quot;Web.NewContactMenu.LawFirm&quot;)"
+        visible="requiredContactType.isAssignableFrom(entity.LawFirm)"/>
+      <MenuItem
+        action="NewContactPopup.push(typekey.Contact.TC_LEGALVENUE, parentContact, claim)"
+        id="NewContactPickerMenuItemSet_NewLegalVenue"
+        label="DisplayKey.get(&quot;Web.NewContactMenu.LegalVenue&quot;)"
+        visible="requiredContactType.isAssignableFrom(entity.LegalVenue)"/>
+    </MenuItem>
+    <Code><![CDATA[property get ShowNewVendor() : boolean {
+  return {entity.Contact,
+          entity.Company,
+          entity.Person,
+          entity.PersonVendor,
+          entity.CompanyVendor,
+          entity.AutoRepairShop,
+          entity.AutoTowingAgcy,
+          entity.Doctor,
+          entity.MedicalCareOrg}.contains(requiredContactType)
+}
+
+property get ShowNewLegal() : boolean {
+  return {entity.Contact,
+          entity.Attorney,
+          entity.LawFirm,
+          entity.Company,
+          entity.LegalVenue,
+          entity.Person,
+          entity.Adjudicator}.contains(requiredContactType)
+}
+]]></Code>
+  </MenuItemSet>
+</PCF>

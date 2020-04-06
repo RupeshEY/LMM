@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Claim.viewtransactiondetails(Claim)"
+    id="ClaimFinancialsTransactions"
+    title="perm.Claim.viewnettotalincurred(Claim) ? DisplayKey.get(&quot;JSP.ClaimFinancials.Financials.Incurred&quot;, gw.api.util.CurrencyUtil.renderAsCurrency(gw.api.util.Math.Nz(gw.api.financials.FinancialsCalculations.getTotalIncurredNet().withClaim(Claim).Amount.Amount), Claim.Currency), DisplayKey.get(&quot;JSP.ClaimFinancials.Financials.Transactions&quot;)) : DisplayKey.get(&quot;JSP.ClaimFinancials.Financials.NoIncurred&quot;, DisplayKey.get(&quot;JSP.ClaimFinancials.Financials.Transactions&quot;))">
+    <LocationEntryPoint
+      signature="ClaimFinancialsTransactions(Claim : Claim)"/>
+    <LocationEntryPoint
+      signature="ClaimFinancialsTransactions(Claim : Claim, requestedOption : gw.api.financials.ClaimFinancialsTransactionsOption)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="requestedOption"
+      type="gw.api.financials.ClaimFinancialsTransactionsOption"/>
+    <Variable
+      initialValue="gw.api.financials.ClaimFinancialsTransactionsUtil.getFilterOption(Claim, requestedOption)"
+      name="TxnFilterOption"
+      type="gw.api.financials.ClaimFinancialsTransactionsOption"/>
+    <Screen
+      id="ClaimFinancialsTransactionsScreen">
+      <Toolbar>
+        <ToolbarRangeInput
+          id="TransactionsLVRangeInput"
+          required="true"
+          sortValueRange="false"
+          value="TxnFilterOption"
+          valueRange="getFilterOptions()"
+          valueType="gw.api.financials.ClaimFinancialsTransactionsOption">
+          <PostOnChange/>
+        </ToolbarRangeInput>
+      </Toolbar>
+      <PanelRef
+        def="TransactionsLV(Claim, TxnFilterOption)"
+        mode="TxnFilterOption.UiMode"/>
+    </Screen>
+    <Code><![CDATA[function getFilterOptions() : gw.api.financials.ClaimFinancialsTransactionsOption[] {
+        var options = new java.util.ArrayList<gw.api.financials.ClaimFinancialsTransactionsOption>()
+        if(perm.Claim.genericviewtransactions) {
+          options.add(gw.api.financials.ClaimFinancialsTransactionsOption.ALL)
+        }
+        if(perm.Claim.genericviewreserves) {
+          options.add(gw.api.financials.ClaimFinancialsTransactionsOption.RESERVE)
+        }
+        if(perm.Claim.genericviewpayments) {
+          options.add(gw.api.financials.ClaimFinancialsTransactionsOption.PAYMENT)
+        }
+        if(perm.Claim.genericviewrecoveries) {
+          options.add(gw.api.financials.ClaimFinancialsTransactionsOption.RECOVERY)
+        }
+        if(perm.Claim.genericviewrecoveryreserves and gw.api.system.CCConfigParameters.UseRecoveryReserves.Value) {
+          options.add(gw.api.financials.ClaimFinancialsTransactionsOption.RECOVERY_RESERVE)
+        }
+        options.add(gw.api.financials.ClaimFinancialsTransactionsOption.CUSTOM)
+        return options?.toTypedArray()
+      }]]></Code>
+  </Page>
+</PCF>

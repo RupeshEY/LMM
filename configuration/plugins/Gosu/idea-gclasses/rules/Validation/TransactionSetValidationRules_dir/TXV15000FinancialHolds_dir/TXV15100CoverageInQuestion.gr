@@ -1,0 +1,27 @@
+package rules.Validation.TransactionSetValidationRules_dir.TXV15000FinancialHolds_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("TXV15100 - Coverage In Question")
+internal class TXV15100CoverageInQuestion {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return transactionSet.Claim.CoverageInQuestion
+
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+if (transactionSet.Transactions.toList().hasMatch(\ t -> t.CostType == TC_CLAIMCOST)) {
+  transactionSet.reject(TC_PAYMENT, DisplayKey.get("Rules.Validation.Transaction.FinancialHolds.CoverageInQuestionError"), null, null)
+} else {
+  transactionSet.reject(null, null, TC_PAYMENT, DisplayKey.get("Rules.Validation.Transaction.FinancialHolds.CoverageInQuestionWarning"))
+}
+/*end00rule*/
+
+  }
+}

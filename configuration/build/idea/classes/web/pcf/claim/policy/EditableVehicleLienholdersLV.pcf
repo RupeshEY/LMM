@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_policy.xml -->
+  <ListViewPanel
+    id="EditableVehicleLienholdersLV">
+    <ExposeIterator
+      valueType="entity.VehicleOwner"
+      widget="EditableVehicleLienholdersLV"/>
+    <Require
+      name="Vehicle"
+      type="Vehicle"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <RowIterator
+      editable="true"
+      elementName="VehicleOwner"
+      hasCheckBoxes="true"
+      hideCheckBoxesIfReadOnly="true"
+      toAdd="Vehicle.addToLienholders(VehicleOwner)"
+      toRemove="Vehicle.removeFromLienholders(VehicleOwner)"
+      value="Vehicle.Lienholders"
+      valueType="entity.VehicleOwner[]">
+      <Row>
+        <ClaimContactCell
+          claim="Claim"
+          editable="true"
+          id="Lienholder"
+          label="DisplayKey.get(&quot;LV.Policy.EditableVehicleLienholders.Lienholder&quot;)"
+          required="true"
+          sortOrder="1"
+          sortValueRange="false"
+          value="VehicleOwner.Lienholder"
+          valueRange="Claim.RelatedContacts"/>
+        <TypeKeyCell
+          editable="true"
+          id="OwnerType"
+          label="DisplayKey.get(&quot;LV.Policy.EditableVehicleLienholders.OwnerType&quot;)"
+          required="true"
+          value="VehicleOwner.OwnerType"
+          valueType="typekey.OwnerType"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

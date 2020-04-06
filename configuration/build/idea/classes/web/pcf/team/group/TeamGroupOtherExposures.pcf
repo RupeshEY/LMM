@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.User.viewteam"
+    id="TeamGroupOtherExposures"
+    title="DisplayKey.get(&quot;Web.Team.OtherExposuresTitle&quot;)">
+    <LocationEntryPoint
+      signature="TeamGroupOtherExposures(Group : Group)"/>
+    <Variable
+      name="Group"
+      type="Group"/>
+    <Variable
+      initialValue="gw.api.team.TeamOtherExposureFilterSet.TEAM_OTHER_EXPOSURE_FILTER"
+      name="FilterSet"
+      type="gw.api.team.TeamExposureFilterSet"/>
+    <Variable
+      initialValue="ExposureTeamView.finder.findStaleOrFailedAssignmentsByGroup(Group)"
+      name="ExposureTeamViewList"
+      recalculateOnRefresh="true"
+      type="gw.api.database.IQueryBeanResult&lt;gw.pl.persistence.core.Bean&gt;"/>
+    <Variable
+      initialValue="&quot;TeamExposuresLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <Screen
+      id="TeamGroupOtherExposuresScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.Team.OtherExposuresTitle&quot;)"/>
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="AssignExposuresPopup.push(new gw.api.exposure.ExposureAssignmentPopup(CheckedValues))"
+          flags="any ExposureTeamView"
+          id="TeamGroupOtherExposures_Assign"
+          iterator="TeamExposuresLV.TeamExposuresLV"
+          label="DisplayKey.get(&quot;Web.Team.Toolbar.Assign&quot;)"
+          shortcut="G"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="gw.api.print.ListViewPrintOptionPopupAction.printListViewWithOptions(PrintTargetLV)"
+          available="perm.User.printlistviews"
+          id="TeamGroupOtherExposures_Print"
+          label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="TeamExposuresLV(ExposureTeamViewList, FilterSet)"/>
+    </Screen>
+  </Page>
+</PCF>

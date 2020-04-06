@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    id="DashboardSubGroup"
+    title="DisplayKey.get(&quot;Web.TabBar.Dashboard&quot;)">
+    <LocationEntryPoint
+      signature="DashboardSubGroup(GroupInfo : gw.api.dashboard.DashboardTreeGroupInfo)"/>
+    <Variable
+      name="GroupInfo"
+      type="gw.api.dashboard.DashboardTreeGroupInfo"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.Dashboard.ClaimCount&quot;)"
+      location="DashboardClaimCount(GroupInfo)"
+      shortcut="O"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.Dashboard.ClaimActivity&quot;)"
+      location="DashboardClaimActivity(GroupInfo)"
+      shortcut="Y"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.Dashboard.CurrentFinancials&quot;)"
+      location="DashboardCurrentFinancials(GroupInfo)"
+      shortcut="F"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.Dashboard.PeriodFinancials&quot;)"
+      location="DashboardPeriodFinancials(GroupInfo)"
+      shortcut="R"/>
+  </LocationGroup>
+</PCF>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Entity to keep track of status of Business Rule validation"
+  entity="BizRulesValidatorStatus"
+  exportable="false"
+  extendable="false"
+  final="true"
+  loadable="false"
+  platform="true"
+  table="brvalidator"
+  type="nonkeyable">
+  <column
+    name="ConfigFP"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    name="ValidatePID"
+    nullok="true"
+    type="softentityreference"/>
+  <index
+    desc="Unique index for configuration fingerprint"
+    name="unique"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ConfigFP"/>
+  </index>
+</entity>

@@ -1,0 +1,46 @@
+package rules.Segmentation.ClaimSegmentationRules_dir.CSG02000Property_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.util.Logger
+
+@gw.rules.RuleName("CSG02100 - Property")
+internal class CSG02100Property {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* This is an ordered list of the Segment values we care about, from lowest 
+   to highest importance. We can’t use the typecode’s Priority for this because 
+   that ordering is for different purposes (e.g. sorting the codes in a typekeyInput). 
+   We are taking advantage of the ascending nature of array indexing to order the 
+   entries with the highest values at the end. This list must be manually maintained
+   and updated if additional segments are added.
+*/
+var targettedSegments : ClaimSegment[] = {
+  TC_PROP_LOW,
+  TC_PROP_MID,
+  TC_PROP_HIGH
+}
+
+// Find the exposure whose segment has the highest index in the targettedSegments array
+var exposureWithHighestSegment = 
+  claim.Exposures.maxBy(\ exp -> gw.api.util.ArrayUtil.indexOf(targettedSegments, exp.Segment))
+
+// This would be null if there were no exposures at all or if none were in a segment we care about
+if (exposureWithHighestSegment != null) {
+  claim.Segment = exposureWithHighestSegment.Segment
+  Logger.logDebug( DisplayKey.get("Rules.Segmentation.Claim", actions.ShortRuleName))
+  Logger.logDebug( DisplayKey.get("Rules.Segmentation.Claim.SegmentedTo", claim.Segment))
+  actions.exit()
+}
+/*end00rule*/
+
+  }
+}

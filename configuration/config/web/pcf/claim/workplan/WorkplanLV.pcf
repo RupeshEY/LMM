@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_activity.xml -->
+  <ListViewPanel
+    id="WorkplanLV">
+    <ExposeIterator
+      flags="CanAssignActivity,CanSkipActivity,CanCompleteActivity,CanApproveActivity"
+      valueType="entity.Activity"
+      widget="WorkplanLV"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="ActivityList"
+      type="gw.api.database.IQueryBeanResult&lt;Activity&gt;"/>
+    <Variable
+      initialValue="gw.api.activity.WorkplanFilterSet.INSTANCE"
+      name="FilterSet"
+      type="gw.api.activity.WorkplanFilterSet"/>
+    <RowIterator
+      editable="false"
+      elementName="Activity"
+      hasCheckBoxes="true"
+      value="ActivityList"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.Activity&gt;">
+      <ToolbarFlag
+        condition="Activity.canAssign() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(Activity?.ID)"
+        name="CanAssignActivity"/>
+      <ToolbarFlag
+        condition="Activity.canSkip() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(Activity?.ID)"
+        name="CanSkipActivity"/>
+      <ToolbarFlag
+        condition="Activity.canComplete() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(Activity?.ID)"
+        name="CanCompleteActivity"/>
+      <ToolbarFlag
+        condition="Activity.canApprove() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(Activity?.ID)"
+        name="CanApproveActivity"/>
+      <ToolbarFilter
+        name="WorkplanFilter">
+        <ToolbarFilterOption
+          filter="FilterSet.NotReviewOpenFilter"
+          label="DisplayKey.get(&quot;Java.Workplan.AllOpenActivities&quot;)"
+          selectOnEnter="true"/>
+        <ToolbarFilterOption
+          filter="FilterSet.MyNotReviewNotExternalOpenFilter"
+          label="DisplayKey.get(&quot;Java.Workplan.MyOpenActivities&quot;)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.NotReviewFilter"
+          label="DisplayKey.get(&quot;Java.Workplan.AllActivities&quot;)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.MyNotReviewNotExternalFilter"
+          label="DisplayKey.get(&quot;Java.Workplan.MyActivities&quot;)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.getMyNotReviewNotExternalOpenDueInNDaysFilter(7)"
+          label="DisplayKey.get(&quot;Java.Workplan.MyOpenActivitiesDueNextNDays&quot;, 7)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.getMyNotReviewNotExternalOpenDueInNDaysFilter(14)"
+          label="DisplayKey.get(&quot;Java.Workplan.MyOpenActivitiesDueNextNDays&quot;, 14)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.getMyNotReviewNotExternalOpenDueInNDaysFilter(30)"
+          label="DisplayKey.get(&quot;Java.Workplan.MyOpenActivitiesDueNextNDays&quot;, 30)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.NotReviewExternalOpenFilter"
+          label="DisplayKey.get(&quot;Java.Workplan.AllOpenExternalActivities&quot;)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.MyNotReviewExternalOpenFilter"
+          label="DisplayKey.get(&quot;Java.Workplan.MyOpenExternalActivities&quot;)"/>
+      </ToolbarFilter>
+      <Row>
+        <BooleanRadioCell
+          enableSort="false"
+          icon="&quot;new.png&quot;"
+          iconLabel="DisplayKey.get(&quot;LV.Activity.Updated.Tip&quot;)"
+          id="Updated"
+          printWidth="0.02"
+          tooltip="DisplayKey.get(&quot;LV.Activity.Updated.Tip&quot;)"
+          value="Activity.UpdatedSinceLastViewed"/>
+        <BooleanRadioCell
+          enableSort="false"
+          icon="&quot;escalated.png&quot;"
+          iconLabel="DisplayKey.get(&quot;LV.Activity.Escalated.Tip&quot;)"
+          id="Escalated"
+          printWidth="0.02"
+          tooltip="DisplayKey.get(&quot;LV.Activity.Escalated.Tip&quot;)"
+          value="Activity.Escalated"/>
+        <DateCell
+          fontColor="gw.api.activity.ActivityUtil.isOverdue(Activity) ? &quot;Red&quot; : &quot;&quot;"
+          id="DueDate"
+          label="DisplayKey.get(&quot;LV.Activity.Workplan.Activities.DueDate&quot;)"
+          printWidth="0.1"
+          sortOrder="2"
+          value="Activity.TargetDate"/>
+        <TypeKeyCell
+          id="Priority"
+          label="DisplayKey.get(&quot;LV.Activity.Workplan.Activities.Priority&quot;)"
+          printWidth="0.1"
+          sortOrder="1"
+          value="Activity.Priority"
+          valueType="typekey.Priority"/>
+        <TextCell
+          id="Status"
+          label="DisplayKey.get(&quot;LV.Activity.Workplan.Activities.Status&quot;)"
+          printWidth="0.1"
+          sortBy="Activity.Status"
+          value="Activity.ActivityStatus"/>
+        <TextCell
+          action="if(not gw.api.activity.ActivityUtil.isWorksheetOpen(Activity.ID)) ActivityDetailForward.goInWorkspace(Claim, Activity)"
+          available="perm.Activity.view(Activity)"
+          id="Subject"
+          label="DisplayKey.get(&quot;LV.Activity.Workplan.Activities.Subject&quot;)"
+          printWidth="0.18"
+          sortBy="Activity.Subject"
+          value="String.isEmpty(Activity.Subject) ? DisplayKey.get(&quot;LV.Activity.Activities.NoSubject&quot;) : Activity.Subject"/>
+        <TextCell
+          id="Exposure"
+          label="DisplayKey.get(&quot;LV.Activity.Workplan.Activities.Exposure&quot;)"
+          maxChars="120"
+          printWidth="0.18"
+          sortBy="Activity.Exposure"
+          value="getExposuresString(Activity)"/>
+        <BooleanRadioCell
+          id="ExternallyOwned"
+          label="DisplayKey.get(&quot;LV.Activity.Workplan.Activities.ExternallyOwned&quot;)"
+          printWidth="0"
+          value="Activity.ExternallyOwned"/>
+        <TextCell
+          id="ExternalOwner"
+          label="DisplayKey.get(&quot;LV.Activity.Workplan.Activities.ExternalOwner&quot;)"
+          printWidth="0.10"
+          sortBy="Activity.ExternalOwnerCC.Contact"
+          value="Activity.ExternalOwner"
+          valueType="entity.Contact"/>
+        <TextCell
+          id="Assigner"
+          label="DisplayKey.get(&quot;LV.Activity.Workplan.Activities.Assigner&quot;)"
+          printWidth="0"
+          sortBy="Activity.AssignedByUser.Contact"
+          value="(Activity.AssignedByUser.Contact == null) ? DisplayKey.get(&quot;Java.Activity.AssignedByUser.SystemUser&quot;) : Activity.AssignedByUser.Contact.DisplayName"/>
+        <TextCell
+          id="AssignedUser"
+          label="DisplayKey.get(&quot;LV.Activity.Workplan.Activities.AssignedUser&quot;)"
+          printWidth="0.10"
+          sortBy="Activity.AssignmentStatus, Activity.AssignedUser, Activity.AssignedQueue"
+          value="Activity.AssigneeDisplayString"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function getExposuresString( activity : Activity ) : String {
+  if( activity.Exposure == null and activity.Claimant != null ) {
+    return Claim.getExposuresForClaimant( activity.Claimant ).join( ", " )
+  } else if( activity.Exposure != null ) {
+    return activity.Exposure as String
+  } else {
+    return ""
+  }
+}]]></Code>
+  </ListViewPanel>
+</PCF>

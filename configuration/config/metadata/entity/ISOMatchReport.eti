@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="ISOMatchReport"
+  requiresType="retireable">
+  <implementsInterface
+    iface="gw.cc.iso.entity.ISOMatchReport"
+    impl="com.guidewire.cc.domain.iso.impl.ISOMatchReportImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.iso.impl.ISOMatchReportInternal"
+    impl="com.guidewire.cc.domain.iso.impl.ISOMatchReportImpl"/>
+  <fulldescription><![CDATA[
+      Details of a match for a Claim or Exposure as returned by the Insurance Office Services (ISO) ClaimSearch
+      service. If ISO ClaimSearch integration is enabled then descriptions of new or changed Claims or Exposures
+      are sent to the ISO ClaimSearch service to see if any suspiciously similar claims have been filed at other
+      companies. If ISO ClaimSearch returns a "match report", indicating that one or more similar claims have been
+      filed, then the report is added to the claim as a document and the most important information from
+      each reported match is stored in an ISOMatchReport entity.
+    ]]></fulldescription>
+  <column
+    desc="Reasons why claim/exposure matched at ISO."
+    name="MatchReasons"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="50"/>
+  </column>
+  <column
+    desc="Insuring company of matching claim."
+    name="InsuringCompany"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="50"/>
+  </column>
+  <column
+    desc="Claim number of matching claim."
+    name="ClaimNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="30"/>
+  </column>
+  <column
+    desc="Loss date of matching claim."
+    name="DateOfLoss"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Policy number of matching claim."
+    name="PolicyNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="30"/>
+  </column>
+  <column
+    desc="Policy type of matching claim."
+    name="PolicyType"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="30"/>
+  </column>
+  <column
+    desc="1st line of insuring company address."
+    name="InsurerAddress1"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="50"/>
+  </column>
+  <column
+    desc="2nd line of insuring company address."
+    name="InsurerAddress2"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="50"/>
+  </column>
+  <column
+    desc="3rd line of insuring company address."
+    name="InsurerAddress3"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="50"/>
+  </column>
+  <column
+    desc="City of insuring company address."
+    name="InsurerAddressCity"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="25"/>
+  </column>
+  <column
+    desc="State of insuring company address."
+    name="InsurerAddressState"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="10"/>
+  </column>
+  <column
+    desc="Postal code of insuring company address."
+    name="InsurerAddressPostalCode"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="9"/>
+  </column>
+  <column
+    desc="Phone number of insuring company."
+    name="InsurerPhone"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="30"/>
+  </column>
+  <column
+    desc="Time match report was received."
+    name="ReceivedDate"
+    nullok="true"
+    type="datetime"/>
+</delegate>

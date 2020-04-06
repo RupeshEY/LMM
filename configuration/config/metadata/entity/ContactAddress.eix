@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ContactAddress">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.contact.impl.ContactAddressCoreExtMethods"
+    impl="com.guidewire.cc.domain.contact.impl.ContactAddressCoreExtMethodsImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="OverlapTable"/>
+</internalExtension>

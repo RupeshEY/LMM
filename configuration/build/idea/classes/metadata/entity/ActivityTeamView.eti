@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<!-- unfortunately dups column in ActivityDesktopView -->
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Displays activities efficiently in the team pages."
+  entity="ActivityTeamView"
+  exportable="false"
+  final="true"
+  primaryEntity="Activity"
+  supertypeEntity="ActivityView">
+  <implementsInterface
+    iface="gw.cc.activity.entity.ActivityTeamView"
+    impl="com.guidewire.cc.domain.activity.impl.ActivityTeamViewImpl"/>
+  <fulldescription><![CDATA[<p>Aggregates the information needed to display one activity row in the activity team page (subtype of ActivityView).</p>
+    ]]></fulldescription>
+  <viewEntityLink
+    name="ClaimInsured"
+    path="Claim.InsuredDenorm"/>
+  <viewEntityName
+    name="AssignedUserName"
+    path="AssignedUser"/>
+</viewEntity>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuActions
+    id="TeamMenuActions">
+    <MenuItem
+      action="UserStatisticsWorksheet.goInWorkspace()"
+      id="TeamMenuActions_Statistics"
+      label="DisplayKey.get(&quot;JSP.DesktopPageActions.PageAction.UserStats&quot;)"
+      shortcut="I"/>
+    <MenuItem
+      action="UserPreferencesWorksheet.goInWorkspace()"
+      id="TeamMenuActions_Preferences"
+      label="DisplayKey.get(&quot;JSP.DesktopPageActions.PageAction.UserPrefs&quot;)"
+      shortcut="P"/>
+    <MenuItem
+      action="UserVacationWorksheet.goInWorkspace()"
+      id="TeamMenuActions_UserVacation"
+      label="DisplayKey.get(&quot;Web.UserVacation&quot;)"
+      shortcut="V"/>
+    <MenuItem
+      action="LoadFactorsPopup.push()"
+      id="TeamMenuActions_LoadAndVacation"
+      label="DisplayKey.get(&quot;Web.LoadAndVacation&quot;)"
+      shortcut="O"/>
+  </MenuActions>
+</PCF>

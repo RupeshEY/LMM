@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- For printing use only (specifically for ClaimPrintout use) -->
+  <Page
+    canEdit="false"
+    canVisit="perm.Claim.view(Claim) and perm.System.viewclaimsummary"
+    id="ClaimSummaryExposuresPrint"
+    parent="ClaimPrintout(Claim)"
+    title="&quot;&quot;">
+    <LocationEntryPoint
+      signature="ClaimSummaryExposuresPrint(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="ClaimSummaryExposuresPrintScreen">
+      <PanelRef
+        def="ClaimSummaryExposuresLV(Claim, Claim.Exposures)">
+        <TitleBar
+          title="DisplayKey.get(&quot;Web.ClaimSummary.ExposuresLV.Title&quot;)"/>
+        <Toolbar/>
+      </PanelRef>
+    </Screen>
+  </Page>
+</PCF>

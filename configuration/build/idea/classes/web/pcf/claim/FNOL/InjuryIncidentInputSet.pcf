@@ -1,0 +1,164 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="InjuryIncidentInputSet">
+    <Require
+      name="injury"
+      type="InjuryIncident"/>
+    <Variable
+      initialValue="injury.MedicalTreatmentType != null || injury.PrimaryDoctor != null"
+      name="treatment"
+      type="boolean"/>
+    <TypeKeyInput
+      editable="true"
+      filter="VALUE.hasCategory( injury.Subtype )"
+      id="Severity"
+      label="DisplayKey.get(&quot;Web.InjuryIncidentInputSet.Severity.Label&quot;)"
+      value="injury.Severity"
+      valueType="typekey.SeverityType"/>
+    <TextAreaInput
+      editable="true"
+      id="InjuryDescription"
+      label="DisplayKey.get(&quot;Web.InjuryIncidentInputSet.Description.Label&quot;)"
+      numRows="3"
+      value="injury.Description"/>
+    <TypeKeyInput
+      editable="true"
+      id="PrimaryInjuryType"
+      label="DisplayKey.get(&quot;Web.InjuryIncidentInputSet.GeneralInjuryType.Label&quot;)"
+      value="injury.GeneralInjuryType"
+      valueType="typekey.InjuryType"/>
+    <TypeKeyInput
+      editable="true"
+      id="DetailedInjuryType"
+      label="DisplayKey.get(&quot;Web.InjuryIncidentInputSet.DetailedInjuryType.Label&quot;)"
+      value="injury.DetailedInjuryType"
+      valueType="typekey.DetailedInjuryType"/>
+    <ListViewInput
+      boldLabel="true"
+      def="EditableBodyPartDetailsLV(injury, false)"
+      editable="true"
+      label="DisplayKey.get(&quot;LV.Incident.Injury.BodyPartDetails.Title&quot;)"
+      labelAbove="true">
+      <Toolbar>
+        <IteratorButtons
+          iterator="EditableBodyPartDetailsLV.EditableBodyPartDetailsLV"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="injury.FirstBodyPart = CheckedValue"
+          flags="one NotFirstBP"
+          hideIfReadOnly="true"
+          id="MakeFirstButton"
+          iterator="EditableBodyPartDetailsLV.EditableBodyPartDetailsLV"
+          label="DisplayKey.get(&quot;LV.Incident.Injury.BodyPartDetails.MakeFirstButton&quot;)"
+          showConfirmMessage="false"
+          tooltip="DisplayKey.get(&quot;LV.Incident.Injury.BodyPartDetails.MakeFirstButton.Tooltip&quot;)"/>
+      </Toolbar>
+    </ListViewInput>
+    <InputDivider/>
+    <BooleanRadioInput
+      editable="true"
+      id="ReceivedTreatment"
+      label="DisplayKey.get(&quot;Web.InjuryIncidentInputSet.ReceivedTreatment.Label&quot;)"
+      validationExpression="(treatment &amp;&amp; injury.PrimaryDoctor == null &amp;&amp; injury.MedicalTreatmentType == null) ? DisplayKey.get(&quot;Web.InjuryIncidentInputSet.TreatmentDetailsRequired&quot;) : null"
+      value="treatment">
+      <PostOnChange
+        onChange="if (!treatment) { injury.PrimaryDoctor = null; injury.MedicalTreatmentType = null }"/>
+    </BooleanRadioInput>
+    <TypeKeyInput
+      editable="true"
+      id="TreatmentType"
+      label="DisplayKey.get(&quot;Web.InjuryIncidentInputSet.TreatmentType.Label&quot;)"
+      value="injury.MedicalTreatmentType"
+      valueType="typekey.MedicalTreatmentType"
+      visible="treatment"/>
+    <ClaimContactInput
+      claim="injury.Claim"
+      editable="true"
+      id="doctor"
+      label="DisplayKey.get(&quot;Web.InjuryIncidentInputSet.PrimaryDoctor.Label&quot;)"
+      newContactMenu="ClaimNewDoctorOnlyPickerMenuItemSet"
+      value="injury.PrimaryDoctor"
+      valueRange="injury.Claim.RelatedDoctorArray"
+      valueType="entity.Doctor"
+      visible="treatment"/>
+    <TypeKeyInput
+      editable="true"
+      id="DisabledDueToAccident"
+      label="DisplayKey.get(&quot;Web.InjuryIncidentInputSet.DisabledDueToAccident.Label&quot;)"
+      value="injury.DisabledDueToAccident"
+      valueType="typekey.DisabledDueToAccident"/>
+    <BooleanRadioInput
+      editable="true"
+      id="AmbulanceUsed"
+      label="DisplayKey.get(&quot;Web.InjuryIncidentInputSet.AmbulanceUsed.Label&quot;)"
+      value="injury.AmbulanceUsed"/>
+    <BooleanRadioInput
+      editable="true"
+      id="LostWages"
+      label="DisplayKey.get(&quot;Web.InjuryIncidentInputSet.LostWages.Label&quot;)"
+      value="injury.LostWages">
+      <PostOnChange/>
+    </BooleanRadioInput>
+    <InputDivider/>
+    <ListViewInput
+      boldLabel="true"
+      def="MedicalDiagnosisLV(injury, true)"
+      editable="true"
+      id="MedicalDiagnosisLVInput"
+      label="DisplayKey.get(&quot;MedCaseMgr.LVs.MedicalDiagnosisLV&quot;)"
+      labelAbove="true">
+      <Toolbar>
+        <IteratorButtons
+          iterator="MedicalDiagnosisLVInput.MedicalDiagnosisLV"/>
+        <ToolbarDivider
+          hideIfReadOnly="true"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="injury.setPrimaryDiagnosisToFalse(); CheckedValue.IsPrimary = true"
+          confirmMessage="DisplayKey.get(&quot;NVV.Claim.MedCaseMgrDetails.MedicalDiagnosis.MakePrimary.Confirm&quot;,  injury.InjuryDiagnoses.firstWhere( \ i -&gt; i.IsPrimary == true ).ICDCode.Code + &quot; : &quot; +  injury.InjuryDiagnoses.firstWhere( \ i -&gt; i.IsPrimary == true ).ICDCode.CodeDesc)"
+          flags="one allowPrimary"
+          hideIfReadOnly="true"
+          id="Make_Primary"
+          iterator="MedicalDiagnosisLVInput.MedicalDiagnosisLV"
+          label="DisplayKey.get(&quot;NVV.Claim.MedCaseMgrDetails.MedicalDiagnosis.MakePrimary&quot;)"
+          showConfirmMessage="injury.InjuryDiagnoses.where( \ i -&gt; i.IsPrimary == true ).Count &gt; 0"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="CheckedValue.reconfirmDiagnosis()"
+          flags="any reconfirmable"
+          hideIfReadOnly="true"
+          id="Reconfirmed_Diagnosis"
+          iterator="MedicalDiagnosisLVInput.MedicalDiagnosisLV"
+          label="DisplayKey.get(&quot;NVV.Claim.MedCaseMgrDetails.MedicalDiagnosis.ReconfirmDiagnosis&quot;)"/>
+      </Toolbar>
+    </ListViewInput>
+    <ListViewInput
+      boldLabel="true"
+      def="NotesLV(getNotes())"
+      editable="false"
+      id="NotesLVInput"
+      label="DisplayKey.get(&quot;MedCaseMgr.LVs.NotesLV&quot;)"
+      labelAbove="true"
+      visible="perm.System.viewmednote and perm.System.viewclaimnotes">
+      <Toolbar/>
+    </ListViewInput>
+    <InputDivider/>
+    <Label
+      label="DisplayKey.get(&quot;Web.ServicesScreen.ServiceRequest.ServiceToPerform&quot;)"/>
+    <TextInput
+      id="ServiceRequestSubmitMessageFNOL"
+      labelAbove="true"
+      value="DisplayKey.get(&quot;Web.ServiceRequest.FNOL.SubmitMessage&quot;)"
+      visible="injury.Claim.DraftClaim"/>
+    <TextInput
+      id="ServiceRequestSubmitMessage"
+      labelAbove="true"
+      value="DisplayKey.get(&quot;Web.ServiceRequest.SubmitMessage&quot;)"
+      visible="not injury.Claim.DraftClaim and CurrentLocation.InEditMode"/>
+    <InputSetRef
+      def="OtherServicesLVInputSet(injury.Claim, injury, injury != null ? injury.ServiceRequests.toSet() : new java.util.HashSet&lt;ServiceRequest&gt;(), null, {})"/>
+    <Code><![CDATA[function getNotes(): gw.api.database.IQueryBeanResult<Note> {
+      return injury.Claim != null ? injury.Claim.getAllNotesWithTopicAndSubject(NoteTopicType.TC_MEDICAL, DisplayKey.get("NVV.Claim.MedCaseMgrDetails.MedicalDiagnosis.DiagnosisConfirmation", injury.injured)) : (new Note[0])?.asQuery()
+    }]]></Code>
+  </InputSet>
+</PCF>

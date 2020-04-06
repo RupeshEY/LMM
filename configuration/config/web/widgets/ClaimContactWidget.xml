@@ -1,0 +1,22 @@
+<WidgetTemplate name="ClaimContactTemplate" inputWidgetName="ClaimContactInput" cellWidgetName="ClaimContactCell">
+
+  <TemplateAttribute name="parentContact" default="null" type="expression"/>
+  <TemplateAttribute name="claim" type="expression"/>
+  <TemplateAttribute name="specialistServices" type="expression" default="null as List&lt;SpecialistService&gt;"/>
+  <TemplateAttribute name="showSearchInMenu" default="true" type="xsd:boolean"/>
+  <TemplateAttribute name="forceContactSubtype" default="statictypeof (#{value})" type="expression"/>
+  <TemplateAttribute name="newContactMenu" default="ClaimNewContactPickerMenuItemSet(#{forceContactSubtype}, #{parentContact}, #{claim})" type="expression"/>
+  <TemplateAttribute name="searchLocation" default="AddressBookPickerPopup.push(#{forceContactSubtype}, #{claim}, #{specialistServices})" type="expression"/>
+  <TemplateAttribute name="onPick" default="" type="expression" />
+
+  <ExpressionRangeValue action="ClaimContactDetailPopup.push(#{value}, #{claim})" onPick="var contactType = #{forceContactSubtype}; var result = eval(&quot;#{value} = #{claim}.resolveContact(#{value}) as &quot; + contactType.Name + &quot;;return null;&quot;); #{onPick};">
+
+    <MenuItemSetRef def="#{ com.guidewire.cc.web.menu.ClaimContactTemplateHelper.replaceRequiredTypeVariable(newContactMenu, forceContactSubtype, parentContact, claim)}" visible="perm.Contact.createlocal" hideIfReadOnly="true"/>
+
+    <MenuItem id="MenuItem_Search" label="DisplayKey.get('Java.ContactPicker.Search')" action="#{searchLocation}" visible="&quot;#{searchLocation}&quot; != &quot;&quot; &amp;&amp; #{showSearchInMenu}" hideIfReadOnly="true"/>
+
+    <MenuItem id="MenuItem_ViewDetails" label="DisplayKey.get('Java.ContactPicker.ViewDetails')" action="if (#{value} != null) { ClaimContactDetailPopup.push(#{value}, #{claim}, false, !CurrentLocation.InEditMode) } else { NullClaimContactDetailPopup.push() }" hideIfReadOnly="true"/>
+
+  </ExpressionRangeValue>
+
+</WidgetTemplate>

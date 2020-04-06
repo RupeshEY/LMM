@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table for Athena to Nozomi upgrade to support copying of balances from old taccount to new taccount"
+  entity="TmpTAccountBalanceCopy"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="tmptacctbalancecopy"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.TmpTAccountBalanceCopy"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TmpTAccountBalanceCopyImpl"/>
+  <column
+    desc="The ID of the t-account to update"
+    name="TAccountID"
+    nullok="false"
+    type="softentityreference"/>
+  <column
+    desc="The balance from the old t-account to copy to the new t-account"
+    name="BalanceToCopy"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="The number of contributing txns to copy to the new t-account"
+    name="TmpNumContributingTxns"
+    nullok="false"
+    type="integer"/>
+  <typekey
+    desc="The type of the source taccount"
+    exportable="false"
+    name="SourceTAccountType"
+    nullok="false"
+    typelist="TAccountType"/>
+  <index
+    desc="Improves performance of CopyBalancesToNewTAccountsTrigger."
+    name="tmpacctbalcopyu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="TAccountID"/>
+    <indexcol
+      keyposition="2"
+      name="SourceTAccountType"/>
+  </index>
+  <index
+    desc="A TAccount should have its balance updated at most once."
+    name="tmpacctbalcopyu2"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="TAccountID"/>
+  </index>
+</entity>

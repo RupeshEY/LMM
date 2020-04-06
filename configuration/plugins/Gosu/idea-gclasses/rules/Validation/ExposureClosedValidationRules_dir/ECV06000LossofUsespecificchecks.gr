@@ -1,0 +1,20 @@
+package rules.Validation.ExposureClosedValidationRules_dir
+
+@gw.rules.RuleName("ECV06000 - Loss of Use-specific checks")
+internal class ECV06000LossofUsespecificchecks {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ExposureType == TC_LOSSOFUSEDAMAGE
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* Child rules, if any, will be specific checks for loss of use exposures */
+/*end00rule*/
+
+  }
+}

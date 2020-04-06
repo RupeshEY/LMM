@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table for creation of TAccounts during staging table load."
+  entity="TmpTAccountCreateJoin"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="tmptaccountcreatejoin"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.TmpTAccountCreateJoin"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TmpTAccountCreateJoinImpl"/>
+  <column
+    desc="Type of a TAccount"
+    name="Type"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="50"/>
+  </column>
+  <column
+    desc="Normal balance of the TAccount (i.e., Credit or Debit)"
+    name="NormalBalance"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="50"/>
+  </column>
+</entity>

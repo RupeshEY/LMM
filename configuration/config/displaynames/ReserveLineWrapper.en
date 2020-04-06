@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<Entity
+  name="ReserveLineWrapper">
+  <Columns>
+    <Column
+      beanPath="ReserveLineWrapper.ReserveLine"
+      name="ReserveLine"/>
+    <Column
+      beanPath="ReserveLineWrapper.BulkInvoiceItemInfo.Exposure"
+      name="Exposure"/>
+    <Column
+      beanPath="ReserveLineWrapper.BulkInvoiceItemInfo.BulkInvoiceItem.CostType"
+      name="CostType"/>
+    <Column
+      beanPath="ReserveLineWrapper.BulkInvoiceItemInfo.BulkInvoiceItem.CostCategory"
+      name="CostCategory"/>
+  </Columns>
+  <DisplayName
+    type="ForEdit"><![CDATA[return ReserveLine;]]></DisplayName>
+  <DisplayName
+    type="ForApproval"><![CDATA[if (null != ReserveLine) {
+        return ReserveLine;
+      } else {
+        var retString = "";
+
+        if (null == Exposure) {
+          retString = retString + gw.api.locale.DisplayKey.get("Financials.ReserveLine.NoExposure");
+        } else {
+          retString = retString + Exposure;
+        }
+
+        if (null != CostType || null != CostCategory) {
+          retString = retString + "; ";
+        }
+
+        if (null != CostType) {
+          retString = retString + CostType.DisplayName;
+
+          if (null != CostCategory) {
+            retString = retString + "/";
+          }
+        }
+
+        if (null != CostCategory) {
+          retString = retString + CostCategory.DisplayName;
+        }
+
+        return retString;
+      }]]></DisplayName>
+  <DisplayName><![CDATA[if (null != ReserveLine) {
+        return ReserveLine;
+      } else {
+        return gw.api.locale.DisplayKey.get("Web.Financials.BulkPay.InvoiceItem.ReserveLine.NewOption");
+      }]]></DisplayName>
+</Entity>

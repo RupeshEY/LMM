@@ -1,0 +1,22 @@
+package rules.Validation.ClaimValidationRules_dir.CLV09000ISOValidation_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV09700 - LossDate")
+internal class CLV09700LossDate {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.LossDate == null
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.rejectField("LossDate", TC_ISO, DisplayKey.get("Rules.Validation.Claim.LossDateNotNull"), null, null)
+/*end00rule*/
+
+  }
+}

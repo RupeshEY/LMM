@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_claim.xml -->
+  <ListViewPanel
+    id="EditableClaimsInAssociationLV">
+    <ExposeIterator
+      valueType="entity.ClaimInAssociation"
+      widget="EditableClaimsInAssociationLV"/>
+    <Require
+      name="ClaimAssociation"
+      type="ClaimAssociation"/>
+    <RowIterator
+      editable="true"
+      elementName="ClaimInAssociation"
+      hideCheckBoxesIfReadOnly="true"
+      numEntriesRequired="2"
+      toAdd="ClaimAssociation.addToClaimsInAssoc(ClaimInAssociation)"
+      toRemove="ClaimAssociation.removeFromClaimsInAssoc(ClaimInAssociation)"
+      validationLabel="DisplayKey.get(&quot;LV.Claim.EditableClaimsInAssociation.RequiresTwoOrMoreEntries&quot;)"
+      value="ClaimAssociation.ClaimsInAssoc"
+      valueType="entity.ClaimInAssociation[]">
+      <Row>
+        <BooleanRadioCell
+          editable="true"
+          id="IsPrimaryClaim"
+          label="DisplayKey.get(&quot;LV.Claim.EditableClaimsInAssociation.IsPrimaryClaim&quot;)"
+          printWidth="0.25"
+          sortDirection="descending"
+          sortOrder="1"
+          value="new util.lvwrapper.ClaimInAssociationLVWrapper(ClaimInAssociation).IsPrimaryClaim">
+          <PostOnChange/>
+        </BooleanRadioCell>
+        <PickerCell
+          conversionExpression="(PickedValue as ClaimSearchView).Claim.ClaimInfo"
+          editable="true"
+          freeInputEnabled="false"
+          id="Claim"
+          label="DisplayKey.get(&quot;LV.Claim.EditableClaimsInAssociation.Claim&quot;)"
+          pickLocation="ClaimSearchPopup.push()"
+          printWidth="0.75"
+          sortOrder="2"
+          unique="true"
+          value="ClaimInAssociation.ClaimInfo"
+          valueType="entity.ClaimInfo"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

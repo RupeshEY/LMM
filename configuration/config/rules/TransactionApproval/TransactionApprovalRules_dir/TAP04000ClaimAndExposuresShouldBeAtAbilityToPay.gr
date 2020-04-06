@@ -1,0 +1,56 @@
+package rules.TransactionApproval.TransactionApprovalRules_dir
+uses gw.api.locale.DisplayKey
+uses java.util.HashSet
+
+@gw.rules.RuleName("TAP04000 - Claim And Exposures Should Be At Ability To Pay")
+internal class TAP04000ClaimAndExposuresShouldBeAtAbilityToPay {
+  static function doCondition(transactionSet        :        entity.TransactionSet) : boolean {
+/*start00rule*/
+return transactionSet.Subtype == TC_CHECKSET
+/*end00rule*/
+}
+
+  static function doAction(transactionSet        :        entity.TransactionSet, actions : gw.rules.Action) {
+/*start00rule*/
+/*
+ * Sends the check set for approval, if its associated claim is not at ability to pay -OR- if at least one of the
+ * payments has its associated exposure not at ability to pay.
+ */
+
+var claimIsNotAtAbilityToPay = not transactionSet.Claim.AtAbilityToPay
+var exposuresNotAtAbilityToPay = new HashSet<String>()
+
+transactionSet.Transactions.each( \ tx -> {
+  var txExposure = tx.Exposure
+  if (txExposure != null and not txExposure.AtAbilityToPay) {
+    exposuresNotAtAbilityToPay.add("#" + txExposure.ClaimOrder)
+  }
+})
+
+var notAllExposuresAreAtAbilityToPay = (exposuresNotAtAbilityToPay.HasElements)
+var approvalReason : String
+
+if (claimIsNotAtAbilityToPay and notAllExposuresAreAtAbilityToPay) {
+  approvalReason = DisplayKey.get("Rules.TransactionApproval.ClaimAndExposuresNotAtAbilityToPay", 
+      exposuresNotAtAbilityToPay.join(", "))
+} else if (notAllExposuresAreAtAbilityToPay) {
+  approvalReason = DisplayKey.get("Java.Rules.TransactionApproval.ExposuresNotAtAbilityToPay", 
+        exposuresNotAtAbilityToPay.join(", "))
+} else if (claimIsNotAtAbilityToPay) {
+  approvalReason = DisplayKey.get("Rules.TransactionApproval.ClaimNotAtAbilityToPay")
+}
+
+if (approvalReason != null) {
+  // Make sure supervisor has not already approved this TransactionSet
+  if (not transactionSet.Claim.Activities.toList().hasMatch(\ act -> (act.TransactionSet == transactionSet
+      and act.ActivityPattern.Code == "approve_payment"
+      and act.Approved
+      and act.AssignedUser == transactionSet.Claim.AssignedGroup.Supervisor))) {
+    if (transactionSet.requireApproval(approvalReason)) {
+        actions.exit()
+    }
+  }
+} 
+/*end00rule*/
+  }
+}

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="claim.isECFVisible()"
+    id="ECFLocationGroup"
+    parent="IPLMLocationGroup(claim)"
+    title="DisplayKey.get(&quot;Accelerator.IPLM.LocationGroup.Title.ECF&quot;)">
+    <LocationEntryPoint
+      signature="ECFLocationGroup(claim:Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Transactions.Title&quot;)"
+      location="ClaimTransactions(claim)"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Messages.Title&quot;)"
+      location="ClaimMessages(claim)"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Accelerator.IPLM.ClaimRetrieve.Title&quot;)"
+      location="ClaimRetrieveRequest(claim)"/>
+  </LocationGroup>
+</PCF>

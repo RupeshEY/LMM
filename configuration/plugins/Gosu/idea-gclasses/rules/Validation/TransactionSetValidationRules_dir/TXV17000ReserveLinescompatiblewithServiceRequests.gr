@@ -1,0 +1,49 @@
+package rules.Validation.TransactionSetValidationRules_dir
+
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("TXV17000 - Reserve Lines compatible with Service Requests")
+internal class TXV17000ReserveLinescompatiblewithServiceRequests {
+  static function doCondition(transactionSet: entity.TransactionSet): boolean {
+/*start00rule*/
+return transactionSet typeis CheckSet
+/*end00rule*/
+  }
+
+  static function doAction(transactionSet: entity.TransactionSet, actions: gw.rules.Action) {
+/*start00rule*/
+// This OOTB rule only needs to run for checks.
+// The rule gets triggered when
+// 1) marking invoices as paid with a check,
+// 2) adding/removing payments in check,
+// 3) changing the reserve line in check's payments, or
+// 4) changing the reserve line when recoding payments.
+// Validates that a check has at least one payment compatible with each of its related ServiceRequestInvoices.
+// A payment and ServiceRequestInvoice are compatible if:
+// a) the invoice's service request is claim-level,
+// b) the payment's reserve line is claim-level,
+// c) the invoice's service request is associated with the same exposure as the reserve line, or
+// d) the invoice's service request is not associated with an exposure, but it is associated with the incident linked to the reserve line's exposure.
+    for (check in (transactionSet as CheckSet).Checks) {
+      var isPaymentEdited = check.isArrayElementAddedOrRemoved(Check#Payments)
+      var isReserveLineEdited = check.Payments.hasMatch(\p -> p.isFieldChanged(Payment#ReserveLine))
+      var nonRecodedPayments = check.Payments.where(\p -> not p.Recoded and not p.RecodingOffset)
+      for (invoice in check.ServiceRequestInvoices) {
+        if (invoice.Changed or isReserveLineEdited or isPaymentEdited) {
+          var relatedToBean = invoice.ServiceRequest.RelatedTo
+          if (not(relatedToBean typeis Claim)) {
+            if (not nonRecodedPayments*.ReserveLine.hasMatch(\rl ->
+                    rl.Exposure == null or
+                    rl.Exposure == relatedToBean or
+                    rl.Exposure.Incident == relatedToBean
+            )) {
+              transactionSet.reject(null, null, ValidationLevel.TC_LOADSAVE, DisplayKey.get("Rules.Validation.Transaction.IncompatibleServiceRequest", invoice.ReferenceNumber))
+            }
+          }
+        }
+      }
+    }
+/*end00rule*/
+  }
+}

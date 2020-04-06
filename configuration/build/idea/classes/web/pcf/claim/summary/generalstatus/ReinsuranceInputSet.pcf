@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="ReinsuranceInputSet">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="claim.ReinsuranceReportable"
+      name="originalReinsReportable"
+      type="boolean"/>
+    <Variable
+      initialValue="claim.ReinsuranceReason"
+      name="originalReinsReason"
+      type="String"/>
+    <Variable
+      initialValue="false"
+      name="editReasonRequired"
+      type="boolean"/>
+    <BooleanRadioInput
+      editable="perm.System.reinsuranceedit"
+      id="ReinsuranceReportable"
+      label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.ReinsuranceReportable&quot;)"
+      value="claim.ReinsuranceReportable">
+      <PostOnChange
+        onChange="setReinsuranceReason()"/>
+    </BooleanRadioInput>
+    <TextAreaInput
+      editable="perm.System.reinsuranceedit"
+      id="ReinsuranceReason"
+      label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.ReinsuranceEditReason&quot;)"
+      numCols="30"
+      numRows="3"
+      required="editReasonRequired"
+      value="claim.ReinsuranceReason"/>
+    <TypeKeyInput
+      id="ReinsuranceFlagged"
+      label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.ReinsuranceFlaggedStatus&quot;)"
+      value="claim.ReinsuranceFlaggedStatus"
+      valueType="typekey.ReinsuranceFlaggedStatus"
+      visible="claim.ReinsuranceReportable!=null &amp;&amp; !CurrentLocation.InEditMode"/>
+    <Code><![CDATA[
+function setReinsuranceReason() {
+  if(originalReinsReportable != claim.ReinsuranceReportable || (claim.ReinsuranceFlaggedStatus == null && claim.ReinsuranceReportable == false)) {
+    editReasonRequired = true
+    claim.ReinsuranceReason = org.apache.commons.lang.StringUtils.EMPTY 
+  } else {
+    claim.ReinsuranceReason = originalReinsReason
+  }  
+}
+    ]]></Code>
+  </InputSet>
+</PCF>

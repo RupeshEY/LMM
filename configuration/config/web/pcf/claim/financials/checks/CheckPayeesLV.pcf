@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_financials.xml -->
+  <ListViewPanel
+    id="CheckPayeesLV">
+    <Require
+      name="Check"
+      type="Check"/>
+    <RowIterator
+      editable="true"
+      elementName="CheckPayee"
+      pageSize="3"
+      value="Check.Payees"
+      valueType="entity.CheckPayee[]">
+      <Row>
+        <ClaimContactCell
+          claim="CheckPayee.Check.Claim"
+          id="CheckPayee_Payee"
+          label="DisplayKey.get(&quot;LV.Financials.CheckPayees.CheckPayee.Payee&quot;)"
+          sortOrder="1"
+          sortValueRange="false"
+          value="CheckPayee.Payee"
+          valueRange="CheckPayee.Check.Claim.RelatedContacts"/>
+        <TypeKeyCell
+          id="CheckPayee_PayeeType"
+          label="DisplayKey.get(&quot;LV.Financials.CheckPayees.CheckPayee.PayeeType&quot;)"
+          value="CheckPayee.PayeeType"
+          valueType="typekey.ContactRole"/>
+        <PrivacyCell
+          encryptionExpression="CheckPayee.Payee.maskTaxId(VALUE)"
+          id="TaxID"
+          label="DisplayKey.get(&quot;LV.Financials.CheckPayees.CheckPayee.Payee.TaxID&quot;)"
+          value="CheckPayee.Payee.TaxID"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

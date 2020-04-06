@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="NewClaimWizard_AssignScreen">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Toolbar>
+      <WizardButtons/>
+    </Toolbar>
+    <Verbatim
+      label="DisplayKey.get(&quot;Web.NewClaimWizard.Assign.Tip&quot;)"/>
+    <PanelRef
+      def="NewClaimWizard_AssignDV(Claim, Wizard)"/>
+  </Screen>
+</PCF>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AddressBookCompanyVendorAdditionalInfoInputSet"
+    mode="CompanyVendor">
+    <Require
+      name="company"
+      type="Company"/>
+    <BooleanRadioInput
+      editable="perm.Contact.createpreferredab"
+      id="IsPreferredVendor"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.IsPreferredVendor&quot;)"
+      value="(company as CompanyVendor).Preferred"/>
+    <InputSetRef
+      def="AddressBookCompanyVendorSpecialtyInputSet(company as CompanyVendor)"
+      mode="company.Subtype"/>
+  </InputSet>
+</PCF>

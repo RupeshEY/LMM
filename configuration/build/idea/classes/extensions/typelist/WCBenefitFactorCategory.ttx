@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="WCBenefitFactorCategory"
+  name="WCBenefitFactorCategory">
+  <typecode
+    code="MaxDuration"
+    desc="Maximum duration of benefit"
+    name="Maximum duration"/>
+  <typecode
+    code="Offset"
+    desc="Allowable offsets such as SSI"
+    name="Offset"/>
+  <typecode
+    code="WorkerFactor"
+    desc="Attributes of the worker such as age"
+    name="EE's Attribute"/>
+  <typecode
+    code="WeeklyWage"
+    desc="How is weekly wage calculated"
+    name="Weekly Wage"/>
+  <typecode
+    code="Other"
+    desc="Other"
+    name="Other"/>
+  <typecode
+    code="DateRelated"
+    desc="How the various dates factor into the calulation.  e.g day of injuy counts as day of disability"
+    name="Date Related"/>
+  <typecode
+    code="Override"
+    desc="Typical benefit calculation formula is not utilized"
+    name="Override"/>
+  <typecode
+    code="WaitingPeriod"
+    desc="Additional information about the waiting period"
+    name="Waiting Period"/>
+</typelistextension>

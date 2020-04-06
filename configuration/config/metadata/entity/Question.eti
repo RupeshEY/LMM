@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A Question"
+  entity="Question"
+  exportable="true"
+  extendable="false"
+  ignoreForEvents="true"
+  platform="false"
+  readOnly="false"
+  table="question"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.question.entity.Question"
+    impl="com.guidewire.cc.domain.question.impl.QuestionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.question.impl.QuestionInternal"
+    impl="com.guidewire.cc.domain.question.impl.QuestionImpl"/>
+  <column
+    default="false"
+    desc="If set to true, will retire this question set during the import xml process."
+    name="ShouldRetireFromImportXML"
+    nullok="true"
+    type="bit"/>
+  <foreignkey
+    columnName="QuestionSetID"
+    fkentity="QuestionSet"
+    name="QuestionSet"
+    nullok="false"/>
+  <array
+    arrayentity="QuestionFilter"
+    arrayfield="Question"
+    name="QuestionFilters"/>
+  <array
+    arrayentity="QuestionChoice"
+    desc="Alternative possible answers.  Only used if QuestionType == Choice."
+    name="Choices"/>
+  <array
+    arrayentity="SubQuestion"
+    name="SubQuestions"/>
+  <typekey
+    desc="What kind of question is this"
+    name="QuestionType"
+    nullok="false"
+    typelist="QuestionType"/>
+  <typekey
+    desc="What format of question to display"
+    getterScriptability="hidden"
+    name="QuestionFormat"
+    nullok="true"
+    setterScriptability="hidden"
+    typelist="QuestionFormat">
+    <keyfilters>
+      <keyfilter
+        name="QuestionType"/>
+    </keyfilters>
+  </typekey>
+  <column
+    name="Text"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="1024"/>
+    <localization
+      nullok="true"
+      tableName="qsnname_l10n"/>
+  </column>
+  <column
+    default="false"
+    name="Required"
+    nullok="false"
+    type="bit"/>
+  <column
+    name="DefaultAnswer"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="1024"/>
+    <localization
+      nullok="true"
+      tableName="qsndefans_l10n"/>
+  </column>
+  <column
+    desc="number of spaces to indent"
+    name="Indent"
+    nullok="true"
+    type="nonnegativeinteger"/>
+  <column
+    default="-1"
+    desc="Sort order priority"
+    name="Priority"
+    nullok="true"
+    type="integer"/>
+</entity>

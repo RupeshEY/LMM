@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- ### ============================================================================
+###  SubViewDef instances
+### ============================================================================
+  This file automatically generated from nvv_activity.xml -->
+  <InputSet
+    id="ActivityOwnerInputSet">
+    <Require
+      name="Activity"
+      type="Activity"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityOwner.Activity.Assignment&quot;)"/>
+    <TextInput
+      id="InternalOwner"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityOwner.Activity.InternalOwner&quot;)"
+      value="Activity.AssigneeDisplayString"/>
+    <GroupInput
+      id="AssignedGroup"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityOwner.Activity.AssignedGroup&quot;)"
+      value="Activity.AssignedGroup"/>
+    <TextInput
+      id="AssignedBy"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityOwner.Activity.AssignedBy&quot;)"
+      value="Activity.AssignedByUser != null ? Activity.AssignedByUser as String : DisplayKey.get(&quot;Java.Activity.AssignedByUser.SystemUser&quot;)"/>
+    <DateInput
+      dateFormat="short"
+      id="AssignDate"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityOwner.Activity.AssignDate&quot;)"
+      value="Activity.AssignmentDate"/>
+  </InputSet>
+</PCF>

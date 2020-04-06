@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.User.viewteam"
+    id="TeamGroupAging"
+    title="DisplayKey.get(&quot;Web.Team.GroupAgingTitle&quot;, GroupInfo.DisplayName)">
+    <LocationEntryPoint
+      signature="TeamGroupAging(GroupInfo : gw.api.admin.TreeGroupInfo)"/>
+    <Variable
+      name="GroupInfo"
+      type="gw.api.admin.TreeGroupInfo"/>
+    <Variable
+      initialValue="new gw.api.team.TeamGroupStatisticsHelper(GroupInfo)"
+      name="PageHelper"
+      type="gw.api.team.TeamGroupStatisticsHelper"/>
+    <Variable
+      initialValue="gw.api.team.TeamStatisticsUtil.getTeamStatistics(GroupInfo.Group)"
+      name="StatisticsList"
+      recalculateOnRefresh="true"
+      type="gw.api.statistics.Statistics[]"/>
+    <Variable
+      initialValue="&quot;GroupAgingStatisticsLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <Screen
+      id="TeamGroupAgingScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="gw.api.print.ListViewPrintOptionPopupAction.printListViewWithOptions(PrintTargetLV)"
+          available="perm.User.printlistviews"
+          id="PrintButton"
+          label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+          shortcut="N"/>
+        <ToolbarDivider/>
+        <ToolbarDivider/>
+        <ToolbarInput
+          boldLabel="true"
+          id="AsOf"
+          value="DisplayKey.get(&quot;Web.Team.AsOf&quot;, PageHelper.AsOfDate)"
+          valueType="java.lang.String"/>
+      </Toolbar>
+      <PanelRef
+        def="GroupAgingStatisticsLV(StatisticsList, PageHelper)"/>
+    </Screen>
+  </Page>
+</PCF>

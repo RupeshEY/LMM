@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Claim">
+  <index
+    desc="Covering index for helping to speed up Claim Search by Insured's last name, when including lossdate as one of the criteria"
+    expectedtobecovering="true"
+    name="claimu6"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="InsuredDenormID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="LossDate"/>
+    <indexcol
+      keyposition="4"
+      name="ID"/>
+  </index>
+  <index
+    desc="This covering index exists to help the performance of the claim search                  feature as configured out of the box, which is to constrain on LossDate                  by default. If this default search configuration is changed then it may                  be worth considering removal of this index. This index also has ClaimNumber                  in it to address execution plan problems with Team Group Activities page in                  MS SQL Server and will be used in places where claimnumber on claim is used."
+    expectedtobecovering="true"
+    name="claimu7u"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="LossDate"/>
+    <indexcol
+      keyposition="4"
+      name="ClaimNumber"/>
+    <indexcol
+      keyposition="5"
+      name="Flagged"/>
+  </index>
+  <index
+    desc="This covering index exists to help the performance of querying for claims                  related to a specified catastrophe."
+    expectedtobecovering="true"
+    name="claimu9"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="LossCause"/>
+    <indexcol
+      keyposition="2"
+      name="LossDate"/>
+    <indexcol
+      keyposition="3"
+      name="LossType"/>
+    <indexcol
+      keyposition="4"
+      name="CatastropheID"/>
+    <indexcol
+      keyposition="5"
+      name="Retired"/>
+    <indexcol
+      keyposition="6"
+      name="LossLocationID"/>
+    <indexcol
+      keyposition="7"
+      name="ID"/>
+  </index>
+  <column
+    deprecated="true"
+    desc="True if the incident occurred on the employer's premises."
+    name="InsuredPremises"
+    nullok="true"
+    type="bit"/>
+</extension>

@@ -1,0 +1,42 @@
+package rules.Preupdate.ClaimPreupdate_dir.CPU30000WorkloadAssignmentBalancing_dir
+
+uses gw.api.system.CCLoggerCategory
+
+@gw.rules.RuleName("CPU30500 - Claim Workload Affected")
+internal class CPU30500ClaimWorkloadAffected {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+/*
+ * Condition: A field on Claim that affects workload has been altered,
+ * but the Claim state is not affected.
+ * Assignment changes to the claim are also ignored.
+ */
+return
+  claim.State == ClaimState.TC_OPEN
+    and
+  not claim.isFieldChanged("AssignedUser")
+    and
+  not claim.isFieldChanged("State")
+    and
+  claim.isWorkloadAffected()
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+// Logging of this rule will be categorized under "Assignment"
+var logger = CCLoggerCategory.ASSIGNMENT_WEIGHTED_WORKLOAD
+if (logger.DebugEnabled) {
+  logger.debug(actions.getRule().DisplayName + " - Claim '" + claim.ClaimNumber + "' modified - updating user workload")
+}
+
+gw.assignment.workload.rules.ClaimWorkloadPreupdateRuleActions.updateUserWorkloadOnClaimModification(claim)
+
+
+/*end00rule*/
+
+  }
+}

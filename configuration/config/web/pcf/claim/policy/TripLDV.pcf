@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListDetailPanel
+    id="TripLDV"
+    selectionName="selection"
+    selectionType="TripRU">
+    <ExposeIterator
+      valueType="entity.TripRU"
+      widget="TripRULV"/>
+    <Require
+      name="aClaim"
+      type="Claim"/>
+    <ListViewPanel
+      id="TripRULV">
+      <RowIterator
+        checkBoxVisible="CurrentLocation.InEditMode"
+        editable="false"
+        elementName="aTripRU"
+        hasCheckBoxes="true"
+        pickLocation="TripRUPopup.push( aClaim )"
+        toRemove="aClaim.Policy.removeFromRiskUnits( aTripRU )"
+        value="aClaim.Policy.RiskUnits.whereTypeIs( TripRU )"
+        valueType="entity.TripRU[]">
+        <Row>
+          <TextCell
+            action="TripRUPopup.push( aClaim, aTripRU, CurrentLocation.InEditMode )"
+            id="TripRU_Name"
+            label="DisplayKey.get(&quot;Web.ClaimPolicy.Trips.TripDescription&quot;)"
+            value="aTripRU.DisplayName"/>
+          <DateCell
+            id="StartDate"
+            label="DisplayKey.get(&quot;NVV.Policy.Trip.StartDate&quot;)"
+            sortOrder="1"
+            value="aTripRU.StartDate"/>
+          <DateCell
+            id="EndDate"
+            label="DisplayKey.get(&quot;NVV.Policy.Trip.EndDate&quot;)"
+            sortOrder="2"
+            value="aTripRU.EndDate"/>
+          <TypeKeyCell
+            id="GeographicalRegion"
+            label="DisplayKey.get(&quot;NVV.Policy.Trip.GeographicalRegion&quot;)"
+            value="aTripRU.GeographicalRegion"
+            valueType="typekey.GeographicalRegion"/>
+        </Row>
+      </RowIterator>
+    </ListViewPanel>
+    <CardViewPanel>
+      <Card
+        id="trip_coverages"
+        title="DisplayKey.get(&quot;Web.ClaimPolicy.Trips.Coverages&quot;)"
+        visible="selection != null">
+        <PanelRef
+          def="PolicyTripCoverageLDV(selection)"
+          id="PolicyTripCoverageLDV"/>
+      </Card>
+    </CardViewPanel>
+  </ListDetailPanel>
+</PCF>

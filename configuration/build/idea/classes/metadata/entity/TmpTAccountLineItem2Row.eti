@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="2 row temp table for upgrade to taccountlineitems."
+  entity="TmpTAccountLineItem2Row"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="tmptaccountlineitem2row"
+  temporary="true"
+  type="keyable">
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.TmpTAccountLineItem2Row"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TmpTAccountLineItem2RowImpl"/>
+  <column
+    desc="Transform for ID."
+    exportable="false"
+    name="IDXform"
+    nullok="false"
+    type="integer"/>
+  <column
+    desc="Transform for PublicID."
+    exportable="false"
+    name="PublicIDXform"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="2"/>
+  </column>
+</entity>

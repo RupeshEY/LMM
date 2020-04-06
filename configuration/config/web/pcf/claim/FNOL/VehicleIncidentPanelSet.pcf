@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="VehicleIncidentPanelSet">
+    <Require
+      name="VehicleIncident"
+      type="VehicleIncident"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Require
+      name="allIncidentOtherServices"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <PanelRef
+      def="RentalServiceDV(RentalServiceRequest, VehicleIncident, unusedServiceRequests)"/>
+    <PanelRef
+      def="VehicleIncidentTowingDV(TowingServiceRequest, VehicleIncident, unusedServiceRequests)"/>
+    <PanelRef
+      def="AppraisalServiceDV(AppraisallServiceRequest, VehicleIncident, unusedServiceRequests, gw.vendormanagement.SpecialistServiceCodeConstants.AUTOAPPRAISAL)"/>
+    <PanelRef
+      def="VehicleIncidentAutoBodyDV(AutoBodyServiceRequest, VehicleIncident, unusedServiceRequests)"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <InputSetRef
+          def="OtherServicesLVInputGroupInputSet(VehicleIncident.Claim, VehicleIncident, createOtherServices(), allIncidentOtherServices, unusedServiceRequests, {})"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <Code><![CDATA[function findServiceRequest(serviceCode : String) : ServiceRequest {
+  return VehicleIncident.ServiceRequests.firstWhere(\ sr ->
+          sr.Instruction.Services.Count == 1
+          and sr.Instruction.Services.single().Service.Code == serviceCode
+          and (allIncidentOtherServices == null or not allIncidentOtherServices.contains(sr))
+  )
+}
+
+property get RentalServiceRequest() : ServiceRequest {
+  return findServiceRequest(gw.vendormanagement.SpecialistServiceCodeConstants.AUTORENTAL)
+}
+
+property get TowingServiceRequest() : ServiceRequest {
+  return findServiceRequest(gw.vendormanagement.SpecialistServiceCodeConstants.AUTOTOWING)
+}
+
+property get AppraisallServiceRequest() : ServiceRequest {
+  return findServiceRequest(gw.vendormanagement.SpecialistServiceCodeConstants.AUTOAPPRAISAL)
+}
+
+property get AutoBodyServiceRequest() : ServiceRequest {
+  return findServiceRequest(gw.vendormanagement.SpecialistServiceCodeConstants.AUTOBODYREPAIR)
+}
+
+function createOtherServices() : java.util.Set<ServiceRequest> {
+  return VehicleIncident.ServiceRequests.where(\ sr -> (
+      sr != RentalServiceRequest and sr != TowingServiceRequest and sr != AppraisallServiceRequest and sr != AutoBodyServiceRequest)).toSet()
+}]]></Code>
+  </PanelSet>
+</PCF>

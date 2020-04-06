@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="DocumentTemplateSearchResults">
+  <description><![CDATA[
+Non-persistent set of criteria to use to represent the results of a specific document template search. This entity should contain enough information to allow the user to select the desired document template.
+<p>
+Document template files are XML files whose format is defined in the deployed document-template.xsd file. Therefore additions of new document template descriptor properties which should be viewable on the results of a document template search must be coordinated between that xsd file, this entity, and the {@link com.guidewire.cc.domain.document.DocumentTemplateSearchCriteria} entity.
+      
+    ]]></description>
+  <column
+    desc="The lob type of the document template."
+    name="Lob"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The state(s) to which the document template applies."
+    name="State"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The section to which the document template applies."
+    name="Section"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The identifier of the document template (distinct from the template ID)."
+    name="Identifier"
+    nullok="true"
+    type="shorttext"/>
+</internalExtension>

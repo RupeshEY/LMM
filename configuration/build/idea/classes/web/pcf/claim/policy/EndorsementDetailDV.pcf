@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_policy.xml -->
+  <DetailViewPanel
+    id="EndorsementDetailDV">
+    <Require
+      name="Endorsement"
+      type="Endorsement"/>
+    <InputColumn>
+      <TextInput
+        editable="true"
+        id="FormNumber"
+        label="DisplayKey.get(&quot;NVV.Policy.EndorsementDetail.Endorsement.FormNumber&quot;)"
+        required="true"
+        value="Endorsement.FormNumber"/>
+      <TextInput
+        editable="true"
+        id="Description"
+        label="DisplayKey.get(&quot;NVV.Policy.EndorsementDetail.Endorsement.Description&quot;)"
+        required="false"
+        value="Endorsement.Description"/>
+      <DateInput
+        editable="true"
+        id="EffectiveDate"
+        label="DisplayKey.get(&quot;NVV.Policy.EndorsementDetail.Endorsement.EffectiveDate&quot;)"
+        required="false"
+        value="Endorsement.EffectiveDate"/>
+      <DateInput
+        editable="true"
+        id="ExpirationDate"
+        label="DisplayKey.get(&quot;NVV.Policy.EndorsementDetail.Endorsement.ExpirationDate&quot;)"
+        required="false"
+        value="Endorsement.ExpirationDate"/>
+      <TextInput
+        editable="true"
+        id="Comments"
+        label="DisplayKey.get(&quot;NVV.Policy.EndorsementDetail.Endorsement.Comments&quot;)"
+        required="false"
+        value="Endorsement.Comments"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="ClaimMessagesScreen">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <PanelRef
+      def="ClaimMessagesLV(claim.ValidClaimNotifyRqs, true)"
+      id="ClaimNotifyPanel">
+      <TitleBar
+        title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimMessages.NotifysLVTitle&quot;)"/>
+      <Toolbar/>
+    </PanelRef>
+    <PanelRef
+      def="ClaimMessagesLV(claim.ClaimRetrieveRses.where(\elt -&gt; not elt.ResponseAcknowledgement.IsRejected and not elt.ResponseAcknowledgement.HasNoClaimData), false)"
+      id="ClaimRetrievePanel">
+      <TitleBar
+        title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimMessages.RetrievesLVTitle&quot;)"/>
+      <Toolbar/>
+    </PanelRef>
+  </Screen>
+</PCF>

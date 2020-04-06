@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  admin="true"
+  desc="Customer account"
+  entity="Account"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  table="account"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.account.entity.Account"
+    impl="com.guidewire.cc.domain.account.impl.AccountImpl"/>
+  <fulldescription><![CDATA[
+       Represents the customer account associated with a claim policy. Used for special account handling.
+    ]]></fulldescription>
+  <column
+    desc="The account number"
+    name="AccountNumber"
+    nullok="false"
+    type="shorttext"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="AccountHolderID"
+    exportable="true"
+    fkentity="Contact"
+    name="AccountHolder"
+    nullok="false"/>
+  <onetoone
+    desc="The Special Handling instructions and notification triggers to apply to any Claims entered                     for Policies that are associated with this Account"
+    fkentity="AccountSpecialHandling"
+    name="SpecialHandling"
+    nullok="true"/>
+  <index
+    desc="Enforce unique account numbers, also speed up internal account search by number"
+    name="accountu1"
+    trackUsage="true"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="AccountNumber"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+  </index>
+</entity>

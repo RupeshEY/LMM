@@ -1,0 +1,37 @@
+package rules.Validation.ClaimValidationRules_dir.CLV09000ISOValidation_dir.CLV09900Insured_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV09920 - Name")
+internal class CLV09920Name {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.InsuredDenorm != null
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+if (claim.InsuredDenorm typeis Person) {
+  var person = claim.InsuredDenorm
+  if (not person.FirstName.HasContent) {
+    claim.rejectSubField(person, "FirstName", TC_ISO, 
+                         DisplayKey.get("Rules.Validation.Claim.InsuredFirstNameNotEmpty", person.LastName), null, null)
+  }
+  if (not person.LastName.HasContent) {
+    claim.rejectSubField(person, "LastName", TC_ISO, 
+                         DisplayKey.get("Rules.Validation.Claim.InsuredLastNameNotEmpty", person.FirstName), null, null)
+  }
+} else if (claim.InsuredDenorm typeis Company) {
+  var company = claim.InsuredDenorm
+  if (not company.Name.HasContent) {
+    claim.rejectSubField(company, "Name", TC_ISO, DisplayKey.get("Rules.Validation.Claim.InsuredNameNotNull"), null, null)
+  }
+}
+/*end00rule*/
+
+  }
+}

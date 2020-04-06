@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    beforeCommit="validateValidRiskUnits(); gw.policy.location.PolicyLocationUtil.addNewBuildingsToPolicyLocation(Claim.Policy)"
+    canEdit="(gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Properties&quot;) or gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Classcodes&quot;)) and perm.Claim.edit(Claim) and perm.Policy.edit(Claim)"
+    canVisit="(gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Properties&quot;) or gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Classcodes&quot;)) and perm.Policy.view(Claim) and perm.System.viewpolicy"
+    id="ClaimPolicyLocations"
+    title="DisplayKey.get(&quot;Web.ClaimPolicy.Locations&quot;)">
+    <LocationEntryPoint
+      signature="ClaimPolicyLocations(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="ClaimPolicyLocationsScreen">
+      <Toolbar>
+        <IteratorButtons
+          addLabel="DisplayKey.get(&quot;Button.AddLocations&quot;)"
+          addVisible="!Claim.Policy.Verified and perm.Claim.edit(Claim) and perm.Policy.edit(Claim)"
+          id="AddLocation"
+          iterator="PolicyLocationLDV.PolicyLocationIterator"
+          removeFlags="no hasRU, any checked"
+          removeLabel="DisplayKey.get(&quot;Button.RemoveLocation&quot;)"
+          removeVisible="!Claim.Policy.Verified and perm.Claim.edit(Claim) and perm.Policy.edit(Claim)"/>
+        <EditButtons
+          editVisible="!Claim.Policy.Verified and perm.Claim.edit(Claim) and perm.Policy.edit(Claim)"/>
+        <ToolbarButton
+          action="gw.api.policy.ClaimPolicyMakeEditableUtil.makePolicyEditable(CurrentLocation, Claim); CurrentLocation.startEditing()"
+          confirmMessage="DisplayKey.get(&quot;JSP.ClaimPolicyGeneral.EditVerifiedPolicy&quot;)"
+          id="ClaimPolicyLocations_AddMoreLocationsButton"
+          label="DisplayKey.get(&quot;Button.AddMoreLocations&quot;)"
+          visible="Claim.Policy.Verified and perm.Claim.edit(Claim) and perm.Policy.edit(Claim) and perm.Policy.makeeditable(Claim)"/>
+      </Toolbar>
+      <PanelRef
+        def="PolicyLocationLDV(Claim)"/>
+      <!-- <ListDetailPanel
+        selectionName="PolicyLocation"
+        selectionType="PolicyLocation">
+        <PanelRef
+          def="PolicyLocationsLV(Claim.Policy.PolicyLocations, Claim)"
+          editable="false"
+          mode="Claim.LossType"/>
+        <CardViewPanel
+          hideTabIfSingle="true">
+          <Card
+            id="LocationDetailCard"
+            title="&quot;&quot;">
+            <PanelRef
+              def="PolicyLocationRiskDetailPanelSet(PolicyLocation, Claim.Policy)">
+              <Toolbar/>
+            </PanelRef>
+          </Card>
+        </CardViewPanel>
+      </ListDetailPanel> -->
+    </Screen>
+    <Code><![CDATA[function validateValidRiskUnits() {
+  if (Claim.Policy.hasValidRiskUnits()) {return}
+  throw new gw.api.util.DisplayableException(DisplayKey.get("JSP.ClaimPolicy.Policy.CombinationMustBeUnique"))
+}]]></Code>
+  </Page>
+</PCF>

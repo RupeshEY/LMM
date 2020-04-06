@@ -1,0 +1,28 @@
+package rules.Assignment.GlobalExposureAssignmentRules_dir.GEA02000Nonautoclaims_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+
+@gw.rules.RuleName("GEA02100 - Default")
+internal class GEA02100Default {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+var logger = CCLoggerCategory.ASSIGNMENT
+
+exposure.CurrentAssignment.assignToIssueOwner()
+logger.debug(DisplayKey.get("Rules.Assignment.Global.Exposure", actions.ShortRuleName))
+logger.debug(DisplayKey.get("Rules.Assignment.AssignedGroupIs", exposure.AssignedGroup))
+logger.debug(DisplayKey.get("Rules.Assignment.AssignedUserIs", exposure.AssignedUser))
+actions.exit()
+/*end00rule*/
+
+  }
+}

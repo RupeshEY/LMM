@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  entity="CCNameCriteria"
+  exportable="true"
+  extendable="true">
+  <implementsInterface
+    iface="gw.cc.custom.entity.CCNameCriteria"
+    impl="com.guidewire.cc.domain.custom.impl.CCNameCriteriaImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.custom.impl.CCNameCriteriaInternal"
+    impl="com.guidewire.cc.domain.custom.impl.CCNameCriteriaImpl"/>
+  <fulldescription><![CDATA[A component used as part of a larger search criteria entity. Encapsulates the information
+        entered by the user to restrict the search to particular contact, specified by some combination
+        of name, tax ID and official ID. One CCNameCriteria entity will be used for each field that needs to
+        be restricted. For example if a search criteria was being constructed to specify searches for
+        an entity which had two different contact fields, then the search criteria would likely
+        contain two distinct CCNameCriteria components. This ClaimCenter specific CCNameCriteria entity
+        differs from the platform NameCriteria entity in that it is extendable and can be used with
+        configurable search]]></fulldescription>
+  <column
+    desc="The first name, if searching for a person."
+    name="FirstName"
+    nullok="true"
+    type="firstname"/>
+  <column
+    desc="The last name, if searching for a person."
+    name="LastName"
+    nullok="true"
+    type="lastname"/>
+  <column
+    desc="The contact's tax identification number."
+    name="TaxId"
+    nullok="true"
+    type="ssn"/>
+  <column
+    desc="Field matched against the OfficialIDValue of the OfficialID objects associated with Contacts."
+    name="OfficialId"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The company name, if searching for a company."
+    name="CompanyName"
+    nullok="true"
+    type="companyname"/>
+  <column
+    desc="The last name or the first name."
+    name="Name"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Phone number to search on."
+    name="Phone"
+    nullok="true"
+    type="phone"/>
+  <column
+    desc="License Number to search on."
+    name="LicenseNumber"
+    nullok="true"
+    type="driverlicense"/>
+</nonPersistentEntity>

@@ -1,0 +1,39 @@
+package rules.Validation.ClaimValidationRules_dir.CLV14000Subrogationrolechanges_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV14200 - Responsible party role removed")
+internal class CLV14200Responsiblepartyroleremoved {
+  static function doCondition(claim: entity.Claim): boolean {
+/*start00rule*/
+    var removedAdversePartyCCRs = claim.Bundle.getRemovedBeansOfType(ClaimContactRole)
+      .where(\ccr -> ccr.Role == ContactRole.TC_ADVERSEPARTY)
+    removedAdversePartyCCRs.addAll(claim.Bundle.getUpdatedBeansOfType(ClaimContactRole)
+      .where(\ccr -> ccr.isFieldChanged(ClaimContactRole#Role) && ccr.getOriginalValue(ClaimContactRole#Role) == ContactRole.TC_ADVERSEPARTY))
+
+    if (removedAdversePartyCCRs.isEmpty()) {
+      return false
+    }
+
+    var removedAdversePartyRoleContacts = removedAdversePartyCCRs.map(\ccr -> ccr.Contact).toSet()
+
+    var currentSubroAdversePartiesWithRemovedAdversePartyRoles = claim.SubrogationSummary.SubroAdverseParties
+        .map(\p -> p.AdverseParty)
+        .where(\p -> removedAdversePartyRoleContacts.contains(p))
+        .toSet()
+    var currentAdversePartyRoleContacts = claim.Contacts
+        .where(\c -> c.Roles.hasMatch(\r -> r.Role == ContactRole.TC_ADVERSEPARTY))
+        .map(\c -> c.Contact)
+        .toSet()
+
+    return !currentAdversePartyRoleContacts.containsAll(currentSubroAdversePartiesWithRemovedAdversePartyRoles)
+/*end00rule*/
+  }
+
+  static function doAction(claim: entity.Claim, actions: gw.rules.Action) {
+/*start00rule*/
+    claim.rejectField("claim.Contacts", ValidationLevel.TC_LOADSAVE,
+        DisplayKey.get("Subrogation.Validation.Claim.ResponsiblePartyRoleRemoved"), null, null)
+/*end00rule*/
+  }
+}

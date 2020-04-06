@@ -1,0 +1,21 @@
+package rules.Workplan.ExposureWorkplan_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("EXW06000 - WC Lost Wages Exposure")
+internal class EXW06000WCLostWagesExposure {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ExposureType ==TC_LOSTWAGES
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* execute child rules */
+/*end00rule*/
+
+  }
+}

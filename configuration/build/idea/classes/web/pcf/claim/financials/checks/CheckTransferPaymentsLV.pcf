@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_financials.xml -->
+  <ListViewPanel
+    id="CheckTransferPaymentsLV">
+    <Require
+      name="Check"
+      type="Check"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="displayLink"
+      type="boolean"/>
+    <Require
+      name="reserveLineInputSetHelper"
+      type="gw.api.financials.ReserveLineInputSetHelper"/>
+    <RowIterator
+      editable="false"
+      elementName="Payment"
+      value="Check.Payments"
+      valueType="entity.Payment[]">
+      <Row>
+        <TextCell
+          id="ExposureNoLink"
+          label="DisplayKey.get(&quot;LV.Financials.CheckTransferPayments.Exposure&quot;)"
+          outputConversion="(null == VALUE) ? DisplayKey.get(&quot;Financials.ReserveLine.NoExposure&quot;) : VALUE as String"
+          sortOrder="1"
+          value="Payment.Exposure.ClaimOrder"
+          valueType="java.lang.Integer"
+          visible="!displayLink"/>
+        <TextCell
+          action="PaymentTransferPopup.push(Payment, Claim, reserveLineInputSetHelper)"
+          id="ExposureLink"
+          label="DisplayKey.get(&quot;LV.Financials.CheckTransferPayments.Exposure&quot;)"
+          outputConversion="(null == VALUE) ? DisplayKey.get(&quot;Financials.ReserveLine.NoExposure&quot;) : VALUE as String"
+          sortOrder="1"
+          value="Payment.Exposure.ClaimOrder"
+          valueType="java.lang.Integer"
+          visible="displayLink"/>
+        <TypeKeyCell
+          id="Coverage"
+          label="DisplayKey.get(&quot;LV.Financials.CheckTransferPayments.Coverage&quot;)"
+          sortOrder="2"
+          value="Payment.Exposure.PrimaryCoverage"
+          valueType="typekey.CoverageType"/>
+        <TypeKeyCell
+          id="CostType"
+          label="DisplayKey.get(&quot;LV.Financials.CheckTransferPayments.CostType&quot;)"
+          value="Payment.CostType"
+          valueType="typekey.CostType"/>
+        <TypeKeyCell
+          id="CostCategory"
+          label="DisplayKey.get(&quot;LV.Financials.CheckTransferPayments.CostCategory&quot;)"
+          value="Payment.CostCategory"
+          valueType="typekey.CostCategory"/>
+        <TypeKeyCell
+          id="ReservingCurrency"
+          label="DisplayKey.get(&quot;LV.Financials.CheckTransferPayments.ReservingCurrency&quot;)"
+          value="Payment.ReservingCurrency"
+          valueType="typekey.Currency"
+          visible="gw.util.CCConfigUtil.AllowExplicitReservingCurrency"/>
+        <TextCell
+          id="Comments"
+          label="DisplayKey.get(&quot;LV.Financials.CheckTransferPayments.Comments&quot;)"
+          value="Payment.Comments"/>
+        <CurrencyCell
+          formatType="currency"
+          id="AmountNoLink"
+          label="DisplayKey.get(&quot;LV.Financials.CheckTransferPayments.Amount&quot;)"
+          value="Payment.TransactionAmountReservingAmountPair"
+          valueType="gw.api.financials.IPairedMoney"
+          visible="!displayLink"/>
+        <CurrencyCell
+          action="PaymentTransferPopup.push(Payment, Claim, reserveLineInputSetHelper)"
+          formatType="currency"
+          id="AmountLink"
+          label="DisplayKey.get(&quot;LV.Financials.CheckTransferPayments.Amount&quot;)"
+          value="Payment.TransactionAmountReservingAmountPair"
+          valueType="gw.api.financials.IPairedMoney"
+          visible="displayLink"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

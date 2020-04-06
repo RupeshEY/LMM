@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="An annual or lifetime aggregate limit on a policy or coverage."
+  entity="AggregateLimit"
+  exportable="true"
+  platform="false"
+  table="aggregatelimit"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.aggregatelimit.impl.AggregateLimitInternal"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.AggregateLimitImpl"/>
+  <implementsInterface
+    iface="gw.cc.aggregatelimit.entity.AggregateLimit"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.AggregateLimitImpl"/>
+  <fulldescription><![CDATA[
+    Defines an annual or lifetime limit on an insurer's liability. This entity's LimitAmount value defines
+    the maximum amount that an insurer is required to pay for a specific period. Each CoverageLine, which represents either a
+    CoverageType or a specific Coverage, has an associated AggregateLimit and they are linked together through the CoverageLineLimit
+    entity. The AggregateLimit.CoverageLines array contains the lines that reference a particular AggregateLimit. Each AggregateLimit
+    is associated with a single policy period and zero or more coverage lines. If associated with multiple coverage lines, all the 
+    lines must be unique.
+  ]]></fulldescription>
+  <column
+    desc="The amount of the aggregate limit, in the Claim Currency of Claims in the PolicyPeriod."
+    name="LimitAmount"
+    nullok="false"
+    type="positivecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Comments about the aggregate limit."
+    exportable="true"
+    name="Comments"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    default="none"
+    desc="Aggregate limit type: none, by loss date, or by reported date."
+    name="LimitType"
+    nullok="false"
+    typelist="AggregateLimitType"/>
+  <typekey
+    default="limit"
+    desc="Aggregate type: limit or deductible."
+    name="ValueType"
+    nullok="false"
+    typelist="AggregateType"/>
+  <typekey
+    default="all"
+    desc="Contribution critiera for limit used calculations"
+    name="AggLimitCalcCriteria"
+    nullok="false"
+    typelist="AggLimitCalcCriteria">
+    <fulldescription><![CDATA[
+      The typekey here maps to a definition in aggregatelimitused-config.xml, which defines any exclusion criteria in terms of excluded cost types / cost categories
+    ]]></fulldescription>
+  </typekey>
+  <foreignkey
+    columnName="PolicyPeriodID"
+    desc="PolicyPeriod with which the aggregate limit is associated."
+    fkentity="PolicyPeriod"
+    name="PolicyPeriod"
+    nullok="false"/>
+  <array
+    arrayentity="CoverageLineLimit"
+    desc="Coverage lines that reference this aggregate limit."
+    name="CoverageLines"
+    owner="true"/>
+  <column
+    default="true"
+    desc="Indicates if the AggregateLimitRpts related to this aggregatelimit are up-to-date."
+    name="Valid"
+    nullok="false"
+    type="bit"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.aggregatelimit.dbchecks.AggregateLimitDBCheckBuilder"/>
+</entity>

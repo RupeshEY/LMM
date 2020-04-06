@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.User.view"
+    id="UserClaimsPage"
+    title="DisplayKey.get(&quot;Web.Admin.UserDetail&quot;, User.DisplayName)">
+    <LocationEntryPoint
+      signature="UserClaimsPage(User : User)"/>
+    <Variable
+      name="User"
+      type="User"/>
+    <Variable
+      initialValue="ClaimDesktopView.finder.findAllAndAttachClaimants()"
+      name="ClaimDesktopViewList"
+      type="gw.api.database.IQueryBeanResult&lt;ClaimDesktopView&gt;"/>
+    <Screen
+      id="UserClaimsScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.Admin.UserDetail.Claims&quot;, User.DisplayName)"/>
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="AssignClaimsPopup.push(new gw.api.claim.ClaimAssignmentPopup(CheckedValues))"
+          default="true"
+          flags="any ClaimDesktopView"
+          id="UserClaimsPage_AssignButton"
+          iterator="DesktopClaimsLV.DesktopClaimsLV"
+          label="DisplayKey.get(&quot;Web.DesktopExposures.Assign&quot;)"
+          shortcut="G"/>
+        <ToolbarDivider/>
+      </Toolbar>
+      <PanelRef
+        def="DesktopClaimsLV(ClaimDesktopViewList, User, false)"/>
+    </Screen>
+  </Page>
+</PCF>

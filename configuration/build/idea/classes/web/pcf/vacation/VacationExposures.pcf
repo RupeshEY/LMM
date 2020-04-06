@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.Exposure.own and perm.System.viewdesktop and ExposureVacationView.finder.areOpenVacationExposures()"
+    id="VacationExposures"
+    title="DisplayKey.get(&quot;Web.Vacation.Exposures&quot;)">
+    <LocationEntryPoint
+      signature="VacationExposures()"/>
+    <Variable
+      initialValue="ExposureVacationView.finder.findVacationExposures() as gw.api.database.IQueryBeanResult&lt;ExposureVacationView&gt;"
+      name="ExposureVacationViewList"
+      recalculateOnRefresh="true"
+      type="gw.api.database.IQueryBeanResult&lt;ExposureVacationView&gt;"/>
+    <Variable
+      initialValue="&quot;MyVacationExposuresLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <Screen
+      id="VacationExposuresScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.Vacation.Exposures&quot;)"/>
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="AssignExposuresPopup.push(new gw.api.exposure.ExposureAssignmentPopup(CheckedValues))"
+          default="true"
+          flags="any ExposureVacationView"
+          id="VacationExposures_Assign"
+          iterator="MyVacationExposuresLV.MyVacationExposuresLV"
+          label="DisplayKey.get(&quot;Web.DesktopExposures.Assign&quot;)"
+          shortcut="g"/>
+        <ToolbarDivider/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="gw.api.print.ListViewPrintOptionPopupAction.printListViewWithOptions(PrintTargetLV)"
+          available="perm.User.printlistviews"
+          id="VacationExposures_Print"
+          label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="MyVacationExposuresLV(ExposureVacationViewList)"/>
+    </Screen>
+  </Page>
+</PCF>

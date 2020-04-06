@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Report of an incident involving a bodily injury."
+  entity="InjuryIncident"
+  final="false"
+  priority="5"
+  supertype="Incident">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.InjuryIncident"
+    impl="com.guidewire.cc.domain.exposure.impl.InjuryIncidentImpl"/>
+  <column
+    desc="True for the one InjuryIncident per claim that holds injury fields formerly on Claim, for Workers Comp."
+    name="ClaimIncident"
+    nullok="true"
+    setterScriptability="hidden"
+    type="bit"/>
+  <column
+    desc="Ambulance arrived during the loss or not."
+    name="AmbulanceUsed"
+    nullok="true"
+    type="bit"/>
+  <array
+    arrayentity="BodyPartDetails"
+    desc="Details of body parts injured."
+    exportable="true"
+    name="BodyParts"
+    owner="true"
+    triggersValidation="true"/>
+  <typekey
+    desc="High-level categorization of the injury."
+    name="GeneralInjuryType"
+    nullok="true"
+    typelist="InjuryType"/>
+  <typekey
+    desc="Detailed Injury category."
+    name="DetailedInjuryType"
+    nullok="true"
+    typelist="DetailedInjuryType">
+    <keyfilters>
+      <keyfilter
+        name="GeneralInjuryType"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="Type of treatment received."
+    name="MedicalTreatmentType"
+    nullok="true"
+    typelist="MedicalTreatmentType"/>
+  <typekey
+    desc="For non-WC, to characterize the disability."
+    name="DisabledDueToAccident"
+    nullok="true"
+    typelist="DisabledDueToAccident"/>
+  <column
+    desc="True if the injured person lost wages as a result of the injury."
+    name="LostWages"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Percentage impairment."
+    name="Impairment"
+    nullok="true"
+    type="percentagedec"/>
+  <array
+    arrayentity="InjuryDiagnosis"
+    desc="All ICD codes associated with this incident"
+    name="InjuryDiagnoses"
+    triggersValidation="true"/>
+</subtype>

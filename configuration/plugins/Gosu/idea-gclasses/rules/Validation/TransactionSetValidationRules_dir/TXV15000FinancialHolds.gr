@@ -1,0 +1,28 @@
+package rules.Validation.TransactionSetValidationRules_dir
+
+@gw.rules.RuleName("TXV15000 - Financial Holds")
+internal class TXV15000FinancialHolds {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return transactionSet.Claim.applyFinancialHolds() == true
+and (transactionSet.Subtype ==TC_RESERVESET 
+     or (transactionSet.Subtype ==TC_CHECKSET 
+         and (transactionSet as CheckSet).checksetHasDeletedOrCancelledChecks() == false))
+
+/* If we are applying financial holds
+   AND either this is a reserve set
+              OR this is a check set with no deleted or cancelled checks
+*/
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

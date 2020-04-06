@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <xsd:element name="AggregateLimitUsedConfig">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="AggLimitCalcCriteriaDefinition" minOccurs="1" maxOccurs="unbounded"/>
+        <xsd:element name="AggLimitCalcTypeDefault" minOccurs="1" maxOccurs="1">
+          <xsd:complexType>
+            <xsd:attribute name="defaultCalctype" type="AggLimitCalcType" use="required"/>
+          </xsd:complexType>
+        </xsd:element>
+        <xsd:element ref="LimitUsedDef" minOccurs="1" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="AggLimitCalcCriteriaDefinition">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element name="ExclusionCriteria" minOccurs="0" maxOccurs="unbounded">
+          <xsd:complexType>
+            <xsd:attribute name="excludeCostType" type="xsd:NMTOKEN" use="required"/>
+            <xsd:attribute name="excludeCostCategory" type="xsd:NMTOKEN" use="optional"/>
+          </xsd:complexType>
+        </xsd:element>
+      </xsd:sequence>
+      <xsd:attribute name="code" type="xsd:NMTOKEN" use="required"/>
+      <xsd:attribute name="default" type="xsd:boolean" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="LimitUsedDef">
+    <xsd:complexType>
+      <xsd:choice minOccurs="1" maxOccurs="unbounded">
+        <xsd:element ref="AggLimitPolicyType" minOccurs="1"/>
+      </xsd:choice>
+      <xsd:attribute name="calctype" type="AggLimitCalcType" use="optional"/>
+      <xsd:attribute name="aggLimitCalculationCriteriaDefault" type="xsd:NMTOKEN" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+
+
+  <xsd:element name="AggLimitPolicyType">
+    <xsd:complexType>
+      <xsd:attribute name="code" type="xsd:NMTOKEN" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:simpleType name="AggLimitCalcType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="TotalPayments"/>
+      <xsd:enumeration value="TotalPaymentsPlusFuturePayments"/>
+      <xsd:enumeration value="TotalIncurredNet"/>
+      <xsd:enumeration value="TotalIncurredNetPlusFutureNonErodingPayments"/>
+      <xsd:enumeration value="TotalIncurredNetMinusOpenRecoveryReserves"/>
+      <xsd:enumeration value="TotalIncurredNetMinusOpenRecoveryReservesPlusFutureNonErodingPayments"/>
+      <xsd:enumeration value="TotalIncurredGross"/>
+      <xsd:enumeration value="TotalIncurredGrossPlusFutureNonErodingPayments"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+</xsd:schema>

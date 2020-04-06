@@ -1,0 +1,29 @@
+package rules.Validation.ExposureValidationRules_dir.EXV05000ISOValidation_dir.EXV05600BodilyInjuryExposure_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("EXV05610 - Injury")
+internal class EXV05610Injury {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.InjuryIncident.BodyParts.length == 0
+or exposure.InjuryIncident.FirstBodyPart.DetailedBodyPart == null
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+if (exposure.InjuryIncident.BodyParts.length == 0) {
+  exposure.rejectSubField(exposure.InjuryIncident, "BodyParts", TC_ISO,
+     DisplayKey.get("Rules.Validation.Exposure.InjuryIncidentMustHaveBodyPartWithDetailedBodyPart"), null, null)
+} else {
+  exposure.rejectSubField(exposure.InjuryIncident.FirstBodyPart, "DetailedBodyPart", TC_ISO, 
+      DisplayKey.get("Rules.Validation.Exposure.DetailedBodyPartNotNull"), null, null)
+}
+/*end00rule*/
+
+  }
+}

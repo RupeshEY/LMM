@@ -1,0 +1,23 @@
+package rules.EventMessage.EventFired_dir.EFR01000ISO_dir.EFR01400Policy_dir
+
+@gw.rules.RuleName("EFR01410 - Policy Changed")
+internal class EFR01410PolicyChanged {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return messageContext.EventName == "PolicyChanged"
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+var policy = messageContext.Root as Policy
+if (policy.Claim != null) {
+  libraries.ISO.checkForClaimChanges(messageContext, policy.Claim)
+}
+/*end00rule*/
+
+  }
+}

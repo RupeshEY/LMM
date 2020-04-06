@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<Entity
+  name="RIAgreementGroup">
+  <Columns>
+    <Column
+      beanPath="RIAgreementGroup.RiskName"
+      name="RiskName"
+      sortOrder="1"/>
+  </Columns>
+  <DisplayName><![CDATA[RiskName.HasContent ? RiskName : gw.api.locale.DisplayKey.get("Web.Claim.Reinsurance.AgreementGroup.OptionLabel.New")]]></DisplayName>
+</Entity>

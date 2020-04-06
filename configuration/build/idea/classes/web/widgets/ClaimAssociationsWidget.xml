@@ -1,0 +1,21 @@
+<WidgetTemplate name="ClaimAssociationsWidget" valueType="ClaimInAssociation[]" cellWidgetName="ClaimAssociationsCell">
+
+  <!--
+    CAUTION: Certain aspects of this widget are hardcoded in the PCF code
+    generator. It must remain a LinkIterator, and the elementName and type
+    cannot change.
+
+    Furthermore, this widget must be used explicitly as <ClaimAssociationsCell>
+    rather than implicitly as <Cell> in order for the code generator to
+    recognize it. Errors of the form "Could not resolve symbol for : claimAssoc"
+    indicate that a <Cell> needs to be replaced with a <ClaimAssociationsCell>
+    somewhere.
+  -->
+
+  <LinkIterator value="#{value}" elementName="claimAssoc" type="ClaimInAssociation">
+    <Link label="claimAssoc.ClaimInfo.ClaimNumber" 
+          action="ClaimInfoForward.go(claimAssoc.ClaimInfo)"/>
+    <Link label="DisplayKey.get('Web.Claim.Associations.Seperator')" visible="claimAssoc != #{value}[#{value}.length - 1]"/>
+  </LinkIterator>
+
+</WidgetTemplate>

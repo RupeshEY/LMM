@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <PanelSet
+    editable="version.Rule.Editable"
+    id="ActivityRulePanelSet">
+    <Require
+      name="version"
+      type="ActivityRuleVersion"/>
+    <Require
+      name="importingVersion"
+      type="boolean"/>
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RulePageController"/>
+    <Variable
+      initialValue="new gw.bizrules.ActivityRulePanelSetHelper(version, CurrentLocation)"
+      name="helper"
+      recalculateOnRefresh="true"
+      type="gw.bizrules.ActivityRulePanelSetHelper"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <InputSetRef
+          def="RuleManagementAuditLinkInputSet(gw.bizrules.ActivityRulesNavigationSupport.Instance.VersionController, importingVersion, version)"/>
+        <TextInput
+          editable="true"
+          id="Name"
+          label="DisplayKey.get('Web.ActivityRules.Rule.Name')"
+          numCols="50"
+          required="true"
+          value="version.Rule.Name">
+          <PostOnChange/>
+        </TextInput>
+        <TextAreaInput
+          editable="true"
+          id="Description"
+          label="DisplayKey.get('Web.ActivityRules.Rule.Description')"
+          numCols="64"
+          numRows="5"
+          value="version.Rule.Description"/>
+        <TypeKeyInput
+          editable="true"
+          id="RuleContextDefinitionKey"
+          label="DisplayKey.get('Web.ActivityRules.Rule.Context')"
+          required="true"
+          value="controller.RuleContextDefinitionKey"
+          valueType="typekey.RuleContextDefinitionKey"
+          valueWidth="375">
+          <PostOnChange
+            onChange="if (!gw.bizrules.BizRulesComponentMapper.getInstance().isSupportedContextForTriggeringPoint(version.Rule.TriggeringPointKey, controller.RuleContextDefinitionKey)) {version.Rule.TriggeringPointKey = null}"
+            target="TriggeringPointKey"/>
+        </TypeKeyInput>
+        <TextInput
+          id="ContextDescription"
+          value="controller.RuleContextDefinitionKeyDescription"/>
+        <TypeKeyInput
+          editable="true"
+          filter="gw.bizrules.BizRulesComponentMapper.getInstance().isSupportedContextForTriggeringPoint(VALUE, controller.RuleContextDefinitionKey)"
+          id="TriggeringPointKey"
+          label="DisplayKey.get('Web.ActivityRules.Rule.Trigger')"
+          required="true"
+          value="version.Rule.TriggeringPointKey"
+          valueType="typekey.TriggeringPointKey"
+          valueWidth="375">
+          <PostOnChange/>
+        </TypeKeyInput>
+        <InputSetRef
+          def="AvailableToRunInputSet(version)"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <PanelRef
+      id="ApplicabilityCriteria">
+      <TitleBar
+        title="DisplayKey.get('Web.ActivityRules.Rule.ApplicabilityCriteria')"/>
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSetRef
+            def="ApplicabilityCriteriaInputSet(helper.LossTypesBundle)"
+            id="LossTypes"/>
+          <InputSetRef
+            def="ApplicabilityCriteriaInputSet(helper.PolicyTypesBundle)"
+            id="PolicyTypes"/>
+          <InputSetRef
+            def="ApplicabilityCriteriaInputSet(helper.JurisdictionsBundle)"
+            id="Jurisdictions"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </PanelRef>
+    <PanelRef
+      def="ConditionBuilderPanelSet(controller.ConditionBuilderController)">
+      <TitleBar
+        id="RuleConditionTitle"
+        title="DisplayKey.get('Web.ActivityRules.Rule.Condition.Title')"/>
+    </PanelRef>
+    <PanelRef
+      def="RuleCommandDefinitionsListDetailView(controller)">
+      <TitleBar
+        title="DisplayKey.get('Web.ActivityRules.Rule.Action.Title')"/>
+    </PanelRef>
+    <PanelDivider/>
+    <!--
+      This widget adds whitespace in order to minimize the effect of the "jumping" cause by autocomplete
+      It is not used for input
+      -->
+    <DetailViewPanel>
+      <InputColumn>
+        <TextAreaInput
+          id="Empty1"
+          label="&quot; &quot;"
+          numRows="6"
+          value="&quot; &quot;"/>
+      </InputColumn>
+    </DetailViewPanel>
+  </PanelSet>
+</PCF>

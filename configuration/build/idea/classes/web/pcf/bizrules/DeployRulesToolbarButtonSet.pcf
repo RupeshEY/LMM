@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    id="DeployRulesToolbarButtonSet">
+    <ReferencedIterator
+      flags="AlwaysTrue"
+      valueType="RuleVersion"
+      widget="Rules"/>
+    <Require
+      name="navigationSupport"
+      type="gw.bizrules.pcf.BizRulesPageNavigationSupport"/>
+    <Require
+      name="iteratorId"
+      type="String"/>
+    <Require
+      name="visibleRulesQuery"
+      type="gw.api.database.Query&lt;RuleVersion&gt;"/>
+    <Variable
+      initialValue="gw.bizrules.pcf.IteratorCheckedValuesAccessor.create(CurrentLocation, iteratorId, RuleVersion)"
+      name="checkedValuesAccessor"
+      type="gw.bizrules.pcf.IteratorCheckedValuesAccessor&lt;RuleVersion&gt;"/>
+    <ToolbarButton
+      available="gw.bizrules.pcf.RulePermissionUIHelper.canDeployRule(null)"
+      id="DeployButton"
+      label="DisplayKey.get('BizRules.RulesPage.DeployButton')"
+      tooltip="gw.bizrules.pcf.RulePermissionUIHelper.checkAndGetDeployPermissionMsg(null)">
+      <MenuItem
+        action="gw.bizrules.pcf.RuleDeploymentPageHelper.deployFromList(navigationSupport, checkedValuesAccessor.CheckedValues)"
+        available="gw.bizrules.pcf.RulePermissionUIHelper.canDeployRule(null)"
+        id="DeploySelected"
+        label="DisplayKey.get(&quot;BizRules.RulesPage.DeployMenuItemSet.DeploySelected&quot;)"
+        visible="true"/>
+      <MenuItem
+        action="gw.bizrules.pcf.RuleDeploymentPageHelper.deployFromQuery(navigationSupport, visibleRulesQuery)"
+        available="gw.bizrules.pcf.RulePermissionUIHelper.canDeployRule(null)"
+        id="DeployAll"
+        label="DisplayKey.get(&quot;BizRules.RulesPage.DeployMenuItemSet.DeployAll&quot;)"
+        visible="true"/>
+    </ToolbarButton>
+  </ToolbarButtonSet>
+</PCF>

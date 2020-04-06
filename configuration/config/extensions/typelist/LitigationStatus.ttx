@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="LitigationStatus">
+  <!-- These are here for backward support (2.1.x and before) -->
+  <typecode
+    code="rep"
+    desc="Claimant represented by lawyer"
+    name="Claimant represented by lawyer"
+    priority="1"
+    retired="true"/>
+  <typecode
+    code="suit_filed"
+    desc="Suit filed"
+    name="Suit filed"
+    priority="2"
+    retired="true"/>
+  <typecode
+    code="judge"
+    desc="Venue set, judge selected"
+    name="Venue set, judge selected"
+    priority="3"
+    retired="true"/>
+  <typecode
+    code="discovery"
+    desc="Discovery complete"
+    name="Discovery complete"
+    priority="4"
+    retired="true"/>
+  <typecode
+    code="trial_begun"
+    desc="Trial begun"
+    name="Trial begun"
+    priority="5"
+    retired="true"/>
+  <typecode
+    code="trial_complete"
+    desc="Trial complete"
+    name="Trial complete"
+    priority="6"
+    retired="true"/>
+  <typecode
+    code="verdict_returned"
+    desc="Verdict returned"
+    name="Verdict returned"
+    priority="7"
+    retired="true"/>
+  <typecode
+    code="pending_appeal"
+    desc="Pending appeal"
+    name="Pending appeal"
+    priority="8"
+    retired="true"/>
+  <typecode
+    code="in_appeal"
+    desc="In appeal"
+    name="In appeal"
+    priority="9"
+    retired="true"/>
+  <typecode
+    code="closed"
+    desc="Closed"
+    name="Closed"
+    priority="10"
+    retired="true"/>
+</typelistextension>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="UserAssignmentCalendarPopup"
+    title="DisplayKey.get(&quot;Web.Calendar&quot;)">
+    <LocationEntryPoint
+      signature="UserAssignmentCalendarPopup(User : User)"/>
+    <Variable
+      name="User"
+      type="User"/>
+    <ScreenRef
+      def="UserAssignmentCalendarScreen(User)"/>
+  </Popup>
+</PCF>

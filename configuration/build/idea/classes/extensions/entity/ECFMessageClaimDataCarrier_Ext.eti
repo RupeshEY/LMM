@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<entity
+  desc="ECF Message Claim Data Carrier"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageClaimDataCarrier_Ext"
+  table="ecfmsgcnotifrqcarrier_ext"
+  exportable="true"
+  final="true"
+  type="retireable">
+  <implementsEntity name="Extractable"/>
+  <column
+    desc="Coded identification of a reinsurer/insurer on the claim"
+    name="Market"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Name of the insurer/reinsurer in text format"
+    name="Name"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The phone number of the person to contact at the insurer/reinsurer organisation"
+    name="Phone"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The email address of the insurer/reinsurer contact person"
+    name="Email"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The name of the person to contact at the insurer/reinsurer organisation"
+    name="Contact"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The insurer share percentage"
+    name="Share"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="precision"
+      value="10"/>
+    <columnParam
+      name="scale"
+      value="7"/>
+  </column>
+  <column
+    name="Reference1"
+    desc="The insurer or reinsurer claim reference number 1"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="Reference2"
+    desc="The insurer or reinsurer claim reference number 2"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    typelist="ECFParticipantFunction_Ext"
+    desc="The insurer or reinsurer participant function"
+    name="Role"
+    nullok="true"/>
+  <column
+    desc="The Managing Agent Number"
+    name="Code"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The consortium number"
+    name="Consortium"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Claim Line Number - in CLASS (needed for non-uniqueness of Company/Syndicate participation)"
+    name="ClaimLineNumber"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="precision"
+      value="20"/>
+    <columnParam
+      name="scale"
+      value="0"/>
+  </column>
+  <array
+    arrayentity="ECFMarketFinancialAmount_Ext"
+    desc="ECF ClaimNotify Request Message MarketFinancialAmounts"
+    name="MarketFinancialAmounts"/>
+  <foreignkey
+    fkentity="ECFMessageClaimData_Ext"
+    name="ECFMsg"
+    nullok="false"/>
+</entity>

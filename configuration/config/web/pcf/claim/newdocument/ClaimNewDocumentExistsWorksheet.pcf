@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Worksheet
+    beforeCommit="DocumentCreationInfo.Document.documentExistenceBeforeCommit()"
+    canEdit="true"
+    canVisit="true"
+    id="ClaimNewDocumentExistsWorksheet"
+    startInEditMode="true"
+    tabLabel="DisplayKey.get(&quot;Java.PageAction.NewDocument&quot;)"
+    title="DisplayKey.get(&quot;Java.PageAction.NewDocument&quot;)">
+    <LocationEntryPoint
+      signature="ClaimNewDocumentExistsWorksheet(Claim : Claim)"/>
+    <Scope
+      location="*"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="gw.document.DocumentsUtil.createDocumentCreationInfo(Claim)"
+      name="DocumentCreationInfo"
+      type="gw.document.DocumentCreationInfo"/>
+    <ScreenRef
+      def="NewDocumentExistsScreen(DocumentCreationInfo, Claim)"/>
+  </Worksheet>
+</PCF>

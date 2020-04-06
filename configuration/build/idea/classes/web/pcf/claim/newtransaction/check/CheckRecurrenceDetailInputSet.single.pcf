@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    editable="check.New"
+    id="CheckRecurrenceDetailInputSet"
+    mode="single">
+    <Require
+      name="check"
+      type="Check"/>
+    <Require
+      name="checkRecurrence"
+      type="gw.financials.CheckRecurrenceUIHelper"/>
+    <DateInput
+      editable="true"
+      id="ScheduledSendDate"
+      label="DisplayKey.get(&quot;Wizard.NewCheckWizard.CheckInstructions.Recurrence.Single.PaymentDate&quot;)"
+      required="true"
+      validationExpression="check.New and check.ScheduledSendDate.before(java.util.Date.Today) ? DisplayKey.get(&quot;Java.Validation.Date.ForbidPast&quot;) : null"
+      value="check.ScheduledSendDate"/>
+  </InputSet>
+</PCF>

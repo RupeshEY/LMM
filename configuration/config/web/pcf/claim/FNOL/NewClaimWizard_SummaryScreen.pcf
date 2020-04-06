@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="NewClaimWizard_SummaryScreen">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Toolbar>
+      <WizardButtons/>
+    </Toolbar>
+    <PanelRef
+      def="ClaimSummaryDV(Claim)"/>
+    <PanelRow>
+      <PanelColumn>
+        <PanelRef
+          def="NewClaimSummaryExposuresLV(Claim, Wizard, Claim.Exposures)">
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.NewClaimWizard.Summary.ExposuresLV.Title&quot;)"/>
+          <Toolbar/>
+        </PanelRef>
+      </PanelColumn>
+    </PanelRow>
+    <PanelRow>
+      <PanelColumn
+        width="60%">
+        <PanelRef
+          def="NewClaimSummaryPeopleInvolvedLV(Claim, Wizard, Claim.Contacts)">
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.NewClaimWizard.Summary.PartiesInvolvedLV.Title&quot;)"/>
+          <Toolbar/>
+        </PanelRef>
+      </PanelColumn>
+      <PanelColumn
+        width="40%">
+        <PanelRef
+          def="NotesLV(Claim.ViewableNotes)">
+          <TitleBar
+            title="DisplayKey.get(&quot;Web.NewClaimWizard.Summary.NotesLV.Title&quot;)"/>
+          <Toolbar/>
+        </PanelRef>
+      </PanelColumn>
+    </PanelRow>
+  </Screen>
+</PCF>

@@ -1,0 +1,13 @@
+package rules.ApprovalRouting
+
+@gw.rules.RuleName("Approval Rules")
+@gw.rules.RuleSetDescription("This is the TransactionSet Approval Assignment rule set.    These rules are run for each TransactionSet to determine to whom it should be assigned for approval.")
+class ApprovalRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.TransactionSet) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.TransactionSet) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Approval Rules", ApprovalRules )
+  }
+}

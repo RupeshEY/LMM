@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<!-- DEPRECATED: Use MedicalTreatmentType instead. -->
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="WCMedicalTreatmentType">
+  <typecode
+    code="hospital"
+    desc="Hospitalized"
+    name="Hospitalized"
+    priority="5"/>
+  <typecode
+    code="major_surgery"
+    desc="Major surgery"
+    name="Major surgery"
+    priority="7"/>
+  <typecode
+    code="minor_surgery"
+    desc="Minor surgery"
+    name="Minor surgery"
+    priority="6"/>
+  <typecode
+    code="mult_doctors"
+    desc="Multiple doctors"
+    name="Multiple doctors"
+    priority="3"/>
+  <typecode
+    code="mult_treatments"
+    desc="Multiple treatments"
+    name="Multiple treatments"
+    priority="8"/>
+  <typecode
+    code="none"
+    desc="No treatment"
+    name="No treatment"
+    priority="1"/>
+  <typecode
+    code="one_doctor"
+    desc="Only one doctor"
+    name="Only one doctor"
+    priority="2"/>
+  <typecode
+    code="rehab"
+    desc="Rehab"
+    name="Rehab"
+    priority="4"/>
+</typelistextension>

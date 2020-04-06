@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Metrics related to a exposure"
+  entity="ExposureMetric"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="exposuremetric"
+  type="editable">
+  <implementsInterface
+    iface="gw.cc.exposure.metric.entity.ExposureMetric"
+    impl="com.guidewire.cc.domain.exposure.metric.impl.ExposureMetricImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsInterface
+    iface="gw.api.metric.MetricMethods"
+    impl="gw.api.exposure.metric.ExposureMetricMethodsImpl"/>
+  <implementsEntity
+    name="MetricLimitTimeDelegate"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="Exposure to which this metric is related."
+    exportable="false"
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="false"/>
+  <foreignkey
+    columnName="MetricLimitDenormID"
+    desc="The metric limit for the exposure metric, denormalized from the claim's inital exposure metric limits array."
+    exportable="false"
+    fkentity="ExposureMetricLimit"
+    name="MetricLimitDenorm"
+    nullok="true"/>
+</entity>

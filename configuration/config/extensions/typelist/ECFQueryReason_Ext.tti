@@ -1,0 +1,14 @@
+<?xml version="1.0"?><typelist xmlns="http://guidewire.com/typelists" desc="ECFQueryReason_Ext typelist" final="false" name="ECFQueryReason_Ext">
+    <typecode code="1" desc="When any policy-related document has not been loaded, or cannot be read. This would include endorsements." name="Missing/Unreadable policy or contract documents"/>
+    <typecode code="2" desc="When any claim-related document has not been loaded, or cannot be read." name="Missing/Unreadable claim related documents"/>
+    <typecode code="3" desc="When any policy data (i.e. data held within the ECF record, not the documentation) is missing – including the Original Signing Number and Date" name="Missing policy data/unsigned premium"/>
+    <typecode code="4" desc="When any broker-loaded claim details are incorrect" name="Incorrect broker loaded claim details"/>
+    <typecode code="5" desc="When the claim has been defined out scope according to the current version of the SP_P" name="Claim out of scope for ECF"/>
+    <typecode code="6" desc="When there is an issue with the financial figures reconciling with those within documentation that cannot be resolved by a request for further information on the next submission" name="Inconsistent financials"/>
+    <typecode code="7" desc="Where the Lead has been incorrectly identified by the broker, or a further agreement party has been incorrectly identified by the Lead" name="Incorrect agreement parties noted"/>
+    <typecode code="8" desc="To be used by XCS only where there is insufficient or missing information to process the transaction" name="Inadequate/incorrect data for XCS processing"/>
+    <typecode code="9" desc="To be used for Settlement transactions only where the agreement party cannot authorise the payment – may be used in conjunction with any other Query Reason" name="Query raised with settlement"/>
+    <typecode code="10" desc="Primarily for CTP claims, where a market meeting has been called of which the outcome will determine the response of the transaction" name="Pending market discussion"/>
+    <typecode code="11" desc="Where the broker has created the transaction in error (e.g. where there is a duplicate ECF UCR, or previously advised on paper)" name="Duplicate advice/claims created in error"/>
+    <typecode code="12" desc="For all other queries" name="Other: Non-fundamental query"/>
+</typelist>

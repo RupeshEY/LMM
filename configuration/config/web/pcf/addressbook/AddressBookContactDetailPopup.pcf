@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="externalContact.Source.supportsUpdate() and perm.Contact.editab(externalContact.Contact) and allowEdit"
+    canVisit="return perm.Contact.viewab(externalContact.Contact)"
+    id="AddressBookContactDetailPopup"
+    returnType="Contact"
+    title="DisplayKey.get(&quot;Web.ContactDetail.Title&quot;, externalContact.Contact)">
+    <LocationEntryPoint
+      signature="AddressBookContactDetailPopup(externalContact : gw.api.contact.ExternalContact)"/>
+    <LocationEntryPoint
+      signature="AddressBookContactDetailPopup(externalContact : gw.api.contact.ExternalContact, allowEdit : boolean)"/>
+    <Variable
+      initialValue="new gw.api.contact.ProximitySearchPageHelper()"
+      name="PageHelper"
+      type="gw.api.contact.ProximitySearchPageHelper"/>
+    <Variable
+      name="externalContact"
+      type="gw.api.contact.ExternalContact"/>
+    <Variable
+      initialValue="externalContact.Source.loadContact(externalContact.Contact, false)"
+      name="contact"
+      type="Contact"/>
+    <Variable
+      initialValue="true"
+      name="allowEdit"
+      type="boolean"/>
+    <ScreenRef
+      def="AddressBookContactDetailScreen(new gw.pcf.AddressBookContactHelper(contact, externalContact.Source, externalContact, allowEdit))"
+      mode="contact == null ? &quot;error&quot; : null"/>
+  </Popup>
+</PCF>

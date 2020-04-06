@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListDetailPanel
+    id="PolicyLocationLDV"
+    selectionName="PolicyLocation"
+    selectionType="PolicyLocation">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <ExposeIterator
+      flags="hasRU,checked"
+      name="PolicyLocationIterator"
+      valueType="entity.PolicyLocation"
+      widget="PolicyLocationsLV.PolicyLocationIterator"/>
+    <PanelRef
+      def="PolicyLocationsLV(Claim.Policy.PolicyLocations, Claim)"
+      editable="false"
+      mode="Claim.LossType"/>
+    <CardViewPanel
+      hideTabIfSingle="true">
+      <Card
+        id="LocationDetailCard"
+        title="&quot;&quot;">
+        <PanelRef
+          def="PolicyLocationRiskDetailPanelSet(PolicyLocation, Claim.Policy)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+    </CardViewPanel>
+  </ListDetailPanel>
+</PCF>

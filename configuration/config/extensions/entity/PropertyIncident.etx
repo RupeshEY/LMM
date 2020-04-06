@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="PropertyIncident">
+  <!-- BEGIN Commercial Property Attributes -->
+  <typekey
+    desc="Total estimate of damage for the event, if known, at the time that the loss was reported. "
+    name="EstDamageType"
+    nullok="true"
+    typelist="EstDamageType">
+    <keyfilters>
+      <keyfilter
+        name="Claim.Currency"/>
+    </keyfilters>
+  </typekey>
+  <column
+    desc="extent of damage to property text"
+    name="ExtDamagetxt"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="289"/>
+  </column>
+  <array
+    arrayentity="TypeofProperty"
+    exportable="true"
+    name="TypeofProperty"
+    triggersValidation="true"/>
+  <column
+    desc="Other Description"
+    name="DescOther"
+    nullok="true"
+    type="shorttext"/>
+  <!-- END Commercial Property Attributes -->
+  <column
+    desc="Estimated Repair Cost"
+    name="EstRepairCost"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Estimated Repair Time"
+    name="EstRepairTime"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Has the item been repaired already?"
+    name="AlreadyRepaired"
+    nullok="true"
+    type="bit"/>
+  <column
+    deprecated="true"
+    desc="Is an inspection required? Deprecated: No longer used in the base configuration.  The equivalent of a true value for this field in 8.0 is the presence of a ServiceRequest with the 'Property - Inspection - Appraisal' service."
+    name="InspectionRequired"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Description of property"
+    name="PropertyDesc"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="255"/>
+  </column>
+  <column
+    deprecated="true"
+    desc="Possible dates when the damage may be viewed.  Deprecated: No longer used in the base configuration.  The equivalent of this field in 8.0 is the RequestedQuoteCompletionDate of a ServiceRequest with the 'Property - Inspection - Appraisal' service."
+    name="WhenToView"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    deprecated="true"
+    desc="Scheduled time for the Appraisal from First Notice.  Deprecated: No longer used in the base configuration.  The equivalent of this field in 8.0 is the RequestedQuoteCompletionDate of a ServiceRequest with the 'Property - Inspection - Appraisal' service."
+    name="AppraisalFirstAppointment"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Whether there has been loss of use"
+    name="LossofUse"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Number of days of meals"
+    name="MealsDays"
+    nullok="true"
+    type="nonnegativeinteger"/>
+  <column
+    desc="Number of people requiring meals"
+    name="MealsPeople"
+    nullok="true"
+    type="nonnegativeinteger"/>
+  <column
+    desc="Daily rate of meals"
+    name="MealsRate"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <typekey
+    desc="Have the repair estimates been received"
+    name="EstimatesReceived"
+    nullok="true"
+    typelist="YesNo"/>
+</extension>

@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="ClaimSnapshotExposuresScreen"
+    mode="default">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="SnapshotParam"
+      type="dynamic.Dynamic"/>
+    <Toolbar/>
+    <ListDetailPanel
+      selectionName="SelectedExposure"
+      selectionType="dynamic.Dynamic">
+      <ListViewPanel
+        id="ClaimSnapshotExposuresLV">
+        <RowIterator
+          editable="false"
+          elementName="Exposure"
+          value="SnapshotParam.Exposures"
+          valueType="dynamic.Dynamic">
+          <Row>
+            <TextCell
+              id="Number"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotExposuresScreen.Number&quot;)"
+              sortOrder="1"
+              value="Exposure.ClaimOrder"
+              valueType="dynamic.Dynamic"/>
+            <TextCell
+              id="Type"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotExposuresScreen.Type&quot;)"
+              value="Exposure.ExposureType"
+              valueType="dynamic.Dynamic"/>
+            <TextCell
+              id="Coverage"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotExposuresScreen.Coverage&quot;)"
+              value="Exposure.PrimaryCoverage"
+              valueType="dynamic.Dynamic"/>
+            <TextCell
+              id="Claimant"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotExposuresScreen.Claimant&quot;)"
+              value="util.Snapshot.renderValue(Exposure.Claimant)"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+      <!-- <Cell
+        id="Reserves"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposuresScreen.Reserves&quot;)"
+        value="Exposure.ExposureRpt.RemainingReserves"/>  <Cell
+        id="FuturePayments"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposuresScreen.FuturePayments&quot;)"
+        value="Exposure.ExposureRpt.FuturePayments"/>  <Cell
+        id="TotalPayments"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposuresScreen.TotalPayments&quot;)"
+        value="Exposure.ExposureRpt.TotalPayments"/> -->
+      <CardViewPanel>
+        <Card
+          id="ClaimSnapshotExposuresCard"
+          title="DisplayKey.get(&quot;Web.ClaimSnapshotExposureDV.CardName&quot;)">
+          <PanelRef
+            def="ClaimSnapshotExposureDV(Claim, SelectedExposure)"
+            mode="SelectedExposure.ExposureType.Code"/>
+        </Card>
+        <Card
+          id="WageBenefits"
+          title="DisplayKey.get(&quot;Web.ClaimSnapshotExposure.WageBenefits.CardName&quot;)"
+          visible="SelectedExposure.ExposureType.Code == &quot;PIPDamages&quot;">
+          <PanelRef
+            def="ClaimSnapshotExposureWageBenefitsDV(SelectedExposure)"/>
+        </Card>
+        <Card
+          id="ReplacementServices"
+          title="DisplayKey.get(&quot;Web.ClaimSnapshotExposure.ReplacementServices.CardName&quot;)"
+          visible="SelectedExposure.ExposureType.Code == &quot;PIPDamages&quot;">
+          <PanelRef
+            def="ClaimSnapshotExposureReplacementServicesDV(SelectedExposure)"
+            mode="ClaimSnapshotExposureDV"/>
+        </Card>
+        <Card
+          id="VocationalBenefits"
+          title="DisplayKey.get(&quot;Web.ClaimSnapshotExposure.VocationalBenefits.CardName&quot;)"
+          visible="SelectedExposure.ExposureType.Code == &quot;PIPDamages&quot;">
+          <PanelRef
+            def="ClaimSnapshotExposuresVocationalBenefitsDV(SelectedExposure)"/>
+        </Card>
+        <Card
+          id="DeathBenefits"
+          title="DisplayKey.get(&quot;Web.ClaimSnapshotExposure.DeathBenefits.CardName&quot;)"
+          visible="SelectedExposure.ExposureType.Code == &quot;PIPDamages&quot;">
+          <PanelRef
+            def="ClaimSnapshotExposureDeathBenefitsDV(SelectedExposure)"/>
+        </Card>
+      </CardViewPanel>
+    </ListDetailPanel>
+  </Screen>
+</PCF>

@@ -1,0 +1,38 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+uses gw.api.locale.DisplayKey
+
+/**
+ * Whenever a subrogation's status is changed to CLOSED, set its Close Date and create a history event.
+ */
+@gw.rules.RuleName("CPU12000 - Subro Status - Close")
+internal class CPU12000SubroStatusClose {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.SubrogationSummary != null
+
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+for (var subrogation in claim.SubrogationSummary.Subrogations) {
+  if (subrogation.isFieldChanged(Subrogation#Status) and subrogation.Status == TC_CLOSED) {
+    subrogation.CloseDate = gw.api.util.DateUtil.currentDate()
+    if(subrogation.Exposure != null) {
+      claim.createSubrogationHistoryEvent(HistoryType.TC_CLOSED, subrogation,
+          DisplayKey.get("Web.Subrogation.History.Closed.Exposure", subrogation, subrogation.Outcome))
+      }
+      else {
+        claim.createSubrogationHistoryEvent(HistoryType.TC_CLOSED, subrogation,
+            DisplayKey.get("Web.Subrogation.History.Closed.Claim", subrogation.Outcome))
+      }
+  }
+}
+/*end00rule*/
+
+  }
+}

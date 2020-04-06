@@ -1,0 +1,170 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Employment information for an exposure on a workers' comp claim."
+  entity="EmploymentData"
+  exportable="true"
+  table="employmentdata"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.EmploymentData"
+    impl="com.guidewire.cc.domain.exposure.impl.EmploymentDataImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Text description of the days the employee normally works. For example, Monday-Friday or MWF."
+    name="DaysWorkedWeek"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Code of department in which employee was working."
+    name="DepartmentCode"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Employee's date of hire."
+    name="HireDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Start time on day of injury."
+    name="InjuryStartTime"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date employee last worked."
+    name="LastWorkedDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Income in the last calendar year."
+    name="LastYearIncome"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Number of hours worked per day."
+    name="NumHoursWorked"
+    nullok="true"
+    type="hoursworkedday"/>
+  <column
+    desc="Number of days worked per week."
+    name="NumDaysWorked"
+    nullok="true"
+    type="daysworkedweek"/>
+  <column
+    desc="Description of the employee's job."
+    name="Occupation"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Overtime wage rate."
+    name="OvertimeRate"
+    nullok="true"
+    type="positivecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Whether the employee was paid full wages for the day of injury or last day worked."
+    name="PaidFull"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Whether Social Security benefits apply."
+    name="SSBenefits"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Amount of Social Security benefits."
+    name="SSBenefitsAmnt"
+    nullok="true"
+    type="positivecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Whether second injury fund benefits apply."
+    name="ScndInjryFnd"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Amount of second injury fund benefits."
+    name="ScndInjryFndAmnt"
+    nullok="true"
+    type="positivecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Date of initial notice to second injury fund."
+    name="ScndInjryFndDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Amount of wages per pay period pre-injury."
+    name="WageAmount"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Amount of wages per pay period post-injury."
+    name="WageAmountPostInjury"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Whether claimant's salary was continued."
+    name="WagePaymentCont"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    desc="Status of employment."
+    name="EmploymentStatus"
+    nullok="true"
+    typelist="EmploymentStatusType"/>
+  <typekey
+    desc="State in which the employee was hired."
+    name="HireState"
+    nullok="true"
+    typelist="State"/>
+  <typekey
+    desc="Pay period of employee."
+    name="PayPeriod"
+    nullok="true"
+    typelist="PayPeriodType"/>
+  <foreignkey
+    columnName="ClassCodeID"
+    desc="Classification of employee, based on state codes or NCCI codes."
+    fkentity="ClassCode"
+    name="ClassCode"
+    nullok="true"
+    triggersValidation="true"/>
+  <array
+    arrayentity="WorkStatus"
+    desc="Periods of time employee returned to work."
+    name="WorkStatusChanges"
+    triggersValidation="true"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The Claim that owns this EmploymentData"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+</entity>

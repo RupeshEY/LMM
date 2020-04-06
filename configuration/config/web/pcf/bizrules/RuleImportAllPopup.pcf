@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canVisit="gw.bizrules.pcf.RulePermissionUIHelper.canImportRule()"
+    id="RuleImportAllPopup"
+    title="DisplayKey.get('BizRules.RuleImportAllPopup.Title')">
+    <LocationEntryPoint
+      signature="RuleImportAllPopup(pageHelper: gw.bizrules.pcf.RuleExportImportPageHelper, importTask: RuleImportTask)"/>
+    <Variable
+      name="pageHelper"
+      type="gw.bizrules.pcf.RuleExportImportPageHelper"/>
+    <Variable
+      name="importTask"
+      type="RuleImportTask"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="pageHelper.importAllRemainingRules(importTask); CurrentLocation.cancel()"
+          id="ImportButton"
+          label="DisplayKey.get('BizRules.Import')"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="CancelButton"
+          label="DisplayKey.get('Button.Cancel')"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            id="Description"
+            labelAbove="true"
+            value="DisplayKey.get('BizRules.RuleImportAllPopup.Description')"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

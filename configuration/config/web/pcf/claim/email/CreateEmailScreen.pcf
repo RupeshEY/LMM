@@ -1,0 +1,444 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    editable="true"
+    id="CreateEmailScreen">
+    <Require
+      name="activity"
+      type="Activity"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="emailTemplate"
+      type="String"/>
+    <Require
+      name="documentsToSend"
+      type="Document[]"/>
+    <Variable
+      initialValue="null"
+      name="documentToSave"
+      type="Document"/>
+    <Variable
+      initialValue="emailTemplate == null"
+      name="noDefaultTemplate"
+      type="Boolean"/>
+    <Variable
+      initialValue="gw.api.contact.AddressBookUtil.newAddressBookContactSource()"
+      name="externalContactSource"
+      type="gw.api.contact.ExternalContactSource"/>
+    <Variable
+      initialValue="new gw.api.contact.ContactEmailAutocompleteHandler(claim.Contacts.map(\contact -&gt; contact.Contact))"
+      name="autoCompleteHandler"
+      type="gw.api.contact.ContactEmailAutocompleteHandler"/>
+    <Variable
+      initialValue="perm.Claim.createdocument(claim)"
+      name="saveAsDocument"
+      type="boolean"/>
+    <Variable
+      initialValue="false"
+      name="showCC"
+      type="boolean"/>
+    <Variable
+      initialValue="false"
+      name="showBCC"
+      type="boolean"/>
+    <Variable
+      initialValue="claim.Insured.PrimaryLanguage == null ? gw.api.util.LocaleUtil.getDefaultLanguageType() : claim.Insured.PrimaryLanguage"
+      name="language"
+      type="LanguageType"/>
+    <Variable
+      name="templateEvalError"
+      type="boolean"/>
+    <Variable
+      initialValue="initNewEmail()"
+      name="NewEmail"
+      type="gw.api.email.Email"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentActionsUIHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <Toolbar>
+      <ToolbarButton
+        action="sendEmailToRecipients(NewEmail)"
+        available="not templateEvalError"
+        id="ToolbarButton0"
+        label="DisplayKey.get(&quot;Web.Email.SendEmail&quot;)"
+        visible="true"/>
+      <ToolbarButton
+        action="CurrentLocation.cancel()"
+        available="true"
+        id="ToolbarButton1"
+        label="DisplayKey.get(&quot;Web.Email.Cancel&quot;)"
+        visible="true"/>
+      <ToolbarDivider/>
+      <PickerToolbarButton
+        action="PickEmailTemplatePopup.push(new gw.api.email.EmailTemplateSearchCriteria(activity != null ? {&quot;Claim&quot;, &quot;Activity&quot;} :{&quot;Claim&quot;}))"
+        id="EmailWorksheet_UseTemplateButton"
+        label="DisplayKey.get(&quot;Web.Email.UseTemplate&quot;)"
+        onPick="resolveTemplate(PickedValue, { &quot;Activity&quot; -&gt; activity, &quot;Claim&quot; -&gt; claim}); language = gw.api.util.LocaleUtil.toLanguageType(PickedValue.Locale);"
+        shortcut="P"
+        visible="noDefaultTemplate"/>
+    </Toolbar>
+    <AlertBar
+      id="NoDefaultTemplate"
+      label="DisplayKey.get(&quot;Web.Email.Template.NotFound&quot;, emailTemplate)"
+      showConfirmMessage="false"
+      visible="emailTemplate != null and noDefaultTemplate"/>
+    <AlertBar
+      id="templateEvalErro"
+      label="DisplayKey.get(&quot;Web.Email.Template.Unusable&quot;, emailTemplate)"
+      showConfirmMessage="false"
+      visible="templateEvalError"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <TypeKeyInput
+          editable="true"
+          id="Language"
+          label="DisplayKey.get(&quot;Web.EmailTemplateSearch.Language&quot;)"
+          required="true"
+          value="language"
+          valueType="typekey.LanguageType"
+          visible="LanguageType.getTypeKeys( false ).Count &gt;  1 and emailTemplate != null">
+          <PostOnChange
+            onChange="executeTemplate(NewEmail)"/>
+        </TypeKeyInput>
+        <ListViewInput
+          editable="true"
+          id="ToRecipientLVInput"
+          label="DisplayKey.get(&quot;Web.Email.ToRecipients&quot;)"
+          labelAbove="true"
+          visible="true">
+          <Toolbar
+            visible="true">
+            <IteratorButtons
+              addVisible="true"
+              iterator="ToRecipientLV"
+              removeVisible="true"/>
+            <ToolbarDivider/>
+          </Toolbar>
+          <ListViewPanel
+            editable="true"
+            id="ToRecipientLV"
+            visible="true">
+            <RowIterator
+              autoAdd="true"
+              editable="true"
+              elementName="ToRecipient"
+              numEntriesRequired="1"
+              numEntriesToAdd="1"
+              toCreateAndAdd="var newEmailContact = new gw.api.email.EmailContact(); NewEmail.addToRecipient(newEmailContact); return newEmailContact;"
+              toRemove="NewEmail.removeToRecipient( ToRecipient )"
+              validationLabel="DisplayKey.get(&quot;Web.Email.ToRecipients&quot;)"
+              value="NewEmail.ToRecipients?.toTypedArray()"
+              valueType="gw.api.email.EmailContact[]">
+              <Row
+                editable="true">
+                <LinkCell
+                  id="ABPickerCell"
+                  label="DisplayKey.get(&quot;Web.Email.Search&quot;)"
+                  tooltip="DisplayKey.get(&quot;Web.Email.SearchIconTooltip&quot;)">
+                  <PickerLink
+                    action="AddressBookPickerPopup.push(Contact, true, claim)"
+                    icon="&quot;menu_claim_search.png&quot;"
+                    id="ABPickerLink"
+                    onPick="ToRecipient.Contact = PickedValue"/>
+                </LinkCell>
+                <TextCell
+                  autoComplete="autoCompleteHandler"
+                  editable="true"
+                  id="ToName"
+                  label="DisplayKey.get(&quot;Web.Email.Name&quot;)"
+                  numCols="15"
+                  value="ToRecipient.Name">
+                  <PostOnChange
+                    onChange="var emailForName = autoCompleteHandler.getEmailForName(ToRecipient.Name); if (emailForName != null) { ToRecipient.EmailAddress = emailForName }"
+                    target="DATA_ONLY"/>
+                </TextCell>
+                <TextCell
+                  editable="true"
+                  id="ToEmail"
+                  label="DisplayKey.get(&quot;Web.Email.EmailAddress&quot;)"
+                  numCols="15"
+                  requestValidationExpression="VALUE == null ? DisplayKey.get(&quot;Web.Email.Error.AddressForToRecipientRequried&quot;) : null"
+                  required="true"
+                  value="ToRecipient.EmailAddress"/>
+              </Row>
+            </RowIterator>
+          </ListViewPanel>
+        </ListViewInput>
+        <ButtonInput
+          action="showCC = true"
+          id="ShowCCRecipients"
+          labelAbove="true"
+          value="DisplayKey.get(&quot;Web.Email.AddCCRecipients&quot;)"
+          visible="!showCC"/>
+        <ListViewInput
+          editable="true"
+          id="CcRecipientLVInput"
+          label="DisplayKey.get(&quot;Web.Email.CCRecipients&quot;)"
+          labelAbove="true"
+          visible="showCC">
+          <Toolbar
+            visible="true">
+            <IteratorButtons
+              addVisible="true"
+              iterator="CcRecipientLV"
+              removeVisible="true"/>
+          </Toolbar>
+          <ListViewPanel
+            editable="true"
+            id="CcRecipientLV"
+            visible="true">
+            <RowIterator
+              editable="true"
+              elementName="CcRecipient"
+              toCreateAndAdd="var newEmailContact = new gw.api.email.EmailContact(); NewEmail.addCcRecipient(newEmailContact); return newEmailContact;"
+              toRemove="NewEmail.removeCcRecipient( CcRecipient )"
+              value="NewEmail.CcRecipients?.toTypedArray()"
+              valueType="gw.api.email.EmailContact[]">
+              <Row
+                editable="true">
+                <LinkCell
+                  id="ABPickerCell"
+                  label="DisplayKey.get(&quot;Web.Email.Search&quot;)"
+                  tooltip="DisplayKey.get(&quot;Web.Email.SearchIconTooltip&quot;)">
+                  <PickerLink
+                    action="AddressBookPickerPopup.push(Contact, true, claim)"
+                    icon="&quot;search.png&quot;"
+                    id="ABPickerLink"
+                    onPick="CcRecipient.Contact = PickedValue"/>
+                </LinkCell>
+                <TextCell
+                  autoComplete="autoCompleteHandler"
+                  editable="true"
+                  id="CcName"
+                  label="DisplayKey.get(&quot;Web.Email.Name&quot;)"
+                  numCols="15"
+                  value="CcRecipient.Name">
+                  <PostOnChange
+                    onChange="var emailForName = autoCompleteHandler.getEmailForName(CcRecipient.Name); if (emailForName != null) { CcRecipient.EmailAddress = emailForName }"
+                    target="DATA_ONLY"/>
+                </TextCell>
+                <TextCell
+                  editable="true"
+                  id="CcEmail"
+                  label="DisplayKey.get(&quot;Web.Email.EmailAddress&quot;)"
+                  numCols="15"
+                  required="true"
+                  value="CcRecipient.EmailAddress"/>
+              </Row>
+            </RowIterator>
+          </ListViewPanel>
+        </ListViewInput>
+        <ButtonInput
+          action="showBCC = true"
+          id="ShowBCCRecipients"
+          labelAbove="true"
+          value="DisplayKey.get(&quot;Web.Email.AddBCCRecipients&quot;)"
+          visible="!showBCC"/>
+        <ListViewInput
+          editable="true"
+          id="BccRecipientLVInput"
+          label="DisplayKey.get(&quot;Web.Email.BCCRecipients&quot;)"
+          labelAbove="true"
+          visible="showBCC">
+          <Toolbar
+            visible="true">
+            <IteratorButtons
+              addVisible="true"
+              iterator="BccRecipientLV"
+              removeVisible="true"/>
+          </Toolbar>
+          <ListViewPanel
+            editable="true"
+            id="BccRecipientLV"
+            visible="true">
+            <RowIterator
+              editable="true"
+              elementName="BccRecipient"
+              toCreateAndAdd="var newEmailContact = new gw.api.email.EmailContact(); NewEmail.addBccRecipient(newEmailContact); return newEmailContact;"
+              toRemove="NewEmail.removeBccRecipient( BccRecipient )"
+              value="NewEmail.BccRecipients?.toTypedArray()"
+              valueType="gw.api.email.EmailContact[]">
+              <Row
+                editable="true">
+                <LinkCell
+                  id="ABPickerCell"
+                  label="DisplayKey.get(&quot;Web.Email.Search&quot;)"
+                  tooltip="DisplayKey.get(&quot;Web.Email.SearchIconTooltip&quot;)">
+                  <PickerLink
+                    action="AddressBookPickerPopup.push(Contact, true, claim)"
+                    icon="&quot;search.png&quot;"
+                    id="ABPickerLink"
+                    onPick="BccRecipient.Contact = PickedValue"/>
+                </LinkCell>
+                <TextCell
+                  autoComplete="autoCompleteHandler"
+                  editable="true"
+                  id="BccName"
+                  label="DisplayKey.get(&quot;Web.Email.Name&quot;)"
+                  numCols="15"
+                  value="BccRecipient.Name">
+                  <PostOnChange
+                    onChange="var emailForName = autoCompleteHandler.getEmailForName(BccRecipient.Name); if (emailForName != null) { BccRecipient.EmailAddress = emailForName }"
+                    target="DATA_ONLY"/>
+                </TextCell>
+                <TextCell
+                  editable="true"
+                  id="BccEmail"
+                  label="DisplayKey.get(&quot;Web.Email.EmailAddress&quot;)"
+                  numCols="15"
+                  required="true"
+                  value="BccRecipient.EmailAddress"/>
+              </Row>
+            </RowIterator>
+          </ListViewPanel>
+        </ListViewInput>
+        <InputDivider/>
+        <CheckBoxInput
+          editable="true"
+          id="SaveAsDocument"
+          value="saveAsDocument"
+          valueLabel="DisplayKey.get(&quot;Web.Email.SaveAsDocument&quot;)"
+          visible="perm.Claim.createdocument(claim)"/>
+      </InputColumn>
+      <InputColumn>
+        <TextInput
+          editable="true"
+          id="TextInput1"
+          label="DisplayKey.get(&quot;Web.Email.SenderName&quot;)"
+          value="NewEmail.Sender.Name"/>
+        <TextInput
+          editable="true"
+          id="TextInput2"
+          label="DisplayKey.get(&quot;Web.Email.SenderEmail&quot;)"
+          value="NewEmail.Sender.EmailAddress"/>
+        <TextInput
+          editable="true"
+          id="TextInput0"
+          label="DisplayKey.get(&quot;Web.Email.Subject&quot;)"
+          requestValidationExpression="VALUE == null ? DisplayKey.get(&quot;Web.Email.Error.SubjectRequired&quot;) : null"
+          required="true"
+          value="NewEmail.Subject"/>
+        <TextAreaInput
+          editable="true"
+          id="TextAreaInput0"
+          label="DisplayKey.get(&quot;Web.Email.Body&quot;)"
+          numCols="60"
+          numRows="10"
+          requestValidationExpression="VALUE == null ? DisplayKey.get(&quot;Web.Email.Error.BodyRequired&quot;) : null"
+          required="true"
+          value="NewEmail.Body"/>
+        <ListViewInput
+          editable="true"
+          label="DisplayKey.get(&quot;Web.Email.AttachedDocuments&quot;)"
+          labelAbove="true">
+          <Toolbar>
+            <PickerToolbarButton
+              action="PickExistingDocumentPopup.push(claim)"
+              available="documentActionsUIHelper.DocumentMetadataActionsAvailable"
+              id="AddDocumentButton"
+              label="DisplayKey.get(&quot;Web.Email.AddDocument&quot;)"
+              onPick="NewEmail.addDocument(PickedValue)"
+              shortcut="A"
+              visible="true"/>
+            <IteratorButtons
+              addVisible="false"
+              iterator="AttachedDocumentsLV"/>
+          </Toolbar>
+          <ListViewPanel
+            editable="true"
+            id="AttachedDocumentsLV">
+            <RowIterator
+              editable="true"
+              elementName="AttachedDocument"
+              toRemove="NewEmail.removeDocument( AttachedDocument )"
+              value="NewEmail.Documents?.toTypedArray()"
+              valueType="entity.Document[]">
+              <Row>
+                <TextCell
+                  editable="true"
+                  id="Document"
+                  label="DisplayKey.get(&quot;Web.Email.DocumentName&quot;)"
+                  value="AttachedDocument.Name"/>
+              </Row>
+            </RowIterator>
+          </ListViewPanel>
+        </ListViewInput>
+      </InputColumn>
+    </DetailViewPanel>
+    <Code><![CDATA[uses java.util.Map
+uses gw.plugin.email.IEmailTemplateDescriptor
+uses gw.api.system.CCLoggerCategory
+uses gw.api.email.Email
+uses java.lang.Exception
+uses gw.api.util.LocationUtil
+
+function resolveTemplate(template:IEmailTemplateDescriptor, beans:Map<String,Object>) {
+  resolveTemplate(NewEmail, template, beans)
+}
+
+function resolveTemplate(email:Email, template:IEmailTemplateDescriptor, beans:Map<String,Object>) {
+  try {
+    email.useEmailTemplate(template, beans)
+    //re-set error flag in case true
+    templateEvalError = false
+  } catch (e:Exception) {
+    //set flag for error message
+    templateEvalError = true
+    CCLoggerCategory.APPLICATION.error("Unable to resolve template ${template.Name}", e)
+  }
+}
+
+function initNewEmail() : gw.api.email.Email {
+  var rtn = new gw.api.email.Email()
+  if (emailTemplate != null) {
+    executeTemplate(rtn)
+  }
+  if (documentsToSend != null) {
+    for (document in documentsToSend) {
+      rtn.addDocument( document )
+    }
+  }
+  return rtn
+}
+
+function executeTemplate(rtn : gw.api.email.Email) {
+  var templatePlugin = gw.plugin.Plugins.get(gw.plugin.email.IEmailTemplateSource)
+  var template = templatePlugin.getEmailTemplate(gw.api.util.LocaleUtil.toLanguage(language), emailTemplate)
+  if (template == null) {
+    noDefaultTemplate = true
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Web.Activity.EmailTemplate.Language", emailTemplate, language))
+  }
+  else {
+    resolveTemplate(rtn, template, { "Activity" -> activity, "Claim" -> claim})
+  }
+}
+
+function sendEmailToRecipients(emailToSend : gw.api.email.Email) {
+  if(templateEvalError) {
+      gw.api.system.CCLoggerCategory.UI.error("Unable to send email due to template error")
+      LocationUtil.addRequestScopedErrorMessage(DisplayKey.get("Web.CreateEmailScreen.TemplateError.EmailNotSent"))
+      return
+  }
+  var warnings = gw.api.email.EmailUtil.emailContentsValid(emailToSend)
+  if (warnings.length > 0) {
+    throw new gw.api.util.DisplayableException(warnings)
+  }
+  if (saveAsDocument) {
+    claim.saveEmailAsDocument(emailToSend, gw.api.util.LocaleUtil.toLanguage(language), {"Activity" -> activity}, true)
+  } else if (documentToSave != null) {
+    documentToSave.remove()
+  }
+  gw.api.email.EmailUtil.sendEmailWithBody(claim, emailToSend)
+  // it didn't throw so reset email template so that other templates can be used
+  if (emailTemplate != null and activity.EmailTemplate == emailTemplate) {
+    activity.EmailTemplate = null
+  }
+  CurrentLocation.commit()
+}]]></Code>
+  </Screen>
+</PCF>

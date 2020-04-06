@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ECFTransactionLV">
+    <Require
+      name="ECFClaimResponse"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <Variable
+      initialValue="ECFClaimResponse.carrierShareOfTransactionFinancialsInCurrency(ECFClaimResponse.Claim.Currency)"
+      name="transactionAmt"
+      type="gw.api.financials.CurrencyAmount"/>
+    <Variable
+      initialValue="gw.api.financials.FinancialsCalculations.OpenReserves.withClaim(ECFClaimResponse.Claim).Amount?:new gw.api.financials.CurrencyAmount(0, ECFClaimResponse.Claim.Currency)"
+      name="claimAmt"
+      type="gw.api.financials.CurrencyAmount"/>
+    <RowIterator
+      editable="false"
+      elementName="transaction"
+      value="{'tableInsteadOfFields'}"
+      valueType="java.lang.String[]">
+      <Row>
+        <TextCell
+          footerLabel="DisplayKey.get(&quot;LV.Financials.Total&quot;)"
+          id="TransactionReference"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.TransactionReference&quot;)"
+          sortOrder="1"
+          value="ECFClaimResponse.TR"/>
+        <CurrencyCell
+          formatType="currency"
+          id="OpenReserves"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.Reserves.OpenReserves&quot;)"
+          value="claimAmt"/>
+        <CurrencyCell
+          footerSumValue="transactionAmt.add(claimAmt)"
+          formatType="currency"
+          id="Amount"
+          label="&quot;Transaction Amount&quot;"
+          value="transactionAmt"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

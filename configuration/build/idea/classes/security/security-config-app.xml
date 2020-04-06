@@ -1,0 +1,885 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SecurityConfig
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="../../../security-config.xsd">
+
+  <ObjectHandler entity="Activity" permKey="approve" internal="true">
+    <Handler code="com.guidewire.cc.domain.activity.ActivityPermissionHandlers.Approve"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="Activity" permKey="approveany" desc="Permission to approve any approval activity" internal="true">
+    <SystemPermType code="actapproveany"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="Activity" permKey="assign" internal="true">
+    <Handler code="com.guidewire.cc.domain.activity.ActivityPermissionHandlers.Assign"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Activity" permKey="edit" internal="true">
+    <Handler code="com.guidewire.cc.domain.activity.ActivityPermissionHandlers.Edit"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="Activity" permKey="genericassign" desc="Permission to re-assign some activity" noPermissionDisplayKey="Java.Error.Permission.GenericActivityReassign" internal="true">
+    <SystemPermType code="actraown"/>
+    <SystemPermType code="actraunown"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Activity" permKey="genericassignowned" desc="Permission to re-assign some owned activity" noPermissionDisplayKey="Java.Error.Permission.GenericActivityReassignOwned" internal="true">
+    <SystemPermType code="actraown"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Activity" permKey="genericassignunowned" desc="Permission to re-assign some unowned activity" noPermissionDisplayKey="Java.Error.Permission.GenericActivityReassignUnowned" internal="true">
+    <SystemPermType code="actraunown"/>
+  </StaticHandler>
+
+  <OptionalObjectHandler entity="Activity" permKey="makemandatory" desc="Permission to make activities mandatory" internal="true">
+    <SystemPermType code="actmakemand"/>
+    <Handler code="com.guidewire.cc.domain.exposure.sec.ExposureRelatedClaimPermissionHandler"/>
+  </OptionalObjectHandler>
+
+  <StaticHandler entity="Activity" permKey="nextfromqueue" internal="true">
+    <Handler code="com.guidewire.cc.domain.activity.ActivityPermissionHandlers.NextFromQueue"/>
+  </StaticHandler>
+
+  <OptionalObjectHandler entity="Activity" permKey="own" desc="Permission to own activities" internal="true">
+    <SystemPermType code="actown"/>
+  </OptionalObjectHandler>
+
+  <StaticHandler entity="Activity" permKey="pickfromqueue" internal="true">
+    <Handler code="com.guidewire.cc.domain.activity.ActivityPermissionHandlers.PickFromQueue"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Activity" permKey="reviewassignment" desc="Permission to complete assignment review activities" internal="true">
+    <SystemPermType code="actreviewassign"/>
+  </StaticHandler>
+
+  <OptionalObjectHandler entity="Activity" permKey="view" desc="Permission to view an activity on a claim" internal="true">
+    <SystemPermType code="actview"/>
+    <Handler code="com.guidewire.cc.domain.exposure.sec.ExposureRelatedClaimPermissionHandler"/>
+  </OptionalObjectHandler>
+
+  <StaticHandler entity="Activity" permKey="viewallqueues" internal="true">
+    <Handler code="com.guidewire.cc.domain.activity.ActivityPermissionHandlers.ViewAllQueues"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Activity" permKey="viewqueue" internal="true">
+    <Handler code="com.guidewire.cc.domain.activity.ActivityPermissionHandlers.ViewQueue"/>
+  </StaticHandler>
+
+  <StaticHandler entity="AuthorityLimit" permKey="create" desc="Permission to create a new authority limit" internal="true">
+    <SystemPermType code="usergrantauth"/>
+  </StaticHandler>
+
+  <StaticHandler entity="AuthorityLimit" permKey="delete" desc="Permission to delete an authority limit" internal="true">
+    <SystemPermType code="usergrantauth"/>
+  </StaticHandler>
+
+  <StaticHandler entity="AuthorityLimit" permKey="edit" desc="Permission to edit an existing authority limit" internal="true">
+    <SystemPermType code="usergrantauth"/>
+  </StaticHandler>
+
+  <StaticHandler entity="AuthorityLimitProfile" permKey="create" desc="Permission to create a new authority limit profile" internal="true">
+    <SystemPermType code="alpmanage"/>
+  </StaticHandler>
+
+  <StaticHandler entity="AuthorityLimitProfile" permKey="delete" desc="Permission to delete an authority limit profile" internal="true">
+    <SystemPermType code="alpmanage"/>
+  </StaticHandler>
+
+  <StaticHandler entity="AuthorityLimitProfile" permKey="edit" desc="Permission to edit an existing authority limit profile" internal="true">
+    <SystemPermType code="alpmanage"/>
+  </StaticHandler>
+
+  <StaticHandler entity="AuthorityLimitProfile" permKey="view" desc="Permission to view authority limit profiles" internal="true">
+    <SystemPermType code="alpview"/>
+  </StaticHandler>
+
+  <StaticHandler entity="BulkInvoice" permKey="create" desc="Permission to create a bulk invoice" internal="true">
+    <SystemPermType code="bulkinvcreate"/>
+  </StaticHandler>
+
+  <StaticHandler entity="BulkInvoice" permKey="delete" desc="Permission to delete a bulk invoice" internal="true">
+    <SystemPermType code="bulkinvdelete"/>
+  </StaticHandler>
+
+  <StaticHandler entity="BulkInvoice" permKey="edit" desc="Permission to edit a bulk invoice" internal="true">
+    <SystemPermType code="bulkinvedit"/>
+  </StaticHandler>
+
+  <StaticHandler entity="BulkInvoice" permKey="view" desc="Permission to view a bulk invoice" internal="true">
+    <SystemPermType code="bulkinvview"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Catastrophe" permKey="create" desc="Permission to create new catastrophes" internal="true">
+    <SystemPermType code="catmanage"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Catastrophe" permKey="delete" desc="Permission to delete catastrophes" internal="true">
+    <SystemPermType code="catmanage"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Catastrophe" permKey="edit" desc="Permission to edit existing catastrophes" internal="true">
+    <SystemPermType code="catmanage"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Catastrophe" permKey="view" desc="Permission to view the catastrophe list and catastrophe details" internal="true">
+    <SystemPermType code="catview"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="Check" permKey="delete" desc="Permission to delete a check on a claim. Checks delete payment or delete manual payment depending on the type of check" internal="true">
+    <SystemPermType code="paydelete"/>
+    <SystemPermType code="manpaydelete"/>
+    <Handler code="com.guidewire.cc.domain.financials.check.impl.CheckStateDependentPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Check" permKey="edit" desc="Permission to edit a check on a claim. Checks edit payment or edit manual payment depending on the type of check" internal="true">
+    <SystemPermType code="payedit"/>
+    <SystemPermType code="manpayedit"/>
+    <Handler code="com.guidewire.cc.domain.financials.check.impl.CheckStateDependentPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Check" permKey="transfer" desc="Permission to transfer a check on a claim" internal="true">
+    <SystemPermType code="checktransfer"/>
+    <SystemPermType code="manpaydelete"/>
+    <Handler code="com.guidewire.cc.domain.financials.check.impl.CheckStateDependentPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Check" permKey="view" desc="Permission to view a check on a claim" internal="true">
+    <SystemPermType code="claimviewpay"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="Claim" permKey="archive" desc="Permission to archive a claim" internal="true">
+    <SystemPermType code="archive"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="Claim" permKey="assign" internal="true">
+    <Handler code="com.guidewire.cc.domain.claim.impl.AssignClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="close" desc="Permission to close a claim" internal="true">
+    <SystemPermType code="claimclose"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="closeexposure" desc="Permission to close an exposure on a claim" internal="true">
+    <SystemPermType code="expclose"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="closematter" desc="Permission to close a matter on a claim" internal="true">
+    <SystemPermType code="mttrclose"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="Claim" permKey="create" desc="Permission to create a new claim" internal="true">
+    <SystemPermType code="claimcreate"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="Claim" permKey="createactivity" desc="Permission to create a new activity on the claim. Checks create activity or create activity closed depending on the state of the claim" internal="true">
+    <SystemPermType code="actcreate"/>
+    <SystemPermType code="actcreateclsd"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimStatePermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="createanytransaction" internal="true">
+    <Handler code="com.guidewire.cc.domain.claim.impl.CreateAnyTransactionPermissionHandler"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="Claim" permKey="createassociation" desc="Permission to create a new association between claims" internal="true">
+    <SystemPermType code="assocmanage"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="Claim" permKey="createdocument" desc="Permission to add a document to the claim. Checks add docs or add docs closed depending on the state of the claim" internal="true">
+    <SystemPermType code="doccreate"/>
+    <SystemPermType code="doccreateclsd"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimStatePermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="createevaluation" desc="Permission to create a new evaluation on a claim" internal="true">
+    <SystemPermType code="evalcreate"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="createexposure" desc="Permission to create new exposures" internal="true">
+    <SystemPermType code="expcreate"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimStatePermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="createincident" desc="Permission to create a new incident on the claim. Checks edit claim or edit claim closed depending on the state of the claim" internal="true">
+    <SystemPermType code="claimedit"/>
+    <SystemPermType code="claimeditclsd"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimStatePermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="createmanualpayment" desc="Permission to create a manual payment on a claim" internal="true">
+    <SystemPermType code="manpaycreate"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="creatematter" desc="Permission to create a new matter on a claim" internal="true">
+    <SystemPermType code="mttrcreate"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="createnegotiation" desc="Permission to create a new negotiation on a claim" internal="true">
+    <SystemPermType code="ngtncreate"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="createnote" desc="Permission to add a note to the claim. Checks add notes or add notes closed depending on the state of the claim" internal="true">
+    <SystemPermType code="notecreate"/>
+    <SystemPermType code="notecreateclsd"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimStatePermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="createpayment" internal="true">
+    <Handler code="com.guidewire.cc.domain.claim.impl.CreatePaymentPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="createrecovery" desc="Permission to create a reserve on a claim" internal="true">
+    <SystemPermType code="reccreate"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="createrecoveryreserve" internal="true">
+    <Handler code="com.guidewire.cc.domain.claim.impl.CreateRecoveryReservePermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="createreserve" internal="true">
+    <Handler code="com.guidewire.cc.domain.claim.impl.CreateReservePermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="edit" desc="Permission to edit the claim. Checks edit claim or edit claim closed depending on the state of the claim" internal="true">
+    <SystemPermType code="claimedit"/>
+    <SystemPermType code="claimeditclsd"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimStatePermissionHandler"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="Claim" permKey="genericassign" desc="Permission to re-assign some claim" noPermissionDisplayKey="Java.Error.Permission.GenericClaimReassign" internal="true">
+    <SystemPermType code="claimraown"/>
+    <SystemPermType code="claimraunown"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Claim" permKey="genericassignowned" desc="Permission to re-assign some owned claim" noPermissionDisplayKey="Java.Error.Permission.GenericClaimReassignOwned" internal="true">
+    <SystemPermType code="claimraown"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Claim" permKey="genericassignunowned" desc="Permission to re-assign some unowned claim" noPermissionDisplayKey="Java.Error.Permission.GenericClaimReassignUnowned" internal="true">
+    <SystemPermType code="claimraunown"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Claim" permKey="genericedit" desc="Permission to perform some sort of edit on some claim" internal="true">
+    <SystemPermType code="claimedit"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Claim" permKey="genericremoveflag" desc="Permission to remove the flag on some claim" noPermissionDisplayKey="Java.Error.Permission.GenericRemoveFlag" internal="true">
+    <SystemPermType code="claimremflag"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Claim" permKey="genericviewactivity" desc="Permission to view activities on some claim" noPermissionDisplayKey="Java.Error.Permission.GenericViewActivities" internal="true">
+    <SystemPermType code="actview"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Claim" permKey="genericviewclaim" desc="Permission to view some claim" noPermissionDisplayKey="Java.Error.Permission.GenericViewClaim" internal="true">
+    <SystemPermType code="claimview"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Claim" permKey="genericviewexposure" desc="Permission to view exposures on some claim" noPermissionDisplayKey="Java.Error.Permission.GenericViewExposures" internal="true">
+    <SystemPermType code="expview"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Claim" permKey="genericviewmatter" desc="Permission to view matters on some claim" noPermissionDisplayKey="Java.Error.Permission.GenericViewMatters" internal="true">
+    <SystemPermType code="mttrview"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Claim" permKey="genericviewnettotalincurred" desc="Permission to view net total incurred information on a claim" noPermissionDisplayKey="Java.Error.Permission.GenericViewTransactions" internal="true">
+    <SystemPermType code="claimviewres"/>
+    <SystemPermType code="claimviewrec"/>
+    <SystemPermType code="claimviewpay"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Claim" permKey="genericviewpayments" desc="Permission to view payments (and derived information) on some claim" noPermissionDisplayKey="Java.Error.Permission.GenericViewTransactions" internal="true">
+    <SystemPermType code="claimviewpay"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Claim" permKey="genericviewrecoveries" desc="Permission to view recoveries (and derived information) on some claim" noPermissionDisplayKey="Java.Error.Permission.GenericViewTransactions" internal="true">
+    <SystemPermType code="claimviewrec"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Claim" permKey="genericviewrecoveryreserves" desc="Permission to view recovery reserves (and derived information) on some claim" noPermissionDisplayKey="Java.Error.Permission.GenericViewTransactions" internal="true">
+    <SystemPermType code="claimviewrecres"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Claim" permKey="genericviewreserves" desc="Permission to view reserves (and derived information) on some claim" noPermissionDisplayKey="Java.Error.Permission.GenericViewTransactions" internal="true">
+    <SystemPermType code="claimviewres"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Claim" permKey="genericviewtransactions" desc="Permission to view transactions on some claim" noPermissionDisplayKey="Java.Error.Permission.GenericViewTransactions" internal="true">
+    <SystemPermType code="claimviewres"/>
+    <SystemPermType code="claimviewrec"/>
+    <SystemPermType code="claimviewrecres"/>
+    <SystemPermType code="claimviewpay"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="Claim" permKey="manageclaimusers" desc="Permission to manage the parties involved on a claim. Checks claim users manage or claim users manage closed depending on the state of the claim" internal="true">
+    <SystemPermType code="claimusermanage"/>
+    <SystemPermType code="claimusermanclsd"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimStatePermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="managepartiesinvolved" desc="Permission to manage the parties involved on a claim. Checks claim parties manage or claim parties manage closed depending on the state of the claim" internal="true">
+    <SystemPermType code="claimprtsmanage"/>
+    <SystemPermType code="claimprtsmanclsd"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimStatePermissionHandler"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="Claim" permKey="own" desc="Permission to own claims" internal="true">
+    <SystemPermType code="claimown"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="Claim" permKey="print" internal="true">
+    <Handler code="com.guidewire.cc.domain.claim.impl.PrintClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="Claim" permKey="purge" desc="Permission to purge a claim" internal="true">
+    <SystemPermType code="purge"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="Claim" permKey="removeflag" desc="Permission to remove the flag on a claim" internal="true">
+    <SystemPermType code="claimremflag"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="reopen" desc="Permission to reopen a claim" internal="true">
+    <SystemPermType code="claimreopen"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="reopenmatter" desc="Permission to reopen a matter on a claim" internal="true">
+    <SystemPermType code="mttrreopen"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="retrymessage" desc="Permission to retry a message on a claim" internal="true">
+    <SystemPermType code="claimintegadmin"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="selectpolicy" desc="Permission to select a new policy for an existing claim. Checks select policy or select policy closed depending on the state of the claim" internal="true">
+    <SystemPermType code="claimselectplcy"/>
+    <SystemPermType code="claimslplcyclsd"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimStatePermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="validate" desc="Permission to run validation rules on a claim" internal="true">
+    <SystemPermType code="claimvalidate"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="view" desc="Permission to view a claim" internal="true">
+    <SystemPermType code="claimview"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="viewconfidentialnotes" internal="true">
+    <Handler code="com.guidewire.cc.domain.claim.impl.ViewConfidentialNotesPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="viewnettotalincurred" desc="Permission to view net total incurred information on a claim" internal="true">
+    <SystemPermType code="claimviewrec"/>
+    <SystemPermType code="claimviewres"/>
+    <SystemPermType code="claimviewpay"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="viewpayments" desc="Permission to view checks and payments (and derived information) on a claim" internal="true">
+    <SystemPermType code="claimviewpay"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="viewrecoveries" desc="Permission to view recoveries (and derived information) on a claim" internal="true">
+    <SystemPermType code="claimviewrec"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="viewrecoveryreserves" desc="Permission to view recovery reserves (and derived information) on a claim" internal="true">
+    <SystemPermType code="claimviewrecres"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="viewreserves" desc="Permission to view reserves (and derived information) on a claim" internal="true">
+    <SystemPermType code="claimviewres"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="viewsyncstatus" desc="Permission to view the sync status of a claim" internal="true">
+    <SystemPermType code="viewclaimsync"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Claim" permKey="viewtransactiondetails" desc="Permission to view transaction details on a claim" internal="true">
+    <SystemPermType code="claimviewres"/>
+    <SystemPermType code="claimviewrec"/>
+    <SystemPermType code="claimviewrecres"/>
+    <SystemPermType code="claimviewpay"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimAnyPermissionHandler"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="ClaimAssociation" permKey="delete" desc="Permission to delete an association from a claim" internal="true">
+    <SystemPermType code="assocmanage"/>
+  </StaticHandler>
+
+  <StaticHandler entity="ClaimAssociation" permKey="edit" desc="Permission to edit an existing association on a claim" internal="true">
+    <SystemPermType code="assocmanage"/>
+  </StaticHandler>
+
+  <StaticHandler entity="ClaimAssociation" permKey="view" desc="Permission to view the associations on a claim or details on one association" internal="true">
+    <SystemPermType code="assocview"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="ClaimInfo" permKey="edit" desc="Permission to edit an archived claim" internal="true">
+    <SystemPermType code="claimedit"/>
+    <Handler code="com.guidewire.cc.domain.claim.archiving.impl.ClaimInfoPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="ClaimInfo" permKey="view" desc="Permission to view an archived claim" internal="true">
+    <SystemPermType code="claimview"/>
+    <Handler code="com.guidewire.cc.domain.claim.archiving.impl.ClaimInfoPermissionHandler"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="Document" permKey="create" desc="Permission to create documents" internal="true">
+    <SystemPermType code="doccreate"/>
+    <SystemPermType code="docmodifyall"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="Document" permKey="delete" internal="true">
+    <Handler code="com.guidewire.cc.domain.document.impl.DocumentPermissionHandlers.Delete"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Document" permKey="edit" internal="true">
+    <Handler code="com.guidewire.cc.domain.document.impl.DocumentPermissionHandlers.Edit"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="Document" permKey="genericdelete" desc="Permission to delete some documents" internal="true">
+    <SystemPermType code="docdelete"/>
+    <SystemPermType code="docmodifyall"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="Document" permKey="view" internal="true">
+    <Handler code="com.guidewire.cc.domain.document.impl.DocumentPermissionHandlers.View"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="ExchangeRate" permKey="edit" desc="Permission to override exchange rate with a custom exchange rate." noPermissionDisplayKey="Java.Error.Permission.EditExchangeRate" internal="true">
+    <SystemPermType code="exchratemanual"/>
+    <Handler code="com.guidewire.cc.domain.financials.StaticFinancialsPermissionHandler"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="Exposure" permKey="assign" internal="true">
+    <Handler code="com.guidewire.cc.domain.exposure.impl.ExposurePermissionHandlers.Assign"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Exposure" permKey="close" desc="Permission to close an exposure on a claim" internal="true">
+    <SystemPermType code="expclose"/>
+    <Handler code="com.guidewire.cc.domain.exposure.sec.ExposureRelatedClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Exposure" permKey="edit" internal="true">
+    <Handler code="com.guidewire.cc.domain.exposure.impl.ExposurePermissionHandlers.Edit"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="Exposure" permKey="genericassign" desc="Permission to re-assign some exposure" noPermissionDisplayKey="Java.Error.Permission.GenericExposureReassign" internal="true">
+    <SystemPermType code="expraown"/>
+    <SystemPermType code="expraunown"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Exposure" permKey="genericassignowned" desc="Permission to re-assign some owned exposure" noPermissionDisplayKey="Java.Error.Permission.GenericExposureReassignOwned" internal="true">
+    <SystemPermType code="expraown"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Exposure" permKey="genericassignunowned" desc="Permission to re-assign some unowned exposure" noPermissionDisplayKey="Java.Error.Permission.GenericExposureReassignUnowned" internal="true">
+    <SystemPermType code="expraunown"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Exposure" permKey="own" desc="Permission to own exposures" internal="true">
+    <SystemPermType code="expown"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="Exposure" permKey="reopen" desc="Permission to reopen an exposure on a claim" internal="true">
+    <SystemPermType code="expreopen"/>
+    <Handler code="com.guidewire.cc.domain.exposure.sec.ExposureRelatedClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Exposure" permKey="validate" desc="Permission to run validation rules on an exposure" internal="true">
+    <SystemPermType code="expvalidate"/>
+    <Handler code="com.guidewire.cc.domain.exposure.sec.ExposureRelatedClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Exposure" permKey="view" desc="Permission to view an exposure on a claim" internal="true">
+    <SystemPermType code="expview"/>
+    <Handler code="com.guidewire.cc.domain.exposure.sec.ExposureRelatedClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Evaluation" permKey="edit" desc="Permission to edit an evaluation on a claim. Checks Edit Evaluation or Edit Evaluation Claim Closed depending on the state of the claim" internal="true">
+    <SystemPermType code="evaledit"/>
+    <SystemPermType code="evaleditclsd"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimStatePermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Evaluation" permKey="view" desc="Permission to view an evaluation on a claim" internal="true">
+    <SystemPermType code="evalview"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Incident" permKey="edit" desc="Permission to edit the incident. Checks edit claim or edit claim closed depending on the state of the claim" internal="true">
+    <SystemPermType code="claimedit"/>
+    <SystemPermType code="claimeditclsd"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimStatePermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Incident" permKey="view" desc="Permission to view an incident" internal="true">
+    <SystemPermType code="claimview"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Matter" permKey="assign" internal="true">
+    <Handler code="com.guidewire.cc.domain.matter.impl.AssignMatterPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Matter" permKey="close" desc="Permission to close a matter" internal="true">
+    <SystemPermType code="mttrclose"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Matter" permKey="edit" internal="true">
+    <Handler code="com.guidewire.cc.domain.matter.impl.EditMatterPermissionHandler"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="Matter" permKey="genericassign" desc="Permission to re-assign some matter" noPermissionDisplayKey="Java.Error.Permission.GenericMatterReassign" internal="true">
+    <SystemPermType code="mttrraown"/>
+    <SystemPermType code="mttrraunown"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Matter" permKey="genericassignowned" desc="Permission to re-assign some owned matter" noPermissionDisplayKey="Java.Error.Permission.GenericMatterReassignOwned" internal="true">
+    <SystemPermType code="mttrraown"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Matter" permKey="genericassignunowned" desc="Permission to re-assign some unowned matter" noPermissionDisplayKey="Java.Error.Permission.GenericMatterReassignUnowned" internal="true">
+    <SystemPermType code="mttrraunown"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Matter" permKey="own" desc="Permission to own matters on a claim" internal="true">
+    <SystemPermType code="mttrown"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="Matter" permKey="reopen" desc="Permission to reopen a matter on a claim" internal="true">
+    <SystemPermType code="mttrreopen"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Matter" permKey="view" desc="Permission to view the list of matters on a claim or an individual matter" internal="true">
+    <SystemPermType code="mttrview"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Negotiation" permKey="edit" desc="Permission to edit a negotiation on a claim. Checks Edit Negotiation or Edit Negotiation Claim Closed depending on the state of the claim" internal="true">
+    <SystemPermType code="ngtnedit"/>
+    <SystemPermType code="ngtneditclsd"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimStatePermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Negotiation" permKey="view" desc="Permission to view a negotiation on a claim" internal="true">
+    <SystemPermType code="ngtnview"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="Note" permKey="create" desc="Permission to create a Note" internal="true">
+    <SystemPermType code="notecreate"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="Note" permKey="delete" internal="true">
+    <Handler code="com.guidewire.cc.domain.note.impl.NotePermissionHandlers.Delete"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Note" permKey="edit" internal="true">
+    <Handler code="com.guidewire.cc.domain.note.impl.NotePermissionHandlers.Edit"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Note" permKey="editbody" internal="true">
+    <Handler code="com.guidewire.cc.domain.note.impl.NotePermissionHandlers.EditBody"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Note" permKey="view" internal="true">
+    <Handler code="com.guidewire.cc.domain.note.impl.NotePermissionHandlers.View"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Payment" permKey="delete" desc="Permission to delete a payment on a claim. Checks delete payment or delete manual payment depending on the type of check the payment is on" internal="true">
+    <SystemPermType code="paydelete"/>
+    <SystemPermType code="manpaydelete"/>
+    <Handler code="com.guidewire.cc.domain.financials.check.impl.CheckStateDependentPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Payment" permKey="deletemanual" desc="Permission to delete a manual payment on a claim" internal="true">
+    <SystemPermType code="manpaydelete"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Payment" permKey="deletenormal" desc="Permission to delete a normal payment on a claim" internal="true">
+    <SystemPermType code="paydelete"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Payment" permKey="edit" desc="Permission to edit a payment on a claim. Checks edit payment or edit manual payment depending on the type of check the payment is on" internal="true">
+    <SystemPermType code="payedit"/>
+    <SystemPermType code="manpayedit"/>
+    <Handler code="com.guidewire.cc.domain.financials.check.impl.CheckStateDependentPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Payment" permKey="editmanual" desc="Permission to edit a manual payment on a claim" internal="true">
+    <SystemPermType code="manpayedit"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Payment" permKey="editnormal" desc="Permission to edit a nromal payment on a claim" internal="true">
+    <SystemPermType code="payedit"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="Payment" permKey="genericview" desc="Permission to view some payments" noPermissionDisplayKey="Java.Error.Permission.GenericViewPayments" internal="true">
+    <SystemPermType code="claimviewpay"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="Payment" permKey="recode" desc="Permission to recode a payment on a claim" internal="true">
+    <SystemPermType code="payrecode"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Payment" permKey="stop" desc="Permission to stop a payment on a claim" internal="true">
+    <SystemPermType code="paystop"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Payment" permKey="view" desc="Permission to view payments on a claim" internal="true">
+    <SystemPermType code="claimviewpay"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Payment" permKey="voidpmt" desc="Permission to void a payment on a claim" internal="true">
+    <SystemPermType code="payvoid"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Payment" permKey="voidclearedpmt" desc="Permission to void a cleared payment" internal="true">
+    <SystemPermType code="clearedpayvoid"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Payment" permKey="voidorstop" internal="true">
+    <Handler code="com.guidewire.cc.domain.financials.payment.impl.VoidOrStopPaymentPermissionHandler"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="Policy" permKey="createunverifiedpolicy" desc="Permission to create an unverified policy in the new claim wizard" internal="true">
+    <SystemPermType code="plcymakeeditable"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="Policy" permKey="edit" internal="true">
+    <Handler code="com.guidewire.cc.domain.policy.impl.PolicyEditPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Policy" permKey="makeeditable" internal="true">
+    <Handler code="com.guidewire.cc.domain.policy.impl.PolicyMakeEditablePermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Policy" permKey="view" desc="Permission to view a policy" internal="true">
+    <SystemPermType code="plcyview"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Recovery" permKey="delete" desc="Permission to delete a recovery" internal="true">
+    <SystemPermType code="recdelete"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Recovery" permKey="edit" desc="Permission to edit an existing recovery" internal="true">
+    <SystemPermType code="recedit"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Recovery" permKey="view" desc="Permission to view details of a recovery" internal="true">
+    <SystemPermType code="claimviewrec"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Recovery" permKey="voidrec" desc="Permission to void a recovery" internal="true">
+    <SystemPermType code="recvoid"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="RecoveryReserve" permKey="delete" desc="Permission to delete a recovery reserve" internal="true">
+    <SystemPermType code="recresdelete"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="RecoveryReserve" permKey="edit" desc="Permission to edit an existing recovery reserve" internal="true">
+    <SystemPermType code="recresedit"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="RecoveryReserve" permKey="view" desc="Permission to view details of a recovery reserve" internal="true">
+    <SystemPermType code="claimviewrecres"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="RecoveryReserveSet" permKey="delete" desc="Permission to delete a recovery reserve set" internal="true">
+    <SystemPermType code="recresdelete"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="RecoveryReserveSet" permKey="edit" desc="Permission to edit an existing recovery reserve set" internal="true">
+    <SystemPermType code="recresedit"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="RecoveryReserveSet" permKey="view" desc="Permission to view a recovery reserve set" internal="true">
+    <SystemPermType code="claimviewrecres"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="RecoverySet" permKey="delete" desc="Permission to delete a recovery set" internal="true">
+    <SystemPermType code="recdelete"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="RecoverySet" permKey="edit" desc="Permission to edit an existing recovery set" internal="true">
+    <SystemPermType code="recedit"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="RecoverySet" permKey="view" desc="Permission to view a recovery set" internal="true">
+    <SystemPermType code="claimviewrec"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Reserve" permKey="delete" desc="Permission to delete a reserve" internal="true">
+    <SystemPermType code="resdelete"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Reserve" permKey="edit" desc="Permission to edit an existing reserve" internal="true">
+    <SystemPermType code="resedit"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="Reserve" permKey="view" desc="Permission to view reserve details" internal="true">
+    <SystemPermType code="claimviewres"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="ReserveSet" permKey="delete" desc="Permission to delete a reserve set" internal="true">
+    <SystemPermType code="resdelete"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="ReserveSet" permKey="edit" desc="Permission to edit an existing reserve set" internal="true">
+    <SystemPermType code="resedit"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimFinancialsPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="ReserveSet" permKey="view" desc="Permission to view a reserve set" internal="true">
+    <SystemPermType code="claimviewres"/>
+    <Handler code="com.guidewire.cc.domain.claim.impl.ClaimPermissionHandler"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="Review" permKey="create" desc="Permission to create new Reviews" internal="true">
+    <SystemPermType code="reviewcreate"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="Review" permKey="delete" internal="true">
+    <Handler code="com.guidewire.cc.domain.contact.impl.ReviewDeletePermissionHandler"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="Review" permKey="edit" desc="Permission to edit existing Reviews" internal="true">
+    <SystemPermType code="reviewedit"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Review" permKey="list" desc="Permission to see the Reviews tab and see the list of Reviews for a given Contact" internal="true">
+    <SystemPermType code="reviewviewlist"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Review" permKey="view" desc="Permission to view the details page of existing Reviews" internal="true">
+    <SystemPermType code="reviewviewdetail"/>
+  </StaticHandler>
+
+  <StaticHandler entity="Subrogation" permKey="own" desc="Permission to own subrogations on a claim" internal="true">
+    <SystemPermType code="subroown"/>
+  </StaticHandler>
+
+  <ObjectHandler entity="Transaction" permKey="view" internal="true">
+    <Handler code="com.guidewire.cc.domain.financials.impl.TransactionPermissionHandler"/>
+  </ObjectHandler>
+
+  <ObjectHandler entity="TransactionSet" permKey="view" internal="true">
+    <Handler code="com.guidewire.cc.domain.financials.impl.TransactionSetPermissionHandler"/>
+  </ObjectHandler>
+
+  <StaticHandler entity="User" permKey="ignoreacl" desc="Permission that ignores claim ACLs (i.e. the user is always considered to be on the ACL)" internal="true">
+    <SystemPermType code="ignoreacl"/>
+  </StaticHandler>
+
+  <StaticHandler entity="User" permKey="viewanyadmin" internal="true">
+    <Handler code="com.guidewire.cc.domain.community.impl.ViewAnyAdminPermissionHandler"/>
+  </StaticHandler>
+
+  <StaticHandler entity="User" permKey="viewanyedb" desc="Permission to view at least one of the executive dashboard screens" noPermissionDisplayKey="Java.Error.Permission.ViewAnyDashboard" internal="true">
+    <SystemPermType code="edbclaimcounts"/>
+    <SystemPermType code="edbclaimact"/>
+    <SystemPermType code="edbcurrfin"/>
+    <SystemPermType code="edbpdfin"/>
+  </StaticHandler>
+
+  <StaticHandler entity="User" permKey="viewedbclaimact" desc="Permission to view the executive dashboard claim activity page" internal="true">
+    <SystemPermType code="edbclaimact"/>
+  </StaticHandler>
+
+  <StaticHandler entity="User" permKey="viewedbclaimcounts" desc="Permission to view the executive dashboard claim counts page" internal="true">
+    <SystemPermType code="edbclaimcounts"/>
+  </StaticHandler>
+
+  <StaticHandler entity="User" permKey="viewedbcurrfin" desc="Permission to view the executive dashboard current financials page" internal="true">
+    <SystemPermType code="edbcurrfin"/>
+  </StaticHandler>
+
+  <StaticHandler entity="User" permKey="viewedbpdfin" desc="Permission to view the executive dashboard period financials page" internal="true">
+    <SystemPermType code="edbpdfin"/>
+  </StaticHandler>
+
+  <!-- Business Rules -->
+  <StaticHandler entity="ActivityRule" permKey="create">
+    <SystemPermType code="activityruleedit"/>
+  </StaticHandler>
+
+  <StaticHandler entity="ActivityRule" permKey="edit">
+    <SystemPermType code="activityruleedit"/>
+  </StaticHandler>
+
+  <StaticHandler entity="ActivityRule" permKey="delete">
+    <SystemPermType code="activityruleedit"/>
+  </StaticHandler>
+
+  <StaticHandler entity="ActivityRule" permKey="view">
+    <SystemPermType code="activityruleview"/>
+  </StaticHandler>
+
+  <StaticHandler entity="ActivityRule" permKey="import">
+    <SystemPermType code="activityruleimport"/>
+  </StaticHandler>
+
+  <StaticHandler entity="ActivityRule" permKey="approve">
+    <SystemPermType code="activityruleapprove"/>
+  </StaticHandler>
+
+  <StaticHandler entity="ActivityRule" permKey="deploy">
+    <SystemPermType code="activityruledeploy"/>
+  </StaticHandler>
+
+</SecurityConfig>

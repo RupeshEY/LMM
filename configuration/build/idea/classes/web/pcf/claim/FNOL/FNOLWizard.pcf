@@ -1,0 +1,605 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <NewClaimWizard
+    afterCancel="ClaimCenterStartupPage.go()"
+    afterFinish="afterFinish()"
+    beforeCommit="if (Wizard.isFinishingCommit()) { Claim.ServiceRequests.where( \ sr -&gt; sr.operationAvailable(TC_SUBMITINSTRUCTION)).each(\ sr -&gt; sr.performOperation(TC_SUBMITINSTRUCTION, null, false)) }"
+    canVisit="perm.Claim.create"
+    cancelWarning="DisplayKey.get(&quot;Wizard.NewClaimWizard.CancelWarning&quot;)"
+    finishConfirmation="Wizard.getFinishConfirmation()"
+    id="FNOLWizard"
+    infoBar="ClaimInfoBar(Claim)"
+    menuActions="FNOLMenuActions(Claim, Wizard)"
+    parent="ClaimTabForward()"
+    title="DisplayKey.get(&quot;JSP.NewClaimOpenDialog.Title&quot;)">
+    <LocationEntryPoint
+      signature="FNOLWizard()"/>
+    <LocationEntryPoint
+      signature="FNOLWizard(policyType : PolicyType, policyNumber : String, claimMode : gw.api.claim.NewClaimMode, LossDate : java.util.Date, PageMode : boolean)"/>
+    <LocationEntryPoint
+      signature="FNOLWizard(Claim : Claim)"/>
+    <LocationEntryPoint
+      signature="FNOLWizard(searchCriteriaAndSummary : gw.api.claim.NewClaimPolicySearchCriteriaAndSummary, claimMode : gw.api.claim.NewClaimMode, LossDate : java.util.Date, PageMode : boolean)"/>
+    <Variable
+      initialValue="new gw.api.claim.NewClaimWizardInfo(CurrentLocation, gw.api.claim.NewClaimCheck)"
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Variable
+      name="claimMode"
+      type="gw.api.claim.NewClaimMode"/>
+    <Variable
+      initialValue="null"
+      name="LossDate"
+      type="java.util.Date"/>
+    <Variable
+      initialValue="true"
+      name="PageMode"
+      type="boolean"/>
+    <Variable
+      initialValue="Wizard.createClaim(PageMode ? claimMode.LossType : null, claimMode.QuickClaimMode as String, LossDate, PageMode)"
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="policyNumber"
+      type="String"/>
+    <Variable
+      initialValue="Wizard.CurrentStepId != &quot;FindPolicy&quot; and Wizard.CurrentStepId != &quot;SelectRiskUnitsStep&quot;"
+      name="independentStepAllowed"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      name="searchCriteriaAndSummary"
+      type="gw.api.claim.NewClaimPolicySearchCriteriaAndSummary"/>
+    <Variable
+      name="policyType"
+      type="PolicyType"/>
+    <WizardStep
+      allowNext="Claim.LossType != null"
+      id="FindPolicy"
+      label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimSelectType.Label&quot;)"
+      onExit="FindPolicyExit()"
+      onFirstEnter="FindPolicyFirstEnter()"
+      refreshStepsOnExit="true"
+      save="true"
+      screen="FNOLWizard_FindPolicyScreen(Claim, Wizard)"
+      showNextIfLastStep="true"
+      title="if (Wizard.CurrentStepNumber == Wizard.TotalNumberOfSteps as String) {return DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimSelectType.OneStep&quot;)} else {return DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimSelectType.Step&quot;,  Wizard.CurrentStepNumber ,  Wizard.TotalNumberOfSteps)}"/>
+    <WizardStep
+      allowNext="true"
+      available="CanSelectRiskUnits"
+      id="SelectRiskUnitsStep"
+      label="SelectRiskUnitsLabel"
+      onExit="onRiskUnitSelectExit()"
+      refreshStepsOnExit="true"
+      save="true"
+      screen="FNOLWizard_PickPolicyRiskUnitsScreen( Claim, Wizard )"
+      title="SelectRiskUnitsTitle"
+      visible="CanSelectRiskUnits"/>
+    <WizardStepSet
+      available="!useNewWizardStep()"
+      id="GeneralPropertyWizardStepSet"
+      visible="!useNewWizardStep()">
+      <WizardStep
+        handlesValidationIssue="VALUE == Claim.maincontact or VALUE == Claim.reporter"
+        id="ClassicMainContacts"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimMainContacts.Label&quot;)"
+        onExit="checkForDuplicatesNoWarning()"
+        save="true"
+        screen="NewClaimWizard_MainContactsScreen(Claim, Wizard)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimMainContacts.Step&quot;,  Wizard.CurrentStepNumber ,  Wizard.TotalNumberOfSteps)"/>
+      <WizardStep
+        allowFinish="true"
+        handlesValidationIssue="VALUE typeis entity.Claim or VALUE typeis entity.Incident"
+        id="ClassicLossDetails"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimLossDetails.Label&quot;)"
+        mode="Claim.LossType"
+        onExit="Claim.ServiceRequests.each(\ sr -&gt; sr.finishSetup())"
+        onFirstEnter="if (!Claim.areInitialValuesSet()) { Claim.setInitialValues() }"
+        save="true"
+        screen="NewClaimWizard_LossDetailsScreen(Claim, Wizard)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimLossDetails.Step&quot;,  Wizard.CurrentStepNumber ,  Wizard.TotalNumberOfSteps)"/>
+      <WizardStep
+        allowFinish="true"
+        handlesValidationIssue="VALUE typeis entity.Exposure"
+        id="ClassicExposures"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimExposures.Label&quot;)"
+        onExit="Claim.ServiceRequests.each(\ sr -&gt; sr.finishSetup())"
+        screen="NewClaimWizard_ExposuresScreen(Claim, Wizard)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimExposures.Step&quot;,  Wizard.CurrentStepNumber ,  Wizard.TotalNumberOfSteps)"
+        visible="Claim.ExposureListChangeable"/>
+      <WizardStep
+        allowFinish="true"
+        handlesValidationIssue="VALUE typeis entity.Contact and VALUE != Claim.maincontact and VALUE != Claim.reporter"
+        id="ClassicPartiesInvolved"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPartiesInvolved.Label&quot;)"
+        screen="NewClaimWizard_PartiesInvolvedScreen(Claim, Wizard)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPartiesInvolved.Step&quot;,  Wizard.CurrentStepNumber ,  Wizard.TotalNumberOfSteps)"/>
+      <WizardStep
+        allowFinish="!gw.plugin.Plugins.isEnabled(gw.plugin.document.IDocumentMetadataSource)"
+        id="ClassicDocuments"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimDocuments.Label&quot;)"
+        screen="NewClaimWizard_DocumentsScreen(Claim, Wizard)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimDocuments.Step&quot;,  Wizard.CurrentStepNumber ,  Wizard.TotalNumberOfSteps)"/>
+      <WizardStep
+        allowFinish="true"
+        id="ClassicAssign"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimAssign.Label&quot;)"
+        screen="NewClaimWizard_AssignScreen(Claim, Wizard)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimAssign.Step&quot;,  Wizard.CurrentStepNumber ,  Wizard.TotalNumberOfSteps)"/>
+      <WizardStep
+        id="ClassicSummary"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimSummary.Label&quot;)"
+        screen="NewClaimWizard_SummaryScreen(Claim, Wizard)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimSummary.Step&quot;,  Wizard.CurrentStepNumber ,  Wizard.TotalNumberOfSteps)"/>
+    </WizardStepSet>
+    <WizardStepSet
+      available="Claim.LossType != null"
+      id="AutoWorkersCompWizardStepSet"
+      visible="useNewWizardStep()">
+      <WizardStep
+        handlesValidationIssue="VALUE == Claim.maincontact or VALUE == Claim.reporter"
+        id="BasicInfo"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimMainContacts.Label&quot;)"
+        mode="Claim.LossType"
+        onExit="checkForDuplicatesNoWarning(); BasicInfoExit(); if (!Claim.areInitialValuesSet()) { Claim.setInitialValues() }"
+        save="true"
+        screen="FNOLWizard_BasicInfoScreen(Claim, Wizard)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimMainContacts.Step&quot;,  Wizard.CurrentStepNumber ,  Wizard.TotalNumberOfSteps)"/>
+      <WizardStep
+        allowFinish="true"
+        handlesValidationIssue="VALUE typeis entity.Claim or VALUE typeis entity.Incident"
+        id="LossDetails"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimLossDetails.Label&quot;)"
+        mode="Claim.LossType"
+        onEnter="gw.api.claim.FnolServiceRequestHelper.cleanAndFinishServiceRequests(Wizard) /* clean up when going back from Services step */"
+        onExit="LossDetailsExit(); gw.api.claim.FnolServiceRequestHelper.cleanAndFinishServiceRequests(Wizard)"
+        onFirstEnter="LossDetailsFirstEnter()"
+        save="true"
+        screen="FNOLWizard_NewLossDetailsScreen(Claim, Wizard)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimLossDetails.Step&quot;,  Wizard.CurrentStepNumber ,  Wizard.TotalNumberOfSteps)"/>
+      <WizardStep
+        allowFinish="true"
+        available="IsServicesStepAvailable"
+        id="Services"
+        label="DisplayKey.get(&quot;Web.FNOLWizard.ServicesStep.Label&quot;)"
+        mode="Claim.LossType"
+        onExit="gw.api.claim.FnolServiceRequestHelper.cleanAndFinishServiceRequests(Wizard)"
+        save="true"
+        screen="FNOLWizard_ServicesScreen(Claim, Wizard)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimServices.Step&quot;,  Wizard.CurrentStepNumber, Wizard.TotalNumberOfSteps)"
+        visible="IsServicesStepAvailable"/>
+      <WizardStep
+        id="Summary"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimAssign.Label&quot;)"
+        mode="Claim.LossType"
+        screen="FNOLWizard_AssignSaveScreen(Claim, Wizard)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimAssign.Step&quot;,  Wizard.CurrentStepNumber ,  Wizard.TotalNumberOfSteps)"/>
+    </WizardStepSet>
+    <QuickClaimStep
+      condition="Claim.LossType == TC_AUTO"
+      id="QuickClaimAuto"
+      label="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimAuto.Label&quot;)"
+      onExit="checkForDuplicates()"
+      quickClaimMode="QuickClaimAuto"
+      screen="FNOLWizard_NewQuickClaimScreen(Claim, Wizard)"
+      title="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimAuto.Step&quot;,  Wizard.CurrentStepNumber ,  Wizard.TotalNumberOfSteps)"/>
+    <QuickClaimStep
+      condition="Claim.LossType == TC_AUTO"
+      id="QuickClaimAutoFirstAndFinal"
+      label="DisplayKey.get(&quot;Wizard.NewClaimWizard.AutoFirstAndFinal.Label&quot;)"
+      onEnter="onAutoFirstAndFinalEnter()"
+      onExit="onAutoFirstAndFinalExit()"
+      quickClaimMode="AutoFirstAndFinal"
+      screen="FNOLWizard_AutoFirstAndFinalScreen(Claim, Wizard)"
+      title="DisplayKey.get(&quot;Wizard.NewClaimWizard.AutoFirstAndFinal.Step&quot;,  Wizard.CurrentStepNumber ,  Wizard.TotalNumberOfSteps)"/>
+    <QuickClaimStep
+      condition="Claim.LossType == LossType.TC_PR and !IsHomeownersClaim"
+      id="QuickClaimPr"
+      label="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimProperty.Label&quot;)"
+      onExit="checkForDuplicates()"
+      quickClaimMode="QuickClaimProperty"
+      screen="NewClaimWizard_QuickClaimScreen(Claim, Wizard)"
+      title="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimProperty.Step&quot;,  Wizard.CurrentStepNumber ,  Wizard.TotalNumberOfSteps)"/>
+    <QuickClaimStep
+      condition="Claim.LossType == TC_TRAV "
+      id="QuickClaimTravelTripCancelOnly"
+      label="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimTravelCancelOnly.Label&quot;)"
+      onExit="checkForDuplicates()"
+      onFirstEnter="Claim.setInitialValues()"
+      quickClaimMode="TravelCancelOnly"
+      screen="FNOLWizard_NewQuickClaimScreen(Claim, Wizard)"
+      title="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimTravelTrip.Step&quot;,  Wizard.CurrentStepNumber ,  Wizard.TotalNumberOfSteps)"/>
+    <QuickClaimStep
+      condition="Claim.LossType == TC_TRAV "
+      id="QuickClaimTravelBaggageOnly"
+      label="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimTravelBaggageDelay.Label&quot;)"
+      onExit="checkForDuplicates()"
+      onFirstEnter="Claim.setInitialValues()"
+      quickClaimMode="TravelBaggageOnly"
+      screen="FNOLWizard_NewQuickClaimScreen(Claim, Wizard)"
+      title="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimTravelBaggage.Step&quot;,  Wizard.CurrentStepNumber ,  Wizard.TotalNumberOfSteps)"/>
+    <QuickClaimStep
+      condition="Claim.LossType == TC_GL"
+      id="QuickClaimGL"
+      label="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimGL.Label&quot;)"
+      onExit="checkForDuplicates()"
+      quickClaimMode="GL"
+      screen="NewClaimWizard_QuickClaimScreen(Claim, Wizard)"
+      title="DisplayKey.get(&quot;Wizard.NewClaimWizard.QuickClaimGL.Step&quot;,  Wizard.CurrentStepNumber ,  Wizard.TotalNumberOfSteps)"/>
+    <WizardStepSet
+      id="IndependentWizardStepSet">
+      <WizardStep
+        available="independentStepAllowed"
+        handlesValidationIssue="VALUE typeis entity.Contact and VALUE != Claim.maincontact and VALUE != Claim.reporter"
+        id="PartiesInvolved"
+        independent="true"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPartiesInvolved.Label&quot;)"
+        save="true"
+        screen="NewClaimWizard_PartiesInvolvedScreen(Claim, Wizard)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPartiesInvolved.Label&quot;)"
+        visible="useNewWizardStep()"/>
+      <WizardStepGroup
+        id="PolicyWizardStepGroup"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPolicyGroup.Label&quot;)">
+        <WizardStep
+          available="independentStepAllowed"
+          handlesValidationIssue="VALUE typeis entity.Policy"
+          id="PolicyGeneral"
+          independent="true"
+          label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPolicyGeneral.Label&quot;)"
+          save="true"
+          screen="NewClaimWizard_PolicyGeneralScreen(Claim, Wizard)"
+          title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPolicyGeneral.Label&quot;)"
+          visible="perm.Policy.view(Claim) and perm.System.viewpolicy"/>
+        <WizardStep
+          available="independentStepAllowed"
+          id="PolicyDetails"
+          independent="true"
+          label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPolicyDetails.Label&quot;)"
+          save="true"
+          screen="NewClaimWizard_PolicyDetailsScreen(Claim, Wizard)"
+          title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPolicyDetails.Label&quot;)"
+          visible="perm.Policy.view(Claim) and perm.System.viewpolicy"/>
+      </WizardStepGroup>
+      <WizardStep
+        available="independentStepAllowed"
+        id="Documents"
+        independent="true"
+        label="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimDocuments.Label&quot;)"
+        save="true"
+        screen="FNOLWizard_DocumentsScreen(Claim, Wizard)"
+        title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimDocuments.Label&quot;)"
+        visible="useNewWizardStep()"/>
+      <WizardStep
+        available="independentStepAllowed"
+        id="Notes"
+        independent="true"
+        label="DisplayKey.get(&quot;Web.NewClaimWizard.IndependentSteps.Notes&quot;)"
+        save="true"
+        screen="FNOLWizard_NotesScreen(Claim)"
+        title="DisplayKey.get(&quot;Web.NewClaimWizard.IndependentSteps.Notes&quot;)"
+        visible="useNewWizardStep()"/>
+    </WizardStepSet>
+    <Code><![CDATA[uses gw.vendormanagement.SpecialistServiceCodeConstants
+uses java.util.Date
+
+  property get IsHomeownersClaim() : boolean {
+  return Claim.LossType == LossType.TC_PR and (Wizard.SelectedPolicyType == typekey.PolicyType.TC_HOMEOWNERS or Wizard.PolicyDescription.UnverifiedPolicyType == typekey.PolicyType.TC_HOMEOWNERS)
+  }
+
+  property get IsServicesStepAvailable() : boolean {
+  //var isAvail = not(Claim.Policy.PolicyType == "Comp" or Claim.Policy.PolicyType == "travel_per" or Claim.Policy.PolicyType == null)
+  //var isAvail = not(Wizard.SelectedPolicyType == "Comp" or Wizard.SelectedPolicyType == "travel_per" or Wizard.SelectedPolicyType == null)
+  return not(Wizard.SelectedPolicyType == typekey.PolicyType.TC_WORKERSCOMP or Wizard.SelectedPolicyType == typekey.PolicyType.TC_TRAVEL_PER or Wizard.SelectedPolicyType == null)
+  }
+
+  property get CanSelectRiskUnits() : boolean {
+  var ps = Wizard.PolicyDescription.PolicySummary
+  return ps != null and ps.CanSelectRiskUnits
+}
+
+property get SelectRiskUnitsTitle() : String {
+  var ps = Wizard.PolicyDescription.PolicySummary
+  if(ps==null) return ""
+  if (ps.CanSelectVehicles)
+    return DisplayKey.get("Wizard.NewClaimWizard.SelectRiskUnitStep.SelectAffectedVehicles.Step.Title", Wizard.CurrentStepNumber, Wizard.TotalNumberOfSteps)
+  else if (ps.CanSelectProperties)  
+    return DisplayKey.get("Wizard.NewClaimWizard.SelectRiskUnitStep.SelectAffectedProperties.Step.Title", Wizard.CurrentStepNumber, Wizard.TotalNumberOfSteps)
+  else
+    return ""
+}
+
+property get SelectRiskUnitsLabel() : String {
+  var ps = Wizard.PolicyDescription.PolicySummary
+  if(ps==null) return ""
+  if (ps.CanSelectVehicles)
+    return DisplayKey.get("Wizard.NewClaimWizard.SelectRiskUnitStep.AffectedRiskUnits.Vehicles")
+  else if (ps.CanSelectProperties)  
+    return DisplayKey.get("Wizard.NewClaimWizard.SelectRiskUnitStep.AffectedRiskUnits.Properties")
+  else
+    return ""
+}
+
+function useNewWizardStep() : boolean {
+  return Claim.LossType == null
+        or Claim.LossType == LossType.TC_AUTO
+        or (Claim.LossType == LossType.TC_PR and Wizard.SelectedPolicyType == typekey.PolicyType.TC_HOMEOWNERS)
+        or Claim.LossType == LossType.TC_WC
+      or Claim.LossType ==  LossType.TC_TRAV
+}
+
+function checkForDuplicates() {
+  if (Wizard.checkForNewDuplicateClaims()) {
+    NewClaimDuplicatesWorksheet.goInWorkspace(Wizard)
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Java.NewClaimWizard.DuplicateClaimWarning"))
+  }
+}
+
+function checkForDuplicatesNoWarning() {
+  if (Wizard.checkForNewDuplicateClaims()) {
+    NewClaimDuplicatesWorksheet.goInWorkspace(Wizard)
+  }
+}
+
+function initializeVehicleRU(exp : Exposure) {
+  var vehicleRU = Claim.Policy.Vehicles.first()
+
+  //default to the first vehicleRU if there's vehicles on the policy
+  if (vehicleRU != null) {
+    //set the deductible object and the vehicleincident vehicle
+    exp.VehicleIncident.Vehicle = vehicleRU.Vehicle
+    exp.updateCoverage(vehicleRU)
+  }
+}
+
+function onAutoFirstAndFinalEnter() {
+
+  if (Wizard.Check.MailingAddress != null) {
+    Wizard.Check.MailingAddress = null
+  }
+  
+  Wizard.initializeNewClaimCheck();
+  
+  if (!Claim.areInitialValuesSet()) {
+    Claim.setInitialValues()
+  }
+  var exposures = Claim.OrderedExposures
+  var exposure : entity.Exposure
+  if (exposures.length > 0) {
+    exposure = exposures.single()
+  } else {
+    if (Claim.Policy.PolicyType == typekey.PolicyType.TC_PERSONALAUTO) {
+      exposure = Wizard.addExposureWithNoIncident(Claim, null, CoverageType.TC_PACOMPREHENSIVECOV, CoverageSubtype.TC_PACOMPREHENSIVECOV)
+    } else {  // BusinessAuto
+      exposure = Wizard.addExposureWithNoIncident(Claim, null, CoverageType.TC_BACOMPREHENSIVECOV, CoverageSubtype.TC_BACOMPREHENSIVECOV)
+    }
+  }
+
+  var incident = exposure.ensureIncidentCreated()
+
+  initializeVehicleRU(exposure)
+
+  if (Claim.ServiceRequests.IsEmpty) {
+    // customer contact will get set up on exit
+    var serviceRequest = Claim.newServiceRequest(null, incident)
+    serviceRequest.Instruction.addServiceFoundByCode(SpecialistServiceCodeConstants.AUTOBODYREPAIR)
+    serviceRequest.Kind = ServiceRequestKind.TC_UNMANAGED
+    serviceRequest.Progress = ServiceRequestProgress.TC_WORKCOMPLETE
+    serviceRequest.QuoteStatus = ServiceRequestQuoteStatus.TC_NOQUOTE
+    serviceRequest.RequestedQuoteCompletionDate = null
+    serviceRequest.RequestedServiceCompletionDate = null
+  }
+}
+
+function onAutoFirstAndFinalExit() {
+  
+  var checkMailingAddressError = Wizard.Check.checkMailingAddress()
+  if (checkMailingAddressError != null) {
+    throw new gw.api.util.DisplayableException(checkMailingAddressError)
+  }
+  
+  checkForDuplicates()
+  Wizard.Check.CostType = CostType.TC_CLAIMCOST
+  Wizard.Check.CostCategory = CostCategory.TC_AUTOPARTS
+  validateClaimCostDeductiblePaid(Wizard.Check.CostType)
+  Wizard.changeExposureLossPartyType(LossPartyType.TC_INSURED)
+
+  var exposure = Claim.Exposures.single()
+  // We don't have an explicit UI field to capture the Vehicle Incident Description, even though its required for the
+  // exposure to get to Ability To Pay. However, we do have a UI field to capture Claim Description and, in 
+  // the context of Auto First & Final, these two are synonymous. Hence we just copy over one to the other.
+  exposure.VehicleIncident.Description = Claim.Description
+  
+  var serviceRequest = Claim.ServiceRequests.single()
+  serviceRequest.Currency = Wizard.Check.TransactionCurrency
+  serviceRequest.assignServiceRequestNumber()
+  serviceRequest.Instruction.CustomerContact = exposure.Claimant
+  serviceRequest.initializeCommMethod()
+  
+  if (Wizard.Check.isReadyToPay()) {
+    var currentTime = new Date()
+    var invoice = new ServiceRequestInvoice() {
+      :ApprovalDate = currentTime,
+      :ApprovedBy = User.util.CurrentUser,
+      :Description = DisplayKey.get("Web.ServiceRequest.Invoice.AutomaticallyCreatedInvoiceForUnmanagedService"),
+      :PaidBy = User.util.CurrentUser,
+      :PaymentDate = currentTime,
+      :ServiceRequest = serviceRequest,
+      :Source = StatementSource.TC_MANUAL,
+      :StatementCreationTime = currentTime,
+      :Status = ServiceRequestInvoiceStatus.TC_CHECKCREATED
+    }
+  }
+
+  serviceRequest.recordChange(DisplayKey.get("Web.ServiceRequest.StateTransition.Description.UnmanagedServiceRequestCreated"), null, null, User.util.CurrentUser.Contact)
+}
+
+function FindPolicyExit() {
+  // Attach real policy object only if the user doesn't have
+  // the option to choose specific policy risk units and we are
+  // not in Quick Claim mode  
+
+  var ps = Wizard.PolicyDescription.PolicySummary
+  if (ps != null) {
+    ps = Wizard.FindPolicyUtils.handleLossDateOutOfRange(ps, CurrentLocation)
+
+    if (Wizard.ClaimMode.QuickClaimMode.Mode != null) {
+      // no risk unit selection screen in this case, so select all
+      ps.selectAllRiskUnits()
+    }
+  }
+
+  if (Wizard.QuickClaim != null or !CanSelectRiskUnits) {
+    setPolicy()
+  }
+
+  if (Claim.HowReported == null) {
+    Claim.HowReported = HowReportedType.TC_PHONE
+  }
+
+  Wizard.updateCurrency()
+}
+
+function FindPolicyFirstEnter() {
+  if (claimMode != null or !Claim.New) {
+    //if claimMode is null, then the wizard is entered with a draft claim
+    //reset the appropriate variables from the claim before Wizard intializes
+    if (claimMode == null) {
+      claimMode = new gw.api.claim.NewClaimMode(Claim.LossType, null)
+      Wizard.PageMode = Claim.Policy.Verified
+      if (Wizard.PageMode) {
+        var tempPolicySearchCriteria = new PolicySearchCriteria()
+        tempPolicySearchCriteria.PolicyNumber = Claim.Policy.PolicyNumber
+        tempPolicySearchCriteria.PolicyType = Claim.Policy.PolicyType
+        tempPolicySearchCriteria.LossDate = Claim.LossDate
+        //reconstructing the PolicySummary, if PolicySummary's extension isSamePolicySummary Method is changed, then this must be changed
+        // to sync up as well.
+        var tempPolicySummary = new PolicySummary()
+        tempPolicySummary.PolicyNumber = Claim.Policy.PolicyNumber
+        tempPolicySummary.PolicyType = Claim.Policy.PolicyType
+        tempPolicySummary.EffectiveDate = Claim.Policy.EffectiveDate
+        tempPolicySummary.ExpirationDate = Claim.Policy.ExpirationDate
+        searchCriteriaAndSummary = new gw.api.claim.NewClaimPolicySearchCriteriaAndSummary(tempPolicySearchCriteria, tempPolicySummary)
+      } else {
+        policyNumber = Claim.Policy.PolicyNumber
+        policyType = Claim.Policy.PolicyType
+      }
+    }
+
+    //initialize the Wizard
+    Wizard.ClaimMode = claimMode
+
+    if (Wizard.PageMode and searchCriteriaAndSummary != null) {
+      var selectedPolicySummary = searchCriteriaAndSummary.getCopyOfPolicySummary(Claim)
+      Wizard.setPolicyDescription(selectedPolicySummary)
+      Wizard.savePolicySearch(searchCriteriaAndSummary.getCopyOfPolicySearchCriteria(Claim), selectedPolicySummary)
+    } else if (!Wizard.PageMode) {
+      Claim.LossType = Wizard.LossType
+      var policyDescription = new gw.cc.claim.NewClaimPolicyDescription()
+      policyDescription.setPolicyVerified(false)
+      policyDescription.setUnverifiedPolicyNumber(policyNumber)
+      policyDescription.setUnverifiedPolicyType(policyType)
+      Wizard.PolicyDescription = policyDescription
+      Wizard.setPolicy()
+    }
+  }
+}
+
+function BasicInfoExit() {
+  if (Claim.LossType == LossType.TC_AUTO) {
+    Wizard.VehicleHelper.syncVehicleIncidents( Claim )
+    var vehicleIncidents = Claim.VehicleIncidentsOnly
+    for (vehicleIncident in vehicleIncidents) {
+      if (vehicleIncident.VehicleLossParty == null) {
+        vehicleIncident.VehicleLossParty = LossPartyType.TC_INSURED
+      }
+    }
+  }  
+}
+
+function LossDetailsFirstEnter() {
+  if (!Claim.areInitialValuesSet()) {
+    Claim.setInitialValues()
+  }
+  
+  if (IsHomeownersClaim and Wizard.HomeownersHelper.LocationChoice == null) {
+    Wizard.HomeownersHelper.LocationChoice = Claim.Policy.PrimaryLocation != null ? "primary" : "other"
+  }
+}
+  
+function LossDetailsExit() {
+  // if the "Primary Location" choice is highlighted, use the primary location
+  // of the claim's policy as the loss location
+  if (Wizard.HomeownersHelper.LocationChoice == "primary") {
+    Claim.LossLocation = Claim.Policy.PrimaryLocation.Address
+  }
+}
+
+function onRiskUnitSelectExit() {
+  // Validate at least one risk unit has been selected.
+  if (Wizard.PolicySummary.VehiclePolicyType) {
+    validateMinimumRiskUnitsSelected(Wizard.PolicySummary.Vehicles)
+  } else {
+    validateMinimumRiskUnitsSelected(Wizard.PolicySummary.Properties)
+  }
+  
+  if (Claim.Policy != null && !Wizard.PolicySummary.hasSameRiskUnits(Claim.Policy)) {
+    Wizard.resetClaimForPolicyChange()
+  }
+  setPolicy()
+}
+
+function setPolicy() {
+  Wizard.setPolicy()
+  Wizard.VehicleHelper.AutoSelectedMarker = false
+}
+ 
+function validateMinimumRiskUnitsSelected(ru : PolicySummaryRiskUnit[]) {
+  foreach(r in ru) {
+    if (r.Selected) {
+      return
+    }
+  }
+  throw new gw.api.util.DisplayableException(
+    DisplayKey.get("Wizard.NewClaimWizard.SelectRiskUnitStep.SelectValidation"))
+}
+
+/**
+ * Method used on check validate claim cost deductible is paid or waived.
+ */
+function validateClaimCostDeductiblePaid(costType : CostType) {
+  //return if not using deductible
+  if (!gw.api.financials.FinancialsUtil.isUseDeductibleHandling()) {
+    return
+  }
+
+  /**
+   * Validates the check to ensure deductibles are paid or waived on a check that contains claim-costs payments on
+   * exposures that have a coverage with a deductible amount when the user tries to move to Step 3 from Step 2
+   * if validation does not pass, the message "The Check cannot be created as the Deductible has not been applied"
+   * is thrown to the UI.
+   *
+   */
+  if (typekey.CostType.TC_CLAIMCOST == costType) {
+    //check only those payments with an exposure and coverage,
+    // and deductible object for the coverage is not paid or waived
+    var claimDeductible = Wizard.Claim.Exposures[0].Coverage.ClaimDeductible
+    if (claimDeductible != null and (Wizard.Check.ReadyToPay and !Wizard.Check.ApplyDeductible)) {
+      throw new gw.api.util.DisplayableException(DisplayKey.get("Web.NewCheckWizard.NewPaymentDetail.DeductibleNotPaid"))
+    }
+  }
+}
+
+function afterFinish() {
+  cleanServiceRequestsLists()
+  Wizard.goAfterFinish()
+}
+
+function cleanServiceRequestsLists() {
+  Wizard.VehicleIncidentOtherServiceRequests.clear()  
+  Wizard.UnusedServiceRequests.clear()
+}]]></Code>
+  </NewClaimWizard>
+</PCF>

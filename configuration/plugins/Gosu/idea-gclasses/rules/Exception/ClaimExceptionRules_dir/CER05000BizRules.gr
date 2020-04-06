@@ -1,0 +1,17 @@
+package rules.Exception.ClaimExceptionRules_dir
+uses gw.bizrules.context.ClaimTriggeringPoint
+
+@gw.rules.RuleName("CER05000 - BizRules")
+internal class CER05000BizRules {
+  static function doCondition(claim : entity.Claim) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+/*start00rule*/
+gw.bizrules.BizRulesExecutor.getInstance().trigger(new ClaimTriggeringPoint(TriggeringPointKey.TC_EXCEPTION, claim)) 
+/*end00rule*/
+  }
+}

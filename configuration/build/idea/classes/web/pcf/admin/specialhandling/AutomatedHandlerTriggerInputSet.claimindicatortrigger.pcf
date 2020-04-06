@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="AutomatedHandlerTriggerInputSet"
+    mode="claimindicatortrigger">
+    <Require
+      name="automatedHandler"
+      type="AutomatedHandler"/>
+    <Variable
+      initialValue="automatedHandler.Trigger as ClaimIndicatorTrigger"
+      name="trigger"
+      type="ClaimIndicatorTrigger"/>
+    <RangeInput
+      editable="true"
+      id="AutomatedHandlerClaimIndicator"
+      label="DisplayKey.get(&quot;Web.Admin.AutomatedHandlerTrigger.ClaimIndicator.Indicator&quot;)"
+      required="true"
+      sortValueRange="false"
+      value="trigger.ClaimIndicator"
+      valueRange="getClaimIndicatorOptions()"
+      valueType="typekey.ClaimIndicator"/>
+    <BooleanRadioInput
+      align="left"
+      editable="true"
+      falseLabel="DisplayKey.get(&quot;Web.Admin.AutomatedHandlerTrigger.ClaimIndicator.Event.TurnsOff&quot;)"
+      id="AutomatedHandlerClaimIndicatorTriggeringValue"
+      label="DisplayKey.get(&quot;Web.Admin.AutomatedHandlerTrigger.ClaimIndicator.Event&quot;)"
+      required="true"
+      stacked="true"
+      trueLabel="DisplayKey.get(&quot;Web.Admin.AutomatedHandlerTrigger.ClaimIndicator.Event.TurnsOn&quot;)"
+      value="trigger.TriggeringValue"/>
+    <Code><![CDATA[function getClaimIndicatorOptions() : typekey.ClaimIndicator[] {
+  var baseSet = typekey.ClaimIndicator.getTypeKeys(false).disjunction({typekey.ClaimIndicator.TC_CLAIMINDICATOR})
+  return baseSet.toArray(new typekey.ClaimIndicator[baseSet.Count]).sortBy(\ c -> c.DisplayName)
+}]]></Code>
+  </InputSet>
+</PCF>

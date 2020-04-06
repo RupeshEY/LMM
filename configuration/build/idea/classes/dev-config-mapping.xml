@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ConfigMapping xsi:noNamespaceSchemaLocation="config-mapping.xsd"
+               xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <Constant name="PRODUCT_DIR" value="$DEV_ROOT$/cc/config/"/>
+
+  <File name="menu-config.xsd" location="$PRODUCT_DIR$/addressbook/menu-config.xsd"/>
+
+  <File name="aggregatelimitused-config.xml" location="$PRODUCT_DIR$/aggregatelimit/aggregatelimitused-config.xml"/>
+  <File name="aggregatelimitused-config.xsd" location="$PRODUCT_DIR$/aggregatelimit/aggregatelimitused-config.xsd"/>
+
+  <File name="contactroleconstraints-config.xml" location="$PRODUCT_DIR$/contact/contactroleconstraints-config.xml"/>
+  <File name="contactroleconstraints-config.xsd" location="$PRODUCT_DIR$/contact/contactroleconstraints-config.xsd"/>
+
+  <File name="entityroleconstraints-config.xml" location="$PRODUCT_DIR$/contact/entityroleconstraints-config.xml"/>
+  <File name="entityroleconstraints-config.xsd" location="$PRODUCT_DIR$/contact/entityroleconstraints-config.xsd"/>
+  
+  <File name="policyperiod-config.xml" location="$PRODUCT_DIR$/aggregatelimit/policyperiod-config.xml"/>
+  <File name="policyperiod-config.xsd" location="$PRODUCT_DIR$/aggregatelimit/policyperiod-config.xsd"/>
+
+  <File name="snapshot.xsd" location="snapshot/snapshot.xsd"/>
+
+  <File name="security-config.xsd" location="$PRODUCT_DIR$/security/security-config.xsd"/>
+  <File name="security-config.xml" location="$PRODUCT_DIR$/security/security-config.xml"/>
+
+  <Dir name="ccworkflow" location="$PRODUCT_DIR$/metro/workflow"/>
+  <File name="ccworkflow.xsd" location="$PRODUCT_DIR$/metro/workflow/workflow.xsd"/>
+
+  <Dir name="iso" location="$PRODUCT_DIR$/iso"/>
+
+  <Dir name="metro" location="$PRODUCT_DIR$/metro"/>
+  <Dir name="metrotemplates" location="$PRODUCT_DIR$/web/templates/metroreport"/>
+
+  <Dir name="snapshot-pcfs" location="$PRODUCT_DIR$/web/pcf/claim/snapshot"/>
+
+  <Include file="pl-dev-config-mapping.xml"/>
+
+</ConfigMapping>

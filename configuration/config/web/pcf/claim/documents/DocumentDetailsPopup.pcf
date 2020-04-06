@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="perm.Document.edit(DocumentParam)"
+    afterCommit="DocumentDetailsPopup.push(DocumentParam, editMetadata)"
+    id="DocumentDetailsPopup"
+    title="DisplayKey.get(&quot;Web.DocumentDetails.Title&quot;)">
+    <LocationEntryPoint
+      signature="DocumentDetailsPopup(DocumentParam : Document)"/>
+    <LocationEntryPoint
+      signature="DocumentDetailsPopup(DocumentParam : Document, editMetadata: boolean)"/>
+    <Variable
+      name="DocumentParam"
+      type="Document"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <Variable
+      initialValue="true"
+      name="editMetadata"
+      type="boolean"/>
+    <Screen
+      id="DocumentDetailsScreen">
+      <AlertBar
+        id="ContentlessNoActionsText"
+        label="DisplayKey.get(&quot;Web.DocumentDetails.ContentActionsDisabled&quot;)"
+        visible="!DocumentParam.DMS"/>
+      <PanelRef>
+        <Toolbar>
+          <EditButtons
+            editVisible="editMetadata and documentsActionsHelper.isEditDocumentDetailsVisible(DocumentParam)"/>
+        </Toolbar>
+        <DetailViewPanel>
+          <InputColumn>
+            <ContentInput
+              labelAbove="true">
+              <Link
+                action="DocumentParam.downloadContent()"
+                available="documentsActionsHelper.isDocumentContentActionsAvailableInDocumentProperties(CurrentLocation.InEditMode, DocumentParam)"
+                download="attachment"
+                icon="documentsActionsHelper.isDocumentContentActionsAvailableInDocumentProperties(CurrentLocation.InEditMode, DocumentParam) ? &quot;download_document_16.png&quot; : &quot;download_document_disabled_16.png&quot; "
+                id="DownloadLink"
+                styleClass="none"
+                tooltip="documentsActionsHelper.DownloadDocumentContentTooltip"
+                visible="editMetadata and documentsActionsHelper.isDownloadDocumentContentVisibleInDocumentProperties(CurrentLocation.InEditMode, DocumentParam)"/>
+              <Link
+                icon="&quot;trans_pixel.png&quot;"
+                id="Spacer1"
+                visible="editMetadata and documentsActionsHelper.isIconSpacerVisible(CurrentLocation.InEditMode, DocumentParam)"/>
+              <Link
+                icon="&quot;trans_pixel.png&quot;"
+                id="Spacer2"
+                visible="editMetadata and documentsActionsHelper.isIconSpacerVisible(CurrentLocation.InEditMode, DocumentParam)"/>
+              <Link
+                icon="&quot;trans_pixel.png&quot;"
+                id="Spacer3"
+                visible="editMetadata and documentsActionsHelper.isIconSpacerVisible(CurrentLocation.InEditMode, DocumentParam)"/>
+              <Link
+                action="UploadDocumentContentPopup.push(DocumentParam)"
+                available="documentsActionsHelper.isDocumentContentActionsAvailableInDocumentProperties(CurrentLocation.InEditMode, DocumentParam)"
+                icon="documentsActionsHelper.isDocumentContentActionsAvailableInDocumentProperties(CurrentLocation.InEditMode, DocumentParam) ? &quot;upload_document_16.png&quot; : &quot;upload_document_disabled_16.png&quot;"
+                id="UploadLink"
+                styleClass="none"
+                tooltip="documentsActionsHelper.UploadDocumentContentTooltip"
+                visible="editMetadata and documentsActionsHelper.isUploadDocumentContentVisibleInDocumentProperties(CurrentLocation.InEditMode, DocumentParam)"/>
+            </ContentInput>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelRef>
+      <DetailViewPanel>
+        <Layout
+          columns="1"
+          type="table"/>
+        <InputSetRef
+          def="DocumentDetailsEditInputSet(new gw.document.DocumentDetailsCCHelper(DocumentParam, false, \docLink -&gt; docLink.Unlinkable), false)"
+          mode="DocumentParam.Type"/>
+        <InputSetRef
+          def="DocumentDetailsEditSupplementalInputSet(DocumentParam)"/>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

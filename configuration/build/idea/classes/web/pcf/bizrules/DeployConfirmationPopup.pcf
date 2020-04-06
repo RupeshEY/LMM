@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canVisit="gw.bizrules.pcf.RulePermissionUIHelper.canDeployRule(null)"
+    id="DeployConfirmationPopup"
+    title="DisplayKey.get('BizRules.DeployConfirmationPopup.Title')">
+    <LocationEntryPoint
+      signature="DeployConfirmationPopup(pageHelper: gw.bizrules.pcf.RuleDeploymentPageHelper)"/>
+    <Variable
+      name="pageHelper"
+      type="gw.bizrules.pcf.RuleDeploymentPageHelper"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="pageHelper.deployQualifiedRulesInNewBundle(); pageHelper.NavigationSupport.goToRulesListPage()"
+          available="pageHelper.hasQualifiedRules() &amp;&amp; !pageHelper.DeployFailed"
+          id="Continue"
+          label="DisplayKey.get('BizRules.DeployConfirmationPopup.ContinueDeploy')"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="Cancel"
+          label="DisplayKey.get('Button.Cancel')"/>
+      </Toolbar>
+      <PanelSet
+        visible="pageHelper.hasQualifiedRules()">
+        <PanelRef
+          def="RuleListPanelSet(pageHelper.NavigationSupport, pageHelper.ReadyVersions)"
+          id="ReadyVersions">
+          <TitleBar
+            title="DisplayKey.get('BizRules.DeployConfirmationPopup.RulesBeingDeployed')"/>
+          <Toolbar/>
+        </PanelRef>
+      </PanelSet>
+      <PanelSet
+        visible="pageHelper.hasExceptions()">
+        <PanelRef>
+          <TitleBar
+            title="DisplayKey.get('BizRules.DeployConfirmationPopup.RulesNotBeingDeployed')"/>
+          <DetailViewPanel>
+            <InputColumn></InputColumn>
+          </DetailViewPanel>
+        </PanelRef>
+        <PanelRef
+          def="RuleListPanelSet(pageHelper.NavigationSupport, pageHelper.UnapprovedVersions)"
+          id="UnapprovedVersions">
+          <Toolbar/>
+        </PanelRef>
+        <PanelRef
+          def="RuleListPanelSet(pageHelper.NavigationSupport, pageHelper.InvalidVersions)"
+          id="InvalidVersions">
+          <Toolbar/>
+        </PanelRef>
+        <PanelRef
+          def="RuleListPanelSet(pageHelper.NavigationSupport, pageHelper.OutdatedVersions)"
+          id="OutdatedVersions">
+          <Toolbar/>
+        </PanelRef>
+        <PanelRef
+          def="RuleListPanelSet(pageHelper.NavigationSupport, pageHelper.AlreadyDeployedVersions)"
+          id="AlreadyDeployedVersions">
+          <Toolbar/>
+        </PanelRef>
+      </PanelSet>
+    </Screen>
+  </Popup>
+</PCF>

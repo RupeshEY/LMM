@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="DocumentTemplateSearchCriteria">
+  <implementsInterface
+    iface="com.guidewire.pl.domain.document.impl.DocumentTemplateSearchCriteriaInternalMethods"
+    impl="com.guidewire.cc.domain.document.impl.DocumentTemplateSearchCriteriaCoreExtMethodsImpl"/>
+  <description><![CDATA[
+Non-persistent set of criteria to use in searching for a specific document template. Document templates are used in conjunction with the {@link com.guidewire.cc.plugin.document.IDocumentProduction} plugin interface to create new documents contents and Document entities, and store them in a document management system.
+<p>
+Document template files are XML files whose format is defined in the deployed document-template.xsd file. Therefore additions of new document template descriptor properties which should be searchable must be coordinated between that xsd file, this entity, and the {@link com.guidewire.cc.domain.document.DocumentTemplateSearchResults} entity.
+      
+    ]]></description>
+  <typekey
+    desc="The desired lob type of the document templates."
+    name="Lob"
+    nullok="true"
+    typelist="LOBCode"/>
+  <typekey
+    desc="The state (modeled as Jursidiction) to which the document template should apply. The Jurisdiction must be associated with JurisdictionType.TC_INSURANCE."
+    name="State"
+    nullok="true"
+    typelist="Jurisdiction"/>
+  <typekey
+    desc="The desired section of the document templates."
+    name="Section"
+    nullok="true"
+    typelist="DocumentSection"/>
+  <column
+    desc="The required identifier value of the document templates."
+    name="Identifier"
+    nullok="true"
+    type="shorttext"/>
+</internalExtension>

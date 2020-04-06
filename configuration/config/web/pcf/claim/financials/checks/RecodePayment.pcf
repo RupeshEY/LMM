@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterCancel="ClaimFinancialsTransactionsDetail.go(Claim, OriginalPayment)"
+    afterCommit="gw.api.financials.FinancialsUtil.logRecode(OriginalPayment, FirstOnsetPayment); ClaimFinancialsTransactions.go(Claim, gw.api.financials.ClaimFinancialsTransactionsOption.PAYMENT)"
+    alwaysInEditMode="true"
+    canEdit="true"
+    canVisit="perm.Payment.recode(OriginalPayment)"
+    id="RecodePayment"
+    parent="ClaimFinancialsTransactionsDetail(Claim, OriginalPayment)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.RecodePayment.Recode.Title&quot;)">
+    <LocationEntryPoint
+      signature="RecodePayment(Claim : Claim, OriginalPayment : Payment)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="OriginalPayment"
+      type="Payment"/>
+    <Variable
+      initialValue="gw.api.financials.ReserveLineInputSetStrategyForPaymentRecode.newHelper(OriginalPayment.Check)"
+      name="reserveLineInputSetHelper"
+      type="gw.api.financials.ReserveLineInputSetHelper"/>
+    <Variable
+      initialValue="createPayment()"
+      name="FirstOnsetPayment"
+      type="entity.Payment"/>
+    <Variable
+      initialValue="new java.util.ArrayList&lt;Payment&gt;(){FirstOnsetPayment}"
+      name="OnsetPayments"
+      type="java.util.ArrayList&lt;Payment&gt;"/>
+    <Screen
+      id="RecodePaymentScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="doRecode()"
+          id="RecodePayment_RecodeButton"
+          label="DisplayKey.get(&quot;Button.Payment.Recode&quot;)"/>
+        <EditButtons
+          cancelLabel="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          cancelVisible="true"
+          editVisible="false"
+          updateVisible="false"/>
+        <IteratorButtons
+          addLabel="DisplayKey.get(&quot;Button.Check.AddPayment&quot;)"
+          addVisible="gw.api.financials.FinancialsUtil.isAllowMultiplePayments() and !OriginalPayment.Check.Bulked"
+          iterator="RecodePaymentPanelSet.NewOnsetPaymentsLV"
+          removeLabel="DisplayKey.get(&quot;Button.Check.RemovePayment&quot;)"
+          removeVisible="gw.api.financials.FinancialsUtil.isAllowMultiplePayments() and !OriginalPayment.Check.Bulked"/>
+      </Toolbar>
+      <PanelRef
+        def="RecodePaymentPanelSet(OriginalPayment, OnsetPayments, reserveLineInputSetHelper)"
+        mode="gw.api.financials.FinancialsUtil.isAllowMultiplePayments() ? &quot;multi&quot; : &quot;single&quot;"/>
+    </Screen>
+    <Code><![CDATA[function createPayment(): Payment {
+  var pmt = OriginalPayment.getOnset();
+  if (pmt == null) {
+    pmt = OriginalPayment.createOnsetPayment(true, true)
+  }
+  return pmt
+}
+
+function doRecode() {
+  var vr: gw.api.validation.ValidationExecutionResult[]
+
+  if (OriginalPayment.hasDeductibleLineItem()) {
+    OriginalPayment.unlinkDeductible()
+  }
+  FirstOnsetPayment.linkDeductible()
+
+  gw.api.util.CCLocationUtil.runAndCommit(\-> {
+    try {
+      OriginalPayment.recodePayment(OnsetPayments.toArray(new Payment[]{}))
+    } catch (e: gw.api.financials.CloseValidationException) {
+      vr = e.ValidationResults
+    }
+  }, CurrentLocation)
+
+  if (vr.HasElements) {
+    gw.api.util.LocationUtil.addRequestScopedInfoMessage(DisplayKey.get("Java.Financials.CheckWizard.Warning.ClaimExposureNotClosed"))
+    for (validationResult in vr) {
+      var messages = validationResult.Result.ErrorMessages
+      for (message in messages) {
+        gw.api.util.LocationUtil.addRequestScopedInfoMessage(message)
+      }
+    }
+  }
+}
+        ]]></Code>
+  </Page>
+</PCF>

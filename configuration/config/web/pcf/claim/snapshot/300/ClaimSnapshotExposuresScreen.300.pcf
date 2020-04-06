@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="ClaimSnapshotExposuresScreen"
+    mode="300">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="SnapshotParam"
+      type="dynamic.Dynamic"/>
+    <Toolbar/>
+    <ListDetailPanel
+      selectionName="SelectedExposure"
+      selectionType="dynamic.Dynamic">
+      <ListViewPanel
+        id="ClaimSnapshotExposuresLV">
+        <RowIterator
+          editable="false"
+          elementName="Exposure"
+          value="SnapshotParam.Exposures"
+          valueType="dynamic.Dynamic">
+          <Row>
+            <TextCell
+              id="Number"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotExposuresScreen.V300.Number&quot;)"
+              sortOrder="1"
+              value="Exposure.ClaimOrder"
+              valueType="dynamic.Dynamic"/>
+            <TextCell
+              id="Type"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotExposuresScreen.V300.Type&quot;)"
+              value="Exposure.Subtype"
+              valueType="dynamic.Dynamic"/>
+            <TextCell
+              id="Coverage"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotExposuresScreen.V300.Coverage&quot;)"
+              value="Exposure.PrimaryCoverage"
+              valueType="dynamic.Dynamic"/>
+            <TextCell
+              id="Claimant"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotExposuresScreen.V300.Claimant&quot;)"
+              value="util.Snapshot.renderValue( util.Snapshot.getClaimant(SnapshotParam, Exposure)[&quot;Contact&quot;] )"/>
+            <TextCell
+              id="Reserves"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotExposuresScreen.V300.Reserves&quot;)"
+              value="util.Snapshot.getPropertyValue(Exposure, &quot;ExposureRpt&quot;)[&quot;RemainingReserves&quot;]"
+              valueType="dynamic.Dynamic"/>
+            <TextCell
+              id="FuturePayments"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotExposuresScreen.V300.FuturePayments&quot;)"
+              value="util.Snapshot.getPropertyValue(Exposure, &quot;ExposureRpt&quot;)[&quot;FuturePayments&quot;]"
+              valueType="dynamic.Dynamic"/>
+            <TextCell
+              id="TotalPayments"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotExposuresScreen.V300.TotalPayments&quot;)"
+              value="util.Snapshot.getPropertyValue(Exposure, &quot;ExposureRpt&quot;)[&quot;TotalPayments&quot;]"
+              valueType="dynamic.Dynamic"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+      <CardViewPanel>
+        <Card
+          id="ClaimSnapshotExposuresCard"
+          title="util.Snapshot.renderValue(SelectedExposure)">
+          <PanelRef
+            def="ClaimSnapshotExposure300DV(Claim, SnapshotParam, SelectedExposure)"
+            mode="SelectedExposure.Subtype.Code"/>
+        </Card>
+      </CardViewPanel>
+    </ListDetailPanel>
+  </Screen>
+</PCF>

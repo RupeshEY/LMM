@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Limits for metrics related to an exposure"
+  entity="ExposureMetricLimit"
+  exportable="true"
+  final="false"
+  ignoreForEvents="true"
+  loadable="false"
+  table="expmetriclimit"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.metric.entity.ExposureMetricLimit"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.exposure.metric.impl.ExposureMetricLimitInternal"/>
+  <implementsEntity
+    name="CopyOnWriteMetricLimitDelegate"/>
+  <implementsInterface
+    iface="gw.api.metric.MetricLimit"
+    impl="gw.api.exposure.metric.ExposureMetricLimitMethodsImpl"/>
+  <foreignkey
+    columnName="PolicyTypeMetricLimitsID"
+    desc="Back pointer to policy type metric limits object that owns this limit."
+    exportable="false"
+    fkentity="PolicyTypeMetricLimits"
+    name="PolicyTypeMetricLimits"
+    nullok="false"/>
+  <typekey
+    desc="Type of exposure metric to which this limit applies."
+    name="ExposureMetricType"
+    nullok="false"
+    typelist="ExposureMetric"/>
+  <typekey
+    desc="Exposure tier to which this limit applies, or null if this is a default limit"
+    name="ExposureTier"
+    nullok="true"
+    typelist="ExposureTier"/>
+  <typekey
+    desc="Currency for this limit, for non money based limits this is always the default currency."
+    name="Currency"
+    nullok="false"
+    typelist="Currency"/>
+  <typekey
+    desc="Units for this type of metric."
+    name="MetricUnit"
+    nullok="false"
+    typelist="MetricUnit"/>
+  <column
+    default="true"
+    desc="Boolean field to indicate the direction of comparison for value validation "
+    name="AscendingLimitOrder"
+    nullok="false"
+    type="bit"/>
+  <index
+    desc="Index to ensure there is only one limit per combination of policy type/metric type/exposure"
+    name="expmetriclimitu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="PolicyTypeMetricLimitsID"/>
+    <indexcol
+      keyposition="2"
+      name="ExposureMetricType"/>
+    <indexcol
+      keyposition="3"
+      name="ExposureTier"/>
+    <indexcol
+      keyposition="4"
+      name="Currency"/>
+    <indexcol
+      keyposition="5"
+      name="Retired"/>
+  </index>
+</entity>

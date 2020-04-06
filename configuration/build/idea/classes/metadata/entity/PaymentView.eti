@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Aggregates the information needed to display a Payment using the Payment filter of the Financials Transactions page. Subtype of TransactionView."
+  entity="PaymentView"
+  exportable="false"
+  final="false"
+  primaryEntity="Payment"
+  supertypeEntity="TransactionView">
+  <implementsInterface
+    iface="gw.cc.financials.entity.PaymentView"
+    impl="com.guidewire.cc.domain.financials.impl.PaymentViewImpl"/>
+  <viewEntityColumn
+    name="Check_ScheduledSendDate"
+    path="Check.ScheduledSendDate"/>
+  <viewEntityColumn
+    name="Check_IssueDate"
+    path="Check.IssueDate"/>
+  <viewEntityColumn
+    name="Check_CheckNumber"
+    path="Check.CheckNumber"/>
+  <viewEntityColumn
+    name="Check_PayTo"
+    path="Check.PayTo"/>
+  <viewEntityTypekey
+    name="PaymentType"
+    path="PaymentType"/>
+</viewEntity>

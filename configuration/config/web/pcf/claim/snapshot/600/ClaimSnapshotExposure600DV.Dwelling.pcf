@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="ClaimSnapshotExposure600DV"
+    mode="Dwelling">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Exposure"
+      type="dynamic.Dynamic"/>
+    <InputColumn>
+      <InputSetRef
+        def="ClaimSnapshotExposureDetailInputSet(Exposure)"
+        mode="600"/>
+    </InputColumn>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposureDV.Default.IncidentOverview&quot;)"/>
+      <TextInput
+        action="ClaimSnapshotDwellingIncident600Popup.push(Claim, Exposure.DwellingIncident)"
+        id="Dwelling_Incident"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposureDV.DwellingIncident.Description&quot;)"
+        value="Exposure.DwellingIncident.DisplayName"
+        valueType="dynamic.Dynamic"/>
+      <InputSetRef
+        def="ClaimSnapshotExposureCodingInputSet(Exposure)"
+        mode="600"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="ClaimSnapshotOtherCarrierInvolvementInputSet(Exposure)"
+        mode="600"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

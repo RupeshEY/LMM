@@ -1,0 +1,111 @@
+package rules.Validation.TransactionSetValidationRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.util.CurrencyUtil
+uses gw.api.financials.FinancialsCalculations
+uses gw.financials.CoverageLimitRulesUtil
+
+@gw.rules.RuleName("TXV01000 - Total payment not > Exposure limit")
+internal class TXV01000TotalpaymentnotExposurelimit {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return transactionSet.Subtype == TC_CHECKSET
+and transactionSet.New
+
+/* The transactionset.new condition disallows the rule from executing for all 
+ * transactions associated with the claim (because we want the rule to execute 
+ * only for the new transactions that we are trying to add.)
+ */
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/* Set the following warning parameters (warning1 & warning2) to true if you want to throw a
+ * warning, but still permit the end-user to continue with the transaction if he/she desires
+ * Set to false if you want to block this transaction
+ */
+var warning1 = false 
+var warning2 = true 
+var exposureSet = new java.util.HashSet<Exposure>()
+var costType = CostType.TC_CLAIMCOST
+
+for (transaction in transactionSet.Transactions) {
+  if (transaction.Exposure != null) {
+    exposureSet.add(transaction.Exposure)
+  }
+}
+
+for (exposure in exposureSet) {
+  //only if the exposure has a coverage with an exposure limit defined
+  if (exposure.HasCoverageLimit) {
+    var exposureLimit = exposure.Coverage.ExposureLimit
+
+    var compareInLimitCurrency = CoverageLimitRulesUtil.shouldCompareInReservingCurrency({exposure}, costType, exposureLimit.Currency)
+    if ( not compareInLimitCurrency ) {
+      exposureLimit = exposureLimit.convert( transactionSet.Claim.Currency, java.math.RoundingMode.UP )
+    }
+
+    var totalPaymentsCalc = FinancialsCalculations.getTotalPaymentsIncludingPending()
+                          .withExposure( exposure )
+                          .withCostType( costType )
+                          .withTransactionSetAsIfSubmitted( transactionSet )
+    var totalPayments = CoverageLimitRulesUtil.getCalcValueForCompare(
+                             totalPaymentsCalc,
+                             exposureLimit.Currency, compareInLimitCurrency)
+
+    var combinedCalc = CoverageLimitRulesUtil.getCommittedAndFutureAndPendingApprovalPaymentsAndReserves()
+                    .withExposure( exposure )
+                    .withCostType( costType )
+                    .withTransactionSetAsIfSubmitted( transactionSet )
+    var combined = CoverageLimitRulesUtil.getCalcValueForCompare(
+                             combinedCalc,
+                             exposureLimit.Currency, compareInLimitCurrency)
+
+    //If this TransactionSet would put the total payout over the exposure limit
+    if (totalPayments > exposureLimit) {
+      //If Warning1 is set to TRUE, throw a warning, but permit the transaction to go through if the user desires so
+      if (warning1 == true) {
+        transactionSet.reject(null, null, TC_PAYMENT, 
+          DisplayKey.get("Rules.Validation.Transaction.TotalPaymentsIncludingPendingOnExposureExceedsExposureLimitWarning", 
+                  exposure, CurrencyUtil.renderAsCurrency(totalPayments), 
+                  CurrencyUtil.renderAsCurrency(exposure.Coverage.ExposureLimit),
+                  actions.ShortRuleName))
+      } else {
+        //If Warning1 is set to FALSE, BLOCK THE TRANSACTION FROM GOING THROUGH
+        transactionSet.reject(TC_PAYMENT, 
+          DisplayKey.get("Rules.Validation.Transaction.TotalPaymentsIncludingPendingOnExposureExceedsExposureLimitError", 
+	          exposure, CurrencyUtil.renderAsCurrency(totalPayments), 
+	          CurrencyUtil.renderAsCurrency(exposure.Coverage.ExposureLimit),
+	          actions.ShortRuleName), 
+	  null, null)
+      }
+    }
+    //If this TransactionSet would put the (TotalIncurred + All Pending Approval transactions) over the exposure limit
+    else if (combined > exposureLimit) {
+      //If Warning2 is set to TRUE, throw a warning, but permit the transaction to go through if the user desires so 
+      if (warning2 == true) {
+        transactionSet.reject(null, null, TC_PAYMENT,
+          DisplayKey.get("Rules.Validation.Transaction.TotalPaymentsIncludingPendingPlusAvailableAndPendingReservesOnExposureExceedsExposureLimitWarning", 
+                  exposure, CurrencyUtil.renderAsCurrency(combined), 
+                  CurrencyUtil.renderAsCurrency(exposure.Coverage.ExposureLimit),
+                  actions.ShortRuleName))
+      } else {
+        //If Warning2 is set to FALSE, BLOCK THE TRANSACTION FROM GOING THROUGH
+        transactionSet.reject(TC_PAYMENT, 
+          DisplayKey.get("Rules.Validation.Transaction.TotalPaymentsIncludingPendingPlusAvailableAndPendingReservesOnExposureExceedsExposureLimitError", 
+                  exposure, CurrencyUtil.renderAsCurrency(combined),
+                  CurrencyUtil.renderAsCurrency(exposure.Coverage.ExposureLimit),
+                  actions.ShortRuleName),
+          null, null)
+      }
+    }
+  }
+}
+/*end00rule*/
+
+  }
+}

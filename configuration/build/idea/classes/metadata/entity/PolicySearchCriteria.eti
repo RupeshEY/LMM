@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Search criteria for Policy searches."
+  entity="PolicySearchCriteria"
+  exportable="true"
+  extendable="true">
+  <implementsInterface
+    iface="gw.cc.policy.entity.PolicySearchCriteria"
+    impl="com.guidewire.cc.domain.policy.impl.PolicySearchCriteriaImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.policy.impl.PolicySearchCriteriaInternal"
+    impl="com.guidewire.cc.domain.policy.impl.PolicySearchCriteriaImpl"/>
+  <implementsInterface
+    iface="java.io.Serializable"
+    impl="com.guidewire.cc.domain.policy.impl.PolicySearchCriteriaImpl"/>
+  <fulldescription><![CDATA[
+Non-persistent set of criteria to use in searching for a specific policy.
+  ]]></fulldescription>
+  <column
+    name="PolicyNumber"
+    nullok="true"
+    type="policynumber"/>
+  <typekey
+    desc="Type of loss."
+    name="LossType"
+    nullok="false"
+    typelist="LossType"/>
+  <typekey
+    desc="Type of policy."
+    name="PolicyType"
+    nullok="true"
+    typelist="PolicyType"/>
+  <column
+    name="LossDate"
+    nullok="true"
+    type="datetime"/>
+  <typekey
+    desc="Type of contact to search for"
+    name="ContactType"
+    nullok="true"
+    typelist="SearchContactType"/>
+  <column
+    name="TaxIdString"
+    nullok="true"
+    type="ssn"/>
+  <column
+    name="Vin"
+    nullok="true"
+    type="vin"/>
+  <column
+    name="LastName"
+    nullok="true"
+    type="lastname"/>
+  <column
+    name="FirstName"
+    nullok="true"
+    type="firstname"/>
+  <column
+    name="CompanyName"
+    nullok="true"
+    type="companyname"/>
+  <column
+    default="false"
+    desc="Include archived olicies in results"
+    name="IncludeArchived"
+    nullok="true"
+    type="bit"/>
+  <foreignkey
+    desc="The address of the insured.  Supercedes the separate fields of City, State, and PostalCode."
+    fkentity="Address"
+    name="InsuredAddress"
+    nullok="true"/>
+  <foreignkey
+    desc="The address of the property.  Generalizes and supercedes the existing PropertyCity field."
+    fkentity="Address"
+    name="PropertyAddress"
+    nullok="true"/>
+</nonPersistentEntity>

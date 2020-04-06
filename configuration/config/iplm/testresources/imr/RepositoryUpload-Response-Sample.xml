@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RepositoryOperationRs xmlns="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0" xmlns:rlc="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/2005-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0 Acord-Repository_v-1-2-0.xsd">
+   <MsgId>5483b656-706b-4f3d-8fa1-b57bfe2fdd34</MsgId>
+   <CreationDtTime>2015-01-29T07:25:26Z</CreationDtTime>
+   <RepositoryOperationTypeCd>RepositoryUpload</RepositoryOperationTypeCd>
+   <ResponseInfo>
+      <MsgId>20142830-42b4-0712-0061-113508251139</MsgId>
+      <AcknowledgementLevelIndicator>application_validation</AcknowledgementLevelIndicator>
+      <AcknowledgementStatusCd>acknowledged</AcknowledgementStatusCd>
+   </ResponseInfo>
+   <Sender>
+      <PartyId>urn:duns:236196817</PartyId>
+      <PartyRoleCd>ServiceProvider</PartyRoleCd>
+      <PartyName>Xchanging</PartyName>      
+   </Sender>
+   <Receiver>
+      <PartyId>urn:lloyds:0001</PartyId>
+      <PartyRoleCd>Insurer</PartyRoleCd>
+      <PartyName>writeback-carrier</PartyName>
+   </Receiver>
+   <Application>
+      <ApplicationCd>Jv-Ins-Reinsurance</ApplicationCd>
+      <SchemaVersion>http://www.ACORD.org/standards/Jv-Ins-Reinsurance/2005-2</SchemaVersion>
+   </Application>
+</RepositoryOperationRs>

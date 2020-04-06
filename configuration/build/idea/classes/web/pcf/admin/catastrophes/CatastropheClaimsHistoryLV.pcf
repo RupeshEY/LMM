@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="CatastropheClaimsHistoryLV">
+    <ExposeIterator
+      valueType="entity.CatastropheClaimsHistory"
+      widget="CatastropheClaimsHistoryLV"/>
+    <Require
+      name="catastrophe"
+      type="Catastrophe"/>
+    <RowIterator
+      editable="false"
+      elementName="history"
+      value="catastrophe.ClaimsHistory"
+      valueType="entity.CatastropheClaimsHistory[]">
+      <Row>
+        <DateCell
+          dateFormat="short"
+          id="Eventtimestamp"
+          label="DisplayKey.get(&quot;Web.Admin.AdminCatastropheDV.CatastropheClaimsHistoryLV.EventTimeStamp&quot;)"
+          sortDirection="descending"
+          sortOrder="1"
+          timeFormat="short"
+          value="history.EventTimestamp"/>
+        <TextCell
+          id="Description"
+          label="DisplayKey.get(&quot;Web.Admin.AdminCatastropheDV.CatastropheClaimsHistoryLV.Description&quot;)"
+          value="history.Description"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

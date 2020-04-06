@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>ClaimCenter903OOTB.modules</groupId>
+  <artifactId>configuration</artifactId>
+  <version>9.0.3</version>
+  <properties/>
+  <parent>
+    <groupId></groupId>
+    <artifactId>ClaimCenter903OOTB</artifactId>
+    <version>9.0.3</version>
+    <relativePath>../../../../../build/publications/mavenJava/pom-default.xml</relativePath>
+  </parent>
+  <dependencyManagement>
+    <dependencies/>
+  </dependencyManagement>
+  <dependencies>
+    <dependency>
+      <groupId>com.guidewire.cc</groupId>
+      <artifactId>cc-tools</artifactId>
+      <scope>runtime</scope>
+    </dependency>
+    <dependency>
+      <groupId>com.guidewire.cc</groupId>
+      <artifactId>cc-gunit</artifactId>
+      <scope>compile</scope>
+    </dependency>
+  </dependencies>
+</project>

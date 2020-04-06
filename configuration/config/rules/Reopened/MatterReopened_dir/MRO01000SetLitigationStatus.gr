@@ -1,0 +1,20 @@
+package rules.Reopened.MatterReopened_dir
+
+@gw.rules.RuleName("MRO01000 - Set Litigation Status")
+internal class MRO01000SetLitigationStatus {
+  static function doCondition(matter : entity.Matter) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(matter : entity.Matter, actions : gw.rules.Action) {
+
+/*start00rule*/
+matter.Claim.LitigationStatus = TC_LITIGATED
+/*end00rule*/
+
+  }
+}

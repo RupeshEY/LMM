@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="CheckRecurrenceInputSet">
+    <Require
+      name="check"
+      type="Check"/>
+    <Variable
+      initialValue="new gw.financials.CheckRecurrenceUIHelper(check)"
+      name="recurrenceHelper"
+      type="gw.financials.CheckRecurrenceUIHelper"/>
+    <RangeInput
+      confirmMessage="DisplayKey.get(&quot;Wizard.NewCheckWizard.CheckInstructions.Recurrence.ConfirmMessage&quot;)"
+      editable="!check.CheckSet.Approved"
+      id="RecurrenceType"
+      label="DisplayKey.get(&quot;Wizard.NewCheckWizard.CheckInstructions.Recurrence.Label&quot;)"
+      required="true"
+      value="recurrenceHelper.RecurrenceType"
+      valueRange="recurrenceHelper.RecurrenceTypes"
+      valueType="gw.financials.CheckRecurrenceType"
+      visible="recurrenceHelper.Visible">
+      <PostOnChange/>
+    </RangeInput>
+    <InputSetRef
+      def="CheckRecurrenceDetailInputSet(check, recurrenceHelper)"
+      mode="recurrenceHelper.RecurrenceType"/>
+  </InputSet>
+</PCF>

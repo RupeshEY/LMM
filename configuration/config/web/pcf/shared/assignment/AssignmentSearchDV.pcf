@@ -1,0 +1,135 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="AssignmentSearchDV">
+    <Require
+      name="AssignmentSearchTypes"
+      type="AssignmentSearchType[]"/>
+    <Require
+      name="SearchCriteria"
+      type="gw.api.assignment.CCAssignmentSearchCriteria"/>
+    <Require
+      name="proximitySearchPageHelper"
+      type="gw.api.contact.CCProximitySearchPageHelper"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="gw.api.admin.AdminUtil.getAttributeNames()?.toTypedArray()"
+      name="AttributeSource"
+      type="String[]"/>
+    <InputColumn>
+      <RangeInput
+        editable="AssignmentSearchTypes.Count &gt; 1"
+        id="SearchFor"
+        label="DisplayKey.get(&quot;Web.Assignment.Search.SearchFor&quot;)"
+        required="true"
+        value="SearchCriteria.SearchType"
+        valueRange="AssignmentSearchTypes"
+        valueType="typekey.AssignmentSearchType">
+        <PostOnChange/>
+      </RangeInput>
+      <!-- List of User-specific searchable parameters -->
+      <InputSet
+        visible="SearchCriteria.SearchType == TC_USER">
+        <InputSetRef
+          def="GlobalPersonNameInputSet( new gw.api.name.SearchNameOwner(SearchCriteria.UserCriteria.Contact))"
+          mode="gw.api.name.NameLocaleSettings.PCFMode"/>
+        <TextInput
+          editable="true"
+          id="Username"
+          label="DisplayKey.get(&quot;Web.Assignment.Search.Username&quot;)"
+          value="SearchCriteria.UserCriteria.Username"/>
+        <GroupInput
+          editable="true"
+          id="Group"
+          label="DisplayKey.get(&quot;Web.Assignment.Search.GroupName&quot;)"
+          selectLocation="AssignmentOrgGroupTreePopup.push()"
+          value="SearchCriteria.CCUserSearchCriteria.Group"/>
+        <RangeInput
+          editable="true"
+          id="UserRole"
+          label="DisplayKey.get(&quot;Web.UserSearch.Role&quot;)"
+          value="SearchCriteria.UserCriteria.Role"
+          valueRange="SearchCriteria.UserCriteria.getAllRoles()"
+          valueType="entity.Role"/>
+        <RangeInput
+          editable="true"
+          id="AttributeName"
+          label="DisplayKey.get(&quot;Web.Assignment.Search.AttributeName&quot;)"
+          value="SearchCriteria.CCUserSearchCriteria.AttributeName"
+          valueRange="AttributeSource"
+          valueType="java.lang.String"
+          visible="true">
+          <PostOnChange/>
+        </RangeInput>
+        <InputSet
+          visible="SearchCriteria.CCUserSearchCriteria.AttributeName != null">
+          <TextInput
+            editable="true"
+            id="AttributeValue"
+            label="DisplayKey.get(&quot;Web.Assignment.Search.AttributeValue&quot;)"
+            value="SearchCriteria.CCUserSearchCriteria.AttributeValue"
+            valueType="java.lang.Integer"/>
+          <TypeKeyInput
+            editable="true"
+            id="AttributeState"
+            label="DisplayKey.get(&quot;Web.Assignment.Search.AttributeState&quot;)"
+            value="SearchCriteria.CCUserSearchCriteria.AttributeState"
+            valueType="typekey.State"/>
+        </InputSet>
+      </InputSet>
+      <!-- List of Group-specific searchable parameters -->
+      <InputSet
+        visible="SearchCriteria.SearchType == TC_GROUP">
+        <TextInput
+          editable="true"
+          id="GroupCriteriaName"
+          label="(gw.api.util.LocaleUtil.CurrentLocaleType == LocaleType.TC_JA_JP) ? DisplayKey.get(&quot;Web.Assignment.Search.GroupNamePhonetic&quot;) : DisplayKey.get(&quot;Web.Assignment.Search.GroupName&quot;)"
+          value="SearchCriteria.GroupCriteria.GroupName"/>
+        <TextInput
+          editable="true"
+          id="GroupCriteriaNameKanji"
+          label="DisplayKey.get(&quot;Web.Assignment.Search.GroupName&quot;)"
+          value="SearchCriteria.GroupCriteria.GroupNameKanji"
+          visible="gw.api.util.LocaleUtil.CurrentLocaleType == LocaleType.TC_JA_JP"/>
+      </InputSet>
+      <!-- List of Queue-specific searchable parameters -->
+      <InputSet
+        visible="SearchCriteria.SearchType == TC_QUEUE">
+        <TextInput
+          editable="true"
+          id="GroupName"
+          label="(gw.api.util.LocaleUtil.CurrentLocaleType == LocaleType.TC_JA_JP) ? DisplayKey.get(&quot;Web.Assignment.Search.GroupNamePhonetic&quot;) : DisplayKey.get(&quot;Web.Assignment.Search.GroupName&quot;)"
+          value="SearchCriteria.QueueCriteria.QueueGroupName"/>
+        <TextInput
+          editable="true"
+          id="GroupNameKanji"
+          label="DisplayKey.get(&quot;Web.Assignment.Search.GroupName&quot;)"
+          value="SearchCriteria.QueueCriteria.QueueGroupNameKanji"
+          visible="gw.api.util.LocaleUtil.CurrentLocaleType == LocaleType.TC_JA_JP"/>
+        <TextInput
+          editable="true"
+          id="QueueName"
+          label="DisplayKey.get(&quot;Web.Assignment.Search.QueueName&quot;)"
+          value="SearchCriteria.QueueCriteria.QueueName"/>
+      </InputSet>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="CCAddressBookSearchLocationInputSet(SearchCriteria.UserCriteria.Contact)"
+        visible="SearchCriteria.SearchType == TC_USER"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="CCAddressBookSearchProximityAddressInputSet(SearchCriteria.UserCriteria.Contact, proximitySearchPageHelper, claim)"
+        visible="SearchCriteria.SearchType == TC_USER and proximitySearchPageHelper.useGeocodeUILocally()"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

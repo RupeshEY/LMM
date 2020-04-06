@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    id="ClaimEvaluationPrintDetail"
+    parent="ClaimPrintout(Evaluation.Claim)"
+    title="DisplayKey.get(&quot;Web.ClaimPlanOfAction.Evaluations&quot;)">
+    <LocationEntryPoint
+      signature="ClaimEvaluationPrintDetail(Evaluation : Evaluation)"/>
+    <Variable
+      initialValue="Evaluation.Claim"
+      name="claim"
+      type="Claim"/>
+    <Variable
+      name="Evaluation"
+      type="Evaluation"/>
+    <Screen
+      id="EvaluationPrintDetailScreen">
+      <PanelRef
+        def="ClaimEvaluationDetailsDV(Evaluation)"
+        mode="claim.LossType"/>
+    </Screen>
+  </Page>
+</PCF>

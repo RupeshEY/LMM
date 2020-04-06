@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Excess of loss non-proportional reinsurance treaty agreement."
+  entity="ExcessOfLossRITreaty"
+  supertype="NonProportionalRIAgreement">
+  <implementsInterface
+    iface="gw.cc.reinsurance.entity.ExcessOfLossRITreaty"
+    impl="com.guidewire.cc.domain.reinsurance.impl.ExcessOfLossRITreatyImpl"/>
+</subtype>

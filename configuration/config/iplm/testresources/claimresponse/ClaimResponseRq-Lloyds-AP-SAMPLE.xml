@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wb:ClaimResponseRq
+  Sender="insurer"
+  Receiver="serviceprovider"
+  xmlns:wb="http://www.xchanging.com/claimResponse/rq/1"
+  xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1">
+  <UUId>20150514-4710-a0f8-0101-1aa177771965</UUId>
+  <wb:AsOfDate>2017-06-16T10:55:34</wb:AsOfDate>
+  <wb:ReferredUUId>614f61e4-2008-46f4-92b9-4a91657e3381</wb:ReferredUUId>
+  <wb:InsurerTransactionReference>55435435</wb:InsurerTransactionReference>
+  <CreationDate>2017-06-16T10:55:42+01:00</CreationDate>
+  <wb:Insurer>
+    <Party>
+      <Id
+        Agency="lloyds">urn:lloyds:0623
+      </Id>
+      <Name>Beazley 0623</Name>
+    </Party>
+    <wb:Contact>
+      <wb:ClassUserId>23214</wb:ClassUserId>
+      <wb:AccountCode>14241</wb:AccountCode>
+    </wb:Contact>
+  </wb:Insurer>
+  <ServiceProvider>
+    <Party>
+      <Id
+        Agency="DUNS_dun_and_bradstreet">urn:duns:236196817
+      </Id>
+      <Name>Xchanging</Name>
+    </Party>
+  </ServiceProvider>
+  <wb:Contract>
+    <BrokerReference>UMR123</BrokerReference>
+  </wb:Contract>
+  <wb:ClaimEntry>
+    <BrokerReference>TR1</BrokerReference>
+  </wb:ClaimEntry>
+  <wb:Claim>
+    <BrokerReference>UCRLLSAP</BrokerReference>
+    <wb:ClaimType>000</wb:ClaimType>
+  </wb:Claim>
+  <wb:ClaimResponse>
+    <wb:ParticipantFunction>Agreement Party</wb:ParticipantFunction>
+    <wb:ClaimLineNo>1</wb:ClaimLineNo>
+    <wb:AgreementPartyResponse>
+      <wb:LloydsAgreeementPartyResponse>QUERY-RETURN</wb:LloydsAgreeementPartyResponse>
+      <wb:PrivateComments>
+        <wb:CommentDetails>4363463</wb:CommentDetails>
+      </wb:PrivateComments>
+      <wb:PublicComments>
+        <wb:CommentDetails>1234567</wb:CommentDetails>
+      </wb:PublicComments>
+    </wb:AgreementPartyResponse>
+  </wb:ClaimResponse>
+</wb:ClaimResponseRq>

@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="ClaimIndicatorInputSet"
+    mode="CoverageInQuestionClaimIndicator">
+    <Require
+      name="indicator"
+      type="ClaimIndicator"/>
+    <Variable
+      initialValue="CurrentLocation.InEditMode"
+      name="inEditMode"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="indicator.Claim.getCoverageInQuestionFactors()"
+      name="coverageInQuestionFactors"
+      type="java.util.HashMap&lt;java.lang.Object, java.lang.Object&gt;"/>
+    <ContentInput
+      id="CoverageInQuestionOnLabel"
+      label="DisplayKey.get(&quot;Web.Claim.CoverageInQuestionClaimIndicator.CoverageInQuestionLabel&quot;)"
+      visible="!inEditMode">
+      <Link
+        icon="indicator.Icon"
+        id="CoverageInQuestionIcon"
+        tooltip="indicator.HoverText"
+        visible="indicator.IsOn"/>
+      <Link
+        id="CoverageInQuestionText"
+        label="indicator.Text"/>
+    </ContentInput>
+    <BooleanRadioInput
+      available="true"
+      editable="editCovInQuestion()"
+      id="CoverageInQuestion"
+      label="DisplayKey.get(&quot;Web.Claim.CoverageInQuestionClaimIndicator.CoverageInQuestionLabel&quot;)"
+      required="true"
+      value="indicator.Claim.CoverageInQuestion"
+      visible="CurrentLocation.InEditMode"/>
+    <InputSet
+      visible="!coverageInQuestionFactors.Empty and indicator.Claim.CoverageInQuestion">
+      <Label
+        id="coverageInQuestionReasons"
+        label="DisplayKey.get(&quot;Web.Claim.CoverageInQuestionClaimIndicator.Reasons&quot;)"/>
+      <TypeKeyInput
+        id="PolicyStatusReason"
+        label="DisplayKey.get(&quot;Web.Claim.CoverageInQuestionClaimIndicator.PolicyStatus&quot;)"
+        value="indicator.Claim.Policy.Status"
+        valueType="typekey.PolicyStatus"
+        visible="coverageInQuestionFactors.containsKey(DisplayKey.get(&quot;Web.Claim.CoverageInQuestionClaimIndicator.PolicyStatus&quot;))"/>
+      <TextInput
+        id="LossDateReason"
+        label="DisplayKey.get(&quot;Web.Claim.CoverageInQuestionClaimIndicator.LossDate&quot;)"
+        value="coverageInQuestionFactors.get(DisplayKey.get(&quot;Web.Claim.CoverageInQuestionClaimIndicator.LossDate&quot;))"
+        valueType="java.lang.Object"
+        visible="coverageInQuestionFactors.containsKey(DisplayKey.get(&quot;Web.Claim.CoverageInQuestionClaimIndicator.LossDate&quot;))"/>
+    </InputSet>
+    <Code><![CDATA[// Used to allow editing the CoverageInQuestion field. Allow editing the field if the value is not true, otherwise only
+// allow editing if the user has the unsetcovinquestion permission   
+function editCovInQuestion() : Boolean{
+   if( indicator.Claim.CoverageInQuestion != true)
+     return true
+   else if(indicator.Claim.CoverageInQuestion == true and perm.System.unsetcovinquestion == true) 
+     return true
+   return false    
+}]]></Code>
+  </InputSet>
+</PCF>

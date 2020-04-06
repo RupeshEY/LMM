@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuTree
+    height="400"
+    id="DashboardMenuTree"
+    visible="perm.User.viewanyedb">
+    <Variable
+      initialValue="new gw.api.web.team.DashboardTreeViewRootModel()"
+      name="dashboardRoot"
+      type="gw.api.web.team.DashboardTreeViewRootModel"/>
+    <TreeView
+      elementLabel="element"
+      elementName="element"
+      elementType="gw.api.web.team.CCTeamTreeViewModel"
+      id="DashboardMenuTree"
+      onClickElement="element.treeElementClicked(CurrentLocation)"
+      value="dashboardRoot"/>
+  </MenuTree>
+</PCF>

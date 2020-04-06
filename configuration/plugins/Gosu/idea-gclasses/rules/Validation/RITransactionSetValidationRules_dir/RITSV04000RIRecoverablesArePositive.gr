@@ -1,0 +1,57 @@
+package rules.Validation.RITransactionSetValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.financials.FinancialsCalculations
+uses gw.api.util.CurrencyUtil
+uses java.util.HashSet
+
+@gw.rules.RuleName("RITSV04000 - RI Recoverables Are Positive")
+internal class RITSV04000RIRecoverablesArePositive {
+  static function doCondition(rITransactionSet : entity.RITransactionSet) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(rITransactionSet : entity.RITransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+var agreements = new HashSet<RIAgreement>()
+
+for (rITransaction in rITransactionSet.RITransactions) {
+  if (rITransaction typeis RIRecoverable) {
+    agreements.add(rITransaction.RIAgreement)
+  }
+}
+
+for (agreement in agreements) {
+
+  var riRecoverablesCalculated = FinancialsCalculations.getRITotalRecoverablesNonAdjustments()
+        .withClaim(rITransactionSet.Claim)
+        .withRIAgreement(agreement)
+        .noNulls()
+        .Amount
+
+  var riRecoverablesTotal = FinancialsCalculations.getRITotalRecoverables()
+        .withClaim(rITransactionSet.Claim)
+        .withRIAgreement(agreement)
+        .noNulls()
+        .Amount
+
+  if (riRecoverablesCalculated.Amount < 0) {
+    var message = DisplayKey.get("Rules.Validation.RITransaction.CalculatedRIRecoverablesMustBeGreaterThanZero", 
+              CurrencyUtil.renderAsCurrency(riRecoverablesCalculated))
+    rITransactionSet.warnOrCreateActivity(message)
+  }
+  if (riRecoverablesTotal.Amount < 0) {
+    var message = DisplayKey.get("Rules.Validation.RITransaction.TotalRIRecoverablesMustBeGreaterThanZero", 
+              CurrencyUtil.renderAsCurrency(riRecoverablesTotal))
+    rITransactionSet.warnOrCreateActivity(message)
+  }
+}
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,270 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SearchConfig
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="search-config.xsd"
+  version="2">
+
+  <!--                                                                       -->
+  <!--                            WARNING                                    -->
+  <!--                                                                       -->
+  <!--
+    The search screens are some of the most performance sensitive in ClaimCenter.
+    Any changes to the search-config.xml file should be followed by thorough
+    performance testing. Remember that a change that works perfectly well at
+    small scale may fail catastrophically under heavy load on a large database.
+    Here are some guidelines for making changes:
+
+    * The main search screens are divided into required and optional sections.
+      The properties in the required section have been carefully chosen so don't
+      muck with them. You can't add new required properties anyway, but don't
+      even change the match type of the existing ones.
+    * You may need to add an index to improve performance. Unfortunately the
+      exact index to add will depend on the database being used and the details
+      of the situation. Consult a database expert.
+    * Avoid the "contains" match type if possible, it is the most expensive type
+      of match (followed by startsWith).
+    * If you add an ArrayCriterion the array table must have two unique indexes.
+      The first must be on the foreign key back to the main table and your
+      chosen arrayMemberProperty. The second must be on the same two properties
+      but in the reverse order (arrayMemberProperty first).
+  -->
+
+  <!--
+    Mapping from claim search criteria to main claim table
+  -->
+  <CriteriaDef entity="ClaimSearchCriteria" targetEntity="Claim">
+
+    <Criterion property="ClaimNumber" matchType="eq"/>
+    <Criterion property="AssignedToUser" targetProperty="AssignedUser" matchType="eq"/>
+    <Criterion property="CreatedByUser" targetProperty="CreateUser" matchType="eq"/>
+    <Criterion property="Catastrophe" matchType="eq"/>
+    <Criterion property="JurisdictionState" matchType="eq"/>
+    <Criterion property="ClaimState" targetProperty="State" matchType="eq"/>
+    <Criterion property="LOBCode" matchType="eq"/>
+    <Criterion property="LossType" matchType="eq"/>
+    <Criterion property="CoverageInQuestion" matchType="eq"/>
+    <Criterion property="FlaggedType" targetProperty="Flagged" matchType="eq"/>
+    <Criterion property="IncidentReport" matchType="eq"/>
+    <Criterion property="LitigationStatus" matchType="eq"/>
+    <Criterion property="ReinsuranceReportable" matchType="eq"/>
+
+    <CriterionChoice property="DateCriterionChoice"
+        init="DateCriterionChoice.SearchType = TC_CLAIM; DateCriterionChoice.DateSearchType = TC_FROMLIST; DateCriterionChoice.DateRangeChoice = TC_N365; DateCriterionChoice.ChosenOption = &quot;Java.Criterion.Option.Claim.LossDate&quot;">
+      <Option label="Java.Criterion.Option.Claim.LossDate" targetProperty="LossDate"/>
+      <Option label="Java.Criterion.Option.Claim.ReportedDate" targetProperty="ReportedDate"/>
+      <Option label="Java.Criterion.Option.Claim.CloseDate" targetProperty="CloseDate"/>
+      <Option label="Java.Criterion.Option.Claim.CreateDate" targetProperty="CreateTime"/>
+    </CriterionChoice>
+
+    <!-- Example extension -->
+    <!--<Criterion property="Fault" matchType="ge"/>-->
+    <Criterion property="UMR_Ext" matchType="startsWith" />
+    <Criterion property="UCR_Ext" matchType="startsWith" />
+  </CriteriaDef>
+
+  <CriteriaDef entity="ClaimSearchCriteria" targetEntity="ClaimInfo">
+    <Criterion property="ClaimNumber" matchType="eq"/>
+    <Criterion property="PolicyNumber" matchType="eq"/>
+    <CriterionChoice property="ArchiveDateCriterionChoice"
+        init="DateCriterionChoice.SearchType = TC_CLAIMINFO; DateCriterionChoice.DateSearchType = TC_FROMLIST; DateCriterionChoice.DateRangeChoice = TC_N365; DateCriterionChoice.ChosenOption = null;">
+      <Option label="Java.Criterion.Option.ArchiveClaim.LossDate" targetProperty="LossDate"/>
+    </CriterionChoice>
+  </CriteriaDef>
+
+  <!--
+    Mapping from claim search criteria to main claimInfo table
+  -->
+  <CriteriaDef entity="ClaimInfoCriteria" targetEntity="ClaimInfo">
+    <Criterion property="ClaimNumber" matchType="eq"/>
+    <Criterion property="PolicyNumber" matchType="eq"/>
+    <Criterion property="UMR_Ext" matchType="startsWith" />
+    <Criterion property="UCR_Ext" matchType="startsWith" />
+  </CriteriaDef>
+
+  <!--
+    Mapping from claim search criteria to ClaimRpt (denormalized financials) table
+
+    Note: New option available in 3.1.2:
+    <Option label="Java.Criterion.Option.Claim.TotalIncurredNetMinusOpenRecoveryReserves"/>
+  -->
+  <CriteriaDef entity="ClaimSearchCriteria" targetEntity="ClaimRpt">
+
+    <CriterionChoice property="FinancialCriterion">
+      <Option label="Java.Criterion.Option.Claim.OpenReserves" targetProperty="OpenReserves"/>
+      <Option label="Java.Criterion.Option.Claim.RemainingReserves" targetProperty="RemainingReserves"/>
+      <Option label="Java.Criterion.Option.Claim.TotalPayments" targetProperty="TotalPayments"/>
+      <Option label="Java.Criterion.Option.Claim.FuturePayments" targetProperty="FuturePayments"/>
+      <Option label="Java.Criterion.Option.Claim.TotalIncurredGross"/>
+      <Option label="Java.Criterion.Option.Claim.TotalIncurredNet"/>
+    </CriterionChoice>
+
+  </CriteriaDef>
+
+  <!--
+    Mapping from activity search criteria to activity table
+  -->
+  <CriteriaDef entity="ActivitySearchCriteria" targetEntity="Activity">
+
+    <Criterion property="ActivityStatus" targetProperty="Status" matchType="eq"/>
+    <Criterion property="Priority" matchType="eq"/>
+    <Criterion property="AssignedToUser" targetProperty="AssignedUser" matchType="eq"/>
+    <Criterion property="CreatedByUser" targetProperty="CreateUser" matchType="eq"/>
+    <Criterion property="Description" matchType="contains"/>
+
+    <CriterionChoice property="DateCriterionChoice"
+        init="DateCriterionChoice.SearchType = TC_ACTIVITY; DateCriterionChoice.DateSearchType = TC_ENTEREDRANGE; DateCriterionChoice.DateRangeChoice = TC_N0; DateCriterionChoice.ChosenOption = &quot;Java.Criterion.Option.Activity.TargetDate&quot;">
+      <Option label="Java.Criterion.Option.Activity.CloseDate" targetProperty="CloseDate"/>
+      <Option label="Java.Criterion.Option.Activity.TargetDate" targetProperty="TargetDate"/>
+      <Option label="Java.Criterion.Option.Activity.CreateDate" targetProperty="CreateTime"/>
+    </CriterionChoice>
+
+  </CriteriaDef>
+
+  <!--
+    Mapping from payment search criteria to check table
+  -->
+  <CriteriaDef entity="PaymentSearchCriteria" targetEntity="Check">
+
+    <Criterion property="CheckNumber" matchType="eq"/>
+    <Criterion property="InvoiceNumber" matchType="eq"/>
+    <Criterion property="CheckStatus" targetProperty="Status" matchType="eq"/>
+    <Criterion property="PayTo" matchType="contains"/>
+
+    <CriterionChoice property="DateCriterionChoice"
+        init="DateCriterionChoice.SearchType = TC_PAYMENT; DateCriterionChoice.DateSearchType = TC_FROMLIST; DateCriterionChoice.DateRangeChoice = TC_N90; DateCriterionChoice.ChosenOption = &quot;Java.Criterion.Option.Payment.EnteredTime&quot;">
+      <Option label="Java.Criterion.Option.Payment.EnteredTime" targetProperty="EnteredTime"/>
+      <Option label="Java.Criterion.Option.Payment.ApprovedDate"/> <!-- Custom -->
+      <Option label="Java.Criterion.Option.Payment.IssueDate" targetProperty="IssueDate"/>
+      <Option label="Java.Criterion.Option.Payment.ServiceDate" targetProperty="DateOfService"/>
+      <Option label="Java.Criterion.Option.Payment.PeriodStart" targetProperty="ServicePDStart"/>
+      <Option label="Java.Criterion.Option.Payment.PeriodEnd" targetProperty="ServicePDEnd"/>
+      <Option label="Java.Criterion.Option.Payment.ScheduledSendDate" targetProperty="ScheduledSendDate"/>
+    </CriterionChoice>
+
+  </CriteriaDef>
+
+  <!--
+    Mapping from payment search criteria to check table
+  -->
+  <CriteriaDef entity="PaymentSearchCriteria" targetEntity="CheckRpt">
+    <CriterionChoice property="FinancialCriterion">
+      <Option label="Java.Criterion.Option.Payment.GrossAmount" targetProperty="GrossAmount"/>
+    </CriterionChoice>
+  </CriteriaDef>
+
+  <!--
+    Mapping from recovery search criteria to recovery table
+  -->
+  <CriteriaDef entity="RecoverySearchCriteria" targetEntity="Recovery">
+
+    <Criterion property="CreatedByUser" targetProperty="CreateUser" matchType="eq"/>
+    <Criterion property="RecoveryStatus" targetProperty="Status" matchType="eq"/>
+    <Criterion property="CostType" matchType="eq"/>
+    <Criterion property="RecoveryCategory" matchType="eq"/>
+
+    <CriterionChoice property="DateCriterionChoice"
+        init="DateCriterionChoice.SearchType = TC_RECOVERY; DateCriterionChoice.DateSearchType = TC_FROMLIST; DateCriterionChoice.DateRangeChoice = TC_N90; DateCriterionChoice.ChosenOption = &quot;Java.Criterion.Option.Recovery.CreateDate&quot;">
+      <Option label="Java.Criterion.Option.Recovery.CreateDate" targetProperty="CreateTime"/>
+      <Option label="Java.Criterion.Option.Recovery.ApprovedDate"/> <!-- Custom -->
+    </CriterionChoice>
+  </CriteriaDef>
+
+  <!--
+    Mapping from bulk invoice search criteria to bulk invoice table
+  -->
+  <CriteriaDef entity="BulkInvoiceSearchCriteria" targetEntity="BulkInvoice">
+    <Criterion property="InvoiceNumber" matchType="eq"/>
+    <Criterion property="CheckNumber" matchType="eq"/>
+    <Criterion property="PayTo" matchType="contains"/>
+
+    <CriterionChoice property="DateCriterionChoice"
+        init="DateCriterionChoice.SearchType = TC_PAYMENT; DateCriterionChoice.DateSearchType = TC_FROMLIST; DateCriterionChoice.DateRangeChoice = TC_N90; DateCriterionChoice.ChosenOption = &quot;Java.Criterion.Option.BulkPay.SendDate&quot;">
+      <Option label="Java.Criterion.Option.BulkPay.SendDate" targetProperty="ScheduledSendDate"/>
+      <Option label="Java.Criterion.Option.BulkPay.ReceivedDate" targetProperty="ReceivedDate"/>
+    </CriterionChoice>
+  </CriteriaDef>
+
+  <!-- Map a search on User/UserBase to search criteria -->
+  <CriteriaDef entity="UserSearchCriteria" targetEntity="User">
+  </CriteriaDef>
+
+  <!-- Map a search on AuthorityLimitProfile to search criteria -->
+  <CriteriaDef entity="UserSearchCriteria" targetEntity="AuthorityLimitProfile">
+  </CriteriaDef>
+
+  <!-- Map a search on Attributes to search criteria -->
+  <CriteriaDef entity="UserSearchCriteria" targetEntity="Attribute">
+    <Criterion property="AttributeName" targetProperty="Name" matchType="startsWith"/>
+  </CriteriaDef>
+
+  <!-- Map a search on AttributeUser to search criteria -->
+  <CriteriaDef entity="UserSearchCriteria" targetEntity="AttributeUser">
+    <Criterion property="AttributeValue" targetProperty="Value" matchType="eq"/>
+    <Criterion property="AttributeState" targetProperty="State" matchType="eq"/>
+  </CriteriaDef>
+
+  <!-- Map a search on Document to search criteria -->
+  <CriteriaDef entity="DocumentSearchCriteria" targetEntity="Document">
+    <Criterion property="Author" targetProperty="Author" matchType="startsWith"/>
+  </CriteriaDef>
+
+  <!--
+    Mapping from a non persistent address used as part of a search criteria object to the physical
+    address table in the database.
+  -->
+  <CriteriaDef entity="Address" targetEntity="Address">
+    <Criterion property="City" matchType="startsWith"/>
+    <Criterion property="CityKanji" matchType="startsWithCaseSensitive"/>
+    <Criterion property="State" matchType="eq"/>
+    <Criterion property="PostalCode" matchType="startsWith"/>
+    <Criterion property="Country" matchType="eq"/>
+  </CriteriaDef>
+
+  <!-- Mapping from CCNameCriteria to Contact -->
+  <CriteriaDef entity="CCNameCriteria" targetEntity="Contact">
+    <Criterion property="TaxId" targetProperty="TaxID" matchType="eq"/>
+  </CriteriaDef>
+
+  <!-- Mapping from CCNameCriteria to Company -->
+  <CriteriaDef entity="CCNameCriteria" targetEntity="Company">
+    <Criterion property="CompanyName" targetProperty="Name" matchType="startsWith"/>
+    <Criterion property="NameKanji" targetProperty="NameKanji" matchType="startsWithCaseSensitive"/>
+  </CriteriaDef>
+
+  <!-- Mapping from CCNameCriteria to Person -->
+  <CriteriaDef entity="CCNameCriteria" targetEntity="Person">
+    <Criterion property="FirstName" matchType="startsWith"/>
+    <Criterion property="LastName" matchType="startsWith"/>
+    <Criterion property="FirstNameKanji" matchType="startsWithCaseSensitive"/>
+    <Criterion property="LastNameKanji" matchType="startsWithCaseSensitive"/>
+  </CriteriaDef>
+
+  <!-- Mapping from CCNameCriteria to ContactInfo, used when searching for archived claims -->
+  <CriteriaDef entity="CCNameCriteria" targetEntity="ContactInfo">
+    <Criterion property="CompanyName" targetProperty="Name" matchType="startsWith"/>
+    <Criterion property="FirstName" matchType="startsWith"/>
+    <Criterion property="LastName" matchType="startsWith"/>
+    <Criterion property="FirstNameKanji" matchType="startsWithCaseSensitive"/>
+    <Criterion property="LastNameKanji" matchType="startsWithCaseSensitive"/>
+    <Criterion property="NameKanji" matchType="startsWithCaseSensitive"/>
+    <Criterion property="TaxId" targetProperty="TaxID" matchType="eq"/>
+  </CriteriaDef>
+
+  <!-- Mapping from CCNameCriteria to ClaimContact, used for claim searches by contact name -->
+  <CriteriaDef entity="CCNameCriteria" targetEntity="ClaimContact">
+    <Criterion property="CompanyName" targetProperty="ContactNameDenorm" matchType="startsWith"/>
+    <Criterion property="FirstName" targetProperty="PersonFirstNameDenorm" matchType="startsWith"/>
+    <Criterion property="LastName" targetProperty="PersonLastNameDenorm" matchType="startsWith"/>
+  </CriteriaDef>
+
+  <!-- Alternative mapping from CCNameCriteria to ClaimContact, if kanji denorm fields in ClaimContact are enabled -->
+  <!--<CriteriaDef entity="CCNameCriteria" targetEntity="ClaimContact">-->
+    <!--<Criterion property="CompanyName" targetProperty="ContactNameDenorm" matchType="startsWith"/>-->
+    <!--<Criterion property="FirstName" targetProperty="PersonFirstNameDenorm" matchType="startsWith"/>-->
+    <!--<Criterion property="LastName" targetProperty="PersonLastNameDenorm" matchType="startsWith"/>-->
+    <!--<Criterion property="LastNameKanji" targetProperty="PersonLastNameKanjiDenorm" matchType="startsWithCaseSensitive"/>-->
+    <!--<Criterion property="FirstNameKanji" targetProperty="PersonFirstNameKanjiDenorm" matchType="startsWithCaseSensitive"/>-->
+    <!--<Criterion property="NameKanji" targetProperty="ContactNameKanjiDenorm" matchType="startsWithCaseSensitive"/>-->
+  <!--</CriteriaDef>-->
+
+</SearchConfig>

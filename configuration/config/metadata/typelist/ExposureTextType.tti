@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Text fields on exposure, stored in ExposureText array"
+  final="true"
+  name="ExposureTextType">
+  <typecode
+    code="TreatmentRendered"
+    desc="Treatment rendered"
+    name="TreatmentRendered"
+    priority="1"/>
+  <typecode
+    code="SubjectiveComplaints"
+    desc="Patient's subjective complaints"
+    name="SubjectiveComplaints"
+    priority="3"/>
+  <typecode
+    code="ObjectiveFindings"
+    desc="Treatment provider's findings"
+    name="ObjectiveFindings"
+    priority="4"/>
+  <typecode
+    code="ISOErrorMessage"
+    desc="Error message if most recent ISO ClaimSearch request failed"
+    name="ISOErrorMessage"
+    priority="5"/>
+</typelist>

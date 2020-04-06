@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="Transaction.Subtype==TC_RECOVERY and perm.Recovery.edit(Transaction)"
+    canVisit="perm.Transaction.view(Transaction)"
+    id="ClaimFinancialsTransactionsDetail"
+    parent="ClaimFinancialsTransactions(Claim)"
+    showUpLink="true"
+    title="Transaction.DetailPageTitle">
+    <LocationEntryPoint
+      signature="ClaimFinancialsTransactionsDetail(Claim : Claim, Transaction : Transaction)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Transaction"
+      type="Transaction"/>
+    <Variable
+      name="TransactionView"
+      type="TransactionView"/>
+    <Screen
+      id="ClaimFinancialsTransactionsDetailScreen">
+      <Toolbar>
+        <ToolbarButtonSetRef
+          mode="Transaction.Subtype"
+          toolbarButtonSet="TransactionDetailToolbarButtonSet(Claim, Transaction)"/>
+      </Toolbar>
+      <PanelRef
+        def="TransactionDetailPanelSet(Transaction)"
+        mode="Transaction.Subtype"/>
+    </Screen>
+  </Page>
+</PCF>

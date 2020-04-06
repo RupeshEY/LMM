@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterEnter="codeSearchResults = libraries.ICDCodeUtil.ICDSearch( codeParam, null, false )"
+    alwaysInEditMode="false"
+    canEdit="false"
+    canVisit="true"
+    id="ICDCodePopup"
+    returnType="ICDCode"
+    title="DisplayKey.get(&quot;Web.Admin.ICD.SearchForCodes&quot;)">
+    <LocationEntryPoint
+      signature="ICDCodePopup(codeParam : String)"/>
+    <Variable
+      name="codeParam"
+      type="String"/>
+    <Variable
+      name="codeSearchResults"
+      type="gw.api.database.IQueryBeanResult&lt;ICDCode&gt;"/>
+    <Variable
+      initialValue="codeParam"
+      name="findCode"
+      type="String"/>
+    <Variable
+      name="findBodySystem"
+      type="ICDBodySystem"/>
+    <Screen
+      editable="true">
+      <Toolbar>
+        <ToolbarInput
+          boldLabel="true"
+          editable="true"
+          id="FindCode"
+          label="DisplayKey.get(&quot;Web.Admin.ICD.FindCode&quot;)"
+          numCols="6"
+          validationExpression="(findCode == null or findCode.length() &lt; 1) ? DisplayKey.get(&quot;Web.Admin.ICD.FindCode.Validation&quot;) : null"
+          value="findCode"
+          valueType="java.lang.String">
+          <PostOnChange/>
+        </ToolbarInput>
+        <ToolbarRangeInput
+          boldLabel="true"
+          editable="true"
+          id="Find_Body_System"
+          label="DisplayKey.get(&quot;Web.Admin.ICD.BodySystem&quot;)"
+          value="findBodySystem"
+          valueRange="ICDBodySystem.getTypeKeys( false )"
+          valueType="typekey.ICDBodySystem"/>
+        <ToolbarButton
+          action="codeParam = findCode; codeSearchResults = libraries.ICDCodeUtil.ICDSearch( findCode, findBodySystem, false ) "
+          id="SearchButton"
+          label="DisplayKey.get(&quot;Web.Admin.ICD.Search&quot;)"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="CancelButton"
+          label="DisplayKey.get(&quot;Web.Admin.ICD.Cancel&quot;)"/>
+      </Toolbar>
+      <PanelRef>
+        <TitleBar
+          appendListViewPaging="true"
+          id="Search_Results"
+          title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+        <ListViewPanel
+          editable="false">
+          <RowIterator
+            editable="false"
+            elementName="anICDResult"
+            id="ICDResultsIterator"
+            pageSize="40"
+            pickValue="anICDResult"
+            value="codeSearchResults"
+            valueType="gw.api.database.IQueryBeanResult&lt;entity.ICDCode&gt;">
+            <Row>
+              <TextCell
+                enableSort="false"
+                id="ICDCode"
+                label="DisplayKey.get(&quot;Web.Admin.ICD.ICDCodes&quot;)"
+                value="anICDResult.Code"/>
+              <TextCell
+                enableSort="false"
+                id="CodeDesc"
+                label="DisplayKey.get(&quot;Web.Admin.ICD.CodeDescription&quot;)"
+                value="anICDResult.CodeDesc"/>
+              <BooleanRadioCell
+                enableSort="false"
+                id="Chronic"
+                label="DisplayKey.get(&quot;Web.Admin.ICD.Chronic&quot;)"
+                value="anICDResult.Chronic"/>
+              <!-- <Cell
+                enableSort="false"
+                id="AvailabilityDate"
+                label="DisplayKey.get(&quot;Web.Admin.ICD.AvailableFrom&quot;)"
+                value="anICDResult.AvailabilityDate"/> -->
+              <DateCell
+                enableSort="false"
+                id="ExpiryDate"
+                label="DisplayKey.get(&quot;Web.Admin.ICD.ExpiresOn&quot;)"
+                value="anICDResult.ExpiryDate"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </PanelRef>
+    </Screen>
+  </Popup>
+</PCF>

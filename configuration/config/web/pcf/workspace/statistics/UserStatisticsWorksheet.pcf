@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Worksheet
+    canEdit="false"
+    id="UserStatisticsWorksheet"
+    tabLabel="DisplayKey.get(&quot;Web.UserStatistics.Title&quot;)"
+    title="DisplayKey.get(&quot;Web.UserStatistics.Title&quot;)">
+    <LocationEntryPoint
+      signature="UserStatisticsWorksheet()"/>
+    <Scope
+      location="*"/>
+    <Variable
+      initialValue="gw.api.team.UserStatisticsUtil.getStatistics()"
+      name="UserStatsBean"
+      recalculateOnRefresh="true"
+      type="UserStatsBean"/>
+    <ScreenRef
+      def="UserStatisticsScreen(UserStatsBean)"/>
+  </Worksheet>
+</PCF>

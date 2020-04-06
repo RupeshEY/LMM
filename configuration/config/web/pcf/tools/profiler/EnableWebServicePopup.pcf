@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF>
+  <!-- WARNING: Internal Guidewire file. DO NOT EDIT. -->
+  <Popup
+    afterCommit="gw.api.profiler.GosuProfilerPageHelper.enableProfilingFor( typekey.ProfilerConfig.TC_WSPROFILERCONFIG, gw.api.profiler.WebServiceProfiler.getEntryPointName( serviceName, operationName ) )"
+    alwaysInEditMode="true"
+    canEdit="true"
+    id="EnableWebServicePopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Profiler.EnableProfilingForWebService&quot;)">
+    <Variable
+      name="serviceName"
+      type="String"/>
+    <Variable
+      name="operationName"
+      type="String"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          editVisible="false"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <RangeInput
+            editable="true"
+            id="WebServiceName"
+            label="DisplayKey.get(&quot;Web.Profiler.WebService&quot;)"
+            required="true"
+            value="serviceName"
+            valueRange="gw.api.profiler.WebServiceProfilerPageHelper.getAllServiceNames().toTypedArray()"
+            valueType="java.lang.String">
+            <PostOnChange/>
+          </RangeInput>
+          <RangeInput
+            available="serviceName != null"
+            editable="true"
+            id="OperationName"
+            label="DisplayKey.get(&quot;Web.Profiler.WebServiceOperationName&quot;)"
+            required="true"
+            value="operationName"
+            valueRange="gw.api.profiler.WebServiceProfilerPageHelper.getAllOperationNames( serviceName ).toTypedArray()"
+            valueType="java.lang.String"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

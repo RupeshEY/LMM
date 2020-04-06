@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<Entity
+  name="TripRU">
+  <Columns>
+    <Column
+      beanPath="TripRU.TripDescription"
+      name="TripDescription"/>
+    <Column
+      beanPath="TripRU.Subtype"
+      name="subtype"/>
+    <Column
+      beanPath="TripRU.RUNumber"
+      name="number"/>
+  </Columns>
+  <DisplayName><![CDATA[
+var sb = new java.lang.StringBuffer();
+      if (number != null) {
+        sb.append(number.toString());     
+      }
+      if (TripDescription != null and TripDescription.length() > 0) {
+        if (sb.length() > 0) sb.append(": ");
+        sb.append(TripDescription);
+      }
+      if (subtype != null and sb.length() == 0) {
+        sb.append(subtype);     
+      }
+
+      var retString = sb.toString();
+      if (retString.length() == 0) {
+        retString = gw.api.locale.DisplayKey.get("DisplayName.TripRU.Unnamed");
+      }
+      return retString;
+
+  ]]></DisplayName>
+</Entity>

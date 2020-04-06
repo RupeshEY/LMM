@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Non-persistent entity used for filtering of stat codes."
+  entity="PolicyStatCodeFilterCriteria"
+  exportable="true"
+  extendable="true">
+  <implementsInterface
+    iface="gw.cc.policy.entity.PolicyStatCodeFilterCriteria"
+    impl="com.guidewire.cc.domain.policy.impl.PolicyStatCodeFilterCriteriaImpl"/>
+  <implementsInterface
+    iface="java.io.Serializable"
+    impl="com.guidewire.cc.domain.policy.impl.PolicyStatCodeFilterCriteriaImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.policy.impl.PolicyStatCodeFilterCriteriaInternal"
+    impl="com.guidewire.cc.domain.policy.impl.PolicyStatCodeFilterCriteriaImpl"/>
+  <foreignkey
+    columnName="PolicyID"
+    desc="Policy on which to search for stat codes."
+    exportable="false"
+    fkentity="Policy"
+    name="Policy"
+    nullok="false"/>
+</nonPersistentEntity>

@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  admin="true"
+  desc="Statistics data for the dashboard."
+  entity="DashboardStats"
+  loadable="false"
+  platform="false"
+  table="dashboardstats"
+  type="keyable">
+  <implementsInterface
+    iface="gw.cc.statistics.entity.DashboardStats"
+    impl="com.guidewire.cc.domain.statistics.impl.DashboardStatsImpl"/>
+  <fulldescription><![CDATA[
+        Maintains statistics for claim activity and financial data within ClaimCenter.
+      
+    ]]></fulldescription>
+  <typekey
+    desc="Whether this stat is for a group, LOB, losstype, or coveragetype."
+    name="StatType"
+    nullok="false"
+    typelist="DashboardStatType"/>
+  <foreignkey
+    columnName="GroupID"
+    desc="Group this statistic is for."
+    fkentity="Group"
+    name="Group"
+    nullok="true"/>
+  <typekey
+    desc="LOB this statistic is for."
+    name="LOBCode"
+    nullok="true"
+    typelist="LOBCode"/>
+  <typekey
+    desc="LossType this statistic is for."
+    name="LossType"
+    nullok="true"
+    typelist="LossType"/>
+  <typekey
+    desc="CoverageType this statistic is for."
+    name="CoverageType"
+    nullok="true"
+    typelist="CoverageType"/>
+  <!-- stats in multiple views -->
+  <column
+    desc="Number of open exposures."
+    name="OpenExposures"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of open claims."
+    name="OpenClaims"
+    nullok="true"
+    type="integer"/>
+  <!-- claim counts stats -->
+  <column
+    desc="Number of users in each group as the primary owner of at least one claim."
+    name="Handlers"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of claims with IncidentReport = true."
+    name="NoticeOnly"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of claims with Flagged = isFlagged."
+    name="Flagged"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of litigated claims."
+    name="Litigated"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of claims that have incurred over a certain amount of money."
+    name="OverIncurredLimit"
+    nullok="true"
+    type="integer"/>
+  <!-- current financials stats -->
+  <column
+    desc="Open reserve amount for open claims."
+    name="OpenReserves"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Expenses paid on open claims."
+    name="ExpensesPaid"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Claim costs paid on open claims."
+    name="ClaimCostsPaid"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Net total incurred for open claims."
+    name="TotalIncurredNet"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Net total incurred minus open recovery reserves for open claims."
+    name="TtlIncNetMinusOpenRecReserves"
+    nullok="true"
+    type="money"/>
+  <!-- claim activity stats -->
+  <column
+    desc="Number of new exposures opened in period."
+    name="NewExposures"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of new claims opened in period."
+    name="NewClaims"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of new claims opened in period."
+    name="NewNoticeOnly"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of claims closed in period."
+    name="ClosedClaims"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Total of days from CreateDate to CloseDate for all claims closed in period."
+    name="CloseTime"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of claims reopened in period."
+    name="ReopenedClaims"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of litigated claims in period."
+    name="NewLitigation"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of exposures closed in period."
+    name="ClosedExposures"
+    nullok="true"
+    type="integer"/>
+  <!-- period financials stats -->
+  <column
+    desc="Expenses paid on claims closed in this period."
+    name="ExpensesOnClosed"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Claim costs paid on claims closed in this period."
+    name="ClaimCostsOnClosed"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Expenses paid in this period."
+    name="ExpensesInPeriod"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Claim costs paid in this period."
+    name="ClaimCostsInPeriod"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Recoveries made in this period."
+    name="RecoveredInPeriod"
+    nullok="true"
+    type="money"/>
+</entity>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="InjuryIncident">
+  <!-- Return To Modifed Work fields -->
+  <column
+    desc="True indicates that Modified Duty is applicable for this injured person and will be tracked"
+    name="ReturnToModWorkValid"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="the Return to Modified Work date for this claim, if ReturnToModWorkActual is true, this date is actual, otherwise it is projected "
+    name="ReturnToModWorkDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="If true, the field, ReturnToModWorkDate, is actual; if false, then date is projected "
+    name="ReturnToModWorkActual"
+    nullok="true"
+    type="bit"/>
+  <!-- Return To Work fields -->
+  <column
+    desc="True indicates that Return to Work will be tracked for this person"
+    name="ReturnToWorkValid"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="the Return to Work date for this claim, if ReturnToWorkActual is true, this date is actual, otherwise it is projected "
+    name="ReturnToWorkDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="If true, the field, ReturnToWorkDate, is actual; if false, then date is projected "
+    name="ReturnToWorkActual"
+    nullok="true"
+    type="bit"/>
+</extension>

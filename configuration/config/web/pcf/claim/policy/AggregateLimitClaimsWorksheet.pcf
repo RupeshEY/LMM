@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Worksheet
+    closeOnLeaveScope="true"
+    countsAsWork="false"
+    desc="Creates an area on a page that allows users to see the claims contributing to an aggregate limit while still looking at other aggregate limits in the list."
+    id="AggregateLimitClaimsWorksheet"
+    showUpLink="true"
+    tabLabel="DisplayKey.get(&quot;LV.Policy.AggregateLimits.Details&quot;)"
+    title="DisplayKey.get(&quot;LITERAL&quot;, &quot;&quot;)">
+    <LocationEntryPoint
+      signature="AggregateLimitClaimsWorksheet(ParentClaim : Claim, AggregateLimit : AggregateLimit)"/>
+    <Scope
+      location="ClaimPolicyAggregateLimits(ParentClaim)"/>
+    <Variable
+      name="ParentClaim"
+      type="Claim"/>
+    <Variable
+      name="AggregateLimit"
+      type="AggregateLimit"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="ToolbarButton"
+          label="DisplayKey.get(&quot;Button.Close&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            id="lid"
+            labelAbove="true"
+            value="DisplayKey.get(&quot;LV.Policy.AggregateLimits.ContributingClaims.ExplanationText&quot;)"/>
+          <TextInput
+            id="lid1"
+            labelAbove="true"
+            value="DisplayKey.get(&quot;LV.Policy.AggregateLimits.CalculationUsedForRealized&quot;, AggregateLimit.FinancialsCalculationDescription)"
+            visible="AggregateLimit.PolicyPeriod.PolicyPeriodType == typekey.PolicyPeriodType.TC_POLICY"/>
+          <ListViewInput
+            def="AggregateLimitClaimsLV(AggregateLimit.ApplicableNonZeroClaimAggregateLimitRpts, AggregateLimit)"
+            hideIfEditable="true"
+            id="agglimitsListView"
+            labelAbove="true">
+            <Toolbar/>
+          </ListViewInput>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Worksheet>
+</PCF>

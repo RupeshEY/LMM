@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!-- ActivityType is an internal typelist that lists the different types of
+    activities in the system.  This list should NOT be used for categorizing
+    activities; instead, types should have semantic meaning within the
+    application. -->
+<internaltypelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="The type of activity"
+  name="ActivityType">
+  <typecode
+    code="fnol"
+    desc="FNOL"
+    name="FNOL"
+    retired="true"/>
+  <typecode
+    code="litigation"
+    desc="Litigation related activity"
+    name="Litigation"/>
+</internaltypelistextension>

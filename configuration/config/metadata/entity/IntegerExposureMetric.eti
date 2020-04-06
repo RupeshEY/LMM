@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Integer based exposure metric."
+  entity="IntegerExposureMetric"
+  final="false"
+  priority="3"
+  supertype="ExposureMetric">
+  <implementsInterface
+    iface="gw.cc.exposure.metric.entity.IntegerExposureMetric"
+    impl="com.guidewire.cc.domain.exposure.metric.impl.IntegerExposureMetricImpl"/>
+  <implementsInterface
+    iface="gw.api.metric.MetricMethods"
+    impl="gw.api.exposure.metric.IntegerExposureMetricMethodsImpl"/>
+  <implementsEntity
+    name="IntegerMetricDelegate"/>
+</subtype>

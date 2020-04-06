@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="EditableWaitingPeriodsLV"
+    validationExpression="(claim.getWCWaitingDaysApplied() &gt; claim.getWCWaitingDays( null)) ? DisplayKey.get(&quot;Warning.WaitingPeriod.DaysEnteredGTJurisdiction&quot;) : null">
+    <ExposeIterator
+      valueType="entity.WCWaitingPeriod"
+      widget="WaitingPeriods"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="claim.ClaimWorkComp"
+      name="ClaimWorkComp"
+      type="ClaimWorkComp"/>
+    <RowIterator
+      editable="true"
+      elementName="WaitingPeriod"
+      hideCheckBoxesIfReadOnly="true"
+      id="WaitingPeriods"
+      toAdd="ClaimWorkComp.addToWaitingPeriodDetails( WaitingPeriod )"
+      toRemove="ClaimWorkComp.removeFromWaitingPeriodDetails( WaitingPeriod )"
+      value="ClaimWorkComp.WaitingPeriodDetails"
+      valueType="entity.WCWaitingPeriod[]">
+      <Row>
+        <DateCell
+          editable="true"
+          id="DateStarted"
+          label="DisplayKey.get(&quot;LV.EditableWaitingPeriods.DateStarted&quot;)"
+          required="true"
+          validationExpression="( WaitingPeriod.DateStarted &gt; WaitingPeriod.DateEnded  ? DisplayKey.get(&quot;LV.EditableWaitingPeriods.StartedDatePriorToEnded_Error&quot;): null)"
+          value="WaitingPeriod.DateStarted"
+          wrapLabel="true"/>
+        <DateCell
+          editable="true"
+          id="DateEnded"
+          label="DisplayKey.get(&quot;LV.EditableWaitingPeriods.DateEnded&quot;)"
+          required="true"
+          validationExpression="( WaitingPeriod.DateStarted &gt; WaitingPeriod.DateEnded  ? DisplayKey.get(&quot;LV.EditableWaitingPeriods.StartedDatePriorToEnded_Error&quot;): null)"
+          value="WaitingPeriod.DateEnded"
+          wrapLabel="true"/>
+        <TextCell
+          editable="true"
+          id="WaitingDaysApplied"
+          label="DisplayKey.get(&quot;LV.EditableWaitingPeriods.DaysApplied&quot;)"
+          validationExpression=" (WaitingPeriod.WaitingDaysApplied &lt; 0 ? DisplayKey.get(&quot;LV.EditableWaitingPeriods.Message.NegativeWaitingDaysApplied&quot;) : ( WaitingPeriod.WaitingDaysRepaid &gt; WaitingPeriod.WaitingDaysApplied ? DisplayKey.get(&quot;LV.EditableWaitingPeriods.DaysRepaidGTDaysApplied&quot;) : null))"
+          value="WaitingPeriod.WaitingDaysApplied"
+          valueType="java.math.BigDecimal"
+          wrapLabel="true"/>
+        <TextCell
+          editable="true"
+          id="WaitingDaysRepaid"
+          label="DisplayKey.get(&quot;LV.EditableWaitingPeriods.DaysRepaid&quot;)"
+          validationExpression=" (WaitingPeriod.WaitingDaysRepaid &lt; 0 ? DisplayKey.get(&quot;LV.EditableWaitingPeriods.Message.NegativeWaitingDaysRepaid&quot;) :( WaitingPeriod.WaitingDaysRepaid &gt; WaitingPeriod.WaitingDaysApplied  ? DisplayKey.get(&quot;LV.EditableWaitingPeriods.DaysRepaidGTDaysApplied&quot;): null))"
+          value="WaitingPeriod.WaitingDaysRepaid"
+          valueType="java.math.BigDecimal"
+          wrapLabel="true"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Detail information about specific benefits."
+  entity="Benefits"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="benefits"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.Benefits"
+    impl="com.guidewire.cc.domain.exposure.impl.BenefitsImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+      Detail information about specific benefits related to an exposure. Exposures
+      have multiple fields linking to different Benefits entities.
+    ]]></fulldescription>
+  <column
+    desc="Date when benefits start."
+    name="BenefitsBeginDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date when benefits end."
+    name="BenefitsEndDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Additional information about benefits."
+    name="Description"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Maximum burial rate."
+    name="MaxBurialRate"
+    nullok="true"
+    type="positivecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="State maximum benefit amount."
+    name="MaxCompRate"
+    nullok="true"
+    type="positivecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="State minimum benefit amount."
+    name="MinCompRate"
+    nullok="true"
+    type="positivecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Date when maximum medical improvement was reached (when PPD benefits can start)."
+    name="MMIDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Monthly compensation rate. This calculation depends on the type of benefit."
+    name="MonthlyCompRate"
+    nullok="true"
+    type="positivecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Number of weeks benefits will be paid. This differs by state."
+    name="NumPaymentWeeks"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Payment limit"
+    name="PaymentLimit"
+    nullok="true"
+    type="positivecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Percentage compensability."
+    name="PercentageComp"
+    nullok="true"
+    type="percentage"/>
+  <column
+    desc="Weekly wages post-injury."
+    name="PostInjryWklyWgs"
+    nullok="true"
+    type="positivecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Services required."
+    name="Services"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    desc="Date of settlement."
+    name="SettleDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date when the waiting period begins."
+    name="WaitPrdBeginDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date when the waiting period ends."
+    name="WaitPrdEndDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Weekly compensation rate. This calculation depends on type of benefit."
+    name="WeeklyCompRate"
+    nullok="true"
+    type="positivecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Rating Information"
+    name="WeeklyCompRateInfo"
+    nullok="true"
+    type="mediumtext"/>
+  <typekey
+    desc="Type of lost wages benefit."
+    name="BenefitType"
+    nullok="true"
+    typelist="LostWagesBenefitType"/>
+  <typekey
+    desc="Payment frequency for benefits. This differs by state."
+    name="PaymentFrequency"
+    nullok="true"
+    typelist="PaymentFrequencyType"/>
+  <column
+    desc="Date 1st payment made"
+    name="FirstPaymentDate"
+    nullok="true"
+    type="datetime"/>
+  <typekey
+    desc="1st payment - whether made on time or reason why not"
+    name="PaidOnTime"
+    nullok="true"
+    typelist="PaidOnTime"/>
+  <typekey
+    desc="Type of services provider."
+    name="ProviderType"
+    nullok="true"
+    typelist="ProviderType"/>
+  <typekey
+    desc="Retroactive period."
+    name="RetroPeriod"
+    nullok="true"
+    typelist="RetroPeriodType"/>
+  <typekey
+    desc="Method of settlement."
+    name="SettleMethod"
+    nullok="true"
+    typelist="SettleMethod"/>
+  <typekey
+    desc="Waiting period before benefits begin. This differs by state."
+    name="WaitingPeriod"
+    nullok="true"
+    typelist="WaitingPeriodType"/>
+  <column
+    desc="Whether the Employer has paid the waiting period"
+    name="WaitingPeriodPaid"
+    nullok="true"
+    type="bit"/>
+</entity>

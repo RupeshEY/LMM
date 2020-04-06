@@ -1,0 +1,8 @@
+<?xml version="1.0"?>
+<plugin
+  interface="MessageTransport"
+  name="autoSyncFailureTransport">
+  <!-- Simple console Messaging example plugin.  Dumps message payload and called method names to console -->
+  <plugin-gosu
+    gosuclass="gw.plugin.messaging.impl.ConsoleMessageTransportNoAck"/>
+</plugin>

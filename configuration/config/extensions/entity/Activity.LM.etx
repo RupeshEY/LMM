@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Activity">
+
+  <foreignkey
+    desc="A foreign key to the LM message which created the activity."
+    fkentity="LMMessage_Ext"
+    name="LMMessage_Ext"
+    nullok="true"/>
+</extension>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="LoginDV">
+    <Require
+      name="LoginForm"
+      type="gw.api.util.LoginForm"/>
+    <InputColumn>
+      <TextInput
+        editable="true"
+        id="username"
+        label="DisplayKey.get(&quot;Web.Login.Username&quot;)"
+        numCols="20"
+        value="LoginForm.Username"/>
+      <PasswordInput
+        editable="true"
+        id="password"
+        label="DisplayKey.get(&quot;Web.Login.Password&quot;)"
+        numCols="20"
+        value="LoginForm.Password"/>
+      <LoginSubmitButton
+        action="LoginForm.login()"
+        default="true"
+        id="submit"
+        value="DisplayKey.get(&quot;Web.Login.LoginBtn&quot;)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

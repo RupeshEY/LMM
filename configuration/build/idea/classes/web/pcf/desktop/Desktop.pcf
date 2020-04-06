@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    id="Desktop"
+    menuActions="DesktopMenuActions()"
+    title="DisplayKey.get(&quot;Web.TabBar.Desktop&quot;)">
+    <LocationEntryPoint
+      signature="Desktop()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.DesktopMenuLinks.Activities&quot;, gw.api.desktop.DesktopCounts.getDesktopCounts().Activities)"
+      location="DesktopActivities()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.DesktopMenuLinks.Claims&quot;, gw.api.desktop.DesktopCounts.getDesktopCounts().Claims)"
+      location="DesktopClaims()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.DesktopMenuLinks.Exposures&quot;, gw.api.desktop.DesktopCounts.getDesktopCounts().Exposures)"
+      location="DesktopExposures()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.DesktopMenuLinks.Subrogations&quot;, gw.api.desktop.DesktopCounts.getDesktopCounts().ActiveSubrogations)"
+      location="DesktopSubrogations()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.DesktopMenuLinks.UnassignedItems&quot;, gw.api.desktop.DesktopCounts.getDesktopCounts().AwaitingAssignment)"
+      location="DesktopAwaitingAssignment()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.DesktopMenuLinks.ActivityQueues&quot;, gw.api.desktop.DesktopCounts.getDesktopCounts().Queues)"
+      location="DesktopQueuedActivities()"/>
+    <LocationRef
+      location="DesktopCalendarGroup()"/>
+    <LocationRef
+      location="BulkPay()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.Desktop.SuspenseQueue.DesktopTitle&quot;, gw.acc.iplm.desktop.DesktopMessageSuspenseQueue.getSuspendedMessagesCount(User.util.CurrentUser))"
+      location="ECFMessageSuspenseQueue()"/>
+  </LocationGroup>
+</PCF>

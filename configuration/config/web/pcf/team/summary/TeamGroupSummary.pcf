@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.User.viewteam"
+    id="TeamGroupSummary"
+    title="DisplayKey.get(&quot;Web.Team.GroupSummaryTitle&quot;, GroupInfo.DisplayName)">
+    <LocationEntryPoint
+      signature="TeamGroupSummary(GroupInfo : gw.api.admin.TreeGroupInfo)"/>
+    <Variable
+      name="GroupInfo"
+      type="gw.api.admin.TreeGroupInfo"/>
+    <Variable
+      initialValue="new gw.api.team.TeamGroupStatisticsHelper(GroupInfo)"
+      name="PageHelper"
+      type="gw.api.team.TeamGroupStatisticsHelper"/>
+    <Variable
+      initialValue="new gw.api.print.PrintSettings()"
+      name="PrintSettings"
+      type="gw.api.print.PrintSettings"/>
+    <Variable
+      initialValue="gw.api.team.TeamStatisticsUtil.getTeamStatistics(GroupInfo.Group)"
+      name="StatisticsList"
+      recalculateOnRefresh="true"
+      type="gw.api.statistics.Statistics[]"/>
+    <Variable
+      initialValue="&quot;GroupStatisticsLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="&quot;BarGraphTitle&quot;"
+      name="BarGraphTitleId"
+      type="java.lang.String"/>
+    <Screen
+      id="TeamGroupSummaryScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="                          PrintSettings.InternalSettings.excludeWidget(BarGraphTitleId);                          gw.api.print.ListViewPrintOptionPopupAction.printListViewWithOptions(PrintTargetLV, PrintSettings);                        "
+          available="perm.User.printlistviews"
+          id="PrintButton"
+          label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+          shortcut="N"/>
+        <ToolbarDivider/>
+        <ToolbarDivider/>
+        <ToolbarInput
+          boldLabel="true"
+          id="AsOf"
+          value="DisplayKey.get(&quot;Web.Team.AsOf&quot;, PageHelper.AsOfDate)"
+          valueType="java.lang.String"/>
+      </Toolbar>
+      <PanelRef
+        def="GroupStatisticsLV(StatisticsList, PageHelper)"/>
+      <PanelRef
+        def="GroupStatisticsBarChart(gw.api.team.TeamStatisticsUtil.getMaxedTeamSummaryStatistics(GroupInfo.Group), GroupInfo.Group)"
+        visible="GroupInfo.Group != null and gw.api.team.TeamStatisticsUtil.showChart()">
+        <TitleBar
+          id="BarGraphTitle"
+          title="DisplayKey.get(&quot;JSP.TeamGroupSummary.Statistics.Caseload&quot;)"/>
+      </PanelRef>
+    </Screen>
+  </Page>
+</PCF>

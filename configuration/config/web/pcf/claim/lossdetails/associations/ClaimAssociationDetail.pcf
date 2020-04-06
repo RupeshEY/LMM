@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterCommit="ClaimAssociationDetailForward.go(Claim, ClaimAssociation)"
+    canEdit="perm.ClaimAssociation.edit"
+    canVisit="perm.Claim.view(Claim) and perm.ClaimAssociation.view"
+    id="ClaimAssociationDetail"
+    parent="ClaimAssociations(Claim)"
+    showUpLink="true"
+    startEditing="ClaimAssociation.addClaimIfNotPresent(Claim)"
+    startInEditMode=" startInEditMode and perm.ClaimAssociation.edit"
+    title="DisplayKey.get(&quot;Web.Claim.Associations&quot;)">
+    <LocationEntryPoint
+      signature="ClaimAssociationDetail(Claim : Claim, ClaimAssociation : ClaimAssociation)"/>
+    <LocationEntryPoint
+      signature="ClaimAssociationDetail(Claim : Claim, ClaimAssociation : ClaimAssociation, startInEditMode : boolean)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="ClaimAssociation"
+      type="ClaimAssociation"/>
+    <Variable
+      initialValue="false"
+      name="startInEditMode"
+      type="boolean"/>
+    <Screen
+      id="ClaimAssociationDetailScreen">
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <PanelRef
+        def="ClaimAssociationDetailDV(ClaimAssociation)"/>
+    </Screen>
+  </Page>
+</PCF>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <InputSet
+    id="PaymentSearchOptionalInputSet">
+    <Require
+      name="PaymentSearchCriteria"
+      type="PaymentSearchCriteria"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Search.OptionalParameters&quot;)"/>
+    <FinancialCriterionMultiCurrencyChoiceInput
+      editable="true"
+      id="CheckTotal"
+      label="DisplayKey.get(&quot;JSP.PaymentSearch.Payments.CheckTotal&quot;)"
+      required="false"
+      value="PaymentSearchCriteria.FinancialCriterion"/>
+    <TypeKeyInput
+      editable="true"
+      id="Status"
+      label="DisplayKey.get(&quot;JSP.PaymentSearch.Payments.Status&quot;)"
+      required="false"
+      value="PaymentSearchCriteria.CheckStatus"
+      valueType="typekey.TransactionStatus"/>
+    <TextInput
+      editable="true"
+      id="PayTo"
+      label="DisplayKey.get(&quot;JSP.PaymentSearch.Payments.PayTo&quot;)"
+      required="false"
+      value="PaymentSearchCriteria.PayTo"/>
+    <DateCriterionChoiceInput
+      chosenOptionVisible="true"
+      editable="true"
+      id="DateSearch"
+      label="DisplayKey.get(&quot;JSP.PaymentSearch.Payments.DateSearch&quot;)"
+      required="false"
+      value="PaymentSearchCriteria.DateCriterionChoice"/>
+  </InputSet>
+</PCF>

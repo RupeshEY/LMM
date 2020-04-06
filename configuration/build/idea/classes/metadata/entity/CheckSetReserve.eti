@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Links a check set with any reserves that were automatically created as part of processing its payments."
+  entity="CheckSetReserve"
+  exportable="true"
+  platform="false"
+  table="checksetreserve"
+  type="joinarray">
+  <implementsInterface
+    iface="gw.cc.financials.check.entity.CheckSetReserve"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckSetReserveImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="CheckSetID"
+    desc="The check set."
+    exportable="false"
+    fkentity="CheckSet"
+    importableagainstexistingobject="false"
+    name="CheckSet"
+    nullok="false"/>
+  <foreignkey
+    columnName="ReserveID"
+    desc="The automatically-generated reserve."
+    fkentity="Reserve"
+    importableagainstexistingobject="false"
+    name="Reserve"
+    nullok="false"
+    triggersValidation="true"/>
+  <index
+    desc="The link between a CheckSet and an offsetting Reserve for one of its Payments should exist only once."
+    name="paymentreserveu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="CheckSetID"/>
+    <indexcol
+      keyposition="2"
+      name="ReserveID"/>
+  </index>
+</entity>

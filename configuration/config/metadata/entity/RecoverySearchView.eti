@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Aggregates the information needed to display a Recovery on the Recovery Search page. Subtype of TransactionSearchView."
+  entity="RecoverySearchView"
+  exportable="false"
+  primaryEntity="Recovery"
+  supertypeEntity="TransactionSearchView">
+  <implementsInterface
+    iface="gw.cc.financials.recovery.entity.RecoverySearchView"
+    impl="com.guidewire.cc.domain.financials.recovery.impl.RecoverySearchViewImpl"/>
+  <viewEntityLink
+    name="Recovery"
+    path="ID"/>
+  <viewEntityLink
+    name="ClaimContact"
+    path="ClaimContact.Contact"/>
+  <viewEntityName
+    name="ClaimContactName"
+    path="ClaimContact.Contact"/>
+  <viewEntityTypekey
+    name="RecoveryCategory"
+    path="RecoveryCategory"/>
+</viewEntity>

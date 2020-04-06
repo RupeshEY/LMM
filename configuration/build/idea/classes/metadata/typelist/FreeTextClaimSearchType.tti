@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!-- ****************************************************************************
+    Free Text Claim Search Typelists
+  **************************************************************************** -->
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Type of claim searches available"
+  name="FreeTextClaimSearchType">
+  <typecode
+    code="byContactInfoActive"
+    desc="Claims stored on active database"
+    name="Active Database"
+    priority="1"/>
+  <typecode
+    code="byContactInfoArchive"
+    desc="Claims stored in archive"
+    name="Archive"
+    priority="2"/>
+</typelist>

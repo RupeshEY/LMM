@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="CompensableInputSet">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsWorkersComp.Claim.CompensabilityDecision&quot;)"/>
+    <DateInput
+      dateFormat="short"
+      editable="true"
+      id="CompensabilityDecision_DueDate"
+      label="DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsWorkersComp.Claim.CompensabilityDecision.DueDate&quot;)"
+      value="Claim.DateCompDcsnDue"
+      visible="Claim.Compensable == null"/>
+    <TypeKeyInput
+      available="Claim.isAllWCCompensabilityFactorsAnswered()"
+      editable="true"
+      helpText="Claim.isAllWCCompensabilityFactorsAnswered() ? &quot;&quot; : DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsWorkersComp.Claim.CompensabilityDecision.CompensableStatus.Tooltip&quot;)"
+      id="CompensableStatus"
+      label="DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsWorkersComp.Claim.CompensabilityDecision.CompensableStatus&quot;)"
+      value="Claim.Compensable"
+      valueType="typekey.CompensabilityDecision">
+      <PostOnChange
+        target="CompensableInputSet"/>
+    </TypeKeyInput>
+    <TypeKeyInput
+      editable="true"
+      id="PartialDenialReason"
+      label="DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsWorkersComp.Claim.CompensabilityDecision.PartialDenialReason&quot;)"
+      required="Claim.Compensable == CompensabilityDecision.TC_PARTIALDENIAL"
+      value="Claim.PartialDenialReason"
+      valueType="typekey.PartialDenialReason"
+      visible="Claim.Compensable == CompensabilityDecision.TC_PARTIALDENIAL"/>
+    <DateInput
+      dateFormat="short"
+      id="CompensabilityDecision_DecisionMadeDate"
+      label="DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsWorkersComp.Claim.CompensabilityDecision.DecisionMadeDate&quot;)"
+      timeFormat="short"
+      value="Claim.DateCompDcsnMade"
+      visible="Claim.Compensable != null and Claim.DateCompDcsnMade != null"/>
+    <DateInput
+      dateFormat="short"
+      editable="true"
+      id="CompensabilityDecision_FullDenialEffectiveDate"
+      label="DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsWorkersComp.Claim.CompensabilityDecision.FullDenialEffectiveDate&quot;)"
+      required="Claim.Compensable == CompensabilityDecision.TC_DENIED"
+      value="Claim.FullDenialEffectiveDate"
+      visible="Claim.Compensable == CompensabilityDecision.TC_DENIED"/>
+    <ListViewInput
+      editable="true"
+      id="CompensabilityDecision_FullDenialReason"
+      label="DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsWorkersComp.Claim.CompensabilityDecision.FullDenialReason&quot;)"
+      labelAbove="true"
+      visible="Claim.Compensable == CompensabilityDecision.TC_DENIED">
+      <Toolbar>
+        <IteratorButtons
+          iterator="DenialReasonCodes"
+          refreshTarget="DATA_ONLY"/>
+      </Toolbar>
+      <ListViewPanel
+        id="FullDenialReasonCodesLV">
+        <RowIterator
+          canPick="false"
+          checkBoxVisible="CurrentLocation.InEditMode"
+          editable="true"
+          elementName="denialReason"
+          id="DenialReasonCodes"
+          toCreateAndAdd="return Claim.createNewFullDenialReason()"
+          toRemove="Claim.removeFromFullDenialReasons(denialReason)"
+          value="Claim.FullDenialReasons"
+          valueType="entity.FullDenialReason[]">
+          <Row>
+            <TypeKeyCell
+              editable="true"
+              flex="1"
+              id="Code"
+              label="DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsWorkersComp.Claim.CompensabilityDecision.FullDenialReason&quot;)"
+              required="true"
+              value="denialReason.FullDenialReasonCode"
+              valueType="typekey.FullDenialReason"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </ListViewInput>
+    <TextAreaInput
+      editable="Claim.isAllWCCompensabilityFactorsAnswered()"
+      id="CompensabilityDecision_BenefitsDecisionReason"
+      label="DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsWorkersComp.Claim.CompensabilityDecision.BenefitsDecisionReason&quot;)"
+      numCols="35"
+      numRows="3"
+      required="Claim.Compensable == TC_DENIED"
+      value="Claim.BenefitsDecisionReason"/>
+  </InputSet>
+</PCF>

@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_policy.xml -->
+  <ListViewPanel
+    desc="Lists the aggregate limits for the current policy on the claim."
+    id="AggregateLimitsLV">
+    <ExposeIterator
+      flags="AggregateLimit"
+      valueType="entity.AggregateLimit"
+      widget="AggregateLimitsLV"/>
+    <Require
+      name="AggregateLimitList"
+      type="AggregateLimit[]"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <RowIterator
+      editable="false"
+      elementName="AggregateLimit"
+      hasCheckBoxes="true"
+      value="AggregateLimitList"
+      valueType="entity.AggregateLimit[]">
+      <ToolbarFlag
+        name="AggregateLimit"/>
+      <Row>
+        <TypeKeyCell
+          action="ClaimPolicyAggregateLimitDetail.drilldown(Claim, AggregateLimit)"
+          id="PeriodType"
+          label="DisplayKey.get(&quot;LV.Policy.AggregateLimits.PeriodType&quot;)"
+          sortOrder="1"
+          value="AggregateLimit.PolicyPeriod.PolicyPeriodType"
+          valueType="typekey.PolicyPeriodType"
+          width="75"/>
+        <TypeKeyCell
+          id="ValueType"
+          label="DisplayKey.get(&quot;LV.Policy.AggregateLimits.ValueType&quot;)"
+          value="AggregateLimit.ValueType"
+          valueType="typekey.AggregateType"
+          width="100"/>
+        <CurrencyCell
+          formatType="currency"
+          id="LimitAmount"
+          label="DisplayKey.get(&quot;LV.Policy.AggregateLimits.LimitAmount&quot;)"
+          value="AggregateLimit.LimitAmount"
+          width="100"/>
+        <CurrencyCell
+          action="AggregateLimitClaimsWorksheet.goInWorkspace(Claim, AggregateLimit)"
+          available="not (AggregateLimit.LimitUsed.Amount.signum() == 0)"
+          fontColor="AggregateLimit.LimitUsed &gt; AggregateLimit.LimitAmount ? &quot;Red&quot; : &quot;&quot;"
+          formatType="currency"
+          id="AmountUsed"
+          label="DisplayKey.get(&quot;LV.Policy.AggregateLimits.AmountUsed&quot;)"
+          value="AggregateLimit.LimitUsed"
+          width="100"/>
+        <CurrencyCell
+          formatType="currency"
+          id="AmountRemaining"
+          label="DisplayKey.get(&quot;LV.Policy.AggregateLimits.AmountRemaining&quot;)"
+          value="AggregateLimit.LimitRemaining"
+          width="100"/>
+        <TypeKeyCell
+          id="AggLimitCalcCriteria"
+          label="DisplayKey.get(&quot;LV.Policy.AggregateLimits.AggLimitCalcCriteria&quot;)"
+          value="AggregateLimit.AggLimitCalcCriteria"
+          valueType="typekey.AggLimitCalcCriteria"
+          width="150"/>
+        <TextCell
+          id="Coverages"
+          label="DisplayKey.get(&quot;LV.Policy.AggregateLimits.Coverages&quot;)"
+          value="AggregateLimit.getCoverageNames()"
+          width="300"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

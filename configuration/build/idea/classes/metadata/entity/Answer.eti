@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Text, Logical and Numeric Answers supplied in a specific Question Set. Question Sets are groupings of questions utilized in the risk qualification process or to develop supplemental underwriting information. Specific to ClaimCenter"
+  entity="Answer"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="answer"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.question.entity.Answer"
+    impl="com.guidewire.cc.domain.question.impl.AnswerImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.question.impl.AnswerInternal"
+    impl="com.guidewire.cc.domain.question.impl.AnswerImpl"/>
+  <implementsEntity
+    name="AnswerDelegate"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.question.impl.AnswerDelegateInternal"
+    impl="com.guidewire.cc.domain.question.impl.AnswerImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="AnswerSetID"
+    desc="Fk to the Answer Set this answer corresponds to"
+    fkentity="AnswerSet"
+    name="AnswerSet"
+    nullok="true"/>
+</entity>

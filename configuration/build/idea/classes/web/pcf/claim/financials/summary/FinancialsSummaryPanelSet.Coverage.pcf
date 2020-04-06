@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    desc="The Financials Summary by coverage"
+    id="FinancialsSummaryPanelSet"
+    mode="Coverage">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="useFloatingFinancials"
+      type="boolean"/>
+    <Require
+      name="financialsSummaryBridge"
+      type="gw.api.financials.summary.FinancialSummaryBridge"/>
+    <PanelRef
+      def="FinancialsSummaryLV(Claim, financialsSummaryBridge)"/>
+  </PanelSet>
+</PCF>

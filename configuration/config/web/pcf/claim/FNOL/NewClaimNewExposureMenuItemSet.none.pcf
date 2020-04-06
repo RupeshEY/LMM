@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <MenuItemSet
+    id="NewClaimNewExposureMenuItemSet"
+    mode="none">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+  </MenuItemSet>
+</PCF>

@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="SIU Claim Indicator"
+  entity="SIUClaimIndicator"
+  final="false"
+  priority="5"
+  supertype="ClaimIndicator">
+  <implementsInterface
+    iface="gw.api.claim.indicator.ClaimIndicatorMethods"
+    impl="gw.claim.indicator.SIUClaimIndicatorMethodsImpl"/>
+</subtype>

@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="incident != null and perm.Incident.view(incident)"
+    id="LivingExpensesIncidentPrint"
+    parent="ClaimPrintout(c)"
+    title="DisplayKey.get(&quot;Web.LivingExpensesIncident.PopupHeader&quot;)">
+    <LocationEntryPoint
+      signature="LivingExpensesIncidentPrint(c : Claim, incident : LivingExpensesIncident)"/>
+    <Variable
+      name="c"
+      type="Claim"/>
+    <Variable
+      name="incident"
+      type="LivingExpensesIncident"/>
+    <Screen>
+      <PanelRef
+        def="LivingExpensesIncidentPanelSet(incident)"/>
+    </Screen>
+  </Page>
+</PCF>

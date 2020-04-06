@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.Attribute.view"
+    id="Attributes"
+    title="DisplayKey.get(&quot;Web.Admin.Attributes&quot;)">
+    <Variable
+      initialValue="gw.api.database.Query.make(entity.Attribute).select()"
+      name="Attributes"
+      type="gw.api.database.IQueryBeanResult&lt;Attribute&gt;"/>
+    <Screen
+      id="AttributesScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.Admin.Attributes&quot;)"/>
+      <Toolbar>
+        <ToolbarButton
+          action="NewAttribute.go()"
+          id="Attributes_AddAttributeButton"
+          label="DisplayKey.get(&quot;Web.Admin.AddAttribute&quot;)"
+          shortcut="B"/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="gw.api.admin.BaseAdminUtil.deleteAttributes(CheckedValues)"
+          available="perm.Attribute.delete"
+          flags="any Attribute"
+          id="Attributes_DeleteButton"
+          iterator="AttributesLV.AttributesLV"
+          label="DisplayKey.get(&quot;Button.Delete&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="AttributesLV(Attributes)"/>
+    </Screen>
+  </Page>
+</PCF>

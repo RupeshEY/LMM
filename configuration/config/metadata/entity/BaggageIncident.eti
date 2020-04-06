@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Report of an incident involving some kind of baggage "
+  displayName="BaggageIncident"
+  entity="BaggageIncident"
+  supertype="MobilePropertyIncident">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.BaggageIncident"
+    impl="com.guidewire.cc.domain.exposure.impl.BaggageIncidentImpl"/>
+  <column
+    desc="Indicates if this is a delay only loss"
+    name="DelayOnly"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="The date/time the baggage was discovered to be missing"
+    name="BaggageMissingFrom"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The date/time the baggage was recovered"
+    name="BaggageRecoveredOn"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Indicates if the carrier compensated the claimant for the baggage loss or delay"
+    name="CarrierCompensated"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Amount the carrier compensated for the baggage loss or delay"
+    name="CarrierCompensatedAmount"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <typekey
+    desc="Type of baggage"
+    name="BaggageType"
+    nullok="true"
+    typelist="BaggageType"/>
+  <foreignkey
+    columnName="RelatedTripRUID"
+    desc="Related trip"
+    fkentity="TripRU"
+    name="RelatedTripRU"
+    nullok="true"/>
+</subtype>

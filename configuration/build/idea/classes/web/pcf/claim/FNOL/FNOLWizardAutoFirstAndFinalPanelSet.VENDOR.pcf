@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="FNOLWizardAutoFirstAndFinalPanelSet"
+    mode="VENDOR">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Require
+      name="VehicleIncident"
+      type="VehicleIncident"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <ClaimContactInput
+          claim="Claim"
+          editable="true"
+          hideChildrenIfReadOnly="false"
+          id="GlassScreenVendorReporter"
+          label="DisplayKey.get(&quot;Web.FNOLWizard.AutoFirstAndFinal.Vendor.Vendor&quot;)"
+          newContactMenu="ClaimNewRepairShopOnlyPickerMenuItemSet"
+          onPick="Claim.ServiceRequests.single().Specialist = Claim.reporter"
+          required="true"
+          specialistServices="new java.util.ArrayList&lt;SpecialistService&gt;()"
+          value="Claim.reporter"
+          valueRange="Claim.RelatedAutoRepairShopArray">
+          <PostOnChange/>
+        </ClaimContactInput>
+      </InputColumn>
+    </DetailViewPanel>
+  </PanelSet>
+</PCF>

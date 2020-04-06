@@ -1,0 +1,13 @@
+package rules.Workplan
+
+@gw.rules.RuleName("Claim Workplan")
+@gw.rules.RuleSetDescription("This is the Initial Claim Workplan generation rule set.    Initial claim workplan rules add initial activities to the    claim as a checklist of work that various people need to do    on the claim.")
+class ClaimWorkplan extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Claim) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Claim) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Claim Workplan", ClaimWorkplan )
+  }
+}

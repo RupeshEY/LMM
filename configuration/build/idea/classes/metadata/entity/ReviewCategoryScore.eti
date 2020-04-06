@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Table linking Reviews to Category Scores"
+  entity="ReviewCategoryScore"
+  exportable="true"
+  platform="false"
+  table="reviewcategoryscore"
+  type="joinarray">
+  <implementsInterface
+    iface="gw.cc.contact.entity.ReviewCategoryScore"
+    impl="com.guidewire.cc.domain.contact.impl.ReviewCategoryScoreImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.contact.CommonCategoryScore"
+    impl="com.guidewire.cc.domain.contact.impl.ReviewCategoryScoreImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="ReviewID"
+    desc="Associated Review."
+    fkentity="Review"
+    name="Review"
+    nullok="false"
+    triggersValidation="true"/>
+  <typekey
+    desc="Category of this QuestionSet."
+    name="ReviewCategory"
+    nullok="true"
+    typelist="ReviewCategory"/>
+  <column
+    name="Score"
+    nullok="true"
+    type="integer"/>
+  <index
+    desc="Enforce uniqueness, a particular review category can only appear once per review"
+    name="reviewcatscu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ReviewID"/>
+    <indexcol
+      keyposition="2"
+      name="ReviewCategory"/>
+  </index>
+</entity>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="IntegerMetricLimitDelegate">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.metric.impl.IntegerMetricLimitDelegateInternal"
+    impl="com.guidewire.cc.domain.metric.impl.IntegerMetricLimitDelegateImpl"/>
+  <implementsInterface
+    iface="gw.cc.metric.entity.IntegerMetricLimitDelegate"
+    impl="com.guidewire.cc.domain.metric.impl.IntegerMetricLimitDelegateImpl"/>
+  <fulldescription><![CDATA[Delegate used by integer claim and exposure metric limits
+    ]]></fulldescription>
+  <column
+    desc="Integer field to store the target value."
+    name="IntegerTargetValue"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Integer field to store the yellow value."
+    name="IntegerYellowValue"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Integer field to store the red value."
+    name="IntegerRedValue"
+    nullok="true"
+    type="integer"/>
+</delegate>

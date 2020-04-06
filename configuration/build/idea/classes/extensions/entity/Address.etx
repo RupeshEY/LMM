@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Address">
+  <!-- Note: If you add foreignkey extension properties to Address and you use or plan to use the Policy Refresh
+             fetaure, review the implementation of gw.plugin.policy.refresh.relink.handler.SharedAddressLinkHandler,
+             which makes copies of Addresses. All of the fields on Address (including foreign keys) are copied, which
+             may not be desirable. -->
+  <index
+    desc="Index covering address for search on state. One usage is in PersonLastNameSearchWithState"
+    name="addressStateU1"
+    trackUsage="true"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ID"/>
+    <indexcol
+      keyposition="2"
+      name="State"/>
+    <indexcol
+      keyposition="3"
+      name="retired"/>
+    <indexcol
+      keyposition="4"
+      name="County"/>
+    <indexcol
+      keyposition="5"
+      name="City"/>
+  </index>
+  <!-- <index
+    xmlns=""
+    desc="Index covering address for search on state. One usage is in PersonLastNameSearchWithState"
+    name="addressStateU1K"
+    trackUsage="true"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ID"/>
+    <indexcol
+      keyposition="2"
+      name="State"/>
+    <indexcol
+      keyposition="3"
+      name="retired"/>
+    <indexcol
+      keyposition="4"
+      name="County"/>
+    <indexcol
+      keyposition="5"
+      name="CityKanji"/>
+  </index> -->
+</extension>

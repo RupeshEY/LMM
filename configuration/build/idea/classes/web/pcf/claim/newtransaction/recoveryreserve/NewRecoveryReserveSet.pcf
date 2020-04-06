@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterCancel="ClaimFinancialsTransactions.go(Claim)"
+    afterCommit="ClaimFinancialsTransactions.go(Claim, gw.api.financials.ClaimFinancialsTransactionsOption.RECOVERY_RESERVE)"
+    afterEnter="afterEnter()"
+    alwaysInEditMode="true"
+    beforeCommit="beforeCommit()"
+    canEdit="true"
+    canVisit="perm.Claim.createrecoveryreserve(Claim) and perm.Claim.viewrecoveryreserves(Claim)"
+    id="NewRecoveryReserveSet"
+    onResume="gw.api.system.bundle.BundleCommitCondition.verify(Claim)"
+    parent="Claim(Claim)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.NewRecoveryReserveSet.SetRecoveryReserves.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewRecoveryReserveSet(Claim : Claim)"/>
+    <Variable
+      initialValue="new gw.api.financials.RecoveryReserveWizardHelper()"
+      name="PageHelper"
+      type="gw.api.financials.RecoveryReserveWizardHelper"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="PageHelper.WorkingTransactionSet"
+      name="RecoveryReserveSet"
+      recalculateOnRefresh="true"
+      type="entity.TransactionSet"/>
+    <Variable
+      initialValue="RecoveryReserveSet"
+      name="TransactionSet"
+      recalculateOnRefresh="true"
+      type="java.lang.Object"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentActionsUIHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <Screen
+      id="NewReserveSetScreen">
+      <Toolbar>
+        <EditButtons
+          cancelLabel="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          cancelVisible="true"
+          editVisible="false"
+          updateLabel="DisplayKey.get(&quot;Button.Save&quot;)"
+          updateVisible="true"/>
+        <IteratorButtons
+          iterator="RecoveryReservesSummaryDV.EditableRecoveryReservesLV"
+          removeFlags="all Removeable"/>
+        <ToolbarDivider/>
+        <PickerToolbarButton
+          action="PickExistingDocumentPopup.push(Claim)"
+          available="documentActionsUIHelper.DocumentMetadataActionsAvailable"
+          id="Button_Reserve_LinkDocument"
+          label="DisplayKey.get(&quot;Button.Reserve.LinkDocument&quot;)"
+          onPick="gw.api.financials.TransactionSetLinkDocumentHelper.linkDocument(PickedValue, PageHelper.WorkingTransactionSet)"
+          shortcut="E"
+          visible="perm.System.viewdocs"/>
+      </Toolbar>
+      <Verbatim
+        label="DisplayKey.get(&quot;JSP.NewRecoveryReserveSet.Helper&quot;)"/>
+      <PanelRef
+        def="RecoveryReservesSummaryDV(PageHelper)"/>
+    </Screen>
+    <Code><![CDATA[function afterEnter() {
+  if (PageHelper.getTransactionWrappers().length == 0) {
+    PageHelper.initializeTransactionSet(Claim);    
+  }                 
+  PageHelper.updateTransactionSet(Claim);
+  Claim.freezeCurrency()
+}
+
+function beforeCommit() { 
+  gw.api.system.bundle.BundleCommitCondition.verify(Claim)
+  PageHelper.beforeCommit()
+}]]></Code>
+  </Page>
+</PCF>

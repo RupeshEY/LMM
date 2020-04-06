@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    id="Organizations"
+    parent="Admin()"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.Admin.Organizations&quot;)">
+    <Screen
+      id="OrganizationsScreen">
+      <Toolbar/>
+      <PanelRef
+        def="OrganizationsLV(Organization.finder.findAllExternalOrganizations())"/>
+    </Screen>
+  </Page>
+</PCF>

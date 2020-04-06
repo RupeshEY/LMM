@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    editable="isEditableServiceRequest()"
+    id="VehicleIncidentTowingDV">
+    <Require
+      name="towingServiceRequest"
+      type="ServiceRequest"/>
+    <Require
+      name="vehicleIncident"
+      type="VehicleIncident"/>
+    <Require
+      name="unusedServices"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Variable
+      initialValue="gw.vendormanagement.SpecialistServiceCodeConstants.AUTOTOWING"
+      name="autoTowingServiceCode"
+      type="String"/>
+    <Variable
+      initialValue="vehicleIncident.getCoverageDescription(vehicleIncident.Claim.Policy.TowingCoverageType)"
+      name="coverageValue"
+      type="String"/>
+    <Variable
+      initialValue="towingServiceRequest != null"
+      name="towingSelected"
+      type="boolean"/>
+    <InputColumn>
+      <InputGroup
+        allowToggle="isEditableServiceRequest()"
+        childrenVisible="towingSelected"
+        id="TowingInputGroup"
+        label="coverageValue != null ? DisplayKey.get(&quot;Web.VehicleIncidentTowingDV.Towing.ValueLabel&quot;) : DisplayKey.get(&quot;Web.VehicleIncidentTowingDV.Towing.LabelNoCoverage&quot;)"
+        onToggle="toggleServiceRequest(VALUE)">
+        <InputSet
+          visible="towingSelected">
+          <TextInput
+            id="TowingCoverage"
+            label="DisplayKey.get(&quot;Web.VehicleIncidentTowingDV.TowingCoverage.Label&quot;)"
+            value="coverageValue == null ? DisplayKey.get(&quot;Web.VehicleIncidentTowingDV.TowingCoverage.NoCoverage.Value&quot;) : coverageValue"/>
+          <ClaimContactInput
+            claim="vehicleIncident.Claim"
+            editable="true"
+            id="TowingAgency"
+            label="DisplayKey.get(&quot;Web.VehicleIncidentDV.TowingAgcyPicker&quot;)"
+            newContactMenu="ClaimNewTowingOnlyPickerMenuItemSet"
+            required="true"
+            specialistServices="{SpecialistService.getForCode(autoTowingServiceCode)}"
+            value="towingServiceRequest.SpecialistAndCreateClaimContact"
+            valueRange="vehicleIncident.Claim.RelatedAutoTowingAgcyArray">
+            <PostOnChange
+              target="OtherServiceRequestInfo"/>
+          </ClaimContactInput>
+          <InputSet
+            id="OtherServiceRequestInfo"
+            visible="towingServiceRequest.Specialist != null">
+            <TextInput
+              id="TowingAgencyAddress"
+              label="DisplayKey.get(&quot;Web.Address.Default.Name&quot;)"
+              value="towingServiceRequest.Specialist.PrimaryAddress"
+              valueType="entity.Address"/>
+            <TextInput
+              id="TowingAgencyPhone"
+              label="DisplayKey.get(&quot;Web.VehicleIncidentDV.TowingAgcyPhone&quot;)"
+              value="towingServiceRequest.Specialist.PrimaryPhoneValue"/>
+            <InputSetRef
+              def="NewServiceRequestInstructionInputSet(towingServiceRequest, DisplayKey.get(&quot;Web.VehicleIncidentTowingDV.PickUpLocation&quot;), null)"
+              mode="&quot;default&quot;"/>
+          </InputSet>
+        </InputSet>
+      </InputGroup>
+    </InputColumn>
+    <Code><![CDATA[function isEditableServiceRequest() : boolean {
+  return towingServiceRequest == null or towingServiceRequest.IsEditableInUI
+}
+
+function toggleServiceRequest(checkboxValue : boolean) {
+  if (towingServiceRequest == null) {
+    if (checkboxValue) {
+      towingServiceRequest = vehicleIncident.Claim.newServiceRequest(vehicleIncident.Claim.maincontact, vehicleIncident)
+      towingServiceRequest.Instruction.addServiceFoundByCode(autoTowingServiceCode)
+      towingServiceRequest.Kind = ServiceRequestKind.TC_SERVICEONLY
+    }
+  } else {
+    if (not checkboxValue) {
+      unusedServices.add(towingServiceRequest)
+    } else {
+      unusedServices.remove(towingServiceRequest)
+    }
+  }
+  towingSelected = checkboxValue
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

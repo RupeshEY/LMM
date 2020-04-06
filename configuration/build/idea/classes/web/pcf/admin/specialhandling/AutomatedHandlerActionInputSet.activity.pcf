@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="AutomatedHandlerActionInputSet"
+    mode="activity">
+    <Require
+      name="automatedHandler"
+      type="AutomatedHandler"/>
+    <Variable
+      initialValue="automatedHandler as AutomatedActivityHandler"
+      name="automatedActivityHandler"
+      type="AutomatedActivityHandler"/>
+    <RangeInput
+      editable="true"
+      id="AutomatedHandlerActivityPattern"
+      label="DisplayKey.get(&quot;Web.Admin.AutomatedHandlerAction.Activity.ActivityPattern&quot;)"
+      optionLabel="VALUE.Subject"
+      required="true"
+      value="automatedActivityHandler.ActivityPattern"
+      valueRange="getAvailableActivityPatterns()"
+      valueType="entity.ActivityPattern">
+      <PostOnChange/>
+    </RangeInput>
+    <TextInput
+      id="AutomatedHandlerDefaultEmailTemplate"
+      label="DisplayKey.get(&quot;Web.Admin.AutomatedHandlerAction.Activity.DefaultEmailTemplate&quot;)"
+      outputConversion="return getDefaultEmailTemplateDisplayName(VALUE, automatedActivityHandler.ActivityPattern != null)"
+      required="false"
+      value="automatedActivityHandler.ActivityPattern.EmailTemplate"/>
+    <PickerInput
+      conversionExpression="PickedValue.getFilename()"
+      editable="true"
+      freeInputEnabled="false"
+      id="AutomatedHandlerEmailTemplateOverride"
+      label="DisplayKey.get(&quot;Web.Admin.AutomatedHandlerAction.Activity.EmailTemplate&quot;)"
+      outputConversion="gw.pcf.specialhandling.EmailTemplateUtil.getEmailTemplateDisplayName(VALUE)"
+      pickLocation="PickEmailTemplatePopup.push(getEmailTemplateSearchCriteria())"
+      required="false"
+      value="automatedActivityHandler.EmailTemplateOverride"
+      valueType="java.lang.String"/>
+    <Code><![CDATA[uses gw.pcf.specialhandling.EmailTemplateUtil
+
+function getAvailableActivityPatterns() : java.util.List<ActivityPattern> {
+  return ActivityPattern.finder.findByCategory(ActivityCategory.TC_HANDLINGINSTRUCTIONS).toList() as java.util.List<ActivityPattern>
+}
+
+function getDefaultEmailTemplateDisplayName(templateFilename : String, patternIsSelected : boolean) : String {
+  if (patternIsSelected and (templateFilename == null or templateFilename.Empty)) {
+    return DisplayKey.get("Web.Admin.AutomatedHandlerAction.Activity.NoDefaultEmailTemplate")
+  } else {
+    return EmailTemplateUtil.getEmailTemplateDisplayName(templateFilename)
+  }
+}
+
+function getEmailTemplateSearchCriteria() : gw.api.email.EmailTemplateSearchCriteria {
+  var criteria = new gw.api.email.EmailTemplateSearchCriteria()
+  criteria.Keywords = "automatedactivityhandler, " + (typeof automatedHandler.Trigger).DisplayName
+  return criteria
+}]]></Code>
+  </InputSet>
+</PCF>

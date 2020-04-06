@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    beforeCommit="removeOrVerifyNewAgreementGroups()"
+    canEdit="perm.System.riedit"
+    canVisit="claim.Exposures.HasElements and perm.System.riedit"
+    id="NewRIAgreement"
+    parent="ReinsuranceSummary(claim)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Claim.Reinsurance.NewAgreement.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewRIAgreement(claim:Claim, subtype:gw.lang.reflect.IType)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      name="subtype"
+      type="gw.lang.reflect.IType"/>
+    <Variable
+      initialValue="createNewAgreement()"
+      name="agreement"
+      type="RIAgreement"/>
+    <ScreenRef
+      def="NewRIAgreementScreen(claim, agreement)"/>
+    <Code><![CDATA[//Creates the appropriate RI agreement
+function createNewAgreement() : RIAgreement {
+  var newAgreement = subtype.TypeInfo.getConstructor({}).Constructor.newInstance({}) as RIAgreement
+  newAgreement.RIAgreementGroup = new RIAgreementGroup()
+  newAgreement.RIAgreementGroup.Claim = claim
+  newAgreement.Claim = claim
+  return newAgreement
+}
+
+function removeOrVerifyNewAgreementGroups() {
+  for (group in claim.RIAgreementGroups) {
+    if (group.New and group != agreement.RIAgreementGroup) {
+      group.deleteIfNecessary()
+    } else if (group.New and group == agreement.RIAgreementGroup
+               and group.Exposures.length == 0) {
+      throw new gw.api.util.DisplayableException(
+        DisplayKey.get("Java.Financials.Exception.NoExposuresOnRIAgreementGroup",  group.DisplayName ))
+    }
+  }
+}]]></Code>
+  </Page>
+</PCF>

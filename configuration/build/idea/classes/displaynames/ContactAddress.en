@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Entity
+  name="ContactAddress">
+  <Columns>
+    <Column
+      beanPath="ContactAddress.Contact"
+      displayName="false"
+      name="contact"/>
+    <Column
+      beanPath="ContactAddress.Address"
+      displayName="true"
+      name="address"/>
+  </Columns>
+  <DisplayName><![CDATA[var singleLineAddr = address.toString().remove("\n")
+return singleLineAddr]]></DisplayName>
+</Entity>

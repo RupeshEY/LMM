@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Stores claim numbers allocated for draft claims which did not get saved successfully."
+  entity="AllocatedClaimNumber"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="allocatedclaimnumber"
+  type="editable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.AllocatedClaimNumber"
+    impl="com.guidewire.cc.domain.claim.impl.AllocatedClaimNumberImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The draft claim for which this number was allocated."
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <column
+    desc="The claim number that was allocated."
+    name="ClaimNumber"
+    nullok="false"
+    type="claimnumber"/>
+  <!-- Unique index on ClaimID -->
+  <index
+    desc="Ensure that there is only one AllocatedClaimNumber per Claim"
+    name="allocclaimnumu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimID"/>
+  </index>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.OnlyDraftClaimHasAllocatedNumberDBCheckBuilder"/>
+</entity>

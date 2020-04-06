@@ -1,0 +1,122 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Supertype for all reinsurance agreements."
+  entity="RIAgreement"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  table="riagreement"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.reinsurance.entity.RIAgreement"
+    impl="com.guidewire.cc.domain.reinsurance.impl.RIAgreementImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.reinsurance.impl.RIAgreementImpl"/>
+  <implementsEntity
+    name="Validatable"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Represents the contractual obligation of a reinsurer who has taken on some of the policy risk in exchange for some of the premium.
+        The RIAgreement centralizes information related to that contract, detailing how the risk has been divided and ceded.
+        Additionally, there is information to indicate when alerts should be directed to counterparties and users.
+    ]]></fulldescription>
+  <column
+    desc="Agreement number."
+    name="AgreementNumber"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+  <column
+    desc="Agreement name."
+    name="AgreementName"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+  <typekey
+    desc="The currency of the Agreement."
+    name="Currency"
+    nullok="false"
+    typelist="Currency"/>
+  <column
+    desc="At what amount of total incurred loss would the reinsurers like to be notified of individual large losses."
+    name="NotificationThreshold"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="Currency"/>
+  </column>
+  <column
+    default="false"
+    desc="Boolean field to mark an agreement as exceeding the notification threshold."
+    name="ExceedsNotificationThreshold"
+    nullok="false"
+    type="bit"/>
+  <column
+    desc="Percentage of liability ceded to reinsurer."
+    name="CededShare"
+    nullok="true"
+    type="ripercentagedec"/>
+  <column
+    desc="The lower limit of when coverage starts."
+    name="AttachmentPoint"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="Currency"/>
+  </column>
+  <column
+    desc="The upper limit of coverage. Counterpart to AttachmentPoint. Labeled as Coverage Limit in the UI to match PolicyCenter."
+    name="TopOfLayer"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="Currency"/>
+  </column>
+  <column
+    desc="The maximum amount that can be recovered from this agreement. Usually equal to TopOfLayer minus AttachmentPoint."
+    name="RecoveryLimit"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="Currency"/>
+  </column>
+  <column
+    default="false"
+    desc="Boolean field to indicate if this agreement should be edited in CC or another system."
+    name="ManagedInExternalSystem"
+    nullok="false"
+    type="bit"/>
+  <foreignkey
+    columnName="RIAgreementGroupID"
+    desc="Associated reinsurance agreement group."
+    fkentity="RIAgreementGroup"
+    name="RIAgreementGroup"
+    nullok="true"/>
+  <array
+    arrayentity="RICoding"
+    desc="RICodings on this agreement."
+    exportable="false"
+    name="RICodings"
+    setterScriptability="hidden"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Associated Claim"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+</entity>

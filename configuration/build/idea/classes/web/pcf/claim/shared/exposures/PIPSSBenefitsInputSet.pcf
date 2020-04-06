@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="PIPSSBenefitsInputSet">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Exposure.WageBenefits.SSDIBenefits&quot;)"/>
+    <BooleanRadioInput
+      editable="true"
+      id="SSCollected_Question"
+      label="DisplayKey.get(&quot;NVV.Exposure.SSCollected.Question&quot;)"
+      value="Exposure.SSBenefit">
+      <PostOnChange/>
+    </BooleanRadioInput>
+    <DateInput
+      editable="true"
+      id="SSDIBenefits_BeginDate"
+      label="DisplayKey.get(&quot;NVV.Exposure.WageBenefits.PIPDamages.SSDIBenefits.BeginDate&quot;)"
+      value="Exposure.SSDIBenefits.BenefitsBeginDate"
+      visible=" Exposure.SSBenefit == true"/>
+    <CurrencyInput
+      editable="true"
+      id="LostWagesBenefits_MonthlyCompRate"
+      label="DisplayKey.get(&quot;NVV.Exposure.WageBenefits.LostWagesBenefits.MonthlyCompRate&quot;)"
+      value="Exposure.SSDIBenefits.MonthlyCompRate"
+      visible=" Exposure.SSBenefit == true"/>
+  </InputSet>
+</PCF>

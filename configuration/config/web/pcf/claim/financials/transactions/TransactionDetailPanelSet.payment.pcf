@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    desc="Provides a reusable panel for displaying a Reserve's details in a ListDetailPanel"
+    id="TransactionDetailPanelSet"
+    mode="payment">
+    <Require
+      name="Transaction"
+      type="Transaction"/>
+    <PanelRef
+      def="TransactionPaymentDV(Transaction as Payment)"/>
+  </PanelSet>
+</PCF>

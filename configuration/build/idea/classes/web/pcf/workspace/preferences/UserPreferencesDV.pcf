@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_admin.xml -->
+  <DetailViewPanel
+    id="UserPreferencesDV">
+    <Require
+      name="User"
+      type="User"/>
+    <InputColumn>
+      <ConfirmPasswordInput
+        confirmLabel="DisplayKey.get(&quot;NVV.Admin.UserPreferences.ConfirmPassword&quot;)"
+        editable="true"
+        id="Password"
+        label="DisplayKey.get(&quot;NVV.Admin.UserPreferences.NewPassword&quot;)"
+        oldPasswordLabel="DisplayKey.get(&quot;NVV.Admin.UserPreferences.OldPassword&quot;)"
+        requireOldPassword="true"
+        required="false"
+        value="User.Credential.Password"/>
+      <InputDivider/>
+      <RangeInput
+        editable="true"
+        id="StartupPage"
+        label="DisplayKey.get(&quot;NVV.Admin.UserPreferences.StartupView&quot;)"
+        sortValueRange="false"
+        value="User.UserSettings.StartupPage"
+        valueRange="User.VisibleStartupPages"
+        valueType="typekey.StartupPage"/>
+      <InputSetRef
+        def="UserPreferencesInputSet(User)"
+        id="GlobalizationPreferences"/>
+      <TextInput
+        editable="true"
+        id="NumClaims"
+        label="DisplayKey.get(&quot;NVV.Admin.UserPreferences.NumClaims&quot;)"
+        value="User.UserSettings.NumOpenClaims"
+        valueType="java.lang.Integer"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

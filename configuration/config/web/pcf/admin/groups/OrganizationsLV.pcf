@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="OrganizationsLV">
+    <Require
+      name="Organizations"
+      type="gw.api.database.IQueryBeanResult&lt;gw.pl.persistence.core.Bean&gt;"/>
+    <RowIterator
+      editable="false"
+      elementName="Organization"
+      hasCheckBoxes="true"
+      type="entity.Organization"
+      value="Organizations"
+      valueType="gw.api.database.IQueryBeanResult&lt;gw.pl.persistence.core.Bean&gt;">
+      <Row>
+        <TextCell
+          action="OrganizationDetail.go(Organization)"
+          align="left"
+          id="Name"
+          label="DisplayKey.get(&quot;Web.Admin.OrganizationsLV.Name&quot;)"
+          value="Organization.Name"/>
+        <TypeKeyCell
+          align="left"
+          id="Type"
+          label="DisplayKey.get(&quot;Web.Admin.OrganizationsLV.Type&quot;)"
+          value="Organization.Type"
+          valueType="typekey.BusinessType"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

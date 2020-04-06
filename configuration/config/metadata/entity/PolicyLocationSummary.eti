@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="PolicyLocationSummary"
+  entity="PolicyLocationSummary"
+  exportable="true"
+  table="policylocationsummary"
+  type="editable">
+  <implementsInterface
+    iface="gw.cc.catastrophe.entity.PolicyLocationSummary"
+    impl="com.guidewire.cc.domain.catastrophe.impl.PolicyLocationSummaryImpl"/>
+  <implementsEntity
+    name="AddressAutofillable"/>
+  <fulldescription><![CDATA[
+Describes a policy location retrieved from the policy system associated with a catastrophe.  The policy location may or may not be used by a claim.
+  ]]></fulldescription>
+  <column
+    desc="Identifier for the policy location in an external policy system"
+    name="PolicySystemId"
+    nullok="false"
+    type="policysystemid"/>
+  <column
+    desc="Number of the policy (generally a string)."
+    name="PolicyNumber"
+    nullok="false"
+    type="policynumber"/>
+  <typekey
+    desc="Type of policy."
+    name="PolicyType"
+    nullok="false"
+    typelist="PolicyType"/>
+  <foreignkey
+    columnName="CatastropheID"
+    desc="Associated catastrophe."
+    fkentity="Catastrophe"
+    name="Catastrophe"
+    nullok="true"/>
+  <array
+    arrayentity="PolicyLocationSummaryJoin"
+    cascadeDelete="true"
+    desc="Link to get to associated claims."
+    exportable="false"
+    ignoreforevents="true"
+    name="ClaimJoin"/>
+  <column
+    desc="Latitude expressed in degrees.  Positive = North; Negative = South: -90 &lt;= x &lt;= 90"
+    loadable="false"
+    name="Latitude"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="5"/>
+    <columnParam
+      name="precision"
+      value="7"/>
+  </column>
+  <column
+    desc="Longitude expressed in degrees relative to the prime meridian.  Positive = East; Negative = West: -180 &lt;= x &lt; 180"
+    loadable="false"
+    name="Longitude"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="5"/>
+    <columnParam
+      name="precision"
+      value="8"/>
+  </column>
+  <typekey
+    default="None"
+    desc="Enum giving the status of the latitude and longitude data."
+    loadable="false"
+    name="GeocodeStatus"
+    nullok="true"
+    typelist="GeocodeStatus"/>
+  <column
+    desc="Name of the primary insured."
+    name="InsuredName"
+    nullok="true"
+    type="companyname">
+    <columnParam
+      name="logicalSize"
+      value="60"/>
+  </column>
+  <column
+    desc="First line of primary insured address."
+    name="InsuredAddressLine1"
+    nullok="true"
+    type="addressline"/>
+  <column
+    desc="Second line of primary insured address."
+    name="InsuredAddressLine2"
+    nullok="true"
+    type="addressline"/>
+  <column
+    desc="Third line of primary insured address."
+    name="InsuredAddressLine3"
+    nullok="true"
+    type="addressline"/>
+  <column
+    desc="City of the primary insured."
+    name="InsuredCity"
+    nullok="true"
+    supportsLinguisticSearch="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="County of the primary insured."
+    name="InsuredCounty"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Postal code of the primary insured; string to handle Zip+4 and international codes."
+    name="InsuredPostalCode"
+    nullok="true"
+    supportsLinguisticSearch="true"
+    type="postalcode"/>
+  <typekey
+    createhistogram="true"
+    desc="State of the primary insured."
+    name="InsuredState"
+    nullok="true"
+    typelist="State">
+    <keyfilters>
+      <keyfilter
+        name="Country"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="Country of the primary insured."
+    name="InsuredCountry"
+    nullok="true"
+    typelist="Country"/>
+  <typekey
+    desc="The phone country of the primary insured"
+    name="PhoneCountry"
+    nullok="true"
+    typelist="PhoneCountryCode"/>
+  <column
+    desc="Phone number of the primary insured."
+    name="Phone"
+    nullok="true"
+    type="phone">
+    <columnParam
+      name="phonecountrycodeProperty"
+      value="PhoneCountry"/>
+    <columnParam
+      name="extensionProperty"
+      value="PhoneExtension"/>
+  </column>
+  <column
+    desc="The phone extension of the primary insured"
+    name="PhoneExtension"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Email address of the primary insured."
+    name="EmailAddress"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    columnName="TotalInsured"
+    default="0"
+    desc="The total insured value for the policy location, in Reporting/Default Currency."
+    name="TotalInsured"
+    nullok="true"
+    type="currencyamount"/>
+  <index
+    desc="Make lookups faster"
+    name="policylocsummaryi1">
+    <indexcol
+      keyposition="1"
+      name="CatastropheID"/>
+    <indexcol
+      keyposition="2"
+      name="PolicyNumber"/>
+    <indexcol
+      keyposition="3"
+      name="PolicySystemId"/>
+  </index>
+  <index
+    desc="Covering index for query that populates heat map cache"
+    name="policylocsummaryi2"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="CatastropheID"/>
+    <indexcol
+      keyposition="2"
+      name="Latitude"/>
+    <indexcol
+      keyposition="3"
+      name="Longitude"/>
+    <indexcol
+      keyposition="4"
+      name="TotalInsured"/>
+    <indexcol
+      keyposition="5"
+      name="ID"/>
+  </index>
+</entity>

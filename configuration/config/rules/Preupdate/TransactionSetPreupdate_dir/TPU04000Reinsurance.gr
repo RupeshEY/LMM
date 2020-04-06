@@ -1,0 +1,21 @@
+package rules.Preupdate.TransactionSetPreupdate_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("TPU04000 - Reinsurance")
+internal class TPU04000Reinsurance {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return transactionSet.Claim.ReinsuranceReportable == null
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

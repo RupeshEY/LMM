@@ -1,0 +1,37 @@
+package rules.Preupdate.TransactionSetPreupdate_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.util.CurrencyUtil
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("TPU02000 - Create Activity After Recovery Denial")
+internal class TPU02000CreateActivityAfterRecoveryDenial {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return transactionSet.Subtype == TC_RECOVERYSET
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+for (recovery in (transactionSet as RecoverySet).Recoveries) {
+  if (recovery.isFieldChanged("Status") and recovery.Status == TC_DENIED) {
+    var activity = transactionSet.Claim.createActivityFromPattern(
+          null, ActivityPattern.finder.getActivityPatternByCode("recovery_denied"))
+    var currentDescription = activity.Description
+    var newDescription = 
+      (currentDescription != null and currentDescription.length > 0) ? currentDescription + " - " : ""
+
+    activity.Description = newDescription + 
+               DisplayKey.get("Java.Financials.Recovery.Deny.Activity.DescriptionDetails", 
+                   recovery.Payer, recovery.TransactionAmountDisplayValue)
+    activity.assignUserAndDefaultGroup(recovery.CreateUser)
+  } 
+}
+/*end00rule*/
+
+  }
+}

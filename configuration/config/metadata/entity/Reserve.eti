@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A reserve transaction (any transaction that designates money for payments)."
+  entity="Reserve"
+  final="true"
+  supertype="Transaction">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.reserve.impl.ReserveInternal"
+    impl="com.guidewire.cc.domain.financials.reserve.impl.ReserveImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.reserve.entity.Reserve"
+    impl="com.guidewire.cc.domain.financials.reserve.impl.ReserveImpl"/>
+  <fulldescription><![CDATA[
+      A subtype of <code>Transaction</code> that sets aside money to cover expected costs. Like every <code>Transaction</code>,
+      a <code>Reserve</code> has a <code>ReserveLine</code>, for which the <code>Reserve</code> transaction increases reserves.
+      Reserves are depleted by eroding payments. To get the total reserves, open reserves, remaining reserves or available reserves, 
+      use the <code>FinancialsCalculationUtil</code> class.
+    ]]></fulldescription>
+  <array
+    arrayentity="PaymentReserve"
+    desc="The payments for which this reserve is the offset.  Should only be one."
+    exportable="false"
+    getterScriptability="hidden"
+    name="OffsetPayments"
+    setterScriptability="doesNotExist"/>
+  <events>
+    <event
+      description="Fired when the reserve is added, and each time its status changes."
+      name="ReserveStatusChanged"/>
+    <event
+      description="Deprecated.  Use ReserveStatusChanged instead."
+      name="ReserveSubmitted"/>
+  </events>
+</subtype>

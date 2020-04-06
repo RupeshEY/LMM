@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="EditableBaggageIncidentsLV">
+    <ExposeIterator
+      flags="Removeable"
+      valueType="entity.BaggageIncident"
+      widget="EditableBaggageIncidentsLV"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <RowIterator
+      editable="true"
+      elementName="BaggageIncident"
+      hideCheckBoxesIfReadOnly="true"
+      pageSize="5"
+      pickLocation="BaggageIncidentPopup.push( Claim )"
+      toRemove="removeBaggageIncident(BaggageIncident)"
+      value="Claim.BaggageIncidentsOnly"
+      valueType="entity.BaggageIncident[]">
+      <ToolbarFlag
+        name="Removeable"/>
+      <IteratorSort
+        sortBy="BaggageIncident.BaggageType"
+        sortOrder="1"/>
+      <Row>
+        <TextCell
+          action="BaggageIncidentPopup.push(BaggageIncident, CurrentLocation.InEditMode)"
+          id="PropertyDesc"
+          label="DisplayKey.get(&quot;Web.BaggageIncident.PropertyDescription&quot;)"
+          value="BaggageIncident"
+          valueType="entity.BaggageIncident"
+          width="60"/>
+        <TextCell
+          action="BaggageIncidentPopup.push(BaggageIncident, CurrentLocation.InEditMode)"
+          id="Description"
+          label="DisplayKey.get(&quot;Web.BaggageIncident.Description&quot;)"
+          value="BaggageIncident.Description.length &gt; 40 ? BaggageIncident.Description.substring( 0, 37 ) + &quot;...&quot; : BaggageIncident.Description"
+          wrapLabel="true"/>
+        <CurrencyCell
+          id="ApprovedContentTotal"
+          label="DisplayKey.get(&quot;Web.BaggageIncident.ApprovedContentTotal&quot;)"
+          value="BaggageIncident.ApprovedContentTotal()"
+          wrapLabel="true"/>
+        <CurrencyCell
+          id="ReviewContentTotal"
+          label="DisplayKey.get(&quot;Web.BaggageIncident.ReviewContentTotal&quot;)"
+          value="BaggageIncident.ReviewContentTotal()"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function removeBaggageIncident(baggageIncidentParam : BaggageIncident) {
+  if (baggageIncidentParam.UsedByExposure) {
+      throw new gw.api.util.DisplayableException(DisplayKey.get("Web.NewLossDetailsScreen.CannotDeleteBaggageIncidentExposureLabel"))
+  }  
+  Claim.removeNewServiceRequests(baggageIncidentParam)
+  Claim.removeFromIncidents( baggageIncidentParam )
+}]]></Code>
+  </ListViewPanel>
+</PCF>

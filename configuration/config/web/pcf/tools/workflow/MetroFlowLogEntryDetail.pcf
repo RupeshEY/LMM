@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    id="MetroFlowLogEntryDetail"
+    parent="MetroFlowDetail(Workflow)"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.InternalTools.MetroFlowLogEntryDetail&quot;)">
+    <LocationEntryPoint
+      signature="MetroFlowLogEntryDetail(Workflow : Workflow, LogEntry : WorkflowTextLog)"/>
+    <Variable
+      name="Workflow"
+      type="Workflow"/>
+    <Variable
+      name="LogEntry"
+      type="WorkflowTextLog"/>
+    <Screen
+      id="MetroFlowLogEntryDetailScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="MetroFlowDetail.go(Workflow)"
+          id="MetroFlowLogEntryDetail_OKButton"
+          label="DisplayKey.get(&quot;Button.OK&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel
+        id="MetroFlowLogEntryDetailDV">
+        <InputColumn>
+          <TextInput
+            id="LogDate"
+            label="DisplayKey.get(&quot;Web.InternalTools.MetroFlowLogEntryDetailDV.LogDate&quot;)"
+            value="gw.api.util.LocaleUtil.getCurrentLocale().getOutputDateFormat(gw.i18n.DateTimeFormat.SHORT, gw.i18n.DateTimeFormat.SHORT).format(LogEntry.LogDate)"/>
+          <TextInput
+            id="Summary"
+            label="DisplayKey.get(&quot;Web.InternalTools.MetroFlowLogEntryDetailDV.Summary&quot;)"
+            value="LogEntry.LocalizeMessage"/>
+          <PreFormattedTextInput
+            id="Description"
+            label="DisplayKey.get(&quot;Web.InternalTools.MetroFlowLogEntryDetailDV.Description&quot;)"
+            value="LogEntry.Description"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Page>
+</PCF>

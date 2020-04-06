@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_financials.xml -->
+  <ListViewPanel
+    id="NewCheckGroupChecksLV">
+    <Require
+      name="CheckGroup"
+      type="CheckGroup"/>
+    <RowIterator
+      editable="false"
+      elementName="Check"
+      pageSize="5"
+      value="CheckGroup.Checks"
+      valueType="entity.Check[]">
+      <Row>
+        <BooleanRadioCell
+          icon="&quot;new.png&quot;"
+          iconLabel="DisplayKey.get(&quot;LV.Financials.Check.Primary.Tip&quot;)"
+          id="Check_Primary"
+          label="DisplayKey.get(&quot;LV.Financials.Check.Primary&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Financials.Check.Primary.Tip&quot;)"
+          value="Check.Primary"/>
+        <TextCell
+          id="Check_PayTo"
+          label="DisplayKey.get(&quot;LV.Financials.NewCheckGroupChecks.Check.PayTo&quot;)"
+          sortOrder="1"
+          value="Check.PayTo"/>
+        <TextCell
+          id="Check_MailingAddress"
+          label="DisplayKey.get(&quot;LV.Financials.NewCheckGroupChecks.Check.MailingAddress&quot;)"
+          value="Check.FormatAddressSummary(false)"/>
+        <TextCell
+          id="Check_Portion"
+          label="DisplayKey.get(&quot;LV.Financials.NewCheckGroupChecks.Check.Portion&quot;)"
+          value="Check.Portion.getMultiCurrencyDisplayName(Check)"/>
+        <CurrencyCell
+          formatType="currency"
+          id="Check_NetAmount"
+          label="DisplayKey.get(&quot;LV.Financials.NewCheckGroupChecks.Check.NetAmount&quot;)"
+          value="Check.NetAmountPair"
+          valueType="gw.api.financials.CurrencyAmountPair"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

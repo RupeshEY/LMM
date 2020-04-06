@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Incident.view(vehicleIncident)"
+    id="VehicleIncidentDetailPrint"
+    infoBar="ClaimInfoBar(vehicleIncident.Claim)"
+    parent="ClaimLossDetails(vehicleIncident.Claim)"
+    title="DisplayKey.get(&quot;Web.EditVehicleIncident.Title&quot;)">
+    <LocationEntryPoint
+      signature="VehicleIncidentDetailPrint(vehicleIncident : VehicleIncident)"/>
+    <Variable
+      name="vehicleIncident"
+      type="VehicleIncident"/>
+    <Screen
+      id="VehicleIncidentScreen">
+      <Toolbar/>
+      <PanelRef
+        def="VehIncidentDetailDV(vehicleIncident, new java.util.HashSet&lt;ServiceRequest&gt;())"/>
+    </Screen>
+  </Page>
+</PCF>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Wraps a ReserveLine associated with a BulkInvoiceItem.  Necessary to allow saving of a draft BulkInvoiceItem that is set to have a new ReserveLine."
+  entity="ReserveLineWrapper"
+  exportable="false"
+  extendable="false"
+  loadable="false"
+  platform="false"
+  table="reservelinewrapper"
+  type="versionable">
+  <implementsInterface
+    iface="gw.cc.financials.bulkpay.entity.ReserveLineWrapper"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.ReserveLineWrapperImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.bulkpay.impl.ReserveLineWrapperInternal"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.ReserveLineWrapperImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.ReserveLineWrapperImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.ReserveLineWrapperImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+      Provides a level of indirection between a BulkInvoiceItem and its ReserveLine. This is necessary when a
+      BulkInvoiceItem is created for a non-existent reserve line, and so cannot be committed to the database.
+      The BulkInvoiceItem has a non-null foreign key (FK) to ReserveLineWrapper, with a second FK from the wrapper
+      to the actual reserve line that is null if the reserve line doesn't yet exist. The Bulk Invoice screen displays
+      the wrapper's correct but uncreated reserve line so the user never knows if the displayed reserve line exists yet.
+    ]]></fulldescription>
+  <onetoone
+    fkentity="BulkInvoiceItemInfo"
+    name="BulkInvoiceItemInfo"
+    nullok="true"
+    setterScriptability="doesNotExist"/>
+  <foreignkey
+    columnName="ReserveLineID"
+    desc="The ReserveLine wrapped by this ReserveLineWrapper."
+    fkentity="ReserveLine"
+    name="ReserveLine"
+    nullok="true"/>
+</entity>

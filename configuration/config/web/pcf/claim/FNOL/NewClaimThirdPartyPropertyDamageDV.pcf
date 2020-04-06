@@ -1,0 +1,235 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="NewClaimThirdPartyPropertyDamageDV">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Variable
+      initialValue="gw.vendormanagement.SpecialistServiceCodeConstants.PROPINSPECTAPPRAISAL"
+      name="appraisalIncidentCode"
+      type="String"/>
+    <Variable
+      initialValue="createOtherServiceRequests()"
+      name="otherServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.Exposure.Overall&quot;)"/>
+      <TypeKeyInput
+        id="Exposure_LossParty"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.Exposure.LossParty&quot;)"
+        required="true"
+        value="Exposure.LossParty"
+        valueType="typekey.LossPartyType"/>
+      <TypeKeyInput
+        id="Exposure_PrimaryCoverage"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.Exposure.PrimaryCoverage&quot;)"
+        value="Exposure.PrimaryCoverage"
+        valueType="typekey.CoverageType"/>
+      <TypeKeyInput
+        id="Exposure_CoverageSubType"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.Exposure.CoverageSubType&quot;)"
+        value="Exposure.CoverageSubType"
+        valueType="typekey.CoverageSubtype"/>
+      <RangeInput
+        editable="true"
+        id="Exposure_Coverage"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.Exposure.Coverage&quot;)"
+        value="Exposure.Coverage"
+        valueRange="Exposure.Claim.Policy.getCoveragesByCoverageType(Exposure.PrimaryCoverage)"
+        valueType="entity.Coverage"/>
+      <InputSet
+        visible="Exposure.Claim.Policy.StatCodingEnabled">
+        <PolicyStatCodePickerInput
+          action="ClaimPolicyStatCodePickerPopup.push(Exposure.Claim)"
+          editable="true"
+          id="Exposure_StatLine"
+          label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.Exposure.StatLine&quot;)"
+          value="Exposure.StatLine"
+          valueRange="Exposure.Claim.Policy.CappedStatCodes"/>
+        <InputSet
+          hideIfReadOnly="true"
+          visible="true">
+          <TextInput
+            id="StatLine_Warning"
+            value="DisplayKey.get(&quot;Java.StatCodes.StatCodeListCappedWarning&quot;, Exposure.Claim.Policy.StatCodeListCap, Exposure.Claim.Policy.StatCodes.length)"
+            visible="Exposure.Claim.Policy.StatCodeListCapped"/>
+        </InputSet>
+      </InputSet>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.Exposure.Claimant&quot;)"/>
+      <ClaimContactInput
+        claim="Exposure.Claim"
+        editable="true"
+        id="Claimant_Picker"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.Exposure.Claimant.Picker&quot;)"
+        required="true"
+        value="Exposure.Claimant"
+        valueRange="Exposure.Claim.RelatedContacts">
+        <Reflect
+          triggerIds="Exposure_LossParty">
+          <ReflectCondition
+            condition="VALUE == TC_INSURED"
+            value="Exposure.Claim.Insured"/>
+          <ReflectCondition
+            condition="true"
+            value="&quot;&quot;"/>
+        </Reflect>
+      </ClaimContactInput>
+      <TypeKeyInput
+        editable="true"
+        id="Claimant_Type"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.Exposure.Claimant.Type&quot;)"
+        required="true"
+        value="Exposure.ClaimantType"
+        valueType="typekey.ClaimantType">
+        <Reflect
+          triggerIds="Claimant_Picker">
+          <ReflectCondition
+            condition="Exposure.Claim.Insured==VALUE"
+            value="&quot;insured&quot;"/>
+          <ReflectCondition
+            condition="true"
+            value="&quot;&quot;"/>
+        </Reflect>
+      </TypeKeyInput>
+      <BooleanRadioInput
+        editable="true"
+        id="Claimant_ContactProhibited"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.Exposure.Claimant.ContactProhibited&quot;)"
+        value="ContactProhibited"/>
+      <TextInput
+        id="Claimant_PrimaryPhone"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.Exposure.Claimant.PrimaryPhone&quot;)"
+        value="Exposure.Claimant.PrimaryPhoneValue">
+        <Reflect
+          triggerIds="Claimant_Picker"
+          value="VALUE.PrimaryPhoneValue"/>
+      </TextInput>
+      <TextInput
+        id="Claimant_Address"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.Exposure.Claimant.Address&quot;)"
+        value="Exposure.Claimant.PrimaryAddressDisplayValue">
+        <Reflect
+          triggerIds="Claimant_Picker"
+          value="VALUE.PrimaryAddressDisplayValue"/>
+      </TextInput>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.Damage&quot;)"/>
+      <TextInput
+        editable="true"
+        id="PropertyDescription"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.PropertyDescription&quot;)"
+        value="Exposure.MobilePropertyIncident.PropertyDesc"/>
+      <TextAreaInput
+        editable="true"
+        id="Description"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.Description&quot;)"
+        numCols="30"
+        numRows="3"
+        value="Exposure.Incident.Description"/>
+      <CurrencyInput
+        editable="true"
+        id="LossEstimate"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.LossEstimate&quot;)"
+        value="Exposure.Incident.LossEstimate"/>
+      <InputDivider/>
+    </InputColumn>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.repairs&quot;)"/>
+      <TypeKeyInput
+        editable="true"
+        id="EstimatedReceived"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.EstimatedReceived&quot;)"
+        value="Exposure.MobilePropertyIncident.EstimatesReceived"
+        valueType="typekey.YesNo">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <CurrencyInput
+        editable="true"
+        id="EstimateCost"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.EstimateCost&quot;)"
+        value="Exposure.MobilePropertyIncident.EstRepairCost"
+        visible="Exposure.MobilePropertyIncident.EstimatesReceived == TC_YES"/>
+      <TextInput
+        editable="true"
+        id="EstimateTime"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.EstimateTime&quot;)"
+        value="Exposure.MobilePropertyIncident.EstRepairTime"
+        visible="Exposure.MobilePropertyIncident.EstimatesReceived == TC_YES"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.OtherCarrierInvolvement&quot;)"/>
+      <BooleanRadioInput
+        editable="true"
+        id="Claimant_OtherCoverage"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.Claimant.OtherCoverage&quot;)"
+        required="false"
+        value="Exposure.OtherCoverage"/>
+      <ListViewInput
+        def="EditableOtherCoverageDetailsLV(Exposure)"
+        editable="true"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimThirdPartyPropertyDamage.Exposure.OtherCoverageDetails&quot;)">
+        <Toolbar>
+          <IteratorButtons
+            iterator="EditableOtherCoverageDetailsLV.EditableOtherCoverageDetailsLV"/>
+        </Toolbar>
+      </ListViewInput>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.ServicesScreen.ServiceRequest.ServiceToPerform&quot;)"/>
+      <TextInput
+        id="ServiceRequestSubmitMessageFNOL"
+        labelAbove="true"
+        value="DisplayKey.get(&quot;Web.ServiceRequest.FNOL.SubmitMessage&quot;)"
+        visible="Exposure.Claim.DraftClaim"/>
+      <TextInput
+        id="ServiceRequestSubmitMessage"
+        labelAbove="true"
+        value="DisplayKey.get(&quot;Web.ServiceRequest.SubmitMessage&quot;)"
+        visible="not Exposure.Claim.DraftClaim and CurrentLocation.InEditMode"/>
+      <InputSetRef
+        def="AppraisalServiceInputSet(AppraisalServiceRequest, Exposure.MobilePropertyIncident, unusedServiceRequests, appraisalIncidentCode)"
+        id="AppraisalServiceInputSet"/>
+      <InputSetRef
+        def="OtherServicesLVInputGroupInputSet(Exposure.MobilePropertyIncident.Claim, Exposure.MobilePropertyIncident, otherServiceRequests, otherServiceRequests, unusedServiceRequests, {})"/>
+    </InputColumn>
+    <Code><![CDATA[uses java.util.Set
+
+function findServiceRequest(serviceCode : String) : ServiceRequest {
+  return Exposure.MobilePropertyIncident.ServiceRequests.firstWhere(\ sr ->
+      sr.Instruction.Services.Count == 1
+          and sr.Instruction.Services.single().Service.Code == serviceCode
+          and (otherServiceRequests == null or not otherServiceRequests.contains(sr))
+  )
+}
+
+property get AppraisalServiceRequest() : ServiceRequest {
+  return findServiceRequest(appraisalIncidentCode)
+}
+
+function createOtherServiceRequests() :  Set<ServiceRequest> {
+  return Exposure.MobilePropertyIncident.ServiceRequests.where(\sr -> sr != AppraisalServiceRequest).toSet()
+}
+
+property get ContactProhibited() : boolean {
+    return Exposure.Claim.getClaimContact(Exposure.Claimant).ContactProhibited
+}
+  
+property set ContactProhibited(prohibited : boolean) {
+  var claimContact = Exposure.Claim.getClaimContact(Exposure.Claimant) 
+  if (claimContact != null) claimContact.ContactProhibited = prohibited 
+}
+      
+    ]]></Code>
+  </DetailViewPanel>
+</PCF>

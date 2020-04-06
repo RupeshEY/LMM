@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Entity
+  name="FinancialCovTerm">
+  <Columns>
+    <Column
+      beanPath="FinancialCovTerm.FinancialAmount"
+      name="financialAmount"/>
+    <Column
+      beanPath="FinancialCovTerm.Coverage.Currency"
+      name="coverageCurrency"/>
+  </Columns>
+  <DisplayName><![CDATA[uses gw.api.util.CurrencyUtil
+
+if(financialAmount != null and coverageCurrency != null) {
+  return CurrencyUtil.renderAsCurrency(financialAmount.Amount, coverageCurrency)
+}
+
+return ""
+
+]]></DisplayName>
+</Entity>

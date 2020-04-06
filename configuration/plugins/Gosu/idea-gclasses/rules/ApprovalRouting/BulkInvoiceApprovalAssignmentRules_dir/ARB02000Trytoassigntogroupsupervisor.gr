@@ -1,0 +1,23 @@
+package rules.ApprovalRouting.BulkInvoiceApprovalAssignmentRules_dir
+
+@gw.rules.RuleName("ARB02000 - Try to assign to group supervisor")
+internal class ARB02000Trytoassigntogroupsupervisor {
+  static function doCondition(bulkInvoice : entity.BulkInvoice) : boolean {
+    
+/*start00rule*/
+return /* This action will succeed (return true) if the exposure
+ * or claim related to the approval batch is assigned and if
+ * the user making the request is not the group supervisor. */
+bulkInvoice.approveByGroupSupervisor()
+/*end00rule*/
+
+  }
+
+  static function doAction(bulkInvoice : entity.BulkInvoice, actions : gw.rules.Action) {
+
+/*start00rule*/
+actions.exit()
+/*end00rule*/
+
+  }
+}

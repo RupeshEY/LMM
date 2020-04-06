@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Worksheet
+    alwaysInEditMode="true"
+    canEdit="true"
+    id="UserVacationWorksheet"
+    startInEditMode="true"
+    tabLabel="DisplayKey.get(&quot;Web.UserVacation&quot;)"
+    title="DisplayKey.get(&quot;Web.UserVacation&quot;)">
+    <LocationEntryPoint
+      signature="UserVacationWorksheet()"/>
+    <Scope
+      location="*"/>
+    <Variable
+      initialValue="User.util.CurrentUser"
+      name="CurrentUser"
+      type="User"/>
+    <ScreenRef
+      def="UserVacationScreen(CurrentUser)"/>
+  </Worksheet>
+</PCF>

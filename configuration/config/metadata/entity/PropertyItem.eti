@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="High-value item associated with a PolicyLocation."
+  entity="PropertyItem"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="propertyitem"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.policy.entity.PropertyItem"
+    impl="com.guidewire.cc.domain.policy.impl.PropertyItemImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Appraised value of the item."
+    name="AppraisedValue"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="PolicyCurrency"/>
+  </column>
+  <column
+    desc="Description of the item."
+    name="Description"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Identifier for the property item in an external policy system"
+    name="PolicySystemId"
+    nullok="true"
+    type="policysystemid"/>
+  <foreignkey
+    columnName="PropertyID"
+    desc="The related property."
+    exportable="false"
+    fkentity="PolicyLocation"
+    name="Property"
+    nullok="false"/>
+</entity>

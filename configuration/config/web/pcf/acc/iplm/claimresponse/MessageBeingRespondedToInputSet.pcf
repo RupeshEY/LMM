@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="MessageBeingRespondedToInputSet">
+    <Require
+      name="claimData"
+      type="ECFMessageClaimData_Ext"/>
+    <Label
+      id="referenceMessageLabel"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.MessageBeingRespondedTo&quot;)"/>
+    <TextInput
+      desc="taken from ClaimNotifyEventRq/CreationDate; passed in wb:ClaimResponseRq/ReferredUUID"
+      id="claimNotifyUUID"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.UUID&quot;)"
+      value="claimData.UUID"/>
+    <TextInput
+      desc="taken from ClaimNotifyEventRq/CreationDate; not in Claim Response message, just here as reference for user"
+      id="claimDataTime"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.CreationDate&quot;)"
+      value="claimData.OriginTimeStamp"
+      valueType="java.util.Date"/>
+    <TextInput
+      desc="taken from ClaimNotifyEventRq/ClaimMovement/ClaimEntry/BrokerReference; passed in wb:ClaimResponseRq/wb:ClaimEntry/BrokerReference"
+      id="claimDataTR"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.TransactionReference&quot;)"
+      value="claimData.TR"/>
+    <TextInput
+      desc="taken from ClaimNotifyEventRq/ClaimMovement/ClaimOriginalPolicy/MessageSequenceNumber; not in Claim Response message, just here as reference for user"
+      id="claimDataSequenceNo"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.SequenceNumber&quot;)"
+      value="claimData.TransactionSequence"/>
+  </InputSet>
+</PCF>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<Entity
+  name="VehicleRU">
+  <!-- Shane: The bean path here causes additional beans to be loaded and could up debugging certain tests  Shane: that asserts beans in bundle.  Use the commented lines instead if that is happening to you -->
+  <Columns>
+    <Column
+      beanPath="VehicleRU.Vehicle"
+      displayName="true"
+      name="vehicle"
+      sortOrder="1"/>
+  </Columns>
+  <!-- <Column
+      beanPath="VehicleRU.RUNumber"
+      name="ruNumber"
+      sortOrder="1"/> -->
+  <DisplayName><![CDATA[vehicle]]></DisplayName>
+</Entity>

@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="true"
+    canVisit="perm.Policy.view(Claim) and perm.System.viewpolicy"
+    handlesValidationIssue="VALUE typeis entity.Policy or VALUE == Claim.Insured"
+    id="ClaimPolicyGeneral"
+    title="DisplayKey.get(&quot;Web.ClaimPolicy.General&quot;)"
+    validationParameter="Claim">
+    <LocationEntryPoint
+      signature="ClaimPolicyGeneral(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="gw.api.policy.PolicyTypeUtil.hasInternalOnlyFields()"
+      name="HasInternalOnlyFields"
+      type="Boolean"/>
+    <Screen
+      id="ClaimPolicyGeneralScreen">
+      <Toolbar
+        visible="perm.Claim.edit(Claim)">
+        <!-- Edit an unverified policy -->
+        <ToolbarButton
+          action="CurrentLocation.startEditing()"
+          default="true"
+          hideIfEditable="true"
+          id="ClaimPolicyGeneral_EditButton"
+          label="DisplayKey.get(&quot;Button.Edit&quot;)"
+          shortcut="E"
+          visible="!Claim.Policy.Verified and perm.Policy.edit(Claim)"/>
+        <!-- Edit a verified policy w/o internal-only fields -->
+        <ToolbarButton
+          action="gw.api.policy.ClaimPolicyMakeEditableUtil.makePolicyEditable(CurrentLocation, Claim, true);"
+          confirmMessage="DisplayKey.get(&quot;JSP.ClaimPolicyGeneral.EditVerifiedPolicy&quot;)"
+          default="true"
+          hideIfEditable="true"
+          id="ClaimPolicyGeneral_EditButton2"
+          label="DisplayKey.get(&quot;Button.Edit&quot;)"
+          shortcut="E"
+          visible="perm.Policy.makeeditable(Claim) and (Claim.Policy.Verified and not HasInternalOnlyFields)"/>
+        <!-- Edit internal-only fields on the policy when the user doesn't have permission to edit a verified policy -->
+        <ToolbarButton
+          action="CurrentLocation.startEditing()"
+          default="true"
+          hideIfEditable="true"
+          id="ClaimPolicyGeneral_EditButton4"
+          label="DisplayKey.get(&quot;Button.Edit&quot;)"
+          shortcut="E"
+          visible="not perm.Policy.makeeditable(Claim) and Claim.Policy.Verified and HasInternalOnlyFields"/>
+        <!-- Optionally edit either whole policy or internal only fields if policy has internal only fields and user has permission to edit them -->
+        <ToolbarButton
+          hideIfEditable="true"
+          id="ClaimPolicyGeneral_EditButton5"
+          label="DisplayKey.get(&quot;Button.Edit&quot;)"
+          visible="Claim.Policy.Verified and HasInternalOnlyFields and (perm.Policy.makeeditable(Claim) and perm.Policy.edit(Claim))">
+          <MenuItem
+            action="gw.api.policy.ClaimPolicyMakeEditableUtil.makePolicyEditable(CurrentLocation, Claim, true)"
+            confirmMessage="DisplayKey.get(&quot;JSP.ClaimPolicyGeneral.EditEntireVerifiedPolicy&quot;)"
+            hideIfEditable="true"
+            id="EditFullPolicy"
+            label="DisplayKey.get(&quot;Web.Claim.ClaimPolicyGeneral.ModifyWholePolicyButton&quot;)"
+            visible="perm.Policy.makeeditable(Claim)"/>
+          <MenuItem
+            action="CurrentLocation.startEditing()"
+            hideIfEditable="true"
+            id="EditInternalOnly"
+            label="DisplayKey.get(&quot;Web.Claim.ClaimPolicyGenera.ModifyClaimCenterOnlyFieldsButton&quot;)"
+            visible="perm.Policy.edit(Claim)"/>
+        </ToolbarButton>
+        <ToolbarButton
+          action="PolicyRefreshWizard.go(getClaimAndCheckForUnsavedWork(), gw.api.policy.refresh.RefreshPolicyFetcher.createForRefresh(Claim))"
+          hideIfEditable="true"
+          id="ClaimPolicyGeneral_RefreshPolicyButton"
+          label="DisplayKey.get(&quot;Button.RefreshPolicy&quot;)"
+          shortcut="F"
+          tooltip="DisplayKey.get(&quot;JSP.ClaimPolicyGeneral.RefreshPolicy&quot;)"
+          visible="Claim.LossDate != null"/>
+        <PickerToolbarButton
+          action="ClaimPolicySelectPolicyPopup.push(getClaimAndCheckForUnsavedWork())"
+          hideIfEditable="true"
+          id="ClaimPolicyGeneral_SelectPolicyButton"
+          label="DisplayKey.get(&quot;Button.SelectPolicy&quot;)"
+          onPick="PolicyRefreshWizard.go(Claim, gw.api.policy.refresh.RefreshPolicyFetcher.createForPolicySelect(Claim, PickedValue))"
+          shortcut="P"
+          tooltip="DisplayKey.get(&quot;JSP.ClaimPolicyGeneral.SelectPolicy&quot;)"
+          visible="Claim.LossDate != null and perm.Claim.selectpolicy(Claim)"/>
+        <EditButtons
+          editVisible="false"/>
+        <ToolbarButton
+          action="ViewPolicy.push(gw.api.system.CCConfigParameters.PolicySystemURL.Value, Claim.Policy.PolicyNumber, Claim.LossDate)"
+          icon="&quot;icon_newWindow.png&quot;"
+          id="ViewInPC"
+          label="DisplayKey.get(&quot;Button.ViewInPC&quot;)"
+          visible="gw.api.system.CCConfigParameters.PolicySystemURL.Value.HasContent and perm.System.viewpolicysystem"/>
+      </Toolbar>
+      <PanelRef
+        def="PolicyGeneralPanelSet(Claim.Policy, Claim)"
+        mode="Claim.LossType"/>
+    </Screen>
+    <Code><![CDATA[function getClaimAndCheckForUnsavedWork() : Claim {
+  if(gw.api.claim.ClaimUtil.doesClaimHaveUnsavedWork()) {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Web.ClaimPolicy.General.UnsavedWorkOnClaim"))
+  }
+  return Claim
+}]]></Code>
+  </Page>
+</PCF>

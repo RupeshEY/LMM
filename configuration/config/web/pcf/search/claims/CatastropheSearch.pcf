@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.Claim.genericviewclaim and perm.System.viewsearch and perm.Catastrophe.view and gw.api.heatmap.HeatMapGenerator.isHeatMapConfigured()"
+    countsAsWork="false"
+    id="CatastropheSearch"
+    parent="ClaimSearchesGroup()"
+    title="DisplayKey.get(&quot;JSP.ClaimSearch.Search.ClaimSearch&quot;)">
+    <LocationEntryPoint
+      signature="CatastropheSearch(catastrophe : Catastrophe)"/>
+    <LocationEntryPoint
+      signature="CatastropheSearch()"/>
+    <Variable
+      name="catastrophe"
+      type="Catastrophe"/>
+    <ScreenRef
+      def="CatastropheSearchScreen(catastrophe)"/>
+  </Page>
+</PCF>

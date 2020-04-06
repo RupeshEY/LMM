@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<plugin
+  interface="ISolrMessageTransportPlugin"
+  name="ISolrMessageTransportPlugin">
+  <plugin-gosu
+    gosuclass="gw.solr.CCSolrMessageTransportPlugin">
+    <param
+      name="debug"
+      value="false"/>
+    <!-- NOTE: if commitImmediately is true, indexing speed drops by a factor of 100x or more -->
+    <param
+      name="commitImmediately"
+      value="false"/>
+    <param name="consistencyCacheSize" value="2500"/>
+    <param name="consistencyCacheExpirationSeconds" value="300"/>
+  </plugin-gosu>
+</plugin>

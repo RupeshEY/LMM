@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Time based exposure metric."
+  entity="TimeBasedExposureMetric"
+  final="false"
+  priority="1"
+  supertype="ExposureMetric">
+  <implementsInterface
+    iface="gw.cc.exposure.metric.entity.TimeBasedExposureMetric"
+    impl="com.guidewire.cc.domain.exposure.metric.impl.TimeBasedExposureMetricImpl"/>
+  <implementsInterface
+    iface="gw.api.metric.MetricMethods"
+    impl="gw.api.exposure.metric.TimeBasedExposureMetricMethodsImpl"/>
+  <implementsEntity
+    name="TimeBasedMetricDelegate"/>
+</subtype>

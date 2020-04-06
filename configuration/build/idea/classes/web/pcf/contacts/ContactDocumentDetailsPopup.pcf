@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="false"
+    id="ContactDocumentDetailsPopup"
+    title="DisplayKey.get(&quot;Web.DocumentDetails.Title&quot;)">
+    <LocationEntryPoint
+      signature="ContactDocumentDetailsPopup(documentInfo: ContactDocumentInfo)"/>
+    <Variable
+      name="documentInfo"
+      type="ContactDocumentInfo"/>
+    <Variable
+      initialValue="new gw.contact.ContactDocumentsUIHelper()"
+      name="contactDocumentsActionsHelper"
+      type="gw.contact.ContactDocumentsUIHelper"/>
+    <Screen>
+      <Toolbar/>
+      <DetailViewPanel>
+        <InputColumn>
+          <ContentInput
+            labelAbove="true">
+            <Link
+              action="documentInfo.download()"
+              download="attachment"
+              icon="&quot;download_document_16.png&quot; "
+              id="DownloadLink"
+              styleClass="none"
+              tooltip="contactDocumentsActionsHelper.DownloadDocumentContentTooltip"
+              visible="documentInfo != null and documentInfo.DMS"/>
+          </ContentInput>
+        </InputColumn>
+      </DetailViewPanel>
+      <AlertBar
+        id="ContentlessNoActionsText"
+        label="DisplayKey.get(&quot;Web.AddressBook.ContactDocuments.ViewContent.IndicateExistence.Message&quot;)"
+        visible="!documentInfo.DMS"/>
+      <DetailViewPanel>
+        <Layout
+          columns="1"
+          type="table"/>
+        <InputSetRef
+          def="ContactDocumentDetailsInputSet(documentInfo)"/>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

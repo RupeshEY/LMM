@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AddressBookAdditionalInfoInputSet"
+    mode="UserContact">
+    <Require
+      name="Contact"
+      type="Person"/>
+    <Require
+      name="externalContactSource"
+      type="gw.api.contact.ExternalContactSource"/>
+    <Require
+      name="allowEditContact"
+      type="boolean"/>
+    <TextInput
+      editable="true"
+      id="EmployeeNumber"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.EmployeeNumber&quot;)"
+      required="true"
+      value="(Contact as UserContact).EmployeeNumber"/>
+    <TypeKeyInput
+      editable="true"
+      id="Currency"
+      label="DisplayKey.get(&quot;Financials.Multicurrency.PreferredCurrency&quot;)"
+      value="Contact.PreferredCurrency"
+      valueType="typekey.Currency"
+      visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()"/>
+  </InputSet>
+</PCF>

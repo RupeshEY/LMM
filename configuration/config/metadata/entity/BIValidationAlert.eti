@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents one BulkInvoice validation alert."
+  entity="BIValidationAlert"
+  exportable="true"
+  extendable="false"
+  loadable="false"
+  platform="false"
+  table="bivalidationalert"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.financials.bulkpay.entity.BIValidationAlert"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BIValidationAlertImpl"/>
+  <fulldescription><![CDATA[
+    Represents one bulk invoice validation alert message. A bulk invoice validation plugin constructs one or more instances
+    of this entity when it encounters validation errors. Each instance is related to a single BulkInvoice and has both an alert type and a message
+    indicating the reason for the validation failure.
+    ]]></fulldescription>
+  <column
+    desc="Text description of this BulkInvoice validation failure alert, i.e. the reason for the validation failure."
+    name="AlertMsg"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    desc="The type of this BulkInvoice validation alert.  Typically customer defined."
+    name="AlertType"
+    nullok="true"
+    typelist="BIValidationAlertType"/>
+  <foreignkey
+    columnName="BulkInvoiceID"
+    desc="The BulkInvoice with which this validation alert is associated."
+    exportasid="true"
+    fkentity="BulkInvoice"
+    name="BulkInvoice"
+    nullok="true"/>
+</entity>

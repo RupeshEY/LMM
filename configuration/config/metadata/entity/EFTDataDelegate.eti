@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="EFTDataDelegate">
+  <implementsInterface
+    iface="gw.cc.contact.entity.EFTDataDelegate"
+    impl="com.guidewire.cc.domain.contact.impl.EFTDataDelegateImpl"/>
+  <fulldescription><![CDATA[Delegate used by Contact and Check to store Electronic funds transfer data
+    ]]></fulldescription>
+</delegate>

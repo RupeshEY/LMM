@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="perm.User.viewteam"
+    id="TeamGroupGroup"
+    title="DisplayKey.get(&quot;Web.TabBar.Team&quot;)">
+    <LocationEntryPoint
+      signature="TeamGroupGroup(GroupInfo : gw.api.admin.TreeGroupInfo)"/>
+    <Variable
+      name="GroupInfo"
+      type="gw.api.admin.TreeGroupInfo"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.GroupSummaryTab&quot;)"
+      location="TeamGroupSummary(GroupInfo)"
+      shortcut="S"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.GroupAgingTab&quot;)"
+      location="TeamGroupAging(GroupInfo)"
+      shortcut="G"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.GroupClaimsTab&quot;)"
+      location="TeamGroupClaims(GroupInfo)"
+      shortcut="L"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.GroupExposuresTab&quot;)"
+      location="TeamGroupExposures(GroupInfo)"
+      shortcut="X"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.GroupActivitiesTab&quot;)"
+      location="TeamGroupActivities(GroupInfo)"
+      shortcut="E"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.GroupMattersTab&quot;)"
+      location="TeamGroupMatters(GroupInfo)"
+      shortcut="R"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.Subrogations&quot;)"
+      location="TeamGroupSubrogations(GroupInfo)"/>
+  </LocationGroup>
+</PCF>

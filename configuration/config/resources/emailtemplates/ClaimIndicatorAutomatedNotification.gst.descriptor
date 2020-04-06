@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<serialization>
+
+  <emailtemplate-descriptor
+
+    name="Claim Indicator Automated Notification"
+    keywords="automatednotificationhandler, claimindicatortrigger"
+    topic="Notification of Claim Indicator Change"
+    subject="The ${ trigger.ClaimIndicator.DisplayName } indicator has changed on Claim ${ clm.ClaimNumber }"
+    body="ClaimIndicatorAutomatedNotification.gst"
+    requiredsymbols="trigger, clm"
+
+  />
+
+</serialization>

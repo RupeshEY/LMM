@@ -1,0 +1,20 @@
+package rules.Segmentation.ExposureSegmentationRules_dir
+
+@gw.rules.RuleName("ESG01000 - Auto")
+internal class ESG01000Auto {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.Claim.LossType == TC_AUTO
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* Run child rules */
+/*end00rule*/
+
+  }
+}

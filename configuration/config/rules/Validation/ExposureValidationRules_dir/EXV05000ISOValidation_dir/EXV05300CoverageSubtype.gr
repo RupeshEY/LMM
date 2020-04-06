@@ -1,0 +1,23 @@
+package rules.Validation.ExposureValidationRules_dir.EXV05000ISOValidation_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("EXV05300 - Coverage Subtype")
+internal class EXV05300CoverageSubtype {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.CoverageSubType == null
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.rejectField("CoverageSubType", TC_ISO, 
+                     DisplayKey.get("Rules.Validation.Exposure.CoverageSubTypeNotNull"), null, null)
+/*end00rule*/
+
+  }
+}

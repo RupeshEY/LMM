@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A filter for this question set that must pass in order for the question to be displayed in the UI."
+  entity="QuestionFilter"
+  exportable="true"
+  extendable="false"
+  ignoreForEvents="true"
+  platform="false"
+  readOnly="false"
+  table="qfilter"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.question.impl.QuestionFilterInternal"
+    impl="com.guidewire.cc.domain.question.impl.QuestionFilterImpl"/>
+  <implementsInterface
+    iface="gw.cc.question.entity.QuestionFilter"
+    impl="com.guidewire.cc.domain.question.impl.QuestionFilterImpl"/>
+  <foreignkey
+    columnName="QuestionID"
+    desc="Fk used to support the array from Question"
+    fkentity="Question"
+    name="Question"
+    nullok="false"/>
+  <foreignkey
+    columnName="FilterQuestionID"
+    desc="The question on which answer the Question depends"
+    fkentity="Question"
+    name="FilterQuestion"
+    nullok="false"/>
+  <column
+    name="Answer"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="1024"/>
+  </column>
+</entity>

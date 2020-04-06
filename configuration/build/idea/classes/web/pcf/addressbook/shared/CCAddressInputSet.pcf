@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="CCAddressInputSet">
+    <Require
+      name="addressOwner"
+      type="gw.api.address.CCAddressOwner"/>
+    <Expose
+      widget="globalAddressContainer"/>
+    <InputSet
+      id="globalAddressContainer">
+      <RangeInput
+        editable="true"
+        hideIfReadOnly="true"
+        id="Address_Picker"
+        label="addressOwner.AddressNameLabel != null ? addressOwner.AddressNameLabel : DisplayKey.get(&quot;Web.Address.Default.Name&quot;)"
+        newValue="addressOwner.getOrCreateNewAddress()"
+        optionLabel="gw.util.RangeInputUtil.formatLabel(addressOwner.getOrCreateNewAddress(), VALUE)"
+        required="addressOwner.RequiredFields.contains(gw.api.address.CCAddressOwnerFieldId.ADDRESS_NAME)"
+        sortValueRange="false"
+        value="addressOwner.Address"
+        valueRange="addressOwner.Addresses"
+        valueType="entity.Address"
+        visible="addressOwner.Addresses != null">
+        <PostOnChange
+          target="CCAddressInputSet"/>
+      </RangeInput>
+      <InputSetRef
+        def="GlobalAddressInputSet(addressOwner)"
+        id="globalAddress"
+        mode="gw.api.address.AddressCountrySettings.getSettings(addressOwner.SelectedCountry).PCFMode"
+        widgets="globalAddressContainer"/>
+      <TypeKeyInput
+        available="addressOwner.isAvailable(gw.api.address.CCAddressOwnerFieldId.ADDRESSTYPE)"
+        editable="addressOwner.isEditable(gw.api.address.CCAddressOwnerFieldId.ADDRESSTYPE)"
+        id="Address_AddressType"
+        label="DisplayKey.get(&quot;Web.Address.Default.AddressType&quot;)"
+        required="addressOwner.isRequired(gw.api.address.CCAddressOwnerFieldId.ADDRESSTYPE)"
+        value="addressOwner.Address.AddressType"
+        valueType="typekey.AddressType"
+        visible="not addressOwner.HiddenFields.contains(gw.api.address.CCAddressOwnerFieldId.ADDRESSTYPE)"/>
+      <TextInput
+        available="addressOwner.isAvailable(gw.api.address.CCAddressOwnerFieldId.DESCRIPTION)"
+        editable="addressOwner.isEditable(gw.api.address.CCAddressOwnerFieldId.DESCRIPTION)"
+        id="Address_Description"
+        label="DisplayKey.get(&quot;Web.Address.Default.Description&quot;)"
+        required="addressOwner.isRequired(gw.api.address.CCAddressOwnerFieldId.DESCRIPTION)"
+        value="addressOwner.Address.Description"
+        visible="not addressOwner.HiddenFields.contains(gw.api.address.CCAddressOwnerFieldId.DESCRIPTION)"/>
+      <DateInput
+        available="addressOwner.isAvailable(gw.api.address.CCAddressOwnerFieldId.VALIDUNTIL)"
+        dateFormat="short"
+        editable="addressOwner.isEditable(gw.api.address.CCAddressOwnerFieldId.VALIDUNTIL)"
+        id="Address_ValidUntil"
+        label="DisplayKey.get(&quot;Web.Address.Default.ValidUntil&quot;)"
+        required="addressOwner.isRequired(gw.api.address.CCAddressOwnerFieldId.VALIDUNTIL)"
+        value="addressOwner.Address.ValidUntil"
+        visible="not addressOwner.HiddenFields.contains(gw.api.address.CCAddressOwnerFieldId.VALIDUNTIL)"/>
+      <TextInput
+        editable="addressOwner.isEditable(gw.api.address.CCAddressOwnerFieldId.LOCATIONCODE)"
+        id="Claim_LocationCode"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsAuto.Claim.LocationCode&quot;)"
+        value="addressOwner.Claim.LossLocationCode"
+        visible="addressOwner.Claim != null and not addressOwner.HiddenFields.contains(gw.api.address.CCAddressOwnerFieldId.LOCATIONCODE)"/>
+      <RangeInput
+        editable="addressOwner.isEditable(gw.api.address.CCAddressOwnerFieldId.JURISDICTIONSTATE)"
+        id="Claim_JurisdictionState"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsAuto.Claim.JurisdictionState&quot;)"
+        value="addressOwner.Jurisdiction"
+        valueRange="addressOwner.Jurisdictions"
+        valueType="typekey.Jurisdiction"
+        visible="IsJurisdictionVisible()">
+        <PostOnChange
+          target="DATA_ONLY"/>
+      </RangeInput>
+    </InputSet>
+    <Code><![CDATA[function IsJurisdictionVisible(): boolean {
+  return addressOwner.Claim != null 
+          and not addressOwner.HiddenFields.contains(gw.api.address.CCAddressOwnerFieldId.JURISDICTIONSTATE)
+          and addressOwner.Jurisdictions.HasElements
+}]]></Code>
+  </InputSet>
+</PCF>

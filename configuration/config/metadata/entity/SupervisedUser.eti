@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  admin="true"
+  desc="Contains a user that is supervised by the given user."
+  entity="SupervisedUser"
+  exportable="false"
+  final="true"
+  platform="false"
+  table="superviseduser"
+  type="versionable">
+  <implementsInterface
+    iface="gw.cc.community.entity.SupervisedUser"
+    impl="com.guidewire.cc.domain.community.impl.SupervisedUserImpl"/>
+  <foreignkey
+    columnName="SuperviseeCacheID"
+    desc="Backpointer to the cache"
+    fkentity="SuperviseesCache"
+    name="SuperviseeCache"
+    nullok="false"/>
+  <foreignkey
+    columnName="SupervisedUserID"
+    desc="User supervised by the owner of the cache"
+    exportable="false"
+    fkentity="User"
+    name="SupervisedUser"
+    nullok="false"/>
+  <index
+    desc="Ensure uniqueness and also provide quick lookup from supervised user to supervisee cache"
+    name="superviseduseru1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="SupervisedUserID"/>
+    <indexcol
+      keyposition="2"
+      name="SuperviseeCacheID"/>
+  </index>
+</entity>

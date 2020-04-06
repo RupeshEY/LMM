@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Statistical code (also known as a statistical line)."
+  entity="StatCode"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="statcode"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.policy.entity.StatCode"
+    impl="com.guidewire.cc.domain.policy.impl.StatCodeImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+A statistical code or statistical line associated with a worker's comp policy.
+    ]]></fulldescription>
+  <column
+    desc="Statistical data line number."
+    name="LineNumber"
+    nullok="false"
+    type="integer"/>
+  <column
+    desc="Location number with which this stat line is associated."
+    name="LocationNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="64"/>
+  </column>
+  <column
+    desc="Building number with which this stat line is associated."
+    name="BuildingNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="64"/>
+  </column>
+  <column
+    desc="Vehicle number with which this stat line is associated."
+    name="VehicleNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="64"/>
+  </column>
+  <column
+    desc="Workers comp class code with which this stat line is associated."
+    name="ClassCode"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="64"/>
+  </column>
+  <column
+    desc="Description of the endorsement."
+    name="Notes"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    desc="Insurance line (also known as major line or bureau)."
+    name="InsuranceLine"
+    nullok="true"
+    typelist="InsuranceLine">
+    <keyfilters>
+      <keyfilter
+        name="Policy.PolicyType"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="Insurance sub-line (also known as risk group or risk unit)."
+    name="InsuranceSubLine"
+    nullok="true"
+    typelist="InsuranceSubLine">
+    <keyfilters>
+      <keyfilter
+        name="InsuranceLine"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="State in which the statistical code applies."
+    name="State"
+    nullok="true"
+    typelist="State"/>
+  <typekey
+    desc="Major peril."
+    name="MajorPeril"
+    nullok="true"
+    typelist="MajorPerils">
+    <keyfilters>
+      <keyfilter
+        name="InsuranceLine"/>
+    </keyfilters>
+  </typekey>
+  <foreignkey
+    columnName="PolicyID"
+    desc="Policy with which the statistical code is associated."
+    exportable="false"
+    fkentity="Policy"
+    name="Policy"
+    nullok="false"/>
+</entity>

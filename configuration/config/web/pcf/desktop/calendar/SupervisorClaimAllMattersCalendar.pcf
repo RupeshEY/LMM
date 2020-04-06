@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.System.viewsupcalendar"
+    id="SupervisorClaimAllMattersCalendar"
+    parent="ClaimMatters(Claim)"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.ClaimMatterCalendar.Title&quot;)">
+    <LocationEntryPoint
+      signature="SupervisorClaimAllMattersCalendar(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="SupervisorClaimAllMattersCalendarScreen">
+      <Toolbar/>
+      <Calendar
+        calendarSource="new gw.api.calendar.SupervisorMatterCalendarSource(Claim, null)"
+        context="/SupervisorLitigationCalendar"/>
+    </Screen>
+  </Page>
+</PCF>

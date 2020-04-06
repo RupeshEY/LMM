@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="FaultRating">
+  <typecode
+    code="2"
+    desc="Insured not at fault"
+    name="Insured not at fault"
+    priority="1"
+    retired="true"/>
+  <typecode
+    code="thirdparty"
+    desc="Insured not at fault"
+    name="Other party at fault"
+    priority="1"/>
+  <typecode
+    code="nofault"
+    desc="No fault - Insured not at fault"
+    name="No fault"
+    priority="5"/>
+  <typecode
+    code="0"
+    desc="Fault unknown"
+    name="Fault unknown"
+    priority="2"/>
+  <typecode
+    code="1"
+    desc="Insured at fault"
+    name="Insured at fault"
+    priority="3"/>
+  <typecode
+    code="3"
+    desc="Physical Damage only"
+    name="Physical Damage only"
+    priority="4"
+    retired="true"/>
+</typelistextension>

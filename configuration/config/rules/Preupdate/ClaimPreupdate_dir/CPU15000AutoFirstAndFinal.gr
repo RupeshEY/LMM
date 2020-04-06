@@ -1,0 +1,54 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+@gw.rules.RuleName("CPU15000 - AutoFirstAndFinal")
+internal class CPU15000AutoFirstAndFinal {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.FirstAndFinal 
+and claim.State == TC_OPEN 
+and claim.LossType == TC_AUTO 
+and claim.Exposures != null
+and claim.Exposures.length == 1
+and claim.NumTransactions == 1
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* Automatically close all activities and set the fault rating to nofault */
+
+/**
+ * Complete all activities that do not require approval
+ */
+for (activity in claim.Activities){
+  if(! (activity.ActivityPattern.Category == ActivityCategory.TC_APPROVAL)) {
+    activity.complete()
+  }
+}
+claim.FaultRating = TC_NOFAULT
+
+/*
+ * This next bit requests the check automatically.
+ * We're turning this default off, but if the end-user wants the claim
+ * to close automatically, they can re-enable it.
+
+var iPayments = claim.getPaymentsIterator(true)
+
+if (iPayments.hasNext()){
+  var payment = iPayments.next() as Payment
+  if (!iPayments.hasNext()) {
+    if ((payment.CostType == "claimcost") &&
+        (payment.CostCategory == "autoparts") &&
+        (payment.PaymentType == "final")){
+      payment.Check.requestCheck()
+    }
+  }
+}
+*/
+/*end00rule*/
+
+  }
+}

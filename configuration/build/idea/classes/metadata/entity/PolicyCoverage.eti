@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- PolicyCoverage -->
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Coverage associated directly with a policy."
+  entity="PolicyCoverage"
+  final="false"
+  supertype="Coverage">
+  <implementsInterface
+    iface="gw.cc.policy.entity.PolicyCoverage"
+    impl="com.guidewire.cc.domain.policy.impl.PolicyCoverageImpl"/>
+  <fulldescription><![CDATA[
+A <code>Coverage</code> associated directly with a <code>Policy</code>, as
+opposed to being associated with a vehicle or property.
+    ]]></fulldescription>
+</subtype>

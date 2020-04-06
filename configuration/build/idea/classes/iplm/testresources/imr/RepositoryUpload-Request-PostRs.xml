@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ac:PostRs
+  xmlns:ac="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0 AcordMsgSvc_v-1-4-0.xsd">
+  <ac:Sender>
+    <ac:PartyId>urn:duns:236196817</ac:PartyId>
+    <ac:PartyRoleCd>ServiceProvider</ac:PartyRoleCd>
+  </ac:Sender>
+  <ac:Receiver>
+    <ac:PartyId>urn:lloyds:1398</ac:PartyId>
+    <ac:PartyRoleCd>urn:lloyds:1398</ac:PartyRoleCd>
+  </ac:Receiver>
+  <ac:Application>
+    <ac:ApplicationCd>ACORD-Repository</ac:ApplicationCd>
+    <ac:SchemaVersion>http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0</ac:SchemaVersion>
+  </ac:Application>
+  <ac:TimeStamp>2016-09-07T12:04:07-04:00</ac:TimeStamp>
+  <ac:MsgItems>
+    <ac:MsgItem>
+      <ac:MsgId>fa64a9a5-c833-452e-9dbe-b8525b42a524</ac:MsgId>
+      <ac:MsgTypeCd>RepositoryUpload</ac:MsgTypeCd>
+      <ac:MsgStatusCd>received</ac:MsgStatusCd>
+    </ac:MsgItem>
+  </ac:MsgItems>
+</ac:PostRs>

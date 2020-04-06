@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    editable="true"
+    id="QueryReasonsInputSet">
+    <Require
+      name="claimResponseRq"
+      type="entity.ECFMessageClaimResponseRq_Ext"/>
+    <ListViewInput
+      boldLabel="true"
+      editable="true"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.QueryReasonUpTo10Lines&quot;)"
+      labelAbove="true">
+      <Toolbar>
+        <IteratorButtons
+          addVisible="claimResponseRq.QueryReasonAvailable"
+          iterator="queryIterator"/>
+      </Toolbar>
+      <ListViewPanel
+        editable="true">
+        <RowIterator
+          editable="true"
+          elementName="selectedQueryReason"
+          id="queryIterator"
+          toAdd="claimResponseRq.addToQueryReasons(selectedQueryReason)"
+          toRemove="claimResponseRq.removeFromQueryReasons(selectedQueryReason)"
+          value="claimResponseRq.QueryReasons"
+          valueType="ECFResponseQueryReason_Ext[]">
+          <Row
+            editable="true">
+            <RangeCell
+              desc="passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:AgreementPartyResponse/wb:QueryReason"
+              editable="true"
+              id="queryCode"
+              label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimNotifyRqMsg.QueryReason.Description&quot;)"
+              required="true"
+              value="selectedQueryReason.Reason"
+              valueRange="ECFQueryReason_Ext.AllTypeKeys.where(\queryReason -&gt; not(claimResponseRq.QueryReasons*.Reason.contains(queryReason)) or queryReason == selectedQueryReason.Reason)"
+              valueType="ECFQueryReason_Ext"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </ListViewInput>
+  </InputSet>
+</PCF>

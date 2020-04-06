@@ -1,0 +1,39 @@
+package rules.Validation.ExposureValidationRules_dir.EXV05000ISOValidation_dir.EXV05500NonWorkersComp_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("EXV05520 - Name")
+internal class EXV05520Name {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ClaimantDenorm != null
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+if(exposure.ClaimantDenorm typeis Person) {
+  var person = exposure.ClaimantDenorm
+  if(person.FirstName == null or person.FirstName.length() == 0) {
+    exposure.rejectSubField(person, "FirstName", TC_ISO, 
+                            DisplayKey.get("Rules.Validation.Exposure.ClaimantFirstNameNotNull"), null, null)
+  }
+  if(person.LastName == null or person.LastName.length() == 0) {
+    exposure.rejectSubField(person, "LastName", TC_ISO, 
+                            DisplayKey.get("Rules.Validation.Exposure.ClaimantLastNameNotNull"), null, null)
+  }
+}
+else if(exposure.ClaimantDenorm typeis Company) {
+  var company = exposure.ClaimantDenorm
+  if(company.Name == null or company.Name.length() == 0) {
+    exposure.rejectSubField(company, "Name", TC_ISO, 
+                            DisplayKey.get("Rules.Validation.Exposure.ClaimantCompanyNameNotNull"), null, null)
+  }
+}
+/*end00rule*/
+
+  }
+}

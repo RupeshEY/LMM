@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="true"
+    id="CovTermPopup"
+    startInEditMode="EditMode"
+    title="DisplayKey.get(&quot;Web.ClaimPolicy.CovTerm&quot;)">
+    <LocationEntryPoint
+      signature="CovTermPopup(Coverage : Coverage, CovTermType : typekey.CovTerm,  EditMode : Boolean)"/>
+    <LocationEntryPoint
+      signature="CovTermPopup(CovTermParam : CovTerm, EditMode : Boolean)"/>
+    <Variable
+      name="CovTermParam"
+      type="CovTerm"/>
+    <Variable
+      name="CovTermType"
+      type="typekey.CovTerm"/>
+    <Variable
+      name="Coverage"
+      type="Coverage"/>
+    <Variable
+      name="EditMode"
+      type="Boolean"/>
+    <Variable
+      initialValue="CovTermParam != null ? CovTermParam : Coverage.createAndAddNewCovTerm(CovTermType)"
+      name="CovTerm"
+      type="entity.CovTerm"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          editVisible="!Coverage.Policy.Verified"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <RangeInput
+            editable="true"
+            id="CovTermPattern"
+            label="DisplayKey.get(&quot;Web.ClaimPolicy.CovTerm.Subject&quot;)"
+            value="CovTerm.CovTermPattern"
+            valueRange="CovTermPattern.getTypeKeys(false).where(\ c -&gt; c.Categories.contains(CovTerm.Coverage.Type))"
+            valueType="typekey.CovTermPattern"/>
+          <TypeKeyInput
+            editable="true"
+            id="ModelRestriction"
+            label="DisplayKey.get(&quot;Web.ClaimPolicy.CovTerm.ApplicableTo&quot;)"
+            value="CovTerm.ModelRestriction"
+            valueType="typekey.CovTermModelRest"/>
+          <TypeKeyInput
+            editable="true"
+            id="ModelAggregation"
+            label="DisplayKey.get(&quot;Web.ClaimPolicy.CovTerm.Per&quot;)"
+            value="CovTerm.ModelAggregation"
+            valueType="typekey.CovTermModelAgg"/>
+        </InputColumn>
+        <InputColumn>
+          <TypeKeyInput
+            id="Type"
+            label="DisplayKey.get(&quot;Web.ClaimPolicy.CovTerm.Subtype&quot;)"
+            value="CovTerm.Subtype"
+            valueType="typekey.CovTerm"/>
+          <InputSetRef
+            def="CovTermTypeDetailsInputSet(CovTerm)"
+            editable="true"
+            id="CovTermTypeDetailsInputSet"
+            mode="CovTerm.Subtype.Code.toString().remove(&quot;CovTerm&quot;)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Subrogation view entity."
+  entity="SubrogationView"
+  exportable="false"
+  final="false"
+  primaryEntity="Subrogation">
+  <implementsInterface
+    iface="gw.cc.subrogation.entity.SubrogationView"
+    impl="com.guidewire.cc.domain.subrogation.impl.SubrogationViewImpl"/>
+  <viewEntityLink
+    name="SubrogationClaim"
+    path="SubrogationSummary.Claim"/>
+  <fulldescription><![CDATA[
+        Supports the efficient creation of subrogation lists in ClaimCenter's views. The system uses this entity to list
+        subrogations in the desktop in an optimum manner. This is a virtual entity and is not stored in the database.       
+    ]]></fulldescription>
+  <viewEntityTypekey
+    name="SubrogationStatus"
+    path="Status"/>
+  <viewEntityColumn
+    name="SubrogationReferralDate"
+    path="SubrogationSummary.SubroReferralDate"/>
+  <viewEntityName
+    name="ExposureName"
+    path="Exposure"/>
+  <computedcolumn
+    expression="${1} + ${2} - ${3}"
+    name="TotalIncurredNetClaim"
+    paths="SubrogationSummary.Claim.ClaimRpt.OpenReserves, SubrogationSummary.Claim.ClaimRpt.TotalPayments, SubrogationSummary.Claim.ClaimRpt.TotalRecoveries"/>
+  <computedcolumn
+    expression="${1} + ${2} - ${3}"
+    name="TotalIncurredNetExposure"
+    paths="Exposure.ExposureRpt.OpenReserves, Exposure.ExposureRpt.TotalPayments, Exposure.ExposureRpt.TotalRecoveries"/>
+  <viewEntityTypekey
+    name="ClaimCurrency"
+    path="SubrogationSummary.Claim.Currency"/>
+  <viewEntityLink
+    name="Exposure"
+    path="Exposure"/>
+  <viewEntityLink
+    name="Subrogation"
+    path="ID"/>
+  <viewEntityLink
+    name="AssignedUser"
+    path="AssignedUser"/>
+</viewEntity>

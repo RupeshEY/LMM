@@ -1,0 +1,13 @@
+package rules.Validation
+
+@gw.rules.RuleName("Claim Reopened Validation Rules")
+@gw.rules.RuleSetDescription("This is the Claim Reopened Validation rule set. These rules are executed when a claim is reopened. They execute before data is committed, before the Claim Reopened rule set and then the normal preupdate and validation rule sets. They enable you to raise validation errors or warnings if the claim should not be reopened.")
+class ClaimReopenedValidationRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Claim) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Claim) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Claim Reopened Validation Rules", ClaimReopenedValidationRules )
+  }
+}

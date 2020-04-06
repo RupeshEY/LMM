@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Join table between Subrogation and SubroAdverseParty to allow fault for the same party to vary across different exposures."
+  entity="SubroAdversePartyOverride"
+  exportable="true"
+  table="subroadversepartyoverride"
+  type="retireable">
+  <column
+    desc="Contact's probable percentage of fault."
+    name="Fault"
+    nullok="false"
+    type="percentagedec"/>
+  <column
+    desc="Expected recovery percentage from this Contact."
+    name="ExpectedRecovery"
+    nullok="false"
+    type="percentagedec"/>
+  <foreignkey
+    columnName="SubrogationID"
+    desc="The subrogation with a fault and/or expected recovery different from the default."
+    fkentity="Subrogation"
+    name="Subrogation"
+    nullok="false"/>
+  <foreignkey
+    columnName="SubroAdversePartyID"
+    desc="The party whose fault and/or expected recovery are overridden."
+    fkentity="SubroAdverseParty"
+    name="SubroAdverseParty"
+    nullok="false"/>
+  <implementsEntity
+    name="Extractable"/>
+  <index
+    desc="SubrogationID and SubroAdversePartyID must be unique."
+    name="sapou1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="SubrogationID"/>
+    <indexcol
+      keyposition="2"
+      name="SubroAdversePartyID"/>
+    <indexcol
+      keyposition="3"
+      name="Retired"/>
+  </index>
+</entity>

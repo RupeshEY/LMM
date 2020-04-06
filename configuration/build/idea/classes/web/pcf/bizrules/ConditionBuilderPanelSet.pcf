@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <PanelSet
+    id="ConditionBuilderPanelSet">
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.ConditionBuilderController"/>
+    <PanelRef
+      visible="CurrentLocation.InEditMode">
+      <DetailViewPanel
+        id="RuleConditionTypeDV">
+        <InputColumn>
+          <TypeKeyRadioInput
+            editable="true"
+            filter="return controller.AlwaysTrueConditionTypeVisible or VALUE != TC_ALWAYSTRUE"
+            id="ConditionType"
+            labelAbove="true"
+            required="true"
+            stacked="true"
+            value="controller.RuleConditionType"
+            valueType="typekey.RuleConditionType">
+            <PostOnChange/>
+          </TypeKeyRadioInput>
+        </InputColumn>
+      </DetailViewPanel>
+    </PanelRef>
+    <PanelSet
+      visible="controller.RuleConditionType != RuleConditionType.TC_ALWAYSTRUE">
+      <PanelRef
+        id="AdvancedConditionsLV"
+        def="ConditionBuilderLV(controller, true)"
+        visible="controller.AdvancedCondition">
+        <Toolbar
+          id="AdvancedConditionToolbar">
+          <AddButton
+            hideIfReadOnly="true"
+            id="AdvancedAdd"
+            iterator="AdvancedConditionsLV.ConditionLineIterator"
+            label="DisplayKey.get(&quot;BizRules.ConditionBuilderPanelSet.Add&quot;)"
+            toCreateAndAdd="controller.insertNewLines(CheckedValues as gw.bizrules.pcf.RuleConditionLineHolder[])"/>
+          <RemoveButton
+            hideIfReadOnly="true"
+            id="AdvancedRemove"
+            iterator="AdvancedConditionsLV.ConditionLineIterator"
+            label="DisplayKey.get(&quot;BizRules.ConditionBuilderPanelSet.Remove&quot;)"/>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="controller.moveLinesUp(CheckedValues)"
+            flags="all CanMoveUp"
+            hideIfReadOnly="true"
+            id="AdvancedMoveUp"
+            iterator="AdvancedConditionsLV.ConditionLineIterator"
+            label="DisplayKey.get(&quot;BizRules.ConditionBuilderPanelSet.MoveUp&quot;)"/>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="controller.moveLinesDown(CheckedValues)"
+            flags="all CanMoveDown"
+            hideIfReadOnly="true"
+            id="AdvancedMoveDown"
+            iterator="AdvancedConditionsLV.ConditionLineIterator"
+            label="DisplayKey.get(&quot;BizRules.ConditionBuilderPanelSet.MoveDown&quot;)"/>
+          <ToolbarButton
+            action="controller.setShowPrettyPrint(true)"
+            id="AdvancedShowPrettyPrint"
+            label="DisplayKey.get('BizRules.ConditionBuilderPanelSet.PrettyPrint.Show')"
+            visible="CurrentLocation.InEditMode &amp;&amp; !controller.isShowPrettyPrint()"/>
+          <ToolbarButton
+            action="controller.setShowPrettyPrint(false)"
+            id="AdvancedHidePrettyPrint"
+            label="DisplayKey.get('BizRules.ConditionBuilderPanelSet.PrettyPrint.Hide')"
+            visible="CurrentLocation.InEditMode &amp;&amp; controller.isShowPrettyPrint()"/>
+          <ToolbarDivider/>
+          <ToolbarButton
+            action="ContextHelp.push()"
+            id="AdvancedContextHelp"
+            label="DisplayKey.get('BizRules.ConditionBuilderPanelSet.ContextHelp.Button')"
+            shortcut="H"
+            visible="CurrentLocation.InEditMode"/>
+        </Toolbar>
+      </PanelRef>
+      <PanelRef
+        id="SimpleConditionsLV"
+        def="ConditionBuilderLV(controller, false)"
+        visible="!controller.AdvancedCondition">
+        <Toolbar
+          id="SimpleConditionToolbar">
+          <AddButton
+            hideIfReadOnly="true"
+            id="SimpleAdd"
+            iterator="SimpleConditionsLV.ConditionLineIterator"
+            label="DisplayKey.get(&quot;BizRules.ConditionBuilderPanelSet.Add&quot;)"
+            toCreateAndAdd="controller.insertNewLines(CheckedValues as gw.bizrules.pcf.RuleConditionLineHolder[])"/>
+          <RemoveButton
+            hideIfReadOnly="true"
+            id="SimpleRemove"
+            iterator="SimpleConditionsLV.ConditionLineIterator"
+            label="DisplayKey.get(&quot;BizRules.ConditionBuilderPanelSet.Remove&quot;)"/>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="controller.moveLinesUp(CheckedValues)"
+            flags="all CanMoveUp"
+            hideIfReadOnly="true"
+            id="SimpleMoveUp"
+            iterator="SimpleConditionsLV.ConditionLineIterator"
+            label="DisplayKey.get(&quot;BizRules.ConditionBuilderPanelSet.MoveUp&quot;)"/>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="controller.moveLinesDown(CheckedValues)"
+            flags="all CanMoveDown"
+            hideIfReadOnly="true"
+            id="SimpleMoveDown"
+            iterator="SimpleConditionsLV.ConditionLineIterator"
+            label="DisplayKey.get(&quot;BizRules.ConditionBuilderPanelSet.MoveDown&quot;)"/>
+          <ToolbarButton
+            action="controller.setShowPrettyPrint(true)"
+            id="SimpleShowPrettyPrint"
+            label="DisplayKey.get('BizRules.ConditionBuilderPanelSet.PrettyPrint.Show')"
+            visible="CurrentLocation.InEditMode &amp;&amp; !controller.isShowPrettyPrint()"/>
+          <ToolbarButton
+            action="controller.setShowPrettyPrint(false)"
+            id="SimpleHidePrettyPrint"
+            label="DisplayKey.get('BizRules.ConditionBuilderPanelSet.PrettyPrint.Hide')"
+            visible="CurrentLocation.InEditMode &amp;&amp; controller.isShowPrettyPrint()"/>
+          <ToolbarDivider/>
+          <ToolbarButton
+            action="ContextHelp.push()"
+            id="SimpleContextHelp"
+            label="DisplayKey.get('BizRules.ConditionBuilderPanelSet.ContextHelp.Button')"
+            shortcut="H"
+            visible="CurrentLocation.InEditMode"/>
+        </Toolbar>
+      </PanelRef>
+      <PanelSet
+        id="PrettyPrintWrapperPanelSet"
+        visible="!CurrentLocation.InEditMode || controller.isShowPrettyPrint()">
+        <TemplatePanel>
+          <TemplatePanelContents><![CDATA[<div style="width:800;height:500;padding:25px;">
+        <% printContent(controller.prettyPrint(), false) %>
+      </div>
+
+              ]]></TemplatePanelContents>
+        </TemplatePanel>
+      </PanelSet>
+      <DetailViewPanel
+        id="ConditionValidationErrorsWhenReadOnlyDV"
+        visible="!CurrentLocation.InEditMode">
+        <InputColumn>
+          <InputSetRef
+            def="ValidationErrorsInputSet(controller.ReadOnlyConditionErrors, true)"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <DetailViewPanel
+        id="ValidationErrorsDV"
+        visible="CurrentLocation.InEditMode">
+        <InputColumn>
+          <InputSetRef
+            def="ValidationErrorsInputSet(controller?.validate(), true)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </PanelSet>
+  </PanelSet>
+</PCF>

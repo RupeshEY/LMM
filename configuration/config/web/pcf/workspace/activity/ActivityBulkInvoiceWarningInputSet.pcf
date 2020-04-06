@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_activity.xml -->
+  <InputSet
+    id="ActivityBulkInvoiceWarningInputSet">
+    <Require
+      name="BulkInvoice"
+      type="BulkInvoice"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.BulkInvoiceDetail&quot;)"/>
+    <TextInput
+      action="BulkPay.go()"
+      id="InvoiceNumber"
+      label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.InvoiceNumber&quot;)"
+      value="BulkInvoice.InvoiceNumber"/>
+    <TextInput
+      id="Payee"
+      label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Payee&quot;)"
+      value="BulkInvoice.Payee"
+      valueType="entity.Contact"/>
+    <CurrencyInput
+      id="TotalAmount"
+      label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.TotalAmount&quot;)"
+      value="BulkInvoice.TotalTransactionAmount"/>
+  </InputSet>
+</PCF>

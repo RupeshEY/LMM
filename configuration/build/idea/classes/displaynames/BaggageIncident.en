@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<Entity
+  name="BaggageIncident">
+  <Columns>
+    <Column
+      beanPath="BaggageIncident.PropertyDesc"
+      name="PropertyDesc"/>
+    <Column
+      beanPath="BaggageIncident.BaggageType"
+      name="BaggageType"/>
+  </Columns>
+  <DisplayName><![CDATA[
+var sb = new java.lang.StringBuffer();
+      if (BaggageType != null) {
+        sb.append(BaggageType.DisplayName);
+      }
+      if (PropertyDesc != null and PropertyDesc.length() > 0) {
+        if (sb.length() > 0) sb.append(": ");
+        sb.append(PropertyDesc);
+      }
+      var retString = sb.toString();
+      if (retString.length() == 0) {
+        retString = gw.api.locale.DisplayKey.get("DisplayName.BaggageIncident.Unnamed");
+      }
+      return retString;
+  ]]></DisplayName>
+</Entity>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <EntryPoint
+    desc="Go to the key metrics page for the claim with the given number"
+    id="ClaimMetrics"
+    location="ClaimMetricsEntryPointForward(claimNumber)">
+    <EntryPointParameter
+      locationParam="claimNumber"
+      type="String"/>
+  </EntryPoint>
+</PCF>

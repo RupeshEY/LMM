@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Indicates the amount of a multi-payee check that applies to a particular check."
+  entity="CheckPortion"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="checkportion"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.check.impl.CheckPortionInternal"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckPortionImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.check.entity.CheckPortion"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckPortionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckPortionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckPortionImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+      Indicates the amount of a multi-payee check that applies to a particular check. Checks with a CheckPortion do not
+      have any payments, but just receive a percentage or fixed amount of the Payments in the primary Check of the
+      CheckGroup (i.e., CheckGroup.PrimaryCheck).
+    ]]></fulldescription>
+  <column
+    desc="The percentage to allocate towards the check. Setting this clears the fixed amount properties"
+    exportable="true"
+    name="Percentage"
+    nullok="true"
+    type="percentagedec"/>
+  <column
+    desc="The fixed amount (in the transaction currency) to allocate towards the check. Setting this clears Percentage and updates FixedClaimAmount and FixedReportingAmount. At least one check must be added to this CheckPortion before setting this."
+    exportable="true"
+    name="FixedTransactionAmount"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="CheckCurrency"/>
+  </column>
+  <column
+    desc="The fixed amount (in the claim currency) to allocate towards the check."
+    exportable="true"
+    name="FixedClaimAmount"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="The fixed amount (in the reserving currency) to allocate towards the check."
+    exportable="true"
+    name="FixedReservingAmount"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ReservingCurrency"/>
+  </column>
+  <column
+    desc="The fixed amount (in the reporting currency) to allocate towards the check."
+    exportable="true"
+    name="FixedReportingAmount"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="currencyamount"/>
+  <column
+    default="false"
+    desc="Flag indicating whether this portion was created for a reissued check."
+    exportable="false"
+    getterScriptability="hidden"
+    name="Reissued"
+    nullok="false"
+    setterScriptability="doesNotExist"
+    type="bit"/>
+  <array
+    arrayentity="Check"
+    desc="Checks whose amounts are defined by this CheckPortion. If there are multiple checks in this array, all of them must belong to the same CheckRecurrence."
+    exportable="true"
+    name="Checks"
+    triggersValidation="true"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.financials.dbchecks.CheckPortionDBCheckBuilder"/>
+  <checkconstraint
+    desc="Either the Percentage or FixedTransactionAmount of a CheckPortion must be null."
+    predicate="Percentage IS NULL OR FixedTransactionAmount IS NULL"/>
+</entity>

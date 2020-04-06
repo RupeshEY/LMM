@@ -1,0 +1,14 @@
+<WidgetTemplate name="ClaimTemplate" inputWidgetName="ClaimPickerInput"
+                valueType="Claim">
+
+  <TemplateAttribute name="conversionExpression" type="expression" default="(PickedValue as ClaimSearchView).Claim.ClaimInfo"/>
+  <TemplateAttribute name="clearEnabled" type="boolean"  default="true"/>
+  <TemplateAttribute name="pickLocation" type="expression" default="ClaimSearchPopup.push()"/>
+  <TemplateAttribute name="freeInputEnabled" type="boolean" default="false"/>
+
+  <BasePickerValue imageButtonId="SelectClaim"
+                   inputConversion="gw.api.claim.ClaimPickerValueWidgetUtil.convertValueFromString(VALUE)"
+                   conversionExpression="#{conversionExpression}" clearEnabled="#{clearEnabled}"
+                   pickLocation="#{pickLocation}" freeInputEnabled="#{freeInputEnabled}"/>
+
+</WidgetTemplate>

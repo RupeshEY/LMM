@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="PolicyComparisonScreen">
+    <Require
+      name="wizard"
+      type="gw.api.policy.refresh.PolicyRefreshAlgorithm"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="getRowTreeRoot()"
+      name="root"
+      type="gw.api.tree.RowTreeRootNode"/>
+    <Variable
+      initialValue="comparisonHasErrors()"
+      name="hasErrors"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Toolbar
+      id="Toolbar">
+      <WizardButtons
+        id="Buttons"/>
+    </Toolbar>
+    <ListViewPanel
+      id="PolicyDifferencesLV">
+      <RowTree
+        contentType="gw.plugin.policy.refresh.ui.DiffDisplay"
+        elementName="diff"
+        id="lv2"
+        pageSize="0"
+        value="root">
+        <Row
+          editable="false">
+          <TextCell
+            id="LabelField"
+            label="DisplayKey.get(&quot;Web.PolicyRefresh.PolicyComparisonScreen.DiffColumnLabel&quot;)"
+            sortBy="getSortBy(diff)"
+            sortOrder="1"
+            value="diff.Label?.elide(80)"/>
+          <TextCell
+            enableSort="false"
+            id="OldPolicyField"
+            label="DisplayKey.get(&quot;Web.PolicyRefresh.PolicyComparisonScreen.BeforeChangesColumnLabel&quot;)"
+            value="oldValue(diff)"/>
+          <TextCell
+            enableSort="false"
+            id="NewPolicyField"
+            label="DisplayKey.get(&quot;Web.PolicyRefresh.PolicyComparisonScreen.AfterChangesColumnLabel&quot;)"
+            value="newValue(diff)"/>
+        </Row>
+      </RowTree>
+    </ListViewPanel>
+    <Code><![CDATA[uses gw.plugin.policy.refresh.ui.DiffDisplay
+uses gw.plugin.policy.refresh.ui.EntityDiffDisplay
+uses gw.plugin.policy.refresh.ui.DiffDisplays
+
+function getRowTreeRoot() : gw.api.tree.RowTreeRootNode {
+  return new gw.api.tree.RowTreeRootNode({wizard.UI.PolicyDisplay}, 
+    \r ->(r typeis gw.plugin.policy.refresh.ui.DiffDisplay) ? DiffDisplays.getVisibleChildren(r) : {}, DiffDisplays.getVisibleChildren(wizard.UI.PolicyDisplay).HasElements ? 1 : 0)
+}
+
+function getSortBy (diff : DiffDisplay) : String {
+  return ((diff typeis EntityDiffDisplay) ? "B:" : "A:") + diff.Label
+}
+
+function getFontColor(diff : DiffDisplay) : String {
+  return diff.HasDeepChanges ? "red" : "black"
+}
+
+function comparisonHasErrors() : boolean {
+  var messages = wizard.Messages
+  messages?.display()
+  return messages?.containsMessageOfType(ERROR)
+}
+
+function oldValue(diff : DiffDisplay) : String {
+  if (not DiffDisplays.getAllChildren(diff).Empty and (diff.Type==CHANGED or (diff.Type==UNCHANGED and diff.HasDeepChanges)))
+    return DisplayKey.get("Web.PolicyRefresh.PolicyComparisonScreen.Changed")  // default display key is empty string
+  else if ((diff.Type == REMOVED or diff.Type == MOVED_FROM))
+    return DisplayKey.get("Web.PolicyRefresh.PolicyComparisonScreen.Check")
+  else
+    return diff.OldValue?.elide(60)
+}
+
+
+function newValue(diff : DiffDisplay) : String {
+  if ((diff.Type == ADDED or diff.Type == MOVED_TO))
+    return DisplayKey.get("Web.PolicyRefresh.PolicyComparisonScreen.Check")
+  else if (diff.Type == REMOVED or diff.Type == MOVED_FROM)
+    return DisplayKey.get("Web.PolicyRefresh.PolicyComparisonScreen.Removed")
+  else
+    return diff.NewValue?.elide(60)
+}]]></Code>
+  </Screen>
+</PCF>

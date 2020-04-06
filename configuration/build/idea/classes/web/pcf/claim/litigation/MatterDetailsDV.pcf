@@ -1,0 +1,577 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_claim.xml -->
+  <DetailViewPanel
+    id="MatterDetailsDV">
+    <Require
+      name="Matter"
+      type="Matter"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.Matter&quot;)"/>
+      <TextInput
+        editable="true"
+        id="Matter_Name"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.Matter.Name&quot;)"
+        required="true"
+        value="Matter.Name"/>
+      <TextInput
+        editable="true"
+        id="Matter_CaseNumber"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.Matter.CaseNumber&quot;)"
+        required="false"
+        value="Matter.CaseNumber"/>
+      <TextInput
+        id="AssignedUser_Name"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.Matter.AssignedUser.Name&quot;)"
+        value="Matter.AssigneeDisplayString"/>
+      <TextInput
+        id="AssignedGroup_Name"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.Matter.AssignedGroup.Name&quot;)"
+        value="Matter.AssigneeGroupOnlyDisplayString"/>
+      <TypeKeyInput
+        editable="true"
+        id="TrialDetails_MatterType"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.TrialDetails.MatterType&quot;)"
+        required="false"
+        value="Matter.MatterType"
+        valueType="typekey.MatterType">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="Plaintiff"
+        label="DisplayKey.get(&quot;MatterGeneral.Matter.Plaintiff&quot;)"
+        required="false"
+        value="Matter.plaintiff"
+        valueRange="Matter.Claim.RelatedContacts"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="Defendant"
+        label="DisplayKey.get(&quot;MatterGeneral.Matter.Defendant&quot;)"
+        required="false"
+        value="Matter.defendant"
+        valueRange="Matter.Claim.RelatedContacts"/>
+      <BooleanRadioInput
+        editable="true"
+        id="TrialDetails_SubroRelated"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.TrialDetails.SubroRelated&quot;)"
+        required="false"
+        value="Matter.SubroRelated"/>
+      <DateInput
+        id="Matter_CloseDate"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.NewMatterGeneral.Matter.CloseDate&quot;)"
+        value="Matter.CloseDate"/>
+      <TypeKeyInput
+        id="Matter_ReopenedReason"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.NewMatterGeneral.Matter.ReopenedReason&quot;)"
+        value="Matter.ReopenedReason"
+        valueType="typekey.MatterReopenedReason"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;MatterGeneral.Matter.Litigation&quot;)"
+        visible="Matter.MatterType == TC_LAWSUIT|| Matter.MatterType == TC_GENERAL"/>
+      <TypeKeyInput
+        editable="true"
+        id="CourtType"
+        label="DisplayKey.get(&quot;MatterGeneral.Matter.CourtType&quot;)"
+        required="false"
+        value="Matter.CourtType"
+        valueType="typekey.MatterCourtType"
+        visible="Matter.MatterType == TC_LAWSUIT|| Matter.MatterType == TC_GENERAL">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <TypeKeyInput
+        editable="true"
+        id="CourtDistrict"
+        label="DisplayKey.get(&quot;MatterGeneral.Matter.CourtDistrict&quot;)"
+        required="false"
+        value="Matter.CourtDistrict"
+        valueType="typekey.MatterCourtDistrict"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_GENERAL"/>
+      <TypeKeyInput
+        editable="true"
+        id="LegalSpecialty"
+        label="DisplayKey.get(&quot;MatterGeneral.Matter.LegalSpecialty&quot;)"
+        required="false"
+        value="Matter.LegalSpecialty"
+        valueType="typekey.LegalSpecialty"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_GENERAL"/>
+      <TypeKeyInput
+        editable="true"
+        id="TrialDetails_PrimaryCause2"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.TrialDetails.PrimaryCause&quot;)"
+        required="false"
+        value="Matter.PrimaryCause"
+        valueType="typekey.PrimaryCauseType"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_GENERAL"/>
+      <InputDivider
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_GENERAL"/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.Counsel&quot;)"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="Counsel_PlaintiffAttorney"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.Counsel.PlaintiffAttorney&quot;)"
+        required="false"
+        value="Matter.plaintiffatt"
+        valueRange="Matter.Claim.RelatedAttorneyArray"
+        valueType="entity.Attorney"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="Counsel_PlaintiffLawFirm"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.Counsel.PlaintiffLawFirm&quot;)"
+        required="false"
+        value="Matter.plaintifffirm"
+        valueRange="Matter.Claim.RelatedLawFirmArray"
+        valueType="entity.LawFirm"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="Counsel_DefenseAttorney"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.Counsel.DefenseAttorney&quot;)"
+        required="false"
+        value="Matter.defenseattorney"
+        valueRange="Matter.Claim.RelatedAttorneyArray"
+        valueType="entity.Attorney"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="Counsel_DefenseLawFirm"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.Counsel.DefenseLawFirm&quot;)"
+        required="false"
+        value="Matter.defensefirm"
+        valueRange="Matter.Claim.RelatedLawFirmArray"
+        valueType="entity.LawFirm"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <InputDivider
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <DateInput
+        editable="true"
+        id="Counsel_DefenseApptDate"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.Counsel.DefenseApptDate&quot;)"
+        required="false"
+        value="Matter.DefenseApptDate"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <DateInput
+        editable="true"
+        id="Counsel_SentToDefenseDate"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.Counsel.SentToDefenseDate&quot;)"
+        required="false"
+        value="Matter.SentToDefenseDate"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <InputDivider
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+    </InputColumn>
+    <InputColumn>
+      <!-- Trial details -->
+      <Label
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.NewMatterGeneral.TrialDetails&quot;)"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_GENERAL"/>
+      <DateInput
+        dateFormat="short"
+        editable="Matter.TrialDateActivity == null || Matter.TrialDateActivity.canEdit()"
+        id="TrialDetails_TrialDate"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.TrialDetails.TrialDate&quot;)"
+        required="false"
+        timeFormat="short"
+        value="TrialDate"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_GENERAL"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="TrialDetails_Venue"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.TrialDetails.Venue&quot;)"
+        required="false"
+        value="Matter.venue"
+        valueRange="Matter.Claim.RelatedLegalVenueArray"
+        valueType="entity.LegalVenue"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_GENERAL"/>
+      <TextInput
+        editable="true"
+        id="TrialDetails_Room"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.TrialDetails.Room&quot;)"
+        required="false"
+        value="Matter.Room"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_GENERAL"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="TrialDetails_Judge"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.TrialDetails.Judge&quot;)"
+        required="false"
+        value="Matter.judge"
+        valueRange="Matter.Claim.RelatedAdjudicatorArray"
+        valueType="entity.Adjudicator"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_GENERAL"/>
+      <InputDivider
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_GENERAL"/>
+      <!-- Arbitration details -->
+      <Label
+        label="DisplayKey.get(&quot;Matter.MatterGeneral.ArbitrationDetails&quot;)"
+        visible="Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_GENERAL"/>
+      <DateInput
+        dateFormat="short"
+        editable="Matter.ArbitrationDateActivity == null || Matter.ArbitrationDateActivity.canEdit()"
+        id="ArbitrationDetails_TrialDate"
+        label="DisplayKey.get(&quot;Matter.MatterGeneral.TrialDetails.ArbitrationHearing&quot;)"
+        required="false"
+        timeFormat="short"
+        value="ArbitrationDate"
+        visible="Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_GENERAL"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="ArbitrationDetails_Venue"
+        label="DisplayKey.get(&quot;Matter.MatterGeneral.ArbitrationDetails.Venue&quot;)"
+        required="false"
+        value="Matter.arbitrationvenue"
+        valueRange="Matter.Claim.RelatedLegalVenueArray"
+        valueType="entity.LegalVenue"
+        visible="Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_GENERAL"/>
+      <TextInput
+        editable="true"
+        id="ArbitrationDetails_Room"
+        label="DisplayKey.get(&quot;Matter.MatterGeneral.ArbitrationDetails.Room&quot;)"
+        required="false"
+        value="Matter.ArbitrationRoom"
+        visible="Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_GENERAL"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="ArbitrationDetails_Arbitrator"
+        label="DisplayKey.get(&quot;Matter.MatterGeneral.ArbitrationDetails.Judge&quot;)"
+        required="false"
+        value="Matter.arbitrator"
+        valueRange="Matter.Claim.RelatedAdjudicatorArray"
+        valueType="entity.Adjudicator"
+        visible="Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_GENERAL"/>
+      <InputDivider
+        visible="Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_GENERAL"/>
+      <!-- Hearing details -->
+      <Label
+        label="DisplayKey.get(&quot;Matter.MatterGeneral.HearingDetails&quot;)"
+        visible="Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <DateInput
+        dateFormat="short"
+        editable="Matter.HearingDateActivity == null || Matter.HearingDateActivity.canEdit()"
+        id="HearingDetails_HearingDate"
+        label="DisplayKey.get(&quot;Matter.MatterGeneral.TrialDetails.HearingDate&quot;)"
+        required="false"
+        timeFormat="short"
+        value="HearingDate"
+        visible="Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="HearingDetails_Venue"
+        label="DisplayKey.get(&quot;Matter.MatterGeneral.HearingDetails.Venue&quot;)"
+        required="false"
+        value="Matter.hearingvenue"
+        valueRange="Matter.Claim.RelatedLegalVenueArray"
+        valueType="entity.LegalVenue"
+        visible="Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <TextInput
+        editable="true"
+        id="HearingDetails_Room"
+        label="DisplayKey.get(&quot;Matter.MatterGeneral.HearingDetails.Room&quot;)"
+        required="false"
+        value="Matter.HearingRoom"
+        visible="Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="HearingDetails_Arbitrator"
+        label="DisplayKey.get(&quot;Matter.MatterGeneral.HearingDetails.Judge&quot;)"
+        required="false"
+        value="Matter.hearingjudge"
+        valueRange="Matter.Claim.RelatedAdjudicatorArray"
+        valueType="entity.Adjudicator"
+        visible="Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <InputDivider
+        visible="Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <!-- Mediation details -->
+      <Label
+        label="DisplayKey.get(&quot;Matter.MatterGeneral.MediationDetails&quot;)"
+        visible="Matter.MatterType == TC_MEDIATION"/>
+      <DateInput
+        dateFormat="short"
+        editable="Matter.MediationDateActivity == null || Matter.MediationDateActivity.canEdit()"
+        id="MediationDetails_MediationDate"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.TrialDetails.MediationDate&quot;)"
+        required="false"
+        timeFormat="short"
+        value="MediationDate"
+        visible="Matter.MatterType == TC_MEDIATION"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="MediationDetails_Venue"
+        label="DisplayKey.get(&quot;Matter.MatterGeneral.MediationDetails.Venue&quot;)"
+        required="false"
+        value="Matter.mediationvenue"
+        valueRange="Matter.Claim.RelatedLegalVenueArray"
+        valueType="entity.LegalVenue"
+        visible="Matter.MatterType == TC_MEDIATION"/>
+      <TextInput
+        editable="true"
+        id="MediationDetails_Room"
+        label="DisplayKey.get(&quot;Matter.MatterGeneral.MediationnDetails.Room&quot;)"
+        required="false"
+        value="Matter.MediationRoom"
+        visible="Matter.MatterType == TC_MEDIATION"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="MediationDetails_Mediator"
+        label="DisplayKey.get(&quot;Matter.MatterGeneral.MediationDetails.Mediator&quot;)"
+        required="false"
+        value="Matter.mediator"
+        valueRange="Matter.Claim.RelatedAdjudicatorArray"
+        valueType="entity.Adjudicator"
+        visible="Matter.MatterType == TC_MEDIATION"/>
+      <InputDivider
+        visible="Matter.MatterType == TC_MEDIATION"/>
+      <!-- <Label
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.SuitDetails&quot;)"/> -->
+      <!-- <Input
+        editable="true"
+        id="SuitDetails_SuitType"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.SuitDetails.SuitType&quot;)"
+        required="false"
+        value="matter.SuitType"/> -->
+      <!-- <Input
+        editable="true"
+        id="SuitDetails_MotionSummaryJgmt"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.SuitDetails.MotionSummaryJgmt&quot;)"
+        required="false"
+        value="matter.MotionSummaryJgmt"/> -->
+      <!-- <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="SuitDetails_Lienholder"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.SuitDetails.Lienholder&quot;)"
+        required="false"
+        value="matter.LienHolder"
+        valueRange="Matter.Claim.RelatedContacts"/> -->
+      <!-- <Input
+        editable="true"
+        id="SuitDetails_DeclaratoryJudgment"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.SuitDetails.DeclaratoryJudgment&quot;)"
+        required="false"
+        value="matter.DeclaratoryJgmt"/> -->
+      <!-- <Input
+        editable="true"
+        id="SuitDetails_StructuredSettlement"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.SuitDetails.StructuredSettlement&quot;)"
+        required="false"
+        value="matter.StructuredSettle"/> -->
+      <!-- <Input
+        editable="true"
+        id="SuitDetails_FirstNotice"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.SuitDetails.FirstNotice&quot;)"
+        required="false"
+        value="matter.FirstNotice"/> -->
+      <!-- <Input
+        editable="true"
+        id="Matter_Risk"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.Matter.Risk&quot;)"
+        required="false"
+        value="matter.RiskType"/> -->
+      <!-- <InputDivider/> -->
+      <Label
+        label="DisplayKey.get(&quot;Matter.AdditionalDetails&quot;)"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <TextInput
+        editable="true"
+        id="DocketNumber"
+        label="DisplayKey.get(&quot;Matter.DocketNumber&quot;)"
+        required="false"
+        value="Matter.DocketNumber"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <DateInput
+        dateFormat="short"
+        editable="true"
+        id="TrialDetails_FilingDate"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.TrialDetails.FilingDate&quot;)"
+        required="false"
+        timeFormat="short"
+        value="Matter.FileDate"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="TrialDetails_FiledBy"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.TrialDetails.FiledBy&quot;)"
+        required="false"
+        value="Matter.filedby"
+        valueRange="Matter.Claim.RelatedContacts"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <DateInput
+        editable="true"
+        id="ServiceDate"
+        label="DisplayKey.get(&quot;Matter.ServiceDate&quot;)"
+        required="false"
+        value="Matter.ServiceDate"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <TypeKeyInput
+        editable="true"
+        id="MethodServed"
+        label="DisplayKey.get(&quot;Matter.MethodServed&quot;)"
+        required="false"
+        value="Matter.MethodServed"
+        valueType="typekey.MatterMethodServed"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <DateInput
+        editable="true"
+        id="ResponseDue"
+        label="DisplayKey.get(&quot;Matter.ResponseDue&quot;)"
+        required="false"
+        value="Matter.ResponseDue"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <DateInput
+        editable="true"
+        id="ResponseFiled"
+        label="DisplayKey.get(&quot;Matter.ResponseFiled&quot;)"
+        required="false"
+        value="Matter.ResponseFiled"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <BooleanRadioInput
+        editable="true"
+        id="AdDamnumSpecified"
+        label="DisplayKey.get(&quot;Matter.AdDamnumSpecified&quot;)"
+        required="false"
+        validationExpression="(!Matter.AdDamnumSpecified and !(Matter.AdDamnumAmount == null || Matter.AdDamnumAmount.Amount == 0)? DisplayKey.get(&quot;Matter.AdDamnumSpecified.Validation&quot;): null)"
+        value="Matter.AdDamnumSpecified"
+        visible="(Matter.AdDamnumSpecified || !(Matter.AdDamnumAmount == null || Matter.AdDamnumAmount.Amount == 0)) || (Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL)">
+        <PostOnChange/>
+      </BooleanRadioInput>
+      <CurrencyInput
+        editable="true"
+        formatType="currency"
+        id="AdDamnumAmount"
+        label="DisplayKey.get(&quot;Matter.AdDamnumAmount&quot;)"
+        required="false"
+        value="Matter.AdDamnumAmount"
+        visible="Matter.AdDamnumSpecified || !(Matter.AdDamnumAmount == null || Matter.AdDamnumAmount.Amount == 0)"/>
+      <BooleanRadioInput
+        editable="true"
+        id="PunitiveDamages"
+        label="DisplayKey.get(&quot;Matter.PunitiveDamagesSpecified&quot;)"
+        required="false"
+        validationExpression="(!Matter.PunitiveDamages and !(Matter.PunitiveAmount == null || Matter.PunitiveAmount.Amount == 0)? DisplayKey.get(&quot;Matter.PunitiveDamagesSpecified.Validation&quot;): null)"
+        value="Matter.PunitiveDamages"
+        visible="(Matter.PunitiveDamages || !(Matter.PunitiveAmount == null || Matter.PunitiveAmount.Amount == 0)) || (Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL)">
+        <PostOnChange/>
+      </BooleanRadioInput>
+      <CurrencyInput
+        editable="true"
+        formatType="currency"
+        id="PunitiveAmount"
+        label="DisplayKey.get(&quot;Matter.PunitiveAmount&quot;)"
+        required="false"
+        value="Matter.PunitiveAmount"
+        visible="Matter.PunitiveDamages || !(Matter.PunitiveAmount == null || Matter.PunitiveAmount.Amount == 0)"/>
+      <InputDivider
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <Label
+        label="DisplayKey.get(&quot;MatterGeneral.Matter.Resolution&quot;)"/>
+      <TypeKeyInput
+        editable="true"
+        id="Matter_Resolution"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.Matter.Resolution&quot;)"
+        required="false"
+        value="Matter.Resolution"
+        valueType="typekey.ResolutionType"/>
+      <CurrencyInput
+        editable="true"
+        formatType="currency"
+        id="Matter_FinalLegalCost"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.NewMatterGeneral.Matter.FinalLegalCost&quot;)"
+        required="false"
+        value="Matter.FinalLegalCost"/>
+      <CurrencyInput
+        editable="true"
+        formatType="currency"
+        id="Matter_FinalSettleCost"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.NewMatterGeneral.Matter.FinalSettleCost&quot;)"
+        required="false"
+        value="Matter.FinalSettleCost"/>
+      <DateInput
+        editable="true"
+        id="Matter_FinalSettleDate"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.NewMatterGeneral.Matter.FinalSettleDate&quot;)"
+        required="false"
+        value="Matter.FinalSettleDate"/>
+    </InputColumn>
+    <InputFooterSection>
+      <ListViewInput
+        boldLabel="true"
+        def="EditableMatterStatusLinesLV(Matter)"
+        editable="true"
+        id="MatterGeneral_Status"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.Status&quot;)"
+        labelAbove="true">
+        <Toolbar>
+          <IteratorButtons
+            iterator="MatterGeneral_Status.EditableMatterStatusLinesLV"/>
+        </Toolbar>
+      </ListViewInput>
+      <ListViewInput
+        boldLabel="true"
+        def="EditableSecondaryAttorneyLV(Matter)"
+        editable="true"
+        id="Counsel_SecAttorney"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.MatterGeneral.Counsel.SecondaryAttorney&quot;)"
+        labelAbove="true">
+        <Toolbar>
+          <IteratorButtons
+            iterator="Counsel_SecAttorney.EditableSecondaryAttorneyLV"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputFooterSection>
+    <Code><![CDATA[
+property get TrialDate() : java.util.Date {
+    return Matter.TrialDateActivity.TargetDate
+}  
+property set TrialDate(date : java.util.Date) {
+    Matter.updateTrialDate( date )
+}
+
+property get ArbitrationDate() : java.util.Date {
+    return Matter.ArbitrationDateActivity.TargetDate
+}
+  
+property set ArbitrationDate(date : java.util.Date) {
+    Matter.updateArbitrationDate( date )
+}
+
+
+property get HearingDate() : java.util.Date {
+    return Matter.HearingDateActivity.TargetDate
+}
+  
+property set HearingDate(date : java.util.Date) {
+    Matter.updateHearingDate( date )
+}
+
+property get MediationDate() : java.util.Date {
+    return Matter.MediationDateActivity.TargetDate
+}
+  
+property set MediationDate(date : java.util.Date) {
+    Matter.updateMediationDate( date )
+}
+    ]]></Code>
+  </DetailViewPanel>
+</PCF>

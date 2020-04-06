@@ -1,0 +1,23 @@
+package rules.Validation.TransactionSetValidationRules_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("TXV14000 - Check Send Date Validation")
+internal class TXV14000CheckSendDateValidation {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return transactionSet typeis CheckSet
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+// Validate that all checks are scheduled to be sent on business calendar days 
+// i.e. not on weekends or holidays
+(transactionSet as CheckSet).validateAllScheduledSendDatesOnBusinessDays()
+/*end00rule*/
+
+  }
+}

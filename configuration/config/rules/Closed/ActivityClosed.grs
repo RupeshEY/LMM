@@ -1,0 +1,13 @@
+package rules.Closed
+
+@gw.rules.RuleName("Activity Closed")
+@gw.rules.RuleSetDescription("This is the Activity Closed rule set. These rules execute after an activity has been closed, before preupdate and validation rules, in order to take automated actions on close.")
+class ActivityClosed extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Activity) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Activity) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Activity Closed", ActivityClosed )
+  }
+}

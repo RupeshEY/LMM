@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A specific amount of money, contained with a transaction and belonging to a t-account"
+  entity="TAccountLineItem"
+  extendable="false"
+  final="true"
+  ignoreForEvents="true"
+  overwrittenInStagingTable="true"
+  platform="false"
+  setterScriptability="hidden"
+  table="taccountlineitem"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.TAccountLineItem"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountLineItemImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="TAccountLineItemDelegate"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.impl.TAccountLineItemDelegateInternal"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountLineItemImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.TAccountLineItemDelegateAdapter"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountLineItemDelegateAdapterNormalImpl"/>
+  <fulldescription><![CDATA[The entry of a specific amount of money, either crediting or debiting one T-account. A TaccountTransaction will contain a pair of balancing TAccountLineItems - a debit to one
+    T-account and an equal credit to another.
+  ]]></fulldescription>
+  <column
+    desc="The amount of money (in the reserving currency) in this line item that was either credited or debited against a TAccount."
+    getterScriptability="hidden"
+    name="ReservingAmount"
+    nullok="false"
+    setterScriptability="hidden"
+    type="money"/>
+  <foreignkey
+    columnName="CreditingTransactionID"
+    desc="The TAccountTransaction for which this lineitem credits a t-account."
+    fkentity="TAccountTransaction"
+    getterScriptability="hidden"
+    loadedByCallback="true"
+    name="CreditingTransaction"
+    nullok="true"
+    setterScriptability="hidden"/>
+  <foreignkey
+    columnName="DebitingTransactionID"
+    desc="The TAccountTransaction for which this lineitem debits a t-account."
+    fkentity="TAccountTransaction"
+    getterScriptability="hidden"
+    loadedByCallback="true"
+    name="DebitingTransaction"
+    nullok="true"
+    setterScriptability="hidden"/>
+  <foreignkey
+    columnName="DenormTransactionID"
+    desc="Denormalized FK to TAccountTransaction table in order to speed up certain queries.  If both CreditingTransactionID and DebitingTransactionID are not null, then this field is NULL, otherwise this field will have same value as the non-null FK.  This allows us to query against this field only when looking for TAccountTransactions that are currently contributing to a TAccount."
+    fkentity="TAccountTransaction"
+    getterScriptability="hidden"
+    loadedByCallback="true"
+    name="DenormTransaction"
+    nullok="true"
+    setterScriptability="hidden"/>
+  <foreignkey
+    columnName="TAccountID"
+    fkentity="TAccount"
+    getterScriptability="hidden"
+    loadedByCallback="true"
+    name="TAccount"
+    nullok="false"
+    setterScriptability="hidden"/>
+</entity>

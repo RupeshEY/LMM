@@ -1,0 +1,99 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="ECFTransactionStatus_Ext" desc="The status of the Lloyd’s, LIRMA, ILU transactions. A dash will be displayed if no transaction exists.">
+  <typecode
+    code="3"
+    desc="Txn in error"
+    name="3"/>
+  <typecode
+    code="4"
+    desc="Awaiting update of earlier txn"
+    name="4"/>
+  <typecode
+    code="8-PURGED"
+    desc="Purged"
+    name="8-PURGED"/>
+  <typecode
+    code="9-MKT-CHK"
+    desc="Awaiting market check"
+    name="9-MKT-CHK"/>
+  <typecode
+    code="10-AWAITING-QUERIED"
+    desc="Awaiting Action/Queried (Queried is just for Lloyds)"
+    name="10-AWAITING/QUERIED"/>
+  <typecode
+    code="12-PENDED-REJECTED"
+    desc="Pended/Rejected by a Lead (ILU)"
+    name="12-PENDED/ REJECTED"/>
+  <typecode
+    code="14-PART-AUT"
+    desc="Part Authorised - authorised by the lead only (Lloyd's only)"
+    name="14-PART-AUT"/>
+  <typecode
+    code="15-PART-AUT"
+    desc="Part Authorised - authorised by the lead and XCS (Lloyd's and ILU)"
+    name="15-PART-AUT"/>
+  <typecode
+    code="16-COND-QUERIED"
+    desc="Part Authorised - authorised by the lead and XCS (Lloyd's and ILU)One or more of the other co-leads / agreement parties have not made a response or the current co-lead’s response is inconsistent with responses made by other co-leads / agreement parties in the group."
+    name="16-COND QUERIED"/>
+  <typecode
+    code="17-COND-AUTHORISED"
+    desc="All agreement parties on the claim have made a consistent response on their respective co-lead transactions, regardless of the nature of that response"
+    name="17-COND AUTHORISED"/>
+  <typecode
+    code="20-CIRCULATED"
+    desc="Circulated (Only LIRMA)"
+    name="20-CIRCULATED"/>
+  <typecode
+    code="24-RIP-REQD"
+    desc="Awaiting Reinstatement (fully authorised) – ILU only"
+    name="24-RIP REQD"/>
+  <typecode
+    code="25-RIP-PREV"
+    desc="Awaiting Reinstatement on previous transaction (fully authorised) – ILU only"
+    name="25-RIP PREV"/>
+  <typecode
+    code="26-HELD-CPA"
+    desc="Awaiting CPA Release – ILU only"
+    name="26-HELD CPA"/>
+  <typecode
+    code="27-HELD-CPA"
+    desc="Awaiting CPA Release on previous transaction – ILU only"
+    name="27-HELD CPA"/>
+  <typecode
+    code="30-AUTHORSD"
+    desc="Fully Authorised – Awaiting Signing (ILU)"
+    name="30-AUTHORSD"/>
+  <typecode
+    code="31-ADV-BDWN"
+    desc="Fully Authorised Lloyds advising transaction – Awaiting processing by Xchanging technician"
+    name="31-ADV BDWN"/>
+  <typecode
+    code="32-SET-BDWN"
+    desc="Fully Authorised Lloyds settlement transaction – Awaiting processing by Xchanging technician"
+    name="32-SET BDWN"/>
+  <typecode
+    code="33-PROCESS"
+    desc="Fully Authorised – Breakdown Incomplete (Lloyd's)"
+    name="33-PROCESS"/>
+  <typecode
+    code="36-RELEASED"
+    desc="Fully Authorised – Breakdown Complete (Lloyd's)"
+    name="36-RELEASED"/>
+  <typecode
+    code="40-COMPLETE"
+    desc="Fully Authorised and Signed/Complete"
+    name="40-COMPLETE"/>
+  <typecode
+    code="45-CANCELD"
+    desc="Cancelled (LIRMA only)"
+    name="45-CANCEL’D"/>
+  <typecode
+    code="12-REJ"
+    desc="Rejected (LIRMA only)"
+    name="12-REJ"/>
+  <typecode
+    code="DELETED"
+    desc="Transaction was deleted on ECF2"
+    name="DELETED"/>
+</typelist>

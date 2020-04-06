@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="RuleComparisonCommandLabelInputSet">
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RuleVersionComparisonController"/>
+    <Require
+      name="actionLabel"
+      type="String"/>
+    <Label
+      id="ActionLabel"
+      label="actionLabel">
+      <LayoutConfig
+        colspan="controller.TotalColumns"
+        tdClass="&quot;bz-sxs-action-label&quot;"/>
+    </Label>
+  </InputSet>
+</PCF>

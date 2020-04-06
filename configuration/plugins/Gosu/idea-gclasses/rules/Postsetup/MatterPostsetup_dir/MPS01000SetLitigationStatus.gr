@@ -1,0 +1,21 @@
+package rules.Postsetup.MatterPostsetup_dir
+
+@gw.rules.RuleName("MPS01000 - Set Litigation Status")
+internal class MPS01000SetLitigationStatus {
+  static function doCondition(matter : entity.Matter) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(matter : entity.Matter, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* If a matter is created, set the claim's litigation status */
+matter.Claim.LitigationStatus = TC_LITIGATED
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Worksheet
+    beforeCommit="activityDetailHelper.beforeCommit(Activity)"
+    canEdit="canEdit"
+    canVisit="perm.Activity.view(Activity)"
+    id="CalendarActivityDetailWorksheet"
+    tabLabel="DisplayKey.get(&quot;Web.Claim.ActivityDetailWorksheet.Tab&quot;)"
+    title="DisplayKey.get(&quot;JSP.ActivityDetail.Detail.Title&quot;, Activity.Claim.ClaimNumber)">
+    <LocationEntryPoint
+      signature="CalendarActivityDetailWorksheet(Activity : Activity)"/>
+    <Scope
+      location="DesktopCalendarGroup()"/>
+    <Scope
+      location="ClaimCalendarGroup(Activity.Claim)"/>
+    <Scope
+      location="Claim(Activity.Claim)"/>
+    <Scope
+      location="ClaimMatterCalendar(Activity.Claim, Activity.Matter)"/>
+    <Scope
+      location="SupervisorClaimMatterCalendar(Activity.Claim, Activity.Matter)"/>
+    <Scope
+      location="ClaimAllMattersCalendar(Activity.Claim)"/>
+    <Scope
+      location="SupervisorClaimAllMattersCalendar(Activity.Claim)"/>
+    <Variable
+      name="Activity"
+      type="Activity"/>
+    <Variable
+      initialValue="Activity.canEdit()"
+      name="canEdit"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.api.activity.ActivityDetailHelper(Activity, \ a -> CalendarActivityDetailWorksheet.goInWorkspace(a))"
+      name="activityDetailHelper"
+      type="gw.api.activity.ActivityDetailHelper"/>
+    <ScreenRef
+      def="ActivityDetailScreen(Activity, activityDetailHelper, true) // no, it doesn't actually have a parent, but this preserves the existing behavior"
+      mode="canEdit ? &quot;editable&quot; : &quot;readonly&quot;"/>
+  </Worksheet>
+</PCF>

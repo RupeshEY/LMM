@@ -1,0 +1,22 @@
+package rules.Workplan.ClaimWorkplan_dir.CLW00100NotFirstandFinal_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("CLW02000 - Thirty day review")
+internal class CLW02000Thirtydayreview {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.createActivityFromPattern(
+    null, ActivityPattern.finder.getActivityPatternByCode("initial_30day_review"))
+/*end00rule*/
+
+  }
+}

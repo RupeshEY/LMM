@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="PolicyLocation"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="policylocation"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.policy.entity.PolicyLocation"
+    impl="com.guidewire.cc.domain.policy.impl.PolicyLocationImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="AddressID"
+    desc="The address where this PolicyLocation exists."
+    fkentity="Address"
+    name="Address"
+    nullok="true"/>
+  <column
+    default="false"
+    desc="Indicates whether this PolicyLocation should be considered the primary one on the owning Policy."
+    name="PrimaryLocation"
+    nullok="false"
+    type="bit"/>
+  <column
+    desc="The alphanumeric &quot;number&quot; associated with this location."
+    name="LocationNumber"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Any notes associated with this location."
+    name="Notes"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Identifier for the policy location in an external policy system"
+    name="PolicySystemId"
+    nullok="true"
+    type="policysystemid"/>
+  <array
+    arrayentity="Building"
+    desc="Buildings associated with this location."
+    name="Buildings"
+    owner="true"
+    triggersValidation="true"/>
+  <array
+    arrayentity="PropertyItem"
+    desc="List of additional high value items."
+    name="HighValueItems"
+    owner="true"
+    triggersValidation="true"/>
+  <array
+    arrayentity="PropertyOwner"
+    desc="List of lienholders for the property."
+    name="Lienholders"
+    owner="true"
+    triggersValidation="true"/>
+  <array
+    arrayentity="LocationBasedRU"
+    desc="List of location based risk units for the property."
+    name="LocationBasedRisks"
+    owner="true"
+    triggersValidation="true"/>
+  <foreignkey
+    columnName="PolicyID"
+    desc="This PolicyLocation's owning Policy."
+    exportable="false"
+    fkentity="Policy"
+    name="Policy"
+    nullok="true"/>
+</entity>

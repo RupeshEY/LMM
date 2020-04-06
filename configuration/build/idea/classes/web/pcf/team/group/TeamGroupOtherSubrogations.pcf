@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.User.viewteam and group.GroupType == TC_SUBRO"
+    id="TeamGroupOtherSubrogations"
+    title="DisplayKey.get(&quot;Web.Team.OtherSubrogationsTitle&quot;)">
+    <LocationEntryPoint
+      signature="TeamGroupOtherSubrogations(group : entity.Group)"/>
+    <Variable
+      name="group"
+      type="entity.Group"/>
+    <Screen
+      id="TeamGroupSubrogationsScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.Team.OtherSubrogationsTitle&quot;)"/>
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="AssignSubrogationPopup.push(new gw.api.subrogation.SubrogationAssignmentPopup(CheckedValues))"
+          id="Assign"
+          iterator="SubrogationsLV.SubrogationsLV"
+          label="DisplayKey.get(&quot;Web.Team.Toolbar.Assign&quot;)"
+          shortcut="G"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="gw.api.print.ListViewPrintOptionPopupAction.printListViewWithOptions(&quot;SubrogationsLV&quot;)"
+          available="perm.User.printlistviews"
+          id="Print"
+          label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="SubrogationsLV(SubrogationView.finder.findOther(group), true)"/>
+    </Screen>
+  </Page>
+</PCF>

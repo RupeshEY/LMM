@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <Popup
+    beforeCommit="validateAndRecordChange(serviceRequest)"
+    canEdit="true"
+    id="EditReferenceNumberPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ServiceRequest.UpdateState.UpdateReferenceNumber.Title&quot;)">
+    <LocationEntryPoint
+      signature="EditReferenceNumberPopup(serviceRequest: ServiceRequest)"/>
+    <Variable
+      name="serviceRequest"
+      type="ServiceRequest"/>
+    <Variable
+      initialValue="serviceRequest.ServiceRequestReferenceNumber"
+      name="originalReferenceNumber"
+      type="java.lang.String"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            editable="true"
+            id="ServiceRequestReferenceNumber"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.UpdateState.ServiceRequestReferenceNumber&quot;)"
+            required="false"
+            value="serviceRequest.ServiceRequestReferenceNumber"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[function validateAndRecordChange(sr : ServiceRequest) {
+  if (serviceRequest.ServiceRequestReferenceNumber != originalReferenceNumber) {
+    var reasonForChange = DisplayKey.get("Web.ServiceRequest.StateTransition.ReferenceNumberChanged", serviceRequest.ServiceRequestReferenceNumber)
+    sr.recordChange(reasonForChange, null, null, User.util.CurrentUser.Contact)
+  }
+}]]></Code>
+  </Popup>
+</PCF>

@@ -1,0 +1,31 @@
+package rules.Segmentation.ExposureSegmentationRules_dir.ESG05000Travel_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.util.Logger
+
+@gw.rules.RuleName("ESG05300 - Travel High")
+internal class ESG05300TravelHigh {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ExposureType == TC_VEHICLEDAMAGE
+or exposure.ExposureType == TC_PROPERTYDAMAGE
+or exposure.ExposureType == TC_PIPDAMAGES 
+or exposure.Incident.Severity == TC_SEVERE_GEN
+or exposure.Incident.Severity == TC_MAJOR_GEN
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.Segment = TC_TRAVEL_HIGH
+Logger.logDebug(DisplayKey.get("Rules.Segmentation.Exposure", actions.ShortRuleName))
+Logger.logDebug(DisplayKey.get("Rules.Segmentation.Exposure.SegmentedTo", exposure.Segment))
+actions.exit()
+
+/*end00rule*/
+
+  }
+}

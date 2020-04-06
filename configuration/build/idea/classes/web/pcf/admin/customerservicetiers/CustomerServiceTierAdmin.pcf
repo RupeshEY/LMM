@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.System.custsvctierview"
+    id="CustomerServiceTierAdmin"
+    title="DisplayKey.get(&quot;Web.Admin.CustomerServiceTier.CustomerServiceTiers&quot;)">
+    <Variable
+      initialValue="getCustomerServiceTiers()"
+      name="customerServiceTiers"
+      recalculateOnRefresh="true"
+      type="CustomerServiceTierSpecialHandling[]"/>
+    <Screen
+      id="CustomerServiceTierScreen">
+      <PanelRef
+        def="CustomerServiceTiersLV(customerServiceTiers)">
+        <Toolbar
+          id="CustomerServiceTierToolbar">
+          <ToolbarButton
+            action="NewCustomerServiceTier.go()"
+            available="CustomerServiceTier.getTypeKeys(false).Count &gt; customerServiceTiers.length"
+            id="AddServiceTierButton"
+            iterator="CustomerServiceTiersLV.CustomerServiceTiersLV"
+            label="DisplayKey.get(&quot;Web.Admin.CustomerServiceTier.Toolbar.Add&quot;)"
+            shortcut="A"
+            showConfirmMessage="false"
+            tooltip="DisplayKey.get(&quot;Web.Admin.CustomerServiceTier.Toolbar.Add.Tooltip&quot;)"
+            visible="perm.System.custsvctiermng"/>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="gw.api.admin.AdminUtil.deleteCustomerServiceTiers(CheckedValues)"
+            confirmMessage="DisplayKey.get(&quot;Web.Admin.CustomerServiceTier.Toolbar.DeleteConfirm&quot;)"
+            id="DeleteServiceTierButton"
+            iterator="CustomerServiceTiersLV.CustomerServiceTiersLV"
+            label="DisplayKey.get(&quot;Web.Admin.CustomerServiceTier.Toolbar.Remove&quot;)"
+            tooltip="DisplayKey.get(&quot;Web.Admin.CustomerServiceTier.Toolbar.Remove.Tooltip&quot;)"
+            visible="perm.System.custsvctiermng"/>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+    <Code><![CDATA[
+      function getCustomerServiceTiers() : CustomerServiceTierSpecialHandling[] {
+        return gw.api.database.Query.make(CustomerServiceTierSpecialHandling).select().toTypedArray()
+      }]]></Code>
+  </Page>
+</PCF>

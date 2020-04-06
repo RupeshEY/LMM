@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    beforeCommit="verifyBenefits()"
+    canEdit="perm.System.wcrefmanage"
+    canVisit="perm.System.wcrefview"
+    id="WCPDWeeksAndLimits"
+    title="DisplayKey.get(&quot;Web.Admin.WCPDWeeksAndLimits&quot;)">
+    <Variable
+      initialValue="gw.api.database.Query.make(entity.ref_WC_PD_WeeksAndLimits).select()"
+      name="ref_WC_PD_WeeksAndLimits"
+      type="gw.api.database.IQueryBeanResult&lt;ref_WC_PD_WeeksAndLimits&gt;"/>
+    <Screen
+      id="ref_WC_PD_WeeksAndLimitsScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.Admin.WCPDWeeksAndLimits&quot;)"/>
+      <Toolbar
+        visible="true">
+        <EditButtons/>
+        <IteratorButtons
+          addVisible="true"
+          iterator="WCPDWeeksAndLimitsLV.WCPDWeeksAndLimitsLV"
+          removeVisible="true"/>
+      </Toolbar>
+      <PanelRef
+        def="WCPDWeeksAndLimitsLV(ref_WC_PD_WeeksAndLimits)"/>
+    </Screen>
+    <Code><![CDATA[function verifyBenefits() {
+  var foundError = false
+  var bundle = gw.transaction.Transaction.getCurrent()
+  
+  var modifiedEntries = bundle.getInsertedAndUpdatedBeansOfType(entity.ref_WC_PD_WeeksAndLimits)
+  var modifiedAndRemoved = bundle.getAllModifiedBeansOfType(entity.ref_WC_PD_WeeksAndLimits)
+    
+  var modifiedByState = modifiedEntries.partition(\ r -> r.JurisdictionState)
+  for (state in modifiedByState.Keys) {
+    var modifiedBenefitsWithState = modifiedByState[state] 
+    var unmodifiedBenefitsWithState = new java.util.ArrayList<ref_WC_PD_WeeksAndLimits>()
+    for (ref in gw.api.database.Query.make(entity.ref_WC_PD_WeeksAndLimits).compare("JurisdictionState", Equals, state).select()) {
+      if (!modifiedAndRemoved.contains(ref)) {
+        unmodifiedBenefitsWithState.add(ref)
+      }
+    }
+    for (ref in modifiedBenefitsWithState index i) {
+      var overlapsWithModified = ref.findOverlaps(modifiedBenefitsWithState.toList().subList(i + 1, modifiedBenefitsWithState.Count))
+      var overlapsWithUnmodified = ref.findOverlaps(unmodifiedBenefitsWithState)
+      if (overlapsWithModified or overlapsWithUnmodified) {
+        foundError = true
+      }
+    }   
+  }
+    
+  if (foundError) {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Web.Admin.WCParams.PDBenefits.ConflictWarning"))
+  }
+}]]></Code>
+  </Page>
+</PCF>

@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="claimResponseRq?.sendResponse()"
+    beforeValidate="claimResponseRq?.processBeforeValidate()"
+    canEdit="true"
+    id="ECFTransactionDetailsPopup"
+    startInEditMode="claimDataMsg.Respondable"
+    title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFTransactionDetailsPopup.Title&quot;, claimDataMsg.TR ,claimDataMsg.SyndicateID, claimDataMsg.BureauType.DisplayName, claimDataMsg.Role)">
+    <LocationEntryPoint
+      signature="ECFTransactionDetailsPopup(claimDataMsg: ECFMessageClaimData_Ext)"/>
+    <LocationEntryPoint
+      signature="ECFTransactionDetailsPopup(claimDataMsg: ECFMessageClaimData_Ext, goToRespondOnEnter: Boolean)"/>
+    <Variable
+      name="claimDataMsg"
+      type="ECFMessageClaimData_Ext"/>
+    <Variable
+      initialValue="claimDataMsg.Respondable ? gw.acc.iplm.entitymapper.ecfwb.claimresponse.ClaimResponseRqEntityMapper.createClaimResponseRqEntity(claimDataMsg, CurrentLocation.Bundle) : null"
+      name="claimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <Variable
+      initialValue="false"
+      name="goToRespondOnEnter"
+      type="Boolean"/>
+    <Screen>
+      <AlertBar
+        id="ResponseCannotBeSentAlert"
+        label="claimResponseRq.LirmaResponse ? DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.NoCommentsEditable.LirmaLead&quot;): DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.NoCommentsEditable&quot;)"
+        visible="claimResponseRq?.commentsLimitReachedByIncomingMessage()"/>
+      <CardViewPanel
+        hideTabIfSingle="true">
+        <Card
+          id="Summary"
+          title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetailsPopup.Summary&quot;)">
+          <PanelRef
+            def="ECFMessageDetailsSummaryPanelSet(claimDataMsg)"
+            editable="false"/>
+        </Card>
+        <Card
+          id="Policy"
+          title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetailsPopup.Policy&quot;)">
+          <PanelRef
+            def="ECFMessageDetailsPolicyPanelSet(claimDataMsg)"
+            editable="false"/>
+        </Card>
+        <Card
+          id="Financials"
+          title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetailsPopup.Financials&quot;)">
+          <PanelRef
+            def="ECFMessageDetailsFinancialsPanelSet(claimDataMsg)"
+            editable="false"/>
+        </Card>
+        <Card
+          id="BulkClaims"
+          title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetailsPopup.BulkClaims&quot;)"
+          visible="claimDataMsg.BulkClaimNoOfItems &gt; 0bd">
+          <PanelRef
+            def="ECFMessageDetailsBulkClaimPanelSet(claimDataMsg)"
+            editable="false"/>
+        </Card>
+        <Card
+          id="Comments"
+          title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetailsPopup.Comments&quot;)">
+          <PanelRef
+            def="ECFMessageDetailsCommentDV(claimDataMsg)"
+            editable="false"/>
+        </Card>
+        <Card
+          id="Respond"
+          selectOnEnter="goToRespondOnEnter"
+          title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetailsPopup.Respond&quot;)"
+          visible="claimDataMsg.Respondable">
+          <PanelRef
+            def="ECFClaimResponsePanelSet(claimDataMsg, claimResponseRq)"
+            editable="true"
+            mode="claimDataMsg.Mode.Code">
+            <Toolbar>
+              <EditButtons
+                cancelVisible="false"
+                editVisible="false"
+                updateLabel="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.SendResponse&quot;)"
+                updateVisible="claimResponseRq.responseSendAvailable()"/>
+            </Toolbar>
+          </PanelRef>
+        </Card>
+      </CardViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

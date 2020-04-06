@@ -1,0 +1,18 @@
+package rules.Preupdate.TransactionSetPreupdate_dir
+
+uses gw.bizrules.context.TransactionSetTriggeringPoint
+
+@gw.rules.RuleName("TPU05000 - BizRules")
+internal class TPU05000BizRules {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+/*start00rule*/
+TransactionSetTriggeringPoint.triggerBizRulesExecutor(TriggeringPointKey.TC_UPDATE, transactionSet)
+/*end00rule*/
+  }
+}

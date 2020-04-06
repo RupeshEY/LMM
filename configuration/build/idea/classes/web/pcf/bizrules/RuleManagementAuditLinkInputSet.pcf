@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="RuleManagementAuditLinkInputSet"
+    visible="version != null">
+    <Require
+      name="versionController"
+      type="gw.bizrules.management.BizRulesVersionController"/>
+    <Require
+      name="importingVersion"
+      type="boolean"/>
+    <Require
+      name="version"
+      type="RuleVersion"/>
+    <Variable
+      initialValue="new gw.bizrules.pcf.RuleManagementAuditController(versionController, importingVersion)"
+      name="controller"
+      type="gw.bizrules.pcf.RuleManagementAuditController"/>
+    <Variable
+      initialValue="version != null ? controller.getMostImportantActivity(version) : null"
+      name="mostImportantActivity"
+      recalculateOnRefresh="true"
+      type="gw.bizrules.pcf.RuleManagementAuditController.Activity"/>
+    <ContentInput
+      labelAbove="true">
+      <Link
+        id="Summary"
+        label="DisplayKey.get(&quot;BizRules.RuleManagementAuditLink.Summary&quot;, mostImportantActivity.ActivityType.DisplayName, mostImportantActivity.UserName, mostImportantActivity.Timestamp.formatDate(SHORT))"/>
+      <Link
+        action="RuleManagementAuditPopup.push(controller, version)"
+        hideIfEditable="true"
+        id="Link"
+        label="DisplayKey.get(&quot;BizRules.RuleManagementAuditLink.ViewHistory&quot;)"/>
+    </ContentInput>
+  </InputSet>
+</PCF>

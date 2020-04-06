@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <!-- This file is not directly used by the base implementation. It is used to replace the old 3.1 list view
+    custom tags RelatedABContactsListItem, RelatedABCompaniesListItem and RelatedABPeopleListItem. Instead
+    of a custom tag you can use a normal ListViewInput with this list view or a copy of this list view.
+
+    If the relationship can return any type of contact then use this list view directly. If the
+    relationship only returns a particular type (say Person) then create a copy of this list view (e.g
+    EditableABRelatedPeopleLV) and cast the value of the AddressBookContactCell to the appropriate
+    type (e.g: contactContact.getOtherContact(primaryContact) as Person) -->
+  <ListViewPanel
+    desc="List of contacts in a given relationship with the primary contact. For use on Address Book pages."
+    id="EditableABRelatedContactsLV">
+    <Require
+      name="primaryContact"
+      type="Contact"/>
+    <Require
+      name="relationship"
+      type="ContactBidiRel"/>
+    <Require
+      name="externalContactSource"
+      type="gw.api.contact.ExternalContactSource"/>
+    <RowIterator
+      editable="true"
+      elementName="contactContact"
+      hasCheckBoxes="true"
+      hideCheckBoxesIfReadOnly="true"
+      pageSize="4"
+      toAdd="primaryContact.addContactContact(contactContact); contactContact.setBidiRel(primaryContact, relationship)"
+      toRemove="primaryContact.removeContactContact(contactContact)"
+      value="primaryContact.getContactContactsByRelationship(relationship)"
+      valueType="entity.ContactContact[]">
+      <ToolbarFlag
+        name="relationship"/>
+      <Row>
+        <AddressBookContactCell
+          editable="true"
+          forceContactSubtype="new util.lvwrapper.ContactContactLVWrapper(contactContact, primaryContact).OtherContactType"
+          id="Contact"
+          label="DisplayKey.get(&quot;Web.RelatedContactsLV.Contact&quot;)"
+          parentContact="primaryContact"
+          setNoneSelected="new util.lvwrapper.ContactContactLVWrapper(contactContact, primaryContact).setNoneSelected()"
+          sortOrder="1"
+          value="new util.lvwrapper.ContactContactLVWrapper(contactContact, primaryContact).OtherContact"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Employment class code (for workers' comp only)."
+  entity="ClassCode"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="classcode"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.policy.entity.ClassCode"
+    impl="com.guidewire.cc.domain.policy.impl.ClassCodeImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Class code."
+    name="Code"
+    nullok="false"
+    type="employmentclassification"/>
+  <column
+    desc="Other notes on the class code."
+    name="Comments"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Description of the class code."
+    name="Description"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    columnName="PolicyID"
+    desc="Policy with which the class code is associated."
+    exportable="false"
+    fkentity="Policy"
+    name="Policy"
+    nullok="false"
+    triggersValidation="true"/>
+</entity>

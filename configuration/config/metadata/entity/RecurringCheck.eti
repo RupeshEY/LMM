@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Links the checks created as part of a recurrence of a check."
+  entity="RecurringCheck"
+  exportable="true"
+  platform="false"
+  table="recurringcheck"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.financials.check.impl.RecurringCheckImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.financials.check.impl.RecurringCheckImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.check.impl.RecurringCheckInternal"
+    impl="com.guidewire.cc.domain.financials.check.impl.RecurringCheckImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.check.entity.RecurringCheck"
+    impl="com.guidewire.cc.domain.financials.check.impl.RecurringCheckImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="CheckSetID"
+    desc="The TransactionSet to which this RecurringCheck belongs."
+    exportable="true"
+    fkentity="CheckSet"
+    importableagainstexistingobject="false"
+    name="CheckSet"
+    nullok="false"/>
+  <array
+    arrayentity="Check"
+    desc="Individual checks that comprise this recurring check."
+    exportable="true"
+    name="Checks"
+    triggersValidation="true"/>
+</entity>

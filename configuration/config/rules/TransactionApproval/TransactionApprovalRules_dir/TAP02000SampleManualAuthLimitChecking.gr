@@ -1,0 +1,44 @@
+package rules.TransactionApproval.TransactionApprovalRules_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("TAP02000 - Sample - Manual Auth Limit Checking")
+internal class TAP02000SampleManualAuthLimitChecking {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return transactionSet.Subtype == TC_RESERVESET 
+or
+(transactionSet.Subtype == TC_CHECKSET  
+  and !(transactionSet as CheckSet).ForBulkedCheck)
+
+/* A sample rule to check authority limits on ReserveSets and CheckSets, as is done
+ * by automatic authority limit checking. Also skips Checks created for
+ * BulkInvoiceItems, which some customers want to do. Automatic authority
+ * limit checking does check BIItem checks.
+ * Note: this rule is only appropriate if the system configuration parameter
+ * 'CheckAuthorityLimits' is set to false
+ */
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+// call the domain method to test the authority limits
+transactionSet.RequestingUser = transactionSet.LastApprovingUser
+var approvalResult = transactionSet.testAuthorityLimits()
+
+// the results from this test then need to be interpreted
+if (approvalResult.HasAuthority) {
+  if (approvalResult.RequiresApproval) {
+    transactionSet.requireApproval(approvalResult.getCombinedMessages())
+  }
+} else {
+  // requesting user does not have adequate authority limits to even attempt approval
+  transactionSet.reject(TC_LOADSAVE, approvalResult.getCombinedMessages(), null, null)
+}
+/*end00rule*/
+
+  }
+}

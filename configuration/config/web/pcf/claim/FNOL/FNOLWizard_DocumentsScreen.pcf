@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="FNOLWizard_DocumentsScreen">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <Variable
+      initialValue="gw.document.DocumentsUtil.getAllDocumentsForClaim(Claim)"
+      name="claimDocuments"
+      recalculateOnRefresh="true"
+      type="entity.Document[]"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarButton
+        action="null"
+        available="documentsActionsHelper.DocumentContentServerAvailable"
+        id="RefreshAsyncContent"
+        label="DisplayKey.get(&quot;Web.DocumentsLV.Button.AsynchronousRefresh&quot;)"
+        tooltip="DisplayKey.get(&quot;Web.DocumentsLV.Button.AsynchronousRefresh.Tooltip&quot;)"
+        visible="documentsActionsHelper.isShowAsynchronousRefreshAction(claimDocuments)"/>
+    </Toolbar>
+    <Verbatim
+      label="DisplayKey.get(&quot;JSP.NewClaimDocuments.Tip&quot;)"/>
+    <PanelRef
+      def="NewClaimDocumentsLV(claimDocuments , Claim, documentsActionsHelper)"/>
+  </Screen>
+</PCF>

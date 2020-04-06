@@ -1,0 +1,20 @@
+package rules.InitialReserve.InitialReserve_dir
+
+@gw.rules.RuleName("IRR01000 - Auto")
+internal class IRR01000Auto {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.Claim.LossType==TC_AUTO
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+actions.exitAfter()
+/*end00rule*/
+
+  }
+}

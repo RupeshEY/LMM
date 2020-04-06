@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<Entity
+  name="ClaimRecentView">
+  <Columns>
+    <Column
+      beanPath="ClaimRecentView.ClaimNumber"
+      name="ClaimNumber"/>
+    <Column
+      beanPath="ClaimRecentView.InsuredDenorm"
+      name="Insured"/>
+    <Column
+      beanPath="ClaimRecentView.ClaimantDenorm"
+      name="Claimant"/>
+    <Column
+      beanPath="ClaimRecentView.LossType"
+      name="ClaimLossType"/>
+  </Columns>
+  <DisplayName><![CDATA[uses gw.util.GosuStringUtil
+
+final var DISPLAY_LENGTH = 23;
+
+var contactName : String
+if (ClaimLossType == LossType.TC_WC) {
+  contactName = Claimant != null ? Claimant : Insured
+} else {
+  contactName = Insured != null ? Insured : Claimant
+}
+return gw.api.locale.DisplayKey.get("Java.ClaimSessionState.Label", 
+        ClaimNumber,
+        (null != contactName) ? GosuStringUtil.abbreviate(contactName, DISPLAY_LENGTH) : "")
+]]></DisplayName>
+</Entity>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table for setting the Number of contributing transactions for each taccount during 4.0 to Nozomi upgrade"
+  entity="TmpTAcctContribTxns"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="tmptacctcontribtxns"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.TmpTAcctContribTxns"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TmpTAcctContribTxnsImpl"/>
+  <column
+    desc="primary key of the taccount"
+    name="TAccountID"
+    nullok="false"
+    type="softentityreference"/>
+  <column
+    default="0"
+    desc="count of the # of contributing txns"
+    name="TmpNumContributingTxns"
+    nullok="false"
+    type="integer"/>
+  <index
+    desc="Each TAccount should should have at most one number describing its number of contributing transactions."
+    name="tmptaccttxnsu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="TAccountID"/>
+  </index>
+</entity>

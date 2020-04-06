@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="false"
+    canVisit="perm.Claim.viewsyncstatus(Claim)"
+    id="ClaimSyncStatusPopup"
+    parent="Claim(Claim)"
+    title="DisplayKey.get(&quot;JSP.SyncStatus.Title&quot;, Claim.ClaimNumber)">
+    <LocationEntryPoint
+      signature="ClaimSyncStatusPopup(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="gw.api.claim.ClaimSyncUtil.getStatistics(Claim)"
+      name="DestinationMessageStatisticsList"
+      recalculateOnRefresh="true"
+      type="gw.api.admin.DestinationMessageStatistics[]"/>
+    <Screen
+      id="ClaimSyncStatusScreen">
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          checkedRowAction="gw.api.claim.ClaimSyncUtil.retry(Claim, CheckedValue)"
+          flags="all DestinationSelected"
+          id="ClaimSyncStatusPopup_RetryButton"
+          iterator="SyncStatusLV.SyncStatusLV"
+          label="DisplayKey.get(&quot;JSP.SyncStatus.Toolbar.Retry&quot;)"
+          shortcut="R"
+          visible="perm.System.retrymessage"/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="gw.api.claim.ClaimSyncUtil.resync(CurrentLocation, Claim, CheckedValues,CheckedValuesErrors)"
+          flags="all DestinationSelected"
+          id="ClaimSyncStatusPopup_ResyncButton"
+          iterator="SyncStatusLV.SyncStatusLV"
+          label="DisplayKey.get(&quot;JSP.SyncStatus.Toolbar.Resync&quot;)"
+          shortcut="S"
+          visible="perm.System.resyncmessage"/>
+      </Toolbar>
+      <PanelRef
+        def="SyncStatusLV(DestinationMessageStatisticsList, Claim)"/>
+    </Screen>
+  </Popup>
+</PCF>

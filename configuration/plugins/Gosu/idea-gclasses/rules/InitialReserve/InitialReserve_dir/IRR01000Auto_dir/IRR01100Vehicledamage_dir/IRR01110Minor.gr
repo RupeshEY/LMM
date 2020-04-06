@@ -1,0 +1,38 @@
+package rules.InitialReserve.InitialReserve_dir.IRR01000Auto_dir.IRR01100Vehicledamage_dir
+
+@gw.rules.RuleName("IRR01110 - Minor")
+internal class IRR01110Minor {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.Segment==TC_AUTO_LOW && 
+!(exposure.Claim.State == TC_OPEN &&
+  exposure.Claim.Exposures != null &&
+  exposure.Claim.Exposures.length == 1 &&
+  exposure.Claim.NumTransactions == 1)
+   
+/* If the segment is auto_low AND 
+*   not (claim is open AND
+*        claim has exactly one exposure AND
+*        claim has exactly one transaction)
+*/
+    
+    
+    
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+if(exposure.Claim.applyFinancialHolds() == true) {
+  exposure.Claim.createNoteIfInitialReservesNotCreated()
+} else { 
+  exposure.createInitialReserve( 
+    TC_CLAIMCOST, TC_BODY, ScriptParameters.InitialReserve_AutoMinorVehicleDamageBody )
+}
+/*end00rule*/
+
+  }
+}

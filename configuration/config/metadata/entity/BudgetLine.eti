@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="BudgetLine"
+  exportable="true"
+  platform="false"
+  table="BudgetLine"
+  type="versionable">
+  <implementsInterface
+    iface="gw.cc.matter.entity.BudgetLine"
+    impl="com.guidewire.cc.domain.matter.impl.BudgetLineImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <typekey
+    desc="Budget line type."
+    name="BudgetLineType"
+    nullok="false"
+    typelist="LineCategory">
+    <keyfilters>
+      <keyfilter
+        name="Matter.MatterType"/>
+    </keyfilters>
+  </typekey>
+  <column
+    desc="Original budget estimate"
+    name="OriginalEstimate"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <foreignkey
+    columnName="MatterID"
+    desc="Related matter."
+    fkentity="Matter"
+    name="Matter"
+    nullok="false"/>
+  <index
+    desc="Enforce uniqueness, only one budget line of a particular type per matter"
+    name="BudgetLineIndex"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="MatterID"/>
+    <indexcol
+      keyposition="2"
+      name="BudgetLineType"/>
+  </index>
+</entity>

@@ -1,0 +1,12 @@
+Authority Limit Profiles,
+type,data-set,entityid,name,description,currency
+AuthorityLimitProfile,0,default_data:1,Adjuster,Adjuster default authority,usd
+AuthorityLimitProfile,0,default_data:2,Claims Supervisor,Claims supervisor default authority,usd
+AuthorityLimitProfile,0,default_data:3,Regional Supervisor,Regional supervisor default authority,usd
+type,data-set,entityid,user,profile,claim,limittype,coveragetype,costtype,limitamount
+AuthorityLimit,0,default_data:1,,default_data:1,,ctr,,,15000 usd
+AuthorityLimit,0,default_data:2,,default_data:1,,cptd,,,15000 usd
+AuthorityLimit,0,default_data:4,,default_data:2,,ctr,,,25000 usd
+AuthorityLimit,0,default_data:5,,default_data:2,,cptd,,,25000 usd
+AuthorityLimit,0,default_data:7,,default_data:3,,ctr,,,100000 usd
+AuthorityLimit,0,default_data:8,,default_data:3,,cptd,,,100000 usd

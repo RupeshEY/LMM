@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table used to store IDs of offsetting payments for voided/stopped checks, which should not be included in checkrpt grossamount values"
+  entity="TmpCheckRptIgnorePmts"
+  exportable="false"
+  extendable="false"
+  loadable="false"
+  platform="false"
+  table="tmpcheckrptignorepmts"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.financials.check.entity.TmpCheckRptIgnorePmts"
+    impl="com.guidewire.cc.domain.financials.check.impl.TmpCheckRptIgnorePmtsImpl"/>
+  <column
+    desc=""
+    exportable="false"
+    name="CheckID"
+    nullok="false"
+    type="softentityreference"/>
+  <column
+    desc=""
+    exportable="false"
+    name="OffsetPaymentID"
+    nullok="false"
+    type="softentityreference"/>
+  <index
+    desc="Improves performance of financials calculation, specifically in CheckRptQueryBuilder.buildPopulateGroupedCheckTempTableSQL()."
+    name="tmprptignorepmts1"
+    unique="false">
+    <indexcol
+      keyposition="1"
+      name="CheckID"/>
+  </index>
+</entity>

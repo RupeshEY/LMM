@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Table linking contacts to claims and exposures."
+  entity="ClaimContact"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="claimcontact"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.domain.persistence.core.KeyableBeanPublicMethods"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimContactImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimContactImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.RemoveCallback"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimContactImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.impl.ClaimContactInternal"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimContactImpl"/>
+  <implementsInterface
+    iface="gw.cc.claim.entity.ClaimContact"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimContactImpl"/>
+  <implementsInterface
+    iface="gw.api.contact.ContactHandle"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimContactImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimContactImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Links a contact to a claim. This entity also contains an array to the roles played by the contact on the claim.
+        Changes to the related Contact or the Roles array triggers validation.
+     
+
+    ]]></fulldescription>
+  <column
+    default="false"
+    desc="Indicates whether contact is prohibited with this contact."
+    name="ContactProhibited"
+    nullok="true"
+    type="bit"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Claim with which the contact is associated."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="ContactID"
+    desc="Contact associated with the claim or exposure."
+    fkentity="Contact"
+    importableagainstexistingobject="false"
+    name="Contact"
+    nullok="false"
+    triggersValidation="true"/>
+  <foreignkey
+    columnName="PolicyID"
+    desc="Policy with which the contact is associated."
+    exportable="false"
+    fkentity="Policy"
+    name="Policy"
+    nullok="true"/>
+  <array
+    arrayentity="ClaimContactRole"
+    desc="The roles that this claimcontact has."
+    name="Roles"
+    triggersValidation="true"/>
+  <column
+    createhistogram="true"
+    desc="Denorm field indicating whether or not this ClaimContact has the role of claimant."
+    exportable="false"
+    loadedByCallback="true"
+    name="ClaimantFlag"
+    nullok="true"
+    type="bit"/>
+  <searchColumn
+    desc="denormalization of contact name, to speed up search for claim by contact name"
+    name="ContactNameDenorm"
+    sourceColumn="NameDenorm"
+    sourceForeignKey="Contact"/>
+  <searchColumn
+    desc="denormalization of person first name, to speed up search for claim by person name"
+    name="PersonFirstNameDenorm"
+    sourceColumn="FirstNameDenorm"
+    sourceForeignKey="Contact"
+    sourceSubtype="Person"/>
+  <searchColumn
+    desc="denormalization of person last name, to speed up search for claim by person name"
+    name="PersonLastNameDenorm"
+    sourceColumn="LastNameDenorm"
+    sourceForeignKey="Contact"
+    sourceSubtype="Person"/>
+  <events>
+    <event
+      description="Fired when the contact of a claim contact changes."
+      name="ClaimContactContactChanged"/>
+  </events>
+  <index
+    desc="Index used for claim exception query that finds all modified claim contacts and claim contact roles"
+    name="claimcontact3"
+    trackUsage="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="UpdateTime"/>
+  </index>
+  <index
+    desc="Covering index for search by name"
+    name="CompanyName"
+    trackUsage="true"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ContactNameDenorm"/>
+    <indexcol
+      keyposition="2"
+      name="ClaimantFlag"/>
+    <indexcol
+      keyposition="3"
+      name="Retired"/>
+    <indexcol
+      keyposition="4"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="5"
+      name="ID"/>
+  </index>
+  <index
+    desc="Covering index for getting the claim contact roles"
+    expectedtobecovering="true"
+    name="claimcontact2"
+    trackUsage="true"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ContactID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="ID"/>
+  </index>
+  <!-- <index
+    xmlns=""
+    desc="ClaimContacts may not share Contacts."
+    name="claimcontact4"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ContactID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+  </index>  This index was removed in changelist 139079 and replaced by db checks in 139343. According to the changelist
+    comments, the index was causing performance problems. -->
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.RelatedContactDBCheckBuilder"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.UniqueClaimContactDBCheckBuilder"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.ClaimantFlagDenormDBCheckBuilder"/>
+</entity>

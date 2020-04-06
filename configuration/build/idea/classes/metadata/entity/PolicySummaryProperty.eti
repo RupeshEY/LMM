@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Summary information about a property on a policy summary."
+  entity="PolicySummaryProperty"
+  supertype="PolicySummaryRiskUnit">
+  <implementsInterface
+    iface="gw.cc.policy.entity.PolicySummaryProperty"
+    impl="com.guidewire.cc.domain.policy.impl.PolicySummaryPropertyImpl"/>
+  <column
+    desc="Number of the property on the policy."
+    name="PropertyNumber"
+    nullok="false"
+    type="integer"/>
+  <column
+    desc="Building number of the property."
+    name="BuildingNumber"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Location number of the property."
+    name="Location"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Other notes on the property."
+    name="Notes"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Description."
+    name="Description"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    deprecated="true"
+    desc="Deprecated, please use AddressLine1, AddressLine2 instead"
+    name="Address"
+    nullok="true"
+    type="addressline"/>
+  <column
+    name="City"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    name="CityKanji"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="First line of mailing address"
+    name="AddressLine1"
+    nullok="true"
+    type="addressline"/>
+  <column
+    desc="Second line of mailing address"
+    name="AddressLine2"
+    nullok="true"
+    type="addressline"/>
+  <column
+    desc="First line of mailing address Kanji"
+    name="AddressLine1Kanji"
+    nullok="true"
+    type="addressline"/>
+  <column
+    desc="Second line of mailing address Kanji"
+    name="AddressLine2Kanji"
+    nullok="true"
+    type="addressline"/>
+</subtype>

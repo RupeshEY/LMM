@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<subtype
+  abstract="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessage_Ext"
+  desc="Supertype for all ECF Message entities"
+  supertype="LMMessage_Ext">
+  <column
+    desc="Insured Id come with in the message"
+    name="InsuredId"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="30"/>
+  </column>
+  <column
+    desc="Transaction reference for the Transaction this message belongs to"
+    name="TR"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    fkentity="ECFMessageResponseAcknowledgement_Ext"
+    name="ResponseAcknowledgement"
+    nullok="true"/>
+  <typekey
+    desc="The three-digit ECF Code specifying the type of Claim"
+    name="ClaimType"
+    nullok="true"
+    typelist="ECFClaimTypeCode_Ext"/>
+  <typekey
+    desc="The role the receiver had in this message"
+    name="Role"
+    nullok="true"
+    typelist="ECFParticipantFunction_Ext"/>
+</subtype>

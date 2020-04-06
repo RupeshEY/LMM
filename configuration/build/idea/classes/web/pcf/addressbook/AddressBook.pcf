@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    id="AddressBook"
+    title="DisplayKey.get(&quot;Web.TabBar.AddressBook&quot;)">
+    <LocationEntryPoint
+      signature="AddressBook()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.AddressBook.MenuLinks.Search&quot;)"
+      location="AddressBookSearch()"/>
+  </LocationGroup>
+</PCF>

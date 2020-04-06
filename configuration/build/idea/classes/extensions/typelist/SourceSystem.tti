@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Policy system from which line of business, coverage, etc. codes are sourced"
+  name="SourceSystem">
+  <typecode
+    code="PC"
+    desc="PolicyCenter product model codes"
+    name="PolicyCenter"/>
+  <typecode
+    code="PC-PEL"
+    desc="Product model codes for PolicyCenter product extension library products"
+    name="PolicyCenter PELs"/>
+  <typecode
+    code="PC-Custom"
+    desc="Codes related to PolicyCenter but not generated automatically from the product model"
+    name="PolicyCenter Custom"/>
+  <typecode
+    code="Ext"
+    desc="Non-specific external policy system other than PolicyCenter"
+    name="External"/>
+</typelist>

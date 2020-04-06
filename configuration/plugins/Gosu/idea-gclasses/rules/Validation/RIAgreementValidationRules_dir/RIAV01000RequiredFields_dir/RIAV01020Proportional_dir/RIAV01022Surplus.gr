@@ -1,0 +1,26 @@
+package rules.Validation.RIAgreementValidationRules_dir.RIAV01000RequiredFields_dir.RIAV01020Proportional_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("RIAV01022 - Surplus")
+internal class RIAV01022Surplus {
+  static function doCondition(rIAgreement : entity.RIAgreement) : boolean {
+    
+/*start00rule*/
+return rIAgreement typeis SurplusRITreaty 
+/*end00rule*/
+
+  }
+
+  static function doAction(rIAgreement : entity.RIAgreement, actions : gw.rules.Action) {
+
+/*start00rule*/
+if(rIAgreement.AttachmentPoint == null) {
+  rIAgreement.rejectField("AttachmentPoint", TC_NEWLOSS, 
+    DisplayKey.get("Rules.Validation.RIAgreement.RequiredFieldMustNotBeNull", "AttachmentPoint", (typeof rIAgreement).DisplayName, rIAgreement.DisplayName), 
+    null, null)
+}
+/*end00rule*/
+
+  }
+}

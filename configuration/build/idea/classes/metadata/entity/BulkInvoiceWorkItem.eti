@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Work item to process bulk invoice items"
+  entity="BulkInvoiceWorkItem"
+  final="true"
+  loadable="false"
+  platform="false"
+  table="bulkinvoiceworkitem"
+  type="keyable">
+  <implementsInterface
+    iface="gw.cc.financials.bulkpay.entity.BulkInvoiceWorkItem"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceWorkItemImpl"/>
+  <implementsEntity
+    name="WorkItem"/>
+  <fulldescription><![CDATA[
+        Represents a unit of work to process a bulk invoice item for submission.
+        A work item has as its target a bulk invoice item for which a placeholder
+        check needs to be created and submitted for approval, or marked as not
+        valid if there are problems with it.
+    ]]></fulldescription>
+  <typekey
+    desc="The type of job for which this bulk invoice item is being processed."
+    getterScriptability="hidden"
+    name="JobType"
+    nullok="false"
+    setterScriptability="hidden"
+    typelist="BulkInvoiceJobType"/>
+  <foreignkey
+    columnName="BulkInvoiceItemID"
+    desc="The bulk invoice item to be processed."
+    fkentity="BulkInvoiceItem"
+    getterScriptability="hidden"
+    name="BulkInvoiceItem"
+    nullok="false"
+    setterScriptability="hidden"/>
+</entity>

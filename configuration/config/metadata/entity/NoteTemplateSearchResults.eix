@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="NoteTemplateSearchResults">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.note.impl.NoteTemplateSearchResultsCoreExtMethods"
+    impl="com.guidewire.cc.domain.note.impl.NoteTemplateSearchResultsCoreExtMethodsImpl"/>
+  <description><![CDATA[
+            Array of search results that match the specified criteria defined in NoteTemplateSearchCriteria.
+    ]]></description>
+  <column
+    desc="The type of the Loss"
+    name="LossTypes"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+</internalExtension>

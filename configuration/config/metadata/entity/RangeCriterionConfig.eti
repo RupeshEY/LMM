@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="RangeCriterionConfig"
+  final="true"
+  supertype="MultiArgCriterionConfig">
+  <implementsInterface
+    iface="com.guidewire.cc.system.dynaction.config.RangeValues"
+    impl="com.guidewire.cc.system.dynaction.config.RangeValuesDelegate"/>
+  <column
+    default="true"
+    name="StartInclusive"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="true"
+    name="EndInclusive"
+    nullok="false"
+    type="bit"/>
+</subtype>

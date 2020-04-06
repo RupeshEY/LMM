@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="gw.api.snapshot.ClaimSnapshotUtil.hasSnapshot(Claim) and perm.Claim.view(Claim) and perm.System.viewclaimbasics and perm.System.viewsnapshot"
+    id="ClaimSnapshotLossDetails"
+    title="DisplayKey.get(&quot;JSP.ClaimSnapshot.ClaimMenu.LossDetails&quot;)">
+    <LocationEntryPoint
+      signature="ClaimSnapshotLossDetails(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="gw.api.snapshot.ClaimSnapshotUtil.getSnapshot(Claim)"
+      name="Snapshot"
+      type="dynamic.Dynamic"/>
+    <Variable
+      initialValue="gw.api.snapshot.ClaimSnapshotUtil.getPageVersion(Snapshot)"
+      name="Version"
+      type="String"/>
+    <ScreenRef
+      def="ClaimSnapshotLossDetailsScreen(Claim, Snapshot)"
+      mode="Version"/>
+  </Page>
+</PCF>

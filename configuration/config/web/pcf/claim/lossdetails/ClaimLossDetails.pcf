@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCommit="ClaimLossDetailsForward.go(Claim)"
+    beforeCommit="gw.api.validation.ValidationUtil.clearValidationErrors(); Claim.instructNewServiceRequests(); Claim.validateUniqueFullDenialReasons();"
+    canEdit="perm.Claim.edit(Claim)"
+    canVisit="perm.Claim.view(Claim) and perm.System.viewclaimbasics and (Claim.State != ClaimState.TC_DRAFT)"
+    handlesValidationIssue="VALUE typeis entity.Claim or VALUE typeis entity.Incident"
+    id="ClaimLossDetails"
+    startInEditMode="fromCompensationActivity"
+    title="DisplayKey.get(&quot;Web.Claim.LossDetails&quot;)"
+    validationParameter="Claim">
+    <LocationEntryPoint
+      signature="ClaimLossDetails(Claim : Claim)"/>
+    <LocationEntryPoint
+      signature="ClaimLossDetails(Claim : Claim, fromCompensationActivity: boolean)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="libraries.ISO.showSubmitInfoMessage()"
+      name="messageShown"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="false"
+      name="fromCompensationActivity"
+      type="boolean"/>
+    <Screen
+      id="ClaimLossDetailsScreen">
+      <Toolbar>
+        <EditButtons/>
+        <ToolbarButton
+          action="gw.api.claim.ClaimUtil.sendToISO(Claim)"
+          available="Claim.ISOButtonsAvailable"
+          hideIfEditable="true"
+          id="ClaimLossDetails_SendToISOButton"
+          label="DisplayKey.get(&quot;Web.ClaimLossDetails.SendToISO&quot;)"
+          visible="Claim.ISOButtonsVisible"/>
+        <ToolbarButton
+          action="null"
+          available="Claim.ISOButtonsAvailable"
+          hideIfEditable="true"
+          id="ClaimLossDetails_RefreshButton"
+          label="DisplayKey.get(&quot;Web.ClaimLossDetails.Refresh&quot;)"
+          visible="Claim.ISOButtonsVisible"/>
+      </Toolbar>
+      <PanelRef
+        def="LossDetailsPanelSet(Claim)"
+        mode="Claim.Policy.PolicyType"/>
+    </Screen>
+  </Page>
+</PCF>

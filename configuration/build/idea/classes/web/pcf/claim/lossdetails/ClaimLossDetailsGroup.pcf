@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="(perm.Claim.view(Claim) and (perm.System.viewclaimbasics or perm.ClaimAssociation.view))"
+    id="ClaimLossDetailsGroup"
+    title="DisplayKey.get(&quot;Web.Claim.LossDetails&quot;)">
+    <LocationEntryPoint
+      signature="ClaimLossDetailsGroup(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimLossDetails.ClaimMenu.LossDetails&quot;)"
+      location="ClaimLossDetails(Claim)"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimAssociations.Title&quot;)"
+      location="ClaimAssociations(Claim)"
+      shortcut="S"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.SIDetails.Title&quot;)"
+      location="SIDetails(Claim)"
+      shortcut="N"/>
+    <LocationRefIterator
+      elementName="Exposure"
+      value="Claim.OrderedExposures"
+      valueType="entity.Exposure[]"
+      visible="Claim.ExposureListVisibleInLossDetails and (Claim.LossType != LossType.TC_WC)">
+      <LocationRef
+        label="DisplayKey.get(&quot;JSP.ClaimPageLinks.DynamicPageLinks.Exposure&quot;, Exposure.ExposureType)"
+        location="LossDetailsExposureDetail(Exposure)"/>
+    </LocationRefIterator>
+  </LocationGroup>
+</PCF>

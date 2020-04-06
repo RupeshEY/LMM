@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="TripExpenseDelegate">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.TripExpenseDelegate"/>
+  <fulldescription><![CDATA[Fields common to TripSegment, AddnlTripSegment, TripAccommodation and AddnlTripAccommodation
+    ]]></fulldescription>
+  <column
+    desc="The starting date/time for this expense"
+    name="StartDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The ending date/time for this expense"
+    name="EndDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Original invoiced amount"
+    name="PaidAmount"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Agent fees incurred"
+    name="AgentFees"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Other fees incurred"
+    name="OtherFees"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <typekey
+    desc="Approve, deny or review an expense"
+    name="Assessment"
+    nullok="true"
+    typelist="AssessmentAction"/>
+  <column
+    desc="Reasons for denial"
+    name="ReasonForDenial"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="250"/>
+  </column>
+</delegate>

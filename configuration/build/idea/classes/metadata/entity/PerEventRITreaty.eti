@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Per event reinsurance treaty agreement."
+  entity="PerEventRITreaty"
+  supertype="NonProportionalRIAgreement">
+  <implementsInterface
+    iface="gw.cc.reinsurance.entity.PerEventRITreaty"
+    impl="com.guidewire.cc.domain.reinsurance.impl.PerEventRITreatyImpl"/>
+</subtype>

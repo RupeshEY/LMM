@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<subtype
+  abstract="true"
+  xmlns="http://guidewire.com/datamodel"
+  desc="Abstract expression fragment representing an expression with an iterable that has its elements filtered down by a condition"
+  entity="FilteredIterableExpressionFragment"
+  platform="true"
+  supertype="ConditionExpressionFragment">
+  <implementsInterface
+    iface="com.guidewire.bizrules.codegenerator.GosuTextBuilder"
+    impl="com.guidewire.bizrules.codegenerator.FilteredIterableExpressionFragmentGosuTextBuilder"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.codegenerator.FilteredIterableExpressionFragmentValidationMethods"
+    impl="com.guidewire.bizrules.codegenerator.FilteredIterableExpressionFragmentGosuTextBuilder"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.ExpressionFragmentDomainMethods"
+    impl="com.guidewire.bizrules.domain.FilteredIterableExpressionFragmentImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.FilteredIterableExpressionFragmentDomainMethods"
+    impl="com.guidewire.bizrules.domain.FilteredIterableExpressionFragmentImpl"/>
+  <onetoone
+    fkentity="FilteredIterableExpressionFragmentJoin"
+    getterScriptability="hidden"
+    linkField="FilteredIterableExpressionFragment"
+    name="IterableExpressionJoin"
+    nullok="true"
+    setterScriptability="hidden"/>
+</subtype>

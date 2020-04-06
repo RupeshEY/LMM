@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="FNOLWizard_FindPolicyScreen">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Variable
+      initialValue="getPageMode()"
+      name="initialPageMode"
+      type="boolean"/>
+    <Variable
+      initialValue="false"
+      name="resetPending"
+      type="boolean"/>
+    <Toolbar>
+      <WizardButtons
+        defaultButton="none"/>
+    </Toolbar>
+    <DetailViewPanel>
+      <InputColumn>
+        <BooleanRadioInput
+          confirmMessage="DisplayKey.get(&quot;Java.Validation.FindPolicyScreen.ScreenMode&quot;)"
+          editable="perm.Policy.createunverifiedpolicy"
+          falseLabel="DisplayKey.get(&quot;Web.FindPolicyScreen.ScreenMode.False.Label&quot;)"
+          id="ScreenMode"
+          labelAbove="true"
+          showConfirmMessage="Claim.Policy != null"
+          trueLabel="DisplayKey.get(&quot;Web.FindPolicyScreen.ScreenMode.True.Label&quot;)"
+          value="UseFindPolicy"
+          visible="perm.Policy.createunverifiedpolicy">
+          <PostOnChange
+            onChange="resetIfResetPending()"/>
+        </BooleanRadioInput>
+      </InputColumn>
+    </DetailViewPanel>
+    <PanelDivider
+      visible="perm.Policy.createunverifiedpolicy"/>
+    <PanelRef
+      def="FNOLWizardFindPolicyPanelSet(Claim, Wizard)"
+      mode="Wizard.PageMode? &quot;Search&quot; : &quot;Create&quot;"/>
+    <Code><![CDATA[public function getPageMode() : boolean{
+  if (!perm.Policy.createunverifiedpolicy) {
+    Wizard.PageMode = true  
+    return true
+  }
+  else {
+    return Wizard.PageMode  
+  }
+}
+
+property get UseFindPolicy() : boolean {
+  return Wizard.PageMode
+}
+
+property set UseFindPolicy(newValue : boolean) {
+  if (Wizard.PageMode != newValue) {
+    resetPending = true
+  }
+}
+
+function resetIfResetPending() {
+  if (resetPending) {
+    var oldMode = getPageMode()
+    (CurrentLocation as pcf.api.Wizard).cancel()
+    pcf.FNOLWizard.go(null, null, null, !oldMode)
+  }
+}]]></Code>
+  </Screen>
+</PCF>

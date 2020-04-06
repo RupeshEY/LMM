@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="LargeLossThreshold"
+  exportable="true"
+  platform="false"
+  table="largelossthreshold"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.LargeLossThreshold"
+    impl="com.guidewire.cc.domain.claim.impl.LargeLossThresholdImpl"/>
+  <fulldescription><![CDATA[This reference table contains the information necessary to determine whether a claim has exceeded the
+        large loss threshold notification limit based upon the claim's policy type.
+    ]]></fulldescription>
+  <typekey
+    desc="Type of policy."
+    name="PolicyType"
+    nullok="false"
+    typelist="PolicyType"/>
+  <column
+    desc="Large Loss threshold value."
+    name="ThresholdValue"
+    nullok="true"
+    type="nonnegativemoney"/>
+  <typekey
+    desc="Type of notification."
+    name="NotificationType"
+    nullok="false"
+    typelist="LargeLossNotificationType"/>
+</entity>

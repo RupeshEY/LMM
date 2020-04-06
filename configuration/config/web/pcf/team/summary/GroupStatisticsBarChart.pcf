@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ChartPanel
+    categoryLabelOrientation="Down45"
+    height="340"
+    id="GroupStatisticsBarChart"
+    type="StackedBar"
+    width="800">
+    <Require
+      name="StatisticsList"
+      type="gw.api.statistics.Statistics[]"/>
+    <Require
+      name="Group"
+      type="Group"/>
+    <DomainAxis
+      label="&quot;&quot;"
+      type="Category"/>
+    <RangeAxis
+      label="&quot;&quot;"
+      type="Number"
+      useWholeNumbers="true"/>
+    <DataSeries
+      categoryLabel="value.Name"
+      dataValueType="gw.api.statistics.Statistics"
+      dataValues="StatisticsList"
+      label="DisplayKey.get(&quot;Java.Desktop.Team.Statistics.Caseload.Tracking&quot;)"
+      value="value.OpenClaims - value.FlaggedClaims"/>
+    <DataSeries
+      categoryLabel="value.Name"
+      dataValueType="gw.api.statistics.Statistics"
+      dataValues="StatisticsList"
+      label="DisplayKey.get(&quot;Java.Desktop.Team.Statistics.Caseload.Flagged&quot;)"
+      value="value.FlaggedClaims"/>
+  </ChartPanel>
+</PCF>

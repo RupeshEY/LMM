@@ -1,0 +1,22 @@
+package rules.Workplan.ClaimWorkplan_dir.CLW00100NotFirstandFinal_dir.CLW05000Propertyclaims_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("CLW05300 - Verify Coverage")
+internal class CLW05300VerifyCoverage {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.Policy.PolicyType == TC_HOMEOWNERS
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.createActivityFromPattern(
+    null, ActivityPattern.finder.getActivityPatternByCode("coverage"))
+/*end00rule*/
+
+  }
+}

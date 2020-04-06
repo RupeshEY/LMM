@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Denotes changes in the employee's work capacity."
+  entity="WorkStatus"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="workstatus"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.WorkStatus"
+    impl="com.guidewire.cc.domain.exposure.impl.WorkStatusImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Date when status changed to this entity's WorkCapacity."
+    name="StatusDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Additional comments."
+    name="Comments"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    desc="Work capacity status for the employee."
+    name="Status"
+    nullok="true"
+    typelist="WorkCapacity"/>
+  <column
+    desc="Last day at this WorkCapacity status. Null indicates current status."
+    name="StatusEndDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Amount of wages per week post-injury."
+    name="WageAmountPostInjury"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Number of days worked per week."
+    name="NumDaysWorked"
+    nullok="true"
+    type="daysworkedweek"/>
+  <column
+    desc="Number of hours worked per week during this period"
+    name="NumHoursWorked"
+    nullok="true"
+    type="hoursworkedday"/>
+  <column
+    desc="The date the employee last worked. Utilized if WorkCapacity == Off-work"
+    name="LastWorkedDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Indicates if the employee was paid in full for the Last day worked. Utilized if WorkCapacity == Off-work"
+    name="PaidFullForLastWorked"
+    nullok="true"
+    type="bit"/>
+  <foreignkey
+    columnName="EmploymentDataID"
+    desc="The related employee."
+    exportable="false"
+    fkentity="EmploymentData"
+    name="EmploymentData"
+    nullok="true"/>
+</entity>

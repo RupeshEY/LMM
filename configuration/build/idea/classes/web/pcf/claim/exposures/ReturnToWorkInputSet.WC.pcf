@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="ReturnToWorkInputSet"
+    mode="WC">
+    <Require
+      name="Injury"
+      type="InjuryIncident"/>
+    <Require
+      name="DetailedView"
+      type="Boolean"/>
+    <Variable
+      initialValue="gw.api.util.DateUtil.currentDate()"
+      name="Today"
+      type="java.util.Date"/>
+    <BooleanRadioInput
+      editable="true"
+      id="ReturnToModWorkValid"
+      label="DisplayKey.get(&quot;NVV.Incident.Injury.RTW.ReturnToModWorkValid&quot;)"
+      value="Injury.ReturnToModWorkValid"
+      visible="DetailedView">
+      <PostOnChange/>
+    </BooleanRadioInput>
+    <DateInput
+      editable="true"
+      hideIfReadOnly="true"
+      id="ReturnToModWorkDate"
+      label="DisplayKey.get(&quot;NVV.Incident.Injury.RTW.ReturnToModWorkDate&quot;)"
+      validationExpression="((Injury.ReturnToModWorkActual and Injury.ReturnToModWorkDate &gt; gw.api.util.DateUtil.currentDate()) ?  DisplayKey.get(&quot;Warning.Date.RTW.IfActualForbidFuture&quot;) : null)"
+      value="Injury.ReturnToModWorkDate"
+      visible="Injury.ReturnToModWorkValid">
+      <PostOnChange
+        onChange="if (Injury.ReturnToModWorkDate.compareIgnoreTime(Today) == -1) {Injury.ReturnToModWorkActual = true} else if (Injury.ReturnToModWorkDate.compareIgnoreTime(Today) == 0) {Injury.ReturnToModWorkActual = null}  else if (Injury.ReturnToModWorkDate.compareIgnoreTime(Today) == 1) {Injury.ReturnToModWorkActual = false}"/>
+    </DateInput>
+    <BooleanRadioInput
+      editable="true"
+      falseLabel="DisplayKey.get(&quot;NVV.Incident.Injury.RTW.Projected&quot;)"
+      hideIfReadOnly="true"
+      id="ReturnToModWorkActual"
+      label="DisplayKey.get(&quot;NVV.Incident.Injury.RTW.ReturnToModWorkActual&quot;)"
+      required="Injury.ReturnToModWorkDate != null"
+      trueLabel="DisplayKey.get(&quot;NVV.Incident.Injury.RTW.Actual&quot;)"
+      value="Injury.ReturnToModWorkActual"
+      visible="Injury.ReturnToModWorkValid"/>
+    <TextInput
+      hideIfEditable="true"
+      id="RTModWReadOnlyMSG"
+      label="DisplayKey.get(&quot;NVV.Incident.Injury.RTW.ReturnToModWorkDate&quot;)"
+      value="(((Injury.ReturnToModWorkDate== null ? null :( Injury.ReturnToModWorkActual) ? Injury.ReturnToModWorkDate.format( &quot;short&quot; ) : DisplayKey.get(&quot;NVV.Incident.Injury.RTW.Msg.Projected&quot;, Injury.ReturnToModWorkDate.format( &quot;short&quot; ), (-1 * Injury.ReturnToModWorkDate.DaysSince) ))))"
+      visible="Injury.ReturnToModWorkValid and (CurrentLocation.InEditMode != true)"/>
+    <InputDivider
+      hideIfReadOnly="true"
+      id="RTWDivider"/>
+    <BooleanRadioInput
+      editable="true"
+      id="ReturnToWorkValid"
+      label="DisplayKey.get(&quot;NVV.Incident.Injury.RTW.ReturnToWorkValid&quot;)"
+      value="Injury.ReturnToWorkValid"
+      visible="DetailedView">
+      <PostOnChange/>
+    </BooleanRadioInput>
+    <DateInput
+      editable="true"
+      hideIfReadOnly="true"
+      id="ReturnToWorkDate"
+      label="DisplayKey.get(&quot;NVV.Incident.Injury.RTW.ReturnToWorkDate&quot;)"
+      validationExpression="((Injury.ReturnToWorkActual and Injury.ReturnToWorkDate &gt; gw.api.util.DateUtil.currentDate()) ?  DisplayKey.get(&quot;Warning.Date.RTW.IfActualForbidFuture&quot;) : null)"
+      value="Injury.ReturnToWorkDate"
+      visible="Injury.ReturnToWorkValid">
+      <PostOnChange
+        onChange="if (Injury.ReturnToWorkDate.compareIgnoreTime(Today) == -1) {Injury.ReturnToWorkActual = true} else if (Injury.ReturnToWorkDate.compareIgnoreTime(Today) == 0) {Injury.ReturnToWorkActual = null}  else if (Injury.ReturnToWorkDate.compareIgnoreTime(Today) == 1) {Injury.ReturnToWorkActual = false}"/>
+    </DateInput>
+    <BooleanRadioInput
+      editable="true"
+      falseLabel="DisplayKey.get(&quot;NVV.Incident.Injury.RTW.Projected&quot;)"
+      hideIfReadOnly="true"
+      id="ReturnToWorkActual"
+      label="DisplayKey.get(&quot;NVV.Incident.Injury.RTW.ReturnToWorkActual&quot;)"
+      required="Injury.ReturnToWorkDate != null"
+      trueLabel="DisplayKey.get(&quot;NVV.Incident.Injury.RTW.Actual&quot;)"
+      value="Injury.ReturnToWorkActual"
+      visible="Injury.ReturnToWorkValid"/>
+    <TextInput
+      hideIfEditable="true"
+      id="RTWReadOnlyMSG"
+      label="DisplayKey.get(&quot;NVV.Incident.Injury.RTW.ReturnToWorkDate&quot;)"
+      value="(((Injury.ReturnToWorkDate== null ? null :( Injury.ReturnToWorkActual) ? Injury.ReturnToWorkDate.format( &quot;short&quot; ) : DisplayKey.get(&quot;NVV.Incident.Injury.RTW.Msg.Projected&quot;, Injury.ReturnToWorkDate.format( &quot;short&quot; ), (-1 * Injury.ReturnToWorkDate.DaysSince) ))))"
+      visible="Injury.ReturnToWorkValid and (CurrentLocation.InEditMode != true)"/>
+  </InputSet>
+</PCF>

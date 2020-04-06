@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+          id="AdditionalInfoInputSet"
+          mode="Person">
+    <!-- NOTE: This shared section requires a gw.api.contact.ContactHandle, rather than a Contact, because it's
+    possible for some actions on a contact detail screen to fundamentally change the contact. In particular, syncing
+    a contact that leads to a downcast of that contact to a more specific subtype causes the original contact to
+    become invalid. To protect against this, contacts on shared sections should be wrapped in a ContactHandle. If the
+    contact is fundamentally changed, then only the handle needs to be updated, and all existing references will see
+    the new contact.
+
+    As a shortcut for "contactHandle.Contact", this shared section defines a read-only property which can be used to
+    access the most current value of the contact. -->
+    <Require
+      name="contactHandle"
+      type="gw.api.contact.ContactHandle"/>
+    <Require
+      name="claimContact"
+      type="ClaimContact"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <TypeKeyInput
+      editable="true"
+      id="IDType"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.IDType&quot;)"
+      required="false"
+      value="Person.PersonClaimantIDType"
+      valueType="typekey.ClaimantIDType"
+      visible="claim.showClaimantInfo(Person, claimContact)">
+      <PostOnChange
+        target="AdditionalInfoInputSet"/>
+    </TypeKeyInput>
+    <PrivacyInput
+      editable="true"
+      encryptionExpression="Person.maskTaxId(VALUE)"
+      id="TaxID"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.TaxID&quot;)"
+      required="false"
+      value="Person.TaxID"
+      visible="Person.PersonClaimantIDType == ClaimantIDType.TC_S"/>
+    <BooleanRadioInput
+      editable="true"
+      id="SSNReleaseAuthorized"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.SSNReleaseAuthorized&quot;)"
+      required="false"
+      value="Person.SSNReleaseAuthorized"
+      visible="claim.showClaimantInfo(Person, claimContact) and Person.PersonClaimantIDType == ClaimantIDType.TC_S"/>
+    <TextInput
+      editable="true"
+      id="VisaNumber"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.VisaNumber&quot;)"
+      required="false"
+      value="Person.VisaNumber"
+      visible="claim.showClaimantInfo(Person, claimContact) and Person.PersonClaimantIDType == ClaimantIDType.TC_E"/>
+    <TextInput
+      editable="true"
+      id="GreenCardNumber"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.GreenCardNumber&quot;)"
+      required="false"
+      value="Person.GreenCardNumber"
+      visible="claim.showClaimantInfo(Person, claimContact) and Person.PersonClaimantIDType == ClaimantIDType.TC_G"/>
+    <TextInput
+      editable="true"
+      id="PassportNumber"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.PassportNumber&quot;)"
+      required="false"
+      value="Person.PassportNumber"
+      visible="claim.showClaimantInfo(Person, claimContact) and Person.PersonClaimantIDType == ClaimantIDType.TC_P"/>
+    <TextInput
+      editable="true"
+      id="JurisdictionAssignedID"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.JurisdictionAssignedID&quot;)"
+      required="false"
+      value="Person.JurisdictionAssignedID"
+      visible="claim.showClaimantInfo(Person, claimContact) and Person.PersonClaimantIDType == ClaimantIDType.TC_A"/>
+    <TextInput
+      id="EmployeeSecurityID"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.EmployeeSecurityID&quot;)"
+      required="false"
+      value="Person.EmployeeSecurityID"
+      visible="claim.showClaimantInfo(Person, claimContact)"/>
+    <TextInput
+      editable="true"
+      helpText="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.TaxExemptionsEntitled.Tooltip&quot;)"
+      id="TaxExemptionsEntitled"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.TaxExemptionsEntitled&quot;)"
+      required="false"
+      value="Person.TaxExemptionsEntitled"
+      valueType="java.math.BigDecimal"
+      visible="claim.showClaimantInfo(Person, claimContact)"/>
+    <TypeKeyInput
+      editable="true"
+      id="TaxFilingStatus"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.TaxFilingStatus&quot;)"
+      value="Person.TaxFilingStatus"
+      valueType="typekey.TaxFilingStatusType"/>
+    <DateInput
+      editable="true"
+      id="DateOfBirth"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.DateOfBirth&quot;)"
+      validationExpression="(Person.DateOfBirth == null or Person.DateOfBirth &lt;= gw.api.upgrade.Coercions.makeDateFrom(&quot;today&quot;)) ? null : DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.DateOfBirth.FutureError&quot;)"
+      value="Person.DateOfBirth"/>
+    <TypeKeyInput
+      editable="true"
+      id="Gender"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.Gender&quot;)"
+      value="Person.Gender"
+      valueType="typekey.GenderType"/>
+    <TypeKeyInput
+      editable="true"
+      id="MaritalStatus"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.MaritalStatus&quot;)"
+      value="Person.MaritalStatus"
+      valueType="typekey.MaritalStatus"/>
+    <TextInput
+      editable="true"
+      helpText="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.EducationLevel.Tooltip&quot;)"
+      id="EducationLevel"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.EducationLevel&quot;)"
+      required="false"
+      value="Person.EducationLevel"
+      visible="claim.showClaimantInfo(Person, claimContact)"/>
+    <ClaimContactInput
+      claim="claim"
+      editable="true"
+      forceContactSubtype="entity.Person.Type"
+      id="Guardian"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.Guardian&quot;)"
+      newContactMenu="ClaimNewPersonOnlyPickerMenuItemSet"
+      parentContact="Person"
+      value="Person.Guardian"
+      valueRange="claim.RelatedPersonArray"
+      valueType="entity.Person"/>
+    <TypeKeyInput
+      editable="true"
+      id="Currency"
+      label="DisplayKey.get(&quot;Financials.Multicurrency.PreferredCurrency&quot;)"
+      value="Person.PreferredCurrency"
+      valueType="typekey.Currency"
+      visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()"/>
+    <InputDivider/>
+    <Label
+      label="DisplayKey.get(&quot;Web.ContactDetail.Company&quot;)"/>
+    <TextInput
+      editable="true"
+      id="Occupation"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Company.Occupation&quot;)"
+      value="Person.Occupation"/>
+    <ClaimContactInput
+      claim="claim"
+      editable="true"
+      id="Organization"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Company.Organization&quot;)"
+      parentContact="Person"
+      value="Person.Employer"
+      valueRange="claim.RelatedCompanyArray"
+      valueType="entity.Company"/>
+    <Code><![CDATA[
+property get Person() : Person { return contactHandle.Contact as Person; }
+    ]]></Code>
+  </InputSet>
+</PCF>

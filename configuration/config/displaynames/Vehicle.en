@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<Entity
+  name="Vehicle">
+  <Columns>
+    <Column
+      beanPath="Vehicle.Year"
+      name="year"
+      sortOrder="1"/>
+    <Column
+      beanPath="Vehicle.Make"
+      name="make"
+      sortOrder="2"/>
+    <Column
+      beanPath="Vehicle.Model"
+      name="model"
+      sortOrder="3"/>
+    <Column
+      beanPath="Vehicle.LicensePlate"
+      name="licensePlate"
+      sortOrder="4"/>
+    <Column
+      beanPath="Vehicle.State"
+      name="state"
+      sortOrder="5"/>
+  </Columns>
+  <DisplayName><![CDATA[var sb = new java.lang.StringBuffer();
+if (year != null) {
+var strYear = year + " ";
+  sb.append(strYear);
+}
+if (make != null and make.length() > 0) {
+  sb.append(make).append(" ");
+}
+if (model != null and model.length() > 0) {
+  sb.append(model).append(" ");
+}
+if (licensePlate != null and licensePlate.length() > 0) {
+  sb.append("(").append(licensePlate);
+  if (state != null) {
+    sb.append(" / ").append(state.DisplayName);
+  }
+  sb.append(")");
+}
+
+var retString = sb.toString();
+if (gw.api.util.StringUtil.length( retString ) == 0) {
+  retString = gw.api.locale.DisplayKey.get("Java.DisplayName.NewlyCreated");
+}
+
+return retString;]]></DisplayName>
+  <DisplayName
+    type="short"><![CDATA[var sb = new java.lang.StringBuffer();
+if (year != null) {
+var strYear = year + " ";
+  sb.append(strYear);
+}
+if (make != null and make.length() > 0) {
+  sb.append(make).append(" ");
+}
+if (model != null and model.length() > 0) {
+  sb.append(model).append(" ");
+}
+
+var retString = sb.toString();
+if (gw.api.util.StringUtil.length( retString ) == 0) {
+  retString = gw.api.locale.DisplayKey.get("Java.DisplayName.NewlyCreated");
+}
+
+return retString;]]></DisplayName>
+</Entity>

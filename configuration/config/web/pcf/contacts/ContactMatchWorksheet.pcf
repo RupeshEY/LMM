@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Worksheet
+    canEdit="true"
+    id="ContactMatchWorksheet"
+    tabLabel="DisplayKey.get(&quot;Web.ContactMatchWorksheet.TabLabel.MatchingContacts&quot;)"
+    title="DisplayKey.get(&quot;Web.ContactMatchWorksheet.Title.MatchingContacts&quot;)">
+    <LocationEntryPoint
+      signature="ContactMatchWorksheet(addressBookMatch : gw.api.contact.AddressBookMatch)"/>
+    <Scope
+      location="*"/>
+    <Variable
+      name="addressBookMatch"
+      type="gw.api.contact.AddressBookMatch"/>
+    <Variable
+      initialValue="new gw.api.contact.ProximitySearchPageHelper()"
+      name="proximitySearchPageHelper"
+      recalculateOnRefresh="true"
+      type="gw.api.contact.ProximitySearchPageHelper"/>
+    <Variable
+      initialValue="true"
+      name="onlyPrimaryRelationships"
+      type="boolean"/>
+    <ScreenRef
+      def="AddressBookMatchWorksheetScreen(addressBookMatch, proximitySearchPageHelper, onlyPrimaryRelationships)"/>
+  </Worksheet>
+</PCF>

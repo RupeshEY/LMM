@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Wizard
+    afterCancel="ClaimFinancialsChecks.go(claim)"
+    afterFinish="wizard.performAfterFinish(); ClaimFinancialsChecks.go(claim)"
+    beforeCancel="wizard.closeCheckDuplicatesWorksheets()"
+    beforeCommit="wizard.CheckSet.RequestingUser = User.util.CurrentUser; gw.api.system.bundle.BundleCommitCondition.verify(claim); wizard.performBeforeFinish()"
+    cancelWarning="DisplayKey.get(&quot;Wizard.NewCheckWizard.CancelWarning&quot;)"
+    id="EditRecurrenceCheckWizard"
+    onResume="gw.api.system.bundle.BundleCommitCondition.verify(claim)"
+    parent="ClaimFinancialsChecksDetail(claim, check)">
+    <LocationEntryPoint
+      signature="EditRecurrenceCheckWizard(claim : Claim, check : Check)"/>
+    <Variable
+      initialValue="new gw.api.financials.EditRecurrenceCheckWizardInfo()"
+      name="wizard"
+      type="gw.api.financials.EditRecurrenceCheckWizardInfo"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      name="check"
+      type="Check"/>
+    <WizardStep
+      allowFinish="false"
+      id="NewCheckPayees"
+      label="DisplayKey.get(&quot;Wizard.NewCheckWizard.NewCheckPayees.Label&quot;)"
+      onExit="wizard.validateAllCheckPayees(); wizard.createNewCheckPortionsIfNecessary(); wizard.refreshBundle(); if( !wizard.showPaymentsStep() ) { wizard.validatePayments()} "
+      onFirstEnter="wizard.setupCheckWizardInfo(null, check)"
+      screen="CheckWizard_CheckPayeesScreen(claim, wizard)"
+      title="DisplayKey.get(&quot;Wizard.NewCheckWizard.NewCheckPayees.Step&quot;,  wizard.CurrentStepNumber ,  wizard.TotalNumberOfSteps)"/>
+    <WizardStep
+      id="NewCheckPayments"
+      label="DisplayKey.get(&quot;Wizard.NewCheckWizard.NewCheckPayments.Label&quot;)"
+      onExit="wizard.validatePayments()"
+      screen="CheckWizard_CheckPaymentsScreen(claim, wizard)"
+      title="DisplayKey.get(&quot;Wizard.NewCheckWizard.NewCheckPayments.Step&quot;,  wizard.CurrentStepNumber ,  wizard.TotalNumberOfSteps)"
+      visible="wizard.showPaymentsStep()"/>
+    <WizardStep
+      id="NewCheckInstructions"
+      label="DisplayKey.get(&quot;Wizard.NewCheckWizard.NewCheckInstructions.Label&quot;)"
+      onEnter="wizard.doFinalChecksAndSetup()"
+      screen="CheckWizard_CheckInstructionsScreen(claim, wizard)"
+      title="DisplayKey.get(&quot;Wizard.NewCheckWizard.NewCheckInstructions.Step&quot;,  wizard.CurrentStepNumber ,  wizard.TotalNumberOfSteps)"/>
+  </Wizard>
+</PCF>

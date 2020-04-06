@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.Claim.view(Claim) and perm.System.viewclaimbasics"
+    id="TripIncidentsPrint"
+    parent="ClaimLossDetails(Claim)"
+    title="DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsTrav.Claim.Trip&quot;)">
+    <LocationEntryPoint
+      signature="TripIncidentsPrint(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="TripIncidentsPrintScreen">
+      <Toolbar/>
+      <PanelRef
+        def="EditableTripIncidentsLV(Claim, false)"/>
+    </Screen>
+  </Page>
+</PCF>

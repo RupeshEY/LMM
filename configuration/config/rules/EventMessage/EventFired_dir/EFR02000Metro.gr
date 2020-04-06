@@ -1,0 +1,21 @@
+package rules.EventMessage.EventFired_dir
+
+@gw.rules.RuleName("EFR02000 - Metro")
+internal class EFR02000Metro {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return true
+//MessageContext.Destination.messageSink.name == "Metro message sink"
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

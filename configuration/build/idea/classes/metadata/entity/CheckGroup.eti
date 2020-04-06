@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Groups the checks that are part of a multi-payee check."
+  entity="CheckGroup"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="checkgroup"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckGroupImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.check.entity.CheckGroup"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckGroupImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckGroupImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.check.impl.CheckGroupInternal"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckGroupImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+      Groups the Checks that are part of a multi-payee "check" (as it would be referred to by users). The primary Check
+      of the CheckGroup (i.e., CheckGroup.PrimaryCheck) contains all of the Payments, and each secondary Check has a
+      CheckPortion that indicates the portion of the total amount of the payments that it should receive. After amounts
+      have been allocated to all secondary Checks according to the CheckPortions, the leftover amount is allocated to
+      the primary Check.
+    ]]></fulldescription>
+  <foreignkey
+    columnName="CheckSetID"
+    desc="The TransactionSet that this check group belongs to."
+    exportable="true"
+    fkentity="CheckSet"
+    importableagainstexistingobject="false"
+    name="CheckSet"
+    nullok="false"/>
+  <array
+    arrayentity="Check"
+    desc="Check objects in the group, including the primary check. Together, these checks form a multi-payee check."
+    exportable="true"
+    name="Checks"
+    triggersValidation="true"/>
+</entity>

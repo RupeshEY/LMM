@@ -1,0 +1,20 @@
+package rules.Validation.TransactionSetValidationRules_dir.TXV19000DisallowReservesandPaymentsUntilCompensabilityDetermination_dir
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("TXV19100 - Compensability Denied")
+internal class TXV19100CompensabilityDenied {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+/*start00rule*/
+
+return transactionSet.Claim.Compensable == CompensabilityDecision.TC_DENIED
+/*end00rule*/
+}
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+/*start00rule*/
+
+transactionSet.reject(ValidationLevel.TC_PAYMENT, DisplayKey.get("Rules.Validation.Transaction.CompensabilityStatusDenied"), null, null)
+
+/*end00rule*/
+  }
+}

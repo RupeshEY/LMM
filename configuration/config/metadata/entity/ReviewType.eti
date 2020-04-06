@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Defines a type of service provider review, used to create Review entities."
+  entity="ReviewType"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="reviewtype"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.contact.entity.ReviewType"
+    impl="com.guidewire.cc.domain.contact.impl.ReviewTypeImpl"/>
+  <column
+    desc="Short name of this review type."
+    name="Name"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <column
+    desc="Detailed description of this review type."
+    name="Description"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="200"/>
+  </column>
+  <typekey
+    desc="Contact class, like Person, Company, and Venue."
+    name="ContactSubtype"
+    nullok="true"
+    typelist="Contact"/>
+  <array
+    arrayentity="ReviewCategoryQuestionSet"
+    desc="List of Question sets, and their assigned categories, associated with this ReviewType."
+    name="ReviewCategoryQuestionSets"/>
+  <column
+    default="false"
+    desc="If set to true, will retire this question set during the import xml process."
+    name="ShouldRetireFromImportXML"
+    nullok="true"
+    type="bit"/>
+</entity>

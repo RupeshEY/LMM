@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="ExpressionFragment for the case when the expression is a RuleCondition, e.g. the expression for a RuleCommandParameter"
+  entity="PropertyReferenceExpressionFragment"
+  final="true"
+  platform="true"
+  supertype="ExpressionFragment">
+  <implementsInterface
+    iface="com.guidewire.bizrules.codegenerator.GosuTextBuilder"
+    impl="com.guidewire.bizrules.codegenerator.PropertyReferenceExpressionFragmentGosuTextBuilder"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.ExpressionFragmentDomainMethods"
+    impl="com.guidewire.bizrules.domain.PropertyReferenceExpressionFragmentImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.PropertyReferenceExpressionFragmentDomainMethods"
+    impl="com.guidewire.bizrules.domain.PropertyReferenceExpressionFragmentImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.PropertyReferenceExpressionFragmentInternalMethods"
+    impl="com.guidewire.bizrules.domain.PropertyReferenceExpressionFragmentImpl"/>
+  <column
+    name="RootObjectExpression"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="shorttext"/>
+  <column
+    name="PropertyName"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="shorttext"/>
+  <column
+    name="FullPropertyDenorm"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="shorttext"/>
+  <column
+    default="false"
+    desc="Whether or not this should generate code that produces the original value of this property"
+    name="GenerateOriginalValue"
+    nullok="false"
+    type="bit"/>
+</subtype>

@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="pcf.ClaimServiceRequests.go(claim)"
+    afterCommit="pcf.ClaimServiceRequests.go(claim,serviceRequest)"
+    beforeCommit="serviceRequest.Instruction.verifyServiceTypesForUI(); serviceRequest.finishSetup(); if (submitServiceRequest){serviceRequest.performOperation(TC_SUBMITINSTRUCTION, null, false)}"
+    canEdit="true"
+    canVisit="true"
+    id="NewServiceRequest"
+    parent="Claim(claim)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ServiceRequest.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewServiceRequest(claim : Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="claim.newServiceRequest(null, null)"
+      name="serviceRequest"
+      type="ServiceRequest"/>
+    <Variable
+      initialValue="false"
+      name="submitServiceRequest"
+      type="boolean"/>
+    <Screen>
+      <Toolbar/>
+      <PanelRef
+        def="NewServiceRequestDV(serviceRequest, false, {})"
+        id="NewServiceRequestScreen">
+        <Toolbar>
+          <ToolbarButton
+            action="submitServiceRequest = true; CurrentLocation.commit()"
+            id="SubmitButton"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.SaveAndSubmit&quot;)"
+            visible="CurrentLocation.InEditMode"/>
+          <EditButtons
+            cancelLabel="DisplayKey.get(&quot;Button.Cancel&quot;)"
+            updateLabel="DisplayKey.get(&quot;Button.Save&quot;)"/>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+  </Page>
+</PCF>

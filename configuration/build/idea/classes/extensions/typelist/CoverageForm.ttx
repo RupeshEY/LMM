@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="CoverageForm">
+  <typecode
+    code="Occurrence"
+    desc="Occurrence coverage (default)"
+    name="Occurrence coverage (default)"
+    priority="1"/>
+  <typecode
+    code="PriorActs"
+    desc="Occurrence coverage (prior acts)"
+    name="Occurrence coverage (prior acts)"
+    priority="2"/>
+  <typecode
+    code="ClmsMdRtr"
+    desc="Claims-made coverage - basic with retroactive coverage"
+    name="Claims-made cov-basic with retroactive cov"
+    priority="3">
+    <category
+      code="retroactivedate"
+      typelist="ReportingDate"/>
+  </typecode>
+  <typecode
+    code="ClmsMdRtrExt"
+    desc="Claims-made coverage - extended reporting period (with retroactive coverage)"
+    name="Claims-made cov-extended rptg period (w/ retro cov)"
+    priority="4">
+    <category
+      code="retroactivedate"
+      typelist="ReportingDate"/>
+    <category
+      code="extreportdate"
+      typelist="ReportingDate"/>
+  </typecode>
+  <typecode
+    code="ClmsMdNoRtr"
+    desc="Claims-made coverage - basic no retroactive coverage"
+    name="Claims-made cov-basic no retro cov"
+    priority="5"/>
+  <typecode
+    code="ClmsMdNoRtrExt"
+    desc="Claims-made coverage - extended reporting period (no retroactive coverage)"
+    name="Claims-made cov-extended rptg period (no retro cov)"
+    priority="6">
+    <category
+      code="extreportdate"
+      typelist="ReportingDate"/>
+  </typecode>
+</typelistextension>

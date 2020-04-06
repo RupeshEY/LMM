@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A text field related to an exposure."
+  entity="ExposureText"
+  exportable="true"
+  platform="false"
+  table="exposuretext"
+  type="versionable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.ExposureText"
+    impl="com.guidewire.cc.domain.exposure.impl.ExposureTextImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="The text associated with the exposure."
+    name="Text"
+    nullok="true"
+    type="mediumtext"/>
+  <typekey
+    desc="Meaning of the text field."
+    name="TextType"
+    nullok="true"
+    typelist="ExposureTextType"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="Related exposure."
+    exportable="false"
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="false"/>
+  <index
+    desc="Enforce uniqueness, only one text entry of a particular type per exposure"
+    name="exposuretextu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ExposureId"/>
+    <indexcol
+      keyposition="2"
+      name="TextType"/>
+  </index>
+</entity>

@@ -1,0 +1,26 @@
+package rules.Segmentation.ClaimSegmentationRules_dir.CSG01000Auto_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.util.Logger
+
+@gw.rules.RuleName("CSG01200 - Auto Default")
+internal class CSG01200AutoDefault {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.Segment == null
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.Segment = TC_AUTO_LOW
+Logger.logDebug(DisplayKey.get("Rules.Segmentation.Claim", actions.ShortRuleName))
+Logger.logDebug(DisplayKey.get("Rules.Segmentation.Claim.SegmentedTo", claim.Segment))
+actions.exit()
+/*end00rule*/
+
+  }
+}

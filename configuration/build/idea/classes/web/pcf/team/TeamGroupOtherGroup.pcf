@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    id="TeamGroupOtherGroup"
+    parent="Team()"
+    title="DisplayKey.get(&quot;Web.TabBar.Team&quot;)">
+    <LocationEntryPoint
+      signature="TeamGroupOtherGroup(Group : Group)"/>
+    <Variable
+      name="Group"
+      type="Group"/>
+    <LocationRef
+      location="TeamGroupOtherClaims(Group)"/>
+    <LocationRef
+      location="TeamGroupOtherExposures(Group)"/>
+    <LocationRef
+      location="TeamGroupOtherActivities(Group)"/>
+    <LocationRef
+      location="TeamGroupOtherMatters(Group)"/>
+    <LocationRef
+      location="TeamGroupOtherSubrogations(Group)"/>
+  </LocationGroup>
+</PCF>

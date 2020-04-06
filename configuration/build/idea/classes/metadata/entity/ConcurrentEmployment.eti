@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Stores details of an employee's concurrent employment for Workers' Compensation claim."
+  entity="ConcurrentEmployment"
+  exportable="true"
+  extendable="true"
+  loadable="true"
+  platform="false"
+  table="concurrentempl"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.ConcurrentEmployment"
+    impl="com.guidewire.cc.domain.claim.impl.ConcurrentEmploymentImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The foreign key to the claim."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <column
+    desc="Name of employer company."
+    name="CompanyName"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="End date of employment"
+    name="EndDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Full time employment?"
+    name="FullTime"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Job title."
+    name="JobTitle"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Start date of employment"
+    name="StartDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Weekly wage during employment"
+    name="WeeklyWage"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <datetimeordering
+    firstcolumnname="StartDate"
+    operator="LE"
+    secondcolumnname="EndDate"/>
+  <column
+    desc="Contact number during employment"
+    name="ContactNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+</entity>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="workStatus.validateNonConflicting(employmentData)"
+    canEdit="true"
+    canVisit="visitable"
+    id="NewWorkStatusPopup"
+    returnType="WorkStatus"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Claim.NewWorkStatusPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewWorkStatusPopup(employmentData : EmploymentData, visitable : boolean)"/>
+    <Variable
+      name="employmentData"
+      type="EmploymentData"/>
+    <Variable
+      initialValue="createWorkStatus()"
+      name="workStatus"
+      type="WorkStatus"/>
+    <Variable
+      name="visitable"
+      type="boolean"/>
+    <Screen>
+      <PanelRef
+        def="WorkStatusDV(workStatus)">
+        <Toolbar>
+          <EditButtons
+            pickValue="workStatus"/>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+    <Code><![CDATA[function createWorkStatus() : WorkStatus {
+  var result = new WorkStatus(employmentData)
+  employmentData.addToWorkStatusChanges(result)
+  return result
+}]]></Code>
+  </Popup>
+</PCF>

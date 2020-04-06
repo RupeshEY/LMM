@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Forward
+    id="ExternalLink">
+    <LocationEntryPoint
+      signature="ExternalLink(linkName : String, claimNumber : String)"/>
+    <Variable
+      name="linkName"
+      type="String"/>
+    <Variable
+      name="claimNumber"
+      type="String"/>
+    <Variable
+      initialValue="(gw.api.database.Query.make(entity.Claim).compare(&quot;ClaimNumber&quot;, Equals, claimNumber).select()).getAtMostOneRow()"
+      name="Claim"
+      type="Claim"/>
+    <ForwardCondition
+      action="EndUserError.go(DisplayKey.get(&quot;Java.Error.ExternalLink.BadClaimNumber&quot;, claimNumber))"
+      condition="Claim == null"/>
+    <ForwardCondition
+      action="ClaimSummary.go(Claim)"
+      condition="linkName == &quot;ClaimByNumber&quot;"/>
+    <ForwardCondition
+      action="ClaimLossDetails.go(Claim)"
+      condition="linkName == &quot;ClaimLossDetailsByNumber&quot;"/>
+    <ForwardCondition
+      action="ClaimFinancialsGroup.go(Claim)"
+      condition="linkName == &quot;ClaimFinancialsByNumber&quot;"/>
+    <ForwardCondition
+      action="ClaimWorkplan.go(Claim)"
+      condition="linkName == &quot;ClaimWorkPlanByNumber&quot;"/>
+    <ForwardCondition
+      action="ClaimCalendar.go(Claim)"
+      condition="linkName == &quot;ClaimLitigationCalendarByNumber&quot;"/>
+    <ForwardCondition
+      action="pcf.Claim.go(Claim)"
+      condition="linkName == &quot;ClaimByNumber&quot; or linkName == &quot;ClaimLossDetailsByNumber&quot; or linkName == &quot;ClaimFinancialsByNumber&quot; or linkName == &quot;ClaimLitigationCalendarByNumber&quot; or linkName == &quot;ClaimWorkPlanByNumber&quot;"/>
+    <ForwardCondition
+      action="CannotViewClaim.go()"
+      condition="linkName == &quot;ClaimByNumber&quot; or linkName == &quot;ClaimLossDetailsByNumber&quot; or linkName == &quot;ClaimFinancialsByNumber&quot; or linkName == &quot;ClaimLitigationCalendarByNumber&quot;"/>
+    <ForwardCondition
+      action="EndUserError.go(DisplayKey.get(&quot;Java.Error.ExternalLink.UnknownLinkName&quot;, linkName))"/>
+  </Forward>
+</PCF>

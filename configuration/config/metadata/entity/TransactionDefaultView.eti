@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Aggregates the information needed to display a Transaction using the All or Custom filters of the Financials Transactions page. Subtype of TransactionView."
+  entity="TransactionDefaultView"
+  exportable="false"
+  final="false"
+  primaryEntity="Transaction"
+  supertypeEntity="TransactionView">
+  <implementsInterface
+    iface="gw.cc.financials.entity.TransactionDefaultView"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionDefaultViewImpl"/>
+  <viewEntityTypekey
+    name="TransactionSubtype"
+    path="Subtype"/>
+</viewEntity>

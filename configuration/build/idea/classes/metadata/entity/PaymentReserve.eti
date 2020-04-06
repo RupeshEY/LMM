@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Links a Payment to an offset Reserve."
+  entity="PaymentReserve"
+  exportable="false"
+  platform="false"
+  table="paymentreserve"
+  type="versionable">
+  <implementsInterface
+    iface="gw.cc.financials.payment.entity.PaymentReserve"
+    impl="com.guidewire.cc.domain.financials.payment.impl.PaymentReserveImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="PaymentID"
+    desc="The payment."
+    fkentity="Payment"
+    name="Payment"
+    nullok="false"/>
+  <foreignkey
+    columnName="ReserveID"
+    desc="The reserve."
+    fkentity="Reserve"
+    name="Reserve"
+    nullok="false"/>
+  <index
+    desc="The link between a Payment and its offsetting Reserve should exist only once."
+    name="paymentreserveu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="PaymentID"/>
+    <indexcol
+      keyposition="2"
+      name="ReserveID"/>
+  </index>
+</entity>

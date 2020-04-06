@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<soap:Envelope
+  xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/"
+  xmlns:p1="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1"
+  xmlns:wb="http://www.xchanging.com/claimResponse/rs/1"
+  xmlns:xh="http://www.xchanging.com/wsdl/ClaimService/">
+  <soap:Header>
+    <xh:xchangingheader>
+      <xh:Sender>
+        <xh:Party>
+          <xh:Id>urn:duns:236196817</xh:Id>
+        </xh:Party>
+      </xh:Sender>
+      <xh:Receiver>
+        <xh:Party>
+          <xh:Id>urn:lloyds:0623</xh:Id>
+        </xh:Party>
+      </xh:Receiver>
+      <xh:MsgTypeCd>ClaimRespond</xh:MsgTypeCd>
+      <xh:Timestamp>2015-11-27T19:46:00+01:00</xh:Timestamp>
+      <xh:ResponseUUId>47f5eb04-fa68-4808-897e-6847d1bb6bdf</xh:ResponseUUId>
+      <xh:RequestUUId>47f5eb04-fa68-4808-897e-6847d0bb6bdf</xh:RequestUUId>
+    </xh:xchangingheader>
+  </soap:Header>
+  <soap:Body>
+    <wb:ClaimResponseRs
+      xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+      Sender="serviceprovider"
+      Receiver="insurer"
+      xsi:schemaLocation="http://www.xchanging.com/claimResponse/rs/1 ../../../../gsrc/gw/acc/iplm/xsd/claimresponse/ClaimResponseRs.xsd http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1 ../../../../gsrc/gw/acc/iplm/xsd/Jv-Ins-Reinsurance-2014-06.xsd">
+      <p1:UUId>20151803-2222-5558-bbbb-1aa00005b111</p1:UUId>
+      <p1:ServiceProviderReference>ServiceProviderReference</p1:ServiceProviderReference>
+      <p1:CreationDate>2006-06-22T15:16:30+01:00</p1:CreationDate>
+      <p1:AcknowledgementTransactionType>response</p1:AcknowledgementTransactionType>
+      <p1:Insurer>
+        <p1:Party>
+          <p1:Id
+            Agency="lloyds">urn:lloyds:0623
+          </p1:Id>
+          <p1:Name>Beazley 0623</p1:Name>
+        </p1:Party>
+      </p1:Insurer>
+      <p1:ServiceProvider>
+        <p1:Party>
+          <p1:Id
+            Agency="DUNS_dun_and_bradstreet">urn:duns:236196817
+          </p1:Id>
+          <p1:Name>Xchanging</p1:Name>
+        </p1:Party>
+      </p1:ServiceProvider>
+      <wb:ReferredMessage>
+        <p1:UUId>20111803-7778-5558-bbbb-1aa00005b415</p1:UUId>
+        <wb:InsurerTransactionReference>InsurerTrnsRef1</wb:InsurerTransactionReference>
+      </wb:ReferredMessage>
+      <p1:Response>
+        <p1:AcknowledgementLevelIndicator>translation_validation</p1:AcknowledgementLevelIndicator>
+        <p1:AcknowledgementStatus>acknowledged</p1:AcknowledgementStatus>
+        <p1:ResponseDescription>Request has been queued</p1:ResponseDescription>
+      </p1:Response>
+    </wb:ClaimResponseRs>
+  </soap:Body>
+</soap:Envelope>

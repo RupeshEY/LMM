@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="FixPropContentItemPopup"
+    title="DisplayKey.get(&quot;NVV.Incident.FixedProperty.AssessmentLine&quot;, AssessmentContentItem.Incident.DisplayName)">
+    <LocationEntryPoint
+      signature="FixPropContentItemPopup(AssessmentContentItem : AssessmentContentItem)"/>
+    <Variable
+      name="AssessmentContentItem"
+      type="AssessmentContentItem"/>
+    <Screen
+      id="EditAssessmentContentItemScreen">
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <PanelRef
+        def="FixPropContentItemDetailsDV(AssessmentContentItem)"/>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="ServiceRequestMetricEscalationDelegate">
+  <fulldescription><![CDATA[Delegate used to store a flag indicating if the metric has been escalated.  To escalate a new metric,
+    changes have to be made in ServiceRequestMetricEscalationWorkQueue in addition to implementing this delegate.
+  ]]></fulldescription>
+  <column
+    default="false"
+    desc="Indicates if this metric has been previously escalated"
+    name="Escalated"
+    nullok="true"
+    type="bit"/>
+</delegate>

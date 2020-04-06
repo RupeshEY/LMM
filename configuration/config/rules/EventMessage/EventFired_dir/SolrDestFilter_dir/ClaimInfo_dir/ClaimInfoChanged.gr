@@ -1,0 +1,21 @@
+package rules.EventMessage.EventFired_dir.SolrDestFilter_dir.ClaimInfo_dir
+
+@gw.rules.RuleName("ClaimInfoChanged")
+internal class ClaimInfoChanged {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return messageContext.EventName == "ClaimInfoChanged"
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+gw.solr.CCSolrMessageTransportPlugin.handleClaimInfoChangedEvent(messageContext)
+/*end00rule*/
+
+  }
+}

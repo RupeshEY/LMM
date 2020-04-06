@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- The next name value view controls the matter screens -->
+  <DetailViewPanel
+    id="NewMatterDV">
+    <Require
+      name="Matter"
+      type="Matter"/>
+    <Require
+      name="AssigneeHolder"
+      type="gw.api.assignment.Assignee[]"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.NewMatterGeneral&quot;)"/>
+      <TypeKeyInput
+        editable="true"
+        id="MatterType"
+        label="DisplayKey.get(&quot;MatterGeneral.Matter.Type&quot;)"
+        required="true"
+        value="Matter.MatterType"
+        valueType="typekey.MatterType">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <TextInput
+        editable="true"
+        id="Matter_Name"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.NewMatterGeneral.Matter.Name&quot;)"
+        required="true"
+        value="Matter.Name"/>
+      <TextInput
+        editable="true"
+        id="Matter_CaseNumber"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.NewMatterGeneral.Matter.CaseNumber&quot;)"
+        required="false"
+        value="Matter.CaseNumber"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="Plaintiff"
+        label="DisplayKey.get(&quot;MatterGeneral.Matter.Plaintiff&quot;)"
+        required="false"
+        value="Matter.plaintiff"
+        valueRange="Matter.Claim.getRelatedContacts()"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="Defendant"
+        label="DisplayKey.get(&quot;MatterGeneral.Matter.Defendant&quot;)"
+        required="false"
+        value="Matter.defendant"
+        valueRange="Matter.Claim.getRelatedContacts()"/>
+      <BooleanRadioInput
+        editable="true"
+        id="TrialDetails_SubroRelated"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.NewMatterGeneral.TrialDetails.SubroRelated&quot;)"
+        required="false"
+        value="Matter.SubroRelated"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;MatterGeneral.Matter.Litigation&quot;)"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_GENERAL"/>
+      <TypeKeyInput
+        editable="true"
+        id="CourtType"
+        label="DisplayKey.get(&quot;MatterGeneral.Matter.CourtType&quot;)"
+        required="false"
+        value="Matter.CourtType"
+        valueType="typekey.MatterCourtType"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_GENERAL">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <TypeKeyInput
+        editable="true"
+        id="CourtDistrict"
+        label="DisplayKey.get(&quot;MatterGeneral.Matter.CourtDistrict&quot;)"
+        required="false"
+        value="Matter.CourtDistrict"
+        valueType="typekey.MatterCourtDistrict"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_GENERAL"/>
+      <TypeKeyInput
+        editable="true"
+        id="LegalSpecialty"
+        label="DisplayKey.get(&quot;MatterGeneral.Matter.LegalSpecialty&quot;)"
+        required="false"
+        value="Matter.LegalSpecialty"
+        valueType="typekey.LegalSpecialty"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_GENERAL"/>
+      <TypeKeyInput
+        editable="true"
+        id="TrialDetails_PrimaryCause"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.NewMatterGeneral.TrialDetails.PrimaryCause&quot;)"
+        required="false"
+        value="Matter.PrimaryCause"
+        valueType="typekey.PrimaryCauseType"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_GENERAL"/>
+      <InputDivider
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_GENERAL"/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.NewMatterGeneral.Counsel&quot;)"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="Counsel_PlaintiffAttorney"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.NewMatterGeneral.Counsel.PlaintiffAttorney&quot;)"
+        required="false"
+        value="Matter.plaintiffatt"
+        valueRange="Matter.Claim.RelatedAttorneyArray"
+        valueType="entity.Attorney"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="Counsel_PlaintiffLawFirm"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.NewMatterGeneral.Counsel.PlaintiffLawFirm&quot;)"
+        required="false"
+        value="Matter.plaintifffirm"
+        valueRange="Matter.Claim.RelatedLawFirmArray"
+        valueType="entity.LawFirm"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="Counsel_DefenseAttorney"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.NewMatterGeneral.Counsel.DefenseAttorney&quot;)"
+        required="false"
+        value="Matter.defenseattorney"
+        valueRange="Matter.Claim.RelatedAttorneyArray"
+        valueType="entity.Attorney"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <ClaimContactInput
+        claim="Matter.Claim"
+        editable="true"
+        id="Counsel_DefenseLawFirm"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.NewMatterGeneral.Counsel.DefenseLawFirm&quot;)"
+        required="false"
+        value="Matter.defensefirm"
+        valueRange="Matter.Claim.RelatedLawFirmArray"
+        valueType="entity.LawFirm"
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <InputDivider
+        visible="Matter.MatterType == TC_LAWSUIT || Matter.MatterType == TC_ARBITRATION || Matter.MatterType == TC_HEARING || Matter.MatterType == TC_GENERAL"/>
+      <CCAssigneeInput
+        assignable="Matter"
+        claim="Matter != null ? Matter.Claim : null"
+        editable="true"
+        id="Matter_AssignActivity"
+        label="DisplayKey.get(&quot;NVV.Matter.SubView.NewMatterGeneral.Matter.AssignActivity&quot;)"
+        required="true"
+        sortValueRange="false"
+        value="AssigneeHolder[0]"
+        valueRange="Matter.SuggestedAssignees"/>
+      <InputDivider/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

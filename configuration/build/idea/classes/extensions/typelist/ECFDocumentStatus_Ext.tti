@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="ECFDocumentStatus_Ext" desc="describe the status of the document regarding its existence">
+  <typecode
+    code="ON_IMR"
+    desc="On IMR but not on DMS"
+    name="IMR"/>
+  <typecode
+    code="ON_IMR_AND_DMS"
+    desc="On IMR and in DMS"
+    name="IMR and DMS"/>
+  <typecode
+    code="ON_DMS"
+    desc="On DMS but not on IMR"
+    name="DMS"/>
+  <typecode
+    code="PENDING_UPLOAD"
+    desc="Sent to IMR for upload but not acknowledged yet"
+    name="Pending Upload to IMR"/>
+  <typecode
+    code="PENDING_DOWNLOAD"
+    desc="Sent to IMR for download but not acknowledged yet"
+    name="Pending Download from IMR"/>
+  <typecode
+    code="NONE"
+    desc="Not in DMS Nor IMR, maybe physically exists."
+    name="None"/>
+</typelist>

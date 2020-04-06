@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temporary table for setting rows as invalid in the aggregate limit denorm table, agglimitrpt, from the staging tables."
+  entity="TmpStagingAggregateLimit2"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="tmpstagglimit2"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.aggregatelimit.entity.TmpStagingAggregateLimit2"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.TmpStagingAggregateLimit2Impl"/>
+  <column
+    desc="Id of the denorm row in aggregatelimitrpt."
+    name="DenormId"
+    nullok="false"
+    type="softentityreference"/>
+  <index
+    desc="An agglimitrpt's id should appear at most once in this table, if it is invalid."
+    name="tmpagglimit21"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="DenormId"/>
+  </index>
+</entity>

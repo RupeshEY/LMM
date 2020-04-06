@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="MetroReportDetailsPopup"
+    returnType="MetroReport"
+    title="DisplayKey.get(&quot;Web.MetroReportDV.Title&quot;)">
+    <LocationEntryPoint
+      signature="MetroReportDetailsPopup(claim : Claim)"/>
+    <LocationEntryPoint
+      signature="MetroReportDetailsPopup(claim : Claim, metroReport : MetroReport)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="claim.newMetroReport()"
+      name="metroReport"
+      type="MetroReport"/>
+    <ScreenRef
+      def="MetroReportDetailsScreen(claim, metroReport)"/>
+  </Popup>
+</PCF>

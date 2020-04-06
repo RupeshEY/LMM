@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Forward
+    canVisit="perm.Claim.createpayment(claim)"
+    id="QuickCreateCheckWizardForward"
+    parent="ClaimFinancialsSummary(claim)">
+    <LocationEntryPoint
+      signature="QuickCreateCheckWizardForward(claim : Claim, exposure : Exposure, costType : CostType, costCategory : CostCategory, reservingCurrency : Currency, setReserveLine : Boolean)"/>
+    <LocationEntryPoint
+      signature="QuickCreateCheckWizardForward(claim : Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      name="exposure"
+      type="Exposure"/>
+    <Variable
+      name="costType"
+      type="CostType"/>
+    <Variable
+      name="costCategory"
+      type="CostCategory"/>
+    <Variable
+      name="setReserveLine"
+      type="Boolean"/>
+    <Variable
+      initialValue="gw.api.financials.CheckUtil.canPay(claim, exposure, CurrentLocation)"
+      name="canPayResult"
+      type="gw.api.financials.AbilityToPayResult"/>
+    <Variable
+      name="reservingCurrency"
+      type="Currency"/>
+    <ForwardCondition
+      action="NewCheckNoAbilityToPay.go(claim, canPayResult)"
+      condition="null != canPayResult"/>
+    <ForwardCondition
+      action="QuickCreateCheckWizard.go(claim, exposure, costType, costCategory, reservingCurrency, setReserveLine)"
+      condition="null == canPayResult"/>
+  </Forward>
+</PCF>

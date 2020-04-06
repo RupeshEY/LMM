@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="!review.isCompleted()"
+    canVisit="true"
+    id="ContactReviewPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Reviews.ReviewPopup.Title&quot;, review.Contact.DisplayName)">
+    <LocationEntryPoint
+      signature="ContactReviewPopup(review: Review)"/>
+    <Variable
+      name="review"
+      type="Review"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="review.updateScores();CurrentLocation.commit()"
+          id="UpdateButton"
+          label="DisplayKey.get(&quot;Button.Activity.Update&quot;)"
+          visible="CurrentLocation.isInEditMode()"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="CancelButton"
+          label="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          shortcut="L"/>
+      </Toolbar>
+      <PanelRef
+        def="ReviewDV(review, false)"/>
+    </Screen>
+  </Popup>
+</PCF>

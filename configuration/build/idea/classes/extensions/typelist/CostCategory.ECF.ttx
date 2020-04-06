@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<typelistextension xmlns="http://guidewire.com/typelists" name="CostCategory">
+    <typecode
+      code="iplmindemnity"
+      desc="IPLM Indemnity Cost Type"
+      name="IPLM Indemnity">
+        <category
+          code="IPLM_Ext"
+          typelist="coveragetype"/>
+        <category
+          code="claimcost"
+          typelist="costtype"/>
+    </typecode>
+    <typecode
+      code="iplmfee"
+      desc="IPLM Fee Cost Type"
+      name="IPLM Fee">
+        <category
+          code="IPLM_Ext"
+          typelist="coveragetype"/>
+        <category
+          code="aoexpense"
+          typelist="costtype"/>
+    </typecode>
+</typelistextension>

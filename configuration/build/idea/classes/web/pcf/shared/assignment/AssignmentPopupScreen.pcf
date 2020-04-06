@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="AssignmentPopupScreen">
+    <Require
+      name="AssignmentPopup"
+      type="gw.api.assignment.AssignmentPopup"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="new gw.api.contact.CCProximitySearchPageHelper()"
+      name="PageHelper"
+      type="gw.api.contact.CCProximitySearchPageHelper"/>
+    <Toolbar>
+      <ToolbarButton
+        action="CurrentLocation.cancel()"
+        id="AssignmentPopupScreen_CancelButton"
+        label="DisplayKey.get(&quot;Button.Cancel&quot;)"
+        shortcut="L"/>
+    </Toolbar>
+    <PanelRef
+      def="FailedAssignmentsLV(AssignmentPopup)"
+      mode="AssignmentPopup.AssignableType.RelativeName"
+      visible="AssignmentPopup.hasErrors()">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.Assignment.Popup.Unassigned&quot;)"/>
+      <Toolbar/>
+    </PanelRef>
+    <SearchPanel
+      criteriaName="SearchCriteria"
+      resultsName="SearchResult"
+      search="SearchCriteria.performSearchByProximity(CurrentLocation, PageHelper)"
+      searchCriteria="createSearchCriteria(claim)"
+      searchCriteriaType="gw.api.assignment.CCAssignmentSearchCriteria"
+      searchResultsType="gw.api.assignment.AssignmentProximitySearchResult">
+      <PanelRef
+        def="AssignmentPopupDV(AssignmentPopup, SearchResult, SearchCriteria)"/>
+      <PanelRef
+        def="AssignmentSearchDV(gw.api.upgrade.Coercions.makeArray&lt;typekey.AssignmentSearchType&gt;(AssignmentPopup.Picker.AllowedAssignmentSearchTypes), SearchCriteria, PageHelper, claim)"/>
+      <PanelRef
+        def="AssignmentUserLV(SearchResult == null ? null : SearchResult.getUsers() as gw.api.database.IQueryBeanResult&lt;GroupUser&gt;, PageHelper, SearchCriteria.getUserCriteria().getContact())"
+        visible="(SearchCriteria.SearchType == TC_USER) and (AssignmentPopup.SelectionType == TC_FROMSEARCH)">
+        <TitleBar
+          appendListViewPaging="true"
+          title="DisplayKey.get(&quot;Web.Assignment.SearchResults&quot;)"/>
+        <Toolbar>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="PageHelper.getDrivingDirectionsCache().getSelectedDirections(CheckedValues, SearchCriteria.getUserCriteria().getContact());"
+            flags="any User"
+            id="RetrieveRequested"
+            iterator="AssignmentUserLV.AssignmentUserLV"
+            label="DisplayKey.get(&quot;Web.AddressBook.Search.Result.GetRequested&quot;)"
+            visible="SearchCriteria.SearchType == TC_USER and SearchCriteria.UserCriteria.Contact.isProximitySearch()"/>
+        </Toolbar>
+      </PanelRef>
+      <PanelRef
+        def="AssignmentGroupLV(SearchResult == null ? null : SearchResult.getGroups())"
+        visible="(SearchCriteria.SearchType == TC_GROUP) and (AssignmentPopup.SelectionType == TC_FROMSEARCH)">
+        <TitleBar
+          appendListViewPaging="true"
+          title="DisplayKey.get(&quot;Web.Assignment.SearchResults&quot;)"/>
+        <Toolbar/>
+      </PanelRef>
+      <PanelRef
+        def="AssignmentQueueLV(SearchResult == null ? null : SearchResult.getQueues())"
+        visible="(SearchCriteria.SearchType == TC_QUEUE) and (AssignmentPopup.SelectionType == TC_FROMSEARCH)">
+        <TitleBar
+          appendListViewPaging="true"
+          title="DisplayKey.get(&quot;Web.Assignment.SearchResults&quot;)"/>
+        <Toolbar/>
+      </PanelRef>
+    </SearchPanel>
+    <Code><![CDATA[
+        function createSearchCriteria(aClaim: Claim) : gw.api.assignment.CCAssignmentSearchCriteria {
+          var criteria = new gw.api.assignment.CCAssignmentSearchCriteria();
+          if(aClaim != null) {
+            criteria.UserCriteria.Contact.initializeProximitySearch(aClaim.Addresses?.toList(), aClaim.LossLocation);
+          }
+          return criteria;
+        }
+      
+    ]]></Code>
+  </Screen>
+</PCF>

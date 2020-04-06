@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="BulkInvoiceSearchDV">
+    <Require
+      name="BulkInvoiceSearchCriteria"
+      type="BulkInvoiceSearchCriteria"/>
+    <InputColumn
+      width="500">
+      <InputSetRef
+        def="BulkInvoiceSearchRequiredInputSet(BulkInvoiceSearchCriteria)"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="BulkInvoiceSearchOptionalInputSet(BulkInvoiceSearchCriteria)"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

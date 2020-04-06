@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ECFMessageDetailsCommentLV">
+    <Require
+      name="comments"
+      type="ECFMessageComment_Ext[]"/>
+    <RowIterator
+      editable="true"
+      elementName="comment"
+      value="comments"
+      valueType="ECFMessageComment_Ext[]">
+      <Row>
+        <TextCell
+          enableSort="false"
+          id="Detail"
+          desc="Comment detail"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Comment.Comment&quot;)"
+          sortBy="comment.LineNumber"
+          value="comment.Detail"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,421 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageClaimData_Ext"
+  desc="Claim related data common between ClaimNotifyRequest and ClaimRetrieveResponse"
+  supertype="ECFMessage_Ext">
+  <column
+    desc="A number assigned to indicate the sequence of the transaction within the UCR"
+    name="TransactionSequence"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Description of the 'business' reason for the sending of this claims message (e.g. 'On Account settlement')"
+    name="AmendmentDetails"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    desc="Identifies the type of transaction and will notify if the message is a first advice (with or without settlement) and interim advice (with or without settlement). The sender and receiver should make sure that this data element is populated."
+    name="TransactionType"
+    nullok="true"
+    typelist="ECFClaimTransactionType_Ext"/>
+  <typekey
+    default="AwaitingResponse"
+    desc="Identifies the state of Claim Data message"
+    name="MessageState"
+    nullok="true"
+    typelist="ECFClaimMessageState_Ext"/>
+  <column
+    desc="Date/time action occurred (transaction created or updated or response made)"
+    name="AsOfDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Reference allocated to the sender transaction reference. Either Insurer or reinsurer transaction reference must be provided"
+    name="InsurerReference"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Name of the claimant involved in a loss"
+    name="Claimant"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Code which identifies the claim cause. Cause code has to be provided on first advice by lead, will default to previous value on subsequent transactions"
+    name="LossCause"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Text description of the location of the loss being reported"
+    name="LossLocation"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The loss details"
+    name="LossDetails"
+    nullok="true"
+    type="longtext"/>
+  <column
+    desc="Start date of period during which a loss occurred"
+    name="LossStartDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="End date of period during which a loss occurred"
+    name="LossEndDate"
+    nullok="true"
+    type="datetime"/>
+  <typekey
+    name="ActionCode"
+    nullok="true"
+    typelist="ECFActionCode_Ext"/>
+  <typekey
+    desc="Code for identifying the class of business (for ILU and LIRMA). AKA JvClassOfBusiness in the XML"
+    name="ClassOfBusiness"
+    nullok="true"
+    typelist="ECFClassOfBusiness_Ext"/>
+  <typekey
+    name="PcsCatastropheCode"
+    desc="Reference assigned to a catastrophe by the Property Claim Service (PCS) related to a claim"
+    nullok="true"
+    typelist="ECFPCSCategoryCode_Ext"/>
+  <typekey
+    name="LcoCatastropheCode"
+    desc="Reference assigned to a catastrophe by the the Lloyd's Claims Office (LCO) related to a claim"
+    nullok="true"
+    typelist="ECFLCOCategoryCode_Ext"/>
+  <typekey
+    name="ClaimStatus"
+    nullok="true"
+    typelist="ECFMessageClaimStatus_Ext"/>
+  <typekey
+    name="FileFormat"
+    nullok="true"
+    typelist="ECFFileFormat_Ext"/>
+  <column
+    desc="Name of insured person or organization in free text"
+    name="Insured"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Identity of the party that took the original insurance with the insurance company that ceded the business expressed in text form"
+    name="Policyholder"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Syndicate or company’s risk reference 2"
+    name="RiskReference"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="ClaimNotifyRq/ClaimRetrieveRs.ClaimMovement.Contract.InsurerRiskReference"
+    name="PolicyNumber"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Broker policy reference 1"
+    name="BrokerReference"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Text giving a description of the insured risk, contract or layer"
+    name="RiskDescription"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Description of situation of insured interest, or journey"
+    name="RiskLocation"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Description of a policy"
+    name="PolicyType"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Code expressing the type of cover (quota share, surplus, XOL..)"
+    name="CoverType"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    name="RiskCode"
+    nullok="true"
+    typelist="ECFRiskCode_Ext"/>
+  <typekey
+    name="BureauType"
+    desc="The carrier's bureau type for this transaction"
+    nullok="true"
+    typelist="ECFBureauType_Ext"/>
+  <column
+    desc="Coded identification of a broking organisation"
+    name="BrokerId"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The name of the Broker organisation"
+    name="BrokerName"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Text giving name of an individual who should serve as first point of contact for this message"
+    name="BrokerContact"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Telephone number of the name or department within the broker organisation to be contacted in relation to a transaction"
+    name="BrokerPhone"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Text giving the email address of the person  to be contacted in a broking organisation. May not be the person who submits the transaction"
+    name="BrokerEmail"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Indicator Y/N to indicate if a Binding authority UCR has Co-Leads on it"
+    name="CoLeadIndicator"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The name of the lead Insurer for the claim where more than one market is involved in the claim. Name and not ID"
+    name="LeadName"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The number of bulk items included in the bulk"
+    name="BulkClaimNoOfItems"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="precision"
+      value="2"/>
+    <columnParam
+      name="scale"
+      value="0"/>
+  </column>
+  <column
+    desc="The Unique Claim Reference of the bulk header"
+    name="BulkClaimHeaderUCR"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The Transaction Reference of the Bulk collection"
+    name="BulkClaimHeaderTR"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Insured Name for this message"
+    name="InsuredName"
+    nullok="true"
+    type="text"/>
+  <typekey
+    name="SettlementCurrency"
+    desc="Financials: The currency in which amounts will be settled"
+    nullok="true"
+    typelist="Currency"/>
+  <typekey
+    name="OutstandingAmountQualifier"
+    desc="Financials: Qualifier providing more information about the outstanding amount and/or the claim in general"
+    typelist="ECFOutstandingQualifierCode_Ext"
+    nullok="true"/>
+  <column
+    name="OriginalSplitReferenceCSV"
+    desc="Financials: The Bureau reference allocated to the premium transaction relating to the claim"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="63"/>
+  </column>
+  <array
+    arrayentity="ECFMessageClaimDataDocument_Ext"
+    desc="ECF Claim Data Message Documents"
+    name="Docs"/>
+  <array
+    arrayentity="ECFMessageClaimDataFinancial_Ext"
+    desc="ECF Claim Data Message Financials"
+    name="Financials"/>
+  <array
+    arrayentity="ECFMessageClaimDataCarrier_Ext"
+    desc="ECF Claim Data Message Carriers"
+    name="Carriers"/>
+  <array
+    arrayentity="ECFMessageBulkClaim_Ext"
+    desc="ECF Claim Data Message Bulk Claims"
+    name="BulkClaims"/>
+  <array
+    arrayentity="ECFMessageBrokerComment_Ext"
+    desc="broker additional comments"
+    name="BrokerComments"/>
+  <array
+    arrayentity="ECFMessagePublicComment_Ext"
+    desc="public comments"
+    name="PublicComments"/>
+  <array
+    arrayentity="ECFMessagePrivateComment_Ext"
+    desc="private comments"
+    name="PrivateComments"/>
+  <array
+    arrayentity="ECFMessageSlipLeadComment_Ext"
+    desc="slip lead comments"
+    name="SlipLeadComments"/>
+  <array
+    arrayentity="ECFMessageCrossMarketPublicComment_Ext"
+    desc="Cross market public comments"
+    name="CrossMarketPublicComments"/>
+  <array
+    arrayentity="ECFMessageCrossMarketPrivateComment_Ext"
+    desc="Cross market private comments"
+    name="CrossMarketPrivateComments"/>
+  <array
+    arrayentity="ECFMessageAggregateDetail_Ext"
+    desc="Aggregate Details comments"
+    name="AggregateDetails"/>
+  <array
+    arrayentity="ECFMessageErrorOrWarning_Ext"
+    desc="Errors or Warnings"
+    name="ErrorsOrWarnings"/>
+  <array
+    arrayentity="ECFMessageSoftWarning_Ext"
+    desc="Soft Warnings"
+    name="SoftWarnings"/>
+  <array
+    arrayentity="ECFContractMarket_Ext"
+    desc="An array holds the information about the parties and their role in each claim data message."
+    name="ECFContractMarkets"/>
+  <foreignkey
+    fkentity="ECFMessageClaimDataContacts_Ext"
+    name="ECFContactData"
+    nullok="true"/>
+  <column
+    desc="Textual details on the loss or event which is the subject of the original insurance of the individual loss included in the transaction."
+    name="LossOrEventName"
+    nullok="true"
+    type="shorttext"/>
+  <array
+    arrayentity="ECFMessageClaimDataParallelClaimUCR_Ext"
+    name="ParallelClaimsUCR"/>
+  <typekey
+    desc="Code identification of what the Loss Date From and To represent"
+    name="LossDateQualifier"
+    nullok="true"
+    typelist="ECFLossDateQualifier_Ext"/>
+  <foreignkey
+    fkentity="ECFTransactionState_Ext"
+    name="ECFTransactionState"
+    nullok="true"/>
+  <column
+    desc="XcsToAgreeIndicator"
+    name="XcsToAgreeIndicator"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    desc="Claim category code"
+    name="CategoryCode"
+    nullok="true"
+    typelist="ECFClaimCategoryCode_Ext"/>
+  <typekey
+    desc="Claim subcategory code"
+    name="SubCategoryCode"
+    nullok="true"
+    typelist="ECFClaimSubCatCode_Ext"/>
+  <typekey
+    desc="The claims scheme applicable to the claim."
+    name="ClaimsScheme"
+    nullok="true"
+    typelist="ECFScheme_Ext"/>
+  <column
+    desc="ClaimResponseUUId - Unique Universal Identifier of the ClaimResponseRq message"
+    name="ClaimResponseUUId"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="36"/>
+  </column>
+  <column
+    desc="Year in which the contract, or an individual risk covered by the contract, is underwritten. Only for Lloyd’s. "
+    name="UnderwritingYear"
+    nullok="true"
+    type="year"/>
+  <column
+    desc="Indicates whether a simultaneous Reinstatement Premium is required"
+    name="SimultaneousReinstatementReq"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="States if this message indicates a Conflict Of Interest on the Claim"
+    name="ConflictOfInterestInd"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="The insurer or reinsurer claim reference number 1"
+    name="InsurerOrReinsurerClaimRef1"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The insurer or reinsurer claim reference number 2"
+    name="InsurerOrReinsurerClaimRef2"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    desc="The status of Lloyd's, LIRMA, ILU Transactions"
+    name="TransactionStatus"
+    nullok="true"
+    typelist="ECFTransactionStatus_Ext"/>
+  <typekey
+    desc="An indication of the complexity of the claim."
+    name="TriageCategory"
+    nullok="true"
+    typelist="ECFTriageCode_Ext"/>
+  <column
+    desc="The Claim Line Number"
+    name="ClaimLineNumber"
+    nullok="true"
+    type="longint"/>
+  <column
+    desc="Immediate part collection indicator"
+    name="ImmediatePartCollectionInd"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="No Further Response Indicator. "
+    name="NoFurtherResponseIndicator"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Indicates that a multiple response is being actioned."
+    name="MultipleResponseIndicator"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Indicates that the cedant is in liquidation."
+    name="CedantInLiquidationIndicator"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Indicates whether chase up required."
+    name="ChaseUpIndicator"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The period (in months) before a chase up will be issued."
+    name="ChaseUpIndicatorInterval"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Indicates that contractual conditions apply to claim."
+    name="ContractualConditionsIndicator"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Indicates that the Reinstatement Premium has been processed."
+    name="SimultaneousReinstatementProcd"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Collection unlikely indicator"
+    name="CollectionUnlikelyIndicator"
+    nullok="true"
+    type="shorttext"/>
+</subtype>

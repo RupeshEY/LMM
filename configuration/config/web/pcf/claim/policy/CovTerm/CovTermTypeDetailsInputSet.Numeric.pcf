@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="CovTermTypeDetailsInputSet"
+    mode="Numeric">
+    <Require
+      name="CovTerm"
+      type="CovTerm"/>
+    <Variable
+      initialValue="CovTerm as NumericCovTerm"
+      name="NumericCovTerm"
+      type="NumericCovTerm"/>
+    <TextInput
+      editable="true"
+      id="NumericValue"
+      label="DisplayKey.get(&quot;Web.ClaimPolicy.CovTerm.NumericValue&quot;)"
+      value="NumericCovTerm.NumericValue"
+      valueType="java.math.BigDecimal"/>
+    <TypeKeyInput
+      editable="true"
+      id="Units"
+      label="DisplayKey.get(&quot;Web.ClaimPolicy.CovTerm.Units&quot;)"
+      value="NumericCovTerm.Units"
+      valueType="typekey.CovTermModelVal"/>
+  </InputSet>
+</PCF>

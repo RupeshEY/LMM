@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="IncidentSeverityConditionsLV">
+    <Require
+      name="classification"
+      type="WorkloadClassification"/>
+    <ExposeIterator
+      valueType="IncidentSeverityConditionFilter"
+      widget="IncidentSeverityConditionsLV"/>
+    <RowIterator
+      editable="true"
+      elementName="incidentseverity"
+      hideCheckBoxesIfReadOnly="true"
+      toAdd="classification.IncidentSeverityCondition.addToConditionFilters(incidentseverity)"
+      toRemove="classification.IncidentSeverityCondition.removeFromConditionFilters(incidentseverity)"
+      value="classification.IncidentSeverityCondition.ConditionFilters"
+      valueType="entity.IncidentSeverityConditionFilter[]">
+      <Row>
+        <TypeKeyCell
+          editable="true"
+          id="IncidentSeverity"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.ExposureIncidentSeveritiesLV.IncidentSeverity&quot;)"
+          required="true"
+          value="incidentseverity.IncidentSeverity"
+          valueType="typekey.SeverityType"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

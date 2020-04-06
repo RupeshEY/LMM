@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<!-- Temp table for upgrading rpt tables -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table used to recalculate from the batch process."
+  entity="FinancialsRptUpgrade"
+  exportable="false"
+  extendable="false"
+  loadable="false"
+  platform="false"
+  table="frptupgrade"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.financials.entity.FinancialsRptUpgrade"
+    impl="com.guidewire.cc.domain.financials.impl.FinancialsRptUpgradeImpl"/>
+  <column
+    desc="Claim id."
+    exportable="false"
+    name="Claim"
+    nullok="false"
+    type="softentityreference"/>
+  <column
+    desc="Exposure id."
+    exportable="false"
+    name="Exposure"
+    nullok="true"
+    type="softentityreference"/>
+  <column
+    desc="All awaiting-submission and commited reserves"
+    exportable="false"
+    name="TotalReserves"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All awaiting-submission and committed eroding payments"
+    exportable="false"
+    name="TotalErodingPmts"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All awaiting-submission and committed non-eroding payments"
+    exportable="false"
+    name="TotalNonErodingPmts"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All (eroding and non-eroding) awaiting-submission and committed payments"
+    exportable="false"
+    name="TotalPayments"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All pending-approval eroding payments"
+    exportable="false"
+    name="ErodingUnapprvdPmts"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All committed recoveries"
+    exportable="false"
+    name="TotalRecoveries"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All committed recovery-reserves"
+    exportable="false"
+    name="TotalRecoveryReserves"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All FutureDated eroding payments"
+    exportable="false"
+    name="FutureErodingPmts"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All FutureDated non-eroding payments"
+    exportable="false"
+    name="FutureNonErodingPmts"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All foreign exchange adjustments to payments"
+    exportable="false"
+    name="ForExAdjustments"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All awaiting-submission and commited reserves"
+    exportable="false"
+    name="TotalReservesRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All awaiting-submission and committed eroding payments"
+    exportable="false"
+    name="TotlErdngPmtsRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All awaiting-submission and committed non-eroding payments"
+    exportable="false"
+    name="TotlNonErdngPmtsRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All (eroding and non-eroding) awaiting-submission and committed payments"
+    exportable="false"
+    name="TotalPaymentsRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All pending-approval eroding payments"
+    exportable="false"
+    name="ErdngUnappPmtsRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All committed recoveries"
+    exportable="false"
+    name="TotalRecoveriesRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All committed recovery-reserves"
+    exportable="false"
+    name="TotalRecReservesRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All FutureDated eroding payments"
+    exportable="false"
+    name="FtrErodngPmtsRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All FutureDated non-eroding payments"
+    exportable="false"
+    name="FtrNonErodngPmtsRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All foreign exchange adjustments to payments"
+    exportable="false"
+    name="ForExAdjustmentsRprtng"
+    nullok="false"
+    type="money"/>
+  <index
+    desc="Improves performance of ExposureRptUpdateTrigger, specifically in ExposureRptQueryBuilder.createWhereSQL()."
+    name="frptupgrade2">
+    <indexcol
+      keyposition="1"
+      name="Exposure"/>
+  </index>
+  <index
+    desc="Improves performance of ClaimRptStagingTableUpdateTrigger and ClaimRptUpdateTrigger, specifically in ClaimRptQueryBuilder.createSelectSumSubQuerySQL()."
+    name="frtpupgrade3">
+    <indexcol
+      keyposition="1"
+      name="Claim"/>
+  </index>
+</entity>

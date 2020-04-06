@@ -1,0 +1,26 @@
+package rules.Validation.SubrogationValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("SUBV01000 Close Subrogation")
+internal class SUBV01000CloseSubrogation {
+  static function doCondition(subrogation: entity.Subrogation): boolean {
+/*start00rule*/
+    return subrogation.isFieldChanged(subrogation#Status) and subrogation.Status == TC_CLOSED
+/*end00rule*/
+  }
+
+  static function doAction(subrogation: entity.Subrogation, actions: gw.rules.Action) {
+/*start00rule*/
+    var toRepay = subrogation.DeductibleToRepay
+    var repaid = subrogation.DeductibleRepaid
+    if (toRepay.Amount > 0) {
+      if (repaid.Amount.IsZero) {
+        subrogation.rejectField("Status", ValidationLevel.TC_LOADSAVE, DisplayKey.get("Web.Subrogation.Deductible.NotRepaid"), null, null)
+      } else if (repaid != toRepay) {
+        subrogation.rejectField("Status", null, null, ValidationLevel.TC_LOADSAVE, DisplayKey.get("Web.Subrogation.Deductible.RepaidNotEqualToRepay"))
+      }
+    }
+/*end00rule*/
+  }
+}

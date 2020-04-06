@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="RecodePaymentPanelSet"
+    mode="single">
+    <Require
+      name="OriginalPayment"
+      type="Payment"/>
+    <Require
+      name="OnsetPayments"
+      type="java.util.ArrayList&lt;Payment&gt;"/>
+    <Require
+      name="reserveLineInputSetHelper"
+      type="gw.api.financials.ReserveLineInputSetHelper"/>
+    <ExposeIterator
+      applicable="false"
+      valueType="entity.Payment"
+      widget="NewOnsetPaymentsLV"/>
+    <PanelRef
+      def="RecodePaymentDV(OnsetPayments.single(), reserveLineInputSetHelper)"/>
+  </PanelSet>
+</PCF>

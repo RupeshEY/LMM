@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    afterCancel="fragHolder.onCancel()"
+    afterCommit="fragHolder.onCommit()"
+    canEdit="true"
+    id="ContainsExpressionPopup"
+    startInEditMode="true"
+    title="fragHolder.PopupTitle">
+    <LocationEntryPoint
+      signature="ContainsExpressionPopup(fragHolder : gw.bizrules.pcf.ContainsExpressionFragmentHolder)"/>
+    <Variable
+      name="fragHolder"
+      type="gw.bizrules.pcf.ContainsExpressionFragmentHolder"/>
+    <Variable
+      initialValue="fragHolder.getInitializedNestedController(CurrentLocation)"
+      name="initializedController"
+      type="gw.bizrules.pcf.ConditionBuilderController"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+        <ToolbarButtonSetRef
+          toolbarButtonSet="ConditionValidationToolbarButtonSet(fragHolder)"/>
+      </Toolbar>
+      <Verbatim
+        id="DescriptionText"
+        label="fragHolder.PopupDescriptionText"/>
+      <PanelRef
+        def="ConditionBuilderPanelSet(initializedController)"/>
+    </Screen>
+  </Popup>
+</PCF>

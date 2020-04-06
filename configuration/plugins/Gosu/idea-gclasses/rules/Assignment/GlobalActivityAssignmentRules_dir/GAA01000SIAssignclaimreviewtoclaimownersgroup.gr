@@ -1,0 +1,22 @@
+package rules.Assignment.GlobalActivityAssignmentRules_dir
+
+@gw.rules.RuleName("GAA01000 - SI - Assign claim review to claim owner's group")
+internal class GAA01000SIAssignclaimreviewtoclaimownersgroup {
+  static function doCondition(activity : entity.Activity) : boolean {
+    
+/*start00rule*/
+return activity.ActivityPattern.Code=="SI_review"
+/*end00rule*/
+
+  }
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+
+/*start00rule*/
+if (activity.CurrentAssignment.assignGroup(activity.Claim.AssignedGroup)) {
+   actions.exit()
+}
+/*end00rule*/
+
+  }
+}

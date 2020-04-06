@@ -1,0 +1,418 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Groups one or more payments together for payment by a single check."
+  entity="Check"
+  exportable="true"
+  table="check"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.check.impl.CheckInternal"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.check.entity.Check"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="EFTDataDelegate"/>
+  <implementsInterface
+    iface="gw.api.financials.CancelCheckMethods"
+    impl="gw.entity.CancelCheckMethodsImpl"/>
+  <implementsInterface
+    iface="gw.api.financials.DeleteCheckMethods"
+    impl="gw.entity.DeleteCheckMethodsImpl"/>
+  <implementsInterface
+    iface="gw.api.financials.CheckValidationMethods"
+    impl="gw.api.financials.CheckValidationMethodsImpl"/>
+  <implementsInterface
+    iface="gw.api.financials.CheckMethods"
+    impl="gw.api.financials.CheckMethodsImpl"/>
+  <fulldescription><![CDATA[
+      A paper Check or EFT issued to a particular payee to deliver one or more Payments. A Check can have multiple payees,
+      in which case distinct Checks to each secondary payee are created in the same CheckSet, and they are all related
+      to the primary check as members of a CheckGroup. For a single payee check, the check's amount is the aggregate
+      of all the payments associated with it. For a multiple-payee check, each of the secondary checks gets a portion
+      of the aggregated payments, and the remainder is the amount of the primary Check.
+    ]]></fulldescription>
+  <column
+    desc="The check or EFT identifier."
+    name="CheckNumber"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Comments about the check, such as a reason it was voided."
+    name="Comments"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Date that the service was performed (if this check is for a service)."
+    name="DateOfService"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The time the check was created. This is different from CreateTime, which is the time it was stored in the system."
+    name="EnteredTime"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Invoice number associated with the check."
+    name="InvoiceNumber"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Date the check was issued."
+    name="IssueDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Name of the person/company to whom the check should be mailed."
+    name="MailTo"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Memo to include on the check."
+    name="Memo"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Pay to the order of."
+    name="PayTo"
+    nullok="true"
+    supportsLinguisticSearch="true"
+    type="shorttext"/>
+  <column
+    desc="Reportable amount of the check in the transaction currency. Used by the BackupWithholdingCalculator as the amount of the check reportable to the IRS, from which it calculates backup withholding Deductions. It is editable in the UI."
+    name="ReportableAmount"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="Currency"/>
+  </column>
+  <column
+    desc="Date that the check is scheduled to be sent.  Also used to determine if the check amount is included in Future Payments (tomorrow or later).  Should only be modified in the UI or PreSetup rules."
+    name="ScheduledSendDate"
+    nullok="true"
+    type="dateonly"/>
+  <column
+    desc="End date of the service period for the check."
+    name="ServicePdEnd"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Start date of the service period for the check."
+    name="ServicePdStart"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Only escalate as part of a BulkInvoice."
+    name="PendEscalationForBulk"
+    nullok="true"
+    type="bit"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="PortionID"
+    desc="The amount of a multi-payee check applicable to this check."
+    fkentity="CheckPortion"
+    importableagainstexistingobject="false"
+    name="Portion"
+    nullok="true"
+    triggersValidation="true"/>
+  <foreignkey
+    columnName="GroupID"
+    desc="CheckGroup this check belongs to, if it's part of a multi-payee check."
+    fkentity="CheckGroup"
+    importableagainstexistingobject="false"
+    name="Group"
+    nullok="true"
+    triggersValidation="true"/>
+  <onetoone
+    desc="The calculated data for this check."
+    exportable="false"
+    fkentity="CheckRpt"
+    ignoreforevents="true"
+    name="CheckRpt"
+    nullok="true"
+    setterScriptability="doesNotExist"/>
+  <foreignkey
+    columnName="CheckSetID"
+    desc="CheckSet this Check belongs to."
+    exportable="false"
+    fkentity="CheckSet"
+    importableagainstexistingobject="false"
+    name="CheckSet"
+    nullok="false"
+    triggersValidation="true"/>
+  <foreignkey
+    columnName="ClaimContactID"
+    desc="Claimant the check is being written for, as a ClaimContact."
+    fkentity="ClaimContact"
+    name="ClaimContact"
+    nullok="true"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The related claim."
+    existingreferencesallowed="false"
+    exportasid="true"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    columnName="RecurringCheckID"
+    desc="The recurring check entity, if any, associated with this check."
+    fkentity="RecurringCheck"
+    importableagainstexistingobject="false"
+    name="RecurringCheck"
+    nullok="true"
+    triggersValidation="true"/>
+  <foreignkey
+    columnName="BulkInvoiceItemInfoID"
+    desc="If this check was created to act as a record-keeper for a bulk invoice item, this is the item it references."
+    exportable="false"
+    fkentity="BulkInvoiceItemInfo"
+    loadable="false"
+    name="BulkInvoiceItemInfo"
+    nullok="true"/>
+  <typekey
+    desc="Source bank account."
+    name="BankAccount"
+    nullok="true"
+    typelist="bankaccount"/>
+  <typekey
+    desc="How the check should be batched for sending."
+    name="CheckBatching"
+    nullok="true"
+    typelist="checkbatching"/>
+  <typekey
+    desc="Special handling instructions for the check."
+    name="CheckInstructions"
+    nullok="true"
+    typelist="checkhandlinginstructions"/>
+  <typekey
+    createhistogram="true"
+    desc="Role of the check in the check group (primary or secondary)."
+    name="CheckType"
+    nullok="false"
+    typelist="CheckType"/>
+  <typekey
+    desc="Deduction type for secondary checks.  Always NULL for primary checks."
+    name="DeductionType"
+    nullok="true"
+    typelist="DeductionType"/>
+  <typekey
+    desc="Requested delivery method."
+    name="DeliveryMethod"
+    nullok="true"
+    typelist="deliverymethod"/>
+  <typekey
+    desc="Requested payment method for all payments in the check."
+    name="PaymentMethod"
+    nullok="true"
+    typelist="paymentmethod"/>
+  <typekey
+    desc="Whether the payment should be reported to the IRS as income."
+    name="Reportability"
+    nullok="true"
+    typelist="ReportabilityType"/>
+  <typekey
+    desc="Status of the check (issued, voided, cleared, and so on). Do not update directly. Use methods to initiate operations, or use updateCheckStatus() method."
+    name="Status"
+    nullok="false"
+    typefilter="check"
+    typelist="TransactionStatus"/>
+  <array
+    arrayentity="Deduction"
+    desc="Any deductions related to the check."
+    name="Deductions"
+    triggersValidation="true"/>
+  <array
+    arrayentity="CheckPayee"
+    desc="Recipients of the payment; there must be at least one. If there are multiple, each is a 'joint' payee."
+    name="Payees"
+    owner="true"
+    requiredmatch="nonretired"
+    triggersValidation="true"/>
+  <array
+    arrayentity="Payment"
+    desc="Payments on the check."
+    name="Payments"
+    triggersValidation="true"/>
+  <array
+    arrayentity="ServiceRequestInvoice"
+    desc="ServiceRequestInvoices related to this check. All linked invoices are expected to have the same service request specialist and currency."
+    name="ServiceRequestInvoices"
+    triggersValidation="true"/>
+  <validatetypekeyinset
+    columnname="Status">
+    <typecodes>
+      <typecode
+        typecode="cleared"/>
+      <typecode
+        typecode="issued"/>
+      <typecode
+        typecode="requested"/>
+      <typecode
+        typecode="stopped"/>
+      <typecode
+        typecode="voided"/>
+    </typecodes>
+  </validatetypekeyinset>
+  <events>
+    <event
+      description="Fired when the check is added, and each time its status changes."
+      name="CheckStatusChanged"/>
+    <event
+      description="Deprecated.  Use CheckStatusChanged instead."
+      name="CheckIssued"/>
+    <event
+      description="Deprecated.  Use CheckStatusChanged instead."
+      name="CheckStopped"/>
+    <event
+      description="Deprecated.  Use CheckStatusChanged instead."
+      name="CheckSubmitted"/>
+    <event
+      description="Deprecated.  Use CheckStatusChanged instead."
+      name="CheckVoided"/>
+    <event
+      description="Deprecated.  Use CheckStatusChanged instead."
+      name="CheckTransferred"/>
+  </events>
+  <index
+    desc="Index used for the financials escalation monitor"
+    name="checku1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Status"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="ID"/>
+    <indexcol
+      keyposition="4"
+      name="ScheduledSendDate"/>
+  </index>
+  <index
+    desc="For CheckSearchCreatedByMyPendingApproval"
+    name="checku2"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Status"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="EnteredTime"/>
+    <indexcol
+      keyposition="4"
+      name="ID"/>
+  </index>
+  <index
+    desc="Index used for CheckSearchCheckNumberSearch"
+    name="checku3"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="CheckNumber"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="4"
+      name="ID"/>
+  </index>
+  <index
+    desc="Index used for CheckSearchInvoiceNumbers"
+    name="checku5"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="InvoiceNumber"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="4"
+      name="ID"/>
+  </index>
+  <index
+    desc="Index used for CheckSearchScheduledSendDate"
+    name="check4">
+    <indexcol
+      keyposition="1"
+      name="ScheduledSendDate"/>
+  </index>
+  <index
+    desc="Index used for CheckSearchCreatedByUserWithPayTo and CheckSearchCreatedByUserAndPendingApproval"
+    name="checku4"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="CreateUserID"/>
+    <indexcol
+      keyposition="2"
+      name="EnteredTime"/>
+    <indexcol
+      keyposition="3"
+      name="Retired"/>
+    <indexcol
+      keyposition="4"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="5"
+      name="PayToDenorm"/>
+    <indexcol
+      keyposition="6"
+      name="Status"/>
+    <indexcol
+      keyposition="7"
+      name="ID"/>
+  </index>
+  <index
+    desc="Index used for consistency checker"
+    name="checku6"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="GroupID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="ID"/>
+  </index>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.financials.dbchecks.CheckDBCheckBuilder"/>
+  <checkconstraint
+    desc="A check with a non-null CheckGroup must have a non-null CheckPortion."
+    predicate="PortionID IS NOT NULL OR GroupID IS NULL"/>
+  <checkconstraint
+    desc="A check with a non-null CheckPortion must belong to a CheckGroup."
+    predicate="PortionID IS NULL OR GroupID IS NOT NULL"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="MailingAddressID"
+    desc="Address of the person/company to whom the check should be mailed. This represents an Address entity."
+    fkentity="Address"
+    name="MailingAddress"
+    nullok="true"
+    triggersValidation="true"/>
+</entity>

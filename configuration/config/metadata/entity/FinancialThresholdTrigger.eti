@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  admin="true"
+  desc="An automated handler trigger that executes based on the state of a specified amount relative to a given financial threshold"
+  entity="FinancialThresholdTrigger"
+  loadable="false"
+  table="financialthresholdtrigger"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.specialhandling.entity.FinancialThresholdTrigger"
+    impl="com.guidewire.cc.domain.specialhandling.impl.FinancialThresholdTriggerImpl"/>
+  <fulldescription><![CDATA[
+    A type of automated handler trigger whose execution behavior is based on a specific financial amount reaching, exceeding or falling below a specified threshold value.
+  ]]></fulldescription>
+  <implementsInterface
+    iface="gw.api.specialhandling.AutomatedHandlerTrigger"
+    impl="gw.specialhandling.FinancialAutomatedHandlerTriggerMethodsImpl"/>
+  <typekey
+    desc="The financial threshold that can cause this trigger to execute"
+    name="FinancialThreshold"
+    nullok="false"
+    typelist="FinancialThreshold"/>
+  <typekey
+    desc="Specifies which exact occurrence takes place to cause this Trigger to fire"
+    name="TriggeringCause"
+    nullok="true"
+    typelist="FinancialTriggerCause"/>
+  <typekey
+    desc="The Currency of ThresholdAmount; this value must equal a Claim's Currency for that Claim to match this trigger."
+    name="Currency"
+    nullok="false"
+    typelist="Currency"/>
+  <column
+    desc="Monetary amount for the threshold that must be exceeded to trigger the event"
+    name="ThresholdAmount"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="Currency"/>
+  </column>
+  <foreignkey
+    columnName="AutomatedHandlerID"
+    fkentity="AutomatedHandler"
+    name="AutomatedHandler"
+    nullok="false"/>
+</entity>

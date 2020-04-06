@@ -1,0 +1,36 @@
+package rules.Preupdate.ClaimPreupdate_dir
+uses gw.api.locale.DisplayKey
+
+/**
+ * If subrogation is appropriate for this claim, create a subrogation summary (if one does not already exist)
+ * and a claim-level subrogation in REVIEW.
+ */
+@gw.rules.RuleName("CPU10800 - Create Subro Summary")
+internal class CPU10800CreateSubroSummary {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.ActivateSubroModule()
+
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+var summary = claim.SubrogationSummary
+if (summary == null) {
+  summary = claim.createSubrogationSummaryIdempotently()
+  summary.ProrateDeductible = true
+}
+if (summary.Subrogations.IsEmpty) {
+  summary.createNewSubrogation()
+}
+if (summary.New) {
+  claim.createSubrogationHistoryEvent(HistoryType.TC_OPENED, summary.Subrogations[0], DisplayKey.get("Web.Subrogation.History.Opened"))
+}
+/*end00rule*/
+
+  }
+}

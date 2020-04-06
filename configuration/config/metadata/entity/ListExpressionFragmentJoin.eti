@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="ListExpressionFragmentJoin"
+  table="listexprfragjoin"
+  final="true"
+  loadable="false"
+  platform="true"
+  type="joinarray">
+  <implementsEntity
+    name="RuleVersionDependent"/>
+  <implementsEntity
+    name="OrderedChild"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.bizrules.domain.ListExpressionFragmentJoinImpl"/>
+  <foreignkey
+    fkentity="ExpressionFragment"
+    name="ExpressionFragment"
+    nullok="false"/>
+  <foreignkey
+    fkentity="ListExpressionFragment"
+    name="ListExpressionFragment"
+    nullok="false"/>
+  <index
+    desc="For ordering"
+    name="ordering"
+    unique="true">
+    <indexcol keyposition="1" name="ListExpressionFragment"/>
+    <indexcol keyposition="2" name="OrderNumber"/>
+  </index>
+</entity>

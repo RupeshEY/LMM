@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <Page
+    alwaysInEditMode="true"
+    canEdit="true"
+    countsAsWork="false"
+    id="SCMClaimMessages"
+    parent="SCMLocationGroup(claim)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Accelerator.IPLM.Messages.Title&quot;)">
+    <LocationEntryPoint
+      signature="SCMClaimMessages(claim:Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="new gw.acc.iplm.controller.SCMClaimMessagesController(claim)"
+      name="controller"
+      type="gw.acc.iplm.controller.SCMClaimMessagesController"/>
+    <Variable
+      name="selectedOCR"
+      type="String"/>
+    <Variable
+      initialValue="controller.scmMessagesWithOCR(selectedOCR)"
+      name="messages"
+      recalculateOnRefresh="true"
+      type="List&lt;LMMessageLloydsSCM_Ext&gt;"/>
+    <Screen>
+      <TitleBar
+        title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimMessages.SCMLVTitle&quot;)"/>
+      <Toolbar>
+        <ToolbarRangeInput
+          editable="true"
+          focusOnStartEditing="true"
+          id="OCR"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimMessages.SelectOCR&quot;)"
+          value="selectedOCR"
+          valueRange="controller.distinctOCRsForAllSCMMessages()"
+          valueType="java.lang.String">
+          <PostOnChange/>
+        </ToolbarRangeInput>
+      </Toolbar>
+      <ListDetailPanel
+        id="scmMessageListDetailPanel"
+        selectionName="selectedMessage"
+        selectionType="entity.LMMessageLloydsSCM_Ext">
+        <PanelRef def="SCMClaimMessagesLV(messages)"
+                  id="scmMessagesPanelRef">
+          <TitleBar
+            title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimMessages.Messages&quot;)"/>
+        </PanelRef>
+        <CardViewPanel>
+          <Card
+            id="scmDetailCard"
+            title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimMessages.SCMCardTitle&quot;, selectedMessage.MovementReferenceSequence)">
+            <PanelRef
+              def="SCMMessageDV(selectedMessage)"
+              id="scmMessagePanelRef"/>
+          </Card>
+        </CardViewPanel>
+      </ListDetailPanel>
+    </Screen>
+  </Page>
+</PCF>

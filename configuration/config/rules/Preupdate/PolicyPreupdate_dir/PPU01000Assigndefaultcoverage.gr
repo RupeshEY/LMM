@@ -1,0 +1,28 @@
+package rules.Preupdate.PolicyPreupdate_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("PPU01000 - Assign default coverage")
+internal class PPU01000Assigndefaultcoverage {
+  static function doCondition(policy : entity.Policy) : boolean {
+    
+/*start00rule*/
+return policy.PolicyType == TC_WORKERSCOMP 
+and policy.Claim != null
+/*end00rule*/
+
+  }
+
+  static function doAction(policy : entity.Policy, actions : gw.rules.Action) {
+
+/*start00rule*/
+/**
+ * This rule has been disabled OOTB.  The linking of WC Exposures to Coverages
+ * is now done as part of the FNOL - Claim enhancement which creates the 
+ * Exposures.  This change ensures the Exposure is fully defined before 
+ * plugins, rules and entity call backs are invoked.
+ */
+policy.Claim.linkWCExposuresToCoverages()
+/*end00rule*/
+
+  }
+}

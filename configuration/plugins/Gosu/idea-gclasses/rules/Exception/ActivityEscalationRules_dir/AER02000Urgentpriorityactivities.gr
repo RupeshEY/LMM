@@ -1,0 +1,22 @@
+package rules.Exception.ActivityEscalationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("AER02000 - Urgent priority activities")
+internal class AER02000Urgentpriorityactivities {
+  static function doCondition(activity : entity.Activity) : boolean {
+    
+/*start00rule*/
+return activity.Priority==TC_URGENT
+/*end00rule*/
+
+  }
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+
+/*start00rule*/
+activity.Claim.setFlag(DisplayKey.get("Rules.Exception.ActivityEscalation.Priority.Urgent", activity.Subject))
+/*end00rule*/
+
+  }
+}

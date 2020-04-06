@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.User.viewteam"
+    id="TeamUserClaims"
+    title="DisplayKey.get(&quot;Web.Team.UserClaimsTitle&quot;, User.DisplayName)">
+    <LocationEntryPoint
+      signature="TeamUserClaims(User : User, Group : Group)"/>
+    <Variable
+      name="User"
+      type="User"/>
+    <Variable
+      name="Group"
+      type="Group"/>
+    <Variable
+      initialValue="new gw.api.team.TeamUserClaimFilterSet(User,Group)"
+      name="FilterSet"
+      type="gw.api.team.TeamClaimFilterSet"/>
+    <Variable
+      initialValue="ClaimTeamView.finder.findAll()"
+      name="ClaimTeamViewList"
+      recalculateOnRefresh="true"
+      type="gw.api.database.IQueryBeanResult&lt;gw.pl.persistence.core.Bean&gt;"/>
+    <Variable
+      initialValue="new RemoveFlagInfo()"
+      name="RemoveFlagInfo"
+      type="RemoveFlagInfo"/>
+    <Variable
+      initialValue="&quot;TeamClaimsLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <Screen
+      id="TeamUserClaimsScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.Team.UserClaimsTitle&quot;, User.DisplayName)"/>
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="AssignClaimsPopup.push(new gw.api.claim.ClaimAssignmentPopup(CheckedValues))"
+          flags="any ClaimTeamView"
+          id="TeamUserClaims_Assign"
+          iterator="TeamClaimsLV.TeamClaimsLV"
+          label="DisplayKey.get(&quot;Web.Team.Toolbar.Assign&quot;)"
+          shortcut="G"/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="TeamClaimRemoveFlagPopup.push(gw.api.team.TeamUtil.convertViewArrayToSingleClaim(CheckedValues))"
+          flags="one CanRemoveFlag, one ClaimTeamView"
+          id="TeamUserClaims_RemoveFlag"
+          iterator="TeamClaimsLV.TeamClaimsLV"
+          label="DisplayKey.get(&quot;Web.Team.Toolbar.RemoveFlag&quot;)"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="gw.api.print.ListViewPrintOptionPopupAction.printListViewWithOptions(PrintTargetLV)"
+          available="perm.User.printlistviews"
+          id="TeamUserClaims_Print"
+          label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="TeamClaimsLV(ClaimTeamViewList, FilterSet)"/>
+    </Screen>
+  </Page>
+</PCF>

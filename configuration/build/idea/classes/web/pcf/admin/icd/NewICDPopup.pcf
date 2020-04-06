@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    alwaysInEditMode="true"
+    canEdit="true"
+    canVisit="true"
+    id="NewICDPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Admin.ICD.NewICDPopup&quot;)">
+    <LocationEntryPoint
+      signature="NewICDPopup()"/>
+    <Variable
+      initialValue="new ICDCode()"
+      name="newICD"
+      type="ICDCode"/>
+    <Screen
+      editable="true"
+      id="ICDPopupScreen">
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <PanelRef
+        def="ICDDV(newICD, true)"
+        editable="true"
+        id="ICDDVPanel"/>
+      <PanelRef
+        def="LocalizedValuesDV(newICD, { &quot;CodeDesc&quot; }, { DisplayKey.get(&quot;Web.Admin.ICD.CodeDescription&quot;) })"/>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,28 @@
+package rules.ApprovalRouting.BulkInvoiceApprovalAssignmentRules_dir
+
+@gw.rules.RuleName("ARB01000 - Western Regional Auto Supervisors")
+internal class ARB01000WesternRegionalAutoSupervisors {
+  static function doCondition(bulkInvoice : entity.BulkInvoice) : boolean {
+    
+/*start00rule*/
+return bulkInvoice.getLastApprovingUser() == util.RuleGroups.instance.getAuto1TeamASupervisor()
+    or bulkInvoice.getLastApprovingUser() == util.RuleGroups.instance.getAuto1TeamBSupervisor()
+    or bulkInvoice.getLastApprovingUser() == util.RuleGroups.instance.getAuto1TeamCSupervisor()
+    
+/* The function calls are defined in RuleGroups.gs and are examples of how you can
+   use functions to avoid having the search details in the rules. 
+*/
+/*end00rule*/
+
+  }
+
+  static function doAction(bulkInvoice : entity.BulkInvoice, actions : gw.rules.Action) {
+
+/*start00rule*/
+bulkInvoice.setApprovingUser(util.RuleGroups.instance.getWesternAutoGroupSupervisor(), 
+                            util.RuleGroups.instance.getWesternAutoGroup())
+actions.exit()
+/*end00rule*/
+
+  }
+}

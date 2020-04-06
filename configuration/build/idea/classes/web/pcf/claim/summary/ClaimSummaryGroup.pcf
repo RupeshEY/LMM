@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="perm.Claim.view(Claim) and perm.System.viewclaimsummary"
+    id="ClaimSummaryGroup"
+    title="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Summary&quot;)">
+    <LocationEntryPoint
+      signature="ClaimSummaryGroup(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimSummary.Tab&quot;)"
+      location="ClaimSummary(Claim)"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.ClaimSummary.ClaimSummary.Tab.ClaimStatus&quot;)"
+      location="ClaimStatus(Claim)"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.ClaimSummary.ClaimSummary.Tab.ClaimHealthMetrics&quot;)"
+      location="ClaimKeyMetrics(Claim)"/>
+  </LocationGroup>
+</PCF>

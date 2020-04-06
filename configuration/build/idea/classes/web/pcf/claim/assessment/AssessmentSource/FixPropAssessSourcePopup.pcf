@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="FixPropAssessSourcePopup"
+    title="DisplayKey.get(&quot;NVV.Incident.FixedProperty.AssessmentSource&quot;, AssessmentSource.Incident.DisplayName)">
+    <LocationEntryPoint
+      signature="FixPropAssessSourcePopup(AssessmentSource : AssessmentSource)"/>
+    <Variable
+      name="AssessmentSource"
+      type="AssessmentSource"/>
+    <Screen
+      id="EditAssessmentSourceScreen">
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <PanelRef
+        def="FixPropAssessSourceDetailsDV(AssessmentSource)"/>
+    </Screen>
+  </Popup>
+</PCF>

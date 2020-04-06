@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="ECFClaimResponsePanelSet"
+    mode="LirmaAgreementParty">
+    <Require
+      name="ecfClaimData"
+      type="ECFMessageClaimData_Ext"/>
+    <Require
+      name="claimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <PanelRow>
+      <PanelColumn>
+        <DetailViewPanel
+          columnDivider="false">
+          <InputColumn>
+            <InputSetRef
+              def="MessageBeingRespondedToInputSet(ecfClaimData)"/>
+            <InputSetRef
+              def="InsurerTransactionReferenceInputSet(claimResponseRq)"/>
+          </InputColumn>
+          <InputColumn>
+            <InputSet>
+              <InputSetRef
+                def="ResponseInputSet(claimResponseRq, true)"/>
+            </InputSet>
+          </InputColumn>
+        </DetailViewPanel>
+        <DetailViewPanel>
+          <InputColumn>
+            <InputGroup
+              allowToggle="false"
+              childrenVisible="true"
+              id="sapActionsInputGroup"
+              label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.LIRMACompanyActions&quot;)">
+              <PostOnChange/>
+              <InputSetRef
+                def="LirmaSAPActionsInputSet(claimResponseRq, ecfClaimData)"/>
+            </InputGroup>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelColumn>
+    </PanelRow>
+  </PanelSet>
+</PCF>

@@ -1,0 +1,14 @@
+package gw.vendormanagement.servicerequeststate
+
+@Export
+enum ServiceRequestActionLocation {
+
+  SERVICE_REQUEST_DETAILS,
+  SERVICE_REQUEST_INVOICE,
+  ADD_QUOTE_POPUP,
+  REVISE_QUOTE_POPUP,
+  APPROVE_QUOTE_POPUP,
+  ADD_INVOICE_POPUP,
+  PERFORM_OPERATION_WITH_CONFIRMATION
+
+}

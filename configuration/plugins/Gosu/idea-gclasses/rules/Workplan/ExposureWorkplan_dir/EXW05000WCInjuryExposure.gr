@@ -1,0 +1,21 @@
+package rules.Workplan.ExposureWorkplan_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("EXW05000 - WC Injury Exposure")
+internal class EXW05000WCInjuryExposure {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ExposureType ==TC_WCINJURYDAMAGE
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* execute child rules */
+/*end00rule*/
+
+  }
+}

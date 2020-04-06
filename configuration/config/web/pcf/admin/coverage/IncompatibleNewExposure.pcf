@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="perm.System.covverifymanage"
+    canVisit="perm.System.covverifyview"
+    id="IncompatibleNewExposure"
+    title="DisplayKey.get(&quot;Web.Admin.IncompatibleNewExposure&quot;)">
+    <Variable
+      initialValue="gw.api.database.Query.make(entity.IncompatibleNewExposure).select()"
+      name="IncompatibleNewExposure"
+      type="gw.api.database.IQueryBeanResult&lt;IncompatibleNewExposure&gt;"/>
+    <Screen
+      id="IncompatibleNewExposureScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.Admin.IncompatibleNewExposure&quot;)"/>
+      <Toolbar
+        visible="true">
+        <EditButtons/>
+        <IteratorButtons
+          addVisible="true"
+          iterator="IncompatibleNewExposureLV.IncompatibleNewExposureLV"
+          removeVisible="true"/>
+      </Toolbar>
+      <PanelRef
+        def="IncompatibleNewExposureLV(IncompatibleNewExposure)"/>
+    </Screen>
+  </Page>
+</PCF>

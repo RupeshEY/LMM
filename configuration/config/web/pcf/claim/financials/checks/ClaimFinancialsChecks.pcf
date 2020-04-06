@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="(Claim.State != ClaimState.TC_DRAFT) and perm.Claim.viewpayments(Claim)"
+    id="ClaimFinancialsChecks"
+    title="perm.Claim.viewnettotalincurred(Claim) ? DisplayKey.get(&quot;JSP.ClaimFinancials.Financials.Incurred&quot;, gw.api.util.CurrencyUtil.renderAsCurrency(gw.api.util.Math.Nz(gw.api.financials.FinancialsCalculations.getTotalIncurredNet().withClaim(Claim).Amount.Amount), Claim.Currency), DisplayKey.get(&quot;JSP.ClaimFinancials.Financials.Checks&quot;)) : DisplayKey.get(&quot;JSP.ClaimFinancials.Financials.NoIncurred&quot;, DisplayKey.get(&quot;JSP.ClaimFinancials.Financials.Checks&quot;))">
+    <LocationEntryPoint
+      signature="ClaimFinancialsChecks(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="ClaimFinancialsChecksScreen">
+      <Toolbar/>
+      <PanelRef
+        def="ChecksLV(Claim)"/>
+    </Screen>
+  </Page>
+</PCF>

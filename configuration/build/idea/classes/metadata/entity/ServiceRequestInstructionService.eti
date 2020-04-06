@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Join entity between a ServiceRequestInstruction and type of service"
+  entity="ServiceRequestInstructionService"
+  exportable="true"
+  final="false"
+  loadable="false"
+  table="servicereqinstructionsvc"
+  type="editable"
+  typelistTableName="servicereqinstructionsvc">
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+    Links a ServiceRequestInstruction to a service to be performed.
+  ]]></fulldescription>
+  <foreignkey
+    columnName="ServiceRequestInstructionID"
+    desc="The instruction as part of which the linked service should be performed."
+    fkentity="ServiceRequestInstruction"
+    name="Instruction"
+    nullok="false"/>
+  <foreignkey
+    columnName="SpecialistServiceID"
+    desc="The service to be performed."
+    fkentity="SpecialistService"
+    ignoreforevents="true"
+    name="Service"
+    nullok="false"/>
+</entity>

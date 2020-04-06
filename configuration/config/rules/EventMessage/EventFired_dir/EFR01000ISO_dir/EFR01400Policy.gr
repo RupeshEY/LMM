@@ -1,0 +1,20 @@
+package rules.EventMessage.EventFired_dir.EFR01000ISO_dir
+
+@gw.rules.RuleName("EFR01400 - Policy")
+internal class EFR01400Policy {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return messageContext.Root typeis Policy
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AddressBookVendorW9InfoInputSet">
+    <Require
+      name="contact"
+      type="Contact"/>
+    <TypeKeyInput
+      editable="true"
+      id="TaxStatus"
+      label="DisplayKey.get(&quot;Web.ContactDetail.TaxInfo.TaxStatus&quot;)"
+      value="contact.TaxStatus"
+      valueType="typekey.TaxStatus"/>
+    <BooleanRadioInput
+      editable="true"
+      id="W9received"
+      label="DisplayKey.get(&quot;Web.ContactDetail.TaxInfo.W9received&quot;)"
+      value="contact.W9Received"/>
+    <DateInput
+      editable="true"
+      id="W9receivedDate"
+      label="DisplayKey.get(&quot;Web.ContactDetail.TaxInfo.W9receivedDate&quot;)"
+      value="contact.W9ReceivedDate"/>
+    <DateInput
+      editable="true"
+      id="W9ValidFrom"
+      label="DisplayKey.get(&quot;Web.ContactDetail.TaxInfo.W9ValidFrom&quot;)"
+      value="contact.W9ValidFrom"/>
+    <DateInput
+      editable="true"
+      id="W9ValidTo"
+      label="DisplayKey.get(&quot;Web.ContactDetail.TaxInfo.W9ValidTo&quot;)"
+      value="contact.W9ValidTo"/>
+  </InputSet>
+</PCF>

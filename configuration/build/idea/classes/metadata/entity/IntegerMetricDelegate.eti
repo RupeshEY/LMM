@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="IntegerMetricDelegate">
+  <implementsInterface
+    iface="gw.cc.metric.entity.IntegerMetricDelegate"
+    impl="com.guidewire.cc.domain.metric.impl.IntegerMetricDelegateImpl"/>
+  <fulldescription><![CDATA[Delegate used by integer claim, service request, and exposure metrics to store an integer value
+    ]]></fulldescription>
+  <column
+    desc="Integer field to store the value."
+    name="IntegerValue"
+    nullok="true"
+    type="integer"/>
+</delegate>

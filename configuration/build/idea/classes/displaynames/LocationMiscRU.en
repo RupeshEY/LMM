@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<Entity
+  name="LocationMiscRU">
+  <Columns>
+    <Column
+      beanPath="LocationMiscRU.PolicyLocation"
+      displayName="true"
+      name="prop"/>
+    <Column
+      beanPath="LocationMiscRU.RUNumber"
+      name="runumber"/>
+    <Column
+      beanPath="LocationMiscRU.Description"
+      name="rudesc"/>
+    <Column
+      beanPath="LocationMiscRU.Subtype"
+      name="subtype"/>
+  </Columns>
+  <DisplayName><![CDATA[uses java.lang.StringBuilder
+
+var sb = new StringBuilder()
+if(runumber!=null) {
+  sb.append(runumber)
+}
+if(rudesc!=null) {
+  if(sb.length() > 0){
+    sb.append(" : ")
+  }  
+  sb.append(rudesc)
+} else if(sb.length() > 0) {
+   sb.append(" (")
+   sb.append(subtype.Description)
+   sb.append(")")   
+}
+if(sb.length() == 0){
+   sb.append(prop)   
+   sb.append(" (")
+   sb.append(subtype.Description)
+   sb.append(")")   
+}
+
+return sb.toString()
+
+
+
+  ]]></DisplayName>
+</Entity>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="ECFClaimTypeCode_Ext" desc="ECF Claim Type Codes">
+  <typecode
+    code="000"
+    desc="Not a Bulk/Aggregate/Cover	Claim Type mandatory for Retrieve Claim Rq and Claim Response Rq. Therefore 000 allocated to identify a claim that is not Bulk/Aggregate/Cover. The value provided in the Claim Event Notify Rq should be provided in Retrieve Claim Rq and Claim Response Rq"
+    name="Not a Bulk/Aggregate/Cover"/>
+  <typecode
+    code="001"
+    name="Bulk Advice/Settlement"/>
+  <typecode
+    code="002"
+    name="Excess of Loss Aggregate Claim"/>
+  <typecode
+    code="003"
+    name="Cover Collection"/>
+  <typecode
+    code="101"
+    desc="ILU only"
+    name="Salvage Association Collection"/>
+  <typefilter
+    desc="Claim Type Codes for LIRMA Company"
+    name="LIRMA">
+    <include
+      code="000"/>
+    <include
+      code="001"/>
+    <include
+      code="002"/>
+  </typefilter>
+  <typefilter
+    desc="Claim Type Codes for ILU Company"
+    name="ILU">
+    <include
+      code="000"/>
+    <include
+      code="001"/>
+    <include
+      code="002"/>
+    <include
+      code="003"/>
+    <include
+      code="101"/>
+  </typefilter>
+  <typefilter
+    desc="Claim Type Codes for LLOYDS Company"
+    name="LLOYDS">
+    <include
+      code="000"/>
+  </typefilter>
+</typelist>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="MoneyMetricLimitDelegate">
+  <implementsInterface
+    iface="gw.cc.metric.entity.MoneyMetricLimitDelegate"
+    impl="com.guidewire.cc.domain.metric.impl.MoneyMetricLimitDelegateImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.metric.impl.MoneyMetricLimitDelegateInternal"
+    impl="com.guidewire.cc.domain.metric.impl.MoneyMetricLimitDelegateImpl"/>
+  <fulldescription><![CDATA[Delegate used by money claim and exposure metric limits
+    ]]></fulldescription>
+  <column
+    desc="Money field to store the target value."
+    name="MoneyTargetValue"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="MoneyCurrency"/>
+  </column>
+  <column
+    desc="Money field to store the yellow value."
+    name="MoneyYellowValue"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="MoneyCurrency"/>
+  </column>
+  <column
+    desc="Money field to store the red value."
+    name="MoneyRedValue"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="MoneyCurrency"/>
+  </column>
+</delegate>

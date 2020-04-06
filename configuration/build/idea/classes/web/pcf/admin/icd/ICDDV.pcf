@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    border="true"
+    editable="true"
+    id="ICDDV">
+    <Require
+      name="anICD"
+      type="ICDCode"/>
+    <Require
+      name="isNew"
+      type="boolean"/>
+    <Variable
+      initialValue="isNew == true? 0 : 1"
+      name="threshold"
+      type="int"/>
+    <InputColumn>
+      <TextInput
+        action="ICD10Data.push( anICD.CodeTrimmed )"
+        actionAvailable="true"
+        editable="anICD.Code == null or perm.System.editrefdata"
+        id="ICD_Code"
+        label="DisplayKey.get(&quot;Web.Admin.ICD.ICDCode&quot;)"
+        requestValidationExpression="gw.api.database.Query.make(entity.ICDCode).compare(&quot;Code&quot;, Equals, VALUE).select().Count &gt; threshold ? DisplayKey.get(&quot;Web.Admin.ICD.ICDCode.DuplicateValidation&quot;) : null"
+        value="anICD.Code"/>
+      <TextInput
+        editable="true"
+        id="Description"
+        label="DisplayKey.get(&quot;Web.Admin.ICD.CodeDescription&quot;)"
+        value="anICD.CodeDesc"/>
+      <TypeKeyInput
+        editable="true"
+        id="Body_System"
+        label="DisplayKey.get(&quot;Web.Admin.ICD.BodySystem&quot;)"
+        value="anICD.BodySystem"
+        valueType="typekey.ICDBodySystem"/>
+    </InputColumn>
+    <InputColumn>
+      <CheckBoxInput
+        editable="true"
+        id="Chronic"
+        label="DisplayKey.get(&quot;Web.Admin.ICD.Chronic&quot;)"
+        value="anICD.Chronic"/>
+      <DateInput
+        dateFormat="short"
+        editable="true"
+        helpText="DisplayKey.get(&quot;Web.Admin.ICD.AvailableFrom.Help&quot;)"
+        id="Available_Date"
+        label="DisplayKey.get(&quot;Web.Admin.ICD.AvailableFrom&quot;)"
+        validationExpression="anICD.AvailabilityDate &gt; anICD.ExpiryDate ? DisplayKey.get(&quot;Web.Admin.ICD.AvailableFrom.Validation&quot;) : null"
+        value="anICD.AvailabilityDate"/>
+      <DateInput
+        dateFormat="short"
+        editable="true"
+        helpText="DisplayKey.get(&quot;Web.Admin.ICD.ExpiresOn.Help&quot;)"
+        id="End_Date"
+        label="DisplayKey.get(&quot;Web.Admin.ICD.ExpiresOn&quot;)"
+        value="anICD.ExpiryDate"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

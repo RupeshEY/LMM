@@ -1,0 +1,2457 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:gwsoap="http://guidewire.com/ws/soapheaders" xmlns:gwwsdl="http://guidewire.com/pl/wsdl" xmlns:pogo="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer" xmlns:pogo10="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter" xmlns:pogo11="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher" xmlns:pogo12="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer" xmlns:pogo13="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult" xmlns:pogo14="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo" xmlns:pogo15="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer" xmlns:pogo16="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult" xmlns:pogo17="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer" xmlns:pogo18="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact" xmlns:pogo19="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService" xmlns:pogo2="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple" xmlns:pogo20="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria" xmlns:pogo21="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec" xmlns:pogo22="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer" xmlns:pogo23="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo" xmlns:pogo3="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult" xmlns:pogo4="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange" xmlns:pogo5="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria" xmlns:pogo6="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch" xmlns:pogo7="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters" xmlns:pogo8="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec" xmlns:pogo9="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPI" name="ABContactAPI" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPI">
+  <wsdl:types>
+    <xs:schema xmlns:imported="http://guidewire.com/ctc/beanmodel" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPI">
+      <xs:import namespace="http://guidewire.com/ws/soapheaders" schemaLocation="soapheaders.xsd"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:import namespace="http://guidewire.com/ctc/beanmodel" schemaLocation="BeanModel.xsd"/>
+      <!-- updateContact(XmlBackedInstance) : AddressBookUIDContainer -->
+      <xs:element name="updateContact">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="abContactXML">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element ref="imported:xmlBackedInstance"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateContactResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="pogo:AddressBookUIDContainer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="AlreadyExecutedException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="BadIdentifierException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="DataConversionException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="EntityStateException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="PermissionException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="RequiredFieldException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="SOAPException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="SOAPSenderException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="WsiAuthenticationException">
+        <xs:complexType/>
+      </xs:element>
+      <!-- createContact(XmlBackedInstance) : AddressBookUIDContainer -->
+      <xs:element name="createContact">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="abContactXML">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element ref="imported:xmlBackedInstance"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createContactResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="pogo:AddressBookUIDContainer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="DuplicateKeyException">
+        <xs:complexType/>
+      </xs:element>
+      <!-- validateCreateContact(XmlBackedInstance) : ABContactAPIValidateCreateContactResult -->
+      <xs:element name="validateCreateContact">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="abContactXML">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element ref="imported:xmlBackedInstance"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="validateCreateContactResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="pogo3:ABContactAPIValidateCreateContactResult"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- updateContactPendingApproval(XmlBackedInstance, ABContactAPIPendingContactChange) -->
+      <xs:element name="updateContactPendingApproval">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="abContactXML">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element ref="imported:xmlBackedInstance"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="updateContext" type="pogo4:ABContactAPIPendingContactChange"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateContactPendingApprovalResponse">
+        <xs:complexType/>
+      </xs:element>
+      <!-- createContactPendingApproval(XmlBackedInstance, ABContactAPIPendingContactChange) : AddressBookUIDContainer -->
+      <xs:element name="createContactPendingApproval">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="abContactXML">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element ref="imported:xmlBackedInstance"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="updateContext" type="pogo4:ABContactAPIPendingContactChange"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="createContactPendingApprovalResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="pogo:AddressBookUIDContainer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- removeContact(XmlBackedInstance) : boolean -->
+      <xs:element name="removeContact">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="abContactXML">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element ref="imported:xmlBackedInstance"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="removeContactResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- searchContact(ABContactAPISearchCriteria, ABContactAPISearchSpec) : ABContactAPISearchResultContainer -->
+      <xs:element name="searchContact">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="abContactAPISearchCriteria" type="pogo5:ABContactAPISearchCriteria"/>
+            <xs:element minOccurs="0" name="abContactAPISearchSpec" type="pogo8:ABContactAPISearchSpec"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="searchContactResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="pogo12:ABContactAPISearchResultContainer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- findDuplicates(XmlBackedInstance, ABContactAPISearchSpec) : ABContactAPIFindDuplicatesResultContainer -->
+      <xs:element name="findDuplicates">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="abContactXML">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element ref="imported:xmlBackedInstance"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+            <xs:element minOccurs="0" name="abContactAPISearchSpec" type="pogo8:ABContactAPISearchSpec"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="findDuplicatesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="pogo15:ABContactAPIFindDuplicatesResultContainer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- retrieveContact(String) : XmlBackedInstance -->
+      <xs:element name="retrieveContact">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="linkID" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="retrieveContactResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element ref="imported:xmlBackedInstance"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- retrieveRelatedContacts(String, ContactBidiRel[]) : RelatedContactInfoContainer -->
+      <xs:element name="retrieveRelatedContacts">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="linkID" type="xs:string"/>
+            <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="relationshipTypes">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="xs:string"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="retrieveRelatedContactsResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="pogo17:RelatedContactInfoContainer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- getReplacementAddress(String) : String -->
+      <xs:element name="getReplacementAddress">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="addressLinkID" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getReplacementAddressResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- getReplacementContact(String) : String -->
+      <xs:element name="getReplacementContact">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="contactLinkID" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getReplacementContactResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- getSpecialistServices(String) : ABContactAPISpecialistService[] -->
+      <xs:element name="getSpecialistServices">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="contactLinkID" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="getSpecialistServicesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="return">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="pogo19:ABContactAPISpecialistService"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- retrieveDocumentsForContact(String, ABContactAPIDocumentSearchCriteria, ABContactAPIDocumentSearchSpec) : ABContactAPIDocumentSearchResultContainer -->
+      <xs:element name="retrieveDocumentsForContact">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="contactLinkID" type="xs:string"/>
+            <xs:element minOccurs="0" name="abContactAPIDocumentSearchCriteria" type="pogo20:ABContactAPIDocumentSearchCriteria"/>
+            <xs:element minOccurs="0" name="abContactAPIDocumentSearchSpec" type="pogo21:ABContactAPIDocumentSearchSpec"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="retrieveDocumentsForContactResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="pogo22:ABContactAPIDocumentSearchResultContainer"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:complexType name="AddressBookUIDContainer">
+        <xs:sequence>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="AddressBookUIDTuples">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="pogo2:AddressBookUIDTuple"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="ContactABUID" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="AddressBookUIDTuple">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="EntityType" type="xs:string"/>
+          <xs:element minOccurs="0" name="External_PublicID" type="xs:string"/>
+          <xs:element minOccurs="0" name="LinkID" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPIValidateCreateContactResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ErrorMessage" type="xs:string"/>
+          <xs:element minOccurs="0" name="Valid" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPIPendingContactChange">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="RootEntityDisplayName" type="xs:string"/>
+          <xs:element minOccurs="0" name="RootEntityID" type="xs:string"/>
+          <xs:element minOccurs="0" name="RootEntityType" type="xs:string"/>
+          <xs:element minOccurs="0" name="UserDisplayName" type="xs:string"/>
+          <xs:element minOccurs="0" name="Username" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPISearchCriteria">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Address" type="pogo6:ABContactAPIAddressSearch"/>
+          <xs:element minOccurs="0" name="AdjudicativeDomain" type="xs:string"/>
+          <xs:element minOccurs="0" name="AllTagsRequired" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="AttorneySpecialty" type="xs:string"/>
+          <xs:element minOccurs="0" name="ContactType" type="xs:string"/>
+          <xs:element minOccurs="0" name="DoctorSpecialty" type="xs:string"/>
+          <xs:element minOccurs="0" name="EmployeeNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="FirstName" type="xs:string"/>
+          <xs:element minOccurs="0" name="FirstNameKanji" type="xs:string"/>
+          <xs:element minOccurs="0" name="Keyword" type="xs:string"/>
+          <xs:element minOccurs="0" name="KeywordKanji" type="xs:string"/>
+          <xs:element minOccurs="0" name="LawFirmSpecialty" type="xs:string"/>
+          <xs:element minOccurs="0" name="MedicalOrgSpecialty" type="xs:string"/>
+          <xs:element minOccurs="0" name="OrganizationName" type="xs:string"/>
+          <xs:element minOccurs="0" name="PreferredVendors" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="ProximitySearchCenter" type="pogo6:ABContactAPIAddressSearch"/>
+          <xs:element minOccurs="0" name="ProximitySearchParameters" type="pogo7:ABContactAPIProximitySearchParameters"/>
+          <xs:element minOccurs="0" name="Score" type="xs:int"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="SpecialistServiceCodes">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="xs:string"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="Tags">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="xs:string"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="TaxID" type="xs:string"/>
+          <xs:element minOccurs="0" name="VendorAvailability" type="xs:string"/>
+          <xs:element minOccurs="0" name="VendorType" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPIAddressSearch">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="City" type="xs:string"/>
+          <xs:element minOccurs="0" name="CityKanji" type="xs:string"/>
+          <xs:element minOccurs="0" name="Country" type="xs:string"/>
+          <xs:element minOccurs="0" name="PostalCode" type="xs:string"/>
+          <xs:element minOccurs="0" name="State" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPIProximitySearchParameters">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CorrectedSearchCenter" type="xs:string"/>
+          <xs:element minOccurs="0" name="DistanceBasedSearch" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="GeocodeStatus" type="xs:string"/>
+          <xs:element minOccurs="0" name="Number" type="xs:int"/>
+          <xs:element minOccurs="0" name="SavedSearchCenter" type="xs:string"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:type="gw.api.database.spatial.SpatialPoint" minOccurs="0" name="SpatialPoint" type="xs:string"/>
+          <xs:element minOccurs="0" name="UnitOfDistance" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPISearchSpec">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ChunkSize" type="xs:int"/>
+          <xs:element minOccurs="0" name="ExcludeTotal" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="GetNumResultsOnly" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="IncludePendingCreates" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="LocaleCode" type="xs:string"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="SortColumns">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="pogo9:ABContactAPISearchSortColumn"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="StartRow" type="xs:int"/>
+          <xs:element minOccurs="0" name="SubtypeFilter" type="pogo10:ABContactAPISubtypeFilter"/>
+          <xs:element minOccurs="0" name="TagMatcher" type="pogo11:ABContactAPITagMatcher"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPISearchSortColumn">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Ascending" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="BeanPath" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPISubtypeFilter">
+        <xs:sequence>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="Subtypes">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="xs:string"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPITagMatcher">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="MatchAllTags" type="xs:boolean"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="Tags">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="xs:string"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPISearchResultContainer">
+        <xs:sequence>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="Results">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="pogo13:ABContactAPISearchResult"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="TotalResults" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPISearchResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CellPhone" type="xs:string"/>
+          <xs:element minOccurs="0" name="CellPhoneCountry" type="xs:string"/>
+          <xs:element minOccurs="0" name="CellPhoneExtension" type="xs:string"/>
+          <xs:element minOccurs="0" name="ContactType" type="xs:string"/>
+          <xs:element minOccurs="0" name="CreateStatus" type="xs:string"/>
+          <xs:element gw:type="java.util.Date" minOccurs="0" name="DateOfBirth" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="EmailAddress1" type="xs:string"/>
+          <xs:element minOccurs="0" name="EmailAddress2" type="xs:string"/>
+          <xs:element minOccurs="0" name="FaxPhone" type="xs:string"/>
+          <xs:element minOccurs="0" name="FaxPhoneCountry" type="xs:string"/>
+          <xs:element minOccurs="0" name="FaxPhoneExtension" type="xs:string"/>
+          <xs:element minOccurs="0" name="FirstName" type="xs:string"/>
+          <xs:element minOccurs="0" name="FirstNameKanji" type="xs:string"/>
+          <xs:element minOccurs="0" name="HomePhone" type="xs:string"/>
+          <xs:element minOccurs="0" name="HomePhoneCountry" type="xs:string"/>
+          <xs:element minOccurs="0" name="HomePhoneExtension" type="xs:string"/>
+          <xs:element minOccurs="0" name="LastName" type="xs:string"/>
+          <xs:element minOccurs="0" name="LastNameKanji" type="xs:string"/>
+          <xs:element minOccurs="0" name="LinkID" type="xs:string"/>
+          <xs:element minOccurs="0" name="MiddleName" type="xs:string"/>
+          <xs:element minOccurs="0" name="Name" type="xs:string"/>
+          <xs:element minOccurs="0" name="NameKanji" type="xs:string"/>
+          <xs:element minOccurs="0" name="Particle" type="xs:string"/>
+          <xs:element minOccurs="0" name="Preferred" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="Prefix" type="xs:string"/>
+          <xs:element minOccurs="0" name="PrimaryAddress" type="pogo14:AddressInfo"/>
+          <xs:element minOccurs="0" name="PrimaryPhone" type="xs:string"/>
+          <xs:element minOccurs="0" name="Score" type="xs:double"/>
+          <xs:element minOccurs="0" name="Suffix" type="xs:string"/>
+          <xs:element minOccurs="0" name="TaxID" type="xs:string"/>
+          <xs:element minOccurs="0" name="VendorAvailability" type="xs:string"/>
+          <xs:element minOccurs="0" name="VendorType" type="xs:string"/>
+          <xs:element minOccurs="0" name="WorkPhone" type="xs:string"/>
+          <xs:element minOccurs="0" name="WorkPhoneCountry" type="xs:string"/>
+          <xs:element minOccurs="0" name="WorkPhoneExtension" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="AddressInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AddressLine1" type="xs:string"/>
+          <xs:element minOccurs="0" name="AddressLine1Kanji" type="xs:string"/>
+          <xs:element minOccurs="0" name="AddressLine2" type="xs:string"/>
+          <xs:element minOccurs="0" name="AddressLine2Kanji" type="xs:string"/>
+          <xs:element minOccurs="0" name="AddressLine3" type="xs:string"/>
+          <xs:element minOccurs="0" name="AddressType" type="xs:string"/>
+          <xs:element minOccurs="0" name="CEDEX" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="CEDEXBureau" type="xs:string"/>
+          <xs:element minOccurs="0" name="City" type="xs:string"/>
+          <xs:element minOccurs="0" name="CityKanji" type="xs:string"/>
+          <xs:element minOccurs="0" name="Country" type="xs:string"/>
+          <xs:element minOccurs="0" name="County" type="xs:string"/>
+          <xs:element minOccurs="0" name="Description" type="xs:string"/>
+          <xs:element minOccurs="0" name="GeocodeStatus" type="xs:string"/>
+          <xs:element minOccurs="0" name="LinkID" type="xs:string"/>
+          <xs:element minOccurs="0" name="PostalCode" type="xs:string"/>
+          <xs:element gw:type="gw.api.database.spatial.SpatialPoint" minOccurs="0" name="SpatialPoint" type="xs:string"/>
+          <xs:element minOccurs="0" name="State" type="xs:string"/>
+          <xs:element gw:type="java.util.Date" minOccurs="0" name="ValidUntil" type="xs:dateTime"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPIFindDuplicatesResultContainer">
+        <xs:sequence>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="Results">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="pogo16:ABContactAPIFindDuplicatesResult"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="TotalResults" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPIFindDuplicatesResult">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="CellPhone" type="xs:string"/>
+          <xs:element minOccurs="0" name="CellPhoneCountry" type="xs:string"/>
+          <xs:element minOccurs="0" name="CellPhoneExtension" type="xs:string"/>
+          <xs:element minOccurs="0" name="ContactType" type="xs:string"/>
+          <xs:element gw:type="java.util.Date" minOccurs="0" name="DateOfBirth" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="EmailAddress1" type="xs:string"/>
+          <xs:element minOccurs="0" name="EmailAddress2" type="xs:string"/>
+          <xs:element minOccurs="0" name="Exact" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="FaxPhone" type="xs:string"/>
+          <xs:element minOccurs="0" name="FaxPhoneCountry" type="xs:string"/>
+          <xs:element minOccurs="0" name="FaxPhoneExtension" type="xs:string"/>
+          <xs:element minOccurs="0" name="FirstName" type="xs:string"/>
+          <xs:element minOccurs="0" name="FirstNameKanji" type="xs:string"/>
+          <xs:element minOccurs="0" name="HomePhone" type="xs:string"/>
+          <xs:element minOccurs="0" name="HomePhoneCountry" type="xs:string"/>
+          <xs:element minOccurs="0" name="HomePhoneExtension" type="xs:string"/>
+          <xs:element minOccurs="0" name="LastName" type="xs:string"/>
+          <xs:element minOccurs="0" name="LastNameKanji" type="xs:string"/>
+          <xs:element minOccurs="0" name="LinkID" type="xs:string"/>
+          <xs:element minOccurs="0" name="MiddleName" type="xs:string"/>
+          <xs:element minOccurs="0" name="Name" type="xs:string"/>
+          <xs:element minOccurs="0" name="NameKanji" type="xs:string"/>
+          <xs:element minOccurs="0" name="Particle" type="xs:string"/>
+          <xs:element minOccurs="0" name="Preferred" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="Prefix" type="xs:string"/>
+          <xs:element minOccurs="0" name="PrimaryAddress" type="pogo14:AddressInfo"/>
+          <xs:element minOccurs="0" name="PrimaryPhone" type="xs:string"/>
+          <xs:element minOccurs="0" name="Score" type="xs:double"/>
+          <xs:element minOccurs="0" name="Suffix" type="xs:string"/>
+          <xs:element minOccurs="0" name="TaxID" type="xs:string"/>
+          <xs:element minOccurs="0" name="VendorAvailability" type="xs:string"/>
+          <xs:element minOccurs="0" name="VendorType" type="xs:string"/>
+          <xs:element minOccurs="0" name="WorkPhone" type="xs:string"/>
+          <xs:element minOccurs="0" name="WorkPhoneCountry" type="xs:string"/>
+          <xs:element minOccurs="0" name="WorkPhoneExtension" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="RelatedContactInfoContainer">
+        <xs:sequence>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="SourceRelatedContacts">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="pogo18:ABContactAPIRelatedContact"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="TargetRelatedContacts">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="pogo18:ABContactAPIRelatedContact"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPIRelatedContact">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ContactFirstName" type="xs:string"/>
+          <xs:element minOccurs="0" name="ContactLastName" type="xs:string"/>
+          <xs:element minOccurs="0" name="ContactLinkID" type="xs:string"/>
+          <xs:element minOccurs="0" name="ContactName" type="xs:string"/>
+          <xs:element minOccurs="0" name="ContactSubtype" type="xs:string"/>
+          <xs:element minOccurs="0" name="LinkID" type="xs:string"/>
+          <xs:element minOccurs="0" name="Relationship" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPISpecialistService">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Code" type="xs:string"/>
+          <xs:element minOccurs="0" name="Name" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPIDocumentSearchCriteria">
+        <xs:sequence>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="IncludeDocumentSecurityTypes">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="xs:string"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="IncludeObsoletes" type="xs:boolean"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPIDocumentSearchSpec">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="ChunkSize" type="xs:int"/>
+          <xs:element minOccurs="0" name="ExcludeTotal" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="GetNumResultsOnly" type="xs:boolean"/>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="SortColumns">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="pogo9:ABContactAPISearchSortColumn"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="StartRow" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPIDocumentSearchResultContainer">
+        <xs:sequence>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="Results">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="pogo23:ABContactAPIDocumentInfo"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="TotalResults" type="xs:int"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentInfo">
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIDocumentSearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISpecialistService"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIRelatedContact"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/RelatedContactInfoContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIFindDuplicatesResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressInfo"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchResultContainer"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPITagMatcher"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISubtypeFilter"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSortColumn"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchSpec"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIProximitySearchParameters"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIAddressSearch"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPISearchCriteria"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIPendingContactChange"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPIValidateCreateContactResult"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDTuple"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab900/abcontactapi/AddressBookUIDContainer"/>
+      <xs:complexType name="ABContactAPIDocumentInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="Author" type="xs:string"/>
+          <xs:element minOccurs="0" name="DMS" type="xs:boolean"/>
+          <xs:element gw:type="java.util.Date" minOccurs="0" name="DateCreated" type="xs:dateTime"/>
+          <xs:element gw:type="java.util.Date" minOccurs="0" name="DateModified" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="Description" type="xs:string"/>
+          <xs:element minOccurs="0" name="DocUID" type="xs:string"/>
+          <xs:element minOccurs="0" name="DocumentIdentifier" type="xs:string"/>
+          <xs:element minOccurs="0" name="Inbound" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="Language" type="xs:string"/>
+          <xs:element minOccurs="0" name="MimeType" type="xs:string"/>
+          <xs:element minOccurs="0" name="Name" type="xs:string"/>
+          <xs:element minOccurs="0" name="Obsolete" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="PendingDocUID" type="xs:string"/>
+          <xs:element minOccurs="0" name="Recipient" type="xs:string"/>
+          <xs:element minOccurs="0" name="Section" type="xs:string"/>
+          <xs:element minOccurs="0" name="SecurityType" type="xs:string"/>
+          <xs:element minOccurs="0" name="Status" type="xs:string"/>
+          <xs:element minOccurs="0" name="Type" type="xs:string"/>
+          <xs:element minOccurs="0" name="URL" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:portType name="ABContactAPIPortType">
+    <wsdl:operation name="updateContact">
+      <wsdl:input message="tns:updateContact" name="updateContact"/>
+      <wsdl:output message="tns:updateContactResponse" name="updateContactResponse"/>
+      <!-- Instruction with transactionID has previously been executed -->
+      <wsdl:fault message="tns:AlreadyExecutedException" name="AlreadyExecutedException"/>
+      <!-- If cannot find the existing contact -->
+      <wsdl:fault message="tns:BadIdentifierException" name="BadIdentifierException"/>
+      <!-- If data format is invalid -->
+      <wsdl:fault message="tns:DataConversionException" name="DataConversionException"/>
+      <!-- If the contact is out of date -->
+      <wsdl:fault message="tns:EntityStateException" name="EntityStateException"/>
+      <!-- If the user the remote application is calling ABContactAPI as doesn't have the neccessary permissions for this operation. -->
+      <wsdl:fault message="tns:PermissionException" name="PermissionException"/>
+      <!-- If required fields are missing -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <!-- Thrown in the event of a general SOAP error -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- Thrown in the event of a general SOAP sender error -->
+      <wsdl:fault message="tns:SOAPSenderException" name="SOAPSenderException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="createContact">
+      <wsdl:input message="tns:createContact" name="createContact"/>
+      <wsdl:output message="tns:createContactResponse" name="createContactResponse"/>
+      <!-- Instruction with transactionID has previously been executed -->
+      <wsdl:fault message="tns:AlreadyExecutedException" name="AlreadyExecutedException"/>
+      <!-- If cannot find the existing contact -->
+      <wsdl:fault message="tns:BadIdentifierException" name="BadIdentifierException"/>
+      <!-- If data format is invalid -->
+      <wsdl:fault message="tns:DataConversionException" name="DataConversionException"/>
+      <!-- If a provided external unique ID already exists -->
+      <wsdl:fault message="tns:DuplicateKeyException" name="DuplicateKeyException"/>
+      <!-- If the user the remote application is calling ABContactAPI as doesn't have the neccessary permissions for this operation. -->
+      <wsdl:fault message="tns:PermissionException" name="PermissionException"/>
+      <!-- If required fields are missing -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <!-- Thrown in the event of a general SOAP error -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- Thrown in the event of a general SOAP sender error -->
+      <wsdl:fault message="tns:SOAPSenderException" name="SOAPSenderException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="validateCreateContact">
+      <wsdl:input message="tns:validateCreateContact" name="validateCreateContact"/>
+      <wsdl:output message="tns:validateCreateContactResponse" name="validateCreateContactResponse"/>
+      <!-- If abContactXML is null -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <!-- Thrown in the event of a general SOAP error -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- Thrown in the event of a general SOAP sender error -->
+      <wsdl:fault message="tns:SOAPSenderException" name="SOAPSenderException"/>
+      <!-- If the user the remote application is calling ABContactAPI as doesn't have the neccessary permissions for this operation. -->
+      <wsdl:fault message="tns:PermissionException" name="PermissionException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="updateContactPendingApproval">
+      <wsdl:input message="tns:updateContactPendingApproval" name="updateContactPendingApproval"/>
+      <wsdl:output message="tns:updateContactPendingApprovalResponse" name="updateContactPendingApprovalResponse"/>
+      <!-- Instruction with transactionID has previously been executed -->
+      <wsdl:fault message="tns:AlreadyExecutedException" name="AlreadyExecutedException"/>
+      <!-- If cannot find the existing contact -->
+      <wsdl:fault message="tns:BadIdentifierException" name="BadIdentifierException"/>
+      <!-- If data format is invalid -->
+      <wsdl:fault message="tns:DataConversionException" name="DataConversionException"/>
+      <!-- If the contact is out of date -->
+      <wsdl:fault message="tns:EntityStateException" name="EntityStateException"/>
+      <!-- If the user the remote application is calling ABContactAPI as doesn't have the neccessary permissions for this operation. -->
+      <wsdl:fault message="tns:PermissionException" name="PermissionException"/>
+      <!-- If required fields are missing -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <!-- Thrown in the event of a general SOAP error -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- Thrown in the event of a general SOAP sender error -->
+      <wsdl:fault message="tns:SOAPSenderException" name="SOAPSenderException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="createContactPendingApproval">
+      <wsdl:input message="tns:createContactPendingApproval" name="createContactPendingApproval"/>
+      <wsdl:output message="tns:createContactPendingApprovalResponse" name="createContactPendingApprovalResponse"/>
+      <!-- Instruction with transactionID has previously been executed -->
+      <wsdl:fault message="tns:AlreadyExecutedException" name="AlreadyExecutedException"/>
+      <!-- If cannot find the existing contact -->
+      <wsdl:fault message="tns:BadIdentifierException" name="BadIdentifierException"/>
+      <!-- If data format is invalid -->
+      <wsdl:fault message="tns:DataConversionException" name="DataConversionException"/>
+      <!-- If a provided external unique ID already exists -->
+      <wsdl:fault message="tns:DuplicateKeyException" name="DuplicateKeyException"/>
+      <!-- If the user the remote application is calling ABContactAPI as doesn't have the neccessary permissions for this operation. -->
+      <wsdl:fault message="tns:PermissionException" name="PermissionException"/>
+      <!-- If required fields are missing -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <!-- Thrown in the event of a general SOAP error -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- Thrown in the event of a general SOAP sender error -->
+      <wsdl:fault message="tns:SOAPSenderException" name="SOAPSenderException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="removeContact">
+      <wsdl:input message="tns:removeContact" name="removeContact"/>
+      <wsdl:output message="tns:removeContactResponse" name="removeContactResponse"/>
+      <!-- Instruction with transactionID has previously been executed -->
+      <wsdl:fault message="tns:AlreadyExecutedException" name="AlreadyExecutedException"/>
+      <!-- If cannot find the contact with given link id -->
+      <wsdl:fault message="tns:BadIdentifierException" name="BadIdentifierException"/>
+      <!-- If the user the remote application is calling ABContactAPI as doesn't have the neccessary permissions for this operation. -->
+      <wsdl:fault message="tns:PermissionException" name="PermissionException"/>
+      <!-- If not enough fields are specified for search -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <!-- Thrown in the event of a general SOAP error -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- Thrown in the event of a general SOAP sender error -->
+      <wsdl:fault message="tns:SOAPSenderException" name="SOAPSenderException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="searchContact">
+      <wsdl:input message="tns:searchContact" name="searchContact"/>
+      <wsdl:output message="tns:searchContactResponse" name="searchContactResponse"/>
+      <!-- If the user the remote application is calling ABContactAPI as doesn't have the neccessary permissions for this operation. -->
+      <wsdl:fault message="tns:PermissionException" name="PermissionException"/>
+      <!-- If not enough fields are specified for search -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <!-- Thrown in the event of a general SOAP error -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- Thrown in the event of a general SOAP sender error -->
+      <wsdl:fault message="tns:SOAPSenderException" name="SOAPSenderException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="findDuplicates">
+      <wsdl:input message="tns:findDuplicates" name="findDuplicates"/>
+      <wsdl:output message="tns:findDuplicatesResponse" name="findDuplicatesResponse"/>
+      <!-- If the user the remote application is calling ABContactAPI as doesn't have the neccessary permissions for this operation. -->
+      <wsdl:fault message="tns:PermissionException" name="PermissionException"/>
+      <!-- If not enough fields are specified for search -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <!-- Thrown in the event of a general SOAP error -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- Thrown in the event of a general SOAP sender error -->
+      <wsdl:fault message="tns:SOAPSenderException" name="SOAPSenderException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveContact">
+      <wsdl:input message="tns:retrieveContact" name="retrieveContact"/>
+      <wsdl:output message="tns:retrieveContactResponse" name="retrieveContactResponse"/>
+      <!-- Thrown in the event of a data conversion error -->
+      <wsdl:fault message="tns:DataConversionException" name="DataConversionException"/>
+      <!-- If the user the remote application is calling ABContactAPI as doesn't have the neccessary permissions for this operation. -->
+      <wsdl:fault message="tns:PermissionException" name="PermissionException"/>
+      <!-- If not enough fields are specified for search -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <!-- Thrown in the event of a general SOAP error -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- Thrown in the event of a general SOAP sender error -->
+      <wsdl:fault message="tns:SOAPSenderException" name="SOAPSenderException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveRelatedContacts">
+      <wsdl:input message="tns:retrieveRelatedContacts" name="retrieveRelatedContacts"/>
+      <wsdl:output message="tns:retrieveRelatedContactsResponse" name="retrieveRelatedContactsResponse"/>
+      <!-- Thrown in the event of a data conversion error -->
+      <wsdl:fault message="tns:DataConversionException" name="DataConversionException"/>
+      <!-- If the user the remote application is calling ABContactAPI as doesn't have the neccessary permissions for this operation. -->
+      <wsdl:fault message="tns:PermissionException" name="PermissionException"/>
+      <!-- If not enough fields are specified for search -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <!-- Thrown in the event of a general SOAP error -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- Thrown in the event of a general SOAP sender error -->
+      <wsdl:fault message="tns:SOAPSenderException" name="SOAPSenderException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="getReplacementAddress">
+      <wsdl:input message="tns:getReplacementAddress" name="getReplacementAddress"/>
+      <wsdl:output message="tns:getReplacementAddressResponse" name="getReplacementAddressResponse"/>
+      <!-- If cannot find the address with given link id -->
+      <wsdl:fault message="tns:BadIdentifierException" name="BadIdentifierException"/>
+      <!-- Thrown in the event of a general SOAP error -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- Thrown in the event of a general SOAP sender error -->
+      <wsdl:fault message="tns:SOAPSenderException" name="SOAPSenderException"/>
+      <!-- If the user the remote application is calling ABContactAPI as doesn't have the neccessary permissions for this operation. -->
+      <wsdl:fault message="tns:PermissionException" name="PermissionException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="getReplacementContact">
+      <wsdl:input message="tns:getReplacementContact" name="getReplacementContact"/>
+      <wsdl:output message="tns:getReplacementContactResponse" name="getReplacementContactResponse"/>
+      <!-- If cannot find the contact with given link id -->
+      <wsdl:fault message="tns:BadIdentifierException" name="BadIdentifierException"/>
+      <!-- Thrown in the event of a general SOAP error -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- Thrown in the event of a general SOAP sender error -->
+      <wsdl:fault message="tns:SOAPSenderException" name="SOAPSenderException"/>
+      <!-- If the user the remote application is calling ABContactAPI as doesn't have the neccessary permissions for this operation. -->
+      <wsdl:fault message="tns:PermissionException" name="PermissionException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="getSpecialistServices">
+      <wsdl:input message="tns:getSpecialistServices" name="getSpecialistServices"/>
+      <wsdl:output message="tns:getSpecialistServicesResponse" name="getSpecialistServicesResponse"/>
+      <!-- Thrown if ContactManager cannot find the contact with the given LinkID -->
+      <wsdl:fault message="tns:BadIdentifierException" name="BadIdentifierException"/>
+      <!-- Thrown if contactLinkID is null. -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <!-- If the user the remote application is calling ABContactAPI as doesn't have the neccessary permissions for this operation. -->
+      <wsdl:fault message="tns:PermissionException" name="PermissionException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveDocumentsForContact">
+      <wsdl:input message="tns:retrieveDocumentsForContact" name="retrieveDocumentsForContact"/>
+      <wsdl:output message="tns:retrieveDocumentsForContactResponse" name="retrieveDocumentsForContactResponse"/>
+      <!-- Thrown if ContactManager cannot find the contact with the given contactLinkID -->
+      <wsdl:fault message="tns:BadIdentifierException" name="BadIdentifierException"/>
+      <!-- Thrown if any of contactLinkID, abContactAPIDocumentSearchCriteria or abContactAPIDocumentSearchSpec is null. -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <!-- If the user the remote application is calling ABContactAPI as doesn't have the neccessary permissions for this operation. -->
+      <wsdl:fault message="tns:PermissionException" name="PermissionException"/>
+      <!-- Thrown in the event of a general SOAP error -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- Thrown in the event of a general SOAP sender error -->
+      <wsdl:fault message="tns:SOAPSenderException" name="SOAPSenderException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ABContactAPISoap12Binding" type="tns:ABContactAPIPortType">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="updateContact">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="updateContact">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateContactResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AlreadyExecutedException">
+        <soap12:fault name="AlreadyExecutedException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="DataConversionException">
+        <soap12:fault name="DataConversionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="EntityStateException">
+        <soap12:fault name="EntityStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap12:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap12:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createContact">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="createContact">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createContactResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AlreadyExecutedException">
+        <soap12:fault name="AlreadyExecutedException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="DataConversionException">
+        <soap12:fault name="DataConversionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="DuplicateKeyException">
+        <soap12:fault name="DuplicateKeyException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap12:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap12:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="validateCreateContact">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="validateCreateContact">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="validateCreateContactResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap12:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap12:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateContactPendingApproval">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="updateContactPendingApproval">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateContactPendingApprovalResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AlreadyExecutedException">
+        <soap12:fault name="AlreadyExecutedException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="DataConversionException">
+        <soap12:fault name="DataConversionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="EntityStateException">
+        <soap12:fault name="EntityStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap12:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap12:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createContactPendingApproval">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="createContactPendingApproval">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createContactPendingApprovalResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AlreadyExecutedException">
+        <soap12:fault name="AlreadyExecutedException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="DataConversionException">
+        <soap12:fault name="DataConversionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="DuplicateKeyException">
+        <soap12:fault name="DuplicateKeyException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap12:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap12:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="removeContact">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="removeContact">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="removeContactResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AlreadyExecutedException">
+        <soap12:fault name="AlreadyExecutedException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap12:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap12:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="searchContact">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="searchContact">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchContactResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="PermissionException">
+        <soap12:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap12:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findDuplicates">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="findDuplicates">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findDuplicatesResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="PermissionException">
+        <soap12:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap12:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveContact">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="retrieveContact">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrieveContactResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataConversionException">
+        <soap12:fault name="DataConversionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap12:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap12:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveRelatedContacts">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="retrieveRelatedContacts">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrieveRelatedContactsResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataConversionException">
+        <soap12:fault name="DataConversionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap12:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap12:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getReplacementAddress">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="getReplacementAddress">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getReplacementAddressResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap12:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap12:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getReplacementContact">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="getReplacementContact">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getReplacementContactResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap12:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap12:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getSpecialistServices">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="getSpecialistServices">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getSpecialistServicesResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap12:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveDocumentsForContact">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="retrieveDocumentsForContact">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrieveDocumentsForContactResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap12:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap12:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ABContactAPISoap11Binding" type="tns:ABContactAPIPortType">
+    <soap11:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="updateContact">
+      <soap11:operation style="document"/>
+      <wsdl:input name="updateContact">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateContactResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AlreadyExecutedException">
+        <soap11:fault name="AlreadyExecutedException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="DataConversionException">
+        <soap11:fault name="DataConversionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="EntityStateException">
+        <soap11:fault name="EntityStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap11:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap11:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createContact">
+      <soap11:operation style="document"/>
+      <wsdl:input name="createContact">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createContactResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AlreadyExecutedException">
+        <soap11:fault name="AlreadyExecutedException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="DataConversionException">
+        <soap11:fault name="DataConversionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="DuplicateKeyException">
+        <soap11:fault name="DuplicateKeyException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap11:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap11:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="validateCreateContact">
+      <soap11:operation style="document"/>
+      <wsdl:input name="validateCreateContact">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="validateCreateContactResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap11:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap11:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateContactPendingApproval">
+      <soap11:operation style="document"/>
+      <wsdl:input name="updateContactPendingApproval">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateContactPendingApprovalResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AlreadyExecutedException">
+        <soap11:fault name="AlreadyExecutedException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="DataConversionException">
+        <soap11:fault name="DataConversionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="EntityStateException">
+        <soap11:fault name="EntityStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap11:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap11:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="createContactPendingApproval">
+      <soap11:operation style="document"/>
+      <wsdl:input name="createContactPendingApproval">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="createContactPendingApprovalResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AlreadyExecutedException">
+        <soap11:fault name="AlreadyExecutedException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="DataConversionException">
+        <soap11:fault name="DataConversionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="DuplicateKeyException">
+        <soap11:fault name="DuplicateKeyException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap11:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap11:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="removeContact">
+      <soap11:operation style="document"/>
+      <wsdl:input name="removeContact">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="removeContactResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="AlreadyExecutedException">
+        <soap11:fault name="AlreadyExecutedException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap11:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap11:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="searchContact">
+      <soap11:operation style="document"/>
+      <wsdl:input name="searchContact">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchContactResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="PermissionException">
+        <soap11:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap11:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findDuplicates">
+      <soap11:operation style="document"/>
+      <wsdl:input name="findDuplicates">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findDuplicatesResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="PermissionException">
+        <soap11:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap11:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveContact">
+      <soap11:operation style="document"/>
+      <wsdl:input name="retrieveContact">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrieveContactResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataConversionException">
+        <soap11:fault name="DataConversionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap11:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap11:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveRelatedContacts">
+      <soap11:operation style="document"/>
+      <wsdl:input name="retrieveRelatedContacts">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrieveRelatedContactsResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="DataConversionException">
+        <soap11:fault name="DataConversionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap11:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap11:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getReplacementAddress">
+      <soap11:operation style="document"/>
+      <wsdl:input name="getReplacementAddress">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getReplacementAddressResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap11:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap11:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getReplacementContact">
+      <soap11:operation style="document"/>
+      <wsdl:input name="getReplacementContact">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getReplacementContactResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap11:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap11:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="getSpecialistServices">
+      <soap11:operation style="document"/>
+      <wsdl:input name="getSpecialistServices">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="getSpecialistServicesResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap11:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrieveDocumentsForContact">
+      <soap11:operation style="document"/>
+      <wsdl:input name="retrieveDocumentsForContact">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrieveDocumentsForContactResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="PermissionException">
+        <soap11:fault name="PermissionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="SOAPSenderException">
+        <soap11:fault name="SOAPSenderException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ABContactAPI">
+    <wsdl:port binding="tns:ABContactAPISoap12Binding" name="ABContactAPISoap12Port">
+      <soap12:address location="http://localhost:8280/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPI"/>
+      <gwwsdl:address location="${ab}/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPI"/>
+    </wsdl:port>
+    <wsdl:port binding="tns:ABContactAPISoap11Binding" name="ABContactAPISoap11Port">
+      <soap11:address location="http://localhost:8280/ab/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPI/soap11"/>
+      <gwwsdl:address location="${ab}/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPI/soap11"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:message name="updateContact">
+    <wsdl:part element="tns:updateContact" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="updateContactResponse">
+    <wsdl:part element="tns:updateContactResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="AlreadyExecutedException">
+    <wsdl:part element="tns:AlreadyExecutedException" name="AlreadyExecutedException"/>
+  </wsdl:message>
+  <wsdl:message name="BadIdentifierException">
+    <wsdl:part element="tns:BadIdentifierException" name="BadIdentifierException"/>
+  </wsdl:message>
+  <wsdl:message name="DataConversionException">
+    <wsdl:part element="tns:DataConversionException" name="DataConversionException"/>
+  </wsdl:message>
+  <wsdl:message name="EntityStateException">
+    <wsdl:part element="tns:EntityStateException" name="EntityStateException"/>
+  </wsdl:message>
+  <wsdl:message name="PermissionException">
+    <wsdl:part element="tns:PermissionException" name="PermissionException"/>
+  </wsdl:message>
+  <wsdl:message name="RequiredFieldException">
+    <wsdl:part element="tns:RequiredFieldException" name="RequiredFieldException"/>
+  </wsdl:message>
+  <wsdl:message name="SOAPException">
+    <wsdl:part element="tns:SOAPException" name="SOAPException"/>
+  </wsdl:message>
+  <wsdl:message name="SOAPSenderException">
+    <wsdl:part element="tns:SOAPSenderException" name="SOAPSenderException"/>
+  </wsdl:message>
+  <wsdl:message name="WsiAuthenticationException">
+    <wsdl:part element="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+  </wsdl:message>
+  <wsdl:message name="createContact">
+    <wsdl:part element="tns:createContact" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="createContactResponse">
+    <wsdl:part element="tns:createContactResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="DuplicateKeyException">
+    <wsdl:part element="tns:DuplicateKeyException" name="DuplicateKeyException"/>
+  </wsdl:message>
+  <wsdl:message name="validateCreateContact">
+    <wsdl:part element="tns:validateCreateContact" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="validateCreateContactResponse">
+    <wsdl:part element="tns:validateCreateContactResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="updateContactPendingApproval">
+    <wsdl:part element="tns:updateContactPendingApproval" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="updateContactPendingApprovalResponse">
+    <wsdl:part element="tns:updateContactPendingApprovalResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="createContactPendingApproval">
+    <wsdl:part element="tns:createContactPendingApproval" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="createContactPendingApprovalResponse">
+    <wsdl:part element="tns:createContactPendingApprovalResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="removeContact">
+    <wsdl:part element="tns:removeContact" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="removeContactResponse">
+    <wsdl:part element="tns:removeContactResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="searchContact">
+    <wsdl:part element="tns:searchContact" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="searchContactResponse">
+    <wsdl:part element="tns:searchContactResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="findDuplicates">
+    <wsdl:part element="tns:findDuplicates" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="findDuplicatesResponse">
+    <wsdl:part element="tns:findDuplicatesResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="retrieveContact">
+    <wsdl:part element="tns:retrieveContact" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="retrieveContactResponse">
+    <wsdl:part element="tns:retrieveContactResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="retrieveRelatedContacts">
+    <wsdl:part element="tns:retrieveRelatedContacts" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="retrieveRelatedContactsResponse">
+    <wsdl:part element="tns:retrieveRelatedContactsResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="getReplacementAddress">
+    <wsdl:part element="tns:getReplacementAddress" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="getReplacementAddressResponse">
+    <wsdl:part element="tns:getReplacementAddressResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="getReplacementContact">
+    <wsdl:part element="tns:getReplacementContact" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="getReplacementContactResponse">
+    <wsdl:part element="tns:getReplacementContactResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="getSpecialistServices">
+    <wsdl:part element="tns:getSpecialistServices" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="getSpecialistServicesResponse">
+    <wsdl:part element="tns:getSpecialistServicesResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="retrieveDocumentsForContact">
+    <wsdl:part element="tns:retrieveDocumentsForContact" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="retrieveDocumentsForContactResponse">
+    <wsdl:part element="tns:retrieveDocumentsForContactResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="gw-authentication">
+    <wsdl:part element="gwsoap:authentication" name="gw-authentication"/>
+  </wsdl:message>
+  <wsdl:message name="gw-locale">
+    <wsdl:part element="gwsoap:locale" name="gw-locale"/>
+  </wsdl:message>
+</wsdl:definitions>

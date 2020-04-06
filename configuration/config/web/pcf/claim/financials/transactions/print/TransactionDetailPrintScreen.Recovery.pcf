@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <Screen
+    id="TransactionDetailPrintScreen"
+    mode="Recovery">
+    <Require
+      name="Transaction"
+      type="Transaction"/>
+    <PanelRef
+      def="TransactionRecoveryDV(Transaction as Recovery)"/>
+  </Screen>
+</PCF>

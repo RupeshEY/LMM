@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    afterEnter="subrogationSummary.SubroReferralDate = gw.api.util.DateUtil.currentDate()"
+    beforeCommit="subrogationSummary.referForSubrogation()"
+    canEdit="perm.System.editsubrodetails"
+    canVisit="perm.System.viewsubrodetails"
+    id="ReferSubrogationPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;NVV.Claim.Subrogation.Referral.Title&quot;)">
+    <LocationEntryPoint
+      signature="ReferSubrogationPopup(claim: Claim)"/>
+    <Variable
+      initialValue="claim.SubrogationSummary"
+      name="subrogationSummary"
+      type="SubrogationSummary"/>
+    <Variable
+      name="claim"
+      type="entity.Claim"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <DateInput
+            dateFormat="short"
+            id="SubroReferralDate"
+            label="DisplayKey.get(&quot;NVV.Claim.Subrogation.Main.ReferralDate&quot;)"
+            value="subrogationSummary.SubroReferralDate"/>
+          <TextAreaInput
+            editable="true"
+            id="SubroReferralComment"
+            label="DisplayKey.get(&quot;NVV.Claim.Subrogation.Main.ReferralComment&quot;)"
+            numRows="4"
+            required="true"
+            value="subrogationSummary.SubroReferralComment"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

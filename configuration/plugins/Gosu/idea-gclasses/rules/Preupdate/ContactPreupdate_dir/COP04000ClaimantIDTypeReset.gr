@@ -1,0 +1,23 @@
+package rules.Preupdate.ContactPreupdate_dir
+
+/* Reset the out-dated Claimant fields when the ClaimantIDType is changed */
+@gw.rules.RuleName("COP04000 - Claimant ID Type Reset")
+internal class COP04000ClaimantIDTypeReset {
+  static function doCondition(contact : entity.Contact) : boolean {
+/*start00rule*/
+return (contact typeis Person)
+/*end00rule*/
+}
+
+  static function doAction(contact : entity.Contact, actions : gw.rules.Action) {
+/*start00rule*/
+
+  if (contact.isFieldChanged(Person#ClaimantIDType)) {
+    var person = contact as Person
+    person.clearClaimantFields()
+
+  }
+
+/*end00rule*/
+  }
+}

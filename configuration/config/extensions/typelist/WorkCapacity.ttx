@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Capacity in which employee returned to work"
+  name="WorkCapacity">
+  <typecode
+    code="lastdateworked"
+    desc="Last date worked prior to injury"
+    name="Last date worked prior to injury"
+    priority="1"
+    retired="true"/>
+  <typecode
+    code="fullduty"
+    desc="Working - No Restrictions"
+    name="Working - No Restrictions"
+    priority="3"/>
+  <typecode
+    code="modifiedduty"
+    desc="Modified duty"
+    name="RTW - modified duty"
+    priority="4"
+    retired="true"/>
+  <typecode
+    code="estimatedrtw"
+    desc="Estimated return to work date"
+    name="Estimated RTW date"
+    priority="2"
+    retired="true"/>
+  <typecode
+    code="stopped_work"
+    desc="Stopped work"
+    name="Off work"
+    priority="5"/>
+  <typecode
+    code="restricted_work"
+    desc="Working with restrictions"
+    name="Restricted work"
+    priority="6"/>
+</typelistextension>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <LocationGroup
+    canVisit="canViewAnyBusinessSettings()"
+    id="BusinessSettings"
+    title="DisplayKey.get(&quot;Web.Admin.BusinessSettings&quot;)">
+    <LocationRef
+      hideIfDisabled="true"
+      location="BusinessRules()"/>
+    <LocationRef
+      location="ActivityPatterns()"/>
+    <LocationRef
+      location="BusinessWeek()"/>
+    <LocationRef
+      location="Catastrophes()"/>
+    <LocationRef
+      location="CoverageDetermination()"/>
+    <LocationRef
+      location="Holidays()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Admin.ICD&quot;)"
+      location="ICD()"/>
+    <LocationRef
+      location="KeyMetrics()"/>
+    <LocationRef
+      location="ReinsuranceThresholds()"/>
+    <LocationRef
+      location="WCParms()"/>
+    <LocationRef
+      location="WorkloadClassifications()"/>
+    <Code><![CDATA[static function canViewAnyBusinessSettings() : boolean {
+  return perm.ActivityPattern.view 
+      or perm.BusinessWeek.view 
+      or perm.Catastrophe.view 
+      or perm.System.covverifyview 
+      or perm.Holiday.view 
+      or perm.System.viewrefdata 
+      or perm.ClaimMetricLimit.view 
+      or perm.System.reinsthresholdview 
+      or perm.System.wcrefview 
+      or (gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value and perm.System.wwlcview)
+      or perm.ActivityRule.view
+}]]></Code>
+  </LocationGroup>
+</PCF>

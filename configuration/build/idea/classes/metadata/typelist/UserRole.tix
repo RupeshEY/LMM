@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<internaltypelistextension xmlns="http://guidewire.com/typelists" name="UserRole" desc="Roles users can have on an assignable object">
+  <typecode
+    code="subrogationowner"
+    desc="User in charge of subrogation"
+    name="Subrogation Owner">
+    <category
+      code="expexclusive"
+      typelist="UserRoleConstraint"/>
+  </typecode>
+</internaltypelistextension>

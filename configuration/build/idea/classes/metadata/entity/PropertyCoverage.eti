@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Coverage associated with a property."
+  entity="PropertyCoverage"
+  final="true"
+  supertype="RUCoverage">
+  <implementsInterface
+    iface="gw.cc.policy.entity.PropertyCoverage"
+    impl="com.guidewire.cc.domain.policy.impl.PropertyCoverageImpl"/>
+  <fulldescription><![CDATA[
+A <code>RUCoverage</code> with extra data specific to LocationBasedRUs.  Contains
+Coinsurance and CoverageBasis information.
+    ]]></fulldescription>
+  <column
+    desc="Co-insurance percentage."
+    name="Coinsurance"
+    nullok="true"
+    type="percentagedec"/>
+  <typekey
+    desc="Coverage basis."
+    name="CoverageBasis"
+    nullok="true"
+    typelist="CoverageBasis"/>
+</subtype>

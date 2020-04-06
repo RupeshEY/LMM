@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    id="DocumentTemplateSearchPopup"
+    returnType="gw.plugin.document.IDocumentTemplateDescriptor"
+    title="DisplayKey.get(&quot;Web.TabBar.Search.DocumentTemplates&quot;)">
+    <LocationEntryPoint
+      signature="DocumentTemplateSearchPopup(claim : Claim, documentCreationInfo : gw.document.DocumentCreationInfo)"/>
+    <LocationEntryPoint
+      signature="DocumentTemplateSearchPopup(symbolProvider : gw.document.SymbolProvider)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      name="documentCreationInfo"
+      type="gw.document.DocumentCreationInfo"/>
+    <Variable
+      name="symbolProvider"
+      type="gw.document.SymbolProvider"/>
+    <Screen
+      id="DocumentTemplateSearchScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="cancel"
+          label="DisplayKey.get(&quot;Button.Cancel&quot;)"/>
+      </Toolbar>
+      <SearchPanel
+        criteriaName="searchCriteria"
+        maxSearchResults="gw.api.search.MaxSearchResults.forDocumentTemplates()"
+        resultCachingEnabled="false"
+        resultsName="DocumentTemplateSearchResultsList"
+        search="searchCriteria.performSearch(symbolProvider != null ? symbolProvider : documentCreationInfo)"
+        searchCriteria="createSearchCriteria()"
+        searchCriteriaType="entity.DocumentTemplateSearchCriteria"
+        searchOnEnter="true"
+        searchResultsType="DocumentTemplateSearchResults[]">
+        <PanelRef
+          def="DocumentTemplateSearchDV(searchCriteria)"/>
+        <PanelRef
+          def="DocumentTemplateSearchResultLV(DocumentTemplateSearchResultsList)">
+          <TitleBar
+            appendListViewPaging="true"
+            title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+          <Toolbar/>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+    <Code><![CDATA[function createSearchCriteria() : DocumentTemplateSearchCriteria {
+      var rtn = new DocumentTemplateSearchCriteria()
+      if (claim != null) {
+        rtn.Language = claim.claimant.PrimaryLanguage
+        rtn.State = claim.JurisdictionState
+        rtn.Lob = claim.LOBCode
+      } else if (documentCreationInfo != null && documentCreationInfo.DocumentTemplateDescriptor != null) {
+        rtn.Language = gw.api.util.LocaleUtil.toLanguageType(documentCreationInfo.DocumentTemplateDescriptor.Language)
+      }
+      return rtn
+}]]></Code>
+  </Popup>
+</PCF>

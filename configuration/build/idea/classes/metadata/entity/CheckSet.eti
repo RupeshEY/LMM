@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A check submitted for approval."
+  entity="CheckSet"
+  final="true"
+  supertype="TransactionSet">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.check.impl.CheckSetInternal"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckSetImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.check.entity.CheckSet"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckSetImpl"/>
+  <implementsInterface
+    iface="gw.api.financials.CheckCreatorProvider"
+    impl="gw.api.financials.CheckCreatorProviderImpl"/>
+  <fulldescription><![CDATA[
+      A subtype of TransactionSet which contains a Check. May contain more than one Check if its a multi-payee
+      check (in a CheckGroup) and/or RecurringCheck. It may also contain Reserve transactions if its payments
+      affect reserves (like a Final payment or a payment that exceeds Available Reserves). Submitted as a unit
+      for approval. Each of the payment transactions for all the checks in a checkset also link back to the CheckSet.
+    ]]></fulldescription>
+  <foreignkey
+    archivingOwner="source"
+    columnName="RecurrenceID"
+    desc="The recurrence schedule for the check set, if it has one."
+    exportable="false"
+    fkentity="CheckRecurrence"
+    importableagainstexistingobject="false"
+    name="Recurrence"
+    nullok="true"
+    triggersValidation="true"/>
+  <array
+    arrayentity="Check"
+    desc="All checks contained in the check set."
+    exportable="true"
+    name="Checks"
+    triggersValidation="true"/>
+  <array
+    arrayentity="CheckGroup"
+    desc="The check groups of multi-payee checks contained in the check set, if any."
+    exportable="true"
+    name="CheckGroups"
+    triggersValidation="true"/>
+  <array
+    arrayentity="RecurringCheck"
+    desc="Recurring checks (if any) that make up this check set."
+    exportable="true"
+    name="RecurringChecks"
+    triggersValidation="true"/>
+  <array
+    arrayentity="CheckSetReserve"
+    desc="Reserves that should be approved or rejected along with the set."
+    name="Reserves"
+    owner="true"
+    triggersValidation="true"/>
+</subtype>

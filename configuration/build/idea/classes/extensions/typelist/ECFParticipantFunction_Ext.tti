@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="ECFParticipantFunction_Ext" desc="It defines the list of participant roles in a Claim.">
+  <typecode
+    code="Lead"
+    desc="To be used when the carrier is the Lead on the claim"
+    name="Lead"/>
+  <typecode
+    code="Follower"
+    desc="To be used ideally when the carrier is a Follower but not an agreement party on the claim however if used accidently
+     when the carrier is a follower and agreement party, the response on the claim will get updated"
+    name="Follower"/>
+  <typecode
+    code="AgreementParty"
+    desc="To be used ideally when a carrier is a Follower as well as an agreement party on the claim."
+    name="Agreement Party"/>
+</typelist>

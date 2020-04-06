@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Medical Treatment Outcome - for use on MedCaseMgr screen"
+  name="TreatmentOutcome">
+  <typecode
+    code="RTW-FT-PIO"
+    desc="Return-to-work full-time pre-injury ccupation"
+    name="RTW FT pre-injury occupation"
+    priority="1"/>
+  <typecode
+    code="RTW-FT-MD"
+    desc="Return-to-work full-time modified duties"
+    name="RTW FT modified duties"
+    priority="2"/>
+  <typecode
+    code="RTW-PT-PIO"
+    desc="Return-to-work part-time pre-injury occupation"
+    name="RTW PT pre-injury occupation"
+    priority="3"/>
+  <typecode
+    code="RTW-PT-MD"
+    desc="Return-to-work part-time modified duties"
+    name="RTW PT modified duties"
+    priority="4"/>
+  <typecode
+    code="UnfitForWork"
+    desc="Still unfit for work"
+    name="Still unfit for work"
+    priority="5"/>
+  <typecode
+    code="AW-RT"
+    desc="At work, but receiving treatment"
+    name="At work, but receiving treatment"
+    priority="6"/>
+</typelistextension>

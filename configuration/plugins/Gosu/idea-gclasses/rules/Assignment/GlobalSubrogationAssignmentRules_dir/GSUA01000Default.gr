@@ -1,0 +1,41 @@
+package rules.Assignment.GlobalSubrogationAssignmentRules_dir
+uses gw.api.system.CCLoggerCategory
+uses gw.api.locale.DisplayKey
+uses gw.api.database.Query
+uses typekey.*
+uses typekey.UserRole
+
+@gw.rules.RuleName("GSUA01000 - Default")
+internal class GSUA01000Default {
+  static function doCondition(subrogation : entity.Subrogation) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(subrogation : entity.Subrogation, actions : gw.rules.Action) {
+/*start00rule*/
+
+  CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.Global.Subrogation", actions.ShortRuleName))
+
+  // If there are subrogationowner in the claim, assign to the first one
+  var currentSubroAssignment =
+    subrogation.SubrogationSummary.Claim.AllRoleAssignments.firstWhere(\ a -> a.Role == UserRole.TC_SUBROGATIONOWNER)
+  if (currentSubroAssignment.AssignedUser != null and subrogation.AssignmentStatus == AssignmentStatus.TC_UNASSIGNED) {
+    if (subrogation.CurrentAssignment.assign(currentSubroAssignment.AssignedGroup, currentSubroAssignment.AssignedUser)) {
+          CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.AssignedUserIs", subrogation.AssignedUser))
+          subrogation.handleSubrogationOwnerRole()
+          actions.exit()
+    }
+  } else {
+    // assign to a user in the first Subro Unit group to review this subrogation
+    var subroGroup = Query.make(Group).compare("GroupType", Equals, GroupType.TC_SUBRO).select().FirstResult
+    if (subrogation.CurrentAssignment.assignGroup(subroGroup)) {
+      CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.AssignedGroupIs", subrogation.AssignedGroup))
+      actions.exit()
+    }
+  }
+
+/*end00rule*/
+  }
+}

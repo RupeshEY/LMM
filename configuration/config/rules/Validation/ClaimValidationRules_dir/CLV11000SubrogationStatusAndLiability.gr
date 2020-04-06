@@ -1,0 +1,44 @@
+package rules.Validation.ClaimValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+uses java.lang.Double
+
+@gw.rules.RuleName("CLV11000 - Subrogation Status And Liability")
+internal class CLV11000SubrogationStatusAndLiability {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.SubrogationSummary != null
+and (claim.SubrogationSummary.Status == TC_CLOSED)
+
+// Will warn end-user if 100% of Liability has not been apportioned
+// at time of Subrogation Close
+
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+var TotalExpLiability : Double = 0
+  
+if (claim.FaultRating == TC_1) {
+  TotalExpLiability = claim.Fault as java.lang.Double
+}
+
+for (thisParty in claim.SubrogationSummary.SubroAdverseParties) {
+  if (thisParty.Fault != null) {
+    TotalExpLiability = TotalExpLiability + thisParty.Fault as java.lang.Double
+  }
+}
+
+if (TotalExpLiability != 100)  {
+  var ruleName = gw.api.util.StringUtil.substring(actions.getRule() as java.lang.String, 0, 8)
+  var reason = DisplayKey.get("Subrogation.Validation.Claim.LiabilityPercent", ruleName, TotalExpLiability)
+  claim.reject(null, null, TC_NEWLOSS, reason)
+}
+/*end00rule*/
+
+  }
+}

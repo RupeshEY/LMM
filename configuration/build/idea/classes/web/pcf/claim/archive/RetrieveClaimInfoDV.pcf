@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    border="true"
+    id="RetrieveClaimInfoDV">
+    <Require
+      name="retrieveClaimInfo"
+      type="ArchivedClaimInfo"/>
+    <InputColumn>
+      <TextAreaInput
+        boldLabel="true"
+        editable="true"
+        id="Comment"
+        label="DisplayKey.get(&quot;Web.ArchivedClaim.Comment&quot;)"
+        labelAbove="true"
+        numCols="60"
+        numRows="5"
+        required="true"
+        value="retrieveClaimInfo.Comment"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

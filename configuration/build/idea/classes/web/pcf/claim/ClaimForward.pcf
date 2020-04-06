@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <!-- Used where the claim could possibly be a draft claim -->
+  <Forward
+    id="ClaimForward"
+    parent="ClaimTabForward()">
+    <LocationEntryPoint
+      signature="ClaimForward(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <!-- Handle draft claim case -->
+    <ForwardCondition
+      action="FNOLWizard.go(Claim)"
+      condition="Claim.State == TC_DRAFT"/>
+    <!-- If this claim is in the process of becoming archived, just display the archive page instead. -->
+    <ForwardCondition
+      action="pcf.ArchivedClaim.go(Claim.ClaimInfo)"
+      condition="Claim.ClaimInfo.ArchiveState == TC_ARCHIVED"/>
+    <!-- Handle normal claim case -->
+    <ForwardCondition
+      action="pcf.Claim.go(Claim)"/>
+    <!-- Handle unknown/error case, such as no permission to view the claim -->
+    <ForwardCondition
+      action="pcf.CannotViewClaim.go()"/>
+  </Forward>
+</PCF>

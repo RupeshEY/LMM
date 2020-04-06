@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ServiceRequestInstruction">
+  <column
+    desc="Text instructions to be provided to the specialist."
+    name="InstructionText"
+    nullok="true"
+    type="longtext"/>
+  <foreignkey
+    columnName="CustomerContactID"
+    desc="The contact with whom the specialist should coordinate to perform the work. In many cases, this will be the claimant."
+    fkentity="Contact"
+    name="CustomerContact"
+    nullok="false"/>
+  <foreignkey
+    columnName="ServiceAddressID"
+    desc="The location at which the service is to be performed; may be null if the location is implied by the specialist, such as if it will be performed at the specialist's place of business."
+    fkentity="Address"
+    name="ServiceAddress"
+    nullok="true"/>
+  <onetoone
+    desc="Refers to the change where this instruction was added to the service request."
+    fkentity="ServiceRequestChange"
+    ignoreforevents="true"
+    name="ChangeWhereIntroduced"
+    nullok="false"/>
+</extension>

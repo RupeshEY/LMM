@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ClaimPolicyCovTermsLV">
+    <Require
+      name="Coverage"
+      type="Coverage"/>
+    <ExposeIterator
+      valueType="entity.CovTerm"
+      widget="ClaimPolicyCovTermsLV"/>
+    <RowIterator
+      editable="!Coverage.Policy.Verified"
+      elementName="CovTerm"
+      hideCheckBoxesIfReadOnly="true"
+      toRemove="Coverage.removeFromCovTerms(CovTerm)"
+      value="Coverage.CovTerms.sortBy(\ c -&gt; c.CovTermOrder)"
+      valueType="entity.CovTerm[]">
+      <Row>
+        <TextCell
+          id="covSortOrderCell"
+          label="&quot;&quot;"
+          sortOrder="1"
+          value="CovTerm.CovTermOrder"
+          valueType="java.lang.Integer"
+          visible="false"/>
+        <TypeKeyCell
+          action="CovTermPopup.push(CovTerm, CurrentLocation.InEditMode)"
+          id="CovTermPattern"
+          label="DisplayKey.get(&quot;LV.Policy.CovTerms.Subject&quot;)"
+          sortOrder="2"
+          value="CovTerm.CovTermPattern"
+          valueType="typekey.CovTermPattern"/>
+        <TypeKeyCell
+          id="ModelRestriction"
+          label="DisplayKey.get(&quot;LV.Policy.CovTerms.ApplicableTo&quot;)"
+          sortOrder="3"
+          value="CovTerm.ModelRestriction"
+          valueType="typekey.CovTermModelRest"/>
+        <TextCell
+          id="Amount"
+          label="DisplayKey.get(&quot;LV.Policy.CovTerms.Amount&quot;)"
+          value="CovTerm.DisplayName"/>
+        <TypeKeyCell
+          id="ModelAggregation"
+          label="DisplayKey.get(&quot;LV.Policy.CovTerms.Per&quot;)"
+          value="CovTerm.ModelAggregation"
+          valueType="typekey.CovTermModelAgg"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

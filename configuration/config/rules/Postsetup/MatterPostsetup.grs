@@ -1,0 +1,13 @@
+package rules.Postsetup
+
+@gw.rules.RuleName("Matter Post-setup")
+@gw.rules.RuleSetDescription("This is the Matter Post-setup rule set. These rules are fired just prior to completing the setup process and saving any changes to matters. Specifically, these rules fire after assignment and workplan rules have run.")
+class MatterPostsetup extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Matter) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Matter) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Matter Post-setup", MatterPostsetup )
+  }
+}

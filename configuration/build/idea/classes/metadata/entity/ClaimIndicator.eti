@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Claim "
+  entity="ClaimIndicator"
+  exportable="true"
+  extendable="true"
+  final="false"
+  platform="false"
+  table="claimindicator"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.indicator.entity.ClaimIndicator"
+    impl="com.guidewire.cc.domain.claim.indicator.impl.ClaimIndicatorImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsInterface
+    iface="gw.api.claim.indicator.ClaimIndicatorMethods"
+    impl="gw.api.claim.indicator.ClaimIndicatorMethodsImpl"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Claim to which this indicator is related."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <column
+    default="false"
+    desc="Is this indicator on?"
+    name="IsOn"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Time at which this indicator was set to on, or null if indicator off"
+    name="WhenOn"
+    nullok="true"
+    type="datetime"/>
+</entity>

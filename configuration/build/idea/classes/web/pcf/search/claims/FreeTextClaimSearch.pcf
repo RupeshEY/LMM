@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.Claim.genericviewclaim and perm.System.viewsearch and gw.api.system.PLConfigParameters.FreeTextSearchEnabled.Value"
+    countsAsWork="false"
+    id="FreeTextClaimSearch"
+    title="DisplayKey.get(&quot;JSP.ClaimSearch.Search.ClaimSearch&quot;)">
+    <LocationEntryPoint
+      signature="FreeTextClaimSearch()"/>
+    <LocationEntryPoint
+      signature="FreeTextClaimSearch(ErrorMessage : String)"/>
+    <Variable
+      name="ErrorMessage"
+      type="String"/>
+    <Variable
+      initialValue="populateErrorMessage()"
+      name="CheckedErrorMessage"
+      recalculateOnRefresh="true"
+      type="java.lang.String"/>
+    <ScreenRef
+      def="FreeTextClaimSearchScreen(true)"/>
+    <Code><![CDATA[function populateErrorMessage() : String{
+        if(ErrorMessage != null) {
+          gw.api.util.LocationUtil.addRequestScopedErrorMessage(ErrorMessage)
+        }
+        return ErrorMessage
+      }]]></Code>
+  </Page>
+</PCF>

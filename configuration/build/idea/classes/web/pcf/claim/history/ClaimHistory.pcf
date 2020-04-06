@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Claim.view(Claim) and perm.System.viewclaimhistory and (Claim.State != ClaimState.TC_DRAFT)"
+    id="ClaimHistory"
+    title="DisplayKey.get(&quot;Web.Claim.ClaimHistory&quot;)">
+    <LocationEntryPoint
+      signature="ClaimHistory(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="ClaimHistoryScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.Claim.ClaimHistory&quot;)"/>
+      <Toolbar>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="null"
+          id="ClaimHistory_RefreshButton"
+          label="DisplayKey.get(&quot;Web.ClaimHistoryLV.Refresh&quot;)"
+          shortcut="F"/>
+      </Toolbar>
+      <PanelRef
+        def="HistoryLV(Claim.AllHistoryEvents)"/>
+    </Screen>
+  </Page>
+</PCF>

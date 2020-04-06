@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    autosaveable="false"
+    canEdit="gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Statcodes&quot;) and perm.Claim.edit(Claim) and perm.Policy.edit(Claim)"
+    canVisit="gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Statcodes&quot;) and perm.Policy.view(Claim) and perm.System.viewpolicy"
+    id="ClaimPolicyStatCodesPrint"
+    parent="ClaimPolicyGroup(Claim)"
+    title="DisplayKey.get(&quot;JSP.ClaimPolicy.Policy.Navigation.Statcodes&quot;)">
+    <LocationEntryPoint
+      signature="ClaimPolicyStatCodesPrint(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="Claim.Policy"
+      name="Policy"
+      recalculateOnRefresh="true"
+      type="entity.Policy"/>
+    <Screen
+      id="ClaimPolicyStatCodesPrintScreen">
+      <PanelRef
+        def="StatCodesLV(Policy.StatCodes, Claim)">
+        <Toolbar/>
+      </PanelRef>
+    </Screen>
+  </Page>
+</PCF>

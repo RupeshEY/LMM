@@ -1,0 +1,20 @@
+package rules.Validation.ExposureValidationRules_dir
+
+@gw.rules.RuleName("EXV05000 - ISO Validation")
+internal class EXV05000ISOValidation {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ISOEnabled
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+// Execute children
+/*end00rule*/
+
+  }
+}

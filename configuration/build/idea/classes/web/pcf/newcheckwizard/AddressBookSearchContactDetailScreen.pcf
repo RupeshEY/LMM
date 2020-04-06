@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<!-- <PCF xsi:noNamespaceSchemaLocation="../../schema/pcf.xsd" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"><Screen id="AddressBookSearchContactDetailScreen"> NOTE: This shared section requires a gw.api.contact.ContactHandle, rather than a Contact, because it'spossible for some actions on a contact detail screen to fundamentally change the contact. In particular, syncinga contact that leads to a downcast of that contact to a more specific subtype causes the original contact tobecome invalid. To protect against this, contacts on shared sections should be wrapped in a ContactHandle. If thecontact is fundamentally changed, then only the handle needs to be updated, and all existing references will seethe new contact.As a shortcut for "contactHandle.Contact", this shared section defines a read-only property which can be used toaccess the most current value of the contact. <Require name="contactHandle" type="gw.api.contact.ContactHandle"/><Require name="canAccessLinkButtons" type="boolean"/><Require name="showRoles" type="boolean"/><Require name="linkStatus" type="gw.api.contact.LinkStatus"/><Require name="claim" type="Claim"/><Toolbar/><PanelRef def="AddressBookContactDetailPanelCV(contactHandle, canAccessLinkButtons, showRoles, linkStatus, claim)" /></Screen></PCF><?xml version="1.0" encoding="UTF-8"?> -->
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="AddressBookSearchContactDetailScreen">
+    <!-- NOTE: This shared section requires a gw.api.contact.ContactHandle, rather than a Contact, because it's
+    possible for some actions on a contact detail screen to fundamentally change the contact. In particular, syncing
+    a contact that leads to a downcast of that contact to a more specific subtype causes the original contact to
+    become invalid. To protect against this, contacts on shared sections should be wrapped in a ContactHandle. If the
+    contact is fundamentally changed, then only the handle needs to be updated, and all existing references will see
+    the new contact.
+
+    As a shortcut for "contactHandle.Contact", this shared section defines a read-only property which can be used to
+    access the most current value of the contact. -->
+    <Require
+      name="contactHandle"
+      type="gw.api.contact.ContactHandle"/>
+    <Require
+      name="canAccessLinkButtons"
+      type="boolean"/>
+    <Require
+      name="showRoles"
+      type="boolean"/>
+    <Require
+      name="linkStatus"
+      type="gw.api.contact.ContactSystemLinkStatus"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="linkStatus.Known and linkStatus.Linked"
+      name="showRelatedObjects"
+      type="boolean"/>
+    <Toolbar/>
+    <CardViewPanel>
+      <Card
+        id="ContactBasicsCard"
+        title="DisplayKey.get(&quot;Web.ContactDetail.PageLinks.Basics&quot;)">
+        <PanelRef
+          def="ContactBasicsDV(contactHandle, showRoles, linkStatus, claim)"
+          mode="Contact.Subtype">
+          <Toolbar>
+            <ToolbarButtonSetRef
+              toolbarButtonSet="AddressBookSearchContactDetailToolbarButtonSet(contactHandle, canAccessLinkButtons, linkStatus)"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="ContactAddressesCard"
+        title="DisplayKey.get(&quot;Web.ContactDetail.PageLinks.Addresses&quot;)"
+        visible="!(Contact typeis Place)">
+        <PanelRef
+          def="AddressesPanelSet(contactHandle)">
+          <Toolbar>
+            <ToolbarButtonSetRef
+              toolbarButtonSet="AddressBookSearchContactDetailToolbarButtonSet(contactHandle, canAccessLinkButtons, linkStatus)"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="ContactRelatedContactsCard"
+        title="DisplayKey.get(&quot;Web.ContactDetail.PageLinks.RelatedContacts&quot;)">
+        <PanelRef
+          def="ContactRelatedContactsDV(contactHandle, claim)">
+          <Toolbar>
+            <ToolbarButtonSetRef
+              toolbarButtonSet="AddressBookSearchContactDetailToolbarButtonSet(contactHandle, canAccessLinkButtons, linkStatus)"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AddressBookContactActivitiesCard"
+        title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Activities&quot;)"
+        visible=" showRelatedObjects and perm.Claim.genericviewactivity">
+        <PanelRef
+          def="AddressBookContactActivitiesLV(Contact)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AddressBookContactClaimsCard"
+        title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Claims&quot;)"
+        visible=" showRelatedObjects and perm.Claim.genericviewclaim">
+        <PanelRef
+          def="AddressBookContactClaimsLV(Contact)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AddressBookContactExposuresCard"
+        title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Exposures&quot;)"
+        visible=" showRelatedObjects and perm.Claim.genericviewexposure">
+        <PanelRef
+          def="AddressBookContactExposuresLV(Contact)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AddressBookContactMattersCard"
+        title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Matters&quot;)"
+        visible=" showRelatedObjects and perm.Claim.genericviewmatter">
+        <PanelRef
+          def="AddressBookContactMattersLV(Contact)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+    </CardViewPanel>
+    <Code><![CDATA[
+      property get Contact() : Contact { return contactHandle.Contact; }
+    ]]></Code>
+  </Screen>
+</PCF>

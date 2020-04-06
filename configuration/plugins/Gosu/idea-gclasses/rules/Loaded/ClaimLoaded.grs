@@ -1,0 +1,13 @@
+package rules.Loaded
+
+@gw.rules.RuleName("Claim Loaded")
+@gw.rules.RuleSetDescription("This is the Claim Loaded rule set. These rules are used when    a new claim is loaded via the FNOL import interface. They    can be used to assign review of the new FNOL to a user prior    to running the full \"automated setup process\".")
+class ClaimLoaded extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Claim) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Claim) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Claim Loaded", ClaimLoaded )
+  }
+}

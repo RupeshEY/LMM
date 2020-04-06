@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Report of an incident involving a dwelling"
+  entity="DwellingIncident"
+  final="false"
+  supertype="FixedPropertyIncident">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.DwellingIncident"
+    impl="com.guidewire.cc.domain.exposure.impl.DwellingIncidentImpl"/>
+  <array
+    arrayentity="DwellingRoomDamage"
+    desc="Information about rooms damaged as a result of the incident."
+    name="DwellingRoomDamages"/>
+  <column
+    desc="Materials damaged as a result of the incident, for instance, floor, walls etc."
+    name="MaterialsDamaged"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="250"/>
+  </column>
+  <column
+    desc="Size of the damaged area in sq. feet, sq. meters or other units of measurement"
+    name="DamagedAreaSize"
+    nullok="true"
+    type="positiveinteger"/>
+  <column
+    desc="Size of the property in sq. feet, sq. meters or other units of measurement"
+    name="PropertySize"
+    nullok="true"
+    type="positiveinteger"/>
+  <column
+    desc="Number of years the insured has owned the home"
+    name="YearsInHome"
+    nullok="true"
+    type="nonnegativeinteger"/>
+  <column
+    desc="Number of people on the policy"
+    name="NumberOfPeopleOnPolicy"
+    nullok="true"
+    type="nonnegativeinteger"/>
+  <column
+    desc="Year the property was built"
+    name="YearBuilt"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Is fire protection available"
+    name="FireProtectionAvailable"
+    nullok="true"
+    type="bit"/>
+  <column
+    deprecated="true"
+    desc="Emergency Management Service requested.  Deprecated: No longer used in the base configuration.  The equivalent of a true value for this field in 8.0 is the presence of a ServiceRequest with the 'Home services - Emergency services - Make safe' service."
+    name="EMSInd"
+    nullok="true"
+    type="bit"/>
+  <column
+    deprecated="true"
+    desc="Debris Removal Service requested.  Deprecated: No longer used in the base configuration.  The equivalent of a true value for this field in 8.0 is the presence of a ServiceRequest with the 'Property - Emergency services - Debris removal' service."
+    name="DebrisRemovalInd"
+    nullok="true"
+    type="bit"/>
+</subtype>

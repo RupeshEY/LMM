@@ -1,0 +1,48 @@
+package rules.Validation.TransactionSetValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("TXV07000 - Default CheckSet Rules")
+internal class TXV07000DefaultCheckSetRules {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+
+if (transactionSet.Subtype == TC_CHECKSET) {
+  var check = ((transactionSet as CheckSet).PrimaryCheck)
+  var mailingAddress = check.MailingAddress
+  if (check.DeliveryMethod == TC_SEND and check.PaymentMethod != TC_EFT) {
+    if (check.MailingAddress != null ) {
+      if (mailingAddress.City == null) {
+        return true
+      }
+      if (mailingAddress.State == null and
+          (mailingAddress.Country == null or mailingAddress.Country == TC_US or mailingAddress.Country == TC_CA)) {
+          return true
+      }
+
+      return false
+    }
+
+    return check.OldMailToAddress == null
+  } else {
+    return false
+  }
+
+} else {
+  return false
+}
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+transactionSet.rejectSubField(
+  (transactionSet as CheckSet).PrimaryCheck, "MailingAddress",
+  TC_NEWLOSS, DisplayKey.get("Web.FNOLWizard.CheckReady.SendingErrorMessage"),  null, null)
+/*end00rule*/
+
+  }
+}

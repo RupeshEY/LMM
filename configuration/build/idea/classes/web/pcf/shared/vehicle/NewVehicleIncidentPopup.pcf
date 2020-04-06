@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="VehicleIncident.Claim.cleanAndFinishServiceRequests(unusedServiceRequests); VehicleIncident.Claim.instructNewServiceRequests()"
+    canEdit="true"
+    canVisit="perm.Claim.createincident(Claim)"
+    id="NewVehicleIncidentPopup"
+    returnType="VehicleIncident"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.NewVehicleIncident.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewVehicleIncidentPopup(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="initializeVehicleIncident()"
+      name="VehicleIncident"
+      type="entity.VehicleIncident"/>
+    <Variable
+      initialValue="new java.util.HashSet&lt;ServiceRequest&gt;()"
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Screen
+      id="NewVehicleIncidentScreen">
+      <TitleBar
+        icon="VehicleIncident.HeaderIcon"/>
+      <Toolbar>
+        <EditButtons
+          pickValue="VehicleIncident"/>
+      </Toolbar>
+      <PanelRef
+        def="VehIncidentDetailDV(VehicleIncident, unusedServiceRequests)"/>
+    </Screen>
+    <Code><![CDATA[function initializeVehicleIncident() : VehicleIncident{
+ var newIncident =  Claim.newIncident(entity.VehicleIncident) as VehicleIncident
+ if(Claim.LossType == TC_TRAV)
+   newIncident.VehicleLossParty = TC_THIRD_PARTY
+ return newIncident  
+}]]></Code>
+  </Popup>
+</PCF>

@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Document">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.document.impl.DocumentCoreExtMethods"
+    impl="com.guidewire.cc.domain.document.impl.DocumentCoreExtMethodsImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.document.impl.DocumentCoreExtInternalMethods"
+    impl="com.guidewire.cc.domain.document.impl.DocumentCoreExtMethodsImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <description><![CDATA[<p>
+        Represents a physical or electronic document. This entity only contains information about the referenced document,
+        known as metadata, not the actual document contents. Use <code>IDocumentContentSource</code> to retrieve and store
+        document contents.  Multiple <code>Document</code> entities may have the same value for the <code>docUID</code>
+        field. This means simply that the <code>Document</code> entities represent the same physical document, for example,
+        a document that applies to multiple claims.
+        </p><p>
+        Note that <code>Document</code> entities may or may not be stored in the database. You can implement a plugin
+        interface, {@link com.guidewire.pl.plugin.document.IDocumentMetadataSource}, to retrieve document metadata from
+        an external document management system (DMS). If you do not implement and register this interface, the system stores
+        the <code>Document</code> entities in the database in the normal manner.
+        </p><p>
+        It is important to coordinate customizations of this entity with those of the <code>DocumentSearchCriteria</code>
+        and <code>DocumentSearchResult</code> entities, so that users will be able to search for documents based on the
+        most appropriate fields and select from the results.
+        </p><p>
+        The system retrieves the documents' contents (as referenced by <code>Document</code> entities) through the
+        {@link com.guidewire.pl.plugin.document.IDocumentContentSource} plugin interface. This interface connects a Guidewire
+        application to a DMS. The DMS property on the <code>Document</code> entity indicates whether the contents of the
+        document are stored in the document management system; if not, then the entity merely denotes the existence of a
+        physical document and no electronic access is available. If the contents do exist in the DMS, then the <code>DocUID</code>
+        property must be a key that uniquely identifies the contents which should be displayed for a particular
+        <code>Document</code> entity.
+        </p><p>
+        You can control access to particular <code>Document</code> entities through the <code>SecurityType</code> property.
+        Use this property in conjunction with the security settings in <code>security-config.xml</code>. See the
+        Administration Guide for more details.
+        </p>
+      
+    ]]></description>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Associated claim."
+    exportasid="true"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="Associated exposure. Note that only one of Exposure, Matter, and ClaimContact may be set."
+    exportasid="true"
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="true"/>
+  <foreignkey
+    columnName="MatterID"
+    desc="Associated matter. Note that only one of Exposure, Matter, and ClaimContact may be set."
+    exportasid="true"
+    fkentity="Matter"
+    name="Matter"
+    nullok="true"/>
+  <foreignkey
+    columnName="ClaimContactID"
+    desc="Associated claim contact. Note that only one of Exposure, Matter, and ClaimContact may be set."
+    exportasid="true"
+    fkentity="ClaimContact"
+    name="ClaimContact"
+    nullok="true"/>
+  <array
+    arrayentity="ServiceRequestDocumentLink"
+    cascadeDelete="false"
+    desc="The ServiceRequestDocumentLinks linking ServiceRequests to this Document. This must be empty if any of the other 'related to' fields are set"
+    exportable="false"
+    ignoreforevents="true"
+    name="ServiceRequestDocumentLinks"
+    setterScriptability="doesNotExist"/>
+  <checkconstraint
+    desc="A document can be associated with a claimant or an exposure or a matter or service requests, but not more than one of these."
+    predicate="(ExposureID IS NULL AND MatterID IS NULL) OR (ExposureID IS NULL AND ClaimContactID IS NULL) OR (MatterID IS NULL AND ClaimContactID IS NULL)"/>
+</internalExtension>

@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Links a BulkInvoiceItem to a claim graph"
+  entity="BulkInvoiceItemInfo"
+  exportable="false"
+  extendable="false"
+  loadable="false"
+  platform="false"
+  table="biiteminfo"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceItemInfoImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.bulkpay.entity.BulkInvoiceItemInfo"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceItemInfoImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+      Links a BulkInvoiceItem to a claim graph. It has a nullable reference to BulkInvoiceItem so that it can be archived along with the claim graph.
+    ]]></fulldescription>
+  <foreignkey
+    columnName="BulkInvoiceItemID"
+    desc="The bulk invoice that this info is referring to"
+    fkentity="BulkInvoiceItem"
+    name="BulkInvoiceItem"
+    nullok="true"/>
+  <column
+    desc="PublicID used to link back to the item"
+    name="BulkInvoiceItemPublicID"
+    nullok="true"
+    overwrittenInStagingTable="true"
+    soapnullok="true"
+    type="publicid"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The Claim for which this BulkInvoiceItem represents a payment."
+    exportasid="true"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="The Exposure, if any, for which this BulkInvoiceItem represents a payment."
+    exportasid="true"
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="true"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="ReserveLineWrapperID"
+    desc="the wrapper that contains the ReserveLine for the payment associated with this invoice item."
+    exportable="false"
+    fkentity="ReserveLineWrapper"
+    name="ReserveLineWrapper"
+    nullok="false"/>
+  <onetoone
+    desc="The Check entity that was created as the associated placeholder for this BulkInvoiceItem."
+    fkentity="Check"
+    name="Check"
+    nullok="true"
+    setterScriptability="doesNotExist"/>
+</entity>

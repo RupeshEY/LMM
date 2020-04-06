@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="ValidatingCommandParameterInputSet">
+    <Require
+      name="parameterHolder"
+      type="gw.bizrules.pcf.RuleCommandParameterHolder"/>
+    <Variable
+      initialValue="parameterHolder.FragHolder"
+      name="fragHolder"
+      type="gw.bizrules.pcf.ExpressionFragmentHolder"/>
+    <InputSetRef
+      def="CommandParameterInputSet(parameterHolder)"
+      mode="parameterHolder.PCFMode"/>
+    <InputSetRef
+      def="ValidationErrorsInputSet(parameterHolder.validate(), false)"/>
+  </InputSet>
+</PCF>

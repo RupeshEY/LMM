@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <InputSet
+    id="AddressSnapshotInputSet">
+    <Require
+      name="Address"
+      type="dynamic.Dynamic"/>
+    <Require
+      name="Claim"
+      type="dynamic.Dynamic"/>
+    <TextInput
+      id="Address_Name"
+      label="DisplayKey.get(&quot;Web.Address.Default.Location&quot;)"
+      value="Address.DisplayName"
+      valueType="dynamic.Dynamic"/>
+    <TextInput
+      id="AddressType"
+      label="DisplayKey.get(&quot;Web.Address.Default.AddressType&quot;)"
+      value="Address.AddressType"
+      valueType="dynamic.Dynamic"/>
+    <TextInput
+      id="ValidUntil"
+      label="DisplayKey.get(&quot;Web.Address.Default.ValidUntil&quot;)"
+      value="Address.ValidUntil"
+      valueType="dynamic.Dynamic"/>
+    <TextInput
+      id="LossLocationCode"
+      label="DisplayKey.get(&quot;Web.Address.Default.LocationCode&quot;)"
+      value="Claim.LossLocationCode"
+      valueType="dynamic.Dynamic"
+      visible="Claim != null and Address.Country.Code == &quot;US&quot; and Claim.LossType.Code != &quot;WC&quot;"/>
+    <TextInput
+      id="JurisdictionState"
+      label="DisplayKey.get(&quot;Web.Address.Default.JurisdictionState&quot;)"
+      value="Claim.JurisdictionState"
+      valueType="dynamic.Dynamic"
+      visible="Claim!=null"/>
+  </InputSet>
+</PCF>

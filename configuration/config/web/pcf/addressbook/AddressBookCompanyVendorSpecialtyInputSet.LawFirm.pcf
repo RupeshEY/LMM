@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AddressBookCompanyVendorSpecialtyInputSet"
+    mode="LawFirm">
+    <Require
+      name="CompanyVendor"
+      type="CompanyVendor"/>
+    <TypeKeyInput
+      editable="true"
+      id="LawFirmSpecialty"
+      label="DisplayKey.get(&quot;Web.ContactDetail.LawFirm.LawFirmSpecialty&quot;)"
+      value="(CompanyVendor as LawFirm).LawFirmSpecialty"
+      valueType="typekey.LegalSpecialty"/>
+  </InputSet>
+</PCF>

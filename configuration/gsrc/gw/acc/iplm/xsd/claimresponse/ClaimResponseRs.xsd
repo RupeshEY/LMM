@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This is the XCHANGING Claim Response Rs Service Interface that will 
+	be received by carrier from XCHANGING. **** version 3.4 Schema **** **** 
+	Last updated on: November 22, 2016 **** COPYRIGHT NOTICE: (c) 2015 XCHANGING. 
+	All Rights Reserved. -->
+<xs:schema xmlns="http://www.xchanging.com/claimResponse/rs/1"
+	targetNamespace="http://www.xchanging.com/claimResponse/rs/1" xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns:jv="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1"
+	elementFormDefault="qualified" attributeFormDefault="unqualified"
+	version="3.4">
+
+	<xs:import namespace="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1"
+		schemaLocation="../Jv-Ins-Reinsurance-2014-06.xsd" />
+
+	<xs:element name="ClaimResponseRs">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="jv:UUId" />
+				<xs:element ref="jv:ServiceProviderReference" minOccurs="0" />
+				<xs:element ref="jv:CreationDate" />
+				<xs:element ref="jv:AcknowledgementTransactionType" />				
+				<xs:element ref="jv:Insurer" minOccurs="0" />
+				<xs:element ref="jv:ServiceProvider" />
+				<xs:element name="ReferredMessage">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element ref="jv:UUId"  />
+							<xs:element name="InsurerTransactionReference" type="xs:string"	minOccurs="0"></xs:element>
+							<xs:element name="ReinsurerTransactionReference" type="xs:string"	minOccurs="0"></xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element ref="jv:Response" />
+				<xs:element name="ErrorsAndWarnings" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Result" maxOccurs="10">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="ErrorWarningLevel">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:enumeration value="001" />
+													<xs:enumeration value="002" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ErrorCode">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="0" />
+													<xs:maxLength value="10" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+										<xs:element name="ErrorWarningDescription">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="0" />
+													<xs:maxLength value="70" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+
+			<xs:attribute name="Sender" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="0" />
+						<xs:maxLength value="35" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Receiver" use="required">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="0" />
+						<xs:maxLength value="35" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="MatterCloseReopenInfo"
+  final="false"
+  supertype="CloseReopenInfo">
+  <implementsInterface
+    iface="gw.cc.matter.entity.MatterCloseReopenInfo"
+    impl="com.guidewire.cc.domain.matter.impl.MatterCloseReopenInfoImpl"/>
+  <fulldescription><![CDATA[
+            Holds transitional internal state information during all matter close or reopen operations.
+            This acts as a abstract base entity for CloseMatterInfo and ReopenMatterInfo. The system does not
+            store MatterCloseReopenInfo in the database.
+            
+    ]]></fulldescription>
+  <foreignkey
+    columnName="MatterID"
+    desc="Related matter."
+    fkentity="Matter"
+    name="Matter"
+    nullok="true"/>
+</subtype>

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="ExposureDetailScreen">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <Require
+      name="User"
+      type="User"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Variable
+      initialValue="libraries.ISO.showSubmitInfoMessage()"
+      name="messageShown"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Toolbar>
+      <EditButtons/>
+      <ToolbarButton
+        action="gw.api.assignment.AssignmentUtil.assignEU(Exposure)"
+        hideIfEditable="true"
+        id="ExposureDetailScreen_AssignButton"
+        label="DisplayKey.get(&quot;Web.ExposureDetail.Assign&quot;)"
+        visible="perm.Exposure.assign(Exposure)"/>
+      <ToolbarButton
+        action="CloseExposurePopup.push(Exposure)"
+        hideIfEditable="true"
+        id="ExposureDetailScreen_CloseButton"
+        label="DisplayKey.get(&quot;Web.ExposureDetail.Close&quot;)"
+        visible="Exposure.canClose(User)"/>
+      <ToolbarButton
+        action="if (gw.api.claim.ReopenUtil.requireExplanation(entity.Exposure)) {ReopenExposurePopup.push(Exposure);} else {gw.api.claim.ReopenUtil.reopenExposureWithoutExplanation(Exposure);}"
+        hideIfEditable="true"
+        id="ExposureDetailScreen_ReopenButton"
+        label="DisplayKey.get(&quot;Web.ExposureDetail.Reopen&quot;)"
+        visible="Exposure.canReopen(User)"/>
+      <ToolbarButton
+        action="NewReserveSet.go(Exposure.Claim, Exposure, true)"
+        hideIfEditable="true"
+        id="ExposureDetailScreen_CreateReserveButton"
+        label="DisplayKey.get(&quot;Web.ExposureDetail.CreateReserve&quot;)"
+        visible="User.hasReserveAuthority() and !Exposure.Closed"/>
+      <ToolbarButton
+        action="gw.api.exposure.ExposureUtil.sendToISO(Exposure)"
+        available="Exposure.ISOButtonsAvailable"
+        hideIfEditable="true"
+        id="ExposureDetailScreen_SendToISOButton"
+        label="DisplayKey.get(&quot;Web.ExposureDetail.SendToISO&quot;)"
+        visible="Exposure.ISOButtonsVisible"/>
+      <ToolbarButton
+        action="null"
+        available="Exposure.ISOButtonsAvailable"
+        hideIfEditable="true"
+        id="ExposureDetailScreen_RefreshButton"
+        label="DisplayKey.get(&quot;Web.ExposureDetail.Refresh&quot;)"
+        visible="Exposure.ISOButtonsVisible"/>
+    </Toolbar>
+    <PanelRef
+      def="ExposureDetailDV(Exposure, unusedServiceRequests)"
+      mode="Exposure.ExposureType"/>
+  </Screen>
+</PCF>

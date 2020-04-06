@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Trips&quot;) and perm.Claim.edit(Claim) and perm.Policy.edit(Claim)"
+    canVisit="gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Trips&quot;) and perm.Policy.view(Claim) and perm.System.viewpolicy"
+    id="ClaimPolicyTrips"
+    title="DisplayKey.get(&quot;Web.ClaimPolicy.Trips&quot;)">
+    <LocationEntryPoint
+      signature="ClaimPolicyTrips(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="ClaimPolicyTripsSegmentsScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="gw.api.policy.ClaimPolicyMakeEditableUtil.makePolicyEditable(CurrentLocation, Claim, true)"
+          confirmMessage="DisplayKey.get(&quot;JSP.ClaimPolicyGeneral.EditVerifiedPolicy&quot;)"
+          hideIfEditable="true"
+          id="ClaimPolicyTrip_DeverifyPolicy"
+          label="DisplayKey.get(&quot;Button.Edit&quot;)"
+          shortcut="E"
+          visible="Claim.Policy.Verified and perm.Policy.edit(Claim)"/>
+        <!-- Edit an unverified policy -->
+        <ToolbarButton
+          action="CurrentLocation.startEditing()"
+          default="true"
+          hideIfEditable="true"
+          id="ClaimPolicyTrip_EditButton"
+          label="DisplayKey.get(&quot;Button.Edit&quot;)"
+          shortcut="E"
+          visible="!Claim.Policy.Verified and perm.Policy.edit(Claim)"/>
+        <ToolbarDivider/>
+        <IteratorButtons
+          iterator="TripLDV.TripRULV"/>
+        <EditButtons
+          editVisible="false"
+          id="tripsegment_toolbar"/>
+      </Toolbar>
+      <PanelRef
+        def="TripLDV(Claim)"
+        visible="Claim.Policy.RiskUnits.where(\ r -&gt; r typeis TripRU).Count &gt; 0"/>
+    </Screen>
+  </Page>
+</PCF>

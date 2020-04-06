@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Defines the code of the specialist services to filter in the contact search criteria"
+  entity="SpecialistServiceSearchCriteria"
+  exportable="true">
+  <foreignkey
+    desc="ContactSearchCriteria which uses this code to perform a contact search."
+    fkentity="ContactSearchCriteria"
+    name="ContactSearchCriteria"
+    nullok="true"/>
+  <column
+    desc="Specialist Service code to filter in the contact search criteria."
+    name="SpecialistServiceCode"
+    nullok="true"
+    type="shorttext"/>
+</nonPersistentEntity>

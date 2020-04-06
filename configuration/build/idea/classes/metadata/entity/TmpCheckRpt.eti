@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<!-- ************************************************************************************************************************************************
+  Temp tables that are necessary for the recomputing the CheckRpt.GrossAmount values during execution of the financials calculations batch process
+  ************************************************************************************************************************************************ -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="temp table used for recalculating CheckRpt.GrossAmount values"
+  entity="TmpCheckRpt"
+  exportable="false"
+  extendable="false"
+  loadable="false"
+  platform="false"
+  table="tmpcheckrpt"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.financials.check.entity.TmpCheckRpt"
+    impl="com.guidewire.cc.domain.financials.check.impl.TmpCheckRptImpl"/>
+  <column
+    desc="The ID of the check to which the gross amount corresponds"
+    exportable="false"
+    name="CheckID"
+    nullok="false"
+    type="softentityreference"/>
+  <column
+    desc="The gross amount of the check, in the check currency, to be updated to the CheckRpt table"
+    exportable="false"
+    name="GrossAmount"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="The gross amount of the check, in the reserving currency, to be updated to the CheckRpt table"
+    exportable="false"
+    name="GrossReservingAmount"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="The gross amount of the check, in the claim currency, to be updated to the CheckRpt table"
+    exportable="false"
+    name="GrossClaimAmount"
+    nullok="false"
+    type="money"/>
+  <typekey
+    desc="The transaction currency of the Check."
+    exportable="false"
+    name="Currency"
+    nullok="false"
+    typelist="Currency"/>
+  <typekey
+    desc="The reserving currency of the Check."
+    exportable="false"
+    name="ReservingCurrency"
+    nullok="false"
+    typelist="Currency"/>
+  <index
+    desc="A Check should have its values calculated in this table at most once."
+    name="tmpcheckrpt1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="CheckID"/>
+  </index>
+</entity>

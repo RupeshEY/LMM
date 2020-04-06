@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="AssignmentPopup.Picker.setSelection(pickedValue);AssignmentPopup.performAssignment()"
+    canEdit="true"
+    id="AssignLMMessagesPopup"
+    returnType="gw.api.assignment.Assignee"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.Assign&quot;)">
+    <LocationEntryPoint
+      signature="AssignLMMessagesPopup(AssignmentPopup : gw.acc.iplm.utils.pcf.suspensequeue.LMMessageAssignmentPopup)"/>
+    <Variable
+      name="AssignmentPopup"
+      type="gw.acc.iplm.utils.pcf.suspensequeue.LMMessageAssignmentPopup"/>
+    <ScreenRef
+      def="AssignmentPopupScreen(AssignmentPopup, AssignmentPopup.Claim)"/>
+  </Popup>
+</PCF>

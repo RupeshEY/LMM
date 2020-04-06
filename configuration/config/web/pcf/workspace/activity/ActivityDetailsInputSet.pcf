@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_activity.xml -->
+  <InputSet
+    id="ActivityDetailsInputSet">
+    <Require
+      name="Activity"
+      type="Activity"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.Activity.Details&quot;)"/>
+    <TextInput
+      editable="true"
+      id="Activity_Subject"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.Activity.Subject&quot;)"
+      required="true"
+      value="Activity.Subject"/>
+    <TextAreaInput
+      editable="true"
+      id="Activity_Description"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.Activity.Description&quot;)"
+      numCols="40"
+      numRows="3"
+      value="Activity.Description"/>
+    <RangeInput
+      editable="true"
+      id="RelatedTo"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.RelatedTo&quot;)"
+      numCols="20"
+      optionGroupLabel="gw.pcf.RelatedToUtil.getOptionGroupLabel(VALUE as KeyableBean)"
+      optionLabel="gw.pcf.RelatedToUtil.getOptionLabel(VALUE as KeyableBean)"
+      required="true"
+      sortValueRange="false"
+      value="Activity.RelatedTo"
+      valueRange="Activity.Claim.RelatedToCandidates"
+      valueType="gw.pl.persistence.core.Bean"
+      visible="not (Activity.RelatedTo typeis ServiceRequest)">
+      <PostOnChange/>
+    </RangeInput>
+    <TextInput
+      action="ClaimServiceRequests.goInMain(Activity.Claim, Activity.ServiceRequest)"
+      id="RelatedToLink"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.RelatedTo&quot;)"
+      value="(Activity.RelatedTo as ServiceRequest).ShortDisplayName"
+      visible="Activity.RelatedTo typeis ServiceRequest"/>
+    <DateInput
+      dateFormat="short"
+      editable="true"
+      id="Activity_DueDate"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.Activity.DueDate&quot;)"
+      required="Activity.Importance != TC_NOTONCALENDAR"
+      value="Activity.TargetDate"
+      visible="Activity.ActivityClass != TC_EVENT"/>
+    <DateInput
+      dateFormat="short"
+      editable="true"
+      id="Activity_StartDate"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.Activity.StartDate&quot;)"
+      required="Activity.Importance != TC_NOTONCALENDAR"
+      timeFormat="short"
+      value="Activity.TargetDate"
+      visible="Activity.ActivityClass == TC_EVENT"/>
+    <DateInput
+      dateFormat="short"
+      editable="true"
+      id="Activity_EndDate"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.Activity.EndDate&quot;)"
+      timeFormat="short"
+      value="Activity.EndDate"
+      visible="Activity.ActivityClass == TC_EVENT"/>
+    <DateInput
+      dateFormat="short"
+      editable="true"
+      id="Activity_EscalationDate"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.Activity.EscalationDate&quot;)"
+      value="Activity.EscalationDate"/>
+    <TypeKeyInput
+      editable="true"
+      id="Activity_Priority"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.Priority&quot;)"
+      required="true"
+      value="Activity.Priority"
+      valueType="typekey.Priority"/>
+    <TypeKeyInput
+      editable="true"
+      id="Activity_Importance"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.Activity.Importance&quot;)"
+      required="true"
+      value="Activity.Importance"
+      valueType="typekey.ImportanceLevel"/>
+    <BooleanRadioInput
+      editable="Activity.canMakeMandatory()"
+      id="Activity_Mandatory"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.Activity.Mandatory&quot;)"
+      required="true"
+      value="Activity.Mandatory"/>
+    <TypeKeyInput
+      id="Activity_Status"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.Activity.Status&quot;)"
+      value="Activity.Status"
+      valueType="typekey.ActivityStatus"/>
+    <BooleanRadioInput
+      editable="true"
+      id="ExternallyOwned"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.ExternallyOwned&quot;)"
+      required="true"
+      value="Activity.ExternallyOwned"/>
+    <ClaimContactInput
+      claim="Activity.Claim"
+      editable="true"
+      id="ExternalOwner"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.ExternalOwner&quot;)"
+      value="Activity.ExternalOwner"
+      valueRange="Activity.Claim.RelatedContacts"/>
+  </InputSet>
+</PCF>

@@ -1,0 +1,177 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="ClaimSearchOptionalInputSet">
+    <Require
+      name="ClaimSearchCriteria"
+      type="ClaimSearchCriteria"/>
+    <Variable
+      initialValue="ClaimSearchCriteria.ClaimSearchType == ClaimSearchType.TC_ACTIVE"
+      name="liveClaimFlag"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="ClaimSearchCriteria.ClaimSearchType == ClaimSearchType.TC_ARCHIVED"
+      name="ArchivedClaimFlag"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Search.OptionalParameters&quot;)"/>
+    <TypeKeyInput
+      available="liveClaimFlag"
+      editable="true"
+      filter="VALUE.hasCategory(JurisdictionType.TC_INSURANCE)"
+      id="State"
+      label="DisplayKey.get(&quot;JSP.ClaimSearch.Claims.State&quot;)"
+      required="false"
+      value="ClaimSearchCriteria.JurisdictionState"
+      valueType="typekey.Jurisdiction"/>
+    <RangeInput
+      available="liveClaimFlag"
+      editable="true"
+      id="ClaimStatus"
+      label="DisplayKey.get(&quot;JSP.ClaimSearch.Claims.ClaimStatus&quot;)"
+      required="false"
+      value="ClaimSearchCriteria.ClaimState"
+      valueRange="gw.api.claim.ClaimUtil.getAvailableClaimStates()"
+      valueType="typekey.ClaimState"/>
+    <TypeKeyInput
+      available="liveClaimFlag"
+      editable="true"
+      id="LOB"
+      label="DisplayKey.get(&quot;JSP.ClaimSearch.Claims.LOB&quot;)"
+      required="false"
+      value="ClaimSearchCriteria.LOBCode"
+      valueType="typekey.LOBCode"/>
+    <TypeKeyInput
+      available="liveClaimFlag"
+      editable="true"
+      id="LossType"
+      label="DisplayKey.get(&quot;JSP.ClaimSearch.Claims.LossType&quot;)"
+      required="false"
+      value="ClaimSearchCriteria.LossType"
+      valueType="typekey.LossType"/>
+    <BooleanDropdownInput
+      available="liveClaimFlag"
+      editable="true"
+      id="PendingAssignment"
+      label="DisplayKey.get(&quot;JSP.ClaimSearch.Claims.PendingAssignment&quot;)"
+      required="false"
+      value="ClaimSearchCriteria.pendingAssignment"/>
+    <BooleanDropdownInput
+      available="liveClaimFlag"
+      editable="true"
+      id="IncidentReport"
+      label="DisplayKey.get(&quot;JSP.ClaimSearch.Claims.IncidentReport&quot;)"
+      required="false"
+      value="ClaimSearchCriteria.IncidentReport"/>
+    <BooleanDropdownInput
+      available="liveClaimFlag"
+      editable="true"
+      id="ReinsuranceReportable"
+      label="DisplayKey.get(&quot;JSP.ClaimSearch.Claims.ReinsuranceReportable&quot;)"
+      required="false"
+      value="ClaimSearchCriteria.ReinsuranceReportable"/>
+    <InputDivider/>
+    <BooleanDropdownInput
+      available="liveClaimFlag"
+      editable="true"
+      id="CoverageInQuestion"
+      label="DisplayKey.get(&quot;JSP.ClaimSearch.Claims.CoverageInQuestion&quot;)"
+      required="false"
+      value="ClaimSearchCriteria.CoverageInQuestion"/>
+    <TypeKeyInput
+      available="liveClaimFlag"
+      editable="true"
+      id="FlaggedType"
+      label="DisplayKey.get(&quot;JSP.ClaimSearch.Claims.FlaggedType&quot;)"
+      required="false"
+      value="ClaimSearchCriteria.FlaggedType"
+      valueType="typekey.FlaggedType"/>
+    <TypeKeyInput
+      available="liveClaimFlag"
+      editable="true"
+      id="LitigationStatus"
+      label="DisplayKey.get(&quot;JSP.ClaimSearch.Claims.LitigationStatus&quot;)"
+      required="false"
+      value="ClaimSearchCriteria.LitigationStatus"
+      valueType="typekey.LitigationStatus"/>
+    <RangeInput
+      editable="liveClaimFlag"
+      id="IndicatorSearch"
+      label="DisplayKey.get(&quot;JSP.ClaimSearch.Claims.ClaimIndicator&quot;)"
+      labelAbove="true"
+      multiSelect="true"
+      numRows="6"
+      shuttleList="true"
+      value="claimIndicators"
+      valueRange="ClaimIndicatorTypeKeys"
+      valueType="typekey.ClaimIndicator[]"/>
+    <InputDivider/>
+    <DateCriterionChoiceInput
+      chosenOptionVisible="true"
+      editable="true"
+      id="DateSearch"
+      label="DisplayKey.get(&quot;JSP.ClaimSearch.Claims.DateSearch&quot;)"
+      required="false"
+      value="ClaimSearchCriteria.DateCriterionChoice"
+      visible="liveClaimFlag"/>
+    <DateCriterionChoiceInput
+      chosenOptionVisible="true"
+      editable="true"
+      id="ArchiveDateSearch"
+      label="DisplayKey.get(&quot;JSP.ClaimSearch.Claims.DateSearch&quot;)"
+      required="false"
+      value="ClaimSearchCriteria.ArchiveDateCriterionChoice"
+      visible="ArchivedClaimFlag"/>
+    <InputDivider/>
+    <FinancialCriterionMultiCurrencyChoiceInput
+      available="liveClaimFlag"
+      chosenOptionVisible="true"
+      editable="true"
+      id="Financial"
+      label="DisplayKey.get(&quot;JSP.ClaimSearch.Claims.Financial&quot;)"
+      required="false"
+      value="ClaimSearchCriteria.FinancialCriterion"/>
+    <Code><![CDATA[
+property get claimIndicators() : typekey.ClaimIndicator[] {
+  var criteria = ClaimSearchCriteria.ClaimIndicatorCriterion
+  var result = new java.util.ArrayList<typekey.ClaimIndicator>()
+  for (var indicator in criteria) {
+    result.add(indicator.ClaimIndicatorType)
+  }
+  return result.toTypedArray()
+}
+  
+property set claimIndicators(value : typekey.ClaimIndicator[]) {
+  var criteria = new java.util.ArrayList<ClaimIndicatorCriterion>()
+  for (var indicator in value) {
+    var criterion = new ClaimIndicatorCriterion()
+    criterion.ClaimIndicatorType = indicator
+    criteria.add(criterion)
+  }
+  ClaimSearchCriteria.ClaimIndicatorCriterion = criteria.toTypedArray()
+}
+
+property get ClaimIndicatorTypeKeys() : typekey.ClaimIndicator[] {
+  var result = new java.util.ArrayList<typekey.ClaimIndicator>()
+  var typekeys = new java.util.ArrayList<typekey.ClaimIndicator>(typekey.ClaimIndicator.getTypeKeys(false))
+  //removing litigation, coverage in question, and flag indicator because there's already search
+  //fields for them.
+  typekeys.remove(typekey.ClaimIndicator.TC_COVERAGEINQUESTIONCLAIMINDICATOR)
+  typekeys.remove(typekey.ClaimIndicator.TC_LITIGATIONCLAIMINDICATOR)
+  typekeys.remove(typekey.ClaimIndicator.TC_FLAGCLAIMINDICATOR)
+  for (subtypeKey in typekeys) {
+    var subtype = gw.lang.reflect.TypeSystem.getByFullName("entity." + subtypeKey.Code)
+    if (!subtype.Abstract){
+      result.add(subtypeKey)
+    }
+  }
+  return result.toTypedArray()
+}
+      
+    ]]></Code>
+  </InputSet>
+</PCF>

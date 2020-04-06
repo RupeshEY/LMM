@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AddressBookPrimaryAddressInputSet">
+    <Require
+      name="contact"
+      type="Contact"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.PrimaryAddressDV&quot;)"/>
+    <InputSetRef
+      def="CCAddressInputSet(contact.AddressOwner)"/>
+  </InputSet>
+</PCF>

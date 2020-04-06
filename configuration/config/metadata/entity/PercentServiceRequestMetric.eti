@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Percent based service request metric."
+  entity="PercentServiceRequestMetric"
+  final="false"
+  priority="4"
+  supertype="ServiceRequestMetric">
+  <implementsInterface
+    iface="gw.api.metric.MetricMethods"
+    impl="gw.api.vendormanagement.metric.PercentServiceRequestMetricMethodsImpl"/>
+  <implementsEntity
+    name="PercentMetricDelegate"/>
+</subtype>

@@ -1,0 +1,252 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_admin.xml -->
+  <DetailViewPanel
+    id="AdminActivityPatternDV">
+    <Require
+      name="ActivityPattern"
+      type="ActivityPattern"/>
+    <Variable
+      name="symbolProvider"
+      type="gw.document.SymbolProvider"
+      initialValue="createSymbolProvider()"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.ActivityPattern&quot;)"/>
+      <TextInput
+        editable="true"
+        id="Subject"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.Subject&quot;)"
+        maxChars="50"
+        required="true"
+        value="ActivityPattern.Subject">
+        <PostOnChange/>
+      </TextInput>
+      <TextInput
+        editable="true"
+        id="ShortSubject"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.ShortSubject&quot;)"
+        numCols="10"
+        value="ActivityPattern.ShortSubject"/>
+      <TypeKeyInput
+        editable="!ActivityPattern.SystemPattern"
+        id="ActivityClass"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.ActivityClass&quot;)"
+        required="true"
+        value="ActivityPattern.ActivityClass"
+        valueType="typekey.ActivityClass">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <TypeKeyInput
+        id="Type"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.Type&quot;)"
+        value="ActivityPattern.Type"
+        valueType="typekey.ActivityType"/>
+      <TypeKeyInput
+        editable="!ActivityPattern.SystemPattern"
+        id="Category"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.Category&quot;)"
+        required="!ActivityPattern.AutomatedOnly"
+        value="ActivityPattern.Category"
+        valueType="typekey.ActivityCategory"/>
+      <TextInput
+        editable="!ActivityPattern.SystemPattern"
+        id="Code"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.Code&quot;)"
+        required="true"
+        value="ActivityPattern.Code"/>
+      <TypeKeyInput
+        editable="true"
+        id="Priority"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.Priority&quot;)"
+        required="true"
+        value="ActivityPattern.Priority"
+        valueType="typekey.Priority"/>
+      <BooleanRadioInput
+        editable="true"
+        id="Mandatory"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.Mandatory&quot;)"
+        required="true"
+        value="ActivityPattern.Mandatory"/>
+      <TypeKeyInput
+        editable="true"
+        id="Importance"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.Importance&quot;)"
+        required="true"
+        value="ActivityPattern.Importance"
+        valueType="typekey.ImportanceLevel"/>
+      <TypeKeyInput
+        editable="true"
+        id="ClaimLossType"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.ClaimLossType&quot;)"
+        value="ActivityPattern.ClaimLossType"
+        valueType="typekey.LossType"/>
+      <BooleanRadioInput
+        editable="!ActivityPattern.SystemPattern"
+        id="AutomatedOnly"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.AutomatedOnly&quot;)"
+        required="true"
+        value="ActivityPattern.AutomatedOnly">
+        <PostOnChange/>
+      </BooleanRadioInput>
+      <BooleanRadioInput
+        editable="true"
+        id="AvailableForClosedClaim"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.AvailableForClosedClaim&quot;)"
+        required="true"
+        value="ActivityPattern.ClosedClaimAvlble"/>
+      <BooleanRadioInput
+        editable="true"
+        id="ExternallyOwned"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.ExternallyOwned&quot;)"
+        required="true"
+        value="ActivityPattern.ExternallyOwned"/>
+      <DocumentTemplateInput
+        conversionExpression="PickedValue.TemplateId"
+        editable="true"
+        freeInputEnabled="false"
+        id="CreateDocument"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.CreateDocument&quot;)"
+        pickLocation="DocumentTemplateSearchPopup.push(symbolProvider)"
+        value="ActivityPattern.DocumentTemplate"
+        valueType="java.lang.String"/>
+      <PickerInput
+        conversionExpression="PickedValue.getFilename()"
+        editable="true"
+        freeInputEnabled="false"
+        id="EmailTemplate"
+        label="DisplayKey.get(&quot;Web.Email.EmailTemplate&quot;)"
+        outputConversion="getDisplayName(VALUE)"
+        pickLocation="PickEmailTemplatePopup.push(new gw.api.email.EmailTemplateSearchCriteria({&quot;Activity&quot;,&quot;Claim&quot;}))"
+        value="ActivityPattern.EmailTemplate"
+        valueType="java.lang.String"/>
+      <BooleanRadioInput
+        editable="true"
+        id="Recurring"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.Recurring&quot;)"
+        required="true"
+        value="ActivityPattern.Recurring"/>
+      <TextAreaInput
+        editable="true"
+        id="Description"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.Description&quot;)"
+        numCols="30"
+        numRows="3"
+        value="ActivityPattern.Description">
+        <PostOnChange/>
+      </TextAreaInput>
+    </InputColumn>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.DueEscalationDates&quot;)"/>
+      <TextInput
+        editable="true"
+        id="TargetDays"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.TargetDays&quot;)"
+        value="ActivityPattern.TargetDays"
+        valueType="java.lang.Integer"
+        visible="ActivityPattern.ActivityClass == TC_TASK"/>
+      <TextInput
+        editable="true"
+        id="TargetHours"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.TargetHours&quot;)"
+        value="ActivityPattern.TargetHours"
+        valueType="java.lang.Integer"
+        visible="ActivityPattern.ActivityClass == TC_TASK"/>
+      <TypeKeyInput
+        editable="true"
+        id="TargetStartPoint"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.TargetStartPoint&quot;)"
+        value="ActivityPattern.TargetStartPoint"
+        valueType="typekey.StartPointType"
+        visible="ActivityPattern.ActivityClass == TC_TASK"/>
+      <TypeKeyInput
+        editable="true"
+        id="TargetIncludeDays"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.TargetIncludeDays&quot;)"
+        value="ActivityPattern.TargetIncludeDays"
+        valueType="typekey.IncludeDaysType"
+        visible="ActivityPattern.ActivityClass == TC_TASK">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <RangeInput
+        editable="true"
+        id="TargetBusCalType"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.TargetBusCalType&quot;)"
+        required="true"
+        value="ActivityPattern.TargetBusCalType"
+        valueRange="getBusCalTypeRange()"
+        valueType="gw.api.activity.BusCalType"
+        visible="ActivityPattern.TargetIncludeDays == IncludeDaysType.TC_BUSINESSDAYS"/>
+      <TextInput
+        editable="true"
+        id="EscalationDays"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.EscalationDays&quot;)"
+        value="ActivityPattern.EscalationDays"
+        valueType="java.lang.Integer"/>
+      <TextInput
+        editable="true"
+        id="EscalationHours"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.EscalationHours&quot;)"
+        value="ActivityPattern.EscalationHours"
+        valueType="java.lang.Integer"/>
+      <TypeKeyInput
+        editable="true"
+        id="EscalationStartPoint"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.EscalationStartPoint&quot;)"
+        value="ActivityPattern.EscalationStartPt"
+        valueType="typekey.StartPointType"/>
+      <TypeKeyInput
+        editable="true"
+        id="EscalationIncludeDays"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.EscalationIncludeDays&quot;)"
+        value="ActivityPattern.EscalationInclDays"
+        valueType="typekey.IncludeDaysType">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <RangeInput
+        editable="true"
+        id="EscalationBusCalType"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminActivityPattern.EscalationBusCalType&quot;)"
+        required="true"
+        value="ActivityPattern.EscalationBusCalType"
+        valueRange="getBusCalTypeRange()"
+        valueType="gw.api.activity.BusCalType"
+        visible="ActivityPattern.EscalationInclDays == IncludeDaysType.TC_BUSINESSDAYS"/>
+    </InputColumn>
+    <Code><![CDATA[uses gw.document.SymbolProvider
+      uses gw.document.SimpleSymbol
+      uses gw.document.GosuCaseInsensitiveBackwardsCompatibleSymbolProvider
+
+      function createSymbolProvider(): SymbolProvider {
+        return new GosuCaseInsensitiveBackwardsCompatibleSymbolProvider({
+          "Activity"->SimpleSymbol.PLACEHOLDER,
+          "Claim"->SimpleSymbol.PLACEHOLDER
+        })
+      }
+
+      function getBusCalTypeRange(): java.util.List<gw.api.activity.BusCalType> {
+        try {
+          return gw.api.activity.BusCalType.createListWithLocations(
+            {
+              DisplayKey.get("Web.Admin.ActivityPatterns.ClaimLossLocation")->"Activity.Claim.LossLocation"
+            });
+        } catch (e: java.lang.Throwable) {
+          throw new gw.api.util.DisplayableException(DisplayKey.get("Web.ActivityPattern.Configuration.BusinessCalendarLocation.Error"));
+        }
+      }
+
+      function getDisplayName(templateFilename: String): String {
+        if (templateFilename == null) {
+          return null;
+        }
+        var ets = gw.pcf.specialhandling.EmailTemplateUtil.EmailTemplatePlugin
+        if (ets.getEmailTemplate(templateFilename) == null) {
+          return DisplayKey.get("Web.Email.TemplateNotFound");
+        }
+        return ets.getEmailTemplate(templateFilename).getName();
+      }]]></Code>
+  </DetailViewPanel>
+</PCF>

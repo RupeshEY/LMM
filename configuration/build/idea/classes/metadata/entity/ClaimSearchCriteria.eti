@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Non-persistent set of criteria to use in searching for a specific claim."
+  entity="ClaimSearchCriteria"
+  supertype="ClaimInfoCriteria">
+  <implementsInterface
+    iface="gw.cc.claim.entity.ClaimSearchCriteria"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimSearchCriteriaImpl"/>
+  <implementsInterface
+    iface="gw.cc.claim.archiving.entity.ClaimInfoCriteria"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimSearchCriteriaImpl"/>
+  <implementsInterface
+    iface="java.io.Serializable"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimSearchCriteriaImpl"/>
+  <fulldescription><![CDATA[
+        Encapsulates the search criteria for a Claim search. The system does not store ClaimSearchCriteria entities,
+        they are exist only for a search and are discarded after use.
+      
+    ]]></fulldescription>
+  <foreignkey
+    columnName="AssignedToGroupID"
+    desc="Match by claim group assignment."
+    fkentity="GroupSearchCriterion"
+    name="AssignedToGroup"
+    nullok="true"/>
+  <foreignkey
+    columnName="AssignedToUserID"
+    desc="Match by claim user assignment."
+    fkentity="User"
+    name="AssignedToUser"
+    nullok="true"/>
+  <foreignkey
+    columnName="CreatedByUserID"
+    desc="Match by claim creator."
+    fkentity="User"
+    name="CreatedByUser"
+    nullok="true"/>
+  <foreignkey
+    columnName="CatastropheID"
+    desc="Match by catastrophe."
+    fkentity="Catastrophe"
+    name="Catastrophe"
+    nullok="true"/>
+  <column
+    desc="Match by car VIN number."
+    name="vinNumber"
+    nullok="true"
+    type="vin"/>
+  <column
+    desc="Match by car license plate."
+    name="licensePlate"
+    nullok="true"
+    type="text"/>
+  <foreignkey
+    columnName="DateCriterionChoiceID"
+    desc="Match claim by specific date criteria."
+    fkentity="DateCriterionChoice"
+    name="DateCriterionChoice"
+    nullok="false"/>
+  <foreignkey
+    columnName="ArchiveDateCriterionChoiceID"
+    desc="Match claim by specific date criteria for archived claim."
+    fkentity="DateCriterionChoice"
+    name="ArchiveDateCriterionChoice"
+    nullok="false"/>
+  <typekey
+    desc="Match by jurisdiction. The Jurisdiction must be associated with JurisdictionType.TC_INSURANCE."
+    name="JurisdictionState"
+    nullok="true"
+    typelist="Jurisdiction"/>
+  <typekey
+    desc="Match by line of business."
+    name="LOBCode"
+    nullok="true"
+    typelist="LOBCode"/>
+  <typekey
+    desc="Match by state of claim."
+    name="ClaimState"
+    nullok="true"
+    typelist="ClaimState"/>
+  <typekey
+    desc="Match by loss type."
+    name="LossType"
+    nullok="true"
+    typelist="LossType"/>
+  <column
+    desc="Match claims that are pending assignment."
+    name="pendingAssignment"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    desc="Match by litigation status."
+    name="LitigationStatus"
+    nullok="true"
+    typelist="LitigationStatus"/>
+  <column
+    desc="Match claims that are resinsurance reportable."
+    name="ReinsuranceReportable"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Match by incident report."
+    name="IncidentReport"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    desc="Match by flagged status."
+    name="FlaggedType"
+    nullok="true"
+    typelist="FlaggedType"/>
+  <column
+    desc="Match by coverage in question status."
+    name="CoverageInQuestion"
+    nullok="true"
+    type="bit"/>
+  <foreignkey
+    columnName="FinancialCriterionID"
+    desc="Match claim by specific financials criteria."
+    fkentity="FinancialCriterionMC"
+    name="FinancialCriterion"
+    nullok="false"/>
+  <array
+    arrayentity="ClaimIndicatorCriterion"
+    desc="Match claim by specific claim indicator criteria"
+    name="ClaimIndicatorCriterion"/>
+</subtype>

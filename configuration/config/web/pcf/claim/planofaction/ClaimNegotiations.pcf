@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="true"
+    canVisit="perm.Claim.view(claim) and perm.Negotiation.view(claim) and perm.System.viewclaimngtns"
+    id="ClaimNegotiations"
+    title="DisplayKey.get(&quot;Web.ClaimPlanOfAction.Negotiations&quot;)">
+    <LocationEntryPoint
+      signature="ClaimNegotiations(claim : Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Screen
+      id="ClaimNegotiationsScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="NewNegotiation.go(claim)"
+          hideIfEditable="true"
+          id="CN_Add"
+          label="DisplayKey.get(&quot;Web.ClaimPlanOfAction.Negotiations.NewNegotiation&quot;)"
+          shortcut="N"
+          visible="perm.Claim.createnegotiation(claim)"/>
+        <IteratorButtons
+          addVisible="false"
+          iterator="EditableNegotiationsLV.EditableNegotiationsLV"
+          removeLabel="DisplayKey.get(&quot;Button.Delete&quot;)"
+          removeVisible="perm.Negotiation.edit(claim)"/>
+      </Toolbar>
+      <ListDetailPanel
+        lockWhileEditing="true"
+        selectionName="negotiation"
+        selectionType="Negotiation">
+        <PanelRef
+          def="EditableNegotiationsLV(claim.Negotiations, claim)"/>
+        <CardViewPanel>
+          <Card
+            id="DetailViewTitleCard"
+            title="DisplayKey.get(&quot;Web.ClaimPlanOfAction.Negotiations.DetailViewTitle&quot;, negotiation)">
+            <PanelRef
+              def="ClaimNegotiationDetailsDV(negotiation)">
+              <Toolbar>
+                <EditButtons
+                  editVisible="perm.Negotiation.edit(claim)"/>
+              </Toolbar>
+            </PanelRef>
+          </Card>
+        </CardViewPanel>
+      </ListDetailPanel>
+    </Screen>
+  </Page>
+</PCF>

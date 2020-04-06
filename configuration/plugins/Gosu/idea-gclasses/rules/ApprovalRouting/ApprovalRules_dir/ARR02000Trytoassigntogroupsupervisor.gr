@@ -1,0 +1,23 @@
+package rules.ApprovalRouting.ApprovalRules_dir
+
+@gw.rules.RuleName("ARR02000 - Try to assign to group supervisor")
+internal class ARR02000Trytoassigntogroupsupervisor {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return /* This action will succeed (return true) if the exposure
+ * or claim related to the approval batch is assigned and if
+ * the user making the request is not the group supervisor. */
+transactionSet.approveByGroupSupervisor()
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+actions.exit()
+/*end00rule*/
+
+  }
+}

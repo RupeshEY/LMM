@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <DetailViewPanel
+    id="ManualCheckPaymentInstructionsDV">
+    <Require
+      name="Check"
+      type="Check"/>
+    <Require
+      name="Wizard"
+      type="gw.api.financials.CheckWizardInfo"/>
+    <InputColumn>
+      <InputSetRef
+        def="CheckWizardCheckSummaryInputSet(Check, Wizard)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

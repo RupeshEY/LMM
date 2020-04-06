@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <DetailViewPanel
+    id="TransactionRecoveryReserveDV">
+    <Require
+      name="RecoveryReserve"
+      type="RecoveryReserve"/>
+    <InputColumn>
+      <InputSetRef
+        def="RecoveryReserveBasicsInputSet(RecoveryReserve)"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="TransactionTrackingInputSet(RecoveryReserve)"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="TransactionApprovalHistoryInputSet(RecoveryReserve)"/>
+      <ListViewInput
+        boldLabel="true"
+        def="RecoveryReserveSetLV((RecoveryReserve.TransactionSet typeis RecoveryReserveSet) ? RecoveryReserve.TransactionSet.RecoveryReserves : null)"
+        label="DisplayKey.get(&quot;NVV.Financials.TransactionRecoveryReserve.RecoveryReserveSet.RecoveryReserves&quot;)"
+        labelAbove="true">
+        <Toolbar/>
+      </ListViewInput>
+      <ListViewInput
+        boldLabel="true"
+        def="UnmodifiableTransactionSetDocumentsLV(RecoveryReserve.TransactionSet.LinkedDocuments)"
+        label="DisplayKey.get(&quot;NVV.Financials.TransactionRecoveryReserve.RecoveryReserveSet.Documents&quot;)"
+        labelAbove="true"
+        visible="perm.System.viewdocs">
+        <Toolbar/>
+      </ListViewInput>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

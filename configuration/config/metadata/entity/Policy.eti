@@ -1,0 +1,342 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Insurance policy."
+  entity="Policy"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="policy"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.policy.entity.Policy"
+    impl="com.guidewire.cc.domain.policy.impl.PolicyImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.CommitCallback"
+    impl="com.guidewire.cc.domain.policy.impl.PolicyImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.policy.impl.PolicyInternal"
+    impl="com.guidewire.cc.domain.policy.impl.PolicyImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.ClaimContactRoleOwner"
+    impl="com.guidewire.cc.domain.policy.impl.PolicyImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.RemoveCallback"
+    impl="com.guidewire.cc.domain.policy.impl.PolicyImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.policy.impl.PolicyImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.policy.impl.PolicyImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.entity.LevelAwareValidatableBean"
+    impl="com.guidewire.cc.domain.policy.impl.PolicyImpl"/>
+  <implementsEntity
+    name="Validatable"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="ClaimContactRoleOwner"/>
+  <fulldescription><![CDATA[
+Describes an insurance policy against which a claim has been filed. When a claim
+is entered in the system, the policy search adapter retrieves the policy
+information from an external system, stores it as a unique <code>Policy</code>,
+and associates it to the claim.  There is a one-to-one relationship between
+claims and policies in the system.  If multiple claims have been filed against
+the same actual policy, there will be a distinct <code>Policy</code> for every
+<code>Claim</code> in the system.
+    ]]></fulldescription>
+  <column
+    desc="The policy is an Assigned risk from the state or not."
+    name="AssignedRisk"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Date on which the policy was canceled."
+    name="CancellationDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="First effective date on which the policyholder had coverage."
+    name="OrigEffectiveDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date on which the policy is effective."
+    name="EffectiveDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date on which the policy expires."
+    name="ExpirationDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Other financial interests of note."
+    name="FinancialInterests"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Whether the insured has foreign coverage."
+    name="ForeignCoverage"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Other notes on the policy."
+    name="Notes"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Notes about the insured's other insurance."
+    name="OtherInsInfo"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    default="false"
+    desc="Whether the insured has other insurance."
+    name="OtherInsurance"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Number of the policy (generally a string)."
+    name="PolicyNumber"
+    nullok="false"
+    type="policynumber"/>
+  <column
+    desc="Agency that sold the policy."
+    name="ProducerCode"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    default="false"
+    desc="True if no non-internal fields have been changed since this policy was retrieved from external system."
+    name="Verified"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="0"
+    desc="Total number of vehicles on the master version of the policy."
+    name="TotalVehicles"
+    nullok="true"
+    type="integer"/>
+  <column
+    default="0"
+    desc="Total number of properties on the master version of the policy."
+    name="TotalProperties"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Indicates each unique period that a policy has been in effect.  (Sometimes called 'Mod' or 'Module.')"
+    name="PolicySuffix"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Account number that this Policy belongs to."
+    name="AccountNumber"
+    nullok="true"
+    type="account"/>
+  <column
+    desc="The id of an associated external policy system period."
+    name="PolicySystemPeriodID"
+    nullok="true"
+    type="longint"/>
+  <typekey
+    desc="Service tier behind this policy"
+    name="CustomerServiceTier"
+    nullok="true"
+    typelist="CustomerServiceTier"/>
+  <typekey
+    desc="Source of the policy information."
+    name="PolicySource"
+    nullok="true"
+    typelist="PolicySource"/>
+  <typekey
+    desc="Status of the policy."
+    name="Status"
+    nullok="true"
+    typelist="PolicyStatus"/>
+  <typekey
+    desc="The Currency of the policy. When set, the new value is also propagated to Claim.Currency."
+    name="Currency"
+    nullok="false"
+    setterScriptability="all"
+    soapnullok="true"
+    typelist="Currency"/>
+  <typekey
+    desc="Type of policy."
+    name="PolicyType"
+    nullok="false"
+    typelist="PolicyType"/>
+  <typekey
+    desc="Validation level that this object passed (if any) before it was stored."
+    exportable="false"
+    name="ValidationLevel"
+    nullok="true"
+    typelist="ValidationLevel"/>
+  <typekey
+    desc="Underwriting company."
+    name="UnderwritingCo"
+    nullok="true"
+    typelist="UnderwritingCompanyType"/>
+  <typekey
+    desc="Underwriting group."
+    name="UnderwritingGroup"
+    nullok="true"
+    typelist="UnderwritingGroupType"/>
+  <!-- setter scriptability is hidden on Contacts because the values should be set
+         using the contact-specific property, i.e. Policy.Agent, Policy.Insured, etc. -->
+  <array
+    arrayentity="ClaimContact"
+    desc="List of contacts associated with this policy."
+    name="Contacts"
+    setterScriptability="hidden"
+    triggersValidation="true"/>
+  <array
+    arrayentity="PolicyCoverage"
+    desc="List of coverages directly related to the policy."
+    name="Coverages"
+    owner="true"
+    triggersValidation="true"/>
+  <array
+    arrayentity="Endorsement"
+    desc="List of endorsements for the policy."
+    name="Endorsements"
+    owner="true"
+    triggersValidation="true"/>
+  <array
+    arrayentity="StatCode"
+    desc="List of stat lines associated with the policy."
+    name="StatCodes"
+    owner="true"
+    triggersValidation="true"/>
+  <array
+    arrayentity="RiskUnit"
+    desc="List of risk units covered by the policy."
+    name="RiskUnits"
+    owner="true"
+    triggersValidation="true"/>
+  <array
+    arrayentity="ClaimContactRole"
+    desc="The roles that this claimcontact has."
+    name="Roles"
+    triggersValidation="true"/>
+  <array
+    arrayentity="ClassCode"
+    desc="List of class codes covered by the Policy."
+    name="ClassCodes"
+    owner="true"
+    triggersValidation="true"/>
+  <array
+    arrayentity="PolicyLocation"
+    desc="The list of all Locations available for use on this Policy."
+    name="PolicyLocations"
+    owner="true"
+    triggersValidation="true"/>
+  <onetoone
+    desc="The claim that references this policy."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="true"
+    setterScriptability="all"/>
+  <!-- workers' comp fields -->
+  <column
+    desc="The insured's SIC code (for workers' comp policies only)."
+    name="InsuredSICCode"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="6"/>
+  </column>
+  <column
+    desc="States in which coverage applies (for workers' comp policies only)."
+    name="WCStates"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Other states in which coverage applies (for workers' comp policies only)."
+    name="WCOtherStates"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    default="false"
+    desc="Return to work program (for workers' comp policies only)."
+    name="ReturnToWorkPrgm"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    desc="Policy's rating plan (for workers' comp policies only)."
+    name="PolicyRatingPlan"
+    nullok="true"
+    typelist="PolicyRatingPlan"/>
+  <!-- commercial policy dependent fields  For commercial policies -->
+  <typekey
+    desc="Policy's coverage form."
+    name="CoverageForm"
+    nullok="true"
+    typelist="CoverageForm"/>
+  <column
+    desc="Participation percentage (for commercial policies only)."
+    name="Participation"
+    nullok="true"
+    type="percentagedec"/>
+  <column
+    desc="Extended reporting date for policies with extended coverage (for commercial policies only)."
+    name="ReportingDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Retroactive date for policies with retroactive coverage (for commercial policies only)."
+    name="RetroactiveDate"
+    nullok="true"
+    type="datetime"/>
+  <datetimeordering
+    firstcolumnname="OrigEffectiveDate"
+    operator="LE"
+    secondcolumnname="EffectiveDate"/>
+  <datetimeordering
+    firstcolumnname="EffectiveDate"
+    operator="LE"
+    secondcolumnname="ExpirationDate"/>
+  <datetimeordering
+    firstcolumnname="EffectiveDate"
+    operator="LE"
+    secondcolumnname="CancellationDate"/>
+  <events/>
+  <index
+    desc="Covering index for TeamGroupActivities (otherwise, get 3-way hash join to get all relevant columns)                  and also for claim search results view bean query to avoid hitting the cc_policy table just to get the policy number"
+    name="policyu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="PolicyNumber"/>
+  </index>
+  <index
+    desc="Enforce unique policy numbers, also speed up internal policy search by number"
+    name="policyu2"
+    trackUsage="true"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="PolicyNumber"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="ID"/>
+  </index>
+  <!-- Consistency checks to make sure that the totalvehicles property has been populated properly with respect to the policyvehicles join array -->
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.policy.dbchecks.PolicyTotalVehiclesDBCheckBuilder"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.RequiredRolesDBCheckBuilder"/>
+</entity>

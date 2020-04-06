@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Categories for transaction line items"
+  final="false"
+  name="LineCategory">
+  <typecode
+    code="deductible"
+    desc="Deductible"
+    name="Deductible">
+    <category
+      code="payment"
+      typelist="transaction"/>
+    <!-- Available for all coverage types, cost types and cost categories -->
+    <categorylist
+      typelist="coveragetype"/>
+    <categorylist
+      typelist="costtype"/>
+    <categorylist
+      typelist="costcategory"/>
+  </typecode>
+  <typecode
+    code="formerdeductible"
+    desc="Former Deductible"
+    name="Former Deductible">
+    <category
+      code="payment"
+      typelist="transaction"/>
+    <!-- Available for all coverage types, cost types and cost categories -->
+    <categorylist
+      typelist="coveragetype"/>
+    <categorylist
+      typelist="costtype"/>
+    <categorylist
+      typelist="costcategory"/>
+  </typecode>
+</typelist>

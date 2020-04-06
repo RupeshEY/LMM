@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Forward
+    canVisit="perm.Claim.createpayment(claim)"
+    id="NormalCreateCheckWizardForward"
+    onBeforeForward="if (serviceRequestInvoice != null) new gw.cc.system.transaction.InvoiceAutomaticProcessor().process(serviceRequestInvoice)"
+    parent="Claim(claim)">
+    <LocationEntryPoint
+      signature="NormalCreateCheckWizardForward(claim : Claim)"/>
+    <LocationEntryPoint
+      signature="NormalCreateCheckWizardForward(claim : Claim, exposure : Exposure, costType : CostType, costCategory : CostCategory, reservingCurrency : Currency, setReserveLine : boolean)"/>
+    <LocationEntryPoint
+      signature="NormalCreateCheckWizardForward(claim : Claim, serviceRequestInvoice : ServiceRequestInvoice)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="null"
+      name="serviceRequestInvoice"
+      type="ServiceRequestInvoice"/>
+    <Variable
+      name="exposure"
+      type="Exposure"/>
+    <Variable
+      name="costType"
+      type="CostType"/>
+    <Variable
+      name="costCategory"
+      type="CostCategory"/>
+    <Variable
+      initialValue="false"
+      name="setReserveLine"
+      type="boolean"/>
+    <Variable
+      initialValue="gw.api.financials.CheckUtil.canPay(claim, exposure, CurrentLocation)"
+      name="canPayResult"
+      type="gw.api.financials.AbilityToPayResult"/>
+    <Variable
+      name="reservingCurrency"
+      type="Currency"/>
+    <ForwardCondition
+      action="NewCheckNoAbilityToPay.go(claim, canPayResult)"
+      condition="null != canPayResult"/>
+    <ForwardCondition
+      action="NormalCreateCheckWizard.go(claim, exposure, costType, costCategory, reservingCurrency, setReserveLine)"
+      condition="setReserveLine"/>
+    <ForwardCondition
+      action="ClaimFinancialsChecksDetail.go(claim, serviceRequestInvoice.Check, serviceRequestInvoice)"
+      condition="serviceRequestInvoice.Check != null"/>
+    <ForwardCondition
+      action="NormalCreateCheckWizard.go(serviceRequestInvoice.ServiceRequest.Claim, serviceRequestInvoice)"
+      condition="serviceRequestInvoice != null"/>
+    <ForwardCondition
+      action="NormalCreateCheckWizard.go(claim)"/>
+  </Forward>
+</PCF>

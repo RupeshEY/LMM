@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="NewClaimSavedDV">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <InputColumn>
+      <Label
+        id="Header"
+        label="DisplayKey.get(&quot;Web.NewClaimWizard.Saved.Header&quot;,  claim.ClaimNumber)"/>
+      <TextInput
+        id="AssignedGroup"
+        labelAbove="true"
+        value="DisplayKey.get(&quot;Web.NewClaimWizard.Saved.AssignedGroup&quot;,  claim.AssignedGroup)"/>
+      <TextInput
+        id="AssignedUser"
+        labelAbove="true"
+        value="DisplayKey.get(&quot;Web.NewClaimWizard.Saved.AssignedUser&quot;,  claim.AssignedUser)"
+        visible="claim.AssignmentStatus == TC_ASSIGNED"/>
+      <TextInput
+        id="PendingAssignment"
+        labelAbove="true"
+        value="DisplayKey.get(&quot;Web.NewClaimWizard.Saved.PendingAssignment&quot;)"
+        visible="claim.AssignmentStatus != TC_ASSIGNED"/>
+      <ContentInput/>
+      <ListViewInput
+        boldLabel="true"
+        editable="false"
+        label="DisplayKey.get(&quot;Web.ServiceRequest.FNOL.RequestedServices&quot;)"
+        labelAbove="true"
+        visible="not claim.ServiceRequests.IsEmpty">
+        <Toolbar/>
+        <ListViewPanel>
+          <RowIterator
+            editable="false"
+            elementName="serviceRequest"
+            value="claim.ServiceRequests"
+            valueType="entity.ServiceRequest[]">
+            <Row>
+              <BooleanRadioCell
+                icon="serviceRequest.Kind.Icon"
+                iconLabel="serviceRequest.Kind.Label"
+                id="Kind"
+                label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.Kind&quot;)"
+                showHeaderIcon="false"
+                value="true"
+                valueType="boolean"/>
+              <TextCell
+                action="pcf.ClaimServiceRequests.go(claim, serviceRequest)"
+                id="ServiceRequestNumber"
+                label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.ServiceRequestNumber&quot;)"
+                sortOrder="3"
+                value="serviceRequest.ServiceRequestNumber"/>
+              <TextCell
+                id="RelatedTo"
+                label="DisplayKey.get(&quot;Web.ServiceRequest.RelatesTo&quot;)"
+                sortOrder="1"
+                value="serviceRequest.RelatedToName"/>
+              <TextCell
+                id="Services"
+                label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.Services&quot;)"
+                value="serviceRequest.ServicesString"/>
+              <TextCell
+                id="Specialist"
+                label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.Specialist&quot;)"
+                sortOrder="2"
+                value="serviceRequest.SpecialistName"/>
+              <DateCell
+                id="RequestedCompletionDate"
+                label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.Target&quot;)"
+                value="serviceRequest.quoteAllowed() ? serviceRequest.RequestedQuoteCompletionDate : serviceRequest.RequestedServiceCompletionDate"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </ListViewInput>
+      <ContentInput/>
+      <Label
+        id="YouCan"
+        label="DisplayKey.get(&quot;Web.NewClaimWizard.Saved.YouCan&quot;)"/>
+      <BulletPointTextInput
+        action="pcf.Claim.go(claim)"
+        id="GoToClaim"
+        labelAbove="true"
+        shortcut="V"
+        value="DisplayKey.get(&quot;Web.NewClaimWizard.Saved.GoToClaim&quot;, claim.ClaimNumber)"/>
+      <BulletPointTextInput
+        action="FNOLWizard.go()"
+        id="CreateNewClaim"
+        labelAbove="true"
+        shortcut="N"
+        value="DisplayKey.get(&quot;Web.NewClaimWizard.Saved.CreateNewClaim&quot;)"/>
+      <BulletPointTextInput
+        action="NewReserveSet.go(claim)"
+        id="CreateReserve"
+        labelAbove="true"
+        shortcut="R"
+        value="DisplayKey.get(&quot;Web.NewClaimWizard.Saved.AddReserves&quot;)"/>
+      <BulletPointTextInput
+        action="NormalCreateCheckWizardForward.go(claim)"
+        id="CreatePayment"
+        labelAbove="true"
+        shortcut="P"
+        value="DisplayKey.get(&quot;Web.NewClaimWizard.Saved.MakePayments&quot;)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Roles users can have on an assignable object"
+  name="UserRole">
+  <typecode
+    code="primaryadjuster"
+    desc="Primary adjuster for the claim"
+    name="Primary Adjuster"
+    retired="true">
+    <category
+      code="objectowner"
+      typelist="UserRoleConstraint"/>
+    <category
+      code="claimexclusive"
+      typelist="UserRoleConstraint"/>
+  </typecode>
+  <typecode
+    code="relateduser"
+    desc="Other user associated with the claim"
+    name="Related User"/>
+  <typecode
+    code="siuinvestigator"
+    desc="SIU Investigator associated with the claim"
+    name="SIU Investigator">
+    <category
+      code="claimexclusive"
+      typelist="UserRoleConstraint"/>
+  </typecode>
+  <typecode
+    code="supervisor"
+    desc="Supervisor associated with the claim"
+    name="Supervisor"/>
+  <typecode
+    code="attorney"
+    desc="Attorney associated with the claim"
+    name="Attorney"/>
+  <typecode
+    code="vhcleinsp"
+    desc="Vehicle Inspector associated with the claim"
+    name="Vehicle Inspector"/>
+  <typecode
+    code="propinsp"
+    desc="Property Inspector associated with the claim"
+    name="Property Inspector"/>
+  <typecode
+    code="salvgowner"
+    desc="Salvage Owner associated with the claim"
+    name="Salvage Owner"/>
+  <typecode
+    code="doctor"
+    desc="Doctor associated with the claim"
+    name="Doctor"/>
+  <typecode
+    code="vendor"
+    desc="Vendor associated with the claim"
+    name="Vendor"/>
+  <typecode
+    code="reporter"
+    desc="Reporter associated with the claim"
+    name="Reporter"/>
+  <typecode
+    code="repairshop"
+    desc="Repair Shop associated with the claim"
+    name="Repair Shop"/>
+  <typecode
+    code="nursecasemgr"
+    desc="Nurse Case Manager associated with the claim"
+    name="Nurse Case Manager"/>
+  <typecode
+    code="indepappr"
+    desc="Independent Appraiser associated with the claim"
+    name="Independent Appraiser"/>
+  <typecode
+    code="siu"
+    desc="SIU associated with the claim"
+    name="SIU"/>
+  <typecode
+    code="police"
+    desc="Police"
+    name="Police"/>
+  <typecode
+    code="reinsmgr"
+    desc="Reinsurance Manager associated with the claim"
+    name="Reinsurance Manager"/>
+</typelistextension>

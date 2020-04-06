@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="CheckWizard_CheckPayeesScreen">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.financials.CheckWizardInfo"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarDivider/>
+      <IteratorButtons
+        addLabel="DisplayKey.get(&quot;Button.NewCheckWizard.AddPayee&quot;)"
+        addVisible="not Wizard.Check.LinkedToServiceRequests"
+        iterator="NewCheckPayeesLV.NewCheckPayeesLV"
+        removeFlags="all NonPrimaryCheck"
+        removeLabel="DisplayKey.get(&quot;Button.NewCheckWizard.RemovePayee&quot;)"
+        removeVisible="not Wizard.Check.LinkedToServiceRequests"/>
+    </Toolbar>
+    <ListDetailPanel
+      selectionName="Check"
+      selectionType="Check">
+      <PanelRef
+        def="NewCheckPayeesLV(Wizard.Check.Group, Wizard)"/>
+      <CardViewPanel>
+        <Card
+          id="DetailsCard"
+          title="DisplayKey.get(&quot;NVV.Financials.SubView.TransactionPaymentDetails.Payment.Check.Details&quot;)">
+          <PanelRef
+            def="NewCheckPayeeDV(Check, Wizard)"
+            visible="Check.Primary">
+            <Toolbar/>
+          </PanelRef>
+          <PanelRef
+            def="NewCheckAdditionalPayeeDV(Check, Wizard)"
+            visible="!Check.Primary">
+            <Toolbar/>
+          </PanelRef>
+        </Card>
+      </CardViewPanel>
+    </ListDetailPanel>
+  </Screen>
+</PCF>

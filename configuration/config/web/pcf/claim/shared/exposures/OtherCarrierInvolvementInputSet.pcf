@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="OtherCarrierInvolvementInputSet">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.OtherCarrierInvolvement&quot;)"/>
+    <BooleanRadioInput
+      editable="true"
+      id="Claimant_OtherCoverage"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Claimant.OtherCoverage&quot;)"
+      required="false"
+      value="Exposure.OtherCoverage"/>
+    <ListViewInput
+      def="EditableOtherCoverageDetailsLV(Exposure)"
+      editable="true"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.OtherCoverageDetails&quot;)"
+      labelAbove="true">
+      <Toolbar>
+        <IteratorButtons
+          iterator="EditableOtherCoverageDetailsLV.EditableOtherCoverageDetailsLV"/>
+      </Toolbar>
+    </ListViewInput>
+  </InputSet>
+</PCF>

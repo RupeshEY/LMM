@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="currentQuote.finishSetup(false)"
+    canEdit="true"
+    canVisit="true"
+    id="AddReviseQuotePopup"
+    startInEditMode="true"
+    title="null">
+    <LocationEntryPoint
+      signature="AddReviseQuotePopup(serviceRequest : entity.ServiceRequest)"/>
+    <LocationEntryPoint
+      signature="AddReviseQuotePopup(serviceRequest : entity.ServiceRequest, oldQuote : entity.ServiceRequestQuote)"/>
+    <Variable
+      name="serviceRequest"
+      type="ServiceRequest"/>
+    <Variable
+      initialValue="initializeQuote()"
+      name="currentQuote"
+      type="ServiceRequestQuote"/>
+    <Variable
+      name="oldQuote"
+      type="entity.ServiceRequestQuote"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <Screen
+      editable="true">
+      <TitleBar
+        id="TitleBar"
+        title="oldQuote == null ? DisplayKey.get(&quot;Web.ServiceRequest.StateTransition.AddReviseQuotePopup.AddTitle&quot;) : DisplayKey.get(&quot;Web.ServiceRequest.StateTransition.AddReviseQuotePopup.ReviseTitle&quot;)"/>
+      <Toolbar
+        visible="true">
+        <EditButtons
+          showUpdateConfirmMessage="false"/>
+      </Toolbar>
+      <AlertBar
+        id="IDCSDisabledAlert"
+        label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.ContentPlugin.Disabled&quot;)"
+        visible="not documentsActionsHelper.ContentSourceEnabled"/>
+      <AlertBar
+        id="IDCSUnavailableAlert"
+        label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.ContentPlugin.Unavailable&quot;)"
+        visible="documentsActionsHelper.ShowContentServerDownWarning"/>
+      <AlertBar
+        id="IDMSUnavailableAlert"
+        label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.MetadataPlugin.Unavailable&quot;)"
+        visible="documentsActionsHelper.ShowMetadataServerDownWarning"/>
+      <PanelRef
+        def="StatementDV(currentQuote, oldQuote?.Amount, true)"
+        mode="oldQuote != null ? &quot;quoterevision&quot; : &quot;quote&quot;"/>
+      <DetailViewPanel>
+        <InputColumn>
+          <ListViewInput
+            def="StatementDocumentsLV(currentQuote, true)"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.Quote.Documents&quot;)"
+            labelAbove="true">
+            <Toolbar>
+              <PickerToolbarButton
+                action="PickExistingDocumentPopup.push(serviceRequest.Claim)"
+                available="documentsActionsHelper.DocumentMetadataActionsAvailable"
+                id="Link"
+                label="DisplayKey.get(&quot;Web.ServiceRequest.Statement.LinkDocument&quot;)"
+                onPick="currentQuote.linkDocumentForUI(PickedValue, false)"
+                visible="perm.System.viewdocs"/>
+              <ToolbarButton
+                action="AttachStatementDocumentsPopup.push(currentQuote)"
+                available="documentsActionsHelper.DocumentMetadataActionsAvailable and documentsActionsHelper.DocumentContentActionsAvailable"
+                id="AttachDocument"
+                label="DisplayKey.get(&quot;Web.ServiceRequest.Statement.AttachDocument&quot;)"/>
+            </Toolbar>
+          </ListViewInput>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[function initializeQuote(): ServiceRequestQuote {
+    var newQuote = (oldQuote == null)
+        ? new ServiceRequestQuote()
+        : oldQuote.copyQuoteForRevision()
+
+    newQuote.ServiceRequest = serviceRequest
+    newQuote.Source = StatementSource.TC_MANUAL
+  
+    return newQuote
+}
+]]></Code>
+  </Popup>
+</PCF>

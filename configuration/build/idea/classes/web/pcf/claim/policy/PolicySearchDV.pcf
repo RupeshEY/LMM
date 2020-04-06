@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_policy.xml -->
+  <DetailViewPanel
+    id="PolicySearchDV">
+    <Require
+      name="PolicySearchCriteria"
+      type="PolicySearchCriteria"/>
+    <InputColumn>
+      <InputSetRef
+        def="PolicySearchPolicyInputSet(PolicySearchCriteria)"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="PolicySearchInsuredInputSet(PolicySearchCriteria)"
+        mode="PolicySearchCriteria.InsuredAddress.Country != null ? PolicySearchCriteria.InsuredAddress.Country : gw.api.admin.BaseAdminUtil.getDefaultCountry()"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

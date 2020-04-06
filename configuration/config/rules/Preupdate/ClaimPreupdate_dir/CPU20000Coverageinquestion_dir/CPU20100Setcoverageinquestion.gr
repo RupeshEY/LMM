@@ -1,0 +1,25 @@
+package rules.Preupdate.ClaimPreupdate_dir.CPU20000Coverageinquestion_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.upgrade.Coercions
+
+@gw.rules.RuleName("CPU20100 - Set coverage in question")
+internal class CPU20100Setcoverageinquestion {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return Coercions.makeBooleanFrom(claim.getOriginalValue("CoverageInQuestion")) != true 
+and !claim.History.hasMatch(\ h -> h.Description == DisplayKey.get("Rules.PreUpdate.Claim.CovInQuestion.True"))
+and claim.isCoverageInQuestionFactorsNotEmpty()
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.CoverageInQuestion = true
+/*end00rule*/
+
+  }
+}

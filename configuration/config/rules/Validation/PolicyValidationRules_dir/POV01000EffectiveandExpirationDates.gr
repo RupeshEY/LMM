@@ -1,0 +1,26 @@
+package rules.Validation.PolicyValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("POV01000 - Effective and Expiration Dates")
+internal class POV01000EffectiveandExpirationDates {
+  static function doCondition(policy : entity.Policy) : boolean {
+    
+/*start00rule*/
+return policy.EffectiveDate > policy.ExpirationDate
+/*end00rule*/
+
+  }
+
+  static function doAction(policy : entity.Policy, actions : gw.rules.Action) {
+
+/*start00rule*/
+policy.rejectField("EffectiveDate",
+                   TC_NEWLOSS,
+                   DisplayKey.get("Rules.Validation.Policy.PolicyExpirationLaterThanEffectiveDate"),
+                   null,
+                   null)
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Wraps a Transaction to keep track of a new amount entered by the user. Used with TransactionWizardHelper. Internally stores an amount in the claim currency and in the currency of the transaction."
+  entity="TransactionEditWrapper">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.impl.TransactionEditWrapperInternal"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionEditWrapperImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.entity.TransactionEditWrapper"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionEditWrapperImpl"/>
+  <foreignkey
+    columnName="TransactionID"
+    desc="Wrapped transaction."
+    fkentity="Transaction"
+    name="Transaction"
+    nullok="false"/>
+  <column
+    desc="Internal storage of the amount in the transaction currency."
+    name="NewTransactionAmount"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="Internal storage of the amount in the reserving currency."
+    name="NewReservingAmount"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="The base amount in the reserving currency for the reserve line corresponding to this row. This is intended to help determine whether the base amount has changed and therefore whether the amount properties should be reset when the reserve line changes."
+    name="PrevBaseAmount"
+    nullok="false"
+    type="money"/>
+  <typekey
+    desc="The previous reserving currency for the reserve line corresponding to this row. This is intended to help determine whether the reserving currency has changed and therefore whether the amount properties should be reset when the reserve line changes."
+    name="PrevReservingCurrency"
+    nullok="false"
+    typelist="Currency"/>
+</nonPersistentEntity>

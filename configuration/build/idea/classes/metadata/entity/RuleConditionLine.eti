@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="One line in a RuleCondition"
+  entity="RuleConditionLine"
+  extendable="false"
+  loadable="false"
+  platform="true"
+  table="bizrulecondline"
+  type="versionable">
+  <implementsEntity
+    name="RuleVersionDependent"/>
+  <implementsEntity
+    name="OrderedChild"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.bizrules.domain.RuleConditionLineImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.management.RuleVersionAwareInternal"
+    impl="com.guidewire.bizrules.domain.RuleConditionLineImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.codegenerator.GosuTextBuilder"
+    impl="com.guidewire.bizrules.codegenerator.RuleConditionLineGosuTextBuilder"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.RuleConditionLineDomainMethods"
+    impl="com.guidewire.bizrules.domain.RuleConditionLineImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.RulesCascadingRemovable"
+    impl="com.guidewire.bizrules.domain.RuleConditionLineImpl"/>
+  <foreignkey
+    fkentity="RuleCondition"
+    name="RuleCondition"
+    nullok="false"/>
+  <typekey
+    name="BooleanOperator"
+    nullok="false"
+    typelist="RuleBooleanOperator"
+    default="And"/>
+  <typekey
+    name="LeftParens"
+    nullok="true"
+    soapnullok="false"
+    typefilter="Left"
+    typelist="Parentheses"/>
+  <foreignkey
+    fkentity="ExpressionFragment"
+    name="LeftOperand"
+    nullok="true"/>
+  <typekey
+    name="Operator"
+    nullok="true"
+    typelist="RuleOperator"/>
+  <foreignkey
+    fkentity="ExpressionFragment"
+    name="RightOperand"
+    nullok="true"/>
+  <typekey
+    name="RightParens"
+    nullok="true"
+    typefilter="Right"
+    typelist="Parentheses"/>
+  <index
+    desc="For ordering"
+    name="ordering"
+    unique="true">
+    <indexcol keyposition="1" name="RuleCondition"/>
+    <indexcol keyposition="2" name="OrderNumber"/>
+  </index>
+</entity>

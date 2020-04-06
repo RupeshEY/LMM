@@ -1,0 +1,22 @@
+package rules.Workplan.ExposureWorkplan_dir.EXW06000WCLostWagesExposure_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("EXW06100 - Wage Statement")
+internal class EXW06100WageStatement {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.Claim.createActivityFromPattern(
+    exposure, ActivityPattern.finder.getActivityPatternByCode("wage_stmt"))
+/*end00rule*/
+
+  }
+}

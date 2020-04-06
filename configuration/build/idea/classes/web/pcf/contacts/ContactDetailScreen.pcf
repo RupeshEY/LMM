@@ -1,0 +1,204 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="ContactDetailScreen">
+    <!-- NOTE: This shared section requires a gw.api.contact.ContactHandle, rather than a Contact, because it's
+    possible for some actions on a contact detail screen to fundamentally change the contact. In particular, syncing
+    a contact that leads to a downcast of that contact to a more specific subtype causes the original contact to
+    become invalid. To protect against this, contacts on shared sections should be wrapped in a ContactHandle. If the
+    contact is fundamentally changed, then only the handle needs to be updated, and all existing references will see
+    the new contact.
+
+    As a shortcut for "contactHandle.Contact", this shared section defines a read-only property which can be used to
+    access the most current value of the contact. -->
+    <Require
+      name="contactHandle"
+      type="gw.api.contact.ContactHandle"/>
+    <Require
+      name="canAccessLinkButtons"
+      type="boolean"/>
+    <Require
+      name="showRoles"
+      type="boolean"/>
+    <Require
+      name="linkStatus"
+      type="gw.api.contact.ContactSystemLinkStatus"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="canPick"
+      type="boolean"/>
+    <Require
+      name="showRelatedObjects"
+      type="boolean"/>
+    <Require
+      name="allowEditInAddressBook"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.api.contact.ContactDetailHelper(contactHandle.Contact.IsHighlyLinked)"
+      name="helper"
+      type="gw.api.contact.ContactDetailHelper"/>
+    <Toolbar/>
+    <CardViewPanel>
+      <Card
+        id="ContactBasicsCard"
+        onSelect="helper.CurrentCard = BASICS"
+        title="DisplayKey.get(&quot;Web.ContactDetail.PageLinks.Basics&quot;)">
+        <PanelRef
+          def="ContactBasicsDV(contactHandle, showRoles, linkStatus, claim)"
+          mode="Contact.Subtype">
+          <Toolbar>
+            <ToolbarButtonSetRef
+              toolbarButtonSet="ContactDetailToolbarButtonSet(contactHandle, canAccessLinkButtons, linkStatus, canPick, allowEditInAddressBook)"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="ContactAddressesCard"
+        onSelect="helper.CurrentCard = ADDRESSES"
+        title="DisplayKey.get(&quot;Web.ContactDetail.PageLinks.Addresses&quot;)"
+        visible="!(Contact typeis Place)">
+        <PanelRef
+          def="AddressesPanelSet(contactHandle)">
+          <Toolbar>
+            <ToolbarButtonSetRef
+              toolbarButtonSet="ContactDetailToolbarButtonSet(contactHandle, canAccessLinkButtons, linkStatus, canPick, allowEditInAddressBook)"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="ContactDocumentsCard"
+        title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Documents&quot;)"
+        visible="new gw.contact.ContactDocumentsUIHelper().isVendorDocumentsSupported(Contact)">
+        <PanelRef
+          def="AddressBookContactDocumentsLV(Contact)">
+          <Toolbar/>
+          <Verbatim
+            label="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Documents.Description&quot;)"/>
+        </PanelRef>
+      </Card>
+      <Card
+        id="ContactRelatedContactsCard"
+        onSelect="helper.CurrentCard = RELATED_CONTACTS"
+        title="DisplayKey.get(&quot;Web.ContactDetail.PageLinks.RelatedContacts&quot;)"
+        visible="not (contactHandle.Contact typeis UserContact)">
+        <PanelRef
+          def="ContactRelatedContactsDV(contactHandle, claim)">
+          <Toolbar>
+            <ToolbarButtonSetRef
+              toolbarButtonSet="ContactDetailToolbarButtonSet(contactHandle, canAccessLinkButtons, linkStatus, canPick, allowEditInAddressBook)"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AddressBookContactActivitiesCard"
+        onSelect="helper.CurrentCard = ACTIVITIES"
+        title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Activities&quot;)"
+        visible=" showRelatedObjects and perm.Claim.genericviewactivity">
+        <DetailViewPanel
+          editable="true"
+          visible="helper.isWarningVisible(ACTIVITIES)">
+          <InputColumn>
+            <ButtonInput
+              action="helper.revealContent(ACTIVITIES)"
+              hideIfDisabled="false"
+              id="ShowActivitiesButton"
+              label="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.HighlyLinkedContactActivityWarning&quot;)"
+              value="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.HighlyLinkedContactActivityButton&quot;)"/>
+          </InputColumn>
+        </DetailViewPanel>
+        <PanelRef
+          def="AddressBookContactActivitiesLV(Contact)"
+          visible="helper.isContentVisible(ACTIVITIES)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AddressBookContactClaimsCard"
+        onSelect="helper.CurrentCard = CLAIMS"
+        title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Claims&quot;)"
+        visible=" showRelatedObjects and perm.Claim.genericviewclaim">
+        <DetailViewPanel
+          editable="true"
+          visible="helper.isWarningVisible(CLAIMS)">
+          <InputColumn>
+            <ButtonInput
+              action="helper.revealContent(CLAIMS)"
+              hideIfDisabled="false"
+              id="ShowClaimsButton"
+              label="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.HighlyLinkedContactClaimWarning&quot;)"
+              value="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.HighlyLinkedContactClaimButton&quot;)"/>
+          </InputColumn>
+        </DetailViewPanel>
+        <PanelRef
+          def="AddressBookContactClaimsLV(Contact)"
+          visible="helper.isContentVisible(CLAIMS)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AddressBookContactExposuresCard"
+        onSelect="helper.CurrentCard = EXPOSURES"
+        title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Exposures&quot;)"
+        visible=" showRelatedObjects and perm.Claim.genericviewexposure">
+        <DetailViewPanel
+          editable="true"
+          visible="helper.isWarningVisible(EXPOSURES)">
+          <InputColumn>
+            <ButtonInput
+              action="helper.revealContent(EXPOSURES)"
+              hideIfDisabled="false"
+              id="ShowExposuresButton"
+              label="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.HighlyLinkedContactExposureWarning&quot;)"
+              value="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.HighlyLinkedContactExposureButton&quot;)"/>
+          </InputColumn>
+        </DetailViewPanel>
+        <PanelRef
+          def="AddressBookContactExposuresLV(Contact)"
+          visible="helper.isContentVisible(EXPOSURES)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AddressBookContactMattersCard"
+        onSelect="helper.CurrentCard = MATTERS"
+        title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Matters&quot;)"
+        visible=" showRelatedObjects and perm.Claim.genericviewmatter">
+        <DetailViewPanel
+          editable="true"
+          visible="helper.isWarningVisible(MATTERS)">
+          <InputColumn>
+            <ButtonInput
+              action="helper.revealContent(MATTERS)"
+              hideIfDisabled="false"
+              id="ShowMattersButton"
+              label="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.HighlyLinkedContactMatterWarning&quot;)"
+              value="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.HighlyLinkedContactMatterButton&quot;)"/>
+          </InputColumn>
+        </DetailViewPanel>
+        <PanelRef
+          def="AddressBookContactMattersLV(Contact)"
+          visible="helper.isContentVisible(MATTERS)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AddressBookContactReviewCard"
+        onSelect="helper.CurrentCard = REVIEWS"
+        title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Reviews&quot;)"
+        visible="util.ReviewPageHelper.shouldDisplayReviewTab(Contact) and perm.Review.list">
+        <PanelRef
+          def="ReviewsPanelSet(claim, Contact, true, false)">
+          <Toolbar>
+            <ToolbarButtonSetRef
+              toolbarButtonSet="ContactDetailToolbarButtonSet(contactHandle, canAccessLinkButtons, linkStatus, canPick, allowEditInAddressBook)"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+    </CardViewPanel>
+    <Code><![CDATA[property get Contact() : Contact { return contactHandle.Contact; }]]></Code>
+  </Screen>
+</PCF>

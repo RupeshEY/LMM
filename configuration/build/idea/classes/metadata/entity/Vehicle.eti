@@ -1,0 +1,183 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Vehicles."
+  entity="Vehicle"
+  exportable="true"
+  table="vehicle"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.policy.impl.VehicleImpl"/>
+  <implementsInterface
+    iface="gw.cc.policy.entity.Vehicle"
+    impl="com.guidewire.cc.domain.policy.impl.VehicleImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.policy.impl.VehicleImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+A vehicle (car, boat, etc.) on a policy.  Describes the vehicle's physical
+characteristics (make, model, VIN etc.) and relates the vehicle to its coverages.
+  ]]></fulldescription>
+  <column
+    desc="License plate of the vehicle."
+    name="LicensePlate"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <column
+    desc="Make of the vehicle."
+    name="Make"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <column
+    desc="Model of the vehicle."
+    name="Model"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <column
+    desc="Color of the vehicle."
+    name="Color"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <column
+    desc="VIN of the vehicle."
+    name="Vin"
+    nullok="true"
+    type="vin"/>
+  <column
+    desc="Serial number; only use if VIN is not appropriate (e.g. for boats)."
+    name="SerialNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="20"/>
+  </column>
+  <column
+    desc="Year of the vehicle's manufacture."
+    name="Year"
+    nullok="true"
+    type="year"/>
+  <column
+    desc="Whether a loan is owed for the vehicle."
+    name="Loan"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Monthly loan payment."
+    name="LoanMonthlyPayment"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="PolicyCurrency"/>
+  </column>
+  <column
+    desc="Months remaining on loan."
+    name="LoanMonthsRemaining"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Loan payoff amount."
+    name="LoanPayoffAmount"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="PolicyCurrency"/>
+  </column>
+  <column
+    desc="Identifier for the vehicle in an external policy system"
+    name="PolicySystemId"
+    nullok="true"
+    type="policysystemid"/>
+  <typekey
+    desc="Type of boat; only applies if vehicle style is boat."
+    name="BoatType"
+    nullok="true"
+    typelist="BoatType"/>
+  <typekey
+    desc="Company that manufactured the vehicle."
+    name="Manufacturer"
+    nullok="true"
+    typelist="VehicleManufacturer">
+    <keyfilters>
+      <keyfilter
+        name="Style"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="Style of snowmobile or ATV (wheels, tracks etc.). Used by ISO."
+    name="OffRoadStyle"
+    nullok="true"
+    typelist="OffRoadVehicleStyle">
+    <keyfilters>
+      <keyfilter
+        name="Style"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="State (Jurisdiction) in which the vehicle is registered. The Jurisdiction must be associated with JurisdictionType.TC_VEHICLE_REG."
+    name="State"
+    nullok="true"
+    typelist="Jurisdiction"/>
+  <typekey
+    desc="Style of Vehicle."
+    name="Style"
+    nullok="true"
+    typelist="VehicleStyle"/>
+  <array
+    arrayentity="VehicleOwner"
+    desc="List of lienholders for the vehicle."
+    name="Lienholders"
+    owner="true"
+    triggersValidation="true"/>
+  <index
+    desc="Index to help claim search by VIN"
+    expectedtobecovering="true"
+    name="vehicleu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Vin"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="ID"/>
+  </index>
+  <index
+    desc="Index to help claim search by LicensePlate"
+    expectedtobecovering="true"
+    name="vehicleu2"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="LicensePlate"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="ID"/>
+  </index>
+</entity>

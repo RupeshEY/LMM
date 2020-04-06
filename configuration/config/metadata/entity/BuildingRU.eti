@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<!-- BuildingRU -->
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="BuildingRU"
+  supertype="LocationBasedRU">
+  <implementsInterface
+    iface="gw.cc.policy.entity.BuildingRU"
+    impl="com.guidewire.cc.domain.policy.impl.BuildingRUImpl"/>
+</subtype>

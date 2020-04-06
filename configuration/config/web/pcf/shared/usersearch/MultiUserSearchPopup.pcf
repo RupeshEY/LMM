@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    id="MultiUserSearchPopup"
+    returnType="User[]"
+    title="DisplayKey.get(&quot;Web.Admin.UserSearchPopup&quot;)">
+    <LocationEntryPoint
+      signature="MultiUserSearchPopup()"/>
+    <LocationEntryPoint
+      signature="MultiUserSearchPopup(Organization : Organization)"/>
+    <Variable
+      initialValue="new gw.api.contact.CCProximitySearchPageHelper()"
+      name="PageHelper"
+      type="gw.api.contact.CCProximitySearchPageHelper"/>
+    <Variable
+      initialValue="null"
+      name="Organization"
+      type="Organization"/>
+    <Screen
+      id="MultiUserSearchPopupScreen">
+      <SearchPanel
+        criteriaName="SearchCriteria"
+        resultsName="searchResults"
+        search="SearchCriteria.performSearchByProximity(CurrentLocation, PageHelper) as gw.api.database.IQueryBeanResult&lt;User&gt;"
+        searchCriteria="new UserSearchCriteria()"
+        searchCriteriaType="entity.UserSearchCriteria"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;User&gt;">
+        <PanelRef
+          def="UserSearchDV(SearchCriteria,PageHelper)"/>
+        <PanelRef
+          def="UserSearchResultsLV(searchResults, false, PageHelper, SearchCriteria, true)">
+          <TitleBar
+            appendListViewPaging="true"
+            title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+          <Toolbar>
+            <CheckedValuesToolbarButton
+              id="MultiUserSearchPopup_SelectButton"
+              iterator="UserSearchResultsLV.UserSearchResultsLV"
+              label="DisplayKey.get(&quot;Button.Select&quot;)"
+              pickValue="CheckedValues"/>
+            <CheckedValuesToolbarButton
+              allCheckedRowsAction="PageHelper.getDrivingDirectionsCache().getSelectedDirections(CheckedValues, SearchCriteria.getContact());"
+              flags="any User"
+              id="RetrieveRequested"
+              iterator="UserSearchResultsLV.UserSearchResultsLV"
+              label="DisplayKey.get(&quot;Web.AddressBook.Search.Result.GetRequested&quot;)"
+              visible="SearchCriteria.Contact.isProximitySearch()"/>
+          </Toolbar>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Popup>
+</PCF>

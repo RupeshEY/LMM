@@ -1,0 +1,265 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Details of metro reports associated with claim."
+  entity="MetroReport"
+  exportable="true"
+  extendable="true"
+  loadable="true"
+  platform="false"
+  table="metroreport"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.MetroReport"
+    impl="com.guidewire.cc.domain.claim.impl.MetroReportImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.claim.impl.MetroReportImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.CommitCallback"
+    impl="com.guidewire.cc.domain.claim.impl.MetroReportImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.RemoveCallback"
+    impl="com.guidewire.cc.domain.claim.impl.MetroReportImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.claim.impl.MetroReportImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+            MetroReport entity corresponds to the report obtained from Metropolitan Reporting Bureau. MetroReport
+             contains some required data fields for requesting or receiving message from Metropolitan Reporting Bureau
+             (such as loss description, sent date and status). It also has a reference to the generated document.
+             A MetroReport is associated with a single claim.
+            
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The claim associated with this MetroReport."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    columnName="DocID"
+    desc="The report document associated with this MetroReport, if it is stored in our database. Most users should use the Document property instead of this one, as this DocID will usually be null if the IDocumentMetadataSource plugin is in use"
+    fkentity="Document"
+    name="Doc"
+    nullok="true"/>
+  <foreignkey
+    columnName="VehicleIncidentID"
+    desc="The vehicle associated with this MetroReport, for auto report types."
+    fkentity="VehicleIncident"
+    name="VehicleIncident"
+    nullok="true"
+    triggersValidation="true"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="DeceasedContactID"
+    desc="Contact for the deceased"
+    fkentity="Contact"
+    name="DeceasedContact"
+    nullok="true"
+    triggersValidation="true"/>
+  <foreignkey
+    columnName="ThirdPartyVehicleID"
+    desc="The third party vehicle associated with this MetroReport, for auto report types."
+    fkentity="VehicleIncident"
+    name="ThirdPartyVehicle"
+    nullok="true"
+    triggersValidation="true"/>
+  <column
+    desc="Name of the metro report"
+    name="Name"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Loss Description"
+    name="LossDescription"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="200"/>
+  </column>
+  <column
+    desc="Metro Control number assigned by Metro Reporting"
+    name="MetroControlNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="10"/>
+  </column>
+  <column
+    desc="Metro transaction ID - Unique number assigned to this order"
+    name="MetroTransactionID"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="15"/>
+  </column>
+  <column
+    desc="Metro process ID - Identifying information for MetroReporting XML Support "
+    name="MetroProcessID"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="50"/>
+  </column>
+  <column
+    desc="The URL link to the document provided by Metro"
+    name="DocumentURL"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="100"/>
+  </column>
+  <column
+    desc="The URL link to the additional information needed from the customer"
+    name="InformationURL"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="100"/>
+  </column>
+  <column
+    desc="The URL link to the delay memo when the status is deferred"
+    name="DelayMemoURL"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="100"/>
+  </column>
+  <column
+    default="false"
+    desc="Flag to indicate if a metro report should be requested regardless of a duplicate request."
+    name="ForceDuplicate"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Flag to indicate if Hold Activity should be created or not."
+    name="CreateHoldActivity"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Flag to indicate if Deferred Activity should be created or not."
+    name="CreateDeferredActivity"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Date of death for the deceased"
+    name="DateOfDeath"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The date sent out the order file"
+    name="SentDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The date received the report"
+    name="ReceivedDate"
+    nullok="true"
+    type="datetime"/>
+  <typekey
+    desc="Type of metro reports (Auto Accident, Fire-Home etc)"
+    name="MetroReportType"
+    nullok="true"
+    typelist="MetroReportType">
+    <keyfilters>
+      <keyfilter
+        name="LossType"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="The type of the Loss (Auto, Property, .. etc)"
+    name="LossType"
+    nullok="true"
+    typelist="LossType"/>
+  <typekey
+    default="new"
+    desc="Status of the Official Report"
+    name="Status"
+    nullok="true"
+    typelist="MetroReportStatus"/>
+  <column
+    desc="Error message return from Metro if failed"
+    name="ErrorMessage"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="500"/>
+  </column>
+  <column
+    desc="Name of Investigating Agency that issued the report"
+    name="AgentName"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="31"/>
+  </column>
+  <typekey
+    desc="Investigating Agency Type"
+    name="MetroAgency"
+    nullok="true"
+    typelist="MetroAgencyType"/>
+  <column
+    desc="Precinct, troop number or name/badge # of officer"
+    name="Precinct"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="20"/>
+  </column>
+  <column
+    desc="Report Number assigned by issuing Police-Fire Agency"
+    name="ReportNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="31"/>
+  </column>
+  <column
+    desc="The name of officer"
+    name="OfficerName"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="35"/>
+  </column>
+  <column
+    desc="Date Reported"
+    name="DateReported"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="City of investigating agency"
+    name="AgentCity"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="20"/>
+  </column>
+  <typekey
+    desc="State of investigating Agency."
+    name="AgentState"
+    nullok="true"
+    typelist="State"/>
+  <events/>
+</entity>

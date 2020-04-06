@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Independent medical examination performed."
+  entity="IMEPerformed"
+  exportable="true"
+  platform="false"
+  table="IMEPerformed"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.IMEPerformed"
+    impl="com.guidewire.cc.domain.exposure.impl.IMEPerformedImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="The related Exposure."
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="false"/>
+  <typekey
+    desc="The type of independent medical examination."
+    name="IMEType"
+    nullok="false"
+    typelist="IMEType"/>
+  <column
+    desc="The date the independent medical examination was performed."
+    name="IMEDate"
+    nullok="true"
+    type="datetime"/>
+</entity>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <DetailViewPanel
+    id="TransactionPaymentDV">
+    <Require
+      name="Payment"
+      type="Payment"/>
+    <InputColumn>
+      <InputSetRef
+        def="PaymentBasicsInputSet(Payment)"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="TransactionPaymentDetailsInputSet(Payment)"/>
+      <InputDivider/>
+      <InputSetRef
+        def="TransactionTrackingInputSet(Payment)"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="TransactionApprovalHistoryInputSet(Payment)"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

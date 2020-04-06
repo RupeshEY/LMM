@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<module xmlns="http://guidewire.com/xml/module" name="cc-customer-build">
+    <dependencies>
+        <dependency name="pl"/>
+        <dependency name="cc"/>
+        <!-- genSchemaJar -->
+        <!--dependency name="cc-customer-schemas"/-->
+    </dependencies>
+    <settings>
+        <setting name="gx.product" value="cc"/>
+        <setting name="gx.use-gosu-enhancements" value="true"/>
+    </settings>
+    <excludes>
+        <!-- <pattern>path/to/schema.xsd</pattern> -->
+    </excludes>
+    <included-only>
+        <!-- <pattern>path/to/schema.xsd</pattern> -->
+    </included-only>
+</module>

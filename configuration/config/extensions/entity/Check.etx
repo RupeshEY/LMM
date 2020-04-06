@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<!-- Extension to check table -->
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Check">
+  <index
+    desc="Index used for CheckSearchPayeeLastName or CompanyName and enteredtime or issuedate or              date fo service - ID column is 1st as we expect contact/checkpayee to be              outer, claimid added for covering. Index can be dropped or modified based              on the type of check searches in the deployment. Indexes combined to include              different dates to reduce index count with column repitition"
+    expectedtobecovering="true"
+    name="checku7"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="EnteredTime"/>
+    <indexcol
+      keyposition="4"
+      name="IssueDate"/>
+    <indexcol
+      keyposition="5"
+      name="DateOfService"/>
+    <indexcol
+      keyposition="6"
+      name="ClaimID"/>
+  </index>
+  <index
+    desc="Index used for CheckSearchPayeeLastName or CompanyName with Service Period start and end date -              ID column is 1st as we expect contact/checkpayee to be outer, claimid added for covering.              Index can be dropped or modified based on the type of check searches in the deployment.              Indexes combined to include different dates to reduce index count with column repitition"
+    expectedtobecovering="true"
+    name="checku8"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="ServicePdStart"/>
+    <indexcol
+      keyposition="4"
+      name="ServicePdEnd"/>
+    <indexcol
+      keyposition="5"
+      name="ClaimID"/>
+  </index>
+  <column
+    deprecated="true"
+    desc="Address of the person/company to whom the check should be mailed."
+    name="MailToAddress"
+    nullok="true"
+    type="shorttext"/>
+</extension>

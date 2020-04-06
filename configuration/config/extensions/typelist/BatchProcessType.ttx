@@ -1,0 +1,482 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Types of batch processes"
+  name="BatchProcessType">
+  <!-- batch processes -->
+  <typecode
+    code="ActivityEsc"
+    desc="Activity escalation monitor"
+    name="Activity Escalation">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="Archive"
+    desc="Archiving item writer"
+    name="Archiving Item Writer">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="BulkPurge"
+    desc="Purge records through table updates"
+    name="BulkPurge">
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="DataDistribution"
+    desc="Data distribution for the database"
+    name="Data Distribution">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="DBStats"
+    desc="Database statistics"
+    name="Database statistics">
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="GroupException"
+    desc="Group exception monitor"
+    name="Group Exception">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="UserException"
+    desc="User exception monitor"
+    name="User Exception">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="Workflow"
+    desc="Workflows work queue writer."
+    name="Workflow">
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <!-- work queues -->
+  <typecode
+    code="ContactAutoSync"
+    desc="Automatically synchronize the local contacts that are out of sync and marked 'allow' auto-sync."
+    name="ContactAutoSync">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="Geocode"
+    desc="Geocoding Addresses queue writer."
+    name="Geocode Writer">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="PhoneNumberNormalizer"
+    desc="Performs a normalization of phone numbers contact"
+    name="Phone number normalizer">
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="StagingTableImport"
+    desc="Asynchronous operation on staging tables (encrypt, statistics, integrity check, load, delete excluded, populate excluded)"
+    name="Staging Table Import">
+    <category
+      code="MaintenanceOnly"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="Statistics"
+    desc="Statistics calculator"
+    name="Statistics">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="ClaimException"
+    desc="Claim exception monitor"
+    name="Claim Exception">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="IdleClaim"
+    desc="Idle claim exception monitor"
+    name="Idle Claim Exception">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="IdleClosedClaim"
+    desc="Idle closed claim exception monitor"
+    name="Idle Closed Claim Exception">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="EncryptionUpgrade"
+    desc="Upgrades encryption for entity fields"
+    name="Encryption Upgrade">
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="ExchangeRate"
+    desc="Creates a new ExchangeRateSet using ExchangeRateSetPlugin"
+    name="Exchange Rate">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="FinancialsEsc"
+    desc="Financials escalation monitor - escalates checks from Awaiting-submission status to Requesting status so that the downstream system will be alerted"
+    name="Financials Escalation">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="FinancialsCalc"
+    desc="Financials calculations"
+    name="Financials Calculations">
+    <category
+      code="MaintenanceOnly"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="BulkInvoiceEsc"
+    desc="Escalate Bulk Invoices from Awaiting-submission status to Requesting status"
+    name="Bulk Invoice Escalation">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="BulkInvoiceWF"
+    desc="Transitions invoices from PendingInvoiceItemValidation status to 'AwaitingSubmission' or 'InvalidInvoiceItems' status once the invoice is ready"
+    name="Bulk Invoice Workflow Monitor">
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="TAccountEsc"
+    desc="TAccounts escalation monitor to transition payments and reserves from FutureDated state to Awaiting-submission state"
+    name="TAccounts Escalation">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="AggLimitCalc"
+    desc="Aggregate limit calculations"
+    name="Aggregate Limit Calculations">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="ClaimContactsCalc"
+    desc="Claim contacts calculations"
+    name="Claim Contacts Calculations">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="MaintenanceOnly"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="DashboardStatistics"
+    desc="Statistics for the executive dashboard"
+    name="Dashboard Statistics">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="ReviewSync"
+    desc="Transmits completed reviews to ContactManager."
+    name="ClaimCenter (SPM) Completed Review Sync">
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="ClaimHealthCalc"
+    desc="Calculates health indictators and metrics for all claims that do not have any metrics calculated"
+    name="Claim Health Calculations">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="RetiredPolicyGraphDisconnector"
+    desc="Disconnects claim graph objects from retired policy objects so that those claims can be archived"
+    name="Retired Policy Graph Disconnector">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="ClaimValidation"
+    desc="Bulk claim validation work queue writer.  Creates workitems to schedule loaded claims for validation. See ClaimAPI.bulkValidate()"
+    name="Bulk claim validation">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="CatastropheClaimFinder"
+    desc="Finds possible claims related to a catastrophe and creates a 'Review for Catastrophe' activity on the claim."
+    name="Catastrophe Claim Finder">
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="RecalculateMetrics"
+    desc="Recalculates claim metrics for claims whose metric update time has passed."
+    name="Recalculate Claim Metrics">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="BulkInvoiceSubmission"
+    desc="Processes bulk invoice items for bulk invoice submission."
+    name="Bulk Invoice Submission">
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="ContactRetire"
+    desc="Attempt to retire a Contacts marked as possibly retireable."
+    name="Contact Retire">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="PurgeMessageHistory"
+    desc="Purges old messages from the message history table"
+    name="Purge Message History">
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="CatastrophePolicyLocationDownload"
+    desc="Downloads PolicyLocationSummary data for catastrophes from the policy system"
+    name="Catastrophe Policy Location Download"/>
+  <typecode
+    code="UserWorkloadUpdate"
+    desc="Updates user weighted workload"
+    name="User Workload Update">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="ServiceRequestMetricEscalation"
+    desc="Escalates service metrics when they have exceeded an upper limit"
+    name="Service Metric Escalation">
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="SolrDataImport"
+    desc="Performs a full data import of the app database into the Solr/Lucene index"
+    name="Solr Data Import">
+    <!-- <category
+      xmlns=""
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/> -->
+    <category
+      code="UIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+    <category
+      code="Schedulable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+</typelistextension>

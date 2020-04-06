@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    autosaveable="false"
+    canEdit="true"
+    canVisit="perm.Contact.viewsearchab"
+    countsAsWork="false"
+    id="AddressBookPickerPopup"
+    returnType="Contact"
+    title="specialistServices != null ? DisplayKey.get(&quot;Web.AddressBookSearch.TitleVendor&quot;) : DisplayKey.get(&quot;Web.AddressBookSearch.Title&quot;)">
+    <LocationEntryPoint
+      signature="AddressBookPickerPopup(requiredContactType : Type)"/>
+    <LocationEntryPoint
+      signature="AddressBookPickerPopup(requiredContactType : Type, claim : Claim)"/>
+    <LocationEntryPoint
+      signature="AddressBookPickerPopup(requiredContactType : Type, externalSearchEnabled : boolean, claim : Claim)"/>
+    <LocationEntryPoint
+      signature="AddressBookPickerPopup(requiredContactType : Type, claim : Claim, specialistServices: java.util.List&lt;SpecialistService&gt; /* passing a non-null value changes the popup to perform a vendor search */)"/>
+    <Variable
+      name="requiredContactType"
+      type="Type"/>
+    <Variable
+      initialValue="true"
+      name="externalSearchEnabled"
+      type="boolean"/>
+    <Variable
+      initialValue="null"
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="null"
+      name="specialistServices"
+      type="java.util.List&lt;SpecialistService&gt;"/>
+    <ScreenRef
+      def="AddressBookSearchScreen(externalSearchEnabled, requiredContactType, claim, true, specialistServices, specialistServices != null)"/>
+  </Popup>
+</PCF>

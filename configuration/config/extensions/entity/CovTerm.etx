@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="CovTerm">
+  <column
+    desc="Ordering for the cov term"
+    name="CovTermOrder"
+    nullok="true"
+    type="integer"/>
+  <typekey
+    desc="Coverage term pattern"
+    name="CovTermPattern"
+    nullok="true"
+    typelist="CovTermPattern"/>
+  <typekey
+    desc="Indicates that the CovTerm is applicable to a subset or a subtype of the coverage"
+    name="ModelAggregation"
+    nullok="true"
+    typelist="CovTermModelAgg"/>
+  <typekey
+    desc="Indicates at what level of an event that the CovTerm is applicable to such as per claimant or per accident"
+    name="ModelRestriction"
+    nullok="true"
+    typelist="CovTermModelRest"/>
+</extension>

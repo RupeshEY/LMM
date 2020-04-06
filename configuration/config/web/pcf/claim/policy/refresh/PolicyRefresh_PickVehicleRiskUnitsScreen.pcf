@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="PolicyRefresh_PickVehicleRiskUnitsScreen">
+    <Require
+      name="wizard"
+      type="gw.api.policy.refresh.PolicyRefreshAlgorithm"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="policySummary"
+      type="PolicySummary"/>
+    <Toolbar
+      id="Toolbar">
+      <WizardButtons
+        id="Buttons"/>
+    </Toolbar>
+    <PanelRef
+      def="PolicyRefreshExistingVehicleRULV(claim,policySummary)">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.PolicyRefresh.CurrentVehicles&quot;)"/>
+      <Toolbar/>
+    </PanelRef>
+    <PanelSet>
+      <Verbatim
+        label="&quot;   &quot;"/>
+    </PanelSet>
+    <PanelRef
+      def="PolicySummaryVehicleLV( policySummary, true, true )"
+      editable="true">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.PolicyRefresh.VehiclesFromPolicySystem&quot;)"/>
+      <Toolbar/>
+    </PanelRef>
+  </Screen>
+</PCF>

@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="ECFMessageDetailsCommentDV">
+    <Require
+      name="claimDataMsg"
+      type="ECFMessageClaimData_Ext"/>
+    <InputColumn>
+      <ListViewInput
+        id="BrokerComments"
+        def="ECFMessageDetailsCommentLV(claimDataMsg?.BrokerComments?.orderBy(\e -&gt; e?.LineNumber)?.toArray(new ECFMessageBrokerComment_Ext[claimDataMsg?.BrokerComments?.length]))"
+        editable="false"
+        label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Comment.BrokerComments&quot;)"
+        labelAbove="true">
+        <Toolbar/>
+      </ListViewInput>
+      <ListViewInput
+        id="PublicComments"
+        def="ECFMessageDetailsCommentLV(claimDataMsg?.PublicComments?.orderBy(\e -&gt; e?.LineNumber)?.toArray(new ECFMessagePublicComment_Ext[claimDataMsg?.PublicComments?.length]))"
+        editable="false"
+        label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Comment.PublicComments&quot;)"
+        labelAbove="true">
+        <Toolbar/>
+      </ListViewInput>
+      <ListViewInput
+        id="PrivateComments"
+        def="ECFMessageDetailsCommentLV(claimDataMsg?.PrivateComments?.orderBy(\e -&gt; e?.LineNumber)?.toArray(new ECFMessagePrivateComment_Ext[claimDataMsg?.PrivateComments?.length]))"
+        editable="false"
+        label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Comment.PrivateComments&quot;)"
+        labelAbove="true">
+        <Toolbar/>
+      </ListViewInput>
+      <ListViewInput
+        id="SlipLeadComments"
+        def="ECFMessageDetailsCommentLV(claimDataMsg?.SlipLeadComments?.orderBy(\e -&gt; e?.LineNumber)?.toArray(new ECFMessageSlipLeadComment_Ext[claimDataMsg?.SlipLeadComments?.length]))"
+        editable="false"
+        label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Comment.SlipLeadComments&quot;)"
+        labelAbove="true">
+        <Toolbar/>
+      </ListViewInput>
+      <ListViewInput
+        id="CrossMarketPublicComments"
+        def="ECFMessageDetailsCrossMarketCommentLV(claimDataMsg?.CrossMarketPublicComments?.orderBy(\e -&gt; e?.LineNumber)?.toArray(new ECFMessageCrossMarketPublicComment_Ext[claimDataMsg?.CrossMarketPublicComments?.length]))"
+        editable="false"
+        label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Comment.CrossMarketPublicComments&quot;)"
+        labelAbove="true">
+        <Toolbar/>
+      </ListViewInput>
+      <ListViewInput
+        id="CrossMarketPrivateComments"
+        def="ECFMessageDetailsCrossMarketCommentLV(claimDataMsg?.CrossMarketPrivateComments?.orderBy(\e -&gt; e?.LineNumber)?.toArray(new ECFMessageCrossMarketPrivateComment_Ext[claimDataMsg?.CrossMarketPrivateComments?.length]))"
+        editable="false"
+        label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Comment.CrossMarketPrivateComments&quot;)"
+        labelAbove="true">
+        <Toolbar/>
+      </ListViewInput>
+      <ListViewInput
+        id="AggregateDetails"
+        def="ECFMessageDetailsCommentLV(claimDataMsg?.AggregateDetails?.orderBy(\e -&gt; e?.LineNumber)?.toArray(new ECFMessageAggregateDetail_Ext[claimDataMsg?.AggregateDetails?.length]))"
+        editable="false"
+        label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Comment.AggregateDetails&quot;)"
+        labelAbove="true">
+        <Toolbar/>
+      </ListViewInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

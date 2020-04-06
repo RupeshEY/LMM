@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<!-- Deprecated. The functionality of this PCF has been removed. -->
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <MenuItemSet
+    desc="Used to construct the New Contact menu for Contact pickers"
+    id="NewContactPickerMenuItemSet">
+    <Require
+      name="requiredContactType"
+      type="Type"/>
+    <Require
+      name="parentContact"
+      type="Contact"/>
+  </MenuItemSet>
+</PCF>

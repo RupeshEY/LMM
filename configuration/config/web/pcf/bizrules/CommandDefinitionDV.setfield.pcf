@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="CommandDefinitionDV"
+    mode="setfield">
+    <Require
+      name="commandDefinition"
+      type="gw.bizrules.pcf.RuleCommandDefinitionHolder"/>
+    <Variable
+      initialValue="gw.bizrules.ruleaction.setfield.config.SetFieldCommandParameterSet.Config"
+      name="config"
+      type="gw.bizrules.ruleaction.setfield.config.SetFieldCommandParameterConfig"/>
+    <Variable
+      initialValue="new gw.bizrules.ruleaction.setfield.SetFieldCommandDefinitionState(commandDefinition)"
+      name="state"
+      recalculateOnRefresh="true"
+      type="gw.bizrules.ruleaction.setfield.SetFieldCommandDefinitionState"/>
+    <InputColumn>
+      <InputSetRef
+        def="ValidatingCommandParameterInputSet(commandDefinition.getParameterHolder(config.SET_ONLY_IF_NULL.Name))"
+        id="NonNull"/>
+      <InputSetRef
+        def="ValidatingCommandParameterInputSet(commandDefinition.getParameterHolder(config.PROPERTY.Name))"
+        id="Field"/>
+      <InputSetRef
+        def="ValidatingCommandParameterInputSet(commandDefinition.getParameterHolder(config.VALUE.Name))"
+        id="Value"/>
+      <InputSetRef
+        def="ValidationWarningsInputSet(state.getWarnings(), false)"
+        id="ObjectFieldToSetWarnings"
+        visible="state.showWarnings()"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

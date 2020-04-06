@@ -1,0 +1,166 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_admin.xml -->
+  <DetailViewPanel
+    id="AdminCatastropheDV">
+    <Require
+      name="Catastrophe"
+      type="Catastrophe"/>
+    <Variable
+      name="zoneType"
+      type="ZoneType"/>
+    <Variable
+      name="linkedZone"
+      type="Zone"/>
+    <Variable
+      initialValue="gw.api.admin.BaseAdminUtil.getDefaultCountry()"
+      name="country"
+      type="Country"/>
+    <InputColumn>
+      <!-- GW10-CAL-01/09/07 Begin - Modified Layout and added fields to the current Catastrophe Screen -->
+      <Label
+        label="DisplayKey.get(&quot;NVV.Admin.AdminCatastrophe.Catastrophe&quot;)"/>
+      <TextInput
+        editable="true"
+        id="CatastropheAdmin_Name"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminCatastrophe.CatastropheAdmin.Name&quot;)"
+        required="true"
+        value="Catastrophe.Name">
+        <PostOnChange/>
+      </TextInput>
+      <TextInput
+        editable="true"
+        id="CatastropheAdmin_Description"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminCatastrophe.CatastropheAdmin.Description&quot;)"
+        required="true"
+        value="Catastrophe.Description">
+        <PostOnChange/>
+      </TextInput>
+      <TextInput
+        editable="true"
+        id="CatastropheAdmin_ID"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminCatastrophe.CatastropheAdmin.ID&quot;)"
+        required="true"
+        value="Catastrophe.CatastropheNumber"/>
+      <TextInput
+        editable="true"
+        id="CatastrophePCSNo"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminCatastrophe.CatastrophePCS.ID&quot;)"
+        value="Catastrophe.PCSCatastropheNumber"/>
+      <TextInput
+        editable="true"
+        id="LCOCode"
+        label="DisplayKey.get(&quot;Accelerator.IPLM.Web.Admin.AdminCatastropheDV.LCOCode&quot;)"
+        value="Catastrophe.LCOCode"/>
+      <TypeKeyInput
+        editable="true"
+        id="CatastropheAdmin_Type"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminCatastrophe.CatastropheAdmin.Type&quot;)"
+        required="true"
+        value="Catastrophe.Type"
+        valueType="typekey.CatastropheType"/>
+      <DateInput
+        dateFormat="short"
+        editable="true"
+        id="CatastropheValidFrom"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminCatastrophe.CatastropheValidFrom&quot;)"
+        required="true"
+        timeFormat="short"
+        value="Catastrophe.CatastropheValidFrom">
+        <PostOnChange
+          onChange="if (Catastrophe.PolicyEffectiveDate == null) { Catastrophe.PolicyEffectiveDate = Catastrophe.CatastropheValidFrom; Catastrophe.PolicyRetrievalSetTime = java.util.Date.CurrentDate }"/>
+      </DateInput>
+      <DateInput
+        dateFormat="short"
+        editable="true"
+        id="CatastropheValidTo"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminCatastrophe.CatastropheValidTo&quot;)"
+        required="true"
+        timeFormat="short"
+        validationExpression="Catastrophe.CatastropheValidFrom &gt; Catastrophe.CatastropheValidTo ? DisplayKey.get(&quot;Java.Validation.AdminCatastrophe.Date.ForbidValidReverse&quot;) : null"
+        value="Catastrophe.CatastropheValidTo"/>
+      <TextAreaInput
+        id="Zones"
+        label="DisplayKey.get(&quot;Web.Admin.AdminCatastropheDV.AreasCovered&quot;)"
+        numCols="50"
+        numRows="5"
+        value="Catastrophe.Zones"/>
+      <RangeInput
+        editable="true"
+        hideIfReadOnly="true"
+        id="Country"
+        label="DisplayKey.get(&quot;Web.Admin.AdminCatastropheDV.Country&quot;)"
+        required="true"
+        value="country"
+        valueRange="getPossibleCountries()"
+        valueType="typekey.Country">
+        <PostOnChange/>
+      </RangeInput>
+      <InputSetRef
+        def="CatastropheZonesInputSet(Catastrophe)"
+        mode="country"/>
+      <ListViewInput
+        boldLabel="true"
+        def="CatastrophePerilsLV(Catastrophe)"
+        editable="true"
+        label="DisplayKey.get(&quot;NVV.Admin.AdminCatastrophe.Peril.Title&quot;)"
+        labelAbove="true">
+        <Toolbar>
+          <IteratorButtons
+            iterator="CatastrophePerilsLV.CatastrophePerilsLV"/>
+        </Toolbar>
+      </ListViewInput>
+      <TextInput
+        id="empty1"
+        value="&quot;&quot;"/>
+      <ListViewInput
+        boldLabel="true"
+        def="LocalizedValuesLV(Catastrophe, { &quot;Name&quot;, &quot;Description&quot;}, { DisplayKey.get(&quot;Web.Admin.CatastropheLocalizedLV.Name&quot;), DisplayKey.get(&quot;Web.Admin.CatastropheLocalizedLV.Description&quot;)})"
+        editable="true"
+        label="DisplayKey.get(&quot;Web.Admin.LocalizedValuesDV.Localization&quot;)"
+        labelAbove="true"
+        visible="LanguageType.getTypeKeys(false).Count &gt; 1">
+        <Toolbar
+          visible="false">
+          <IteratorButtons
+            iterator="LocalizedValuesLV.LocalizedFields"/>
+        </Toolbar>
+      </ListViewInput>
+      <TextInput
+        id="empty2"
+        value="&quot;&quot;"/>
+      <ListViewInput
+        boldLabel="true"
+        def="CatastropheClaimsHistoryLV(Catastrophe)"
+        label="DisplayKey.get(&quot;Web.Admin.AdminCatastropheDV.HistoryOfMatchedClaims&quot;)"
+        labelAbove="true">
+        <Toolbar
+          visible="false">
+          <IteratorButtons
+            iterator="CatastropheClaimsHistoryLV.CatastropheClaimsHistoryLV"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputColumn>
+    <Code><![CDATA[function getZoneInputValueRange(first : String[], second : String[]) : String[] {
+  var both = new java.util.ArrayList<String>();
+  java.util.Collections.addAll(both, first);
+  java.util.Collections.addAll(both, second);
+
+  var h = new java.util.HashSet<String>(both);
+  both.clear();
+  both.addAll(h);
+
+  return both.toArray(new String[] {});
+}
+
+function getPossibleCountries() : java.util.List<Country> {
+  var org = User.util.CurrentUser.Organization
+  if (org == null) {
+    org = User.util.UnrestrictedUser.Organization
+  }
+  return org.Countries
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

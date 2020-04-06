@@ -1,0 +1,23 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+@gw.rules.RuleName("CPU19000 - Geocode Catastrophe Claims")
+internal class CPU19000GeocodeCatastropheClaims {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.Catastrophe != null 
+and claim.LossLocation.NeverGeocoded
+
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.scheduleGeocoding(claim.LossLocation)
+
+/*end00rule*/
+
+  }
+}

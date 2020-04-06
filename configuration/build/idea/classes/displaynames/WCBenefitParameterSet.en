@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<Entity
+  name="WCBenefitParameterSet">
+  <Columns>
+    <Column
+      beanPath="WCBenefitParameterSet.JurisdictionState"
+      name="JurisdictionState"
+      sortOrder="1"/>
+    <Column
+      beanPath="WCBenefitParameterSet.StartDate"
+      name="StartDate"
+      sortOrder="2"/>
+    <Column
+      beanPath="WCBenefitParameterSet.EndDate"
+      name="EndDate"
+      sortOrder="3"/>
+  </Columns>
+  <DisplayName><![CDATA[
+var retString : String = "";
+  if (JurisdictionState != null) {
+       retString = retString + JurisdictionState.AbbreviatedDisplayValue
+   }
+   if (StartDate != null) {
+       retString = retString + " " + StartDate;
+   }
+   if (EndDate != null) {
+       retString = retString + " " + EndDate;
+   }    
+   return retString;
+  ]]></DisplayName>
+</Entity>

@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="PageHelper.afterCancel(claim)"
+    canEdit="perm.Claim.manageclaimusers(claim)"
+    canVisit="perm.Claim.view(claim) and perm.System.viewclaimparties"
+    id="ClaimUsers"
+    startEditing="PageHelper.startEditing()"
+    title="DisplayKey.get(&quot;Web.ClaimUsers.Title&quot;)">
+    <LocationEntryPoint
+      signature="ClaimUsers(claim : Claim)"/>
+    <Variable
+      initialValue="new gw.api.claimparties.ClaimUsersPageHelper()"
+      name="PageHelper"
+      type="gw.api.claimparties.ClaimUsersPageHelper"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="claim.ClaimUserModelSet"
+      name="claimUserModelSet"
+      type="ClaimUserModelSet"/>
+    <Screen
+      id="ClaimUsersScreen">
+      <Toolbar>
+        <PickerToolbarButton
+          action="GroupUserPickerPopup.push()"
+          hideIfEditable="true"
+          id="ClaimUsers_AddUserButton"
+          label="DisplayKey.get(&quot;Web.ClaimUsers.AddUser.Button&quot;)"
+          onPick="gw.api.claimparties.ClaimUserUtil.addClaimUser(PickedValue, claimUserModelSet, CurrentLocation)"
+          visible="perm.Claim.manageclaimusers(claim)"/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="gw.api.claimparties.ClaimUserUtil.removeUserRoles(CurrentLocation, CheckedValues)"
+          flags="all ClaimUserWithRoles"
+          hideIfEditable="true"
+          id="ClaimUsers_ButtonButton"
+          iterator="ClaimUsersLV.ClaimUsersLV"
+          label="DisplayKey.get(&quot;Web.ClaimUsers.RemoveUserRoles.Button&quot;)"
+          visible="perm.Claim.manageclaimusers(claim)"/>
+      </Toolbar>
+      <ListDetailPanel
+        lockWhileEditing="true"
+        selectionName="claimUserModel"
+        selectionType="ClaimUserModel">
+        <PanelRef
+          def="ClaimUsersLV(claimUserModelSet.ClaimUserModels)"/>
+        <CardViewPanel>
+          <Card
+            id="UserDetailsCard"
+            title="DisplayKey.get(&quot;Web.ClaimUsers.UserDetails.Title&quot;, claimUserModel.User)">
+            <PanelRef
+              def="ClaimUserDetailDV(claimUserModel, claim)">
+              <Toolbar>
+                <EditButtons/>
+              </Toolbar>
+            </PanelRef>
+          </Card>
+        </CardViewPanel>
+      </ListDetailPanel>
+    </Screen>
+  </Page>
+</PCF>

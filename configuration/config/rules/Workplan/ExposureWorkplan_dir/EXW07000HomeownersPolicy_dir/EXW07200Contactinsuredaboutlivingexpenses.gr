@@ -1,0 +1,22 @@
+package rules.Workplan.ExposureWorkplan_dir.EXW07000HomeownersPolicy_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("EXW07200 - Contact insured about living expenses")
+internal class EXW07200Contactinsuredaboutlivingexpenses {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ExposureType == TC_LIVINGEXPENSES
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.Claim.createActivityFromPattern(
+    exposure, ActivityPattern.finder.getActivityPatternByCode("living_expenses"))
+/*end00rule*/
+
+  }
+}

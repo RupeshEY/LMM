@@ -1,0 +1,52 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+@gw.rules.RuleName("CPU14000 - Subro Adverse Party role")
+internal class CPU14000SubroAdversePartyrole {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.SubrogationSummary != null
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* Iterate over the subro adverse parties. If any of these has a different contact, then
+ * iterate over the claimcontacts to find the one with the same contact that is the adverse party.
+ * If this claimcontact does not have the role of "adverseparty", then add a new claimcontactrole
+ * of "adverseparty" for this claimcontact.
+ */
+var contacts = new HashSet<Contact>()
+for (thisparty in claim.SubrogationSummary.SubroAdverseParties) { 
+  if (thisparty.isFieldChanged("AdverseParty")) {
+    for (thiscontact in claim.Contacts) { 
+      if (thisparty.AdverseParty == thiscontact.Contact) {
+        contacts.add(thiscontact.Contact)
+        if (not thiscontact.Roles.toList().hasMatch(\ thisrole -> thisrole.Role == TC_ADVERSEPARTY)) {
+          var ccc = new ClaimContactRole(thiscontact)
+          ccc.Role = TC_ADVERSEPARTY
+          ccc.Active = true
+          thiscontact.addToRoles(ccc)
+        }
+      }
+    } // for (thiscontact
+  }  // if (thisparty
+}  // for (thisparty
+
+// For each removed adverse party, remove the associated adverseparty role
+for (bean in claim.SubrogationSummary.getRemovedArrayElements("SubroAdverseParties")) {
+  var party = bean as SubroAdverseParty
+  if (not contacts.contains(party.AdverseParty)) {
+    for (contact in claim.Contacts) {
+      if (party.AdverseParty == contact.Contact) {
+        contact.Roles.where(\role -> role.Role == ContactRole.TC_ADVERSEPARTY).each(\role -> role.remove())
+      }
+    }
+  }
+}
+/*end00rule*/
+
+  }
+}

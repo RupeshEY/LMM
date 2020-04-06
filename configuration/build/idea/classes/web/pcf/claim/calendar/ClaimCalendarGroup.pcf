@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="perm.Claim.view(Claim) and (Claim.State != ClaimState.TC_DRAFT)"
+    id="ClaimCalendarGroup"
+    title="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Calendar&quot;)">
+    <LocationEntryPoint
+      signature="ClaimCalendarGroup(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.LitigationCalendar.General.Tab&quot;)"
+      location="ClaimCalendar(Claim)"
+      shortcut="Y"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.LitigationCalendar.Supervisor.Tab&quot;)"
+      location="SupervisorClaimCalendar(Claim)"
+      shortcut="S"/>
+  </LocationGroup>
+</PCF>

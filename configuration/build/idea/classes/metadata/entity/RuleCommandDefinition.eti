@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="false"
+  desc="Rule Command Definition"
+  entity="RuleCommandDefinition"
+  exportable="false"
+  extendable="false"
+  final="true"
+  loadable="false"
+  platform="true"
+  table="bizrulecommdef"
+  type="versionable">
+  <implementsEntity
+    name="RuleVersionDependent"/>
+  <implementsEntity
+    name="OrderedChild"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.RulesCascadingRemovable"
+    impl="com.guidewire.bizrules.domain.RuleCommandDefinitionImpl"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.bizrules.domain.RuleCommandDefinitionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.codegenerator.GosuTextBuilder"
+    impl="com.guidewire.bizrules.codegenerator.RuleCommandDefinitionGosuTextBuilder"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.codegenerator.RuleCommandDefinitionValidationMethods"
+    impl="com.guidewire.bizrules.codegenerator.RuleCommandDefinitionGosuTextBuilder"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.RuleCommandDefinitionDomainMethods"
+    impl="com.guidewire.bizrules.domain.RuleCommandDefinitionImpl"/>
+  <foreignkey
+    columnName="BizRule"
+    fkentity="Rule"
+    name="Rule"
+    nullok="false"/>
+  <typekey
+    name="RuleActionKey"
+    nullok="true"
+    typelist="RuleActionKey"/>
+  <array
+    arrayentity="RuleCommandParameter"
+    name="RuleCommandParameters"
+    owner="true"/>
+  <index
+    desc="For ordering"
+    name="ordering"
+    unique="true">
+    <indexcol keyposition="1" name="BizRule"/>
+    <indexcol keyposition="2" name="OrderNumber"/>
+  </index>
+</entity>

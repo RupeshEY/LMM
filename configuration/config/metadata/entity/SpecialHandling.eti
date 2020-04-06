@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  admin="true"
+  desc="The parent entity for Special Handling"
+  entity="SpecialHandling"
+  extendable="true"
+  final="false"
+  loadable="false"
+  table="specialhandling"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.specialhandling.entity.SpecialHandling"
+    impl="com.guidewire.cc.domain.specialhandling.impl.SpecialHandlingImpl"/>
+  <fulldescription><![CDATA[
+        This is the parent entity for defining special handling of Claims. There may be different special handling needs for claims related to a particular Account, Brokerage or Affinity Program. All the special handling instructions and triggers are hung off the SpecialHandling entity and then different subtypes of this entity point to the owning Account, Brokerage or Program.
+    ]]></fulldescription>
+  <array
+    arrayentity="OtherInstruction"
+    cascadeDelete="true"
+    desc="Related other instructions"
+    name="OtherInstructions"/>
+  <array
+    arrayentity="AutomatedHandler"
+    cascadeDelete="true"
+    desc="An associative array of AutomatedHandlers, segmented by the AutomatedHandler subtype (i.e., AutomatedActivityHandler and AutomatedNotificationHandler"
+    name="AutomatedHandlers">
+    <array-association
+      hasGetter="true"
+      hasSetter="false">
+      <subtype-map/>
+    </array-association>
+  </array>
+</entity>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    id="ClaimInfoGroup"
+    title="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Summary&quot;)">
+    <LocationEntryPoint
+      signature="ClaimInfoGroup(ClaimInfo : ClaimInfo)"/>
+    <Variable
+      name="ClaimInfo"
+      type="ClaimInfo"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimInfo.Tab&quot;)"
+      location="ArchivedClaim(ClaimInfo)"/>
+  </LocationGroup>
+</PCF>

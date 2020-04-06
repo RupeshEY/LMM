@@ -1,0 +1,39 @@
+package rules.BulkInvoiceApproval.BulkInvoiceApprovalRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("BIA01000 - Always Require Approval")
+internal class BIA01000AlwaysRequireApproval {
+  static function doCondition(bulkInvoice : entity.BulkInvoice) : boolean {
+    
+/*start00rule*/
+return true
+
+/*end00rule*/
+
+  }
+
+  static function doAction(bulkInvoice : entity.BulkInvoice, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+var actQuery = gw.api.database.Query.make(Activity).compare("BulkInvoice", Equals, bulkInvoice).compare("Status", Equals, ActivityStatus.TC_OPEN).compare(Activity.TYPE_PROP.get(), Equals, ActivityType.TC_APPROVAL).select()
+
+if (actQuery.Empty) {
+  bulkInvoice.requireApproval( DisplayKey.get("Rules.BulkInvoice.ForceApproval") )
+}
+
+/* Requires one approval each time the BI is submitted.
+ *
+ * When the approving user approves the first Approval Activity,
+ * and these rules are run again to see if further approval is required,
+ * this finder sees the first Activity as still OPEN in the DB since
+ * the bundle has not been committed yet. In which case, the query
+ * result is not empty and approval is not required again.
+ */
+
+/*end00rule*/
+
+  }
+}

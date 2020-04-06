@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="NewCheckPaymentPanelSet"
+    mode="Single">
+    <ExposeIterator
+      applicable="false"
+      name="NewCheckPaymentsLV"
+      valueType="entity.Payment"
+      widget="NewCheckPaymentsLV"/>
+    <Require
+      name="Wizard"
+      type="gw.api.financials.CheckWizardInfo"/>
+    <Require
+      name="reserveLineInputSetHelper"
+      type="gw.api.financials.ReserveLineInputSetHelper"/>
+    <PanelRef
+      def="NewPaymentDetailDV(Wizard.Check.findOrCreatePayment(), Wizard, reserveLineInputSetHelper)"/>
+  </PanelSet>
+</PCF>

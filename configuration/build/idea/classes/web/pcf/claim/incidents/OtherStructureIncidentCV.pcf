@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <CardViewPanel
+    id="OtherStructureIncidentCV">
+    <Require
+      name="otherStructureIncident"
+      type="OtherStructureIncident"/>
+    <Card
+      id="OtherStructure_DetailsCard"
+      title="DisplayKey.get(&quot;Web.OtherStructureIncident.Details&quot;)">
+      <PanelRef
+        def="OtherStructureIncidentPanelSet(otherStructureIncident)"/>
+    </Card>
+    <Card
+      id="OtherStructure_AssessmentCard"
+      title="DisplayKey.get(&quot;Web.OtherStructureIncident.Assessment&quot;)">
+      <PanelRef
+        def="IncidentAssessDV(otherStructureIncident)"/>
+    </Card>
+  </CardViewPanel>
+</PCF>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?><typelist xmlns="http://guidewire.com/typelists" desc="ECFTriageCode_Ext typelist" final="false" name="ECFTriageCode_Ext">
+  <typecode code="Complex" desc="Complex" name="Complex"/>
+  <typecode code="CTP-Complex" desc="CTP-Complex" name="CTP-Complex"/>
+  <typecode code="CTP-Standard" desc="CTP-Standard" name="CTP-Standard"/>
+  <typecode code="NotSpecified" desc="Not Specified" name="Not Specified"/>
+  <typecode code="Standard" desc="Standard" name="Standard"/>
+  <typecode code="VCS-Crawford" desc="VCS-Crawford" name="VCS-Crawford"/>
+  <typecode code="VCS-XCS" desc="VCS-XCS" name="VCS-XCS"/>
+  <typecode code="None" desc="None" name="None"/>
+  <typefilter
+    desc="Applicable for 2006 and prior"
+    name="2006AndPrior">
+    <include
+      code="NotSpecified"/>
+    <include
+      code="Standard"/>
+    <include
+      code="Complex"/>
+    <include
+      code="VCS-XCS"/>
+    <include
+      code="VCS-Crawford"/>
+  </typefilter>
+  <typefilter
+    desc="Applicable for 2010 scheme"
+    name="2010">
+    <include
+      code="None"/>
+    <include
+      code="CTP-Standard"/>
+    <include
+      code="CTP-Complex"/>
+    <include
+      code="VCS-XCS"/>
+    <include
+      code="VCS-Crawford"/>
+  </typefilter>
+</typelist>

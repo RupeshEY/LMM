@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <PanelSet
+    desc="Provides a reusable panel displaying a Contact's Addresses in a ListDetailPanel."
+    id="AddressBookAddressesPanelSet">
+    <Require
+      name="contact"
+      type="Contact"/>
+    <ListDetailPanel
+      selectionName="selectedAddress"
+      selectionType="Address">
+      <PanelRef
+        def="AddressBookAddressesLV(contact)"/>
+      <CardViewPanel>
+        <Card
+          id="AddressDetailCard"
+          title="DisplayKey.get(&quot;Web.Contact.AddressDetail.Title&quot;)">
+          <DetailViewPanel>
+            <InputColumn>
+              <Label
+                label="DisplayKey.get(&quot;Web.Contact.AddressDetail.Title&quot;)"/>
+              <InputSetRef
+                def="CCAddressInputSet(new gw.api.address.AddressAddressOwner(selectedAddress){ :AlwaysShowSeparateFields = true } )"/>
+            </InputColumn>
+          </DetailViewPanel>
+        </Card>
+      </CardViewPanel>
+    </ListDetailPanel>
+  </PanelSet>
+</PCF>

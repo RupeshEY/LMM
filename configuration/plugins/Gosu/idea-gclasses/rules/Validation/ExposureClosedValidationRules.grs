@@ -1,0 +1,13 @@
+package rules.Validation
+
+@gw.rules.RuleName("Exposure Closed Validation Rules")
+@gw.rules.RuleSetDescription("This is the Exposure Closed Validation rule set. These rules are executed when an exposure is closed. They enable you to raise validation errors or warnings if the exposure must not be closed. This rule set executes before the Exposure Closed rule set, and before the Exposure Preupdate and Exposure Validation rule sets.")
+class ExposureClosedValidationRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Exposure) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Exposure) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Exposure Closed Validation Rules", ExposureClosedValidationRules )
+  }
+}

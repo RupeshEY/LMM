@@ -1,0 +1,32 @@
+package rules.Validation.RIAgreementValidationRules_dir.RIAV01000RequiredFields_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("RIAV01010 - Non-Proportional")
+internal class RIAV01010NonProportional {
+  static function doCondition(rIAgreement : entity.RIAgreement) : boolean {
+    
+/*start00rule*/
+return rIAgreement typeis NonProportionalRIAgreement 
+/*end00rule*/
+
+  }
+
+  static function doAction(rIAgreement : entity.RIAgreement, actions : gw.rules.Action) {
+
+/*start00rule*/
+if(rIAgreement.AttachmentPoint == null) {
+  rIAgreement.rejectField("AttachmentPoint", TC_NEWLOSS, 
+    DisplayKey.get("Rules.Validation.RIAgreement.RequiredFieldMustNotBeNull", "AttachmentPoint", (typeof rIAgreement).DisplayName, rIAgreement.DisplayName), 
+    null, null)
+}
+
+if(rIAgreement.CededShare == null) {
+  rIAgreement.rejectField("CededShare", TC_NEWLOSS, 
+    DisplayKey.get("Rules.Validation.RIAgreement.RequiredFieldMustNotBeNull", "CededShare", (typeof rIAgreement).DisplayName, rIAgreement.DisplayName), 
+    null, null)  
+}
+/*end00rule*/
+
+  }
+}

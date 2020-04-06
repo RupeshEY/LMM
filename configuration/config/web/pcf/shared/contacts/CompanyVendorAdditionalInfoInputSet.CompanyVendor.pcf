@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="CompanyVendorAdditionalInfoInputSet"
+    mode="CompanyVendor">
+    <Require
+      name="contactHandle"
+      type="gw.api.contact.ContactHandle"/>
+    <TextInput
+      id="OverallReviewScore"
+      label="DisplayKey.get(&quot;Web.Reviews.OverallScore&quot;)"
+      value="contactHandle.Contact.Score"
+      valueType="java.lang.Integer"
+      visible="(contactHandle.Contact.Score != null) or util.ReviewPageHelper.shouldDisplayReviewTab(contactHandle.Contact)"/>
+    <BooleanRadioInput
+      editable="perm.Contact.createpreferredab"
+      id="IsPreferredVendor"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.IsPreferredVendor&quot;)"
+      value="CompanyVendor.Preferred"/>
+    <InputSetRef
+      def="CompanyVendorSpecialtyInputSet(contactHandle)"
+      mode="CompanyVendor.Subtype"/>
+    <Code><![CDATA[
+property get CompanyVendor() : CompanyVendor { return contactHandle.Contact as CompanyVendor; }
+    ]]></Code>
+  </InputSet>
+</PCF>

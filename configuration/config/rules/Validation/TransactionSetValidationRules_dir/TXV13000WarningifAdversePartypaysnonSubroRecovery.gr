@@ -1,0 +1,42 @@
+package rules.Validation.TransactionSetValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.util.StringUtil
+uses java.util.HashSet
+
+@gw.rules.RuleName("TXV13000 - Warning if Adverse Party pays non-Subro Recovery")
+internal class TXV13000WarningifAdversePartypaysnonSubroRecovery {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return transactionSet.Subtype == typekey.TransactionSet.TC_RECOVERYSET
+and transactionSet.New
+and transactionSet.Claim.SubrogationSummary.SubroAdverseParties.HasElements
+
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+// collect all the AdverseParty contacts
+var responsiblePartyContacts = transactionSet.Claim.SubrogationSummary.SubroAdverseParties.reduce(new HashSet<Contact>(),
+        \ hset, subroAP -> {
+          hset.add(subroAP.AdverseParty)
+          return hset
+        })
+
+for (recovery in (transactionSet as RecoverySet).Recoveries ) {
+  // recovery Payer that is an adverse party should have Subro recovery category
+  if ( responsiblePartyContacts.contains(recovery.PayerDenorm)
+       and recovery.RecoveryCategory != RecoveryCategory.TC_SUBRO
+      ) {
+    transactionSet.reject(ValidationLevel.TC_NEWLOSS, DisplayKey.get("Rules.Validation.Transaction.RecoveriesForSubrogation", recovery.PayerDenorm.DisplayName, StringUtil.substring( actions.getRule().DisplayName, 0, 8)), null, null)
+  }
+}
+
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="FNOLWizardAutoFirstAndFinalPanelSet"
+    mode="INSURED">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Require
+      name="VehicleIncident"
+      type="VehicleIncident"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <ClaimContactInput
+          claim="Claim"
+          editable="true"
+          forceContactSubtype="entity.Person.Type"
+          hideChildrenIfReadOnly="false"
+          id="FirstAndFinalScreenInsuredClaimant"
+          label="DisplayKey.get(&quot;Web.FNOLWizard.AutoFirstAndFinal.Insured.Name&quot;)"
+          newContactMenu="ClaimNewPersonOnlyPickerMenuItemSet"
+          required="true"
+          value="Claim.reporter"
+          valueRange="Claim.RelatedPersonArray"/>
+      </InputColumn>
+    </DetailViewPanel>
+  </PanelSet>
+</PCF>

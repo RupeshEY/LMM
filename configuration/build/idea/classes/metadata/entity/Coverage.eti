@@ -1,0 +1,130 @@
+<?xml version="1.0"?>
+<!-- Coverage -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Insurance coverage."
+  entity="Coverage"
+  exportable="true"
+  final="false"
+  table="coverage"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.policy.entity.Coverage"
+    impl="com.guidewire.cc.domain.policy.impl.CoverageImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.RemoveCallback"
+    impl="com.guidewire.cc.domain.policy.impl.CoverageImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.policy.impl.CoverageInternal"
+    impl="com.guidewire.cc.domain.policy.impl.CoverageImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.policy.impl.CoverageImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+Abstract superclass describing a specific coverage on a policy. Contains
+information about deductibles, limits, and effective dates of the coverage. A
+policy may have multiple coverages.
+    ]]></fulldescription>
+  <column
+    desc="Deductible for this coverage."
+    name="Deductible"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="Currency"/>
+  </column>
+  <column
+    desc="Date on which the coverage is effective."
+    name="EffectiveDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date on which the coverage is expired."
+    name="ExpirationDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Dollar limit per exposure."
+    name="ExposureLimit"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="Currency"/>
+  </column>
+  <column
+    desc="Dollar limit per incident."
+    name="IncidentLimit"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="Currency"/>
+  </column>
+  <column
+    desc="Additional notes on this coverage."
+    name="Notes"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Identifier for the coverage in an external policy system"
+    name="PolicySystemId"
+    nullok="true"
+    type="policysystemid"/>
+  <onetoone
+    desc="Deductible entity to be applied to a payment."
+    fkentity="Deductible"
+    ignoreforevents="true"
+    name="ClaimDeductible"
+    nullok="true"
+    setterScriptability="doesNotExist"/>
+  <typekey
+    desc="The currency of the coverage. Once set, this value can be updated only when CoverageMethods.allowCurrencyChange() returns true."
+    name="Currency"
+    nullok="false"
+    typelist="Currency"/>
+  <typekey
+    desc="Whether a coverage type can be combined."
+    name="LimitsIndicator"
+    nullok="true"
+    typelist="LimitsIndicator"/>
+  <typekey
+    desc="The state in which this coverage is applicable, if state-specific."
+    name="State"
+    nullok="true"
+    typelist="State"/>
+  <typekey
+    desc="Type of coverage."
+    name="Type"
+    nullok="false"
+    typelist="CoverageType">
+    <keyfilters>
+      <keyfilter
+        name="Policy.PolicyType"/>
+    </keyfilters>
+  </typekey>
+  <array
+    arrayentity="CovTerm"
+    desc="Additional terms and conditions associated with this Coverage."
+    name="CovTerms"
+    owner="true"
+    triggersValidation="true"/>
+  <foreignkey
+    columnName="PolicyID"
+    desc="Policy to which the coverage belongs."
+    fkentity="Policy"
+    name="Policy"
+    nullok="false"/>
+  <datetimeordering
+    firstcolumnname="EffectiveDate"
+    operator="LE"
+    secondcolumnname="ExpirationDate"/>
+  <events/>
+  <implementsInterface
+    iface="gw.api.policy.CoverageMethods"
+    impl="gw.api.policy.CoverageMethodsImpl"/>
+</entity>

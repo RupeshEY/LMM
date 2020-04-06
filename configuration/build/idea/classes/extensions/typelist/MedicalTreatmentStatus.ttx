@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Medical treatment status - for use on MedCaseMgr screen"
+  name="MedicalTreatmentStatus">
+  <typecode
+    code="InitialReview"
+    desc="Initial review"
+    name="Initial review"
+    priority="1"/>
+  <typecode
+    code="MedicalExam"
+    desc="Medical exam"
+    name="Medical exam"
+    priority="2"/>
+  <typecode
+    code="FollowUpVisit"
+    desc="Follow-up visit"
+    name="Follow-up visit"
+    priority="3"/>
+  <typecode
+    code="ContinuingTreatment"
+    desc="Continuing treatment"
+    name="Continuing treatment"
+    priority="4"/>
+  <typecode
+    code="RestMedication"
+    desc="Rest and medication"
+    name="Rest and medication"
+    priority="5"/>
+  <typecode
+    code="PhysicalTherapy"
+    desc="Physical therapy"
+    name="Physical therapy"
+    priority="6"/>
+  <typecode
+    code="ActiveTreatment"
+    desc="Active treatment"
+    name="Active treatment"
+    priority="7"/>
+  <typecode
+    code="LabXray"
+    desc="Laboratory or X-ray"
+    name="Laboratory or X-ray"
+    priority="8"/>
+  <typecode
+    code="SpecialistReferral"
+    desc="Specialist referral"
+    name="Specialist referral"
+    priority="9"/>
+  <typecode
+    code="SpecialistTest"
+    desc="Specialist Test such as MRI or CAT Scan"
+    name="Specialist test"
+    priority="10"/>
+  <typecode
+    code="Hospital"
+    desc="Hospital"
+    name="Hospital"
+    priority="11"/>
+  <typecode
+    code="PendingSurgery"
+    desc="Pending surgery"
+    name="Pending surgery"
+    priority="12"/>
+  <typecode
+    code="Surgery"
+    desc="Surgery"
+    name="Surgery"
+    priority="13"/>
+  <typecode
+    code="PostSurgeryRecovery"
+    desc="Post surgical recovery period"
+    name="Post surgical recovery period"
+    priority="14"/>
+  <typecode
+    code="Released"
+    desc="Released"
+    name="Released"
+    priority="15"/>
+  <typecode
+    code="Other"
+    desc="Other Treatment not listed here"
+    name="Other treatment"
+    priority="16"/>
+</typelistextension>

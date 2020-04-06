@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="ConditionEnabledDV">
+    <Require
+      name="fragHolder"
+      type="gw.bizrules.pcf.FilteredIterableExpressionFragmentHolder"/>
+    <InputColumn>
+      <BooleanRadioInput
+        editable="true"
+        falseLabel="fragHolder.getConditionLabel(false)"
+        id="IsConditionDisabled"
+        labelAbove="true"
+        stacked="true"
+        trueLabel="fragHolder.getConditionLabel(true)"
+        value="fragHolder.ConditionDisabled">
+        <PostOnChange/>
+      </BooleanRadioInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

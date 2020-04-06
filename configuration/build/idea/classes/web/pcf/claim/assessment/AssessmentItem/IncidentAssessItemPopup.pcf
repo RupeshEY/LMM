@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="IncidentAssessItemPopup"
+    title="assessmentItem.Incident.DisplayName">
+    <LocationEntryPoint
+      signature="IncidentAssessItemPopup(assessmentItem : AssessmentItem)"/>
+    <Variable
+      name="assessmentItem"
+      type="AssessmentItem"/>
+    <Screen
+      id="EditAssessmentItemScreen">
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <PanelRef
+        def="IncidentAssessItemDetailsDV(assessmentItem)"/>
+    </Screen>
+  </Popup>
+</PCF>

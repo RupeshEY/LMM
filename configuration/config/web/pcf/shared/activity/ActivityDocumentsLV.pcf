@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ActivityDocumentsLV">
+    <Require
+      name="Activity"
+      type="Activity"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <RowIterator
+      editable="true"
+      elementName="document"
+      pageSize="6"
+      value="Activity.LinkedDocuments"
+      valueType="entity.Document[]">
+      <Row>
+        <BooleanRadioCell
+          icon="document.Icon"
+          id="Icon"
+          showHeaderIcon="false"
+          value="true"
+          valueType="boolean"/>
+        <LinkCell
+          id="Name"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.Name&quot;)"
+          printWidth="4"
+          width="300"
+          wrapLabel="true">
+          <Link
+            available="documentsActionsHelper.isViewDocumentContentAvailable(document)"
+            download="inline"
+            action="document.downloadContent()"
+            id="NameLink"
+            label="document.Name"
+            styleClass="none"
+            tooltip="documentsActionsHelper.getViewDocumentContentTooltip(document)"/>
+        </LinkCell>
+        <LinkCell
+          id="Actions"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.ViewAndEdit&quot;)">
+          <Link
+            action="DocumentDetailsPopup.push(document, !CurrentLocation.InEditMode)"
+            available="documentsActionsHelper.DocumentMetadataActionsAvailable"
+            icon="documentsActionsHelper.DocumentMetadataActionsAvailable ? &quot;info_16.png&quot; : &quot;info_16_disabled.png&quot;"
+            id="ViewPropertiesLink"
+            styleClass="miniButton"
+            tooltip="documentsActionsHelper.ViewDocumentPropertiesTooltip"/>
+          <Link
+            action="document.downloadContent()"
+            available="documentsActionsHelper.isDownloadDocumentContentAvailable(document)"
+            download="attachment"
+            icon="documentsActionsHelper.isDownloadDocumentContentAvailable(document) ? &quot;download_document_16.png&quot; : &quot;download_document_disabled_16.png&quot; "
+            id="DownloadLink"
+            styleClass="miniButton"
+            tooltip="documentsActionsHelper.DownloadDocumentContentTooltip"
+            visible="documentsActionsHelper.isDownloadDocumentContentVisible(document)"/>
+          <Link
+            action="UploadDocumentContentPopup.push(document)"
+            available="documentsActionsHelper.isUploadDocumentContentAvailable(document)"
+            hideIfEditable="true"
+            icon="documentsActionsHelper.isUploadDocumentContentAvailable(document) ? &quot;upload_document_16.png&quot; : &quot;upload_document_disabled_16.png&quot;"
+            id="UploadLink"
+            styleClass="none"
+            tooltip="documentsActionsHelper.UploadDocumentContentTooltip"
+            visible="documentsActionsHelper.isUploadDocumentContentVisible(document)"/>
+          <Link
+            action="documentsActionsHelper.removeLinkedDocument(document, Activity, CurrentLocation.InEditMode)"
+            available="documentsActionsHelper.DocumentMetadataActionsAvailable"
+            confirmMessage="DisplayKey.get(&quot;Web.DocumentsLV.Button.Remove.Confirm&quot;, &quot;activity&quot;)"
+            hideIfEditable="true"
+            icon="documentsActionsHelper.DocumentMetadataActionsAvailable ? &quot;remove_document_16.png&quot; : &quot;remove_document_disabled_16.png&quot;  "
+            id="DocumentsLV_RemoveLink"
+            styleClass="miniButton"
+            tooltip="documentsActionsHelper.RemoveDocumentReferenceLinkTooltip"/>
+        </LinkCell>
+        <TypeKeyCell
+          id="Type"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.Type&quot;)"
+          numCols="15"
+          printWidth="2"
+          value="document.Type"
+          valueType="typekey.DocumentType"
+          wrapLabel="true"/>
+        <TypeKeyCell
+          id="Status"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.Status&quot;)"
+          value="document.Status"
+          valueType="typekey.DocumentStatusType"/>
+        <TextCell
+          id="Author"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.Author&quot;)"
+          printWidth="2"
+          value="document.Author"/>
+        <DateCell
+          dateFormat="short"
+          id="DateModified"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.DateModified&quot;)"
+          numCols="10"
+          sortDirection="descending"
+          sortOrder="1"
+          timeFormat="short"
+          value="document.DateModified"
+          width="174"
+          wrapLabel="true"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

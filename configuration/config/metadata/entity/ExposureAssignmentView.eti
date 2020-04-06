@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Exposure view entity with assignment detail attributes."
+  entity="ExposureAssignmentView"
+  exportable="false"
+  final="false"
+  primaryEntity="Exposure"
+  supertypeEntity="ExposureDesktopView">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.ExposureAssignmentView"
+    impl="com.guidewire.cc.domain.exposure.impl.ExposureAssignmentViewImpl"/>
+  <viewEntityTypekey
+    name="AssignmentStatus"
+    path="AssignmentStatus"/>
+  <viewEntityName
+    name="AssignedUser"
+    path="AssignedUser"/>
+  <viewEntityName
+    name="AssignedQueue"
+    path="AssignedQueue"/>
+</viewEntity>

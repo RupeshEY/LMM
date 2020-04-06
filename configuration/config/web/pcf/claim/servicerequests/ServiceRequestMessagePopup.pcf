@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCancel="removeUncomittedMessage()"
+    canEdit="true"
+    canVisit="true"
+    id="ServiceRequestMessagePopup"
+    returnType="ServiceRequestMessage"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ServiceRequest.Message.NewMessage&quot;)">
+    <LocationEntryPoint
+      signature="ServiceRequestMessagePopup(serviceRequest:ServiceRequest)"/>
+    <LocationEntryPoint
+      signature="ServiceRequestMessagePopup(serviceRequest:ServiceRequest, subject:String)"/>
+    <Variable
+      initialValue="createServiceRequestMessage()"
+      name="serviceRequestMessage"
+      type="ServiceRequestMessage"/>
+    <Variable
+      name="serviceRequest"
+      type="ServiceRequest"/>
+    <Variable
+      name="subject"
+      type="String"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          pickValue="serviceRequestMessage"
+          updateLabel="DisplayKey.get(&quot;Web.ServiceRequest.Message.Send&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel
+        id="NewMessageDV">
+        <InputColumn>
+          <TypeKeyRadioInput
+            editable="true"
+            id="MessageType"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.Message.TypeLabel&quot;)"
+            required="true"
+            value="serviceRequestMessage.Type"
+            valueType="typekey.ServiceRequestMessageType"/>
+          <TextInput
+            editable="true"
+            id="MessageTitle"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.Message.SubjectLabel&quot;)"
+            maxChars="255"
+            numCols="75"
+            required="true"
+            value="serviceRequestMessage.Title"/>
+          <InputDivider/>
+          <TextAreaInput
+            editable="true"
+            id="MessageContent"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.Message.ContentLabel&quot;)"
+            numCols="75"
+            numRows="20"
+            required="true"
+            value="serviceRequestMessage.Body"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[function createServiceRequestMessage() : ServiceRequestMessage {
+  var scm = new ServiceRequestMessage(serviceRequest.Bundle)
+  scm.Author = User.util.CurrentUser.Contact
+  scm.SendDate = java.util.Date.CurrentDate 
+  if (subject.HasContent) {
+    if (not subject.startsWith(DisplayKey.get("Web.ServiceRequest.Message.ReplyPrefix"))) {
+      scm.Title = DisplayKey.get("Web.ServiceRequest.Message.ReplyPrefix") + subject
+    } else {
+      scm.Title = subject
+    }
+  } 
+  scm.SentFromPortal = false
+  scm.addEvent(gw.cc.vendormanagement.entity.ServiceRequestMessage.MESSAGE_TO_VENDOR_ADDED_EVENT)
+  serviceRequest.addToMessages(scm)
+  return scm
+}
+
+function removeUncomittedMessage() {
+  serviceRequestMessage.remove()
+}]]></Code>
+  </Popup>
+</PCF>

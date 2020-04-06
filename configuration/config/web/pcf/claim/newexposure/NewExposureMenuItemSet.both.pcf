@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <MenuItemSet
+    id="NewExposureMenuItemSet"
+    mode="both">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <MenuItem
+      id="NewExposureMenuItemSet_ByCoverageType"
+      label="DisplayKey.get(&quot;JSP.NewExposure.ChooseByCoverageType&quot;)"
+      subMenuOnDemand="true">
+      <MenuItemTree
+        children="item.Children"
+        elementName="item"
+        value="gw.api.exposure.NewExposureMenuUtil.createItemsByCoverageType(claim)"
+        valueType="gw.api.exposure.NewExposureMenuItem[]">
+        <MenuItem
+          action="NewExposure.go(claim, item.CoverageType, item.CoverageSubtype, item.lazyLoadCoverage(claim))"
+          hideIfDisabled="false"
+          id="item"
+          label="item.DisplayLabel"/>
+      </MenuItemTree>
+    </MenuItem>
+    <MenuItem
+      id="NewExposureMenuItemSet_ByCoverage"
+      label="DisplayKey.get(&quot;JSP.NewExposure.ChooseByCoverage&quot;)"
+      subMenuOnDemand="true">
+      <MenuItemTree
+        children="item.Children"
+        elementName="item"
+        value="gw.api.exposure.NewExposureMenuUtil.createItemsByCoverage(claim)"
+        valueType="gw.api.exposure.NewExposureMenuItem[]">
+        <MenuItem
+          action="NewExposure.go(claim, item.CoverageType, item.CoverageSubtype, item.lazyLoadCoverage(claim))"
+          available="(item.CoverageType != null and item.CoverageSubtype != null) or item.Children.length &gt; 0"
+          hideIfDisabled="false"
+          id="item"
+          label="item.DisplayLabel"/>
+      </MenuItemTree>
+    </MenuItem>
+  </MenuItemSet>
+</PCF>

@@ -1,0 +1,11 @@
+<servlets xmlns="http://guidewire.com/servlet">
+  <!--  <servlet class="gw.xml.ws.Wsdl2GosuTestServlet"/> -->
+  <!-- Servlet used by system_tools -->
+  <servlet class="gw.database.DBInfoDownloadServlet"/>
+  <servlet class="gw.database.LoadInfoDownloadServlet"/>
+  <!-- Servlet for previewing zip reports -->
+  <servlet class="gw.database.ReportViewServlet"/>
+  <!-- Servlet for delegating SSO and authentication requests to gw.plugin.security.AuthenticationServicePlugin -->
+  <servlet class="gw.servlet.CustomAuthServlet"/>
+  <servlet class="gw.bizrules.contexthelp.BizRulesContextHelpServlet"/>
+</servlets>

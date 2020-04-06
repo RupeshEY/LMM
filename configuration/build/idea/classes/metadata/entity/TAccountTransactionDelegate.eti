@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="TAccountTransactionDelegate">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.impl.TAccountTransactionDelegateInternal"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountTransactionDelegateImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.TAccountTransactionDelegate"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountTransactionDelegateImpl"/>
+  <fulldescription><![CDATA[Delegate for the TAccountTransaction types (normal/plain and RI).
+    Contains the TAccountLineItems that change a pair of T-accounts to account for a transaction as it moves
+    through its LifeCycle States. For example, when a reserve becomes committed, it is debited (removed from) Pending Approval ReservesXX
+    T-Account and added (credited) to the ReservesXX T-Account.  Each TAccountTransaction has a link to its succeeding TAccountTransaction,
+    thus providing a history of the life of the associated transaction. It may have 2 or 4 TAccountLineItemDelegates: 2 to undo previous contributions,
+    and 2 to effect the new contributions. If one of the previous or target states does not have a T-account (i.e. New, Rejected), then there will
+    be only 2 line items.
+  ]]></fulldescription>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.TAccountTransactionDelegateAdapter"/>
+  <column
+    desc="Comments about the transaction, such as the LifeCycleState transition for which it was created."
+    name="Comments"
+    nullok="true"
+    type="shorttext"/>
+</delegate>

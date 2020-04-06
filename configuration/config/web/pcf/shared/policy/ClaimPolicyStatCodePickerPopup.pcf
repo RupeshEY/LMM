@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    autosaveable="false"
+    countsAsWork="false"
+    id="ClaimPolicyStatCodePickerPopup"
+    returnType="StatCode"
+    title="DisplayKey.get(&quot;JSP.StatCodePicker.Policy.StatCodes&quot;)">
+    <LocationEntryPoint
+      signature="ClaimPolicyStatCodePickerPopup(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="Claim.Policy"
+      name="Policy"
+      recalculateOnRefresh="true"
+      type="entity.Policy"/>
+    <Screen
+      id="ClaimPolicyStatCodesScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="ClaimPolicyStatCodePickerPopup_CancelButton"
+          label="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          shortcut="C"/>
+      </Toolbar>
+      <SearchPanel
+        cachingEnabled="false"
+        criteriaName="FilterCriteria"
+        resultsName="StatCodeList"
+        search="gw.api.upgrade.Coercions.makeArray&lt;entity.StatCode&gt;(FilterCriteria.FilteredPolicyStatCodes)"
+        searchCriteria="var c = new PolicyStatCodeFilterCriteria(); c.Policy = Policy; return c;"
+        searchCriteriaType="entity.PolicyStatCodeFilterCriteria"
+        searchOnEnter="true"
+        searchResultsType="StatCode[]">
+        <PanelRef
+          def="StatCodeFilterDV(FilterCriteria)"/>
+        <PanelRef
+          def="StatCodePickerLV(StatCodeList)">
+          <Toolbar/>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Popup>
+</PCF>

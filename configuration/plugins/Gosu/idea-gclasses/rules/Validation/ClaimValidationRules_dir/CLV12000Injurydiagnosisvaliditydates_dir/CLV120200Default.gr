@@ -1,0 +1,30 @@
+package rules.Validation.ClaimValidationRules_dir.CLV12000Injurydiagnosisvaliditydates_dir
+
+@gw.rules.RuleName("CLV120200 - Default")
+internal class CLV120200Default {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+for(eachIncident in claim.InjuryIncidentsOnly) {
+  for(eachDiagnosis in eachIncident.InjuryDiagnoses) {
+    if(!eachDiagnosis.startDateBetweenCodeValidity()) {
+      claim.reject(null, null, TC_ISO, eachDiagnosis.diagnosisCodeWarningString())
+    }
+    if(!eachDiagnosis.endDateBetweenCodeValidity()){
+      claim.reject(null, null, TC_ISO, eachDiagnosis.diagnosisCodeWarningString())  
+    } 
+  }    
+}
+
+/*end00rule*/
+
+  }
+}

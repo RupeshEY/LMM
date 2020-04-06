@@ -1,0 +1,21 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+@gw.rules.RuleName("CPU10000 - Primary Diagnosis Code Changed")
+internal class CPU10000PrimaryDiagnosisCodeChanged {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.InjuryIncidentsOnly.where(\ i -> i.InjuryDiagnoses.length > 0).Count > 0
+or claim.ClaimInjuryIncident.InjuryDiagnoses.length > 0
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+//evaluate child rules
+/*end00rule*/
+
+  }
+}

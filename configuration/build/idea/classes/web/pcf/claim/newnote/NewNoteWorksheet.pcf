@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Worksheet
+    canEdit="true"
+    canVisit="perm.Claim.createnote(Claim)"
+    id="NewNoteWorksheet"
+    parent="Claim(Claim)"
+    startEditing="Note.setInitialValues()"
+    startInEditMode="true"
+    tabLabel="DisplayKey.get(&quot;Web.ClaimMenuActions.NewNote&quot;)"
+    title="DisplayKey.get(&quot;Web.ClaimMenuActions.NewNote&quot;)">
+    <LocationEntryPoint
+      signature="NewNoteWorksheet(Claim : Claim)"/>
+    <Scope
+      location="Claim(Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="Claim.addNote(null)"
+      name="Note"
+      type="Note"/>
+    <Variable
+      initialValue="initializeTemplateSearchCriteria()"
+      name="templateSearchCriteria"
+      type="NoteTemplateSearchCriteria"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentActionsUIHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <Screen
+      id="NewNoteScreen">
+      <Toolbar>
+        <EditButtons
+          editVisible="false"/>
+        <ToolbarDivider/>
+        <PickerToolbarButton
+          action="PickNoteTemplatePopup.push(templateSearchCriteria)"
+          id="NewNoteWorksheet_UseTemplateButton"
+          label="DisplayKey.get(&quot;Web.Note.UseTemplate&quot;)"
+          onPick="Note.useTemplate( PickedValue, { &quot;claim&quot; -&gt; Claim})"
+          shortcut="P"/>
+        <ToolbarDivider/>
+        <PickerToolbarButton
+          action="PickExistingDocumentPopup.push(Claim)"
+          available="documentActionsUIHelper.DocumentMetadataActionsAvailable"
+          id="NewNoteWorksheet_AddDocumentButton"
+          label="DisplayKey.get(&quot;JSP.NoteDetail.Toolbar.AddDocument&quot;)"
+          onPick="gw.api.note.NewNoteUtil.linkDocumentToNote(PickedValue, Note)"
+          shortcut="E"
+          visible="gw.document.DocumentsUtil.claimHasDocuments(Claim) and perm.Claim.view(Claim) and perm.System.viewdocs"/>
+      </Toolbar>
+      <PanelRef
+        def="NoteDetailDV(Note, true, true)"/>
+    </Screen>
+    <Code><![CDATA[function initializeTemplateSearchCriteria() : NoteTemplateSearchCriteria {
+  var rtn = new NoteTemplateSearchCriteria()
+  rtn.Language = gw.api.util.LocaleUtil.toLanguageType(User.util.CurrentLocale)
+  rtn.AvailableSymbols = "Claim"
+  return rtn
+}]]></Code>
+  </Worksheet>
+</PCF>

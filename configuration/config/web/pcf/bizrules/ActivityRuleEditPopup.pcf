@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    alwaysInEditMode="true"
+    canEdit="true"
+    canVisit="perm.ActivityRule.edit"
+    id="ActivityRuleEditPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;BizRules.Import.Comparison.Edit.Title&quot;, importEntry.NewHeadVersion.Rule.Name)">
+    <LocationEntryPoint
+      signature="ActivityRuleEditPopup(importEntry : RuleImportTaskEntry, importHelper : gw.bizrules.pcf.RuleExportImportPageHelper&lt;ActivityRuleVersion&gt;, chosenSide : RuleImportSide)"/>
+    <Variable
+      name="importEntry"
+      type="RuleImportTaskEntry"/>
+    <Variable
+      name="importHelper"
+      type="gw.bizrules.pcf.RuleExportImportPageHelper&lt;ActivityRuleVersion&gt;"/>
+    <Variable
+      name="chosenSide"
+      type="RuleImportSide"/>
+    <Variable
+      initialValue="importHelper.getNewDraftVersionFrom(importEntry, chosenSide)"
+      name="ruleVersion"
+      type="ActivityRuleVersion"/>
+    <Variable
+      initialValue="new gw.bizrules.pcf.RulePageController(ruleVersion, gw.bizrules.ActivityRulePanelSetHelper.UIConfigs, CurrentLocation, gw.bizrules.pcf.RuleConditionLineHolder.SWITCHABLE_LINE_EXPRESSION_MODES_SUPERSET)"
+      name="rulePageController"
+      type="gw.bizrules.pcf.RulePageController"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButtonSetRef
+          toolbarButtonSet="RuleEditPopupToolbarButtonSet()"/>
+        <ToolbarButtonSetRef
+          toolbarButtonSet="ConditionValidationToolbarButtonSet(rulePageController)"/>
+      </Toolbar>
+      <PanelRef
+        def="ActivityRulePanelSet(ruleVersion, true, rulePageController)"
+        editable="true"/>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<entity
+  exportable="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFResponseQueryReason_Ext"
+  desc="Entity to hold a Lloyd's Query Reason. Needed as a ClaimResponse can have many Query Reasons"
+  table="ecfqueryreason_ext"
+  type="retireable">
+  <implementsEntity
+    name="Extractable"/>
+  <typekey
+    name="Reason"
+    nullok="true"
+    typelist="ECFQueryReason_Ext"/>
+  <foreignkey
+    fkentity="ECFMessageClaimResponseRq_Ext"
+    name="ECFMessageClaimResponseRq_Ext"
+    nullok="false"/>
+</entity>

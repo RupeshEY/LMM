@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="FutureMedicalActionType">
+  <typecode
+    code="continuing"
+    desc="Continuing medical treatment required"
+    name="Continuing"/>
+  <typecode
+    code="released"
+    desc="Released from care no further treatment"
+    name="Released"/>
+  <typecode
+    code="referred"
+    desc="Referring to different provider for opinion/treatment"
+    name="Referred"/>
+  <typecode
+    code="investigating"
+    desc="Ordered tests/x-rays other medical investigations"
+    name="Investigating"/>
+  <typecode
+    code="ps_mmi"
+    desc="Reached P&amp;S/MMI status (Permanent &amp; Stationary / Maximum Medical Improvement)"
+    name="P&amp;S/MMI"/>
+  <typecode
+    code="surgery"
+    desc="Requires surgery"
+    name="Surgery"/>
+</typelistextension>

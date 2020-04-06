@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_claim.xml -->
+  <ListViewPanel
+    id="ClaimUserAssignmentsLV">
+    <Require
+      name="AssignableList"
+      type="Assignable[]"/>
+    <RowIterator
+      editable="false"
+      elementName="Assignable"
+      value="AssignableList"
+      valueType="entity.Assignable[]">
+      <Row>
+        <TextCell
+          id="Type"
+          label="DisplayKey.get(&quot;LV.Claim.ClaimUserAssignments.Type&quot;)"
+          sortBy="(Assignable typeis Claim ? 1 : (Assignable typeis Exposure ? 2 : (Assignable typeis Activity ? 3 : (Assignable typeis Matter ? 4 : 1000))))"
+          value="var entityName = (Assignable typeis Claim ? &quot;Claim&quot; : (Assignable typeis Exposure ? &quot;Exposure&quot; : (Assignable typeis Activity ? &quot;Activity&quot; : (Assignable typeis Matter ? &quot;Matter&quot; : null)))); var displayName = Assignable.DisplayName; return (displayName == null ? entityName : displayName);"/>
+        <TextCell
+          id="Name"
+          label="DisplayKey.get(&quot;LV.Claim.ClaimUserAssignments.Name&quot;)"
+          value="Assignable.DisplayName"/>
+        <TextCell
+          id="Status"
+          label="DisplayKey.get(&quot;LV.Claim.ClaimUserAssignments.Status&quot;)"
+          value="gw.api.claimparties.ClaimUserAssignmentsUtil.getStatus(Assignable)"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Subrogation information related to a claim"
+  entity="SubrogationSummary"
+  exportable="true"
+  table="subrogationsummary"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.SubrogationSummary"
+    impl="com.guidewire.cc.domain.claim.impl.SubrogationSummaryImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Related Claim"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <column
+    default="false"
+    desc="To indicate Subro for a claim as owned by an external owner"
+    name="ExtOwned"
+    nullok="true"
+    type="bit"/>
+  <column
+    default="false"
+    desc="Escalate toSubro"
+    name="EscalateSubro"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Date when when referral made to Subrogation"
+    name="SubroReferralDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="A Comment from the referer to the referee"
+    name="SubroReferralComment"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    default="false"
+    desc="Indicates whether deductible should be prorated"
+    name="ProrateDeductible"
+    nullok="false"
+    type="bit"/>
+  <array
+    arrayentity="StatuteLimitationsLine"
+    desc="A list of applicable Statute of Limitations for this claim."
+    name="StatuteLine"
+    triggersValidation="true"/>
+  <array
+    arrayentity="SubroAdverseParty"
+    desc="A list of applicable Adverse Parties related to for this claim."
+    name="SubroAdverseParties"
+    triggersValidation="true"/>
+  <column
+    default="false"
+    desc="Whether to automatically calculate OS Recovery Reserves"
+    name="CalculateOSRecReserve"
+    nullok="true"
+    type="bit"/>
+  <array
+    arrayentity="Subrogation"
+    desc="The subrogations associated with this summary"
+    name="Subrogations"
+    triggersValidation="true"/>
+</entity>

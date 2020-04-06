@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="CCAddressBookSearchProximityAddressInputSet">
+    <Require
+      name="contactSearchCriteria"
+      type="ContactSearchCriteria"/>
+    <Require
+      name="proximitySearchPageHelper"
+      type="gw.api.contact.CCProximitySearchPageHelper"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="new gw.api.address.ProximitySearchAddressOwner(contactSearchCriteria, claim){ :AlwaysShowSeparateFields = true } "
+      name="proximityAddressOwner"
+      recalculateOnRefresh="true"
+      type="gw.api.address.ProximitySearchAddressOwner"/>
+    <Variable
+      initialValue="gw.util.Geocode.setDefaultSearchRange(proximitySearchPageHelper, contactSearchCriteria)"
+      name="pspRange"
+      type="entity.ProximitySearchParameters[]"/>
+    <Expose
+      widget="globalAddressContainer"/>
+    <InputSet
+      id="globalAddressContainer">
+      <Label
+        label="DisplayKey.get(&quot;Web.AddressBook.Search.ProximitySearch&quot;)"/>
+      <RangeInput
+        editable="true"
+        id="ProximitySearchType"
+        label="DisplayKey.get(&quot;Web.AddressBook.Search.ProximitySearch.Radius&quot;)"
+        optionLabel="VALUE.getLabel()"
+        sortValueRange="false"
+        value="contactSearchCriteria.ProximitySearchParameters"
+        valueRange="pspRange"
+        valueType="entity.ProximitySearchParameters">
+        <PostOnChange
+          target="CCAddressBookSearchProximityAddressInputSet"/>
+      </RangeInput>
+      <RangeInput
+        available="contactSearchCriteria.ProximitySearchParameters != null"
+        editable="claim != null"
+        id="Address_Name"
+        label="DisplayKey.get(&quot;Web.Address.Default.Location&quot;)"
+        required="false"
+        sortValueRange="false"
+        value="Psc"
+        valueRange="contactSearchCriteria.ProximitySearchCenterChoices"
+        valueType="entity.Address"
+        visible="claim != null">
+        <PostOnChange
+          target="proximityAddress"/>
+      </RangeInput>
+      <InputSetRef
+        def="GlobalAddressInputSet(proximityAddressOwner)"
+        id="proximityAddress"
+        mode="gw.api.address.AddressCountrySettings.getSettings(proximityAddressOwner.InputSetMode).PCFMode"
+        widgets="globalAddressContainer"/>
+    </InputSet>
+    <Code><![CDATA[property get Psc() : Address {
+  return contactSearchCriteria.ProximitySearchCenter;
+}
+
+property set Psc(value : Address) {
+  if (claim != null) {
+    contactSearchCriteria.ProximitySearchCenter = value;
+  }
+}]]></Code>
+  </InputSet>
+</PCF>

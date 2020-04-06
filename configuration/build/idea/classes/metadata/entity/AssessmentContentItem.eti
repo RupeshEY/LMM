@@ -1,0 +1,140 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="An assessment detail line regarding Content"
+  entity="AssessmentContentItem"
+  exportable="true"
+  platform="false"
+  table="assessmentcontentitem"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.AssessmentContentItem"
+    impl="com.guidewire.cc.domain.exposure.impl.AssessmentContentItemImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Assessment line."
+    name="Description"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Assessment Item Comment"
+    name="ItemComment"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    columnName="IncidentID"
+    desc="Related Incident"
+    exportable="false"
+    fkentity="Incident"
+    name="Incident"
+    nullok="false"/>
+  <typekey
+    desc="AssessmentContentAction"
+    name="Action"
+    nullok="true"
+    typelist="AssessmentContentAction"/>
+  <foreignkey
+    columnName="AssessmentSourceID"
+    desc="Related AssessmentSource if applicable"
+    exportable="false"
+    fkentity="AssessmentSource"
+    name="AssessmentSource"
+    nullok="true"/>
+  <typekey
+    desc="Assessment Schedule for Property"
+    name="ContentSchedule"
+    nullok="true"
+    typelist="ContentLineItemSchedule"/>
+  <typekey
+    desc="Assessment Category for Property"
+    name="ContentCategory"
+    nullok="true"
+    typelist="ContentLineItemCategory">
+    <keyfilters>
+      <keyfilter
+        name="ContentSchedule"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="AssessmentCatetory for Vehicles"
+    name="VehicleCategory"
+    nullok="true"
+    typelist="VehicleLineItemCategory"/>
+  <!-- Related to Fixed Property -->
+  <column
+    desc="Number of Items"
+    name="NumberOfItems"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Brand Name / Manufacturer"
+    name="Brand"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Date when this item was acquired"
+    name="DateAcquired"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="PurchaseCost"
+    name="PurchaseCost"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Depreciation"
+    name="Depreciation"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Salvage"
+    name="Salvage"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Did the loss occur on this leg of the schedule"
+    name="ProofOfOwnershipProvided"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Depreciation percentage, per year"
+    name="DepreciationPercentage"
+    nullok="true"
+    type="percentagedec"/>
+  <column
+    desc="The amount payable on the item(s)"
+    name="AmountAfterLimit"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Estimated cost of replacing item(s)"
+    name="ReplacementValue"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Order of the item on the Incident"
+    name="IncidentOrder"
+    nullok="true"
+    type="integer"/>
+</entity>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="NewClaimIncidentInputSet"
+    mode="Propertydamage">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <RangeInput
+      editable="true"
+      hideChildrenIfReadOnly="false"
+      id="Property_Incident"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimPropertyDamage.Exposure.FixedPropertyIncident&quot;)"
+      required="true"
+      value="Exposure.FixedPropertyIncident"
+      valueRange="Exposure.Claim.FixedPropertyIncidentsOnly"
+      valueType="entity.FixedPropertyIncident">
+      <MenuItem
+        action="NewFixedPropertyIncidentPopup.push(Exposure.Claim)"
+        id="NewClaimPropertyDamageDV_NewIncidentMenuItem"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimPropertyDamage.Exposure.NewIncident&quot;)"/>
+      <MenuItem
+        action="EditFixedPropertyIncidentPopup.push(Exposure.FixedPropertyIncident, true)"
+        id="NewClaimPropertyDamageDV_EditIncidentMenuItem"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimPropertyDamage.Exposure.EditIncident&quot;)"/>
+    </RangeInput>
+  </InputSet>
+</PCF>

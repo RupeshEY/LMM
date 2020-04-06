@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="perm.System.covverifyview"
+    id="CoverageDetermination"
+    parent="Admin()"
+    title="DisplayKey.get(&quot;Web.TabBar.CoverageDetermination&quot;)">
+    <LocationEntryPoint
+      signature="CoverageDetermination()"/>
+    <LocationRef
+      location="InvalidCoverageForCause()"/>
+    <LocationRef
+      location="IncompatibleNewExposure()"/>
+    <LocationRef
+      location="InvalidCoverageForFault()"/>
+  </LocationGroup>
+</PCF>

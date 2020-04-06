@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="ECF Write Back message types"
+  name="ECFMessageType_Ext">
+  <typecode
+    code="ClaimNotify"
+    desc="ClaimNotifyEventRq message type"
+    name="ClaimNotify"/>
+  <typecode
+    code="RespondErrorNotify"
+    desc="ClaimNotifyEventRq with MsgTypeCd of RespondErrorNotify - Errors in a Claim Response"
+    name="RespondErrorNotify"/>
+  <typecode
+    code="TransactionErrorNotify"
+    desc="ClaimNotifyEventRq with Errors generated in Transaction on ECF2"
+    name="TransactionErrorNotify"/>
+  <typecode
+    code="ClaimRespond"
+    desc="ClaimResponseRq and ClaimResponseRs message type"
+    name="ClaimRespond"/>
+  <typecode
+    code="RetrieveClaim"
+    desc="RetrieveClaimRq and RetrieveClaimRs message type"
+    name="RetrieveClaim"/>
+  <typecode
+    code="RepositorySearch"
+    desc="IMR RepositorySearchRequest and RepositorySearchResponse message type"
+    name="RepositorySearch"/>
+  <typecode
+    code="RepositoryUpload"
+    desc="IMR RepositoryUploadRequest and RepositoryUploadResponse message type"
+    name="RepositoryUpload"/>
+  <typecode
+    code="RepositoryDownload"
+    desc="IMR RepositoryDownloadRequest and RepositoryDownloadResponse message type"
+    name="RepositoryDownload"/>
+  <typecode
+    code="RepositorySearchReceipt"
+    desc="Document Search Request Receipt"
+    name="RepositorySearchReceipt"/>
+  <typecode
+    code="RepositoryUploadReceipt"
+    desc="Document Upload Request Receipt"
+    name="RepositoryUploadReceipt"/>
+  <typecode
+    code="RepositoryDownloadReceipt"
+    desc="Document Download Request Receipt"
+    name="RepositoryDownloadReceipt"/>
+  <typecode
+    code="LloydsSyndicateClaim"
+    desc="Syndicate Claim Message (SCM) message type. Applies to Lloyd's."
+    name="LloydsSyndicateClaim"/>
+  <typefilter
+    desc="ECF Writeback messages"
+    name="ECFWriteback">
+    <include
+      code="ClaimNotify"/>
+    <include
+      code="RespondErrorNotify"/>
+    <include
+      code="TransactionErrorNotify"/>
+    <include
+      code="ClaimRespond"/>
+    <include
+      code="RetrieveClaim"/>
+  </typefilter>
+  <typefilter
+    desc="IMR messages"
+    name="IMR">
+    <include
+      code="RepositorySearch"/>
+    <include
+      code="RepositoryUpload"/>
+    <include
+      code="RepositoryDownload"/>
+    <include
+      code="RepositorySearchReceipt"/>
+    <include
+      code="RepositoryUploadReceipt"/>
+    <include
+      code="RepositoryDownloadReceipt"/>
+  </typefilter>
+  <typefilter
+    desc="Claim Movement messages"
+    name="ClaimMovement">
+    <include
+      code="LloydsSyndicateClaim"/>
+  </typefilter>
+  <typefilter
+    desc="A SubMessage is characterized by not having its own entity, shares the same entity with other message types."
+    name="SubMessage">
+    <include
+      code="RespondErrorNotify"/>
+    <include
+      code="TransactionErrorNotify"/>
+    <include
+      code="RepositorySearchReceipt"/>
+    <include
+      code="RepositoryUploadReceipt"/>
+    <include
+      code="RepositoryDownloadReceipt"/>
+  </typefilter>
+</typelist>

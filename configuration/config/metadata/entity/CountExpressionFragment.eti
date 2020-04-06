@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Expression fragment representing a COUNT expression, which evaluates to the number of elements in a list which match a given condition"
+  entity="CountExpressionFragment"
+  final="true"
+  platform="true"
+  supertype="FilteredIterableExpressionFragment">
+  <implementsInterface
+    iface="com.guidewire.bizrules.codegenerator.GosuTextBuilder"
+    impl="com.guidewire.bizrules.codegenerator.CountExpressionFragmentGosuTextBuilder"/>
+</subtype>

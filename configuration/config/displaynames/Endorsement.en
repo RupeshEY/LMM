@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Entity
+  name="Endorsement">
+  <Columns>
+    <Column
+      beanPath="Endorsement.Description"
+      name="description"/>
+    <Column
+      beanPath="Endorsement.FormNumber"
+      name="formNumber"/>
+  </Columns>
+  <DisplayName><![CDATA[uses java.lang.StringBuilder
+
+var sb = new StringBuilder()
+if(formNumber!=null) {
+  sb.append(formNumber)
+}
+if(description!=null) {
+  if(sb.length()!=0) {
+    sb.append(": ")
+  }
+  sb.append(description)
+}
+//if neither present, use display key
+if(sb.length()==0) {
+  sb.append(gw.api.locale.DisplayKey.get("entity.Endorsement"))
+}
+return sb.toString()]]></DisplayName>
+</Entity>

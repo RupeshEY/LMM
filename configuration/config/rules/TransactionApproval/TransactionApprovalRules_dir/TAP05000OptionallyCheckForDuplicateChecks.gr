@@ -1,0 +1,23 @@
+package rules.TransactionApproval.TransactionApprovalRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.financials.CheckUtil
+uses gw.api.financials.TransactionApprovalRuleParameters
+
+@gw.rules.RuleName("TAP05000 - Optionally Check For Duplicate Checks")
+internal class TAP05000OptionallyCheckForDuplicateChecks {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+/*start00rule*/
+return transactionSet typeis CheckSet
+and TransactionApprovalRuleParameters.CheckSetRequiresApprovalForDuplicateChecks.get(transactionSet)
+/*end00rule*/
+}
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+/*start00rule*/
+var checkSet = transactionSet as CheckSet
+if (CheckUtil.findDuplicates(checkSet.PrimaryCheck, null).HasElements) {
+  checkSet.requireApproval(DisplayKey.get("Java.Financials.API.Warning.DuplicateCheckFound"))
+}
+/*end00rule*/
+  }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<plugin
+  interface="IStartablePlugin"
+  name="IMRProducerService">
+  <plugin-gosu
+    gosuclass="gw.acc.iplm.jms.producer.IMRProducerService">
+    <param
+      name="jmsProvider"
+      value="tcp://localhost:61616"/>
+    <param
+      name="jmsQueue"
+      value="IMR_OUTBOUND"/>
+  </plugin-gosu>
+</plugin>

@@ -1,0 +1,20 @@
+package rules.Validation.ClaimValidationRules_dir.CLV09000ISOValidation_dir
+
+@gw.rules.RuleName("CLV09900 - Insured")
+internal class CLV09900Insured {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+// Exec children
+/*end00rule*/
+
+  }
+}

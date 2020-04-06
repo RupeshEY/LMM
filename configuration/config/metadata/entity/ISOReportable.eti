@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="ISOReportable"
+  requiresType="keyable">
+  <implementsInterface
+    iface="gw.cc.iso.entity.ISOReportable"
+    impl="com.guidewire.cc.domain.iso.impl.ISOReportableImpl"/>
+  <fulldescription><![CDATA[
+      Common fields used to track communication with ISO about a Claim or Exposure.
+    ]]></fulldescription>
+  <column
+    desc="The last time a search request was sent to ISO. "
+    name="ISOSendDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The last time a response was received from ISO for this object. "
+    name="ISOReceiveDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Has a search request for this object been successfully received by ISO?"
+    name="ISOKnown"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    default="None"
+    desc="Status of exposure with ISO - for example checked, not of interest."
+    name="ISOStatus"
+    nullok="true"
+    typelist="ISOStatus"/>
+</delegate>

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="UserRegionLV">
+    <Require
+      name="User"
+      type="User"/>
+    <ExposeIterator
+      valueType="UserRegion"
+      widget="UserRegionLV"/>
+    <RowIterator
+      conversionExpression="gw.api.admin.UserRegionUtil.createUserRegions(PickedValue, CurrentLocation)"
+      editable="true"
+      elementName="UserRegion"
+      hideCheckBoxesIfReadOnly="true"
+      pickLocation="UserRegionPopup.push()"
+      toAdd="User.addToRegions(UserRegion)"
+      toRemove="User.removeFromRegions(UserRegion)"
+      value="User.Regions"
+      valueType="entity.UserRegion[]">
+      <Row>
+        <TextCell
+          id="Name"
+          label="DisplayKey.get(&quot;Web.Admin.RegionDetailDV.Name&quot;)"
+          value="UserRegion.Region.Name"/>
+        <TextCell
+          enableSort="false"
+          id="Zones"
+          label="DisplayKey.get(&quot;Web.Admin.RegionDetailDV.Zones&quot;)"
+          value="UserRegion.Region.Zones"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

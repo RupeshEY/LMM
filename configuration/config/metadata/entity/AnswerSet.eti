@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="This is a set of answers that correspond to the user filling out one question set form"
+  entity="AnswerSet"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="answerset"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.question.entity.AnswerSet"
+    impl="com.guidewire.cc.domain.question.impl.AnswerSetImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <array
+    arrayentity="Answer"
+    name="Answers"
+    triggersValidation="true"/>
+  <array
+    arrayentity="ReviewQAnswerSet"
+    desc="Internal use by the SPM/Review functionality. Do not modify."
+    getterScriptability="hidden"
+    name="ReviewQAnswerSets"
+    setterScriptability="doesNotExist"
+    triggersValidation="true"/>
+  <foreignkey
+    columnName="QuestionSetID"
+    desc="Fk to the Question Set this answer set corresponds to"
+    fkentity="QuestionSet"
+    name="QuestionSet"
+    nullok="false"/>
+</entity>

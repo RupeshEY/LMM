@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    afterReturnFromPopup="gw.api.util.SearchUtil.search(CurrentLocation)"
+    canEdit="true"
+    canVisit="perm.Contact.viewsearchab"
+    countsAsWork="false"
+    id="AddressBookSearch"
+    title="DisplayKey.get(&quot;Web.AddressBookSearch.Title&quot;)">
+    <LocationEntryPoint
+      signature="AddressBookSearch()"/>
+    <ScreenRef
+      def="AddressBookSearchScreen(false, entity.Contact, null, false, {}, false)"/>
+  </Page>
+</PCF>

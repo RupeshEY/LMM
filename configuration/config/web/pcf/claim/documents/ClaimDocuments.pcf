@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.Claim.view(Claim) and perm.System.viewdocs and (Claim.State != ClaimState.TC_DRAFT)"
+    countsAsWork="false"
+    id="ClaimDocuments"
+    title="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Documents&quot;)">
+    <LocationEntryPoint
+      signature="ClaimDocuments(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <Screen
+      id="Claim_DocumentsScreen">
+      <AlertBar
+        id="IDCSDisabledAlert"
+        label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.ContentPlugin.Disabled&quot;)"
+        visible="not documentsActionsHelper.ContentSourceEnabled"/>
+      <AlertBar
+        id="IDCSUnavailableAlert"
+        label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.ContentPlugin.Unavailable&quot;)"
+        visible="documentsActionsHelper.ShowContentServerDownWarning"/>
+      <AlertBar
+        id="IDMSUnavailableAlert"
+        label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.MetadataPlugin.Unavailable&quot;)"
+        visible="documentsActionsHelper.ShowMetadataServerDownWarning"/>
+      <SearchPanel
+        cachingEnabled="false"
+        criteriaName="DocumentSearchCriteria"
+        resultsName="DocumentList"
+        search="DocumentSearchCriteria.performSearch() as gw.api.database.IQueryBeanResult&lt;Document&gt;"
+        searchCriteria="return createSearchCriteria();"
+        searchCriteriaType="entity.DocumentSearchCriteria"
+        searchOnEnter="true"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;Document&gt;">
+        <PanelRef
+          def="ClaimDocumentSearchDV(DocumentSearchCriteria)"/>
+        <PanelRef
+          def="DocumentsLV(DocumentList,DocumentSearchCriteria)">
+          <Toolbar>
+            <ToolbarDivider/>
+            <CheckedValuesToolbarButton
+              available="documentsActionsHelper.DocumentMetadataActionsAvailable"
+              checkedRowAction=" CheckedValue.Obsolete = true"
+              flags="all EditableDocument,no Hidden"
+              id="ClaimDocuments_ObsolesceButton"
+              iterator="DocumentsLV.DocumentsLV"
+              label="DisplayKey.get(&quot;Web.DocumentsLV.Button.Obsolesce&quot;)"
+              shortcut="O"/>
+            <CheckedValuesToolbarButton
+              available="documentsActionsHelper.DocumentMetadataActionsAvailable"
+              checkedRowAction=" CheckedValue.Obsolete = false"
+              flags="all EditableDocument,all Hidden"
+              id="ClaimDocuments_DeobsolesceButton"
+              iterator="DocumentsLV.DocumentsLV"
+              label="DisplayKey.get(&quot;Web.DocumentsLV.Button.Deobsolesce&quot;)"
+              shortcut="O"
+              visible="DocumentSearchCriteria.IncludeObsoletes"/>
+            <ToolbarButton
+              id="AddDocuments"
+              label="DisplayKey.get(&quot;Web.DocumentsLV.Button.NewDocument&quot;)"
+              visible="perm.Claim.createdocument(Claim)">
+              <MenuItemSetRef
+                def="ClaimNewDocumentMenuItemSet(Claim)"/>
+            </ToolbarButton>
+            <CheckedValuesToolbarButton
+              checkedRowAction="gw.document.DocumentsUtil.deleteDocument(CheckedValue)"
+              confirmMessage="DisplayKey.get(&quot;Web.DocumentsLV.Button.Delete.Confirm&quot;)"
+              flags="all CanDeleteDocument"
+              id="RemoveDocuments"
+              iterator="DocumentsLV.DocumentsLV"
+              label="DisplayKey.get(&quot;Web.DocumentsLV.Button.DeleteSelected&quot;)"
+              tooltip="DisplayKey.get(&quot;Web.DocumentsLV.Button.DeleteSelected.Tooltip&quot;)"/>
+            <ToolbarButton
+              action="null"
+              available="documentsActionsHelper.DocumentContentServerAvailable"
+              id="RefreshAsyncContent"
+              label="DisplayKey.get(&quot;Web.DocumentsLV.Button.AsynchronousRefresh&quot;)"
+              tooltip="DisplayKey.get(&quot;Web.DocumentsLV.Button.AsynchronousRefresh.Tooltip&quot;)"
+              visible="documentsActionsHelper.isShowAsynchronousRefreshAction(DocumentList.toTypedArray())"/>
+            <ToolbarButton
+              available="documentsActionsHelper.DocumentContentServerAvailable"
+              id="RefreshFromIMRAsyncContent"
+              label="DisplayKey.get(&quot;Accelerator.IPLM.Web.DocumentsLV.Button.IMRDocumentSearch&quot;)"
+              tooltip="DisplayKey.get(&quot;Accelerator.IPLM.Web.DocumentsLV.Button.IMRDocumentSearch.Tooltip&quot;)"
+              visible="Claim.isECFVisible()">
+              <MenuItemSetRef
+                def="ECFDocumentSearchMenuItemSet(Claim, Claim.TransactionReferences)"/>
+            </ToolbarButton>
+          </Toolbar>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+    <Code><![CDATA[
+      function createSearchCriteria() : DocumentSearchCriteria {
+        var searchCriteria = new DocumentSearchCriteria();
+        searchCriteria.Claim = Claim;
+        searchCriteria.IncludeObsoletes = false;
+        return searchCriteria;
+      }
+    ]]></Code>
+  </Page>
+</PCF>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="CommandParameterInputSet"
+    mode="date">
+    <Require
+      name="parameterHolder"
+      type="gw.bizrules.pcf.RuleCommandParameterHolder"/>
+    <Variable
+      initialValue="parameterHolder.FragHolder as gw.bizrules.pcf.DateExpressionFragmentHolder"
+      name="fragHolder"
+      recalculateOnRefresh="true"
+      type="gw.bizrules.pcf.DateExpressionFragmentHolder"/>
+    <DateInput
+      dateFormat="short"
+      editable="true"
+      id="Date"
+      label="parameterHolder.ParameterLabel"
+      value="fragHolder.Value">
+      <MenuItemSetRef
+        def="CommandParameterMenuItemSet(parameterHolder)"/>
+      <PostOnChange/>
+    </DateInput>
+  </InputSet>
+</PCF>

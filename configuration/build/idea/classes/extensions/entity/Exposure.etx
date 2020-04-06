@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Exposure">
+  <!-- <column
+    xmlns=""
+    default="foo"
+    desc="varchar(30) extension; default value of 'foo'"
+    name="VarcharExt"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="30"/>
+  </column> -->
+  <!-- <column
+    xmlns=""
+    default="12"
+    desc="integer extension; default value of '12'"
+    name="IntegerExt"
+    nullok="true"
+    type="integer"/> -->
+  <!-- <array
+    xmlns=""
+    arrayentity="GWXCostCat"
+    desc="An array of entities containing of Contact/CostCategory/BodyPart information for the Exposure."
+    name="GWXCostCategories"/> -->
+  <array
+    arrayentity="ServiceRequest"
+    desc="Service requests associated with this exposure."
+    name="ServiceRequests"/>
+</extension>

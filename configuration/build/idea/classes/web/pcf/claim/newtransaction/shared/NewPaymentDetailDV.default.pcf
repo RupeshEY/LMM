@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="NewPaymentDetailDV"
+    mode="default">
+    <ExposeIterator
+      name="EditablePaymentLineItemsLV"
+      valueType="entity.TransactionLineItem"
+      widget="EditablePaymentLineItemsLV.EditablePaymentLineItemsLV"/>
+    <Require
+      name="Payment"
+      type="Payment"/>
+    <Require
+      name="Wizard"
+      type="gw.api.financials.CheckWizardInfo"/>
+    <Require
+      name="reserveLineInputSetHelper"
+      type="gw.api.financials.ReserveLineInputSetHelper"/>
+    <Variable
+      initialValue="Payment.SharedDeductible"
+      name="deductible"
+      recalculateOnRefresh="true"
+      type="Deductible"/>
+    <InputColumn>
+      <InputSetRef
+        def="ReserveLineInputSet(Payment, reserveLineInputSetHelper)"/>
+      <TypeKeyInput
+        editable="true"
+        filter="Wizard.isAllowedPaymentType( Payment, VALUE )"
+        id="Payment_PaymentType"
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentDetail.Payment.PaymentType&quot;)"
+        requestValidationExpression="Wizard.validatePaymentType(Payment, VALUE)"
+        required="true"
+        value="Payment.PaymentType"
+        valueType="typekey.PaymentType"/>
+      <BooleanRadioInput
+        editable="true"
+        id="Payment_Eroding"
+        label="DisplayKey.get(&quot;Web.NewCheckWizard.NewPaymentDetail.Eroding&quot;)"
+        required="true"
+        value="Payment.ErodesReserves"
+        visible="!Payment.Exposure.Closed and Payment.PaymentType != PaymentType.TC_SUPPLEMENT"/>
+      <CurrencyInput
+        formatType="currency"
+        id="Transaction_AvailableReserves"
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentDetail.Transaction.AvailableReserves&quot;)"
+        value="gw.api.financials.FinancialsCalculationsForEditedTransaction.getAvailableReserves(Payment).ReservingAmountTransactionAmountPair"
+        valueType="gw.api.financials.IPairedMoney"
+        visible="Payment.ReserveLine != null and not Payment.ReserveLine.New"/>
+      <TextInput
+        editable="true"
+        id="Transaction_Comments"
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentDetail.Transaction.Comments&quot;)"
+        value="Payment.Comments"/>
+      <TypeKeyInput
+        editable="not Wizard.Check.LinkedToServiceRequests"
+        id="Payment_Currency"
+        label="DisplayKey.get(&quot;Web.NewCheckWizard.NewPaymentDetail.Currency&quot;)"
+        required="true"
+        value="Wizard.CheckCurrency"
+        valueType="typekey.Currency"
+        visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <InputSetRef
+        def="CheckExchangeRateInputSet(Payment.Check,null)"/>
+      <ListViewInput
+        available="Payment.ReserveLine != null"
+        def="EditablePaymentLineItemsLV(Payment)"
+        editable="true"
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentDetail.Transaction.LineItems&quot;)"
+        mode="getMode()"
+        validationExpression="Payment.getCheckWizardPaymentValidationExpression()">
+        <Toolbar>
+          <IteratorButtons
+            addLabel="DisplayKey.get(&quot;Java.Financials.TransactionLineItem.AddItem&quot;)"
+            addShortcut="I"
+            addVisible="gw.api.financials.FinancialsUtil.isAllowMultipleLineItems()"
+            iterator="EditablePaymentLineItemsLV.EditablePaymentLineItemsLV"
+            removeVisible="gw.api.financials.FinancialsUtil.isAllowMultipleLineItems()"/>
+          <AddButton
+            id="ApplyDeductibleButton"
+            iterator="EditablePaymentLineItemsLV.EditablePaymentLineItemsLV"
+            label="DisplayKey.get(&quot;NVV.Financials.NewPaymentDetail.Transaction.ApplyDeductible&quot;)"
+            toCreateAndAdd="Payment.addDeductibleLineItem()"
+            visible="gw.api.financials.FinancialsUtil.isAllowMultipleLineItems() and !Payment.Check.CheckSet.Recurring and deductible != null and !deductible.Paid and !deductible.Waived and gw.api.financials.FinancialsUtil.isUseDeductibleHandling()"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="ServiceRequestInvoiceInputSet(Wizard, true)"
+        mode="Wizard.Check.ServiceRequestInvoices.Count == 1 ? &quot;single&quot; : &quot;multiple&quot;"
+        visible="Wizard.Check.LinkedToServiceRequests"/>
+    </InputColumn>
+    <Code><![CDATA[
+function getMode() : String {
+  if (Payment.LineItems.countWhere(\ t -> t.LineCategory==TC_DEDUCTIBLE) == 1) {
+    return "deductible"
+  } else {
+    return "default"
+  }
+}
+      
+    ]]></Code>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<internaltypelistextension
+xmlns="http://guidewire.com/typelists"
+desc="Unique key identifying a TriggeringPoint, used when invoking Business Rules"
+name="TriggeringPointKey">
+<typecode
+  code="Creation"
+  desc="Trigger action when object is created"
+  name="Creation"
+  priority="1"/>
+<typecode
+  code="Update"
+  desc="Trigger action when object is updated"
+  name="Update"
+  priority="2"/>
+<typecode
+  code="Exception"
+  desc="Trigger action when exception batch is run"
+  name="Exception"
+  priority="3"/>
+</internaltypelistextension>

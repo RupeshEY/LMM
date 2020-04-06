@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="How a check should be batched for sending"
+  name="CheckBatching">
+  <typecode
+    code="apdefault"
+    desc="A/P default"
+    name="A/P default"
+    priority="0"/>
+  <typecode
+    code="bulkcheck"
+    desc="Check is a record keeping entity for a bulk check"
+    name="Bulk check"
+    priority="1"/>
+</typelistextension>

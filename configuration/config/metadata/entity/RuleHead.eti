@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Rule Head"
+  entity="RuleHead"
+  extendable="false"
+  final="false"
+  loadable="false"
+  platform="true"
+  table="bizrulehead"
+  type="versionable">
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.RuleHeadDomainMethods"/>
+  <column
+    desc="The identity of a rule for which this is the unique head instance."
+    name="GlobalRuleID"
+    nullok="false"
+    type="publicid"/>
+  <foreignkey
+    desc="In progress import entry"
+    fkentity="RuleImportTaskEntry"
+    name="InProgressImportTaskEntry"
+    nullok="true"/>
+  <index name="bizruleheadu1"
+    desc="Ensure uniqueness of Head per GlobalRuleID."
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="GlobalRuleID"/>
+  </index>
+</entity>

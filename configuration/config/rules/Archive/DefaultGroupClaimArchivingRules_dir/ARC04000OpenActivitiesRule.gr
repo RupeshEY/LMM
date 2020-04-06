@@ -1,0 +1,25 @@
+package rules.Archive.DefaultGroupClaimArchivingRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("ARC04000 - Open Activities Rule")
+internal class ARC04000OpenActivitiesRule {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return gw.api.database.Query.make(Activity)
+                     .compare("Claim", Equals, claim)
+                     .compare("Status", Equals, ActivityStatus.TC_OPEN).select().Count > 0
+
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.skipFromArchiving(DisplayKey.get("Rules.Archive.OpenActivities"))
+/*end00rule*/
+
+  }
+}

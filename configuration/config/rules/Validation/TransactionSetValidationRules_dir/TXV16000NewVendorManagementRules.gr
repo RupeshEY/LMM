@@ -1,0 +1,24 @@
+package rules.Validation.TransactionSetValidationRules_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("TXV16000 - New Vendor Management Rules")
+internal class TXV16000NewVendorManagementRules {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return transactionSet.Subtype == typekey.TransactionSet.TC_CHECKSET
+and transactionSet.Changed
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+// This OOTB rule only needs to run for checks.
+// It does not look at Contact Manager synchronization for recoveries.
+
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!-- A join table linking an activity to one or more documents. -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A one-to-many relationship between an activity and its documents."
+  entity="ActivityDocument"
+  exportable="true"
+  platform="false"
+  table="activitydocument"
+  type="joinarray">
+  <implementsInterface
+    iface="com.guidewire.pl.domain.document.DocumentJoiningBean"
+    impl="com.guidewire.cc.domain.activity.impl.ActivityDocumentImpl"/>
+  <implementsInterface
+    iface="gw.cc.activity.entity.ActivityDocument"
+    impl="com.guidewire.cc.domain.activity.impl.ActivityDocumentImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.CommitCallback"
+    impl="com.guidewire.cc.domain.activity.impl.ActivityDocumentImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[<p>Joins an activity to one or more documents.</p>
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ActivityID"
+    desc="Parent activity for the documents."
+    exportable="false"
+    fkentity="Activity"
+    name="Activity"
+    nullok="false"/>
+  <foreignkey
+    columnName="DocumentID"
+    desc="A document linked to a parent activity."
+    fkentity="Document"
+    name="Document"
+    nullok="false"/>
+  <index
+    desc="Enforce uniqueness - there should be at most 1 row per (activityid, documentid)"
+    name="activitydocumentu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ActivityID"/>
+    <indexcol
+      keyposition="2"
+      name="DocumentID"/>
+  </index>
+</entity>

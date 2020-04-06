@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!-- ================================== ANSWERS ============================== -->
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="AggregateLimitRptDelegate">
+  <implementsInterface
+    iface="gw.cc.aggregatelimit.entity.AggregateLimitRptDelegate"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.AggregateLimitRptDelegateImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.aggregatelimit.impl.AggregateLimitRptDelegateInternal"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.AggregateLimitRptDelegateImpl"/>
+  <fulldescription><![CDATA[
+    Common state and behavior shared by both the AggregateLimitRpt and ClaimAggregateLimitRpt entities. These
+    entities contain denormalized AggregateLimit amount used values
+  ]]></fulldescription>
+  <column
+    desc="The amount of the limit that has been used that is tracked within ClaimCenter."
+    name="LimitUsed"
+    nullok="true"
+    setterScriptability="hidden"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    default="true"
+    desc="Indicates if the limit used is up-to-date."
+    name="Valid"
+    nullok="false"
+    type="bit"/>
+  <typekey
+    desc="Aggregate limit type: by loss date or by reported date"
+    name="LimitType"
+    nullok="false"
+    typelist="AggregateLimitType"/>
+  <typekey
+    default="limit"
+    desc="Aggregate type: limit or deductible."
+    name="ValueType"
+    nullok="false"
+    typelist="AggregateType"/>
+  <typekey
+    default="all"
+    desc="Exclusions for limit used calculations"
+    name="AggLimitCalcCriteria"
+    nullok="false"
+    typelist="AggLimitCalcCriteria"/>
+  <foreignkey
+    columnName="PolicyPeriodID"
+    desc="PolicyPeriod with which the aggregate limit is associated. This property exists because CoverageLine may be null; when CoverageLine is not null, it must equal CoverageLine.PolicyPeriodID"
+    fkentity="PolicyPeriod"
+    name="PolicyPeriod"
+    nullok="false"/>
+  <foreignkey
+    columnName="CoverageLineID"
+    desc="The associated coverage line."
+    fkentity="CoverageLine"
+    name="CoverageLine"
+    nullok="true"/>
+</delegate>

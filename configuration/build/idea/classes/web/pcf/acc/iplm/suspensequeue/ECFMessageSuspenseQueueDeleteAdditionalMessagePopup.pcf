@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    id="ECFMessageSuspenseQueueDeleteAdditionalMessagePopup"
+    title="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.RelatedMessages&quot;)">
+    <LocationEntryPoint
+      signature="ECFMessageSuspenseQueueDeleteAdditionalMessagePopup(ecfMessageClaimData: ECFMessageClaimData_Ext)"/>
+    <Variable
+      initialValue="new gw.acc.iplm.controller.ECFSuspenseQueueController()"
+      name="ecfSuspenseQueueController"
+      type="gw.acc.iplm.controller.ECFSuspenseQueueController"/>
+    <Variable
+      name="ecfMessageClaimData"
+      type="ECFMessageClaimData_Ext"/>
+    <Screen
+      id="ECFMessageSuspenseQueueDeleteAdditionalMessageScreen">
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="ecfSuspenseQueueController.deleteECFMessages(CheckedValues);pcf.ECFMessageSuspenseQueue.go() "
+          id="DeleteButton"
+          iterator="ClaimDataSuspenseQueueLV.ECFMessageSuspenseQueueRowIterator"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.Delete&quot;)"
+          showConfirmMessage="false"/>
+      </Toolbar>
+    <PanelRef
+      def="ClaimDataSuspenseQueueLV(ecfSuspenseQueueController.getAllSuspendedMsgsForClaimTransaction(ecfMessageClaimData))"/>
+    </Screen>
+   </Popup>
+</PCF>

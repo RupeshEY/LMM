@@ -1,0 +1,29 @@
+package rules.Presetup.ClaimPresetup_dir
+
+@gw.rules.RuleName("CPR01000 - WCDefaultExposures")
+internal class CPR01000WCDefaultExposures {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.LossType == TC_WC
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.createRelevantWorkCompExposures() 
+
+//Below is the OOB function call used in ClaimCenter 4.0 and earlier 
+//to auto-create Workers' Compensation Exposures
+//If you wish to continue creating exposures relative to the Claim's Severity,
+//comment out the function call above and uncomment the line below to execute 
+//the CreateWcDefaultExposures()function. 
+//Do Not let both of these functions execute
+
+//claim.createWcDefaultExposures()
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <MenuItemSet
+    id="NewExposureMenuItemSet"
+    mode="coveragetype">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <MenuItemTree
+      children="item.Children"
+      elementName="item"
+      value="gw.api.exposure.NewExposureMenuUtil.createItemsByCoverageType(claim)"
+      valueType="gw.api.exposure.NewExposureMenuItem[]">
+      <MenuItem
+        action="NewExposure.go(claim, item.CoverageType, item.CoverageSubtype, item.lazyLoadCoverage(claim))"
+        hideIfDisabled="false"
+        id="item"
+        label="item.DisplayLabel"/>
+    </MenuItemTree>
+  </MenuItemSet>
+</PCF>

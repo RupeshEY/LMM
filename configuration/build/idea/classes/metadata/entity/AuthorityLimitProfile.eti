@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  admin="true"
+  desc="Groups a set of limits together for reuse as a standard profile."
+  entity="AuthorityLimitProfile"
+  platform="false"
+  table="authorityprofile"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.community.impl.AuthorityLimitProfileInternal"
+    impl="com.guidewire.cc.domain.community.impl.AuthorityLimitProfileImpl"/>
+  <implementsInterface
+    iface="gw.cc.community.entity.AuthorityLimitProfile"
+    impl="com.guidewire.cc.domain.community.impl.AuthorityLimitProfileImpl"/>
+  <fulldescription><![CDATA[
+        Encompasses a set of AuthorityLimit entities. A user with the proper authority can assign an AuthorityLimitProfile
+        to one or more users in the system. A user can have only one assigned AuthorityLimitProfile. As long as an AuthorityLimit
+        is in use, it cannot be deleted.
+      
+    ]]></fulldescription>
+  <column
+    desc="Name that identifies the profile."
+    name="Name"
+    nullok="false"
+    type="shorttext">
+    <localization
+      nullok="false"
+      tableName="authlp_name_l10n"/>
+  </column>
+  <column
+    desc="Description of the limit."
+    name="Description"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="authlp_desc_l10n"/>
+  </column>
+  <column
+    default="false"
+    desc="Is this a custom limit, used by a single user?"
+    name="Custom"
+    nullok="false"
+    type="bit"/>
+  <typekey
+    desc="The currency in which the profile's limits are defined."
+    name="Currency"
+    nullok="false"
+    typelist="Currency"/>
+  <array
+    arrayentity="AuthorityLimit"
+    desc="Limits contained in the profile."
+    exportable="true"
+    name="Limits"
+    owner="true"/>
+  <events/>
+</entity>

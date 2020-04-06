@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table with final calcs, utilized during the population of the production ExposureRpt table from staging tables."
+  entity="TmpStagingExposureRpt"
+  extendable="false"
+  loadable="false"
+  table="tmpstagingexposurerpt"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.financials.entity.TmpStagingExposureRpt"
+    impl="com.guidewire.cc.domain.financials.impl.TmpStagingExposureRptImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.impl.TmpStagingExposureRptInternal"
+    impl="com.guidewire.cc.domain.financials.impl.TmpStagingExposureRptImpl"/>
+  <column
+    default="0"
+    desc="The open reserves."
+    name="OpenReserves"
+    nullok="false"
+    type="money"/>
+  <column
+    default="0"
+    desc="The available reserves on an exposure."
+    name="AvailableReserves"
+    nullok="false"
+    type="money"/>
+  <column
+    default="0"
+    desc="The remaining reserves on an exposure."
+    name="RemainingReserves"
+    nullok="false"
+    type="money"/>
+  <column
+    default="0"
+    desc="The total payments."
+    name="TotalPayments"
+    nullok="false"
+    type="money"/>
+  <column
+    default="0"
+    desc="The total of awaiting submission payments scheduled to be sent after today."
+    name="FuturePayments"
+    nullok="false"
+    type="money"/>
+  <column
+    default="0"
+    desc="The total recoveries on an exposure."
+    name="TotalRecoveries"
+    nullok="false"
+    type="money"/>
+  <column
+    default="0"
+    desc="The open recovery reserves on an exposure."
+    name="OpenRecoveryReserves"
+    nullok="false"
+    type="money"/>
+  <column
+    default="0"
+    desc="The open reserves."
+    name="OpenReservesRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    default="0"
+    desc="The available reserves on an exposure."
+    name="AvailableResrvRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    default="0"
+    desc="The remaining reserves on an exposure."
+    name="RemainingResrvRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    default="0"
+    desc="The total payments."
+    name="TotalPaymentsRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    default="0"
+    desc="The total of awaiting submission payments scheduled to be sent after today."
+    name="FuturePaymentsRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    default="0"
+    desc="The total recoveries on an exposure."
+    name="TotalRecoveriesRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    default="0"
+    desc="The open recovery reserves on an exposure."
+    name="OpenRecoveryResRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="The exposure that the calculations are on."
+    name="ExposureID"
+    nullok="true"
+    type="softentityreference"/>
+  <column
+    desc="The ID for the ExposureRpt record being inserted"
+    name="ExposureRptID"
+    nullok="true"
+    type="softentityreference"/>
+  <column
+    desc="The public ID for the ExposureRpt record being inserted."
+    name="ExposureRptPublicID"
+    nullok="true"
+    type="publicid"/>
+  <column
+    desc="This exposure's claim"
+    name="ClaimID"
+    nullok="false"
+    type="softentityreference"/>
+  <column
+    desc="The ID for the ClaimRpt record being inserted"
+    name="ClaimRptID"
+    nullok="true"
+    type="softentityreference"/>
+  <column
+    desc="The public ID for the ClaimRpt record being inserted."
+    name="ClaimRptPublicID"
+    nullok="true"
+    type="publicid"/>
+  <column
+    desc="The public ID for the exposure."
+    name="ExposurePublicID"
+    nullok="true"
+    type="publicid"/>
+  <column
+    desc="The public ID for the claim."
+    name="ClaimPublicID"
+    nullok="false"
+    type="publicid"/>
+  <!-- Unique index on ExposureID -->
+  <index
+    desc="Speed up access by ExposurePublicID"
+    name="exposurerptu1">
+    <indexcol
+      keyposition="1"
+      name="ExposurePublicID"/>
+  </index>
+  <index
+    desc="Speed up access by ClaimPublicID"
+    name="exposurerptu2">
+    <indexcol
+      keyposition="1"
+      name="ClaimPublicID"/>
+  </index>
+  <index
+    desc="Enforce uniqueness of the Claim/Exposure pair"
+    name="exposurerptu3"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimPublicID"/>
+    <indexcol
+      keyposition="2"
+      name="ExposurePublicID"/>
+  </index>
+  <index
+    desc="Speed up access by ClaimID; not a foreign key so there is no automatically generated backing index"
+    name="exposurerpt4">
+    <indexcol
+      keyposition="1"
+      name="ClaimID"/>
+  </index>
+  <index
+    desc="Speed up access by ExposureID; not a foreign key so there is no automatically generated backing index"
+    name="exposurerpt5">
+    <indexcol
+      keyposition="1"
+      name="ExposureID"/>
+  </index>
+</entity>

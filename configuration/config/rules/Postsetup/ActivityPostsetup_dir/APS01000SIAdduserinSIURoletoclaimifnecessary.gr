@@ -1,0 +1,33 @@
+package rules.Postsetup.ActivityPostsetup_dir
+
+@gw.rules.RuleName("APS01000 - SI - Add user in SIU Role to claim if necessary")
+internal class APS01000SIAdduserinSIURoletoclaimifnecessary {
+  static function doCondition(activity : entity.Activity) : boolean {
+    
+/*start00rule*/
+return activity.ActivityPattern.Code == "SIU_escalation"
+/*end00rule*/
+
+  }
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+
+/*start00rule*/
+var currentSIuser: User
+
+for (theRelatedContact in activity.Claim.RoleAssignments) {
+  if (theRelatedContact.Role==TC_SIUINVESTIGATOR) {
+    currentSIuser = theRelatedContact.AssignedUser
+  }
+}
+
+if (currentSIuser == null) {
+  if (activity.Claim.assignUserRole(
+        activity.AssignedUser, activity.AssignedGroup, TC_SIUINVESTIGATOR) != null) {
+    actions.exit()
+  }
+}
+/*end00rule*/
+
+  }
+}

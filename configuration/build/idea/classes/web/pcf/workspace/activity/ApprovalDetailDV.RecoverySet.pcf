@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <DetailViewPanel
+    id="ApprovalDetailDV"
+    mode="RecoverySet">
+    <Require
+      name="Activity"
+      type="Activity"/>
+    <InputColumn>
+      <ListViewInput
+        boldLabel="true"
+        def="ApprovalHistoryLV(Activity.TransactionSet.ApprovalHistory?.toTypedArray())"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoverySetSummary.ApprovalHistory&quot;)">
+        <Toolbar/>
+      </ListViewInput>
+      <TextInput
+        boldLabel="true"
+        editable="true"
+        id="ApprovalRationale"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoverySetSummary.ApprovalRationale&quot;)"
+        numCols="50"
+        value="Activity.ApprovalRationale"
+        visible="Activity.canApprove()"/>
+      <InputDivider/>
+      <TextInput
+        id="Recovery_Exposure"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoverySetSummary.Recovery.Exposure&quot;)"
+        value="(Activity.TransactionSet as RecoverySet).Recoveries[0].Exposure.DisplayName"/>
+      <TypeKeyInput
+        id="Recovery_Coverage"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoverySetSummary.Recovery.Coverage&quot;)"
+        value="(Activity.TransactionSet as RecoverySet).Recoveries[0].Exposure.PrimaryCoverage"
+        valueType="typekey.CoverageType"/>
+      <TypeKeyInput
+        id="Recovery_CostType"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoverySetSummary.Recovery.CostType&quot;)"
+        value="(Activity.TransactionSet as RecoverySet).Recoveries[0].CostType"
+        valueType="typekey.CostType"/>
+      <TypeKeyInput
+        id="Recovery_CostCategory"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoverySetSummary.Recovery.CostCategory&quot;)"
+        value="(Activity.TransactionSet as RecoverySet).Recoveries[0].CostCategory"
+        valueType="typekey.CostCategory"/>
+      <TypeKeyInput
+        id="Recovery_ReservingCurrency"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoverySetSummary.Recovery.ReservingCurrency&quot;)"
+        value="(Activity.TransactionSet as RecoverySet).Recoveries[0].ReservingCurrency"
+        valueType="typekey.Currency"
+        visible="gw.util.CCConfigUtil.AllowExplicitReservingCurrency"/>
+      <TypeKeyInput
+        id="Recovery_RecoveryCategory"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoverySetSummary.Recovery.RecoveryCategory&quot;)"
+        value="(Activity.TransactionSet as RecoverySet).Recoveries[0].RecoveryCategory"
+        valueType="typekey.RecoveryCategory"/>
+      <CurrencyInput
+        formatType="currency"
+        id="Recovery_Amount"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoverySetSummary.Recovery.Amount&quot;)"
+        value="(Activity.TransactionSet as RecoverySet).Recoveries[0].TransactionAmountReservingAmountPair"
+        valueType="gw.api.financials.IPairedMoney"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Financials.RecoverySetSummary.Details&quot;)"/>
+      <ClaimContactInput
+        claim="Activity.Claim"
+        id="Details_CreateUser"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoverySetSummary.Details.CreateUser&quot;)"
+        value="Activity.TransactionSet.CreateUser.Contact"
+        valueRange="Activity.Claim.RelatedUserContactArray"
+        valueType="entity.UserContact"/>
+      <DateInput
+        id="Details_CreateTime"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoverySetSummary.Details.CreateTime&quot;)"
+        value="Activity.TransactionSet.CreateTime"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

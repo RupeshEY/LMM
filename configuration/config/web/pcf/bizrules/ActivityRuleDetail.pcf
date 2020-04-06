@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    afterCancel="stateHolder.afterCancel()"
+    beforeCommit="stateHolder.beforeUpdate()"
+    canEdit="true"
+    id="ActivityRuleDetail"
+    parent="ActivityRules()"
+    showUpLink="true"
+    title="DisplayKey.get('Web.ActivityRules.Rule.Title',gw.bizrules.pcf.RuleDetailsStateHolder.getRuleName(head)?:&quot;&quot;)">
+    <LocationEntryPoint
+      signature="ActivityRuleDetail(head: ActivityRuleHead, version: ActivityRuleVersion)"/>
+    <Variable
+      name="head"
+      type="ActivityRuleHead"/>
+    <Variable
+      name="version"
+      type="ActivityRuleVersion"/>
+    <Variable
+      initialValue="new gw.bizrules.ActivityRuleDetailsStateHolder(head, gw.bizrules.ActivityRulesNavigationSupport.Instance, gw.bizrules.ActivityRulePanelSetHelper.UIConfigs, CurrentLocation)"
+      name="stateHolder"
+      type="gw.bizrules.ActivityRuleDetailsStateHolder"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButtonSetRef
+        toolbarButtonSet="StatusTransitionToolbarButtonSet(stateHolder)"/>
+        <ToolbarButtonSetRef
+          toolbarButtonSet="ConditionValidationToolbarButtonSet(stateHolder.RulePageController)"
+          visible="stateHolder.doesHeadExist()"/>
+        <ToolbarDivider/>
+        <ToolbarRangeInput
+          available="!CurrentLocation.InEditMode"
+          id="Version"
+          label="DisplayKey.get('Web.ActivityRules.Rule.Version')"
+          optionLabel="stateHolder.formatVersion(VALUE)"
+          required="true"
+          sortValueRange="false"
+          value="stateHolder.SelectedVersion"
+          valueRange="stateHolder.History"
+          valueType="entity.ActivityRuleVersion"
+          valueWidth="250"
+          visible="stateHolder.doesHeadExist()">
+          <PostOnChange/>
+        </ToolbarRangeInput>
+      </Toolbar>
+      <AlertBar
+        action="stateHolder.SelectedVersion = stateHolder.Head.HeadVersion"
+        allowDismiss="false"
+        hideIfEditable="true"
+        id="NotLatestAlert"
+        label="DisplayKey.get('Web.ActivityRules.Rule.NewerVersionAvailable')"
+        visible="stateHolder.NotLatestVersionSelected"/>
+      <AlertBar
+        action="stateHolder.makeLatestVersionAvailableToRunInNewBundle()"
+        allowDismiss="false"
+        available="!stateHolder.ImportInProgress  &amp;&amp; gw.bizrules.pcf.RulePermissionUIHelper.canEditRule(stateHolder.getSelectedVersion())"
+        hideIfEditable="true"
+        id="UnavailableToRunAlert"
+        label="!stateHolder.ImportInProgress &amp;&amp; gw.bizrules.pcf.RulePermissionUIHelper.canEditRule(stateHolder.getSelectedVersion()) ? DisplayKey.get('BizRules.RuleDetailsPage.Alert.UnavailableToRun.WithMakeAvailableAction') : DisplayKey.get('BizRules.RuleDetailsPage.Alert.UnavailableToRun')"
+        visible="stateHolder.LatestVersionSelected &amp;&amp; !stateHolder.SelectedVersion.Rule.AvailableToRun"/>
+      <AlertBar
+        action="RuleImportDetailsPopup.push(stateHolder.NavigationSupport, stateHolder.Head.InProgressImportTaskEntry.Task, false)"
+        allowDismiss="false"
+        id="PendingImportAlert"
+        label="DisplayKey.get('BizRules.RuleDetailsPage.Alert.PendingImport')"
+        visible="stateHolder.ImportInProgress"/>
+      <AlertBar
+        action="stateHolder.VersionController.pushRulesWithSameNamePopup(head.HeadVersion)"
+        allowDismiss="false"
+        id="DuplicatedNameAlertBar"
+        label="DisplayKey.get('BizRules.RuleDetailsPage.Alert.DuplicatedName')"
+        visible="stateHolder.LatestVersionSelected &amp;&amp; !stateHolder.VersionController.isRuleNameUnique(stateHolder.SelectedVersion)"/>
+      <AlertBar
+        action="stateHolder.NavigationSupport.goToRulesListPage()"
+        allowDismiss="false"
+        hideIfEditable="true"
+        id="RuleDeletedByAnotherUserAlert"
+        label="DisplayKey.get('BizRules.RuleDetailsPage.Alert.DeletedByAnotherUser')"
+        visible="!stateHolder.doesHeadExist()"/>
+      <PanelRef
+        def="ActivityRulePanelSet(stateHolder.SelectedVersion, false, stateHolder.RulePageController)"
+        visible="stateHolder.SelectedVersion != null"/>
+    </Screen>
+  </Page>
+</PCF>

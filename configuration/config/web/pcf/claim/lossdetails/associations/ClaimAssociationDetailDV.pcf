@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- The next screen controls the content of the claim association tab on the claim loss details screen
+This is not sensitive to business line.
+    This file automatically generated from nvv_claim.xml -->
+  <DetailViewPanel
+    id="ClaimAssociationDetailDV">
+    <Require
+      name="ClaimAssociation"
+      type="ClaimAssociation"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimAssociationDetail.ClaimAssociation&quot;)"/>
+      <TextInput
+        editable="true"
+        id="Title"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimAssociationDetail.Title&quot;)"
+        required="true"
+        value="ClaimAssociation.Title"/>
+      <TypeKeyInput
+        editable="true"
+        id="Type"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimAssociationDetail.Type&quot;)"
+        value="ClaimAssociation.ClaimAssocType"
+        valueType="typekey.ClaimAssocType"/>
+      <TextAreaInput
+        editable="true"
+        id="Description"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimAssociationDetail.Description&quot;)"
+        numRows="3"
+        value="ClaimAssociation.Description"/>
+      <ListViewInput
+        def="EditableClaimsInAssociationLV(ClaimAssociation)"
+        editable="true"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimAssociationDetail.Claims&quot;)">
+        <Toolbar>
+          <IteratorButtons
+            iterator="EditableClaimsInAssociationLV.EditableClaimsInAssociationLV"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Worksheet
+    canVisit="true"
+    closeOnLeaveScope="true"
+    id="ClaimOtherInstructionWorksheet"
+    showUpLink="true"
+    tabLabel="DisplayKey.get(&quot;NVV.Claim.SpecialHandling.OtherInstructions&quot;)"
+    title="&quot;&quot;">
+    <LocationEntryPoint
+      signature="ClaimOtherInstructionWorksheet(claim : Claim)"/>
+    <Scope
+      location="Claim(claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Screen>
+      <PanelRef
+        def="OtherInstructionsPanelSet(claim.OtherInstructions, claim.Policy.PolicyType, false)">
+        <Toolbar>
+          <ToolbarButton
+            action="CurrentLocation.cancel()"
+            id="Close"
+            label="DisplayKey.get(&quot;Button.Close&quot;)"/>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+  </Worksheet>
+</PCF>

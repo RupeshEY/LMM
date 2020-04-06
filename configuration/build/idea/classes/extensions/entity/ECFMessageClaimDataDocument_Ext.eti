@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<entity
+  desc="ECF Message Claim Data Supporting Documents"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageClaimDataDocument_Ext"
+  table="ecfmsgclaimnotrqdoc_ext"
+  exportable="true"
+  final="true"
+  type="retireable">
+  <implementsEntity name="Extractable"/>
+  <column
+    desc="The version number of the document. Version can be given in combination to any document identification"
+    name="Version"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Document version date and time"
+    name="VersionDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The size of the document file, in units specified by SupportingDocumentFileSizeMeasurementUnit"
+    name="FileSize"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="precision"
+      value="20"/>
+    <columnParam
+      name="scale"
+      value="4"/>
+  </column>
+  <typekey
+    typelist="ECFMsgNotifRqDocSizeUnit_Ext"
+    desc="The unit of measure for the document size"
+    name="FileSizeUnit"
+    nullok="true"/>
+  <typekey
+    typelist="ECFFileFormat_Ext"
+    desc="Code that specifies the type and subtype of document format"
+    name="FileFormat"
+    nullok="true"/>
+  <typekey
+    typelist="IMRDocumentType_Ext"
+    desc="Coded indication of the business purpose of the document"
+    name="DocType"
+    nullok="true"/>
+  <column
+    name="Description"
+    desc="Description"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="DocumentId"
+    desc="Document Id"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="Reference"
+    desc="The unique reference of a document in the message owners repository"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    fkentity="ECFMessageClaimData_Ext"
+    name="ECFMsg"
+    nullok="false"/>
+</entity>

@@ -1,0 +1,87 @@
+package rules.Validation.TransactionSetValidationRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.util.CurrencyUtil
+uses gw.financials.CoverageLimitRulesUtil
+
+@gw.rules.RuleName("TXV04000 - Check incid limit when increasing reserves")
+internal class TXV04000Checkincidlimitwhenincreasingreserves {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return transactionSet.Subtype == TC_RESERVESET
+and transactionSet.New
+/* The transactionset.new condition disallows the rule from executing 
+ * for all transactions associated with the claim (because we want the 
+ * rule to execute only for the new transactions that we are trying to add).
+ */
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+var claim = transactionSet.Claim
+
+var coverageSet = new java.util.HashSet<Coverage>() // a set of Coverage to aggregate amt for that coverage
+
+/* Set the following warning parameter to true if you want to throw a 
+ * warning, but still permit the end-user to continue with the transaction if he/she desires
+ * Set to false if you want to block this transaction
+ */
+var warning = true
+var costType = CostType.TC_CLAIMCOST
+
+for (trans in transactionSet.Transactions) {
+  if (!trans.New) {
+    continue // in case a check is changed, and the ReserveSet gets re-validated, 
+              // we don?t want to double count amounts that are already in the cache
+  }
+  coverageSet.add(trans.Exposure.Coverage)
+}
+
+for (coverage in coverageSet) {
+  if (not coverage.HasIncidentLimit) {
+    continue
+  }
+  var incidentLimit = coverage.IncidentLimit
+
+  var exposures = claim.Exposures.where( \ e -> e.PrimaryCoverage == coverage.Type)
+
+  var compareInLimitCurrency = CoverageLimitRulesUtil.shouldCompareInReservingCurrency(exposures, costType, incidentLimit.Currency)
+  if ( not compareInLimitCurrency ) {
+    incidentLimit = incidentLimit.convert( transactionSet.Claim.Currency, java.math.RoundingMode.UP )
+  }
+
+  var combinedCalc = CoverageLimitRulesUtil.getCommittedAndFutureAndPendingApprovalPaymentsAndReserves()
+                     .withClaim(claim)
+                     .withCoverageType(coverage.Type)
+                     .withCostType(costType)
+  var combined = CoverageLimitRulesUtil.getCalcValueForCompare(
+                          combinedCalc,
+                          incidentLimit.Currency, compareInLimitCurrency)
+
+  if (incidentLimit != null && combined > incidentLimit) {
+    //If Warning is set to TRUE, throw a warning, but permit the transaction to go through if the user desires so
+    if (warning == true) {
+      transactionSet.reject(null, null, TC_PAYMENT, 
+                            DisplayKey.get("Rules.Validation.Transaction.ReserveExceedsIncidentLimitWarning", 
+                              coverage, CurrencyUtil.renderAsCurrency(combined), 
+                              coverage.Type, CurrencyUtil.renderAsCurrency(coverage.IncidentLimit), 
+                              actions.ShortRuleName))
+    } else {
+      //If Warning is set to FALSE, block the transaction from going through 
+      transactionSet.reject(TC_PAYMENT, 
+                            DisplayKey.get("Rules.Validation.Transaction.ReserveExceedsIncidentLimitError", 
+                              coverage, CurrencyUtil.renderAsCurrency(combined), 
+                              coverage.Type, CurrencyUtil.renderAsCurrency(coverage.IncidentLimit), 
+                              actions.ShortRuleName), 
+                            null, null)
+    }
+  }
+}
+/*end00rule*/
+
+  }
+}

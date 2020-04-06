@@ -1,0 +1,32 @@
+package rules.InitialReserve.InitialReserve_dir.IRR02000Travel_dir.IRR02100BaggageDamage_dir
+
+@gw.rules.RuleName("IRR02120 - Baggage Loss")
+internal class IRR02120BaggageLoss {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.BaggageIncident.DelayOnly != true
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+if(exposure.Claim.applyFinancialHolds() == true) {
+  exposure.Claim.createNoteIfInitialReservesNotCreated()
+} else { 
+/* If there is an exposure limit, create a reserve for that amount.
+ * If not, create a reserve for the approved content total (assuming it is non-zero.)
+ */
+  if(exposure.HasCoverageLimit) {
+    exposure.createInitialReserve(TC_CLAIMCOST, TC_BAGGAGE, exposure.Coverage.ExposureLimit)
+  // If  ApprovedContentTotal() does not return a value, set the initial reserve to the exposure limit on the coverage
+  } else if(exposure.Incident.ApprovedContentTotal().Amount > 0) {
+    exposure.createInitialReserve(TC_CLAIMCOST, TC_BAGGAGE, exposure.Incident.ApprovedContentTotal())
+  }
+}
+/*end00rule*/
+
+  }
+}

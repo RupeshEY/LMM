@@ -1,0 +1,32 @@
+package rules.Preupdate.ExposurePreupdate_dir
+
+@gw.rules.RuleName("EPU04000 - Update Deductible On Updated Exposure Coverage")
+internal class EPU04000UpdateDeductibleOnUpdatedExposureCoverage {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return gw.api.financials.FinancialsUtil.isUseDeductibleHandling()
+and exposure.isFieldChanged("Coverage") 
+and exposure.Claim.Policy.PolicyType == TC_PERSONALAUTO
+and exposure.ExposureType == TC_VEHICLEDAMAGE
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+/**
+ * This rule is triggered when an exposure's coverage is changed.
+ *
+ * If the exposure's new coverage is not null and the coverage's
+ * deductible amount is not null, if the coverage does not already
+ * have a calculated deductible entity, a new one is constructed.
+ */
+if (exposure.Coverage.HasDeductibleAmount) {
+  exposure.Coverage.ensureDeductible(exposure.Claim)
+}
+/*end00rule*/
+
+  }
+}

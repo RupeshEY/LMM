@@ -1,0 +1,22 @@
+package rules.Preupdate.ContactPreupdate_dir
+
+@gw.rules.RuleName("COP02500 - Set all Vendors to auto sync")
+internal class COP02500SetallVendorstoautosync {
+  static function doCondition(contact : entity.Contact) : boolean {
+    
+/*start00rule*/
+return // All contacts added to the claim should be set to Autosync 
+  contact.AutoSync == null
+/*end00rule*/
+
+  }
+
+  static function doAction(contact : entity.Contact, actions : gw.rules.Action) {
+
+/*start00rule*/
+contact.AutoSync = TC_ALLOW
+//Alternative could use --- Contact. AutoSync = typekey.AutoSync.TC_ALLOW
+/*end00rule*/
+
+  }
+}

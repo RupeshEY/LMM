@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DocumentTemplateDescriptor
+    id="EmailSent.gosu.htm"
+    name="Gosu Sample Email Sent Record"
+    description="Record of an email being sent."
+    default-security-type="sensitive"
+    type="email"
+    lob="GLLine"
+    state="CA"
+    mime-type="text/html"
+    date-effective="2003-03-15"
+    date-expires="2009-03-15"
+    keywords="CA, email">
+  
+  <ContextObject name="Subject" type="string">
+    <DefaultObjectValue></DefaultObjectValue>
+  </ContextObject>
+
+  <ContextObject name="To" type="Contact">
+    <DefaultObjectValue>Claim.maincontact</DefaultObjectValue>
+    <PossibleObjectValues>Claim.getRelatedContacts()</PossibleObjectValues>
+  </ContextObject>
+
+  <ContextObject name="From" type="Contact">
+    <DefaultObjectValue>Claim.AssignedUser.Contact</DefaultObjectValue>
+    <PossibleObjectValues>Claim.getRelatedUserContacts()</PossibleObjectValues>
+  </ContextObject>
+
+  <ContextObject name="Body" type="text">
+    <DefaultObjectValue></DefaultObjectValue>
+  </ContextObject>
+
+  <FormFieldGroup name="default">
+    <DisplayValues>
+      <NullDisplayValue>None</NullDisplayValue>
+    </DisplayValues>
+    <FormField name="ClaimNumber">RelatedTo.DisplayName</FormField>
+    <FormField name="Subject">Subject</FormField>
+    <FormField name="ToEmailAddress">To.EmailAddress1</FormField>
+    <FormField name="FromEmailAddress">From.EmailAddress1</FormField>
+    <FormField name="RelatedToName">RelatedTo.DisplayName</FormField>
+    <FormField name="Body">Body</FormField>
+  </FormFieldGroup>
+
+</DocumentTemplateDescriptor>

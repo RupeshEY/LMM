@@ -1,0 +1,22 @@
+package rules.Loaded.ClaimLoaded_dir
+
+@gw.rules.RuleName("CLR01000 - Filter previously set up claims")
+internal class CLR01000Filterpreviouslysetupclaims {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return (claim.State != null
+ and claim.State != TC_DRAFT) /* Already opened claims */
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* no need for further setup */
+actions.exit()
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="AutomatedHandlerActionInputSet"
+    mode="notification">
+    <Require
+      name="automatedHandler"
+      type="AutomatedHandler"/>
+    <Variable
+      initialValue="automatedHandler as AutomatedNotificationHandler"
+      name="automatedNotificationHandler"
+      type="AutomatedNotificationHandler"/>
+    <PickerInput
+      conversionExpression="PickedValue.getFilename()"
+      editable="true"
+      freeInputEnabled="false"
+      id="AutomatedHandlerEmailTemplate"
+      label="DisplayKey.get(&quot;Web.Admin.AutomatedHandlerAction.Notification.EmailTemplate&quot;)"
+      outputConversion="gw.pcf.specialhandling.EmailTemplateUtil.getEmailTemplateDisplayName(VALUE)"
+      pickLocation="PickEmailTemplatePopup.push(getEmailTemplateSearchCriteria())"
+      required="true"
+      value="automatedNotificationHandler.EmailTemplate"
+      valueType="java.lang.String"/>
+    <RangeInput
+      editable="true"
+      id="NotificationType"
+      label="DisplayKey.get(&quot;Web.Admin.AutomatedHandlerAction.Notification.NotificationType&quot;)"
+      value="automatedNotificationHandler.NotificationType"
+      valueRange="NotificationType.getTypeKeys(false)"
+      valueType="typekey.NotificationType">
+      <PostOnChange
+        onChange="gw.api.specialhandling.SpecialHandlingHelper.refreshEmailAddressField(automatedNotificationHandler)"/>
+    </RangeInput>
+    <TypeKeyInput
+      editable="true"
+      id="ContactRole"
+      label="DisplayKey.get(&quot;Web.Admin.AutomatedHandlerAction.Notification.ContactRole&quot;)"
+      required="automatedNotificationHandler.NotificationType == NotificationType.TC_CONTACTROLE"
+      value="automatedNotificationHandler.EmailRole"
+      valueType="typekey.ContactRole"
+      visible="automatedNotificationHandler.NotificationType == NotificationType.TC_CONTACTROLE"/>
+    <TextInput
+      editable="true"
+      id="AutomatedHandlerEmailAddress"
+      label="DisplayKey.get(&quot;Web.Admin.AutomatedHandlerAction.Notification.EmailAddress&quot;)"
+      required="automatedNotificationHandler.NotificationType == NotificationType.TC_EMAIL"
+      value="automatedNotificationHandler.EmailAddress"
+      visible="automatedNotificationHandler.NotificationType == NotificationType.TC_EMAIL"/>
+    <ListViewInput
+      id="EmailAddressesLV"
+      label="DisplayKey.get(&quot;Web.Admin.AutomatedHandlerAction.Notification.EmailAddresses&quot;)"
+      visible="automatedNotificationHandler.NotificationType == NotificationType.TC_MULTI_EMAIL">
+      <Toolbar>
+        <IteratorButtons
+          iterator="EmailIterator"/>
+      </Toolbar>
+      <ListViewPanel>
+        <RowIterator
+          editable="true"
+          elementName="anEmailAddress"
+          id="EmailIterator"
+          toAdd="automatedNotificationHandler.addToEmailAddresses(anEmailAddress)"
+          toRemove="automatedNotificationHandler.removeFromEmailAddresses(anEmailAddress)"
+          value="automatedNotificationHandler.EmailAddresses"
+          valueType="entity.SpecialHandlingEmailAddress[]">
+          <Row>
+            <TextCell
+              editable="true"
+              id="EmailAddress"
+              label="DisplayKey.get(&quot;Web.Admin.AutomatedHandlerAction.Notification.EmailAddress&quot;)"
+              value="anEmailAddress.EmailAddress"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </ListViewInput>
+    <Code><![CDATA[function getEmailTemplateSearchCriteria() : gw.api.email.EmailTemplateSearchCriteria {
+  var criteria = new gw.api.email.EmailTemplateSearchCriteria()
+  criteria.Keywords = "automatednotificationhandler, " + (typeof automatedHandler.Trigger).DisplayName
+  return criteria
+}]]></Code>
+  </InputSet>
+</PCF>

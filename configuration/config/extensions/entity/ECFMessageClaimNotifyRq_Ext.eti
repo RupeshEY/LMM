@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageClaimNotifyRq_Ext"
+  desc="Claim Notify Request subtype for ECF messages"
+  supertype="ECFMessageClaimData_Ext">
+  <implementsEntity
+    name="Assignable"/>
+  <column
+    desc="Sequence number allocated to a request message to help the carrier to reconcile the messages received each day"
+    name="MessageSequence"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="precision"
+      value="20"/>
+    <columnParam
+      name="scale"
+      value="0"/>
+  </column>
+  <column
+    desc="Code identifying syndicate or company or broker on the claim market who takes the action"
+    name="ActionParticipant"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    name="ActionParticipantType"
+    nullok="true"
+    typelist="ECFParticipationType_Ext"/>
+  <typekey
+    name="ResponseCode"
+    nullok="true"
+    typelist="ECFResponseCode_Ext"/>
+</subtype>

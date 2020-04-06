@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    id="ClaimUserPrintDetails"
+    parent="ClaimPrintout(claim)"
+    title="DisplayKey.get(&quot;Web.ClaimUsers.UserDetails.Title&quot;, claimUserModel.User)">
+    <LocationEntryPoint
+      signature="ClaimUserPrintDetails(claim : Claim, claimUserModel : ClaimUserModel)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      name="claimUserModel"
+      type="ClaimUserModel"/>
+    <Screen
+      id="ClaimUserPrintDetailScreen">
+      <PanelRef
+        def="ClaimUserDetailDV(claimUserModel, claim)">
+        <Toolbar/>
+      </PanelRef>
+    </Screen>
+  </Page>
+</PCF>

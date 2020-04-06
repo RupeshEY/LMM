@@ -1,0 +1,20 @@
+package rules.Validation.TransactionSetValidationRules_dir
+
+@gw.rules.RuleName("TXV19000 - Disallow Reserves and Payments Until Compensability Determination")
+internal class TXV19000DisallowReservesandPaymentsUntilCompensabilityDetermination {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+/*start00rule*/
+
+return transactionSet.Claim.LossType == LossType.TC_WC
+  and (transactionSet.Subtype ==TC_RESERVESET or transactionSet.Subtype ==TC_CHECKSET)
+  and transactionSet.Transactions.hasMatch( \ tr -> tr.CostType == CostType.TC_CLAIMCOST)
+
+/*end00rule*/
+}
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+/*start00rule*/
+
+/*end00rule*/
+  }
+}

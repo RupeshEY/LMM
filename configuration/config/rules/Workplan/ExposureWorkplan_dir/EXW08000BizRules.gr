@@ -1,0 +1,18 @@
+package rules.Workplan.ExposureWorkplan_dir
+
+uses gw.bizrules.context.ExposureTriggeringPoint
+
+@gw.rules.RuleName("EXW08000 - BizRules")
+internal class EXW08000BizRules {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+/*start00rule*/
+gw.bizrules.BizRulesExecutor.getInstance().trigger(new ExposureTriggeringPoint(TriggeringPointKey.TC_CREATION, exposure))
+/*end00rule*/
+  }
+}

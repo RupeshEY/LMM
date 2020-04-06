@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ClaimSnapshotPolicyLocations700LV">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="SnapshotParam"
+      type="dynamic.Dynamic"/>
+    <Variable
+      initialValue="(SnapshotParam).Policy"
+      name="Policy"
+      type="dynamic.Dynamic"/>
+    <RowIterator
+      canPick="false"
+      editable="false"
+      elementName="PolicyLocation"
+      hasCheckBoxes="true"
+      id="PolicyLocationIterator"
+      value="Policy.PolicyLocations"
+      valueType="dynamic.Dynamic">
+      <Row>
+        <TextCell
+          action="ClaimSnapshotPolicyLocation700Popup.push(Claim, PolicyLocation)"
+          id="Location"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyLocationsLV.Location&quot;)"
+          value="PolicyLocation.LocationNumber"
+          valueType="dynamic.Dynamic"/>
+        <TextCell
+          id="Description"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyLocationsLV.Description&quot;)"
+          value="PolicyLocation.Address.Description"
+          valueType="dynamic.Dynamic"/>
+        <TextCell
+          id="Address"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyLocationsLV.Address&quot;)"
+          value="util.Snapshot.renderValue(PolicyLocation.Address)"/>
+        <TextCell
+          id="Lienholders"
+          label="DisplayKey.get(&quot;LV.Policy.Locations.Lienholders&quot;)"
+          value="util.Snapshot.renderValue(getLocationLienHolders(PolicyLocation))"/>
+        <TextCell
+          id="HighValueItems"
+          label="DisplayKey.get(&quot;LV.Policy.Locations.HasListedItems&quot;)"
+          value="hasListedItems(PolicyLocation)"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function getLocationLienHolders(policyLocation : dynamic.Dynamic) : dynamic.Dynamic {
+  var list = new java.util.ArrayList()
+  for (lienHolder in (policyLocation.Lienholders)) {
+    if(lienHolder.LocationBasedRU == null) {
+      list.add(lienHolder)
+    }
+   }
+  return list.toArray()
+}
+
+function hasListedItems(policyLocation : dynamic.Dynamic) : String {
+  if((policyLocation.HighValueItems).HasElements)
+    return YesNo.TC_YES.DisplayName
+  return YesNo.TC_NO.DisplayName  
+}]]></Code>
+  </ListViewPanel>
+</PCF>

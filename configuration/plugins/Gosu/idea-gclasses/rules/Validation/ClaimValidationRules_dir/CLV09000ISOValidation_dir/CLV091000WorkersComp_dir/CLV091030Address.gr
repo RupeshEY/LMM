@@ -1,0 +1,43 @@
+package rules.Validation.ClaimValidationRules_dir.CLV09000ISOValidation_dir.CLV091000WorkersComp_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV091030 - Address")
+internal class CLV091030Address {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.claimant != null
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+var address = claim.ClaimantDenorm.PrimaryAddress
+if(address.AddressLine1 == null or address.AddressLine1.length() == 0) {
+  claim.rejectSubField(claim.ClaimantDenorm, "PrimaryAddress.AddressLine1", TC_ISO, 
+                       DisplayKey.get("Rules.Validation.Claim.ClaimantPrimaryAddressNotEmpty", 
+                           DisplayKey.get("Rules.Validation.Claim.ContactAddress.Line1")),
+                       null, null)
+}
+
+if(address.City == null or address.City.length() == 0) {
+  claim.rejectSubField(claim.ClaimantDenorm, "PrimaryAddress.City", TC_ISO, 
+                       DisplayKey.get("Rules.Validation.Claim.ClaimantPrimaryAddressNotEmpty", 
+                           DisplayKey.get("Rules.Validation.Claim.ContactAddress.City")),
+                       null, null)
+}
+
+if(address.State == null 
+   and (address.Country == null or address.Country == TC_US or address.Country == TC_CA)) {
+  claim.rejectSubField(claim.ClaimantDenorm, "PrimaryAddress.State", TC_ISO, 
+                       DisplayKey.get("Rules.Validation.Claim.ClaimantPrimaryAddressNotEmpty", 
+                           DisplayKey.get("Rules.Validation.Claim.ContactAddress.State")),
+                       null, null)
+}
+/*end00rule*/
+
+  }
+}

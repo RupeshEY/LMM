@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A unique combination of Claim, Exposure, CostType and CostCategory against which reserves can be set and payments made."
+  entity="ReserveLine"
+  ignoreForEvents="true"
+  overwrittenInStagingTable="true"
+  table="reserveline"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.financials.impl.ReserveLineImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.impl.ReserveLineInternal"
+    impl="com.guidewire.cc.domain.financials.impl.ReserveLineImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.financials.impl.ReserveLineImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.entity.ReserveLine"
+    impl="com.guidewire.cc.domain.financials.impl.ReserveLineImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="TAccountOwnerDelegate"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.TAccountOwnerDelegateAdapter"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountOwnerDelegateAdapterReserveLineImpl"/>
+  <fulldescription><![CDATA[
+      A combination of Claim, Exposure, CostType, and CostCategory, used to categorize every Transaction on a claim.
+      Every Transaction has a ReserveLine. Claim is required, as all Transactions must be associated with a Claim.
+      Exposure can be NULL, in which case the Transaction and ReserveLine are "Claim-level". CostType and CostCategory
+      are typelists that contain values for categorizing Transactions, which can be configured for the customer's needs.
+      CostType and CostCategory cannot be NULL, but each has an Unspecified value (which may be removed during configuration).
+      <p>Every Transaction either increases or depletes reserves on a ReserveLine. Given the flexibility of Exposure being
+      null, and the two typelists being configurable, customers can track their Transactions according to their needs: all
+      Reserves and Payments could occur at the claim-level, or they could be categorized by exposure, CostType ("ClaimCost",
+      "A & O" adjusting expenses, etc) and CostCategory (Auto body repair, Legal, Vehicle Inspection, etc). Only certain
+      combinations of Exposure coverage type, CostType, and CostCategory are valid, as defined in the CostCategory.xml
+      typelist file.
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The related claim."
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"
+    setterScriptability="hidden"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="The related exposure."
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="true"
+    setterScriptability="hidden"/>
+  <typekey
+    desc="Type of cost (for example, LAE or claim cost)."
+    name="CostType"
+    nullok="false"
+    setterScriptability="hidden"
+    typelist="costtype"/>
+  <typekey
+    desc="The costcategory for this transaction."
+    name="CostCategory"
+    nullok="false"
+    setterScriptability="hidden"
+    typelist="costcategory">
+    <keyfilters>
+      <keyfilter
+        name="Exposure.PrimaryCoverage"/>
+      <keyfilter
+        name="CostType"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="Reserving Currency of this ReserveLine. Indicates the currency in which reserves are to be set aside and eroded."
+    name="ReservingCurrency"
+    nullok="false"
+    setterScriptability="hidden"
+    typelist="Currency"/>
+  <array
+    arrayentity="TAccount"
+    arrayfield="ReserveLine"
+    getterScriptability="hidden"
+    name="TAccounts"
+    owner="true"
+    setterScriptability="hidden">
+    <link-association
+      hasGetter="false">
+      <typelist-map
+        field="TAccountType"/>
+    </link-association>
+  </array>
+  <array
+    arrayentity="Transaction"
+    desc="Set of transactions that contribute to this ReserveLine."
+    getterScriptability="hidden"
+    name="Transactions"
+    setterScriptability="hidden"/>
+  <array
+    arrayentity="RICoding"
+    desc="Set of RICodings that reference this ReserveLine."
+    getterScriptability="hidden"
+    name="RICodings"
+    setterScriptability="hidden"/>
+  <array
+    arrayentity="RecoveryCoding"
+    desc="Set of RecoveryCodings that reference this ReserveLine."
+    exportable="false"
+    getterScriptability="hidden"
+    name="RecoveryCodings"
+    setterScriptability="hidden"/>
+  <index
+    desc="Every nonretired ReserveLine instance should be for a unique combination of Claim, Exposure, CostType and CostCategory"
+    name="reserveline1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="ExposureID"/>
+    <indexcol
+      keyposition="4"
+      name="CostType"/>
+    <indexcol
+      keyposition="5"
+      name="CostCategory"/>
+    <indexcol
+      keyposition="6"
+      name="ReservingCurrency"/>
+  </index>
+</entity>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Desktop Exposure view entity."
+  entity="ExposureDesktopView"
+  exportable="false"
+  final="false"
+  primaryEntity="Exposure"
+  supertypeEntity="ExposureAbstractView">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.ExposureDesktopView"
+    impl="com.guidewire.cc.domain.exposure.impl.ExposureDesktopViewImpl"/>
+  <viewEntityLink
+    name="ClaimClaimant"
+    path="Claim.ClaimantDenorm"/>
+  <viewEntityLink
+    name="Exposure"
+    path="ID"/>
+  <viewEntityLink
+    name="ExposureClaim"
+    path="Claim"/>
+</viewEntity>

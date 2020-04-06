@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A group of RITransactions."
+  entity="RITransactionSet"
+  exportable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="ritransactionset"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.financials.entity.RITransactionSet"
+    impl="com.guidewire.cc.domain.financials.impl.RITransactionSetImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.impl.RITransactionSetInternal"
+    impl="com.guidewire.cc.domain.financials.impl.RITransactionSetImpl"/>
+  <implementsEntity
+    name="Validatable"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+      A set of RI transactions created at the same time.
+  ]]></fulldescription>
+  <column
+    desc="Comments about the RI Transaction Set.  Typically, comments give some sense of why the transactions were created."
+    exportable="true"
+    name="Comments"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The claim entity to which this TransactionSet belongs."
+    exportable="true"
+    exportasid="true"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <array
+    arrayentity="RITransaction"
+    desc="RITransactions in the set."
+    exportable="true"
+    name="RITransactions"
+    triggersValidation="true"/>
+</entity>

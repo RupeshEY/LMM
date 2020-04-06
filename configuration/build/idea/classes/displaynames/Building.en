@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<Entity
+  name="Building">
+  <Columns>
+    <Column
+      beanPath="Building.BuildingNumber"
+      name="number"/>
+    <Column
+      beanPath="Building.PolicyLocation.Address"
+      displayName="true"
+      name="address"/>
+  </Columns>
+  <DisplayName><![CDATA[uses java.lang.StringBuilder
+
+var sb = new StringBuilder(gw.api.locale.DisplayKey.get("entity.Building"))
+if(number!=null) {
+  sb.append(" ").append(number)
+}
+sb.append(" ")
+  .append("(")
+  .append(address)
+  .append(")")
+return sb.toString()]]></DisplayName>
+</Entity>

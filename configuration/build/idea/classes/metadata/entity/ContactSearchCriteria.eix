@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  ContactSearchCriteria  ==================================================================== -->
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ContactSearchCriteria">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.contact.impl.ContactSearchCriteriaCoreExtMethods"
+    impl="com.guidewire.cc.domain.contact.impl.ContactSearchCriteriaCoreExtMethodsImpl"/>
+  <description><![CDATA[&lt;p&gt;
+Encapsulates the search criteria for a Contact Search. Key points in the system for contact searches
+include the Address Book search page, and "Add Existing Contacts" on the Claim Related Contacts page.&lt;/p&gt;
+&lt;p&gt;
+When searching against ContactManager, it is possible to search for Contacts by proximity. From GScript,
+this can be done most easily via {@link gw.api.geocode.GeocodeScriptHelper#setupContactCenterProximitySearch} which creates a
+&lt;code&gt;ContactSearchCriteria&lt;/code&gt; ready to perform the proximity search. Alternatively this can be done by setting
+the &lt;code&gt;ProximitySearchParameters&lt;/code&gt; on an existing &lt;code&gt;ContactSearchCriteria&lt;/code&gt;.
+&lt;/p&gt;
+@see gw.pl.contact.entity.ProximitySearchParameters
+    ]]></description>
+  <column
+    desc="Including contacts pending creation"
+    name="IncludePendingContacts"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Minimum Score for returned Contacts"
+    name="Score"
+    nullok="true"
+    type="integer"/>
+  <array
+    arrayentity="ContactSearchCriteriaTag"
+    desc="List of ContactSearchCriteriaTags."
+    name="Tags"
+    owner="true"/>
+  <column
+    default="false"
+    desc="If true, Contacts must have all the tags to match, if false, Contacts must have at least one of the tags to match."
+    name="AllTagsRequired"
+    nullok="true"
+    type="bit"/>
+  <array
+    arrayentity="SpecialistServiceSearchCriteria"
+    cascadeDelete="true"
+    desc="The list of specialist services that will be used to filter contacts."
+    name="SpecialistServiceCodes"/>
+</internalExtension>

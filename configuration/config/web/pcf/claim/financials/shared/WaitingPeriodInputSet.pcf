@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="WaitingPeriodInputSet">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Label
+      id="WaitingPeriod"
+      label="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.TTD.WaitingPeriod&quot;)"/>
+    <BooleanRadioInput
+      editable="true"
+      id="WaitingPeriodApplied"
+      label="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.WaitingPeriod.Applied&quot;)"
+      value="claim.ClaimWorkComp.WaitingPeriodApplied"/>
+    <TextInput
+      id="WaitingPeriodDays"
+      label="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.WaitingPeriod.WaitingPeriodDays&quot;)"
+      value="claim.getWCWaitingDays( null )"
+      valueType="java.lang.Double"/>
+    <TextInput
+      id="TTD_RetroactivePeriod"
+      label="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.TTD.RetroactivePeriod&quot;)"
+      value="claim.getWCRetroactiveDays( null )"
+      valueType="java.lang.Double"/>
+    <CheckBoxInput
+      id="WCDoesnotApplytoPPD"
+      label="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.WaitingPeriod.WPNotAppliedToPPD&quot;)"
+      value="claim.findWCBeneCalcRef().WPNotAppliedToPPD"
+      visible="claim.findWCBeneCalcRef().WPNotAppliedToPPD"/>
+    <CheckBoxInput
+      id="WCDoesnotApplytoPTD"
+      label="DisplayKey.get(&quot;NVV.Exposure.LostWagesBenefits.WaitingPeriod.WPNotAppliedToPTD&quot;)"
+      value="claim.findWCBeneCalcRef().WPNotAppliedToPTD"
+      visible="claim.findWCBeneCalcRef().WPNotAppliedToPTD"/>
+    <ListViewInput
+      def="EditableWaitingPeriodsLV(claim)"
+      id="WaitingPeriodDetail"
+      labelAbove="true">
+      <Toolbar>
+        <IteratorButtons
+          iterator="WaitingPeriodDetail.WaitingPeriods"/>
+      </Toolbar>
+    </ListViewInput>
+  </InputSet>
+</PCF>

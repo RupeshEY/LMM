@@ -1,0 +1,22 @@
+package rules.Workplan.ExposureWorkplan_dir.EXW05000WCInjuryExposure_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("EXW05100 - Medical Report")
+internal class EXW05100MedicalReport {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.Claim.createActivityFromPattern(
+    exposure, ActivityPattern.finder.getActivityPatternByCode("initial_med_report"))
+/*end00rule*/
+
+  }
+}

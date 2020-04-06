@@ -1,0 +1,27 @@
+package rules.Assignment.DefaultGroupExposureAssignmentRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+
+@gw.rules.RuleName("DGE02000 - Default - users in team")
+internal class DGE02000Defaultusersinteam {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.CurrentAssignment.AssignedGroup.Users.toList().hasMatch(\ aUser -> true)
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+if (exposure.CurrentAssignment.assignUserByRoundRobin(false, exposure.CurrentAssignment.AssignedGroup)) {
+  CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.DefaultGroup.Exposure", actions.ShortRuleName))
+  CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.AssignedUserIs", exposure.AssignedUser))
+  actions.exit()
+}
+/*end00rule*/
+
+  }
+}

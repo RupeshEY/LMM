@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="ClaimSnapshotBaggageIncidentScreen"
+    mode="500">
+    <Require
+      name="IncidentParam"
+      type="dynamic.Dynamic"/>
+    <Variable
+      initialValue="IncidentParam"
+      name="BaggageIncident"
+      type="dynamic.Dynamic"/>
+    <CardViewPanel
+      hideTabIfSingle="true">
+      <Card
+        id="Baggage_DetailsCard"
+        title="DisplayKey.get(&quot;Web.BaggageIncident.Details&quot;)">
+        <PanelRef
+          def="ClaimSnapshotBaggageIncident500DV(IncidentParam)"/>
+      </Card>
+    </CardViewPanel>
+  </Screen>
+</PCF>

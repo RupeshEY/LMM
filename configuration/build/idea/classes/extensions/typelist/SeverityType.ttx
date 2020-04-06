@@ -1,0 +1,241 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="The severity of the exposure"
+  name="SeverityType">
+  <typecode
+    code="minor"
+    desc="Minor"
+    name="Minor"
+    priority="1">
+    <category
+      code="InjuryIncident"
+      typelist="Incident"/>
+    <category
+      code="VehicleIncident"
+      typelist="Incident"/>
+    <category
+      code="FixedPropertyIncident"
+      typelist="Incident"/>
+    <category
+      code="MobilePropertyIncident"
+      typelist="Incident"/>
+    <category
+      code="PropertyIncident"
+      typelist="Incident"/>
+    <category
+      code="Incident"
+      typelist="Incident"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+    <category
+      code="BaggageIncident"
+      typelist="Incident"/>
+    <category
+      code="TripIncident"
+      typelist="Incident"/>
+  </typecode>
+  <typecode
+    code="moderate-gen"
+    desc="Moderate"
+    name="Moderate"
+    priority="2">
+    <category
+      code="InjuryIncident"
+      typelist="Incident"/>
+    <category
+      code="MobilePropertyIncident"
+      typelist="Incident"/>
+    <category
+      code="PropertyIncident"
+      typelist="Incident"/>
+    <category
+      code="Incident"
+      typelist="Incident"/>
+    <category
+      code="BaggageIncident"
+      typelist="Incident"/>
+    <category
+      code="TripIncident"
+      typelist="Incident"/>
+  </typecode>
+  <typecode
+    code="moderate-auto"
+    desc="Moderate (drivable)"
+    name="Moderate (drivable)"
+    priority="3">
+    <category
+      code="VehicleIncident"
+      typelist="Incident"/>
+  </typecode>
+  <typecode
+    code="moderate-prop"
+    desc="Moderate (usable)"
+    name="Moderate (usable)"
+    priority="4">
+    <category
+      code="FixedPropertyIncident"
+      typelist="Incident"/>
+  </typecode>
+  <typecode
+    code="major-gen"
+    desc="Major"
+    name="Major"
+    priority="5">
+    <category
+      code="MobilePropertyIncident"
+      typelist="Incident"/>
+    <category
+      code="PropertyIncident"
+      typelist="Incident"/>
+    <category
+      code="Incident"
+      typelist="Incident"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+    <category
+      code="TripIncident"
+      typelist="Incident"/>
+    <category
+      code="BaggageIncident"
+      typelist="Incident"/>
+  </typecode>
+  <typecode
+    code="major-auto"
+    desc="Major (not drivable)"
+    name="Major (not drivable)"
+    priority="6">
+    <category
+      code="VehicleIncident"
+      typelist="Incident"/>
+  </typecode>
+  <typecode
+    code="major-prop"
+    desc="Major (not usable)"
+    name="Major (not usable)"
+    priority="7">
+    <category
+      code="FixedPropertyIncident"
+      typelist="Incident"/>
+  </typecode>
+  <typecode
+    code="major-injury"
+    desc="Major (hospitalization)"
+    name="Major (hospitalization)"
+    priority="8">
+    <category
+      code="InjuryIncident"
+      typelist="Incident"/>
+  </typecode>
+  <typecode
+    code="severe-gen"
+    desc="Severe"
+    name="Severe"
+    priority="9">
+    <category
+      code="FixedPropertyIncident"
+      typelist="Incident"/>
+    <category
+      code="MobilePropertyIncident"
+      typelist="Incident"/>
+    <category
+      code="PropertyIncident"
+      typelist="Incident"/>
+    <category
+      code="Incident"
+      typelist="Incident"/>
+    <category
+      code="TripIncident"
+      typelist="Incident"/>
+    <category
+      code="BaggageIncident"
+      typelist="Incident"/>
+  </typecode>
+  <typecode
+    code="severe-auto"
+    desc="Possible total loss"
+    name="Possible total loss"
+    priority="10">
+    <category
+      code="VehicleIncident"
+      typelist="Incident"/>
+  </typecode>
+  <typecode
+    code="severe-injury"
+    desc="Life-threatening"
+    name="Life-threatening"
+    priority="11">
+    <category
+      code="InjuryIncident"
+      typelist="Incident"/>
+  </typecode>
+  <typecode
+    code="td"
+    desc="Temporary disability"
+    name="Temporary disability"
+    priority="12"/>
+  <typecode
+    code="pd"
+    desc="Permanent disability"
+    name="Permanent disability"
+    priority="13"/>
+  <typecode
+    code="fatal"
+    desc="Fatal"
+    name="Death"
+    priority="17">
+    <category
+      code="InjuryIncident"
+      typelist="Incident"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="medical_only"
+    desc="Became medical only"
+    name="Became medical only"
+    priority="14">
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="perm-total"
+    desc="Permanent total"
+    name="Permanent total"
+    priority="16">
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="temporary"
+    desc="Temporary"
+    name="Temporary"
+    priority="15">
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="contract-medical"
+    desc="Contract medical"
+    name="Contract medical"
+    priority="18">
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="wc-ell"
+    desc="Employer liability"
+    name="Employer liability"
+    priority="19">
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+</typelistextension>

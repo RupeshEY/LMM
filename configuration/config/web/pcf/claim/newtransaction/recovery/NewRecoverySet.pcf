@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterCancel="ClaimFinancialsTransactions.go(Claim)"
+    afterCommit="ClaimFinancialsTransactions.go(Claim, gw.api.financials.ClaimFinancialsTransactionsOption.RECOVERY)"
+    afterEnter="Claim.freezeCurrency()"
+    alwaysInEditMode="true"
+    beforeCommit="beforeCommit()"
+    canEdit="true"
+    canVisit="perm.Claim.createrecovery(Claim) and (Claim.State != ClaimState.TC_DRAFT)"
+    id="NewRecoverySet"
+    onResume="gw.api.system.bundle.BundleCommitCondition.verify(Claim)"
+    parent="Claim(Claim)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.EditRecovery.Financials.CreateRecovery&quot;)">
+    <LocationEntryPoint
+      signature="NewRecoverySet(Claim : Claim)"/>
+    <LocationEntryPoint
+      signature="NewRecoverySet(Claim : Claim, Payment : Payment)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Payment"
+      type="Payment"/>
+    <Variable
+      initialValue="gw.api.financials.FinancialsUtil.newRecovery(Claim, Payment)"
+      name="Recovery"
+      type="Recovery"/>
+    <Variable
+      initialValue="new gw.api.financials.RecoveryHelper(Recovery)"
+      name="recoveryHelper"
+      type="gw.api.financials.RecoveryHelper"/>
+    <Variable
+      initialValue="gw.api.financials.ReserveLineInputSetStrategyForNewRecovery.newHelper(recoveryHelper)"
+      name="reserveLineInputSetHelper"
+      type="gw.api.financials.ReserveLineInputSetHelper"/>
+    <Screen
+      id="NewRecoveryScreen">
+      <Toolbar>
+        <EditButtons
+          cancelLabel="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          cancelVisible="true"
+          editVisible="false"
+          updateLabel="DisplayKey.get(&quot;Button.Update&quot;)"
+          updateVisible="true"/>
+      </Toolbar>
+      <PanelRef
+        def="RecoveryDetailDV(Recovery, reserveLineInputSetHelper, recoveryHelper)"/>
+    </Screen>
+    <Code><![CDATA[function beforeCommit() {
+  gw.api.system.bundle.BundleCommitCondition.verify(Claim)
+  gw.api.financials.FinancialsUtil.preCommitRecovery(Recovery)
+}]]></Code>
+  </Page>
+</PCF>

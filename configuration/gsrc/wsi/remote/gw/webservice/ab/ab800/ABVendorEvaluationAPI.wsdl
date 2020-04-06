@@ -1,0 +1,318 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:gwsoap="http://guidewire.com/ws/soapheaders" xmlns:gwwsdl="http://guidewire.com/pl/wsdl" xmlns:pogo="http://guidewire.com/ab/ws/gw/webservice/ab/ab800/abvendorevaluationapi/ABVendorEvaluationAPIReviewSummary" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://guidewire.com/ab/ws/gw/webservice/ab/ab800/abvendorevaluationapi/ABVendorEvaluationAPI" name="ABVendorEvaluationAPI" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab800/abvendorevaluationapi/ABVendorEvaluationAPI">
+  <wsdl:types>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab800/abvendorevaluationapi/ABVendorEvaluationAPI">
+      <xs:import namespace="http://guidewire.com/ws/soapheaders" schemaLocation="soapheaders.xsd"/>
+      <xs:import namespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab800/abvendorevaluationapi/ABVendorEvaluationAPIReviewSummary"/>
+      <!-- addNewReviewSummary(ABVendorEvaluationAPIReviewSummary) : ABVendorEvaluationAPIReviewSummary -->
+      <xs:element name="addNewReviewSummary">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="reviewInfo" type="pogo:ABVendorEvaluationAPIReviewSummary"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="addNewReviewSummaryResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="pogo:ABVendorEvaluationAPIReviewSummary"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="IllegalStateException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="WsiAuthenticationException">
+        <xs:complexType/>
+      </xs:element>
+      <!-- deleteReviewSummary(String) : Boolean -->
+      <xs:element name="deleteReviewSummary">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="linkID" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="deleteReviewSummaryResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="xs:boolean"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- updateReviewScoresForContact(String) : int -->
+      <xs:element name="updateReviewScoresForContact">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="linkID" type="xs:string"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateReviewScoresForContactResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element name="return" type="xs:int"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <!-- updateReviewSummary(ABVendorEvaluationAPIReviewSummary) : ABVendorEvaluationAPIReviewSummary -->
+      <xs:element name="updateReviewSummary">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="reviewSummaryInfo" type="pogo:ABVendorEvaluationAPIReviewSummary"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="updateReviewSummaryResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="pogo:ABVendorEvaluationAPIReviewSummary"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/ab/ws/gw/webservice/ab/ab800/abvendorevaluationapi/ABVendorEvaluationAPIReviewSummary">
+      <xs:complexType name="ABVendorEvaluationAPIReviewSummary">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="associatedContact" type="xs:string"/>
+          <xs:element gw:viewas="array" minOccurs="0" name="categoryScores">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" type="xs:int"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="claimCenterUID" type="xs:string"/>
+          <xs:element minOccurs="0" name="claimNumber" type="xs:string"/>
+          <xs:element minOccurs="0" name="comments" type="xs:string"/>
+          <xs:element minOccurs="0" name="description" type="xs:string"/>
+          <xs:element minOccurs="0" name="linkID" type="xs:string"/>
+          <xs:element minOccurs="0" name="name" type="xs:string"/>
+          <xs:element minOccurs="0" name="relatedTo" type="xs:string"/>
+          <xs:element gw:viewas="array" minOccurs="0" name="reviewCategories">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="xs:string"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="reviewType" type="xs:string"/>
+          <xs:element minOccurs="0" name="reviewedBy" type="xs:string"/>
+          <xs:element minOccurs="0" name="score" type="xs:int"/>
+          <xs:element gw:type="java.util.Date" minOccurs="0" name="serviceDate" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="serviceType" type="xs:string"/>
+          <xs:element minOccurs="0" name="subContact" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:portType name="ABVendorEvaluationAPIPortType">
+    <wsdl:operation name="addNewReviewSummary">
+      <wsdl:input message="tns:addNewReviewSummary" name="addNewReviewSummary"/>
+      <wsdl:output message="tns:addNewReviewSummaryResponse" name="addNewReviewSummaryResponse"/>
+      <!-- If LinkID requirements are not met -->
+      <wsdl:fault message="tns:IllegalStateException" name="IllegalStateException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="deleteReviewSummary">
+      <wsdl:input message="tns:deleteReviewSummary" name="deleteReviewSummary"/>
+      <wsdl:output message="tns:deleteReviewSummaryResponse" name="deleteReviewSummaryResponse"/>
+      <!-- If LinkID requirements are not met -->
+      <wsdl:fault message="tns:IllegalStateException" name="IllegalStateException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="updateReviewScoresForContact">
+      <wsdl:input message="tns:updateReviewScoresForContact" name="updateReviewScoresForContact"/>
+      <wsdl:output message="tns:updateReviewScoresForContactResponse" name="updateReviewScoresForContactResponse"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="updateReviewSummary">
+      <wsdl:input message="tns:updateReviewSummary" name="updateReviewSummary"/>
+      <wsdl:output message="tns:updateReviewSummaryResponse" name="updateReviewSummaryResponse"/>
+      <!-- If LinkID requirements are not met -->
+      <wsdl:fault message="tns:IllegalStateException" name="IllegalStateException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="ABVendorEvaluationAPISoap12Binding" type="tns:ABVendorEvaluationAPIPortType">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="addNewReviewSummary">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="addNewReviewSummary">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addNewReviewSummaryResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalStateException">
+        <soap12:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteReviewSummary">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="deleteReviewSummary">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteReviewSummaryResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalStateException">
+        <soap12:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateReviewScoresForContact">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="updateReviewScoresForContact">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateReviewScoresForContactResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateReviewSummary">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="updateReviewSummary">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateReviewSummaryResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalStateException">
+        <soap12:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="ABVendorEvaluationAPISoap11Binding" type="tns:ABVendorEvaluationAPIPortType">
+    <soap11:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="addNewReviewSummary">
+      <soap11:operation style="document"/>
+      <wsdl:input name="addNewReviewSummary">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="addNewReviewSummaryResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalStateException">
+        <soap11:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="deleteReviewSummary">
+      <soap11:operation style="document"/>
+      <wsdl:input name="deleteReviewSummary">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="deleteReviewSummaryResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalStateException">
+        <soap11:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateReviewScoresForContact">
+      <soap11:operation style="document"/>
+      <wsdl:input name="updateReviewScoresForContact">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateReviewScoresForContactResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="updateReviewSummary">
+      <soap11:operation style="document"/>
+      <wsdl:input name="updateReviewSummary">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="updateReviewSummaryResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="IllegalStateException">
+        <soap11:fault name="IllegalStateException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="ABVendorEvaluationAPI">
+    <wsdl:port binding="tns:ABVendorEvaluationAPISoap12Binding" name="ABVendorEvaluationAPISoap12Port">
+      <soap12:address location="http://localhost:8280/ab/ws/gw/webservice/ab/ab800/abvendorevaluationapi/ABVendorEvaluationAPI"/>
+      <gwwsdl:address location="${ab}/ws/gw/webservice/ab/ab800/abvendorevaluationapi/ABVendorEvaluationAPI"/>
+    </wsdl:port>
+    <wsdl:port binding="tns:ABVendorEvaluationAPISoap11Binding" name="ABVendorEvaluationAPISoap11Port">
+      <soap11:address location="http://localhost:8280/ab/ws/gw/webservice/ab/ab800/abvendorevaluationapi/ABVendorEvaluationAPI/soap11"/>
+      <gwwsdl:address location="${ab}/ws/gw/webservice/ab/ab800/abvendorevaluationapi/ABVendorEvaluationAPI/soap11"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:message name="addNewReviewSummary">
+    <wsdl:part element="tns:addNewReviewSummary" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="addNewReviewSummaryResponse">
+    <wsdl:part element="tns:addNewReviewSummaryResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="IllegalStateException">
+    <wsdl:part element="tns:IllegalStateException" name="IllegalStateException"/>
+  </wsdl:message>
+  <wsdl:message name="WsiAuthenticationException">
+    <wsdl:part element="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+  </wsdl:message>
+  <wsdl:message name="deleteReviewSummary">
+    <wsdl:part element="tns:deleteReviewSummary" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="deleteReviewSummaryResponse">
+    <wsdl:part element="tns:deleteReviewSummaryResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="updateReviewScoresForContact">
+    <wsdl:part element="tns:updateReviewScoresForContact" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="updateReviewScoresForContactResponse">
+    <wsdl:part element="tns:updateReviewScoresForContactResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="updateReviewSummary">
+    <wsdl:part element="tns:updateReviewSummary" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="updateReviewSummaryResponse">
+    <wsdl:part element="tns:updateReviewSummaryResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="gw-authentication">
+    <wsdl:part element="gwsoap:authentication" name="gw-authentication"/>
+  </wsdl:message>
+  <wsdl:message name="gw-locale">
+    <wsdl:part element="gwsoap:locale" name="gw-locale"/>
+  </wsdl:message>
+</wsdl:definitions>

@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="SIDetailsDV">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="Claim.getQuestionSets(util.QuestionUtils.getAppropriateQuestionSet(Claim))"
+      name="QuestionSets"
+      type="QuestionSet[]"/>
+    <InputColumn>
+      <InputSetRef
+        def="SItriggersInputSet(Claim)"/>
+      <InputSetRef
+        def="SIinfoInputSet(Claim)"/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.Questionnaire&quot;)"/>
+      <InputSet
+        id="SIUQuestionSets"
+        visible="QuestionSets != null and QuestionSets.length != 0">
+        <InputIterator
+          elementName="QuestionSet"
+          id="SIUQuestionSetIterator"
+          value="QuestionSets"
+          valueType="entity.QuestionSet[]">
+          <InputSet
+            id="SIUQuestionSetInputSet"
+            visible="QuestionSet.isQuestionSetAvailable(Claim)">
+            <TextInput
+              boldLabel="true"
+              id="SIUQuestionSetName"
+              label="QuestionSet.Name"
+              required="false"
+              value="&quot;&quot;"/>
+            <ListViewInput
+              def="QuestionSetLV(QuestionSet, Claim)"
+              editable="(Claim.State != ClaimState.TC_CLOSED)"
+              id="SIUQuestionSetListViewInput"
+              labelAbove="true">
+              <Toolbar/>
+            </ListViewInput>
+          </InputSet>
+        </InputIterator>
+        <TextInput
+          boldLabel="true"
+          id="SIUQuestionSetTotalScore"
+          label="DisplayKey.get(&quot;NVV.Claim.SubView.SITriggersScore&quot;)"
+          value="util.QuestionUtils.getQuestionSetTotalScore(Claim, QuestionSets)"
+          valueType="java.lang.Integer"/>
+      </InputSet>
+      <InputDivider/>
+      <InputSetRef
+        def="SITotalScoreEscalationInputSet(Claim)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

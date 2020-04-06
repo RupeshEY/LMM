@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="EmploymentData">
+  <column-override
+    name="NumHoursWorked">
+    <columnParam
+      name="validator"
+      value="HoursWorkedDay"/>
+  </column-override>
+  <column-override
+    name="NumDaysWorked">
+    <columnParam
+      name="validator"
+      value="DaysWorkedWeek"/>
+  </column-override>
+</extension>

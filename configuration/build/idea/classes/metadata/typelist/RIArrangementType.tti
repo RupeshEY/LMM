@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Type of arrangement of a reinsurance agreement (Treaty or Facultative)."
+  final="true"
+  name="RIArrangementType">
+  <typecode
+    code="treaty"
+    desc="Agreement between the insurer and the reinsurer which provides for automatic reinsurance."
+    name="Treaty"
+    priority="1"/>
+  <typecode
+    code="facultative"
+    desc="Reinsurance placed on an individual case basis."
+    name="Facultative"
+    priority="2"/>
+</typelist>

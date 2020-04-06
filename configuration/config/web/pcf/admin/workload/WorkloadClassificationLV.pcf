@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    available="gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value and perm.System.wwlcview"
+    editable="gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value and perm.System.wwlcmanage"
+    id="WorkloadClassificationLV">
+    <ExposeIterator
+      flags="ActiveClassification,InactiveClassification,Row"
+      valueType="WorkloadClassification"
+      widget="WorkloadClassificationLV"/>
+    <Require
+      name="weights"
+      type="gw.api.database.IQueryBeanResult&lt;WorkloadClassification&gt;"/>
+    <RowIterator
+      editable="false"
+      elementName="classification"
+      hasCheckBoxes="true"
+      id="Classifications"
+      value="weights"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.WorkloadClassification&gt;">
+      <ToolbarFilter
+        name="WeightedAssignmentRulesFilter">
+        <ToolbarFilterOption
+          filter="gw.assignment.workload.util.WorkloadClassificationToolbarFilters.INSTANCE.all()"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.WorkloadClassificationLV.Filter.AllClassifications&quot;)"/>
+        <ToolbarFilterOption
+          filter="gw.assignment.workload.util.WorkloadClassificationToolbarFilters.INSTANCE.onlyActiveWorkloadClassifications()"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.WorkloadClassificationLV.Filter.AllActiveClassifications&quot;)"
+          selectOnEnter="true"/>
+        <ToolbarFilterOption
+          filter="gw.assignment.workload.util.WorkloadClassificationToolbarFilters.INSTANCE.onlyActiveClaimWorkloadClassifications()"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.WorkloadClassificationLV.Filter.ActiveClaimClassifications&quot;)"/>
+        <ToolbarFilterOption
+          filter="gw.assignment.workload.util.WorkloadClassificationToolbarFilters.INSTANCE.onlyClaimWorkloadClassifications()"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.WorkloadClassificationLV.Filter.AllClaimClassifications&quot;)"/>
+        <ToolbarFilterOption
+          filter="gw.assignment.workload.util.WorkloadClassificationToolbarFilters.INSTANCE.onlyActiveExposureWorkloadClassifications()"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.WorkloadClassificationLV.Filter.ActiveExposureClassifications&quot;)"/>
+        <ToolbarFilterOption
+          filter="gw.assignment.workload.util.WorkloadClassificationToolbarFilters.INSTANCE.onlyExposureWorkloadClassifications()"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.WorkloadClassificationLV.Filter.AllExposureClassifications&quot;)"/>
+      </ToolbarFilter>
+      <ToolbarFlag
+        condition="classification.Active"
+        name="ActiveClassification"/>
+      <ToolbarFlag
+        condition="not classification.Active"
+        name="InactiveClassification"/>
+      <ToolbarFlag
+        name="Row"/>
+      <Row>
+        <BooleanRadioCell
+          icon="classification.Active ? &quot;green_bullet.png&quot; : &quot;red_bullet.png&quot;"
+          iconLabel="classification.Active ? DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.Active&quot;) : DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.Inactive&quot;)"
+          id="Status"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.Status&quot;)"
+          showHeaderIcon="false"
+          sortBy="classification.Active"
+          value="true"
+          valueType="boolean"/>
+        <TextCell
+          action="WorkloadClassificationDetailPopup.drilldown(classification)"
+          id="Name"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.Name&quot;)"
+          value="classification.Name"/>
+        <TextCell
+          id="EntityAssignmentType"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.EntityAssignmentType&quot;)"
+          outputConversion="(VALUE as gw.api.assignment.workload.classifications.WorkloadClassificationMethods).AssignableType.DisplayName"
+          sortBy="classification.Subtype"
+          sortOrder="1"
+          value="classification"
+          valueType="entity.WorkloadClassification"/>
+        <TypeKeyCell
+          id="LossType"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.LossType&quot;)"
+          value="classification.ClaimLossType"
+          valueType="typekey.LossType"/>
+        <TextCell
+          id="Priority"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.Rank&quot;)"
+          sortOrder="2"
+          value="classification.Priority"
+          valueType="java.lang.Integer"/>
+        <TextCell
+          id="TotalFactor"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.TotalWeightFactor&quot;)"
+          value="classification.Weight"
+          valueType="java.lang.Integer"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

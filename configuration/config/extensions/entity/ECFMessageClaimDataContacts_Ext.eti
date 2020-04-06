@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<entity
+  desc="Entity to hold the Contact details from a ECF message containing Claim Data. These will be mapped to Claim Contact entities"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageClaimDataContacts_Ext"
+  table="ecfmsgclaimdatacntcts_ext"
+  type="retireable">
+  <column
+    name="AdjusterName"
+    nullok="true"
+    type="shorttext"></column>
+  <column
+    name="AdjusterReference"
+    nullok="true"
+    type="shorttext"></column>
+  <column
+    name="BrokerPartyName"
+    nullok="true"
+    type="shorttext"></column>
+  <column
+    name="BrokerPartyId"
+    nullok="true"
+    type="shorttext"></column>
+  <column
+    name="BrokerContactName"
+    nullok="true"
+    type="shorttext"></column>
+  <column
+    name="BrokerContactTelephone"
+    nullok="true"
+    type="shorttext"></column>
+  <column
+    desc="Bureau Leading Insurer Or Reinsurer Name"
+    name="BureauLeadInsurerOrReinsurer"
+    nullok="true"
+    type="shorttext"></column>
+  <column
+    name="InsurerId"
+    nullok="true"
+    type="shorttext"></column>
+  <column
+    name="ReinsurerId"
+    nullok="true"
+    type="shorttext"></column>
+  <column
+    name="InsurerName"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="ReinsurerName"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="InsurerAgency"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="ReinsurerAgency"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="LawyerName"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="LawyerReference"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Contact Name for Bureau Leading Insurer Or Reinsurer"
+    name="BureauLeadInsurerContactName"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Contact Phone for Bureau Leading Insurer Or Reinsurer"
+    name="BureauLeadInsurerContactPhone"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Email for Bureau Leading Insurer Or Reinsurer"
+    name="BureauLeadInsurerContactEmail"
+    nullok="true"
+    type="shorttext"/>
+</entity>

@@ -1,0 +1,23 @@
+package rules.Workplan.ClaimWorkplan_dir.CLW00100NotFirstandFinal_dir.CLW05000Propertyclaims_dir.CLW05200Newusers_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("CLW05210 - Police report")
+internal class CLW05210Policereport {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.Strategy == TC_PROP_NORMAL
+and claim.LossCause == TC_FIRE
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.createActivityFromPattern(
+    null, ActivityPattern.finder.getActivityPatternByCode("police_report"))
+/*end00rule*/
+
+  }
+}

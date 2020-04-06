@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<subtype
+  abstract="true"
+  desc="Cross market comment"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageCrossMarketComment_Ext"
+  final="false"
+  supertype="ECFMessageComment_Ext">
+  <column
+    desc="The name of the agreement party who has made the comment on the mixed bureau claim"
+    name="SyndicateName"
+    nullok="false"
+    type="shorttext"/>
+  <typekey
+    name="BureauAgency"
+    desc="The bureau that the cross market comments are related to"
+    nullok="false"
+    typelist="ECFBureauType_Ext"/>
+</subtype>

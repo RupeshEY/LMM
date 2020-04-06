@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="perm.Contact.createlocal"
+    id="AddressBookSearchNewContactPopup"
+    returnType="Contact"
+    startInEditMode="true"
+    title="gw.api.contact.NewContactUtil.getDisplayKeyForContactSubtype(contactSubtype.Code)">
+    <LocationEntryPoint
+      signature="AddressBookSearchNewContactPopup(searchCriteria : ContactSearchCriteria, contactSubtype : typekey.Contact, parentContact : Contact, claim : Claim)"/>
+    <Variable
+      name="searchCriteria"
+      type="ContactSearchCriteria"/>
+    <Variable
+      name="contactSubtype"
+      type="typekey.Contact"/>
+    <Variable
+      name="parentContact"
+      type="Contact"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="new gw.api.contact.LocationContactHandle(createNewContact())"
+      name="contactHandle"
+      type="gw.api.contact.LocationContactHandle"/>
+    <Variable
+      initialValue="gw.api.contact.ContactSystemUtil.INSTANCE.generateLinkStatus(Contact)"
+      name="linkStatus"
+      recalculateOnRefresh="true"
+      type="gw.api.contact.ContactSystemLinkStatus"/>
+    <ScreenRef
+      def="AddressBookSearchContactDetailScreen(contactHandle, true, false, linkStatus, claim)"/>
+    <Code><![CDATA[
+property get Contact() : Contact { return contactHandle.Contact; }
+
+      function createNewContact() : Contact {
+        var newContact : Contact = gw.api.contact.NewContactUtil.newContactFromSubtype(contactSubtype);
+        if (searchCriteria != null) {
+          populateContact( searchCriteria, newContact );
+        }
+        return newContact;
+      }
+
+      function populateContact( sCriteria : ContactSearchCriteria, sContact : Contact ) {
+        var populateString = "sCriteria.populate" + contactSubtype.Code + "( sContact )";
+        var e = eval( populateString );
+      }
+    ]]></Code>
+  </Popup>
+</PCF>

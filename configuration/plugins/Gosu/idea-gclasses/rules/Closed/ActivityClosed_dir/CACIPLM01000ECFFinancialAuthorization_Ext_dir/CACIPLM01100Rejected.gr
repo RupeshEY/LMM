@@ -1,0 +1,18 @@
+package rules.Closed.ActivityClosed_dir.CACIPLM01000ECFFinancialAuthorization_Ext_dir
+uses gw.acc.iplm.services.activity.ecfwb.ECFActivityCreationService
+
+@gw.rules.RuleName("CAC-IPLM01100 - Rejected")
+internal class CACIPLM01100Rejected {
+  static function doCondition(activity        :        entity.Activity) : boolean {
+/*start00rule*/
+return activity.Rejected
+/*end00rule*/
+}
+
+  static function doAction(activity        :        entity.Activity, actions : gw.rules.Action) {
+/*start00rule*/
+    new ECFActivityCreationService().createActivityForClaimResponseAuthorizationRejection(activity)
+    activity.LMMessage_Ext.Status = ECFMessageStatus_Ext.TC_REJECTED
+/*end00rule*/
+  }
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="true"
+    canVisit="perm.Activity.own and perm.System.viewdesktop"
+    id="Calendar"
+    title="DisplayKey.get(&quot;Web.Calendar&quot;)">
+    <Screen
+      id="CalendarScreen">
+      <Toolbar/>
+      <Calendar
+        calendarSource="new gw.api.calendar.DesktopMyCalendarActivitySource(null)"
+        context="/MyDesktopCalendar"/>
+    </Screen>
+  </Page>
+</PCF>

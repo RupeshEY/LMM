@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Links an status type line to a legal matter."
+  entity="LitStatusTypeLine"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="litstatustypeline"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.matter.entity.LitStatusTypeLine"
+    impl="com.guidewire.cc.domain.matter.impl.LitStatusTypeLineImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+            Represents the current state of a legal matter. It also contains the date the
+            matter entered the status and the date in which it completed the status.
+            
+    ]]></fulldescription>
+  <foreignkey
+    columnName="MatterID"
+    desc="Related matter."
+    exportable="false"
+    fkentity="Matter"
+    name="Matter"
+    nullok="false"/>
+  <typekey
+    desc="The current state of litigation."
+    name="LitigationStatus"
+    nullok="true"
+    typelist="MatterStatus"/>
+  <column
+    desc="Date the matter entered this status."
+    name="StartDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date the matter completed this status."
+    name="CompletionDate"
+    nullok="true"
+    type="datetime"/>
+</entity>

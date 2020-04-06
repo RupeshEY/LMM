@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<entity
+  desc="ECF Message Claim Notify Request Carrier"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageBulkClaim_Ext"
+  table="ecfmessagebulkclaim_ext"
+  exportable="true"
+  final="true"
+  type="retireable">
+  <implementsEntity name="Extractable"/>
+  <column
+    desc="Unique Claim Reference of the component claim which is the header for a bulk collection"
+    name="UCR"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The Transaction reference of the component transaction which is in the header for a bulk collection"
+    name="TR"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The name of the component loss"
+    name="LossName"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The date of loss for a claim, or the first date in a loss period"
+    name="LossDate"
+    nullok="true"
+    type="dateonly">
+  </column>
+  <array
+    arrayentity="ECFMessageBulkClaimDetail_Ext"
+    desc="ECF Message Claim Notify Request Carrier"
+    name="Details"/>
+  <foreignkey
+    fkentity="ECFMessageClaimData_Ext"
+    name="ECFMsg"
+    nullok="false"/>
+</entity>

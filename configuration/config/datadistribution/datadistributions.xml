@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DataDistributions xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+                   xsi:noNamespaceSchemaLocation="datadistributions.xsd">
+
+  <!--
+  <SimpleDataDistRequest table="cc_claim" description="Sample data dist request one" topN="5"
+                         query="select lobcode, count(*) count from cc_claim group by lobcode order by count desc">
+    <ResultColumn name="LOBCode"/>
+    <ResultColumn name="Count"/>
+  </SimpleDataDistRequest>
+  -->
+  
+  <!--
+  <DateDistRequest table="cc_activity" description="Test distribution by date"
+                   typekeycolumn="AssignmentStatus" datecolumn="AssignmentDate" addlcolumn="AssignedUserID"
+                   initialbinsize="29">
+    <DateBin number="19" size="179"/>
+    <DateBin number="9" size="3599"/>
+    <DateBin number="9" size="35999"/>
+    <DateBin number="2" size="35999"/>
+  </DateDistRequest>
+  -->
+</DataDistributions>

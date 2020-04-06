@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<Entity
+  name="NumericCovTerm">
+  <Columns>
+    <Column
+      beanPath="NumericCovTerm.NumericValue"
+      name="numericValue"/>
+    <Column
+      beanPath="NumericCovTerm.Units"
+      name="units"/>
+  </Columns>
+  <DisplayName><![CDATA[uses java.lang.StringBuilder
+
+var sb = new StringBuilder()
+if(numericValue!=null) {
+  sb.append(numericValue)
+  sb.append(" ")
+}
+if(units!=null) {
+  sb.append(units)
+}
+return sb.toString()]]></DisplayName>
+</Entity>

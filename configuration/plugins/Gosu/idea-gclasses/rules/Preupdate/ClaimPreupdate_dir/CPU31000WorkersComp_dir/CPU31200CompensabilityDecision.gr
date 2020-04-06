@@ -1,0 +1,25 @@
+package rules.Preupdate.ClaimPreupdate_dir.CPU31000WorkersComp_dir
+uses gw.api.util.DateUtil
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CPU31200 - Compensability Decision")
+internal class CPU31200CompensabilityDecision {
+  static function doCondition(claim  :  entity.Claim) : boolean {
+/*start00rule*/
+return claim.ClaimWorkComp != null and
+  claim.Compensable != claim.ClaimWorkComp.getOriginalValue(ClaimWorkComp#Compensable)
+/*end00rule*/
+}
+
+  static function doAction(claim  :  entity.Claim, actions : gw.rules.Action) {
+/*start00rule*/
+
+claim.addToHistory(claim.createCustomHistoryEvent( TC_DATACHANGE,
+    DisplayKey.get('Rules.PreUpdate.Claim.CompensableDecisionHistory',
+    (claim.Compensable == null ? "None" : claim.Compensable.DisplayName)) ) )
+
+claim.DateCompDcsnMade = DateUtil.currentDate()
+
+/*end00rule*/
+  }
+}

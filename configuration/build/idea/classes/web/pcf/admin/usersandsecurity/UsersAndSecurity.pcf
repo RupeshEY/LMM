@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <LocationGroup
+    canVisit="perm.Group.viewtree or perm.Role.view or perm.Region.view or perm.SecurityZone.view or perm.AuthorityLimitProfile.view or perm.Attribute.view"
+    id="UsersAndSecurity"
+    title="DisplayKey.get(&quot;Web.Admin.UsersAndSecurity&quot;)">
+    <LocationRef
+      location="AdminUserSearchPage()"/>
+    <LocationRef
+      location="AdminGroupSearchPage()"/>
+    <LocationRef
+      location="Roles()"/>
+    <LocationRef
+      location="Regions()"/>
+    <LocationRef
+      location="SecurityZones()"/>
+    <LocationRef
+      location="AuthorityLimitProfiles()"/>
+    <LocationRef
+      location="Attributes()"/>
+  </LocationGroup>
+</PCF>

@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<ClaimResponseRq Sender="insurer" Receiver="serviceprovider" xmlns="http://www.xchanging.com/claimResponse/rq/1">
+  <UUId xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1">293341a5-a935-4592-b1a9-d9d25af8ec49</UUId>
+  <AsOfDate>2016-11-07T07:28:15.792Z</AsOfDate>
+  <ReferredUUId>275e7c97-f3fd-452d-969c-15845bd4931c</ReferredUUId>
+  <InsurerTransactionReference>script-40-step-96</InsurerTransactionReference>
+  <CreationDate xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1">2016-11-08T09:20:25Z</CreationDate>
+  <Insurer>
+    <ns2:Party xmlns="" xmlns:ns2="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1" xmlns:ns3="http://www.xchanging.com/claimnotify/rq/1" xmlns:ns4="http://www.ACORD.org/Standards/AcordMsgSvc/1" xmlns:ns5="http://www.xchanging.com/wsdl/generated" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xh="http://www.xchanging.com/wsdl/ClaimService/">
+      <ns2:Id Agency="lirma">urn:lirma:C1104</ns2:Id>
+      <ns2:Name>CHUBB CUSTOM</ns2:Name>
+    </ns2:Party>
+    <Contact>
+      <PersonName xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1">Super User</PersonName>
+      <Telephone xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1">201-555-0123</Telephone>
+      <ClassUserId>CHUB01</ClassUserId>
+      <AccountCode>CHUB</AccountCode>
+    </Contact>
+  </Insurer>
+  <ServiceProvider xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1">
+    <ns2:Party xmlns="" xmlns:ns2="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1" xmlns:ns3="http://www.xchanging.com/claimnotify/rq/1" xmlns:ns4="http://www.ACORD.org/Standards/AcordMsgSvc/1" xmlns:ns5="http://www.xchanging.com/wsdl/generated" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xh="http://www.xchanging.com/wsdl/ClaimService/">
+      <ns2:Id Agency="DUNS_dun_and_bradstreet">urn:duns:236196817</ns2:Id>
+      <ns2:Name>Xchanging</ns2:Name>
+    </ns2:Party>
+  </ServiceProvider>
+  <Contract>
+    <BrokerReference xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1">B9979ECF2WB5003</BrokerReference>
+  </Contract>
+  <ClaimEntry>
+    <BrokerReference xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1">B9979001</BrokerReference>
+  </ClaimEntry>
+  <Claim>
+    <BrokerReference xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1">B9979ECF2WBSC40G</BrokerReference>
+    <ClaimType>000</ClaimType>
+    <ClaimCategoryCode>C</ClaimCategoryCode>
+    <ClaimSubCategoryCode>TC</ClaimSubCategoryCode>
+    <Indicators>
+      <SimultaneousRIPIndicator>N</SimultaneousRIPIndicator>
+      <MinorPrecautionaryIndicator>Y</MinorPrecautionaryIndicator>
+      <ChaseUpIndicator>
+        <Indicator>N</Indicator>
+      </ChaseUpIndicator>
+      <ContractualConditionsMayApplyIndicator>Y</ContractualConditionsMayApplyIndicator>
+      <AllUnderwritersToSeeFileIndicator>N</AllUnderwritersToSeeFileIndicator>
+    </Indicators>
+  </Claim>
+  <ClaimResponse>
+    <ParticipantFunction>Lead</ParticipantFunction>
+    <ClaimLineNo>1</ClaimLineNo>
+    <LeadResponse>
+      <LeadContact>
+        <PersonName xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1">Lirma Lead</PersonName>
+        <Telephone xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1">000-123-4567</Telephone>
+      </LeadContact>
+      <ContractMarket>
+        <InsurerOrReinsurer>
+          <AgreementPartyModifiedIndicator>add</AgreementPartyModifiedIndicator>
+          <Party xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1">
+            <Id Agency="lirma">urn:lirma:C1004</Id>
+            <Name>Agreement Party</Name>
+          </Party>
+        </InsurerOrReinsurer>
+        <InsurerOrReinsurer>
+          <AgreementPartyModifiedIndicator>rem</AgreementPartyModifiedIndicator>
+          <Party xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1">
+            <Id Agency="lirma">urn:lirma:C1003</Id>
+            <Name>Follower</Name>
+          </Party>
+        </InsurerOrReinsurer>
+      </ContractMarket>
+      <LirmaLead>
+        <LirmaResponse>CIR</LirmaResponse>
+        <LeadComments>
+          <CommentDetails>lead comment test</CommentDetails>
+        </LeadComments>
+      </LirmaLead>
+    </LeadResponse>
+  </ClaimResponse>
+</ClaimResponseRq>

@@ -1,0 +1,294 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="createAdjustmentTransactions()"
+    canEdit="true"
+    canVisit="canAdjust(Agreement, Claim) and perm.System.riedit"
+    id="AdjustRIRecoverablesPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Claim.Reinsurance.AdjustRIRecoverables.AdjustRecoverables&quot;)">
+    <LocationEntryPoint
+      signature="AdjustRIRecoverablesPopup(Agreement:RIAgreement, Claim:Claim)"/>
+    <Variable
+      name="Agreement"
+      type="RIAgreement"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="new gw.api.financials.CurrencyAmountPlaceholder(Claim.Currency, gw.api.financials.FinancialsCalculations.getRITotalRecoverablesAdjustments().withClaim(Claim).withRIAgreement(Agreement).Amount)"
+      name="NewAdjustedRecoverable"
+      type="gw.api.financials.CurrencyAmountPlaceholder"/>
+    <Variable
+      initialValue="new gw.api.financials.CurrencyAmountPlaceholder(Claim.Currency, gw.api.financials.FinancialsCalculations.getRITotalCededReservesAdjustments().withClaim(Claim).withRIAgreement(Agreement).Amount)"
+      name="NewAdjustedCededReserve"
+      type="gw.api.financials.CurrencyAmountPlaceholder"/>
+    <Variable
+      name="CommentsText"
+      type="String"/>
+    <Variable
+      initialValue="new gw.api.financials.CurrencyAmountPlaceholder(Claim.Currency, gw.api.financials.FinancialsCalculations.getRITotalRecoverablesNonAdjustments().withClaim(Claim).withRIAgreement(Agreement).Amount)"
+      name="NewUnadjustedRecoverable"
+      type="gw.api.financials.CurrencyAmountPlaceholder"/>
+    <Variable
+      initialValue="new gw.api.financials.CurrencyAmountPlaceholder(Claim.Currency, gw.api.financials.FinancialsCalculations.getRITotalCededReservesNonAdjustments().withClaim(Claim).withRIAgreement(Agreement).Amount)"
+      name="NewUnadjustedCededReserves"
+      type="gw.api.financials.CurrencyAmountPlaceholder"/>
+    <Variable
+      initialValue="null"
+      name="RITransactionSet"
+      type="RITransactionSet"/>
+    <Screen
+      id="AdjustRIRecoverablesScreen">
+      <Toolbar>
+        <EditButtons
+          updateLabel="DisplayKey.get(&quot;Web.Claim.Reinsurance.AdjustRIRecoverables.OK&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="AgreementDetailsDV(Agreement)"
+        editable="false"
+        mode="Agreement.Subtype"/>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextAreaInput
+            editable="true"
+            id="ReasonForAdjustment"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.AdjustRIRecoverables.ReasonForAdjustment&quot;)"
+            labelAbove="true"
+            numRows="3"
+            required="true"
+            value="CommentsText"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <ListViewPanel
+        id="RIRecoverableLV">
+        <RowSetRef
+          def="AdjustRIRecoverablesHeaderRowSet(Agreement, DisplayKey.get(&quot;Web.Claim.Reinsurance.AdjustRIRecoverables.RIRecoverable&quot;))"
+          id="RIRecoverableHeader"/>
+        <Row
+          id="RIRecoverableAmounts">
+          <CurrencyCell
+            formatType="currency"
+            id="CalculatedRecoverable"
+            value="gw.api.financials.FinancialsCalculations.getRITotalRecoverablesNonAdjustments().withClaim(Claim).withRIAgreement(Agreement).Amount"/>
+          <CurrencyCell
+            formatType="currency"
+            id="UnadjustedRecoverableDelta"
+            value="getUnadjustedRecoverableDelta()"
+            visible="Agreement typeis entity.NonProportionalRIAgreement">
+            <PostOnChange/>
+          </CurrencyCell>
+          <CurrencyCell
+            editable="Agreement.canSetUnadjustedRecoverables()"
+            formatType="currency"
+            id="NewUnadjustedRecoverable"
+            validationExpression="NewUnadjustedRecoverable.Value == null or NewUnadjustedRecoverable.Amount &gt;= 0 ? null : DisplayKey.get(&quot;Web.Claim.Reinsurance.AdjustRIRecoverables.NonNegativeAmountRequired&quot;)"
+            value="NewUnadjustedRecoverable.Value"
+            visible="Agreement.canSetUnadjustedCededReserves() or Agreement.canSetUnadjustedRecoverables()">
+            <PostOnChange
+              onChange="ensureAdjustedRecoverableValid()"/>
+          </CurrencyCell>
+          <CurrencyCell
+            formatType="currency"
+            id="PreviousAdjustments"
+            value="gw.api.financials.FinancialsCalculations.getRITotalRecoverablesAdjustments().withClaim(Claim).withRIAgreement(Agreement).Amount"/>
+          <CurrencyCell
+            formatType="currency"
+            id="AdjustedRecoverableDelta"
+            value="getAdjustedRecoverableDelta()">
+            <PostOnChange/>
+          </CurrencyCell>
+          <CurrencyCell
+            editable="(NewUnadjustedRecoverable.Value != null and NewUnadjustedRecoverable.Amount != 0) or Agreement.canAdjustRecoverables()"
+            formatType="currency"
+            id="NewRecoverableAdjustment"
+            value="NewAdjustedRecoverable.Value">
+            <PostOnChange/>
+          </CurrencyCell>
+          <CurrencyCell
+            formatType="currency"
+            id="TotalRecoverables"
+            value="getNewPaymentRecoverableTotal()"/>
+        </Row>
+        <RowSetRef
+          def="AdjustRIRecoverablesHeaderRowSet(Agreement, DisplayKey.get(&quot;Web.Claim.Reinsurance.AdjustRIRecoverables.CededReserves&quot;))"
+          id="CededReservesHeader"/>
+        <Row
+          id="CededReservesAmounts">
+          <CurrencyCell
+            formatType="currency"
+            id="OpenCededReserves"
+            value="gw.api.financials.FinancialsCalculations.getRITotalCededReservesNonAdjustments().withClaim(Claim).withRIAgreement(Agreement).Amount"/>
+          <CurrencyCell
+            formatType="currency"
+            id="UnadjustedCededReservesDelta"
+            value="getUnadjustedCededReserveDelta()"
+            visible="Agreement typeis entity.NonProportionalRIAgreement">
+            <PostOnChange/>
+          </CurrencyCell>
+          <CurrencyCell
+            editable="Agreement.canSetUnadjustedCededReserves()"
+            formatType="currency"
+            id="NewUnadjustedCededReserves"
+            validationExpression="NewUnadjustedCededReserves.Value == null or NewUnadjustedCededReserves.Amount &gt;= 0 ? null : DisplayKey.get(&quot;Web.Claim.Reinsurance.AdjustRIRecoverables.NonNegativeAmountRequired&quot;)"
+            value="NewUnadjustedCededReserves.Value"
+            visible="Agreement.canSetUnadjustedCededReserves() or Agreement.canSetUnadjustedRecoverables()">
+            <PostOnChange
+              onChange="ensureAdjustedCededReserveValid()"/>
+          </CurrencyCell>
+          <CurrencyCell
+            formatType="currency"
+            id="PreviousReserveAdjustments"
+            value="gw.api.financials.FinancialsCalculations.getRITotalCededReservesAdjustments().withClaim(Claim).withRIAgreement(Agreement).Amount"/>
+          <CurrencyCell
+            id="AdjustedCededReservesDelta"
+            value="getAdjustedCededReserveDelta()">
+            <PostOnChange/>
+          </CurrencyCell>
+          <CurrencyCell
+            editable="(NewUnadjustedCededReserves.Value != null and NewUnadjustedCededReserves.Amount != 0) or Agreement.canAdjustCededReserves()"
+            formatType="currency"
+            id="NewReserveAdjustment"
+            value="NewAdjustedCededReserve.Value">
+            <PostOnChange/>
+          </CurrencyCell>
+          <CurrencyCell
+            formatType="currency"
+            id="TotalReserves"
+            value="getNewCededReserveTotal()"/>
+        </Row>
+      </ListViewPanel>
+    </Screen>
+    <Code><![CDATA[uses gw.api.financials.CurrencyAmount
+uses gw.api.financials.FinancialsCalculations
+uses gw.api.util.CurrencyUtil
+
+function createAdjustmentTransactions() {
+  if (RITransactionSet != null) {
+    RITransactionSet.remove()
+  }
+
+  var newPayments = gw.api.util.CurrencyUtil.renderAsCurrency(getNewPaymentRecoverableTotal())
+  var newCededReserves = gw.api.util.CurrencyUtil.renderAsCurrency(getNewCededReserveTotal())
+
+  var comment =  CommentsText + "\n"
+                + DisplayKey.get("Web.Claim.Reinsurance.AdjustRIRecoverables.ReasonForAdjustment.NoteChanges", Agreement.DisplayName, 
+                                                  newPayments.Empty ? DisplayKey.get("Web.Claim.Reinsurance.AdjustRIRecoverables.ReasonForAdjustment.NoteChanges.Null") : newPayments,
+                                                  newCededReserves.Empty ? DisplayKey.get("Web.Claim.Reinsurance.AdjustRIRecoverables.ReasonForAdjustment.NoteChanges.Null") : newCededReserves)
+  RITransactionSet = Agreement.setRIFinancials(NewUnadjustedCededReserves.Amount, NewAdjustedCededReserve.Amount, NewUnadjustedRecoverable.Amount, NewAdjustedRecoverable.Amount, comment)
+}
+
+static function canAdjust(anAgreement : RIAgreement, aClaim : Claim) : Boolean {
+  return anAgreement.canAdjustCededReserves() or
+    anAgreement.canAdjustRecoverables() or
+    anAgreement.canSetUnadjustedCededReserves() or
+    anAgreement.canSetUnadjustedRecoverables()
+}
+
+function ensureAdjustedRecoverableValid() {
+  if (NewUnadjustedRecoverable.Value == null and !Agreement.canAdjustRecoverables()) {
+    NewAdjustedRecoverable.Value = null
+  }
+}
+
+function ensureAdjustedCededReserveValid() {
+  if (NewUnadjustedCededReserves.Value == null and !Agreement.canAdjustCededReserves()) {
+    NewAdjustedCededReserve.Value = null
+  }
+}
+
+function getNewPaymentRecoverableTotal() : gw.api.financials.CurrencyAmount {
+  var start = FinancialsCalculations.getRITotalRecoverablesNonAdjustments().withClaim(Claim).withRIAgreement(Agreement).Amount
+  if (NewAdjustedRecoverable.Value == null) {
+    start = FinancialsCalculations.getRITotalRecoverables().withClaim(Claim).withRIAgreement(Agreement).Amount
+  }
+  if (NewUnadjustedRecoverable.Value != null) {
+    start = NewUnadjustedRecoverable.Value
+  }
+  if (start == null) {
+    if (NewAdjustedRecoverable.Value == null) {
+      return null
+    } else {
+      return NewAdjustedRecoverable.Value
+    }
+  } else {
+    if (NewAdjustedRecoverable.Value == null) {
+      return start
+    } else {
+      return start.addStrict(NewAdjustedRecoverable.Value)
+    }
+  }
+}
+
+function getNewCededReserveTotal() : gw.api.financials.CurrencyAmount {
+  var start = FinancialsCalculations.getRITotalCededReservesNonAdjustments().withClaim(Claim).withRIAgreement(Agreement).Amount
+  if (NewAdjustedCededReserve.Value == null) {
+    start = gw.api.financials.FinancialsCalculations.getRIOpenCededReserves().withClaim(Claim).withRIAgreement(Agreement).Amount
+  }
+  if (NewUnadjustedCededReserves.Value != null) {
+    start = NewUnadjustedCededReserves.Value
+  }
+  if (start == null) {
+    if (NewAdjustedCededReserve.Value == null) {
+      return null
+    } else {
+      return NewAdjustedCededReserve.Value
+    }
+  } else {
+    if (NewAdjustedCededReserve.Value == null) {
+      return start
+    } else {
+      return start.addStrict(NewAdjustedCededReserve.Value)
+    }
+  }
+}
+
+function getUnadjustedRecoverableDelta() : CurrencyAmount {
+  if (NewUnadjustedRecoverable.Value == null) {
+    return null
+  }
+  var adjustment = NewUnadjustedRecoverable.Value
+  var previousValue = FinancialsCalculations.getRITotalRecoverablesNonAdjustments().withClaim(Claim).withRIAgreement(Agreement).Amount
+  if (previousValue == null) {
+    return adjustment
+  }
+  return adjustment.subtractStrict(previousValue)
+}
+
+function getUnadjustedCededReserveDelta() : CurrencyAmount {
+  if (NewUnadjustedCededReserves.Value == null) {
+    return null
+  }
+  var adjustment = NewUnadjustedCededReserves.Value
+  var previousValue = FinancialsCalculations.getRITotalCededReservesNonAdjustments().withClaim(Claim).withRIAgreement(Agreement).Amount
+  if (previousValue == null) {
+    return adjustment
+  }
+  return adjustment.subtractStrict(previousValue)
+}
+function getAdjustedRecoverableDelta() : CurrencyAmount {
+  if (NewAdjustedRecoverable.Value == null) {
+    return null
+  }
+  var adjustment = NewAdjustedRecoverable.Value
+  var previousValue = FinancialsCalculations.getRITotalRecoverablesAdjustments().withClaim(Claim).withRIAgreement(Agreement).Amount
+  if (previousValue == null) {
+    return adjustment
+  }
+  return adjustment.subtractStrict(previousValue)
+}
+function getAdjustedCededReserveDelta() : CurrencyAmount {
+  if (NewAdjustedCededReserve.Value == null) {
+    return null
+  }
+  var adjustment = NewAdjustedCededReserve.Value
+  var previousValue = FinancialsCalculations.getRITotalCededReservesAdjustments().withClaim(Claim).withRIAgreement(Agreement).Amount
+  if (previousValue == null) {
+    return adjustment
+  }
+  return adjustment.subtractStrict(previousValue)
+}]]></Code>
+  </Popup>
+</PCF>

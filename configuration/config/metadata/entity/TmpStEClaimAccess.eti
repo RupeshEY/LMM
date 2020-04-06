@@ -1,0 +1,91 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Tmp table that records information about users and groups that are allowed to access a claim.  Used for staging table population of objects against existing claims."
+  entity="TmpStEClaimAccess"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="tmpsteclaimaccess"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.TmpStEClaimAccess"
+    impl="com.guidewire.cc.domain.claim.impl.TmpStEClaimAccessImpl"/>
+  <column
+    desc="A foreign key to the claim."
+    name="ClaimID"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="20"/>
+  </column>
+  <column
+    desc="The permitted group.  Exactly one of GroupID, UserID, and SecurityZoneID should be non-null."
+    name="GroupID"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="20"/>
+  </column>
+  <column
+    desc="The permitted user.  Exactly one of GroupID, UserID, and SecurityZoneID should be non-null."
+    name="UserID"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="20"/>
+  </column>
+  <column
+    desc="The permitted security zone.  Exactly one of GroupID, UserID, and SecurityZoneID should be non-null."
+    name="SecurityZoneID"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="20"/>
+  </column>
+  <column
+    default="false"
+    desc="Whether this permission should be granted to everyone.  If true then GroupID, UserID, and SecurityZoneID should be null."
+    name="Anyone"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="The type of permission being granted."
+    name="Permission"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="20"/>
+  </column>
+  <!-- NOTE: This is a temp table, so no unique index is required.
+               During upgrade, we do insert/selects into this table and we could well insert duplicates
+               into the table. -->
+  <index
+    desc="Covering index to speed up staging table load of claim access control lists on existing claims"
+    name="tmpsteclaimaccess1">
+    <indexcol
+      keyposition="1"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="2"
+      name="UserID"/>
+    <indexcol
+      keyposition="3"
+      name="GroupID"/>
+    <indexcol
+      keyposition="4"
+      name="SecurityZoneID"/>
+    <indexcol
+      keyposition="5"
+      name="Anyone"/>
+    <indexcol
+      keyposition="6"
+      name="Permission"/>
+  </index>
+</entity>

@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="NewIncidentAssessItemPopup"
+    returnType="AssessmentItem"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;NVV.Incident.Vehicle.AssessmentLine&quot;, incident.DisplayName)">
+    <LocationEntryPoint
+      signature="NewIncidentAssessItemPopup(incident :Incident)"/>
+    <Variable
+      name="incident"
+      type="Incident"/>
+    <Variable
+      initialValue="incident.createAssessmentItem()"
+      name="assessmentItem"
+      type="AssessmentItem"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          pickValue="assessmentItem"/>
+      </Toolbar>
+      <PanelRef
+        def="IncidentAssessItemDetailsDV(assessmentItem)"/>
+    </Screen>
+  </Popup>
+</PCF>

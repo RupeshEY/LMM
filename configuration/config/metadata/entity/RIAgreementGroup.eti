@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Reinsurance agreements associated with a claim."
+  entity="RIAgreementGroup"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  table="riagreementgroup"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.reinsurance.entity.RIAgreementGroup"
+    impl="com.guidewire.cc.domain.reinsurance.impl.RIAgreementGroupImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.reinsurance.impl.RIAgreementGroupImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.reinsurance.impl.RIAgreementGroupImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Associates a collection of RIAgreements with a collection of Exposures for a Claim.
+    ]]></fulldescription>
+  <column
+    desc="Identifier for the risk in an external system. Null if created manually in ClaimCenterS."
+    name="ExternalRiskID"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="22"/>
+  </column>
+  <column
+    desc="Name of the risk."
+    name="RiskName"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+  </column>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Claim associated with the risk."
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <array
+    arrayentity="Exposure"
+    desc="List of exposures associated with this reinsurance risk."
+    name="Exposures"/>
+  <array
+    arrayentity="RIAgreement"
+    desc="List of reinsurance agreements associated with this agreement group."
+    name="Agreements"/>
+</entity>

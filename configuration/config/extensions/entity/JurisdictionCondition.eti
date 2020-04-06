@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Jurisdiction Classification Condition"
+  entity="JurisdictionCondition"
+  final="false"
+  priority="1"
+  supertype="ClassificationCondition">
+  <implementsInterface
+    iface="gw.api.assignment.workload.classifications.conditions.ConditionMethods"
+    impl="gw.assignment.workload.classifications.conditions.JurisdictionConditionMethodsImpl"/>
+  <array
+    arrayentity="JurisdictionConditionFilter"
+    cascadeDelete="true"
+    name="ConditionFilters"/>
+</subtype>

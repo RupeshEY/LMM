@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="RuleComparisonCommandParametersInputSet"
+    mode="generatehistoryevent">
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RuleVersionComparisonController"/>
+    <Require
+      name="commandDefinitionDiff"
+      type="gw.bizrules.diff.RuleMatchableDiffPair&lt;RuleCommandDefinition&gt;"/>
+    <InputSetRef
+    id="type"
+    def="RuleComparisonRowTypeKeyInputSet(commandDefinitionDiff.getRowAsTypeKey(gw.bizrules.ruleaction.generatehistoryevent.config.GenerateHistoryEventCommandParameterSet.Config.TYPE.Name))"/>
+    <InputSetRef
+      id="description"
+      def="RuleComparisonRowStringInputSet(commandDefinitionDiff.getRow(gw.bizrules.ruleaction.generatehistoryevent.config.GenerateHistoryEventCommandParameterSet.Config.DESCRIPTION.Name))"/>
+    <InputSetRef
+      id="related_to"
+      def="RuleComparisonRowStringInputSet(commandDefinitionDiff.getRow(gw.bizrules.ruleaction.generatehistoryevent.config.GenerateHistoryEventCommandParameterSet.Config.RELATED_TO.Name))"/>
+  </InputSet>
+</PCF>

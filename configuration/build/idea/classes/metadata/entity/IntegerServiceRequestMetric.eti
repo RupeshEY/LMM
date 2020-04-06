@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Integer based service request metric"
+  entity="IntegerServiceRequestMetric"
+  final="false"
+  supertype="ServiceRequestMetric">
+  <implementsInterface
+    iface="gw.api.metric.MetricMethods"
+    impl="gw.api.vendormanagement.metric.IntegerServiceRequestMetricMethodsImpl"/>
+  <implementsEntity
+    name="IntegerMetricDelegate"/>
+</subtype>

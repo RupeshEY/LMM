@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterEnter="initializeVariable()"
+    beforeCommit="dwellingIncident.Claim.cleanAndFinishServiceRequests(unusedServiceRequests); dwellingIncident.Claim.instructNewServiceRequests() "
+    canEdit="perm.Incident.edit(dwellingIncident)"
+    canVisit="dwellingIncident != null or Claim != null"
+    id="EditDwellingIncidentPopup"
+    startInEditMode="startInEditMode"
+    title="DisplayKey.get(&quot;Web.EditDwellingIncident.Title&quot;)">
+    <LocationEntryPoint
+      signature="EditDwellingIncidentPopup(dwellingIncident : DwellingIncident, startInEditMode : boolean)"/>
+    <LocationEntryPoint
+      signature="EditDwellingIncidentPopup(dwellingIncident : DwellingIncident)"/>
+    <LocationEntryPoint
+      signature="EditDwellingIncidentPopup(Claim: Claim, startInEditMode : boolean)"/>
+    <Variable
+      name="dwellingIncident"
+      type="DwellingIncident"/>
+    <Variable
+      initialValue="true"
+      name="startInEditMode"
+      type="boolean"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="new java.util.HashSet&lt;ServiceRequest&gt;()"
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Screen
+      id="EditDwellingIncidentScreen">
+      <TitleBar
+        icon="dwellingIncident.HeaderIcon"/>
+      <Toolbar>
+        <EditButtons/>
+        <ToolbarDivider/>
+        <PrintToolbarButton
+          hideIfEditable="true"
+          id="DwellingIncident_PrintButton"
+          label="DisplayKey.get(&quot;Button.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="DwellingIncidentCV(dwellingIncident, unusedServiceRequests)"/>
+    </Screen>
+    <Code><![CDATA[function initializeVariable() {
+  if (dwellingIncident == null) {
+    dwellingIncident = new DwellingIncident();
+    Claim.addToIncidents( dwellingIncident );
+  }
+}]]></Code>
+  </Popup>
+</PCF>

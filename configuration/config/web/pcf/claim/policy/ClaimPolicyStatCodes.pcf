@@ -1,0 +1,85 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCommit="ClaimPolicyStatCodesForward.go(Claim)"
+    autosaveable="false"
+    canEdit="gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Statcodes&quot;) and perm.Claim.edit(Claim) and perm.Policy.edit(Claim)"
+    canVisit="gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Statcodes&quot;) and perm.Policy.view(Claim) and perm.System.viewpolicy"
+    id="ClaimPolicyStatCodes"
+    title="DisplayKey.get(&quot;JSP.ClaimPolicy.Policy.Navigation.Statcodes&quot;)">
+    <LocationEntryPoint
+      signature="ClaimPolicyStatCodes(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="Claim.Policy"
+      name="Policy"
+      recalculateOnRefresh="true"
+      type="entity.Policy"/>
+    <Screen
+      id="ClaimPolicyStatCodesScreen">
+      <SearchPanel
+        cachingEnabled="false"
+        criteriaName="FilterCriteria"
+        resultsName="StatCodeList"
+        search="FilterCriteria.FilteredPolicyStatCodes.whereTypeIs(StatCode).toTypedArray()"
+        searchCriteria="var c = new PolicyStatCodeFilterCriteria(); c.Policy = Policy; return c;"
+        searchCriteriaType="entity.PolicyStatCodeFilterCriteria"
+        searchOnEnter="true"
+        searchResultsType="StatCode[]">
+        <PanelRef
+          def="StatCodeFilterDV(FilterCriteria)"/>
+        <ListDetailPanel
+          lockWhileEditing="true"
+          selectionName="StatCode"
+          selectionType="StatCode">
+          <PanelRef
+            def="StatCodesLV(StatCodeList, Claim)">
+            <Toolbar>
+              <IteratorButtons
+                addVisible="!Policy.Verified and perm.Claim.edit(Claim) and perm.Policy.edit(Claim)"
+                iterator="StatCodesLV.StatCodesLV"
+                removeLabel="DisplayKey.get(&quot;Button.Delete&quot;)"
+                removeVisible="!Policy.Verified and perm.Claim.edit(Claim) and perm.Policy.edit(Claim)"/>
+              <!-- Button which will deverify the policy -->
+              <ToolbarButton
+                action="gw.api.policy.ClaimPolicyMakeEditableUtil.makePolicyEditable(CurrentLocation, Claim)"
+                confirmMessage="DisplayKey.get(&quot;JSP.ClaimPolicyGeneral.EditVerifiedPolicy&quot;)"
+                id="ClaimPolicyStatCodes_AddMoreStatCodesButton"
+                label="DisplayKey.get(&quot;Button.AddMoreStatCodes&quot;)"
+                visible="Policy.Verified and perm.Claim.edit(Claim) and perm.Policy.edit(Claim) and perm.Policy.makeeditable(Claim)"/>
+            </Toolbar>
+          </PanelRef>
+          <CardViewPanel>
+            <Card
+              id="StatCodeDetailCard"
+              title="DisplayKey.get(&quot;Web.ClaimPolicy.StatCodeDetail&quot;)">
+              <PanelRef
+                def="StatCodeDetailDV(StatCode)">
+                <Toolbar>
+                  <!-- EDF this is an edit button which will deverify the policy and put the page into edit mode.
+                  This button doesn't appear in the struts version: the user has to deverify the policy in some other way,
+                  i.e. on the ClaimPolicyGeneral page. -->
+                  <ToolbarButton
+                    action="gw.api.policy.ClaimPolicyMakeEditableUtil.makePolicyEditable(CurrentLocation, Claim, true);"
+                    confirmMessage="DisplayKey.get(&quot;JSP.ClaimPolicyGeneral.EditVerifiedPolicy&quot;)"
+                    id="ClaimPolicyStatCodes_EditButton"
+                    label="DisplayKey.get(&quot;Button.Edit&quot;)"
+                    visible="Policy.Verified and perm.Claim.edit(Claim) and perm.Policy.edit(Claim) and perm.Policy.makeeditable(Claim)"/>
+                  <!-- standard edit buttons only visible for unverified policy -->
+                  <EditButtons
+                    cancelVisible="!Policy.Verified"
+                    editVisible="!Policy.Verified"
+                    updateVisible="!Policy.Verified"/>
+                </Toolbar>
+              </PanelRef>
+            </Card>
+          </CardViewPanel>
+        </ListDetailPanel>
+      </SearchPanel>
+    </Screen>
+  </Page>
+</PCF>

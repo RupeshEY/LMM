@@ -1,0 +1,21 @@
+package rules.EventMessage.EventFired_dir.EFR06000PolicySystemNotification_dir.EFR06100Claim_dir
+
+@gw.rules.RuleName("EFR06110 - Claim Resync")
+internal class EFR06110ClaimResync {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return messageContext.EventName == "ClaimResync"
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+gw.policy.notification.PolicySystemNotifications.resync(messageContext)
+
+/*end00rule*/
+
+  }
+}

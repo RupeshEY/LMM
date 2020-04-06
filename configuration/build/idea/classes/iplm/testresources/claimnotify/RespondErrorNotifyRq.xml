@@ -1,0 +1,59 @@
+<soapenv:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:xh="http://www.xchanging.com/wsdl/ClaimService/" xmlns:ns2="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1" xmlns:ns3="http://www.xchanging.com/claimnotify/rq/1" xmlns:ns4="http://www.ACORD.org/Standards/AcordMsgSvc/1" xmlns:ns5="http://www.xchanging.com/wsdl/generated" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+    <soapenv:Header>
+        <xh:xchangingheader>
+            <xh:Sender>
+                <xh:Party>
+                    <xh:Id>urn:duns:236196817</xh:Id>
+                </xh:Party>
+            </xh:Sender>
+            <xh:Receiver>
+                <xh:Party>
+                    <xh:Id>urn:ilu:402801</xh:Id>
+                </xh:Party>
+            </xh:Receiver>
+            <xh:MsgTypeCd>RespondErrorNotify</xh:MsgTypeCd>
+            <xh:Timestamp>2016-10-27T16:21:53.140+01:00</xh:Timestamp>
+            <xh:RequestUUId>d3cbeb2d-65dc-4a01-887c-4df942abbc88</xh:RequestUUId>
+        </xh:xchangingheader>
+        <wsse:Security soapenv:mustUnderstand="1">
+            <Signature xmlns="http://www.w3.org/2000/09/xmldsig#">
+                <SignedInfo>
+                    <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" xmlns:ds="http://www.w3.org/2000/09/xmldsig#" />
+                    <SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+                    <Reference URI="#Id-B4E2A151-9901-4F26-9BF7-4798CD38218E">
+                        <Transforms>
+                            <Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#" />
+                        </Transforms>
+                        <DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+                        <DigestValue>pYssDYDuvr9v9+69wTe2ZfLP1Aw=</DigestValue>
+                    </Reference>
+                </SignedInfo>
+                <SignatureValue>EGtpvuS95sLWNx+0QNXWKTA99masGnbNgVaFfsaQt8EiKaYHlYztheyxyQ6LKHtMQtXtuIhyybjH5JU39jAKdMmyIeeDl9ms9Im4aQqgZv4d4m7Di4KgQyObjaGi/M/hOjhdbzRzwt4bke+hqG3N2eUltI7BM75cA9cWGwRQ0rUAkne3IWXR2loKKGjAE/DdoIzXomGtVjJbixyD3ChmBPv9EIhwcxHPCbioUjnob0iA/4/60prD+u7qJk0G6Yh/iWlk0fKEg/WcxlY0ZYb4pp1rUhc9Wm9V3bHXy/ieTXr0KWIW3iOB7YGcUNdrOuQLpVK0o0v/0scBSm1sbjEBsg==</SignatureValue>
+                <KeyInfo>
+                    <wsse:SecurityTokenReference>
+                        <ds:X509Data xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+                            <ds:X509IssuerSerial>
+                                <ds:X509IssuerName>CN=COMODO RSA Domain Validation Secure Server CA,O=COMODO CA Limited,L=Salford,ST=Greater Manchester,C=GB</ds:X509IssuerName>
+                                <ds:X509SerialNumber>218837913371202335816408030592644071352</ds:X509SerialNumber>
+                            </ds:X509IssuerSerial>
+                        </ds:X509Data>
+                    </wsse:SecurityTokenReference>
+                </KeyInfo>
+            </Signature>
+        </wsse:Security>
+    </soapenv:Header>
+    <soapenv:Body wsu:Id="Id-B4E2A151-9901-4F26-9BF7-4798CD38218E">
+        <ns3:ClaimNotifyEventRq Sender="serviceprovider" Receiver="insurer">
+            <ns2:UUId>d3cbeb2d-65dc-4a01-887c-4df942abbc88</ns2:UUId>
+            <ns2:CreationDate>2016-10-21T14:02:44+01:00</ns2:CreationDate>
+            <ns3:ClaimResponseUUId>5526d2dd-0a0f-496c-9880-00a5d9307a21</ns3:ClaimResponseUUId>
+            <ns3:ErrorsAndWarnings>
+                <ns3:Result>
+                    <ns3:ErrorWarningLevel>002</ns3:ErrorWarningLevel>
+                    <ns3:ErrorCode>U053</ns3:ErrorCode>
+                    <ns3:ErrorWarningDescription>PLEASE SELECT A BUSINESS CLASS</ns3:ErrorWarningDescription>
+                </ns3:Result>
+            </ns3:ErrorsAndWarnings>
+        </ns3:ClaimNotifyEventRq>
+    </soapenv:Body>
+</soapenv:Envelope>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Entity
+  name="RecoveryCoding">
+  <Columns>
+    <Column
+      beanPath="RecoveryCoding.ReserveLine"
+      name="reserveLine"
+      sortOrder="0"/>
+    <Column
+      beanPath="RecoveryCoding.RecoveryCategory"
+      name="recoveryCategory"/>
+  </Columns>
+  <DisplayName><![CDATA[return gw.api.locale.DisplayKey.get("DisplayName.RecoveryCoding", reserveLine, recoveryCategory.DisplayName)
+]]></DisplayName>
+</Entity>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="ClaimSearchAndResetInputSet">
+    <ContentInput
+      id="searchBtns"
+      labelAbove="true">
+      <Link
+        action="gw.api.util.SearchUtil.search()"
+        default="true"
+        id="Search"
+        label="DisplayKey.get(&quot;Button.Search&quot;)"
+        shortcut="S"
+        styleClass="bigButton"
+        visible="true"/>
+      <Link
+        action="gw.api.claim.ClaimUtil.resetClaimSearchCriteria()"
+        id="Reset"
+        label="DisplayKey.get(&quot;Button.Reset&quot;)"
+        shortcut="R"
+        styleClass="bigButton"
+        visible="true"/>
+    </ContentInput>
+  </InputSet>
+</PCF>

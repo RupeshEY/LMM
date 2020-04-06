@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Abstract base view entity for efficiently displaying Claims in list views."
+  entity="ClaimAbstractView"
+  exportable="false"
+  final="false"
+  primaryEntity="Claim">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.impl.ClaimAbstractViewInternal"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimAbstractViewImpl"/>
+  <implementsInterface
+    iface="gw.cc.claim.entity.ClaimAbstractView"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimAbstractViewImpl"/>
+  <fulldescription><![CDATA[
+        Supports the efficient creation of claim lists in ClaimCenter's views. The system uses this entity to list
+        claims in the desktop, search, and team view in an optimum manner. This is a virtual entity and is not stored
+        in the database. 
+      
+    ]]></fulldescription>
+  <viewEntityColumn
+    name="ClaimNumber"
+    path="ClaimNumber"/>
+  <viewEntityTypekey
+    name="Flagged"
+    path="Flagged"/>
+  <viewEntityName
+    name="InsuredDenorm"
+    path="InsuredDenorm"/>
+  <viewEntityName
+    name="ClaimantDenorm"
+    path="ClaimantDenorm"/>
+  <viewEntityTypekey
+    name="JurisdictionState"
+    path="JurisdictionState"/>
+  <viewEntityTypekey
+    name="LOBCode"
+    path="LOBCode"/>
+  <viewEntityColumn
+    name="LossDate"
+    path="LossDate"/>
+  <viewEntityColumn
+    name="PolicyNumber"
+    path="Policy.PolicyNumber"/>
+  <viewEntityTypekey
+    name="State"
+    path="State"/>
+  <viewEntityLink
+    name="Claim"
+    path="ID"/>
+  <viewEntityLink
+    name="Insured"
+    path="InsuredDenorm"/>
+  <viewEntityTypekey
+    name="ClaimCurrency"
+    path="Currency"/>
+  <viewEntityColumn
+    name="WorkloadWeight"
+    path="WorkloadWeight"/>
+</viewEntity>

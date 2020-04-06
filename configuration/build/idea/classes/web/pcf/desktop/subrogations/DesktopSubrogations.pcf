@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Subrogation.own and perm.System.viewdesktop"
+    id="DesktopSubrogations"
+    title="DisplayKey.get(&quot;Web.DesktopSubrogations&quot;)">
+    <LocationEntryPoint
+      signature="DesktopSubrogations()"/>
+    <Screen
+      id="DesktopSubrogationsScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.DesktopSubrogations&quot;)"/>
+      <Toolbar>
+        <ToolbarButton
+          action="gw.api.print.ListViewPrintOptionPopupAction.printListViewWithOptions(&quot;SubrogationsLV&quot;)"
+          available="perm.User.printlistviews"
+          id="DesktopSubrogations_PrintButton"
+          label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+          shortcut="N"/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="AssignSubrogationPopup.push(new gw.api.subrogation.SubrogationAssignmentPopup(CheckedValues))"
+          available="perm.System.editsubrodetails"
+          flags="all CanAssignSubrogation"
+          id="DesktopSubrogations_AssignButton"
+          iterator="SubrogationsLV.SubrogationsLV"
+          label="DisplayKey.get(&quot;Web.DesktopSubrogations.Assign&quot;)"
+          shortcut="G"/>
+      </Toolbar>
+      <PanelRef
+        def="SubrogationsLV(SubrogationView.finder.findByUser(entity.User.util.CurrentUser), false)"/>
+    </Screen>
+  </Page>
+</PCF>

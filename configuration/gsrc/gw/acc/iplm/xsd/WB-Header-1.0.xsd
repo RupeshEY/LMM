@@ -1,0 +1,43 @@
+<!-- This XSD is the web service header schema for xchanging ECF services
+	Version =1.0
+	**** Last updated on: March 23, 2015 **** 
+	COPYRIGHT NOTICE: (c) 2015 XCHANGING. All Rights Reserved. -->	
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.xchanging.com/wsdl/ClaimService/" targetNamespace="http://www.xchanging.com/wsdl/ClaimService/"
+	version="1.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:complexType name="xchangingHeaderType">
+		<xs:sequence>
+			<xs:element name="Sender">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Party">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element type="xs:string" name="Id" />
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="Receiver">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Party">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element type="xs:string" name="Id" />
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element type="xs:string" name="MsgTypeCd" />
+			<xs:element type="xs:dateTime" name="Timestamp" />
+			<xs:element type="xs:string" name="ResponseUUId" minOccurs="0" />
+			<xs:element type="xs:string" name="RequestUUId" />
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="xchangingheader" type="xchangingHeaderType" />
+</xs:schema>

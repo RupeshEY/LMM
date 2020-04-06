@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Exposure">
+  <column
+    xmlns=""
+    desc="Exposure Id is used to identify exposures in an ECF WB Claim"
+    name="ECFExposureId_Ext"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="50"/>
+  </column>
+  <column
+    desc="The OCR is the Originating Claim Office Reference which can be found on messages such as SCMs"
+    name="OCR_Ext"
+    nullok="true"
+    type="shorttext"/>
+</extension>

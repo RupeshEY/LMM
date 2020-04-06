@@ -1,0 +1,13 @@
+package rules.Segmentation
+
+@gw.rules.RuleName("Exposure Segmentation Rules")
+@gw.rules.RuleSetDescription("This is the Exposure Segmentation rule set. Exposure segmentation rules are used to categorize each exposure based on complexity, severity of damage and other attributes. The results set the segment field of a exposure.")
+class ExposureSegmentationRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Exposure) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Exposure) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Exposure Segmentation Rules", ExposureSegmentationRules )
+  }
+}

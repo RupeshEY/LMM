@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ServiceRequestInvoice">
+  <events>
+    <event
+      description="Service request invoice operation is performed"
+      name="ServiceRequestInvoiceOperation_approveinvoice"/>
+    <event
+      description="Service request invoice operation is performed"
+      name="ServiceRequestInvoiceOperation_payinvoice"/>
+    <event
+      description="Service request invoice operation is performed"
+      name="ServiceRequestInvoiceOperation_rejectinvoice"/>
+    <event
+      description="Service request invoice operation is performed"
+      name="ServiceRequestInvoiceOperation_withdrawinvoice"/>
+    <event
+      description="Service request invoice operation is performed"
+      name="ServiceRequestInvoiceOperation_unpayinvoice"/>
+  </events>
+</extension>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AddressBookAttorneyAdditionalInfoInputSet"
+    mode="Attorney">
+    <Require
+      name="personVendor"
+      type="PersonVendor"/>
+    <TextInput
+      editable="true"
+      id="AttorneyLicense"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Attorney.AttorneyLicense&quot;)"
+      value="(personVendor as Attorney).AttorneyLicense"/>
+    <TypeKeyInput
+      editable="true"
+      id="AttorneySpecialty"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Attorney.AttorneySpecialty&quot;)"
+      value="(personVendor as Attorney).AttorneySpecialty"
+      valueType="typekey.LegalSpecialty"/>
+  </InputSet>
+</PCF>

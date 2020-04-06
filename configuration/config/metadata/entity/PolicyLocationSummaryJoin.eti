@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="PolicyLocationSummaryJoin"
+  entity="PolicyLocationSummaryJoin"
+  exportable="true"
+  extendable="true"
+  final="true"
+  platform="false"
+  table="policylocationsummaryjoin"
+  type="editable">
+  <implementsInterface
+    iface="gw.cc.catastrophe.entity.PolicyLocationSummaryJoin"
+    impl="com.guidewire.cc.domain.catastrophe.impl.PolicyLocationSummaryJoinImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+Join table between Claim and PolicyLocationSummary.  It exists to improve performance.
+  ]]></fulldescription>
+  <foreignkey
+    columnName="PolicyLocationSummaryID"
+    desc="Associated PolicyLocationSummary"
+    fkentity="PolicyLocationSummary"
+    name="PolicyLocationSummary"
+    nullok="false"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Associated claim."
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+</entity>

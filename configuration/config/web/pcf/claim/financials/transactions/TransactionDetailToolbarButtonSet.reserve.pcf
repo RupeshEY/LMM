@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    desc="Toolbar buttons for the Reserve Details Panel"
+    id="TransactionDetailToolbarButtonSet"
+    mode="reserve">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="Transaction"
+      type="Transaction"/>
+    <Variable
+      initialValue="(null != (Transaction as Reserve).Exposure) ? (Transaction as Reserve).Exposure : null"
+      name="exposure"
+      recalculateOnRefresh="true"
+      type="entity.Exposure"/>
+    <ToolbarButton
+      action="NewReserveSet.go(claim, (Transaction as Reserve), null)"
+      available="( !claim.Closed and (exposure == null or !exposure.Closed) ) and perm.Reserve.edit(Transaction)"
+      id="TransactionDetailToolbarButtons_EditButton"
+      label="DisplayKey.get(&quot;Button.Edit&quot;)"
+      shortcut="E"
+      visible="perm.Reserve.edit(Transaction)"/>
+    <ToolbarButton
+      action="DeleteReserveSet.go(claim, (Transaction as Reserve))"
+      available="(Transaction as Reserve).Deletable and !(Transaction as Reserve).isZeroingOffset() and perm.Reserve.edit(Transaction)"
+      id="TransactionDetailToolbarButtons_DeleteButton"
+      label="DisplayKey.get(&quot;Button.Delete&quot;)"
+      shortcut="L"
+      visible="perm.Reserve.edit(Transaction)"/>
+    <ToolbarDivider/>
+    <ToolbarButton
+      action="NormalCreateCheckWizardForward.go(claim, exposure, Transaction.CostType, Transaction.CostCategory, Transaction.ReservingCurrency, true)"
+      available="( ((Transaction as Reserve).Status != null and !(Transaction as Reserve).NotApproved)) and perm.Claim.createpayment(claim)"
+      id="TransactionDetailToolbarButtons_CreateCheckButton"
+      label="DisplayKey.get(&quot;Button.Reserve.CreateCheck&quot;)"
+      shortcut="T"
+      visible="perm.Claim.createpayment(claim)"/>
+  </ToolbarButtonSet>
+</PCF>

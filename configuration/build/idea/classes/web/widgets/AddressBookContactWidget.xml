@@ -1,0 +1,18 @@
+<WidgetTemplate name="AddressBookContactTemplate" inputWidgetName="AddressBookContactInput" cellWidgetName="AddressBookContactCell">
+
+  <TemplateAttribute name="showSearchInMenu" default="true" type="expression"/>
+  <TemplateAttribute name="forceContactSubtype" default="statictypeof (#{value})" type="expression"/>
+  <TemplateAttribute name="searchLocation" default="AddressBookPickerPopup.push(#{forceContactSubtype})" type="expression"/>
+  <TemplateAttribute name="setNoneSelected" default="#{value} = null" type="expression"/>
+  <TemplateAttribute name="parentContact" default="null" type="expression"/>
+  <TemplateAttribute name="allowEditContact" default="true" type="expression"/>
+
+  <PlainTextValue action="AddressBookContactDetailPopup.push(externalContactSource.wrap(#{value}),#{allowEditContact})" actionEnabled="#{value} != null">
+
+    <MenuItem id="MenuItem_Search" label="DisplayKey.get('Java.ContactPicker.Search')" action="#{searchLocation}" visible="&quot;#{searchLocation}&quot; != &quot;&quot; &amp;&amp; #{showSearchInMenu}" hideIfReadOnly="true"/>
+
+    <MenuItem id="MenuItem_NoneSelected" label="DisplayKey.get('Java.ContactPicker.NoneSelected')" action="#{setNoneSelected}" hideIfReadOnly="true"/>
+
+  </PlainTextValue>
+
+</WidgetTemplate>

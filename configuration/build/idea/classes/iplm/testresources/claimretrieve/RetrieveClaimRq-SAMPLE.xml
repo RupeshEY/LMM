@@ -1,0 +1,30 @@
+<wb:RetrieveClaimRq  Sender="insurer" Receiver="serviceprovider" xmlns:wb="http://www.xchanging.com/retrieveClaim/rq/1" xmlns:p1="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1" xmlns:p2="http://www.ACORD.org/Standards/AcordMsgSvc/1" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.xchanging.com/retrieveClaim/rq/1 ../../../../gsrc/gw/acc/iplm/xsd/retrieveclaim/RetrieveClaimRq.xsd http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1 ../../../../gsrc/gw/acc/iplm/xsd/Jv-Ins-Reinsurance-2014-06.xsd http://www.ACORD.org/Standards/AcordMsgSvc/1 ../../../../gsrc/gw/acc/iplm/xsd/AcordMsgSvc_base_v-1-5-0.xsd" >
+	<p1:UUId>20111803-7778-5558-bbbb-1aa00005b415</p1:UUId>
+	<p1:InsurerReference>InsurerReference</p1:InsurerReference>
+	<p1:CreationDate>2006-06-22T15:16:30+01:00</p1:CreationDate>
+	<p1:Insurer>
+			<p1:Party>
+				<p1:Id Agency="lloyds">urn:lloyds:0002</p1:Id>
+				<p1:Name>Name</p1:Name>
+			</p1:Party>
+	</p1:Insurer>
+		<p1:ServiceProvider>
+			<p1:Party>
+				<p1:Id Agency="DUNS_dun_and_bradstreet">urn:duns:236196817</p1:Id>
+				<p1:Name>Xchanging</p1:Name>
+			</p1:Party>
+		</p1:ServiceProvider>
+	<wb:ReferredObjects>
+		<wb:Contract>
+			<p1:BrokerReference>B0001UMR</p1:BrokerReference>
+		</wb:Contract>
+		<wb:Claim>
+			<p1:BrokerReference>B0001UCR</p1:BrokerReference>
+			<wb:ClaimLineNumber>1</wb:ClaimLineNumber>
+			<wb:ClaimType>001</wb:ClaimType>
+		</wb:Claim>
+		<wb:ClaimEntry>
+			<p1:BrokerReference>B0001TR</p1:BrokerReference>
+		</wb:ClaimEntry>
+	</wb:ReferredObjects>
+</wb:RetrieveClaimRq>

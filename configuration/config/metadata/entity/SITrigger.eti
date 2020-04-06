@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="SITrigger"
+  exportable="true"
+  extendable="true"
+  loadable="true"
+  platform="false"
+  table="sitrigger"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.SITrigger"
+    impl="com.guidewire.cc.domain.claim.impl.SITriggerImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Describes a trigger for a special investigation. Tracks the Claim that generated the trigger and the rule
+        which was triggered.
+      
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Foreign key to Claim entity."
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="Foreign key to exposure table."
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="true"/>
+  <column
+    default="0"
+    desc="Point value of this trigger - as defined in rules."
+    name="PointValue"
+    nullok="false"
+    type="integer"/>
+  <column
+    desc="Rule that was triggered."
+    name="TriggerDescription"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="500"/>
+  </column>
+  <column
+    desc="Additional information being tracked."
+    name="AdditionalInformation"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="500"/>
+  </column>
+</entity>

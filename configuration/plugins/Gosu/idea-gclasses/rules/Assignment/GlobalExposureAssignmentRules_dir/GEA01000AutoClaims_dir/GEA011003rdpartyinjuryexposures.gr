@@ -1,0 +1,47 @@
+package rules.Assignment.GlobalExposureAssignmentRules_dir.GEA01000AutoClaims_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+
+@gw.rules.RuleName("GEA01100 - 3rd-party injury exposures")
+internal class GEA011003rdpartyinjuryexposures {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.LossParty == TC_THIRD_PARTY and 
+exposure.ExposureType == TC_BODILYINJURYDAMAGE
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+var logger = CCLoggerCategory.ASSIGNMENT
+
+var result = libraries.Exposureassignment.getGroupTypeBasedOnExpSegment(exposure.Claim.LossType,
+                                                                        exposure.Segment)
+var primarygrouptype = result[0]
+var secondarygrouptype = result[1]
+
+if (exposure.Claim.Insured.PrimaryAddress != null) {
+  if (exposure.CurrentAssignment.assignGroupByLocation(primarygrouptype, exposure.Claim.Insured.PrimaryAddress,
+                                                       true, exposure.CurrentAssignment.AssignedGroup)) {
+    logger.debug(DisplayKey.get("Rules.Assignment.Global.Exposure", actions.ShortRuleName))
+    logger.debug(DisplayKey.get("Rules.Assignment.AssignedGroupIs", exposure.AssignedGroup))
+    actions.exit()
+  }
+}
+
+// Then try a normal team
+if (exposure.Claim.Insured.PrimaryAddress != null) {
+  if (exposure.CurrentAssignment.assignGroupByLocation(secondarygrouptype, exposure.Claim.Insured.PrimaryAddress,
+                                                       true, exposure.CurrentAssignment.AssignedGroup)) {
+    logger.debug(DisplayKey.get("Rules.Assignment.Global.Exposure", actions.ShortRuleName))
+    logger.debug(DisplayKey.get("Rules.Assignment.AssignedGroupIs", exposure.AssignedGroup))
+    actions.exit()
+  }
+}
+/*end00rule*/
+
+  }
+}

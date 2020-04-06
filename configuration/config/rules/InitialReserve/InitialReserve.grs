@@ -1,0 +1,13 @@
+package rules.InitialReserve
+
+@gw.rules.RuleName("Initial Reserve")
+@gw.rules.RuleSetDescription("This is the Initial Reserve generation rule set. These rules determine the initial financial reserves that are created for a new exposure. These rules should use Exposure.createInitialReserve() to create the new reserves. Note that any reserve added in this rule will not have a TransactionSet associated with it until ClaimCenter processes the new reserves.")
+class InitialReserve extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Exposure) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Exposure) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Initial Reserve", InitialReserve )
+  }
+}

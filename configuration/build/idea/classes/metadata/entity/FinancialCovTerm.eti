@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents a financial coverage term"
+  displayName="Financial Coverage Term"
+  entity="FinancialCovTerm"
+  supertype="CovTerm">
+  <implementsInterface
+    iface="gw.cc.policy.entity.FinancialCovTerm"
+    impl="com.guidewire.cc.domain.policy.impl.FinancialCovTermImpl"/>
+  <fulldescription/>
+  <column
+    desc="Financial amount"
+    name="FinancialAmount"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="CoverageCurrency"/>
+  </column>
+</subtype>

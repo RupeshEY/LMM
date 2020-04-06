@@ -1,0 +1,38 @@
+package rules.Preupdate.ExposurePreupdate_dir.EPU10000WorkloadAssignmentBalancing_dir
+
+uses gw.assignment.workload.rules.ExposureWorkloadPreupdateRuleActions
+
+@gw.rules.RuleName("EPU10400 - New Exposure")
+internal class EPU10400NewExposure {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return
+/*
+ * Condition: The exposure is new (it previously had no assignee)
+ */
+exposure.New
+  or
+(exposure.isFieldChanged("AssignedUser") and exposure.getOriginalValue("AssignedUser") == null)
+
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+// Find the assigned user, that user's workload will be affected by this change
+var user = exposure.AssignedUser
+
+// Logging of this rule will be categorized under "Assignment"
+var logger = gw.api.system.CCLoggerCategory.ASSIGNMENT_WEIGHTED_WORKLOAD
+if (logger.DebugEnabled) {
+  logger.debug(actions.getRule().DisplayName + " - Exposure '" + ExposureWorkloadPreupdateRuleActions.getExposureNameForLogging(exposure) + "' created - updating user '" + user.Credential.UserName + "' workload")
+}
+
+ExposureWorkloadPreupdateRuleActions.updateUserWorkloadOnNewExposure(exposure)
+/*end00rule*/
+
+  }
+}

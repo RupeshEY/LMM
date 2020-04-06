@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="ClaimSearchScreen">
+    <Require
+      name="archiveSearchEnabled"
+      type="boolean"/>
+    <Variable
+      initialValue="&quot;ClaimSearchResultsLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <SearchPanel
+      criteriaName="criteriaWrapper"
+      maxSearchResults="gw.api.search.MaxSearchResults.forClaims()"
+      resultCachingEnabled="false"
+      resultsName="claimSearchResults"
+      search="new gw.api.name.SearchNameOwner(criteriaWrapper.Criteria.NameCriteria).clearNonvisibleFields(); return criteriaWrapper.Criteria.performAdvancedSearchWithoutSummary()"
+      searchCriteria="gw.api.claim.ClaimUtil.getClaimSearchCriteria()"
+      searchCriteriaType="gw.cc.claim.ClaimSearchCriteriaWrapper"
+      searchOnEnter="true"
+      searchOnRefresh="false"
+      searchResultsType="gw.api.search.ClaimSearchResults">
+      <PanelRef
+        def="ClaimSearchDV(criteriaWrapper.Criteria, archiveSearchEnabled)"/>
+      <PanelRef
+        def="ClaimSearchResultsLV(claimSearchResults)"
+        mode="criteriaWrapper.Criteria.ClaimSearchType.Code">
+        <TitleBar
+          appendListViewPaging="true"
+          title="DisplayKey.get(&quot;JSP.ClaimSearch.Search.Results&quot;)"/>
+        <Toolbar>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="AssignClaimsPopup.push(new gw.api.claim.ClaimAssignmentPopup(CheckedValues.cast(ClaimSearchView)))"
+            id="ClaimSearchScreen_AssignButton"
+            iterator="ClaimSearchResultsLV.ClaimSearchResultsIterator"
+            label="DisplayKey.get(&quot;Web.ClaimSearch.Toolbar.Assign&quot;)"
+            shortcut="G"
+            visible="!isArchived(criteriaWrapper.Criteria)"/>
+          <ToolbarDivider/>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="ArchiveClaimRetrievePopup.push(new gw.api.claim.ClaimArchiveRestoreSet(CheckedValues))"
+            flags="all RetrievableClaim"
+            id="ClaimSearchScreen_RetrieveButton"
+            iterator="ClaimSearchResultsLV.ClaimSearchResultsIterator"
+            label="DisplayKey.get(&quot;Web.ClaimSearch.Toolbar.Retrieve&quot;)"
+            shortcut="R"
+            visible="isArchived(criteriaWrapper.Criteria)"/>
+          <ToolbarDivider/>
+          <ToolbarButton
+            action="gw.api.print.ListViewPrintOptionPopupAction.printListViewOnlyWithOptions(PrintTargetLV, DisplayKey.get(&quot;JSP.ClaimSearch.Search.Results&quot;), null)"
+            available="perm.User.printlistviews"
+            id="ClaimSearchScreen_PrintButton"
+            label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+            shortcut="N"/>
+        </Toolbar>
+      </PanelRef>
+    </SearchPanel>
+    <Code><![CDATA[function isArchived(csc : ClaimSearchCriteria) : boolean {
+      return csc.ClaimSearchType == ClaimSearchType.TC_ARCHIVED;
+      }]]></Code>
+  </Screen>
+</PCF>

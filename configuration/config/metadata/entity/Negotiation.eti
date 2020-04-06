@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A negotiation for a claim or a part of a claim."
+  entity="Negotiation"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="negotiation"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.Negotiation"
+    impl="com.guidewire.cc.domain.claim.impl.NegotiationImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.impl.NegotiationInternal"
+    impl="com.guidewire.cc.domain.claim.impl.NegotiationImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.CommitCallback"
+    impl="com.guidewire.cc.domain.claim.impl.NegotiationImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.ClaimContactRoleOwner"
+    impl="com.guidewire.cc.domain.claim.impl.NegotiationImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.relatedto.RelatedToBean"
+    impl="com.guidewire.cc.domain.relatedto.RelatedToBeanImpl"/>
+  <implementsEntity
+    name="ClaimContactRoleOwner"/>
+  <fulldescription><![CDATA[
+        Contains details related to a negotiated settlement for a claim or part of claim. This entity tracks the
+        Contacts involved in the negotiation, summarizes basic arguments, and financial figures.
+      
+    ]]></fulldescription>
+  <column
+    desc="The name or subject of this negotiation."
+    name="Name"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="128"/>
+  </column>
+  <column
+    desc="The target amount of negotiated settlement."
+    name="TargetOffer"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="The rationale for the proposed target offer."
+    name="Rationale"
+    nullok="true"
+    type="longtext"/>
+  <column
+    desc="The maximum offer the owner is willing to settle for before rethinking the strategy."
+    name="MaxOffer"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="An assessment of the total liability for this negotiation."
+    name="LiabilityEval"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Related claim."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <!-- Exposure, claimant are mutually exclusive -->
+  <foreignkey
+    columnName="ExposureID"
+    desc="Related exposure."
+    exportable="false"
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="true"/>
+  <foreignkey
+    columnName="ClaimContactID"
+    desc="Related claimant (either a person or a company)."
+    exportable="false"
+    fkentity="ClaimContact"
+    name="ClaimContact"
+    nullok="true"
+    triggersValidation="true"/>
+  <foreignkey
+    columnName="MatterID"
+    desc="Related matter."
+    exportable="false"
+    fkentity="Matter"
+    name="Matter"
+    nullok="true"/>
+  <foreignkey
+    columnName="ServiceRequestID"
+    desc="Associated service request"
+    exportasid="true"
+    fkentity="ServiceRequest"
+    name="ServiceRequest"
+    nullok="true"/>
+  <array
+    arrayentity="NegotiationLine"
+    desc="A list of demands, offers, and couteroffers related to this negotiation."
+    name="SettleNegotiation"
+    triggersValidation="true"/>
+  <array
+    arrayentity="NegotiationText"
+    desc="The list of texts related to this negotiation; for example arguments, settlemnet plan, etc."
+    name="Text"
+    owner="true"
+    triggersValidation="true"/>
+  <events/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.RequiredRolesDBCheckBuilder"/>
+</entity>

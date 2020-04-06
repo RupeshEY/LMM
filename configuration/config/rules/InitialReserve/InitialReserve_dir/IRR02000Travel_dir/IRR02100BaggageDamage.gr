@@ -1,0 +1,20 @@
+package rules.InitialReserve.InitialReserve_dir.IRR02000Travel_dir
+
+@gw.rules.RuleName("IRR02100 - Baggage Damage")
+internal class IRR02100BaggageDamage {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ExposureType == TC_BAGGAGE
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

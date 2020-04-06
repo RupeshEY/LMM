@@ -1,0 +1,13 @@
+package rules.Archive
+
+@gw.rules.RuleName("Default Group Claim Archiving Rules")
+@gw.rules.RuleSetDescription("Use this ruleset to prevent an otherwise-eligible claim from being archived. This ruleset is invoked immediately before a claim gets archived, after internal archiveability criteria have been met. To 'skip' a claim from archiving during this pass (the claim is only temporarily unarchiveable), rules in this ruleset can call claim.skipFromArchiving(String), which terminates the ruleset execution. To 'exclude' the claim from archiving during this and future passes (the claim is semi-permanently unarchiveable), call claim.reportArchivingProbem(String), which does not terminate the ruleset execution.")
+class DefaultGroupClaimArchivingRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Claim) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Claim) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Default Group Claim Archiving Rules", DefaultGroupClaimArchivingRules )
+  }
+}

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="RecoveryReservesSummaryDV">
+    <ExposeIterator
+      flags="Removeable"
+      name="EditableRecoveryReservesLV"
+      valueType="entity.TransactionEditWrapper"
+      widget="EditableRecoveryReservesLV.EditableRecoveryReservesLV"/>
+    <Require
+      name="NewRecoveryReserveSet"
+      type="gw.api.financials.RecoveryReserveWizardHelper"/>
+    <InputColumn>
+      <ListViewInput
+        boldLabel="true"
+        def="EditableRecoveryReservesLV(NewRecoveryReserveSet)"
+        editable="true"
+        labelAbove="true">
+        <Toolbar/>
+      </ListViewInput>
+    </InputColumn>
+    <InputFooterSection>
+      <ListViewInput
+        boldLabel="true"
+        def="TransactionSetDocumentsLV(NewRecoveryReserveSet.WorkingTransactionSet)"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoveryReservesSummary.RecoveryReserveSet.Documents&quot;)"
+        labelAbove="true"
+        visible="perm.System.viewdocs">
+        <Toolbar/>
+      </ListViewInput>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="ReinsuranceFlaggedStatus">
+  <typecode
+    code="SystemFlagged"
+    desc="Reinsurance reportable set by the system"
+    name="System Flagged"
+    priority="1"/>
+  <typecode
+    code="UserFlagged"
+    desc="Reinsurance reportable set by the user"
+    name="User Flagged"
+    priority="2"/>
+  <typecode
+    code="UserUnflagged"
+    desc="Reinsurance reportable unset by the user"
+    name="User Unflagged"
+    priority="3"/>
+  <typecode
+    code="SystemUnflagged"
+    desc="Reinsurance reportable set by the system"
+    name="System Unflagged"
+    priority="4"/>
+</typelistextension>

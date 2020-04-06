@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="CustomerServiceTierAdmin.go()"
+    afterCommit="CustomerServiceTierAdmin.go()"
+    canEdit="true"
+    id="NewCustomerServiceTier"
+    parent="CustomerServiceTierAdmin()"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Admin.CustomerServiceTier.NewCustomerServiceTier&quot;)">
+    <Variable
+      initialValue="initializeCustomerServiceTier()"
+      name="aCustomerServiceTierSpecialHandling"
+      type="CustomerServiceTierSpecialHandling"/>
+    <ScreenRef
+      def="CustomerServiceTierDetailScreen(aCustomerServiceTierSpecialHandling, false)"/>
+    <Code><![CDATA[uses gw.api.database.Query
+
+// Create a new policy program and associated special handler.
+function initializeCustomerServiceTier() : CustomerServiceTierSpecialHandling {
+  var newCustomerServiceTier = new CustomerServiceTierSpecialHandling()
+  return newCustomerServiceTier
+}
+]]></Code>
+  </Page>
+</PCF>

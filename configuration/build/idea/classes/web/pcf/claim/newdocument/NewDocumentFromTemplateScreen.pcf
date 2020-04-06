@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="NewDocumentFromTemplateScreen">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="docInit"
+      type="util.document.DocumentInitWrapper"/>
+    <Require
+      name="template"
+      type="gw.plugin.document.IDocumentTemplateDescriptor"/>
+    <Require
+      name="activity"
+      type="Activity"/>
+    <Variable
+      name="documentCCContext"
+      type="gw.document.DocumentCCContext"
+      initialValue="new gw.document.DocumentCCContext(Claim, docInit.Init, false)"/>
+    <Variable
+      initialValue="documentCCContext.createDocumentCreationInfo(template)"
+      name="docCreationInfo"
+      type="gw.document.DocumentCreationInfo"/>
+    <Toolbar>
+      <ToolbarButtonSetRef
+        toolbarButtonSet="DocumentCreationToolbarButtonSet(documentCCContext,docCreationInfo)"/>
+    </Toolbar>
+    <PanelRow>
+      <PanelColumn>
+        <PanelRef
+          def="NewTemplateDocumentDV(documentCCContext, docCreationInfo, docCreationInfo.Document, Claim, activity)"
+          widgets="NewDocumentFromTemplateScreen"/>
+      </PanelColumn>
+      <PanelColumn>
+        <PanelRef
+          def="DocumentDetailsEditDVPanelSet(new gw.document.DocumentDetailsCCHelper(docCreationInfo.Document), true)"/>
+      </PanelColumn>
+    </PanelRow>
+  </Screen>
+</PCF>

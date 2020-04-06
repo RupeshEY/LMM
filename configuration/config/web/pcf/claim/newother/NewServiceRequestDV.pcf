@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="NewServiceRequestDV">
+    <Require
+      name="serviceRequest"
+      type="ServiceRequest"/>
+    <Require
+      name="doNotAllowIncidentSelection"
+      type="boolean"/>
+    <Require
+      name="incidentsToExclude"
+      type="java.util.Collection&lt;Incident&gt;"/>
+    <Variable
+      initialValue="false"
+      name="incidentsRemoved"
+      type="boolean"/>
+    <InputColumn>
+      <RangeInput
+        editable="true"
+        hideIfReadOnly="true"
+        id="RelatedTo"
+        label="DisplayKey.get(&quot;Web.ServiceRequest.RelatesTo&quot;)"
+        optionGroupLabel="gw.pcf.RelatedToUtil.getServiceRequestOptionGroupLabel(VALUE as KeyableBean)"
+        optionLabel="gw.pcf.RelatedToUtil.getServiceRequestOptionLabel(VALUE as KeyableBean)"
+        required="true"
+        sortValueRange="false"
+        value="serviceRequest.RelatedTo"
+        valueRange="serviceRequest.getRelatedToCandidates(incidentsToExclude.toList())"
+        valueType="gw.pl.persistence.core.Bean"
+        visible="not serviceRequest.IsPromotion and not doNotAllowIncidentSelection">
+        <PostOnChange
+          onChange="removeIncompatibleServices()"
+          target="NewServiceRequestDV"/>
+      </RangeInput>
+      <ContentInput
+        visible="incidentsRemoved">
+        <Link
+          icon="gw.vendormanagement.ServiceRequestStatus.ATTENTION.Icon"
+          id="IncompatibleServicesAlert"/>
+        <Link
+          id="IncompatibleServicesAlertText"
+          label="DisplayKey.get(&quot;Web.ServiceRequest.RelatesToChangeIncompatibleWithSpecialistService&quot;)"/>
+      </ContentInput>
+      <TextInput
+        id="RelatedToName"
+        label="DisplayKey.get(&quot;Web.ServiceRequest.RelatesTo&quot;)"
+        value="serviceRequest.RelatedToName"
+        visible="serviceRequest.IsPromotion or (serviceRequest.Incident != null and doNotAllowIncidentSelection)"/>
+      <InputDivider/>
+      <ListViewInput
+        def="InstructionServicesLV(serviceRequest, true)"
+        editable="true"
+        label="DisplayKey.get(&quot;Web.ServiceRequest.ServiceToPerform&quot;)"
+        labelAbove="true"
+        mode="serviceRequest.Incident.ID // InstructionServicesLV has only a default mode.  Specifying it here as the Incident's ID forces it to redraw &amp; reload the data whenever a different Incident is selected, allowing us to add an remove LV rows programmatically.">
+        <Toolbar>
+          <AddButton
+            conversionExpression="addServicesFromPopup(PickedValue)"
+            id="AddMultipleServices"
+            iterator="InstructionServicesLV.InstructionServicesLV"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.SelectServices.Add&quot;)"
+            pickLocation="SelectServicesPopup.push(serviceRequest)"/>
+          <IteratorButtons
+            addVisible="false"
+            iterator="InstructionServicesLV.InstructionServicesLV"/>
+        </Toolbar>
+      </ListViewInput>
+      <RangeInput
+        editable="not serviceRequest.IsPromotion"
+        id="Kind"
+        label="DisplayKey.get(&quot;Web.ServiceRequest.Kind&quot;)"
+        optionLabel="VALUE.Label"
+        required="true"
+        value="serviceRequest.Kind"
+        valueRange="serviceRequest.AvailableKinds"
+        valueType="typekey.ServiceRequestKind">
+        <PostOnChange/>
+      </RangeInput>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.ServiceRequest.SpecialistHeading&quot;)"/>
+      <ClaimContactInput
+        claim="serviceRequest.Claim"
+        editable="true"
+        hideIfReadOnly="true"
+        id="Specialist"
+        label="DisplayKey.get(&quot;Web.ServiceRequest.SpecialistName&quot;)"
+        newContactMenu="ClaimNewServiceRequestSpecialistPickerMenuItemSet"
+        onPick="serviceRequest.initializeCommMethod()"
+        required="true"
+        specialistServices="serviceRequest.Instruction.Services*.Service.toList()"
+        value="serviceRequest.SpecialistAndCreateClaimContact"
+        valueRange="serviceRequest.Claim.servicerequestspecialist"
+        visible="not serviceRequest.IsPromotion">
+        <PostOnChange
+          onChange="serviceRequest.initializeCommMethod()"/>
+      </ClaimContactInput>
+      <TextInput
+        action="ClaimContactDetailPopup.push(serviceRequest.Specialist, serviceRequest.Claim)"
+        actionAvailable="serviceRequest.Specialist != null"
+        id="SpecialistName"
+        label="DisplayKey.get(&quot;Web.ServiceRequest.SpecialistName&quot;)"
+        value="serviceRequest.SpecialistName"
+        visible="serviceRequest.IsPromotion"/>
+      <TextInput
+        id="SpecialistPhone"
+        label="DisplayKey.get(&quot;Web.ServiceRequest.SpecialistPhone&quot;)"
+        value="serviceRequest.Specialist.PrimaryPhoneValue"
+        visible="serviceRequest.Specialist != null"/>
+      <TextInput
+        hideIfEditable="true"
+        id="SpecialistAddress"
+        label="DisplayKey.get(&quot;Web.Address.Default.Name&quot;)"
+        value="serviceRequest.Specialist.PrimaryAddress"
+        valueType="entity.Address"
+        visible="serviceRequest.Specialist != null"/>
+      <TypeKeyInput
+        id="SpecialistCommMethod"
+        label="DisplayKey.get(&quot;Web.ServiceRequest.SpecialistCommMethod&quot;)"
+        required="false"
+        value="serviceRequest.SpecialistCommMethod"
+        valueType="typekey.SpecialistCommMethod"
+        visible="serviceRequest.Specialist != null"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.ServiceRequest.InstructionsForSpecialist&quot;)"/>
+      <InputSetRef
+        def="NewServiceRequestInstructionInputSet(serviceRequest, null, null)"
+        mode="&quot;default&quot;"/>
+    </InputColumn>
+    <Code><![CDATA[uses java.util.ArrayList
+uses gw.api.util.DisplayableException
+
+function removeIncompatibleServices() {
+  var instruction = serviceRequest.Instruction
+  if (serviceRequest.SpecialistServicesIncompatibleWithIncident.HasElements) {
+    incidentsRemoved = true
+    serviceRequest.SpecialistServicesIncompatibleWithIncident.each( \ is -> instruction.removeFromServices(is))
+  } else {
+    incidentsRemoved = false
+  }
+}
+
+function addServicesFromPopup(pickedValue: SpecialistService[]): ServiceRequestInstructionService[] {
+  incidentsRemoved = false
+  var newSpecialistServices = new ArrayList<ServiceRequestInstructionService>()  
+  pickedValue.each( \ ss -> newSpecialistServices.add(serviceRequest.Instruction.addService(ss)))
+  
+  serviceRequest.updateKindBasedOnSpecialistServicesSelection()
+  return newSpecialistServices?.toTypedArray()
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

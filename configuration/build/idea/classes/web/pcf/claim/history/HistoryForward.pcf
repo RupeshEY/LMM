@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Forward
+    canVisit="(history.BulkInvoice != null ) || (history.TransactionSet != null  &amp;&amp;  (history.TransactionSet.Subtype!=TC_CHECKSET || (history.TransactionSet as CheckSet).PrimaryCheck != null))"
+    id="HistoryForward">
+    <LocationEntryPoint
+      signature="HistoryForward(history : History)"/>
+    <Variable
+      name="history"
+      type="History"/>
+    <Variable
+      initialValue="history.Claim"
+      name="claim"
+      recalculateOnRefresh="true"
+      type="entity.Claim"/>
+    <ForwardCondition
+      action="EditBulkInvoiceDetail.go(history.BulkInvoice)"
+      condition="history.BulkInvoice!=null"/>
+    <ForwardCondition
+      action="ClaimFinancialsTransactionsDetail.go(claim, history.FirstPayment)"
+      condition="history.TransactionSet.Subtype==TC_CHECKSET"/>
+    <!-- action="go:CheckDetail" -->
+    <ForwardCondition
+      action="ClaimFinancialsTransactionsDetail.go(claim, history.FirstTransaction)"
+      condition="history.TransactionSet.Subtype==TC_RESERVESET"/>
+    <!-- action="go:ReserveDetail" -->
+    <ForwardCondition
+      action="ClaimFinancialsTransactionsDetail.go(claim, history.FirstTransaction)"
+      condition="history.TransactionSet.Subtype==TC_RECOVERYSET"/>
+    <!-- action="go:RecoveryDetail" -->
+    <ForwardCondition
+      action="ClaimFinancialsTransactionsDetail.go(claim, history.FirstTransaction)"
+      condition="history.TransactionSet.Subtype==TC_RECOVERYRESERVESET"/>
+  </Forward>
+</PCF>

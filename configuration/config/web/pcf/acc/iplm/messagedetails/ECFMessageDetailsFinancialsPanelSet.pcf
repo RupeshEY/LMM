@@ -1,0 +1,1244 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="ECFMessageDetailsFinancialsPanelSet">
+    <Require
+      name="claimDataMsg"
+      type="ECFMessageClaimData_Ext"/>
+    <Variable
+      name="helper"
+      type="gw.acc.iplm.utils.pcf.messagedetails.ECFMessageDetailsFinancialsPCFHelper"
+      initialValue="new gw.acc.iplm.utils.pcf.messagedetails.ECFMessageDetailsFinancialsPCFHelper(claimDataMsg)"/>
+    <Variable
+      name="financial1"
+      type="ECFMessageClaimDataFinancial_Ext"
+      initialValue="helper.Financial1"/>
+    <Variable
+      name="financial2"
+      type="ECFMessageClaimDataFinancial_Ext"
+      initialValue="helper.Financial2"/>
+    <Variable
+      name="financial3"
+      type="ECFMessageClaimDataFinancial_Ext"
+      initialValue="helper.Financial3"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <Label
+          id="SyndicateDetails"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.SyndicateDetailsTitle&quot;)"/>
+        <TextInput
+          id="CurrentSyndicate"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.CurrentSyndicate&quot;)"
+          value="claimDataMsg.ReceiverPartyId.split(&quot;:&quot;).last()"
+          visible="claimDataMsg.ReceiverPartyId != null"/>
+        <TextInput
+          id="CurrentSyndicateShare"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.SyndicateShare&quot;)"
+          value="claimDataMsg.InsurerSharePercentage.stripTrailingZeros() + &quot;%&quot;"
+          visible="claimDataMsg.InsurerSharePercentage != null"/>
+        <TextInput
+          desc="Transaction/Broker Reference"
+          id="Financial1OutstandingAmountQualifierLbl"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.OutstandingAmountQualifier&quot;)"
+          value="claimDataMsg.OutstandingAmountQualifier.DisplayName"
+          visible="claimDataMsg.OutstandingAmountQualifier != null"/>
+        <TextInput
+          id="Financial1OriginalSplitReferenceCSVLbl"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.OriginalSplitReferenceCSV&quot;)"
+          value="helper.convertOSNDCsvToFormattedOSNDs(claimDataMsg.OriginalSplitReferenceCSV)"
+          visible="claimDataMsg.OriginalSplitReferenceCSV != null"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <PanelRow>
+      <PanelColumn>
+        <DetailViewPanel>
+          <InputColumn>
+            <Label
+              id="fullsharelabel"
+              label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.Share100&quot;)"
+              visible="helper.isLessThanFullShare()"/>
+            <ListViewInput
+              boldLabel="true"
+              labelAbove="true">
+              <Toolbar/>
+              <ListViewPanel
+                id="FinancialMovementLV">
+                <RowIterator
+                  canPick="false"
+                  editable="true"
+                  elementName="name"
+                  value="{'tableActingAsFields'}"
+                  valueType="java.lang.String[]">
+                  <Row
+                    visible="financial1.FguAmountIncurred != null or financial2.FguAmountIncurred != null or financial3.FguAmountIncurred != null">
+                    <TextCell
+                      enableSort="false"
+                      id="Financial1FguAmountIncurredLbl"
+                      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.FinancialDetailsTitle&quot;)"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.FguAmountIncurred&quot;)"/>
+                    <MonetaryAmountCell
+                      enableSort="false"
+                      id="Financial1FguAmountIncurred"
+                      desc="fgu_amount_of_loss_incurred_by_all_layers_or_policies_from_zero"
+                      label="financial1.Currency.getDisplayName()"
+                      value="financial1.FguAmountIncurred"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      enableSort="false"
+                      id="Financial2FguAmountIncurred"
+                      desc="fgu_amount_of_loss_incurred_by_all_layers_or_policies_from_zero"
+                      label="financial2.Currency.getDisplayName()"
+                      value="financial2.FguAmountIncurred"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      enableSort="false"
+                      id="Financial3FguAmountIncurred"
+                      desc="fgu_amount_of_loss_incurred_by_all_layers_or_policies_from_zero"
+                      label="financial3.Currency.getDisplayName()"
+                      value="financial3.FguAmountIncurred"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.FguNarrative != null">
+                    <TextAreaCell
+                      id="Financial1FguNarrativeLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.FguNarrative&quot;)"/>
+                    <TextAreaCell
+                      colspan="3"
+                      id="Financial1FguNarrative"
+                      desc="FguNarrative"
+                      value="financial1.FguNarrative"
+                      visible="helper.HasFinancial1"/>
+                  </Row>
+                  <Row
+                    visible="financial1.LossAndExpensesIncurred != null or financial2.LossAndExpensesIncurred != null or financial3.LossAndExpensesIncurred != null">
+                    <TextCell
+                      id="Financial1LossAndExpensesIncurredLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.LossAndExpensesIncurred&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1LossAndExpensesIncurred"
+                      desc="loss_and_expense_incurred_for_contract_before_retention"
+                      value="financial1.LossAndExpensesIncurred"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2LossAndExpensesIncurred"
+                      desc="loss_and_expense_incurred_for_contract_before_retention"
+                      value="financial2.LossAndExpensesIncurred"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3LossAndExpensesIncurred"
+                      desc="loss_and_expense_incurred_for_contract_before_retention"
+                      value="financial3.LossAndExpensesIncurred"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.OutstandingLossPlus != null or financial2.OutstandingLossPlus != null or financial3.OutstandingLossPlus != null">
+                    <TextCell
+                      id="Financial1Lbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.OutstandingLossPlus&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1"
+                      desc="outstanding_loss_plus_expense_for_contract_before_retention"
+                      value="financial1.OutstandingLossPlus"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2"
+                      desc="outstanding_loss_plus_expense_for_contract_before_retention"
+                      value="financial2.OutstandingLossPlus"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3"
+                      desc="outstanding_loss_plus_expense_for_contract_before_retention"
+                      value="financial3.OutstandingLossPlus"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.FullCostsPaidBefoRetent != null or financial2.FullCostsPaidBefoRetent != null or financial3.FullCostsPaidBefoRetent != null">
+                    <TextCell
+                      id="Financial1FullCostsPaidBeforeRetentionLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.FullCostsPaidBeforeRetention&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1FullCostsPaidBeforeRetention"
+                      desc="100_percent_losses_and_expenses_paid_for_contract_before_retention"
+                      value="financial1.FullCostsPaidBefoRetent"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2FullCostsPaidBeforeRetention"
+                      desc="100_percent_losses_and_expenses_paid_for_contract_before_retention"
+                      value="financial2.FullCostsPaidBefoRetent"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3FullCostsPaidBeforeRetention"
+                      desc="100_percent_losses_and_expenses_paid_for_contract_before_retention"
+                      value="financial3.FullCostsPaidBefoRetent"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.CurrentCostsForContract != null or financial2.CurrentCostsForContract != null or financial3.CurrentCostsForContract != null">
+                    <TextCell
+                      id="Financial1CurrentCostsForContractLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.CurrentCostsForContract&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1CurrentCostsForContract"
+                      desc="current_payment_losses_and_expenses_for_contract"
+                      value="financial1.CurrentCostsForContract"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2CurrentCostsForContract"
+                      desc="current_payment_losses_and_expenses_for_contract"
+                      value="financial2.CurrentCostsForContract"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3CurrentCostsForContract"
+                      desc="current_payment_losses_and_expenses_for_contract"
+                      value="financial3.CurrentCostsForContract"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.CurrentLossesForContract != null or financial2.CurrentLossesForContract != null or financial3.CurrentLossesForContract != null">
+                    <TextCell
+                      id="Financial1CurrentLossesForContractLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.CurrentLossesForContract&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1CurrentLossesForContract"
+                      desc="current_payment_losses_for_the_contract"
+                      value="financial1.CurrentLossesForContract"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2CurrentLossesForContract"
+                      desc="current_payment_losses_for_the_contract"
+                      value="financial2.CurrentLossesForContract"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3CurrentLossesForContract"
+                      desc="current_payment_losses_for_the_contract"
+                      value="financial3.CurrentLossesForContract"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.ProfAdvisorFeesOutstanding != null or financial2.ProfAdvisorFeesOutstanding != null or financial3.ProfAdvisorFeesOutstanding != null">
+                    <TextCell
+                      id="Financial1ProfessionalAdvisorFeesOutstandingLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.ProfessionalAdvisorFeesOutstanding&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1ProfessionalAdvisorFeesOutstanding"
+                      desc="ProfessionalAdvisorFeesOutstanding"
+                      value="financial1.ProfAdvisorFeesOutstanding"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2ProfessionalAdvisorFeesOutstanding"
+                      desc="ProfessionalAdvisorFeesOutstanding"
+                      value="financial2.ProfAdvisorFeesOutstanding"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3ProfessionalAdvisorFeesOutstanding"
+                      desc="ProfessionalAdvisorFeesOutstanding"
+                      value="financial3.ProfAdvisorFeesOutstanding"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.ProfAdvisorFeesCurPayment != null or financial2.ProfAdvisorFeesCurPayment != null or financial3.ProfAdvisorFeesCurPayment != null">
+                    <TextCell
+                      id="Financial1ProfessionalAdvisorFeesCurrentPaymentLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.ProfessionalAdvisorFeesCurrentPayment&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1ProfessionalAdvisorFeesCurrentPayment"
+                      desc="ProfessionalAdvisorFeesCurrentPayment"
+                      value="financial1.ProfAdvisorFeesCurPayment"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2ProfessionalAdvisorFeesCurrentPayment"
+                      desc="ProfessionalAdvisorFeesCurrentPayment"
+                      value="financial2.ProfAdvisorFeesCurPayment"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3ProfessionalAdvisorFeesCurrentPayment"
+                      desc="ProfessionalAdvisorFeesCurrentPayment"
+                      value="financial3.ProfAdvisorFeesCurPayment"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.LeadReserveAmount != null or financial2.LeadReserveAmount != null or financial3.LeadReserveAmount != null">
+                    <TextCell
+                      id="Financial1LeadReserveAmountLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.LeadReserveAmount&quot;)"/>
+                    <MonetaryAmountCell
+                      enableSort="false"
+                      id="Financial1LeadReserveAmount"
+                      desc="LeadReserveAmount"
+                      value="financial1.LeadReserveAmount"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      enableSort="false"
+                      id="Financial2LeadReserveAmount"
+                      desc="LeadReserveAmount"
+                      value="financial2.LeadReserveAmount"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      enableSort="false"
+                      id="FinancialLeadReserveAmount"
+                      desc="LeadReserveAmount"
+                      value="financial3.LeadReserveAmount"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.LeadReserveFees != null or financial2.LeadReserveFees != null or financial3.LeadReserveFees != null">
+                    <TextCell
+                      id="Financial1LeadReserveFeesLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.LeadReserveFees&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1LeadReserveFees"
+                      desc="LeadReserveFees"
+                      value="financial1.LeadReserveFees"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2LeadReserveFees"
+                      desc="LeadReserveFees"
+                      value="financial2.LeadReserveFees"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3LeadReserveFees"
+                      desc="LeadReserveFees"
+                      value="financial3.LeadReserveFees"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.ReinsuredReleasedAmount != null or financial2.ReinsuredReleasedAmount != null or financial3.ReinsuredReleasedAmount != null">
+                    <TextCell
+                      id="Financial1ReinsuredReleasedAmountLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.ReinsuredReleasedAmount&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1ReinsuredReleasedAmount"
+                      desc="ReinsuredReleasedAmount"
+                      value="financial1.ReinsuredReleasedAmount"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2ReinsuredReleasedAmount"
+                      desc="ReinsuredReleasedAmount"
+                      value="financial2.ReinsuredReleasedAmount"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3ReinsuredReleasedAmount"
+                      desc="ReinsuredReleasedAmount"
+                      value="financial3.ReinsuredReleasedAmount"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.ReinsuredRetainedAmount != null or financial2.ReinsuredRetainedAmount != null or financial3.ReinsuredRetainedAmount != null">
+                    <TextCell
+                      id="Financial1ReinsuredRetainedAmountLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.ReinsuredRetainedAmount&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1ReinsuredRetainedAmount"
+                      desc="ReinsuredRetainedAmount"
+                      value="financial1.ReinsuredRetainedAmount"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2ReinsuredRetainedAmount"
+                      desc="ReinsuredRetainedAmount"
+                      value="financial2.ReinsuredRetainedAmount"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="FinancialReinsuredRetainedAmount"
+                      desc="ReinsuredRetainedAmount"
+                      value="financial3.ReinsuredRetainedAmount"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.ReinsuredRetainedInterest != null or financial2.ReinsuredRetainedInterest != null or financial3.ReinsuredRetainedInterest != null">
+                    <TextCell
+                      id="Financial1ReinsuredRetainedInterestLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.ReinsuredRetainedInterest&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1ReinsuredRetainedInterest"
+                      desc="ReinsuredRetainedInterest"
+                      value="financial1.ReinsuredRetainedInterest"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2ReinsuredRetainedInterest"
+                      desc="ReinsuredRetainedInterest"
+                      value="financial2.ReinsuredRetainedInterest"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3ReinsuredRetainedInterest"
+                      desc="ReinsuredRetainedInterest"
+                      value="financial3.ReinsuredRetainedInterest"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.SettlementTax != null or financial2.SettlementTax != null or financial3.SettlementTax != null">
+                    <TextCell
+                      id="Financial1SettlementTaxLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.SettlementTax&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1SettlementTax"
+                      desc="SettlementTax"
+                      value="financial1.SettlementTax"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2SettlementTax"
+                      desc="SettlementTax"
+                      value="financial2.SettlementTax"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3SettlementTax"
+                      desc="SettlementTax"
+                      value="financial3.SettlementTax"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.SettlementVat != null or financial2.SettlementVat != null or financial3.SettlementVat != null">
+                    <TextCell
+                      id="Financial1SettlementVatLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.SettlementVat&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1SettlementVat"
+                      desc="SettlementVat"
+                      value="financial1.SettlementVat"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2SettlementVat"
+                      desc="SettlementVat"
+                      value="financial2.SettlementVat"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3SettlementVat"
+                      desc="SettlementVat"
+                      value="financial3.SettlementVat"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.ImportedServicesAmount != null or financial2.ImportedServicesAmount != null or financial3.ImportedServicesAmount != null">
+                    <TextCell
+                      id="Financial1ImportedServicesAmountLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.ImportedServicesAmount&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1ImportedServicesAmount"
+                      desc="ImportedServicesAmount"
+                      value="financial1.ImportedServicesAmount"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2ImportedServicesAmount"
+                      desc="ImportedServicesAmount"
+                      value="financial2.ImportedServicesAmount"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3ImportedServicesAmount"
+                      desc="ImportedServicesAmount"
+                      value="financial3.ImportedServicesAmount"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.ImportedServicesNarrative != null">
+                    <TextCell
+                      id="Financial1ImportedServicesNarrativeLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.ImportedServicesNarrative&quot;)"/>
+                    <TextCell
+                      colspan="3"
+                      id="Financial1ImportedServicesNarrative"
+                      desc="ImportedServicesNarrative"
+                      value="financial1.ImportedServicesNarrative"
+                      visible="helper.HasFinancial1"/>
+                  </Row>
+                  <Row
+                    visible="financial1.LetterOfCreditAmount != null or financial2.LetterOfCreditAmount != null or financial3.LetterOfCreditAmount != null">
+                    <TextCell
+                      id="Financial1LetterOfCreditAmountLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.LetterOfCreditAmount&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1LetterOfCreditAmount"
+                      desc="LetterOfCreditAmount"
+                      value="financial1.LetterOfCreditAmount"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2LetterOfCreditAmount"
+                      desc="LetterOfCreditAmount"
+                      value="financial2.LetterOfCreditAmount"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3LetterOfCreditAmount"
+                      desc="LetterOfCreditAmount"
+                      value="financial3.LetterOfCreditAmount"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.LetterOfCreditReference != null">
+                    <TextCell
+                      id="Financial1LetterOfCreditReferenceLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.LetterOfCreditReference&quot;)"/>
+                    <TextCell
+                      colspan="3"
+                      id="Financial1LetterOfCreditReference"
+                      desc="LetterOfCreditReference"
+                      value="financial1.LetterOfCreditReference"
+                      visible="helper.HasFinancial1"/>
+                  </Row>
+                  <Row
+                    visible="financial1.SettlementAmount != null or financial2.SettlementAmount != null or financial3.SettlementAmount != null">
+                    <TextCell
+                      id="Financial1SettlementAmountLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.SettlementAmount&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1SettlementAmount"
+                      desc="SettlementAmount"
+                      value="financial1.SettlementAmount"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2SettlementAmount"
+                      desc="SettlementAmount"
+                      value="financial2.SettlementAmount"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3SettlementAmount"
+                      desc="SettlementAmount"
+                      value="financial3.SettlementAmount"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.Outstanding != null or financial2.Outstanding != null or financial3.Outstanding != null">
+                    <TextCell
+                      id="Financial1OutstandingLbl"
+                      desc="Outstanding"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.Outstanding&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1Outstanding"
+                      desc="Outstanding"
+                      value="financial1.Outstanding"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2Outstanding"
+                      desc="Outstanding"
+                      value="financial2.Outstanding"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3Outstanding"
+                      desc="Outstanding"
+                      value="financial3.Outstanding"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.PreviouslyPaid != null or financial2.PreviouslyPaid != null or financial3.PreviouslyPaid != null">
+                    <TextCell
+                      id="Financial1PreviouslyPaidLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.PreviouslyPaid&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1PreviouslyPaid"
+                      desc="PreviouslyPaid"
+                      value="financial1.PreviouslyPaid"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2PreviouslyPaid"
+                      desc="PreviouslyPaid"
+                      value="financial2.PreviouslyPaid"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3PreviouslyPaid"
+                      desc="PreviouslyPaid"
+                      value="financial3.PreviouslyPaid"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.Incurred != null or financial2.Incurred != null or financial3.Incurred != null">
+                    <TextCell
+                      id="Financial1IncurredLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.Incurred&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1Incurred"
+                      desc="Incurred"
+                      value="financial1.Incurred"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2Incurred"
+                      desc="Incurred"
+                      value="financial2.Incurred"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3Incurred"
+                      desc="Incurred"
+                      value="financial3.Incurred"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.Vat != null or financial2.Vat != null or financial3.Vat != null">
+                    <TextCell
+                      id="Financial1VatLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.Vat&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1Vat"
+                      desc="Vat"
+                      value="financial1.Vat"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2Vat"
+                      desc="Vat"
+                      value="financial2.Vat"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3Vat"
+                      desc="Vat"
+                      value="financial3.Vat"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.CurrentPaid != null or financial2.CurrentPaid != null or financial3.CurrentPaid != null">
+                    <TextCell
+                      id="Financial1CurrentPaidLbl"
+                      desc="CurrentPaid"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.CurrentPaid&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1CurrentPaid"
+                      desc="CurrentPaid"
+                      value="financial1.CurrentPaid"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2CurrentPaid"
+                      desc="CurrentPaid"
+                      value="financial2.CurrentPaid"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3CurrentPaid"
+                      desc="CurrentPaid"
+                      value="financial3.CurrentPaid"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.CurrentAgreeded != null or financial2.CurrentAgreeded != null or financial3.CurrentAgreeded != null">
+                    <TextCell
+                      id="Financial1CurrentAgreeded"
+                      desc="CurrentAgreeded"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.CurrentAgreeded&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1CurrentAgreededLbl"
+                      desc="CurrentAgreeded"
+                      value="financial1.CurrentAgreeded"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2CurrentAgreeded"
+                      desc="CurrentAgreeded"
+                      value="financial2.CurrentAgreeded"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3CurrentAgreeded"
+                      desc="CurrentAgreeded"
+                      value="financial3.CurrentAgreeded"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.AgreedNotSettled != null or financial2.AgreedNotSettled != null or financial3.AgreedNotSettled != null">
+                    <TextCell
+                      id="Financial1AgreedNotSettledLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.AgreedNotSettled&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1AgreedNotSettled"
+                      desc="AgreedNotSettled"
+                      value="financial1.AgreedNotSettled"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2AgreedNotSettled"
+                      desc="AgreedNotSettled"
+                      value="financial2.AgreedNotSettled"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3AgreedNotSettled"
+                      desc="AgreedNotSettled"
+                      value="financial3.AgreedNotSettled"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.ClaimLastPaid != null or financial2.ClaimLastPaid != null or financial3.ClaimLastPaid != null">
+                    <TextCell
+                      id="Financial1ClaimLastPaidLbl"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.ClaimLastPaid&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1ClaimLastPaid"
+                      desc="ClaimLastPaid"
+                      value="financial1.ClaimLastPaid"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2ClaimLastPaid"
+                      desc="ClaimLastPaid"
+                      value="financial2.ClaimLastPaid"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3ClaimLastPaid"
+                      desc="ClaimLastPaid"
+                      value="financial3.ClaimLastPaid"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                  <Row
+                    visible="financial1.ClaimAgreedNotSettled != null or financial2.ClaimAgreedNotSettled != null or financial3.ClaimAgreedNotSettled != null">
+                    <TextCell
+                      id="Financial1ClaimAgreedNotSettledLbl"
+                      desc="ClaimAgreedNotSettled"
+                      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.ClaimAgreedNotSettled&quot;)"/>
+                    <MonetaryAmountCell
+                      id="Financial1ClaimAgreedNotSettled"
+                      desc="ClaimAgreedNotSettled"
+                      value="financial1.ClaimAgreedNotSettled"
+                      visible="helper.HasFinancial1"/>
+                    <MonetaryAmountCell
+                      id="Financial2ClaimAgreedNotSettled"
+                      desc="ClaimAgreedNotSettled"
+                      value="financial2.ClaimAgreedNotSettled"
+                      visible="helper.HasFinancial2"/>
+                    <MonetaryAmountCell
+                      id="Financial3ClaimAgreedNotSettled"
+                      desc="ClaimAgreedNotSettled"
+                      value="financial3.ClaimAgreedNotSettled"
+                      visible="helper.HasFinancial3"/>
+                  </Row>
+                </RowIterator>
+              </ListViewPanel>
+            </ListViewInput>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelColumn>
+      <PanelColumn
+        visible="helper.isLessThanFullShare()">
+        <DetailViewPanel>
+          <InputColumn>
+            <Label
+              id="yoursharelabel"
+              label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Financial.YourShare&quot;, claimDataMsg.InsurerSharePercentage.stripTrailingZeros())"/>
+            <ListViewInput
+              boldLabel="true"
+              labelAbove="true">
+              <Toolbar/>
+              <ListViewPanel
+                id="FinancialMovement2LV">
+                <RowIterator
+                  canPick="false"
+                  editable="true"
+                  elementName="name"
+                  value="{'tableActingAsFields'}"
+                  valueType="java.lang.String[]">
+                  <Row
+                    visible="financial1.FguAmountIncurred != null or financial2.FguAmountIncurred != null or financial3.FguAmountIncurred != null">
+                    <MonetaryAmountCell
+                      enableSort="false"
+                      id="Financial1FguAmountIncurredCarrier"
+                      desc="fgu_amount_of_loss_incurred_by_all_layers_or_policies_from_zero"
+                      label="financial1.Currency.getDisplayName()"
+                      value="financial1.FguAmountIncurred?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      enableSort="false"
+                      id="Financial2FguAmountIncurredCarrier"
+                      desc="fgu_amount_of_loss_incurred_by_all_layers_or_policies_from_zero"
+                      label="financial2.Currency.getDisplayName()"
+                      value="financial2.FguAmountIncurred?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      enableSort="false"
+                      id="Financial3FguAmountIncurredCarrier"
+                      desc="fgu_amount_of_loss_incurred_by_all_layers_or_policies_from_zero"
+                      label="financial3.Currency.getDisplayName()"
+                      value="financial3.FguAmountIncurred?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.FguNarrative != null">
+                    <TextAreaCell
+                      id="Financial1FguNarrative"
+                      desc="FguNarrative"
+                      value="financial1.FguNarrative"
+                      visible="helper.HasFinancial1"/>
+                  </Row>
+                  <Row
+                    visible="financial1.LossAndExpensesIncurred != null or financial2.LossAndExpensesIncurred != null or financial3.LossAndExpensesIncurred != null">
+                    <MonetaryAmountCell
+                      id="Financial1LossAndExpensesIncurredCarrier"
+                      desc="loss_and_expense_incurred_for_contract_before_retention"
+                      value="financial1.LossAndExpensesIncurred?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2LossAndExpensesIncurredCarrier"
+                      desc="loss_and_expense_incurred_for_contract_before_retention"
+                      value="financial2.LossAndExpensesIncurred?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3LossAndExpensesIncurredCarrier"
+                      desc="loss_and_expense_incurred_for_contract_before_retention"
+                      value="financial3.LossAndExpensesIncurred?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.OutstandingLossPlus != null or financial2.OutstandingLossPlus != null or financial3.OutstandingLossPlus != null">
+                    <MonetaryAmountCell
+                      id="Financial1Carrier"
+                      desc="outstanding_loss_plus_expense_for_contract_before_retention"
+                      value="financial1.OutstandingLossPlus?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2Carrier"
+                      desc="outstanding_loss_plus_expense_for_contract_before_retention"
+                      value="financial2.OutstandingLossPlus?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3Carrier"
+                      desc="outstanding_loss_plus_expense_for_contract_before_retention"
+                      value="financial3.OutstandingLossPlus?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.FullCostsPaidBefoRetent != null or financial2.FullCostsPaidBefoRetent != null or financial3.FullCostsPaidBefoRetent != null">
+                    <MonetaryAmountCell
+                      id="Financial1FullCostsPaidBeforeRetentionCarrier"
+                      desc="100_percent_losses_and_expenses_paid_for_contract_before_retention"
+                      value="financial1.FullCostsPaidBefoRetent?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2FullCostsPaidBeforeRetentionCarrier"
+                      desc="100_percent_losses_and_expenses_paid_for_contract_before_retention"
+                      value="financial2.FullCostsPaidBefoRetent?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3FullCostsPaidBeforeRetentionCarrier"
+                      desc="100_percent_losses_and_expenses_paid_for_contract_before_retention"
+                      value="financial3.FullCostsPaidBefoRetent?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.CurrentCostsForContract != null or financial2.CurrentCostsForContract != null or financial3.CurrentCostsForContract != null">
+                    <MonetaryAmountCell
+                      id="Financial1CurrentCostsForContractCarrier"
+                      desc="current_payment_losses_and_expenses_for_contract"
+                      value="financial1.CurrentCostsForContract?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2CurrentCostsForContractCarrier"
+                      desc="current_payment_losses_and_expenses_for_contract"
+                      value="financial2.CurrentCostsForContract?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3CurrentCostsForContractCarrier"
+                      desc="current_payment_losses_and_expenses_for_contract"
+                      value="financial3.CurrentCostsForContract?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.CurrentLossesForContract != null or financial2.CurrentLossesForContract != null or financial3.CurrentLossesForContract != null">
+                    <MonetaryAmountCell
+                      id="Financial1CurrentLossesForContractCarrier"
+                      desc="current_payment_losses_for_the_contract"
+                      value="financial1.CurrentLossesForContract?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2CurrentLossesForContractCarrier"
+                      desc="current_payment_losses_for_the_contract"
+                      value="financial2.CurrentLossesForContract?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3CurrentLossesForContractCarrier"
+                      desc="current_payment_losses_for_the_contract"
+                      value="financial3.CurrentLossesForContract?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.ProfAdvisorFeesOutstanding != null or financial2.ProfAdvisorFeesOutstanding != null or financial3.ProfAdvisorFeesOutstanding != null">
+                    <MonetaryAmountCell
+                      id="Financial1ProfessionalAdvisorFeesOutstandingCarrier"
+                      desc="ProfessionalAdvisorFeesOutstanding"
+                      value="financial1.ProfAdvisorFeesOutstanding?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2ProfessionalAdvisorFeesOutstandingCarrier"
+                      desc="ProfessionalAdvisorFeesOutstanding"
+                      value="financial2.ProfAdvisorFeesOutstanding?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3ProfessionalAdvisorFeesOutstandingCarrier"
+                      desc="ProfessionalAdvisorFeesOutstanding"
+                      value="financial3.ProfAdvisorFeesOutstanding?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.ProfAdvisorFeesCurPayment != null or financial2.ProfAdvisorFeesCurPayment != null or financial3.ProfAdvisorFeesCurPayment != null">
+                    <MonetaryAmountCell
+                      id="Financial1ProfessionalAdvisorFeesCurrentPaymentCarrier"
+                      desc="ProfessionalAdvisorFeesCurrentPayment"
+                      value="financial1.ProfAdvisorFeesCurPayment?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2ProfessionalAdvisorFeesCurrentPaymentCarrier"
+                      desc="ProfessionalAdvisorFeesCurrentPayment"
+                      value="financial2.ProfAdvisorFeesCurPayment?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3ProfessionalAdvisorFeesCurrentPaymentCarrier"
+                      desc="ProfessionalAdvisorFeesCurrentPayment"
+                      value="financial3.ProfAdvisorFeesCurPayment?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.LeadReserveAmount != null or financial2.LeadReserveAmount != null or financial3.LeadReserveAmount != null">
+                    <MonetaryAmountCell
+                      enableSort="false"
+                      id="Financial1LeadReserveAmountCarrier"
+                      desc="LeadReserveAmount"
+                      value="financial1.LeadReserveAmount?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      enableSort="false"
+                      id="Financial2LeadReserveAmountCarrier"
+                      desc="LeadReserveAmount"
+                      value="financial2.LeadReserveAmount?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      enableSort="false"
+                      id="FinancialLeadReserveAmountCarrier"
+                      desc="LeadReserveAmount"
+                      value="financial3.LeadReserveAmount?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.LeadReserveFees != null or financial2.LeadReserveFees != null or financial3.LeadReserveFees != null">
+                    <MonetaryAmountCell
+                      id="Financial1LeadReserveFeesCarrier"
+                      desc="LeadReserveFees"
+                      value="financial1.LeadReserveFees?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2LeadReserveFeesCarrier"
+                      desc="LeadReserveFees"
+                      value="financial2.LeadReserveFees?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3LeadReserveFeesCarrier"
+                      desc="LeadReserveFees"
+                      value="financial3.LeadReserveFees?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.ReinsuredReleasedAmount != null or financial2.ReinsuredReleasedAmount != null or financial3.ReinsuredReleasedAmount != null">
+                    <MonetaryAmountCell
+                      id="Financial1ReinsuredReleasedAmountCarrier"
+                      desc="ReinsuredReleasedAmount"
+                      value="financial1.ReinsuredReleasedAmount?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2ReinsuredReleasedAmountCarrier"
+                      desc="ReinsuredReleasedAmount"
+                      value="financial2.ReinsuredReleasedAmount?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3ReinsuredReleasedAmountCarrier"
+                      desc="ReinsuredReleasedAmount"
+                      value="financial3.ReinsuredReleasedAmount?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.ReinsuredRetainedAmount != null or financial2.ReinsuredRetainedAmount != null or financial3.ReinsuredRetainedAmount != null">
+                    <MonetaryAmountCell
+                      id="Financial1ReinsuredRetainedAmountCarrier"
+                      desc="ReinsuredRetainedAmount"
+                      value="financial1.ReinsuredRetainedAmount?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2ReinsuredRetainedAmountCarrier"
+                      desc="ReinsuredRetainedAmount"
+                      value="financial2.ReinsuredRetainedAmount?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="FinancialReinsuredRetainedAmountCarrier"
+                      desc="ReinsuredRetainedAmount"
+                      value="financial3.ReinsuredRetainedAmount?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.ReinsuredRetainedInterest != null or financial2.ReinsuredRetainedInterest != null or financial3.ReinsuredRetainedInterest != null">
+                    <MonetaryAmountCell
+                      id="Financial1ReinsuredRetainedInterestCarrier"
+                      desc="ReinsuredRetainedInterest"
+                      value="financial1.ReinsuredRetainedInterest?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2ReinsuredRetainedInterestCarrier"
+                      desc="ReinsuredRetainedInterest"
+                      value="financial2.ReinsuredRetainedInterest?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3ReinsuredRetainedInterestCarrier"
+                      desc="ReinsuredRetainedInterest"
+                      value="financial3.ReinsuredRetainedInterest?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.SettlementTax != null or financial2.SettlementTax != null or financial3.SettlementTax != null">
+                    <MonetaryAmountCell
+                      id="Financial1SettlementTaxCarrier"
+                      desc="SettlementTax"
+                      value="financial1.SettlementTax?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2SettlementTaxCarrier"
+                      desc="SettlementTax"
+                      value="financial2.SettlementTax?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3SettlementTaxCarrier"
+                      desc="SettlementTax"
+                      value="financial3.SettlementTax?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.SettlementVat != null or financial2.SettlementVat != null or financial3.SettlementVat != null">
+                    <MonetaryAmountCell
+                      id="Financial1SettlementVatCarrier"
+                      desc="SettlementVat"
+                      value="financial1.SettlementVat?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2SettlementVatCarrier"
+                      desc="SettlementVat"
+                      value="financial2.SettlementVat?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3SettlementVatCarrier"
+                      desc="SettlementVat"
+                      value="financial3.SettlementVat?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.ImportedServicesAmount != null or financial2.ImportedServicesAmount != null or financial3.ImportedServicesAmount != null">
+                    <MonetaryAmountCell
+                      id="Financial1ImportedServicesAmountCarrier"
+                      desc="ImportedServicesAmount"
+                      value="financial1.ImportedServicesAmount?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2ImportedServicesAmountCarrier"
+                      desc="ImportedServicesAmount"
+                      value="financial2.ImportedServicesAmount?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3ImportedServicesAmountCarrier"
+                      desc="ImportedServicesAmount"
+                      value="financial3.ImportedServicesAmount?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.ImportedServicesNarrative != null">
+                    <TextCell
+                      id="Financial1ImportedServicesNarrative"
+                      desc="ImportedServicesNarrative"
+                      value="financial1.ImportedServicesNarrative"
+                      visible="helper.HasFinancial1"/>
+                  </Row>
+                  <Row
+                    visible="financial1.LetterOfCreditAmount != null or financial2.LetterOfCreditAmount != null or financial3.LetterOfCreditAmount != null">
+                    <MonetaryAmountCell
+                      id="Financial1LetterOfCreditAmountCarrier"
+                      desc="LetterOfCreditAmount"
+                      value="financial1.LetterOfCreditAmount?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2LetterOfCreditAmountCarrier"
+                      desc="LetterOfCreditAmount"
+                      value="financial2.LetterOfCreditAmount?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3LetterOfCreditAmountCarrier"
+                      desc="LetterOfCreditAmount"
+                      value="financial3.LetterOfCreditAmount?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.LetterOfCreditReference != null">
+                    <TextCell
+                      id="Financial1LetterOfCreditReference"
+                      desc="LetterOfCreditReference"
+                      value="financial1.LetterOfCreditReference"
+                      visible="helper.HasFinancial1"/>
+                  </Row>
+                  <Row
+                    visible="financial1.SettlementAmount != null or financial2.SettlementAmount != null or financial3.SettlementAmount != null">
+                    <MonetaryAmountCell
+                      id="Financial1SettlementAmountCarrier"
+                      desc="SettlementAmount"
+                      value="financial1.SettlementAmount?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2SettlementAmountCarrier"
+                      desc="SettlementAmount"
+                      value="financial2.SettlementAmount?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3SettlementAmountCarrier"
+                      desc="SettlementAmount"
+                      value="financial3.SettlementAmount?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.Outstanding != null or financial2.Outstanding != null or financial3.Outstanding != null">
+                    <MonetaryAmountCell
+                      id="Financial1OutstandingCarrier"
+                      desc="Outstanding"
+                      value="financial1.Outstanding?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2OutstandingCarrier"
+                      desc="Outstanding"
+                      value="financial2.Outstanding?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3OutstandingCarrier"
+                      desc="Outstanding"
+                      value="financial3.Outstanding?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.PreviouslyPaid != null or financial2.PreviouslyPaid != null or financial3.PreviouslyPaid != null">
+                    <MonetaryAmountCell
+                      id="Financial1PreviouslyPaidCarrier"
+                      desc="PreviouslyPaid"
+                      value="financial1.PreviouslyPaid?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2PreviouslyPaidCarrier"
+                      desc="PreviouslyPaid"
+                      value="financial2.PreviouslyPaid?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3PreviouslyPaidCarrier"
+                      desc="PreviouslyPaid"
+                      value="financial3.PreviouslyPaid?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.Incurred != null or financial2.Incurred != null or financial3.Incurred != null">
+                    <MonetaryAmountCell
+                      id="Financial1IncurredCarrier"
+                      desc="Incurred"
+                      value="financial1.Incurred?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2IncurredCarrier"
+                      desc="Incurred"
+                      value="financial2.Incurred?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3IncurredCarrier"
+                      desc="Incurred"
+                      value="financial3.Incurred?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.Vat != null or financial2.Vat != null or financial3.Vat != null">
+                    <MonetaryAmountCell
+                      id="Financial1VatCarrier"
+                      desc="Vat"
+                      value="financial1.Vat?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2VatCarrier"
+                      desc="Vat"
+                      value="financial2.Vat?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3VatCarrier"
+                      desc="Vat"
+                      value="financial3.Vat?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.CurrentPaid != null or financial2.CurrentPaid != null or financial3.CurrentPaid != null">
+                    <MonetaryAmountCell
+                      id="Financial1CurrentPaidCarrier"
+                      desc="CurrentPaid"
+                      value="financial1.CurrentPaid?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2CurrentPaidCarrier"
+                      desc="CurrentPaid"
+                      value="financial2.CurrentPaid?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3CurrentPaidCarrier"
+                      desc="CurrentPaid"
+                      value="financial3.CurrentPaid?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.CurrentAgreeded != null or financial2.CurrentAgreeded != null or financial3.CurrentAgreeded != null">
+                    <MonetaryAmountCell
+                      id="Financial1CurrentAgreedLblCarrier"
+                      desc="CurrentAgreeded"
+                      value="financial1.CurrentAgreeded?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2CurrentAgreedCarrier"
+                      desc="CurrentAgreeded"
+                      value="financial2.CurrentAgreeded?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3CurrentAgreedCarrier"
+                      desc="CurrentAgreeded"
+                      value="financial3.CurrentAgreeded?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.AgreedNotSettled != null or financial2.AgreedNotSettled != null or financial3.AgreedNotSettled != null">
+                    <MonetaryAmountCell
+                      id="Financial1AgreedNotSettledCarrier"
+                      desc="AgreedNotSettled"
+                      value="financial1.AgreedNotSettled?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2AgreedNotSettledCarrier"
+                      desc="AgreedNotSettled"
+                      value="financial2.AgreedNotSettled?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3AgreedNotSettledCarrier"
+                      desc="AgreedNotSettled"
+                      value="financial3.AgreedNotSettled?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.ClaimLastPaid != null or financial2.ClaimLastPaid != null or financial3.ClaimLastPaid != null">
+                    <MonetaryAmountCell
+                      id="Financial1ClaimLastPaidCarrier"
+                      desc="ClaimLastPaid"
+                      value="financial1.ClaimLastPaid?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2ClaimLastPaidCarrier"
+                      desc="ClaimLastPaid"
+                      value="financial2.ClaimLastPaid?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3ClaimLastPaidCarrier"
+                      desc="ClaimLastPaid"
+                      value="financial3.ClaimLastPaid?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                  <Row
+                    visible="financial1.ClaimAgreedNotSettled != null or financial2.ClaimAgreedNotSettled != null or financial3.ClaimAgreedNotSettled != null">
+                    <MonetaryAmountCell
+                      id="Financial1ClaimAgreedNotSettledCarrier"
+                      desc="ClaimAgreedNotSettled"
+                      value="financial1.ClaimAgreedNotSettled?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial1 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial2ClaimAgreedNotSettledCarrier"
+                      desc="ClaimAgreedNotSettled"
+                      value="financial2.ClaimAgreedNotSettled?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial2 and helper.isLessThanFullShare()"/>
+                    <MonetaryAmountCell
+                      id="Financial3ClaimAgreedNotSettledCarrier"
+                      desc="ClaimAgreedNotSettled"
+                      value="financial3.ClaimAgreedNotSettled?.divide(100)?.multiply(claimDataMsg.InsurerSharePercentage)"
+                      visible="helper.HasFinancial3 and helper.isLessThanFullShare()"/>
+                  </Row>
+                </RowIterator>
+              </ListViewPanel>
+            </ListViewInput>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelColumn>
+    </PanelRow>
+  </PanelSet>
+</PCF>

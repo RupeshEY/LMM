@@ -1,0 +1,141 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- Similar to the above Acitivites ListViewDef, with one additional column: AssignedUser.   This file automatically generated from lv_activity.xml -->
+  <ListViewPanel
+    id="VacationActivitiesLV">
+    <ExposeIterator
+      flags="CanAssignActivity,CanSkipActivity,CanCompleteActivity,CanApproveActivity"
+      valueType="entity.ActivityVacationView"
+      widget="VacationActivitiesLV"/>
+    <Require
+      name="ActivityVacationViewList"
+      type="gw.api.database.IQueryBeanResult&lt;ActivityVacationView&gt;"/>
+    <Variable
+      initialValue="new gw.api.desktop.DesktopActivityFilterSet()"
+      name="FilterSet"
+      type="gw.api.desktop.DesktopActivityFilterSet"/>
+    <RowIterator
+      editable="false"
+      elementName="ActivityVacationView"
+      hasCheckBoxes="true"
+      value="ActivityVacationViewList"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.ActivityVacationView&gt;">
+      <ToolbarFlag
+        condition="ActivityVacationView.canAssign() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(ActivityVacationView.ID)"
+        name="CanAssignActivity"/>
+      <ToolbarFlag
+        condition="ActivityVacationView.canSkip() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(ActivityVacationView.ID)"
+        name="CanSkipActivity"/>
+      <ToolbarFlag
+        condition="ActivityVacationView.canComplete() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(ActivityVacationView.ID)"
+        name="CanCompleteActivity"/>
+      <ToolbarFlag
+        condition="ActivityVacationView.canApprove() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(ActivityVacationView.ID)"
+        name="CanApproveActivity"/>
+      <ToolbarFilter
+        name="DesktopActivitiesFilter">
+        <ToolbarFilterOption
+          filter="FilterSet.NotReviewOpenDueTodayFilter"
+          label="DisplayKey.get(&quot;Java.ToolBar.Activities.CurrentVacationOpen&quot;)"
+          selectOnEnter="true"/>
+        <ToolbarFilterOption
+          filter="FilterSet.getNotReviewOpenDueInNDaysFilter(7)"
+          label="DisplayKey.get(&quot;Java.ToolBar.Activities.DueNDays&quot;, 7)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.NotReviewOpenFilter"
+          label="DisplayKey.get(&quot;Java.ToolBar.Activities.AllOpen&quot;)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.NotReviewOpenOverdueFilter"
+          label="DisplayKey.get(&quot;Java.ToolBar.Activities.Overdue&quot;)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.NotReviewExternalOpenFilter"
+          label="DisplayKey.get(&quot;Java.ToolBar.Activities.AllOpenExternal&quot;)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.getNotReviewCompletedLastNDaysFilter(30)"
+          label="DisplayKey.get(&quot;Java.ToolBar.Activities.ClosedLastNDays&quot;, 30)"/>
+      </ToolbarFilter>
+      <Row>
+        <BooleanRadioCell
+          enableSort="false"
+          icon="&quot;new.png&quot;"
+          iconLabel="DisplayKey.get(&quot;LV.Activity.Updated.Tip&quot;)"
+          id="NewActivity"
+          printWidth="0.02"
+          tooltip="DisplayKey.get(&quot;LV.Activity.Updated.Tip&quot;)"
+          value="ActivityVacationView.UpdatedSinceLastViewed"/>
+        <BooleanRadioCell
+          enableSort="false"
+          icon="&quot;escalated.png&quot;"
+          iconLabel="DisplayKey.get(&quot;LV.Activity.Escalated.Tip&quot;)"
+          id="Escalated"
+          printWidth="0.02"
+          tooltip="DisplayKey.get(&quot;LV.Activity.Escalated.Tip&quot;)"
+          value="ActivityVacationView.Escalated"/>
+        <TextCell
+          id="AssignedUser"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.AssignedUser&quot;)"
+          printWidth="0.15"
+          sortOrder="1"
+          value="ActivityVacationView.AssignedUserName"/>
+        <DateCell
+          fontColor="ActivityVacationView.Overdue ? &quot;Red&quot; : &quot;&quot;"
+          id="DueDate"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.DueDate&quot;)"
+          printWidth="0.1"
+          value="ActivityVacationView.TargetDate"/>
+        <TypeKeyCell
+          id="Priority"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.Priority&quot;)"
+          printWidth="0.1"
+          sortOrder="2"
+          value="ActivityVacationView.Priority"
+          valueType="typekey.Priority"/>
+        <TextCell
+          action="ClaimWorkplan.go(ActivityVacationView.Claim); ActivityDetailForward.goInWorkspace(ActivityVacationView.Claim, ActivityVacationView.Activity)"
+          id="Subject"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.Subject&quot;)"
+          printWidth="0.24"
+          value="ActivityVacationView.Subject"/>
+        <TextCell
+          action="pcf.Claim.go(ActivityVacationView.Claim)"
+          id="CaseID"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.CaseID&quot;)"
+          printWidth="0.12"
+          sortOrder="3"
+          value="ActivityVacationView.ClaimNumber"/>
+        <TextCell
+          action="ClaimContactDetailPopup.push(ActivityVacationView.ClaimInsured, ActivityVacationView.Claim)"
+          id="Insured"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.Insured&quot;)"
+          printWidth="0.14"
+          value="ActivityVacationView.ClaimInsuredName"/>
+        <TextCell
+          enableSort="false"
+          id="Exposure"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.Exposure&quot;)"
+          maxChars="120"
+          printWidth="0"
+          value="ActivityVacationView.Exposure"/>
+        <BooleanRadioCell
+          id="ExternallyOwned"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.ExternallyOwned&quot;)"
+          printWidth="0.1"
+          value="ActivityVacationView.ExternallyOwned"/>
+        <TypeKeyCell
+          id="LOB"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.LOB&quot;)"
+          printWidth="0"
+          value="ActivityVacationView.LOBCode"
+          valueType="typekey.LOBCode"/>
+        <TypeKeyCell
+          id="State"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.State&quot;)"
+          printWidth="0"
+          value="ActivityVacationView.JurisdictionState"
+          valueType="typekey.Jurisdiction"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

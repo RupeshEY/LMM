@@ -1,0 +1,244 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="InvoicePanelSet">
+    <Require
+      name="selectedInvoice"
+      type="ServiceRequestInvoice"/>
+    <Require
+      name="stateHandler"
+      type="gw.vendormanagement.servicerequeststate.ServiceRequestStateHandler"/>
+    <Require
+      name="callbackHelper"
+      type="gw.vendormanagement.ServiceRequestOperationCallbackHelper"/>
+    <Variable
+      initialValue="selectedInvoice.ServiceRequest"
+      name="serviceRequest"
+      recalculateOnRefresh="true"
+      type="entity.ServiceRequest"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <ContentInput
+          available="true"
+          labelAbove="true"
+          visible="selectedInvoice.anyOperationAvailable({TC_APPROVEINVOICE, TC_REJECTINVOICE, TC_PAYINVOICE, TC_WITHDRAWINVOICE, TC_UNPAYINVOICE}, stateHandler)">
+          <Link
+            action="callbackHelper.performInvoiceOperation(CurrentLocation, selectedInvoice, TC_APPROVEINVOICE, stateHandler)"
+            id="ApproveInvoice"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.StateTransition.ApproveInvoice&quot;)"
+            showConfirmMessage="false"
+            styleClass="bigButton"
+            visible="selectedInvoice.operationAvailable(TC_APPROVEINVOICE, false, stateHandler)"/>
+          <Link
+            action="RejectInvoicePopup.push(selectedInvoice)"
+            id="RejectInvoice"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.StateTransition.RejectInvoice&quot;)"
+            showConfirmMessage="false"
+            styleClass="bigButton"
+            visible="selectedInvoice.operationAvailable(TC_REJECTINVOICE, false, stateHandler)"/>
+          <Link
+            action="NormalCreateCheckWizardForward.go(selectedInvoice.ServiceRequest.Claim, selectedInvoice)"
+            id="PayInvoice"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.StateTransition.PayInvoice&quot;)"
+            showConfirmMessage="false"
+            styleClass="bigButton"
+            visible="selectedInvoice.operationAvailable(TC_PAYINVOICE, false, stateHandler)"/>
+          <Link
+            action="MarkInvoicePaidPopup.push(selectedInvoice)"
+            id="MarkAsPaid"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.StateTransition.MarkAsPaid&quot;)"
+            styleClass="bigButton"
+            visible="selectedInvoice.operationAvailable(TC_PAYINVOICE, false, stateHandler)"/>
+          <Link
+            action="OperationReasonPromptPopup.push(selectedInvoice.ServiceRequest, selectedInvoice, TC_UNPAYINVOICE)"
+            id="MarkAsUnpaid"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.StateTransition.MarkAsUnpaid&quot;)"
+            styleClass="bigButton"
+            visible="selectedInvoice.operationAvailable(TC_UNPAYINVOICE, false, stateHandler)"/>
+          <Link
+            action="OperationReasonPromptPopup.push(selectedInvoice.ServiceRequest, selectedInvoice, TC_WITHDRAWINVOICE)"
+            id="WithdrawInvoice"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.StateTransition.WithdrawInvoice&quot;)"
+            showConfirmMessage="false"
+            styleClass="bigButton"
+            visible="selectedInvoice.operationAvailable(TC_WITHDRAWINVOICE, false, stateHandler)"/>
+        </ContentInput>
+      </InputColumn>
+    </DetailViewPanel>
+    <DetailViewPanel>
+      <InputColumn>
+        <ContentInput
+          labelAbove="true"
+          visible="selectedInvoice.ActionRequiredVisible">
+          <Link
+            icon="gw.vendormanagement.ServiceRequestStatus.ATTENTION.Icon"
+            id="InvoiceTabWaitingForInvoiceAlert"/>
+          <Link
+            id="InvoiceTabWaitingForInvoiceAlertText"
+            label="selectedInvoice.ActionRequiredMessage"/>
+        </ContentInput>
+        <ContentInput
+          labelAbove="true"
+          visible="isInvoiceWarningMessageVisible(serviceRequest) and serviceRequest.LatestQuote == null">
+          <Link
+            icon="gw.vendormanagement.ServiceRequestStatus.ATTENTION.Icon"
+            id="InvoiceWithNoQuoteAlert"/>
+          <Link
+            id="InvoiceWithNoQuoteMessage"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.Invoices.InvoiceWithNoQuoteMessage&quot;)"/>
+        </ContentInput>
+        <ContentInput
+          labelAbove="true"
+          visible="isInvoiceWarningMessageVisible(serviceRequest) and serviceRequest.LatestQuote != null and serviceRequest.QuoteStatus == ServiceRequestQuoteStatus.TC_WAITINGFORAPPROVAL">
+          <Link
+            icon="gw.vendormanagement.ServiceRequestStatus.ATTENTION.Icon"
+            id="InvoiceWithWaitingForApprovalQuoteAlert"/>
+          <Link
+            id="InvoiceWithWaitingForApprovalQuoteMessage"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.Invoices.InvoiceWithWaitingForApprovalQuoteMessage&quot;)"/>
+        </ContentInput>
+        <ContentInput
+          labelAbove="true"
+          visible="isInvoiceWarningMessageVisible(serviceRequest) and serviceRequest.LatestQuote != null and serviceRequest.QuoteStatus == ServiceRequestQuoteStatus.TC_WAITINGFORQUOTE">
+          <Link
+            icon="gw.vendormanagement.ServiceRequestStatus.ATTENTION.Icon"
+            id="InvoiceWithWaitingForRevisedQuoteAlert"/>
+          <Link
+            id="InvoiceWithWaitingForRevisedQuoteMessage"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.Invoices.InvoiceWithWaitingForRevisedQuoteMessage&quot;)"/>
+        </ContentInput>
+        <TextInput
+          id="ReferenceNumber"
+          label="DisplayKey.get(&quot;Web.ServiceRequest.Invoice.ReferenceNumber&quot;)"
+          value="selectedInvoice.ReferenceNumber"/>
+        <TypeKeyInput
+          id="Status"
+          label="DisplayKey.get(&quot;Web.ServiceRequest.Invoice.InvoiceStatus&quot;)"
+          value="selectedInvoice.Status"
+          valueType="typekey.ServiceRequestInvoiceStatus"/>
+        <TextInput
+          id="RejectedReason"
+          label="DisplayKey.get(&quot;Web.ServiceRequest.Invoice.RejectedReason&quot;)"
+          value="selectedInvoice.DeclinedReason"
+          visible="selectedInvoice.DeclinedReason != null"/>
+        <DateInput
+          dateFormat="short"
+          id="SubmittedDate"
+          label="DisplayKey.get(&quot;Web.ServiceRequest.Invoice.SubmittedDate&quot;)"
+          value="selectedInvoice.StatementCreationTime"/>
+        <UserInput
+          id="ApprovedBy"
+          label="DisplayKey.get(&quot;Web.ServiceRequest.Invoice.ApprovedBy&quot;)"
+          value="selectedInvoice.ApprovedBy"
+          valueType="entity.User"
+          visible="selectedInvoice.ApprovedBy != null"/>
+        <DateInput
+          dateFormat="short"
+          id="ApprovalDate"
+          label="DisplayKey.get(&quot;Web.ServiceRequest.Invoice.ApprovalDate&quot;)"
+          value="selectedInvoice.ApprovalDate"
+          visible="selectedInvoice.ApprovalDate != null"/>
+        <UserInput
+          id="PaidBy"
+          label="DisplayKey.get(&quot;Web.ServiceRequest.Invoice.PaidBy&quot;)"
+          value="selectedInvoice.PaidBy"
+          valueType="entity.User"
+          visible="selectedInvoice.PaidBy != null"/>
+        <DateInput
+          dateFormat="short"
+          id="PaymentDate"
+          label="DisplayKey.get(&quot;Web.ServiceRequest.Invoice.PaymentDate&quot;)"
+          value="selectedInvoice.PaymentDate"
+          visible="selectedInvoice.PaymentDate != null"/>
+        <TextAreaInput
+          id="Description"
+          label="DisplayKey.get(&quot;Web.ServiceRequest.Invoice.Description&quot;)"
+          numRows="2"
+          value="selectedInvoice.Description"/>
+        <ListViewInput
+          def="StatementLineItemLV(selectedInvoice)"
+          editable="false"
+          label="DisplayKey.get(&quot;Web.ServiceRequest.LineItems&quot;)"
+          labelAbove="true">
+          <Toolbar>
+            <IteratorButtons
+              iterator="StatementLineItemLV.lineItemsIterator"/>
+          </Toolbar>
+        </ListViewInput>
+      </InputColumn>
+      <InputColumn>
+        <InputSet
+          id="CheckDetails"
+          visible="selectedInvoice.Check != null">
+          <Variable
+            initialValue="selectedInvoice.Check"
+            name="check"
+            recalculateOnRefresh="true"
+            type="Check"/>
+          <TextInput
+            action="ClaimFinancialsChecksDetail.go(check.Claim, check)"
+            boldLabel="true"
+            id="CheckLabel"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.Invoices.CheckLabel&quot;)"
+            value="DisplayKey.get(&quot;Web.ServiceRequest.Invoices.ViewCheck&quot;)"/>
+          <TextInput
+            boldValue="true"
+            id="InvoiceLinkedToMultipleInvoices"
+            labelAbove="true"
+            value="DisplayKey.get(&quot;Web.ServiceRequest.Invoices.InvoiceLinkedToMultipleInvoices&quot;)"
+            visible="selectedInvoice.Check.ServiceRequestInvoices.Count &gt; 1"/>
+          <TextInput
+            id="CheckNumber"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.Invoices.CheckNumber&quot;)"
+            value="check.CheckNumber"/>
+          <CurrencyInput
+            formatType="currency"
+            id="CheckAmount"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.Invoices.CheckAmount&quot;)"
+            value="check.GrossAmount"/>
+          <TypeKeyInput
+            id="CheckStatus"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.Invoices.CheckStatus&quot;)"
+            value="check.Status"
+            valueType="typekey.TransactionStatus"/>
+          <DateInput
+            id="CheckScheduledSendDate"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.Invoices.CheckScheduledSendDate&quot;)"
+            value="check.ScheduledSendDate"/>
+        </InputSet>
+      </InputColumn>
+    </DetailViewPanel>
+    <PanelSet>
+      <DetailViewPanel>
+        <InputColumn>
+          <ListViewInput
+            def="StatementDocumentsLV(selectedInvoice, false)"
+            id="InvoiceDocuments"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.Invoice.Documents&quot;)"
+            labelAbove="true">
+            <Toolbar>
+              <ToolbarButton
+                action="null"
+                available="documentsActionsHelper.DocumentContentServerAvailable"
+                id="RefreshAsyncContent"
+                label="DisplayKey.get(&quot;Web.DocumentsLV.Button.AsynchronousRefresh&quot;)"
+                tooltip="DisplayKey.get(&quot;Web.DocumentsLV.Button.AsynchronousRefresh.Tooltip&quot;)"
+                visible="documentsActionsHelper.isShowAsynchronousRefreshAction(selectedInvoice.ViewableDocumentLinksAndDocuments*.Second)"/>
+            </Toolbar>
+          </ListViewInput>
+        </InputColumn>
+      </DetailViewPanel>
+    </PanelSet>
+    <Code><![CDATA[function isInvoiceWarningMessageVisible(invoiceServiceRequest: ServiceRequest): boolean {
+  return invoiceServiceRequest.quoteAllowed(stateHandler) and invoiceServiceRequest.IsActive
+}
+
+]]></Code>
+  </PanelSet>
+</PCF>

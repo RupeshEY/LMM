@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="EditableInjuryIncidentsLV">
+    <ExposeIterator
+      flags="Removeable"
+      valueType="entity.InjuryIncident"
+      widget="EditableInjuryIncidentsLV"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <RowIterator
+      editable="true"
+      elementName="InjuryIncident"
+      hideCheckBoxesIfReadOnly="true"
+      pageSize="5"
+      pickLocation="NewInjuryIncidentPopup.push(Claim)"
+      toRemove="Claim.removeNewServiceRequests(InjuryIncident); Claim.removeFromIncidents(InjuryIncident)"
+      value="Claim.InjuryIncidentsOnly"
+      valueType="entity.InjuryIncident[]">
+      <ToolbarFlag
+        condition="!InjuryIncident.UsedByExposure"
+        name="Removeable"/>
+      <Row>
+        <TextCell
+          action="EditInjuryIncidentPopup.push(InjuryIncident, CurrentLocation.InEditMode)"
+          id="Name"
+          label="DisplayKey.get(&quot;Web.EditableInjuryIncidentsLV.Name&quot;)"
+          sortOrder="1"
+          value="InjuryIncident.injured"
+          valueType="entity.Person"/>
+        <TypeKeyCell
+          action="EditInjuryIncidentPopup.push(InjuryIncident, CurrentLocation.InEditMode)"
+          id="Severity"
+          label="DisplayKey.get(&quot;Web.EditableInjuryIncidentsLV.Severity&quot;)"
+          sortOrder="2"
+          value="InjuryIncident.Severity"
+          valueType="typekey.SeverityType"/>
+        <TextCell
+          id="Description"
+          label="DisplayKey.get(&quot;Web.EditableInjuryIncidentsLV.Description&quot;)"
+          sortOrder="3"
+          value="InjuryIncident.Description"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

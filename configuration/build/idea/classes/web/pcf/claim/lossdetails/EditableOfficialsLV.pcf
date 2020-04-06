@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- Worker's Comp embedded LV for details of associated officials   This file automatically generated from lv_claim.xml -->
+  <ListViewPanel
+    id="EditableOfficialsLV">
+    <ExposeIterator
+      valueType="entity.Official"
+      widget="EditableOfficialsLV"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <RowIterator
+      editable="true"
+      elementName="Official"
+      hideCheckBoxesIfReadOnly="true"
+      pageSize="3"
+      toAdd="Claim.addToOfficials(Official)"
+      toRemove="Claim.removeFromOfficials(Official)"
+      value="Claim.Officials"
+      valueType="entity.Official[]">
+      <Row>
+        <TypeKeyCell
+          editable="true"
+          id="OfficialType"
+          label="DisplayKey.get(&quot;LV.Claim.EditableOfficials.OfficialType&quot;)"
+          required="true"
+          value="Official.OfficialType"
+          valueType="typekey.OfficialType"/>
+        <TextCell
+          editable="true"
+          id="Name"
+          label="DisplayKey.get(&quot;LV.Claim.EditableOfficials.Name&quot;)"
+          required="true"
+          value="Official.Name"/>
+        <TextCell
+          editable="true"
+          id="ReportNumber"
+          label="DisplayKey.get(&quot;LV.Claim.EditableOfficials.ReportNumber&quot;)"
+          required="false"
+          value="Official.ReportNumber"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

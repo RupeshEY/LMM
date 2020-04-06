@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="MedicalContactStatus"
+  exportable="true"
+  extendable="true"
+  loadable="true"
+  platform="false"
+  table="medicalcontactstatus"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.MedicalContactStatus"
+    impl="com.guidewire.cc.domain.claim.impl.MedicalContactStatusImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Supports Workmen's Compensation claim functionality. The MedicalContactStatus entity tracks contact between a
+        claimant and a Contact providing a medical service.
+      
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Foreign key to Claim entity."
+    exportable="true"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    columnName="ClaimContactID"
+    desc="Foreign key to Contact entity."
+    fkentity="ClaimContact"
+    name="ClaimContact"
+    nullok="true"/>
+  <column
+    desc="Date of contact."
+    name="CommunicationDate"
+    nullok="false"
+    type="datetime"/>
+  <typekey
+    desc="Medical information source."
+    name="InfoSource"
+    nullok="false"
+    typelist="InfoSource"/>
+  <typekey
+    desc="Medical treatment status."
+    name="MedicalTreatmentStatus"
+    nullok="true"
+    typelist="MedicalTreatmentStatus"/>
+  <typekey
+    desc="Medical treatment outcome."
+    name="TreatmentOutcome"
+    nullok="true"
+    typelist="TreatmentOutcome"/>
+  <column
+    desc="Date of next follow-up."
+    name="NextFollowUpDate"
+    nullok="true"
+    type="datetime"/>
+  <datetimeordering
+    firstcolumnname="CommunicationDate"
+    operator="LE"
+    secondcolumnname="NextFollowUpDate"/>
+</entity>

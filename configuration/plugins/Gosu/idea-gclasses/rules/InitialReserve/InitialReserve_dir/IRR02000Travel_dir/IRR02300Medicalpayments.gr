@@ -1,0 +1,27 @@
+package rules.InitialReserve.InitialReserve_dir.IRR02000Travel_dir
+
+@gw.rules.RuleName("IRR02300 - Medical payments")
+internal class IRR02300Medicalpayments {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ExposureType == TC_MEDPAY
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+if(exposure.Claim.applyFinancialHolds() == true) {
+  exposure.Claim.createNoteIfInitialReservesNotCreated()
+} else { 
+  // Set the initial reserve to the exposure limit on the coverage
+  if(exposure.HasCoverageLimit) {
+    exposure.createInitialReserve(TC_CLAIMCOST, TC_MEDICAL  , exposure.Coverage.ExposureLimit )
+  }
+}
+/*end00rule*/
+
+  }
+}

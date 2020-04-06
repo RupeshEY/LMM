@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<Entity
+  name="Catastrophe">
+  <Columns>
+    <Column
+      beanPath="Catastrophe.CatastropheNumber"
+      name="number"
+      sortOrder="1"/>
+    <Column
+      beanPath="Catastrophe.Name"
+      name="name"
+      sortOrder="none"/>
+    <Column
+      beanPath="Catastrophe.CatastropheValidFrom"
+      name="CatastropheValidFrom"
+      sortOrder="none"/>
+    <Column
+      beanPath="Catastrophe.CatastropheValidTo"
+      name="CatastropheValidTo"
+      sortOrder="none"/>
+  </Columns>
+  <DisplayName><![CDATA[
+
+var retString = "";
+    if (number != null)
+      {if (name != null)
+         {retString = retString + number + " - " + name;}
+       else
+         {retString = retString + number;}
+      }
+    else {
+          if (name != null)
+            {retString = retString + name;}
+          else
+            {retString = "";}
+         }   
+      
+    if ((CatastropheValidFrom != null) and (CatastropheValidTo != null)){
+        retString = retString + " - " + CatastropheValidFrom.format("short") + " - " + CatastropheValidTo.format("short");
+    }
+   
+    return retString;
+  ]]></DisplayName>
+</Entity>

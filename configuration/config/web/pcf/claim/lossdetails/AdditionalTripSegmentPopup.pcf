@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="true"
+    id="AdditionalTripSegmentPopup"
+    returnType="AddnlTripSegment"
+    startInEditMode="addnlTripSegment.TripSegment == null or isParentInEditMode"
+    title="DisplayKey.get(&quot;Web.TripIncident.AddnlTripSegmentPopup&quot;)">
+    <LocationEntryPoint
+      signature="AdditionalTripSegmentPopup(affectedTripSegment : TripSegment, isParentInEditMode: Boolean)"/>
+    <LocationEntryPoint
+      signature="AdditionalTripSegmentPopup(addnlTripSegment : AddnlTripSegment, affectedTripSegment : TripSegment, isParentInEditMode: Boolean)"/>
+    <Variable
+      initialValue="new AddnlTripSegment()"
+      name="addnlTripSegment"
+      type="AddnlTripSegment"/>
+    <Variable
+      name="affectedTripSegment"
+      type="TripSegment"/>
+    <Variable
+      name="isParentInEditMode"
+      type="Boolean"/>
+    <Variable
+      initialValue="initIsNew()"
+      name="isNewAddnlTripSegment"
+      type="boolean"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          pickValue="addnlTripSegment"
+          updateLabel="isNewAddnlTripSegment ? DisplayKey.get(&quot;Button.OK&quot;) : DisplayKey.get(&quot;Button.Update&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="AdditionalTripSegmentDetailDV(addnlTripSegment, affectedTripSegment )"/>
+    </Screen>
+    <Code><![CDATA[function initIsNew() : boolean {
+  var result : boolean = false
+  if (addnlTripSegment.TripSegment == null) {
+    result = true
+    addnlTripSegment.TripSegment = affectedTripSegment
+  }
+  return result
+}]]></Code>
+  </Popup>
+</PCF>

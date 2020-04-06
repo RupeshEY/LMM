@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<entity
+  desc="Policy Type Applicability Criteria "
+  loadable="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="AppCritPolicyType"
+  table="appcritpolicytype"
+  type="versionable">
+  <typekey
+    desc="Policy Type in a rule availability criteria"
+    name="PolicyType"
+    nullok="false"
+    typelist="PolicyType"/>
+  <foreignkey
+    desc="The associated rule"
+    fkentity="ActivityRule"
+    name="ActivityRule"
+    nullok="false"/>
+  <implementsEntity
+    name="RuleVersionDependent"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.cc.domain.bizrules.AppCritPolicyTypeImpl"/>
+  <index
+    desc="Enforce uniqueness per policytype/rule combo"
+    name="UniqueEntryIndex"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ActivityRule"/>
+    <indexcol
+      keyposition="2"
+      name="PolicyType"/>
+  </index>
+</entity>

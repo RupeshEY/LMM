@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    id="NoClaim"
+    parent="ClaimMessage()"
+    title="DisplayKey.get(&quot;Web.NoClaim.Title&quot;)">
+    <LocationEntryPoint
+      signature="NoClaim()"/>
+    <Screen
+      id="NoClaimScreen">
+      <Toolbar/>
+      <PanelRef
+        def="NoClaimDV()"/>
+    </Screen>
+  </Page>
+</PCF>

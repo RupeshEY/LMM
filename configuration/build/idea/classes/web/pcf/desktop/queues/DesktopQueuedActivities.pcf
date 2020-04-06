@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Activity.viewqueue and perm.System.viewdesktop"
+    id="DesktopQueuedActivities"
+    title="DisplayKey.get(&quot;Web.DesktopQueuedActivities&quot;)">
+    <LocationEntryPoint
+      signature="DesktopQueuedActivities()"/>
+    <Variable
+      initialValue="perm.Activity.pickfromqueue"
+      name="hasPickPermission"
+      type="boolean"/>
+    <Variable
+      initialValue="&quot;DesktopQueuedActivitiesLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="gw.api.desktop.DesktopQueuedActivitiesUtil.getSelectedQueue()"
+      name="selectedQueue"
+      type="entity.AssignableQueue"/>
+    <Screen
+      id="DesktopQueuedActivitiesScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.DesktopQueuedActivities&quot;)"/>
+      <Toolbar>
+        <ToolbarRangeInput
+          id="AvailableQueues"
+          noneSelectedLabel="DisplayKey.get(&quot;Java.ListView.Filter.NoneAvailable&quot;)"
+          optionLabel="gw.api.desktop.DesktopQueuedActivitiesUtil.getLabel(VALUE)"
+          required="true"
+          value="selectedQueue"
+          valueRange="gw.api.desktop.DesktopQueuedActivitiesUtil.getQueues()"
+          valueType="entity.AssignableQueue">
+          <PostOnChange
+            onChange="gw.api.desktop.DesktopQueuedActivitiesUtil.setSelectedQueue( selectedQueue )"/>
+        </ToolbarRangeInput>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="gw.api.desktop.DesktopQueuedActivitiesUtil.assignActivitiesToMe(CheckedValues)"
+          flags="any ActivityDesktopViews"
+          id="DesktopQueuedActivities_AssignSelectedButton"
+          iterator="DesktopQueuedActivitiesLV.DesktopQueuedActivitiesLV"
+          label="DisplayKey.get(&quot;Web.DesktopQueuedActivities.AssignSelected&quot;)"
+          visible="perm.Activity.pickfromqueue"/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="gw.api.desktop.DesktopQueuedActivitiesUtil.clearErrors(); AssignActivitiesPopup.push(new gw.api.activity.ActivityAssignmentPopup(CheckedValues))"
+          flags="any ActivityDesktopViews"
+          id="DesktopQueuedActivities_AssignButton"
+          iterator="DesktopQueuedActivitiesLV.DesktopQueuedActivitiesLV"
+          label="DisplayKey.get(&quot;Web.DesktopQueuedActivities.Assign&quot;)"
+          shortcut="G"
+          visible="perm.Activity.pickfromqueue"/>
+        <ToolbarButton
+          action="gw.api.desktop.DesktopQueuedActivitiesUtil.assignNextQueuedActivityToMe()"
+          available="!gw.api.desktop.DesktopQueuedActivitiesUtil.isSelectedQueueEmpty()"
+          flags="no ActivityDesktopViews, exists ActivityDesktopViews"
+          id="DesktopQueuedActivities_AssignNextButton"
+          iterator="DesktopQueuedActivitiesLV.DesktopQueuedActivitiesLV"
+          label="DisplayKey.get(&quot;Web.DesktopQueuedActivities.AssignNext&quot;)"
+          visible=" hasPickPermission and perm.Activity.nextfromqueue"/>
+        <ToolbarButton
+          action="gw.api.desktop.DesktopQueuedActivitiesUtil.assignNextQueuedActivityToMe()"
+          available="!gw.api.desktop.DesktopQueuedActivitiesUtil.isSelectedQueueEmpty()"
+          id="DesktopQueuedActivities_AssignNextButton2"
+          label="DisplayKey.get(&quot;Web.DesktopQueuedActivities.AssignNext&quot;)"
+          visible=" !hasPickPermission and perm.Activity.nextfromqueue"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="gw.api.desktop.DesktopQueuedActivitiesUtil.refresh()"
+          id="DesktopQueuedActivities_RefreshButton"
+          label="DisplayKey.get(&quot;Button.Refresh&quot;)"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="gw.api.print.ListViewPrintOptionPopupAction.printListViewWithOptions(PrintTargetLV)"
+          available="perm.User.printlistviews"
+          id="DesktopQueuedActivities_PrintButton"
+          label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="DesktopQueuedActivitiesLV(gw.api.desktop.DesktopQueuedActivitiesUtil.getActivitiesForSelectedQueue())"/>
+    </Screen>
+  </Page>
+</PCF>

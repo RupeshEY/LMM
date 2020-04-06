@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<AggregateLimitUsedConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="aggregatelimitused-config.xsd">
+
+  <AggLimitCalcCriteriaDefinition code="all" default="true"/>
+
+  <AggLimitCalcCriteriaDefinition code="costTypesExcludingExpenses">
+    <ExclusionCriteria excludeCostType="unspecified"/>
+    <ExclusionCriteria excludeCostType="dccexpense"/>
+    <ExclusionCriteria excludeCostType="aoexpense"/>
+  </AggLimitCalcCriteriaDefinition>
+
+  <AggLimitCalcCriteriaDefinition code="costTypesExcludingLegalExpenses">
+    <ExclusionCriteria excludeCostType="unspecified" excludeCostCategory="legal"/>
+    <ExclusionCriteria excludeCostType="aoexpense" excludeCostCategory="legal"/>
+    <ExclusionCriteria excludeCostType="dccexpense" excludeCostCategory="legal"/>
+  </AggLimitCalcCriteriaDefinition>
+
+  <!-- This defines the default calctype to use if a PolicyType is not listed in any LimitUsedDef element below-->
+  <!-- The calctype determines which transaction subtypes apply to the LimitUsed of an aggregate limit -->
+  <!-- options available: TotalIncurredNet
+                          TotalIncurredNetPlusFutureNonErodingPayments
+                          TotalPayments
+                          TotalPaymentsPlusFuturePayments *This one includes future payments regardless if they erode reserves.
+                          TotalIncurredGross
+                          TotalIncurredGrossPlusFutureNonErodingPayments
+                          TotalIncurredNetMinusOpenRecoveryReserves
+                          TotalIncurredNetMinusOpenRecoveryReservesPlusFutureNonErodingPayments
+
+                          *PlusFutureNonErodingPayments means include those payments whose check has a scheduled
+                           send date after today which do not erode reserves. -->
+
+  <!-- to change the calctype or aggLimitCalculationCriteriaDefault for a subset of policy types,
+    one may create separate LimitUsedDef elements containing the needed defaults for that subset of policy types -->
+  <AggLimitCalcTypeDefault defaultCalctype="TotalIncurredNetPlusFutureNonErodingPayments"/>
+
+  <LimitUsedDef aggLimitCalculationCriteriaDefault="all" calctype="TotalIncurredNetPlusFutureNonErodingPayments">
+    <AggLimitPolicyType code="PersonalAuto"/>
+    <AggLimitPolicyType code="BusinessAuto"/>
+    <AggLimitPolicyType code="WorkersComp"/>
+    <AggLimitPolicyType code="BusinessOwners"/>
+    <AggLimitPolicyType code="GeneralLiability"/>
+    <AggLimitPolicyType code="CommercialProperty"/>
+    <AggLimitPolicyType code="InlandMarine"/>
+    <AggLimitPolicyType code="CommercialPackage"/>
+    <AggLimitPolicyType code="Homeowners"/>
+    <AggLimitPolicyType code="PersonalUmbrella"/>
+    <AggLimitPolicyType code="prof_liability"/>
+    <AggLimitPolicyType code="farmowners"/>
+    <AggLimitPolicyType code="travel_per"/>
+  </LimitUsedDef>
+</AggregateLimitUsedConfig>

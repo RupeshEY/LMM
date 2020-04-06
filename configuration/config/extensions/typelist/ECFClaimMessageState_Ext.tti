@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  name="ECFClaimMessageState_Ext"
+  desc="Identifies the state of ClaimNotifyRq or ClaimRetrieveRs message">
+  <typecode
+    code="Pending"
+    desc="A response for this message has been sent and a Claim Notify message to confirm it hasn't arrived yet"
+    name="Pending"/>
+  <typecode
+    code="Responded"
+    desc="This message has been responded via ClaimResponse and a new Claim Notify message has confirmed this response"
+    name="Responded"/>
+  <typecode
+    code="AwaitingResponse"
+    desc="This message has not been responded to yet, via ClaimResponse"
+    name="Awaiting Response"/>
+  <typecode
+    code="Obsolete"
+    desc="The message can not be responded and it does not receive a response. Another message came with updates."
+    name="Obsolete"/>
+</typelist>

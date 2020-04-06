@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="claim.SCMVisible"
+    id="SCMLocationGroup"
+    parent="IPLMLocationGroup(claim)"
+    title="DisplayKey.get(&quot;Accelerator.IPLM.LocationGroup.Title.SCM&quot;)">
+    <LocationEntryPoint
+      signature="SCMLocationGroup(claim:Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Messages.Title&quot;)"
+      location="SCMClaimMessages(claim)"/>
+  </LocationGroup>
+</PCF>

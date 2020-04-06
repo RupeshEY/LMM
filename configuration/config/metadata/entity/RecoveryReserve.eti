@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A recovery reserve transaction; indicates an expected recovery."
+  entity="RecoveryReserve"
+  final="true"
+  supertype="Transaction">
+  <implementsInterface
+    iface="gw.cc.financials.recovery.entity.RecoveryReserve"
+    impl="com.guidewire.cc.domain.financials.recovery.impl.RecoveryReserveImpl"/>
+  <fulldescription><![CDATA[
+      A subtype of Transaction that indicates money expected to be recovered. These reserves are depleted by Recovery
+      transactions. Not commonly used, and ClaimCenter can be globally configured to not use RecoveryReserves at all.
+      However, if ClaimCenter is configured to use them, and a Recovery is created with an amount that exceeds the open
+      recovery reserves (total Recovery Reserves minus Total Recoveries) on that particular ReserveLine, then a
+      RecoveryReserve in the proper amount is automatically created to keep open recovery reserves from becoming negative.
+    ]]></fulldescription>
+  <events>
+    <event
+      description="Fired when the recovery reserve is added, and each time its status changes."
+      name="RecoveryReserveStatusChanged"/>
+    <event
+      description="Deprecated.  Use RecoveryReserveStatusChanged instead."
+      name="RecoveryReserveSubmitted"/>
+  </events>
+  <typekey
+    columnName="RecoveryCategory"
+    desc="The RecoveryCategory to which this transaction is coded."
+    name="RecoveryCategory"
+    nullok="false"
+    typelist="RecoveryCategory"/>
+</subtype>

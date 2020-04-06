@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Classification condition filter by Exposure"
+  entity="ExposureConditionFilter"
+  final="false"
+  priority="1"
+  supertype="ConditionFilter">
+  <typekey
+    desc="The coverage type"
+    name="CoverageType"
+    nullok="false"
+    typelist="CoverageType"/>
+  <typekey
+    desc="The coverage subtype"
+    name="CoverageSubType"
+    nullok="false"
+    typelist="CoverageSubType">
+    <keyfilters>
+      <keyfilter
+        name="CoverageType"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="The loss party; generally either first or third-party loss."
+    name="LossPartyType"
+    nullok="true"
+    typelist="LossPartyType">
+    <keyfilters>
+      <keyfilter
+        name="CoverageSubType"/>
+    </keyfilters>
+  </typekey>
+  <index
+    desc="Prevents duplicate condition filters"
+    name="exp_cond_index_1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ClassificationConditionID"/>
+    <indexcol
+      keyposition="2"
+      name="CoverageType"/>
+    <indexcol
+      keyposition="3"
+      name="CoverageSubType"/>
+    <indexcol
+      keyposition="4"
+      name="LossPartyType"/>
+  </index>
+</subtype>

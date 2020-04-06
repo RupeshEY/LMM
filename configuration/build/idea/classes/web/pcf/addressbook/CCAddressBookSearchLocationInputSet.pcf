@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="CCAddressBookSearchLocationInputSet">
+    <Require
+      name="contactSearchCriteria"
+      type="ContactSearchCriteria"/>
+    <Variable
+      initialValue="new gw.api.address.ContactSearchAddressOwner(contactSearchCriteria){ :AlwaysShowSeparateFields = true } "
+      name="addressOwner"
+      recalculateOnRefresh="true"
+      type="gw.api.address.CCAddressOwner"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.Address.Default.Location&quot;)"/>
+    <InputSetRef
+      def="CCAddressInputSet(addressOwner)"/>
+  </InputSet>
+</PCF>

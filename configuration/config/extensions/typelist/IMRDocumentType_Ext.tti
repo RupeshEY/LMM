@@ -1,0 +1,814 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  name="IMRDocumentType_Ext"
+  desc="The available document types for IMR documents on an ECF Claim">
+  <typecode
+    code="correspondence_claim"
+    desc="&quot;Claim correspondence&quot;"
+    name="correspondence_claim"/>
+  <typecode
+    code="form_query_response"
+    desc="A form that allows users to submit information in response to a business query"
+    name="form_query_response"/>
+  <typecode
+    code="form_correction"
+    desc="A form that allows users to submit information pertaining to a correction"
+    name="form_correction"/>
+  <typecode
+    code="schedule_values"
+    desc="ACORD Statement/Schedule of values"
+    name="schedule_values"/>
+  <typecode
+    code="report_adjuster"
+    desc="Adjuster Report"
+    name="report_adjuster"/>
+  <typecode
+    code="calculation_adjustment_premium"
+    desc="Adjustment Premium calculation"
+    name="calculation_adjustment_premium"/>
+  <typecode
+    code="calculation_aggregate_deductible"
+    desc="Aggregate deductible calculation"
+    name="calculation_aggregate_deductible"/>
+  <typecode
+    code="document_placing_endorsement_agreed"
+    desc="Agreed Placing Endorsement"
+    name="document_placing_endorsement_agreed"/>
+  <typecode
+    code="document_placing_slip_agreed"
+    desc="Agreed Placing Slip"
+    name="document_placing_slip_agreed"/>
+  <typecode
+    code="wording_agreed"
+    desc="Agreed wording"
+    name="wording_agreed"/>
+  <typecode
+    code="attorney_info_correspondence"
+    desc="Attorney Correspondence"
+    name="attorney_info_correspondence"/>
+  <typecode
+    code="loss_billing_attorney_recommendation"
+    desc="Attorney's Billing Recommendation"
+    name="loss_billing_attorney_recommendation"/>
+  <typecode
+    code="correspondence_bank"
+    desc="Bank Correspondence"
+    name="correspondence_bank"/>
+  <typecode
+    code="loss_billing_partial"
+    desc="Billing Partial Proof of Loss"
+    name="loss_billing_partial"/>
+  <typecode
+    code="loss_billing_aggregate_deductible"
+    desc="Billing/Aggregate Deductible"
+    name="loss_billing_aggregate_deductible"/>
+  <typecode
+    code="loss_billing_initial"
+    desc="Billing/Initial Proof of Loss"
+    name="loss_billing_initial"/>
+  <typecode
+    code="loss_billing_subsequent"
+    desc="Billing/subsequent"
+    name="loss_billing_subsequent"/>
+  <typecode
+    code="loss_billing_subsequent_aggregate_deductible"
+    desc="Billing/subsequent/aggregate deductible"
+    name="loss_billing_subsequent_aggregate_deductible"/>
+  <typecode
+    code="booklet"
+    desc="Booklet"
+    name="booklet"/>
+  <typecode
+    code="booklet_insurance_policy"
+    desc="Booklet: Insurance Policy"
+    name="booklet_insurance_policy"/>
+  <typecode
+    code="booklet_product"
+    desc="Booklet: Product"
+    name="booklet_product"/>
+  <typecode
+    code="booklet_reinsurance_contract"
+    desc="Booklet: Reinsurance Contract"
+    name="booklet_reinsurance_contract"/>
+  <typecode
+    code="bordereau_risk"
+    desc="Bordereau: Risk"
+    name="bordereau_risk"/>
+  <typecode
+    code="document_broker_invoice"
+    desc="Broker Invoice"
+    name="document_broker_invoice"/>
+  <typecode
+    code="lm_bureau_endorsement"
+    desc="Bureau endorsement London Market"
+    name="lm_bureau_endorsement"/>
+  <typecode
+    code="calculation"
+    desc="Calculation"
+    name="calculation"/>
+  <typecode
+    code="cascal_cash_call_message"
+    desc="CASCAL : Cash call message"
+    name="cascal_cash_call_message"/>
+  <typecode
+    code="loss_billing_cash_loss_advance"
+    desc="Cash Loss Advance Billing"
+    name="loss_billing_cash_loss_advance"/>
+  <typecode
+    code="bordereau_catastrophe_report"
+    desc="Catastrophe Report"
+    name="bordereau_catastrophe_report"/>
+  <typecode
+    code="claim_close_aggregate_deductible"
+    desc="Claim Close Aggregate Deductible"
+    name="claim_close_aggregate_deductible"/>
+  <typecode
+    code="claim_close_notice"
+    desc="Claim Closing Notice"
+    name="claim_close_notice"/>
+  <typecode
+    code="inquiry_loss_client"
+    desc="Claim Inquiry Client"
+    name="inquiry_loss_client"/>
+  <typecode
+    code="advice_claim_movement"
+    desc="Claim movement advice"
+    name="advice_claim_movement"/>
+  <typecode
+    code="advice_claim_movement_seen"
+    desc="Claim movement advice"
+    name="advice_claim_movement_seen"/>
+  <typecode
+    code="calculation_claim_reserve"
+    desc="Claim Reserve calculation"
+    name="calculation_claim_reserve"/>
+  <typecode
+    code="statistics_claim"
+    desc="Claim statistics"
+    name="statistics_claim"/>
+  <typecode
+    code="document_claims_paid_breakdown"
+    desc="Claims paid breakdown"
+    name="document_claims_paid_breakdown"/>
+  <typecode
+    code="correspondence_client"
+    desc="Client Correspondence"
+    name="correspondence_client"/>
+  <typecode
+    code="instructions_client_quote"
+    desc="Client quote instructions"
+    name="instructions_client_quote"/>
+  <typecode
+    code="correspondence_cobroker"
+    desc="Co-broker Correspondence"
+    name="correspondence_cobroker"/>
+  <typecode
+    code="inquiry_collection"
+    desc="Collection Inquiry"
+    name="inquiry_collection"/>
+  <typecode
+    code="advice_commission"
+    desc="Commission advice"
+    name="advice_commission"/>
+  <typecode
+    code="document_company_closing"
+    desc="Company closing"
+    name="document_company_closing"/>
+  <typecode
+    code="attorney_info_complaint"
+    desc="Complaint"
+    name="attorney_info_complaint"/>
+  <typecode
+    code="report_contingent_liability"
+    desc="Contingent Liability Report"
+    name="report_contingent_liability"/>
+  <typecode
+    code="attorney_info_coverage_counsel_correspon"
+    desc="Coverage Counsel Correspondence"
+    name="attorney_info_coverage_counsel_correspon"/>
+  <typecode
+    code="currac_current_account_message"
+    desc="CURRAC : Current account message"
+    name="currac_current_account_message"/>
+  <typecode
+    code="attorney_info_defense_counsel_report"
+    desc="Defense Counsel Report"
+    name="attorney_info_defense_counsel_report"/>
+  <typecode
+    code="advice_deposit_premium"
+    desc="Deposit Premium advice"
+    name="advice_deposit_premium"/>
+  <typecode
+    code="document_operations_description"
+    desc="Description of Operations"
+    name="document_operations_description"/>
+  <typecode
+    code="loss_billing_declaratory_judgement"
+    desc="DJ - Declaratory Judgement Billing"
+    name="loss_billing_declaratory_judgement"/>
+  <typecode
+    code="document"
+    desc="Document"
+    name="document"/>
+  <typecode
+    code="document_various_loss_breakdown"
+    desc="Document various loss breakdown"
+    name="document_various_loss_breakdown"/>
+  <typecode
+    code="document_binder"
+    desc="Document: Binder"
+    name="document_binder"/>
+  <typecode
+    code="document_certificate"
+    desc="Document: Certificate"
+    name="document_certificate"/>
+  <typecode
+    code="document_cover_note"
+    desc="Document: Cover Note"
+    name="document_cover_note"/>
+  <typecode
+    code="document_cover_note_addenda"
+    desc="Document: Cover Note Addenda"
+    name="document_cover_note_addenda"/>
+  <typecode
+    code="document_slip"
+    desc="Document: Slip"
+    name="document_slip"/>
+  <typecode
+    code="loss_billing_extra_contractual_obligations"
+    desc="ECO - Extra Contractual Obligations Billing"
+    name="loss_billing_extra_contractual_obligations"/>
+  <typecode
+    code="calculation_experience_adjustment"
+    desc="Experience Adjustment Calculation"
+    name="calculation_experience_adjustment"/>
+  <typecode
+    code="fee_bill"
+    desc="Fee bill"
+    name="fee_bill"/>
+  <typecode
+    code="document_file_note"
+    desc="File note document"
+    name="document_file_note"/>
+  <typecode
+    code="loss_billing_final"
+    desc="Final Billing Proof of Loss"
+    name="loss_billing_final"/>
+  <typecode
+    code="acknowledgement_first_notice_client"
+    desc="First Notice Client Acknowledgement"
+    name="acknowledgement_first_notice_client"/>
+  <typecode
+    code="loss_billing_first_and_final"
+    desc="First/Final Billing"
+    name="loss_billing_first_and_final"/>
+  <typecode
+    code="loss_non_billing_first_and_final_notice"
+    desc="First/Final Notice"
+    name="loss_non_billing_first_and_final_notice"/>
+  <typecode
+    code="form"
+    desc="Form"
+    name="form"/>
+  <typecode
+    code="form_declaration"
+    desc="Form: Declaration"
+    name="form_declaration"/>
+  <typecode
+    code="form_insurance_policy"
+    desc="Form: Insurance Policy"
+    name="form_insurance_policy"/>
+  <typecode
+    code="form_quotation_request"
+    desc="Form: Quotation Request"
+    name="form_quotation_request"/>
+  <typecode
+    code="form_reinsurance_contract"
+    desc="Form: Reinsurance Contract"
+    name="form_reinsurance_contract"/>
+  <typecode
+    code="form_statutory_declaration"
+    desc="Form: Statutory declaration"
+    name="form_statutory_declaration"/>
+  <typecode
+    code="document_account_information"
+    desc="General Account Information"
+    name="document_account_information"/>
+  <typecode
+    code="correspondence_general_cedent"
+    desc="General Correspondence Cedent"
+    name="correspondence_general_cedent"/>
+  <typecode
+    code="correspondence_general_reinsurer"
+    desc="General Correspondence Reinsurer"
+    name="correspondence_general_reinsurer"/>
+  <typecode
+    code="document_information_sheet"
+    desc="Information Sheet"
+    name="document_information_sheet"/>
+  <typecode
+    code="loss_non_billing_initial_notice"
+    desc="Initial Notice"
+    name="loss_non_billing_initial_notice"/>
+  <typecode
+    code="loss_non_billing_initial_notice_precautionary"
+    desc="Initial Notice Precautionary"
+    name="loss_non_billing_initial_notice_precautionary"/>
+  <typecode
+    code="reserve_initial"
+    desc="Initial Reserve"
+    name="reserve_initial"/>
+  <typecode
+    code="reserve_initial_aggregate_deductible"
+    desc="Initial Reserve - Aggregate Deductible"
+    name="reserve_initial_aggregate_deductible"/>
+  <typecode
+    code="inquiry_loss_market"
+    desc="Inquiry"
+    name="inquiry_loss_market"/>
+  <typecode
+    code="inquiry_loss_response"
+    desc="Inquiry Response"
+    name="inquiry_loss_response"/>
+  <typecode
+    code="form_insurance_policy_endorsement"
+    desc="Insurance policy endorsement form"
+    name="form_insurance_policy_endorsement"/>
+  <typecode
+    code="ippoad_message"
+    desc="IPPOAD Message"
+    name="ippoad_message"/>
+  <typecode
+    code="lm_claim_collection_form"
+    desc="LCCF London Claim Collection form London Market"
+    name="lm_claim_collection_form"/>
+  <typecode
+    code="letter_of_credit"
+    desc="Letter of credit"
+    name="letter_of_credit"/>
+  <typecode
+    code="report_life_care_plans"
+    desc="Life Care Plans"
+    name="report_life_care_plans"/>
+  <typecode
+    code="limcid"
+    desc="LIMCID"
+    name="limcid"/>
+  <typecode
+    code="limtex_supporting_text"
+    desc="LIMTEX (supporting text)"
+    name="limtex_supporting_text"/>
+  <typecode
+    code="limuwm"
+    desc="LIMUWM"
+    name="limuwm"/>
+  <typecode
+    code="limuwr"
+    desc="LIMUWR"
+    name="limuwr"/>
+  <typecode
+    code="bordereau_line_of_business_detail"
+    desc="Line of business detail US general classification breakdown"
+    name="bordereau_line_of_business_detail"/>
+  <typecode
+    code="loc_oca_acknowledgement"
+    desc="LOC/OCA Acknowledgement"
+    name="loc_oca_acknowledgement"/>
+  <typecode
+    code="loc_oca_draw_request"
+    desc="LOC/OCA Draw Request"
+    name="loc_oca_draw_request"/>
+  <typecode
+    code="lossad_loss_advice_message"
+    desc="LOSSAD : Loss advice message"
+    name="lossad_loss_advice_message"/>
+  <typecode
+    code="lm_lpo_208"
+    desc="LPO 208  London Market"
+    name="lm_lpo_208"/>
+  <typecode
+    code="calculation_manual"
+    desc="Manual Calculation"
+    name="calculation_manual"/>
+  <typecode
+    code="acknowledgement_loss_market"
+    desc="Market Acknowledgement"
+    name="acknowledgement_loss_market"/>
+  <typecode
+    code="acknowledgement_inquiry_loss_market"
+    desc="Market Inquiry Acknowledgement"
+    name="acknowledgement_inquiry_loss_market"/>
+  <typecode
+    code="document_market_presentation"
+    desc="Market Presentation"
+    name="document_market_presentation"/>
+  <typecode
+    code="bordereau_outstanding_loss_and_loss_adjustment_ex"
+    desc="Outstanding Loss and Loss Adjustment Expense (LAE) Reserve Bordereau"
+    name="bordereau_outstanding_loss_and_loss_adjustment_expense_reserve"/>
+  <typecode
+    code="bordereau_paid_loss_and_lae_and_outstanding_loss_"
+    desc="Paid Loss and LAE and Outstanding Loss and LAE Reserve Bordereau"
+    name="bordereau_paid_loss_and_lae_and_outstanding_loss_and_lae_reservie"/>
+  <typecode
+    code="bordereau_paid_loss_and_loss_adjustment_expense"
+    desc="Paid Loss and Loss Adjustment Expense (LAE) Bordereau"
+    name="bordereau_paid_loss_and_loss_adjustment_expense"/>
+  <typecode
+    code="lm_premium_advice_note"
+    desc="PAN Premium advice note London Market"
+    name="lm_premium_advice_note"/>
+  <typecode
+    code="report_pass_alongs"
+    desc="Pass alongs"
+    name="report_pass_alongs"/>
+  <typecode
+    code="paycor_payment_and_confirmation_message"
+    desc="PAYCOR : Payment and confirmation message"
+    name="paycor_payment_and_confirmation_message"/>
+  <typecode
+    code="document_photographs"
+    desc="Photographs"
+    name="document_photographs"/>
+  <typecode
+    code="document_placing_slip"
+    desc="Placing Slip"
+    name="document_placing_slip"/>
+  <typecode
+    code="plan"
+    desc="Plan"
+    name="plan"/>
+  <typecode
+    code="plan_building"
+    desc="Plan: Building"
+    name="plan_building"/>
+  <typecode
+    code="plan_maintenance"
+    desc="Plan: Maintenance"
+    name="plan_maintenance"/>
+  <typecode
+    code="plan_product_recall"
+    desc="Plan: Product Recall"
+    name="plan_product_recall"/>
+  <typecode
+    code="plan_project"
+    desc="Plan: Project"
+    name="plan_project"/>
+  <typecode
+    code="attorney_info_pleadings"
+    desc="Pleadings"
+    name="attorney_info_pleadings"/>
+  <typecode
+    code="form_policy_control"
+    desc="Policy Control Form"
+    name="form_policy_control"/>
+  <typecode
+    code="document_policy_endorsement"
+    desc="Policy Endorsement"
+    name="document_policy_endorsement"/>
+  <typecode
+    code="portfolio_split"
+    desc="Portfolio Split"
+    name="portfolio_split"/>
+  <typecode
+    code="portfolio_split_per_catastrophe_zone"
+    desc="Portfolio Split: per Catastrophe Zone"
+    name="portfolio_split_per_catastrophe_zone"/>
+  <typecode
+    code="portfolio_split_per_geographical_zone"
+    desc="Portfolio Split: per Geographical Zone"
+    name="portfolio_split_per_geographical_zone"/>
+  <typecode
+    code="report_portfolio"
+    desc="Portofolio Report"
+    name="report_portfolio"/>
+  <typecode
+    code="advice_premium"
+    desc="Premium advice"
+    name="advice_premium"/>
+  <typecode
+    code="bordereau_premium_and_loss"
+    desc="Premium and Bordereau Loss"
+    name="bordereau_premium_and_loss"/>
+  <typecode
+    code="correspondence_premium"
+    desc="Premium Correspondence"
+    name="correspondence_premium"/>
+  <typecode
+    code="correspondence_previous_documentation"
+    desc="Previous Documentation"
+    name="correspondence_previous_documentation"/>
+  <typecode
+    code="calculation_profit_commission"
+    desc="Profit Commission calculation"
+    name="calculation_profit_commission"/>
+  <typecode
+    code="report_projected_medical_cost"
+    desc="Projected Medical Cost Reports"
+    name="report_projected_medical_cost"/>
+  <typecode
+    code="questionnaire"
+    desc="Questionnaire"
+    name="questionnaire"/>
+  <typecode
+    code="questionnaire_protection_devices"
+    desc="Questionnaire: Protection Devices"
+    name="questionnaire_protection_devices"/>
+  <typecode
+    code="questionnaire_quality_control_procedures"
+    desc="Questionnaire: Quality Control Procedures"
+    name="questionnaire_quality_control_procedures"/>
+  <typecode
+    code="questionnaire_security_measures"
+    desc="Questionnaire: Security Measures"
+    name="questionnaire_security_measures"/>
+  <typecode
+    code="loss_non_billing_re_open_notice"
+    desc="Re-open Notice"
+    name="loss_non_billing_re_open_notice"/>
+  <typecode
+    code="bordereau"
+    desc="REBORD : Reinsurance bordereau message"
+    name="bordereau"/>
+  <typecode
+    code="bordereau_premium"
+    desc="REBORD : Reinsurance bordereau message"
+    name="bordereau_premium"/>
+  <typecode
+    code="recalc_reinsurance_calculation_message"
+    desc="RECALC : Reinsurance calculation message"
+    name="recalc_reinsurance_calculation_message"/>
+  <typecode
+    code="claim_movement"
+    desc="RECLAM : Reinsurance claims message"
+    name="claim_movement"/>
+  <typecode
+    code="code_update"
+    desc="RECODE : Reinsurance code set message"
+    name="code_update"/>
+  <typecode
+    code="placing"
+    desc="RECORD Message"
+    name="placing"/>
+  <typecode
+    code="acknowledgement"
+    desc="REDIAL : Reinsurance dialog message"
+    name="acknowledgement"/>
+  <typecode
+    code="reinac_reinsurance_account_message"
+    desc="REINAC : Reinsurance account message"
+    name="reinac_reinsurance_account_message"/>
+  <typecode
+    code="calculation_reinstatement"
+    desc="Reinstatement calculation"
+    name="calculation_reinstatement"/>
+  <typecode
+    code="correspondence_reinstatement_of_premium"
+    desc="Reinstatement of Premium"
+    name="correspondence_reinstatement_of_premium"/>
+  <typecode
+    code="calculation_reinstatement_premium"
+    desc="Reinstatement premium calculation"
+    name="calculation_reinstatement_premium"/>
+  <typecode
+    code="reinsurance_contract_endorsement"
+    desc="Reinsurance contract endorsement"
+    name="reinsurance_contract_endorsement"/>
+  <typecode
+    code="inquiry_specific_request_reinsurer"
+    desc="Reinsurer - Specific Request"
+    name="inquiry_specific_request_reinsurer"/>
+  <typecode
+    code="inquiry_status_request_reinsurer"
+    desc="Reinsurer Status Request"
+    name="inquiry_status_request_reinsurer"/>
+  <typecode
+    code="correspondence_reinsurer_status_update"
+    desc="Reinsurer Status Update"
+    name="correspondence_reinsurer_status_update"/>
+  <typecode
+    code="placing_schedule"
+    desc="RELIST Message"
+    name="placing_schedule"/>
+  <typecode
+    code="report"
+    desc="Report"
+    name="report"/>
+  <typecode
+    code="report_balance_sheet"
+    desc="Report: Balance Sheet"
+    name="report_balance_sheet"/>
+  <typecode
+    code="report_credit_rating"
+    desc="Report: Credit Rating"
+    name="report_credit_rating"/>
+  <typecode
+    code="report_income_statement"
+    desc="Report: Income Statement"
+    name="report_income_statement"/>
+  <typecode
+    code="report_inspection"
+    desc="Report: Inspection"
+    name="report_inspection"/>
+  <typecode
+    code="report_medical"
+    desc="Report: Medical"
+    name="report_medical"/>
+  <typecode
+    code="report_outstanding_loss"
+    desc="Report: Outstanding Loss"
+    name="report_outstanding_loss"/>
+  <typecode
+    code="report_soil_analysis"
+    desc="Report: Soil Analysis"
+    name="report_soil_analysis"/>
+  <typecode
+    code="report_survey"
+    desc="Report: Survey"
+    name="report_survey"/>
+  <typecode
+    code="premium_calculation"
+    desc="REPREM : Reinsurance premium message"
+    name="premium_calculation"/>
+  <typecode
+    code="document_reservation_of_rights"
+    desc="Reservation of Rights"
+    name="document_reservation_of_rights"/>
+  <typecode
+    code="reserve_change_notice"
+    desc="Reserve Change Notice"
+    name="reserve_change_notice"/>
+  <typecode
+    code="settlement"
+    desc="RESETT : Reinsurance settlement of accounts message"
+    name="settlement"/>
+  <typecode
+    code="technical_account"
+    desc="RETACC : Reinsurance technical account message"
+    name="technical_account"/>
+  <typecode
+    code="loss_non_billing_reversal_notice"
+    desc="Reversal Notice"
+    name="loss_non_billing_reversal_notice"/>
+  <typecode
+    code="loss_billing_salvage"
+    desc="Salvage Billing"
+    name="loss_billing_salvage"/>
+  <typecode
+    code="salvage_subrogation_notice"
+    desc="Salvage Notice"
+    name="salvage_subrogation_notice"/>
+  <typecode
+    code="salvage_subrogation_refund_notification"
+    desc="Salvage/Subrogation Refund Notification"
+    name="salvage_subrogation_refund_notification"/>
+  <typecode
+    code="salvage_subrogation_request_for_payment"
+    desc="Salvage/Subrogation Request for Payment"
+    name="salvage_subrogation_request_for_payment"/>
+  <typecode
+    code="schedule"
+    desc="Schedule"
+    name="schedule"/>
+  <typecode
+    code="schedule_insurance_policy"
+    desc="Schedule: Insurance Policy"
+    name="schedule_insurance_policy"/>
+  <typecode
+    code="schedule_maintenance"
+    desc="Schedule: Maintenance"
+    name="schedule_maintenance"/>
+  <typecode
+    code="schedule_project"
+    desc="Schedule: Project"
+    name="schedule_project"/>
+  <typecode
+    code="schedule_reinsurance_contract"
+    desc="Schedule: Reinsurance Contract"
+    name="schedule_reinsurance_contract"/>
+  <typecode
+    code="correspondence_settlement_documentation"
+    desc="Settlement Documentation"
+    name="correspondence_settlement_documentation"/>
+  <typecode
+    code="document_policy_signed_digitally"
+    desc="Signed electronic Policy Document"
+    name="document_policy_signed_digitally"/>
+  <typecode
+    code="document_policy_endorsement_signed_digitally"
+    desc="Signed electronic policy endorsement document"
+    name="document_policy_endorsement_signed_digitally"/>
+  <typecode
+    code="document_placing_endorsement_signed"
+    desc="Signed placing endorsement"
+    name="document_placing_endorsement_signed"/>
+  <typecode
+    code="document_placing_slip_signed"
+    desc="Signed placing slip"
+    name="document_placing_slip_signed"/>
+  <typecode
+    code="statistics"
+    desc="Statistics"
+    name="statistics"/>
+  <typecode
+    code="statistics_per_accounting_year"
+    desc="Statistics: per Accounting Year"
+    name="statistics_per_accounting_year"/>
+  <typecode
+    code="statistics_per_underwriting_year"
+    desc="Statistics: per Underwriting Year"
+    name="statistics_per_underwriting_year"/>
+  <typecode
+    code="statistics_triangular"
+    desc="Statistics: Triangular"
+    name="statistics_triangular"/>
+  <typecode
+    code="reserve_status_supplemental_notice_no_change"
+    desc="Status Supplemental Notice No Reserve Change"
+    name="reserve_status_supplemental_notice_no_change"/>
+  <typecode
+    code="loss_non_billing_subsequent_precautionary"
+    desc="Subsequent Precautionary"
+    name="loss_non_billing_subsequent_precautionary"/>
+  <typecode
+    code="loss_billing"
+    desc="Subsequent Proof Of Loss"
+    name="loss_billing"/>
+  <typecode
+    code="reserve_subsequent"
+    desc="Subsequent Reserve"
+    name="reserve_subsequent"/>
+  <typecode
+    code="reserve_subsequent_aggregate_deductible"
+    desc="Subsequent Reserve - Aggregate Deductible"
+    name="reserve_subsequent_aggregate_deductible"/>
+  <typecode
+    code="report_summary"
+    desc="Summary Report"
+    name="report_summary"/>
+  <typecode
+    code="report_surveyor"
+    desc="Surveyor Report"
+    name="report_surveyor"/>
+  <typecode
+    code="table_of_limits"
+    desc="Table of limits"
+    name="table_of_limits"/>
+  <typecode
+    code="calculation_term_adjustment"
+    desc="Term Adjustment Calculation"
+    name="calculation_term_adjustment"/>
+  <typecode
+    code="document_broker_account"
+    desc="Treaty Statement"
+    name="document_broker_account"/>
+  <typecode
+    code="attorney_related_info_trial_report"
+    desc="Trial Report"
+    name="attorney_related_info_trial_report"/>
+  <typecode
+    code="correspondence_underwriter"
+    desc="Underwriter correspondence"
+    name="correspondence_underwriter"/>
+  <typecode
+    code="bordereau_unearned_premium"
+    desc="Unearned Premium Bordereau"
+    name="bordereau_unearned_premium"/>
+  <typecode
+    code="document_void"
+    desc="Void"
+    name="document_void"/>
+  <typecode
+    code="wording"
+    desc="Wording"
+    name="wording"/>
+  <typecode
+    code="wording_addenda"
+    desc="Wording addenda"
+    name="wording_addenda"/>
+  <typecode
+    code="wording_construction_contract"
+    desc="Wording: Construction Contract"
+    name="wording_construction_contract"/>
+  <typecode
+    code="wording_insurance_policy"
+    desc="Wording: Insurance Policy"
+    name="wording_insurance_policy"/>
+  <typecode
+    code="wording_maintenance_contract"
+    desc="Wording: Maintenance Contract"
+    name="wording_maintenance_contract"/>
+  <typecode
+    code="wording_reinsurance_contract"
+    desc="Wording: Reinsurance Contract"
+    name="wording_reinsurance_contract"/>
+  <typecode
+    code="form_work_order"
+    desc="Work Order"
+    name="form_work_order"/>
+  <typecode
+    code="loss_billing_excess_of_policy_limit"
+    desc="XPL - Excess of Policy Limit Billing"
+    name="loss_billing_excess_of_policy_limit"/>
+</typelist>

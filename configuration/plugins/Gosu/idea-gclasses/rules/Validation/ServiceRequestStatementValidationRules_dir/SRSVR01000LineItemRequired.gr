@@ -1,0 +1,21 @@
+package rules.Validation.ServiceRequestStatementValidationRules_dir
+uses gw.api.locale.DisplayKey
+
+
+@gw.rules.RuleName("SRSVR01000 - Line Item Required")
+internal class SRSVR01000LineItemRequired {
+  static function doCondition(serviceRequestStatement : entity.ServiceRequestStatement) : boolean {
+/*start00rule*/
+  return serviceRequestStatement.LineItems.IsEmpty
+
+/*end00rule*/
+}
+
+  static function doAction(serviceRequestStatement : entity.ServiceRequestStatement, actions : gw.rules.Action) {
+/*start00rule*/
+    serviceRequestStatement.rejectField("LineItems", TC_LOADSAVE,
+        DisplayKey.get("Web.ServiceRequest.LineItems.AtLeastOneItemValidation"), null, null)
+
+/*end00rule*/
+  }
+}

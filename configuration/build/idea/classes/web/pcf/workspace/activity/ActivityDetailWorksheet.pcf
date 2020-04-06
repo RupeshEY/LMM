@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Worksheet
+    beforeCommit="activityDetailHelper.beforeCommit(Activity)"
+    canEdit="canEdit"
+    canVisit="perm.Activity.view(Activity)"
+    id="ActivityDetailWorksheet"
+    parent="ClaimWorkplan(Activity.Claim)"
+    tabLabel="DisplayKey.get(&quot;Web.Claim.ActivityDetailWorksheet.Tab&quot;)"
+    title="DisplayKey.get(&quot;JSP.ActivityDetail.Detail.Title&quot;, Activity.Claim.ClaimNumber)">
+    <LocationEntryPoint
+      signature="ActivityDetailWorksheet(Claim : Claim, Activity : Activity)"/>
+    <Scope
+      location="Claim(Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Activity"
+      type="Activity"/>
+    <Variable
+      initialValue="Activity.canEdit()"
+      name="canEdit"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.api.activity.ActivityDetailHelper(Activity, \ a -> ActivityDetailWorksheet.goInWorkspace(a.Claim, a))"
+      name="activityDetailHelper"
+      type="gw.api.activity.ActivityDetailHelper"/>
+    <ScreenRef
+      def="ActivityDetailScreen(Activity, activityDetailHelper, true)"
+      mode="canEdit ? &quot;editable&quot; : &quot;readonly&quot;"/>
+    <Code><![CDATA[function returnToWorksheet() {
+  ActivityDetailForward.goInWorkspace(Activity.Claim, Activity)
+}]]></Code>
+  </Worksheet>
+</PCF>

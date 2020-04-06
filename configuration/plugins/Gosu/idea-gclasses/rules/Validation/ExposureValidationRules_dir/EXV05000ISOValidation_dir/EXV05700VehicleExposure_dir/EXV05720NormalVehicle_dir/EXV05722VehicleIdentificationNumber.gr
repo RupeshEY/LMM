@@ -1,0 +1,27 @@
+package rules.Validation.ExposureValidationRules_dir.EXV05000ISOValidation_dir.EXV05700VehicleExposure_dir.EXV05720NormalVehicle_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("EXV05722 - Vehicle Identification Number")
+internal class EXV05722VehicleIdentificationNumber {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.VehicleIncident.Vehicle.Year != null
+and exposure.VehicleIncident.Vehicle.Year >= gw.api.iso.ISOValidationConstants.YEAR_VIN_REQUIRED
+and exposure.VehicleIncident.Vehicle.Vin != null
+and not gw.api.iso.ISOValidationConstants.VIN_PATTERN.matcher(
+                    exposure.VehicleIncident.Vehicle.Vin).matches()
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.rejectField("VehicleIncident.Vehicle", TC_ISO, 
+                     DisplayKey.get("Rules.Validation.Exposure.VehicleIdNumberFormat"), null, null)
+/*end00rule*/
+
+  }
+}

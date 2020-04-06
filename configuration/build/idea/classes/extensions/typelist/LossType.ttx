@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<!-- ### ===========================================================================
+###  tl_claim.xml
+### ===========================================================================
+### tl_claim.xml contains typelists that are used exclusively in elements
+### referenced in md_claim.xml.  General-purpose typelists are stored in
+### tl_general.xml
+  
+    Claim/general exposure-related typelists
+   the core loss categories -->
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="All available types of claims"
+  name="LossType">
+  <typecode
+    code="AUTO"
+    desc="Auto"
+    name="Auto">
+    <category
+      code="PersonalAutoLine"
+      typelist="LOBCode"/>
+    <category
+      code="BusinessAutoLine"
+      typelist="LOBCode"/>
+  </typecode>
+  <typecode
+    code="PR"
+    desc="Property"
+    name="Property">
+    <category
+      code="CPLine"
+      typelist="LOBCode"/>
+    <category
+      code="IMLine"
+      typelist="LOBCode"/>
+    <category
+      code="HomeownersLine_HOE"
+      typelist="LOBCode"/>
+  </typecode>
+  <typecode
+    code="GL"
+    desc="Liability"
+    name="Liability">
+    <category
+      code="GLLine"
+      typelist="LOBCode"/>
+    <category
+      code="BOPLine"
+      typelist="LOBCode"/>
+    <category
+      code="PersonalUmbrellaLine_PUE"
+      typelist="LOBCode"/>
+    <category
+      code="other_liab"
+      typelist="LOBCode"/>
+  </typecode>
+  <typecode
+    code="WC"
+    desc="Workers' Comp"
+    name="Workers' Comp">
+    <category
+      code="WorkersCompLine"
+      typelist="LOBCode"/>
+  </typecode>
+  <typecode
+    code="TRAV"
+    desc="General loss during travel"
+    name="Travel">
+    <category
+      code="travel"
+      typelist="LOBCode"/>
+  </typecode>
+  <typefilter
+    desc="This option allows specifying the NewExposure-action-menu for specific LossTypes. Note that removing this menu item for a LossType will also hide the Exposures step in the New Claim Wizard for that LossType. Note that config.xml also controls the LossTypes using a parameter with same name as the filter. This typefilter makes it possible to make changes for a rolling upgrade. In a subsequent release, this definition will be removed from config.xml"
+    name="ShowNewExposureMenuForLossTypes">
+    </typefilter>
+  <typefilter
+    desc="NewExposure-action-menu can have two sub-menus.  This option allows specifying Loss Types that will go into this sub-menu Note that config.xml also controls the LossTypes using a parameter with same name as the filter. This typefilter makes it possible to make changes for a rolling upgrade. In a subsequent release, this definition will be removed from config.xml"
+    name="ShowNewExposureChooseByCoverageTypeMenuForLossTypes">
+  </typefilter>
+  <typefilter
+    desc="NewExposure-action-menu can have two sub-menus.  This option allows specifying Loss Types that will go into this sub-menu. Recommendation: Omit WC from this list.  Note that config.xml also controls the LossTypes using a parameter with same name as the filter. This typefilter makes it possible to make changes for a rolling upgrade. In a subsequent release, this definition will be removed from config.xml"
+    name="ShowNewExposureChooseByCoverageMenuForLossTypes">
+  </typefilter>
+  <typefilter
+    desc="NewExposure-action-menu/ChooseByCoverage has three sub-menus. This option allows hiding empty Vehicle and Property submenus for specific LossTypes.   Note that config.xml also controls the LossTypes using a parameter with same name as the filter. This typefilter makes it possible to make changes for a rolling upgrade. In a subsequent release, this definition will be removed from config.xml"
+    name="HidePolicyObjectsWithNoCoveragesForLossTypes">
+  </typefilter>
+</typelistextension>

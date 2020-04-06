@@ -1,0 +1,150 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="FixedPropertyIncidentDV">
+    <Require
+      name="FixedPropertyIncident"
+      type="FixedPropertyIncident"/>
+    <Require
+      name="singletonNewFixedProperty"
+      type="PolicyLocation"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Variable
+      initialValue="FixedPropertyIncident.Claim"
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="new gw.api.address.FixedPropertyAddressOwner(FixedPropertyIncident, singletonNewFixedProperty)"
+      name="addressOwner"
+      recalculateOnRefresh="true"
+      type="gw.api.address.CCAddressOwner"/>
+    <Variable
+      initialValue="gw.vendormanagement.SpecialistServiceCodeConstants.PROPINSPECTAPPRAISAL"
+      name="appraisalIncidentCode"
+      type="String"/>
+    <Variable
+      initialValue="createOtherServiceRequests()"
+      name="otherServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.FixedPropertyIncident.Damage&quot;)"/>
+      <TextInput
+        editable="true"
+        id="PropertyDescription"
+        label="DisplayKey.get(&quot;Web.FixedPropertyIncident.PropertyDescription&quot;)"
+        numCols="21"
+        value="FixedPropertyIncident.PropertyDesc"/>
+      <TextAreaInput
+        editable="true"
+        id="Description"
+        label="DisplayKey.get(&quot;Web.FixedPropertyIncident.Description&quot;)"
+        numCols="35"
+        numRows="3"
+        value="FixedPropertyIncident.Description"/>
+      <CurrencyInput
+        editable="true"
+        id="LossEstimate"
+        label="DisplayKey.get(&quot;Web.FixedPropertyIncident.LossEstimate&quot;)"
+        value="FixedPropertyIncident.LossEstimate"/>
+      <TypeKeyInput
+        editable="true"
+        id="EstDamageAmt"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsProperty.Claim.EstDamageAmt&quot;)"
+        value="FixedPropertyIncident.EstDamageType"
+        valueType="typekey.EstDamageType"/>
+      <TextAreaInput
+        editable="true"
+        id="ExtDamagetxt"
+        label="DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsProperty.Claim.ExtDamagetxt&quot;)"
+        numCols="35"
+        numRows="2"
+        value="FixedPropertyIncident.ExtDamagetxt"/>
+      <InputDivider
+        visible="FixedPropertyIncident.Claim.Policy.PolicyType == TC_HOMEOWNERS"/>
+      <Label
+        label="DisplayKey.get(&quot;Web.FixedPropertyIncident.Property&quot;)"/>
+      <InputSetRef
+        def="CCAddressInputSet(addressOwner)"/>
+      <ListViewInput
+        boldLabel="true"
+        def="AllPolicyLocationLienHoldersLV(FixedPropertyIncident.Property)"
+        editable="false"
+        label="DisplayKey.get(&quot;Web.FixedPropertyIncident.Property.Lienholders&quot;)"
+        labelAbove="true"
+        visible="FixedPropertyIncident.Claim.Policy.PolicyType != TC_HOMEOWNERS">
+        <Toolbar/>
+      </ListViewInput>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.ServicesScreen.ServiceRequest.ServiceToPerform&quot;)"/>
+      <TextInput
+        id="ServiceRequestSubmitMessageFNOL"
+        labelAbove="true"
+        value="DisplayKey.get(&quot;Web.ServiceRequest.FNOL.SubmitMessage&quot;)"
+        visible="Claim.DraftClaim"/>
+      <TextInput
+        id="ServiceRequestSubmitMessage"
+        labelAbove="true"
+        value="DisplayKey.get(&quot;Web.ServiceRequest.SubmitMessage&quot;)"
+        visible="not Claim.DraftClaim and CurrentLocation.InEditMode"/>
+      <InputSetRef
+        def="AppraisalServiceInputSet(PropertyAppraisalServiceRequest, FixedPropertyIncident, unusedServiceRequests, appraisalIncidentCode)"
+        id="AppraisalServiceInputSet"/>
+      <InputSetRef
+        def="OtherServicesLVInputGroupInputSet(Claim, FixedPropertyIncident, otherServiceRequests, otherServiceRequests, unusedServiceRequests, {})"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.FixedPropertyIncident.Repairs&quot;)"/>
+      <TypeKeyInput
+        editable="true"
+        id="EstimatedReceived"
+        label="DisplayKey.get(&quot;Web.FixedPropertyIncident.EstimatedReceived&quot;)"
+        value="FixedPropertyIncident.EstimatesReceived"
+        valueType="typekey.YesNo">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <CurrencyInput
+        editable="true"
+        id="EstimateCost"
+        label="DisplayKey.get(&quot;Web.FixedPropertyIncident.EstimateCost&quot;)"
+        value="FixedPropertyIncident.EstRepairCost"
+        visible="FixedPropertyIncident.EstimatesReceived == TC_YES"/>
+      <TextInput
+        editable="true"
+        id="EstimateTime"
+        label="DisplayKey.get(&quot;Web.FixedPropertyIncident.EstimateTime&quot;)"
+        value="FixedPropertyIncident.EstRepairTime"
+        visible="FixedPropertyIncident.EstimatesReceived == TC_YES"/>
+      <BooleanRadioInput
+        editable="true"
+        id="AlreadyRepaired"
+        label="DisplayKey.get(&quot;Web.FixedPropertyIncident.AlreadyRepaired&quot;)"
+        value="FixedPropertyIncident.AlreadyRepaired">
+        <PostOnChange/>
+      </BooleanRadioInput>
+      <InputDivider/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="PropertyAttributeInputSet(FixedPropertyIncident)"/>
+      <InputDivider/>
+    </InputColumn>
+    <Code><![CDATA[uses java.util.Set
+
+property get PropertyAppraisalServiceRequest() : ServiceRequest {
+  return FixedPropertyIncident.ServiceRequests.firstWhere(\ sr ->
+         sr.Instruction.Services.Count == 1
+         and sr.Instruction.Services.single().Service.Code == appraisalIncidentCode
+         and (otherServiceRequests == null or not otherServiceRequests.contains(sr)))
+}
+
+function createOtherServiceRequests() :  Set<ServiceRequest> {
+  return FixedPropertyIncident.ServiceRequests.where(\sr -> sr != PropertyAppraisalServiceRequest).toSet()
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

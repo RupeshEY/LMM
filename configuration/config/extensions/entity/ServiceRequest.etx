@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ServiceRequest">
+  <foreignkey
+    columnName="IncidentID"
+    desc="The incident that led to the work requested by this service request."
+    fkentity="Incident"
+    name="Incident"
+    nullok="true"/>
+  <column
+    desc="A string identifier assigned to this ServiceRequest by the specialist. The value of this field may only be meaningful to the specialist."
+    name="ServiceRequestReferenceNumber"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    desc="The channel through which the carrier will communicate with the specialist."
+    name="SpecialistCommMethod"
+    nullok="true"
+    typelist="SpecialistCommMethod"/>
+  <column
+    desc="Desired date by which the specialist will have completed the work, or null if the specialist has not indicated such a date."
+    name="RequestedServiceCompletionDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Desired date by which the specialist will have submitted the quote, or null if the specialist has not indicated such a date."
+    name="RequestedQuoteCompletionDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The reason the service request was canceled"
+    name="CanceledReason"
+    nullok="true"
+    type="longtext"/>
+  <!-- changes to the following properties are recorded with ServiceRequestChanges -->
+  <column
+    desc="Date by which the specialist expects to submit the quote, or null if the specialist has not indicated such a date."
+    name="ExpectedQuoteCompletionDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date by which the specialist expects to complete the work, or null if the specialist has not indicated such a date."
+    name="ExpectedServiceCompletionDate"
+    nullok="true"
+    type="datetime"/>
+  <index
+    desc="Enforce uniqueness of ServiceRequestNumber"
+    name="servicerequestu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ServiceRequestNumber"/>
+  </index>
+  <events>
+    <event
+      description="Service request operation is performed"
+      name="ServiceRequestOperation_submitinstruction"/>
+    <event
+      description="Service request operation is performed"
+      name="ServiceRequestOperation_specialistacceptedwork"/>
+    <event
+      description="Service request operation is performed"
+      name="ServiceRequestOperation_addquote"/>
+    <event
+      description="Service request operation is performed"
+      name="ServiceRequestOperation_approvequote"/>
+    <event
+      description="Service request operation is performed"
+      name="ServiceRequestOperation_specialistcompletedwork"/>
+    <event
+      description="Service request operation is performed"
+      name="ServiceRequestOperation_addinvoice"/>
+    <event
+      description="Service request operation is performed"
+      name="ServiceRequestOperation_requestrequote"/>
+    <event
+      description="Service request operation is performed"
+      name="ServiceRequestOperation_specialistwaiting"/>
+    <event
+      description="Service request operation is performed"
+      name="ServiceRequestOperation_specialistresumedwork"/>
+    <event
+      description="Service request operation is performed"
+      name="ServiceRequestOperation_updatequoteecd"/>
+    <event
+      description="Service request operation is performed"
+      name="ServiceRequestOperation_updateserviceecd"/>
+    <event
+      description="Service request operation is performed"
+      name="ServiceRequestOperation_specialistdeclined"/>
+    <event
+      description="Service request operation is performed"
+      name="ServiceRequestOperation_cancelservicerequest"/>
+    <event
+      description="Service request operation is performed"
+      name="ServiceRequestOperation_specialistcanceled"/>
+  </events>
+  <foreignkey
+    columnName="ExposureID"
+    desc="The exposure that led to the work requested by this service request."
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="true"/>
+</extension>

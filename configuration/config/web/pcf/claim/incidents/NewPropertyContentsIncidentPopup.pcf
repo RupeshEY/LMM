@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="incident.updatePropertyContentsLineItemsBeforeCommit()"
+    canEdit="true"
+    canVisit="claim != null and perm.Claim.createincident(claim)"
+    id="NewPropertyContentsIncidentPopup"
+    returnType="PropertyContentsIncident"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.NewPropertyContentsIncident.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewPropertyContentsIncidentPopup(claim : Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="createIncident()"
+      name="incident"
+      type="entity.PropertyContentsIncident"/>
+    <Screen
+      id="NewPropertyContentsIncidentScreen">
+      <TitleBar
+        icon="incident.HeaderIcon"/>
+      <Toolbar>
+        <EditButtons
+          pickValue="incident"/>
+      </Toolbar>
+      <PanelRef
+        def="PropertyContentsIncidentPanelSet(incident)"/>
+    </Screen>
+    <Code><![CDATA[
+function createIncident() : PropertyContentsIncident {
+  var newIncident = claim.newIncident(entity.PropertyContentsIncident) as PropertyContentsIncident
+  return newIncident
+}
+      
+    ]]></Code>
+  </Popup>
+</PCF>

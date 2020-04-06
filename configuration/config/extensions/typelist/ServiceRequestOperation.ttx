@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="State transitions for all kinds of service requests.   An operation is executed by calling serviceRequest.performOperation(OPERATION, context, commitInNewBundle) or invoice.performOperation(OPERATION, context, commitInNewBundle).  Each operation (as defined in the StateHandler classes) holds information about when it should be available, the Progress and QuoteStatus states to move to after the operation, a display name, and an optional action to take."
+  name="ServiceRequestOperation">
+  <typecode
+    code="submitinstruction"
+    desc="Submit Instruction"
+    name="Submit Instruction"
+    priority="9"/>
+  <typecode
+    code="specialistacceptedwork"
+    desc="Vendor Accepted Work"
+    name="Vendor Accepted Work"
+    priority="1"/>
+  <typecode
+    code="addquote"
+    desc="Add Quote"
+    name="Add Quote"
+    priority="5"/>
+  <typecode
+    code="approvequote"
+    desc="Approve Quote"
+    name="Approve Quote"
+    priority="10"/>
+  <typecode
+    code="specialistcompletedwork"
+    desc="Vendor Completed Work"
+    name="Vendor Completed Work"
+    priority="3"/>
+  <typecode
+    code="addinvoice"
+    desc="Add Invoice"
+    name="Add Invoice"
+    priority="6"/>
+  <typecode
+    code="requestrequote"
+    desc="Request Requote"
+    name="Request Requote"
+    priority="11"/>
+  <typecode
+    code="specialistwaiting"
+    desc="Vendor Waiting"
+    name="Vendor Waiting"
+    priority="4"/>
+  <typecode
+    code="specialistresumedwork"
+    desc="Vendor Resumed Work"
+    name="Vendor Resumed Work"
+    priority="2"/>
+  <typecode
+    code="updatequoteecd"
+    desc="Update Quote ECD"
+    name="Update Quote ECD"
+    priority="12"/>
+  <typecode
+    code="updateserviceecd"
+    desc="Update Service ECD"
+    name="Update Service ECD"
+    priority="13"/>
+  <typecode
+    code="specialistdeclined"
+    desc="Vendor Declined"
+    name="Vendor Declined"
+    priority="7"/>
+  <typecode
+    code="cancelservicerequest"
+    desc="Cancel Service"
+    name="Cancel Service"
+    priority="14"/>
+  <typecode
+    code="specialistcanceled"
+    desc="Vendor Canceled Service"
+    name="Vendor Canceled Service"
+    priority="8"/>
+  <typecode
+    code="approveinvoice"
+    desc="Approve Invoice"
+    name="Approve Invoice"
+    priority="15"/>
+  <typecode
+    code="payinvoice"
+    desc="Pay Invoice"
+    name="Pay Invoice"
+    priority="16"/>
+  <typecode
+    code="rejectinvoice"
+    desc="Reject Invoice"
+    name="Reject Invoice"
+    priority="17"/>
+  <typecode
+    code="withdrawinvoice"
+    desc="Withdraw Invoice"
+    name="Withdraw Invoice"
+    priority="18"/>
+  <typecode
+    code="unpayinvoice"
+    desc="Unpay Invoice"
+    name="Unpay Invoice"
+    priority="19"/>
+</typelistextension>

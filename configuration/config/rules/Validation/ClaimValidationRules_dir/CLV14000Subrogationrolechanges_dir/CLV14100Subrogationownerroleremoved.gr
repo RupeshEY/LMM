@@ -1,0 +1,31 @@
+package rules.Validation.ClaimValidationRules_dir.CLV14000Subrogationrolechanges_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV14100 - Subrogation owner role removed")
+internal class CLV14100Subrogationownerroleremoved {
+  static function doCondition(claim: entity.Claim): boolean {
+/*start00rule*/
+    if (claim.Bundle.getAllModifiedBeansOfType(UserRoleAssignment).isEmpty()) {
+      return false
+    }
+
+    var currentSubrogationOwnerUsers = claim.AllRoleAssignments
+        .where(\a -> a.AssignedUser != null && a.Role == typekey.UserRole.TC_SUBROGATIONOWNER)
+        .map(\a -> a.AssignedUser)
+        .toSet()
+    var currentSubrogationAssignees = claim.SubrogationSummary.Subrogations
+        .map(\s -> s.AssignedUser)
+        .where(\a -> a != null)
+        .toList()
+    return !currentSubrogationOwnerUsers.containsAll(currentSubrogationAssignees)
+/*end00rule*/
+  }
+
+  static function doAction(claim: entity.Claim, actions: gw.rules.Action) {
+/*start00rule*/
+    claim.rejectField("claim.RoleAssignments", ValidationLevel.TC_LOADSAVE,
+        DisplayKey.get("Subrogation.Validation.Claim.SubrogationOwnerRoleRemoved"), null, null)
+/*end00rule*/
+  }
+}

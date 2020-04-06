@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="CommandDefinitionDV"
+    mode="default">
+    <Require
+      name="commandDefinition"
+      type="gw.bizrules.pcf.RuleCommandDefinitionHolder"/>
+    <InputColumn>
+      <InputIterator
+        elementName="commandParameterHolder"
+        id="RuleCommandParameters"
+        type="gw.bizrules.pcf.RuleCommandParameterHolder"
+        value="commandDefinition.ParameterHolders.where(\elt -&gt; elt.UIConfig.isVisible())"
+        valueType="gw.bizrules.pcf.RuleCommandParameterHolder[]">
+        <InputSetRef
+          def="ValidatingCommandParameterInputSet(commandParameterHolder)"
+          id="RuleCommandParameter"/>
+      </InputIterator>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

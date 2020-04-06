@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="LoanInformationInputSet">
+    <Require
+      name="VehicleIncident"
+      type="VehicleIncident"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.LoanInformationDV&quot;)"/>
+    <BooleanRadioInput
+      editable="true"
+      id="LoanInformation_Loan"
+      label="DisplayKey.get(&quot;Web.LoanInformationDV.Loan&quot;)"
+      value="VehicleIncident.Vehicle.Loan">
+      <PostOnChange/>
+    </BooleanRadioInput>
+    <CurrencyInput
+      editable="true"
+      id="MonthlyPayment"
+      label="DisplayKey.get(&quot;Web.LoanInformationDV.MonthlyPayment&quot;)"
+      value="VehicleIncident.Vehicle.LoanMonthlyPayment"
+      visible=" VehicleIncident.Vehicle.Loan == true "/>
+    <TextInput
+      editable="true"
+      id="MonthsRemaining"
+      label="DisplayKey.get(&quot;Web.LoanInformationDV.MonthsRemaining&quot;)"
+      value="VehicleIncident.Vehicle.LoanMonthsRemaining"
+      valueType="java.lang.Integer"
+      visible=" VehicleIncident.Vehicle.Loan == true "/>
+    <CurrencyInput
+      editable="true"
+      id="PayoffAmount"
+      label="DisplayKey.get(&quot;Web.LoanInformationDV.PayoffAmount&quot;)"
+      value="VehicleIncident.Vehicle.LoanPayoffAmount"
+      visible=" VehicleIncident.Vehicle.Loan == true "/>
+    <InputDivider/>
+  </InputSet>
+</PCF>

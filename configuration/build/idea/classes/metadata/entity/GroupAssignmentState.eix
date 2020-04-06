@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<!-- Group Assignment State table -->
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="GroupAssignmentState">
+  <description><![CDATA[
+        Maintains round-robin assignment state for a particular group or for a particular group and all
+        its subgroups. This is an internal class which should only be used by the internals of the
+        assignment engine.
+      
+    ]]></description>
+  <implementsEntity
+    name="LastAssignedUserContainer"/>
+  <column
+    desc="The current load of the group for claims."
+    name="ClaimLoad"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="The current load of the group for exposures."
+    name="ExposureLoad"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="The current load of the group for matters."
+    name="MatterLoad"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="The current load of the group for service requests."
+    name="ServiceRequestLoad"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="The current load of the group for subrogations."
+    name="SubrogationLoad"
+    nullok="true"
+    type="integer"/>
+</internalExtension>

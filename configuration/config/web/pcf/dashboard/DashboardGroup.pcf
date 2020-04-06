@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="perm.User.viewanyedb"
+    id="DashboardGroup"
+    menuActions="DesktopMenuActions()"
+    menuLinks="BlankMenuLinks()"
+    menuTree="DashboardMenuTree()"
+    title="DisplayKey.get(&quot;Web.TabBar.Dashboard&quot;)">
+    <LocationEntryPoint
+      signature="DashboardGroup()"/>
+    <LocationRef
+      location="DashboardSubGroup(new gw.api.dashboard.DashboardTreeGroupInfo(null))"/>
+  </LocationGroup>
+</PCF>

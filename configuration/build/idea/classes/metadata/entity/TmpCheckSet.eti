@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table for upgrade to 3.1 checksets."
+  entity="TmpCheckSet"
+  loadable="false"
+  platform="false"
+  table="tmpcheckset"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.financials.check.entity.TmpCheckSet"
+    impl="com.guidewire.cc.domain.financials.check.impl.TmpCheckSetImpl"/>
+  <column
+    desc="Check id."
+    exportable="false"
+    name="CheckID"
+    nullok="false"
+    type="softentityreference"/>
+  <column
+    desc="TransactionSet id."
+    exportable="false"
+    name="TransactionSetID"
+    nullok="false"
+    type="softentityreference"/>
+  <index
+    desc="Enforce uniqueness per Check/TransactionSet pair"
+    name="checksetu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="CheckID"/>
+    <indexcol
+      keyposition="2"
+      name="TransactionSetID"/>
+  </index>
+</entity>

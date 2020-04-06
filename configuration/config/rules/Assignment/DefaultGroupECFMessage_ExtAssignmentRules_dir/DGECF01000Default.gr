@@ -1,0 +1,25 @@
+package rules.Assignment.DefaultGroupECFMessage_ExtAssignmentRules_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+
+
+@gw.rules.RuleName("DGECF01000 - Default")
+internal class DGECF01000Default {
+  static function doCondition(eCFMessage_Ext  :  entity.ECFMessage_Ext) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(eCFMessage_Ext  :  entity.ECFMessage_Ext, actions : gw.rules.Action) {
+/*start00rule*/
+    var group = eCFMessage_Ext.CurrentAssignment.AssignedGroup
+    var user = group.Supervisor
+    eCFMessage_Ext.CurrentAssignment.assign(group, user)
+    CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Accelerator.IPLM.Rules.Assignment.DefaultGroup.ECFMessage", actions.ShortRuleName))
+    CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.AssignedUserIs", eCFMessage_Ext.AssignedUser))
+    actions.exit()
+/*end00rule*/
+  }
+}

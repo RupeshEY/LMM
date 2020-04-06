@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AddressBookCompanyVendorSpecialtyInputSet"
+    mode="MedicalCareOrg">
+    <Require
+      name="CompanyVendor"
+      type="CompanyVendor"/>
+    <TypeKeyInput
+      editable="true"
+      id="MedicalSpecialty"
+      label="DisplayKey.get(&quot;Web.ContactDetail.MedicalCareOrg.MedicalSpecialty&quot;)"
+      value="(CompanyVendor as MedicalCareOrg).MedicalOrgSpecialty"
+      valueType="typekey.SpecialtyType"/>
+  </InputSet>
+</PCF>

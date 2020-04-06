@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    editable="true"
+    id="ClaimParticipantRolesInputSet">
+    <Require
+      name="ecfClaimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <ListViewInput
+      boldLabel="true"
+      editable="true"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ClaimParticipantRoles&quot;)"
+      labelAbove="true">
+      <Toolbar/>
+      <ListViewPanel>
+        <RowIterator
+          editable="true"
+          elementName="selectedParticipant"
+          id="partyIterator"
+          value="ecfClaimResponseRq.ClaimParticipantRoles"
+          valueType="ECFClaimParticipantRole_Ext[]">
+          <Row>
+            <CheckBoxCell
+              desc="interpret from wb:ClaimNotifyEventRq/wb:ClaimMovement/wb:Extension/wb:Contract/wb:ContractMarket/wb:InsurerOrReinsurer/wb:ParticipantFunction; if changed, generate an entry in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ContractMarket/wb:InsurerOrReinsurer/wb:AgreementPartyModifiedIndicator"
+              editable="true"
+              id="secondaryAgreementInd"
+              label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.SecondaryAgreementParty&quot;)"
+              value="selectedParticipant.AgreementParty">
+            </CheckBoxCell>
+            <TextCell
+              editable="false"
+              id="PartyId"
+              label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.PartyID&quot;)"
+              value="selectedParticipant.PartyID"/>
+            <TextCell
+              desc="taken from wb:ClaimNotifyEventRq/wb:ClaimMovement/wb:Extension/wb:Contract/wb:ContractMarket/wb:InsurerOrReinsurer/Party/Id@Agency; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ContractMarket/wb:InsurerOrReinsurer/Party/Id@Agency"
+              editable="false"
+              id="bureau"
+              label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.Bureau&quot;)"
+              value="selectedParticipant.BureauType"
+              valueType="ECFBureauType_Ext"/>
+            <TextCell
+              desc="taken from wb:ClaimNotifyEventRq/wb:ClaimMovement/wb:Extension/wb:Contract/wb:ContractMarket/wb:InsurerOrReinsurer/Party/Name; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ContractMarket/wb:InsurerOrReinsurer/Party/Name"
+              editable="false"
+              id="name"
+              label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.Name&quot;)"
+              value="selectedParticipant.PartyName"/>
+            <TextCell
+              editable="false"
+              id="role"
+              label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.Role&quot;)"
+              value="selectedParticipant.InitialParticipantFunction"
+              valueType="typekey.ECFParticipantFunction_Ext"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </ListViewInput>
+  </InputSet>
+</PCF>

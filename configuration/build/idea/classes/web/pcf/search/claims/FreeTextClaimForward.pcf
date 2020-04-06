@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Forward
+    id="FreeTextClaimForward">
+    <LocationEntryPoint
+      signature="FreeTextClaimForward(claimNumber : String, claimStatus : ClaimSearchType)"/>
+    <Variable
+      name="claimNumber"
+      type="String"/>
+    <Variable
+      name="claimStatus"
+      type="ClaimSearchType"/>
+    <ForwardCondition
+      action="pcf.ArchivedClaim.go(entity.Claim.finder.findClaimInfoByClaimNumber(claimNumber))"
+      condition="claimStatus != null and claimStatus.equals(ClaimSearchType.TC_ARCHIVED)"/>
+    <ForwardCondition
+      action="pcf.ClaimForward.go(entity.Claim.finder.findClaimByClaimNumber(claimNumber))"
+      condition="claimStatus == null or !claimStatus.equals(ClaimSearchType.TC_ARCHIVED)"/>
+    <ForwardCondition
+      action="CannotViewClaim.go()"/>
+  </Forward>
+</PCF>

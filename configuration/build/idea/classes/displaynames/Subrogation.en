@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<Entity
+  name="Subrogation">
+  <Columns>
+    <Column
+      beanPath="Subrogation.Exposure"
+      displayName="true"
+      name="ExposureDisplayName"/>
+    <Column
+      beanPath="Subrogation.SubrogationSummary.Claim"
+      displayName="true"
+      name="ClaimDisplayName"/>
+    <Column
+      beanPath="Subrogation.Exposure"
+      name="Exposure"/>
+  </Columns>
+  <DisplayName><![CDATA[if (Exposure != null) {
+  return gw.api.locale.DisplayKey.get("DisplayName.Subrogation.Exposure", ExposureDisplayName)
+} else {
+  return gw.api.locale.DisplayKey.get("DisplayName.Subrogation.Claim", ClaimDisplayName)
+}
+]]></DisplayName>
+</Entity>

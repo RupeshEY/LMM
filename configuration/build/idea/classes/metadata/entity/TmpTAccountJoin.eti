@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table for Athena to Nozomi upgrade - used to help with creation of new rejection taccounts"
+  entity="TmpTAccountJoin"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="tmptaccountjoin"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.TmpTAccountJoin"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TmpTAccountJoinImpl"/>
+  <column
+    desc="ID of the old taccount"
+    name="OldTAccountID"
+    nullok="false"
+    type="softentityreference"/>
+  <typekey
+    desc="Type of the old taccount (i.e., either Reserves or RecoveryReserves)"
+    name="OldTAccountType"
+    nullok="false"
+    typelist="TAccountType"/>
+  <column
+    desc="ID of the new taccount"
+    name="NewTAccountID"
+    nullok="false"
+    type="softentityreference"/>
+  <index
+    desc="Each old taccount should have at most one target new taccount to transfer balances to."
+    name="tmptaccountjoinu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="oldtaccountid"/>
+  </index>
+  <index
+    desc="Improves performance of PopulateTmpTableForChangingTxnContributionsTrigger."
+    name="tmptaccountjoinu2"
+    unique="false">
+    <indexcol
+      keyposition="1"
+      name="oldtaccounttype"/>
+  </index>
+</entity>

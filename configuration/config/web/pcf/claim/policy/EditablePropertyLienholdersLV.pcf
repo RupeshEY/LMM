@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_policy.xml -->
+  <ListViewPanel
+    id="EditablePropertyLienholdersLV">
+    <ExposeIterator
+      valueType="entity.PropertyOwner"
+      widget="EditablePropertyLienholdersLV"/>
+    <Require
+      name="PolicyLocation"
+      type="PolicyLocation"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <RowIterator
+      editable="true"
+      elementName="PropertyOwner"
+      hasCheckBoxes="true"
+      hideCheckBoxesIfReadOnly="true"
+      toAdd="PolicyLocation.addToLienholders(PropertyOwner)"
+      toRemove="PolicyLocation.removeFromLienholders(PropertyOwner)"
+      value="PolicyLocation.policyLocationLienHoldersOnly"
+      valueType="entity.PropertyOwner[]">
+      <Row>
+        <ClaimContactCell
+          claim="Claim"
+          editable="true"
+          id="Lienholder"
+          label="DisplayKey.get(&quot;LV.Policy.EditablePropertyLienholders.Lienholder&quot;)"
+          required="true"
+          sortOrder="1"
+          sortValueRange="false"
+          value="PropertyOwner.Lienholder"
+          valueRange="Claim.RelatedContacts"/>
+        <TypeKeyCell
+          editable="true"
+          id="OwnerType"
+          label="DisplayKey.get(&quot;LV.Policy.EditablePropertyLienholders.OwnerType&quot;)"
+          required="true"
+          value="PropertyOwner.OwnerType"
+          valueType="typekey.OwnerType"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

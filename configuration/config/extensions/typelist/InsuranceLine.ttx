@@ -1,0 +1,165 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Insurance line (for stat coding)"
+  name="InsuranceLine">
+  <typecode
+    code="comm_auto_liab"
+    desc="Commercial auto liability"
+    name="Commercial auto liability"
+    priority="1">
+    <category
+      code="BusinessAuto"
+      typelist="policytype"/>
+  </typecode>
+  <typecode
+    code="comm_auto_phys"
+    desc="Commercial auto physical damage"
+    name="Commercial auto physical damage"
+    priority="2">
+    <category
+      code="BusinessAuto"
+      typelist="policytype"/>
+  </typecode>
+  <typecode
+    code="comm_auto_noflt"
+    desc="Commercial auto no-fault"
+    name="Commercial auto no-fault"
+    priority="3">
+    <category
+      code="BusinessAuto"
+      typelist="policytype"/>
+  </typecode>
+  <typecode
+    code="businessowners"
+    desc="Businessowners"
+    name="Businessowners"
+    priority="4">
+    <category
+      code="BusinessOwners"
+      typelist="policytype"/>
+  </typecode>
+  <typecode
+    code="comm_property"
+    desc="Commercial property"
+    name="Commercial property"
+    priority="5">
+    <category
+      code="CommercialProperty"
+      typelist="policytype"/>
+    <category
+      code="CommercialPackage"
+      typelist="policytype"/>
+  </typecode>
+  <typecode
+    code="farmowners"
+    desc="Farmowners"
+    name="Farmowners"
+    priority="6">
+    <category
+      code="farmowners"
+      typelist="policytype"/>
+  </typecode>
+  <typecode
+    code="general_liab"
+    desc="General Liability"
+    name="General Liability"
+    priority="7">
+    <category
+      code="GeneralLiability"
+      typelist="policytype"/>
+    <category
+      code="CommercialPackage"
+      typelist="policytype"/>
+  </typecode>
+  <typecode
+    code="glass"
+    desc="Glass"
+    name="Glass"
+    priority="8">
+    <category
+      code="PersonalAuto"
+      typelist="policytype"/>
+    <category
+      code="BusinessAuto"
+      typelist="policytype"/>
+  </typecode>
+  <typecode
+    code="homeowners"
+    desc="Homeowners"
+    name="Homeowners"
+    priority="9">
+    <category
+      code="Homeowners"
+      typelist="policytype"/>
+  </typecode>
+  <typecode
+    code="pers_liab"
+    desc="Personal liability"
+    name="Personal liability"
+    priority="10">
+    <category
+      code="PersonalUmbrella"
+      typelist="policytype"/>
+  </typecode>
+  <typecode
+    code="mobile_homeowns"
+    desc="Mobile homeowners"
+    name="Mobile homeowners"
+    priority="11">
+    <category
+      code="Homeowners"
+      typelist="policytype"/>
+  </typecode>
+  <typecode
+    code="pers_auto_liab"
+    desc="Personal auto liability"
+    name="Personal auto liability"
+    priority="12">
+    <category
+      code="PersonalAuto"
+      typelist="policytype"/>
+  </typecode>
+  <typecode
+    code="pers_auto_phys"
+    desc="Personal auto physical damage"
+    name="Personal auto physical damage"
+    priority="13">
+    <category
+      code="PersonalAuto"
+      typelist="policytype"/>
+  </typecode>
+  <typecode
+    code="pers_auto_noflt"
+    desc="Personal auto no-fault"
+    name="Personal auto no-fault"
+    priority="14">
+    <category
+      code="PersonalAuto"
+      typelist="policytype"/>
+  </typecode>
+  <typecode
+    code="inland_marine"
+    desc="Inland marine"
+    name="Inland marine"
+    priority="15">
+    <category
+      code="InlandMarine"
+      typelist="policytype"/>
+    <category
+      code="CommercialProperty"
+      typelist="policytype"/>
+    <category
+      code="CommercialPackage"
+      typelist="policytype"/>
+  </typecode>
+  <typecode
+    code="wc"
+    desc="Workers' compensation"
+    name="Workers' compensation"
+    priority="16">
+    <category
+      code="WorkersComp"
+      typelist="policytype"/>
+  </typecode>
+</typelistextension>

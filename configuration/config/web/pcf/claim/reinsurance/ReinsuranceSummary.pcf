@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    alwaysInEditMode="false"
+    canEdit="true"
+    canVisit="perm.System.riview"
+    id="ReinsuranceSummary"
+    title="DisplayKey.get(&quot;Web.Claim.Reinsurance.FinancialsSummary&quot;)">
+    <LocationEntryPoint
+      signature="ReinsuranceSummary(claim:Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Screen>
+      <DetailViewPanel
+        id="FinancialsDetailsDV">
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.ReinsuranceSummary.ClaimFinancialsHeader&quot;)"/>
+          <TextInput
+            align="right"
+            id="NetPaidOnClaim"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.ReinsuranceSummary.NetPaidOnClaim&quot;)"
+            value="currToString(gw.api.financials.FinancialsCalculations.getSubmittedNetPayments().withClaim(claim).Amount)"/>
+          <TextInput
+            align="right"
+            id="OpenReserves"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.ReinsuranceSummary.OpenReserves&quot;)"
+            value="safeCurrToString(gw.api.financials.FinancialsCalculations.getSubmittedOpenReserves().withClaim(claim).Amount)"/>
+          <TextInput
+            align="right"
+            id="TotalIncurred"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.ReinsuranceSummary.TotalIncurred&quot;)"
+            value="safeCurrToString(gw.api.financials.FinancialsCalculations.getSubmittedTotalIncurredNet().withClaim(claim).Amount)"/>
+        </InputColumn>
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.ReinsuranceSummary.ReinsuranceFinancialsHeader&quot;)"/>
+          <TextInput
+            align="right"
+            id="TotalRIRecoverable"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.ReinsuranceSummary.TotalRIRecoverable&quot;)"
+            value="safeCurrToString(gw.api.financials.FinancialsCalculations.getRITotalRecoverables().withClaim(claim).Amount)"/>
+          <TextInput
+            align="right"
+            id="CededReserves"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.ReinsuranceSummary.CededReserves&quot;)"
+            value="safeCurrToString(gw.api.financials.FinancialsCalculations.getRIOpenCededReserves().withClaim(claim).Amount)"/>
+          <TextInput
+            align="right"
+            id="TotalRI"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.ReinsuranceSummary.TotalRI&quot;)"
+            value="safeCurrToString(gw.api.financials.FinancialsCalculations.getRITotalReinsurance().withClaim(claim).Amount)"/>
+        </InputColumn>
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.ReinsuranceSummary.ClaimFnlsWithRIHeader&quot;)"/>
+          <TextInput
+            align="right"
+            id="NetNetOnClaim"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.ReinsuranceSummary.NetNetOnClaim&quot;)"
+            value="currToString(nullToZeroInClaimCurrency(gw.api.financials.FinancialsCalculations.getRISubmittedNetNetPayments().withClaim(claim).Amount))"/>
+          <TextInput
+            align="right"
+            id="NetNetReserves"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.ReinsuranceSummary.NetNetReserves&quot;)"
+            value="currToString(nullToZeroInClaimCurrency(gw.api.financials.FinancialsCalculations.getRISubmittedNetNetReserves().withClaim(claim).Amount))"/>
+          <TextInput
+            align="right"
+            id="TotalIncurredWithRI"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.ReinsuranceSummary.TotalIncurredWithRI&quot;)"
+            value="currToString(nullToZeroInClaimCurrency(gw.api.financials.FinancialsCalculations.getRISubmittedTotalIncurred().withClaim(claim).Amount))"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="ReinsuranceSummaryLV(claim)">
+        <Toolbar
+          visible="true">
+          <ToolbarButton
+            available="claim.Exposures.HasElements and perm.System.riedit"
+            id="AddAgreementButton"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.AddAgreement&quot;)"
+            showConfirmMessage="false"
+            visible="perm.System.riedit">
+            <MenuItemSetRef
+              def="AddAgreementMenuItemSet( claim )"/>
+          </ToolbarButton>
+          <ToolbarButton
+            action="ReinsuranceExposures.go(claim)"
+            available="claim.Exposures.HasElements and perm.System.riedit"
+            id="ManageExposuresButton"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.ManageExposures&quot;)"
+            showConfirmMessage="false"
+            visible="perm.System.riedit"/>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+    <Code><![CDATA[uses gw.api.financials.CurrencyAmount
+
+function safeCurrToString(val : CurrencyAmount) : String {
+  return currToString(nullToZeroInClaimCurrency(val))
+}
+
+function nullToZeroInClaimCurrency (val : CurrencyAmount) : CurrencyAmount {
+  return val!=null ? val : 0bd.ofCurrency(claim.Currency)
+}
+
+function currToString (val : CurrencyAmount) : String {
+  return gw.api.util.CurrencyUtil.renderAsCurrency(gw.api.util.CurrencyUtil.nz(val), claim.Currency)
+}]]></Code>
+  </Page>
+</PCF>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="UserAssignableDV"
+    mode="exposure">
+    <Require
+      name="User"
+      type="User"/>
+    <InputColumn>
+      <ListViewInput
+        def="DesktopExposuresLV(ExposureDesktopView.finder.findAll(), User)"
+        labelAbove="true">
+        <Toolbar>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="AssignExposuresPopup.push(new gw.api.exposure.ExposureAssignmentPopup(CheckedValues))"
+            default="true"
+            flags="any ExposureDesktopView"
+            id="UserExposuresPage_AssignButton"
+            iterator="DesktopExposuresLV.DesktopExposuresLV"
+            label="DisplayKey.get(&quot;Web.DesktopExposures.Assign&quot;)"
+            shortcut="G"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<!-- Note, the Code must be equal to the quickClaimMode tag on the QuickClaimStep element in  NewClaimWizard.pcf for the defaults to work correctly -->
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Default values for quick claims"
+  final="false"
+  name="QuickClaimDefault">
+  <typecode
+    code="Glass"
+    desc="General liability incidents only"
+    name="GL Incident Only">
+    <category
+      code="GL"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="QuickClaimAuto"
+    desc="Quick claim auto"
+    name="Quick Claim Auto">
+    <category
+      code="Auto"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="AutoFirstAndFinal"
+    desc="Auto first and final"
+    name="Auto First and Final">
+    <category
+      code="Auto"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="QuickClaimProperty"
+    desc="Quick claim property"
+    name="Quick Claim Property">
+    <category
+      code="PR"
+      typelist="losstype"/>
+  </typecode>
+</typelist>

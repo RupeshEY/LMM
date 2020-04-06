@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="WaterDamageQuestionsPanelSet">
+    <Require
+      name="aClaim"
+      type="Claim"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <TypeKeyRadioInput
+          editable="true"
+          id="WaterSource"
+          label="DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsProperty.Claim.WaterDamage.WaterSource&quot;)"
+          stacked="true"
+          value="aClaim.PropertyWaterDamage.WaterSource"
+          valueType="typekey.WaterSource">
+          <PostOnChange/>
+        </TypeKeyRadioInput>
+      </InputColumn>
+      <InputColumn>
+        <BooleanRadioInput
+          editable="true"
+          id="HasWaterBeenTurnedOff"
+          label="DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsProperty.Claim.WaterDamage.HasWaterBeenTurnedOff&quot;)"
+          value="aClaim.PropertyWaterDamage.HasWaterBeenTurnedOff"
+          visible="aClaim.PropertyWaterDamage.WaterSource == TC_PLUMBING_APPLIANCES"/>
+        <BooleanRadioInput
+          editable="true"
+          id="IsRoofCovered"
+          label="DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsProperty.Claim.WaterDamage.IsRoofProtected&quot;)"
+          value="aClaim.PropertyWaterDamage.IsRoofProtected"
+          visible="aClaim.PropertyWaterDamage.WaterSource == TC_ROOF"/>
+      </InputColumn>
+    </DetailViewPanel>
+  </PanelSet>
+</PCF>

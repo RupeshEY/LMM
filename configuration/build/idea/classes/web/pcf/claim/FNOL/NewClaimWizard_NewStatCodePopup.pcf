@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="NewClaimWizard_NewStatCodePopup"
+    returnType="StatCode"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPolicyStatCode.New&quot;)">
+    <LocationEntryPoint
+      signature="NewClaimWizard_NewStatCodePopup(Policy : Policy)"/>
+    <Variable
+      name="Policy"
+      type="Policy"/>
+    <Variable
+      initialValue="Policy.createStatCode()"
+      name="StatCode"
+      type="StatCode"/>
+    <Screen
+      id="NewClaimWizard_NewStatCodeScreen">
+      <Toolbar>
+        <EditButtons
+          pickValue="StatCode"/>
+      </Toolbar>
+      <PanelRef
+        def="StatCodeDetailDV(StatCode)"/>
+    </Screen>
+  </Popup>
+</PCF>

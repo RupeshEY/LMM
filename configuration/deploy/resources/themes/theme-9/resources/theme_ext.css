@@ -1,0 +1,247 @@
+/* This file should contain any customer- or application-specific CSS additions or overrides */
+
+/********************************************************************************
+ * Styles used by the litigation calendar widget
+ * TODO: Only include this with Litigation Calendar widget
+ *******************************************************************************/
+TD.calendarWeek {
+    border: 1px solid #ededed;
+}
+
+TABLE.largeMonth {
+    border-collapse: collapse;
+}
+
+TD.largeDateCell {
+    border: 1px solid #ededed;
+}
+
+TD.largeDayName, TD.largeMonthTitleCell, TD.weekTitleCell, TD.smallDateLine {
+    text-align: center;
+    padding: 7px;
+    background-color: #f5f5f5;
+    border: 1px solid #ededed;
+}
+
+DIV.largeDateBox {
+    width: 105px;
+    height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 8pt;
+}
+
+DIV.largeDateBoxToday {
+    width: 105px;
+    height: 100px;
+    background-color: #ceffce;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+DIV.largeDateBoxBoldBorder {
+    border: 2px solid #0067ac;
+}
+
+DIV.largeDateBoxSelectedDay, DIV.largeDateBoxSelectedWeek {
+    width: 105px;
+    height: 100px;
+    background-color: #fdffca;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+DIV.largeDateBoxOtherMonth {
+    width: 105px;
+    height: 100px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    font-size: 8pt;
+}
+
+DIV.largeDateLine, DIV.largeDateLineCritical1 {
+    width: 100%;
+    font-size: 8pt;
+    padding-top: 1px;
+    padding-right: 4px;
+    text-align: right;
+    cursor: pointer;
+}
+
+DIV.largeDateLine:hover, DIV.largeDateLineCritical1:hover {
+    font-weight: bold;
+}
+
+TD.largeDateContent {
+    width: 100%;
+    height: 100%;
+}
+
+TD.largeWeekend2DateContent {
+    border-top: 1px solid #ededed;
+    width: 100%;
+    height: 50%;
+}
+
+TD.eventFootnote {
+    font-size: 8pt;
+    text-align: left;
+}
+
+DIV.largeDateContentEventLine {
+    width: 90px;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    padding-left: 3px;
+}
+
+.linkDateContentEventLine {
+    color: #0067ac;
+    font-size: 8pt;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    text-decoration: none;
+}
+
+IMG.linkDateContentEventCriticalBullet {
+    vertical-align: baseline;
+    padding-right: 1px;
+}
+
+DIV.largeDateContentEventLineContainer {
+    width: 100%;
+    font-size: 8pt;
+    text-align: left;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+DIV.linkDateContentEventLineWeekendContainer {
+    width: 90px;
+    height: 30px;
+    overflow-y: auto;
+    overflow-x: hidden;
+}
+
+TD.smallDateLine {
+    font-size: 9pt;
+    padding: 4px;
+}
+
+TD.smallDateContent, TD.smallDateContentCritical1, TD.smallDateContentOtherMonth {
+    text-align: center;
+    border: 1px solid #ededed;
+    padding: 3px 5px;
+    font-size: 8pt;
+    cursor: pointer;
+}
+
+TD.smallDateContentCritical1 {
+    background-color: #ffb7b7;
+}
+
+TD.smallDateContentOtherMonth {
+    background-color: #f7f7f7;
+    color: #c0c0c0;
+}
+
+TD.dateNavigatorTitle {
+    text-align: center;
+    font-size: 14pt;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+TD.dateNavigatorButton {
+    cursor: pointer;
+}
+
+TD.weekNavigatorTitle {
+    text-align: center;
+    font-size: 10pt;
+    font-weight: bold;
+    white-space: nowrap;
+}
+
+TD.weekNavigatorButton {
+    cursor: pointer;
+}
+
+TD.weekDayTitle {
+    font-size: 8pt;
+    white-space: nowrap;
+}
+
+DIV.longWeekDisplay {
+    font-size: 8pt;
+}
+
+TD.weekPropertyName, TD.weekPropertyValue {
+    padding-left: 3px;
+    padding-right: 3px;
+    font-size: 8pt;
+    white-space: nowrap;
+}
+
+TD.weekNoEvents {
+    font-size: 8pt;
+    color: #808080;
+}
+
+A.dateNavigatorSmallText {
+    color: #0067ac;
+}
+
+.dateNavigatorSmallText {
+    font-size: 8pt;
+    text-decoration: none;
+}
+
+IMG.dateNavigatorSmallTextCriticalBullet {
+    vertical-align: baseline;
+    padding-right: 1px;
+}
+
+.alertBarCustom {
+    border: 1px solid #ffefb7 !important;
+    padding: 2px 10px;
+    margin: 5px 5px 5px 7px;
+    border-radius: 3px;
+    background-color: #ffefb7;
+    line-height: 26px;
+    font-weight: normal;
+    font-size: 13px;}
+
+/* small width for the CLOSE button*/
+.alertBarCustom TD + TD{
+    width: 20px;
+
+}
+
+
+.bz-sxs-row {
+    background-color: white;
+    border-top: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+}
+
+.bz-sxs-row-hilite {
+    background-color: #FFF0B6;
+    border-top: 1px solid #DDDDDD;
+    border-right: 1px solid #DDDDDD;
+}
+
+.bz-sxs-section-label {
+    background-color: #EFEFEF;
+    font-size: 1.25em;
+    color: #999999;
+    border-top: 3px solid silver;
+    border-bottom: 1px solid silver;
+}
+
+.bz-sxs-action-label {
+    background-color: #EFEFEF;
+    border-top: 1px solid #DDDDDD;
+}

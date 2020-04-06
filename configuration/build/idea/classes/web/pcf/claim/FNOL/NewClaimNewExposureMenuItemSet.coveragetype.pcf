@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <MenuItemSet
+    id="NewClaimNewExposureMenuItemSet"
+    mode="coveragetype">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <MenuItemTree
+      children="item.Children"
+      elementName="item"
+      value="gw.api.exposure.NewExposureMenuUtil.createItemsByCoverageType(claim)"
+      valueType="gw.api.exposure.NewExposureMenuItem[]">
+      <MenuItem
+        action="NewClaimWizard_NewExposurePopup.push(claim, wizard, item.loadCoverageFromBundle(claim), item.CoverageType, item.CoverageSubtype)"
+        id="item"
+        label="item.DisplayLabel"/>
+    </MenuItemTree>
+  </MenuItemSet>
+</PCF>

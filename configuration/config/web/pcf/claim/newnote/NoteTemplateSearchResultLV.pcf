@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_claim.xml -->
+  <ListViewPanel
+    id="NoteTemplateSearchResultLV">
+    <Require
+      name="NoteTemplateSearchResultsList"
+      type="NoteTemplateSearchResults[]"/>
+    <RowIterator
+      editable="false"
+      elementName="NoteTemplateSearchResults"
+      pickValue="NoteTemplateSearchResults"
+      value="NoteTemplateSearchResultsList"
+      valueType="entity.NoteTemplateSearchResults[]">
+      <Row>
+        <TextCell
+          id="Template"
+          label="DisplayKey.get(&quot;LV.Claim.NoteTemplateSearch.NoteTemplateDescriptor.Template&quot;)"
+          value="NoteTemplateSearchResults.Name"/>
+        <TypeKeyCell
+          id="Topic"
+          label="DisplayKey.get(&quot;LV.Claim.NoteTemplateSearch.NoteTemplateDescriptor.Topic&quot;)"
+          value="NoteTemplateSearchResults.Topic"
+          valueType="typekey.NoteTopicType"/>
+        <TypeKeyCell
+          id="Type"
+          label="DisplayKey.get(&quot;LV.Claim.NoteTemplateSearch.NoteTemplateDescriptor.Type&quot;)"
+          value="NoteTemplateSearchResults.Type"
+          valueType="typekey.NoteType"/>
+        <TypeKeyCell
+          id="Language"
+          label="DisplayKey.get(&quot;LV.Claim.NoteTemplateSearch.NoteTemplateDescriptor.Language&quot;)"
+          value="NoteTemplateSearchResults.Language"
+          valueType="typekey.LanguageType"
+          visible="LanguageType.getTypeKeys( false ).Count &gt; 1"/>
+        <TextCell
+          id="LossType"
+          label="DisplayKey.get(&quot;LV.Claim.NoteTemplateSearch.NoteTemplateDescriptor.LossType&quot;)"
+          sortBy="NoteTemplateSearchResults.LossTypes"
+          value="NoteTemplateSearchResults.LossTypes"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[
+// Not used, the search criteria perform search, does this for us
+// but left for if they decided they would rather the search result retruned
+// codes
+function formatLOB(lobStr : String) : String {
+  if (lobStr == null) {
+    return null
+  }
+  return lobStr.split(",").map(\ s -> (typekey.LossType.get(s)).DisplayName).join(",")
+}
+      
+    ]]></Code>
+  </ListViewPanel>
+</PCF>

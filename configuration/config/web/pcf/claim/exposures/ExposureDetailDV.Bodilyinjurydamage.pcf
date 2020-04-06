@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- There are three types of exposure nvvs, which follow a specific naming convention:
+  1) Existing exposures displayed in existing claims.  The name of the NVV corresponds to the subtype name.
+  2) New exposures displayed in existing claims.  The name of the NVV is New<subtype name>.
+  3) New exposures displayed in new claims.  The name of the NVV is NewClaim<subtype name>.
+
+  The code within the application depends on this naming convention, so please follow it when adding new exposure
+  subtypes.
+    
+
+  ### =================================================================================================================
+  ###  Existing exposure/existing claim NVVs
+  ### =================================================================================================================
+      This file automatically generated from nvv_exposure.xml -->
+  <CardViewPanel
+    id="ExposureDetailDV"
+    mode="Bodilyinjurydamage">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Card
+      id="BodilyInjuryDamage_DetailsCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.BodilyInjuryDamage.Details&quot;)">
+      <PanelRef
+        def="BodilyInjuryDamageDV(Exposure)"/>
+    </Card>
+    <Card
+      id="Exposure_ISOCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.ISO&quot;)"
+      visible="!Exposure.Claim.ISOClaimLevelMessaging">
+      <PanelRef
+        def="ISODetailsDV(Exposure)"/>
+    </Card>
+  </CardViewPanel>
+</PCF>

@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    editable="perm.AuthorityLimitProfile.edit"
+    id="UserAuthorityLimitsDV">
+    <Require
+      name="User"
+      type="User"/>
+    <InputColumn>
+      <RangeInput
+        align="left"
+        boldLabel="true"
+        editable="User.AuthorityProfile == null  or (User.AuthorityProfile != null and !User.AuthorityProfile.isFieldChanged(&quot;Limits&quot;))"
+        id="AuthorityLimitsProfile"
+        label="DisplayKey.get(&quot;Web.Admin.UserAuthorityLimits.AuthorityLimitProfile&quot;)"
+        sortValueRange="false"
+        value="AuthorityLimitsProfile"
+        valueRange="gw.api.admin.UserAuthorityLimitUtil.getProfiles(User)"
+        valueType="entity.AuthorityLimitProfile">
+        <PostOnChange/>
+      </RangeInput>
+      <TextInput
+        align="left"
+        boldLabel="true"
+        id="Description"
+        label="DisplayKey.get(&quot;NVV.Admin.UserAuthorityLimits.AdminUserDetails.AuthorityLimitProfile.Description&quot;)"
+        value="User.AuthorityProfile.Description"/>
+      <TypeKeyInput
+        boldLabel="true"
+        editable="true"
+        id="Currency"
+        label="DisplayKey.get(&quot;NVV.Admin.UserAuthorityLimits.AdminUserDetails.AuthorityLimitProfile.Currency&quot;)"
+        required="true"
+        value="User.AuthorityProfile.Currency"
+        valueType="typekey.Currency"
+        visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode() and User.AuthorityProfile.Custom">
+        <PostOnChange/>
+      </TypeKeyInput>
+    </InputColumn>
+    <InputFooterSection>
+      <ListViewInput
+        boldLabel="true"
+        def="EditableAuthorityLimitsLV(User)"
+        editable="User.AuthorityProfile != null and User.AuthorityProfile.Custom"
+        label="DisplayKey.get(&quot;NVV.Admin.UserAuthorityLimits.AdminUserDetails.AuthorityLimits&quot;)"
+        labelAbove="true"
+        validationExpression="User.AuthorityProfile != null and !gw.plugin.authoritylimits.AuthorityLimitsConfiguration.resolveAuthorityLimits(User.AuthorityProfile) ? gw.plugin.authoritylimits.AuthorityLimitsConfiguration.ErrorString : null">
+        <Toolbar>
+          <IteratorButtons
+            iterator="EditableAuthorityLimitsLV.EditableAuthorityLimitsLV"
+            removeShortcut="E"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputFooterSection>
+    <Code><![CDATA[
+property get AuthorityLimitsProfile() : AuthorityLimitProfile {
+    var p = User.AuthorityProfile
+    if (p == null) {
+      var x = gw.api.admin.UserAuthorityLimitUtil.getProfiles(User)
+      if (x != null && !x.IsEmpty) {
+        p = x[0]
+        User.changeAuthorityProfile(p)
+      }
+    }
+    return p
+  }
+  
+  property set AuthorityLimitsProfile(profile : AuthorityLimitProfile) {
+    User.changeAuthorityProfile(profile)
+  }
+
+    ]]></Code>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,20 @@
+package rules.Validation.ClaimClosedValidationRules_dir
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CCV06000 - Subrogation Referred Or Closed")
+internal class CCV06000SubrogationReferredOrClosed {
+  static function doCondition(claim  :  entity.Claim) : boolean {
+/*start00rule*/
+return claim.SubrogationSummary != null
+        and claim.SubrogationSummary.Status != SubrogationStatus.TC_CLOSED
+        and claim.SubrogationSummary.SubroReferralDate == null
+/*end00rule*/
+}
+
+  static function doAction(claim  :  entity.Claim, actions : gw.rules.Action) {
+/*start00rule*/
+var ruleName = gw.api.util.StringUtil.substring(actions.getRule() as java.lang.String, 0, 8)
+    claim.reject(TC_NEWLOSS, DisplayKey.get("Subrogation.Validation.ClaimClosed.SubroReferredOrClosed", ruleName), null, null) 
+/*end00rule*/
+  }
+}

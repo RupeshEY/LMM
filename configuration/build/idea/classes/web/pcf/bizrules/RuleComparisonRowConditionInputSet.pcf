@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="RuleComparisonRowConditionInputSet">
+    <Require
+      name="row"
+      type="gw.bizrules.pcf.RuleComparisonRow&lt;String&gt;"/>
+    <TextInput
+      id="Label"
+      labelAbove="true"
+      value="row.Label">
+      <LayoutConfig
+        tdClass="row.CssClass"/>
+    </TextInput>
+    <InputIterator
+      elementName="value"
+      id="ValueIterator"
+      type="java.util.function.Supplier&lt;String&gt;"
+      value="row.Values"
+      valueType="List&lt;java.util.function.Supplier&lt;String&gt;&gt;">
+      <TextAreaInput
+        id="Value"
+        labelAbove="true"
+        numCols="60"
+        numRows="20"
+        value="value.get()"
+        valueType="String">
+        <LayoutConfig
+          tdClass="row.CssClass"/>
+      </TextAreaInput>
+    </InputIterator>
+  </InputSet>
+</PCF>

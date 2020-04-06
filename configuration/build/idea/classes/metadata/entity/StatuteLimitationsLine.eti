@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="An applicable status of limiations in regards to subrogation"
+  entity="StatuteLimitationsLine"
+  exportable="true"
+  table="statuelimitationsline"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.StatuteLimitationsLine"
+    impl="com.guidewire.cc.domain.claim.impl.StatuteLimitationsLineImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Additional Description of statute of Limitation"
+    name="Description"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    columnName="SubrogationSummaryID"
+    desc="Related Subrogation Summary"
+    exportable="false"
+    fkentity="SubrogationSummary"
+    name="SubrogationSummary"
+    nullok="false"/>
+  <typekey
+    desc="The type of statute of limitations - e.g. Medical, Indemnity, etc."
+    name="StatuteLimitType"
+    nullok="true"
+    typelist="StatuteLimitationsType"/>
+  <typekey
+    desc="Jurisdiction State. The Jurisdiction must be associated with JurisdictionType.TC_INSURANCE."
+    name="JurisdictionState"
+    nullok="true"
+    typelist="Jurisdiction"/>
+  <column
+    desc="Last Date prior before claim is expired due to statute of limitations"
+    name="StatuteDate"
+    nullok="true"
+    type="datetime"/>
+</entity>

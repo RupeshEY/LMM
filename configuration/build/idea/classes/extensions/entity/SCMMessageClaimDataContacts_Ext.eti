@@ -1,0 +1,128 @@
+<?xml version="1.0"?>
+<entity
+  desc="Entity to hold the Contact details from an SCM message containing Claim Data. These will be mapped to Claim Contact entities."
+  xmlns="http://guidewire.com/datamodel"
+  entity="SCMMessageClaimDataContacts_Ext"
+  table="scmmsgclaimdatacntcts_ext"
+  type="retireable">
+  <column
+    desc="Id of Broker Party"
+    name="BrokerPartyId"
+    nullok="true"
+    type="shorttext"></column>
+  <column
+    desc="Name of Broker Party"
+    name="BrokerPartyName"
+    nullok="true"
+    type="shorttext"></column>
+  <column
+    desc="Agency of Broker Party"
+    name="BrokerPartyAgency"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Contact name for Broker"
+    name="BrokerContactName"
+    nullok="true"
+    type="shorttext"></column>
+  <column
+    desc="Contact Telephone for Broker"
+    name="BrokerContactTelephone"
+    nullok="true"
+    type="shorttext"></column>
+  <column
+    desc="Contact Description of Broker Party"
+    name="BrokerContactDescription"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    desc="Id of Insurer Party"
+    name="InsurerId"
+    nullok="true"
+    type="shorttext"></column>
+  <column
+    desc="Name of Insurer Party"
+    name="InsurerName"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Agency of Insurer Party"
+    name="InsurerAgency"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Id of Reinsurer Party"
+    name="ReinsurerId"
+    nullok="true"
+    type="shorttext"></column>
+  <column
+    desc="Name of Reinsurer Party"
+    name="ReinsurerName"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Agency of Reinsurer Party"
+    name="ReinsurerAgency"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Id of Claim Agreement Party"
+    name="ClaimAgreementPartyId"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Participant function of Claim Agreement"
+    name="ClaimAgreementParticipant"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Agency of Contact Agreement Party"
+    name="ClaimAgreementPartyAgency"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Id of Service Provider"
+    name="ServiceProviderId"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Name of Service Provider"
+    name="ServiceProviderName"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Agency of Service Provider"
+    name="ServiceProviderAgency"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Contact Description of Service Provider"
+    name="ServiceProviderDescription"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    desc="Cover Holder Name"
+    name="CoverHolderName"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    desc="Insured Name"
+    name="InsuredName"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    desc="Bureau leading insurer or reinsurer first party id"
+    name="BureauLeadingInsurerId"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Bureau leading insurer or reinsurer party name"
+    name="BureauLeadingInsurerName"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Bureau leading insurer or reinsurer party agency"
+    name="BureauLeadingInsurerAgency"
+    nullok="true"
+    type="shorttext"/>
+</entity>

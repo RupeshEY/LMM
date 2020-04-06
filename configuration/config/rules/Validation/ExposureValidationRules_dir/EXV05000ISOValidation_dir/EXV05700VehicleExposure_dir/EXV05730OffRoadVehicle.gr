@@ -1,0 +1,22 @@
+package rules.Validation.ExposureValidationRules_dir.EXV05000ISOValidation_dir.EXV05700VehicleExposure_dir
+
+@gw.rules.RuleName("EXV05730 - Off Road Vehicle")
+internal class EXV05730OffRoadVehicle {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.VehicleIncident.Vehicle != null
+and (exposure.VehicleIncident.Vehicle.Style ==TC_ATV
+     or exposure.VehicleIncident.Vehicle.Style == TC_SNOWMOBILE)
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

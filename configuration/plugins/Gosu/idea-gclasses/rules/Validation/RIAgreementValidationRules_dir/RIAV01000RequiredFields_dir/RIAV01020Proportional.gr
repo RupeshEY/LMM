@@ -1,0 +1,20 @@
+package rules.Validation.RIAgreementValidationRules_dir.RIAV01000RequiredFields_dir
+
+@gw.rules.RuleName("RIAV01020 - Proportional")
+internal class RIAV01020Proportional {
+  static function doCondition(rIAgreement : entity.RIAgreement) : boolean {
+    
+/*start00rule*/
+return rIAgreement typeis ProportionalRIAgreement 
+/*end00rule*/
+
+  }
+
+  static function doAction(rIAgreement : entity.RIAgreement, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<!-- TripRU -->
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A RiskUnit that has travel legs associated with it."
+  displayName="Trip Risk Unit"
+  entity="TripRU"
+  supertype="RiskUnit">
+  <implementsInterface
+    iface="gw.cc.policy.entity.TripRU"
+    impl="com.guidewire.cc.domain.policy.impl.TripRUImpl"/>
+  <column
+    desc="A brief description of the trip"
+    name="TripDescription"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <typekey
+    desc="Geographical regions for travel"
+    name="GeographicalRegion"
+    nullok="true"
+    typelist="GeographicalRegion"/>
+  <column
+    desc="The date this trip will start"
+    name="StartDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The date this trip will end"
+    name="EndDate"
+    nullok="true"
+    type="datetime"/>
+</subtype>

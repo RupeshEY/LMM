@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="PolicyLocationRiskDetailPanelSet">
+    <Require
+      name="PolicyLocation"
+      type="PolicyLocation"/>
+    <Require
+      name="Policy"
+      type="Policy"/>
+    <PanelRef>
+      <TitleBar
+        title="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Risks&quot;)"/>
+      <Toolbar>
+        <AddButton
+          hideIfReadOnly="true"
+          id="AddLocationRisk"
+          iterator="LocationBasedRULV.LocationBasedRUIterator"
+          label="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Risks.Add&quot;, typekey.RiskUnit.TC_LOCATIONBASEDRU.DisplayName)"/>
+        <AddButton
+          hideIfReadOnly="true"
+          id="AddMiscLocationRisk"
+          iterator="LocationBasedRULV.LocationBasedRUIterator"
+          label="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Risks.Add&quot;, typekey.RiskUnit.TC_LOCATIONMISCRU.DisplayName)"
+          toCreateAndAdd="PolicyLocation.addLocationBasedRU(typekey.RiskUnit.TC_LOCATIONMISCRU.Description)"
+          visible="Policy.Claim.LOBCode != TC_WORKERSCOMPLINE and Policy.Claim.LOBCode != TC_HOMEOWNERSLINE_HOE"/>
+        <IteratorButtons
+          addVisible="false"
+          id="RemoveLocation"
+          iterator="LocationBasedRULV.LocationBasedRUIterator"
+          removeLabel="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Risks.Remove&quot;)"
+          removeVisible="true"/>
+      </Toolbar>
+      <ListDetailPanel
+        selectionName="RU"
+        selectionType="RiskUnit">
+        <PanelRef
+          def="LocationBasedRULV(PolicyLocation)"/>
+        <CardViewPanel>
+          <Card
+            id="RiskDetail"
+            title="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Risks.Details&quot;)"
+            visible="true">
+            <PanelRef
+              def="PolicyLocationRUDetailsDV(RU as LocationBasedRU)"/>
+          </Card>
+          <Card
+            id="LocationCoverages"
+            title="DisplayKey.get(&quot;NVV.Policy.PolicyVehicleDetail.Vehicle.Coverages&quot;)"
+            visible="true">
+            <!-- Location coverages -->
+            <PanelRef
+              def="LocationCoverageListDetail(RU as LocationBasedRU)"/>
+          </Card>
+        </CardViewPanel>
+      </ListDetailPanel>
+    </PanelRef>
+  </PanelSet>
+</PCF>

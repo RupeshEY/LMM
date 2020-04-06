@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    desc="Configures a labeled section divider on a rule comparison table detail view."
+    id="RuleComparisonSectionLabelInputSet">
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RuleVersionComparisonController"/>
+    <Require
+      name="sectionLabel"
+      type="String"/>
+    <Label
+      id="SectionLabel"
+      label="sectionLabel">
+      <LayoutConfig
+        colspan="controller.TotalColumns"
+        tdClass="&quot;bz-sxs-section-label&quot;"/>
+    </Label>
+  </InputSet>
+</PCF>

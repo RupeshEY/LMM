@@ -1,0 +1,19 @@
+package rules.Validation.ServiceRequestStatementValidationRules_dir
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("SRSVR02000 - Non negative total statement amount")
+internal class SRSVR02000Nonnegativetotalstatementamount {
+  static function doCondition(serviceRequestStatement : entity.ServiceRequestStatement) : boolean {
+/*start00rule*/
+  return serviceRequestStatement.Amount != null and serviceRequestStatement.Amount.Amount < 0
+
+/*end00rule*/
+}
+
+  static function doAction(serviceRequestStatement : entity.ServiceRequestStatement, actions : gw.rules.Action) {
+/*start00rule*/
+  serviceRequestStatement.rejectField("LineItems", TC_LOADSAVE,
+      DisplayKey.get("Web.ServiceRequest.Statement.NegativeAmountValidation"), null, null)
+/*end00rule*/
+  }
+}

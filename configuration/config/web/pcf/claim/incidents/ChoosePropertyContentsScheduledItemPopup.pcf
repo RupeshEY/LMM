@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    id="ChoosePropertyContentsScheduledItemPopup"
+    returnType="PropertyContentsScheduledItem[]"
+    title="DisplayKey.get(&quot;Web.ChoosePropertyContentsScheduledItem.Title&quot;)">
+    <LocationEntryPoint
+      signature="ChoosePropertyContentsScheduledItemPopup(incident : PropertyContentsIncident, policyLocation : PolicyLocation)"/>
+    <Variable
+      name="incident"
+      type="PropertyContentsIncident"/>
+    <Variable
+      name="policyLocation"
+      type="PolicyLocation"/>
+    <Variable
+      initialValue="incident.PropertyContentsScheduledItems.map(\ i -&gt; i.PropertyItem).toSet()"
+      name="alreadyChosen"
+      type="java.util.Set&lt;entity.PropertyItem&gt;"/>
+    <Screen>
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          flags="all Present"
+          id="AddCheckedItems"
+          iterator="HighValueItems"
+          label="DisplayKey.get(&quot;Web.ChoosePropertyContentsScheduledItem.AddCheckedItems&quot;)"
+          pickValue="CheckedValues.map(\ item -&gt; incident.createOrderedPropertyContentsScheduledItem(item))"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="ToolbarButton"
+          label="DisplayKey.get(&quot;Web.ChoosePropertyContentsScheduledItem.Cancel&quot;)"/>
+      </Toolbar>
+      <ListViewPanel>
+        <RowIterator
+          checkBoxVisible="!alreadyChosen.contains(item)"
+          editable="false"
+          elementName="item"
+          hasCheckBoxes="true"
+          id="HighValueItems"
+          value="policyLocation.HighValueItems"
+          valueType="entity.PropertyItem[]">
+          <ToolbarFlag
+            name="Present"/>
+          <Row>
+            <TextCell
+              id="ItemDescription"
+              label="DisplayKey.get(&quot;Web.ChoosePropertyContentsScheduledItem.ItemDescription&quot;)"
+              sortOrder="1"
+              value="item.Description"/>
+            <CurrencyCell
+              id="ItemValue"
+              label="DisplayKey.get(&quot;Web.ChoosePropertyContentsScheduledItem.ItemValue&quot;)"
+              value="item.AppraisedValue"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

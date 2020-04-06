@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Forward
+    id="ClaimExposureEntryPointForward">
+    <LocationEntryPoint
+      signature="ClaimExposureEntryPointForward(claimNumber : String, exposureClaimOrder : String, exposureId : String)"/>
+    <Variable
+      name="claimNumber"
+      type="String"/>
+    <Variable
+      name="exposureClaimOrder"
+      type="String"/>
+    <Variable
+      name="exposureId"
+      type="String"/>
+    <Variable
+      initialValue="gw.api.database.Query.make(entity.Claim).compare(&quot;ClaimNumber&quot;, Equals, claimNumber).select().FirstResult"
+      name="claim"
+      type="entity.Claim"/>
+    <Variable
+      initialValue="claim != null ? claim.Exposures.firstWhere(\ e -&gt; (e.ClaimOrder as String == exposureClaimOrder or e.ID.Value as String == exposureId)) : null"
+      name="exposure"
+      type="Exposure"/>
+    <ForwardCondition
+      action="EndUserError.go(DisplayKey.get(&quot;Web.EntryPoint.ClaimExposureEntryPointForward.CouldNotFindClaim&quot;, claimNumber))"
+      condition="claim == null"/>
+    <ForwardCondition
+      action="EndUserError.go(DisplayKey.get(&quot;Web.EntryPoint.ClaimExposureEntryPointForward.CouldNotFindExposure&quot;, exposureClaimOrder != null ? exposureClaimOrder : exposureId, claimNumber))"
+      condition="exposure == null"/>
+    <ForwardCondition
+      action="ExposureDetailForward.go(claim, exposure)"/>
+    <ForwardCondition
+      action="EndUserError.go(DisplayKey.get(&quot;Web.EntryPoint.ClaimExposureEntryPointForward.CouldNotVisitExposure&quot;, exposureClaimOrder != null ? exposureClaimOrder : exposureId, claimNumber))"/>
+  </Forward>
+</PCF>

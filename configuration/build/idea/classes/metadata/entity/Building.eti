@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="Building"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="building"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.policy.entity.Building"
+    impl="com.guidewire.cc.domain.policy.impl.BuildingImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.policy.impl.BuildingImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.policy.impl.BuildingImpl"/>
+  <column
+    desc="Identifier for the building in an external policy system"
+    name="PolicySystemId"
+    nullok="true"
+    type="policysystemid"/>
+  <column
+    desc="The alphanumeric &quot;number&quot; associated with this building."
+    name="BuildingNumber"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Any notes associated with this building."
+    name="Notes"
+    nullok="true"
+    type="shorttext"/>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="PolicyLocationID"
+    desc="The PolicyLocation where this building exists."
+    fkentity="PolicyLocation"
+    name="PolicyLocation"
+    nullok="false"/>
+</entity>

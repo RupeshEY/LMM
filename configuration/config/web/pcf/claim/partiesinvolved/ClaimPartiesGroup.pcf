@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="perm.Claim.view(Claim) and perm.System.viewclaimparties and (Claim.State != ClaimState.TC_DRAFT)"
+    id="ClaimPartiesGroup"
+    title="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.PeopleInvolved&quot;)">
+    <LocationEntryPoint
+      signature="ClaimPartiesGroup(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimParties.Contacts.Tab&quot;)"
+      location="ClaimContacts(Claim)"
+      shortcut="T"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimParties.Users.Tab&quot;)"
+      location="ClaimUsers(Claim)"
+      shortcut="S"/>
+  </LocationGroup>
+</PCF>

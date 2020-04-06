@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Forward
+    id="ClaimServiceRequestForward">
+    <LocationEntryPoint
+      signature="ClaimServiceRequestForward(claim : Claim, serviceRequest : ServiceRequest, initialInvoice: ServiceRequestInvoice)"/>
+    <LocationEntryPoint
+      signature="ClaimServiceRequestForward(claim : Claim, serviceRequest : ServiceRequest)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      name="serviceRequest"
+      type="ServiceRequest"/>
+    <Variable
+      name="initialInvoice"
+      type="ServiceRequestInvoice"/>
+    <ForwardCondition
+      action="pcf.ClaimServiceRequests.go(claim, serviceRequest, initialInvoice)"
+      condition="initialInvoice != null"/>
+    <ForwardCondition
+      action="pcf.ClaimServiceRequests.go(claim, serviceRequest)"
+      condition="initialInvoice == null"/>
+  </Forward>
+</PCF>

@@ -1,0 +1,65 @@
+package rules.Validation.TransactionSetValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("TXV08000 - Check Aggregate Limits")
+internal class TXV08000CheckAggregateLimits {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+/*start00rule*/
+    return true
+/*end00rule*/
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+/*start00rule*/
+//if any aggregate limits are marked as invalid, issue a warning about
+//that but allow the transaction to go through.
+
+/* An Invalid limit means that the amount returned by aggregateLimit.LimitUsed is suspect.
+ * An aggregate limit may become invalid in one of two ways:
+ * 1) A staging table load brings in new transactions that might fall under an existing or newly-loaded
+ * aggregate limit.  When this happens the aggregate limits on the corresponding policy period are marked as invalid.
+ *
+ * 2) An administrator's request to rebuild all the AggregateLimit values, which runs in the background, has not
+ * proceeded all the way through the database yet. When this request is issued all Aggregate Limits are initially
+ * marked as invalid, and then are marked as valid as the process proceeds through the database one by one.
+ *
+ * If the aggregate limit is invalid it means that the LimitUsed value cannot be trusted to be accurate yet.  In this
+ * case no guarantee is made that a transaction would either exceed or not exceed an aggregate limit.
+ *
+ * A batch job called AggLimitCalc can rebuild either all or just the invalid aggregate
+ * limits, depending on the parameter used when the job is run.
+*/
+
+//This variable controls whether or not any invalid aggregate limits are rebuilt on demand
+//  or just a warning is given.  A configuration can choose between two behaviors by changing this value.
+//The default OOTB value, false, means a warning is issued for invalid limits.
+//You must restart the server to see the effect of changing this value.
+var rebuildInvalidAggregateLimitsOnDemand = false
+
+if (transactionSet.hasInvalidAggregateLimit()) {
+  if (rebuildInvalidAggregateLimitsOnDemand) {
+    transactionSet.rebuildAggregateLimits()
+  } else {
+    transactionSet.reject(
+      null, null, TC_NEWLOSS, 
+      DisplayKey.get("Rules.Validation.Transaction.InvalidAggregateLimit"))
+  }
+}
+
+
+//Note that even if the aggregate limit is invalid we still check the whether any limit 
+//has been exceeded.
+if (transactionSet.isExceedsApplicableLimitIgnoringStatus()
+    and 
+    (transactionSet typeis CheckSet ? 
+     not transactionSet.checksetHasDeletedOrCancelledChecks() :
+     true)) {
+  //only displays a warning when AggregateLimit is exceeded
+  transactionSet.reject(
+    null, null, TC_NEWLOSS, 
+    DisplayKey.get("Rules.Validation.Transaction.ExceedsAggregateLimit"))
+}
+/*end00rule*/
+  }
+}

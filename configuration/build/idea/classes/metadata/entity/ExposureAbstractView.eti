@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Abstract base view entity for efficiently displaying Exposures in list views."
+  entity="ExposureAbstractView"
+  exportable="false"
+  final="false"
+  primaryEntity="Exposure">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.ExposureAbstractView"
+    impl="com.guidewire.cc.domain.exposure.impl.ExposureAbstractViewImpl"/>
+  <viewEntityColumn
+    name="ClaimNumber"
+    path="Claim.ClaimNumber"/>
+  <viewEntityColumn
+    name="ClaimOrder"
+    path="ClaimOrder"/>
+  <computedcolumn
+    expression="${1} + ${2} - ${3}"
+    name="TotalIncurredNet"
+    paths="ExposureRpt.OpenReserves, ExposureRpt.TotalPayments, ExposureRpt.TotalRecoveries"/>
+  <viewEntityTypekey
+    name="ExposureType"
+    path="ExposureType"/>
+  <viewEntityTypekey
+    name="PrimaryCoverage"
+    path="PrimaryCoverage"/>
+  <viewEntityTypekey
+    name="State"
+    path="State"/>
+  <viewEntityColumn
+    name="WorkloadWeight"
+    path="WorkloadWeight"/>
+  <viewEntityLink
+    name="ExposureClaimant"
+    path="ClaimantDenorm"/>
+  <!-- Required for "ExposureClaimant" column -->
+  <viewEntityName
+    name="ExposureClaimantName"
+    path="ClaimantDenorm"/>
+  <viewEntityName
+    name="ClaimClaimantName"
+    path="Claim.ClaimantDenorm"/>
+  <viewEntityTypekey
+    name="ClaimCurrency"
+    path="Claim.Currency"/>
+</viewEntity>

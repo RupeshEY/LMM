@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<Entity
+  name="AddnlTripSegment">
+  <Columns>
+    <Column
+      beanPath="AddnlTripSegment.CarrierName"
+      name="CarrierName"/>
+    <Column
+      beanPath="AddnlTripSegment.PortOfEmbarkation"
+      name="PortOfEmbarkation"/>
+    <Column
+      beanPath="AddnlTripSegment.StartDate"
+      name="StartDate"/>
+    <Column
+      beanPath="AddnlTripSegment.PortOfDisembarkation"
+      name="PortOfDisembarkation"/>
+    <Column
+      beanPath="AddnlTripSegment.CarrierNumber"
+      name="CarrierNumber"/>
+  </Columns>
+  <DisplayName><![CDATA[
+var sb = new java.lang.StringBuffer();
+      if (CarrierName != null and CarrierName.length() > 0) {
+        sb.append(CarrierName);
+      }
+      if (CarrierNumber != null and CarrierNumber.length() > 0) {
+        if (sb.length() > 0) sb.append(" ");
+        sb.append(CarrierNumber);
+      }
+      if (StartDate != null ) {
+        if (sb.length() > 0) sb.append(", ");
+        sb.append(StartDate.format("MM/dd/yy hh:mm aaa").toString());
+      }
+      if (PortOfEmbarkation != null and PortOfEmbarkation.length() > 0) {
+        if (sb.length() > 0) sb.append(", ");
+        sb.append(PortOfEmbarkation);
+      }
+      if (PortOfDisembarkation != null and PortOfDisembarkation.length() > 0) {
+        if (sb.length() > 0) sb.append("-");
+        sb.append(PortOfDisembarkation);
+      }      
+
+      var retString = sb.toString();
+      if (retString.length() == 0) {
+        retString = gw.api.locale.DisplayKey.get("DisplayName.AdditionalTripSegment.Unnamed")
+      }
+      return retString;
+  ]]></DisplayName>
+</Entity>

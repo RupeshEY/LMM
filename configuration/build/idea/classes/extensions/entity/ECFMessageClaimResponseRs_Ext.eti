@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageClaimResponseRs_Ext"
+  desc="Claim Response Response subtype for ECF messages"
+  supertype="ECFMessage_Ext">
+  <column
+    desc="ReferredMessageUUId - Unique Universal Identifier of the message identifies ClaimResponseRq"
+    name="ReferredMessageUUId"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="36"/>
+  </column>
+  <array
+    arrayentity="ECFMessageErrorOrWarning_Ext"
+    desc="Errors or Warnings"
+    name="ErrorsOrWarnings"/>
+</subtype>

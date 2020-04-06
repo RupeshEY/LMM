@@ -1,0 +1,31 @@
+package rules.EventMessage.EventFired_dir.EFR08000Contacts_dir.EFR08300ClaimContact_dir
+uses gw.api.contact.ContactTokenThreadLocal
+uses gw.api.contact.ContactSystemPluginAdapter
+uses gw.api.database.Query
+
+@gw.rules.RuleName("EFR08310 - Removed")
+internal class EFR08310Removed {
+  static function doCondition(messageContext     :     entity.MessageContext) : boolean {
+/*start00rule*/
+return (messageContext.Root as ClaimContact).Contact.AddressBookUID != null
+and (messageContext.Root as ClaimContact).Contact.AutoSync == AutoSync.TC_ALLOW
+and not ((messageContext.Root as ClaimContact).Contact typeis UserContact)
+/*end00rule*/
+}
+
+  static function doAction(messageContext     :     entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+var contact = (messageContext.Root as ClaimContact).Contact
+var contactQuery = Query.make(ClaimContact).join("Contact").compare("AddressBookUID", Equals, contact.AddressBookUID).select()
+
+if (contactQuery.Count == 1) {
+  var plugin = ContactSystemPluginAdapter.getAdapter()
+  if (plugin != null) {
+  if (!ContactTokenThreadLocal.isTokenSet("ab", contact.AddressBookUID, "Contact")) {
+    plugin.createAsyncUpdate(messageContext)
+  }
+}
+} 
+/*end00rule*/
+  }
+}

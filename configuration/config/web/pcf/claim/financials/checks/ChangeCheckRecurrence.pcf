@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterCancel="ClaimFinancialsChecksDetail.go(Claim, Check)"
+    afterCommit="ClaimFinancialsChecks.go(Claim);"
+    alwaysInEditMode="true"
+    beforeCommit="prepareToCommit()"
+    canEdit="true"
+    canVisit="perm.Payment.edit(Check)"
+    id="ChangeCheckRecurrence"
+    parent="ClaimFinancialsChecksDetail(Claim, Check)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.ChangeRecurrenceSchedule.Title&quot;)">
+    <LocationEntryPoint
+      signature="ChangeCheckRecurrence(Claim : Claim, Check : Check)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Check"
+      type="Check"/>
+    <Screen
+      id="ChangeCheckRecurrenceScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="CurrentLocation.commit()"
+          id="ChangeCheckRecurrence_SaveButton"
+          label="DisplayKey.get(&quot;Button.Save&quot;)"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel(); ChangeCheckRecurrence.go(Claim, Check)"
+          id="ChangeCheckRecurrence_ResetButton"
+          label="DisplayKey.get(&quot;Button.Reset&quot;)"/>
+        <EditButtons
+          cancelLabel="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          cancelVisible="true"
+          updateVisible="false"/>
+      </Toolbar>
+      <PanelRef
+        def="CheckRecurrenceDV(Check)"/>
+    </Screen>
+    <Code><![CDATA[function prepareToCommit() {
+   Check.CheckSet.RequestingUser = User.util.CurrentUser        
+   gw.api.financials.CheckUtil.saveRecurringCheckSet(Check.CheckSet);
+}
+]]></Code>
+  </Page>
+</PCF>

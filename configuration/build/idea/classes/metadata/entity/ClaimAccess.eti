@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!-- Claim Security Table -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Records information about users and groups that are allowed to access a claim."
+  entity="ClaimAccess"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="claimaccess"
+  type="versionable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.impl.ClaimAccessInternal"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimAccessImpl"/>
+  <implementsInterface
+    iface="gw.cc.claim.entity.ClaimAccess"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimAccessImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="ClaimAccessData"/>
+  <fulldescription><![CDATA[
+        Records claim-level permission for users and groups. Claim access can be granted to a User, Group, SecurityZone,
+        and to anyone. The AccessType defines what level of access is permitted.
+      
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    desc="A foreign key to the claim."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <index
+    desc="Covering index for Claim ACL"
+    expectedtobecovering="true"
+    name="claimaccess1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Permission"/>
+    <indexcol
+      keyposition="2"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="3"
+      name="UserID"/>
+    <indexcol
+      keyposition="4"
+      name="GroupID"/>
+    <indexcol
+      keyposition="5"
+      name="SecurityZoneID"/>
+    <indexcol
+      keyposition="6"
+      name="Anyone"/>
+  </index>
+</entity>

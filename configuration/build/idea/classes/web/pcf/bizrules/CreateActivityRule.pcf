@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    afterCancel="ActivityRules.go()"
+    afterCommit="ActivityRuleDetail.go(head, head.HeadVersion)"
+    canEdit="true"
+    id="CreateActivityRule"
+    parent="ActivityRules()"
+    showUpLink="true"
+    startInEditMode="true"
+    title="ruleToClone == null ? DisplayKey.get('Web.ActivityRules.Rule.CreateNewRule') : DisplayKey.get('Web.ActivityRules.Rule.Clone', ruleToClone.Name)">
+    <LocationEntryPoint
+      signature="CreateActivityRule(token : String)"/>
+    <LocationEntryPoint
+      signature="CreateActivityRule(ruleToClone: ActivityRule, token : String)"/>
+    <Variable
+      name="ruleToClone"
+      type="ActivityRule"/>
+    <Variable
+      name="token"
+      type="String"/>
+    <Variable
+      name="head"
+      type="ActivityRuleHead"
+      initialValue="new gw.bizrules.ActivityRuleFactory().createRuleHead(com.google.common.base.Optional.fromNullable(ruleToClone))"/>
+    <Variable
+      name="versionController"
+      type="gw.bizrules.pcf.RuleVersionController&lt;ActivityRuleVersion&gt;"
+      initialValue="new gw.bizrules.pcf.RuleVersionController&lt;ActivityRuleVersion&gt;(gw.bizrules.ActivityRulesNavigationSupport.Instance)"/>
+    <Variable
+      name="ruleController"
+      type="gw.bizrules.pcf.RulePageController"
+      initialValue="new gw.bizrules.pcf.RulePageController(head.HeadVersion, gw.bizrules.ActivityRulePanelSetHelper.UIConfigs, CurrentLocation, gw.bizrules.ActivityRuleDetailsStateHolder.SwitchableModes)"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons updateLabel="DisplayKey.get('Web.ActivityRules.Rule.Save')"/>
+        <ToolbarDivider/>
+        <ToolbarButtonSetRef toolbarButtonSet="ConditionValidationToolbarButtonSet(ruleController)"/>
+      </Toolbar>
+      <AlertBar
+        action="versionController.pushRulesWithSameNamePopup(head.HeadVersion)"
+        allowDismiss="false"
+        id="DuplicatedNameAlertBar"
+        label="DisplayKey.get('BizRules.RuleDetailsPage.Alert.DuplicatedName')"
+        visible="!versionController.isRuleNameUnique(head.HeadVersion)"/>
+      <PanelRef
+        def="ActivityRulePanelSet(head.HeadVersion, false, ruleController)"/>
+    </Screen>
+  </Page>
+</PCF>

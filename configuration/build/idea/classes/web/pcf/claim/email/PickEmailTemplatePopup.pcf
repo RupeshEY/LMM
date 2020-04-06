@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    id="PickEmailTemplatePopup"
+    returnType="gw.plugin.email.IEmailTemplateDescriptor"
+    title="DisplayKey.get(&quot;Web.EmailTemplateSearch.Title&quot;)">
+    <LocationEntryPoint
+      signature="PickEmailTemplatePopup(inSearchCriteria : gw.api.email.EmailTemplateSearchCriteria)"/>
+    <Variable
+      name="inSearchCriteria"
+      type="gw.api.email.EmailTemplateSearchCriteria"/>
+    <Screen
+      id="PickEmailTemplateScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="CurrentLocation.cancel();"
+          id="PickEmailTemplatePopup_CancelButton"
+          label="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          shortcut="L"/>
+      </Toolbar>
+      <SearchPanel
+        criteriaName="searchCriteria"
+        resultsName="EmailTemplateDescriptorList"
+        search="searchCriteria.performSearch()"
+        searchCriteria="inSearchCriteria.copy()"
+        searchCriteriaType="gw.api.email.EmailTemplateSearchCriteria"
+        searchResultsType="gw.plugin.email.IEmailTemplateDescriptor[]">
+        <PanelRef
+          def="EmailTemplateSearchDV(searchCriteria)"/>
+        <PanelRef
+          def="EmailTemplateSearchResultLV(EmailTemplateDescriptorList)"/>
+      </SearchPanel>
+    </Screen>
+  </Popup>
+</PCF>

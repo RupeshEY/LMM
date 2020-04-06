@@ -1,0 +1,20 @@
+package rules.Closed.ClaimClosed_dir
+
+@gw.rules.RuleName("CCL01000 - Notify external systems")
+internal class CCL01000Notifyexternalsystems {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return true /* Always notify */
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.addEvent("claim_closed")
+/*end00rule*/
+
+  }
+}

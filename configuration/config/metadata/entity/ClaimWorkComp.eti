@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Worker's compensation information related to a claim"
+  entity="ClaimWorkComp"
+  exportable="true"
+  table="workcomp"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.ClaimWorkComp"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimWorkCompImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Stores worker's compensation information related to a claim.
+  ]]></fulldescription>
+  <onetoone
+    fkentity="Claim"
+    name="Claim"
+    nullok="true"/>
+  <column
+    desc="True if this is claim has a report that the injured worker will lose time from work."
+    name="TimeLossReport"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="True if this is claim has a report that the injured worker requires Medical treatment."
+    name="MedicalReport"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="True if this claim has a report of death of the injured worker."
+    name="DeathReport"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="True if this claim has a possible Employer's Liability aspect."
+    name="EmployerLiability"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Field to describe the equipment, materials or chemicals the employee was using when event or exposure occurred."
+    name="EquipmentUsed"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    desc="Field to describe the specific activity the injured worker was performing."
+    name="ActivityPerformed"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    desc="Is claim being made for illness related to chemical or material exposure?"
+    name="IllnessRelatedToExposure"
+    nullok="true"
+    type="bit"/>
+  <column
+    default="true"
+    desc="Is Class Code filtered by Location"
+    name="ClassCodeByLocation"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    desc="Indicates status of the compensability decision"
+    name="Compensable"
+    nullok="true"
+    typelist="CompensabilityDecision"/>
+  <column
+    desc="Should the Waiting Period be applied?"
+    name="WaitingPeriodApplied"
+    nullok="true"
+    type="bit"/>
+  <array
+    arrayentity="WCWaitingPeriod"
+    desc="Used to track the specific days indicated as the Waiting Period on a WC Claim"
+    name="WaitingPeriodDetails"
+    triggersValidation="true"/>
+</entity>

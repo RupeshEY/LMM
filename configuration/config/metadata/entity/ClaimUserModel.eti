@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Defines a User/Group pair that is assigned to something on a Claim"
+  entity="ClaimUserModel">
+  <implementsInterface
+    iface="gw.cc.claim.entity.ClaimUserModel"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimUserModelImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.impl.ClaimUserModelInternal"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimUserModelImpl"/>
+  <foreignkey
+    columnName="ClaimUserModelSetID"
+    fkentity="ClaimUserModelSet"
+    getterScriptability="doesNotExist"
+    name="ClaimUserModelSet"
+    nullok="true"
+    setterScriptability="doesNotExist"/>
+  <foreignkey
+    columnName="UserID"
+    desc="The user."
+    fkentity="User"
+    name="User"
+    nullok="true"/>
+  <foreignkey
+    columnName="GroupID"
+    desc="The group."
+    fkentity="Group"
+    name="Group"
+    nullok="true"/>
+</nonPersistentEntity>

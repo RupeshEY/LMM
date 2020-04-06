@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="claim != null and perm.Claim.createincident(claim)"
+    id="NewLivingExpensesIncidentPopup"
+    returnType="LivingExpensesIncident"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.LivingExpensesIncident.PopupHeader&quot;)">
+    <LocationEntryPoint
+      signature="NewLivingExpensesIncidentPopup(claim : Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="createIncident()"
+      name="incident"
+      type="entity.LivingExpensesIncident"/>
+    <Screen
+      id="NewLivingExpensesIncidentScreen">
+      <TitleBar
+        icon="incident.HeaderIcon"/>
+      <Toolbar>
+        <EditButtons
+          pickValue="incident"/>
+      </Toolbar>
+      <PanelRef
+        def="LivingExpensesIncidentPanelSet(incident)"/>
+    </Screen>
+    <Code><![CDATA[
+function createIncident() : LivingExpensesIncident {
+  var newIncident = claim.newIncident(entity.LivingExpensesIncident) as LivingExpensesIncident
+  return newIncident
+}
+      
+    ]]></Code>
+  </Popup>
+</PCF>

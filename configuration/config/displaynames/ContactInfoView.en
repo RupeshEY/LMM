@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<Entity
+  name="ContactInfoView">
+  <Columns>
+    <Column
+      beanPath="ContactInfoView.LastName"
+      name="LastName"
+      sortBeanPath="ContactInfoView.LastName"
+      sortOrder="1"/>
+    <Column
+      beanPath="ContactInfoView.LastNameKanji"
+      name="LastNameKanji"/>
+    <Column
+      beanPath="ContactInfoView.FirstName"
+      name="FirstName"
+      sortBeanPath="ContactInfoView.FirstName"
+      sortOrder="2"/>
+    <Column
+      beanPath="ContactInfoView.FirstNameKanji"
+      name="FirstNameKanji"/>
+    <Column
+      beanPath="ContactInfoView.Suffix"
+      name="Suffix"
+      sortOrder="3"/>
+    <Column
+      beanPath="ContactInfoView.Prefix"
+      name="Prefix"/>
+    <Column
+      beanPath="ContactInfoView.Particle"
+      name="Particle"/>
+    <Column
+      beanPath="ContactInfoView.MiddleName"
+      name="MiddleName"/>
+    <Column
+      beanPath="ContactInfoView.Name"
+      name="Name"
+      sortBeanPath="ContactInfoView.Name"
+      sortOrder="4"/>
+    <Column
+      beanPath="ContactInfoView.NameKanji"
+      name="NameKanji"/>
+  </Columns>
+  <DisplayName><![CDATA[uses gw.api.name.NameFormatter
+uses gw.api.name.ContactNameFieldsImpl
+uses gw.api.name.PersonNameFieldsImpl
+uses gw.api.name.NameOwnerFieldId
+
+if (Name.HasContent) {
+    var contact = new ContactNameFieldsImpl(){
+      :Name = Name,
+      :NameKanji = NameKanji
+    }
+    return new NameFormatter().format(contact, " ")
+  } else {
+    var person = new PersonNameFieldsImpl(){
+      :LastName = LastName,    
+      :LastNameKanji = LastNameKanji,
+      :FirstName = FirstName,
+      :FirstNameKanji = FirstNameKanji,
+      :Suffix = Suffix,
+      :Prefix = Prefix,
+      :Particle = Particle,
+      :MiddleName = MiddleName,
+      :Name = Name,
+      :NameKanji = NameKanji
+    }
+    return new NameFormatter().format(person, " ", NameOwnerFieldId.DISPLAY_NAME_FIELDS)
+  
+  }
+    ]]></DisplayName>
+</Entity>

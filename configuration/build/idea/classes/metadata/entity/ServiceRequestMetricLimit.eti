@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc=""
+  entity="ServiceRequestMetricLimit"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="servicerequestmetriclimit"
+  type="editable">
+  <implementsEntity
+    name="DecimalMetricLimitDelegate"/>
+  <typekey
+    desc="Type of service request metric to which this limit applies"
+    name="ServiceRequestMetricType"
+    nullok="false"
+    typelist="ServiceRequestMetric"/>
+</entity>

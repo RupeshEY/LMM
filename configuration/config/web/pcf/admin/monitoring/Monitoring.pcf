@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <LocationGroup
+    canVisit="perm.System.integadmin or perm.System.eventmessageview or perm.System.workflowview"
+    id="Monitoring"
+    title="DisplayKey.get(&quot;Web.Admin.Monitoring&quot;)">
+    <LocationRef
+      location="MessagingDestinationControlList()"/>
+    <LocationRef
+      location="WorkflowSearch()"/>
+    <LocationRef
+      location="WorkflowStats()"/>
+  </LocationGroup>
+</PCF>

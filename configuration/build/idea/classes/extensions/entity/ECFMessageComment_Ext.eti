@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<entity
+  abstract="true"
+  desc="A comment on a Claim for the ECF system"
+  exportable="true"
+  final="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageComment_Ext"
+  table="ecfmessagecomment_ext"
+  type="retireable">
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Line no. allocated to the comments"
+    name="LineNumber"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Each company can provide up to x lines of comments with each line comprising up to 70 characters. These comments will be supplied in the order the comments were entered, with the oldest comment being the first instance. Suppliers should take care when displaying comments that they do so in a fixed width non proportional font so that it is displayed as entered.
+  ILU, Lloyd's and LIRMA Co. only"
+    name="Detail"
+    nullok="false"
+    type="shorttext"/>
+  <foreignkey
+    fkentity="ECFMessage_Ext"
+    name="ECFMessage"
+    nullok="false"/>
+</entity>

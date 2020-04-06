@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.System.accountview"
+    id="AccountAdmin"
+    title="DisplayKey.get(&quot;Web.Admin.Account.Title&quot;)">
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="NewAccount.go()"
+          id="Accounts_AddAccountButton"
+          label="DisplayKey.get(&quot;Web.Admin.Account.Toolbar.Add&quot;)"
+          shortcut="A"
+          showConfirmMessage="false"
+          tooltip="DisplayKey.get(&quot;Web.Admin.Account.Toolbar.Add.Tooltip&quot;)"
+          visible="perm.System.accountmng"/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="gw.api.admin.AdminUtil.deleteAccounts(CheckedValues)"
+          confirmMessage="DisplayKey.get(&quot;Web.Admin.Account.Toolbar.DeleteConfirm&quot;)"
+          id="Accounts_DeleteAccountsButton"
+          iterator="AccountsLV.AccountsLV"
+          label="DisplayKey.get(&quot;Web.Admin.Account.Toolbar.Remove&quot;)"
+          tooltip="DisplayKey.get(&quot;Web.Admin.Account.Toolbar.Remove.Tooltip&quot;)"
+          visible="perm.System.accountmng"/>
+      </Toolbar>
+      <PanelRef
+        def="AccountsLV(gw.api.admin.AdminUtil.getAllAccounts())"/>
+    </Screen>
+  </Page>
+</PCF>

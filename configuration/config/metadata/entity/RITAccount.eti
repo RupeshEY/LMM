@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents the value of Reinsurance transactions in a certain lifecycle state."
+  entity="RITAccount"
+  exportable="false"
+  extendable="false"
+  final="true"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  setterScriptability="hidden"
+  table="ritaccount"
+  type="editable">
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.RITAccount"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.RITAccountImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.TAccountDelegateAdapter"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.RITAccountImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="TAccountDelegate"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.impl.TAccountDelegateInternal"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.RITAccountImpl"/>
+  <fulldescription><![CDATA[RITAccounts are used in ClaimCenter to provide a rolled-up view of all Reinsurance (RI) financials transactions
+    entered into the system. They share the same functionality as TAccounts for regular transactions.
+    Each RICoding (unique combination of ReserveLine and RIAgreement) has
+    X distinct TAccounts that together represent every possible life cycle state for each of the 2 RI transaction subtypes
+    (Ceded Reserves, Payment Recoverables), and distinguish the totals for normal transactions vs.
+    "adjustment" transactions. Although RITransaction only use the Submitting/Submitted status, we use the
+    same TAccount mechanism as regular transactions so Financials Calculations and other code can be reused.
+  ]]></fulldescription>
+  <foreignkey
+    columnName="RICodingID"
+    desc="FK to the RICoding that this TAccount is assoicated with."
+    fkentity="RICoding"
+    getterScriptability="hidden"
+    name="RICoding"
+    nullok="false"
+    setterScriptability="hidden"/>
+  <array
+    arrayentity="RITAccountLineItem"
+    arrayfield="TAccount"
+    desc="Line items for this RITAccount."
+    exportable="false"
+    getterScriptability="hidden"
+    name="RITAccountLineItems"
+    owner="true"
+    setterScriptability="hidden"/>
+  <index
+    desc="Enforce uniqueness - there should be at most 1 RITAccount of a given type per RICoding"
+    name="ritaccountu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="RICodingID"/>
+    <indexcol
+      keyposition="2"
+      name="TAccountType"/>
+  </index>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.financials.dbchecks.RITAccountDBCheckBuilder"/>
+</entity>

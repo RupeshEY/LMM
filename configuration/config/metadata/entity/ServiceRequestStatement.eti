@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="An estimation (such as a quote or invoice) received from a specialist and related to a Service Request."
+  entity="ServiceRequestStatement"
+  exportable="true"
+  final="false"
+  loadable="false"
+  table="servicerequeststatement"
+  type="editable">
+  <implementsInterface
+    iface="gw.cc.vendormanagement.entity.ServiceRequestStatement"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestStatementImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="ServiceRequestID"
+    desc="Service Request the statement is linked to."
+    fkentity="ServiceRequest"
+    name="ServiceRequest"
+    nullok="false"/>
+  <column
+    desc="A string identifier assigned to this ServiceRequestStatement by the specialist. The value of this field may only be meaningful to the specialist."
+    name="ReferenceNumber"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The time at which this statement was created."
+    name="StatementCreationTime"
+    nullok="false"
+    type="datetime"/>
+  <column
+    desc="The time at which this statement was approved."
+    name="ApprovalDate"
+    nullok="true"
+    type="datetime"/>
+  <foreignkey
+    columnName="ApprovedByID"
+    desc="The user who approved this statement."
+    fkentity="User"
+    name="ApprovedBy"
+    nullok="true"/>
+  <array
+    arrayentity="ServiceRequestStatementDocumentLink"
+    cascadeDelete="true"
+    desc="The join entity that holds the information for documents associated with this statement"
+    name="StatementDocumentLinks"
+    setterScriptability="hidden"/>
+  <column
+    desc="The description for the statement"
+    name="Description"
+    nullok="false"
+    type="longtext"/>
+  <column
+    desc="The reason the statement was declined. When the state changes this value is recalculated, as the previous value not longer makes sense."
+    name="DeclinedReason"
+    nullok="true"
+    type="longtext"/>
+  <events/>
+  <array
+    arrayentity="ServiceRequestStatementLineItem"
+    name="LineItems"/>
+  <typekey
+    desc="The external system from which this data comes "
+    name="Source"
+    nullok="true"
+    typelist="StatementSource"/>
+  <implementsEntity
+    name="Validatable"/>
+</entity>

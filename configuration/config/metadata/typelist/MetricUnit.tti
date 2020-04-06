@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Units for claim metrics, such as days, currency, percent etc."
+  final="false"
+  name="MetricUnit">
+  <typecode
+    code="numeric"
+    desc="Metric is a simple number"
+    name="Numeric"/>
+  <typecode
+    code="percent"
+    desc="Metric is measured in percent"
+    name="Percent"/>
+  <typecode
+    code="currency"
+    desc="Metric is measured in a particular currency"
+    name="Currency"/>
+  <typecode
+    code="hours"
+    desc="Metric is measured in hours"
+    name="Hours"/>
+  <typecode
+    code="days"
+    desc="Metric is measured in days"
+    name="Days"/>
+</typelist>

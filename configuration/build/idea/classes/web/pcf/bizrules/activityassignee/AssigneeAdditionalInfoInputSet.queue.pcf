@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="AssigneeAdditionalInfoInputSet"
+    mode="queue">
+    <Require
+      name="commandDefinition"
+      type="gw.bizrules.pcf.RuleCommandDefinitionHolder"/>
+    <Require
+      name="state"
+      type="gw.bizrules.ruleaction.generateactivity.GenerateActivityCommandDefinitionState"/>
+    <Require
+      name="config"
+      type="gw.bizrules.ruleaction.generateactivity.config.GenerateActivityCommandParameterConfig"/>
+    <PickerInput
+      conversionExpression="PickedValue as AssignableQueue"
+      editable="true"
+      freeInputEnabled="false"
+      id="QueuePicker"
+      label="DisplayKey.get('Web.ActivityRules.Action.GenerateActivity.Assignee.Queue')"
+      pickLocation="AssigneePickerPopup.push(new gw.bizrules.ruleaction.generateactivity.GenerateActivityAssigneePicker(AssignmentSearchType.TC_QUEUE))"
+      value="state.Queue"
+      valueType="AssignableQueue">
+      <PostOnChange/>
+    </PickerInput>
+  </InputSet>
+</PCF>

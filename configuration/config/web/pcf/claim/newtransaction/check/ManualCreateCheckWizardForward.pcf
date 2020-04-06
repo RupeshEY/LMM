@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Forward
+    canVisit="perm.Claim.createpayment(claim)"
+    id="ManualCreateCheckWizardForward"
+    parent="Claim(claim)">
+    <LocationEntryPoint
+      signature="ManualCreateCheckWizardForward(claim : Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="gw.api.financials.CheckUtil.canPay(claim, null, CurrentLocation)"
+      name="canPayResult"
+      type="gw.api.financials.AbilityToPayResult"/>
+    <ForwardCondition
+      action="NewCheckNoAbilityToPay.go(claim, canPayResult)"
+      condition="null != canPayResult"/>
+    <ForwardCondition
+      action="ManualCreateCheckWizard.go(claim)"
+      condition="null == canPayResult"/>
+  </Forward>
+</PCF>

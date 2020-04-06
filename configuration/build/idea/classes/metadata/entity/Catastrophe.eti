@@ -1,0 +1,223 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  admin="true"
+  desc="Catastrophe"
+  entity="Catastrophe"
+  exportable="true"
+  platform="false"
+  table="catastrophe"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.catastrophe.entity.Catastrophe"
+    impl="com.guidewire.cc.domain.catastrophe.impl.CatastropheImpl"/>
+  <fulldescription><![CDATA[
+Represents a catastrophe to code claims with. Each catastrophe has a unique
+name and catastrophe number.
+    ]]></fulldescription>
+  <column
+    default="true"
+    desc="True if a catastrophe can be assigned to a new claim."
+    name="Active"
+    nullok="false"
+    type="bit"/>
+  <column
+    desc="Catastrophe number."
+    name="CatastropheNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Description of the catastrophe."
+    name="Description"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="cat_desc_l10n"/>
+  </column>
+  <column
+    desc="Name of the catastrophe."
+    name="Name"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+    <localization
+      nullok="true"
+      tableName="cat_name_l10n"
+      unique="true"/>
+  </column>
+  <column
+    default="false"
+    desc="Boolean field to mark a catastrophe to be run in the CatastropheClaimFinder batch process."
+    name="ScheduleBatch"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    desc="Type of the catastrophe (for example, ISO or internal)."
+    name="Type"
+    nullok="true"
+    typelist="CatastropheType"/>
+  <!-- Comment out one columns -->
+  <column
+    desc="Start date when this catastrophe is valid"
+    name="CatastropheValidFrom"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date when this catastrophe is no longer valid"
+    name="CatastropheValidTo"
+    nullok="true"
+    type="datetime"/>
+  <!-- <typekey
+    xmlns=""
+    desc="Should a claim of this catastrophe type be auto assigned"
+    name="AutoAssign"
+    typelist="YesNo"/> -->
+  <array
+    arrayentity="CatastrophePeril"
+    desc="Details of perils associated with a catastrophe."
+    exportable="true"
+    name="Perils"
+    owner="true"/>
+  <!-- <array
+    xmlns=""
+    arrayentity="CatastropheState"
+    desc="Details of states associated with a catastrophe."
+    exportable="true"
+    name="States"
+    owner="true"/> -->
+  <array
+    arrayentity="CatastropheZone"
+    arrayfield="Catastrophe"
+    desc="The zones that define this catastrophe."
+    exportable="true"
+    name="CatastropheZones"
+    owner="true"/>
+  <!-- <array
+    xmlns=""
+    arrayentity="BranchOffices"
+    desc="Details of branch offices associated with a catastrophe."
+    exportable="true"
+    name="BranchOffices"
+    owner="true"/> -->
+  <array
+    arrayentity="CatastropheClaimsHistory"
+    desc="History of the matched claims."
+    exportable="true"
+    name="ClaimsHistory"
+    owner="true"/>
+  <column
+    desc="Comments regarding the Catastrophe"
+    name="Comments"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="PCS catastrophe number from ISO data feed."
+    name="PCSCatastropheNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <events/>
+  <column
+    desc="Longitude for the top left point of the area of interest, in degrees."
+    exportable="true"
+    loadable="false"
+    name="TopLeftLongitude"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="5"/>
+    <columnParam
+      name="precision"
+      value="8"/>
+  </column>
+  <column
+    desc="Latitude for the top left  point of the area of interest, in degrees."
+    exportable="true"
+    loadable="false"
+    name="TopLeftLatitude"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="5"/>
+    <columnParam
+      name="precision"
+      value="7"/>
+  </column>
+  <column
+    desc="Longitude for the bottom right point of the area of interest, in degrees."
+    exportable="true"
+    loadable="false"
+    name="BottomRightLongitude"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="5"/>
+    <columnParam
+      name="precision"
+      value="8"/>
+  </column>
+  <column
+    desc="Latitude for the bottom right point of the area of interest, in degrees."
+    exportable="true"
+    loadable="false"
+    name="BottomRightLatitude"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="5"/>
+    <columnParam
+      name="precision"
+      value="7"/>
+  </column>
+  <column
+    desc="Effective date for retrieving policy locations from the policy system."
+    name="PolicyEffectiveDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Time when policy location retrieval parameters were last set."
+    name="PolicyRetrievalSetTime"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Time when last policy retrieval location was completed."
+    name="PolicyRetrievalCompletionTime"
+    nullok="true"
+    type="datetime"/>
+  <index
+    desc="Enforce uniqueness of catastrophe name"
+    name="catu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Name"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+  </index>
+  <index
+    desc="Enforce uniqueness of catastrophe number"
+    name="catu2"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="CatastropheNumber"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+  </index>
+</entity>

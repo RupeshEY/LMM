@@ -1,0 +1,20 @@
+package rules.Validation.ClaimValidationRules_dir
+
+@gw.rules.RuleName("CLV09000 - ISO Validation")
+internal class CLV09000ISOValidation {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.ISOEnabled
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+// Exec children
+/*end00rule*/
+
+  }
+}

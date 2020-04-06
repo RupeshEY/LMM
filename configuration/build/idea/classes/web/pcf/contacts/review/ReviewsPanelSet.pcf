@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    desc="Provides a reusable panel displaying a Contact's reviews in a ListDetailPanel."
+    id="ReviewsPanelSet">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="contact"
+      type="Contact"/>
+    <Require
+      name="requireEdit"
+      type="Boolean"/>
+    <Require
+      name="inAB"
+      type="Boolean"/>
+    <ListDetailPanel
+      desc="List of Reviews"
+      id="ReviewCardPanel"
+      selectionName="selectedReview"
+      selectionType="Review">
+      <PanelRef
+        def="ReviewsLV(contact, claim)"
+        mode="isInAB(inAB)">
+        <Toolbar>
+          <ToolbarButton
+            hideIfReadOnly="true"
+            id="Reviews_AddReviewNewRE"
+            label="DisplayKey.get(&quot;Web.Reviews.Add&quot;)"
+            visible="perm.Review.create">
+            <MenuItemIterator
+              elementName="selected"
+              value="gw.api.contact.ReviewUtil.findReviewTypesForContact(contact)"
+              valueType="entity.ReviewType[]">
+              <MenuItem
+                action="createNewReview(selected)"
+                id="Reviews_AddReviewNewMenuItem"
+                label="selected.Name"/>
+            </MenuItemIterator>
+          </ToolbarButton>
+          <ToolbarButton
+            hideIfEditable="true"
+            id="Reviews_AddReviewNewNRE"
+            label="DisplayKey.get(&quot;Web.Reviews.Add&quot;)"
+            visible="(!requireEdit or claim.Closed) and perm.Review.create">
+            <MenuItemIterator
+              elementName="selected"
+              value="gw.api.contact.ReviewUtil.findReviewTypesForContact(contact)"
+              valueType="entity.ReviewType[]">
+              <MenuItem
+                action="pcf.CreateReviewPopup.push( selected, contact, claim )"
+                id="Reviews_AddReviewNewMenuItem"
+                label="selected.Name"/>
+            </MenuItemIterator>
+          </ToolbarButton>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="gw.api.contact.ReviewUtil.completeSelectedReviews( CheckedValues, CurrentLocation )"
+            confirmMessage="DisplayKey.get(&quot;Web.Reviews.CompleteSelected.Warning&quot;)"
+            hideIfEditable="true"
+            id="ReviewCompleteSelectedNRE"
+            iterator="ReviewsLV.ReviewsLV"
+            label="DisplayKey.get(&quot;Web.Reviews.CompleteSelected&quot;)"
+            visible="perm.Review.edit and contact.AddressBookUID != null"/>
+        </Toolbar>
+      </PanelRef>
+      <CardViewPanel>
+        <Card
+          id="ReviewDetailCard"
+          title="DisplayKey.get(&quot;Web.Reviews.Review&quot;)"
+          visible="perm.Review.view">
+          <PanelRef
+            def="ReviewDV(selectedReview, false)">
+            <Toolbar>
+              <ToolbarButton
+                action="pcf.ContactReviewPopup.push( selectedReview )"
+                hideIfEditable="true"
+                id="ToolbarButton"
+                label="DisplayKey.get(&quot;Button.Edit&quot;)"
+                visible="(!requireEdit or claim.Closed) and !selectedReview.Completed and perm.Review.edit"/>
+              <ToolbarDivider/>
+              <ToolbarButton
+                action="selectedReview.delete()"
+                confirmMessage="DisplayKey.get(&quot;Web.Reviews.Delete.Warning&quot;)"
+                hideIfEditable="true"
+                id="Delete"
+                label="DisplayKey.get(&quot;Web.Reviews.Delete&quot;)"
+                visible="perm.Review.delete( selectedReview )"/>
+            </Toolbar>
+          </PanelRef>
+        </Card>
+      </CardViewPanel>
+    </ListDetailPanel>
+    <Code><![CDATA[
+function createNewReview(type : ReviewType) : Review {
+  return gw.api.contact.ReviewUtil.createNewReview(type, contact, claim);
+}
+
+function isInAB(useAB : Boolean) : String {
+  if (useAB) return "ab";
+  return "default";
+}
+    ]]></Code>
+  </PanelSet>
+</PCF>

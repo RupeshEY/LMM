@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_financials.xml -->
+  <ListViewPanel
+    id="EditableRecodeLineItemsLV">
+    <ExposeIterator
+      valueType="entity.TransactionLineItem"
+      widget="EditableRecodeLineItemsLV"/>
+    <Require
+      name="Transaction"
+      type="Transaction"/>
+    <RowIterator
+      checkBoxVisible="(Transaction typeis Payment) and gw.api.financials.FinancialsUtil.isAllowMultipleLineItems()"
+      editable="true"
+      elementName="TransactionLineItem"
+      hasCheckBoxes="true"
+      toAdd="Transaction.addToLineItems(TransactionLineItem)"
+      toRemove="remove(TransactionLineItem)"
+      value="Transaction.LineItems"
+      valueType="entity.TransactionLineItem[]">
+      <Row>
+        <TypeKeyCell
+          editable="TransactionLineItem.LineCategory != TC_DEDUCTIBLE and TransactionLineItem.LineCategory != TC_FORMERDEDUCTIBLE"
+          filter="TransactionLineItem.ValidLineCategories.contains(VALUE)"
+          id="LineCategory"
+          label="DisplayKey.get(&quot;Web.Claim.EditableRecodeLineItemsLV.Category&quot;)"
+          required="false"
+          value="TransactionLineItem.LineCategory"
+          valueType="typekey.LineCategory"/>
+        <CurrencyCell
+          editable="gw.api.financials.FinancialsUtil.isAllowMultiplePayments() and (Transaction typeis Payment)"
+          footerSumValue="TransactionLineItem.TransactionAmountReservingAmountPair"
+          formatType="currency"
+          id="Amount"
+          label="DisplayKey.get(&quot;Web.Claim.EditableRecodeLineItemsLV.Amount&quot;)"
+          value="TransactionLineItem.TransactionAmountReservingAmountPair"
+          valueType="gw.api.financials.IPairedMoney"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function remove(tli : TransactionLineItem) {
+  if (tli.LineCategory == TC_DEDUCTIBLE) {
+    (Transaction as Payment).removeDeductibleLineItem(tli)
+  } else {
+    // temporarily disassociate the check from onset so that line items can be removed from a submitted check
+    var c = (Transaction as Payment).Check;
+    (Transaction as Payment).Check = null
+    Transaction.removeFromLineItemsIfEditable(tli)
+    (Transaction as Payment).Check = c
+  }
+}]]></Code>
+  </ListViewPanel>
+</PCF>

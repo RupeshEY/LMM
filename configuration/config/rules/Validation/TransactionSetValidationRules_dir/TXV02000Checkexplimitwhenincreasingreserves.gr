@@ -1,0 +1,77 @@
+package rules.Validation.TransactionSetValidationRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.util.CurrencyUtil
+uses gw.financials.CoverageLimitRulesUtil
+
+@gw.rules.RuleName("TXV02000 - Check exp limit when increasing reserves")
+internal class TXV02000Checkexplimitwhenincreasingreserves {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return transactionSet.Subtype == TC_RESERVESET 
+and transactionSet.New
+//The transactionset.new condition disallows the rule from executing for all transactions associated
+//with the claim (because we want the rule to execute only for the new transactions that we are trying to add).
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/* Set the following warning parameter to true if you want to throw a 
+ * warning, but still permit the end-user to continue with the transaction if he/she desires
+ * Set to false if you want to block this transaction
+ */
+var warning = true
+var costType = CostType.TC_CLAIMCOST
+var exposureSet = new java.util.HashSet<Exposure>()
+
+for (transaction in transactionSet.Transactions) {
+  exposureSet.add(transaction.Exposure)
+}
+      
+for (exposure in exposureSet) {
+  /* This rule triggers only if the exposure has a coverage with an exposure limit defined 
+   * (exp.Coverage.exposurelimit != null). 
+   */
+  if (exposure.HasCoverageLimit) {
+    var exposureLimit = exposure.Coverage.ExposureLimit
+
+    var compareInLimitCurrency = CoverageLimitRulesUtil.shouldCompareInReservingCurrency({exposure}, costType, exposureLimit.Currency)
+    if ( not compareInLimitCurrency ) {
+      exposureLimit = exposureLimit.convert( transactionSet.Claim.Currency, java.math.RoundingMode.UP )
+    }
+
+    var combinedCalc = CoverageLimitRulesUtil.getCommittedAndFutureAndPendingApprovalPaymentsAndReserves()
+                     .withExposure(exposure)
+                     .withCostType(costType)
+    var combined = CoverageLimitRulesUtil.getCalcValueForCompare(
+                     combinedCalc,
+                     exposureLimit.Currency, compareInLimitCurrency)
+
+    if (combined > exposureLimit) {
+      //If Warning is set to TRUE, throw a warning, but permit the transaction to go through if the user desires so
+      if (warning == true) {
+        transactionSet.reject(null, null, TC_PAYMENT,
+          DisplayKey.get("Rules.Validation.Transaction.ReserveExceedsExposureLimitWarning", 
+              exposure, CurrencyUtil.renderAsCurrency(combined),
+              CurrencyUtil.renderAsCurrency(exposure.Coverage.ExposureLimit),
+              actions.ShortRuleName))
+      } else {
+        //If Warning is set to FALSE, block the transaction from going through
+        transactionSet.reject(TC_PAYMENT, 
+          DisplayKey.get("Rules.Validation.Transaction.ReserveExceedsExposureLimitError", 
+              exposure, CurrencyUtil.renderAsCurrency(combined), 
+              CurrencyUtil.renderAsCurrency(exposure.Coverage.ExposureLimit), 
+              actions.ShortRuleName), 
+          null, null)
+      }
+    }
+  }
+}
+/*end00rule*/
+
+  }
+}

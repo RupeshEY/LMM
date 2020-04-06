@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Partial Denial Reason Codes"
+  name="PartialDenialReason">
+  <typecode
+    code="A"
+    desc="Denying Indemnity in whole, but not Medical"
+    name="Denying Indemnity in whole, but not Medical"
+    priority="1"/>
+  <typecode
+    code="B"
+    desc="Denying Indemnity in part, but not Medical "
+    name="Denying Indemnity in part, but not Medical "
+    priority="2"/>
+  <typecode
+    code="C"
+    desc="Denying Medical in whole, but not Indemnity "
+    name="Denying Medical in whole, but not Indemnity "
+    priority="3"/>
+  <typecode
+    code="D"
+    desc="Denying Medical in part, but not Indemnity"
+    name="Denying Medical in part, but not Indemnity"
+    priority="4"/>
+  <typecode
+    code="E"
+    desc="Denying Indemnity in whole and Medical in part"
+    name="Denying Indemnity in whole and Medical in part"
+    priority="5"/>
+  <typecode
+    code="F"
+    desc="Denying Medical in whole and Indemnity in part"
+    name="Denying Medical in whole and Indemnity in part"
+    priority="6"/>
+  <typecode
+    code="G"
+    desc="Denying both Indemnity and Medical in part"
+    name="Denying both Indemnity and Medical in part"
+    priority="7"/>
+</typelist>

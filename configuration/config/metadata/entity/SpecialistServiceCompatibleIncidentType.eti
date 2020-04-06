@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Indicates that a SpecialistService is compatible with the specified Incident subclass."
+  entity="SpecialistServiceCompatibleIncidentType"
+  extendable="true"
+  final="true"
+  loadable="false"
+  table="specialistsvccompinctype"
+  type="joinarray">
+  <fulldescription><![CDATA[
+    The presence of an instance of this entity indicates that the related SpecialistService can be used
+    with Incidents extending from the specified Incident subclass. In the base configuration, instances
+    of this entity must only be linked to root SpecialistServices.
+  ]]></fulldescription>
+  <foreignkey
+    columnName="SpecialistServiceID"
+    desc="The service that is compatible with the Incident type."
+    fkentity="SpecialistService"
+    name="Service"
+    nullok="false"/>
+  <typekey
+    columnName="IncidentType"
+    desc="The subclass of Incident with which the related SpecialistService is compatible."
+    name="IncidentType"
+    nullok="false"
+    typelist="Incident"/>
+  <index
+    desc="Prevents the same IncidentType from being recorded twice for the same service."
+    name="incidenttype"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="SpecialistServiceID"/>
+    <indexcol
+      keyposition="2"
+      name="IncidentType"/>
+  </index>
+</entity>

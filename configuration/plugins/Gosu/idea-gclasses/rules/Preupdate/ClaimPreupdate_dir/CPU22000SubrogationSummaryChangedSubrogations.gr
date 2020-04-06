@@ -1,0 +1,32 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+uses gw.entity.IArrayPropertyInfo
+
+@gw.rules.RuleName("CPU22000 - SubrogationSummary - Changed Subrogations")
+internal class CPU22000SubrogationSummaryChangedSubrogations {
+  static function doCondition(claim: entity.Claim): boolean {
+/*start00rule*/
+    return claim.SubrogationSummary != null and claim.SubrogationSummary.EscalateSubro
+/*end00rule*/
+  }
+
+  static function doAction(claim: entity.Claim, actions: gw.rules.Action) {
+/*start00rule*/
+
+    for (addedSubro in claim.SubrogationSummary.getAddedArrayElements(SubrogationSummary#Subrogations.PropertyInfo as IArrayPropertyInfo)) {
+      if ((addedSubro as Subrogation).AssignedUser == null) {
+        (addedSubro as Subrogation).autoAssign()
+      }
+    }
+
+    var claimRoles = claim.AllRoleAssignments.where(\roleAssignment -> roleAssignment.Role == typekey.UserRole.TC_SUBROGATIONOWNER)
+    var claimSubrogations = claim.SubrogationSummary.Subrogations
+    for (roleAssignment in claimRoles) {
+      if (!claimSubrogations*.Exposure.hasMatch(\subroExposure -> subroExposure == roleAssignment.Exposure)) {
+        roleAssignment.remove()
+      }
+    }
+
+/*end00rule*/
+  }
+}

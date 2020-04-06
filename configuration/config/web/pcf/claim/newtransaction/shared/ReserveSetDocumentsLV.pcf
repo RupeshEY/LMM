@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_financials.xml -->
+  <ListViewPanel
+    id="ReserveSetDocumentsLV">
+    <Require
+      name="ReserveWizardHelper"
+      type="gw.api.financials.ReserveWizardHelper"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <RowIterator
+      editable="false"
+      elementName="document"
+      pageSize="6"
+      value="ReserveWizardHelper.LinkedDocuments.where( \ d -&gt; perm.Document.view(d) )"
+      valueType="entity.Document[]">
+      <Row>
+        <BooleanRadioCell
+          icon="document.Icon"
+          id="Icon"
+          showHeaderIcon="false"
+          value="true"
+          valueType="boolean"/>
+        <LinkCell
+          id="Name"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.Name&quot;)"
+          printWidth="4"
+          width="300">
+          <Link
+            available="documentsActionsHelper.isViewDocumentContentAvailable(document)"
+            download="inline"
+            action="document.downloadContent()"
+            id="NameLink"
+            label="document.Name"
+            styleClass="none"
+            tooltip="documentsActionsHelper.getViewDocumentContentTooltip(document)"/>
+        </LinkCell>
+        <LinkCell
+          id="Actions"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.ViewAndEdit&quot;)">
+          <Link
+            action="DocumentDetailsPopup.push(document, false)"
+            available="documentsActionsHelper.DocumentMetadataActionsAvailable"
+            icon="documentsActionsHelper.DocumentMetadataActionsAvailable ? &quot;info_16.png&quot; : &quot;info_16_disabled.png&quot;"
+            id="ViewPropertiesLink"
+            styleClass="miniButton"
+            tooltip="documentsActionsHelper.ViewDocumentPropertiesTooltip"/>
+          <Link
+            action="ReserveWizardHelper.removeLinkedDocument(document)"
+            available="documentsActionsHelper.DocumentMetadataActionsAvailable"
+            icon="documentsActionsHelper.DocumentMetadataActionsAvailable ? &quot;remove_document_16.png&quot; : &quot;remove_document_disabled_16.png&quot;"
+            id="DocumentsLV_RemoveLink"
+            styleClass="miniButton"
+            tooltip="documentsActionsHelper.RemoveDocumentReferenceLinkTooltip"/>
+        </LinkCell>
+        <TypeKeyCell
+          id="Type"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.Type&quot;)"
+          printWidth="2"
+          value="document.Type"
+          valueType="typekey.DocumentType"/>
+        <TypeKeyCell
+          id="Status"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.Status&quot;)"
+          value="document.Status"
+          valueType="typekey.DocumentStatusType"/>
+        <TextCell
+          id="Author"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.Author&quot;)"
+          printWidth="2"
+          value="document.Author"/>
+        <DateCell
+          dateFormat="short"
+          id="DateModified"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.DateModified&quot;)"
+          sortDirection="descending"
+          sortOrder="1"
+          timeFormat="short"
+          value="document.DateModified"
+          width="174"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

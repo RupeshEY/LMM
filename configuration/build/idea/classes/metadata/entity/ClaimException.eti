@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Records the action of the claim exception monitor. This table will have at most one row for each claim in the system, indicating the last time it had claim exception rules run on it."
+  entity="ClaimException"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="claimexception"
+  type="versionable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.ClaimException"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimExceptionImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Records the action of the claim exception monitor. Each Claim in the system has, at most, one ClaimException instance
+        indicating the last time the claim exception rules ran on the claim.
+       
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    desc="A foreign key to the claim."
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <column
+    desc="The last time at which claim exception rules were run on the claim."
+    name="ExCheckTime"
+    nullok="false"
+    type="datetime"/>
+  <!-- This table holds at most 1 row per claim, so we have a unique index on claimid.
+      One of the access patterns for this table is to search for all claims that haven't been
+      checked since some timestamp, so we have an index on exchecktime to speed that search. -->
+  <index
+    desc="Enforce uniqueness - should only be one claim exception row per claim"
+    name="claimexception1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="2"
+      name="ExCheckTime"/>
+  </index>
+  <index
+    desc="Speed up search by check time, because usual access pattern is to check for all claims that haven't been checked since a particular time"
+    name="claimexception2">
+    <indexcol
+      keyposition="1"
+      name="ExCheckTime"/>
+  </index>
+</entity>

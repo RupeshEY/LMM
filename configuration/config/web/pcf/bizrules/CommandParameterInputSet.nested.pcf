@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="CommandParameterInputSet"
+    mode="nested">
+    <Require
+      name="parameterHolder"
+      type="gw.bizrules.pcf.RuleCommandParameterHolder"/>
+    <Variable
+      initialValue="parameterHolder.FragHolder as gw.bizrules.pcf.NestedInputConfig"
+      name="inputConfig"
+      recalculateOnRefresh="true"
+      type="gw.bizrules.pcf.NestedInputConfig"/>
+    <ContentInput
+      boldValue="true"
+      id="LabelAndLink"
+      label="parameterHolder.ParameterLabel">
+      <Link
+        id="Label"
+        label="inputConfig.CommandParameterLabel"
+        visible="inputConfig.LabelVisible"/>
+      <Link
+        label="&quot;|&quot;"
+        id="Bar"
+        hideIfReadOnly="true"
+        visible="inputConfig.LabelVisible"/>
+      <Link
+        action="inputConfig.pushPopupFromCommandParameter(parameterHolder)"
+        hideIfReadOnly="true"
+        label="inputConfig.PopupLinkLabel"
+        id="PopupLink"/>
+    </ContentInput>
+    <TextInput
+      hideChildrenIfReadOnly="false"
+      id="NestedText"
+      value="inputConfig.NestedText"
+      visible="inputConfig.NestedTextVisible">
+      <MenuItemSetRef
+        def="CommandParameterMenuItemSet(parameterHolder)"/>
+    </TextInput>
+  </InputSet>
+</PCF>

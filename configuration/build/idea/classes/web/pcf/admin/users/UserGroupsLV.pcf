@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_admin.xml -->
+  <ListViewPanel
+    id="UserGroupsLV">
+    <ExposeIterator
+      valueType="entity.GroupUser"
+      widget="UserGroupsLV"/>
+    <Require
+      name="User"
+      type="User"/>
+    <RowIterator
+      conversionExpression="var GU : GroupUser = null; if(User == null or !PickedValue.isMember(User?.ID)){GU = new GroupUser(); PickedValue.addToUsers(GU)}; return GU"
+      editable="true"
+      elementName="GroupUser"
+      pickLocation="OrganizationGroupTreePopup.push()"
+      toAdd="gw.api.admin.GroupUserUtil.add(User,GroupUser)"
+      toRemove="gw.api.assignment.workload.util.WorkloadUIHelper.checkCanRemoveGroup(GroupUser); gw.api.admin.GroupUserUtil.remove(User,GroupUser.Group)"
+      value="User.AllGroupUsersAsArray"
+      valueType="entity.GroupUser[]">
+      <Row>
+        <GroupCell
+          align="left"
+          editable="true"
+          id="Group"
+          label="DisplayKey.get(&quot;Web.Admin.GroupUsers.Group&quot;)"
+          required="true"
+          unique="true"
+          value="GroupUser.Group">
+          <PostOnChange/>
+        </GroupCell>
+        <BooleanRadioCell
+          align="left"
+          editable="true"
+          id="Member"
+          label="DisplayKey.get(&quot;Web.Admin.GroupUsers.Member&quot;)"
+          required="true"
+          value="GroupUser.Member"/>
+        <BooleanRadioCell
+          align="left"
+          editable="true"
+          id="Manager"
+          label="DisplayKey.get(&quot;Web.Admin.GroupUsers.Manager&quot;)"
+          required="true"
+          value="GroupUser.Manager"/>
+        <TypeKeyCell
+          align="left"
+          editable="true"
+          id="LoadFactorType"
+          label="DisplayKey.get(&quot;Web.Admin.GroupUsers.LoadFactorType&quot;)"
+          value="GroupUser.LoadFactorType"
+          valueType="typekey.LoadFactorType"/>
+        <TextCell
+          align="left"
+          editable="true"
+          id="LoadFactor"
+          label="DisplayKey.get(&quot;Web.Admin.GroupUsers.LoadFactor&quot;)"
+          validationExpression="!(GroupUser.LoadFactor &lt; 0 or GroupUser.LoadFactor &gt; 100) ? null : DisplayKey.get(&quot;NVV.Admin.GroupBasics.AdminGroupDetails.Assignment.LoadFactor.OutOfRange&quot;)"
+          value="GroupUser.LoadFactor"
+          valueType="java.lang.Integer"/>
+        <TextCell
+          id="GroupUserWeightedWorkload"
+          label="DisplayKey.get(&quot;Web.Admin.GroupUsers.WeightedWorkload&quot;)"
+          value="getWeightedWorkload(GroupUser)"
+          valueType="java.lang.Integer"
+          visible="gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value and perm.System.wwlview"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function getWeightedWorkload(gu : GroupUser) : java.lang.Integer {
+  var result : java.lang.Integer = null
+  if (gu.GroupUserWorkload != null) {
+    result = gu.GroupUserWorkload.Workload
+  }
+  return result
+}]]></Code>
+  </ListViewPanel>
+</PCF>

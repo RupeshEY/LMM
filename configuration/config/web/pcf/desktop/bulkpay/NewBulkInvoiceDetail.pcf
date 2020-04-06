@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="helper.flushCache(); BulkPay.go()"
+    afterCommit="helper.flushCache(); EditBulkInvoiceDetail.go( bulkInvoice )"
+    beforeCommit="helper.clearUnusedReserveLineWrappers(bulkInvoice); bulkInvoice.verifyChangesAllowed()"
+    beforeValidate="helper.prepBulkInvoiceForSave(bulkInvoice, CostType.TC_UNSPECIFIED, CostCategory.TC_UNSPECIFIED); paymentMethodHelper.cleanUpBeforeCommit()"
+    canEdit="perm.BulkInvoice.create"
+    canVisit="perm.BulkInvoice.create"
+    id="NewBulkInvoiceDetail"
+    parent="BulkPay()"
+    showUpLink="true"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.BulkInvoiceDetail&quot;)">
+    <LocationEntryPoint
+      signature="NewBulkInvoiceDetail()"/>
+    <Variable
+      initialValue="new gw.api.financials.BulkPayHelper()"
+      name="helper"
+      type="gw.api.financials.BulkPayHelper"/>
+    <Variable
+      initialValue="helper.newBulkInvoice()"
+      name="bulkInvoice"
+      type="BulkInvoice"/>
+    <Variable
+      initialValue="bulkInvoice.Payee!=null ? gw.api.contact.ContactSystemUtil.INSTANCE.generateLinkStatus(bulkInvoice.Payee) : null"
+      name="payeeLinkStatus"
+      recalculateOnRefresh="true"
+      type="gw.api.contact.ContactSystemLinkStatus"/>
+    <Variable
+      initialValue="new gw.api.financials.PaymentMethodHelper(bulkInvoice)"
+      name="paymentMethodHelper"
+      type="gw.api.financials.PaymentMethodHelper"/>
+    <Variable
+      initialValue="new org.apache.commons.lang3.mutable.MutableBoolean(false)"
+      name="showAddressFields"
+      type="org.apache.commons.lang3.mutable.MutableBoolean"/>
+    <Screen
+      editable="true"
+      id="BulkInvoiceDetailScreen">
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <PanelRef
+        def="BulkInvoiceDetailDV(bulkInvoice, payeeLinkStatus, paymentMethodHelper, showAddressFields)"/>
+      <PanelRef
+        def="BulkInvoiceItemsLV(bulkInvoice, helper)">
+        <Toolbar>
+          <IteratorButtons
+            iterator="BulkInvoiceItemsLV.BulkInvoiceItemsLV"/>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+  </Page>
+</PCF>

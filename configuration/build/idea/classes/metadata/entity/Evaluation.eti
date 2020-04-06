@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="Evaluation"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="evaluation"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.ClaimContactRoleOwner"
+    impl="com.guidewire.cc.domain.claim.impl.EvaluationImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.CommitCallback"
+    impl="com.guidewire.cc.domain.claim.impl.EvaluationImpl"/>
+  <implementsInterface
+    iface="gw.cc.claim.entity.Evaluation"
+    impl="com.guidewire.cc.domain.claim.impl.EvaluationImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.impl.EvaluationInternal"
+    impl="com.guidewire.cc.domain.claim.impl.EvaluationImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.relatedto.RelatedToBean"
+    impl="com.guidewire.cc.domain.relatedto.RelatedToBeanImpl"/>
+  <implementsEntity
+    name="ClaimContactRoleOwner"/>
+  <fulldescription><![CDATA[
+        Represents the liabilities and damages in a Claim's plan of action. A plan of action is an agreement between
+        parties that concludes a discussion of outstanding liabilities. The Evaluation object brings together
+        key contacts and financial data related to a claim.
+      
+    ]]></fulldescription>
+  <column
+    desc="Then name or subject of this evaluation."
+    name="Name"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="128"/>
+  </column>
+  <column
+    desc="Total evaluation amount."
+    name="Amount"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <!-- Liability distribution -->
+  <column
+    desc="Insured's liability percentage."
+    name="InsuredLiability"
+    nullok="true"
+    type="percentagedec"/>
+  <column
+    desc="Claimant's liability percentage."
+    name="ClaimantLiability"
+    nullok="true"
+    type="percentagedec"/>
+  <column
+    desc="Other party's liability percentage."
+    name="OtherLiability"
+    nullok="true"
+    type="percentagedec"/>
+  <!-- Economic damages -->
+  <column
+    desc="Hospital/Emergency Room cost."
+    name="HospitalER"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Treating physician cost."
+    name="TreatingPhysician"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Physical therapy cost."
+    name="PhysicalTherapy"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Diagnostic cost - for example, x-ray."
+    name="Diagnostic"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Medical equipment cost."
+    name="MedicalEquipment"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Future medical cost."
+    name="FutureMedical"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Claimant out of pocket cost."
+    name="ClmtOutOfPocket"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Other damages cost."
+    name="Other"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <!-- Non economic damages -->
+  <column
+    desc="Low non-economic cost estimate."
+    name="Low"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="High non-economic cost estimate."
+    name="High"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Likely non-economic cost estimate."
+    name="Likely"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Related claim."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <!-- Exposure, claimant are mutually exclusive -->
+  <foreignkey
+    columnName="ExposureID"
+    desc="Related exposure."
+    exportable="false"
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="true"/>
+  <foreignkey
+    columnName="ClaimContactID"
+    desc="Related claimant (either a person or a company)."
+    exportable="false"
+    fkentity="ClaimContact"
+    name="ClaimContact"
+    nullok="true"/>
+  <foreignkey
+    columnName="MatterID"
+    desc="Related matter."
+    exportable="false"
+    fkentity="Matter"
+    name="Matter"
+    nullok="true"/>
+  <foreignkey
+    columnName="ServiceRequestID"
+    desc="Associated service request"
+    exportasid="true"
+    fkentity="ServiceRequest"
+    name="ServiceRequest"
+    nullok="true"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.RequiredRolesDBCheckBuilder"/>
+</entity>

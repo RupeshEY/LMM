@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="DocumentSearchCriteria">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.document.impl.DocumentSearchCriteriaCoreExtMethods"
+    impl="com.guidewire.cc.domain.document.impl.DocumentSearchCriteriaCoreExtMethodsImpl"/>
+  <description><![CDATA[
+Represents the criteria used in document searches. The criteria can include such things as the document name or ID, the documentauthor, the date, the related claim, exposure, matter, or claim contact, and similar items. ClaimCenter does not store this entity; it exists only for the search's duration.
+<p>
+If you configured a {@link com.guidewire.cc.plugin.document.IDocumentMetadataSource} implementation, then the system passes an instance of DocumentSearchCriteria to the searchDocuments method on that interface, and returns a {@link com.guidewire.cc.domain.document.DocumentSearchResult} instance any results for display in the UI.
+<p>
+If there is not an {@link com.guidewire.cc.plugin.document.IDocumentMetadataSource} interface configured, then any extensions fields included in the search criteria will also need to be configured through the search-config.xml file to be properly handled by the standard database query processing.
+      
+    ]]></description>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.relatedto.RelatedToBean"
+    impl="com.guidewire.cc.domain.relatedto.RelatedToBeanImpl"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Associated claim"
+    exportasid="true"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="Exposure for RelatedTo search."
+    exportasid="true"
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="true"/>
+  <foreignkey
+    columnName="MatterID"
+    desc="Matter for RelatedTo search."
+    exportasid="true"
+    fkentity="Matter"
+    name="Matter"
+    nullok="true"/>
+  <foreignkey
+    columnName="ClaimContactID"
+    desc="ClaimContact for RelatedTo search."
+    exportasid="true"
+    fkentity="ClaimContact"
+    name="ClaimContact"
+    nullok="true"/>
+  <foreignkey
+    columnName="ServiceRequestID"
+    desc="ServiceRequest for RelatedTo search."
+    exportasid="true"
+    fkentity="ServiceRequest"
+    name="ServiceRequest"
+    nullok="true"/>
+</internalExtension>

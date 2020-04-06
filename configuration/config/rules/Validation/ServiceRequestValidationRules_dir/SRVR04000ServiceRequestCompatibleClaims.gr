@@ -1,0 +1,21 @@
+package rules.Validation.ServiceRequestValidationRules_dir
+uses gw.api.locale.DisplayKey
+
+
+@gw.rules.RuleName("SRVR04000 - Service Request Compatible Claims")
+internal class SRVR04000ServiceRequestCompatibleClaims {
+  static function doCondition(serviceRequest  :  entity.ServiceRequest) : boolean {
+/*start00rule*/
+return serviceRequest.isFieldChanged(ServiceRequest#Incident)
+/*end00rule*/
+}
+
+  static function doAction(serviceRequest  :  entity.ServiceRequest, actions : gw.rules.Action) {
+/*start00rule*/
+if (serviceRequest.Incident != null && serviceRequest.Incident.Claim != serviceRequest.Claim) {
+    serviceRequest.rejectField("Incident", ValidationLevel.TC_LOADSAVE,
+      DisplayKey.get("Rules.Validation.ServiceRequest.IncompatibleClaims"), null, null)
+}
+/*end00rule*/
+  }
+}

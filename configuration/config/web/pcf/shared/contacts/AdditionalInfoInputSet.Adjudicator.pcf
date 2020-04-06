@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+          id="AdditionalInfoInputSet"
+          mode="Adjudicator">
+    <!-- NOTE: This shared section requires a gw.api.contact.ContactHandle, rather than a Contact, because it's
+    possible for some actions on a contact detail screen to fundamentally change the contact. In particular, syncing
+    a contact that leads to a downcast of that contact to a more specific subtype causes the original contact to
+    become invalid. To protect against this, contacts on shared sections should be wrapped in a ContactHandle. If the
+    contact is fundamentally changed, then only the handle needs to be updated, and all existing references will see
+    the new contact.
+
+    As a shortcut for "contactHandle.Contact", this shared section defines a read-only property which can be used to
+    access the most current value of the contact.
+
+    Note also that claimContact may be null, so fields which depend on reference it should only be available for setting if it is not. -->
+    <Require
+      name="contactHandle"
+      type="gw.api.contact.ContactHandle"/>
+    <Require
+      name="claimContact"
+      type="ClaimContact"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <TextInput
+      editable="true"
+      id="AdjudicatorLicense"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Adjudicator.AdjudicatorLicense&quot;)"
+      value="Adjudicator.AdjudicatorLicense"/>
+    <TypeKeyInput
+      editable="true"
+      id="AdjudicativeDomain"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Adjudicator.AdjudicativeDomain&quot;)"
+      value="Adjudicator.AdjudicativeDomain"
+      valueType="typekey.AdjudicativeDomain"/>
+    <PrivacyInput
+      editable="true"
+      encryptionExpression="Adjudicator.maskTaxId(VALUE)"
+      id="TaxID"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.TaxID&quot;)"
+      value="Adjudicator.TaxID"/>
+    <TypeKeyInput
+      editable="true"
+      id="Currency"
+      label="DisplayKey.get(&quot;Financials.Multicurrency.PreferredCurrency&quot;)"
+      value="Adjudicator.PreferredCurrency"
+      valueType="typekey.Currency"
+      visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()"/>
+    <ClaimContactInput
+      claim="claim"
+      editable="true"
+      id="Organization"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Company.Organization&quot;)"
+      parentContact="Adjudicator"
+      value="Adjudicator.Employer"
+      valueRange="claim.RelatedCompanyArray"
+      valueType="entity.Company"/>
+    <DateInput
+      available="claimContact != null"
+      editable="true"
+      id="AdjudicatorValidFrom"
+      label="DisplayKey.get(&quot;Web.ContactBasicsDV.Person.Adjudicator.ValidFrom&quot;)"
+      value="claimContact.ContactValidFrom"/>
+    <DateInput
+      available="claimContact != null"
+      editable="true"
+      id="AdjudicatorValidTo"
+      label="DisplayKey.get(&quot;Web.ContactBasicsDV.Person.Adjudicator.ValidTo&quot;)"
+      value="claimContact.ContactValidTo"/>
+    <Code><![CDATA[
+property get Adjudicator() : Adjudicator { return contactHandle.Contact as Adjudicator; }
+    ]]></Code>
+  </InputSet>
+</PCF>

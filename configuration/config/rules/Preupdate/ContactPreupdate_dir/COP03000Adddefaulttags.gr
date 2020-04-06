@@ -1,0 +1,24 @@
+package rules.Preupdate.ContactPreupdate_dir
+
+@gw.rules.RuleName("COP03000 - Add default tags")
+internal class COP03000Adddefaulttags {
+  static function doCondition(contact : entity.Contact) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(contact : entity.Contact, actions : gw.rules.Action) {
+
+/*start00rule*/
+// Ensure that the minimum tags for ClaimCenter are on the Contact.
+// To change the default tags created for a Contact look at
+// the CCContactMinimalTagsImpl class
+contact.ensureMinimumTags()
+
+/*end00rule*/
+
+  }
+}

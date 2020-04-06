@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Aggregates the information needed to display a RecoveryReserve using the RecoveryReserve filter of the Financials Transactions page. Subtype of TransactionView."
+  entity="RecoveryReserveView"
+  exportable="false"
+  final="false"
+  primaryEntity="RecoveryReserve"
+  supertypeEntity="TransactionView">
+  <viewEntityTypekey
+    name="RecoveryCategory"
+    path="RecoveryCategory"/>
+  <implementsInterface
+    iface="gw.cc.financials.entity.RecoveryReserveView"
+    impl="com.guidewire.cc.domain.financials.impl.RecoveryReserveViewImpl"/>
+</viewEntity>

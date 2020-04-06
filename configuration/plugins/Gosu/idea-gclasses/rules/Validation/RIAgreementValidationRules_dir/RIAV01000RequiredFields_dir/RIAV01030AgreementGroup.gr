@@ -1,0 +1,22 @@
+package rules.Validation.RIAgreementValidationRules_dir.RIAV01000RequiredFields_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("RIAV01030 - Agreement Group")
+internal class RIAV01030AgreementGroup {
+  static function doCondition(rIAgreement : entity.RIAgreement) : boolean {
+/*start00rule*/
+return (rIAgreement.RIAgreementGroup == null and
+        rIAgreement.RICodings.IsEmpty)
+/*end00rule*/
+}
+
+  static function doAction(rIAgreement : entity.RIAgreement, actions : gw.rules.Action) {
+/*start00rule*/
+ rIAgreement.rejectField("RIAgreementGroup", TC_NEWLOSS,
+  DisplayKey.get("Rules.Validation.RIAgreement.AgreementGroupNull", rIAgreement.DisplayName),
+   null,
+   null)
+/*end00rule*/
+  }
+}

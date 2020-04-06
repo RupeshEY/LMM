@@ -1,0 +1,20 @@
+package rules.Validation.ClaimValidationRules_dir.CLV09000ISOValidation_dir
+
+@gw.rules.RuleName("CLV091000 - Workers Comp")
+internal class CLV091000WorkersComp {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.LossType == TC_WC
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+// Exec children
+/*end00rule*/
+
+  }
+}

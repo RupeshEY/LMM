@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RepositoryOperationRs xmlns="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0" xmlns:rlc="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/2005-2">
+   <MsgId>6b49891b-c6eb-4722-a5ce-e8c9ef0672ad</MsgId>
+   <CreationDtTime>2016-08-02T12:52:17+01:00</CreationDtTime>
+   <RepositoryOperationTypeCd>RepositoryDownload</RepositoryOperationTypeCd>
+   <ResponseInfo>
+      <MsgId>6b49891b-c6eb-4722-a5ce-e8c9ef0672ad</MsgId>
+      <AcknowledgementLevelIndicator>application_validation</AcknowledgementLevelIndicator>
+      <AcknowledgementStatusCd>acknowledged</AcknowledgementStatusCd>
+   </ResponseInfo>
+   <Sender>
+      <PartyId>urn:duns:236196817</PartyId>
+      <PartyRoleCd>ServiceProvider</PartyRoleCd>
+      <PartyName>Xchanging</PartyName>
+   </Sender>
+   <Receiver>
+      <PartyId>urn:lloyds:1274</PartyId>
+      <PartyRoleCd>Insurer</PartyRoleCd>
+      <PartyName>ACORD Testing Agent</PartyName>
+   </Receiver>
+   <Application>
+      <ApplicationCd>Jv-Ins-Reinsurance</ApplicationCd>
+      <SchemaVersion>http://www.ACORD.org/standards/Jv-Ins-Reinsurance/2005-2</SchemaVersion>
+   </Application>
+   <DocumentList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+      <HierarchySortIndicator>0</HierarchySortIndicator>
+      <DocumentItem>
+         <Document>
+            <DocumentId>0A79137C-F9BE-4B98-BCE0-E6BAEEE03735</DocumentId>
+            <DocumentVersion>1.0</DocumentVersion>
+            <DocumentVersionDtTime>2011-04-04T18:11:12.000Z</DocumentVersionDtTime>
+            <InheritIndicator>0</InheritIndicator>
+            <FileId>SampleFirstReport.pdf</FileId>
+            <FileFormatCd>application/pdf</FileFormatCd>
+            <FileSize>
+               <NumUnits>90</NumUnits>
+               <UnitMeasurementCd>KB</UnitMeasurementCd>
+            </FileSize>
+            <DocumentTypeCd>report_loss_history</DocumentTypeCd>
+            <Description>UMR Search Document</Description>
+         </Document>
+      </DocumentItem>
+   </DocumentList>
+</RepositoryOperationRs>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Custom history event types, used to add customer-defined events to a claim's history"
+  name="CustomHistoryType">
+  <typecode
+    code="a_n_f_r"
+    desc="Claim exception: Fault rating not set on auto claim"
+    name="Auto: No fault rating"/>
+  <typecode
+    code="e_w_n_r"
+    desc="Claim exception: No reserve set for exposure"
+    name="Exposure with no reserves"/>
+  <typecode
+    code="Export"
+    desc="Integration: New claim exported to mainframe"
+    name="Exported to mainframe"/>
+  <typecode
+    code="DataChange"
+    desc="Data change"
+    name="Data change"/>
+  <typecode
+    code="create_recovery_bill"
+    desc="Create recovery bill"
+    name="Create recovery bill"/>
+  <typecode
+    code="catastrophe"
+    desc="Change to catastrophe values"
+    name="Guidewire catastrophe rules"/>
+  <typecode
+    code="email"
+    desc="Email sent"
+    name="Email sent"/>
+</typelistextension>

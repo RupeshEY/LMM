@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="List of available operators for criterion"
+  final="false"
+  name="CriterionOperator">
+  <typecode
+    code="gt"
+    desc="Greater Than"
+    name="Greater Than Operator">
+    <category
+      code="SingleArgCriterionConfig"
+      typelist="BaseCriterionConfig"/>
+  </typecode>
+  <typecode
+    code="gte"
+    desc="Greater Than Or Equal To"
+    name="Greater Than or Equality Operator">
+    <category
+      code="SingleArgCriterionConfig"
+      typelist="BaseCriterionConfig"/>
+  </typecode>
+  <typecode
+    code="lt"
+    desc="Less Than"
+    name="Less Than Operator">
+    <category
+      code="SingleArgCriterionConfig"
+      typelist="BaseCriterionConfig"/>
+  </typecode>
+  <typecode
+    code="lte"
+    desc="Less Than or Equal To"
+    name="Less Than or Equality Operator">
+    <category
+      code="SingleArgCriterionConfig"
+      typelist="BaseCriterionConfig"/>
+  </typecode>
+  <typecode
+    code="eq"
+    desc="Equal To"
+    name="Equality Operator">
+    <category
+      code="SingleArgCriterionConfig"
+      typelist="BaseCriterionConfig"/>
+  </typecode>
+  <typecode
+    code="neq"
+    desc="Not Equal To"
+    name="InEquality Operator">
+    <category
+      code="SingleArgCriterionConfig"
+      typelist="BaseCriterionConfig"/>
+  </typecode>
+  <typecode
+    code="inlist"
+    desc="Is One Of"
+    name="In List Operator">
+    <category
+      code="ArrayCriterionConfig"
+      typelist="BaseCriterionConfig"/>
+  </typecode>
+  <typecode
+    code="between"
+    desc="Is Between"
+    name="Range Operator">
+    <category
+      code="RangeCriterionConfig"
+      typelist="BaseCriterionConfig"/>
+  </typecode>
+  <typecode
+    code="nil"
+    desc="Has No Value"
+    name="Null or Empty Operator">
+    <category
+      code="NoArgCriterionConfig"
+      typelist="BaseCriterionConfig"/>
+  </typecode>
+</typelist>

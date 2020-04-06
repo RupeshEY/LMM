@@ -1,0 +1,35 @@
+package rules.Archive.DefaultGroupClaimArchivingRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("ARC07000 - Transaction State Rule")
+internal class ARC07000TransactionStateRule {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return // Skip claims that have transactions that have yet to be escalated or acknowledged
+  gw.api.database.Query.make(Transaction)
+  .compare("Claim", Equals, claim)
+  .compareNotIn("Status", new Object[] {
+    TransactionStatus.TC_SUBMITTED,
+    TransactionStatus.TC_REJECTED,
+    TransactionStatus.TC_VOIDED,
+    TransactionStatus.TC_STOPPED,
+    TransactionStatus.TC_RECODED,
+    TransactionStatus.TC_TRANSFERRED,
+    TransactionStatus.TC_DENIED
+    })
+  .select()
+  .Count > 0
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.skipFromArchiving(DisplayKey.get("Rules.Archive.IncompleteTransaction"))
+/*end00rule*/
+
+  }
+}

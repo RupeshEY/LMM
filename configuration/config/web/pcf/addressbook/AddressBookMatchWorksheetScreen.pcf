@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="AddressBookMatchWorksheetScreen">
+    <Require
+      name="addressBookMatch"
+      type="gw.api.contact.AddressBookMatch"/>
+    <Require
+      name="proximitySearchPageHelper"
+      type="gw.api.contact.ProximitySearchPageHelper"/>
+    <Require
+      name="onlyPrimaryRelationships"
+      type="boolean"/>
+    <Variable
+      initialValue="gw.api.contact.AddressBookUtil.newAddressBookContactSource()"
+      name="externalSource"
+      type="gw.api.contact.ExternalContactSource"/>
+    <Toolbar>
+      <ToolbarButton
+        action="CurrentLocation.cancel()"
+        id="AddressBookMatchWorksheet_CancelButton"
+        label="DisplayKey.get(&quot;Button.Cancel&quot;)"/>
+      <ToolbarButton
+        action="gw.api.contact.CCAddressBookUtil.createMatchInAddressBook(addressBookMatch, onlyPrimaryRelationships)"
+        id="AddressBookMatchWorksheet_CreateNewContactButton"
+        label="DisplayKey.get(&quot;Web.AddressBook.Button.CreateNewContact&quot;)"
+        visible="perm.Contact.createab(addressBookMatch.getRootContactType()) and addressBookMatch.canCreateInAddressBook()"/>
+    </Toolbar>
+    <Verbatim
+      id="matchMessage"
+      label="addressBookMatch.Message"/>
+    <PanelRef
+      def="CheckDuplicateContactsLV(addressBookMatch, proximitySearchPageHelper, externalSource, addressBookMatch.Matches as gw.api.database.IQueryBeanResult&lt;Contact&gt;, null)"/>
+  </Screen>
+</PCF>

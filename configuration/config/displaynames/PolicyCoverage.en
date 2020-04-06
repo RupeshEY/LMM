@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Entity
+  name="PolicyCoverage">
+  <Columns>
+    <Column
+      beanPath="PolicyCoverage.Subtype"
+      name="subtype"
+      sortOrder="1"/>
+    <Column
+      beanPath="PolicyCoverage.Type"
+      name="type"
+      sortOrder="2"/>
+  </Columns>
+  <DisplayName><![CDATA[return gw.api.locale.DisplayKey.get("DisplayName.Coverage.PolicyLevel", type.DisplayName);]]></DisplayName>
+</Entity>

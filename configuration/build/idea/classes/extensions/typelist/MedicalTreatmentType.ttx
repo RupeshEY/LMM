@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="MedicalTreatmentType">
+  <!-- Remove retired flag from typecodes (none, one_doctor, mult_doctors) during configuration merge if the values were
+       used as a part of WCMedicalTreatmentType, which is now deprecated and merged into this list. -->
+  <typecode
+    code="acup"
+    desc="Acupuncture"
+    name="Acupuncture"
+    priority="1"/>
+  <typecode
+    code="chir"
+    desc="Chiropractor"
+    name="Chiropractor"
+    priority="2"/>
+  <typecode
+    code="counsel"
+    desc="Psych counseling"
+    name="Psych counseling"
+    priority="14"/>
+  <typecode
+    code="emer_care"
+    desc="Emergency care"
+    name="Emergency care"
+    priority="3"/>
+  <typecode
+    code="er"
+    desc="ER treated &amp; released"
+    name="ER treated &amp; released"
+    priority="4"/>
+  <typecode
+    code="hospital"
+    desc="Hospitalized"
+    name="Hospitalized"
+    priority="5"/>
+  <typecode
+    code="inject"
+    desc="Injections"
+    name="Injections"
+    priority="6"/>
+  <typecode
+    code="major_surgery"
+    desc="Major surgery"
+    name="Major surgery"
+    priority="7"/>
+  <typecode
+    code="minor_surgery"
+    desc="Minor surgery"
+    name="Minor surgery"
+    priority="8"/>
+  <typecode
+    code="mri"
+    desc="MRI"
+    name="MRI"
+    priority="8"/>
+  <typecode
+    code="mult_doctors"
+    desc="Multiple doctors"
+    name="Multiple doctors"
+    priority="19"
+    retired="true"/>
+  <typecode
+    code="mult_treatments"
+    desc="Multiple treatments"
+    name="Multiple treatments"
+    priority="9"/>
+  <typecode
+    code="neuro"
+    desc="Neurologic"
+    name="Neurologic"
+    priority="10"/>
+  <typecode
+    code="none"
+    desc="No treatment"
+    name="No treatment"
+    priority="17"
+    retired="true"/>
+  <typecode
+    code="one_doctor"
+    desc="Only one doctor"
+    name="Only one doctor"
+    priority="18"
+    retired="true"/>
+  <typecode
+    code="ortho"
+    desc="Orthopedic"
+    name="Orthopedic"
+    priority="11"/>
+  <typecode
+    code="oth"
+    desc="Other"
+    name="Other"
+    priority="16"/>
+  <typecode
+    code="pcp"
+    desc="Primary care physician"
+    name="Primary care physician"
+    priority="13"/>
+  <typecode
+    code="pt"
+    desc="Physical therapy"
+    name="Physical therapy"
+    priority="12"/>
+  <typecode
+    code="rehab"
+    desc="Rehab"
+    name="Rehab"
+    priority="15"/>
+  <typecode
+    code="xray"
+    desc="X-ray"
+    name="X-ray"
+    priority="15"/>
+  <typefilter
+    desc="Typecodes in deprecated WCMedicalTreatmentType."
+    name="wc">
+    <include
+      code="none"/>
+    <include
+      code="one_doctor"/>
+    <include
+      code="mult_doctors"/>
+    <include
+      code="rehab"/>
+    <include
+      code="hospital"/>
+    <include
+      code="minor_surgery"/>
+    <include
+      code="major_surgery"/>
+    <include
+      code="mult_treatments"/>
+  </typefilter>
+</typelistextension>

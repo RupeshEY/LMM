@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="ValidationWarningsInputSet">
+    <Require
+      name="warnings"
+      type="java.lang.String[]"/>
+    <Require
+      name="labelAbove"
+      type="boolean"/>
+    <Variable
+      name="firstWarning"
+      recalculateOnRefresh="true"
+      type="java.lang.String"
+      initialValue="warnings.HasElements ? warnings[0] : null"/>
+    <Variable
+      name="otherWarnings"
+      recalculateOnRefresh="true"
+      type="java.lang.String[]"
+      initialValue="warnings.length &lt; 2 ? {} : warnings.fastList().subList(1, warnings.length).toTypedArray()"/>
+    <ContentInput
+      align="left"
+      labelAbove="labelAbove"
+      visible="firstWarning != null">
+      <Link
+        icon="&quot;warn.png&quot;"
+        id="ValidationWarningIcon"/>
+      <Link
+        icon="&quot;trans_pixel.png&quot;"
+        id="Space1"/>
+      <Link
+        icon="&quot;trans_pixel.png&quot;"
+        id="Space2"/>
+      <Link
+        id="Label"
+        label="firstWarning"/>
+    </ContentInput>
+    <InputIterator
+      elementName="warning"
+      type="java.lang.String"
+      value="otherWarnings"
+      valueType="java.lang.String[]">
+      <TextInput
+        align="left"
+        id="ValidationWarning"
+        labelAbove="labelAbove"
+        value="warning"/>
+    </InputIterator>
+    <ContentInput
+      visible="firstWarning != null &amp;&amp; !otherWarnings.HasElements">
+      <Link
+        icon="&quot;trans_pixel.png&quot;"
+        id="Space3"/>
+    </ContentInput>
+  </InputSet>
+</PCF>

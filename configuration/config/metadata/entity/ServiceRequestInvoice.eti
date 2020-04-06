@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="An invoice received from a specialist for a Service Request."
+  entity="ServiceRequestInvoice"
+  supertype="ServiceRequestStatement">
+  <typekey
+    columnName="InvoiceStatus"
+    desc="The current invoice status"
+    name="Status"
+    nullok="false"
+    typelist="ServiceRequestInvoiceStatus"/>
+  <column
+    desc="The time at which this invoice was paid."
+    name="PaymentDate"
+    nullok="true"
+    type="datetime"/>
+  <foreignkey
+    columnName="PaidByID"
+    desc="The user who paid this invoice."
+    fkentity="User"
+    name="PaidBy"
+    nullok="true"/>
+  <foreignkey
+    columnName="CheckID"
+    desc="The check that paid this invoice."
+    fkentity="Check"
+    name="Check"
+    nullok="true"/>
+</subtype>

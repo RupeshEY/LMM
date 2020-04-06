@@ -1,0 +1,20 @@
+package rules.Assignment.GlobalActivityAssignmentRules_dir
+
+@gw.rules.RuleName("GAA05000 - Homeowners PolicyType")
+internal class GAA05000HomeownersPolicyType {
+  static function doCondition(activity : entity.Activity) : boolean {
+    
+/*start00rule*/
+return activity.Claim.Policy.PolicyType == TC_HOMEOWNERS
+/*end00rule*/
+
+  }
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

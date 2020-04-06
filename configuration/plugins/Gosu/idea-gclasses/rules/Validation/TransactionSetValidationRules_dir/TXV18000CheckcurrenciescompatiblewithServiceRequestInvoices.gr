@@ -1,0 +1,25 @@
+package rules.Validation.TransactionSetValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("TXV18000 - Check currencies compatible with Service Request Invoices")
+internal class TXV18000CheckcurrenciescompatiblewithServiceRequestInvoices {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+/*start00rule*/
+return transactionSet typeis CheckSet
+/*end00rule*/
+}
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+/*start00rule*/
+for(check in (transactionSet as CheckSet).Checks) {
+  for(sri in check.ServiceRequestInvoices) {
+    if(!sri.HasConsistentCheckCurrency) {
+      transactionSet.rejectSubField(check, "Checks.Currency", TC_LOADSAVE,
+              DisplayKey.get("Rules.Validation.ServiceRequest.InvalidInvoice", sri.ReferenceNumber ?: "", sri.ServiceRequest.ServiceRequestNumber), null, null)
+    }
+  }
+}
+/*end00rule*/
+  }
+}

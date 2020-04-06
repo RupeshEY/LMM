@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<webservice-collection xmlns="http://guidewire.com/config/webservicecollection">
+  <resources>
+    <resource>
+      <url>${pc}/ws/gw/webservice/pc/pc800/reinsurance/RICoverageAPI?wsdl</url>
+    </resource>
+    <resource>
+      <url>${pc}/ws/gw/webservice/pc/pc800/ccintegration/ClaimToPolicySystemNotificationAPI?wsdl</url>
+    </resource>
+    <resource>
+      <url>${pc}/ws/gw/webservice/pc/pc800/ccintegration/CCPolicySearchIntegration?wsdl</url>
+    </resource>
+    <resource>
+      <url>${pc}/ws/gw/webservice/pc/pc800/ccintegration/PolicyLocationSearchAPI?wsdl</url>
+    </resource>
+  </resources>
+  <settings>
+    <configuration-provider>
+      <type-name>wsi.remote.gw.webservice.pc.PCConfigurationProvider</type-name>
+    </configuration-provider>
+  </settings>
+</webservice-collection>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_exposure.xml -->
+  <CardViewPanel
+    hideTabIfSingle="true"
+    id="NewExposureDV"
+    mode="Propertydamage|Dwelling">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Card
+      id="NewExposureCard"
+      title="&quot;&quot;">
+      <PanelRef
+        def="NewClaimPropertyDamageDV(Exposure)"/>
+    </Card>
+  </CardViewPanel>
+</PCF>

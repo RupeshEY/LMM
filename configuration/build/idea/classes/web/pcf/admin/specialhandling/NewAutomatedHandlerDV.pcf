@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    editable="true"
+    id="NewAutomatedHandlerDV">
+    <Require
+      name="newHandler"
+      type="AutomatedHandler"/>
+    <Require
+      name="mode"
+      type="String"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.Admin.AutomatedHandlerBase.HeaderCondition&quot;)"/>
+      <InputSetRef
+        def="AutomatedHandlerBaseInputSet(newHandler)"/>
+      <InputSetRef
+        def="AutomatedHandlerTriggerInputSet(newHandler)"
+        mode="(typeof newHandler.Trigger).DisplayName"/>
+      <Label
+        label="DisplayKey.get(&quot;Web.Admin.AutomatedHandlerBase.HeaderAction&quot;)"/>
+      <InputSetRef
+        def="AutomatedHandlerActionInputSet(newHandler)"
+        mode="mode"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

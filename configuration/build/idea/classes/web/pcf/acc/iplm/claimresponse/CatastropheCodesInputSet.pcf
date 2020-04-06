@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="CatastropheCodesInputSet">
+    <Require
+      name="ecfClaimData"
+      type="ECFMessageClaimData_Ext"/>
+    <Require
+      name="claimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <RangeInput
+      desc="passed in wb:ClaimResponseRq/wb:Claim/PcsReference"
+      editable="true"
+      id="pcsCatastropheCode"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.PCSCatastrophe&quot;)"
+      noneSelectedLabel="gw.util.GosuStringUtil.isBlank(ecfClaimData.PcsCatastropheCode?.UiDisplayDescription) ? DisplayKey.get(&quot;Java.NameValueView.NoneSelected&quot;) : ecfClaimData.PcsCatastropheCode.UiDisplayDescription"
+      optionLabel="VALUE.UiDisplayDescription"
+      value="claimResponseRq.PcsCatastropheCode"
+      valueRange="ECFPCSCategoryCode_Ext.getTypeKeys(false).where(\elt -&gt; elt != ecfClaimData.PcsCatastropheCode)"
+      valueType="ECFPCSCategoryCode_Ext"/>
+    <RangeInput
+      desc="passed in wb:ClaimResponseRq/wb:Claim/LcoCatastropheReference"
+      editable="true"
+      id="lcoCatastropheCode"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.LCOCatastrophe&quot;)"
+      noneSelectedLabel="gw.util.GosuStringUtil.isBlank(ecfClaimData.LcoCatastropheCode?.UiDisplayDescription) ? DisplayKey.get(&quot;Java.NameValueView.NoneSelected&quot;) : ecfClaimData.LcoCatastropheCode.UiDisplayDescription"
+      optionLabel="VALUE.UiDisplayDescription"
+      value="claimResponseRq.LcoCatastropheCode"
+      valueRange="ECFLCOCategoryCode_Ext.getTypeKeys(false).where(\elt -&gt; elt != ecfClaimData.LcoCatastropheCode)"
+      valueType="ECFLCOCategoryCode_Ext"/>
+  </InputSet>
+</PCF>

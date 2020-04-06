@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <!-- Default admin page is to view root group for current user -->
+  <Forward
+    canVisit="perm.User.viewanyadmin"
+    id="AdminWelcome">
+    <LocationEntryPoint
+      signature="AdminWelcome()"/>
+    <Variable
+      initialValue="User.util.CurrentUser.RootGroup"
+      name="Group"
+      type="Group"/>
+    <ForwardCondition
+      action="GroupDetailPage.go(Group)"/>
+    <ForwardCondition
+      action="Admin.go()"/>
+  </Forward>
+</PCF>

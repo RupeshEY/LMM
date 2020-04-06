@@ -1,0 +1,101 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A recovery transaction."
+  entity="Recovery"
+  final="true"
+  supertype="Transaction">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.financials.recovery.impl.RecoveryImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.recovery.entity.Recovery"
+    impl="com.guidewire.cc.domain.financials.recovery.impl.RecoveryImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.recovery.impl.RecoveryInternal"
+    impl="com.guidewire.cc.domain.financials.recovery.impl.RecoveryImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.financials.recovery.impl.RecoveryImpl"/>
+  <fulldescription><![CDATA[
+      Records money that reduces a claim's liability, received from such sources as subrogation, salvage, other
+      insurance, copayments, or deductibles. Equivalent to a negative Payment. A subtype of Transaction.
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimContactID"
+    desc="Person or company from whom the recovery was obtained."
+    fkentity="ClaimContact"
+    name="ClaimContact"
+    nullok="true"
+    triggersValidation="true"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="PayerDenormID"
+    desc="Payer FK denorm."
+    exportable="false"
+    fkentity="Contact"
+    ignoreforevents="true"
+    loadable="false"
+    name="PayerDenorm"
+    nullok="true"/>
+  <foreignkey
+    columnName="OBOClaimContactID"
+    desc="Person or company responsible for paying."
+    fkentity="ClaimContact"
+    name="OBOClaimContact"
+    nullok="true"
+    triggersValidation="true"/>
+  <edgeForeignKey
+    desc="The RecoveryReserve, if any, that exists as a direct offset for this Recovery."
+    edgeTableName="recToRecReserves"
+    exportable="false"
+    extractable="true"
+    fkentity="RecoveryReserve"
+    loadable="true"
+    name="OffsettingRecoveryReserve"
+    nullok="true"
+    setterScriptability="hidden"/>
+  <index
+    desc="Covering index for RecoverySearchByPayerLastName, where we expect contact to be outer table.  ClaimiID and ID added for covering."
+    expectedtobecovering="true"
+    name="transactionu7"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="PayerDenormID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="Subtype"/>
+    <indexcol
+      keyposition="4"
+      name="CreateTime"/>
+    <indexcol
+      keyposition="5"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="6"
+      name="ID"/>
+  </index>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.financials.dbchecks.RecoveryPayerDBCheckBuilder"/>
+  <events>
+    <event
+      description="Fired when the recovery is added, and each time its status changes."
+      name="RecoveryStatusChanged"/>
+    <event
+      description="Deprecated.  Use RecoveryStatusChanged instead."
+      name="RecoverySubmitted"/>
+    <event
+      description="Deprecated.  Use RecoveryStatusChanged instead."
+      name="RecoveryVoided"/>
+  </events>
+  <typekey
+    columnName="RecoveryCategory"
+    desc="The RecoveryCategory to which this transaction is coded."
+    name="RecoveryCategory"
+    nullok="false"
+    typelist="RecoveryCategory"/>
+</subtype>

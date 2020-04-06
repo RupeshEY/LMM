@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  entity="MatterView"
+  exportable="false"
+  final="false"
+  primaryEntity="Matter">
+  <implementsInterface
+    iface="gw.cc.matter.entity.MatterView"
+    impl="com.guidewire.cc.domain.matter.impl.MatterViewImpl"/>
+  <fulldescription><![CDATA[
+            Aggregates the information needed to display one matter row (base entity for all other matter views).
+            
+    ]]></fulldescription>
+  <viewEntityColumn
+    name="ClaimNumber"
+    path="Claim.ClaimNumber"/>
+  <viewEntityColumn
+    name="Name"
+    path="Name"/>
+  <viewEntityColumn
+    name="CaseNumber"
+    path="CaseNumber"/>
+  <viewEntityColumn
+    name="FinalSettleCost"
+    path="FinalSettleCost"/>
+  <viewEntityColumn
+    name="TrialDate"
+    path="TrialDate"/>
+  <viewEntityLink
+    name="Matter"
+    path="ID"/>
+  <viewEntityLink
+    name="MatterClaim"
+    path="Claim"/>
+  <!-- The following are needed for AssigneeDisplayString. -->
+  <viewEntityTypekey
+    name="AssignmentStatus"
+    path="AssignmentStatus"/>
+  <viewEntityName
+    name="AssignedUserDisplayName"
+    path="AssignedUser"/>
+  <viewEntityName
+    name="AssignedQueueDisplayName"
+    path="AssignedQueue"/>
+</viewEntity>

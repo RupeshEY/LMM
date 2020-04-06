@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <CardViewPanel
+    id="FixPropIncidentDetailDV">
+    <Require
+      name="FixedPropertyIncident"
+      type="FixedPropertyIncident"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Card
+      id="Vehicle_DetailsCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.VehicleDamage.Details&quot;)">
+      <PanelRef
+        def="FixedPropertyIncidentDV(FixedPropertyIncident, newPolicyLocation(), unusedServiceRequests)"/>
+    </Card>
+    <Card
+      id="Incident_Assessment"
+      title="DisplayKey.get(&quot;NVV.Incident.FixedProperty.Assessment&quot;)">
+      <PanelRef
+        def="FixPropIncidentAssessDV(FixedPropertyIncident)">
+        <Toolbar>
+          <IteratorButtons
+            iterator="FixPropIncidentAssessDV.FixPropAssessSourceLV"/>
+        </Toolbar>
+      </PanelRef>
+    </Card>
+    <Code><![CDATA[function newPolicyLocation() : PolicyLocation {
+  var prop = entity.FixedPropertyIncident.Type.TypeInfo.getProperty("Property") as gw.entity.IEntityPropertyInfo
+  return gw.api.address.CCAddressOwnerUtil.getOrCreateNewBeanFor(FixedPropertyIncident, prop, \ -> new PolicyLocation())
+}]]></Code>
+  </CardViewPanel>
+</PCF>

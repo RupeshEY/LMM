@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Decimal based claim metric."
+  entity="DecimalClaimMetric"
+  final="false"
+  priority="4"
+  supertype="ClaimMetric">
+  <implementsInterface
+    iface="gw.cc.claim.metric.entity.DecimalClaimMetric"
+    impl="com.guidewire.cc.domain.claim.metric.impl.DecimalClaimMetricImpl"/>
+  <implementsInterface
+    iface="gw.api.metric.MetricMethods"
+    impl="gw.api.claim.metric.DecimalClaimMetricMethodsImpl"/>
+  <implementsEntity
+    name="DecimalMetricDelegate"/>
+</subtype>

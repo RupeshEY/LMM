@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Is subrogation on Claim?"
+  entity="SubrogationClaimIndicator"
+  final="true"
+  priority="7"
+  supertype="ClaimIndicator">
+  <implementsInterface
+    iface="gw.api.claim.indicator.ClaimIndicatorMethods"
+    impl="gw.claim.indicator.SubrogationClaimIndicatorMethodsImpl"/>
+</subtype>

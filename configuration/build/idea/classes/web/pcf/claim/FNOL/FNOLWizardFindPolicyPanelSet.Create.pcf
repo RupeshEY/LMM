@@ -1,0 +1,271 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="FNOLWizardFindPolicyPanelSet"
+    mode="Create">
+    <Variable
+      initialValue="initNewPolicy()"
+      name="newPolicy"
+      type="gw.cc.claim.NewClaimPolicyDescription"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Variable
+      initialValue="Claim.Policy != null ? gw.api.policy.PolicyTabUtil.getTabSet(Claim.Policy) : null"
+      name="policyTabSet"
+      type="java.util.Set"/>
+    <Variable
+      initialValue="initClaimModeArray()"
+      name="claimModeArray"
+      type="gw.api.claim.NewClaimMode[]"/>
+    <Variable
+      initialValue="new gw.api.claim.ClaimLossDateProxy(Claim)"
+      name="claimLossDate"
+      type="gw.api.claim.ClaimLossDateProxy"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <TextInput
+          editable="true"
+          id="ClaimNumber2"
+          label="DisplayKey.get(&quot;NVV.Claim.SubView.NewClaimGeneral.Claim.ClaimNumber&quot;)"
+          required="true"
+          validationExpression="!Claim.DuplicateClaimNumber ? null : DisplayKey.get(&quot;Java.NewClaimWizard.Error.ClaimNumberNotUnique&quot;, Claim.ClaimNumber)"
+          value="Claim.ClaimNumber"
+          visible="!Claim.ClaimNumberGenerationEnabled"/>
+        <TextInput
+          editable="true"
+          focusOnStartEditing="true"
+          id="PolicyNumber"
+          label="DisplayKey.get(&quot;NVV.Policy.SubView.PolicyGeneral.Policy.PolicyNumber&quot;)"
+          required="true"
+          value="newPolicy.UnverifiedPolicyNumber">
+          <PostOnChange
+            onChange="setPolicy(CurrentLocation as pcf.api.Wizard);"/>
+        </TextInput>
+        <TypeKeyInput
+          confirmMessage="DisplayKey.get(&quot;Java.Validation.FindPolicyPanelSet.Unselect&quot;)"
+          editable="true"
+          id="Type"
+          label="DisplayKey.get(&quot;NVV.Policy.SubView.PolicyGeneral.Policy.Type&quot;)"
+          required="true"
+          showConfirmMessage="Claim.Policy.PolicyType != null"
+          value="newPolicy.UnverifiedPolicyType"
+          valueType="typekey.PolicyType">
+          <PostOnChange
+            onChange="setPolicy(CurrentLocation as pcf.api.Wizard);"/>
+        </TypeKeyInput>
+        <RangeRadioInput
+          confirmMessage="DisplayKey.get(&quot;Java.Validation.SelectPolicy.Warnings.ChangingClaimType&quot;)"
+          editable="true"
+          id="ClaimLossType"
+          label="DisplayKey.get(&quot;NVV.Claim.NewClaimSelectType.Claim.LossType&quot;)"
+          required="true"
+          showConfirmMessage="Claim.Policy.PolicyType != null and Claim.LossType != Wizard.LossType "
+          sortValueRange="false"
+          stacked="true"
+          value="Wizard.ClaimMode"
+          valueRange="claimModeArray"
+          valueType="gw.api.claim.NewClaimMode">
+          <PostOnChange
+            onChange="setPolicy(CurrentLocation as pcf.api.Wizard);setClaimFirstAndFinalStatus();"/>
+        </RangeRadioInput>
+        <DateInput
+          dateFormat="short"
+          editable="true"
+          id="Claim_LossDate"
+          label="DisplayKey.get(&quot;NVV.Claim.SubView.NewClaimLossDetailsAuto.Claim.LossDate&quot;)"
+          required="true"
+          validationExpression="Claim.validateLossDate()"
+          value="claimLossDate.LossDate"/>
+        <DateInput
+          editable="true"
+          id="Claim_lossTime"
+          label="DisplayKey.get(&quot;Web.CreateFindPolicyPanelSet.Time.Label&quot;)"
+          timeFormat="short"
+          validationExpression="Claim.LossDate != null || Claim.LossDate &lt; gw.api.util.DateUtil.currentDate() ? null : DisplayKey.get(&quot;Java.Validation.Date.ForbidFuture&quot;)"
+          value="claimLossDate.LossTime"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <PanelDivider/>
+    <PanelRef
+      def="NewClaimPolicyGeneralPanelSet(Claim.Policy)"
+      editable="!Claim.Policy.Verified"
+      mode="Claim.LossType"/>
+    <PanelRef
+      def="NewClaimVehiclesLV(Claim.Policy.Vehicles, Claim.Policy)"
+      visible="policyTabSet != null &amp;&amp; policyTabSet.contains(&quot;Vehicles&quot;) &amp;&amp; allRequiredFieldsExist()">
+      <TitleBar
+        title=" (!Claim.Policy.Verified or (Claim.Policy.TotalVehicles == Claim.Policy.Vehicles.length)) ? DisplayKey.get(&quot;JSP.NewClaimPolicyDetails.Policy.Vehicles&quot;) as String : DisplayKey.get(&quot;JSP.NewClaimPolicyDetails.Policy.Vehicles.PartialList&quot;, Claim.Policy.TotalVehicles)"/>
+      <Toolbar>
+        <IteratorButtons
+          addVisible=" !Claim.Policy.Verified and perm.Policy.edit(Claim)"
+          iterator="NewClaimVehiclesLV.NewClaimVehiclesLV"
+          removeVisible="perm.Policy.edit(Claim)"/>
+      </Toolbar>
+    </PanelRef>
+    <PanelRef
+      def="PolicyTripLV( Claim, Wizard )"
+      visible="policyTabSet != null &amp;&amp; policyTabSet.contains(&quot;Trips&quot;) &amp;&amp; allRequiredFieldsExist()">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.ClaimPolicy.Trips&quot;)"/>
+      <Toolbar>
+        <IteratorButtons
+          addVisible=" !Claim.Policy.Verified and perm.Policy.edit(Claim)"
+          iterator="PolicyTripLV.PolicyTripLV"
+          removeVisible=" !Claim.Policy.Verified and perm.Policy.edit(Claim)"/>
+      </Toolbar>
+    </PanelRef>
+    <PanelRef
+      def="PolicyLocationLDV(Claim)"
+      visible="policyTabSet != null &amp;&amp; (policyTabSet.contains(&quot;Properties&quot;) or policyTabSet.contains(&quot;Classcodes&quot;)) &amp;&amp; allRequiredFieldsExist()">
+      <TitleBar
+        appendListViewPaging="true"
+        title="!Claim.Policy.Verified or (Claim.Policy.TotalProperties == Claim.Policy.Properties.length) ? DisplayKey.get(&quot;JSP.NewClaimPolicyDetails.Policy.Locations&quot;) as String : DisplayKey.get(&quot;JSP.NewClaimPolicyDetails.Policy.Locations.PartialList&quot;, Claim.Policy.TotalProperties)"/>
+      <Toolbar>
+        <IteratorButtons
+          addVisible=" !Claim.Policy.Verified and perm.Policy.edit(Claim)"
+          iterator="PolicyLocationLDV.PolicyLocationIterator"
+          removeVisible=" !Claim.Policy.Verified and perm.Policy.edit(Claim)"/>
+      </Toolbar>
+    </PanelRef>
+    <PanelRef
+      def="NewClaimEndorsementsLV(Claim.Policy.Endorsements, Claim.Policy)"
+      visible="policyTabSet != null &amp;&amp; policyTabSet.contains(&quot;Endorsements&quot;) &amp;&amp; allRequiredFieldsExist()">
+      <TitleBar
+        title="DisplayKey.get(&quot;JSP.NewClaimPolicyDetails.Endorsements.Title&quot;)"/>
+      <Toolbar>
+        <IteratorButtons
+          addVisible=" !Claim.Policy.Verified and perm.Policy.edit(Claim)"
+          iterator="NewClaimEndorsementsLV.NewClaimEndorsementsLV"
+          removeVisible=" !Claim.Policy.Verified and perm.Policy.edit(Claim)"/>
+      </Toolbar>
+    </PanelRef>
+    <PanelRef
+      def="NewClaimStatCodesLV(Claim.Policy.StatCodes, Claim.Policy)"
+      visible="policyTabSet != null &amp;&amp; policyTabSet.contains(&quot;Statcodes&quot;) &amp;&amp; allRequiredFieldsExist()">
+      <TitleBar
+        title="DisplayKey.get(&quot;JSP.NewClaimPolicyDetails.Policy.StatCodes&quot;)"/>
+      <Toolbar>
+        <IteratorButtons
+          addVisible=" !Claim.Policy.Verified and perm.Policy.edit(Claim)"
+          iterator="NewClaimStatCodesLV.NewClaimStatCodesLV"
+          removeVisible=" !Claim.Policy.Verified and perm.Policy.edit(Claim)"/>
+      </Toolbar>
+    </PanelRef>
+    <Code><![CDATA[uses gw.cc.claim.NewClaimPolicyDescription
+
+function initNewPolicy() : NewClaimPolicyDescription {
+  if (Wizard.PolicyDescription.UnverifiedPolicyType != null) {
+    return Wizard.PolicyDescription
+  }
+  else {
+    var policyDescription = Wizard.PolicyDescription
+    var user: User = User.util.getCurrentUser()
+    policyDescription.UnverifiedPolicyType = user.PolicyType
+    return policyDescription
+  }
+}
+
+function setClaimFirstAndFinalStatus() {  
+  Claim.FirstAndFinal = ("AutoFirstAndFinal" == Wizard.ClaimMode.QuickClaimMode.Mode)
+}
+
+
+function getSelectedClaimMode(modeArray : gw.api.claim.NewClaimMode[]) : gw.api.claim.NewClaimMode {
+  var result : gw.api.claim.NewClaimMode = null
+  if ((modeArray != null) && (modeArray.length > 0)){
+    result = modeArray[0]
+    if (Wizard.ClaimMode != null){
+      foreach (indivMode in modeArray){
+        if (Wizard.ClaimMode == indivMode){
+          result = Wizard.ClaimMode  
+        }
+      }      
+    }
+  }  
+  return result
+}
+
+function initClaimModeArray() : gw.api.claim.NewClaimMode[] {
+  var modeArray = Wizard.getAvailableClaimModes(newPolicy.UnverifiedPolicyType)
+  var user: User = User.util.getCurrentUser()
+  if ((user.LossType != null) && (Wizard.LossType == null)) {
+    Wizard.setClaimMode(user.LossType, user.QuickClaim as String)
+    if (newPolicy.UnverifiedPolicyType == null){
+      var availablePolicyTypes = Wizard.getAvailablePolicyTypes()
+      if ((availablePolicyTypes != null) && (availablePolicyTypes.length > 0)) {
+        newPolicy.UnverifiedPolicyType = availablePolicyTypes[0]
+        modeArray = Wizard.getAvailableClaimModes(newPolicy.UnverifiedPolicyType)
+      }
+      setPolicy(CurrentLocation as pcf.api.Wizard)
+    }
+  } else {
+    Wizard.ClaimMode = getSelectedClaimMode(modeArray)
+  }
+  return modeArray
+}
+
+function allRequiredFieldsExist() : boolean {
+  return newPolicy.UnverifiedPolicyNumber != null && newPolicy.UnverifiedPolicyType != null && Wizard.getLossType() != null
+}
+
+function hasLossTypeChanged() : boolean {
+  return Claim.LossType != null and Wizard.LossType != Claim.LossType
+}
+
+function hasPolicyTypeChanged() : boolean {
+  return newPolicy.UnverifiedPolicyType != null and newPolicy.UnverifiedPolicyType != Claim.Policy.PolicyType
+}
+
+function setPolicy(location : pcf.api.Wizard) {
+  var policyChanged = false
+  
+  if (Claim.Policy != null and newPolicy.UnverifiedPolicyNumber != Claim.Policy.PolicyNumber) {
+    Claim.Policy.PolicyNumber = newPolicy.UnverifiedPolicyNumber
+  }
+  
+  if (hasPolicyTypeChanged()) {
+    claimModeArray = initClaimModeArray()
+    if (Claim.Policy != null) {
+        Claim.Policy.removeAllRoles()
+    }
+    //If we're changing claim types, we're nuking all the claim contacts.
+    policyChanged = true
+  }     
+  
+    
+  if (allRequiredFieldsExist()) {
+    if (hasLossTypeChanged() or policyChanged) {
+      //if the claim loss type has changed, then must reset the wizard by reentering the wizard.
+      var lossDate = Claim.LossDate
+      var policyType = newPolicy.UnverifiedPolicyType
+      var policyNumber = newPolicy.UnverifiedPolicyNumber
+      location.cancel()
+      pcf.FNOLWizard.go(policyType, policyNumber, Wizard.ClaimMode, lossDate, Wizard.PageMode)
+    }
+    
+    //when claimMode is changed, the losstype is not changed on claim yet, so must set the claim loss type before setting policy
+    if (Claim.LossType == null or Wizard.LossType != Claim.LossType) {
+      Claim.LossType = Wizard.LossType
+      policyChanged = true
+    }
+    
+    if (policyChanged) {
+      newPolicy.setPolicyVerified(false)
+      Wizard.PolicyDescription = newPolicy
+      Wizard.setPolicy()
+      if (Claim.Policy != null) {
+        Claim.Policy.removeAllRoles()
+      }
+      policyTabSet = gw.api.policy.PolicyTabUtil.getTabSet(Claim.Policy)
+    }
+  }
+}]]></Code>
+  </PanelSet>
+</PCF>

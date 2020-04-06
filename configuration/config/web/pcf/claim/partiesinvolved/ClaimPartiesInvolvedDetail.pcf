@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="perm.Claim.managepartiesinvolved(claim)"
+    canVisit="perm.Claim.view(claim) and perm.System.viewclaimparties"
+    id="ClaimPartiesInvolvedDetail"
+    parent="ClaimContacts(claim)"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.ClaimContacts.Title&quot;)">
+    <LocationEntryPoint
+      signature="ClaimPartiesInvolvedDetail(claimContact : ClaimContact, claim : Claim)"/>
+    <Variable
+      name="claimContact"
+      type="ClaimContact"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="perm.Claim.managepartiesinvolved(claim)"
+      name="canAccessLinkButtons"
+      type="boolean"/>
+    <Variable
+      initialValue="gw.api.contact.ContactSystemUtil.INSTANCE.generateLinkStatus(claimContact.Contact)"
+      name="linkStatus"
+      recalculateOnRefresh="true"
+      type="gw.api.contact.ContactSystemLinkStatus"/>
+    <Variable
+      initialValue="(linkStatus != null and linkStatus.Known and linkStatus.Linked) ? true : false"
+      name="showRelatedObjects"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <ScreenRef
+      def="ContactDetailScreen(claimContact, canAccessLinkButtons, true, linkStatus, claim, false, false, true)"/>
+  </Page>
+</PCF>

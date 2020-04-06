@@ -1,0 +1,24 @@
+<ac:PostRs xmlns:ac="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0 AcordMsgSvc_v-1-4-0.xsd">
+  <ac:Sender>
+    <ac:PartyId>urn:duns:236196817</ac:PartyId>
+    <ac:PartyRoleCd>ServiceProvider</ac:PartyRoleCd>
+    <ac:PartyName>Xchanging</ac:PartyName>
+  </ac:Sender>
+  <ac:Receiver>
+    <ac:PartyId>urn:lloyds:2623</ac:PartyId>
+    <ac:PartyRoleCd>Insurer</ac:PartyRoleCd>
+    <ac:PartyName>SYNDICATE 2623</ac:PartyName>
+  </ac:Receiver>
+  <ac:Application>
+    <ac:ApplicationCd>ACORD-Repository</ac:ApplicationCd>
+    <ac:SchemaVersion>http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0</ac:SchemaVersion>
+  </ac:Application>
+  <ac:TimeStamp>2017-09-20T11:00:00.000+01:00</ac:TimeStamp>
+  <ac:MsgItems>
+    <ac:MsgItem>
+      <ac:MsgId>dd1d846b-9701-41b6-b844-5ae9afe1dd0b</ac:MsgId>
+      <ac:MsgTypeCd>RepositoryDownload</ac:MsgTypeCd>
+      <ac:MsgStatusCd>received</ac:MsgStatusCd>
+    </ac:MsgItem>
+  </ac:MsgItems>
+</ac:PostRs>

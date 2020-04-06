@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="perm.System.covverifymanage"
+    canVisit="perm.System.covverifyview"
+    id="InvalidCoverageForFault"
+    title="DisplayKey.get(&quot;Web.Admin.InvalidCoverageForFault&quot;)">
+    <Variable
+      initialValue="gw.api.database.Query.make(entity.InvalidCoverageForFault).select()"
+      name="InvalidCoverageForFault"
+      type="gw.api.database.IQueryBeanResult&lt;InvalidCoverageForFault&gt;"/>
+    <Screen
+      id="InvalidCoverageForFaultScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.Admin.InvalidCoverageForFault&quot;)"/>
+      <Toolbar
+        visible="true">
+        <EditButtons/>
+        <IteratorButtons
+          addVisible="true"
+          iterator="InvalidCoverageForFaultLV.InvalidCoverageForFaultLV"
+          removeVisible="true"/>
+      </Toolbar>
+      <PanelRef
+        def="InvalidCoverageForFaultLV(InvalidCoverageForFault)"/>
+    </Screen>
+  </Page>
+</PCF>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AddressBookAdditionalInfoInputSet"
+    mode="Adjudicator">
+    <Require
+      name="contact"
+      type="Person"/>
+    <Require
+      name="externalContactSource"
+      type="gw.api.contact.ExternalContactSource"/>
+    <Require
+      name="allowEditContact"
+      type="boolean"/>
+    <TextInput
+      editable="true"
+      id="AdjudicatorLicense"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Adjudicator.AdjudicatorLicense&quot;)"
+      value="(contact as Adjudicator).AdjudicatorLicense"/>
+    <TypeKeyInput
+      editable="true"
+      id="AdjudicativeDomain"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Adjudicator.AdjudicativeDomain&quot;)"
+      value="(contact as Adjudicator).AdjudicativeDomain"
+      valueType="typekey.AdjudicativeDomain"/>
+    <PrivacyInput
+      editable="true"
+      encryptionExpression="contact.maskTaxId(VALUE)"
+      id="TaxID"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.TaxID&quot;)"
+      value="(contact as Adjudicator).TaxID"/>
+    <TypeKeyInput
+      editable="true"
+      id="Currency"
+      label="DisplayKey.get(&quot;Financials.Multicurrency.PreferredCurrency&quot;)"
+      value="contact.PreferredCurrency"
+      valueType="typekey.Currency"
+      visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()"/>
+    <AddressBookContactInput
+      allowEditContact="allowEditContact"
+      editable="true"
+      id="Organization"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Company.Organization&quot;)"
+      parentContact="contact"
+      value="(contact as Adjudicator).Employer"
+      valueType="entity.Company"/>
+  </InputSet>
+</PCF>

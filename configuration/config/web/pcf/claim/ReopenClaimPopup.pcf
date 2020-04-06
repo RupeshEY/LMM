@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="reopenClaimInfo.beforeCommit()"
+    canEdit="true"
+    id="ReopenClaimPopup"
+    parent="Claim(Claim)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.ReopenClaim.Title&quot;, Claim)">
+    <LocationEntryPoint
+      signature="ReopenClaimPopup(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="createInfo()"
+      name="reopenClaimInfo"
+      type="ReopenClaimInfo"/>
+    <Screen
+      id="ReopenClaimScreen">
+      <Toolbar>
+        <EditButtons
+          updateLabel="DisplayKey.get(&quot;Web.Claim.ReopenClaim&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="ReopenClaimInfoDV(reopenClaimInfo)"/>
+    </Screen>
+    <Code><![CDATA[
+function createInfo() : ReopenClaimInfo {
+        var info = new ReopenClaimInfo();
+        info.Claim = Claim;
+        return info;
+      }
+    ]]></Code>
+  </Popup>
+</PCF>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<entity
+  desc="ECF Message Claim Notify Request MarketFinancialAmount"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMarketFinancialAmount_Ext"
+  table="ecfmarketfinanamt_ext"
+  exportable="true"
+  final="true"
+  type="retireable">
+  <implementsEntity name="Extractable"/>
+  <monetaryamount
+    desc="The amount to be settled in cash by the company, in settlement currency"
+    name="CashSettlementAmount"
+    nullok="true"
+    precision="15"
+    scale="2"/>
+  <monetaryamount
+    desc="The amount to be settled by Letter of Credit by the company, in settlement currency"
+    name="LetterOfCreditAmount"
+    nullok="true"
+    precision="15"
+    scale="2"/>
+  <foreignkey
+    fkentity="ECFMessageClaimDataCarrier_Ext"
+    name="Carrier"
+    nullok="false"/>
+</entity>

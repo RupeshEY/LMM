@@ -1,0 +1,13 @@
+package rules.Assignment
+
+@gw.rules.RuleName("GlobalServiceRequestAssignmentRules")
+@gw.rules.RuleSetDescription("This is the Global Service Request Assignment rule set.  These rules are used to make the first assignment decision for service requests (for example, \"To which office should the work be sent?\") when no group has already been assigned.")
+class GlobalServiceRequestAssignmentRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.ServiceRequest) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.ServiceRequest) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "GlobalServiceRequestAssignmentRules", GlobalServiceRequestAssignmentRules )
+  }
+}

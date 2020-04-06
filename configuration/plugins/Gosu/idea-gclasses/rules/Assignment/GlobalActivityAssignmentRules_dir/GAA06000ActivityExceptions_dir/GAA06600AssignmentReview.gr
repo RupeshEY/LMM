@@ -1,0 +1,23 @@
+package rules.Assignment.GlobalActivityAssignmentRules_dir.GAA06000ActivityExceptions_dir
+
+@gw.rules.RuleName("GAA06600 - Assignment Review")
+internal class GAA06600AssignmentReview {
+  static function doCondition(activity : entity.Activity) : boolean {
+    
+/*start00rule*/
+return activity.Type == TC_ASSIGNMENTREVIEW
+and activity.Claim.AssignedGroup != null
+/*end00rule*/
+
+  }
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+
+/*start00rule*/
+if (activity.CurrentAssignment.assign(activity.Claim.AssignedGroup, activity.Claim.AssignedGroup.Supervisor)) {
+  actions.exit()
+}
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="TripExpenseCancellationDelegate">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.TripExpenseCancellationDelegate"
+    impl="com.guidewire.cc.domain.exposure.impl.TripExpenseCancellationDelegateImpl"/>
+  <fulldescription><![CDATA[Fields related to cancellation of a trip expense, shared by TripSegment and TripAccomodation
+    ]]></fulldescription>
+  <implementsEntity
+    name="TripExpenseDelegate"/>
+  <column
+    desc="Indicates if the expense is cancelled without the need for additional arrangements"
+    name="CancelOnly"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Reason for cancellation"
+    name="ReasonForCancellation"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="250"/>
+  </column>
+  <column
+    desc="Cancellation fees incurred"
+    name="CancellationFees"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+</delegate>

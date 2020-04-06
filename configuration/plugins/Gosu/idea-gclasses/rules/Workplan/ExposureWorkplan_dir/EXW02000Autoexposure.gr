@@ -1,0 +1,22 @@
+package rules.Workplan.ExposureWorkplan_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("EXW02000 - Auto exposure")
+internal class EXW02000Autoexposure {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ExposureType == TC_VEHICLEDAMAGE 
+and !exposure.Claim.FirstAndFinal
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* execute child rules */
+/*end00rule*/
+
+  }
+}

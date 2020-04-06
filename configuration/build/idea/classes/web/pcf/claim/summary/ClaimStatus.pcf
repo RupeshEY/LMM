@@ -1,0 +1,234 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCommit="ClaimStatusForward.go(claim)"
+    canEdit="perm.Claim.edit(claim)"
+    canVisit="perm.Claim.view(claim) and perm.System.viewclaimsummary and (claim.State != ClaimState.TC_DRAFT)"
+    id="ClaimStatus"
+    title="DisplayKey.get(&quot;Web.Claim.ClaimStatus.Title&quot;)">
+    <LocationEntryPoint
+      signature="ClaimStatus(claim : Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="claim.OrderedIndicators"
+      name="indicators"
+      type="entity.ClaimIndicator[]"/>
+    <Variable
+      initialValue="indicators.first()"
+      name="firstIndicator"
+      type="entity.ClaimIndicator"/>
+    <Variable
+      initialValue="claim.findMatchingClassification()"
+      name="classification"
+      recalculateOnRefresh="true"
+      type="entity.WorkloadClassification"/>
+    <Screen
+      editable="true">
+      <Toolbar>
+        <EditButtons/>
+        <ToolbarButton
+          action="TeamClaimRemoveFlagPopup.push(claim, false)"
+          id="RemoveFlagButton"
+          label="DisplayKey.get(&quot;Web.Team.Toolbar.RemoveFlag&quot;)"
+          visible="(User.util.CurrentUser as User).hasClaimBasedPermission(claim, TC_CLAIMREMFLAG) and claim.Flagged == FlaggedType.TC_ISFLAGGED"/>
+      </Toolbar>
+      <PanelRow>
+        <PanelColumn>
+          <PanelRef>
+            <TitleBar
+              title="DisplayKey.get(&quot;Web.Claim.ClaimStatus.GeneralStatusTitle&quot;)"/>
+            <DetailViewPanel>
+              <InputColumn>
+                <TypeKeyInput
+                  id="LossType"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.LossType&quot;)"
+                  value="claim.LossType"
+                  valueType="typekey.LossType"/>
+                <TypeKeyInput
+                  editable="true"
+                  id="LineOfBusiness"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.LineOfBusiness&quot;)"
+                  required="true"
+                  value="claim.LOBCode"
+                  valueType="typekey.LOBCode"/>
+                <TypeKeyInput
+                  id="ClaimSegment"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.ClaimSegment&quot;)"
+                  value="claim.Segment"
+                  valueType="typekey.ClaimSegment"/>
+                <TypeKeyInput
+                  id="ClaimStrategy"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.ClaimStrategy&quot;)"
+                  value="claim.Strategy"
+                  valueType="typekey.ClaimStrategy"/>
+                <BooleanRadioInput
+                  editable="true"
+                  helpText="DisplayKey.get(&quot;Web.Claim.ClaimStatus.IncidentOnly.HelpText&quot;)"
+                  id="IncidentOnly"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.IncidentOnly&quot;)"
+                  required="true"
+                  value="claim.IncidentReport"/>
+                <InputDivider/>
+                <TypeKeyRadioInput
+                  id="ClaimStatus"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.ClaimStatus&quot;)"
+                  optionIcon="VALUE == TC_OPEN ? &quot;icon_claimOpen.png&quot; : &quot;icon_claimClosed.png&quot;"
+                  value="claim.State"
+                  valueType="typekey.ClaimState"/>
+                <DateInput
+                  dateFormat="short"
+                  editable="true"
+                  id="DateReported"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.DateReported&quot;)"
+                  required="true"
+                  timeFormat="short"
+                  validationExpression="claim.ReportedDate == null || claim.ReportedDate &lt; gw.api.util.DateUtil.currentDate() ? null : DisplayKey.get(&quot;Java.Validation.Date.ForbidFuture&quot;)"
+                  value="claim.ReportedDate"/>
+                <DateInput
+                  id="CreateDate"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.CreateDate&quot;)"
+                  value="claim.CreateTime"/>
+                <TextInput
+                  id="DaysOpen"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.DaysOpen&quot;)"
+                  value="claim.DaysOpenClaimMetric.DisplayValue"/>
+                <DateInput
+                  id="CloseDate"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.CloseDate&quot;)"
+                  value="claim.CloseDate"
+                  visible="claim.State == TC_CLOSED "/>
+                <TypeKeyInput
+                  id="Resolution"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.Resolution&quot;)"
+                  value="claim.ClosedOutcome"
+                  valueType="typekey.ClaimClosedOutcomeType"
+                  visible="claim.State == TC_CLOSED "/>
+                <TypeKeyInput
+                  id="ReopenedReason"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.ReopenedReason&quot;)"
+                  value="claim.ReopenedReason"
+                  valueType="typekey.ClaimReopenedReason"
+                  visible="claim.ReOpenDate != null "/>
+                <DateInput
+                  dateFormat="short"
+                  id="ReOpenDate"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.ReOpenDate&quot;)"
+                  value="claim.ReOpenDate"
+                  visible="claim.ReOpenDate != null "/>
+                <InputDivider/>
+                <TextInput
+                  action="UserContactDetailPopup.push(claim.AssignedUser)"
+                  available="claim.AssignedUser.Contact != null"
+                  id="PrimaryUser"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.PrimaryAdjuster&quot;)"
+                  value="claim.AssigneeDisplayString"/>
+                <TextInput
+                  id="PrimaryGroup"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.PrimaryGroup&quot;)"
+                  value="claim.AssigneeGroupOnlyDisplayString"/>
+                <TypeKeyInput
+                  editable="true"
+                  id="SpecialClaimPermission"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.SpecialClaimPermission&quot;)"
+                  value="claim.PermissionRequired"
+                  valueType="typekey.ClaimSecurityType"/>
+                <InputDivider/>
+                <TypeKeyInput
+                  id="ClaimValidationLevel"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.ClaimValidationLevel&quot;)"
+                  value="claim.ValidationLevel"
+                  valueType="typekey.ValidationLevel"/>
+                <BooleanRadioInput
+                  editable="perm.System.integadmin"
+                  id="ISOEnabled"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.ISOEnabled&quot;)"
+                  value="claim.ISOEnabled"
+                  visible="perm.System.integadmin"/>
+                <TypeKeyInput
+                  editable="true"
+                  id="SalvageStatus"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.SalvageStatus&quot;)"
+                  value="claim.SalvageStatus"
+                  valueType="typekey.SalvageStatus"
+                  visible="claim.LossType != TC_WC"/>
+                <TypeKeyInput
+                  editable="true"
+                  id="OtherRecoverableStatus"
+                  label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.OtherRecoverableStatus&quot;)"
+                  value="claim.OtherRecovStatus"
+                  valueType="typekey.OtherRecoverableStatus"/>
+                <InputSetRef
+                  def="ReinsuranceInputSet( claim )"/>
+                <InputDivider/>
+                <InputSetRef
+                  def="StorageInputSet(claim)"/>
+                <InputDivider
+                  visible="gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value and perm.System.wwlview"/>
+                <InputSet
+                  id="Workload"
+                  visible="gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value and perm.System.wwlview">
+                  <Label
+                    label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.Workload&quot;)"/>
+                  <TextInput
+                    id="Classification"
+                    label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.Workload.Classification&quot;)"
+                    value="classification"
+                    valueType="entity.WorkloadClassification"
+                    visible="gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value and perm.System.wwlview and not claim.Closed"/>
+                  <TextInput
+                    id="ClassificationWorkload"
+                    label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.Workload.ClassificationWeight&quot;)"
+                    value="classification.Weight"
+                    valueType="java.lang.Integer"
+                    visible="gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value and perm.System.wwlview and not claim.Closed"/>
+                  <TextInput
+                    editable="perm.System.wwlmanage"
+                    id="SupplementalWorkloadWeight"
+                    label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.Workload.SupplementalWeight&quot;)"
+                    value="claim.SupplementalWorkloadWeight"
+                    valueType="java.lang.Integer"
+                    visible="gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value and perm.System.wwlview"/>
+                  <TextInput
+                    id="TotalWorkloadWeight"
+                    label="DisplayKey.get(&quot;Web.Claim.ClaimStatus.Workload.TotalWeight&quot;)"
+                    value="claim.WorkloadWeight"
+                    valueType="java.lang.Integer"
+                    visible="gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value and perm.System.wwlview"/>
+                </InputSet>
+              </InputColumn>
+            </DetailViewPanel>
+          </PanelRef>
+        </PanelColumn>
+        <PanelColumn>
+          <PanelRef>
+            <TitleBar
+              title="DisplayKey.get(&quot;Web.Claim.ClaimStatus.HighRiskIndicatorsTitle&quot;)"/>
+            <DetailViewPanel>
+              <InputColumn>
+                <InputIterator
+                  elementName="indicator"
+                  id="Indicators"
+                  value="indicators"
+                  valueType="entity.ClaimIndicator[]">
+                  <InputDivider
+                    visible="indicator != firstIndicator"/>
+                  <Label
+                    id="IndicatorType"
+                    label="indicator.Subtype.DisplayName"/>
+                  <InputSetRef
+                    def="ClaimIndicatorInputSet(indicator)"
+                    editable="true"
+                    mode="indicator.Subtype"/>
+                </InputIterator>
+              </InputColumn>
+            </DetailViewPanel>
+          </PanelRef>
+        </PanelColumn>
+      </PanelRow>
+    </Screen>
+  </Page>
+</PCF>

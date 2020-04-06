@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="PaymentTransferPopup"
+    parent="CheckTransfer(Claim, Payment.Check)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.PaymentTransfer.Title&quot;)">
+    <LocationEntryPoint
+      signature="PaymentTransferPopup(Payment : Payment, Claim : Claim, reserveLineInputSetHelper : gw.api.financials.ReserveLineInputSetHelper)"/>
+    <Variable
+      name="Payment"
+      type="Payment"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="reserveLineInputSetHelper"
+      type="gw.api.financials.ReserveLineInputSetHelper"/>
+    <Screen
+      id="PaymentTransferPopupScreen">
+      <Toolbar>
+        <EditButtons
+          cancelVisible="true"
+          updateVisible="true"/>
+      </Toolbar>
+      <PanelRef
+        def="PaymentTransferDV(Payment, Payment, reserveLineInputSetHelper)"/>
+    </Screen>
+  </Popup>
+</PCF>

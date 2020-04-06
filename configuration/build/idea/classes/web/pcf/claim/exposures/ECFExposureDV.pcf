@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="ECFExposureDV">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <InputColumn>
+      <TextInput
+        id="ECFExposureId"
+        label="DisplayKey.get(&quot;Accelerator.IPLM.Exposure.ECFExposureId&quot;)"
+        value="Exposure.ECFExposureId_Ext"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

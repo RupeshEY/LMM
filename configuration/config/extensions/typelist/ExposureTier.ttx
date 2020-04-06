@@ -1,0 +1,363 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="ExposureTier"
+  name="ExposureTier">
+  <typecode
+    code="medical"
+    desc="Medical Exposure"
+    name="Medical"
+    priority="100">
+    <category
+      code="WorkersComp"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="indemnity"
+    desc="Indemnity"
+    name="Indemnity"
+    priority="200">
+    <category
+      code="WorkersComp"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="el"
+    desc="Employer's Liability"
+    name="Employer's Liability"
+    priority="300">
+    <category
+      code="WorkersComp"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="1p_pd_low"
+    desc="1st Party Physical Damage - Low Complexity"
+    name="1st Party Physical Damage - Low Complexity"
+    priority="100">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="1p_pd_high"
+    desc="1st Party Physical Damage - High Complexity"
+    name="1st Party Physical Damage - High Complexity"
+    priority="200">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="1p_med_low"
+    desc="1st Party Medical - Low Complexity"
+    name="1st Party Medical - Low Complexity"
+    priority="200">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="1p_med_high"
+    desc="1st Party Medical - High Complexity"
+    name="1st Party Medical - High Complexity"
+    priority="300">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="lossofuse"
+    desc="Loss of Use"
+    name="Loss of Use"
+    priority="200">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialProperty"
+      typelist="PolicyType"/>
+    <category
+      code="Homeowners"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="rental"
+    desc="Rental"
+    name="Rental"
+    priority="100">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="towing"
+    desc="Towing"
+    name="Towing"
+    priority="100">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="1p_sd_low"
+    desc="1st Party Structural Damage - Low Complexity"
+    name="1st Party Structural Damage - Low Complexity"
+    priority="100">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialProperty"
+      typelist="PolicyType"/>
+    <category
+      code="Homeowners"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="1p_sd_high"
+    desc="1st Party Structural Damage - High Complexity"
+    name="1st Party Structural Damage - High Complexity"
+    priority="300">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialProperty"
+      typelist="PolicyType"/>
+    <category
+      code="Homeowners"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="1p_content_low"
+    desc="1st Party Contents - Low Complexity"
+    name="1st Party Contents - Low Complexity"
+    priority="100">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialProperty"
+      typelist="PolicyType"/>
+    <category
+      code="Homeowners"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="1p_content_high"
+    desc="1st Party Contents - High Complexity"
+    name="1st Party Contents - High Complexity"
+    priority="200">
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialProperty"
+      typelist="PolicyType"/>
+    <category
+      code="Homeowners"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="low"
+    desc="Low Complexity"
+    name="Low Complexity"
+    priority="100">
+    <category
+      code="prof_liability"
+      typelist="PolicyType"/>
+    <category
+      code="farmowners"
+      typelist="PolicyType"/>
+    <category
+      code="D_and_O"
+      typelist="PolicyType"/>
+    <category
+      code="travel_per"
+      typelist="PolicyType"/>
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="InlandMarine"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="PersonalUmbrella"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="medium"
+    desc="Medium Complexity"
+    name="Medium Complexity"
+    priority="200">
+    <category
+      code="prof_liability"
+      typelist="PolicyType"/>
+    <category
+      code="farmowners"
+      typelist="PolicyType"/>
+    <category
+      code="D_and_O"
+      typelist="PolicyType"/>
+    <category
+      code="travel_per"
+      typelist="PolicyType"/>
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="InlandMarine"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="PersonalUmbrella"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="high"
+    desc="High Complexity"
+    name="High Complexity"
+    priority="300">
+    <category
+      code="prof_liability"
+      typelist="PolicyType"/>
+    <category
+      code="farmowners"
+      typelist="PolicyType"/>
+    <category
+      code="D_and_O"
+      typelist="PolicyType"/>
+    <category
+      code="travel_per"
+      typelist="PolicyType"/>
+    <category
+      code="BusinessOwners"
+      typelist="PolicyType"/>
+    <category
+      code="GeneralLiability"
+      typelist="PolicyType"/>
+    <category
+      code="InlandMarine"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="PersonalUmbrella"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="3p_med_low"
+    desc="3rd Party Medical - Low Complexity"
+    name="3rd Party Medical - Low Complexity"
+    priority="200">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialProperty"
+      typelist="PolicyType"/>
+    <category
+      code="Homeowners"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="3p_med_high"
+    desc="3rd Party Medical - High Complexity"
+    name="3rd Party Medical - High Complexity"
+    priority="300">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialProperty"
+      typelist="PolicyType"/>
+    <category
+      code="Homeowners"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="3p_pd_low"
+    desc="3rd Party Physical Damage - Low Complexity"
+    name="3rd Party Physical Damage - Low Complexity"
+    priority="200">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialProperty"
+      typelist="PolicyType"/>
+    <category
+      code="Homeowners"
+      typelist="PolicyType"/>
+  </typecode>
+  <typecode
+    code="3p_pd_high"
+    desc="3rd Party Physical Damagel - High Complexity"
+    name="3rd Party Physical Damage - High Complexity"
+    priority="300">
+    <category
+      code="PersonalAuto"
+      typelist="PolicyType"/>
+    <category
+      code="BusinessAuto"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialPackage"
+      typelist="PolicyType"/>
+    <category
+      code="CommercialProperty"
+      typelist="PolicyType"/>
+    <category
+      code="Homeowners"
+      typelist="PolicyType"/>
+  </typecode>
+</typelistextension>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <EntryPoint
+    desc="Go to the details of a particular exposure on a claim, given the claim number and the exposure's order number within the claim or the exposure id."
+    id="ClaimExposure"
+    location="ClaimExposureEntryPointForward(claimNumber, exposureClaimOrder, exposureId)">
+    <EntryPointParameter
+      locationParam="claimNumber"
+      type="String"/>
+    <EntryPointParameter
+      locationParam="exposureClaimOrder"
+      optional="true"
+      type="String"/>
+    <EntryPointParameter
+      locationParam="exposureId"
+      optional="true"
+      type="String"/>
+  </EntryPoint>
+</PCF>

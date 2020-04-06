@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_dashboard.xml -->
+  <ListViewPanel
+    id="PeriodFinancialsByLossTypeLV">
+    <Require
+      name="DashboardStatsList"
+      type="DashboardStats[]"/>
+    <Row
+      renderAsSmartHeader="true">
+      <TextCell
+        align="center"
+        colspan="1"
+        id="Group1"
+        value="&quot; &quot;"/>
+      <TextCell
+        align="center"
+        colspan="1"
+        id="Group2"
+        value="&quot; &quot;"/>
+      <TextCell
+        align="center"
+        colspan="4"
+        id="Group3"
+        value="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.PaymentsOnClosed&quot;)"/>
+      <TextCell
+        align="center"
+        colspan="3"
+        id="Group4"
+        value="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.PaymentsInPeriod&quot;)"/>
+      <TextCell
+        align="center"
+        colspan="1"
+        id="Group5"
+        value="&quot; &quot;"/>
+    </Row>
+    <RowIterator
+      editable="false"
+      elementName="DashboardStats"
+      value="DashboardStatsList"
+      valueType="entity.DashboardStats[]">
+      <Row>
+        <TypeKeyCell
+          footerLabel="DisplayKey.get(&quot;LV.Dashboard.Common.Total&quot;)"
+          id="ByLossType"
+          label="DisplayKey.get(&quot;LV.Dashboard.ByLossType&quot;)"
+          sortOrder="1"
+          value="DashboardStats.LossType"
+          valueType="typekey.LossType"
+          width="150"/>
+        <TextCell
+          footerSumValue="DashboardStats.ClosedClaims"
+          id="PeriodFinancials_ClosedClaims"
+          label="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.ClosedClaims&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.ClosedClaims.ToolTip&quot;)"
+          value="DashboardStats.ClosedClaims"
+          valueType="java.lang.Integer"
+          width="100"/>
+        <TextCell
+          footerSumValue="DashboardStats.ExpensesOnClosed.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          formatType="currency"
+          id="PeriodFinancials_ExpensesOnClosed"
+          label="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.ExpensesOnClosed&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.ExpensesOnClosed.ToolTip.Claim&quot;)"
+          value="DashboardStats.ExpensesOnClosed.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          valueType="java.math.BigDecimal"/>
+        <TextCell
+          footerSumValue="DashboardStats.ClaimCostsOnClosed.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          formatType="currency"
+          id="PeriodFinancials_ClaimCostsOnClosed"
+          label="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.ClaimCostsOnClosed&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.ClaimCostsOnClosed.ToolTip.Claim&quot;)"
+          value="DashboardStats.ClaimCostsOnClosed.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          valueType="java.math.BigDecimal"/>
+        <TextCell
+          footerSumValue="DashboardStats.PaidOnClosed.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          formatType="currency"
+          id="PeriodFinancials_PaidOnClosed"
+          label="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.PaidOnClosed&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.PaidOnClosed.ToolTip.Claim&quot;)"
+          value="DashboardStats.PaidOnClosed.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          valueType="java.math.BigDecimal"/>
+        <TextCell
+          formatType="currency"
+          id="PeriodFinancials_AvgPaidOnClosed"
+          label="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.AvgPaidOnClosed&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.AvgPaidOnClosed.ToolTip.Claim&quot;)"
+          value="DashboardStats.AvgPaidOnClosed.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          valueType="java.math.BigDecimal"/>
+        <TextCell
+          footerSumValue="DashboardStats.ExpensesInPeriod.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          formatType="currency"
+          id="PeriodFinancials_ExpensesInPeriod"
+          label="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.ExpensesInPeriod&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.ExpensesInPeriod.ToolTip.Claim&quot;)"
+          value="DashboardStats.ExpensesInPeriod.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          valueType="java.math.BigDecimal"/>
+        <TextCell
+          footerSumValue="DashboardStats.ClaimCostsInPeriod.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          formatType="currency"
+          id="PeriodFinancials_ClaimCostsInPeriod"
+          label="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.ClaimCostsInPeriod&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.ClaimCostsInPeriod.ToolTip.Claim&quot;)"
+          value="DashboardStats.ClaimCostsInPeriod.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          valueType="java.math.BigDecimal"/>
+        <TextCell
+          footerSumValue="DashboardStats.PaidInPeriod.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          formatType="currency"
+          id="PeriodFinancials_PaidInPeriod"
+          label="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.PaidInPeriod&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.PaidInPeriod.ToolTip.Claim&quot;)"
+          value="DashboardStats.PaidInPeriod.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          valueType="java.math.BigDecimal"/>
+        <TextCell
+          footerSumValue="DashboardStats.RecoveredInPeriod.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          formatType="currency"
+          id="PeriodFinancials_RecoveredInPeriod"
+          label="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.RecoveredInPeriod&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.PeriodFinancials.RecoveredInPeriod.ToolTip.Claim&quot;)"
+          value="DashboardStats.RecoveredInPeriod.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          valueType="java.math.BigDecimal"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

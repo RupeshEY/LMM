@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="SItriggersLV">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <RowIterator
+      editable="false"
+      elementName="SITriggersEntity"
+      pageSize="10"
+      value="Claim.SITriggers"
+      valueType="entity.SITrigger[]">
+      <Row>
+        <TextCell
+          id="SItriggers_PointValue"
+          label="DisplayKey.get(&quot;LV.SItriggers.PointValue&quot;)"
+          value="SITriggersEntity.PointValue"
+          valueType="java.lang.Integer"
+          visible="perm.System.viewSensSIUdetails"/>
+        <TextCell
+          id="SItriggers_Description"
+          label="DisplayKey.get(&quot;LV.SItriggers.Description&quot;)"
+          value="SITriggersEntity.TriggerDescription"/>
+        <TextCell
+          id="SItriggers_AdditionalInfo"
+          label="DisplayKey.get(&quot;LV.SItriggers.AdditionalInfo&quot;)"
+          value="SITriggersEntity.AdditionalInformation"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,23 @@
+package rules.Preupdate.ExposurePreupdate_dir
+
+@gw.rules.RuleName("EPU05000 - Update Deductible On Updated Coverage Deductible")
+internal class EPU05000UpdateDeductibleOnUpdatedCoverageDeductible {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.Coverage != null and
+exposure.Coverage.shouldUpdateDeductible()
+
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.Coverage.updateDeductibleEntry(exposure.Claim)
+
+/*end00rule*/
+
+  }
+}

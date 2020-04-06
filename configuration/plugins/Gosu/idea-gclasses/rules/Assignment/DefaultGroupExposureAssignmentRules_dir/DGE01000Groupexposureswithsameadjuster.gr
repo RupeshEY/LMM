@@ -1,0 +1,37 @@
+package rules.Assignment.DefaultGroupExposureAssignmentRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+
+@gw.rules.RuleName("DGE01000 - Group exposures with same adjuster")
+internal class DGE01000Groupexposureswithsameadjuster {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return true
+
+/* Exposures only get here if they are not going to the claim owner.
+ * Check to see if anyone in this group already has an exposure on this claim - 
+ * if so, that person should get this new exposure, too.
+ */
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+for (exp in exposure.Claim.Exposures) {
+  if (exp != exposure
+      and exp.AssignedGroup == exposure.CurrentAssignment.AssignedGroup
+      and exp.AssignedUser != null) {
+    if (exposure.CurrentAssignment.assign(exp.AssignedGroup, exp.AssignedUser)) {
+      CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.DefaultGroup.Exposure", actions.ShortRuleName))
+      CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.AssignedUserIs", exposure.AssignedUser))
+      actions.exit()
+    }
+  }
+}
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_dashboard.xml -->
+  <ListViewPanel
+    id="ClaimActivityByCoverageTypeLV">
+    <Require
+      name="DashboardStatsList"
+      type="DashboardStats[]"/>
+    <RowIterator
+      editable="false"
+      elementName="DashboardStats"
+      value="DashboardStatsList"
+      valueType="entity.DashboardStats[]">
+      <Row>
+        <TypeKeyCell
+          footerLabel="DisplayKey.get(&quot;LV.Dashboard.Common.Total&quot;)"
+          id="ByCoverageType"
+          label="DisplayKey.get(&quot;LV.Dashboard.ByCoverageType&quot;)"
+          value="DashboardStats.CoverageType"
+          valueType="typekey.CoverageType"
+          width="150"/>
+        <TextCell
+          footerSumValue="DashboardStats.NewExposures"
+          id="ClaimActivity_NewExposures"
+          label="DisplayKey.get(&quot;LV.Dashboard.ClaimActivity.NewExposures&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.ClaimActivity.NewExposures.ToolTip&quot;)"
+          value="DashboardStats.NewExposures"
+          valueType="java.lang.Integer"/>
+        <TextCell
+          footerSumValue="DashboardStats.ClosedExposures"
+          id="ClaimActivity_ClosedExposures"
+          label="DisplayKey.get(&quot;LV.Dashboard.ClaimActivity.ClosedExposures&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.ClaimActivity.ClosedExposures.ToolTip&quot;)"
+          value="DashboardStats.ClosedExposures"
+          valueType="java.lang.Integer"/>
+        <TextCell
+          id="ClaimActivity_AvgCloseTime"
+          label="DisplayKey.get(&quot;LV.Dashboard.ClaimActivity.AvgCloseTime&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.ClaimActivity.AvgCloseTime.ToolTip.Exposure&quot;)"
+          value="DashboardStats.AvgCloseTime"
+          valueType="java.lang.Double"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

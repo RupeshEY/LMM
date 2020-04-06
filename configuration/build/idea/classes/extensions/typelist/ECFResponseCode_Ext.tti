@@ -1,0 +1,188 @@
+<?xml version="1.0"?><typelist xmlns="http://guidewire.com/typelists" desc="ECFResponseCode_Ext typelist" final="false" name="ECFResponseCode_Ext">
+    <typecode code="SEEN-ACTION" desc="Seen / Action" name="Seen / Action"/>
+    <typecode code="QUERY-RETURN" desc="Query / Return" name="Query / Return"/>
+    <typecode code="DELEGATE" desc="Delegate" name="Delegate"/>
+    <typecode code="SERVICE-ACTION" desc="Service / Action" name="Service / Action"/>
+    <typecode code="VCS-ENTRY" desc="Lead is moving a claim into VCS" name="Lead is moving a claim into VCS"/>
+    <typecode code="VCS-EXIT-XCS" desc="XCS is moving a claim out of VCS" name="XCS is moving a claim out of VCS"/>
+    <typecode code="VCS-EXIT-CFORD" desc="Crawfords is moving a claim out of VCS" name="Crawfords is moving a claim out of VCS"/>
+    <typecode code="AGREE-PAY" desc="Agree / Pay" name="Agree / Pay"/>
+    <typecode code="CIR" desc="Circulate" name="Circulate"/>
+    <typecode code="REJ" desc="Reject" name="Reject"/>
+    <typecode code="CAN" desc="Cancel" name="Cancel"/>
+    <typecode code="CAA" desc="Claims Advice Accepted" name="CAA: Claims Advice Accepted"/>
+    <typecode code="INF" desc="Broker requested to supply further information to participants. Companies making this response will be required to complete the “request” narrative."
+              name="INF: Broker requested to supply further information to participants. Companies making this response will be required to complete the “request” narrative."/>
+    <typecode code="FIL" desc="Broker requested to supply File or relevant correspondence to participant"
+              name="FIL: Broker requested to supply File or relevant correspondence to participant"/>
+    <typecode code="DIS" desc="DIS Insurer is in dispute over this claim" name="DIS: DIS Insurer is in dispute over this claim"/>
+    <typecode code="ACC" desc="Company has no technical objections to the claim, but has an outstanding accounting issue with the reinsured. No signing will be issued for the company concerned until the response is changed to YES or CES (which are the only change responses allowed)"
+              name="ACC: Company has no technical objections to the claim, but has an outstanding accounting issue with the reinsured. No signing will be issued for the company concerned until the response is changed to YES or CES (which are the only change responses allowed)"/>
+    <typecode code="NO" desc="Insurer is in dispute" name="NO: Insurer is in dispute"/>
+    <typecode code="YES" desc="Claim settlement agreed" name="YES: Claim settlement agreed."/>
+    <typecode code="CES" desc="Yes response above will be automatically changed to CES if the responding company sets the immediate partial collection indicator to Y"
+              name="CES: Yes response above will be automatically changed to CES if the responding company sets the immediate partial collection indicator to Y"/>
+    <typecode code="COM" desc="Fully authorised and signed. Generated when all claim signings are generated for all members on a LIRMA claim transaction. Created after all SGN's"
+              name="COM: Fully authorised and signed. Generated when all claim signings are generated for all members on a LIRMA claim transaction. Created after all SGN's"/>
+    <typecode code="SGN" desc="Fully authorised and signed. Generated when Claim signing is generated and transaction is moved to status 40"
+              name="SGN: Fully authorised and signed. Generated when Claim signing is generated and transaction is moved to status 40"/>
+    <typecode code="AUT" desc="Authorise" name="Authorise"/>
+    <typecode code="PEN" desc="Pend" name="Pend"/>
+    <typefilter
+      desc="Transaction Type Advice Response codes for Lloyds company"
+      name="LloydsSAPAdvice">
+        <include
+          code="SEEN-ACTION"/>
+        <include
+          code="QUERY-RETURN"/>
+    </typefilter>
+    <typefilter
+      desc="Transaction Type Settlement Response codes for Lloyds company"
+      name="LloydsSAPSettlement">
+        <include
+          code="QUERY-RETURN"/>
+        <include
+          code="AGREE-PAY"/>
+    </typefilter>
+    <typefilter
+      desc="Transaction Type Advice Response codes for Lloyds lead"
+      name="LloydsLeadAdvice">
+        <include
+          code="SEEN-ACTION"/>
+        <include
+          code="QUERY-RETURN"/>
+        <include
+          code="DELEGATE"/>
+        <include
+          code="SERVICE-ACTION"/>
+        <include
+          code="VCS-ENTRY"/>
+        <include
+          code="VCS-EXIT-XCS"/>
+        <include
+          code="VCS-EXIT-CFORD"/>
+    </typefilter>
+    <typefilter
+      desc="Transaction Type Settlement Response codes for Lloyds lead"
+      name="LloydsLeadSettlement">
+        <include
+          code="QUERY-RETURN"/>
+        <include
+          code="DELEGATE"/>
+        <include
+          code="AGREE-PAY"/>
+        <include
+          code="SERVICE-ACTION"/>
+        <include
+          code="VCS-ENTRY"/>
+        <include
+          code="VCS-EXIT-XCS"/>
+        <include
+          code="VCS-EXIT-CFORD"/>
+    </typefilter>
+    <typefilter
+      desc="Transaction Type Advice Response code for Lirma company"
+      name="LirmaSAPAdvice">
+        <include
+          code="CAA"/>
+        <include
+          code="INF"/>
+        <include
+          code="FIL"/>
+        <include
+          code="DIS"/>
+        <include
+          code="COM"/>
+        <include
+          code="SGN"/>
+    </typefilter>
+    <typefilter
+      desc="Transaction Type Settlement Response code for Lirma company"
+      name="LirmaSAPSettlement">
+        <include
+          code="INF"/>
+        <include
+          code="FIL"/>
+        <include
+          code="ACC"/>
+        <include
+          code="NO"/>
+        <include
+          code="YES"/>
+        <include
+          code="CES"/>
+        <include
+          code="COM"/>
+        <include
+          code="SGN"/>
+    </typefilter>
+    <typefilter
+      desc="Response code for Lirma lead"
+      name="LirmaLead">
+        <include
+          code="CIR"/>
+        <include
+          code="REJ"/>
+    </typefilter>
+    <typefilter
+      desc="Response code for Lirma lead after the message was circulated"
+      name="LirmaLeadCirculated">
+        <include
+          code="CIR"/>
+        <include
+          code="CAN"/>
+    </typefilter>
+    <typefilter
+      desc="Response code for ILU"
+      name="ILU">
+        <include
+          code="AUT"/>
+        <include
+          code="PEN"/>
+    </typefilter>
+    <typefilter
+      desc="Codes that indicate that this ClaimResponse is not expecting any further ClaimNotifyRq messages"
+      name="Final">
+        <include
+          code="SEEN-ACTION"/>
+        <include
+          code="SERVICE-ACTION"/>
+        <include
+          code="VCS-ENTRY"/>
+        <include
+          code="AGREE-PAY"/>
+        <include
+          code="CIR"/>
+        <include
+          code="REJ"/>
+        <include
+          code="CAN"/>
+        <include
+          code="CAA"/>
+        <include
+          code="YES"/>
+        <include
+          code="CES"/>
+        <include
+          code="COM"/>
+        <include
+          code="SGN"/>
+        <include
+          code="AUT"/>
+    </typefilter>
+
+    <typefilter
+      desc="Codes that indicate that this ClaimResponse is a carrier's agreement to a transaction"
+      name="Agreement">
+        <include
+          code="SEEN-ACTION"/>
+        <include
+          code="AGREE-PAY"/>
+        <include
+          code="CAA"/>
+        <include
+          code="YES"/>
+        <include
+          code="AUT"/>
+    </typefilter>
+</typelist>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    id="ClaimNegotiationPrintDetail"
+    parent="ClaimPrintout(Negotiation.Claim)"
+    title="DisplayKey.get(&quot;Web.ClaimPlanOfAction.Negotiations&quot;)">
+    <LocationEntryPoint
+      signature="ClaimNegotiationPrintDetail(Negotiation : Negotiation)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      name="Negotiation"
+      type="Negotiation"/>
+    <Screen
+      id="NegotiationPrintDetailScreen">
+      <PanelRef
+        def="ClaimNegotiationDetailsDV(Negotiation)"/>
+    </Screen>
+  </Page>
+</PCF>

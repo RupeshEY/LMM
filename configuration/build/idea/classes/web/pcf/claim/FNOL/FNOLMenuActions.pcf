@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <MenuActions
+    id="FNOLMenuActions"
+    subMenuOnDemand="true">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <MenuItem
+      id="NewClaimMenuActions_NewExposure"
+      label="DisplayKey.get(&quot;Web.ClaimMenuActions.NewExposure&quot;)"
+      shortcut="X"
+      visible="Wizard.showNewExposureMenu()">
+      <MenuItemSetRef
+        def="NewClaimNewExposureMenuItemSet(Claim, Wizard)"
+        mode="getNewExposureMenuMode()"/>
+    </MenuItem>
+    <MenuItem
+      action="FNOLWizard_NewNoteWorksheet.goInWorkspace(Wizard)"
+      id="NewClaimMenuActions_NewNote"
+      label="DisplayKey.get(&quot;JSP.NewClaimPageActions.New.Note&quot;)"
+      shortcut="O"/>
+    <MenuItem
+      id="NewClaimMenuActions_NewDocument"
+      label="DisplayKey.get(&quot;Web.ClaimMenuActions.NewDocument&quot;)"
+      shortcut="W"
+      visible="perm.Claim.createdocument(Claim) and Wizard.ClaimSaved">
+      <MenuItemSetRef
+        def="NewClaimNewDocumentMenuItemSet(Claim)"/>
+    </MenuItem>
+    <Code><![CDATA[
+      function getNewExposureMenuMode() : String {
+        // Return "none" if there's no claim or no loss type yet
+        if (Claim == null || Claim.LossType == null || !Claim.isExposureListChangeable()) {
+          return "none";
+        }
+
+        var byCoverageType = gw.api.exposure.NewExposureMenuUtil.showChooseByCoverageTypeMenu(Claim);
+        var byCoverage = gw.api.exposure.NewExposureMenuUtil.showChooseByCoverageMenu(Claim);
+
+        if (byCoverageType and byCoverage) {
+          return "both";
+        } else if (byCoverageType) {
+          return "coveragetype";
+        } else if (byCoverage) {
+          return "coverage";
+        } else {
+          throw new java.lang.IllegalStateException("Claim loss type " + Claim.LossType + " is not configured to show the new exposure menu either by coverage type or by coverage");
+        }
+      }
+    ]]></Code>
+  </MenuActions>
+</PCF>

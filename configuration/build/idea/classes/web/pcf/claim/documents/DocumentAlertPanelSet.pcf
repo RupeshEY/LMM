@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="DocumentAlertPanelSet">
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <PanelSet>
+      <Verbatim
+        id="IDCSDisabledAlert"
+        label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.ContentPlugin.Disabled&quot;)"
+        labelStyleClass="alertBarCustom"
+        visible="not documentsActionsHelper.ContentSourceEnabled"/>
+    </PanelSet>
+    <PanelSet>
+      <Verbatim
+        id="IDCSUnavailableAlert"
+        label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.ContentPlugin.Unavailable&quot;)"
+        labelStyleClass="alertBarCustom"
+        visible="documentsActionsHelper.ShowContentServerDownWarning"/>
+    </PanelSet>
+    <PanelSet>
+      <Verbatim
+        id="IDMSUnavailableAlert"
+        label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.MetadataPlugin.Unavailable&quot;)"
+        labelStyleClass="alertBarCustom"
+        visible="documentsActionsHelper.ShowMetadataServerDownWarning"/>
+    </PanelSet>
+  </PanelSet>
+</PCF>

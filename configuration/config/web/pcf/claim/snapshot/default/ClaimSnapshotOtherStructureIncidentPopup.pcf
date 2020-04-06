@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    canEdit="false"
+    canVisit="perm.Claim.view(Claim) and perm.System.viewsnapshot"
+    id="ClaimSnapshotOtherStructureIncidentPopup"
+    title="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotOtherStructureIncident.Title&quot;)">
+    <LocationEntryPoint
+      signature="ClaimSnapshotOtherStructureIncidentPopup(Claim : Claim, Incident : dynamic.Dynamic)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Incident"
+      type="dynamic.Dynamic"/>
+    <Variable
+      initialValue="gw.api.snapshot.ClaimSnapshotUtil.getSnapshot(Claim)"
+      name="Snapshot"
+      type="dynamic.Dynamic"/>
+    <Variable
+      initialValue="gw.api.snapshot.ClaimSnapshotUtil.getPageVersion(Snapshot)"
+      name="Version"
+      type="String"/>
+    <Screen>
+      <PanelRef
+        def="ClaimSnapshotOtherStructureIncidentCV(Claim, Incident, Snapshot)"
+        mode="Version"/>
+    </Screen>
+  </Popup>
+</PCF>

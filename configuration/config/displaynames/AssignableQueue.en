@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Entity
+  name="AssignableQueue">
+  <Columns>
+    <Column
+      beanPath="AssignableQueue.Name"
+      name="name"
+      sortOrder="1"/>
+    <Column
+      beanPath="AssignableQueue.Group.Name"
+      name="groupName"
+      sortOrder="none"/>
+  </Columns>
+  <DisplayName><![CDATA[gw.api.locale.DisplayKey.get("DisplayName.AssignableQueue", name, groupName)
+]]></DisplayName>
+</Entity>

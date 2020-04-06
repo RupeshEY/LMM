@@ -1,0 +1,312 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="QuickCheckBasicsDV">
+    <Require
+      name="Payment"
+      type="Payment"/>
+    <Require
+      name="Wizard"
+      type="gw.api.financials.QuickCreateCheckWizardInfo"/>
+    <Require
+      name="reserveLineInputSetHelper"
+      type="gw.api.financials.ReserveLineInputSetHelper"/>
+    <Variable
+      initialValue="Payment.SharedDeductible"
+      name="deductible"
+      recalculateOnRefresh="true"
+      type="Deductible"/>
+    <Variable
+      initialValue="false"
+      name="showAddressFields"
+      type="boolean"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.PrimaryPayee&quot;)"
+        visible="Payment.Check.Payees.length &lt;= 1"/>
+      <ClaimContactInput
+        claim="Payment.Check.Claim"
+        editable="true"
+        id="PrimaryPayee_Name"
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.PrimaryPayee.Name&quot;)"
+        onPick="Payment.Check.handleOnPickForPayee(Payment.Check.FirstPayee); showAddressFields = !Payment.Check.addressRequiredFieldsValid();"
+        required="true"
+        value="Payment.Check.FirstPayee.Payee"
+        valueRange="Payment.Check.Claim.PayeeCandidates"
+        visible="Payment.Check.Payees.length &lt;= 1">
+        <PostOnChange
+          onChange="Payment.Check.handleOnPickForPayee(Payment.Check.FirstPayee); showAddressFields = !Payment.Check.addressRequiredFieldsValid();"/>
+      </ClaimContactInput>
+      <RangeInput
+        editable="true"
+        id="PrimaryPayee_Type"
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.PrimaryPayee.Type&quot;)"
+        required="true"
+        value="Payment.Check.FirstPayee.PayeeType"
+        valueRange="Payment.Check.getAllowedPayeeTypes(Payment.Check.FirstPayee.Payee)"
+        valueType="typekey.ContactRole"
+        visible="Payment.Check.Payees.length &lt;= 1"/>
+      <ButtonInput
+        action="Payment.Check.addNewPayee()"
+        id="AddJointPayees"
+        value="DisplayKey.get(&quot;NVV.Financials.Check.AddJointPayees&quot;)"
+        visible="Payment.Check.Payees.length &lt;= 1"/>
+      <ListViewInput
+        boldLabel="true"
+        editable="true"
+        label="DisplayKey.get(&quot;NVV.Financials.Check.Payees&quot;)"
+        labelAbove="true"
+        visible="Payment.Check.Payees.length &gt; 1">
+        <Toolbar>
+          <IteratorButtons
+            iterator="NewCheckPayeeDVPayeesLV"/>
+        </Toolbar>
+        <ListViewPanel
+          id="NewCheckPayeeDVPayeesLV">
+          <RowIterator
+            editable="true"
+            elementName="CheckPayee"
+            toCreateAndAdd="Payment.Check.addNewPayee()"
+            toRemove="Payment.Check.removeFromPayees(CheckPayee); Payment.Check.handleOnPickForPayee(null);"
+            value="Payment.Check.Payees"
+            valueType="entity.CheckPayee[]">
+            <Row>
+              <ClaimContactCell
+                claim="Payment.Check.Claim"
+                editable="true"
+                id="PayeeName"
+                label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.PrimaryPayee.Name&quot;)"
+                onPick="Payment.Check.handleOnPickForPayee(CheckPayee)"
+                required="true"
+                value="CheckPayee.Payee"
+                valueRange="Payment.Check.Claim.PayeeCandidates">
+                <PostOnChange
+                  onChange="Payment.Check.handleOnPickForPayee(CheckPayee)"/>
+              </ClaimContactCell>
+              <TypeKeyCell
+                editable="true"
+                id="PayeeType"
+                label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.PrimaryPayee.Type&quot;)"
+                required="true"
+                validationExpression="CheckPayee.PayeeType == TC_CLAIMANT &amp;&amp; !CheckPayee.ClaimContact.isClaimant() ? DisplayKey.get(&quot;Java.NewPayment.Error.PayeeIsNotClaimant&quot;) : null"
+                value="CheckPayee.PayeeType"
+                valueType="typekey.ContactRole"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </ListViewInput>
+      <InputDivider/>
+      <RangeRadioInput
+        boldLabel="true"
+        editable="true"
+        filter="VALUE !=  PaymentMethod.TC_MANUAL"
+        id="PaymentMethod"
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentInstructions.Check.PaymentMethod&quot;)"
+        value="Payment.Check.PaymentMethod"
+        valueRange="PaymentMethod.getTypeKeys( false )"
+        valueType="typekey.PaymentMethod">
+        <PostOnChange
+          onChange="Payment.Check.handleOnPickForPayee(null)"/>
+      </RangeRadioInput>
+      <TextAreaInput
+        boldLabel="true"
+        editable="true"
+        id="PayTo"
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.PayTo&quot;)"
+        numRows="1"
+        required="Payment.Check.PaymentMethod == PaymentMethod.TC_CHECK"
+        value="Payment.Check.PayTo"
+        visible="Payment.Check.PaymentMethod == PaymentMethod.TC_CHECK">
+      </TextAreaInput>
+      <InputSet
+        id="EFTDataInputSet"
+        visible="Payment.Check.PaymentMethod == PaymentMethod.TC_EFT">
+        <RangeInput
+          editable="true"
+          id="EFTRecords"
+          label="DisplayKey.get(&quot;Web.Financials.Check.BankData.SelectEFT&quot;)"
+          value="Payment.Check.EFTData"
+          valueRange="Payment.Check.FirstPayee.Payee.EFTRecords"
+          valueType="entity.EFTData"/>
+        <TextAreaInput
+          editable="true"
+          id="PayTo"
+          label="DisplayKey.get(&quot;Web.Financials.Check.BankData.BankAcctHolderName&quot;)"
+          numRows="1"
+          value="Payment.Check.PayTo">
+          <Reflect
+            triggerIds="EFTRecords"
+            value="VALUE.AccountName"/>
+        </TextAreaInput>
+        <TextInput
+          editable="true"
+          id="BankName"
+          label="DisplayKey.get(&quot;Web.Financials.Check.BankData.BankName&quot;)"
+          value="Payment.Check.BankName">
+          <Reflect
+            triggerIds="EFTRecords"
+            value="VALUE.BankName"/>
+        </TextInput>
+        <RangeRadioInput
+          editable="true"
+          id="BankAccountType"
+          label="DisplayKey.get(&quot;Web.Financials.Check.BankData.BankAccountType&quot;)"
+          required="true"
+          value="Payment.Check.BankAccountType"
+          valueRange="BankAccountType.getTypeKeys( false )"
+          valueType="typekey.BankAccountType">
+          <Reflect
+            triggerIds="EFTRecords"
+            value="VALUE.BankAccountType"/>
+        </RangeRadioInput>
+        <PrivacyInput
+          editable="true"
+          encryptionExpression="Payment.Check.maskBankAccountNumber(VALUE)"
+          id="BankAccountNumber"
+          label="DisplayKey.get(&quot;Web.Financials.Check.BankData.BankAccountNumber&quot;)"
+          required="true"
+          value="Payment.Check.BankAccountNumber">
+          <Reflect
+            triggerIds="EFTRecords"
+            value="VALUE.BankAccountNumber"/>
+        </PrivacyInput>
+        <TextInput
+          editable="true"
+          id="BankRoutingNumber"
+          label="DisplayKey.get(&quot;Web.Financials.Check.BankData.BankRoutingNumber&quot;)"
+          required="true"
+          value="Payment.Check.BankRoutingNumber">
+          <Reflect
+            triggerIds="EFTRecords"
+            value="VALUE.BankRoutingNumber"/>
+        </TextInput>
+      </InputSet>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.MailTo&quot;)"
+        visible="Payment.Check.PaymentMethod == PaymentMethod.TC_CHECK"/>
+      <TypeKeyInput
+        editable="true"
+        id="Check_DeliveryMethod"
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.DeliveryMethod&quot;)"
+        value="Payment.Check.DeliveryMethod"
+        valueType="typekey.DeliveryMethod"
+        visible="Payment.Check.PaymentMethod == PaymentMethod.TC_CHECK"/>
+      <TextInput
+        editable="true"
+        id="Check_MailToContact"
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.MailToContact&quot;)"
+        required="true"
+        value="Payment.Check.MailTo"
+        visible="Payment.Check.PaymentMethod == PaymentMethod.TC_CHECK"/>
+      <TextInput
+        id="Check_MailingAddress"
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.MailingAddress&quot;)"
+        value="Payment.Check.CheckAddressOwner.Address"
+        valueType="entity.Address"
+        visible="Payment.Check.PaymentMethod == PaymentMethod.TC_CHECK"/>
+      <CheckBoxInput
+        editable="true"
+        id="ToggleAddressEdit"
+        labelAbove="true"
+        value="showAddressFields"
+        valueLabel="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.EditMailingAddress&quot;)"
+        visible="Payment.Check.PaymentMethod == PaymentMethod.TC_CHECK and Payment.Check.FirstPayee.Payee != null">
+        <PostOnChange
+          target="MailingAddressInputSet"/>
+      </CheckBoxInput>
+      <InputSetRef
+        def="CCAddressInputSet(Payment.Check.CheckAddressOwner)"
+        id="MailingAddressInputSet"
+        visible="Payment.Check.PaymentMethod == PaymentMethod.TC_CHECK and showAddressFields"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.TaxReporting&quot;)"/>
+      <TypeKeyInput
+        editable="true"
+        id="Check_Reportability"
+        label="DisplayKey.get(&quot;NVV.Financials.NewCheckPayee.Check.Reportability&quot;)"
+        value="Payment.Check.Reportability"
+        valueType="typekey.ReportabilityType">
+        <Reflect
+          triggerIds="PrimaryPayee_Type"
+          value="javascript:VALUE == 'vendor' ? 'reportable' : 'notreportable'"/>
+      </TypeKeyInput>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Financials.QuickCheck.PaymentDetails&quot;)"/>
+      <InputSetRef
+        def="ReserveLineInputSet(Payment, reserveLineInputSetHelper)"/>
+      <TypeKeyInput
+        editable="Payment.New"
+        filter="Wizard.isAllowedPaymentType( Payment, VALUE )"
+        id="Payment_PaymentType"
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentDetail.Payment.PaymentType&quot;)"
+        requestValidationExpression="Wizard.validatePaymentType(Payment, VALUE)"
+        required="true"
+        value="Payment.PaymentType"
+        valueType="typekey.PaymentType"/>
+      <BooleanRadioInput
+        editable="true"
+        id="Payment_Eroding"
+        label="DisplayKey.get(&quot;Web.NewCheckWizard.NewPaymentDetail.Eroding&quot;)"
+        required="true"
+        value="Payment.ErodesReserves"
+        visible="!Payment.Exposure.Closed and Payment.PaymentType != PaymentType.TC_SUPPLEMENT"/>
+      <CurrencyInput
+        formatType="currency"
+        id="Transaction_AvailableReserves"
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentDetail.Transaction.AvailableReserves&quot;)"
+        value="gw.api.financials.FinancialsCalculationsForEditedTransaction.getAvailableReserves(Payment).ReservingAmountTransactionAmountPair"
+        valueType="gw.api.financials.IPairedMoney"
+        visible="Payment.ReserveLine != null and not Payment.ReserveLine.New"/>
+      <TextInput
+        editable="Payment.New"
+        id="Transaction_Comments"
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentDetail.Transaction.Comments&quot;)"
+        value="Payment.Comments"/>
+      <TypeKeyInput
+        editable="true"
+        id="Payment_Currency"
+        label="DisplayKey.get(&quot;Wizard.QuickCheckWizard.QuickCheckBasics.QuickCheckBasicsDV.Currency&quot;)"
+        required="true"
+        value="Wizard.CheckCurrency"
+        valueType="typekey.Currency"
+        visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <InputSetRef
+        def="CheckExchangeRateInputSet(Payment.Check,null)"/>
+      <ListViewInput
+        available="Payment.ReserveLine != null"
+        def="EditablePaymentLineItemsLV(Payment)"
+        editable="true"
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentDetail.Transaction.LineItems&quot;)"
+        mode="getMode()"
+        validationExpression="Payment.getCheckWizardPaymentValidationExpression()">
+        <Toolbar>
+          <IteratorButtons
+            addLabel="DisplayKey.get(&quot;Java.Financials.TransactionLineItem.AddItem&quot;)"
+            addShortcut="I"
+            addVisible="gw.api.financials.FinancialsUtil.isAllowMultipleLineItems()"
+            iterator="EditablePaymentLineItemsLV.EditablePaymentLineItemsLV"
+            removeVisible="gw.api.financials.FinancialsUtil.isAllowMultipleLineItems()"/>
+          <AddButton
+            id="ApplyDeductibleButton"
+            iterator="EditablePaymentLineItemsLV.EditablePaymentLineItemsLV"
+            label="DisplayKey.get(&quot;NVV.Financials.NewPaymentDetail.Transaction.ApplyDeductible&quot;)"
+            toCreateAndAdd="Payment.addDeductibleLineItem()"
+            visible="gw.api.financials.FinancialsUtil.isAllowMultipleLineItems() and !Payment.Check.CheckSet.Recurring and deductible != null and !deductible.Paid and !deductible.Waived and gw.api.financials.FinancialsUtil.isUseDeductibleHandling()"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputColumn>
+    <Code><![CDATA[function getMode() : String {
+  if (Payment.LineItems.where( \ t -> t.LineCategory==TC_DEDUCTIBLE ).Count == 1) {
+    return "deductible"
+  } else {
+    return "default"
+  }
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

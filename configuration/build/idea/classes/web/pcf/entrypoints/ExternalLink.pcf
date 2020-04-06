@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <EntryPoint
+    authenticationRequired="true"
+    desc="Backwards compatibility - mimic 3.1.x ExternalLink behavior"
+    id="ExternalLink"
+    location="ExternalLink(linkName, claimNumber)">
+    <EntryPointParameter
+      locationParam="linkName"
+      type="String"/>
+    <EntryPointParameter
+      locationParam="claimNumber"
+      type="String"/>
+  </EntryPoint>
+</PCF>

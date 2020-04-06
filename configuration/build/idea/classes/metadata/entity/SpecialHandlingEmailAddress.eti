@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="An email address associated with a special handling notification rule."
+  entity="SpecialHandlingEmailAddress"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="shemailaddress"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.specialhandling.entity.SpecialHandlingEmailAddress"
+    impl="com.guidewire.cc.domain.specialhandling.impl.SpecialHandlingEmailAddressImpl"/>
+  <column
+    desc="An email address included in a special handling notification rule."
+    name="EmailAddress"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+    <columnParam
+      name="validator"
+      value="Email"/>
+  </column>
+  <foreignkey
+    fkentity="AutomatedNotificationHandler"
+    name="AutomatedNotificationHandler"
+    nullok="false"/>
+</entity>

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="ref_WC_TD"
+  platform="false"
+  table="ref_WC_TD"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.ref_WC_TD"
+    impl="com.guidewire.cc.domain.exposure.impl.ref_WC_TDImpl"/>
+  <fulldescription><![CDATA[
+      Reference table tracking state-specific disability minimum and maximum
+      monetary benefits for particular date ranges.
+    ]]></fulldescription>
+  <typekey
+    desc="Jurisdiction State"
+    name="JurisdictionState"
+    nullok="true"
+    typelist="Jurisdiction"/>
+  <column
+    desc="PD Benefit Effective Date"
+    name="TD_BenefitStartDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="PD Benefit Expiration Date"
+    name="TD_BenefitEndDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The percentage of wages paid for TTD (e.g. 80%)"
+    name="TTDPercentOfWages"
+    nullok="true"
+    type="rate"/>
+  <column
+    desc="If true and AWW is less than Min then set Min to AWW"
+    name="TTDMinAdjToAWW"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="MinState TD limit "
+    name="TD_Min"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Max State TD limit"
+    name="TD_Max"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Additional comments."
+    name="RateComments"
+    nullok="true"
+    type="mediumtext"/>
+</entity>

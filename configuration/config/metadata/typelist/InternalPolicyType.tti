@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<!-- ### ===========================================================================
+###  tl_policy.xml
+### ============================================================================
+### tl_policy.xml contains typelists that are used exclusively in elements
+### referenced in dm_policy.xml.  General-purpose typelists are stored in
+### tl_general.xml -->
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Internal policy types"
+  final="true"
+  name="InternalPolicyType">
+  <typecode
+    code="personal"
+    desc="Personal"
+    name="personal"/>
+  <typecode
+    code="commercial"
+    desc="Commercial"
+    name="commercial"/>
+</typelist>

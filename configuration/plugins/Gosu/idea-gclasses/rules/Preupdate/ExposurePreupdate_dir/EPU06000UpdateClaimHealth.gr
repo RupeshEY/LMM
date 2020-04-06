@@ -1,0 +1,20 @@
+package rules.Preupdate.ExposurePreupdate_dir
+
+@gw.rules.RuleName("EPU06000 - Update Claim Health")
+internal class EPU06000UpdateClaimHealth {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.Claim.scheduleHealthUpdate()
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,48 @@
+package rules.Segmentation.ClaimSegmentationRules_dir.CSG03000WC_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.util.Logger
+
+@gw.rules.RuleName("CSG03100 - WC")
+internal class CSG03100WC {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return true
+
+/* This example claim segmentation rule is not as efficient as the one found in CSG02100 - Property,
+   but it is more easily understood. If efficiency of claim segmentation is of primary concern, you
+   should consider using the model from that other rule instaed.
+*/   
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* Find an exposure with the most imortant segmentation. If not found, repeat for
+   the rest of the segmentations in reverse order of importance. As soon as an 
+   exposure is found in any of these searches, segment the claim in the manner of
+   the exposure and then leave the claim segmentation rules. If no exposure is found,
+   leave this rule and drop into the default rule.
+*/
+var highestExposure = claim.Exposures.firstWhere(\ e -> e.Segment == TC_WC_LIABILITY)
+
+if (highestExposure == null) {
+    highestExposure = claim.Exposures.firstWhere(\ e -> e.Segment == TC_WC_LOST_TIME)
+}
+if (highestExposure == null) {
+    highestExposure = claim.Exposures.firstWhere(\ e -> e.Segment == TC_WC_MED_ONLY)
+}
+if (highestExposure != null) {
+  claim.Segment = highestExposure.Segment
+  Logger.logDebug(DisplayKey.get("Rules.Segmentation.Claim", actions.ShortRuleName))
+  Logger.logDebug(DisplayKey.get("Rules.Segmentation.Claim.SegmentedTo", claim.Segment))
+  actions.exit()
+}
+
+/*end00rule*/
+
+  }
+}

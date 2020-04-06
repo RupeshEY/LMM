@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Worksheet
+    canEdit="false"
+    id="NewClaimDuplicatesWorksheet"
+    tabLabel="DisplayKey.get(&quot;JSP.WorkspaceTabBar.DuplicateClaims&quot;)"
+    title="DisplayKey.get(&quot;JSP.NewClaimDuplicates.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewClaimDuplicatesWorksheet(wizard : gw.api.claim.NewClaimWizardInfo)"/>
+    <Scope
+      location="FNOLWizard()"/>
+    <Variable
+      name="wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Variable
+      initialValue="wizard.DuplicateClaims"
+      name="duplicateClaims"
+      type="entity.Claim[]"/>
+    <Screen
+      id="NewClaimDuplicatesScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="wizard.checkForNewDuplicateClaims()"
+          id="NewClaimDuplicatesWorksheet_RefreshButton"
+          label="DisplayKey.get(&quot;Button.Refresh&quot;)"
+          shortcut="F"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="NewClaimDuplicatesWorksheet_CloseButton"
+          label="DisplayKey.get(&quot;Button.Close&quot;)"
+          shortcut="E"/>
+      </Toolbar>
+      <Verbatim
+        label="duplicateClaims.length &gt; 0 ? DisplayKey.get(&quot;JSP.NewClaimDuplicates.Warning&quot;) : DisplayKey.get(&quot;JSP.NewClaimDuplicates.NoDuplicates&quot;)"/>
+      <PanelRef
+        def="DuplicateClaimSearchResultsLV(duplicateClaims)"
+        visible="duplicateClaims.length &gt; 0">
+        <Toolbar/>
+      </PanelRef>
+    </Screen>
+  </Worksheet>
+</PCF>

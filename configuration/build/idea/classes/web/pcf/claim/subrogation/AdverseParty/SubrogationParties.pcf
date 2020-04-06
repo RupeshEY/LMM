@@ -1,0 +1,339 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterCommit="adversePartyWrappers = gw.subrogation.financials.SubrogationFinancialsHelper.getSelectableAdversePartiesWithTotalRow(claim)"
+    afterReturnFromPopup="if(claim.SubrogationSummary.SubroAdverseParties.Count == 0) { CurrentLocation.cancel() }"
+    canEdit="perm.System.editsubrodetails"
+    canVisit="perm.Claim.view(claim) and perm.System.viewsubrodetails"
+    id="SubrogationParties"
+    title="DisplayKey.get(&quot;Web.Subrogation.SubrogationParties&quot;)">
+    <LocationEntryPoint
+      signature="SubrogationParties(claim : Claim)"/>
+    <LocationEntryPoint
+      signature="SubrogationParties(claim : Claim, selectedWrapper : gw.subrogation.financials.AdversePartyWrapper)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="gw.subrogation.financials.SubrogationFinancialsHelper.getSelectableAdversePartiesWithTotalRow(claim)"
+      name="adversePartyWrappers"
+      type="java.util.List&lt;gw.subrogation.financials.AdversePartyWrapper&gt;"/>
+    <Variable
+      initialValue="null"
+      name="selectedWrapper"
+      type="gw.subrogation.financials.AdversePartyWrapper"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <Screen
+      id="SubrogationPartiesScreen">
+      <Toolbar>
+        <AddButton
+          conversionExpression="new gw.subrogation.financials.AdversePartyWrapper(PickedValue)"
+          hideIfReadOnly="true"
+          id="AddNewSubroAdverseParty"
+          iterator="EditableSubrogationPartiesLV.EditableSubrogationPartiesLV"
+          label="DisplayKey.get(&quot;Web.Subrogation.SubrogationParties.NewSubroAdverseParty&quot;)"
+          pickLocation="NewSubroAdversePartyPopup.push(claim)"
+          shortcut="N"
+          visible="perm.System.editsubrodetails"/>
+        <IteratorButtons
+          iterator="EditableSubrogationPartiesLV.EditableSubrogationPartiesLV"
+          removeConfirmMessage="DisplayKey.get(&quot;Web.Subrogation.Warning.RemovingParty&quot;)"
+          removeVisible="perm.System.editsubrodetails"
+          showRemoveConfirmMessage="not claim.SubrogationSummary.Subrogations*.SubroAdversePartyOverrides.IsEmpty"/>
+      </Toolbar>
+      <ListDetailPanel
+        lockWhileEditing="true"
+        selectionName="adversePartyRow"
+        selectionOnEnter="adversePartyWrappers.firstWhere(\ wrapper -&gt; wrapper == selectedWrapper)"
+        selectionType="gw.subrogation.financials.AdversePartyWrapper">
+        <PanelRef
+          def="EditableSubrogationPartiesLV(adversePartyWrappers, claim)"/>
+        <CardViewPanel>
+          <Variable
+            initialValue="adversePartyRow.AdverseParty"
+            name="subroadverseparty"
+            recalculateOnRefresh="true"
+            type="SubroAdverseParty"/>
+          <Variable
+            initialValue="claim.SubrogationSummary.getRelatedDocuments(subroadverseparty)"
+            name="subroDocuments"
+            recalculateOnRefresh="true"
+            type="Document[]"/>
+          <Card
+            id="DetailAdverseViewTitleCard"
+            title="DisplayKey.get(&quot;Web.Subrogation.SubrogationParties.DetailViewTitle&quot;, subroadverseparty.AdverseParty)"
+            visible="adversePartyRow.AdverseParty != null">
+            <PanelRef
+              def="SubrogationPartyDetailDV(subroadverseparty)">
+              <Toolbar>
+                <EditButtons
+                  editVisible="perm.System.editsubrodetails"/>
+              </Toolbar>
+            </PanelRef>
+          </Card>
+          <Card
+            hideIfEditable="true"
+            id="AdversePartyFinancialsCard"
+            title="subroadverseparty != null ? DisplayKey.get(&quot;Web.Subrogation.SubrogationParties.FinancialsTab&quot;) : DisplayKey.get(&quot;Web.Subrogation.SubrogationParties.ClaimFinancialsTab&quot;)">
+            <PanelRef>
+              <Toolbar>
+                <ToolbarButton
+                  action="createRecoveryReserve(claim, adversePartyRow)"
+                  hideIfEditable="true"
+                  id="CreateRecoveryReserve"
+                  label="DisplayKey.get(&quot;NVV.Claim.Subrogation.Main.CalculateOSRecReserve&quot;)"
+                  tooltip="DisplayKey.get(&quot;NVV.Claim.Subrogation.Main.CalculateOSRecReserve.Tooltip&quot;)"
+                  visible="subroadverseparty == null and gw.api.system.CCConfigParameters.UseRecoveryReserves.Value and perm.Claim.createrecoveryreserve(claim)"/>
+              </Toolbar>
+              <Verbatim
+                id="SubroAdversePartyFinancialsCardNote"
+                label="DisplayKey.get(&quot;Subrogation.FinancialsPage.Alert&quot;)"
+                labelStyleClass="alertBarCustom"/>
+              <ListViewPanel
+                id="SubrogationFinancialsLV">
+                <Variable
+                  initialValue="gw.subrogation.financials.SubrogationFinancialsHelper.getSubroFinancialsRows(claim, subroadverseparty)"
+                  name="subroFinsResult"
+                  recalculateOnRefresh="true"
+                  type="gw.subrogation.financials.SubroFinsResult"/>
+                <Row
+                  renderAsSmartHeader="true">
+                  <TextCell
+                    id="LabelTopHeader"/>
+                  <TextCell
+                    colspan="4"
+                    id="ClaimFinancialsHeader"
+                    value="DisplayKey.get(&quot;Web.Subrogation.Financials.Header.ClaimFinancials&quot;)"/>
+                  <TextCell
+                    colspan="4"
+                    id="SubrogationFinancialsHeader"
+                    value="DisplayKey.get(&quot;Web.Subrogation.Financials.Header.SubrogationFinancials&quot;)"/>
+                </Row>
+                <Row
+                  renderAsSmartHeader="true">
+                  <TextCell
+                    id="LabelBottomHeader"
+                    value="DisplayKey.get(&quot;Web.Subrogation.Financials.Header.ReserveLine&quot;)"
+                    valueType="java.lang.String"/>
+                  <TextCell
+                    id="PaidHeader"
+                    value="DisplayKey.get(&quot;Web.Subrogation.Financials.Header.Paid&quot;)"/>
+                  <TextCell
+                    id="RecoveryHeader"
+                    value="DisplayKey.get(&quot;Web.Subrogation.Financials.Header.Recovered&quot;)"/>
+                  <TextCell
+                    id="NetPaidHeader"
+                    value="DisplayKey.get(&quot;Web.Subrogation.Financials.Header.NetPaid&quot;)"/>
+                  <TextCell
+                    id="DeductibleHeader"
+                    value="DisplayKey.get(&quot;Web.Subrogation.Financials.Header.Deductible&quot;)"/>
+                  <TextCell
+                    id="ExpectedRecoveryHeader"
+                    value="DisplayKey.get(&quot;Web.Subrogation.Financials.Header.ExpectedRecovery&quot;)"/>
+                  <TextCell
+                    id="RecoveredHeader"
+                    value="DisplayKey.get(&quot;Web.Subrogation.Financials.Header.SubroRecovered&quot;)"/>
+                  <TextCell
+                    id="PendingHeader"
+                    value="DisplayKey.get(&quot;Web.Subrogation.Financials.Header.Pending&quot;)"/>
+                  <TextCell
+                    id="AvailableRecoveryReservesHeader"
+                    value="if(gw.api.system.CCConfigParameters.UseRecoveryReserves.getValue()) { return subroadverseparty == null ? DisplayKey.get(&quot;Web.Subrogation.Financials.Header.OpenRecoveryReserves&quot;) : DisplayKey.get(&quot;Web.Subrogation.Financials.Header.ApportionedOpenRecoveryReserves&quot;) } else { return &quot;&quot; }"/>
+                </Row>
+                <RowIterator
+                  editable="false"
+                  elementName="fsRow"
+                  value="subroFinsResult.Nodes"
+                  valueType="java.util.List&lt;gw.subrogation.financials.AbstractSubroFinsNode&gt;">
+                  <Row
+                    useSubHeaderStyle="fsRow.Level == 1">
+                    <TextCell
+                      id="Label"
+                      value="fsRow.Label"/>
+                    <CurrencyCell
+                      id="Paid"
+                      value="fsRow.getCalculations()[gw.subrogation.financials.SubrogationCalculationsEnum.PAID]"/>
+                    <CurrencyCell
+                      id="RecoveryAmount"
+                      value="fsRow.getCalculations()[gw.subrogation.financials.SubrogationCalculationsEnum.RECOVERIES]"/>
+                    <CurrencyCell
+                      id="NetPaidAmount"
+                      value="fsRow.getCalculations()[gw.subrogation.financials.SubrogationCalculationsEnum.NET_PAID]"/>
+                    <CurrencyCell
+                      id="DeductibleAmount"
+                      value="fsRow.getCalculations()[gw.subrogation.financials.SubrogationCalculationsEnum.DEDUCTIBLE]"/>
+                    <CurrencyCell
+                      id="ExpectedRecoveryAmount"
+                      value="fsRow.getCalculations()[gw.subrogation.financials.SubrogationCalculationsEnum.EXPECTED_RECOVERY]"/>
+                    <CurrencyCell
+                      id="SubroRecoveredAmount"
+                      value="fsRow.getCalculations()[gw.subrogation.financials.SubrogationCalculationsEnum.SUBROGATION_RECOVERIES]"/>
+                    <CurrencyCell
+                      id="PendingAmount"
+                      value="fsRow.getCalculations()[gw.subrogation.financials.SubrogationCalculationsEnum.PENDING]"/>
+                    <CurrencyCell
+                      id="AvailableRecoveryReserves"
+                      value="fsRow.getCalculations()[gw.subrogation.financials.SubrogationCalculationsEnum.OPEN_RECOVERY_RESERVES]"/>
+                  </Row>
+                </RowIterator>
+                <Row
+                  useSubHeaderStyle="true"
+                  visible="subroFinsResult.Totals.size() &gt; 0">
+                  <TextCell
+                    id="TotalLabel"
+                    value="DisplayKey.get(&quot;Web.Subrogation.Financials.Total&quot;)"/>
+                  <CurrencyCell
+                    id="TotalPaid"
+                    value="subroFinsResult.Totals[gw.subrogation.financials.SubrogationCalculationsEnum.PAID]"/>
+                  <CurrencyCell
+                    id="TotalRecovered"
+                    value="subroFinsResult.Totals[gw.subrogation.financials.SubrogationCalculationsEnum.RECOVERIES]"/>
+                  <CurrencyCell
+                    id="TotalNetPaid"
+                    value="subroFinsResult.Totals[gw.subrogation.financials.SubrogationCalculationsEnum.NET_PAID]"/>
+                  <CurrencyCell
+                    id="TotalDeductible"
+                    value="subroFinsResult.Totals[gw.subrogation.financials.SubrogationCalculationsEnum.DEDUCTIBLE]"/>
+                  <CurrencyCell
+                    id="TotalExpectedRecovery"
+                    value="subroFinsResult.Totals[gw.subrogation.financials.SubrogationCalculationsEnum.EXPECTED_RECOVERY]"/>
+                  <CurrencyCell
+                    id="TotalSubroRecovered"
+                    value="subroFinsResult.Totals[gw.subrogation.financials.SubrogationCalculationsEnum.SUBROGATION_RECOVERIES]"/>
+                  <CurrencyCell
+                    id="TotalPending"
+                    value="subroFinsResult.Totals[gw.subrogation.financials.SubrogationCalculationsEnum.PENDING]"/>
+                  <CurrencyCell
+                    id="TotalAvailableRecoveryReserves"
+                    value="subroFinsResult.Totals[gw.subrogation.financials.SubrogationCalculationsEnum.OPEN_RECOVERY_RESERVES]"/>
+                </Row>
+              </ListViewPanel>
+            </PanelRef>
+            <DetailViewPanel>
+              <InputColumn>
+                <Label
+                  label="DisplayKey.get(&quot;Web.Subrogation.Financials.SubroRecoveries&quot;)"/>
+              </InputColumn>
+            </DetailViewPanel>
+            <PanelRef>
+              <Toolbar/>
+              <ListViewPanel
+                id="SubrogationRecoveriesLV">
+                <Variable
+                  initialValue="subroadverseparty != null ? subroadverseparty.getSubroRecoveriesForParty() : claim.SubroClaimCostRecoveries"
+                  name="recoveries"
+                  recalculateOnRefresh="true"
+                  type="java.util.List&lt;Recovery&gt;"/>
+                <RowIterator
+                  editable="false"
+                  elementName="recovery"
+                  value="recoveries"
+                  valueType="java.util.List&lt;entity.Recovery&gt;">
+                  <Row>
+                    <DateCell
+                      dateFormat="short"
+                      id="CreateDate"
+                      label="DisplayKey.get(&quot;Web.Subrogation.Financials.SubroRecoveries.CreateDate&quot;)"
+                      value="recovery.CreateTime"/>
+                    <TextCell
+                      id="ReserveLine"
+                      label="DisplayKey.get(&quot;Web.Subrogation.Financials.SubroRecoveries.ReserveLine&quot;)"
+                      value="recovery.ReserveLine"
+                      valueType="entity.ReserveLine"/>
+                    <CurrencyCell
+                      id="RecoveryAmount"
+                      label="DisplayKey.get(&quot;Web.Subrogation.Financials.SubroRecoveries.RecoveryAmount&quot;)"
+                      value="recovery.ReservingAmount"/>
+                    <TypeKeyCell
+                      id="Status"
+                      label="DisplayKey.get(&quot;Web.Subrogation.Financials.SubroRecoveries.Status&quot;)"
+                      value="recovery.Status"
+                      valueType="typekey.TransactionStatus"/>
+                  </Row>
+                </RowIterator>
+                <Row
+                  useSubHeaderStyle="true"
+                  visible="recoveries.size() &gt; 0 and !recoveries.hasMatch(\ rec -&gt; rec.ReserveLine.ReservingCurrency != recoveries[0].ReserveLine.ReservingCurrency )">
+                  <TextCell
+                    id="TotalFooter"
+                    value="DisplayKey.get(&quot;Web.Subrogation.Financials.Total&quot;)"/>
+                  <EmptyCell
+                    id="ReserveLineFooter"/>
+                  <CurrencyCell
+                    id="RecoveryAmountTotalFooter"
+                    value="recoveries.sumCurrencyAmount(\ rec -&gt; rec.ReservingAmount )"/>
+                  <EmptyCell
+                    id="StatusFooter"/>
+                </Row>
+              </ListViewPanel>
+            </PanelRef>
+            <DetailViewPanel>
+              <InputColumn>
+                <InputSetRef
+                  def="DeductibleInputSet(claim, true)"/>
+              </InputColumn>
+            </DetailViewPanel>
+          </Card>
+          <Card
+            hideIfEditable="true"
+            id="AdversePartyDocumentsCard"
+            title="DisplayKey.get(&quot;Web.Subrogation.SubrogationParties.DocumentsTab&quot;)"
+            visible="adversePartyRow.AdverseParty != null">
+            <PanelRef
+              def="DocumentAlertPanelSet()"/>
+            <PanelRef
+              def="SubrogationDocumentsLV(subroDocuments)">
+              <Toolbar>
+                <ToolbarButton
+                  action="ClaimNewDocumentFromTemplateWorksheet.goInWorkspace(claim, claim.SubrogationSummary.getDocumentInitForUI(subroadverseparty))"
+                  available="documentsActionsHelper.DocumentTemplateActionsAvailable"
+                  id="CreateFromTemplate"
+                  label="DisplayKey.get(&quot;Web.Subrogation.Documents.Create&quot;)"/>
+                <ToolbarButton
+                  action="ClaimNewDocumentLinkedWorksheet.goInWorkspace(claim, claim.SubrogationSummary.getDocumentInitForUI(subroadverseparty))"
+                  available="documentsActionsHelper.DocumentMetadataActionsAvailable and documentsActionsHelper.DocumentContentActionsAvailable"
+                  id="AttachDocument"
+                  label="DisplayKey.get(&quot;Web.Subrogation.Documents.Attach&quot;)"/>
+                <PickerToolbarButton
+                  action="PickExistingDocumentPopup.push(claim)"
+                  available="documentsActionsHelper.DocumentMetadataActionsAvailable"
+                  id="LinkDocument"
+                  label="DisplayKey.get(&quot;Web.Subrogation.Documents.Link&quot;)"
+                  onPick="claim.SubrogationSummary.linkDocumentForUI(PickedValue, subroadverseparty)"/>
+                <ToolbarButton
+                  action="null"
+                  available="documentsActionsHelper.DocumentContentServerAvailable"
+                  id="RefreshAsyncContent"
+                  label="DisplayKey.get(&quot;Web.DocumentsLV.Button.AsynchronousRefresh&quot;)"
+                  tooltip="DisplayKey.get(&quot;Web.DocumentsLV.Button.AsynchronousRefresh.Tooltip&quot;)"
+                  visible="documentsActionsHelper.isShowAsynchronousRefreshAction(subroDocuments)"/>
+              </Toolbar>
+            </PanelRef>
+          </Card>
+        </CardViewPanel>
+      </ListDetailPanel>
+    </Screen>
+    <Code>uses gw.subrogation.financials.AdversePartyWrapper
+
+function createRecoveryReserve(aClaim : Claim, currentWrapper : AdversePartyWrapper) {
+  CurrentLocation.startEditing()
+
+  var success =  false
+  try {
+    aClaim.AutoSetOpenRecoveryReserve()
+    CurrentLocation.commit()
+    CurrentLocation.go(aClaim, currentWrapper)
+    success = true
+  } finally {
+    if (!success) {
+      CurrentLocation.cancel()
+    }
+  }
+}</Code>
+  </Page>
+</PCF>

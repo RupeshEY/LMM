@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The entity used to track the amount used per  claim against an aggregate limit."
+  entity="ClaimAggregateLimitRpt"
+  loadable="false"
+  table="claimagglimitrpt"
+  type="editable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.aggregatelimit.impl.ClaimAggregateLimitRptInternal"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.ClaimAggregateLimitRptImpl"/>
+  <implementsInterface
+    iface="gw.cc.aggregatelimit.entity.ClaimAggregateLimitRpt"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.ClaimAggregateLimitRptImpl"/>
+  <fulldescription><![CDATA[Represents denormalized aggregate limit used calculations (i.e., the amount of the limit that has been used to date) for a
+    claim as related to a given aggregate limit and optionally, for a coverageline.
+  ]]></fulldescription>
+  <column
+    desc="The total amount of reserve transactions from this claim that apply to the aggregate limit."
+    name="ReserveTotal"
+    nullok="true"
+    setterScriptability="hidden"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="The total amount of non-eroding payment transactions from this claim that apply to the aggregate limit."
+    name="NonErodingPaymentTotal"
+    nullok="true"
+    setterScriptability="hidden"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="The total amount of eroding payment transactions from this claim that apply to the aggregate limit."
+    name="ErodingPaymentTotal"
+    nullok="true"
+    setterScriptability="hidden"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="The total amount of recovery transactions from this claim that apply to the aggregate limit."
+    name="RecoveryTotal"
+    nullok="true"
+    setterScriptability="hidden"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="The total amount of recovery reserve transactions from this claim that apply to the aggregate limit."
+    name="RecoveryReserveTotal"
+    nullok="true"
+    setterScriptability="hidden"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="The total amount of future eroding payment transactions from this claim that apply to the aggregate limit."
+    name="FutureErodingPaymentTotal"
+    nullok="true"
+    setterScriptability="hidden"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="The total amount of future non-eroding payment transactions transactions from this claim that apply to the aggregate limit."
+    name="FutureNonErodingPaymentTotal"
+    nullok="true"
+    setterScriptability="hidden"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <implementsEntity
+    name="AggregateLimitRptDelegate"/>
+  <foreignkey
+    columnName="ClaimInfoID"
+    desc="ClaimInfo with which the aggregate limit is associated."
+    fkentity="ClaimInfo"
+    name="ClaimInfo"
+    nullok="false"/>
+  <index
+    desc="Index to assure the uniqueness of one ClaimAggregateLimitRpt for each unique combination of ClaimInfo, PolicyPeriod, CoverageLine, LimitType and ValueType"
+    name="claimagglimitrptu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="PolicyPeriodID"/>
+    <indexcol
+      keyposition="2"
+      name="ClaimInfoID"/>
+    <indexcol
+      keyposition="3"
+      name="CoverageLineID"/>
+    <indexcol
+      keyposition="4"
+      name="LimitType"/>
+    <indexcol
+      keyposition="5"
+      name="ValueType"/>
+    <indexcol
+      keyposition="6"
+      name="AggLimitCalcCriteria"/>
+  </index>
+</entity>

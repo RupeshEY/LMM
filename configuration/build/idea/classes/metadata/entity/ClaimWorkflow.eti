@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  Workflow -                                                            ====================================================================  subtype for all workflows that are linked to claim -->
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Base workflow subtype for all workflows that are linked to a claim"
+  displayName="Claim Workflow"
+  entity="ClaimWorkflow"
+  supertype="Workflow">
+  <implementsInterface
+    iface="gw.cc.workflow.entity.ClaimWorkflow"
+    impl="com.guidewire.cc.domain.workflow.impl.ClaimWorkflowImpl"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The Claim with which this workflow is associated."
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+</subtype>

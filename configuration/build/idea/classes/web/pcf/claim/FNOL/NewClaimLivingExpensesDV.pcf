@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="NewClaimLivingExpensesDV">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <InputColumn>
+      <InputSetRef
+        def="ExposureDetailInputSet(Exposure, true)"/>
+    </InputColumn>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.LivingExpenses.Exposure.IncidentOverview&quot;)"/>
+      <RangeInput
+        editable="true"
+        hideChildrenIfReadOnly="false"
+        id="Living_Expenses_Incident"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.LivingExpenses.Exposure.LivingExpenses&quot;)"
+        required="true"
+        value="Exposure.LivingExpensesIncident"
+        valueRange="Exposure.Claim.LivingExpensesIncidentsOnly"
+        valueType="entity.LivingExpensesIncident">
+        <MenuItem
+          action="NewLivingExpensesIncidentPopup.push( Exposure.Claim )"
+          hideIfReadOnly="true"
+          id="LivingExpensesDV_NewIncidentMenuItem"
+          label="DisplayKey.get(&quot;NVV.Exposure.SubView.LivingExpenses.Exposure.NewIncident&quot;)"/>
+        <MenuItem
+          action="EditLivingExpensesIncidentPopup.push(Exposure.LivingExpensesIncident, true)"
+          hideIfReadOnly="true"
+          id="LivingExpensesDV_EditIncidentMenuItem"
+          label="DisplayKey.get(&quot;NVV.Exposure.SubView.LivingExpenses.Exposure.EditIncident&quot;)"/>
+        <MenuItem
+          action="EditLivingExpensesIncidentPopup.push(Exposure.LivingExpensesIncident, false)"
+          hideIfEditable="true"
+          id="LivingExpensesDV_ViewIncidentMenuItem"
+          label="DisplayKey.get(&quot;NVV.Exposure.SubView.LivingExpenses.Exposure.ViewIncident&quot;)"/>
+      </RangeInput>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="OtherCarrierInvolvementInputSet(Exposure)"/>
+    </InputFooterSection>
+    <Code><![CDATA[
+property get ContactProhibited() : boolean {
+    return Exposure.Claim.getClaimContact(Exposure.Claimant).ContactProhibited
+}
+  
+property set ContactProhibited(prohibited : boolean) {
+  var claimContact = Exposure.Claim.getClaimContact(Exposure.Claimant) 
+  if (claimContact != null) claimContact.ContactProhibited = prohibited 
+}
+    ]]></Code>
+  </DetailViewPanel>
+</PCF>

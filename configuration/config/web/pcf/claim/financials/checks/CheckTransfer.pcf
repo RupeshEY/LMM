@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterCancel="ClaimFinancialsChecksDetail.go(Claim, OldCheck)"
+    afterCommit="ClaimFinancialsChecksDetail.go(Claim, OldCheck)"
+    beforeCommit="gw.api.system.bundle.BundleCommitCondition.verify(NewCheck)"
+    canEdit="true"
+    canVisit="perm.Claim.viewpayments(Claim)"
+    id="CheckTransfer"
+    onResume="gw.api.system.bundle.BundleCommitCondition.verify(NewCheck)"
+    parent="ClaimFinancialsChecksDetail(Claim, OldCheck)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.Check.Transfer.Title&quot;)">
+    <LocationEntryPoint
+      signature="CheckTransfer(Claim : Claim, OldCheck : Check)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="OldCheck"
+      type="Check"/>
+    <Variable
+      initialValue="OldCheck.createCheckForTransfer()"
+      name="NewCheck"
+      type="Check"/>
+    <Variable
+      initialValue="gw.api.financials.ReserveLineInputSetStrategyForPaymentTransfer.newHelper(NewCheck)"
+      name="reserveLineInputSetHelper"
+      type="gw.api.financials.ReserveLineInputSetHelper"/>
+    <Screen
+      id="CheckTransferScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="doTransfer()"
+          available="perm.Check.edit(OldCheck)"
+          id="CheckTransfer_TransferButton"
+          label="DisplayKey.get(&quot;Button.Check.Transfer&quot;)"
+          visible="perm.Check.edit(OldCheck)"/>
+        <EditButtons
+          cancelLabel="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          editVisible="false"
+          updateVisible="false"/>
+      </Toolbar>
+      <PanelRef
+        def="CheckTransferDV(NewCheck, OldCheck, Claim, reserveLineInputSetHelper)"/>
+    </Screen>
+    <Code><![CDATA[function doTransfer() {
+  OldCheck.unlinkDeductibles()
+  NewCheck.linkDeductibles()
+  OldCheck.unlinkServiceRequestInvoicesForTransfer()
+  gw.api.financials.CheckUtil.transferCheck(NewCheck, OldCheck, CurrentLocation)
+}]]></Code>
+  </Page>
+</PCF>

@@ -1,0 +1,28 @@
+package rules.Assignment.DefaultGroupActivityAssignmentRules_dir
+
+@gw.rules.RuleName("DGA02000 - SI Assign Escalation Activity to named SIU user")
+internal class DGA02000SIAssignEscalationActivitytonamedSIUuser {
+  static function doCondition(activity : entity.Activity) : boolean {
+    
+/*start00rule*/
+return activity.ActivityPattern.Code == "SIU_escalation"
+/*end00rule*/
+
+  }
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+
+/*start00rule*/
+var currentSIusers = activity.Claim.RoleAssignments.where(
+    \ contact -> contact.Role == TC_SIUINVESTIGATOR)
+  
+if (not currentSIusers.IsEmpty) {
+  var assignment = currentSIusers.last()
+  if (activity.CurrentAssignment.assign(assignment.AssignedGroup, assignment.AssignedUser)) {
+    actions.exit()
+  }
+}
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="CatastropheZonesInputSet"
+    mode="CA">
+    <Require
+      name="Catastrophe"
+      type="Catastrophe"/>
+    <Variable
+      initialValue="null"
+      name="zoneType"
+      type="ZoneType"/>
+    <Variable
+      initialValue="null"
+      name="linkedZone"
+      type="Zone"/>
+    <Variable
+      initialValue="typekey.Country.TC_CA"
+      name="country"
+      type="Country"/>
+    <RangeInput
+      editable="true"
+      hideIfReadOnly="true"
+      id="ZoneType"
+      label="DisplayKey.get(&quot;Web.Admin.AdminCatastropheDV.ZoneType&quot;)"
+      value="zoneType"
+      valueRange="Catastrophe.getRelevantZoneTypesForCountry(country)"
+      valueType="typekey.ZoneType">
+      <PostOnChange
+        onChange="linkedZone=null; Catastrophe.FilterCriteria.LinkedZone=null; Catastrophe.FilterCriteria.ZoneType=zoneType"/>
+    </RangeInput>
+    <ListViewInput
+      def="CatastropheZonesLV(Catastrophe, zoneType, country)"
+      editable="true"
+      hideIfReadOnly="true"
+      label="DisplayKey.get(&quot;Web.Admin.AdminCatastropheDV.CatastropheZones&quot;)"
+      visible="Catastrophe.FilterCriteria.ZoneType==TC_FSA">
+      <Toolbar
+        visible="true">
+        <IteratorButtons
+          iterator="CatastropheZonesLV.CatastropheZonesLV"/>
+      </Toolbar>
+    </ListViewInput>
+    <!-- filter for counties, filter on state before showing
+               shuttlelist -->
+    <RangeInput
+      editable="true"
+      hideIfReadOnly="true"
+      id="state"
+      label="DisplayKey.get(&quot;Web.Admin.AdminCatastropheDV.Province&quot;)"
+      value="linkedZone"
+      valueRange="Zone.finder.findZones(country,typekey.ZoneType.TC_PROVINCE)"
+      valueType="entity.Zone"
+      visible="Catastrophe.FilterCriteria.ZoneType == TC_CITY">
+      <PostOnChange
+        onChange="Catastrophe.FilterCriteria.LinkedZone=linkedZone"/>
+    </RangeInput>
+    <RangeInput
+      editable="true"
+      hideIfReadOnly="true"
+      id="ZoneInput"
+      label="DisplayKey.get(&quot;Web.Admin.AdminCatastropheDV.CatastropheZones&quot;)"
+      multiSelect="true"
+      numRows="10"
+      shuttleList="true"
+      value="Catastrophe.ZoneCodes"
+      valueRange="Zone.finder.findZoneCodes(country,Catastrophe.FilterCriteria.ZoneType,Catastrophe.FilterCriteria.LinkedZone)"
+      valueType="java.lang.String[]"
+      visible="!(Catastrophe.FilterCriteria.ZoneType==null or Catastrophe.FilterCriteria.ZoneType==TC_FSA or (Catastrophe.FilterCriteria.ZoneType == TC_CITY and Catastrophe.FilterCriteria.LinkedZone==null))"/>
+  </InputSet>
+</PCF>

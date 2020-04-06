@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="Contact != null and perm.Contact.editlocal(User.Contact)"
+    canVisit="perm.Contact.viewlocal"
+    desc="Placeholder for app-specific UserContactDetail popup."
+    id="UserContactDetailPopup"
+    returnType="Contact"
+    title="User.DisplayName">
+    <LocationEntryPoint
+      signature="UserContactDetailPopup(User : User)"/>
+    <Variable
+      name="User"
+      type="User"/>
+    <Variable
+      initialValue="new gw.api.contact.LocationContactHandle(User.Contact)"
+      name="contactHandle"
+      type="gw.api.contact.LocationContactHandle"/>
+    <Variable
+      initialValue="Contact==null ? null : gw.api.contact.ContactSystemUtil.INSTANCE.generateLinkStatus(Contact)"
+      name="linkStatus"
+      recalculateOnRefresh="true"
+      type="gw.api.contact.ContactSystemLinkStatus"/>
+    <Variable
+      initialValue="(linkStatus != null and linkStatus.Known and linkStatus.Linked) ? true : false"
+      name="showRelatedObjects"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <ScreenRef
+      def="ContactDetailScreen(contactHandle, false, false, linkStatus, null, true, showRelatedObjects, true)"/>
+    <Code><![CDATA[
+property get Contact() : Contact { return contactHandle.Contact; }
+    ]]></Code>
+  </Popup>
+</PCF>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageDocumentDownloadRq_Ext"
+  desc="Document Download Request subtype for ECF messages"
+  supertype="ECFDocumentMessage_Ext">
+  <column
+    desc="DownloadResponseUUId - Unique Universal Identifier of the message"
+    name="DownloadResponseUUId"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="36"/>
+  </column>
+</subtype>

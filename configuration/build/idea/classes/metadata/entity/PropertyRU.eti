@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- PropertyRU -->
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="RiskUnit containing a policy."
+  entity="PropertyRU"
+  supertype="LocationBasedRU">
+  <implementsInterface
+    iface="gw.cc.policy.entity.PropertyRU"
+    impl="com.guidewire.cc.domain.policy.impl.PropertyRUImpl"/>
+</subtype>

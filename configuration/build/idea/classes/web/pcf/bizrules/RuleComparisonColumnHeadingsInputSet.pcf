@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    desc="Configures the column headings on a rule comparison table detail view."
+    id="RuleComparisonColumnHeadingsInputSet">
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RuleVersionComparisonController"/>
+    <Require
+      name="headings"
+      type="List&lt;String&gt;"/>
+    <Label
+      id="HeadingSpacer">
+      <LayoutConfig
+        tdClass="controller.DefaultTDStyleClass"/>
+    </Label>
+    <InputIterator
+      elementName="heading"
+      id="ColumnRelativeStateHeadings"
+      type="String"
+      value="headings"
+      valueType="List&lt;String&gt;">
+      <TextInput
+        boldValue="true"
+        id="ColumnRelativeStateHeadings"
+        labelAbove="true"
+        value="heading">
+        <LayoutConfig
+          tdClass="controller.DefaultTDStyleClass"/>
+      </TextInput>
+    </InputIterator>
+  </InputSet>
+</PCF>

@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_policy.xml -->
+  <InputSet
+    id="PolicySearchInsuredInputSet"
+    mode="default">
+    <Require
+      name="PolicySearchCriteria"
+      type="PolicySearchCriteria"/>
+    <Variable
+      initialValue="new gw.api.address.PolicySearchAddressOwner(PolicySearchCriteria){ :AlwaysShowSeparateFields = true } "
+      name="addressOwner"
+      recalculateOnRefresh="true"
+      type="gw.api.address.CCAddressOwner"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Policy.PolicySearch.Insured&quot;)"/>
+    <TypeKeyInput
+      editable="true"
+      id="Policy_ContactType"
+      label="DisplayKey.get(&quot;NVV.Policy.PolicySearch.Policy.ContactType&quot;)"
+      value="PolicySearchCriteria.ContactType"
+      valueType="typekey.SearchContactType">
+      <PostOnChange
+        onChange="clearSearchCriteriaNameFields()"/>
+    </TypeKeyInput>
+    <InputSetRef
+      def="GlobalPersonNameInputSet(new gw.api.name.SearchNameOwner(PolicySearchCriteria))"
+      mode="gw.api.name.NameLocaleSettings.PCFMode"
+      visible="PolicySearchCriteria.ContactType == SearchContactType.TC_PERSON"/>
+    <InputSetRef
+      def="GlobalContactNameInputSet(new gw.api.name.SearchNameOwner(PolicySearchCriteria))"
+      mode="gw.api.name.NameLocaleSettings.PCFMode"
+      visible="PolicySearchCriteria.ContactType == SearchContactType.TC_COMPANY"/>
+    <TextInput
+      editable="true"
+      id="Policy_TaxId"
+      label="DisplayKey.get(&quot;NVV.Policy.PolicySearch.Policy.TaxId&quot;)"
+      value="PolicySearchCriteria.TaxIdString"/>
+    <InputSetRef
+      def="CCAddressInputSet(addressOwner)"/>
+    <Code><![CDATA[/**
+ * Clears the name fields when you toggle between search ContactTypes.
+ */
+function clearSearchCriteriaNameFields() {
+  var searchContactType = PolicySearchCriteria.ContactType
+  if(searchContactType==null) {
+    PolicySearchCriteria.FirstName = null
+    PolicySearchCriteria.LastName = null
+    PolicySearchCriteria.CompanyName = null
+  }
+  else if(searchContactType==TC_PERSON) {
+    PolicySearchCriteria.CompanyName = null
+  }
+  else if(searchContactType==TC_COMPANY) {
+    PolicySearchCriteria.FirstName = null
+    PolicySearchCriteria.LastName = null
+  }
+}]]></Code>
+  </InputSet>
+</PCF>

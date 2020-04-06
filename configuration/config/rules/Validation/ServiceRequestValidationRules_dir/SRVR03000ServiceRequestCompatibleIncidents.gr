@@ -1,0 +1,21 @@
+package rules.Validation.ServiceRequestValidationRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.vendormanagement.ServiceRequestChangePropertySet
+
+@gw.rules.RuleName("SRVR03000 - Service Request Compatible Incidents")
+internal class SRVR03000ServiceRequestCompatibleIncidents {
+  static function doCondition(serviceRequest   :   entity.ServiceRequest) : boolean {
+/*start00rule*/
+return serviceRequest.isFieldChanged(ServiceRequest#Exposure) || serviceRequest.isFieldChanged(ServiceRequest#Incident)
+/*end00rule*/
+}
+
+  static function doAction(serviceRequest   :   entity.ServiceRequest, actions : gw.rules.Action) {
+/*start00rule*/
+if (serviceRequest.Exposure != null && serviceRequest.Incident != serviceRequest.Exposure.Incident) {
+    serviceRequest.rejectField("Exposure", ValidationLevel.TC_LOADSAVE,
+      DisplayKey.get("Rules.Validation.ServiceRequest.IncompatibleIncidents"), null, null)
+} 
+/*end00rule*/
+  }
+}

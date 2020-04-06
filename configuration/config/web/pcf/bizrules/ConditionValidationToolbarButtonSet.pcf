@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    id="ConditionValidationToolbarButtonSet">
+    <Require
+      name="scopedValidatable"
+      type="gw.bizrules.pcf.ScopedValidatable"/>
+    <ToolbarButton
+      action="scopedValidatable.ShowValidationErrors = true"
+      available="scopedValidatable.HasErrorsInScope"
+      id="ShowValidation"
+      label="scopedValidatable.HasErrorsInScope ? DisplayKey.get('BizRules.ConditionBuilderPanelSet.Toolbar.EnableValidation') : DisplayKey.get(&quot;BizRules.ConditionBuilderPanelSet.Toolbar.NoErrors&quot;)"
+      visible="!scopedValidatable.ShowValidationErrors &amp;&amp; (scopedValidatable.ShowValidationButtonIfNoErrorsInScope || scopedValidatable.HasErrorsInScope)"/>
+    <ToolbarButton
+      action="scopedValidatable.ShowValidationErrors = false"
+      available="scopedValidatable.HasErrorsInScope"
+      id="HideValidation"
+      label="scopedValidatable.HasErrorsInScope ? DisplayKey.get('BizRules.ConditionBuilderPanelSet.Toolbar.DisableValidation') : DisplayKey.get(&quot;BizRules.ConditionBuilderPanelSet.Toolbar.NoErrors&quot;)"
+      visible="scopedValidatable.ShowValidationErrors &amp;&amp; (scopedValidatable.ShowValidationButtonIfNoErrorsInScope || scopedValidatable.HasErrorsInScope)"/>
+  </ToolbarButtonSet>
+</PCF>

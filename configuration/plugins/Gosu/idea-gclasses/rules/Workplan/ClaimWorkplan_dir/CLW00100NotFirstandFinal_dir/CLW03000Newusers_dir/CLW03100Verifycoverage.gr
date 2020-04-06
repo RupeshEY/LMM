@@ -1,0 +1,22 @@
+package rules.Workplan.ClaimWorkplan_dir.CLW00100NotFirstandFinal_dir.CLW03000Newusers_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("CLW03100 - Verify coverage")
+internal class CLW03100Verifycoverage {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.createActivityFromPattern(
+    null, ActivityPattern.finder.getActivityPatternByCode("coverage"))
+/*end00rule*/
+
+  }
+}

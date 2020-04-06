@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- The next area controls the Claim Association Search
+    This file automatically generated from nvv_claim.xml -->
+  <DetailViewPanel
+    id="ClaimAssociationSearchDV">
+    <Require
+      name="ClaimAssociationSearchCriteria"
+      type="ClaimAssociationSearchCriteria"/>
+    <InputColumn>
+      <TextInput
+        boldLabel="true"
+        editable="true"
+        id="ClaimAssociation_Title"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimAssociationSearch.ClaimAssociation.Title&quot;)"
+        value="ClaimAssociationSearchCriteria.Title"/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimAssociationSearch.Claim&quot;)"/>
+      <TextInput
+        editable="true"
+        id="Claim_ClaimNumber"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimAssociationSearch.Claim.ClaimNumber&quot;)"
+        value="ClaimAssociationSearchCriteria.ClaimNumber"/>
+      <DateInput
+        editable="true"
+        id="Claim_LossDate"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimAssociationSearch.Claim.LossDate&quot;)"
+        value="ClaimAssociationSearchCriteria.LossDate"/>
+    </InputColumn>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimAssociationSearch.Insured&quot;)"/>
+      <InputSetRef
+        def="GlobalPersonNameInputSet( new gw.api.name.SearchNameOwner(ClaimAssociationSearchCriteria))"
+        mode="gw.api.name.NameLocaleSettings.PCFMode"/>
+      <InputSetRef
+        def="GlobalContactNameInputSet( new gw.api.name.SearchNameOwner(ClaimAssociationSearchCriteria))"
+        mode="gw.api.name.NameLocaleSettings.PCFMode"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

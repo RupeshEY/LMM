@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <Page
+    id="TransactionDetailPrint"
+    parent="ClaimPrintout(Claim)"
+    title="TransactionView.Transaction.DetailPageTitle">
+    <LocationEntryPoint
+      signature="TransactionDetailPrint(Claim : Claim, TransactionView : TransactionView)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="TransactionView"
+      type="TransactionView"/>
+    <Variable
+      initialValue="TransactionView.Transaction"
+      name="transaction"
+      type="Transaction"/>
+    <ScreenRef
+      def="TransactionDetailPrintScreen(transaction)"
+      mode="(typeof transaction).RelativeName"/>
+  </Page>
+</PCF>

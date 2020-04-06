@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Tmp table for populating the aggregate limit denorm table, agglimitrpt."
+  entity="TmpAggregateLimitRpt"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="tmpagglimitrpt"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.aggregatelimit.entity.TmpAggregateLimitRpt"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.TmpAggregateLimitRptImpl"/>
+  <column
+    autoincrement="agglimitrptorderseq"
+    desc="The id of the agglimitrpt."
+    name="TmpID"
+    nullok="false"
+    type="softentityreference"/>
+  <column
+    desc="A foreign key to the PolicyPeriod."
+    name="PolicyPeriodID"
+    nullok="false"
+    type="softentityreference"/>
+  <column
+    desc="A foreign key to the CoverageLine."
+    name="CoverageLineID"
+    nullok="true"
+    type="softentityreference"/>
+  <typekey
+    desc="Aggregate limit type."
+    name="LimitType"
+    nullok="false"
+    typelist="AggregateLimitType"/>
+  <typekey
+    default="limit"
+    desc="Aggregate type: limit or deductible."
+    name="ValueType"
+    nullok="false"
+    typelist="AggregateType"/>
+  <typekey
+    desc="Exclusions for limit used calculations"
+    name="AggLimitCalcCriteria"
+    nullok="true"
+    typelist="AggLimitCalcCriteria"/>
+  <index
+    desc="Two aggregate limits must differ in at least one of PolicyPeriod, CoverageLine, LimitType, or ValueType."
+    name="tmpagglimitrpt1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="PolicyPeriodID"/>
+    <indexcol
+      keyposition="2"
+      name="CoverageLineID"/>
+    <indexcol
+      keyposition="3"
+      name="LimitType"/>
+    <indexcol
+      keyposition="4"
+      name="ValueType"/>
+  </index>
+</entity>

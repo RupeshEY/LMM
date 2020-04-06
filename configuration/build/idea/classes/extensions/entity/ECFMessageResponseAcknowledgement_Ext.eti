@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<entity
+  desc="Entity to hold the acknowladgement response information from the response sent back from XChanging"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageResponseAcknowledgement_Ext"
+  table="ecfmessagerspack_ext"
+  type="retireable">
+  <column
+    name="AcknowledgementLevelIndicator"
+    nullok="false"
+    type="shorttext"/>
+  <typekey
+    name="AcknowledgementStatus"
+    nullok="false"
+    typelist="ECFAcknowledgementStatus_Ext"/>
+  <column
+    name="ResponseDescription"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="Links this acknowledgement response to a error code"
+    name="ErrorCode"
+    nullok="true"
+    type="integer"/>
+  <typekey
+    name="AckLevel"
+    nullok="true"
+    typelist="ECFAckLevelCode_Ext"/>
+</entity>

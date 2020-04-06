@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<PolicyPeriodConfig
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="policyperiod-config.xsd">
+
+  <PolicyPeriodDef  type="account">
+    <PolicyTypeConfig code="PersonalAuto"/>
+    <PolicyTypeConfig code="BusinessAuto"/>
+    <PolicyTypeConfig code="WorkersComp"/>
+    <PolicyTypeConfig code="BusinessOwners"/>
+    <PolicyTypeConfig code="GeneralLiability"/>
+    <PolicyTypeConfig code="CommercialProperty"/>
+    <PolicyTypeConfig code="InlandMarine"/>
+    <PolicyTypeConfig code="CommercialPackage"/>
+    <PolicyTypeConfig code="Homeowners"/>
+    <PolicyTypeConfig code="PersonalUmbrella"/>
+    <PolicyTypeConfig code="prof_liability"/>
+    <PolicyTypeConfig code="farmowners"/>
+    <PolicyTypeConfig code="travel_per"/>
+
+    <PolicyField fieldName="AccountNumber"/>
+  </PolicyPeriodDef>
+
+  <PolicyPeriodDef type="policy">
+    <PolicyTypeConfig code="PersonalAuto"/>
+    <PolicyTypeConfig code="BusinessAuto"/>
+    <PolicyTypeConfig code="WorkersComp"/>
+    <PolicyTypeConfig code="BusinessOwners"/>
+    <PolicyTypeConfig code="GeneralLiability"/>
+    <PolicyTypeConfig code="CommercialProperty"/>
+    <PolicyTypeConfig code="InlandMarine"/>
+    <PolicyTypeConfig code="CommercialPackage"/>
+    <PolicyTypeConfig code="Homeowners"/>
+    <PolicyTypeConfig code="PersonalUmbrella"/>
+    <PolicyTypeConfig code="prof_liability"/>
+    <PolicyTypeConfig code="farmowners"/>
+    <PolicyTypeConfig code="travel_per"/>
+
+    <PolicyField fieldName="PolicyNumber"/>
+    <PolicyField fieldName="EffectiveDate"/>
+    <PolicyField fieldName="ExpirationDate"/>
+  </PolicyPeriodDef>
+</PolicyPeriodConfig>

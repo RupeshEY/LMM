@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="ECFMessageStatus_Ext" desc="Contains expected ECF message processing status">
+<typecode
+  code="Pending"
+  desc="Message that hasn't been processed yet"
+  name="Pending"/>
+  <typecode
+  code="Success"
+  desc="Message successfully processed"
+  name="Success"/>
+  <typecode
+  code="Failure"
+  desc="Failure during message processing"
+  name="Failure"/>
+  <typecode
+  code="Suspended"
+  desc="Message that has to be manually managed"
+  name="Suspended"/>
+  <typecode
+  code="Rejected"
+  desc="Message that has been rejected"
+  name="Rejected"/>
+  <typecode
+  code="Superseded"
+  desc="Message that has to been superseded by a newer message"
+  name="Superseded"></typecode>
+  <typecode
+    code="FinancialAuthorisation"
+    desc="Signifies that the message is awaiting financial authorisation."
+    name="Financial Authorisation"/>
+</typelist>

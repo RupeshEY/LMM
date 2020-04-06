@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFTransactionState_Ext"
+  desc="Transaction state indicates the particular claim message state within a specific TR. Such as Lead or Agreement Party is agreed or not and if it the message is respond-able or not."
+  table="ecftransactionstate"
+  type="retireable">
+  <column
+    desc="The UUID for the respondable message or null if there is no any."
+    name="UUID"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="36"/>
+  </column>
+  <column
+    desc="The ID of the receiver party."
+    name="ReceiverId"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="TR"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="UCR"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    default="false"
+    name="Agreed"
+    nullok="true"
+    type="bit"/>
+  <array
+    arrayentity="ECFMessageClaimData_Ext"
+    name="ECFMessages"/>
+  <column
+    desc="The Transaction Sequence number for this Transaction"
+    name="TransactionSequence"
+    nullok="false"
+    type="integer"/>
+</entity>

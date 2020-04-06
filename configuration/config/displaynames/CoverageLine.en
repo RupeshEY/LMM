@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<Entity
+  name="CoverageLine">
+  <Columns>
+    <Column
+      beanPath="CoverageLine.CoverageSubtype"
+      name="subtype"
+      sortOrder="1"/>
+  </Columns>
+  <DisplayName><![CDATA[var retString = "";
+      if (subtype == TC_PROPERTYCOVERAGE) {
+        retString = gw.api.locale.DisplayKey.get("DisplayName.Coverage.Property");
+      }
+      if (subtype == TC_VEHICLECOVERAGE) {
+        retString = gw.api.locale.DisplayKey.get("DisplayName.Coverage.Vehicle");
+      }
+      if (subtype == TC_POLICYCOVERAGE) {
+        retString = gw.api.locale.DisplayKey.get("DisplayName.Coverage.Policy");
+      }
+      return retString;]]></DisplayName>
+</Entity>

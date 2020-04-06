@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <DetailViewPanel
+    id="VoidStopCheckGroupDV">
+    <Require
+      name="Check"
+      type="Check"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Financials.VoidStopCheckGroup.Tip1&quot;)"/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Financials.VoidStopCheckGroup.Tip2&quot;)"/>
+      <TextInput
+        boldLabel="true"
+        editable="true"
+        id="Check_Comments"
+        label="DisplayKey.get(&quot;NVV.Financials.VoidStopCheckGroup.Check.Comments&quot;)"
+        value="Check.Comments"/>
+      <ListViewInput
+        boldLabel="true"
+        def="VoidStopCheckGroupLV(Check.Group)"
+        label="DisplayKey.get(&quot;NVV.Financials.VoidStopCheckGroup.Check.Group.Checks&quot;)">
+        <Toolbar/>
+      </ListViewInput>
+      <ListViewInput
+        boldLabel="true"
+        def="CheckSummaryPaymentsLV(Check.Group.PrimaryCheck.Payments)"
+        label="DisplayKey.get(&quot;NVV.Financials.VoidStopCheckGroup.Check.Payments&quot;)">
+        <Toolbar/>
+      </ListViewInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

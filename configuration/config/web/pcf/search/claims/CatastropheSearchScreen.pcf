@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="CatastropheSearchScreen">
+    <Require
+      name="gotoCatastrophe"
+      type="Catastrophe"/>
+    <Variable
+      initialValue="true"
+      name="enterPage"
+      type="boolean"/>
+    <Variable
+      initialValue="gw.api.heatmap.CatastropheSearchCriteria.getCriteria(enterPage, gotoCatastrophe, &quot;catMap&quot;)"
+      name="criteria"
+      recalculateOnRefresh="true"
+      type="gw.api.heatmap.CatastropheSearchCriteria"/>
+    <Variable
+      initialValue="criteria.updateMapAndTable()"
+      name="updateMapAndTable"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="criteria.HeatMap.SelectionMessage"
+      name="mapSelectionMessage"
+      recalculateOnRefresh="true"
+      type="String"/>
+    <Variable
+      initialValue="criteria.ClaimTableData"
+      name="catSearchClaimResults"
+      recalculateOnRefresh="true"
+      type="gw.api.database.IQueryBeanResult&lt;ClaimSearchView&gt;"/>
+    <Variable
+      initialValue="criteria.PolicyLocationTableData"
+      name="catSearchPolicyLocationResults"
+      recalculateOnRefresh="true"
+      type="List&lt;gw.api.heatmap.CatastropheSearchCriteria.PolicyLocationSearchResult&gt;"/>
+    <Variable
+      initialValue="enterPage = false; return 0"
+      name="clearEnterPage"
+      type="java.lang.Integer"/>
+    <Variable
+      initialValue="&quot;SimpleClaimSearchResultsLV&quot;"
+      name="PrintTargetLv"
+      type="java.lang.String"/>
+    <SearchPanel
+      criteriaName="criteriaWrapper"
+      maxSearchResults="gw.api.search.MaxSearchResults.forClaims()"
+      resultCachingEnabled="false"
+      resultsName="dummyResults"
+      search="null as gw.api.database.IQueryBeanResult&lt;ClaimSearchView&gt;"
+      searchCriteria="null"
+      searchCriteriaType="java.io.Serializable"
+      searchOnEnter="false"
+      searchResultsType="gw.api.database.IQueryBeanResult&lt;ClaimSearchView&gt;">
+      <PanelRef
+        def="CatastropheHeatMapFilterPanelSet(criteria, true)"/>
+      <DetailViewPanel
+        columnDivider="false"
+        visible="criteria.MapVisible">
+        <InputColumn>
+          <TextInput
+            id="howToSelect"
+            value="criteria.HeatMap.hasPolicyLocations() ?  DisplayKey.get(&quot;JSP.ClaimSearch.Search.ClaimSearch.Catastrophe.ToChangeSelectionWithPolicyLocations&quot;) : DisplayKey.get(&quot;JSP.ClaimSearch.Search.ClaimSearch.Catastrophe.ToChangeSelection&quot;)"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <TemplatePanel>
+        <TemplatePanelContents><![CDATA[<iframe id="mapFrame" src="./../../../../MapOverlay.do?map.html=&mapName=${criteria.HeatMap.MapName}" width="100%" height="${criteria.HeatMap.InitialHeight}" frameborder="0"> <p>${gw.api.locale.DisplayKey.get('Web.HeatMap.BrowserDoesntSupportIframes')}</p> </iframe>]]></TemplatePanelContents>
+      </TemplatePanel>
+      <DetailViewPanel
+        columnDivider="false"
+        visible="criteria.MapVisible">
+        <InputColumn
+          id="mapSelectionIC">
+          <TextInput
+            id="mapSelectionMessage"
+            label="&quot; &quot;"
+            value="mapSelectionMessage"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <CardViewPanel
+        hideTabIfSingle="true">
+        <Card
+          id="Claims"
+          title="DisplayKey.get(&quot;JSP.ClaimSearch.Search.Claims&quot;)"
+          visible="criteria.TableVisible and criteria.HeatMap.hasClaims()">
+          <PanelRef
+            def="SimpleClaimSearchResultsLV(catSearchClaimResults)"
+            visible="criteria.TableVisible">
+            <TitleBar
+              appendListViewPaging="true"
+              title="DisplayKey.get(&quot;JSP.ClaimSearch.Search.Results&quot;)"/>
+            <Toolbar>
+              <CheckedValuesToolbarButton
+                allCheckedRowsAction="AssignClaimsPopup.push(new gw.api.claim.ClaimAssignmentPopup(CheckedValues))"
+                id="ClaimSearchScreen_AssignButton"
+                iterator="SimpleClaimSearchResultsLV.SimpleClaimSearchResultsLV"
+                label="DisplayKey.get(&quot;Web.ClaimSearch.Toolbar.Assign&quot;)"
+                shortcut="G"/>
+              <ToolbarDivider/>
+              <ToolbarButton
+                action="gw.api.print.ListViewPrintOptionPopupAction.printListViewOnlyWithOptions(PrintTargetLv, DisplayKey.get(&quot;JSP.ClaimSearch.Search.Results&quot;), null)"
+                available="perm.User.printlistviews"
+                id="SimpleClaimSearchScreen_PrintButton"
+                label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+                shortcut="N"/>
+            </Toolbar>
+          </PanelRef>
+        </Card>
+        <Card
+          id="Policy"
+          title="DisplayKey.get(&quot;JSP.ClaimSearch.Search.PolicyLocations&quot;)"
+          visible="criteria.TableVisible and criteria.HeatMap.hasPolicyLocations()">
+          <PanelRef
+            def="PolicyLocationSearchResultsLV(catSearchPolicyLocationResults, criteria.SelectedCatastrophe.PolicyEffectiveDate)"
+            visible="criteria.TableVisible">
+            <TitleBar
+              appendListViewPaging="true"
+              title="DisplayKey.get(&quot;JSP.ClaimSearch.Search.Results&quot;)"/>
+            <Toolbar/>
+          </PanelRef>
+        </Card>
+      </CardViewPanel>
+    </SearchPanel>
+  </Screen>
+</PCF>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="(Claim.State != ClaimState.TC_DRAFT) and (perm.Claim.view(Claim) and ((perm.Evaluation.view(Claim) and perm.System.viewclaimevals) or (perm.Negotiation.view(Claim) and perm.System.viewclaimngtns)))"
+    id="ClaimPlanOfActionGroup"
+    title="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Settlement&quot;)">
+    <LocationEntryPoint
+      signature="ClaimPlanOfActionGroup(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.ClaimPlanOfAction.Evaluations&quot;)"
+      location="ClaimEvaluations(Claim)"
+      shortcut="S"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.ClaimPlanOfAction.Negotiations&quot;)"
+      location="ClaimNegotiations(Claim)"
+      shortcut="G"/>
+  </LocationGroup>
+</PCF>

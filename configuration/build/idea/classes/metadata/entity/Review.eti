@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A service provider review, created from a given ReviewType."
+  entity="Review"
+  exportable="true"
+  table="review"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.contact.impl.ReviewImpl"/>
+  <implementsInterface
+    iface="gw.cc.contact.entity.Review"
+    impl="com.guidewire.cc.domain.contact.impl.ReviewImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.contact.impl.ReviewInternal"
+    impl="com.guidewire.cc.domain.contact.impl.ReviewImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.contact.impl.ReviewImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="ReviewTypeID"
+    desc="Associated ReviewType."
+    fkentity="ReviewType"
+    ignoreforevents="true"
+    name="ReviewType"
+    nullok="false"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Associated Claim."
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    columnName="ContactID"
+    desc="Associated Contact."
+    fkentity="Contact"
+    name="Contact"
+    nullok="false"/>
+  <foreignkey
+    desc="User who created the review"
+    fkentity="User"
+    name="ReviewedBy"
+    nullok="true"/>
+  <column
+    desc="Short name of this review type."
+    name="Name"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <column
+    desc="Optionally associated sub-Contact (Service Person or similar)."
+    name="Subcontact"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="80"/>
+  </column>
+  <column
+    desc="Detailed description of this review type."
+    name="RelatedTo"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="80"/>
+  </column>
+  <column
+    desc="Date of the service being reviewed"
+    name="ServiceDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    name="Score"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Represents the ID of the associated ReviewSummary in Address Book. Null if the object is not linked to Address Book."
+    name="AddressBookUID"
+    nullok="true"
+    type="externalid">
+  </column>
+  <column
+    desc="Description ofthe accident or loss."
+    name="Description"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    default="false"
+    desc="Boolean field to mark a review as completed."
+    name="Completed"
+    nullok="false"
+    type="bit"/>
+  <typekey
+    name="ServiceType"
+    nullok="true"
+    typelist="ReviewServiceType"/>
+  <array
+    arrayentity="ReviewCategoryScore"
+    desc="List of categories and their scores, associated with this Review."
+    name="CategoryScores"
+    triggersValidation="true"/>
+  <array
+    arrayentity="ReviewQAnswerSet"
+    desc="List of Question set/Answer Set pairs, and their assigned categories, associated with this Review."
+    name="QuestionAnswerSets"
+    triggersValidation="true"/>
+  <column
+    desc="Comments about the Review"
+    name="Comments"
+    nullok="true"
+    type="mediumtext"/>
+</entity>

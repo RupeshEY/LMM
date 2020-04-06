@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <InputSet
+    id="OtherServicesLVInputSet">
+    <Require
+      name="claim"
+      type="entity.Claim"/>
+    <Require
+      name="incident"
+      type="entity.Incident"/>
+    <Require
+      name="otherServices"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Require
+      name="alsoAddAndRemove"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Require
+      name="incidentsToExclude"
+      type="java.util.Collection&lt;Incident&gt;"/>
+    <ListViewInput
+      def="OtherServicesLV(otherServices, alsoAddAndRemove)"
+      labelAbove="true">
+      <Toolbar
+        visible="CurrentLocation.InEditMode">
+        <ToolbarButton
+          action="OtherServiceRequestPopup.push(claim, incident, alsoAddAndRemove, incidentsToExclude)"
+          id="AddServiceRequest"
+          label="DisplayKey.get(&quot;Web.ServicesScreen.ServiceRequest.AddOtherService&quot;)"/>
+        <IteratorButtons
+          addVisible="false"
+          iterator="OtherServicesLV.OtherServicesLV"
+          removeVisible="areAnyOtherRequestsEditable()"/>
+      </Toolbar>
+    </ListViewInput>
+    <Code><![CDATA[function areAnyOtherRequestsEditable() : boolean {
+  return otherServices.hasMatch( \ sr -> sr.IsEditableInUI)
+}]]></Code>
+  </InputSet>
+</PCF>

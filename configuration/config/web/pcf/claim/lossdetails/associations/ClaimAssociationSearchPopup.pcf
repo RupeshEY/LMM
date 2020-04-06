@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    canVisit="perm.Claim.view(Claim) and perm.ClaimAssociation.view"
+    id="ClaimAssociationSearchPopup"
+    parent="ClaimAssociations(Claim)"
+    returnType="ClaimAssociation"
+    title="DisplayKey.get(&quot;Web.Claim.AssociationSearch&quot;)">
+    <LocationEntryPoint
+      signature="ClaimAssociationSearchPopup(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="ClaimAssociationsSearchScreen">
+      <SearchPanel
+        criteriaName="ClaimAssociationSearchCriteria"
+        resultsName="ClaimAssociationList"
+        search="ClaimAssociationSearchCriteria.performSearch()"
+        searchCriteria="new ClaimAssociationSearchCriteria()"
+        searchCriteriaType="entity.ClaimAssociationSearchCriteria"
+        searchResultsType="ClaimAssociation[]">
+        <PanelRef
+          def="ClaimAssociationSearchDV(ClaimAssociationSearchCriteria)"/>
+        <PanelRef
+          def="ClaimAssociationsSearchResultsLV(ClaimAssociationList)">
+          <TitleBar
+            appendListViewPaging="true"
+            title="DisplayKey.get(&quot;Web.Search.Results&quot;)"/>
+          <Toolbar/>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Popup>
+</PCF>

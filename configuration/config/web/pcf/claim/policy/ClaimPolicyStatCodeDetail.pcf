@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    id="ClaimPolicyStatCodeDetail"
+    parent="ClaimPolicyStatCodes(Claim)"
+    title="DisplayKey.get(&quot;Web.ClaimPolicy.StatCodeDetail&quot;)">
+    <LocationEntryPoint
+      signature="ClaimPolicyStatCodeDetail(Claim : Claim, StatCode : StatCode)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="StatCode"
+      type="StatCode"/>
+    <Screen
+      id="ClaimPolicyStatCodeDetailScreen">
+      <Toolbar/>
+      <PanelRef
+        def="StatCodeDetailDV(StatCode)"/>
+    </Screen>
+  </Page>
+</PCF>

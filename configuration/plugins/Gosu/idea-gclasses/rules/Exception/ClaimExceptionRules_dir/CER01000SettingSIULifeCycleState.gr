@@ -1,0 +1,20 @@
+package rules.Exception.ClaimExceptionRules_dir
+
+@gw.rules.RuleName("CER01000 - Setting SIU Life Cycle State")
+internal class CER01000SettingSIULifeCycleState {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+libraries.SetSIULifeCycleState.settingSIULifeCycleState(claim)
+/*end00rule*/
+
+  }
+}

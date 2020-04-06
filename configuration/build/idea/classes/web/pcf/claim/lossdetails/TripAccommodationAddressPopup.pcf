@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="true"
+    id="TripAccommodationAddressPopup"
+    returnType="TripAccommodation"
+    startInEditMode="aTripAccommodation.PropertyName == null or isParentInEditMode == true"
+    title="DisplayKey.get(&quot;Web.TripIncident.TripAccommodationPopup&quot;)">
+    <LocationEntryPoint
+      signature="TripAccommodationAddressPopup(aTripAccommodation : TripAccommodation, aTripIncident : TripIncident, isParentInEditMode : Boolean)"/>
+    <LocationEntryPoint
+      signature="TripAccommodationAddressPopup(aTripIncident : TripIncident, isParentInEditMode : Boolean)"/>
+    <Variable
+      initialValue="aTripAccommodationParam == null ? initTripAccommodation() : aTripAccommodationParam"
+      name="aTripAccommodation"
+      type="TripAccommodation"/>
+    <Variable
+      name="aTripIncident"
+      type="TripIncident"/>
+    <Variable
+      name="isParentInEditMode"
+      recalculateOnRefresh="true"
+      type="Boolean"/>
+    <Variable
+      name="aTripAccommodationParam"
+      type="TripAccommodation"/>
+    <Variable
+      initialValue="aTripAccommodation.AddnlTripAccommodations.length &gt; 0 ? aTripAccommodation.AddnlTripAccommodations.first() : null"
+      name="anAddnlTripAccommodation"
+      recalculateOnRefresh="true"
+      type="AddnlTripAccommodation"/>
+    <Screen>
+      <PanelRef
+        def="ClaimTripAccommodationDetailDV(aTripAccommodation, aTripIncident)"
+        editable="true"
+        id="ClaimPolicyTripAccommodationDetailDV">
+        <Toolbar>
+          <EditButtons
+            pickValue="aTripAccommodation"
+            updateLabel="aTripAccommodationParam == null ? DisplayKey.get(&quot;Button.OK&quot;) : DisplayKey.get(&quot;Button.Update&quot;)"/>
+        </Toolbar>
+      </PanelRef>
+      <CardViewPanel
+        hideTabIfSingle="true">
+        <Card
+          id="AffectedTripAccommodationCard"
+          title="&quot;&quot;"
+          visible="not aTripAccommodation.CancelOnly">
+          <DetailViewPanel>
+            <InputColumn>
+              <Label
+                label="DisplayKey.get(&quot;Web.TripIncidentScreen.TripCard.AddnlTripAccommodations&quot;)"/>
+            </InputColumn>
+          </DetailViewPanel>
+          <PanelRef
+            def="AdditionalTripAccommodationLV(aTripAccommodation)">
+            <Toolbar>
+              <IteratorButtons
+                iterator="AdditionalTripAccommodationLV.TripAccommodationIterator"/>
+              <ToolbarDivider/>
+              <CheckedValuesToolbarButton
+                checkedRowAction="CheckedValue.Assessment = TC_APPROVE"
+                flags="no approve_add_acc, any row_add_acc"
+                hideIfReadOnly="true"
+                id="SegmentApprovalButton"
+                iterator="AdditionalTripAccommodationLV.TripAccommodationIterator"
+                label="DisplayKey.get(&quot;Web.TripIncidentScreen.Approve&quot;)"
+                shortcut="P"/>
+              <CheckedValuesToolbarButton
+                checkedRowAction="CheckedValue.Assessment = TC_REVIEW"
+                flags="no approve_add_acc, any row_add_acc"
+                hideIfReadOnly="true"
+                id="AddnlAccommodationReviewButton"
+                iterator="AdditionalTripAccommodationLV.TripAccommodationIterator"
+                label="DisplayKey.get(&quot;Web.TripIncidentScreen.Review&quot;)"
+                shortcut="V"/>
+              <CheckedValuesToolbarButton
+                checkedRowAction="CheckedValue.Assessment = TC_DENY"
+                flags="no deny_add_acc, any row_add_acc"
+                hideIfReadOnly="true"
+                id="AddnlAccommodationDenyButton"
+                iterator="AdditionalTripAccommodationLV.TripAccommodationIterator"
+                label="DisplayKey.get(&quot;Web.TripIncidentScreen.Deny&quot;)"
+                shortcut="N"/>
+              <CheckedValuesToolbarButton
+                checkedRowAction="CheckedValue.Assessment = null"
+                flags="no clear_add_acc, any row_add_acc"
+                hideIfReadOnly="true"
+                id="AddnlAccommodationClearButton"
+                iterator="AdditionalTripAccommodationLV.TripAccommodationIterator"
+                label="DisplayKey.get(&quot;Web.TripIncidentScreen.Clear&quot;)"
+                shortcut="L"/>
+            </Toolbar>
+          </PanelRef>
+        </Card>
+      </CardViewPanel>
+    </Screen>
+    <Code><![CDATA[function initTripAccommodation() : TripAccommodation {
+  var result = new TripAccommodation()
+  result.TripIncident = aTripIncident
+  return result 
+}]]></Code>
+  </Popup>
+</PCF>

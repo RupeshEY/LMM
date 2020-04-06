@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="JurisdictionConditionsLV">
+    <Require
+      name="classification"
+      type="WorkloadClassification"/>
+    <ExposeIterator
+      valueType="JurisdictionConditionFilter"
+      widget="JurisdictionConditionsLV"/>
+    <RowIterator
+      editable="true"
+      elementName="jurisdiction"
+      hideCheckBoxesIfReadOnly="true"
+      toAdd="classification.JurisdictionCondition.addToConditionFilters(jurisdiction)"
+      toRemove="classification.JurisdictionCondition.removeFromConditionFilters(jurisdiction)"
+      value="classification.JurisdictionCondition.ConditionFilters"
+      valueType="entity.JurisdictionConditionFilter[]">
+      <Row>
+        <TypeKeyCell
+          editable="true"
+          filter="VALUE.hasCategory(JurisdictionType.TC_INSURANCE)"
+          id="Jurisdiction"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.ExposureJurisdictionStatesLV.JurisdictionState&quot;)"
+          required="true"
+          value="jurisdiction.Jurisdiction"
+          valueType="typekey.Jurisdiction"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

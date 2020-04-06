@@ -1,0 +1,162 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterCommit="if (afterCommitAction != null) {afterCommitAction()}"
+    beforeCommit="if (beforeCommitAction != null) {beforeCommitAction()}"
+    canEdit="true"
+    canVisit="perm.Check.view(check)"
+    id="ClaimFinancialsChecksDetail"
+    parent="ClaimFinancialsChecks(claim)"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;JSP.CheckDetail.ViewCheck.Title&quot;)">
+    <LocationEntryPoint
+      signature="ClaimFinancialsChecksDetail(claim : Claim, check : Check)"/>
+    <LocationEntryPoint
+      signature="ClaimFinancialsChecksDetail(claim : Claim, check : Check, autoPaidInvoice: ServiceRequestInvoice)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      name="check"
+      type="Check"/>
+    <Variable
+      name="CheckView"
+      type="CheckView"/>
+    <Variable
+      initialValue="null"
+      name="beforeCommitAction"
+      type="block()"/>
+    <Variable
+      initialValue="null"
+      name="afterCommitAction"
+      type="block()"/>
+    <Variable
+      name="autoPaidInvoice"
+      type="ServiceRequestInvoice"/>
+    <Screen
+      id="ClaimFinancialsChecksDetailScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="EditCheckWizard.go(claim, check)"
+          available="!check.Bulked and ((check.Group != null) ? check.Group.isEditable() : check.isEditable()) and (!check.CheckSet.Recurring || check.CheckSet.Approved) and perm.Payment.edit(check)"
+          id="ClaimFinancialsChecksDetail_EditButton"
+          label="DisplayKey.get(&quot;Button.Edit&quot;)"
+          shortcut="E"
+          visible="perm.Payment.edit(check)"/>
+        <ToolbarButton
+          action="ensureLocationEditing();  beforeCommitAction = \ -&gt; deleteCheck(check);  afterCommitAction = \ -&gt; ClaimFinancialsChecks.go(claim);  CurrentLocation.commit()"
+          available="!check.Bulked and check.Deletable and perm.Payment.edit(check)"
+          confirmMessage="getDeleteConfirmationMsg(check)"
+          id="ClaimFinancialsChecksDetail_DeleteButton"
+          label="DisplayKey.get(&quot;Button.Delete&quot;)"
+          shortcut="L"
+          visible="perm.Payment.edit(check)"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="CheckTransfer.go(claim, check)"
+          available=" check.isTransferable() and perm.Check.transfer(check)"
+          id="ClaimFinancialsChecksDetail_TransferButton"
+          label="DisplayKey.get(&quot;Button.Check.Transfer&quot;)"
+          shortcut="T"
+          visible="perm.Check.transfer(check)"/>
+        <ToolbarButton
+          action="VoidStopCheck.go(claim, check)"
+          available="( (check.Voidable or check.Stoppable)) and perm.Payment.voidorstop(check)"
+          id="ClaimFinancialsChecksDetail_VoidStopButton"
+          label="DisplayKey.get(&quot;Button.Check.VoidStop&quot;)"
+          shortcut="P"
+          visible="perm.Payment.voidorstop(check)"/>
+        <ToolbarButton
+          action="ReissueCheck.go(claim, check)"
+          available="!check.Bulked and check.Reissueable and perm.Payment.voidorstop(check) and check.PaymentMethod != PaymentMethod.TC_EFT"
+          id="ClaimFinancialsChecksDetail_ReissueButton"
+          label="DisplayKey.get(&quot;Button.Check.Reissue&quot;)"
+          visible="perm.Payment.voidorstop(check)"/>
+        <ToolbarButton
+          action="resubmitCheck(check)"
+          available=" check.Resubmittable and perm.Check.edit(check)"
+          id="ClaimFinancialsChecksDetail_ResubmitButton"
+          label="DisplayKey.get(&quot;Button.Check.Resubmit&quot;)"
+          shortcut="R"
+          visible="check.Resubmittable"/>
+        <ToolbarButton
+          action="CloneCheckWizard.go(claim, check)"
+          available="!check.Bulked and perm.Claim.createpayment(claim)"
+          id="ClaimFinancialsChecksDetail_CloneButton"
+          label="DisplayKey.get(&quot;Button.Check.Clone&quot;)"
+          visible="perm.Claim.createpayment(claim)"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="EditRecurrenceCheckWizard.go(claim, check)"
+          available="check.CheckSet.Recurrence != null and check.CheckSet.Recurrence.hasEditableChecks() and perm.Payment.edit(check)"
+          id="ClaimFinancialsChecksDetail_EditAllButton"
+          label="DisplayKey.get(&quot;Button.Payment.Edit.EditAll&quot;)"
+          shortcut="U"
+          tooltip="DisplayKey.get(&quot;Button.Payment.Edit.EditAll.Tip&quot;)"
+          visible="check.CheckSet.Recurrence != null and perm.Payment.edit(check)"/>
+        <ToolbarButton
+          action="ChangeCheckRecurrence.go(claim, check)"
+          available="check.CheckSet.Recurrence != null and check.CheckSet.Recurrence.hasEditableChecks() and perm.Payment.edit(check)"
+          id="ClaimFinancialsChecksDetail_ChangeRecurrenceScheduleButton"
+          label="DisplayKey.get(&quot;Button.Payment.Edit.ChangeRecurrenceSchedule&quot;)"
+          shortcut="S"
+          visible="check.CheckSet.Recurrence != null and perm.Payment.edit(check)"/>
+      </Toolbar>
+      <AlertBar
+        id="InvoiceWasAutoPaid"
+        label="autoPaidInvoice.ReferenceNumber.HasContent ? DisplayKey.get(&quot;Web.Plugin.InvoiceAutoApproveAutoPayPlugin.AutoPaidWithReferenceNumber&quot;, autoPaidInvoice.ReferenceNumber, autoPaidInvoice.Amount) : DisplayKey.get(&quot;Web.Plugin.InvoiceAutoApproveAutoPayPlugin.AutoPaid&quot;, autoPaidInvoice.Amount)"
+        visible="autoPaidInvoice != null"/>
+      <PanelRef
+        def="CheckDV(check)"
+        visible="!check.Retired"/>
+    </Screen>
+    <Code><![CDATA[function deleteCheck(aCheck: Check) {
+  // only unlink deductible if the deleted check is the primary check or not in a checkgroup. 
+  if (aCheck.Group == null or (aCheck.Group != null and aCheck.PublicID == aCheck.Group.PrimaryCheck.PublicID)) {
+    aCheck.unlinkDeductibles()
+  }
+  aCheck.delete()
+}
+
+function getDeleteConfirmationMsg(chk: Check): java.lang.String {
+  var invoiceList = chk.BulletedListOfServiceRequestInvoicesForWarning
+  if (chk.Primary) {
+    if (invoiceList != null) {
+      return DisplayKey.get("Java.Financials.DeleteCheckWithInvoices.Tip", ServiceRequestInvoiceStatus.TC_APPROVED.DisplayName, invoiceList)
+    } else {
+      return DisplayKey.get("Java.Financials.DeleteCheck.Tip")
+    }
+  } else {
+    if (invoiceList != null) {
+      return DisplayKey.get("Java.Financials.DeleteCheckWithInvoices.Tip.Secondary", ServiceRequestInvoiceStatus.TC_APPROVED.DisplayName, invoiceList)
+    } else {
+      return DisplayKey.get("Java.Financials.DeleteCheck.Tip.Secondary");
+    }
+  }
+}
+
+function resubmitCheck(rcheck: Check) {
+  ensureLocationEditing()
+  var success = false
+  try {
+    //relinks the deductible
+    rcheck.relinkFormerDeductiblesForResubmit()
+    rcheck.resubmit()
+    CurrentLocation.commit()
+    success = true
+  } finally {
+    if (!success) {
+      CurrentLocation.cancel()
+    }
+  }
+}
+
+function ensureLocationEditing() {
+  if (!CurrentLocation.InEditMode) {
+    CurrentLocation.startEditing();
+  }
+}]]></Code>
+  </Page>
+</PCF>

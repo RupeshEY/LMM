@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="ManualCheckWizard_CheckPaymentsScreen">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.financials.CheckWizardInfo"/>
+    <Variable
+      initialValue="gw.api.financials.ReserveLineInputSetStrategyForPaymentCreateAndEdit.newHelper(Wizard)"
+      name="reserveLineInputSetHelper"
+      type="gw.api.financials.ReserveLineInputSetHelper"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarDivider/>
+      <IteratorButtons
+        addLabel="DisplayKey.get(&quot;Button.Check.AddPayment&quot;)"
+        addVisible="gw.api.financials.FinancialsUtil.isAllowMultiplePayments()"
+        iterator="NewCheckPaymentPanelSet.NewCheckPaymentsLV"
+        removeLabel="DisplayKey.get(&quot;Button.Check.RemovePayment&quot;)"
+        removeVisible="gw.api.financials.FinancialsUtil.isAllowMultiplePayments()"/>
+    </Toolbar>
+    <PanelRef
+      def="NewCheckPaymentPanelSet(Wizard, reserveLineInputSetHelper)"
+      mode="gw.api.financials.FinancialsUtil.isAllowMultiplePayments() ? &quot;Multi&quot; : &quot;Single&quot;"/>
+  </Screen>
+</PCF>

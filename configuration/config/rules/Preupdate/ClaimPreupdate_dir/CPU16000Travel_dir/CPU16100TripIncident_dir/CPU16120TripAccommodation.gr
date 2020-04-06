@@ -1,0 +1,35 @@
+package rules.Preupdate.ClaimPreupdate_dir.CPU16000Travel_dir.CPU16100TripIncident_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CPU16120 - Trip Accommodation")
+internal class CPU16120TripAccommodation {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.TripIncidentsOnly.hasMatch(\ t -> t.TripAccommodations.length > 0)
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* This rule ultimately calls onPreUpate for each trip accomodation, which evaluates if the 
+ * accomodation's Assessment field has changed. If it has, history events and activities may 
+ * be created.
+ */
+var today = java.util.Date.CurrentDate
+for (eachTripIncident in claim.TripIncidentsOnly) {
+  for (eachTripAccommodation in eachTripIncident.TripAccommodations) {
+    eachTripAccommodation.onPreUpdate(claim, today, DisplayKey.get("Rules.PreUpdate.Claim.TripExpenseAccommodation"))
+    for (eachAddnlTripAccommodation in eachTripAccommodation.AddnlTripAccommodations) {
+      eachAddnlTripAccommodation.onPreUpdate(claim, today, DisplayKey.get("Rules.PreUpdate.Claim.TripExpenseAccommodation"))
+    }
+  }
+}
+
+/*end00rule*/
+
+  }
+}

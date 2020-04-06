@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Estimate of damage from Iexprs"
+  name="EstDamageType">
+  <typecode
+    code="1"
+    desc="$ 0 - 5,000"
+    name="$ 0 - 5,000"
+    priority="1">
+    <category
+      code="USD"
+      typelist="Currency"/>
+  </typecode>
+  <typecode
+    code="2"
+    desc="$ 5,001 - 15,000"
+    name="$ 5,001 - 15,000"
+    priority="2">
+    <category
+      code="USD"
+      typelist="Currency"/>
+  </typecode>
+  <typecode
+    code="3"
+    desc="$ 15,001 - 25,000"
+    name="$ 15,001 - 25,000"
+    priority="3">
+    <category
+      code="USD"
+      typelist="Currency"/>
+  </typecode>
+  <typecode
+    code="4"
+    desc="$ 25,001 - 50,000"
+    name="$ 25,001 - 50,000"
+    priority="4">
+    <category
+      code="USD"
+      typelist="Currency"/>
+  </typecode>
+  <typecode
+    code="5"
+    desc="$ 50,001 - 100,000"
+    name="$ 50,001 - 100,000"
+    priority="5">
+    <category
+      code="USD"
+      typelist="Currency"/>
+  </typecode>
+  <typecode
+    code="6"
+    desc="&gt; $ 100,000"
+    name="&gt; $ 100,000"
+    priority="6">
+    <category
+      code="USD"
+      typelist="Currency"/>
+  </typecode>
+  <typecode
+    code="Unknown"
+    desc="Unknown"
+    name="Unknown"
+    priority="7">
+    <category
+      code="USD"
+      typelist="Currency"/>
+    <category
+      code="EUR"
+      typelist="Currency"/>
+  </typecode>
+  <typecode
+    code="7"
+    desc="&#8364; 0 - 5000"
+    name="&#8364; 0 - 5000"
+    priority="1">
+    <category
+      code="EUR"
+      typelist="Currency"/>
+  </typecode>
+  <typecode
+    code="8"
+    desc="&#8364; 5001 - 15 000"
+    name="&#8364; 5001 - 15 000"
+    priority="2">
+    <category
+      code="EUR"
+      typelist="Currency"/>
+  </typecode>
+  <typecode
+    code="9"
+    desc="&#8364; 15 001 - 25 000"
+    name="&#8364; 15 001 - 25 000"
+    priority="3">
+    <category
+      code="EUR"
+      typelist="Currency"/>
+  </typecode>
+  <typecode
+    code="10"
+    desc="&#8364; 25 001 - 50 000"
+    name="&#8364; 25 001 - 50 000"
+    priority="4">
+    <category
+      code="EUR"
+      typelist="Currency"/>
+  </typecode>
+  <typecode
+    code="11"
+    desc="&#8364; 50 001 - 100 000"
+    name="&#8364; 50 001 - 100 000"
+    priority="5">
+    <category
+      code="EUR"
+      typelist="Currency"/>
+  </typecode>
+  <typecode
+    code="12"
+    desc="&gt; &#8364; 100 000"
+    name="&gt; &#8364; 100 000"
+    priority="6">
+    <category
+      code="EUR"
+      typelist="Currency"/>
+  </typecode>
+</typelist>

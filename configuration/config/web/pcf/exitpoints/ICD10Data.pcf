@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ExitPoint
+    height="800"
+    id="ICD10Data"
+    popup="true"
+    url="http://www.icd10data.com/Codes/{icdCode}"
+    width="1024">
+    <LocationEntryPoint
+      signature="ICD10Data(ICDCode : String)"/>
+    <ExitPointParameter
+      locationParam="ICDCode"
+      type="String"
+      urlParam="icdCode"/>
+  </ExitPoint>
+</PCF>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="closeMatterInfo.beforeCommit()"
+    canEdit="true"
+    id="CloseMatterPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.CloseMatter.Title&quot;, matter)">
+    <LocationEntryPoint
+      signature="CloseMatterPopup(matter : Matter)"/>
+    <Variable
+      name="matter"
+      type="Matter"/>
+    <Variable
+      initialValue="createInfo()"
+      name="closeMatterInfo"
+      type="CloseMatterInfo"/>
+    <Screen
+      id="CloseMatterScreen">
+      <Toolbar>
+        <EditButtons
+          updateLabel="DisplayKey.get(&quot;Web.Matter.CloseMatter&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="CloseMatterInfoDV(closeMatterInfo)"/>
+    </Screen>
+    <Code><![CDATA[
+function createInfo() : CloseMatterInfo {
+        var info = new CloseMatterInfo();
+        info.Matter = matter;
+        return info;
+      }
+    ]]></Code>
+  </Popup>
+</PCF>

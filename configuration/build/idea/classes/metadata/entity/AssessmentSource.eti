@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A source of information for the assessment"
+  entity="AssessmentSource"
+  exportable="true"
+  platform="false"
+  table="assessmentsource"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.AssessmentSource"
+    impl="com.guidewire.cc.domain.exposure.impl.AssessmentSourceImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Description of Assessment Source"
+    name="Description"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Assessment Source name"
+    name="SourceName"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    columnName="IncidentID"
+    desc="Related assessment"
+    exportable="false"
+    fkentity="Incident"
+    name="Incident"
+    nullok="false"/>
+  <typekey
+    desc="Assessment Source typelist"
+    name="SourceType"
+    nullok="true"
+    typelist="AssessmentSource"/>
+  <foreignkey
+    columnName="AssessorID"
+    desc="The relevant assessor"
+    fkentity="Contact"
+    name="Assessor"
+    nullok="true"/>
+  <array
+    arrayentity="AssessmentLine"
+    desc="A list of events for this claim."
+    name="StatusLine"
+    triggersValidation="true"/>
+</entity>

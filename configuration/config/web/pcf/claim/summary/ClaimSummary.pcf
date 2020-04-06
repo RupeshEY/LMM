@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    beforeCommit="operationCallbackHelper.BeforeCommitAction()"
+    canEdit="true"
+    canVisit="perm.Claim.view(Claim) and perm.System.viewclaimsummary and (Claim.State != ClaimState.TC_DRAFT)"
+    id="ClaimSummary"
+    title="DisplayKey.get(&quot;Web.Claim.ClaimSummary&quot;)">
+    <LocationEntryPoint
+      signature="ClaimSummary(Claim : Claim)"/>
+    <LocationEntryPoint
+      signature="ClaimSummary(Claim : Claim, excludeConfidentialNotes : boolean)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="false"
+      name="excludeConfidentialNotes"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.vendormanagement.ServiceRequestOperationCallbackHelper()"
+      name="operationCallbackHelper"
+      type="gw.vendormanagement.ServiceRequestOperationCallbackHelper"/>
+    <Screen
+      id="ClaimSummaryScreen">
+      <Toolbar/>
+      <AlertBar
+        id="EEventAlert"
+        label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimSummary.EEventAlert&quot;)"
+        visible="Claim.isECFVisible() and Claim.ECFLocked"/>
+      <AlertBar
+        id="ECFNewCatastropheCodeEventAlert"
+        label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimSummary.NewCatastropheCodeEventAlert&quot;, Claim.LatestMessageClaimData.LcoOrPcsCatastropheCode)"
+        visible="Claim.Catastrophe == null and Claim.LatestMessageClaimData.LcoOrPcsCatastropheCode != null"/>
+      <PanelRow>
+        <PanelColumn>
+          <PanelRef
+            def="ClaimSummaryHeadlinePanelSet(Claim)"/>
+          <PanelRef
+            def="LMClaimSummaryPanelSet(Claim)"
+            visible="Claim.isLMVisible()">
+            <TitleBar
+              title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimSummary.Title&quot;)"/>
+          </PanelRef>
+          <PanelRef
+            def="ClaimSummaryDV(Claim)">
+            <TitleBar
+              title="DisplayKey.get(&quot;Web.ClaimSummaryDV.Title&quot;)"/>
+          </PanelRef>
+          <PanelRef
+            def="ServiceRequestLV(Claim, true, operationCallbackHelper)">
+            <TitleBar
+              title="DisplayKey.get(&quot;Web.ClaimSummary.ServiceRequestLV.Title&quot;)"/>
+            <Toolbar/>
+          </PanelRef>
+          <PanelRef
+            def="ClaimSummaryExposuresLV(Claim, Claim.Exposures)">
+            <TitleBar
+              title="DisplayKey.get(&quot;Web.ClaimSummary.ExposuresLV.Title&quot;)"/>
+            <Toolbar/>
+          </PanelRef>
+        </PanelColumn>
+      </PanelRow>
+      <PanelRow>
+        <PanelColumn>
+          <PanelRef
+            def="PeopleInvolvedLV(Claim, Claim.getContactsWithPreload())">
+            <TitleBar
+              title="DisplayKey.get(&quot;Web.ClaimSummary.PartiesInvolvedLV.Title&quot;)"/>
+            <Toolbar/>
+          </PanelRef>
+          <PanelRef
+            def="ClaimSummaryActivitiesLV(Claim)">
+            <TitleBar
+              title="DisplayKey.get(&quot;Web.ClaimSummary.ActivitiesLV.Title&quot;)"/>
+            <Toolbar/>
+          </PanelRef>
+          <PanelRef
+            def="ClaimSummaryMattersLV(Claim.Matters, Claim)"
+            visible="perm.Matter.view(Claim) and perm.System.viewmatters">
+            <TitleBar
+              title="DisplayKey.get(&quot;Web.ClaimSummary.MattersLV.Title&quot;)"/>
+            <Toolbar/>
+          </PanelRef>
+          <PanelRef
+            def="ClaimSummaryAssociatedClaimsLV(Claim, Claim.Associations)">
+            <TitleBar
+              title="DisplayKey.get(&quot;Web.ClaimSummary.AssociatedClaimsLV.Title&quot;)"/>
+            <Toolbar/>
+          </PanelRef>
+        </PanelColumn>
+        <PanelColumn>
+          <PanelRef
+            def="NotesLV(excludeConfidentialNotes ? Claim.NonconfidentialNotes : Claim.ViewableNotes)">
+            <TitleBar
+              appendListViewPaging="true"
+              title="DisplayKey.get(&quot;Web.ClaimSummary.NotesLV.Title&quot;)"/>
+            <Toolbar/>
+          </PanelRef>
+        </PanelColumn>
+      </PanelRow>
+    </Screen>
+  </Page>
+</PCF>

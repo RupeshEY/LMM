@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="PersonContactInfoInputSet">
+    <!-- NOTE: This shared section requires a gw.api.contact.ContactHandle, rather than a Contact, because it's
+    possible for some actions on a contact detail screen to fundamentally change the contact. In particular, syncing
+    a contact that leads to a downcast of that contact to a more specific subtype causes the original contact to
+    become invalid. To protect against this, contacts on shared sections should be wrapped in a ContactHandle. If the
+    contact is fundamentally changed, then only the handle needs to be updated, and all existing references will see
+    the new contact.
+
+    As a shortcut for "contactHandle.Contact", this shared section defines a read-only property which can be used to
+    access the most current value of the contact. -->
+    <Require
+      name="contactHandle"
+      type="gw.api.contact.ContactHandle"/>
+    <Require
+      name="claimContact"
+      type="ClaimContact"/>
+    <InputDivider/>
+    <Label
+      label="DisplayKey.get(&quot;Web.ContactDetail.Phone&quot;)"/>
+    <InputSet
+      visible="claimContact != null">
+      <BooleanRadioInput
+        editable="true"
+        id="ContactProhibited"
+        label="DisplayKey.get(&quot;Web.ContactDetail.ContactProhibited&quot;)"
+        value="claimContact.ContactProhibited"
+        visible="claimContact.isClaimant()"/>
+    </InputSet>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(contactHandle, Person#WorkPhone), DisplayKey.get(&quot;Web.ContactDetail.Phone.Work&quot;), false))"
+      editable="true"
+      id="Work"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(contactHandle, Contact#HomePhone), DisplayKey.get(&quot;Web.ContactDetail.Phone.Home&quot;), false))"
+      editable="true"
+      id="Home"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(contactHandle, Person#CellPhone), DisplayKey.get(&quot;Web.ContactDetail.Phone.Cell&quot;), false))"
+      editable="true"
+      id="Cell"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(contactHandle, Contact#FaxPhone), DisplayKey.get(&quot;Web.ContactDetail.Phone.Fax&quot;), false))"
+      editable="true"
+      id="Fax"/>
+    <TypeKeyInput
+      editable="true"
+      id="PrimaryPhone"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Phone.PrimaryPhone&quot;)"
+      validationExpression="(Person.PrimaryPhone == null or (Person.PrimaryPhone == TC_WORK and Person.WorkPhone != null) or  (Person.PrimaryPhone == TC_HOME and Person.HomePhone != null) or (Person.PrimaryPhone == TC_MOBILE and Person.CellPhone != null)) ? null : DisplayKey.get(&quot;Web.ContactDetail.Phone.PrimaryPhone.Error&quot;)"
+      value="Person.PrimaryPhone"
+      valueType="typekey.PrimaryPhoneType"/>
+    <InputDivider/>
+    <Label
+      label="DisplayKey.get(&quot;Web.ContactDetail.Email&quot;)"/>
+    <TextInput
+      editable="true"
+      formatType="email"
+      id="Primary"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Email.Primary&quot;)"
+      value="Person.EmailAddress1"/>
+    <TextInput
+      editable="true"
+      formatType="email"
+      id="Secondary"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Email.Secondary&quot;)"
+      value="Person.EmailAddress2"/>
+    <Code><![CDATA[property get Person() : Person { return contactHandle.Contact as Person; }
+
+/**
+ * Sets the new primary phone value, based on the phone number inputs. If the current
+ * primary phone value is blank, and there is exactly one non-blank phone number input,
+ * then the primary phone value corresponding to that non-blank input is returned.
+ */
+function setPrimaryPhoneType(phoneNum : String, numType : PrimaryPhoneType) {
+  
+  var phoneNums = {Person.WorkPhone, Person.HomePhone, Person.CellPhone}
+  phoneNums.removeWhere(\ s -> s == null)
+  
+  if (phoneNums.Count == 1 and phoneNums.single() == phoneNum) {
+    Person.PrimaryPhone = numType
+  }
+}]]></Code>
+  </InputSet>
+</PCF>

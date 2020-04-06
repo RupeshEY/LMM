@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="ClaimSnapshotInjuryIncidentScreen"
+    mode="default">
+    <Require
+      name="IncidentParam"
+      type="dynamic.Dynamic"/>
+    <Variable
+      initialValue="IncidentParam"
+      name="InjuryIncident"
+      type="dynamic.Dynamic"/>
+    <Toolbar/>
+    <PanelRef
+      def="ClaimSnapshotInjuryIncidentDV(IncidentParam)"/>
+  </Screen>
+</PCF>

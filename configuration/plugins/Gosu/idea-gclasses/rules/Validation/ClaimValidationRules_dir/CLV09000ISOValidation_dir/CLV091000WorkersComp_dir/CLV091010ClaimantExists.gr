@@ -1,0 +1,22 @@
+package rules.Validation.ClaimValidationRules_dir.CLV09000ISOValidation_dir.CLV091000WorkersComp_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV091010 - Claimant Exists")
+internal class CLV091010ClaimantExists {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.ClaimantDenorm == null
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.rejectField("Claimant", TC_ISO, DisplayKey.get("Rules.Validation.Claim.ClaimantNotNull"), null, null)
+/*end00rule*/
+
+  }
+}

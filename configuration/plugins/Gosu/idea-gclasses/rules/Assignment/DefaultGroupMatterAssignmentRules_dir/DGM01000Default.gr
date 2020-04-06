@@ -1,0 +1,26 @@
+package rules.Assignment.DefaultGroupMatterAssignmentRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+
+@gw.rules.RuleName("DGM01000 - Default")
+internal class DGM01000Default {
+  static function doCondition(matter : entity.Matter) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(matter : entity.Matter, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+matter.CurrentAssignment.assignUserByRoundRobin(false, matter.CurrentAssignment.AssignedGroup)
+CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.DefaultGroup.Matter", actions.ShortRuleName))
+CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.AssignedUserIs", matter.AssignedUser))
+actions.exit()
+/*end00rule*/
+
+  }
+}

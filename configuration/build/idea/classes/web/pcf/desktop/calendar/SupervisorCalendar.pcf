@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="true"
+    canVisit="perm.System.viewsupcalendar"
+    id="SupervisorCalendar"
+    title="DisplayKey.get(&quot;Web.Calendar&quot;)">
+    <Screen
+      id="SupervisorCalendarScreen">
+      <Toolbar/>
+      <Calendar
+        calendarSource="new gw.api.calendar.SupervisorDesktopCalendarSource()"
+        context="/SupervisorDesktopCalendar"/>
+    </Screen>
+  </Page>
+</PCF>

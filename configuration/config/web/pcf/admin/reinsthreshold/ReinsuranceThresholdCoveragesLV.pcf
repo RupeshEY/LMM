@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ReinsuranceThresholdCoveragesLV">
+    <ExposeIterator
+      valueType="entity.ReinsuranceCoverage"
+      widget="ReinsuranceThresholdCoveragesLV"/>
+    <Require
+      name="ReinsuranceThreshold"
+      type="ReinsuranceThreshold"/>
+    <RowIterator
+      editable="true"
+      elementName="Coverage"
+      hideCheckBoxesIfReadOnly="true"
+      toAdd="ReinsuranceThreshold.addToCoverageTypes( Coverage )"
+      toRemove="ReinsuranceThreshold.removeFromCoverageTypes( Coverage )"
+      value="ReinsuranceThreshold.CoverageTypes"
+      valueType="entity.ReinsuranceCoverage[]">
+      <Row>
+        <TypeKeyCell
+          editable="true"
+          id="CoverageType"
+          label="DisplayKey.get(&quot;LV.ReinsuranceThreshold.Coverages.Coverage&quot;)"
+          required="true"
+          value="Coverage.Coverage"
+          valueType="typekey.CoverageType"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

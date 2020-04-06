@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Details of other benefits for Workers' Comp claim"
+  entity="OtherBenefit"
+  exportable="true"
+  extendable="true"
+  loadable="true"
+  platform="false"
+  table="otherbenefit"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.OtherBenefit"
+    impl="com.guidewire.cc.domain.claim.impl.OtherBenefitImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Supports Workmen's Compensation functionality. This entity details the amount and reason for miscellaneous
+        financial benefits paid an a claim.
+      
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The foreign key to the claim."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <column
+    desc="Amount of benefit."
+    name="Amount"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Comments."
+    name="Comments"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="End date of benefit."
+    name="EndDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Name of contact for other benefit."
+    name="InitialContact"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Reference number for benefit."
+    name="ReferenceNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Start date of benefit."
+    name="StartDate"
+    nullok="true"
+    type="datetime"/>
+  <datetimeordering
+    firstcolumnname="StartDate"
+    operator="LE"
+    secondcolumnname="EndDate"/>
+</entity>

@@ -1,0 +1,1346 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This is the XCHANGING Claim Notify Event Request Service Interface that 
+	sends the claim movement notification to the carriers. **** version 3.4 Schema 
+	**** **** Last updated on: November 22 2016 **** COPYRIGHT NOTICE: (c) 2015 
+	XCHANGING. All Rights Reserved. -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema"
+	xmlns="http://www.xchanging.com/claimnotify/rq/1" xmlns:ac="http://www.ACORD.org/Standards/AcordMsgSvc/1"
+	xmlns:jv="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1"
+	targetNamespace="http://www.xchanging.com/claimnotify/rq/1" version="3.4"
+	elementFormDefault="qualified" attributeFormDefault="unqualified">
+
+	<xs:import namespace="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1"
+		schemaLocation="../Jv-Ins-Reinsurance-2014-06.xsd" />
+
+	<xs:import namespace="http://www.ACORD.org/Standards/AcordMsgSvc/1"
+		schemaLocation="../Acord-Repository_v-1-3-0-RLC-Slice.xsd" />
+
+	<xs:complexType name="ClaimNotifyEventRqType">
+		<xs:sequence>
+			<xs:element ref="jv:UUId" />
+			<xs:element ref="jv:CreationDate" />
+			<xs:element name="ClaimResponseUUId" type="jv:UUIdType"
+				minOccurs="0" />
+			<xs:element name="ClaimMovement" minOccurs="0">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="jv:ClaimMovementType">
+							<xs:sequence>
+								<xs:element name="MessageSequenceNumber" type="xs:positiveInteger" />
+								
+								<!-- AsOfDate is added as custom element to accomodate time component in th date
+									ACORD value i.e. jv:AsOfDate is a date component and not a time component in it.
+									Hence, creating a custom element to hold both date and time. 
+									 -->
+								
+								<xs:element name="AsOfDate" type="xs:dateTime"/>
+								<xs:element name="ActionParticipantType">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="0" />
+											<xs:maxLength value="1" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="ActionParticipant">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="0" />
+											<xs:maxLength value="6" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="ResponseCode" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="0" />
+											<xs:maxLength value="15" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="Reinsured" minOccurs="0">
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="jv:AnyPartyType" />
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="PlacingBroker" minOccurs="0">
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="jv:PlacingBrokerType">
+												<xs:sequence>
+													<xs:element name="Description" minOccurs="0">
+														<xs:simpleType>
+															<xs:restriction base="xs:string">
+																<xs:minLength value="0" />
+																<xs:maxLength value="20" />
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+												</xs:sequence>
+											</xs:extension>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="InsurerRiskReference2" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="0" />
+											<xs:maxLength value="15" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="ContractSection" minOccurs="0">
+									<xs:complexType>
+										<xs:complexContent>
+											<xs:extension base="jv:ContractSectionType">
+												<xs:sequence>
+													<xs:element name="PolicyType" minOccurs="0">
+														<xs:simpleType>
+															<xs:restriction base="xs:string">
+																<xs:minLength value="0" />
+																<xs:maxLength value="40" />
+															</xs:restriction>
+														</xs:simpleType>
+													</xs:element>
+												</xs:sequence>
+											</xs:extension>
+										</xs:complexContent>
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="AssociatedUCR" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="0" />
+											<xs:maxLength value="17" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="AssociatedTR" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="0" />
+											<xs:maxLength value="17" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="LossDateNarrative" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="0" />
+											<xs:maxLength value="30" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<xs:element name="LossDetails" minOccurs="0">
+									<xs:simpleType>
+										<xs:restriction base="xs:string">
+											<xs:minLength value="0" />
+											<xs:maxLength value="350" />
+										</xs:restriction>
+									</xs:simpleType>
+								</xs:element>
+								<!-- Repeats upto max. 3 supported Currencies -->
+								<xs:element name="ClaimAmounts" minOccurs="0"
+									maxOccurs="3">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element ref="jv:ClaimMovementAmtItem"
+												minOccurs="0" maxOccurs="unbounded" />
+										</xs:sequence>
+										<xs:attribute name="Ccy" type="jv:CcyType" />
+									</xs:complexType>
+								</xs:element>
+								<xs:element name="Extension">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element name="Contract">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="BrokerPolicyReference1"
+															minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="12" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element ref="jv:RiskLocation" minOccurs="0" />
+														<xs:element name="RiskCode" minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="2" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="ClaimSettlingAgent"
+															minOccurs="0">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element ref="jv:Location" minOccurs="0" />
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="SlipLeadName" minOccurs="0">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element ref="jv:Party" />
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="ContractMarket" minOccurs="0"
+															maxOccurs="3">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="InsurerOrReinsurer"
+																		minOccurs="0" maxOccurs="unbounded">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element ref="jv:Party" minOccurs="0" />
+																				<xs:element ref="jv:Contact" minOccurs="0" />
+																				<xs:element name="MarketFinancialAmounts"
+																					minOccurs="0" maxOccurs="3">
+																					<xs:complexType>
+																						<xs:sequence>
+																							<xs:element name="IncludedInSettlementIndicator"
+																								minOccurs="0">
+																								<xs:simpleType>
+																									<xs:restriction base="xs:string">
+																										<xs:minLength value="0" />
+																										<xs:maxLength value="1" />
+																									</xs:restriction>
+																								</xs:simpleType>
+																							</xs:element>
+																							<xs:element ref="jv:ClaimMovementAmtItem"
+																								minOccurs="0" maxOccurs="unbounded" />
+																							<xs:element name="ClaimSettlementSigningNumber"
+																								minOccurs="0">
+																								<xs:simpleType>
+																									<xs:restriction base="xs:string">
+																										<xs:minLength value="0" />
+																										<xs:maxLength value="15" />
+																									</xs:restriction>
+																								</xs:simpleType>
+																							</xs:element>
+																						</xs:sequence>
+																						<xs:attribute name="Ccy" use="required">
+																							<xs:simpleType>
+																								<xs:restriction base="xs:string">
+																									<xs:minLength value="0" />
+																									<xs:maxLength value="3" />
+																								</xs:restriction>
+																							</xs:simpleType>
+																						</xs:attribute>
+																					</xs:complexType>
+																				</xs:element>
+																				<xs:element ref="jv:InsurerSharePercentage"
+																					minOccurs="0" />
+																				<xs:element ref="jv:ReinsurerSharePercentage"
+																					minOccurs="0" />
+																				<xs:element name="InsurerOrReinsurerClaimReference1"
+																					minOccurs="0">
+																					<xs:simpleType>
+																						<xs:restriction base="xs:string">
+																							<xs:minLength value="0" />
+																							<xs:maxLength value="15" />
+																						</xs:restriction>
+																					</xs:simpleType>
+																				</xs:element>
+																				<xs:element name="InsurerOrReinsurerClaimReference2"
+																					minOccurs="0">
+																					<xs:simpleType>
+																						<xs:restriction base="xs:string">
+																							<xs:minLength value="0" />
+																							<xs:maxLength value="15" />
+																						</xs:restriction>
+																					</xs:simpleType>
+																				</xs:element>
+																				<xs:element name="ParticipantFunction"
+																					minOccurs="0">
+																					<xs:simpleType>
+																						<xs:restriction base="xs:string">
+																							<xs:minLength value="0" />
+																							<xs:maxLength value="25" />
+																						</xs:restriction>
+																					</xs:simpleType>
+																				</xs:element>																				
+																				<xs:element name="ManagingAgentCode"
+																					minOccurs="0">
+																					<xs:simpleType>
+																						<xs:restriction base="xs:string">
+																							<xs:minLength value="0" />
+																							<xs:maxLength value="10" />
+																						</xs:restriction>
+																					</xs:simpleType>																			
+																				</xs:element>
+																				<xs:element name="ConsortiumNumber"
+																					minOccurs="0">
+																					<xs:simpleType>
+																						<xs:restriction base="xs:string">
+																							<xs:minLength value="0" />
+																							<xs:maxLength value="6" />
+																						</xs:restriction>
+																					</xs:simpleType>
+																				</xs:element>
+																				<!--
+																					Placeholder to add ClaimLineNumber of each Participant 
+																					that will be passed in the notify. 																					
+																				-->
+																				<xs:element name="ClaimLineNumber" type="xs:integer" minOccurs="0"/>																				
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																</xs:sequence>
+																<xs:attribute name="Agency" use="required">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:minLength value="0" />
+																			<xs:maxLength value="7" />
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:attribute>
+															</xs:complexType>
+														</xs:element>
+														
+														<!--
+															This was added as part of requirement from the software vendors 
+															from a workshop on 20/2/2015
+															-->
+														<xs:element name="SlipOrder1"
+															minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:decimal">
+																	<xs:totalDigits value="10" />
+																	<xs:fractionDigits value="7" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>														
+														<xs:element name="SlipOrder2"
+															minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:decimal">
+																	<xs:totalDigits value="10" />
+																	<xs:fractionDigits value="7" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>														
+														
+														<xs:element name="PremiumPeriod" minOccurs="0">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="PremiumPeriodFrom" type="xs:date"
+																		minOccurs="0" />
+																	<xs:element name="PremiumPeriodTo" type="xs:date"
+																		minOccurs="0" />
+																	<xs:element name="PremiumPeriodNarrative"
+																		minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="40" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="ContractCoverage" minOccurs="0">
+															<xs:complexType>
+																<xs:complexContent>
+																	<xs:extension base="jv:ContractCoverageType">
+																		<xs:sequence>
+																			<xs:element name="CoverageAmount" type="jv:AnyAmtType"
+																				minOccurs="0" maxOccurs="3" />
+																		</xs:sequence>
+																	</xs:extension>
+																</xs:complexContent>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="ContractValueInterest"
+															minOccurs="0">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="ValueInterestAmount"
+																		minOccurs="0" maxOccurs="3" type="jv:AnyAmtType" />
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="ContractDeductible"
+															minOccurs="0">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="DeductibleAmount"
+																		minOccurs="0" maxOccurs="3" type="jv:AnyAmtType" />
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="OriginalPolicy" minOccurs="0">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="OriginalCurrency"
+																		minOccurs="0" maxOccurs="3">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="Ccy" type="jv:CcyType" />
+																				<xs:element name="OriginalSumInsuredAmount"
+																					minOccurs="0">
+																					<xs:simpleType>
+																						<xs:restriction base="xs:decimal">
+																							<xs:totalDigits value="15" />
+																							<xs:fractionDigits value="2" />
+																						</xs:restriction>
+																					</xs:simpleType>
+																				</xs:element>
+																				<xs:element name="OriginalExcessAmount"
+																					minOccurs="0">
+																					<xs:simpleType>
+																						<xs:restriction base="xs:decimal">
+																							<xs:totalDigits value="15" />
+																							<xs:fractionDigits value="2" />
+																						</xs:restriction>
+																					</xs:simpleType>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="OriginalPolicyPeriodNarrative"
+																		minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="20" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="CertificateNumber"
+																		minOccurs="0" maxOccurs="unbounded">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="15" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="Claim">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="ReinsuredClaimReference"
+															minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="35" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="ClaimLineNumber" type="xs:integer"/>
+														<xs:element name="LeadClaimReference"
+															minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="35" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="LeadClaimReference2"
+															minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="35" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="ClaimStatus" minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="6" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<!-- this is for Binders -->
+														<xs:element name="ClaimClassification"
+															minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="2" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<!-- this is for Binders -->
+														<xs:element name="CoLeadIndicator" minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="1" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="LossPeriod" minOccurs="0">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="LossDateQualifier"
+																		minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="1" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="StartDate" type="jv:FlexibleDate_Type"
+																		minOccurs="0" />
+																	<xs:element name="EndDate" type="jv:FlexibleDate_Type"
+																		minOccurs="0" />
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="ClaimType" minOccurs="1">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="16" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="ClaimCategoryCode" minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="21" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="ClaimSubCategoryCode"
+															minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="22" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="ClaimsScheme" minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="14" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="ECFIndicator">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:enumeration value="Y" />
+																	<xs:enumeration value="N" />
+																	<xs:enumeration value="T" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="TriageCategory" minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="15" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="ParallelUniqueClaimReference"
+															minOccurs="0" maxOccurs="unbounded">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="17" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="Indicators" minOccurs="0">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="ConflictOfInterestIndicator"
+																		minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="1" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="ChaseUpIndicator"
+																		minOccurs="0">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="Indicator" minOccurs="0">
+																					<xs:simpleType>
+																						<xs:restriction base="xs:string">
+																							<xs:minLength value="0" />
+																							<xs:maxLength value="1" />
+																						</xs:restriction>
+																					</xs:simpleType>
+																				</xs:element>
+																				<xs:element name="Interval" minOccurs="0">
+																					<xs:simpleType>
+																						<xs:restriction base="xs:positiveInteger">
+																							<xs:totalDigits value="2" />
+																						</xs:restriction>
+																					</xs:simpleType>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>																	
+																	<xs:element name="CedantInLiquidationIndicator"
+																		minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="1" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="SimultaneousReinstatementRequired"
+																		minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="1" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="SimultaneousReinstatementProcessed"
+																		minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="1" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="WarIndicator" minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="1" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="NotifySalvageAssociationIndicator"
+																		minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="1" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="SoftWarnings" minOccurs="0"
+																		maxOccurs="unbounded">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="SoftWarningsDescription"
+																					minOccurs="0">
+																					<xs:simpleType>
+																						<xs:restriction base="xs:string">
+																							<xs:minLength value="0" />
+																							<xs:maxLength value="140" />
+																						</xs:restriction>
+																					</xs:simpleType>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="XcsToAgreeIndicator"
+																		minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="1" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="CollectionUnlikelyIndicator"
+																		minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="1" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="ContractualConditionsMayApplyIndicator"
+																		minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="1" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="ImmediatePartCollectionIndicator"
+																		minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="1" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="NoFurtherResponseIndicator"
+																		minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="1" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="MultipleResponseIndicator"
+																		minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="1" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<!--
+														   added broker claim reference	
+														-->
+														<xs:element name="BrokerClaimReference1" minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="12" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<!--
+														  binder field
+														-->
+														<xs:element name="GroupHeaderBinderReference" type="xs:integer" minOccurs="0"/>
+													
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+											<xs:element name="ClaimEntry">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element name="TransactionSequence">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="3" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="AmendmentDetails" minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="50" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="LloydsStatus" minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="35" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="LirmaStatus" minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="35" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="IluStatus" minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="35" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<!-- this is for Binders -->
+														<xs:element name="SubClassification" minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="2" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="BrokerAdvisedDate" type="xs:date"
+															minOccurs="0" />
+														<xs:element name="AddedCirculatedOrAuthorisedDate"
+															type="xs:date" minOccurs="0"/>
+														<xs:element name="TransactionSubCode"
+															minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:minLength value="0" />
+																	<xs:maxLength value="20" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<!-- this is for Binders -->
+														<xs:element name="SettledIndicator" minOccurs="0">
+															<xs:simpleType>
+																<xs:restriction base="xs:string">
+																	<xs:enumeration value="Y" />
+																	<xs:enumeration value="N" />
+																</xs:restriction>
+															</xs:simpleType>
+														</xs:element>
+														<xs:element name="LinkedClaims" minOccurs="0">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="LinkedClaim" minOccurs="0"
+																		maxOccurs="unbounded">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element ref="jv:BrokerReference" />
+																				<xs:element name="LinkedClaimEntry"
+																					minOccurs="0" maxOccurs="unbounded">
+																					<xs:complexType>
+																						<xs:sequence>
+																							<xs:element ref="jv:BrokerReference" />
+																						</xs:sequence>
+																					</xs:complexType>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="LinkedMasterSubordinateClaims"
+																		minOccurs="0" maxOccurs="unbounded">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element ref="jv:BrokerReference" />
+																				<xs:element name="LinkedClaimEntry"
+																					maxOccurs="unbounded">
+																					<xs:complexType>
+																						<xs:sequence>
+																							<xs:element ref="jv:BrokerReference" />
+																						</xs:sequence>
+																					</xs:complexType>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="Comments" minOccurs="0">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="Broker" minOccurs="0"
+																		maxOccurs="60">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element ref="LineNumber" />
+																				<xs:element ref="CommentDetails" />
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="SlipLead" minOccurs="0"
+																		maxOccurs="15">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element ref="LineNumber" />
+																				<xs:element ref="CommentDetails" />
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="PrivateComments"
+																		minOccurs="0">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="Comment" minOccurs="0"
+																					maxOccurs="15">
+																					<xs:complexType>
+																						<xs:sequence>
+																							<xs:element ref="LineNumber" />
+																							<xs:element ref="CommentDetails" />
+																						</xs:sequence>
+																					</xs:complexType>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="PublicComments" minOccurs="0">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="Comment" minOccurs="0"
+																					maxOccurs="15">
+																					<xs:complexType>
+																						<xs:sequence>
+																							<xs:element ref="LineNumber" />
+																							<xs:element ref="CommentDetails" />
+																						</xs:sequence>
+																					</xs:complexType>
+																				</xs:element>
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																	<xs:element name="CrossMarketComments"
+																		minOccurs="0" maxOccurs="2">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="Bureau" maxOccurs="3">
+																					<xs:complexType>
+																						<xs:sequence>
+																							<xs:element name="Claim" maxOccurs="unbounded">
+																								<xs:complexType>
+																									<xs:sequence>
+																										<xs:element ref="jv:BrokerReference" />
+																										<!-- 22/4/2015 data type of TransactionReference was missing, now added -->																										
+																										<xs:element name="TransactionReference" type="xs:string" minOccurs="0" />
+																										<xs:element ref="jv:CreationDate" />
+																										<xs:element name="Syndicate"
+																											maxOccurs="unbounded">
+																											<xs:complexType>
+																												<xs:sequence>
+																													<xs:element name="Comment"
+																														minOccurs="0" maxOccurs="15">
+																														<xs:complexType>
+																															<xs:sequence>
+																																<xs:element ref="LineNumber" />
+																																<xs:element ref="CommentDetails" />
+																															</xs:sequence>
+																														</xs:complexType>
+																													</xs:element>
+																													<xs:element name="RequestToBroker"
+																														minOccurs="0">
+																														<xs:simpleType>
+																															<xs:restriction base="xs:string">
+																																<xs:minLength value="0" />
+																																<xs:maxLength value="50" />
+																															</xs:restriction>
+																														</xs:simpleType>
+																													</xs:element>
+																													<xs:element name="Response"
+																														minOccurs="0">
+																														<xs:simpleType>
+																															<xs:restriction base="xs:string">
+																																<xs:minLength value="0" />
+																																<xs:maxLength value="70" />
+																															</xs:restriction>
+																														</xs:simpleType>
+																													</xs:element>
+																												</xs:sequence>
+																												<xs:attribute name="Name">
+																													<xs:simpleType>
+																														<xs:restriction base="xs:string">
+																															<xs:minLength value="0" />
+																															<!-- changing the length from 20 to 30 -->
+																															<xs:maxLength value="30" />
+																														</xs:restriction>
+																													</xs:simpleType>
+																												</xs:attribute>
+																											</xs:complexType>
+																										</xs:element>
+																									</xs:sequence>
+																								</xs:complexType>
+																							</xs:element>
+																						</xs:sequence>
+																						<xs:attribute name="Agency">
+																							<xs:simpleType>
+																								<xs:restriction base="xs:string">
+																									<xs:minLength value="0" />
+																									<xs:maxLength value="7" />
+																								</xs:restriction>
+																							</xs:simpleType>
+																						</xs:attribute>
+																					</xs:complexType>
+																				</xs:element>
+																			</xs:sequence>
+																			<xs:attribute name="PrivateCommentIndicator" use="optional">
+																				<xs:simpleType>
+																					<xs:restriction base="xs:string">
+																						<xs:enumeration value="Y" />
+																						<xs:enumeration value="N" />
+																					</xs:restriction>
+																				</xs:simpleType>
+																			</xs:attribute>
+																		</xs:complexType>
+																	</xs:element>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="ClaimEntryFinancialAmounts"
+															minOccurs="0" maxOccurs="3">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="OutstandingAmountQualifier"
+																		minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="1" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="ServiceProviderOriginalSplitReference"
+																		minOccurs="0" maxOccurs="4">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="15" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element ref="jv:ClaimMovementAmtItem"
+																		minOccurs="0" maxOccurs="unbounded" />
+																	<xs:element name="ImportedServicesNarrative"
+																		type="xs:string" minOccurs="0" />
+																	<xs:element ref="jv:LetterOfCreditReference"
+																		minOccurs="0" />
+																	<xs:element name="FguNarrative" minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="50" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="TargetCurrency" type="jv:AnyCcyType"
+																		minOccurs="0" />
+																	<xs:element name="SettlementAmount"
+																		minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:decimal">
+																				<xs:totalDigits value="15" />
+																				<xs:fractionDigits value="2" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="ExchangeRate" minOccurs="0">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:decimal">
+																				<xs:totalDigits value="11" />
+																				<xs:fractionDigits value="5" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<!-- this is for Binders -->
+																	<xs:element name="FinancialAmountInformation"
+																		minOccurs="0">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element ref="jv:ClaimMovementAmtItem"
+																					maxOccurs="unbounded" />
+																			</xs:sequence>
+																		</xs:complexType>
+																	</xs:element>
+																</xs:sequence>
+																<xs:attribute name="Ccy">
+																	<xs:simpleType>
+																		<xs:restriction base="xs:string">
+																			<xs:minLength value="0" />
+																			<xs:maxLength value="3" />
+																		</xs:restriction>
+																	</xs:simpleType>
+																</xs:attribute>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="AggregateDetails" minOccurs="0"
+															maxOccurs="495">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="DescriptionLineNo">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:positiveInteger">
+																				<xs:totalDigits value="3" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element ref="jv:Description" />
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+														<xs:element name="BulkClaimInformation"
+															minOccurs="0">
+															<xs:complexType>
+																<xs:sequence>
+																	<xs:element name="NoOfItems">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:positiveInteger">
+																				<xs:totalDigits value="2" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="HeaderUCR">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="17" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="HeaderTransactionReference">
+																		<xs:simpleType>
+																			<xs:restriction base="xs:string">
+																				<xs:minLength value="0" />
+																				<xs:maxLength value="17" />
+																			</xs:restriction>
+																		</xs:simpleType>
+																	</xs:element>
+																	<xs:element name="Component" minOccurs="0"
+																		maxOccurs="3">
+																		<xs:complexType>
+																			<xs:sequence>
+																				<xs:element name="ComponentClaimLineDetails"
+																					minOccurs="0" maxOccurs="unbounded">
+																					<xs:complexType>
+																						<xs:sequence>
+																							<xs:element name="ComponentLineNo">
+																								<xs:simpleType>
+																									<xs:restriction base="xs:positiveInteger">
+																										<xs:totalDigits value="3" />
+																									</xs:restriction>
+																								</xs:simpleType>
+																							</xs:element>
+																							<xs:element name="ComponentUCR">
+																								<xs:simpleType>
+																									<xs:restriction base="xs:string">
+																										<xs:minLength value="0" />
+																										<xs:maxLength value="17" />
+																									</xs:restriction>
+																								</xs:simpleType>
+																							</xs:element>
+																							<xs:element name="ComponentTR">
+																								<xs:simpleType>
+																									<xs:restriction base="xs:string">
+																										<xs:minLength value="0" />
+																										<xs:maxLength value="17" />
+																									</xs:restriction>
+																								</xs:simpleType>
+																							</xs:element>
+																							<xs:element name="ComponentLossName">
+																								<xs:simpleType>
+																									<xs:restriction base="xs:string">
+																										<xs:minLength value="0" />
+																										<xs:maxLength value="20" />
+																									</xs:restriction>
+																								</xs:simpleType>
+																							</xs:element>
+																							<xs:element name="ComponentLossDate"
+																								type="xs:date" />
+																							<xs:element name="ComponentSettlementAmount"
+																								minOccurs="0">
+																								<xs:simpleType>
+																									<xs:restriction base="xs:decimal">
+																										<xs:totalDigits value="15" />
+																										<xs:fractionDigits value="2" />
+																									</xs:restriction>
+																								</xs:simpleType>
+																							</xs:element>																							
+																							<xs:element name="ComponentTargetCurrency"
+																								type="jv:AnyCcyType" minOccurs="0" />
+																							<xs:element ref="jv:ClaimMovementAmtItem"
+																								minOccurs="0" maxOccurs="unbounded" />
+																							<xs:element name="ImportedServicesNarrative"
+																								minOccurs="0">
+																								<xs:simpleType>
+																									<xs:restriction base="xs:string">
+																										<xs:minLength value="0" />
+																										<xs:maxLength value="20" />
+																									</xs:restriction>
+																								</xs:simpleType>
+																							</xs:element>
+																						</xs:sequence>
+																					</xs:complexType>
+																				</xs:element>
+																			</xs:sequence>
+																			<xs:attribute name="Ccy" use="required">
+																				<xs:simpleType>
+																					<xs:restriction base="xs:string">
+																						<xs:minLength value="0" />
+																						<xs:maxLength value="3" />
+																					</xs:restriction>
+																				</xs:simpleType>
+																			</xs:attribute>
+																		</xs:complexType>
+																	</xs:element>
+																</xs:sequence>
+															</xs:complexType>
+														</xs:element>
+													</xs:sequence>
+												</xs:complexType>
+											</xs:element>
+										</xs:sequence>
+									</xs:complexType>
+								</xs:element>
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="SupportingDocument" minOccurs="0"
+				maxOccurs="unbounded">
+				<xs:complexType>
+					<xs:complexContent>
+						<xs:extension base="ac:SupportingDocument_Type">
+							<xs:sequence>
+								<xs:element ref="ac:FolderReference" minOccurs="0"/>	
+								<xs:element name="ReferredObjects">
+									<xs:complexType>
+										<xs:sequence>
+											<xs:element ref="jv:ServiceProvider" minOccurs="0" />
+											<xs:element name="Contract">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element ref="jv:BrokerReference" />
+													</xs:sequence>
+												</xs:complexType>												
+											</xs:element>
+											<xs:element name="Claim" minOccurs="0">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element ref="jv:BrokerReference" />
+													</xs:sequence>
+												</xs:complexType>												
+											</xs:element>
+											<xs:element name="ClaimEntry" minOccurs="0">
+												<xs:complexType>
+													<xs:sequence>
+														<xs:element ref="jv:BrokerReference" />
+													</xs:sequence>
+												</xs:complexType>												
+											</xs:element>											
+										</xs:sequence>
+									</xs:complexType>									
+								</xs:element>								
+							</xs:sequence>
+						</xs:extension>
+					</xs:complexContent>
+				</xs:complexType>
+			</xs:element>
+
+			<xs:element name="ErrorsAndWarnings" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="Result" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="ErrorWarningLevel">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:enumeration value="001" />
+												<xs:enumeration value="002" />
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="ErrorCode">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="0" />
+												<xs:maxLength value="10" />
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="ErrorWarningDescription">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="0" />
+												<xs:maxLength value="70" />
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+			<xs:element name="AdditionalInformation" minOccurs="0">
+				<xs:complexType>
+					<xs:sequence>
+						<xs:element name="ExtendedFields" maxOccurs="unbounded">
+							<xs:complexType>
+								<xs:sequence>
+									<xs:element name="FieldName">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="0" />
+												<xs:maxLength value="350" />
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="FieldValue">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="0" />
+												<xs:maxLength value="350" />
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+									<xs:element name="FieldDescription">
+										<xs:simpleType>
+											<xs:restriction base="xs:string">
+												<xs:minLength value="0" />
+												<xs:maxLength value="350" />
+											</xs:restriction>
+										</xs:simpleType>
+									</xs:element>
+								</xs:sequence>
+							</xs:complexType>
+						</xs:element>
+					</xs:sequence>
+				</xs:complexType>
+			</xs:element>
+		</xs:sequence>
+		<xs:attribute name="Sender" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="0" />
+					<xs:maxLength value="35" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+		<xs:attribute name="Receiver" use="required">
+			<xs:simpleType>
+				<xs:restriction base="xs:string">
+					<xs:minLength value="0" />
+					<xs:maxLength value="35" />
+				</xs:restriction>
+			</xs:simpleType>
+		</xs:attribute>
+	</xs:complexType>
+
+	<xs:simpleType name="LineNumberType">
+		<xs:restriction base="xs:positiveInteger">
+			<xs:totalDigits value="2" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:simpleType name="CommentDetailsType">
+		<xs:restriction base="xs:string">
+			<xs:minLength value="0" />
+			<xs:maxLength value="70" />
+		</xs:restriction>
+	</xs:simpleType>
+
+	<xs:element name="ClaimNotifyEventRq" type="ClaimNotifyEventRqType" />
+	<xs:element name="LineNumber" type="LineNumberType" />
+	<xs:element name="CommentDetails" type="CommentDetailsType" />
+
+</xs:schema>

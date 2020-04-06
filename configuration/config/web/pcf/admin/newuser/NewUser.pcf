@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="AdminWelcome.go()"
+    afterCommit="UserDetailPage.go(User)"
+    beforeCommit="gw.api.admin.UserAuthorityLimitUtil.cleanUpUnusedCustomProfiles(User)"
+    canEdit="true"
+    canVisit="perm.User.create"
+    id="NewUser"
+    parent="Admin()"
+    startEditing="User.Credential = new Credential(); User.initPreferences()"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Admin.NewUser&quot;)">
+    <LocationEntryPoint
+      signature="NewUser()"/>
+    <Variable
+      initialValue="new User()"
+      name="User"
+      type="User"/>
+    <Variable
+      initialValue="User.Contact == null ? null : gw.api.contact.ContactSystemUtil.INSTANCE.generateLinkStatus(User.Contact)"
+      name="linkStatus"
+      type="gw.api.contact.ContactSystemLinkStatus"/>
+    <Screen
+      id="NewUserDetailScreen">
+      <Toolbar>
+        <EditButtons/>
+        <ToolbarButton
+          action="gw.api.admin.AdminUtil.deleteUser(User); AdminWelcome.go();"
+          confirmMessage="DisplayKey.get(&quot;Web.Admin.UserDetail.DeleteConfirm&quot;)"
+          hideIfEditable="true"
+          id="NewUser_DeleteUserButton"
+          label="DisplayKey.get(&quot;Button.DeleteUser&quot;)"
+          visible=" User.SafeToDelete and perm.User.delete"/>
+      </Toolbar>
+      <CardViewPanel>
+        <Card
+          id="BasicsCard"
+          shortcut="B"
+          title="DisplayKey.get(&quot;JSP.UserDetail.User.Basics&quot;)"
+          visible="perm.User.create">
+          <PanelRef
+            def="UserDetailDV(User, linkStatus)">
+            <Toolbar/>
+          </PanelRef>
+        </Card>
+        <Card
+          id="ProfileCard"
+          shortcut="L"
+          title="DisplayKey.get(&quot;JSP.UserDetail.User.Profile&quot;)"
+          visible="perm.User.create">
+          <PanelRef
+            def="UserProfileDV(User, linkStatus)">
+            <Toolbar/>
+          </PanelRef>
+        </Card>
+        <Card
+          id="AuthorityLimitsCard"
+          shortcut="Y"
+          title="DisplayKey.get(&quot;JSP.UserDetail.User.AuthorityLimits&quot;)"
+          visible="perm.User.create">
+          <PanelRef
+            def="UserAuthorityLimitsDV(User)">
+            <Toolbar/>
+          </PanelRef>
+        </Card>
+        <Card
+          id="AttributesCard"
+          shortcut="U"
+          title="DisplayKey.get(&quot;JSP.UserDetail.User.Attributes&quot;)"
+          visible="perm.User.create">
+          <PanelRef
+            def="UserAttributesLV(User)">
+            <Toolbar>
+              <IteratorButtons
+                iterator="UserAttributesLV.UserAttributesLV"
+                removeShortcut="E"/>
+            </Toolbar>
+          </PanelRef>
+        </Card>
+        <Card
+          id="RegionsCard"
+          shortcut="R"
+          title="DisplayKey.get(&quot;JSP.UserDetail.User.Regions&quot;)"
+          visible="perm.User.create">
+          <PanelRef
+            def="UserRegionLV(User)">
+            <Toolbar>
+              <IteratorButtons
+                iterator="UserRegionLV.UserRegionLV"
+                removeShortcut="E"/>
+            </Toolbar>
+          </PanelRef>
+        </Card>
+      </CardViewPanel>
+    </Screen>
+  </Page>
+</PCF>

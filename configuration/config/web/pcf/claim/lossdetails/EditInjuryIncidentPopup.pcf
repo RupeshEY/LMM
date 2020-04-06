@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="injuryIncident.Claim.instructNewServiceRequests()"
+    canEdit="perm.Incident.edit(injuryIncident)"
+    canVisit="injuryIncident != null"
+    id="EditInjuryIncidentPopup"
+    infoBar="ClaimInfoBar(injuryIncident.Claim)"
+    startInEditMode="startInEditMode"
+    title="DisplayKey.get(&quot;Web.EditInjuryIncident.Title&quot;)">
+    <LocationEntryPoint
+      signature="EditInjuryIncidentPopup(injuryIncident : InjuryIncident, startInEditMode : boolean)"/>
+    <LocationEntryPoint
+      signature="EditInjuryIncidentPopup(injuryIncident : InjuryIncident)"/>
+    <Variable
+      name="injuryIncident"
+      type="InjuryIncident"/>
+    <Variable
+      initialValue="true"
+      name="startInEditMode"
+      type="boolean"/>
+    <Screen
+      id="EditInjuryIncidentScreen">
+      <TitleBar
+        icon="injuryIncident.HeaderIcon"/>
+      <Toolbar>
+        <EditButtons/>
+        <ToolbarDivider/>
+        <PrintToolbarButton
+          hideIfEditable="true"
+          id="InjuryIncident_PrintButton"
+          label="DisplayKey.get(&quot;Button.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="InjuryIncidentDV(injuryIncident)"/>
+    </Screen>
+  </Popup>
+</PCF>

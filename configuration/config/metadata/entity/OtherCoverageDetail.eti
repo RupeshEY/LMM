@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Details of other coverage associated with an exposure."
+  entity="OtherCoverageDetail"
+  exportable="true"
+  extendable="true"
+  loadable="true"
+  platform="false"
+  table="othercvgdet"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.OtherCoverageDetail"
+    impl="com.guidewire.cc.domain.exposure.impl.OtherCoverageDetailImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="The related exposure."
+    exportable="false"
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="false"/>
+  <column
+    desc="Name of contact at insurer."
+    name="ContactName"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Phone number of contact at insurer."
+    name="ContactPhone"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Name of insurer."
+    name="Insurer"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Comments/notes about the coverage."
+    name="Notes"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Policy number at insurer."
+    name="PolicyNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+</entity>

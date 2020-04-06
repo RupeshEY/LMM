@@ -1,0 +1,13 @@
+package rules.Workplan
+
+@gw.rules.RuleName("Exposure Workplan")
+@gw.rules.RuleSetDescription("This is the Initial Exposure Workplan generation rule set.    Initial exposure workplan rules add initial activities to    the exposure as a checklist of work that various people need    to do on the exposure.")
+class ExposureWorkplan extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Exposure) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Exposure) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Exposure Workplan", ExposureWorkplan )
+  }
+}

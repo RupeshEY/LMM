@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="WorkloadDelegate">
+  <column
+    default="0"
+    exportable="false"
+    ignoreforevents="true"
+    name="WorkloadWeight"
+    nullok="false"
+    type="nonnegativeinteger"/>
+  <column
+    default="0"
+    name="SupplementalWorkloadWeight"
+    nullok="false"
+    type="integer"/>
+  <column
+    desc="Last time user workload was calculated and updated"
+    exportable="false"
+    ignoreforevents="true"
+    name="WorkloadUpdated"
+    nullok="true"
+    type="datetime"/>
+</delegate>

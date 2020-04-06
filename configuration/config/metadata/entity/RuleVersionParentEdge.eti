@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="RuleVersionParentEdge"
+  extendable="false"
+  loadable="false"
+  platform="true"
+  table="bizruleversionpedge"
+  type="versionable">
+  <implementsEntity
+    name="RuleVersionDependent"/>
+  <implementsEntity
+    name="OrderedChild"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.bizrules.domain.RuleVersionParentEdgeImpl"/>
+  <foreignkey
+    fkentity="RuleVersion"
+    name="Owner"
+    nullok="false"/>
+  <foreignkey
+    fkentity="RuleVersion"
+    name="Parent"
+    nullok="false"/>
+  <column
+    name="AuditTrailParent"
+    nullok="false"
+    type="bit"/>
+</entity>

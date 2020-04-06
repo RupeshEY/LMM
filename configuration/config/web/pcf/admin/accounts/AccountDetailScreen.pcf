@@ -1,0 +1,109 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="AccountDetailScreen">
+    <Require
+      name="account"
+      type="Account"/>
+    <Require
+      name="showAccountHandlingCardToStart"
+      type="boolean"/>
+    <CardViewPanel
+      id="AccountTabsCV">
+      <Card
+        id="AccountDetailTab"
+        selectOnEnter="!showAccountHandlingCardToStart"
+        title="DisplayKey.get(&quot;Web.Admin.Account.Tabs.Detail&quot;)">
+        <PanelRef
+          def="AccountDV(account)">
+          <Toolbar>
+            <EditButtons/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+      <Card
+        id="AccountHandlingTab"
+        selectOnEnter="showAccountHandlingCardToStart"
+        title="DisplayKey.get(&quot;Web.Admin.Account.Tabs.Handling&quot;)"
+        visible="account.SpecialHandling != null">
+        <PanelRef
+          def="SpecialHandlingAutomatedNotificationsLV(account.SpecialHandling, perm.System.accountmng)"
+          id="AccountAutomatedNotificationsLVPanelRef">
+          <TitleBar
+            id="AutomatedNotificationsTitle"
+            title="DisplayKey.get(&quot;Web.Admin.AccountDetailScreen.AutomatedNotificationsTitle&quot;)"/>
+          <Toolbar
+            visible="perm.System.accountmng">
+            <CheckedValuesToolbarButton
+              checkedRowAction="CheckedValue.remove()"
+              confirmMessage="DisplayKey.get(&quot;Web.Admin.AccountDetailScreen.AutomatedNotificationsDeleteConfirmation&quot;)"
+              id="AutomatedNotificationsDelete"
+              iterator="AccountAutomatedNotificationsLVPanelRef.AutomatedNotificationsRowIterator"
+              label="DisplayKey.get(&quot;Web.Admin.AccountDetailScreen.AutomatedNotificationsDelete&quot;)"/>
+            <ToolbarButton
+              id="AutomatedNotificationsAdd"
+              label="DisplayKey.get(&quot;Web.Admin.AccountDetailScreen.AutomatedNotificationsAdd&quot;)"
+              showConfirmMessage="false">
+              <MenuItemIterator
+                elementName="automatedHandlerSubtype"
+                id="AutomatedNotificationsAddMenuItemIterator"
+                value="(AutomatedNotificationHandler.Type as gw.entity.IEntityType).AllSubtypes.where(\ t -&gt; not t.Abstract).sortBy(\ t -&gt; t.DisplayName)"
+                valueType="java.util.List&lt;gw.entity.IEntityType&gt;">
+                <MenuItem
+                  action="NewAutomatedNotificationHandlerPopup.push(account.SpecialHandling, automatedHandlerSubtype)"
+                  id="AutomatedNotificationsAddClaimIndicatorHandler"
+                  label="DisplayKey.get(&quot;Web.Admin.AccountDetailScreen.AutomatedNotificationsAdd.MenuItemLabel.&quot; + (automatedHandlerSubtype.DisplayName))"/>
+              </MenuItemIterator>
+            </ToolbarButton>
+          </Toolbar>
+        </PanelRef>
+        <PanelRef
+          def="SpecialHandlingAutomatedActivitiesLV(account.SpecialHandling, perm.System.accountmng)"
+          id="AccountAutomatedActivitiesLVPanelRef">
+          <TitleBar
+            id="AutomatedActivitiesTitle"
+            title="DisplayKey.get(&quot;Web.Admin.AccountDetailScreen.AutomatedActivitiesTitle&quot;)"/>
+          <Toolbar
+            visible="perm.System.accountmng">
+            <CheckedValuesToolbarButton
+              checkedRowAction="CheckedValue.remove()"
+              confirmMessage="DisplayKey.get(&quot;Web.Admin.AccountDetailScreen.AutomatedActivitiesDeleteConfirmation&quot;)"
+              id="AutomatedActivitiesDelete"
+              iterator="AccountAutomatedActivitiesLVPanelRef.AutomatedActivitiesRowIterator"
+              label="DisplayKey.get(&quot;Web.Admin.AccountDetailScreen.AutomatedActivitiesDelete&quot;)"/>
+            <ToolbarButton
+              id="AutomatedActivitiesAdd"
+              label="DisplayKey.get(&quot;Web.Admin.AccountDetailScreen.AutomatedActivitiesAdd&quot;)"
+              showConfirmMessage="false">
+              <MenuItemIterator
+                elementName="automatedHandlerSubtype"
+                id="AutomatedActivitiesAddMenuItemIterator"
+                value="(AutomatedActivityHandler.Type as gw.entity.IEntityType).AllSubtypes.where(\ t -&gt; not t.Abstract).sortBy(\ t -&gt; t.DisplayName)"
+                valueType="java.util.List&lt;gw.entity.IEntityType&gt;">
+                <MenuItem
+                  action="NewAutomatedActivityHandlerPopup.push(account.SpecialHandling, automatedHandlerSubtype)"
+                  id="AutomatedActivitiesAddClaimIndicatorHandler"
+                  label="DisplayKey.get(&quot;Web.Admin.AccountDetailScreen.AutomatedActivitiesAdd.MenuItemLabel.&quot; + (automatedHandlerSubtype.DisplayName))"/>
+              </MenuItemIterator>
+            </ToolbarButton>
+          </Toolbar>
+        </PanelRef>
+        <PanelRef
+          def="OtherInstructionsPanelSet(account.SpecialHandling.OtherInstructions, null, perm.System.accountmng)">
+          <TitleBar
+            id="OtherInstructionsTitle"
+            title="DisplayKey.get(&quot;Web.Admin.AccountDetailScreen.OtherInstructionsTitle&quot;)"/>
+          <Toolbar
+            visible="perm.System.accountmng">
+            <ToolbarButton
+              action="OtherInstructionPopup.push(null, account.SpecialHandling, true, perm.System.accountmng)"
+              id="ToolbarButtonaddOtherInstruction"
+              label="DisplayKey.get(&quot;Web.Admin.AccountDetailScreen.OtherInstruction.Add&quot;)"/>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+    </CardViewPanel>
+  </Screen>
+</PCF>

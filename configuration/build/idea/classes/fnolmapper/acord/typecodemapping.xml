@@ -1,0 +1,156 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!--
+    Mapping to ClaimCenter type codes from ACORD type codes.
+-->
+<typecodemapping>
+    
+	<namespacelist>
+		<namespace name="acord" />
+	</namespacelist>
+
+	<typelist name="AddressType">
+		<mapping alias="BranchOffice" namespace="acord" typecode="business" />
+		<mapping alias="Terminal" namespace="acord" typecode="other" />
+		<mapping alias="Storage" namespace="acord" typecode="other" />
+		<mapping alias="JobSite" namespace="acord" typecode="business" />
+		<mapping alias="Marina" namespace="acord" typecode="other" />
+	</typelist>
+	<typelist name="BodyPartType">
+		<mapping alias="LEG/LOWER" namespace="acord" typecode="lower" />
+		<mapping alias="HEAD" namespace="acord" typecode="head" />
+	</typelist>
+	<typelist name="ContactRole">
+		<mapping alias="DOC" namespace="acord" typecode="driver" />
+		<mapping alias="OT" namespace="acord" typecode="other" />
+		<mapping alias="LOSSP" namespace="acord" typecode="recoverypayer" />
+		<mapping alias="WIT" namespace="acord" typecode="witness" />
+		<mapping alias="RecoveringAgency" namespace="acord" typecode="recoveryagent" />
+		<mapping alias="Employer" namespace="acord" typecode="employer" />
+		<mapping alias="SubroHandler" namespace="acord" typecode="subrogator" />
+		<mapping alias="CLM" namespace="acord" typecode="claimant" />
+		<mapping alias="AT" namespace="acord" typecode="attorney" />
+		<mapping alias="DEP" namespace="acord" typecode="claimantdep" />
+		<mapping alias="AP" namespace="acord" typecode="injured" />
+		<mapping alias="RepShop" namespace="acord" typecode="repairshop" />
+		<mapping alias="Insured" namespace="acord" typecode="insured" />
+		<mapping alias="LIEN" namespace="acord" typecode="lienholder" />
+		<mapping alias="Super" namespace="acord" typecode="supervisor" />
+		<mapping alias="PAS" namespace="acord" typecode="passenger" />
+		<mapping alias="VND" namespace="acord" typecode="vendor" />
+		<mapping alias="INSURER" namespace="acord" typecode="InsuredRep" />
+		<mapping alias="SalvageBuyer" namespace="acord" typecode="salvagebuyer" />
+		<mapping alias="DRV" namespace="acord" typecode="driver" />
+		<mapping alias="PHY" namespace="acord" typecode="doctor" />
+		<mapping alias="default" namespace="acord" typecode="other" />
+		<mapping alias="ReptBy" namespace="acord" typecode="reporter" />
+		<mapping alias="HOSP" namespace="acord" typecode="hospital" />
+	</typelist>
+	<typelist name="GenderType">
+		<mapping alias="F" namespace="acord" typecode="F" />
+		<mapping alias="M" namespace="acord" typecode="M" />
+	</typelist>
+	<typelist name="LOBCode">
+		<mapping alias="AUTO" namespace="acord" typecode="BusinessAutoLine" />
+		<mapping alias="CGL" namespace="acord" typecode="GLLine" />
+		<mapping alias="AUTOP" namespace="acord" typecode="PersonalAutoLine" />
+	</typelist>
+	<typelist name="LossType">
+		<mapping alias="AUTO" namespace="acord" typecode="AUTO" />
+		<mapping alias="CGL" namespace="acord" typecode="GL" />
+		<mapping alias="AUTOP" namespace="acord" typecode="AUTO" />
+	</typelist>
+	<typelist name="MaritalStatus">
+		<mapping alias="W" namespace="acord" typecode="widowed" />
+		<mapping alias="V" namespace="acord" typecode="common" />
+		<mapping alias="S" namespace="acord" typecode="single" />
+		<mapping alias="P" namespace="acord" typecode="married" />
+		<mapping alias="D" namespace="acord" typecode="divorced" />
+		<mapping alias="M" namespace="acord" typecode="married" />
+	</typelist>
+	<typelist name="PersonRelationType">
+		<mapping alias="IN" namespace="acord" typecode="self" />
+		<mapping alias="RR" namespace="acord" typecode="relative" />
+		<mapping alias="BS" namespace="acord" typecode="relative" />
+		<mapping alias="EM" namespace="acord" typecode="employee" />
+		<mapping alias="RE" namespace="acord" typecode="relative" />
+		<mapping alias="PA" namespace="acord" typecode="relative" />
+		<mapping alias="OT" namespace="acord" typecode="other" />
+		<mapping alias="default" namespace="acord" typecode="other" />
+	</typelist>
+	<typelist name="PolicyType">
+		<mapping alias="AUTO" namespace="acord" typecode="BusinessAuto" />
+		<mapping alias="CGL" namespace="acord" typecode="GeneralLiability" />
+		<mapping alias="AUTOP" namespace="acord" typecode="PersonalAuto" />
+	</typelist>
+    <typelist name="CoverageType">
+        <mapping alias="ACOLL" namespace="acord" typecode="BACollisionCov"/>
+        <mapping alias="COLL" namespace="acord" typecode="PACollisionCov"/>
+        <mapping alias="ACOMP" namespace="acord" typecode="BAComprehensiveCov"/>
+        <mapping alias="COMP" namespace="acord" typecode="PAComprehensiveCov"/>
+        <mapping alias="ALIBI" namespace="acord" typecode="BAOwnedLiabilityCov"/>
+        <mapping alias="BI" namespace="acord" typecode="PALiabilityCov"/>
+        <mapping alias="ALIPD" namespace="acord" typecode="BAOwnedLiabilityCov"/>
+        <mapping alias="PD" namespace="acord" typecode="PALiabilityCov"/>
+        <mapping alias="PIP" namespace="acord" typecode="PAPIP_NJ"/>
+        <mapping alias="GL" namespace="acord" typecode="GLCGLCov"/>
+    </typelist>
+	<typelist name="PrimaryPhoneType">
+		<mapping alias="Business" namespace="acord" typecode="work" />
+		<mapping alias="Home" namespace="acord" typecode="home" />
+	</typelist>
+	<typelist name="State">
+		<mapping alias="PR" namespace="acord" typecode="PR" />
+		<mapping alias="MO" namespace="acord" typecode="MO" />
+		<mapping alias="VT" namespace="acord" typecode="VT" />
+		<mapping alias="MN" namespace="acord" typecode="MN" />
+		<mapping alias="DE" namespace="acord" typecode="DE" />
+		<mapping alias="DC" namespace="acord" typecode="DC" />
+		<mapping alias="MI" namespace="acord" typecode="MI" />
+		<mapping alias="GA" namespace="acord" typecode="GA" />
+		<mapping alias="ME" namespace="acord" typecode="ME" />
+		<mapping alias="MD" namespace="acord" typecode="MD" />
+		<mapping alias="MA" namespace="acord" typecode="MA" />
+		<mapping alias="SD" namespace="acord" typecode="SD" />
+		<mapping alias="SC" namespace="acord" typecode="SC" />
+		<mapping alias="PA" namespace="acord" typecode="PA" />
+		<mapping alias="VA" namespace="acord" typecode="VA" />
+		<mapping alias="CT" namespace="acord" typecode="CT" />
+		<mapping alias="CO" namespace="acord" typecode="CO" />
+		<mapping alias="OR" namespace="acord" typecode="OR" />
+		<mapping alias="FL" namespace="acord" typecode="FL" />
+		<mapping alias="IN" namespace="acord" typecode="IN" />
+		<mapping alias="UT" namespace="acord" typecode="UT" />
+		<mapping alias="IL" namespace="acord" typecode="IL" />
+		<mapping alias="OK" namespace="acord" typecode="OK" />
+		<mapping alias="CA" namespace="acord" typecode="CA" />
+		<mapping alias="OH" namespace="acord" typecode="OH" />
+		<mapping alias="ID" namespace="acord" typecode="ID" />
+		<mapping alias="RI" namespace="acord" typecode="RI" />
+		<mapping alias="IA" namespace="acord" typecode="IA" />
+		<mapping alias="LA" namespace="acord" typecode="LA" />
+		<mapping alias="KY" namespace="acord" typecode="KY" />
+		<mapping alias="NY" namespace="acord" typecode="NY" />
+		<mapping alias="NV" namespace="acord" typecode="NV" />
+		<mapping alias="KS" namespace="acord" typecode="KS" />
+		<mapping alias="TX" namespace="acord" typecode="TX" />
+		<mapping alias="WY" namespace="acord" typecode="WY" />
+		<mapping alias="WV" namespace="acord" typecode="WV" />
+		<mapping alias="HI" namespace="acord" typecode="HI" />
+		<mapping alias="NM" namespace="acord" typecode="NM" />
+		<mapping alias="TN" namespace="acord" typecode="TN" />
+		<mapping alias="NJ" namespace="acord" typecode="NJ" />
+		<mapping alias="NH" namespace="acord" typecode="NH" />
+		<mapping alias="NE" namespace="acord" typecode="NE" />
+		<mapping alias="ND" namespace="acord" typecode="ND" />
+		<mapping alias="WI" namespace="acord" typecode="WI" />
+		<mapping alias="AZ" namespace="acord" typecode="AZ" />
+		<mapping alias="NC" namespace="acord" typecode="NC" />
+		<mapping alias="WA" namespace="acord" typecode="WA" />
+		<mapping alias="AR" namespace="acord" typecode="AR" />
+		<mapping alias="AL" namespace="acord" typecode="AL" />
+		<mapping alias="MT" namespace="acord" typecode="MT" />
+		<mapping alias="AK" namespace="acord" typecode="AK" />
+		<mapping alias="MS" namespace="acord" typecode="MS" />
+	</typelist>
+        
+</typecodemapping>

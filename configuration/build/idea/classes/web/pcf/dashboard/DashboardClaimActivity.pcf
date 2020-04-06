@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.User.viewedbclaimact"
+    id="DashboardClaimActivity"
+    title="DisplayKey.get(&quot;Java.Dashboard.Title&quot;, DisplayKey.get(&quot;Java.Dashboard.ClaimActivity.Title&quot;, gw.api.dashboard.DashboardUtil.getHelper().Period))">
+    <LocationEntryPoint
+      signature="DashboardClaimActivity(GroupInfo : gw.api.dashboard.DashboardTreeGroupInfo)"/>
+    <Variable
+      name="GroupInfo"
+      type="gw.api.dashboard.DashboardTreeGroupInfo"/>
+    <Variable
+      initialValue="gw.api.dashboard.DashboardUtil.getHelper()"
+      name="Stats"
+      type="gw.api.dashboard.DashboardStatsHelper"/>
+    <Screen
+      id="DashboardClaimActivityScreen">
+      <Toolbar>
+        <PrintToolbarButton
+          available="perm.User.printlistviews"
+          id="PrintButton"
+          label="DisplayKey.get(&quot;Button.Print&quot;)"/>
+        <ToolbarDivider/>
+        <ToolbarInput
+          boldLabel="true"
+          id="label"
+          label="DisplayKey.get(&quot;Java.Dashboard.AsOf&quot;)"
+          value="Stats.WhenLastCalculatedString"
+          valueType="java.lang.String"/>
+      </Toolbar>
+      <PanelRef
+        def="ClaimActivityByOrgLevelLV(Stats.getOrgStatsAsArray(GroupInfo.AllGroups?.toTypedArray()))"/>
+      <PanelRef
+        def="ClaimActivityByLOBLV(Stats.LOBStats?.toTypedArray())"
+        visible="GroupInfo.isRoot() &amp;&amp; gw.api.dashboard.DashboardUtil.isShowByLineOrLoss()">
+        <Toolbar/>
+      </PanelRef>
+      <PanelRef
+        def="ClaimActivityByLossTypeLV(Stats.LossTypeStats?.toTypedArray())"
+        visible="GroupInfo.isRoot() &amp;&amp; gw.api.dashboard.DashboardUtil.isShowByLineOrLoss()">
+        <Toolbar/>
+      </PanelRef>
+      <PanelRef
+        def="ClaimActivityByCoverageTypeLV(Stats.CoverageTypeStats?.toTypedArray())"
+        visible="GroupInfo.isRoot() &amp;&amp; gw.api.dashboard.DashboardUtil.isShowByCoverage()">
+        <Toolbar/>
+      </PanelRef>
+    </Screen>
+  </Page>
+</PCF>

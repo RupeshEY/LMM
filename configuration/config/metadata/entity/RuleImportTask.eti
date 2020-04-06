@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="The task to import business rules."
+  entity="RuleImportTask"
+  final="true"
+  platform="true"
+  supertype="RuleExportImportTask">
+  <column
+    desc="The source name, e.g. the file name."
+    name="SourceName"
+    nullok="true"
+    type="shorttext"/>
+</subtype>

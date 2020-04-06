@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!-- RUCoverage -->
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Coverage associated with a risk unit."
+  entity="RUCoverage"
+  final="false"
+  supertype="Coverage">
+  <implementsInterface
+    iface="gw.cc.policy.entity.RUCoverage"
+    impl="com.guidewire.cc.domain.policy.impl.RUCoverageImpl"/>
+  <fulldescription><![CDATA[
+A <code>Coverage</code> associated with a <code>RiskUnit</code>.
+    ]]></fulldescription>
+  <foreignkey
+    columnName="RiskUnitID"
+    desc="RiskUnit associated with the coverage."
+    exportable="true"
+    fkentity="RiskUnit"
+    name="RiskUnit"
+    nullok="false"
+    triggersValidation="true"/>
+</subtype>

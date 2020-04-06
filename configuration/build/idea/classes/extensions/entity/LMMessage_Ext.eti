@@ -1,0 +1,163 @@
+<?xml version="1.0"?>
+<entity
+  abstract="true"
+  desc="Supertype for all London Market Message entities"
+  exportable="true"
+  final="false"
+  xmlns="http://guidewire.com/datamodel"
+  entity="LMMessage_Ext"
+  table="lmmessage_ext"
+  type="retireable">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="CCAssignable"/>
+  <column
+    desc="UUId - Unique Universal Identifier of the message"
+    name="UUID"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="36"/>
+  </column>
+  <column
+    desc="The message content"
+    name="Content"
+    nullok="true"
+    type="blob"/>
+  <column
+    desc="Unique Claim Reference for claim"
+    name="UCR"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    desc="Message processing status"
+    name="Status"
+    nullok="true"
+    typelist="ECFMessageStatus_Ext"/>
+  <column
+    desc="The message origin post date and time"
+    name="OriginTimeStamp"
+    nullok="false"
+    type="datetime"/>
+  <column
+    default="false"
+    desc="Whether the message needs a manual interaction due to preprocessing validation failure or not."
+    name="Suspended"
+    nullok="false"
+    type="bit"/>
+  <foreignkey
+    desc="The Claim this message is related to."
+    fkentity="Claim"
+    name="Claim"
+    nullok="true"/>
+  <column
+    desc="The error code for the reason this message failed validation"
+    name="ValidationErrorCode"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="The reason being given for this message to have failed validation"
+    name="ValidationFailureReason"
+    nullok="true"
+    type="text"/>
+  <column
+    desc="Unique Mandate Reference. This identifies the policy."
+    name="UMR"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Sender Party Id"
+    name="SenderPartyId"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Sender Party Name"
+    name="SenderPartyName"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Sender Party Agency"
+    name="SenderPartyAgency"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Sender Party Role"
+    name="SenderPartyRoleCd"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Receiver Party Id"
+    name="ReceiverPartyId"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Receiver Party Name"
+    name="ReceiverPartyName"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Receiver Party Agency"
+    name="ReceiverPartyAgency"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Receiver Party Role"
+    name="ReceiverPartyRoleCd"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <typekey
+    desc="store message type as extracted from the header"
+    name="MessageType"
+    nullok="true"
+    typelist="ECFMessageType_Ext"/>
+  <typekey
+    desc="Specifies if the message is an Inbound or Outbound message"
+    name="MessageDirection"
+    nullok="false"
+    typelist="ECFMessageDirectionType_Ext"/>
+  <typekey
+    desc="Specifies a category that this message belongs to."
+    name="MessageCategory"
+    nullok="false"
+    typelist="LMMessageCategory_Ext"/>
+  <column
+    default="false"
+    desc="Indicates if a message needs to be reprocessed. Will be picked up by a batch process."
+    name="Reprocess"
+    nullok="true"
+    type="bit"/>
+</entity>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="Catastrophes.go()"
+    afterCommit="Catastrophes.go()"
+    beforeCommit="Catastrophe.removeNullZones()"
+    canEdit="true"
+    canVisit="perm.Catastrophe.create"
+    id="NewCatastrophe"
+    parent="Catastrophes()"
+    showUpLink="true"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Admin.NewCatastrophe&quot;)">
+    <LocationEntryPoint
+      signature="NewCatastrophe()"/>
+    <Variable
+      initialValue="new Catastrophe()"
+      name="Catastrophe"
+      type="Catastrophe"/>
+    <ScreenRef
+      def="CatastropheDetailScreen(Catastrophe, false)"/>
+  </Page>
+</PCF>

@@ -1,0 +1,33 @@
+package rules.Assignment.GlobalActivityAssignmentRules_dir
+
+@gw.rules.RuleName("GAA02000 - SI - Assign SIU escalation activity to SIU group")
+internal class GAA02000SIAssignSIUescalationactivitytoSIUgroup {
+  static function doCondition(activity : entity.Activity) : boolean {
+    
+/*start00rule*/
+return activity.ActivityPattern.Code == "SIU_escalation"
+/*end00rule*/
+
+  }
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+
+/*start00rule*/
+//If there is already an SIU Investigator on the claim, assign this activity to 
+//that user's group.
+//Otherwise, assign this activity to the Western SIU Group.
+var currentSIAssignment = activity.Claim.RoleAssignments.firstWhere(\ a -> a.Role == TC_SIUINVESTIGATOR)
+if (currentSIAssignment.AssignedGroup != null) {
+  if (activity.CurrentAssignment.assignGroup(currentSIAssignment.AssignedGroup)) {
+    actions.exit()
+  }
+} else {
+  var siuGroup = gw.api.database.Query.make(Group).compare("Name", Equals, "Western SIU").select().AtMostOneRow
+  if (activity.CurrentAssignment.assignGroup(siuGroup)) {
+     actions.exit()
+  }	
+}
+/*end00rule*/
+
+  }
+}

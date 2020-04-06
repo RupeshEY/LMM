@@ -1,0 +1,86 @@
+<?xml version = "1.0" encoding = "UTF-8"?>
+<soapenv:Envelope xmlns:soap = "http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenv = "http://schemas.xmlsoap.org/soap/envelope/" xmlns:xh = "http://www.xchanging.com/wsdl/ClaimService/" xmlns:ns2 = "http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1" xmlns:ns3 = "http://www.xchanging.com/claimnotify/rq/1" xmlns:ns4 = "http://www.ACORD.org/Standards/AcordMsgSvc/1" xmlns:ns5 = "http://www.xchanging.com/wsdl/generated" xmlns:wsse = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu = "http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd">
+  <soapenv:Header>
+    <xh:xchangingheader>
+      <xh:Sender xmlns:ns6 = "http://www.xchanging.com/acord/extension">
+        <xh:Party>
+          <xh:Id>urn:duns:236196817</xh:Id>
+        </xh:Party>
+      </xh:Sender>
+      <xh:Receiver xmlns:ns6 = "http://www.xchanging.com/acord/extension">
+        <xh:Party>
+          <xh:Id>urn:lloyds:2623</xh:Id>
+        </xh:Party>
+      </xh:Receiver>
+      <xh:MsgTypeCd xmlns:ns6 = "http://www.xchanging.com/acord/extension">ClaimNotify</xh:MsgTypeCd>
+      <xh:Timestamp xmlns:ns6 = "http://www.xchanging.com/acord/extension">2017-08-23T15:13:10+01:00</xh:Timestamp>
+      <xh:RequestUUId xmlns:ns6 = "http://www.xchanging.com/acord/extension">f9dfedf0-fb4f-44b6-93c6-6a6d69609cbf</xh:RequestUUId>
+    </xh:xchangingheader>
+    <wsse:Security soapenv:mustUnderstand = "1">
+      <Signature xmlns = "http://www.w3.org/2000/09/xmldsig#">
+        <SignedInfo>
+          <ds:CanonicalizationMethod Algorithm = "http://www.w3.org/2001/10/xml-exc-c14n#" xmlns:ds = "http://www.w3.org/2000/09/xmldsig#"/>
+          <SignatureMethod Algorithm = "http://www.w3.org/2000/09/xmldsig#rsa-sha1"/>
+          <Reference URI = "#Id-CDEC4B1C-41E4-48BC-88D7-FEE8056910FE">
+            <Transforms>
+              <Transform Algorithm = "http://www.w3.org/2001/10/xml-exc-c14n#"/>
+            </Transforms>
+            <DigestMethod Algorithm = "http://www.w3.org/2000/09/xmldsig#sha1"/>
+            <DigestValue>9nItYPWGy4qKnnlyA2hO4rPb4Qs=</DigestValue>
+          </Reference>
+        </SignedInfo>
+        <SignatureValue>R47nUi43rIG7TTHnusOv0jZBmHOEjLIbEwusCxwIhpRwxyRybv0DGVhrEDQQIfx8kVIEx3nmaxvkMBePu+T+c5nStkWi62W9IQwHCcF+IKMN1Q9hfBE8IKwud9FBLl214VkUHYOkn9t52Tjl8/Nnyg3MmzWBsyum6spcK+aWDsyzj6OL7sUNVlm+aPb2Mz1cwefRLFqU4WxIADVJhuUs8yVt7lT7IvSHluiLKCi7NvdTRStOWpokF0O0qPikbcLTwAr6twpmMKQvMHkKZg2Yw7VLqlyYu21iMCzozjBjaNfp0kspA6bt38Nb+wJXAj474Io2NmX4lJnNxEmO3rp0cQ==</SignatureValue>
+        <KeyInfo>
+          <wsse:SecurityTokenReference>
+            <ds:X509Data xmlns:ds = "http://www.w3.org/2000/09/xmldsig#">
+              <ds:X509IssuerSerial>
+                <ds:X509IssuerName>CN=COMODO RSA Domain Validation Secure Server CA,O=COMODO CA Limited,L=Salford,ST=Greater Manchester,C=GB</ds:X509IssuerName>
+                <ds:X509SerialNumber>218837913371202335816408030592644071352</ds:X509SerialNumber>
+              </ds:X509IssuerSerial>
+            </ds:X509Data>
+          </wsse:SecurityTokenReference>
+        </KeyInfo>
+      </Signature>
+    </wsse:Security>
+  </soapenv:Header>
+  <soapenv:Body wsu:Id = "Id-CDEC4B1C-41E4-48BC-88D7-FEE8056910FE">
+    <ns3:ClaimNotifyEventRq Sender = "serviceprovider" Receiver = "insurer">
+      <ns2:UUId xmlns:ns6 = "http://www.xchanging.com/acord/extension">f9dfedf0-fb4f-44b6-93c6-6a6d69609cbf</ns2:UUId>
+      <ns2:CreationDate xmlns:ns6 = "http://www.xchanging.com/acord/extension">2017-08-23T15:13:10+01:00</ns2:CreationDate>
+      <ns3:ErrorsAndWarnings xmlns:ns6 = "http://www.xchanging.com/acord/extension">
+        <ns3:Result>
+          <ns3:ErrorWarningLevel>002</ns3:ErrorWarningLevel>
+          <ns3:ErrorCode>Z001</ns3:ErrorCode>
+          <ns3:ErrorWarningDescription>CLAIM TRANSACTION IS DELETED</ns3:ErrorWarningDescription>
+        </ns3:Result>
+      </ns3:ErrorsAndWarnings>
+      <ns3:AdditionalInformation xmlns:ns6 = "http://www.xchanging.com/acord/extension">
+        <ns3:ExtendedFields>
+          <ns3:FieldName>UMR</ns3:FieldName>
+          <ns3:FieldValue>B6666ECF2WB10002</ns3:FieldValue>
+          <ns3:FieldDescription>UMR</ns3:FieldDescription>
+        </ns3:ExtendedFields>
+        <ns3:ExtendedFields>
+          <ns3:FieldName>UCR</ns3:FieldName>
+          <ns3:FieldValue>B6666WB1012BEA2</ns3:FieldValue>
+          <ns3:FieldDescription>UCR</ns3:FieldDescription>
+        </ns3:ExtendedFields>
+        <ns3:ExtendedFields>
+          <ns3:FieldName>TR</ns3:FieldName>
+          <ns3:FieldValue>B6666001</ns3:FieldValue>
+          <ns3:FieldDescription>TR</ns3:FieldDescription>
+        </ns3:ExtendedFields>
+        <ns3:ExtendedFields>
+          <ns3:FieldName>Bureau</ns3:FieldName>
+          <ns3:FieldValue>SY</ns3:FieldValue>
+          <ns3:FieldDescription>Bureau</ns3:FieldDescription>
+        </ns3:ExtendedFields>
+        <ns3:ExtendedFields>
+          <ns3:FieldName>MessageSequenceNumber</ns3:FieldName>
+          <ns3:FieldValue>201</ns3:FieldValue>
+          <ns3:FieldDescription>MessageSequenceNumber</ns3:FieldDescription>
+        </ns3:ExtendedFields>
+      </ns3:AdditionalInformation>
+    </ns3:ClaimNotifyEventRq>
+  </soapenv:Body>
+</soapenv:Envelope>

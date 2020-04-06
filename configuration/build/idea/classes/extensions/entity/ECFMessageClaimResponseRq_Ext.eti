@@ -1,0 +1,359 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageClaimResponseRq_Ext"
+  desc="Claim Response Request - Holds the values the user edited on the transaction during this Writeback request"
+  supertype="ECFMessage_Ext">
+  <column
+    desc="The UUID for the Claim Data Message this response is for"
+    name="ReferredUUID"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="36"/>
+  </column>
+  <typekey
+    desc="The Response Code for this response"
+    name="ResponseCode"
+    nullok="true"
+    typelist="ECFResponseCode_Ext"/>
+  <column
+    default="true"
+    desc="For a LIRMA Lead response, indicates whether the user chose to respond with Lead Actions or SAP Actions"
+    name="LIRMALeadActions"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Reference allocated to the transaction by the sender of this Claim Response Request"
+    name="InsurerTransactionReference"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Name of the user who sent this Response as Lead"
+    name="LeadContactName"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Telephone number of the user who sent this Response as Lead"
+    name="LeadContactTelephone"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Email address of the user who sent this Response as Lead"
+    name="LeadContactEmail"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    desc="ClaimResponseRq/ContractSection/RiskCode"
+    name="RiskCode"
+    nullok="true"
+    typelist="ECFRiskCode_Ext"/>
+  <typekey
+    desc="The new Claim Cause Of Loss set in this Response"
+    name="CauseOfLossCode"
+    nullok="true"
+    typelist="ECFCauseOfLossCode_Ext"/>
+  <typekey
+    desc="The new PCS Catastrophe Code set in this Response"
+    name="PcsCatastropheCode"
+    nullok="true"
+    typelist="ECFPCSCategoryCode_Ext"/>
+  <typekey
+    desc="The new LCO Catastrophe Code set in this Response"
+    name="LcoCatastropheCode"
+    nullok="true"
+    typelist="ECFLCOCategoryCode_Ext"/>
+  <typekey
+    desc="The new Claims Scheme set in this Response"
+    name="ClaimsScheme"
+    nullok="true"
+    typelist="ECFScheme_Ext"/>
+  <typekey
+    desc="The new Triage Category set in this Response"
+    name="TriageCategory"
+    nullok="true"
+    typelist="ECFTriageCode_Ext"/>
+  <typekey
+    desc="The new Outstanding Qualifier Code set in this Response"
+    name="OutstandingQualifierCode"
+    nullok="true"
+    typelist="ECFOutstandingQualifierCode_Ext"/>
+  <column
+    desc="The new Simultaneous RIP Indicator set in this Response"
+    name="IsSimultaneousRIPIndicator"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="The new XCS To Agree Indicator set in this Response"
+    name="XcsToAgreeIndicator"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The responding carriers reference to the claim"
+    name="InsurerOrReinsurerClaimRef1"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The responding carriers second reference to the claim"
+    name="InsurerOrReinsurerClaimRef2"
+    nullok="true"
+    type="shorttext"/>
+  <array
+    arrayentity="ECFResponseQueryReason_Ext"
+    desc="Query Reasons in a Lloyd's Response"
+    name="QueryReasons"/>
+  <array
+    arrayentity="ECFResponseAPModification_Ext"
+    desc="Agreement Party promotion and demotions made by a Lead"
+    name="AgreementPartyModifications"/>
+  <typekey
+    desc="The target currency associated with ClaimEntryAmounts"
+    name="TargetCurrency1"
+    nullok="true"
+    typelist="Currency"/>
+  <typekey
+    desc="The target currency associated with ClaimEntryAmounts"
+    name="TargetCurrency2"
+    nullok="true"
+    typelist="Currency"/>
+  <typekey
+    desc="The target currency associated with ClaimEntryAmounts"
+    name="TargetCurrency3"
+    nullok="true"
+    typelist="Currency"/>
+  <typekey
+    desc="The currency associated with ClaimEntryAmounts"
+    name="Currency1"
+    nullok="true"
+    typelist="Currency"/>
+  <typekey
+    desc="The currency associated with ClaimEntryAmounts"
+    name="Currency2"
+    nullok="true"
+    typelist="Currency"/>
+  <typekey
+    desc="The currency associated with ClaimEntryAmounts"
+    name="Currency3"
+    nullok="true"
+    typelist="Currency"/>
+  <monetaryamount
+    desc="Change to the VAT amount on the transaction in currency 1"
+    name="VATAmount1"
+    nullok="true"/>
+  <monetaryamount
+    desc="Change to the VAT amount on the transaction in currency 2"
+    name="VATAmount2"
+    nullok="true"/>
+  <monetaryamount
+    desc="Change to the VAT amount on the transaction in currency 3"
+    name="VATAmount3"
+    nullok="true"/>
+  <monetaryamount
+    desc="Change to the Lead Reserve amount on the transaction in currency 1"
+    name="LeadReserveAmount1"
+    nullok="true"/>
+  <monetaryamount
+    desc="Change to the Lead Reserve amount on the transaction in currency 2"
+    name="LeadReserveAmount2"
+    nullok="true"/>
+  <monetaryamount
+    desc="Change to the Lead Reserve amount on the transaction in currency 3"
+    name="LeadReserveAmount3"
+    nullok="true"/>
+  <monetaryamount
+    desc="Change to the Lead Reserve Fees on the transaction in currency 1"
+    name="LeadReserveFees1"
+    nullok="true"/>
+  <monetaryamount
+    desc="Change to the Lead Reserve Fees on the transaction in currency 2"
+    name="LeadReserveFees2"
+    nullok="true"/>
+  <monetaryamount
+    desc="Change to the Lead Reserve Fees on the transaction in currency 3"
+    name="LeadReserveFees3"
+    nullok="true"/>
+  <monetaryamount
+    desc="Change to the Imported Services Amount on the transaction in currency 1"
+    name="ImportedServicesAmount1"
+    nullok="true"/>
+  <monetaryamount
+    desc="Change to the Imported Services Amount on the transaction in currency 2"
+    name="ImportedServicesAmount2"
+    nullok="true"/>
+  <monetaryamount
+    desc="Change to the Imported Services Amount on the transaction in currency 3"
+    name="ImportedServicesAmount3"
+    nullok="true"/>
+  <column
+    name="ImportedServicesNarrative1"
+    desc="Free format narrative to support the component claim imported services amount."
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="ImportedServicesNarrative2"
+    desc="Free format narrative to support the component claim imported services amount."
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="ImportedServicesNarrative3"
+    desc="Free format narrative to support the component claim imported services amount."
+    nullok="true"
+    type="shorttext"/>
+  <array
+    arrayentity="ECFMessagePrivateComment_Ext"
+    desc="Any private comments the user entered with this response"
+    name="PrivateComments"/>
+  <array
+    arrayentity="ECFMessagePublicComment_Ext"
+    desc="Any public comments the user entered with this response"
+    name="PublicComments"/>
+  <column
+    desc="Date/time action occurred (transaction created or updated or response made)"
+    name="AsOfDate"
+    nullok="true"
+    type="datetime"/>
+  <typekey
+    desc="The participant function of the user that is responding."
+    name="ParticipantFunction"
+    nullok="false"
+    typelist="ECFParticipantFunction_Ext"/>
+  <column
+    desc="The Claim Line Number"
+    name="ClaimLineNumber"
+    nullok="true"
+    type="longint"/>
+  <typekey
+    name="BureauType"
+    desc="The carrier's bureau type for this transaction"
+    nullok="true"
+    typelist="ECFBureauType_Ext"/>
+  <column
+    desc="The CLASS User ID of the person making the response"
+    name="ContactClassUserId"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The Account Code that the CLASS User ID belongs to of the person making the response"
+    name="ContactClassAccountId"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The person's name making the response"
+    name="ContactName"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Telephone number of the name or department within the Insurer to be contacted in relation to a transaction."
+    name="ContactTelephone"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Fax number of the name or department within the Insurer to be contacted in relation to transaction."
+    name="ContactFax"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Email address of the name or department within the Insurer to be contacted in relation to a transaction."
+    name="ContactEmail"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    desc="Identifies the type of transaction and will notify if the message is a first advice (with or without settlement) and interim advice (with or without settlement). The sender and receiver should make sure that this data element is populated."
+    name="TransactionType"
+    nullok="true"
+    typelist="ECFClaimTransactionType_Ext"/>
+  <array
+    arrayentity="ECFClaimParticipantRole_Ext"
+    desc="Participants and their roles that can potentially be changed."
+    name="ClaimParticipantRoles"/>
+  <column
+    name="ChaseUpIndicator"
+    desc="String representation of the ChaseUpIndicator boolean"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="ChaseUpIndicatorInterval"
+    desc="String representation of the ChaseUpIndicator Interval"
+    nullok="true"
+    type="integer"/>
+  <column
+    name="SimultaneousRIPIndicator"
+    desc="String representation of the SimultaneousRIPIndicator boolean"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="CedantInLiquidationIndicator"
+    desc="String representation of the CedantInLiquidationIndicator boolean"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    name="ClassOfBusiness"
+    desc="Code for identifying the class of business (for ILU and LIRMA). AKA JvClassOfBusiness in the XML"
+    nullok="true"
+    typelist="ECFClassOfBusiness_Ext"/>
+  <column
+    name="PrivateFootnote"
+    desc="Private comments are only visible to members of the same organisation (LIRMA)"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    name="RequestToBroker1"
+    desc="A Request to the Broker (LIRMA)"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    name="RequestToBroker2"
+    desc="A Request to the Broker (LIRMA)"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    name="NoFurtherResponseIndicator"
+    desc="Indicates that the company in question has indicated that they do not want to make any further responses on this claim."
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="ImmediatePartCollectionInd"
+    desc="Immediate part collection indicator"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="MultipleResponseIndicator"
+    desc="Indicates that a multiple response is being actioned."
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="MinorPrecautionaryIndicator"
+    desc="Collection unlikely indicator"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    desc="Claim category code"
+    name="CategoryCode"
+    nullok="true"
+    typelist="ECFClaimCategoryCode_Ext"/>
+  <typekey
+    desc="Claim subcategory code"
+    name="SubCategoryCode"
+    nullok="true"
+    typelist="ECFClaimSubCatCode_Ext"/>
+  <typekey
+    desc="Indicates that contractual conditions apply to claim"
+    name="ContractConditionsApplyInd"
+    nullok="true"
+    typelist="ECFContractConditions_Ext"/>
+  <column
+    desc="Indicator set by the leader to inform the broker that all underwriters on the market will need to see a copy of the file."
+    name="AllUnderwritersToSeeFileInd"
+    nullok="true"
+    type="shorttext"/>
+  <array
+    arrayentity="Activity"
+    desc="Array of Approval / Approval Denied Activities linked to this Claim Response"
+    name="Activities"/>
+  <column
+    desc="If this message needs approval before sending, this is the reason why"
+    name="ApprovalIssue"
+    nullok="true"
+    type="shorttext"/>
+</subtype>

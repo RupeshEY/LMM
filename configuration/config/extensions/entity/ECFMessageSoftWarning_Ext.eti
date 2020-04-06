@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<entity
+  desc="A Soft Warning on the Claim"
+  exportable="true"
+  final="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageSoftWarning_Ext"
+  table="ecfmessagesoftwarning_ext"
+  type="retireable">
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Warnings generated at the time the broker creates the claim"
+    name="Description"
+    nullok="false"
+    type="shorttext"/>
+  <foreignkey
+    fkentity="ECFMessageClaimData_Ext"
+    name="ECFMessage"
+    nullok="false"/>
+</entity>

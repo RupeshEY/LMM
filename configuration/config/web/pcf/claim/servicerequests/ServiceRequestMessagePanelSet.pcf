@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="ServiceRequestMessagePanelSet">
+    <Require
+      name="messages"
+      type="ServiceRequestMessage[]"/>
+    <PanelIterator
+      elementName="message"
+      id="MessageIterator"
+      value="messages"
+      valueType="entity.ServiceRequestMessage[]">
+      <IteratorSort
+        sortBy="message.SendDate"
+        sortDirection="descending"
+        sortOrder="1"/>
+      <PanelRef
+        def="ServiceRequestMessageDV(message)">
+        <TitleBar
+          icon="message.SentFromPortal ? &quot;service_request_inbound_message.png&quot; : &quot;service_request_outbound_message.png&quot;"
+          title="message.Title"/>
+        <Toolbar>
+          <ToolbarButton
+            action="ServiceRequestMessagePopup.push(message.ServiceRequest, message.Title)"
+            id="ReplyMessage"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.Message.Reply&quot;)"/>
+        </Toolbar>
+      </PanelRef>
+    </PanelIterator>
+  </PanelSet>
+</PCF>

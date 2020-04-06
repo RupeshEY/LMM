@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table for upgrade to taccounts populating reserve line."
+  entity="TmpTAccountReserveLine"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="tmptaccountreserveline"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.TmpTAccountReserveLine"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TmpTAccountReserveLineImpl"/>
+  <column
+    desc="Temp TAccount ID."
+    name="TAccountID"
+    nullok="false"
+    type="softentityreference"/>
+  <typekey
+    desc="type of the taccount"
+    name="TAccountType"
+    nullok="false"
+    typelist="taccounttype"/>
+  <column
+    desc="Temp ReserveLine ID."
+    name="TmpReserveLineID"
+    nullok="false"
+    type="softentityreference"/>
+  <column
+    desc="The number of transactions currently contributing to this taccount"
+    name="TmpNumContributingTxns"
+    nullok="true"
+    type="nonnegativeinteger"/>
+  <index
+    desc="Used in 4.0-&gt;Nozomi upgrade"
+    name="tmptaccountru1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="TAccountID"/>
+  </index>
+  <index
+    desc="Used in 4.0-&gt;Nozomi upgrade"
+    name="tmptaccountru2"
+    unique="false">
+    <indexcol
+      keyposition="1"
+      name="TAccountType"/>
+  </index>
+</entity>

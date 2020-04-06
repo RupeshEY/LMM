@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="ECFMessageDetailsSummaryMessageDetailsInputSet"
+    mode="ECFMessageClaimNotifyRq_Ext">
+    <Require
+      name="claimData"
+      type="ECFMessageClaimData_Ext"/>
+    <Variable
+      initialValue="(claimData as ECFMessageClaimNotifyRq_Ext)"
+      name="claimNotifyMsg"
+      type="ECFMessageClaimNotifyRq_Ext"/>
+    <Label
+      id="MessageDetailsLabel"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimNotifyMsg.MessageDetails&quot;)"/>
+    <TextInput
+      desc="Action Participant"
+      id="ActionParticipant"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimNotifyMsg.ActionParticipant&quot;)"
+      value="claimNotifyMsg.ActionParticipant"/>
+    <TextInput
+      desc="Action Participant"
+      id="ActionParticipantType"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimNotifyMsg.ActionParticipantType&quot;)"
+      value="claimNotifyMsg.ActionParticipantType.DisplayName"/>
+    <TextInput
+      desc="Message Response Code"
+      id="ResponseCode"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimNotifyMsg.ResponseCode&quot;)"
+      value="claimNotifyMsg.ResponseCode.Code"
+      visible="claimNotifyMsg.ActionCode == ECFActionCode_Ext.TC_R"/>
+  </InputSet>
+</PCF>

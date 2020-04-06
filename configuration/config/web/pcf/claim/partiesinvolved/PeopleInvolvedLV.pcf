@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_claim.xml -->
+  <ListViewPanel
+    id="PeopleInvolvedLV">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="ClaimContactList"
+      type="ClaimContact[]"/>
+    <RowIterator
+      editable="false"
+      elementName="ClaimContact"
+      value="ClaimContactList"
+      valueType="entity.ClaimContact[]">
+      <Row>
+        <TextCell
+          action="ClaimPartiesInvolvedDetail.drilldown(ClaimContact, claim)"
+          id="Name"
+          label="DisplayKey.get(&quot;LV.Claim.PeopleInvolved.Name&quot;)"
+          sortBy="ClaimContact.Contact.PrimarySortValue,ClaimContact.Contact.SecondarySortValue,ClaimContact.Contact.TertiarySortValue,ClaimContact.Contact.QuaternarySortValue"
+          sortOrder="1"
+          value="ClaimContact.Contact"
+          valueType="entity.Contact"/>
+        <TextCell
+          id="Roles"
+          label="DisplayKey.get(&quot;LV.Claim.PeopleInvolved.Roles&quot;)"
+          printWidth="3"
+          value="ClaimContact.Roles.join( &quot;, &quot; )"
+          width="250"
+          wrap="true"/>
+        <TextCell
+          id="Phone"
+          label="DisplayKey.get(&quot;LV.Claim.PeopleInvolved.Phone&quot;)"
+          value="ClaimContact.Contact.PrimaryPhoneValue"
+          width="115"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

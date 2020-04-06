@@ -1,0 +1,22 @@
+package rules.Validation.ClaimValidationRules_dir.CLV09000ISOValidation_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV09400 - PolicyNumber")
+internal class CLV09400PolicyNumber {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.Policy.PolicyNumber == null
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.rejectField("Policy.PolicyNumber", TC_ISO, DisplayKey.get("Rules.Validation.Claim.PolicyNumberNotNull"), null, null)
+/*end00rule*/
+
+  }
+}

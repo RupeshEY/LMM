@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="View entity for efficiently displaying Claims on the Claim search page."
+  entity="ClaimSearchView"
+  exportable="false"
+  primaryEntity="Claim"
+  supertypeEntity="ClaimAssignmentView">
+  <implementsInterface
+    iface="gw.cc.claim.entity.ClaimSearchView"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimSearchViewImpl"/>
+  <implementsInterface
+    iface="gw.cc.claim.ArchivedClaimCompatible"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimSearchViewImpl"/>
+  <fulldescription><![CDATA[
+        Supports the efficient creation of claim lists returned through ClaimCenter's search function. This is a virtual
+        entity and is not stored in the database. 
+      
+    ]]></fulldescription>
+  <viewEntityColumn
+    name="FuturePayments"
+    path="ClaimRpt.FuturePayments"/>
+  <viewEntityColumn
+    name="TotalPayments"
+    path="ClaimRpt.TotalPayments"/>
+  <viewEntityColumn
+    name="ReportedDate"
+    path="ReportedDate"/>
+  <viewEntityName
+    name="AssignedGroup"
+    path="AssignedGroup"/>
+  <viewEntityColumn
+    name="RemainingReserves"
+    path="ClaimRpt.RemainingReserves"/>
+</viewEntity>

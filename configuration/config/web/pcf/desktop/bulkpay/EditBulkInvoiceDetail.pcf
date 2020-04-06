@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="bulkPayHelper.flushCache()"
+    afterCommit="bulkPayHelper.flushCache()"
+    beforeCommit="bulkInvoice.verifyChangesAllowed()"
+    beforeValidate="bulkPayHelper.prepBulkInvoiceForSave(bulkInvoice, CostType.TC_UNSPECIFIED, CostCategory.TC_UNSPECIFIED); paymentMethodHelper.cleanUpBeforeCommit()"
+    canEdit="perm.BulkInvoice.edit"
+    canVisit="perm.BulkInvoice.view"
+    id="EditBulkInvoiceDetail"
+    parent="BulkPay()"
+    showUpLink="true"
+    startEditing="showAddressFields.Value = paymentMethodHelper.setupMailingAddress() "
+    title="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.BulkInvoiceDetail&quot;)">
+    <LocationEntryPoint
+      signature="EditBulkInvoiceDetail(bulkInvoice : BulkInvoice)"/>
+    <Variable
+      initialValue="new gw.api.financials.BulkPayHelper()"
+      name="bulkPayHelper"
+      type="gw.api.financials.BulkPayHelper"/>
+    <Variable
+      name="bulkInvoice"
+      type="BulkInvoice"/>
+    <Variable
+      initialValue="bulkInvoice.Payee!=null ? gw.api.contact.ContactSystemUtil.INSTANCE.generateLinkStatus(bulkInvoice.Payee) : null"
+      name="payeeLinkStatus"
+      recalculateOnRefresh="true"
+      type="gw.api.contact.ContactSystemLinkStatus"/>
+    <Variable
+      initialValue="new gw.api.financials.PaymentMethodHelper(bulkInvoice)"
+      name="paymentMethodHelper"
+      type="gw.api.financials.PaymentMethodHelper"/>
+    <Variable
+      initialValue="new org.apache.commons.lang3.mutable.MutableBoolean(bulkInvoice.MailingAddress == null and bulkInvoice.Payee.PrimaryAddress == null) "
+      name="showAddressFields"
+      type="org.apache.commons.lang3.mutable.MutableBoolean"/>
+    <Screen
+      editable="true"
+      id="BulkInvoiceDetailScreen">
+      <Toolbar>
+        <EditButtons
+          editVisible="bulkInvoice.Editable and perm.BulkInvoice.edit"/>
+        <ToolbarButton
+          action="validateAndSubmit()"
+          available="(bulkInvoice.Validateable or bulkInvoice.Submittable) and perm.BulkInvoice.edit"
+          hideIfEditable="true"
+          id="SubmitButton"
+          label="DisplayKey.get(&quot;Web.Financials.BulkPay.Button.Submit&quot;)"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="null"
+          hideIfEditable="true"
+          id="RefreshButton"
+          label="DisplayKey.get(&quot;Web.Financials.BulkPay.Button.Refresh&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="BulkInvoiceDetailDV(bulkInvoice, payeeLinkStatus, paymentMethodHelper, showAddressFields)"/>
+      <PanelRef
+        def="BulkInvoiceItemsLV(bulkInvoice, bulkPayHelper)">
+        <Toolbar>
+          <IteratorButtons
+            iterator="BulkInvoiceItemsLV.BulkInvoiceItemsLV"/>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+    <Code><![CDATA[uses gw.api.financials.BulkInvoiceUIHelper
+
+public function validateAndSubmit() {
+  if (bulkInvoice.Validateable) {
+    bulkPayHelper.validateBulkInvoice(bulkInvoice)
+    bulkInvoice.refresh()
+  }
+  
+  if (bulkInvoice.Submittable) {
+    BulkInvoiceUIHelper.beforeSubmit(bulkInvoice)
+    bulkPayHelper.submitBulkInvoiceForApprovalAndCommit(bulkInvoice)
+    bulkInvoice.refresh()
+  }
+
+}]]></Code>
+  </Page>
+</PCF>

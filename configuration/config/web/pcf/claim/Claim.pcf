@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    afterEnter="gw.api.claim.ClaimUtil.addToSessionList(Claim); gw.api.claim.ClaimUtil.markClaimAsViewed(Claim);"
+    browserTitle="DisplayKey.get(&quot;Web.Claim.WindowTitle&quot;, Claim.ClaimNumber)"
+    id="Claim"
+    infoBar="ClaimInfoBar(Claim)"
+    menuActions="ClaimMenuActions(Claim)"
+    parent="ClaimForward(Claim)"
+    title="DisplayKey.get(&quot;Web.ClaimFile.LocationGroup.Title&quot;, Claim.ClaimNumber)">
+    <LocationEntryPoint
+      signature="Claim(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Summary&quot;)"
+      location="ClaimSummaryGroup(Claim)"
+      shortcut="1"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Workplan&quot;)"
+      location="ClaimWorkplan(Claim)"
+      shortcut="2"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.LossDetails&quot;)"
+      location="ClaimLossDetailsGroup(Claim)"
+      shortcut="3"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Exposures&quot;)"
+      location="ClaimExposures(Claim)"
+      shortcut="4"/>
+    <LocationRefIterator
+      elementName="Exposure"
+      value="Claim.OrderedExposures"
+      valueType="entity.Exposure[]"
+      visible="(Claim.ExposureListVisibleInClaimFile) or (Claim.LossType == LossType.TC_WC)">
+      <LocationRef
+        label="DisplayKey.get(&quot;JSP.ClaimPageLinks.DynamicPageLinks.Exposure&quot;, Exposure.ExposureType)"
+        location="TopLevelExposureDetail(Exposure)"/>
+    </LocationRefIterator>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Reinsurance&quot;)"
+      location="ReinsuranceSummary(Claim)"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.PeopleInvolved&quot;)"
+      location="ClaimPartiesGroup(Claim)"
+      shortcut="5"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Policy&quot;)"
+      location="ClaimPolicyGroup(Claim)"
+      shortcut="6"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Financials&quot;)"
+      location="ClaimFinancialsGroup(Claim)"
+      shortcut="7"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Notes&quot;)"
+      location="ClaimNotes(Claim)"
+      shortcut="8"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Documents&quot;)"
+      location="ClaimDocuments(Claim)"
+      shortcut="9"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Settlement&quot;)"
+      location="ClaimPlanOfActionGroup(Claim)"
+      shortcut="0"/>
+    <LocationRef
+      location="ClaimServiceRequests(Claim)"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Subro&quot;)"
+      location="ClaimSubrogationGroup(Claim)"
+      shortcut="u"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Litigation&quot;)"
+      location="ClaimMatters(Claim)"
+      shortcut="-"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.History&quot;)"
+      location="ClaimHistory(Claim)"
+      shortcut="="/>
+    <LocationRef
+      label="(Claim.LossType == LossType.TC_WC ) ? DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.FirstReportOfInjurySnapshot&quot;) : DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Snapshot&quot;)  "
+      location="ClaimSnapshotGroup(Claim)"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Calendar&quot;)"
+      location="ClaimCalendarGroup(Claim)"
+      shortcut="c"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Menu.LocationGroup.LondonMarket&quot;)"
+      location="IPLMLocationGroup(Claim)"
+      shortcut="l"/>
+  </LocationGroup>
+</PCF>

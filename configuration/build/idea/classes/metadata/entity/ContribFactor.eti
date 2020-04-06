@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="ContribFactor"
+  exportable="true"
+  extendable="true"
+  loadable="true"
+  platform="false"
+  table="contribfactor"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.ContribFactor"
+    impl="com.guidewire.cc.domain.claim.impl.ContribFactorImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+          Details a variable which played a part in the cause of a loss. ContribFactor entities relate to a single Claim.
+        
+      ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    exportable="true"
+    fkentity="claim"
+    name="Claim"
+    nullok="false"/>
+  <typekey
+    desc=""
+    name="PriContributingFactors"
+    nullok="false"
+    typelist="PriContributingFactors">
+    <keyfilters>
+      <keyfilter
+        name="Claim.LossType"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc=""
+    name="SecContributingFactors"
+    nullok="true"
+    typelist="SecContributingFactors">
+    <keyfilters>
+      <keyfilter
+        name="PriContributingFactors"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc=""
+    name="ResContributingFactors"
+    nullok="true"
+    typelist="ResContributingFactors">
+    <keyfilters>
+      <keyfilter
+        name="SecContributingFactors"/>
+    </keyfilters>
+  </typekey>
+  <column
+    desc="When other is selected Text will display to be filled in"
+    name="ContFactText"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+</entity>

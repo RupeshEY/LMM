@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="RuleComparisonCommandSequenceInputSet">
+    <Require
+      name="commandDefinitionDiff"
+      type="gw.bizrules.diff.RuleMatchableDiffPair&lt;RuleCommandDefinition&gt;"/>
+    <InputSetRef
+      def="RuleComparisonRowIntegerInputSet(commandDefinitionDiff.SequenceRow)"/>
+  </InputSet>
+</PCF>

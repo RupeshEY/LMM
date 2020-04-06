@@ -1,0 +1,22 @@
+package rules.EventMessage.EventFired_dir.SolrDestFilter_dir.ClaimContactRole_dir
+
+@gw.rules.RuleName("ClaimContactRoleChanged")
+internal class ClaimContactRoleChanged {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return messageContext.EventName == "ClaimContactRoleChanged"
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+gw.solr.CCSolrMessageTransportPlugin.handleClaimContactRoleChangedEvent(messageContext)
+
+/*end00rule*/
+
+  }
+}

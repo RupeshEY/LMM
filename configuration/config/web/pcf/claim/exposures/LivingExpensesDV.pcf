@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="LivingExpensesDV">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <InputColumn>
+      <InputSetRef
+        def="ExposureDetailInputSet(Exposure, false)"/>
+      <InputSetRef
+        def="ExposureWorkloadInputSet(Exposure)"/>
+    </InputColumn>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.LivingExpenses.Exposure.IncidentOverview&quot;)"/>
+      <RangeInput
+        editable="true"
+        hideChildrenIfReadOnly="false"
+        id="Living_Expenses_Incident"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.LivingExpenses.Exposure.LivingExpenses&quot;)"
+        required="true"
+        value="Exposure.LivingExpensesIncident"
+        valueRange="Exposure.Claim.LivingExpensesIncidentsOnly"
+        valueType="entity.LivingExpensesIncident">
+        <MenuItem
+          action="NewLivingExpensesIncidentPopup.push( Exposure.Claim )"
+          hideIfReadOnly="true"
+          id="LivingExpensesDV_NewIncidentMenuItem"
+          label="DisplayKey.get(&quot;NVV.Exposure.SubView.LivingExpenses.Exposure.NewIncident&quot;)"/>
+        <MenuItem
+          action="EditLivingExpensesIncidentPopup.push(Exposure.LivingExpensesIncident, true)"
+          hideIfReadOnly="true"
+          id="LivingExpensesDV_EditIncidentMenuItem"
+          label="DisplayKey.get(&quot;NVV.Exposure.SubView.LivingExpenses.Exposure.EditIncident&quot;)"/>
+        <MenuItem
+          action="EditLivingExpensesIncidentPopup.push(Exposure.LivingExpensesIncident, false)"
+          hideIfEditable="true"
+          id="LivingExpensesDV_ViewIncidentMenuItem"
+          label="DisplayKey.get(&quot;NVV.Exposure.SubView.LivingExpenses.Exposure.ViewIncident&quot;)"/>
+      </RangeInput>
+      <InputDivider/>
+      <InputSetRef
+        def="ExposureCodingFinancialsInputSet(Exposure)"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="OtherCarrierInvolvementInputSet(Exposure)"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

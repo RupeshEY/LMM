@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Used to track the original and changed accommodation on the travel schedule for the insured/claimant"
+  entity="TripAccommodation"
+  exportable="true"
+  platform="false"
+  table="tripaccommodation"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.TripAccommodation"
+    impl="com.guidewire.cc.domain.exposure.impl.TripAccommodationImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="TripAccommodationDelegate"/>
+  <implementsEntity
+    name="TripExpenseCancellationDelegate"/>
+  <implementsInterface
+    iface="gw.cc.exposure.entity.TripExpenseCancellationDelegate"
+    impl="com.guidewire.cc.domain.exposure.impl.TripAccommodationImpl"/>
+  <implementsInterface
+    iface="gw.cc.exposure.entity.TripExpenseDelegate"
+    impl="com.guidewire.cc.domain.exposure.impl.TripAccommodationImpl"/>
+  <foreignkey
+    columnName="TripIncidentID"
+    desc="Incident this accommodation is related to"
+    fkentity="TripIncident"
+    name="TripIncident"
+    nullok="false"/>
+  <array
+    arrayentity="AddnlTripAccommodation"
+    desc="All new/additional trip accommodations associated with this accommodation"
+    name="AddnlTripAccommodations"
+    triggersValidation="true"/>
+  <foreignkey
+    columnName="TripSegmentID"
+    desc="Accommodation is related to this trip segment"
+    fkentity="TripSegment"
+    name="TripSegment"
+    nullok="true"/>
+</entity>

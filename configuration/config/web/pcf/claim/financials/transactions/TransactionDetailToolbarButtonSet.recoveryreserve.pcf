@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    desc="Toolbar buttons for the Payment Details Panel"
+    id="TransactionDetailToolbarButtonSet"
+    mode="recoveryreserve">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Transaction"
+      type="Transaction"/>
+  </ToolbarButtonSet>
+</PCF>

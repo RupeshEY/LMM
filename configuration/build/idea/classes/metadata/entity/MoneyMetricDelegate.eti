@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="MoneyMetricDelegate">
+  <implementsInterface
+    iface="gw.cc.metric.entity.MoneyMetricDelegate"
+    impl="com.guidewire.cc.domain.metric.impl.MoneyMetricDelegateImpl"/>
+  <fulldescription><![CDATA[Delegate used by money claim, exposure, and service request metrics to store a money value
+    ]]></fulldescription>
+  <column
+    desc="Money field to store the money value."
+    name="MoneyValue"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="MoneyCurrency"/>
+  </column>
+</delegate>

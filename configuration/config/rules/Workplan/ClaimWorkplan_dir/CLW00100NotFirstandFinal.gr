@@ -1,0 +1,20 @@
+package rules.Workplan.ClaimWorkplan_dir
+
+@gw.rules.RuleName("CLW00100 - Not First and Final")
+internal class CLW00100NotFirstandFinal {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return not claim.FirstAndFinal
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

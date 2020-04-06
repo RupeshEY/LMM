@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<Entity
+  name="UpdateBatch">
+  <Columns>
+    <Column
+      beanPath="UpdateBatch.CreateUpdateOps"
+      name="createUpdateOps"
+      sortOrder="0"/>
+    <Column
+      beanPath="UpdateBatch.DeleteUpdateOps"
+      name="deleteUpdateOps"
+      sortOrder="1"/>
+    <Column
+      beanPath="UpdateBatch.FieldChangeUpdateOps"
+      name="fieldChangeUpdateOps"
+      sortOrder="2"/>
+  </Columns>
+  <DisplayName><![CDATA[
+gw.api.locale.DisplayKey.get("DisplayName.UpdateOps.Create") + createUpdateOps.map(\ o -> o.EntityTypeName + "[" + o.ObjectUId  + "]").join(",") +
+      gw.api.locale.DisplayKey.get("DisplayName.UpdateOps.Delete") + deleteUpdateOps.map(\ o -> o.EntityTypeName + " " + o.ObjectUId ).join(",") +
+      gw.api.locale.DisplayKey.get("DisplayName.UpdateOps.FieldChange") + fieldChangeUpdateOps.map(\ o -> o.EntityTypeName + "[" + o.ObjectUId  + "]." +  o.Field + "=\"" + o.Value + "\"" ).join(",")
+  ]]></DisplayName>
+</Entity>

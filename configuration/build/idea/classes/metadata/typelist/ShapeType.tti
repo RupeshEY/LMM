@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="type of a geographic shape"
+  final="false"
+  name="ShapeType">
+  <typecode
+    code="bbox"
+    desc="Bounding Box"
+    name="bbox"
+    priority="1"/>
+  <typecode
+    code="polygon"
+    desc="Polygon"
+    name="polygon"
+    priority="2"/>
+  <typecode
+    code="region"
+    desc="Region, a set of multiple sub-shapes"
+    name="region"
+    priority="2"/>
+</typelist>

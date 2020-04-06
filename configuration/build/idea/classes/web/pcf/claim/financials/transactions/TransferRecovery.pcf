@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterCancel="ClaimFinancialsTransactionsDetail.go(claim, originalRecovery)"
+    afterCommit="ClaimFinancialsTransactions.go(claim, gw.api.financials.ClaimFinancialsTransactionsOption.RECOVERY)"
+    afterEnter="afterEnter()"
+    beforeCommit="gw.api.system.bundle.BundleCommitCondition.verify(onsetRecovery)"
+    canEdit="true"
+    id="TransferRecovery"
+    onResume="gw.api.system.bundle.BundleCommitCondition.verify(onsetRecovery)"
+    parent="ClaimFinancialsTransactionsDetail(originalRecovery.Claim, originalRecovery)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.TransferRecovery.Title&quot;)">
+    <LocationEntryPoint
+      signature="TransferRecovery(originalRecovery : Recovery)"/>
+    <Variable
+      name="originalRecovery"
+      type="Recovery"/>
+    <Variable
+      initialValue="originalRecovery.createOnsetRecovery()"
+      name="onsetRecovery"
+      type="Recovery"/>
+    <Variable
+      initialValue="gw.api.financials.ReserveLineInputSetStrategyForRecovery.newHelper(originalRecovery.TransToReservingExchangeRate)"
+      name="reserveLineInputSetHelper"
+      type="gw.api.financials.ReserveLineInputSetHelper"/>
+    <Variable
+      initialValue="originalRecovery.Claim"
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="null"
+      name="targetClaimInfo"
+      type="ClaimInfo"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="doTransfer()"
+          id="TransferButton"
+          label="DisplayKey.get(&quot;Web.Claim.TransferRecovery.TransferButton&quot;)"/>
+        <EditButtons
+          cancelLabel="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          cancelVisible="true"
+          editVisible="false"
+          updateVisible="false"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <PickerInput
+            conversionExpression="(PickedValue as ClaimSearchView).Claim.ClaimInfo"
+            editable="true"
+            freeInputEnabled="false"
+            id="Claim"
+            label="DisplayKey.get(&quot;Web.Claim.TransferRecovery.Claim&quot;)"
+            onPick="resetRecoveryFields()"
+            pickLocation="ClaimSearchPopup.push()"
+            required="true"
+            value="targetClaimInfo"
+            valueType="entity.ClaimInfo"/>
+          <InputSetRef
+            def="ReserveLineInputSet(onsetRecovery, reserveLineInputSetHelper)"/>
+          <TextInput
+            editable="true"
+            id="Comments"
+            label="DisplayKey.get(&quot;Web.Claim.TransferRecovery.Comments&quot;)"
+            numCols="14"
+            value="onsetRecovery.Comments"/>
+          <ListViewInput
+            boldLabel="true"
+            def="EditableRecodeLineItemsLV(onsetRecovery)"
+            editable="onsetRecovery.ReserveLine != null"
+            label="DisplayKey.get(&quot;Web.Claim.TransferRecovery.LineItems&quot;)"
+            labelAbove="true">
+            <Toolbar>
+              <IteratorButtons
+                addLabel="DisplayKey.get(&quot;Java.Financials.TransactionLineItem.AddItem&quot;)"
+                addShortcut="I"
+                addVisible="gw.api.financials.FinancialsUtil.isAllowMultipleLineItems()"
+                iterator="EditableRecodeLineItemsLV.EditableRecodeLineItemsLV"
+                removeVisible="gw.api.financials.FinancialsUtil.isAllowMultipleLineItems()"/>
+            </Toolbar>
+          </ListViewInput>
+          <InputSetRef
+            def="TransactionExchangeRateInputSet(onsetRecovery)"
+            visible="onsetRecovery.ReservingCurrency != null and onsetRecovery.Currency != onsetRecovery.ReservingCurrency"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[function resetRecoveryFields() {
+  onsetRecovery.Claim = targetClaimInfo.Claim
+  onsetRecovery.Exposure = null
+  onsetRecovery.CostType = null
+  onsetRecovery.CostCategory = null
+  if (onsetRecovery.Claim.Currency == originalRecovery.Claim.Currency) {
+    onsetRecovery.TransToClaimExchangeRate = originalRecovery.TransToClaimExchangeRate
+  }
+  
+  // This line may appear to be totally bogus, but it's apparently a necessary evil required for forcing recalculation 
+  // of various rates and amounts set on the Recovery.
+  onsetRecovery.Currency = onsetRecovery.Currency
+  onsetRecovery.ReservingCurrency = onsetRecovery.Claim.Currency
+  onsetRecovery.Claim.freezeCurrency()
+}
+
+function doTransfer() {
+  gw.api.util.CCLocationUtil.runAndCommit(\ -> originalRecovery.transfer(), CurrentLocation)
+}
+
+function afterEnter() {
+  onsetRecovery.Claim = null; 
+  onsetRecovery.ReserveLine = null; 
+  onsetRecovery.Exposure = null; 
+  onsetRecovery.CostType = null; 
+  onsetRecovery.CostCategory = null
+}]]></Code>
+  </Page>
+</PCF>

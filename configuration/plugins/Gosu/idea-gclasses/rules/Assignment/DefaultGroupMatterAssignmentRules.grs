@@ -1,0 +1,13 @@
+package rules.Assignment
+
+@gw.rules.RuleName("Default Group Matter Assignment Rules")
+@gw.rules.RuleSetDescription("This is the Default Group Matter Assignment rule set. These rules determine how matters are assigned within a group.")
+class DefaultGroupMatterAssignmentRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Matter) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Matter) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Default Group Matter Assignment Rules", DefaultGroupMatterAssignmentRules )
+  }
+}

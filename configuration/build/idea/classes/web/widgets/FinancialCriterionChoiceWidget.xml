@@ -1,0 +1,13 @@
+<WidgetTemplate name="FinancialCriterionTemplate" inputWidgetName="FinancialCriterionChoiceInput">
+
+  <TemplateAttribute name="chosenOptionVisible" default="false" type="xsd:boolean"/>
+
+  <ExpressionRangeValue id="FinancialChosenOption" label="DisplayKey.get('JSP.ClaimSearch.Claims.Financial')"
+                        available="#{available}" optionLabel="gw.api.locale.DisplayKey.get(VALUE)"
+                        value="#{value}.ChosenOption" valueRange="#{value}.Options"  valueType="java.lang.String" visible="#{chosenOptionVisible}"/>
+  <BR visible="#{chosenOptionVisible}"/>
+  <TextValue id="FinancialAmountStartLabel" value="DisplayKey.get('Java.Search.From')" valueType="java.lang.String" editable="false"/>
+  <TextValue id="FinancialAmountStart" available="#{available}" value="#{value}.AmountStart" valueType="java.math.BigDecimal" numCols="10"/>
+  <TextValue id="FinancialAmountEndLabel" value="DisplayKey.get('Java.Search.To')"  valueType="java.lang.String" editable="false"/>
+  <TextValue id="FinancialAmountEnd" available="#{available}" value="#{value}.AmountEnd" valueType="java.math.BigDecimal" numCols="10"/>
+</WidgetTemplate>

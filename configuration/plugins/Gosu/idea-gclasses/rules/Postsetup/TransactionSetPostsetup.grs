@@ -1,0 +1,13 @@
+package rules.Postsetup
+
+@gw.rules.RuleName("Transaction Post-setup")
+@gw.rules.RuleSetDescription("This is the Transaction Post-setup rule set. These rules are fired just prior to completing the setup process and saving any changes to transactions. Specifically, these rules fire after assignment rules have run.")
+class TransactionSetPostsetup extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.TransactionSet) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.TransactionSet) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Transaction Post-setup", TransactionSetPostsetup )
+  }
+}

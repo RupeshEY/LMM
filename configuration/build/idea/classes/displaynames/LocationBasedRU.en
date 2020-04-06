@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<Entity
+  name="LocationBasedRU">
+  <Columns>
+    <Column
+      beanPath="LocationBasedRU.RUNumber"
+      name="ruNumber"/>
+    <Column
+      beanPath="LocationBasedRU.Building.BuildingNumber"
+      name="buildingNumber"/>
+    <Column
+      beanPath="LocationBasedRU.Building.PolicyLocation.Address.AddressLine1"
+      name="buildingAddressLine1"/>
+    <Column
+      beanPath="LocationBasedRU.Description"
+      name="description"/>
+    <Column
+      beanPath="LocationBasedRU.PolicyLocation.Address.AddressLine1"
+      name="locationAddressLine1"/>
+  </Columns>
+  <DisplayName><![CDATA[var retString = ""
+
+// Start off with the Risk Unit number followed by a colon.
+retString += ruNumber + ":"
+
+// If there is a description on the location, then use this as the display name.
+if (description != "" && description != null) {
+    retString += description  
+} else {
+ 
+  // Otherwise, is this a building? If we have a building number, then print out the building number and addressline1 (if available)
+  if (buildingNumber != null || buildingAddressLine1 != null) {
+    if (buildingNumber != null) {
+      retString += gw.api.locale.DisplayKey.get("DisplayName.LocationBasedRU.BuildingNumber") + buildingNumber
+      if (buildingAddressLine1 != null) {retString += ","}
+    }
+
+    if (buildingAddressLine1 != null) {
+      retString += buildingAddressLine1
+    }
+    
+  } else {
+
+    // For other types of locations, just print out Address Line 1
+    retString += locationAddressLine1
+  }
+  
+  } 
+return retString
+]]></DisplayName>
+</Entity>

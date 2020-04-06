@@ -1,0 +1,26 @@
+package rules.Assignment.DefaultGroupActivityAssignmentRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+
+@gw.rules.RuleName("DGA09000 - Default")
+internal class DGA09000Default {
+  static function doCondition(activity : entity.Activity) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+activity.CurrentAssignment.assignManually(activity.CurrentAssignment.AssignedGroup.Supervisor)
+CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.DefaultGroup.Activity", actions.ShortRuleName))
+CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.AssignedUserIs", activity.AssignedUser))
+actions.exit()
+/*end00rule*/
+
+  }
+}

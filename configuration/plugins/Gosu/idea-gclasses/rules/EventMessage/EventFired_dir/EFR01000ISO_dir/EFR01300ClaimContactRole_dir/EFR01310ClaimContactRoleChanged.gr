@@ -1,0 +1,23 @@
+package rules.EventMessage.EventFired_dir.EFR01000ISO_dir.EFR01300ClaimContactRole_dir
+
+@gw.rules.RuleName("EFR01310 - Claim Contact Role Changed")
+internal class EFR01310ClaimContactRoleChanged {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return messageContext.EventName == "ClaimContactRoleAdded" or
+messageContext.EventName == "ClaimContactRoleChanged" or
+messageContext.EventName == "ClaimContactRoleRemoved"
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+var claimContactRole = messageContext.Root as ClaimContactRole
+libraries.ISO.checkForClaimChanges(messageContext, claimContactRole.ClaimContact.Claim)
+/*end00rule*/
+
+  }
+}

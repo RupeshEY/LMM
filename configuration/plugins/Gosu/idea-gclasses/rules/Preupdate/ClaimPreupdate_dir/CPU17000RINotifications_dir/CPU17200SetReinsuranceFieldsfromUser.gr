@@ -1,0 +1,43 @@
+package rules.Preupdate.ClaimPreupdate_dir.CPU17000RINotifications_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CPU17200 - Set Reinsurance Fields from User")
+internal class CPU17200SetReinsuranceFieldsfromUser {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return (claim.isFieldChanged("ReinsuranceReportable")
+ and !claim.isFieldChanged("ReinsuranceFlaggedStatus"))
+or 
+(claim.isFieldChanged("Text")
+ and (claim.ReinsuranceFlaggedStatus == TC_USERFLAGGED
+      or claim.ReinsuranceFlaggedStatus == TC_USERUNFLAGGED))
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+if(claim.isFieldChanged("ReinsuranceReportable")) {
+  if (claim.ReinsuranceReportable) { 
+    claim.ReinsuranceFlaggedStatus = TC_USERFLAGGED    
+    claim.addNote(TC_REINSURANCE, 
+      DisplayKey.get("Rules.PreUpdate.Claim.Reinsurance.Note.ClaimMarkedForReinsurance"), claim.ReinsuranceReason)
+  } else { 
+    claim.ReinsuranceFlaggedStatus = TC_USERUNFLAGGED 
+    claim.addNote(TC_REINSURANCE, 
+      DisplayKey.get("Rules.PreUpdate.Claim.Reinsurance.Note.ClaimUnmarkedForReinsurance"), claim.ReinsuranceReason)
+  }
+} else {
+  if (claim.isFieldChanged("Text")) {
+    claim.addNote(TC_REINSURANCE, 
+      DisplayKey.get("Rules.PreUpdate.Claim.Reinsurance.Note.EditReasonModified"), claim.ReinsuranceReason)
+  }
+}
+
+/*end00rule*/
+
+  }
+}

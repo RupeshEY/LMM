@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="UserAttributesSearchDV">
+    <Require
+      name="SearchCriteria"
+      type="gw.api.admin.AttributeSearchCriteria"/>
+    <InputColumn>
+      <TextInput
+        editable="true"
+        id="Name"
+        label="DisplayKey.get(&quot;Web.Admin.UserAttributesSearch.Name&quot;)"
+        required="false"
+        value="SearchCriteria.AttributeName"/>
+      <TypeKeyInput
+        editable="true"
+        id="Type"
+        label="DisplayKey.get(&quot;Web.Admin.UserAttributesSearch.Type&quot;)"
+        noneSelectedLabel="DisplayKey.get(&quot;Java.Select.All&quot;)"
+        required="false"
+        value="SearchCriteria.AttributeType"
+        valueType="typekey.UserAttributeType"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

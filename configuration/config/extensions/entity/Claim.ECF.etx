@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<!-- Extension to claim table -->
+<extension xmlns="http://guidewire.com/datamodel" entityName="Claim">
+
+  <column
+    desc="End date of period during which a loss occurred."
+    name="LossEndDate_Ext"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="A Unique Market Reference (UMR) Number"
+    name="UMR_Ext"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="64"/>
+  </column>
+  <column
+    desc="A Unique Claim Reference (UCR) Number"
+    name="UCR_Ext"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="64"/>
+  </column>
+  <column
+    desc="A Claim line number in CLASS (needed for non-uniqueness of Company/Syndicate participation)"
+    name="ClaimLineNumber_Ext"
+    nullok="true"
+    type="longint">
+  </column>
+  <column
+    name="EEventTime_Ext"
+    nullok="true"
+    type="datetime">
+  </column>
+  <array
+    arrayentity="LMMessage_Ext"
+    desc="Full list of LMMessage_Ext entities related to this Claim."
+    name="LMMessages"/>
+  <column
+    desc="The last time this Claim was updated from the ECF servers by either a Claim Notify or Claim Retrieve"
+    name="ECFLastUpdateTime"
+    nullok="true"
+    type="datetime"/>
+  <index
+    desc="Unique Index for Claim UCR"
+    name="UCR_ExtIndex"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="UCR_Ext"/>
+  </index>
+  <column
+    default="false"
+    desc="Indicates if this ECF Claim is a Volume Claims Service (VCS) claim. This is indicated by the TriageCategory in an ECF message (Lloyd's only)."
+    name="VCSIndicator_Ext"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="false"
+    desc="This flag indicates if this ECF Claim is a Uber Precautionary."
+    name="UberPrecautionaryFlag_Ext"
+    nullok="false"
+    type="bit"/>
+  <typekey
+    name="ClaimTypeCode_Ext"
+    nullok="true"
+    typelist="ECFClaimTypeCode_Ext"/>
+</extension>

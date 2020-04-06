@@ -1,0 +1,512 @@
+<soap:Envelope
+  xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:cla="http://www.xchanging.com/wsdl/ClaimService/">
+  <soap:Header
+    xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+    <cla:xchangingheader>
+      <cla:Sender>
+        <cla:Party>
+          <cla:Id>urn:duns:236196817</cla:Id>
+        </cla:Party>
+      </cla:Sender>
+      <cla:Receiver>
+        <cla:Party>
+          <cla:Id>urn:lloyds:0623</cla:Id>
+        </cla:Party>
+      </cla:Receiver>
+      <cla:MsgTypeCd>RetrieveClaim</cla:MsgTypeCd>
+      <cla:Timestamp>2015-11-27T19:46:00+01:00</cla:Timestamp>
+      <cla:ResponseUUId>47f5eb04-fa68-4808-897e-6847d1bb6bdf</cla:ResponseUUId>
+      <cla:RequestUUId>47f5eb04-fa68-4808-897e-6847d0bb6bdf</cla:RequestUUId>
+    </cla:xchangingheader>
+  </soap:Header>
+  <soap:Body>
+    <ns2:RetrieveClaimRs xmlns:ns2="http://www.xchanging.com/retrieveClaim/rs/1" xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1" xmlns:ns3="http://www.ACORD.org/Standards/AcordMsgSvc/1" Sender="serviceprovider" Receiver="insurer">
+      <UUId>2f76099c-e16c-40c3-8210-0848781f135f</UUId>
+      <CreationDate>2016-07-06T09:03:57+01:00</CreationDate>
+      <ns2:ReferredUUId>c434645b-c239-493b-a72e-59e98eba180c</ns2:ReferredUUId>
+      <ns2:ClaimMovement Sender="serviceprovider" Receiver="insurer">
+        <ServiceProviderReference>73da6614-9d2c-4d72-90c2-76c3a1d5a828</ServiceProviderReference>
+        <CreationDate>2016-07-06T09:03:57+01:00</CreationDate>
+        <ClaimAdviceInitialOrSubsequentIndicator>FirstAdvice</ClaimAdviceInitialOrSubsequentIndicator>
+        <Insurer>
+          <Party>
+            <Id Agency="lloyds">urn:lloyds:0623</Id>
+            <Name>Beazley 0623</Name>
+          </Party>
+        </Insurer>
+        <Broker>
+          <Party>
+            <Id Agency="lloyds">urn:lloyds:0001</Id>
+            <Name>G2 TEST 31AP</Name>
+          </Party>
+          <Contact>
+            <PersonName>XXXXX</PersonName>
+            <Telephone>123566</Telephone>
+          </Contact>
+        </Broker>
+        <ServiceProvider>
+          <Party>
+            <Id Agency="DUNS_dun_and_bradstreet">urn:duns:236196817</Id>
+            <Name>Xchanging</Name>
+          </Party>
+        </ServiceProvider>
+        <Insured>
+          <Party>
+            <Name>XXXXX</Name>
+          </Party>
+        </Insured>
+        <BureauLeadingInsurerOrReinsurer>
+          <Party>
+            <Name>LLOYD'S 2032 SYND</Name>
+          </Party>
+          <Contact>
+            <PersonName>BACK21</PersonName>
+            <Telephone>67676767</Telephone>
+          </Contact>
+        </BureauLeadingInsurerOrReinsurer>
+        <Contract>
+          <BrokerReference>B0001JUL06SP1TSB</BrokerReference>
+          <InsurerRiskReference>54-123456</InsurerRiskReference>
+        </Contract>
+        <ClaimEntry>
+          <BrokerReference>B0001VTR01</BrokerReference>
+        </ClaimEntry>
+        <Claim>
+          <LossOrEventName>XXXXX</LossOrEventName>
+          <BrokerReference>B0001JUL06SP01TSB</BrokerReference>
+          <LossLocation>
+            <Location>
+              <Description>XXXXX</Description>
+            </Location>
+          </LossLocation>
+        </Claim>
+        <ClaimOriginalPolicy>
+          <JvClassOfBusiness>N</JvClassOfBusiness>
+        </ClaimOriginalPolicy>
+        <ns2:AsOfDate>2016-09-06T13:27:42.421+01:00</ns2:AsOfDate>
+        <ns2:LossDetails>TEST</ns2:LossDetails>
+        <ns2:ClaimAmounts Ccy="GBP">
+          <ClaimMovementAmtItem Type="loss_and_expense_incurred_for_contract_before_retention">
+            <Amt Ccy="GBP" Share="hundred_percent" CcyIndic="reference_currency">0.00</Amt>
+          </ClaimMovementAmtItem>
+          <ClaimMovementAmtItem Type="outstanding_loss_plus_expense_for_contract_before_retention">
+            <Amt Ccy="GBP" Share="hundred_percent" CcyIndic="reference_currency">0.00</Amt>
+          </ClaimMovementAmtItem>
+          <ClaimMovementAmtItem Type="100_percent_losses_and_expenses_paid_for_contract_before_retention">
+            <Amt Ccy="GBP" Share="hundred_percent" CcyIndic="reference_currency">0.00</Amt>
+          </ClaimMovementAmtItem>
+          <ClaimMovementAmtItem Type="current_payment_losses_and_expenses_for_contract">
+            <Amt Ccy="GBP" Share="hundred_percent" CcyIndic="reference_currency">0.00</Amt>
+          </ClaimMovementAmtItem>
+        </ns2:ClaimAmounts>
+        <ns2:Extension>
+          <ns2:Contract>
+            <ns2:RiskCode>KA</ns2:RiskCode>
+            <ns2:SlipLeadName>
+              <Party>
+                <Name>LLOYD'S 2032 SYND</Name>
+              </Party>
+            </ns2:SlipLeadName>
+            <ns2:ContractMarket Agency="lloyds">
+              <ns2:InsurerOrReinsurer>
+                <Party>
+                  <Id Agency="lloyds">urn:lloyds:1230</Id>
+                  <Name>LLOYD'S SYNDICATE</Name>
+                </Party>
+                <InsurerSharePercentage>
+                  <Rate RateUnit="Percentage">32.0000000</Rate>
+                </InsurerSharePercentage>
+                <ns2:InsurerOrReinsurerClaimReference1>DUMMY1</ns2:InsurerOrReinsurerClaimReference1>
+                <ns2:ParticipantFunction>Follower</ns2:ParticipantFunction>
+                <ns2:ClaimLineNumber>1</ns2:ClaimLineNumber>
+              </ns2:InsurerOrReinsurer>
+              <ns2:InsurerOrReinsurer>
+                <Party>
+                  <Id Agency="lloyds">urn:lloyds:2032</Id>
+                  <Name>LLOYD'S 2032 SYND</Name>
+                </Party>
+                <Contact>
+                  <PersonName>BACK21</PersonName>
+                  <Telephone>67676767</Telephone>
+                </Contact>
+                <InsurerSharePercentage>
+                  <Rate RateUnit="Percentage">5.0000000</Rate>
+                </InsurerSharePercentage>
+                <ns2:InsurerOrReinsurerClaimReference1>DUMMY2</ns2:InsurerOrReinsurerClaimReference1>
+                <ns2:ParticipantFunction>Lead</ns2:ParticipantFunction>
+                <ns2:ClaimLineNumber>2</ns2:ClaimLineNumber>
+              </ns2:InsurerOrReinsurer>
+              <ns2:InsurerOrReinsurer>
+                <Party>
+                  <Id Agency="lloyds">urn:lloyds:0623</Id>
+                  <Name>Beazley 0623</Name>
+                </Party>
+                <InsurerSharePercentage>
+                  <Rate RateUnit="Percentage">5.0000000</Rate>
+                </InsurerSharePercentage>
+                <ns2:InsurerOrReinsurerClaimReference1>DUMMY3</ns2:InsurerOrReinsurerClaimReference1>
+                <ns2:ParticipantFunction>Follower</ns2:ParticipantFunction>
+                <ns2:ClaimLineNumber>3</ns2:ClaimLineNumber>
+              </ns2:InsurerOrReinsurer>
+              <ns2:InsurerOrReinsurer>
+                <Party>
+                  <Id Agency="lloyds">urn:lloyds:2031</Id>
+                  <Name>LLOYD'S 2031 SYND</Name>
+                </Party>
+                <InsurerSharePercentage>
+                  <Rate RateUnit="Percentage">5.0000000</Rate>
+                </InsurerSharePercentage>
+                <ns2:InsurerOrReinsurerClaimReference1>DUMMY4</ns2:InsurerOrReinsurerClaimReference1>
+                <ns2:ParticipantFunction>Follower</ns2:ParticipantFunction>
+                <ns2:ClaimLineNumber>4</ns2:ClaimLineNumber>
+              </ns2:InsurerOrReinsurer>
+            </ns2:ContractMarket>
+            <ns2:SlipOrder1>100.0000000</ns2:SlipOrder1>
+            <ns2:SlipOrder2>0.0000000</ns2:SlipOrder2>
+          </ns2:Contract>
+          <ns2:Claim>
+            <ns2:ClaimLineNumber>3</ns2:ClaimLineNumber>
+            <ns2:LeadClaimReference>DUMMY2</ns2:LeadClaimReference>
+            <ns2:ClaimStatus>Open</ns2:ClaimStatus>
+            <ns2:LossPeriod>
+              <ns2:LossDateQualifier>L</ns2:LossDateQualifier>
+              <ns2:StartDate>2016-01-01</ns2:StartDate>
+              <ns2:EndDate>2016-01-02</ns2:EndDate>
+            </ns2:LossPeriod>
+            <ns2:ClaimType>000</ns2:ClaimType>
+            <ns2:ClaimCategoryCode>A</ns2:ClaimCategoryCode>
+            <ns2:ClaimSubCategoryCode>AB</ns2:ClaimSubCategoryCode>
+            <ns2:ClaimsScheme>2010</ns2:ClaimsScheme>
+            <ns2:ECFIndicator>Y</ns2:ECFIndicator>
+            <ns2:Indicators>
+              <ns2:ConflictOfInterestIndicator>Y</ns2:ConflictOfInterestIndicator>
+              <ns2:ChaseUpIndicator>
+                <ns2:Indicator>Y</ns2:Indicator>
+                <ns2:Interval>21</ns2:Interval>
+              </ns2:ChaseUpIndicator>
+              <ns2:CedantInLiquidationIndicator>N</ns2:CedantInLiquidationIndicator>
+              <ns2:SimultaneousReinstatementRequired>Y</ns2:SimultaneousReinstatementRequired>
+              <ns2:SimultaneousReinstatementProcessed>Y</ns2:SimultaneousReinstatementProcessed>
+              <ns2:WarIndicator>Y</ns2:WarIndicator>
+              <ns2:XcsToAgreeIndicator>N</ns2:XcsToAgreeIndicator>
+              <ns2:ContractualConditionsMayApplyIndicator>Y</ns2:ContractualConditionsMayApplyIndicator>
+              <ns2:ImmediatePartCollectionIndicator>N</ns2:ImmediatePartCollectionIndicator>
+              <ns2:NoFurtherResponseIndicator>N</ns2:NoFurtherResponseIndicator>
+              <ns2:MultipleResponseIndicator>Y</ns2:MultipleResponseIndicator>
+            </ns2:Indicators>
+          </ns2:Claim>
+          <ns2:ClaimEntry>
+            <ns2:TransactionSequence>001</ns2:TransactionSequence>
+            <ns2:LloydsStatus>10-AWAITING/QUERIED</ns2:LloydsStatus>
+            <ns2:AddedCirculatedOrAuthorisedDate>2016-07-06</ns2:AddedCirculatedOrAuthorisedDate>
+            <ns2:Comments>
+              <ns2:Broker>
+                <ns2:LineNumber>1</ns2:LineNumber>
+                <ns2:CommentDetails>AJH DCF DWHC UDHSF UFHUFHV DFOUI DFUH UDHV UHFVUFHVUFHVB</ns2:CommentDetails>
+              </ns2:Broker>
+              <ns2:SlipLead>
+                <ns2:LineNumber>1</ns2:LineNumber>
+                <ns2:CommentDetails>SlipLeadAJH</ns2:CommentDetails>
+              </ns2:SlipLead>
+              <ns2:PrivateComments>
+                <ns2:Comment>
+                  <ns2:LineNumber>1</ns2:LineNumber>
+                  <ns2:CommentDetails>private comments 1</ns2:CommentDetails>
+                </ns2:Comment>
+                <ns2:Comment>
+                  <ns2:LineNumber>2</ns2:LineNumber>
+                  <ns2:CommentDetails>XCS Query Private</ns2:CommentDetails>
+                </ns2:Comment>
+              </ns2:PrivateComments>
+              <ns2:PublicComments>
+                <ns2:Comment>
+                  <ns2:LineNumber>1</ns2:LineNumber>
+                  <ns2:CommentDetails>public comments 1</ns2:CommentDetails>
+                </ns2:Comment>
+                <ns2:Comment>
+                  <ns2:LineNumber>2</ns2:LineNumber>
+                  <ns2:CommentDetails>XCS Query</ns2:CommentDetails>
+                </ns2:Comment>
+              </ns2:PublicComments>
+              <ns2:CrossMarketComments
+                PrivateCommentIndicator="Y">
+                <ns2:Bureau
+                  Agency="lloyds">
+                  <ns2:Claim>
+                    <BrokerReference>B0001OCT28SP02FOF</BrokerReference>
+                    <ns2:TransactionReference>B0001VTR01</ns2:TransactionReference>
+                    <CreationDate>2015-10-28T07:23:35+00:00</CreationDate>
+                    <ns2:Syndicate
+                      Name="LLOYD'S SYNDICATE TEST ACCOUNT">
+                      <ns2:Comment>
+                        <ns2:LineNumber>1</ns2:LineNumber>
+                        <ns2:CommentDetails>swaty1</ns2:CommentDetails>
+                      </ns2:Comment>
+                      <ns2:Response>QUERY-RETURN</ns2:Response>
+                    </ns2:Syndicate>
+                  </ns2:Claim>
+                </ns2:Bureau>
+              </ns2:CrossMarketComments>
+              <ns2:CrossMarketComments
+                PrivateCommentIndicator="N">
+                <ns2:Bureau
+                  Agency="lirma">
+                  <ns2:Claim>
+                    <BrokerReference>B0001OCT28SP02FOF</BrokerReference>
+                    <ns2:TransactionReference>B0001VTR01</ns2:TransactionReference>
+                    <CreationDate>2015-10-28T07:23:35+00:00</CreationDate>
+                    <ns2:Syndicate
+                      Name="WRITE BACK TEST1">
+                      <ns2:Comment>
+                        <ns2:LineNumber>1</ns2:LineNumber>
+                        <ns2:CommentDetails>writeback test</ns2:CommentDetails>
+                      </ns2:Comment>
+                    </ns2:Syndicate>
+                    <ns2:Syndicate
+                      Name="WRITE BACK TEST2">
+                      <ns2:Comment>
+                        <ns2:LineNumber>1</ns2:LineNumber>
+                        <ns2:CommentDetails>Request to Broker</ns2:CommentDetails>
+                      </ns2:Comment>
+                      <ns2:Response>INF</ns2:Response>
+                    </ns2:Syndicate>
+                  </ns2:Claim>
+                </ns2:Bureau>
+                <ns2:Bureau
+                  Agency="lloyds">
+                  <ns2:Claim>
+                    <BrokerReference>B0001OCT28SP02FOF</BrokerReference>
+                    <ns2:TransactionReference>B0001VTR01</ns2:TransactionReference>
+                    <CreationDate>2015-10-28T07:23:35+00:00</CreationDate>
+                    <ns2:Syndicate
+                      Name="LLOYD'S SYNDICATE TEST ACCOUNT">
+                      <ns2:Comment>
+                        <ns2:LineNumber>1</ns2:LineNumber>
+                        <ns2:CommentDetails>tetsing writeback</ns2:CommentDetails>
+                      </ns2:Comment>
+                      <ns2:Response>QUERY-RETURN</ns2:Response>
+                    </ns2:Syndicate>
+                  </ns2:Claim>
+                </ns2:Bureau>
+              </ns2:CrossMarketComments>
+            </ns2:Comments>
+            <ns2:ClaimEntryFinancialAmounts Ccy="GBP">
+              <ns2:OutstandingAmountQualifier>S</ns2:OutstandingAmountQualifier>
+              <ns2:ServiceProviderOriginalSplitReference>2100225022011</ns2:ServiceProviderOriginalSplitReference>
+              <ClaimMovementAmtItem Type="Vat_Amount">
+                <Amt Ccy="GBP" Share="hundred_percent" CcyIndic="reference_currency">0.00</Amt>
+              </ClaimMovementAmtItem>
+              <ClaimMovementAmtItem Type="Lead_Reserve_Amount">
+                <Amt Ccy="GBP" Share="hundred_percent" CcyIndic="reference_currency">0.00</Amt>
+              </ClaimMovementAmtItem>
+              <ClaimMovementAmtItem Type="Lead_Reserve_Fees">
+                <Amt Ccy="GBP" Share="hundred_percent" CcyIndic="reference_currency">0.00</Amt>
+              </ClaimMovementAmtItem>
+              <ns2:SettlementAmount>0.00</ns2:SettlementAmount>
+              <ns2:ExchangeRate>1.00000</ns2:ExchangeRate>
+            </ns2:ClaimEntryFinancialAmounts>
+            <ns2:AggregateDetails>
+              <ns2:DescriptionLineNo>1</ns2:DescriptionLineNo>
+              <Description>descAD</Description>
+            </ns2:AggregateDetails>
+          </ns2:ClaimEntry>
+        </ns2:Extension>
+      </ns2:ClaimMovement>
+      <ns2:SupportingDocument>
+        <ns3:DocumentId>30a429d5-1799-4c05-9d56-77058e1f43fa</ns3:DocumentId>
+        <ns3:DocumentVersion>1.0</ns3:DocumentVersion>
+        <ns3:DocumentVersionDtTime>2016-07-06T09:02:53+01:00</ns3:DocumentVersionDtTime>
+        <ns3:FileId>Doc3 - Copy (24) - Copy</ns3:FileId>
+        <ns3:FileFormatCd>application/vnd.openxmlformats-officedocument.wordprocessingml.document</ns3:FileFormatCd>
+        <ns3:FileSize>
+          <ns3:NumUnits>135</ns3:NumUnits>
+          <ns3:UnitMeasurementCd>KB</ns3:UnitMeasurementCd>
+        </ns3:FileSize>
+        <ns3:DocumentTypeCd>bordereau_outstanding_loss_and_loss_adju</ns3:DocumentTypeCd>
+        <ns3:FolderReference>Claim Related Documents</ns3:FolderReference>
+        <ns2:ReferredObjects>
+          <ServiceProvider>
+            <Party>
+              <Name>Xchanging</Name>
+            </Party>
+            <Contact>
+              <Description>B0001JUL06SP1TSB-B0001JUL06SP01TSB-B0001VTR01</Description>
+            </Contact>
+          </ServiceProvider>
+          <ns2:Contract>
+            <BrokerReference>B0001JUL06SP1TSB</BrokerReference>
+          </ns2:Contract>
+          <ns2:Claim>
+            <BrokerReference>B0001JUL06SP01TSB</BrokerReference>
+          </ns2:Claim>
+          <ns2:ClaimEntry>
+            <BrokerReference>B0001VTR01</BrokerReference>
+          </ns2:ClaimEntry>
+        </ns2:ReferredObjects>
+      </ns2:SupportingDocument>
+      <ns2:SupportingDocument>
+        <ns3:DocumentId>9b1229e7-592d-4fff-9b05-25cece618c3b</ns3:DocumentId>
+        <ns3:DocumentVersion>1.0</ns3:DocumentVersion>
+        <ns3:DocumentVersionDtTime>2016-07-06T09:02:51+01:00</ns3:DocumentVersionDtTime>
+        <ns3:FileId>Doc3 - Copy (23) - Copy</ns3:FileId>
+        <ns3:FileFormatCd>application/vnd.openxmlformats-officedocument.wordprocessingml.document</ns3:FileFormatCd>
+        <ns3:FileSize>
+          <ns3:NumUnits>135</ns3:NumUnits>
+          <ns3:UnitMeasurementCd>KB</ns3:UnitMeasurementCd>
+        </ns3:FileSize>
+        <ns3:DocumentTypeCd>document_file_note</ns3:DocumentTypeCd>
+        <ns3:FolderReference>Claim Related Documents</ns3:FolderReference>
+        <ns2:ReferredObjects>
+          <ServiceProvider>
+            <Party>
+              <Name>Xchanging</Name>
+            </Party>
+            <Contact>
+              <Description>B0001JUL06SP1TSB-B0001JUL06SP01TSB-B0001VTR01</Description>
+            </Contact>
+          </ServiceProvider>
+          <ns2:Contract>
+            <BrokerReference>B0001JUL06SP1TSB</BrokerReference>
+          </ns2:Contract>
+          <ns2:Claim>
+            <BrokerReference>B0001JUL06SP01TSB</BrokerReference>
+          </ns2:Claim>
+          <ns2:ClaimEntry>
+            <BrokerReference>B0001VTR01</BrokerReference>
+          </ns2:ClaimEntry>
+        </ns2:ReferredObjects>
+      </ns2:SupportingDocument>
+      <ns2:SupportingDocument>
+        <ns3:DocumentId>914c2e9b-d397-4e8a-9e39-47913c93ae5f</ns3:DocumentId>
+        <ns3:DocumentVersion>1.0</ns3:DocumentVersion>
+        <ns3:DocumentVersionDtTime>2016-07-06T08:59:23+01:00</ns3:DocumentVersionDtTime>
+        <ns3:FileId>Doc3 - Copy (11)</ns3:FileId>
+        <ns3:FileFormatCd>application/vnd.openxmlformats-officedocument.wordprocessingml.document</ns3:FileFormatCd>
+        <ns3:FileSize>
+          <ns3:NumUnits>135</ns3:NumUnits>
+          <ns3:UnitMeasurementCd>KB</ns3:UnitMeasurementCd>
+        </ns3:FileSize>
+        <ns3:DocumentTypeCd>lm_bureau_endorsement</ns3:DocumentTypeCd>
+        <ns3:FolderReference>Slip Documents</ns3:FolderReference>
+        <ns2:ReferredObjects>
+          <ns2:Contract>
+            <BrokerReference>B0001JUL06SP1TSB</BrokerReference>
+          </ns2:Contract>
+        </ns2:ReferredObjects>
+      </ns2:SupportingDocument>
+      <ns2:SupportingDocument>
+        <ns3:DocumentId>5f287fe6-40bb-46f0-9242-1c31a5043dce</ns3:DocumentId>
+        <ns3:DocumentVersion>1.0</ns3:DocumentVersion>
+        <ns3:DocumentVersionDtTime>2016-07-06T08:59:21+01:00</ns3:DocumentVersionDtTime>
+        <ns3:FileId>Doc3 - Copy (10)</ns3:FileId>
+        <ns3:FileFormatCd>application/vnd.openxmlformats-officedocument.wordprocessingml.document</ns3:FileFormatCd>
+        <ns3:FileSize>
+          <ns3:NumUnits>135</ns3:NumUnits>
+          <ns3:UnitMeasurementCd>KB</ns3:UnitMeasurementCd>
+        </ns3:FileSize>
+        <ns3:DocumentTypeCd>booklet_reinsurance_contract</ns3:DocumentTypeCd>
+        <ns3:FolderReference>Slip Documents</ns3:FolderReference>
+        <ns2:ReferredObjects>
+          <ns2:Contract>
+            <BrokerReference>B0001JUL06SP1TSB</BrokerReference>
+          </ns2:Contract>
+        </ns2:ReferredObjects>
+      </ns2:SupportingDocument>
+      <ns2:SupportingDocument>
+        <ns3:DocumentId>7e4adc70-9439-4656-9238-0a3d19fdb2f8</ns3:DocumentId>
+        <ns3:DocumentVersion>1.0</ns3:DocumentVersion>
+        <ns3:DocumentVersionDtTime>2016-07-06T09:00:45+01:00</ns3:DocumentVersionDtTime>
+        <ns3:FileId>Doc3 - Copy (16) - Copy</ns3:FileId>
+        <ns3:FileFormatCd>application/vnd.openxmlformats-officedocument.wordprocessingml.document</ns3:FileFormatCd>
+        <ns3:FileSize>
+          <ns3:NumUnits>135</ns3:NumUnits>
+          <ns3:UnitMeasurementCd>KB</ns3:UnitMeasurementCd>
+        </ns3:FileSize>
+        <ns3:DocumentTypeCd>document_file_note</ns3:DocumentTypeCd>
+        <ns3:FolderReference>Policy Documents</ns3:FolderReference>
+        <ns2:ReferredObjects>
+          <ns2:Contract>
+            <BrokerReference>B0001JUL06SP1TSB</BrokerReference>
+          </ns2:Contract>
+        </ns2:ReferredObjects>
+      </ns2:SupportingDocument>
+      <ns2:SupportingDocument>
+        <ns3:DocumentId>259c3dec-0a08-4cc6-be4d-e49dffb5c4ec</ns3:DocumentId>
+        <ns3:DocumentVersion>1.0</ns3:DocumentVersion>
+        <ns3:DocumentVersionDtTime>2016-07-06T09:00:43+01:00</ns3:DocumentVersionDtTime>
+        <ns3:FileId>Doc3 - Copy (15) - Copy</ns3:FileId>
+        <ns3:FileFormatCd>application/vnd.openxmlformats-officedocument.wordprocessingml.document</ns3:FileFormatCd>
+        <ns3:FileSize>
+          <ns3:NumUnits>135</ns3:NumUnits>
+          <ns3:UnitMeasurementCd>KB</ns3:UnitMeasurementCd>
+        </ns3:FileSize>
+        <ns3:DocumentTypeCd>form_quotation_request</ns3:DocumentTypeCd>
+        <ns3:FolderReference>Policy Documents</ns3:FolderReference>
+        <ns2:ReferredObjects>
+          <ns2:Contract>
+            <BrokerReference>B0001JUL06SP1TSB</BrokerReference>
+          </ns2:Contract>
+        </ns2:ReferredObjects>
+      </ns2:SupportingDocument>
+      <ns2:SupportingDocument>
+        <ns3:DocumentId>17e60abe-070a-4992-ae8f-46f6fa2fab36</ns3:DocumentId>
+        <ns3:DocumentVersion>1.0</ns3:DocumentVersion>
+        <ns3:DocumentVersionDtTime>2016-07-06T09:00:41+01:00</ns3:DocumentVersionDtTime>
+        <ns3:FileId>Doc3 - Copy (14) - Copy</ns3:FileId>
+        <ns3:FileFormatCd>application/vnd.openxmlformats-officedocument.wordprocessingml.document</ns3:FileFormatCd>
+        <ns3:FileSize>
+          <ns3:NumUnits>135</ns3:NumUnits>
+          <ns3:UnitMeasurementCd>KB</ns3:UnitMeasurementCd>
+        </ns3:FileSize>
+        <ns3:DocumentTypeCd>document_file_note</ns3:DocumentTypeCd>
+        <ns3:FolderReference>Policy Documents</ns3:FolderReference>
+        <ns2:ReferredObjects>
+          <ns2:Contract>
+            <BrokerReference>B0001JUL06SP1TSB</BrokerReference>
+          </ns2:Contract>
+        </ns2:ReferredObjects>
+      </ns2:SupportingDocument>
+      <ns2:SupportingDocument>
+        <ns3:DocumentId>e0afe050-3857-4b01-807f-5501379eae53</ns3:DocumentId>
+        <ns3:DocumentVersion>1.0</ns3:DocumentVersion>
+        <ns3:DocumentVersionDtTime>2016-07-06T09:00:39+01:00</ns3:DocumentVersionDtTime>
+        <ns3:FileId>Doc3 - Copy (13) - Copy</ns3:FileId>
+        <ns3:FileFormatCd>application/vnd.openxmlformats-officedocument.wordprocessingml.document</ns3:FileFormatCd>
+        <ns3:FileSize>
+          <ns3:NumUnits>135</ns3:NumUnits>
+          <ns3:UnitMeasurementCd>KB</ns3:UnitMeasurementCd>
+        </ns3:FileSize>
+        <ns3:DocumentTypeCd>document</ns3:DocumentTypeCd>
+        <ns3:FolderReference>Policy Documents</ns3:FolderReference>
+        <ns2:ReferredObjects>
+          <ns2:Contract>
+            <BrokerReference>B0001JUL06SP1TSB</BrokerReference>
+          </ns2:Contract>
+        </ns2:ReferredObjects>
+      </ns2:SupportingDocument>
+      <ns2:SupportingDocument>
+        <ns3:DocumentId>d445dc1c-6141-4e42-9741-f654f1cdc784</ns3:DocumentId>
+        <ns3:DocumentVersion>1.0</ns3:DocumentVersion>
+        <ns3:DocumentVersionDtTime>2016-07-06T09:00:36+01:00</ns3:DocumentVersionDtTime>
+        <ns3:FileId>Doc3 - Copy (12) - Copy</ns3:FileId>
+        <ns3:FileFormatCd>application/vnd.openxmlformats-officedocument.wordprocessingml.document</ns3:FileFormatCd>
+        <ns3:FileSize>
+          <ns3:NumUnits>135</ns3:NumUnits>
+          <ns3:UnitMeasurementCd>KB</ns3:UnitMeasurementCd>
+        </ns3:FileSize>
+        <ns3:DocumentTypeCd>instructions_client_quote</ns3:DocumentTypeCd>
+        <ns3:FolderReference>Policy Documents</ns3:FolderReference>
+        <ns2:ReferredObjects>
+          <ns2:Contract>
+            <BrokerReference>B0001JUL06SP1TSB</BrokerReference>
+          </ns2:Contract>
+        </ns2:ReferredObjects>
+      </ns2:SupportingDocument>
+      <Response>
+        <AcknowledgementLevelIndicator>application_validation</AcknowledgementLevelIndicator>
+        <AcknowledgementStatus>acknowledged</AcknowledgementStatus>
+        <ResponseDescription>Success</ResponseDescription>
+      </Response>
+    </ns2:RetrieveClaimRs>
+  </soap:Body>
+</soap:Envelope>

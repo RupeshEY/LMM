@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Vacation Exposure view entity."
+  entity="ExposureVacationView"
+  exportable="false"
+  primaryEntity="Exposure"
+  supertypeEntity="ExposureAssignmentView">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.ExposureVacationView"
+    impl="com.guidewire.cc.domain.exposure.impl.ExposureVacationViewImpl"/>
+</viewEntity>

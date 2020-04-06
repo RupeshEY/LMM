@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Large Loss Claim Indicator"
+  entity="LargeLossClaimIndicator"
+  final="false"
+  priority="3"
+  supertype="ClaimIndicator">
+  <implementsInterface
+    iface="gw.api.claim.indicator.ClaimIndicatorMethods"
+    impl="gw.claim.indicator.LargeLossClaimIndicatorMethodsImpl"/>
+  <column
+    desc="Net Total Incurred"
+    name="NetTotalIncurred"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="MoneyCurrency"/>
+  </column>
+</subtype>

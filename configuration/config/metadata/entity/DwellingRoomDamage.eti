@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Room damage information for Dwellings"
+  entity="DwellingRoomDamage"
+  exportable="true"
+  platform="false"
+  table="dwellingroomdamage"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.DwellingRoomDamage"
+    impl="com.guidewire.cc.domain.exposure.impl.DwellingRoomDamageImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Count of the particular room type damaged. For instance 2 of a certain kind of room"
+    name="NumberOfRooms"
+    nullok="true"
+    type="positiveinteger"/>
+  <typekey
+    desc="Room types. For instance, living room, bedroom."
+    name="RoomType"
+    nullok="true"
+    typelist="RoomType"/>
+  <foreignkey
+    desc="The DwellingIncident this room is related to."
+    fkentity="Incident"
+    name="Incident"
+    nullok="true"
+    triggersValidation="true"/>
+</entity>

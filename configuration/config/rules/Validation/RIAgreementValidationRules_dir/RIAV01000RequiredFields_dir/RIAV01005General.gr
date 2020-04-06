@@ -1,0 +1,32 @@
+package rules.Validation.RIAgreementValidationRules_dir.RIAV01000RequiredFields_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("RIAV01005 - General")
+internal class RIAV01005General {
+  static function doCondition(rIAgreement : entity.RIAgreement) : boolean {
+    
+/*start00rule*/
+return //- TopOfLayer must not be null for all subtypes except FacProportional
+  not (rIAgreement typeis FacProportionalRIAgreement)
+    and
+  rIAgreement.TopOfLayer == null
+
+/*end00rule*/
+
+  }
+
+  static function doAction(rIAgreement : entity.RIAgreement, actions : gw.rules.Action) {
+
+/*start00rule*/
+rIAgreement.rejectField("TopOfLayer", TC_NEWLOSS,
+  DisplayKey.get("Rules.Validation.RIAgreement.RequiredFieldMustNotBeNull", "Coverage Limit", 
+                                                                     rIAgreement.Subtype.DisplayName, 
+                                                                     rIAgreement.DisplayName), 
+                                                                     null,
+                                                                     null)
+        
+/*end00rule*/
+
+  }
+}

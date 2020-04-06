@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Status of a service quote"
+  name="ServiceRequestQuoteStatus">
+  <typecode
+    code="waitingforapproval"
+    desc="Quote received and waiting for approval"
+    name="Waiting for Approval"
+    priority="3"/>
+  <typecode
+    code="waitingforquote"
+    desc="Service is waiting to be quoted"
+    name="Waiting for Quote"
+    priority="2"/>
+  <typecode
+    code="approved"
+    desc="Quote has been approved "
+    name="Approved"
+    priority="4"/>
+  <typecode
+    code="noquote"
+    desc="Service does not have a quote"
+    name="No Quote"
+    priority="1"/>
+  <typecode
+    code="quoted"
+    desc="Quote has been received"
+    name="Quoted"
+    priority="5"/>
+</typelistextension>

@@ -1,0 +1,22 @@
+package rules.Archive.DefaultGroupClaimArchivingRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("ARC01000 - Claim State Rule")
+internal class ARC01000ClaimStateRule {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return !claim.Closed
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.skipFromArchiving(DisplayKey.get("Rules.Archive.ClaimState.Closed"))
+/*end00rule*/
+
+  }
+}

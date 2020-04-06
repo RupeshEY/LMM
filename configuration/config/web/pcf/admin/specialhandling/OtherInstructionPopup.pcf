@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="canEdit"
+    canVisit="true"
+    id="OtherInstructionPopup"
+    returnType="OtherInstruction"
+    startInEditMode="editMode"
+    title="DisplayKey.get(&quot;Web.Admin.OtherInstruction.Title&quot;)">
+    <LocationEntryPoint
+      signature="OtherInstructionPopup(otherInstructionParam : OtherInstruction, specialHandling : SpecialHandling, editMode : boolean, canEdit : boolean)"/>
+    <Variable
+      name="specialHandling"
+      type="SpecialHandling"/>
+    <Variable
+      name="otherInstructionParam"
+      type="OtherInstruction"/>
+    <Variable
+      initialValue="otherInstructionParam == null ?  specialHandling.createOtherInstruction() : otherInstructionParam"
+      name="otherInstruction"
+      type="OtherInstruction"/>
+    <Variable
+      name="editMode"
+      type="boolean"/>
+    <Variable
+      initialValue="false"
+      name="canEdit"
+      type="boolean"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          pickValue="otherInstruction"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            id="policyTypeReadOnly"
+            label="DisplayKey.get(&quot;Web.Admin.OtherInstruction.PolicyType&quot;)"
+            value="otherInstruction.PolicyType == null ? DisplayKey.get(&quot;Web.Admin.OtherInstruction.PolicyType.NoneSelected&quot;) : otherInstruction.PolicyType"
+            valueType="java.io.Serializable &amp; java.lang.Comparable&lt;java.lang.Object&gt;"
+            visible="!CurrentLocation.InEditMode"/>
+          <TypeKeyInput
+            editable="true"
+            id="PolicyType"
+            label="DisplayKey.get(&quot;Web.Admin.OtherInstruction.PolicyType&quot;)"
+            noneSelectedLabel="DisplayKey.get(&quot;Web.Admin.OtherInstruction.PolicyType.NoneSelected&quot;)"
+            value="otherInstruction.PolicyType"
+            valueType="typekey.PolicyType"
+            visible="CurrentLocation.InEditMode"/>
+          <TypeKeyInput
+            editable="true"
+            id="InstructionCategory"
+            label="DisplayKey.get(&quot;Web.Admin.OtherInstruction.InstructionCategory&quot;)"
+            required="true"
+            value="otherInstruction.InstructionCategory"
+            valueType="typekey.InstructionCategory"/>
+          <TypeKeyInput
+            editable="true"
+            id="InstructionType"
+            label="DisplayKey.get(&quot;Web.Admin.OtherInstruction.InstructionType&quot;)"
+            required="true"
+            value="otherInstruction.InstructionType"
+            valueType="typekey.InstructionType"/>
+        </InputColumn>
+        <InputColumn>
+          <TextAreaInput
+            editable="true"
+            id="Comment"
+            label="DisplayKey.get(&quot;Web.Admin.OtherInstruction.Comment&quot;)"
+            labelAbove="true"
+            numCols="40"
+            numRows="10"
+            value="otherInstruction.Comments"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="LocalizedValuesDV(otherInstruction, {&quot;Comments&quot;}, {DisplayKey.get(&quot;Web.Admin.OtherInstruction.Comment&quot;)})"
+        id="LocalizedValues"/>
+    </Screen>
+  </Popup>
+</PCF>

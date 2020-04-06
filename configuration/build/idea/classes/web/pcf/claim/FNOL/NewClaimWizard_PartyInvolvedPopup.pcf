@@ -1,0 +1,145 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterCancel="if (IsNew) { cancelClaimContact() }"
+    afterEnter="if (IsDuplicate) { addRoles() }"
+    canEdit="true"
+    id="NewClaimWizard_PartyInvolvedPopup"
+    startInEditMode="true"
+    title="IsNew ? DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPartyInvolved.New&quot;) : DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPartyInvolved.Edit&quot;)">
+    <LocationEntryPoint
+      signature="NewClaimWizard_PartyInvolvedPopup(Wizard : gw.api.claim.NewClaimWizardInfo, ClaimContact : ClaimContact, IsNew : boolean)"/>
+    <LocationEntryPoint
+      signature="NewClaimWizard_PartyInvolvedPopup(WizardBase : gw.api.claim.NewClaimWizardInfoBase, ClaimContact : ClaimContact, IsNew : boolean, IsDuplicate : boolean, roles : gw.api.contact.ClaimContactRoleWrapper)"/>
+    <Variable
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Variable
+      name="ClaimContact"
+      type="ClaimContact"/>
+    <Variable
+      name="IsNew"
+      type="boolean"/>
+    <Variable
+      initialValue="ClaimContact.Claim"
+      name="Claim"
+      recalculateOnRefresh="true"
+      type="entity.Claim"/>
+    <Variable
+      initialValue="gw.api.contact.ContactSystemUtil.INSTANCE.generateLinkStatus(Contact)"
+      name="linkStatus"
+      recalculateOnRefresh="true"
+      type="gw.api.contact.ContactSystemLinkStatus"/>
+    <Variable
+      name="IsDuplicate"
+      type="boolean"/>
+    <Variable
+      name="roles"
+      type="gw.api.contact.ClaimContactRoleWrapper"/>
+    <Variable
+      initialValue="false"
+      name="alreadyCheckedDuplicates"
+      type="boolean"/>
+    <Variable
+      name="WizardBase"
+      type="gw.api.claim.NewClaimWizardInfoBase"/>
+    <Screen
+      id="NewClaimWizard_PartyInvolvedScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="customUpdate()"
+          id="CustomUpdateButton"
+          label="DisplayKey.get(&quot;Button.Update&quot;)"
+          shortcut="U"
+          visible="Contact.PublicID == null and Contact.AddressBookUID == null"/>
+        <EditButtons
+          updateVisible="!(Contact.PublicID == null and Contact.AddressBookUID == null)"/>
+        <ToolbarButton
+          action="checkForDuplicates(true)"
+          id="CheckDuplicatesButton"
+          label="DisplayKey.get(&quot;Button.CheckForDuplicates&quot;)"
+          visible="Contact.PublicID == null and Contact.AddressBookUID == null and CurrentLocation.InEditMode"/>
+      </Toolbar>
+      <CardViewPanel>
+        <Card
+          id="NewClaimWizard_PartyInvolvedBasicsCard"
+          title="DisplayKey.get(&quot;Web.ContactDetail.PageLinks.Basics&quot;)">
+          <PanelRef
+            def="ContactBasicsDV(ClaimContact, true, linkStatus, Claim)"
+            mode="Contact.Subtype">
+            <Toolbar/>
+          </PanelRef>
+        </Card>
+        <Card
+          id="NewClaimWizard_PartyInvolvedAddressesCard"
+          title="DisplayKey.get(&quot;Web.ContactDetail.PageLinks.Addresses&quot;)"
+          visible="!(Contact typeis Place)">
+          <PanelRef
+            def="AddressesPanelSet(ClaimContact)">
+            <Toolbar/>
+          </PanelRef>
+        </Card>
+        <Card
+          id="ContactDocumentsCard"
+          title="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Documents&quot;)"
+          visible="new gw.contact.ContactDocumentsUIHelper().isVendorDocumentsSupported(Contact)">
+          <PanelRef
+            def="AddressBookContactDocumentsLV(Contact)">
+            <Toolbar/>
+            <Verbatim
+              label="DisplayKey.get(&quot;Web.AddressBook.ContactDetail.ScreenTab.Documents.Description&quot;)"/>
+          </PanelRef>
+        </Card>
+        <Card
+          id="NewClaimWizard_PartyInvolvedRelatedContactsCard"
+          title="DisplayKey.get(&quot;Web.ContactDetail.PageLinks.RelatedContacts&quot;)">
+          <PanelRef
+            def="ContactRelatedContactsDV(ClaimContact, Claim)">
+            <Toolbar/>
+          </PanelRef>
+        </Card>
+      </CardViewPanel>
+    </Screen>
+    <Code><![CDATA[uses java.lang.Exception
+      uses gw.plugin.contact.ContactSystemApprovalUtil
+
+property get Contact() : Contact { return ClaimContact.Contact; }
+
+function addRoles() {
+  roles.addRolesToClaimContact(ClaimContact)
+}
+
+function customUpdate() {
+  if (!alreadyCheckedDuplicates and Contact.PublicID == null and Contact.AddressBookUID == null and (ContactSystemApprovalUtil.shouldCreateInContactSystem(Contact) or ClaimContact == null)) {
+    if (!checkForDuplicates(false)) {
+      gw.api.contact.ContactUtil.customCommit(false, Contact, CurrentLocation) 
+    }
+  } else {
+    gw.api.contact.ContactUtil.customCommit(false, Contact, CurrentLocation)
+  }
+}
+
+function checkForDuplicates(showMessage : boolean) : boolean {
+  var hasDuplicates : boolean
+  try {
+    hasDuplicates = gw.api.contact.ContactUtil.findDuplicates(Contact, ClaimContact, showMessage, Wizard)    
+  } catch (e : Exception) {
+    if (showMessage) {
+      throw e
+    }  
+  }
+  alreadyCheckedDuplicates = true;
+  return hasDuplicates;
+}
+
+function cancelClaimContact() {
+  if (Wizard != null) {
+    Wizard.cancelClaimContact(ClaimContact)  
+  } else {
+    WizardBase.cancelClaimContact(ClaimContact)  
+  }
+}]]></Code>
+  </Popup>
+</PCF>

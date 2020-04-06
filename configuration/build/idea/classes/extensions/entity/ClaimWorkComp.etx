@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ClaimWorkComp">
+  <typekey
+    desc="Initial Treatment"
+    name="InitialTreatment"
+    nullok="true"
+    typelist="InitialTreatment"/>
+  <column
+    desc="Jurisdiction Claim Number will be filled once received by the Jurisdiction."
+    name="JurisdictionClaimNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="25"/>
+  </column>
+  <column
+    desc="Date Claim Administrator Notified of Employee Representation"
+    name="DateOfEmployeeRepresentation"
+    nullok="true"
+    type="dateonly"/>
+  <column
+    desc="A number assigned by the insured to identify a specific claim. If this data is included on any FROI/SROI transaction, it should be returned on the transaction&#8217;s acknowledgment regardless of whether it is a data element collected by the jurisdiction."
+    name="InsuredReportNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="25"/>
+  </column>
+  <column
+    desc="The amount of non-salary remuneration which the employer has discontinued as applicable to the calculation of benefits per the jurisdiction."
+    name="DiscontinuedFringeBenefits"
+    nullok="true"
+    type="currencyamount"/>
+  <typekey
+    desc="A code to indicate the premises where the accident occurred."
+    name="AccidentPremises"
+    nullok="true"
+    typelist="AccidentPremises"/>
+  <column
+    desc="An indicator that the employee's written authorization to release medical records related to the injury is on file."
+    name="MedRecReleaseAuth"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="The date the compensability Decision (for entire claim) was set to Denied."
+    name="FullDenialEffectiveDate"
+    nullok="true"
+    type="datetime"/>
+  <array
+    arrayentity="FullDenialReason"
+    desc="Compensability full denial reasons when the claim compensibility was set to denied."
+    name="FullDenialReasons"
+    triggersValidation="true"/>
+  <typekey
+    desc="Indicates reason for partial denial"
+    name="PartialDenialReason"
+    nullok="true"
+    typelist="PartialDenialReason"/>
+</extension>

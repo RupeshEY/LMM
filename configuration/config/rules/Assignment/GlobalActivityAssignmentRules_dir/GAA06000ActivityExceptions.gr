@@ -1,0 +1,20 @@
+package rules.Assignment.GlobalActivityAssignmentRules_dir
+
+@gw.rules.RuleName("GAA06000 - Activity Exceptions")
+internal class GAA06000ActivityExceptions {
+  static function doCondition(activity : entity.Activity) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

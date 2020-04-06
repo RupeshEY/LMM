@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<!-- ********************************************************************************************************************
+  temp table with subdef calcs to make population of ExposureRpt table more efficient when loading financials from staging table
+  ******************************************************************************************************************** -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table with subdef calcs (akin to FinancialsRptUpgrade table), used for populating the ExposureRpt table from the staging tables"
+  entity="TmpExposureRptStaging"
+  exportable="false"
+  extendable="false"
+  loadable="false"
+  platform="false"
+  table="tmpexprptstaging"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.financials.entity.TmpExposureRptStaging"
+    impl="com.guidewire.cc.domain.financials.impl.TmpExposureRptStagingImpl"/>
+  <column
+    desc="Exposure id."
+    exportable="false"
+    name="ExposureID"
+    nullok="true"
+    type="publicid"/>
+  <column
+    desc="Claim ID"
+    exportable="false"
+    name="ClaimID"
+    nullok="false"
+    type="publicid"/>
+  <column
+    desc="All awaiting-submission and commited reserves"
+    exportable="false"
+    name="TotalReserves"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All awaiting-submission and committed eroding payments"
+    exportable="false"
+    name="TotalErodingPmts"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All awaiting-submission and committed non-eroding payments"
+    exportable="false"
+    name="TotalNonErodingPmts"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All (eroding and non-eroding) awaiting-submission and committed payments"
+    exportable="false"
+    name="TotalPayments"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All pending-approval eroding payments"
+    exportable="false"
+    name="ErodingUnapprvdPmts"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All committed recoveries"
+    exportable="false"
+    name="TotalRecoveries"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All committed recovery-reserves"
+    exportable="false"
+    name="TotalRecoveryReserves"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All FutureDated eroding payments"
+    exportable="false"
+    name="FutureErodingPmts"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All FutureDated non-eroding payments"
+    exportable="false"
+    name="FutureNonErodingPmts"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All awaiting-submission and commited reserves"
+    exportable="false"
+    name="TotalReservesRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All awaiting-submission and committed eroding payments"
+    exportable="false"
+    name="TotlErdngPmtsRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All awaiting-submission and committed non-eroding payments"
+    exportable="false"
+    name="TotlNonErdngPmtsRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All (eroding and non-eroding) awaiting-submission and committed payments"
+    exportable="false"
+    name="TotalPaymentsRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All pending-approval eroding payments"
+    exportable="false"
+    name="ErdngUnappPmtsRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All committed recoveries"
+    exportable="false"
+    name="TotalRecoveriesRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All committed recovery-reserves"
+    exportable="false"
+    name="TotalRecReservesRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All FutureDated eroding payments"
+    exportable="false"
+    name="FtrErodngPmtsRprtng"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="All FutureDated non-eroding payments"
+    exportable="false"
+    name="FtrNonErodngPmtsRprtng"
+    nullok="false"
+    type="money"/>
+  <index
+    desc="Improves performance of TmpStagingRptTableLoaderCallback, specifically in TmpStagingRptQueryBuilder.createWhereSQL()."
+    name="frptupgrade1">
+    <indexcol
+      keyposition="1"
+      name="ExposureID"/>
+  </index>
+  <index
+    desc="Improves performance of TmpStagingRptTableLoaderCallback, specifically in TmpStagingRptQueryBuilder.createWhereSQL()."
+    name="frptupgrade2">
+    <indexcol
+      keyposition="1"
+      name="ClaimID"/>
+  </index>
+</entity>

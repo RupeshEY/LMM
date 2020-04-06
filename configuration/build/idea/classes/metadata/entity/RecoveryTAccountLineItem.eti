@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A specific amount of money, contained with a transaction and belonging to a t-account"
+  entity="RecoveryTAccountLineItem"
+  extendable="false"
+  ignoreForEvents="true"
+  overwrittenInStagingTable="true"
+  setterScriptability="hidden"
+  table="recoverytaccountlineitem"
+  type="editable">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="TAccountLineItemDelegate"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.TAccountLineItemDelegateAdapter"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountLineItemDelegateAdapterRecoveryImpl"/>
+  <fulldescription><![CDATA[
+The entry of a specific amount of money, either crediting or debiting one T-account.
+A TaccountTransaction will contain a pair of balancing TAccountLineItems -
+a debit to one  T-account and an equal credit to another.
+ ]]></fulldescription>
+  <column
+    desc="The amount of money (in the reserving currency) in this line item that was either credited or debited against a RecoveryTAccount."
+    getterScriptability="hidden"
+    name="ReservingAmount"
+    nullok="false"
+    overwrittenInStagingTable="true"
+    setterScriptability="hidden"
+    type="money"/>
+  <foreignkey
+    columnName="CreditingTransactionID"
+    desc="The TAccountTransaction for which this lineitem credits a t-account."
+    existingreferencesallowed="false"
+    exportable="false"
+    fkentity="RecTAccountTransaction"
+    getterScriptability="hidden"
+    importableagainstexistingobject="false"
+    name="CreditingTransaction"
+    nullok="true"
+    overwrittenInStagingTable="true"
+    setterScriptability="hidden"/>
+  <foreignkey
+    columnName="DebitingTransactionID"
+    desc="The TAccountTransaction for which this lineitem debits a t-account."
+    existingreferencesallowed="false"
+    exportable="false"
+    fkentity="RecTAccountTransaction"
+    getterScriptability="hidden"
+    importableagainstexistingobject="false"
+    name="DebitingTransaction"
+    nullok="true"
+    overwrittenInStagingTable="true"
+    setterScriptability="hidden"/>
+  <foreignkey
+    columnName="DenormTransactionID"
+    desc="Denormalized FK to RecTAccountTransaction table in order to speed up certain queries.  If both CreditingTransactionID and DebitingTransactionID are not null, then this field is NULL, otherwise this field will have same value as the non-null FK.  This allows us to query against this field only when looking for RecTAccountTransactions that are currently contributing to a RecoveryTAccount."
+    existingreferencesallowed="false"
+    exportable="false"
+    fkentity="RecTAccountTransaction"
+    getterScriptability="hidden"
+    importableagainstexistingobject="false"
+    name="DenormTransaction"
+    nullok="true"
+    overwrittenInStagingTable="true"
+    setterScriptability="hidden"/>
+  <foreignkey
+    columnName="RecoveryTAccountID"
+    desc="RecoveryTAccount with which this line item is associated."
+    existingreferencesallowed="false"
+    exportable="false"
+    fkentity="RecoveryTAccount"
+    getterScriptability="hidden"
+    importableagainstexistingobject="false"
+    name="RecoveryTAccount"
+    nullok="false"
+    overwrittenInStagingTable="true"
+    setterScriptability="hidden"/>
+</entity>

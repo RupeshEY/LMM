@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="perm.Claim.edit(Claim)"
+    canVisit="perm.Claim.view(Claim) and perm.System.viewclaimbasics"
+    id="SIDetails"
+    title="DisplayKey.get(&quot;Web.Claim.SIDetails&quot;)">
+    <LocationEntryPoint
+      signature="SIDetails(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="SIDetailsScreen">
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <PanelRef
+        def="SIDetailsDV(Claim)"/>
+    </Screen>
+  </Page>
+</PCF>

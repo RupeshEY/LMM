@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="ActivityPatternDetailScreen">
+    <Require
+      name="ActivityPattern"
+      type="ActivityPattern"/>
+    <Toolbar>
+      <EditButtons
+        editVisible="perm.ActivityPattern.edit"/>
+      <ToolbarButton
+        action="gw.api.admin.BaseAdminUtil.deleteActivityPattern(ActivityPattern); ActivityPatterns.go()"
+        available=" !ActivityPattern.SystemPattern and perm.ActivityPattern.delete"
+        hideIfEditable="true"
+        id="ActivityPatternDetailScreen_DeleteButton"
+        label="DisplayKey.get(&quot;Button.Delete&quot;)"
+        visible="perm.ActivityPattern.delete"/>
+    </Toolbar>
+    <PanelRef
+      def="AdminActivityPatternDV(ActivityPattern)"/>
+    <PanelRef
+      def="LocalizedValuesDV(ActivityPattern, { &quot;Subject&quot;, &quot;ShortSubject&quot;, &quot;Description&quot;}, { DisplayKey.get(&quot;Web.Admin.ActivityPatternLocalizedLV.Subject&quot;), DisplayKey.get(&quot;Web.Admin.ActivityPatternLocalizedLV.ShortSubject&quot;), DisplayKey.get(&quot;Web.Admin.ActivityPatternLocalizedLV.Description&quot;)})"
+      id="LocalizedValues"/>
+  </Screen>
+</PCF>

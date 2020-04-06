@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="ClaimSnapshotGeneral600PanelSet"
+    mode="Pr">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Snapshot"
+      type="dynamic.Dynamic"/>
+    <PanelRef
+      def="ClaimSnapshotGeneralPR600PanelSet(Claim, Snapshot)"
+      mode="Claim.Policy.PolicyType"/>
+  </PanelSet>
+</PCF>

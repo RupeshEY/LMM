@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuItemSet
+    id="CommandParameterMenuItemSet">
+    <Require
+      name="parameterHolder"
+      type="gw.bizrules.pcf.RuleCommandParameterHolder"/>
+    <MenuItemIterator
+      elementName="mode"
+      type="gw.bizrules.pcf.ExpressionInputMode"
+      value="gw.bizrules.pcf.ExpressionInputMode.values()"
+      valueType="gw.bizrules.pcf.ExpressionInputMode[]"
+      visible="CurrentLocation.InEditMode &amp;&amp; parameterHolder.getLegalAvailableModes().size() &gt; 1">
+      <MenuItem
+        action="parameterHolder.Mode = mode"
+        id="modeItem"
+        label="parameterHolder.getMenuItemDisplayForMode(mode)"
+        visible="parameterHolder.isLegalMode(mode)"/>
+    </MenuItemIterator>
+  </MenuItemSet>
+</PCF>

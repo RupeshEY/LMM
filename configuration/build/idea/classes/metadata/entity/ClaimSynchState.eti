@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents the current state of synchronization between a Claim and a MessageSink."
+  entity="ClaimSynchState"
+  loadable="false"
+  platform="false"
+  table="claimsynchst"
+  type="versionable">
+  <implementsInterface
+    iface="gw.cc.messaging.entity.ClaimSynchState"
+    impl="com.guidewire.cc.domain.messaging.impl.ClaimSynchStateImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[<p>Represents the synchronization state of a <code>Claim</code> with respect to a particular <code>MessageSink</code>.
+As part of the work of integrating Guidewire application with other external and/or legacy systems, <code>MessageSink</code>
+objects are set up to receive messages and update those systems to reflect the new state of the <code>Claim</code> in the system.</p>
+<p>
+Due to the asynchronous nature of messaging, those messages may not be transmitted immeditately, so the <code>ClaimSynchState</code>
+entity exists to track whether the external system represented by a particular <code>MessageSink</code> can be considered to
+be up-to-date with the system changes.</p><p>
+See {@link com.guidewire.pl.system.typelist.tl.SynchState} for the available synchronization states.
+</p>
+@see Claim#getClaimSynchStates
+      
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The Claim to which the synchronization state applies."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <column
+    desc="Identifies the message sink to which the synchronization state applies."
+    name="MessageSink"
+    nullok="false"
+    type="integer"/>
+  <typekey
+    desc="The synchronization state of the given Claim with respect to the given message sink."
+    name="SynchState"
+    nullok="true"
+    typelist="SynchState"/>
+  <index
+    desc="Enforce uniqueness, only one entry per message sink per claim"
+    name="claimsynchstu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="2"
+      name="MessageSink"/>
+  </index>
+</entity>

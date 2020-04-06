@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="perm.System.wcrefview"
+    id="WCParms"
+    parent="Admin()"
+    title="DisplayKey.get(&quot;Web.TabBar.WCParms&quot;)">
+    <LocationEntryPoint
+      signature="WCParms()"/>
+    <LocationRef
+      location="WCBenefitParameterSet()"/>
+    <LocationRef
+      location="WCPDBenefits()"/>
+    <LocationRef
+      location="WCPDWeeksAndLimits()"/>
+    <LocationRef
+      location="DenialPeriods()"/>
+  </LocationGroup>
+</PCF>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Classification condition filter by Loss Cause"
+  entity="LossCauseConditionFilter"
+  final="false"
+  priority="1"
+  supertype="ConditionFilter">
+  <typekey
+    desc="LossCause"
+    name="LossCause"
+    nullok="false"
+    typelist="LossCause"/>
+  <index
+    desc="Prevents duplicate condition filters"
+    name="lc_cond_index_1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ClassificationConditionID"/>
+    <indexcol
+      keyposition="2"
+      name="LossCause"/>
+  </index>
+</subtype>

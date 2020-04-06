@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Forward
+    id="CheckViewDetailForward"
+    parent="ClaimFinancialsChecks(Claim)">
+    <LocationEntryPoint
+      signature="CheckViewDetailForward(Claim : Claim, CheckView : CheckView)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="CheckView"
+      type="CheckView"/>
+    <Variable
+      initialValue="CheckView.Check"
+      name="Check"
+      type="Check"/>
+    <ForwardCondition
+      action="ClaimFinancialsChecksDetail.go(Claim, Check)"/>
+  </Forward>
+</PCF>

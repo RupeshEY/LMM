@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <DetailViewPanel
+    id="TransactionReserveDV">
+    <Require
+      name="Reserve"
+      type="Reserve"/>
+    <InputColumn>
+      <InputSetRef
+        def="TransactionBasicsInputSet(Reserve)"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="TransactionTrackingInputSet(Reserve)"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="TransactionApprovalHistoryInputSet(Reserve)"/>
+      <ListViewInput
+        boldLabel="true"
+        def="ReserveSetLV(gw.api.financials.FinancialsUtil.getReservesFromTransactionSet(Reserve.TransactionSet))"
+        label="DisplayKey.get(&quot;NVV.Financials.TransactionReserve.ReserveSet.Reserves&quot;)"
+        labelAbove="true">
+        <Toolbar/>
+      </ListViewInput>
+      <ListViewInput
+        boldLabel="true"
+        def="UnmodifiableTransactionSetDocumentsLV(Reserve.TransactionSet.LinkedDocuments)"
+        label="DisplayKey.get(&quot;NVV.Financials.TransactionReserve.ReserveSet.Documents&quot;)"
+        labelAbove="true"
+        visible="perm.System.viewdocs">
+        <Toolbar/>
+      </ListViewInput>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

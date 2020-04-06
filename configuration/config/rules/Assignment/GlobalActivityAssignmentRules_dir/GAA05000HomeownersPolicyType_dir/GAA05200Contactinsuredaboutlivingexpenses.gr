@@ -1,0 +1,21 @@
+package rules.Assignment.GlobalActivityAssignmentRules_dir.GAA05000HomeownersPolicyType_dir
+
+@gw.rules.RuleName("GAA05200 - Contact insured about living expenses")
+internal class GAA05200Contactinsuredaboutlivingexpenses {
+  static function doCondition(activity : entity.Activity) : boolean {
+    
+/*start00rule*/
+return activity.ActivityPattern.Code == "living_expenses"
+/*end00rule*/
+
+  }
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+
+/*start00rule*/
+if(activity.CurrentAssignment.assignToIssueOwner())
+  actions.exit()
+/*end00rule*/
+
+  }
+}

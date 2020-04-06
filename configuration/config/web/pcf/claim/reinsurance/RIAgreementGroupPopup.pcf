@@ -1,0 +1,90 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="beforeCommit()"
+    canEdit="true"
+    canVisit="true"
+    id="RIAgreementGroupPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Claim.Reinsurance.CreateRIAgreementGroup&quot;)">
+    <LocationEntryPoint
+      signature="RIAgreementGroupPopup( claim : Claim, agreement : RIAgreement)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      name="agreement"
+      type="RIAgreement"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            editable="true"
+            id="AgreementGroupName"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.AgreementGroup.Name&quot;)"
+            required="true"
+            value="agreement.RIAgreementGroup.RiskName"/>
+          <ListViewInput
+            boldLabel="true"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.RelatedExposures&quot;)"
+            labelAbove="true">
+            <Toolbar/>
+            <ListViewPanel
+              id="RelatedExposuresPopupLV">
+              <RowIterator
+                editable="true"
+                elementName="relatedExposure"
+                id="availableExposureIter"
+                pageSize="0"
+                value="getExposures()"
+                valueType="gw.reins.RIAgreementToGroupPicker[]">
+                <IteratorSort
+                  sortBy="relatedExposure.Exposure"
+                  sortOrder="1"/>
+                <ToolbarFlag
+                  name="assignedExposure"/>
+                <Row>
+                  <CheckBoxCell
+                    editable="true"
+                    id="Picked"
+                    value="relatedExposure.Picked"/>
+                  <TextCell
+                    id="ExposureName"
+                    label="DisplayKey.get(&quot;entity.Exposure&quot;)"
+                    value="relatedExposure.Exposure.DisplayName"/>
+                </Row>
+              </RowIterator>
+            </ListViewPanel>
+          </ListViewInput>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[function getExposures() :  gw.reins.RIAgreementToGroupPicker[] {
+  return wrap(getAvailableExposures())
+}
+
+function wrap(exposures : Exposure[]) : gw.reins.RIAgreementToGroupPicker[] {
+  var result = new java.util.ArrayList<gw.reins.RIAgreementToGroupPicker>()
+  for (exposure in exposures) {
+    result.add(new gw.reins.RIAgreementToGroupPicker(exposure, agreement.RIAgreementGroup))
+  }
+  
+  return result.toArray(new gw.reins.RIAgreementToGroupPicker[result.Count])
+}
+
+function getAvailableExposures() : Exposure[] {
+  return claim.Exposures.where(\ e -> e.RIAgreementGroup == null)
+}
+
+function beforeCommit() {
+  if (agreement.RIAgreementGroup.Exposures.IsEmpty) {
+        throw new gw.api.util.DisplayableException(DisplayKey.get("Web.Claim.Reinsurance.AgreementGroup.ChooseExposureError"))
+  }
+}]]></Code>
+  </Popup>
+</PCF>

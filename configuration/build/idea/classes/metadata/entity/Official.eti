@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Details of officials associated with claim."
+  entity="Official"
+  exportable="true"
+  extendable="true"
+  loadable="true"
+  platform="false"
+  table="official"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.Official"
+    impl="com.guidewire.cc.domain.claim.impl.OfficialImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Represents a police officer, fireman, coroner, and so forth associated with a Claim. The details of this entity
+        include the official's type, name, and number of the report created.
+      
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The foreign key to the claim."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <column
+    desc="Name of official."
+    name="Name"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Official report number."
+    name="ReportNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <typekey
+    desc="Type of official (fire, police etc)."
+    name="OfficialType"
+    nullok="true"
+    typelist="OfficialType"/>
+</entity>

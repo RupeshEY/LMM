@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Forward
+    id="SimpleClaimForward">
+    <LocationEntryPoint
+      signature="SimpleClaimForward(ClaimInfo : ClaimInfo)"/>
+    <Variable
+      name="ClaimInfo"
+      type="ClaimInfo"/>
+    <ForwardCondition
+      action="pcf.ArchivedClaim.go(ClaimInfo)"
+      condition="ClaimInfo.ArchiveState != null &amp;&amp; perm.ClaimInfo.view( ClaimInfo )"/>
+    <ForwardCondition
+      action="pcf.ClaimForward.go(ClaimInfo.Claim)"
+      condition="ClaimInfo.ArchiveState == null &amp;&amp; perm.ClaimInfo.view( ClaimInfo )"/>
+    <ForwardCondition
+      action="CannotViewClaim.go()"/>
+  </Forward>
+</PCF>

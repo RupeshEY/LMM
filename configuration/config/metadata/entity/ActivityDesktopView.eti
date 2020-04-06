@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Displays activities efficiently in the desktop pages."
+  entity="ActivityDesktopView"
+  exportable="false"
+  final="false"
+  primaryEntity="Activity"
+  supertypeEntity="ActivityView">
+  <implementsInterface
+    iface="gw.cc.activity.entity.ActivityDesktopView"
+    impl="com.guidewire.cc.domain.activity.impl.ActivityDesktopViewImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.entity.PermissionAssignableCheck"
+    impl="com.guidewire.cc.domain.activity.impl.ActivityDesktopViewImpl"/>
+  <fulldescription><![CDATA[<p>Aggregates the information needed to display one activity row in the activity desktop page (subtype of ActivityView).</p>
+    ]]></fulldescription>
+  <viewEntityColumn
+    name="AssignmentDate"
+    path="AssignmentDate"/>
+  <viewEntityColumn
+    name="ClaimContactID"
+    path="ClaimContact.Contact"/>
+  <viewEntityColumn
+    name="ExposureID"
+    path="Exposure"/>
+  <viewEntityColumn
+    name="Mandatory"
+    path="Mandatory"/>
+  <viewEntityLink
+    name="ClaimInsured"
+    path="Claim.InsuredDenorm"/>
+  <viewEntityName
+    name="ClaimClaimantName"
+    path="Claim.ClaimantDenorm"/>
+  <viewEntityName
+    name="ClaimContactName"
+    path="ClaimContact.Contact"/>
+  <viewEntityName
+    name="ExposureClaimantName"
+    path="Exposure.ClaimantDenorm"/>
+  <viewEntityName
+    name="ExposureName"
+    path="Exposure"/>
+</viewEntity>

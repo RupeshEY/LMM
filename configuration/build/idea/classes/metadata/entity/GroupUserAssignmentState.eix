@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!-- GroupUser table -->
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="GroupUserAssignmentState">
+  <description><![CDATA[
+        Joins a GroupAssignmentState entity to one or more Users. Also stores per user load information
+        for round-robin assignment. This is an internal class which should only be used by the internals
+        of the assignment engine.
+      
+    ]]></description>
+  <column
+    desc="The current load of the user for claims."
+    name="ClaimLoad"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="The current load of the user for exposures."
+    name="ExposureLoad"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="The current load of the user for matters."
+    name="MatterLoad"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="The current load of the user for service requests."
+    name="ServiceRequestLoad"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="The current load of the user for subrogations."
+    name="SubrogationLoad"
+    nullok="true"
+    type="integer"/>
+</internalExtension>

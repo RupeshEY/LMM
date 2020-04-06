@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <!-- NOTE: Autosaveable is intentionally marked false, because it causes problems when a contact is downcast as
+  part of a sync. Autosaveable is meaningless on popups anyway. -->
+  <Popup
+    autosaveable="false"
+    canEdit="(inputContact != null and perm.Contact.editlocal(inputContact)) and (claim != null and perm.Claim.edit(claim))"
+    canVisit="inputContact != null and perm.Contact.viewlocal and (claim != null and perm.Claim.view(claim))"
+    id="ClaimContactDetailPopup"
+    startInEditMode="startInEditMode"
+    title="inputContact.DisplayName">
+    <LocationEntryPoint
+      signature="ClaimContactDetailPopup(inputContact : Contact, claim : Claim)"/>
+    <LocationEntryPoint
+      signature="ClaimContactDetailPopup(inputContact : Contact, claim : Claim, startInEditMode : boolean)"/>
+    <LocationEntryPoint
+      signature="ClaimContactDetailPopup(inputContact : Contact, claim : Claim, startInEditMode : boolean, allowEditInAddressBook : boolean)"/>
+    <Variable
+      name="inputContact"
+      type="Contact"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="claim == null ? null : claim.getClaimContact(inputContact)"
+      name="claimContact"
+      type="ClaimContact"/>
+    <Variable
+      initialValue="claimContact == null ? new gw.api.contact.LocationContactHandle(inputContact) : claimContact"
+      name="contactHandle"
+      type="gw.api.contact.ContactHandle"/>
+    <Variable
+      initialValue="Contact==null ? null : gw.api.contact.ContactSystemUtil.INSTANCE.generateLinkStatus(Contact)"
+      name="linkStatus"
+      recalculateOnRefresh="true"
+      type="gw.api.contact.ContactSystemLinkStatus"/>
+    <Variable
+      initialValue="false"
+      name="startInEditMode"
+      type="boolean"/>
+    <Variable
+      initialValue="linkStatus.Known and linkStatus.Linked"
+      name="showRelatedObjects"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="true"
+      name="allowEditInAddressBook"
+      type="boolean"/>
+    <ScreenRef
+      def="ContactDetailScreen(contactHandle, true, false, linkStatus, claim, false, showRelatedObjects, allowEditInAddressBook)"/>
+    <Code><![CDATA[property get Contact() : Contact { return contactHandle.Contact; }]]></Code>
+  </Popup>
+</PCF>

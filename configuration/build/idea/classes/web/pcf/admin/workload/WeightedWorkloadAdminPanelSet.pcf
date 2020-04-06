@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    available="gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value and perm.System.wwlcview"
+    editable="gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value and perm.System.wwlcmanage"
+    id="WeightedWorkloadAdminPanelSet">
+    <Require
+      name="classification"
+      type="WorkloadClassification"/>
+    <PanelRow>
+      <PanelColumn>
+        <DetailViewPanel>
+          <InputColumn>
+            <TextInput
+              editable="true"
+              id="Name"
+              label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.Name&quot;)"
+              required="true"
+              value="classification.Name"/>
+            <TextInput
+              editable="true"
+              id="Description"
+              label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.Description&quot;)"
+              value="classification.Description"/>
+            <BooleanRadioInput
+              editable="true"
+              id="Active"
+              label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.Active&quot;)"
+              required="true"
+              value="classification.Active"/>
+            <TextInput
+              editable="true"
+              id="Priority"
+              label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.Rank&quot;)"
+              required="true"
+              value="classification.Priority"
+              valueType="java.lang.Integer"/>
+            <TextInput
+              editable="true"
+              id="Weight"
+              label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.WorkloadWeight&quot;)"
+              numCols="4"
+              required="true"
+              value="classification.Weight"
+              valueType="java.lang.Integer"
+              visible="true"/>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelColumn>
+    </PanelRow>
+    <PanelRef
+      def="WorkloadClassificationDV(classification)"
+      mode="(typeof classification).TypeInfo.Name">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.Criteria&quot;)"/>
+    </PanelRef>
+    <PanelRef
+      def="LocalizedValuesDV(classification, { &quot;Name&quot;, &quot;Description&quot;}, { DisplayKey.get(&quot;Web.Admin.CustomerServiceTier.Name&quot;), DisplayKey.get(&quot;Web.Admin.CustomerServiceTier.Description&quot;)})"
+      id="LocalizedValues"/>
+  </PanelSet>
+</PCF>

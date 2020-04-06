@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="PercentMetricLimitDelegate">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.metric.impl.PercentMetricLimitDelegateInternal"
+    impl="com.guidewire.cc.domain.metric.impl.PercentMetricLimitDelegateImpl"/>
+  <implementsInterface
+    iface="gw.cc.metric.entity.PercentMetricLimitDelegate"
+    impl="com.guidewire.cc.domain.metric.impl.PercentMetricLimitDelegateImpl"/>
+  <fulldescription><![CDATA[Delegate used by percent claim and exposure metric limits
+    ]]></fulldescription>
+  <column
+    desc="Percent field to store the target value."
+    name="PercentTargetValue"
+    nullok="true"
+    type="percentagemetric"/>
+  <column
+    desc="Percent field to store the yellow value."
+    name="PercentYellowValue"
+    nullok="true"
+    type="percentagemetric"/>
+  <column
+    desc="Percent field to store the red value."
+    name="PercentRedValue"
+    nullok="true"
+    type="percentagemetric"/>
+</delegate>

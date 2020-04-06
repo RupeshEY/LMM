@@ -1,0 +1,40 @@
+package rules.Preupdate.ClaimPreupdate_dir.CPU31000WorkersComp_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("CPU31100 - Class Code Selection")
+internal class CPU31100ClassCodeSelection {
+  static function doCondition(claim : entity.Claim) : boolean {
+/*start00rule*/
+
+return
+    //There is Work Comp Info
+    claim.ClaimWorkComp != null
+    and
+    ((//The claim was just opened
+      claim.getOriginalValue(Claim#State) == ClaimState.TC_DRAFT
+      and claim.State == ClaimState.TC_OPEN
+    )
+    or
+    (//or the ClassCodeByLocation field just changed
+      claim.State != ClaimState.TC_DRAFT
+      and claim.ClaimWorkComp.isFieldChanged(ClaimWorkComp#ClassCodeByLocation)
+    ))
+    //and we picked a class code
+    and claim.EmploymentData.ClassCode != null
+    //but we chose not to filter by Location
+    and not claim.ClaimWorkComp.ClassCodeByLocation
+
+/*end00rule*/
+}
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+/*start00rule*/
+
+  var pattern = ActivityPattern.finder.getActivityPatternByCode("class_code_review")
+  if(!claim.Activities.hasMatch( \ act -> act.ActivityPattern == pattern and act.ActivityStatus == "Open")) {
+    claim.createActivityFromPattern(null, pattern)
+  }
+
+/*end00rule*/
+  }
+}

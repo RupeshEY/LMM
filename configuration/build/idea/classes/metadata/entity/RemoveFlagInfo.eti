@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temporary entity that holds transitional internal state information during claim remove flagged operation."
+  entity="RemoveFlagInfo">
+  <implementsInterface
+    iface="gw.cc.claim.entity.RemoveFlagInfo"
+    impl="com.guidewire.cc.domain.claim.impl.RemoveFlagInfoImpl"/>
+  <fulldescription><![CDATA[
+        Holds transitional internal state information during the claim remove flagged operation. The system does not store this entity.
+      
+    ]]></fulldescription>
+  <column
+    desc="Comments on the action taken."
+    name="note"
+    nullok="true"
+    type="mediumtext"/>
+</nonPersistentEntity>

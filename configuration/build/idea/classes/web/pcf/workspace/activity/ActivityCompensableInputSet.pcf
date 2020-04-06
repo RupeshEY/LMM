@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="ActivityCompensableInputSet">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Activity"
+      type="Activity"/>
+    <ButtonInput
+      action="ClaimLossDetailsForward.goInMain(Claim, true)"
+      id="UpdateCompensability"
+      labelAbove="true"
+      value="DisplayKey.get(&quot;Button.LossDetails.WC.UpdateCompensableActivity&quot;)"
+      visible="Claim.CompensableActivity.Status == TC_OPEN"/>
+  </InputSet>
+</PCF>

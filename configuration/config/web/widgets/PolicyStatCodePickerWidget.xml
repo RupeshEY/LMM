@@ -1,0 +1,11 @@
+<WidgetTemplate name="PolicyStatCodePickerTemplate" inputWidgetName="PolicyStatCodePickerInput">
+
+  <TemplateAttribute name="pickerIcon" default="&quot;search.png&quot;" type="xsd:string" />
+
+  <ExpressionRangeValue>
+    <MenuItem id="#{id}_PickerButton" icon="#{pickerIcon}"
+                 action="#{action}"
+                 hideIfReadOnly="true" />
+  </ExpressionRangeValue>
+  
+</WidgetTemplate>

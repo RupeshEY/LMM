@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="ActivityDV"
+    mode="approve_ecf_transaction">
+    <Require
+      name="Activity"
+      type="Activity"/>
+    <InputColumn>
+      <ListViewInput
+        boldLabel="true"
+        def="ApprovalHistoryLV((Activity.LMMessage_Ext as ECFMessageClaimResponseRq_Ext).ApprovalHistory)"
+        label="DisplayKey.get(&quot;NVV.Financials.ReserveSetSummary.ApprovalHistory&quot;)">
+        <Toolbar/>
+      </ListViewInput>
+      <InputDivider/>
+      <ListViewInput
+        boldLabel="true"
+        def="ECFTransactionLV(Activity.LMMessage_Ext as ECFMessageClaimResponseRq_Ext)"
+        label="&quot;Transaction&quot;">
+        <Toolbar/>
+      </ListViewInput>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Financials.ReserveSetSummary.Details&quot;)"/>
+      <ClaimContactInput
+        claim="Activity.Claim"
+        id="Details_CreateUser"
+        label="DisplayKey.get(&quot;NVV.Financials.ReserveSetSummary.Details.CreateUser&quot;)"
+        value="Activity.LMMessage_Ext.CreateUser.Contact"
+        valueRange="Activity.Claim.RelatedUserContactArray"
+        valueType="entity.UserContact"/>
+      <DateInput
+        id="Details_CreateTime"
+        label="DisplayKey.get(&quot;NVV.Financials.ReserveSetSummary.Details.CreateTime&quot;)"
+        value="Activity.LMMessage_Ext.CreateTime"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

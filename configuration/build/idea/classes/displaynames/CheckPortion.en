@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Entity
+  name="CheckPortion">
+  <Columns>
+    <Column
+      beanPath="CheckPortion.FixedTransactionAmount"
+      name="fixedAmt"/>
+    <Column
+      beanPath="CheckPortion.Percentage"
+      name="percentage"/>
+  </Columns>
+  <DisplayName><![CDATA[uses gw.api.util.CurrencyUtil
+uses gw.api.util.StringUtil
+uses java.lang.Double
+
+var retString = ""
+
+if (null != percentage) {
+  retString = StringUtil.formatNumber(percentage as Double, "") + "%"
+} else if (null != fixedAmt) {
+  if (CurrencyUtil.isSingleCurrencyMode()) {
+    retString = CurrencyUtil.renderAsCurrency(fixedAmt, CurrencyUtil.getDefaultCurrency())
+  } else {
+    retString = StringUtil.formatNumber(fixedAmt as Double, "")
+  }
+}
+return retString
+]]></DisplayName>
+</Entity>

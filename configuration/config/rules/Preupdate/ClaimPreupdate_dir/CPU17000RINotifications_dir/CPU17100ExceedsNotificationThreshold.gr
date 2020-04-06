@@ -1,0 +1,21 @@
+package rules.Preupdate.ClaimPreupdate_dir.CPU17000RINotifications_dir
+
+@gw.rules.RuleName("CPU17100 - Exceeds Notification Threshold")
+internal class CPU17100ExceedsNotificationThreshold {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.setReinsuranceNotificationIfGrossTotalIncurredOverThreshold()
+
+/*end00rule*/
+
+  }
+}

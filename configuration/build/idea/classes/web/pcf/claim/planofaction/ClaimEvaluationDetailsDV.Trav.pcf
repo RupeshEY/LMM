@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <CardViewPanel
+    hideTabIfSingle="true"
+    id="ClaimEvaluationDetailsDV"
+    mode="Trav">
+    <Require
+      name="Evaluation"
+      type="Evaluation"/>
+    <Card
+      id="ClaimEvaluationDetailsCard"
+      title="&quot;&quot;">
+      <PanelRef
+        def="ClaimEvaluationDetailDV(Evaluation)"/>
+    </Card>
+  </CardViewPanel>
+</PCF>

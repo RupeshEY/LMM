@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="View entity for efficiently displaying the Contact info on the Archive Claim search page."
+  entity="ContactInfoView"
+  exportable="false"
+  primaryEntity="ContactInfo">
+  <implementsInterface
+    iface="gw.cc.claim.archiving.entity.ContactInfoView"
+    impl="com.guidewire.cc.domain.claim.archiving.impl.ContactInfoViewImpl"/>
+  <fulldescription><![CDATA[
+          Supports the efficient creation of contactInfo lists returned through ClaimCenter's search function. It retrieves
+          the contact information necessary for the claim search page. This is a virtual entity and is not stored in the database. 
+        
+      ]]></fulldescription>
+  <viewEntityLink
+    name="ClaimInfo"
+    path="ClaimInfo"/>
+  <viewEntityLink
+    name="ContactInfo"
+    path="ID"/>
+  <viewEntityColumn
+    name="Name"
+    path="Name"/>
+  <viewEntityColumn
+    name="FirstName"
+    path="FirstName"/>
+  <viewEntityColumn
+    name="LastName"
+    path="LastName"/>
+  <viewEntityColumn
+    name="MiddleName"
+    path="MiddleName"/>
+  <viewEntityTypekey
+    name="Prefix"
+    path="Prefix"/>
+  <viewEntityTypekey
+    name="Suffix"
+    path="Suffix"/>
+  <viewEntityTypekey
+    name="Role"
+    path="Role"/>
+</viewEntity>

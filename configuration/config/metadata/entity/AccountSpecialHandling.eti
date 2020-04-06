@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Special Handling for an Account"
+  entity="AccountSpecialHandling"
+  final="true"
+  supertype="SpecialHandling">
+  <implementsInterface
+    iface="gw.cc.specialhandling.entity.AccountSpecialHandling"
+    impl="com.guidewire.cc.domain.specialhandling.impl.AccountSpecialHandlingImpl"/>
+  <fulldescription><![CDATA[
+        The special handling to follow for claims linked to a given Account
+    ]]></fulldescription>
+  <foreignkey
+    columnName="AccountID"
+    desc="The Account that owns this instance of Special Handling.  Any Claims created for Policies associated with this Account will have these special handling instructions and triggers applied."
+    fkentity="Account"
+    name="Account"
+    nullok="false"/>
+</subtype>

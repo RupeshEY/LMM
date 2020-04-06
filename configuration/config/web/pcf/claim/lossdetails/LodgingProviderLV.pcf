@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="LodgingProviderLV">
+    <ExposeIterator
+      valueType="entity.LodgingProvider"
+      widget="LodgingProviderLV"/>
+    <Require
+      name="incident"
+      type="LivingExpensesIncident"/>
+    <RowIterator
+      editable="true"
+      elementName="aLodgingProvider"
+      hideCheckBoxesIfReadOnly="true"
+      toAdd="incident.addToLodgingProviders( aLodgingProvider )"
+      toRemove="incident.removeFromLodgingProviders( aLodgingProvider )"
+      value="incident.LodgingProviders"
+      valueType="entity.LodgingProvider[]">
+      <Row>
+        <DateCell
+          editable="true"
+          id="StartDate"
+          label="DisplayKey.get(&quot;Web.LodgingProviderLV.StartDate&quot;)"
+          required="true"
+          value="aLodgingProvider.StartDate">
+          <PostOnChange
+            target="DATA_ONLY"/>
+        </DateCell>
+        <DateCell
+          editable="true"
+          id="EndDate"
+          label="DisplayKey.get(&quot;Web.LodgingProviderLV.EndDate&quot;)"
+          validationExpression="aLodgingProvider.StartDate != null and aLodgingProvider.StartDate &gt; aLodgingProvider.EndDate ? DisplayKey.get(&quot;Web.LodgingProviderLV.InvalidEndDateBeforeStartDate&quot;)  : null"
+          value="aLodgingProvider.EndDate">
+          <PostOnChange
+            target="DATA_ONLY"/>
+        </DateCell>
+        <ClaimContactCell
+          align="right"
+          claim="incident.Claim"
+          editable="true"
+          forceContactSubtype="Company.Type"
+          id="Contact"
+          label="DisplayKey.get(&quot;Web.LodgingProviderLV.Location&quot;)"
+          newContactMenu="ClaimNewCompanyOnlyPickerMenuItemSet"
+          onPick="aLodgingProvider.PropertyIncident.Claim.addRole(ContactRole.TC_LODGINGPROVIDER, aLodgingProvider.Contact) "
+          value="aLodgingProvider.Contact"
+          valueRange="incident.Claim.RelatedCompanyArray">
+          <PostOnChange
+            onChange="if(aLodgingProvider.Contact != null) aLodgingProvider.PropertyIncident.Claim.addRole(ContactRole.TC_LODGINGPROVIDER, aLodgingProvider.Contact)"
+            target="DATA_ONLY"/>
+        </ClaimContactCell>
+        <ModalCellRef
+          def="ContactPhoneDisplayCell(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(aLodgingProvider.Contact, Contact#WorkPhone), false), aLodgingProvider)"
+          id="LocationDetailsCell"
+          label="DisplayKey.get(&quot;Web.LodgingProviderLV.LocationDetails&quot;)"
+          mode="aLodgingProvider.Contact != null ? &quot;default&quot; : &quot;NullContact&quot;"/>
+        <TextCell
+          id="Days"
+          label="DisplayKey.get(&quot;Web.LodgingProviderLV.Days&quot;)"
+          value="aLodgingProvider.Days"
+          valueType="java.lang.Integer"/>
+        <CurrencyCell
+          editable="true"
+          formatType="currency"
+          id="Rate"
+          label="DisplayKey.get(&quot;Web.LodgingProviderLV.NightlyRate&quot;)"
+          value="aLodgingProvider.LodgingRate">
+          <PostOnChange
+            target="DATA_ONLY"/>
+        </CurrencyCell>
+        <CurrencyCell
+          formatType="currency"
+          id="Approx_Total"
+          label="DisplayKey.get(&quot;Web.LodgingProviderLV.ApproxTotal&quot;)"
+          value="aLodgingProvider.LodgingTotal"/>
+        <TextAreaCell
+          editable="true"
+          id="Comments"
+          label="DisplayKey.get(&quot;Web.LodgingProviderLV.Comments&quot;)"
+          numRows="3"
+          value="aLodgingProvider.Comments"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

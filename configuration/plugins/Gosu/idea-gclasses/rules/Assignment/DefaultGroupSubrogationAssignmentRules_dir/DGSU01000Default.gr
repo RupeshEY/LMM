@@ -1,0 +1,25 @@
+package rules.Assignment.DefaultGroupSubrogationAssignmentRules_dir
+uses gw.api.system.CCLoggerCategory
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("DGSU01000 - Default")
+internal class DGSU01000Default {
+  static function doCondition(subrogation : entity.Subrogation) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(subrogation : entity.Subrogation, actions : gw.rules.Action) {
+/*start00rule*/
+
+  if (subrogation.CurrentAssignment.assignUserByRoundRobin(false, subrogation.CurrentAssignment.AssignedGroup)) {
+    CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.DefaultGroup.Subrogation", actions.ShortRuleName))
+    CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.AssignedUserIs", subrogation.CurrentAssignment.AssignedUser))
+    subrogation.handleSubrogationOwnerRole()
+    actions.exit()
+  }
+
+/*end00rule*/
+  }
+}

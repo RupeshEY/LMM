@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="true"
+    id="ClaimNewDocumentFromActivityPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Java.PageAction.NewDocument&quot;)">
+    <LocationEntryPoint
+      signature="ClaimNewDocumentFromActivityPopup(Activity : Activity, Template : gw.plugin.document.IDocumentTemplateDescriptor)"/>
+    <Variable
+      name="Activity"
+      type="Activity"/>
+    <Variable
+      name="Template"
+      type="gw.plugin.document.IDocumentTemplateDescriptor"/>
+    <ScreenRef
+      def="NewDocumentFromTemplateScreen(Activity.Claim, new util.document.DocumentInitWrapper(\doc -> Activity.addLinkedDocument(doc)), Template, Activity)"/>
+  </Popup>
+</PCF>

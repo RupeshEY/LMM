@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterCancel="ClaimFinancialsChecksDetail.go(Claim, Check)"
+    afterCommit="ClaimFinancialsChecksDetail.go(Claim, Check)"
+    canEdit="true"
+    canVisit="perm.Claim.viewpayments(Claim)"
+    countsAsWork="false"
+    id="VoidStopCheck"
+    parent="ClaimFinancialsChecksDetail(Claim, Check)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.VoidStopCheck.VoidStop.Title&quot;)">
+    <LocationEntryPoint
+      signature="VoidStopCheck(Claim : Claim, Check : Check)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Check"
+      type="Check"/>
+    <Screen
+      id="VoidStopCheckScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="voidCheck()"
+          available=" Check.Voidable and perm.Payment.voidpmt(Check)"
+          confirmMessage="DisplayKey.get(&quot;JSP.VoidStopCheck.Void.Confirm&quot;)"
+          id="VoidStopCheck_VoidButton"
+          label="DisplayKey.get(&quot;Button.Check.Void&quot;)"
+          visible="perm.Payment.voidpmt(Check)"/>
+        <ToolbarButton
+          action="stopCheck()"
+          available=" Check.Stoppable and perm.Payment.stop(Check)"
+          confirmMessage="DisplayKey.get(&quot;JSP.VoidStopCheck.Stop.Confirm&quot;)"
+          id="VoidStopCheck_StopButton"
+          label="DisplayKey.get(&quot;Button.Check.Stop&quot;)"
+          visible="perm.Payment.stop(Check)"/>
+        <EditButtons
+          cancelLabel="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          editVisible="false"
+          updateVisible="false"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            boldLabel="true"
+            id="LinkedServiceRequestInvoicesMessage"
+            label="DisplayKey.get(&quot;JSP.VoidStopCheck.VoidStop.InvoicesTip&quot;, ServiceRequestInvoiceStatus.TC_APPROVED.DisplayName, Check.BulletedListOfServiceRequestInvoicesForWarning)"
+            labelAbove="true"
+            value="&quot;&quot;"
+            visible="Check.ServiceRequestInvoices.HasElements"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="VoidStopCheckDV(Check)"
+        visible="Check.Group == null"/>
+      <PanelRef
+        def="VoidStopCheckGroupDV(Check)"
+        visible="Check.Group != null"/>
+    </Screen>
+    <Code><![CDATA[uses java.lang.IllegalStateException
+
+function voidCheck() {
+  try {
+    gw.api.util.CCLocationUtil.runAndCommit( \ -> Check.voidCheck(), CurrentLocation )
+  } catch (e : IllegalStateException) {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Web.Financials.CheckCancel.Error.IllegalFinancialsStatus"), e)
+  }
+}
+
+function stopCheck() {
+  try {
+    gw.api.util.CCLocationUtil.runAndCommit( \ -> Check.stopCheck(), CurrentLocation )
+  } catch (e : IllegalStateException) {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Web.Financials.CheckCancel.Error.IllegalFinancialsStatus"), e)
+  }
+}
+]]></Code>
+  </Page>
+</PCF>

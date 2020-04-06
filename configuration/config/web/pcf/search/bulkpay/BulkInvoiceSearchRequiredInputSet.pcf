@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="BulkInvoiceSearchRequiredInputSet">
+    <Require
+      name="BulkInvoiceSearchCriteria"
+      type="BulkInvoiceSearchCriteria"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Search.RequiredParameters&quot;)"/>
+    <TextInput
+      editable="true"
+      id="ClaimNumber"
+      label="DisplayKey.get(&quot;Financials.BulkPay.Search.ClaimNumber&quot;)"
+      value="BulkInvoiceSearchCriteria.ClaimNumber"/>
+    <TextInput
+      editable="true"
+      id="InvoiceNumber"
+      label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.InvoiceNumber&quot;)"
+      value="BulkInvoiceSearchCriteria.InvoiceNumber"/>
+    <InputSetRef
+      def="GlobalPersonNameInputSet(new gw.api.name.SearchNameOwner(BulkInvoiceSearchCriteria.NameCriteria) { :NameLabelType = gw.api.name.SearchNameOwner.PAYEE } )"
+      mode="gw.api.name.NameLocaleSettings.PCFMode"/>
+    <InputSetRef
+      def="GlobalContactNameInputSet(new gw.api.name.SearchNameOwner(BulkInvoiceSearchCriteria.NameCriteria) { :NameLabelType = gw.api.name.SearchNameOwner.PAYEE } )"
+      mode="gw.api.name.NameLocaleSettings.PCFMode"/>
+    <TextInput
+      editable="true"
+      id="TaxID"
+      label="DisplayKey.get(&quot;Financials.BulkPay.Search.TaxID&quot;)"
+      required="false"
+      value="BulkInvoiceSearchCriteria.NameCriteria.TaxId"/>
+    <TextInput
+      editable="true"
+      id="CheckNumber"
+      label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.CheckNumber&quot;)"
+      value="BulkInvoiceSearchCriteria.CheckNumber"/>
+  </InputSet>
+</PCF>

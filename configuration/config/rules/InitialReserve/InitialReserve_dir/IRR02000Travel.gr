@@ -1,0 +1,20 @@
+package rules.InitialReserve.InitialReserve_dir
+
+@gw.rules.RuleName("IRR02000 - Travel")
+internal class IRR02000Travel {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.Claim.LossType== TC_TRAV
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+actions.exitAfter()
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="DynamicAssignmentState">
+  <implementsEntity
+    name="LastAssignedUserContainer"/>
+  <description><![CDATA[
+        Maintains round-robin assignment state for a particular fingerprint. The fingerprint is generated
+        from some entity (such as a UserSearchCriteria) which determines the set of users to be chosen
+        via round-robin. This is an internal class which should only be used by the internals of the
+        assignment engine.
+      
+    ]]></description>
+</internalExtension>

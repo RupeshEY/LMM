@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<!-- Legal values for this type list are included but commented out.
+   Adding values to this list that aren't in the legal list will cause them to show up in the UI, but when
+   the search button is hit, ClaimCenter will fail. -->
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="The search options for the date searches in search"
+  name="DateFieldsToSearchType">
+  <typecode
+    code="loss"
+    desc="Find by Loss Date"
+    name="Loss date">
+    <category
+      code="claim"
+      typelist="SearchObjectType"/>
+    <category
+      code="claimInfo"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="reported"
+    desc="Find by reported date"
+    name="Reported date">
+    <category
+      code="claim"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="closed"
+    desc="Find by closed date"
+    name="Closed date">
+    <category
+      code="claim"
+      typelist="SearchObjectType"/>
+    <category
+      code="activity"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="target"
+    desc="Find by target date"
+    name="Due date">
+    <category
+      code="activity"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="create"
+    desc="Find by creation date"
+    name="Creation date">
+    <category
+      code="payment"
+      typelist="SearchObjectType"/>
+    <category
+      code="claim"
+      typelist="SearchObjectType"/>
+    <category
+      code="activity"
+      typelist="SearchObjectType"/>
+    <category
+      code="recovery"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="approved"
+    desc="Find by approved date"
+    name="Approved date">
+    <category
+      code="payment"
+      typelist="SearchObjectType"/>
+    <category
+      code="recovery"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="issue"
+    desc="Find by issue date"
+    name="Issue date">
+    <category
+      code="payment"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="service"
+    desc="Find by service date"
+    name="Date of service">
+    <category
+      code="payment"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="periodstart"
+    desc="Find by service period start"
+    name="Service period start">
+    <category
+      code="payment"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="periodend"
+    desc="Find by service period end"
+    name="Service period end">
+    <category
+      code="payment"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="schedsend"
+    desc="The date the check is supposed to go out"
+    name="Scheduled send date">
+    <category
+      code="payment"
+      typelist="SearchObjectType"/>
+  </typecode>
+</typelistextension>

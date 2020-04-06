@@ -1,0 +1,187 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="FNOLWizard_BasicInfoScreen"
+    mode="default">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Variable
+      initialValue="((Claim.maincontact == Claim.reporter and Claim.MainContactType == Claim.ReportedByType) || (Claim.maincontact == null and Claim.MainContactType == null))"
+      name="maincontactSamePerson"
+      type="boolean"/>
+    <Variable
+      initialValue="Claim.Policy.PolicyType"
+      name="claimPolicyType"
+      type="PolicyType"/>
+    <Variable
+      name="contact"
+      type="Contact"/>
+    <Toolbar>
+      <WizardButtons/>
+    </Toolbar>
+    <PanelRow
+      id="PanelRow">
+      <PanelColumn
+        id="BasicInfoPanelColumn">
+        <DetailViewPanel
+          id="BasicInfoDetailViewPanelDV">
+          <InputColumn
+            id="BasicInfoInputColumn">
+            <Label
+              id="ReporterLabel"
+              label="DisplayKey.get(&quot;NVV.Claim.NewClaimPeople.Claim.ReportedBy&quot;)"/>
+            <TypeKeyInput
+              editable="true"
+              id="HowReported"
+              label="DisplayKey.get(&quot;NVV.Claim.SubView.NewClaimLossDetailsAuto.Claim.Notification.HowReported&quot;)"
+              value="Claim.HowReported"
+              valueType="typekey.HowReportedType"/>
+            <ClaimContactInput
+              claim="Claim"
+              editable="true"
+              forceContactSubtype="entity.Person.Type"
+              id="ReportedBy_Name"
+              label="DisplayKey.get(&quot;NVV.Claim.NewClaimPeople.Claim.ReportedBy.Name&quot;)"
+              newContactMenu="ClaimNewPersonOnlyPickerMenuItemSet"
+              required="true"
+              value="Claim.reporter"
+              valueRange="Claim.RelatedPersonArray">
+              <PostOnChange
+                onChange="if (Claim.reporter == Claim.Insured) Claim.ReportedByType = PersonRelationType.TC_SELF else Claim.ReportedByType = null; if (maincontactSamePerson) {Claim.maincontact = Claim.reporter as Person;  Claim.MainContactType = Claim.ReportedByType;}"/>
+            </ClaimContactInput>
+            <TypeKeyInput
+              editable="true"
+              filter="VALUE.hasCategory(claimPolicyType)"
+              id="Claim_ReportedByType"
+              label="DisplayKey.get(&quot;NVV.Claim.NewClaimPeople.Claim.ReportedByType&quot;)"
+              required="true"
+              value="Claim.ReportedByType"
+              valueType="typekey.PersonRelationType">
+              <PostOnChange
+                onChange="if (maincontactSamePerson) {Claim.MainContactType = Claim.ReportedByType;}"/>
+            </TypeKeyInput>
+            <DateInput
+              editable="true"
+              id="Notification_ReportedDate"
+              label="DisplayKey.get(&quot;NVV.Claim.SubView.NewClaimLossDetailsAuto.Claim.Notification.ReportedDate&quot;)"
+              required="false"
+              validationExpression="Claim.ReportedDate != null and Claim.ReportedDate &gt; gw.api.util.DateUtil.currentDate() ? DisplayKey.get(&quot;Java.Validation.Date.ForbidFuture&quot;) : null"
+              value="Claim.ReportedDate"/>
+            <Label
+              label="DisplayKey.get(&quot;Web.BasicInfoScreen.BasicInfoDetailViewPanel.VerifyDOBLabel&quot;)"
+              visible="Claim.reporter != null"/>
+            <DateInput
+              id="DOB"
+              label="DisplayKey.get(&quot;Web.BasicInfoScreen.BasicInfoDetailViewPanel.DOB.Label&quot;)"
+              value="(Claim.reporter as Person).DateOfBirth"
+              visible="Claim.reporter != null"/>
+            <Label
+              label="DisplayKey.get(&quot;Web.BasicInfoScreen.BasicInfoDetailViewPanel.ConfirmContactLabel&quot;)"
+              visible="Claim.reporter != null"/>
+            <TextInput
+              id="reporter_Address"
+              label="DisplayKey.get(&quot;NVV.Claim.NewClaimPeople.Policy.Insured.Address&quot;)"
+              value="(Claim.reporter as Person).PrimaryAddressDisplayValue"
+              visible="Claim.reporter != null"/>
+            <InputSetRef
+              def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(Claim.reporter, contact#WorkPhone), DisplayKey.get(&quot;Web.BasicInfoScreen.BasicInfoDetailViewPanel.BusinessPhone.Label&quot;), false))"
+              editable="Claim.reporter != null"
+              id="reporter_businessphone"
+              visible="Claim.reporter != null"/>
+            <InputSetRef
+              def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(Claim.reporter, contact#HomePhone), DisplayKey.get(&quot;Web.BasicInfoScreen.BasicInfoDetailViewPanel.HomePhone.Label&quot;), false))"
+              editable="Claim.reporter != null"
+              id="reporter_homephone"
+              visible="Claim.reporter != null"/>
+            <InputSetRef
+              def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(Claim.reporter, Person#CellPhone), DisplayKey.get(&quot;Web.BasicInfoScreen.BasicInfoDetailViewPanel.Mobile.Label&quot;), false))"
+              editable="Claim.reporter != null"
+              id="reporter_mobile"
+              visible="Claim.reporter != null"/>
+            <TypeKeyInput
+              editable="true"
+              id="reporter_primarytype"
+              label="DisplayKey.get(&quot;Web.BasicInfoScreen.BasicInfoDetailViewPanel.PrimaryPhone.Label&quot;)"
+              value="(Claim.reporter as Person).PrimaryPhone"
+              valueType="typekey.PrimaryPhoneType"
+              visible="Claim.reporter != null"/>
+            <TextInput
+              editable="true"
+              id="reporter_email"
+              label="DisplayKey.get(&quot;Web.BasicInfoScreen.BasicInfoDetailViewPanel.Email.Label&quot;)"
+              value="(Claim.reporter as Person).EmailAddress1"
+              visible="Claim.reporter != null"/>
+            <ButtonInput
+              action="ClaimContactDetailPopup.push(Claim.reporter, Claim, true)"
+              id="EditContact"
+              shortcut="E"
+              value="DisplayKey.get(&quot;Web.BasicInfoScreen.BasicInfoDetailViewPanel.EditContactButton.Value&quot;)"
+              visible="Claim.reporter != null"/>
+            <InputDivider/>
+            <Label
+              label="DisplayKey.get(&quot;NVV.Claim.NewClaimPeople.Policy.Insured&quot;)"/>
+            <TextInput
+              action="ClaimContactDetailPopup.push(Claim.Insured, Claim, true)"
+              id="Insured_Name"
+              label="DisplayKey.get(&quot;NVV.Claim.NewClaimPeople.Policy.Insured.Name&quot;)"
+              value="Claim.Insured"
+              valueType="entity.Contact"/>
+            <TextInput
+              id="Insured_Address"
+              label="DisplayKey.get(&quot;NVV.Claim.NewClaimPeople.Policy.Insured.Address&quot;)"
+              value="Claim.Insured.PrimaryAddressDisplayValue"/>
+            <TextInput
+              id="Insured_WorkPhone"
+              label="DisplayKey.get(&quot;NVV.Claim.NewClaimPeople.Policy.Insured.WorkPhone&quot;)"
+              value="Claim.Insured.PrimaryPhoneValue"/>
+            <InputDivider/>
+            <Label
+              label="DisplayKey.get(&quot;NVV.Claim.NewClaimPeople.Claim.MainContact&quot;)"/>
+            <BooleanRadioInput
+              editable="true"
+              falseLabel="DisplayKey.get(&quot;Web.BasicInfoScreen.BasicInfoDetailViewPanel.SamePerson.False.Label&quot;)"
+              id="MainContactChoice"
+              label="DisplayKey.get(&quot;Web.BasicInfoScreen.BasicInfoDetailViewPanel.SamePerson.Label&quot;)"
+              stacked="true"
+              trueLabel="DisplayKey.get(&quot;Web.BasicInfoScreen.BasicInfoDetailViewPanel.SamePerson.True.Label&quot;)"
+              value="maincontactSamePerson">
+              <PostOnChange
+                onChange="if (maincontactSamePerson) {Claim.maincontact = Claim.reporter as Person;  Claim.MainContactType = Claim.ReportedByType;} else {Claim.maincontact = null;  Claim.MainContactType = null;}"/>
+            </BooleanRadioInput>
+            <ClaimContactInput
+              claim="Claim"
+              editable="true"
+              id="MainContact_Name"
+              label="DisplayKey.get(&quot;NVV.Claim.NewClaimPeople.Claim.MainContact.Name&quot;)"
+              newContactMenu="ClaimNewPersonOnlyPickerMenuItemSet"
+              value="Claim.maincontact"
+              valueRange="Claim.RelatedPersonArray"
+              valueType="entity.Person"
+              visible="!maincontactSamePerson"/>
+            <TypeKeyInput
+              editable="true"
+              filter="VALUE.hasCategory(claimPolicyType)"
+              id="Claim_MainContactType"
+              label="DisplayKey.get(&quot;NVV.Claim.NewClaimPeople.Claim.MainContactType&quot;)"
+              value="Claim.MainContactType"
+              valueType="typekey.PersonRelationType"
+              visible="!maincontactSamePerson"/>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelColumn>
+      <PanelColumn
+        id="VehiclePanelColumn">
+        <PanelRef
+          def="FNOLWizard_BasicInfoRightPanelSet(Claim, Wizard)"
+          id="RightPanel"
+          mode="Claim.LossType"/>
+      </PanelColumn>
+    </PanelRow>
+  </Screen>
+</PCF>

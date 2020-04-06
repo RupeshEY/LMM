@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<Entity
+  name="WCBenefitFactorDetail">
+  <Columns>
+    <Column
+      beanPath="WCBenefitFactorDetail.FactorCategory"
+      name="Category"/>
+    <Column
+      beanPath="WCBenefitFactorDetail.DetailedFactor"
+      name="DetailedFactor"/>
+    <Column
+      beanPath="WCBenefitFactorDetail.FactorValue"
+      name="Value"/>
+    <Column
+      beanPath="WCBenefitFactorDetail.FactorComment"
+      name="Comment"/>
+  </Columns>
+  <DisplayName><![CDATA[
+var retString : String = "";
+   if (Category != null) {
+       retString = retString + Category.DisplayName;
+   }
+   
+      if (Category != null) {
+       retString = retString + " - " +  DetailedFactor.DisplayName
+   }
+   
+   
+   if (Value != null) {
+       retString = retString + ": " + Value;
+   }
+   if (Comment != null) {
+       retString = retString + " - " + Comment;
+   }    
+   return retString;
+  ]]></DisplayName>
+</Entity>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A set of instructions to be transmitted to the specialist who will work on a service request"
+  entity="ServiceRequestInstruction"
+  exportable="true"
+  loadable="false"
+  table="servicerequestinstruction"
+  type="editable">
+  <implementsInterface
+    iface="gw.cc.vendormanagement.entity.ServiceRequestInstruction"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestInstructionImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+    Contains a set of instructions to be transmitted to the specialist who will work on a service request.
+  ]]></fulldescription>
+  <foreignkey
+    columnName="ServiceRequestID"
+    desc="The service request for which the specialist is being instructed."
+    fkentity="ServiceRequest"
+    name="ServiceRequest"
+    nullok="false"/>
+  <array
+    arrayentity="ServiceRequestInstructionService"
+    cascadeDelete="true"
+    desc="The services to be performed for this set of instructions."
+    name="Services"
+    owner="true"/>
+</entity>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    id="CannotViewClaim"
+    parent="ClaimMessage()"
+    title="DisplayKey.get(&quot;Web.CannotViewClaim.Title&quot;)">
+    <LocationEntryPoint
+      signature="CannotViewClaim()"/>
+    <Screen
+      id="CannotViewClaimScreen">
+      <Toolbar/>
+      <Verbatim
+        label="DisplayKey.get(&quot;Web.CannotViewClaim.Message&quot;)"/>
+    </Screen>
+  </Page>
+</PCF>

@@ -1,0 +1,131 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The relationship a contact has with the claim"
+  name="ContactRole">
+  <typecode
+    code="checkpayee"
+    desc="The payee on a check"
+    name="Check Payee"
+    priority="17"/>
+  <typecode
+    code="negcontact"
+    desc="Negotiation contact"
+    name="Negotiation Contact"
+    priority="20"/>
+  <typecode
+    code="claimant"
+    desc="Claimant"
+    name="Claimant"
+    priority="2"/>
+  <typecode
+    code="other"
+    desc="Other"
+    name="Other"
+    priority="20"/>
+  <typecode
+    code="recoverypayer"
+    desc="The payer on a recovery"
+    name="Recovery Payer"
+    priority="16"/>
+  <typecode
+    code="recoveryonbehalfof"
+    desc="The responsible party on a recovery"
+    name="Recovery On Behalf Of"
+    priority="17"/>
+  <typecode
+    code="vendor"
+    desc="Vendor"
+    name="Vendor"
+    priority="12"/>
+  <typecode
+    code="activityowner"
+    desc="The external owner of an activity"
+    name="Activity Owner"/>
+  <typecode
+    code="agent"
+    desc="Agent"
+    name="Agent"/>
+  <typecode
+    code="coveredparty"
+    desc="Covered party"
+    name="Covered Party"/>
+  <typecode
+    code="doingbusinessas"
+    desc="Doing business as"
+    name="Doing Business As"/>
+  <typecode
+    code="excludedparty"
+    desc="Excluded party"
+    name="Excluded Party"/>
+  <typecode
+    code="insured"
+    desc="Insured"
+    name="Insured"
+    priority="1"/>
+  <typecode
+    code="policyholder"
+    desc="Policy Holder"
+    name="Policy holder"/>
+  <typecode
+    code="underwriter"
+    desc="Underwriter"
+    name="Underwriter"/>
+  <typecode
+    code="formeragent"
+    desc="Former agent"
+    name="Former Agent"/>
+  <typecode
+    code="formercoveredparty"
+    desc="Former covered party"
+    name="Former Covered Party"/>
+  <typecode
+    code="formerdoingbusinessas"
+    desc="Former doing business As"
+    name="Former Doing Business As"/>
+  <typecode
+    code="formerexcludedparty"
+    desc="Former excluded party"
+    name="Former Excluded Party"/>
+  <typecode
+    code="formerinsured"
+    desc="Former insured"
+    name="Former Insured"/>
+  <typecode
+    code="formerpolicyholder"
+    desc="Former policy holder"
+    name="Former Policy Holder"/>
+  <typecode
+    code="formerunderwriter"
+    desc="Former underwriter"
+    name="Former Underwriter"/>
+  <typecode
+    code="filedby"
+    desc="Filed by"
+    name="Filed By"/>
+  <typecode
+    code="venue"
+    desc="Authority which handles legal matters e.g., a court house."
+    name="Venue"/>
+  <typecode
+    code="defenseattorney"
+    desc="Primary Defense Attorney"
+    name="Primary Defense Attorney"/>
+  <typecode
+    code="plaintiffatt"
+    desc="Primary Plaintiff's Attorney"
+    name="Primary Plaintiff's Attorney"/>
+  <typecode
+    code="formercheckpayee"
+    desc="Former Check Payee"
+    name="Former Check Payee"/>
+  <typefilter
+    desc="Typecodes relevant to payee for tax reporting purposes"
+    name="payee"/>
+  <typefilter
+    desc="Typecodes relevant to special handling"
+    name="specialhandling"/>
+  <typefilter
+    desc="Typecodes to represent former policy roles"
+    name="formerpolicyrole"/>
+</typelist>

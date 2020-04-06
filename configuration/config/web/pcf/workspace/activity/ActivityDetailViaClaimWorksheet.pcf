@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Worksheet
+    beforeCommit="activityDetailHelper.beforeCommit(Activity)"
+    canEdit="canEdit"
+    canVisit="perm.Activity.view(Activity)"
+    id="ActivityDetailViaClaimWorksheet"
+    tabLabel="DisplayKey.get(&quot;Web.Claim.ActivityDetailWorksheet.Tab&quot;)"
+    title="DisplayKey.get(&quot;JSP.ActivityDetail.Detail.Title&quot;, Activity.Claim.ClaimNumber)">
+    <LocationEntryPoint
+      signature="ActivityDetailViaClaimWorksheet(Claim : Claim, Activity : Activity)"/>
+    <Scope
+      location="Claim(Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Activity"
+      type="Activity"/>
+    <Variable
+      initialValue="Activity.canEdit()"
+      name="canEdit"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.api.activity.ActivityDetailHelper(Activity, \ a -> ActivityDetailViaClaimWorksheet.goInWorkspace(a.Claim, a))"
+      name="activityDetailHelper"
+      type="gw.api.activity.ActivityDetailHelper"/>
+    <ScreenRef
+      def="ActivityDetailScreen(Activity, activityDetailHelper, false)"
+      mode="canEdit ? &quot;editable&quot; : &quot;readonly&quot;"/>
+  </Worksheet>
+</PCF>

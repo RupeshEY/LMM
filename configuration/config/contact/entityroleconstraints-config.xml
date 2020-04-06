@@ -1,0 +1,561 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- WARNING: Some configurations in this file refer to internal contact roles. Do not remove configurations that make use of internal
+ContactRole types. If you are unsure which types are internal, review the Data Dictionary for the ContactRole for the definitive list.
+ -->
+<EntityRoleConstraintsConfig xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="entityroleconstraints-config.xsd">
+  <ContactRoleTypeConstraint contactRoleCode="ExternalAdjuster_Ext" contactSubtype="Company"/>
+  <ContactRoleTypeConstraint contactRoleCode="BureauLeadInsurerOrReinsurer_Ext" contactSubtype="Company"/>
+  <ContactRoleTypeConstraint contactRoleCode="Broker_Ext" contactSubtype="Company"/>
+  <ContactRoleTypeConstraint contactRoleCode="ECFInsurer_Ext" contactSubtype="Company"/>
+  <ContactRoleTypeConstraint contactRoleCode="ECFReinsurer_Ext" contactSubtype="Company"/>
+  <ContactRoleTypeConstraint contactRoleCode="ECFContractMarketInsurerOrReinsurer_Ext" contactSubtype="Company"/>
+  <ContactRoleTypeConstraint contactRoleCode="FirstIntakeDoctor" contactSubtype="Doctor"/>
+  <ContactRoleTypeConstraint contactRoleCode="PrimaryDoctor" contactSubtype="Doctor"/>
+  <ContactRoleTypeConstraint contactRoleCode="TowingAgcy" contactSubtype="AutoTowingAgcy"/>
+  <ContactRoleTypeConstraint contactRoleCode="altcontact" contactSubtype="Person"/>
+  <ContactRoleTypeConstraint contactRoleCode="arbitrationvenue" contactSubtype="LegalVenue"/>
+  <ContactRoleTypeConstraint contactRoleCode="arbitrator" contactSubtype="Adjudicator"/>
+  <ContactRoleTypeConstraint contactRoleCode="attorney" contactSubtype="Attorney"/>
+  <ContactRoleTypeConstraint contactRoleCode="casemgmtco" contactSubtype="Company"/>
+  <ContactRoleTypeConstraint contactRoleCode="casemgr" contactSubtype="Person"/>
+  <ContactRoleTypeConstraint contactRoleCode="claimant" contactSubtype="Person">
+    <ExceptionConstraint contactSubtype="Company" entityRef="Exposure"/>
+  </ContactRoleTypeConstraint>
+  <ContactRoleTypeConstraint contactRoleCode="claimantdep" contactSubtype="Person"/>
+  <ContactRoleTypeConstraint contactRoleCode="debrisremoval" contactSubtype="Company"/>
+  <ContactRoleTypeConstraint contactRoleCode="defenseattorney" contactSubtype="Attorney"/>
+  <ContactRoleTypeConstraint contactRoleCode="defensefirm" contactSubtype="LawFirm"/>
+  <ContactRoleTypeConstraint contactRoleCode="disbenprovider" contactSubtype="Company"/>
+  <ContactRoleTypeConstraint contactRoleCode="doctor" contactSubtype="Doctor"/>
+  <ContactRoleTypeConstraint contactRoleCode="doingbusinessas" contactSubtype="Company"/>
+  <ContactRoleTypeConstraint contactRoleCode="driver" contactSubtype="Person"/>
+  <ContactRoleTypeConstraint contactRoleCode="employer" contactSubtype="Company"/>
+  <ContactRoleTypeConstraint contactRoleCode="ems" contactSubtype="Company"/>
+  <ContactRoleTypeConstraint contactRoleCode="hearingjudge" contactSubtype="Adjudicator"/>
+  <ContactRoleTypeConstraint contactRoleCode="hearingvenue" contactSubtype="LegalVenue"/>
+  <ContactRoleTypeConstraint contactRoleCode="hospital" contactSubtype="MedicalCareOrg"/>
+  <ContactRoleTypeConstraint contactRoleCode="injured" contactSubtype="Person"/>
+  <ContactRoleTypeConstraint contactRoleCode="judge" contactSubtype="Adjudicator"/>
+  <ContactRoleTypeConstraint contactRoleCode="leadparalegal" contactSubtype="Person"/>
+  <ContactRoleTypeConstraint contactRoleCode="lodgingprovider" contactSubtype="Company"/>
+  <ContactRoleTypeConstraint contactRoleCode="maincontact" contactSubtype="Person"/>
+  <ContactRoleTypeConstraint contactRoleCode="mattermanager" contactSubtype="Person"/>
+  <ContactRoleTypeConstraint contactRoleCode="mediationvenue" contactSubtype="LegalVenue"/>
+  <ContactRoleTypeConstraint contactRoleCode="mediator" contactSubtype="Adjudicator"/>
+  <ContactRoleTypeConstraint contactRoleCode="nursecasemgr" contactSubtype="Person"/>
+  <ContactRoleTypeConstraint contactRoleCode="passenger" contactSubtype="Person"/>
+  <ContactRoleTypeConstraint contactRoleCode="pedestrian" contactSubtype="Person"/>
+  <ContactRoleTypeConstraint contactRoleCode="plaintiffatt" contactSubtype="Attorney"/>
+  <ContactRoleTypeConstraint contactRoleCode="plaintifffirm" contactSubtype="LawFirm"/>
+  <ContactRoleTypeConstraint contactRoleCode="repairshop" contactSubtype="AutoRepairShop"/>
+  <ContactRoleTypeConstraint contactRoleCode="salvageservice" contactSubtype="Company"/>
+  <ContactRoleTypeConstraint contactRoleCode="secdefattorney" contactSubtype="Attorney"/>
+  <ContactRoleTypeConstraint contactRoleCode="secdefensefirm" contactSubtype="LawFirm"/>
+  <ContactRoleTypeConstraint contactRoleCode="supervisor" contactSubtype="Person"/>
+  <ContactRoleTypeConstraint contactRoleCode="underwriter" contactSubtype="Person"/>
+  <ContactRoleTypeConstraint contactRoleCode="venue" contactSubtype="LegalVenue"/>
+  <ContactRoleTypeConstraint contactRoleCode="wccarrier" contactSubtype="Company"/>
+  <ContactRoleTypeConstraint contactRoleCode="witness" contactSubtype="Person"/>
+  <EntityRoleConstraint>
+    <EntityRef entityType="Claim">
+      <RoleRef contactRoleCode="ExternalAdjuster_Ext">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="BureauLeadInsurerOrReinsurer_Ext">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="Broker_Ext">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="ECFInsurer_Ext"/>
+      <RoleRef contactRoleCode="ECFReinsurer_Ext">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="ECFContractMarketInsurerOrReinsurer_Ext"/>
+      <RoleRef contactRoleCode="FirstIntakeDoctor">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="InsuredRep"/>
+      <RoleRef contactRoleCode="LawEnfcAgcy"/>
+      <RoleRef contactRoleCode="OccTherapist"/>
+      <RoleRef contactRoleCode="PhysTherapist"/>
+      <RoleRef contactRoleCode="PrimaryDoctor">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="TowingAgcy"/>
+      <RoleRef contactRoleCode="activityowner"/>
+      <RoleRef contactRoleCode="adverseparty"/>
+      <RoleRef contactRoleCode="altcontact"/>
+      <RoleRef contactRoleCode="arbitrationvenue"/>
+      <RoleRef contactRoleCode="arbitrator"/>
+      <RoleRef contactRoleCode="assessor"/>
+      <RoleRef contactRoleCode="attorney"/>
+      <RoleRef contactRoleCode="casemgmtco"/>
+      <RoleRef contactRoleCode="casemgr"/>
+      <RoleRef contactRoleCode="checkpayee"/>
+      <RoleRef contactRoleCode="formercheckpayee"/>
+      <RoleRef contactRoleCode="claimant">
+        <RoleConstraint constraintType="Exclusive"/>
+        <RoleConstraint constraintType="Required">
+          <AdditionalInfo propertyName="LossType" value="WC"/>
+        </RoleConstraint>
+        <RoleConstraint constraintType="Prohibited">
+          <AdditionalInfo propertyName="LossType" value="AUTO"/>
+          <AdditionalInfo propertyName="LossType" value="PR"/>
+          <AdditionalInfo propertyName="LossType" value="GL"/>
+        </RoleConstraint>
+      </RoleRef>
+      <RoleRef contactRoleCode="claimantdep"/>
+      <RoleRef contactRoleCode="codefendant"/>
+      <RoleRef contactRoleCode="collection">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="debrisremoval"/>
+      <RoleRef contactRoleCode="defendant"/>
+      <RoleRef contactRoleCode="defenseattorney"/>
+      <RoleRef contactRoleCode="defensefirm"/>
+      <RoleRef contactRoleCode="disbenprovider"/>
+      <RoleRef contactRoleCode="doctor"/>
+      <RoleRef contactRoleCode="employer"/>
+      <RoleRef contactRoleCode="ems"/>
+      <RoleRef contactRoleCode="filedby"/>
+      <RoleRef contactRoleCode="formeragent"/>
+      <RoleRef contactRoleCode="formercoveredparty"/>
+      <RoleRef contactRoleCode="formerdoingbusinessas"/>
+      <RoleRef contactRoleCode="formerexcludedparty"/>
+      <RoleRef contactRoleCode="formerinsured"/>
+      <RoleRef contactRoleCode="formerpolicyholder"/>
+      <RoleRef contactRoleCode="formerunderwriter"/>
+      <RoleRef contactRoleCode="hearingjudge"/>
+      <RoleRef contactRoleCode="hearingvenue"/>
+      <RoleRef contactRoleCode="hospital">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="injured"/>
+      <RoleRef contactRoleCode="judge"/>
+      <RoleRef contactRoleCode="judges"/>
+      <RoleRef contactRoleCode="lienholder"/>
+      <RoleRef contactRoleCode="lodgingprovider"/>
+      <RoleRef contactRoleCode="maincontact">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="mattermanager"/>
+      <RoleRef contactRoleCode="mediationvenue"/>
+      <RoleRef contactRoleCode="mediator"/>
+      <RoleRef contactRoleCode="negcontact"/>
+      <RoleRef contactRoleCode="nursecasemgr">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="other"/>
+      <RoleRef contactRoleCode="passenger"/>
+      <RoleRef contactRoleCode="pedestrian"/>
+      <RoleRef contactRoleCode="plaintiff"/>
+      <RoleRef contactRoleCode="plaintiffatt"/>
+      <RoleRef contactRoleCode="plaintifffirm"/>
+      <RoleRef contactRoleCode="plaintiffs"/>
+      <RoleRef contactRoleCode="recoverypayer"/>
+      <RoleRef contactRoleCode="recoveryonbehalfof"/>
+      <RoleRef contactRoleCode="repairshop"/>
+      <RoleRef contactRoleCode="reporter">
+        <RoleConstraint constraintType="Exclusive"/>
+        <RoleConstraint constraintType="Required"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="rsbenprovider"/>
+      <RoleRef contactRoleCode="salvageservice"/>
+      <RoleRef contactRoleCode="secdefattorney"/>
+      <RoleRef contactRoleCode="secdefensefirm"/>
+      <RoleRef contactRoleCode="secplaintiffatt"/>
+      <RoleRef contactRoleCode="secplaintifffirm"/>
+      <RoleRef contactRoleCode="subrogator">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="supervisor">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="vendor"/>
+      <RoleRef contactRoleCode="venue"/>
+      <RoleRef contactRoleCode="wccarrier"/>
+      <RoleRef contactRoleCode="witness"/>
+      <RoleRef contactRoleCode="salvagebuyer"/>
+      <RoleRef contactRoleCode="servicerequestparticipant"/>
+      <RoleRef contactRoleCode="servicerequestspecialist"/>
+    </EntityRef>
+    <EntityRef entityType="Evaluation">
+      <RoleRef contactRoleCode="InsuredRep"/>
+      <RoleRef contactRoleCode="agent"/>
+      <RoleRef contactRoleCode="altcontact"/>
+      <RoleRef contactRoleCode="assessor"/>
+      <RoleRef contactRoleCode="attorney"/>
+      <RoleRef contactRoleCode="casemgmtco"/>
+      <RoleRef contactRoleCode="casemgr"/>
+      <RoleRef contactRoleCode="doctor"/>
+      <RoleRef contactRoleCode="employer"/>
+      <RoleRef contactRoleCode="maincontact"/>
+      <RoleRef contactRoleCode="supervisor"/>
+      <RoleRef contactRoleCode="vendor"/>
+      <RoleRef contactRoleCode="venue"/>
+    </EntityRef>
+    <EntityRef entityType="Exposure">
+      <RoleRef contactRoleCode="FirstIntakeDoctor">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="LawEnfcAgcy">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="OccTherapist"/>
+      <RoleRef contactRoleCode="PhysTherapist"/>
+      <RoleRef contactRoleCode="PrimaryDoctor">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="activityowner"/>
+      <RoleRef contactRoleCode="adverseparty"/>
+      <RoleRef contactRoleCode="altcontact">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="arbitrationvenue"/>
+      <RoleRef contactRoleCode="arbitrator"/>
+      <RoleRef contactRoleCode="assessor"/>
+      <RoleRef contactRoleCode="attorney"/>
+      <RoleRef contactRoleCode="casemgmtco">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="casemgr">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="checkpayee"/>
+      <RoleRef contactRoleCode="claimant" generateProperty="none">
+        <RoleConstraint constraintType="Exclusive"/>
+        <RoleConstraint constraintType="Required">
+          <AdditionalInfo propertyName="ExposureType" value="BodilyInjuryDamage"/>
+          <AdditionalInfo propertyName="ExposureType" value="MedPay"/>
+          <AdditionalInfo propertyName="ExposureType" value="LossOfUseDamage"/>
+          <AdditionalInfo propertyName="ExposureType" value="PersonalPropertyDamage"/>
+          <AdditionalInfo propertyName="ExposureType" value="PropertyDamage"/>
+          <AdditionalInfo propertyName="ExposureType" value="VehicleDamage"/>
+          <AdditionalInfo propertyName="ExposureType" value="GeneralDamage"/>
+          <AdditionalInfo propertyName="ExposureType" value="PIPDamages"/>
+        </RoleConstraint>
+        <RoleConstraint constraintType="Prohibited">
+          <AdditionalInfo propertyName="ExposureType" value="WCInjuryDamage"/>
+          <AdditionalInfo propertyName="ExposureType" value="EmployerLiability"/>
+          <AdditionalInfo propertyName="ExposureType" value="LostWages"/>
+        </RoleConstraint>
+      </RoleRef>
+      <RoleRef contactRoleCode="claimantdep"/>
+      <RoleRef contactRoleCode="codefendant"/>
+      <RoleRef contactRoleCode="collection"/>
+      <RoleRef contactRoleCode="defendant"/>
+      <RoleRef contactRoleCode="defenseattorney"/>
+      <RoleRef contactRoleCode="defensefirm"/>
+      <RoleRef contactRoleCode="disbenprovider">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="doctor"/>
+      <RoleRef contactRoleCode="employer">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="filedby"/>
+      <RoleRef contactRoleCode="formeragent"/>
+      <RoleRef contactRoleCode="formercoveredparty"/>
+      <RoleRef contactRoleCode="formerdoingbusinessas"/>
+      <RoleRef contactRoleCode="formerexcludedparty"/>
+      <RoleRef contactRoleCode="formerinsured"/>
+      <RoleRef contactRoleCode="formerpolicyholder"/>
+      <RoleRef contactRoleCode="formerunderwriter"/>
+      <RoleRef contactRoleCode="hearingjudge"/>
+      <RoleRef contactRoleCode="hearingvenue"/>
+      <RoleRef contactRoleCode="hospital">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="injured"/>
+      <RoleRef contactRoleCode="judge"/>
+      <RoleRef contactRoleCode="judges"/>
+      <RoleRef contactRoleCode="lienholder"/>
+      <RoleRef contactRoleCode="maincontact"/>
+      <RoleRef contactRoleCode="mattermanager"/>
+      <RoleRef contactRoleCode="mediationvenue"/>
+      <RoleRef contactRoleCode="mediator"/>
+      <RoleRef contactRoleCode="negcontact"/>
+      <RoleRef contactRoleCode="nursecasemgr"/>
+      <RoleRef contactRoleCode="other"/>
+      <RoleRef contactRoleCode="plaintiff"/>
+      <RoleRef contactRoleCode="plaintiffatt"/>
+      <RoleRef contactRoleCode="plaintifffirm"/>
+      <RoleRef contactRoleCode="plaintiffs">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="recoverypayer"/>
+      <RoleRef contactRoleCode="recoveryonbehalfof"/>
+      <RoleRef contactRoleCode="reporter"/>
+      <RoleRef contactRoleCode="rsbenprovider"/>
+      <RoleRef contactRoleCode="salvageservice"/>
+      <RoleRef contactRoleCode="secdefattorney"/>
+      <RoleRef contactRoleCode="secdefensefirm"/>
+      <RoleRef contactRoleCode="secplaintiffatt"/>
+      <RoleRef contactRoleCode="secplaintifffirm"/>
+      <RoleRef contactRoleCode="subrogator"/>
+      <RoleRef contactRoleCode="supervisor">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="vendor"/>
+      <RoleRef contactRoleCode="venue"/>
+      <RoleRef contactRoleCode="wccarrier">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="witness"/>
+      <RoleRef contactRoleCode="salvagebuyer"/>
+    </EntityRef>
+    <EntityRef entityType="FixedPropertyIncident" superType="PropertyIncident">
+      <RoleRef contactRoleCode="AppraisalSource"/>
+      <RoleRef contactRoleCode="assessor"/>
+      <RoleRef contactRoleCode="fnolassessor">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="incidentowner">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="other"/>
+      <RoleRef contactRoleCode="witness"/>
+    </EntityRef>
+    <EntityRef entityType="DwellingIncident" superType="FixedPropertyIncident">
+      <RoleRef contactRoleCode="debrisremoval">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="ems">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="fnolassessor">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+    </EntityRef>
+    <EntityRef entityType="BaggageIncident" superType="MobilePropertyIncident">
+      <RoleRef contactRoleCode="AppraisalSource"/>
+      <RoleRef contactRoleCode="assessor"/>
+      <RoleRef contactRoleCode="fnolassessor">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="incidentowner">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="other"/>
+    </EntityRef>
+
+    <EntityRef entityType="Incident">
+      <RoleRef contactRoleCode="assessor"/>
+      <RoleRef contactRoleCode="incidentowner">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="other"/>
+      <RoleRef contactRoleCode="witness"/>
+    </EntityRef>
+    <EntityRef entityType="InjuryIncident" superType="Incident">
+      <RoleRef contactRoleCode="PrimaryDoctor">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="assessor"/>
+      <RoleRef contactRoleCode="injured">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="other"/>
+      <RoleRef contactRoleCode="witness"/>
+      <RoleRef contactRoleCode="incidentowner">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+    </EntityRef>
+    <EntityRef entityType="Matter">
+      <RoleRef contactRoleCode="InsuredRep"/>
+      <RoleRef contactRoleCode="LawEnfcAgcy"/>
+      <RoleRef contactRoleCode="altcontact"/>
+      <RoleRef contactRoleCode="arbitrationvenue">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="arbitrator">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="attorney"/>
+      <RoleRef contactRoleCode="casemgmtco"/>
+      <RoleRef contactRoleCode="casemgr"/>
+      <RoleRef contactRoleCode="claimant"/>
+      <RoleRef contactRoleCode="codefendant">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="defendant">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="defenseattorney">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="defensefirm">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="employer"/>
+      <RoleRef contactRoleCode="filedby">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="hearingjudge">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="hearingvenue">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="injured">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="judge">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="judges"/>
+      <RoleRef contactRoleCode="leadparalegal">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="lienholder">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="maincontact"/>
+      <RoleRef contactRoleCode="mattermanager">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="mediationvenue">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="mediator">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="nursecasemgr"/>
+      <RoleRef contactRoleCode="other"/>
+      <RoleRef contactRoleCode="plaintiff">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="plaintiffatt">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="plaintifffirm">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="plaintiffs"/>
+      <RoleRef contactRoleCode="secdefattorney"/>
+      <RoleRef contactRoleCode="secdefensefirm"/>
+      <RoleRef contactRoleCode="secplaintiffatt"/>
+      <RoleRef contactRoleCode="secplaintifffirm"/>
+      <RoleRef contactRoleCode="supervisor"/>
+      <RoleRef contactRoleCode="venue">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="wccarrier"/>
+      <RoleRef contactRoleCode="witness"/>
+    </EntityRef>
+    <EntityRef entityType="MobilePropertyIncident" superType="PropertyIncident">
+      <RoleRef contactRoleCode="AppraisalSource"/>
+      <RoleRef contactRoleCode="assessor"/>
+      <RoleRef contactRoleCode="fnolassessor">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="other"/>
+      <RoleRef contactRoleCode="witness"/>
+      <RoleRef contactRoleCode="incidentowner">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="recoveryagent">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+    </EntityRef>
+    <EntityRef entityType="Negotiation">
+      <RoleRef contactRoleCode="InsuredRep"/>
+      <RoleRef contactRoleCode="adverseparty"/>
+      <RoleRef contactRoleCode="altcontact"/>
+      <RoleRef contactRoleCode="attorney"/>
+      <RoleRef contactRoleCode="casemgr"/>
+      <RoleRef contactRoleCode="filedby"/>
+      <RoleRef contactRoleCode="maincontact"/>
+      <RoleRef contactRoleCode="mediationvenue"/>
+      <RoleRef contactRoleCode="mediator"/>
+      <RoleRef contactRoleCode="negcontact">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="other"/>
+    </EntityRef>
+    <EntityRef entityType="Policy">
+      <RoleRef contactRoleCode="InsuredRep"/>
+      <RoleRef contactRoleCode="agent">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="altcontact"/>
+      <RoleRef contactRoleCode="coveredparty"/>
+      <RoleRef contactRoleCode="doingbusinessas">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="excludedparty"/>
+      <RoleRef contactRoleCode="formeragent"/>
+      <RoleRef contactRoleCode="formercoveredparty"/>
+      <RoleRef contactRoleCode="formerdoingbusinessas"/>
+      <RoleRef contactRoleCode="formerexcludedparty"/>
+      <RoleRef contactRoleCode="formerinsured"/>
+      <RoleRef contactRoleCode="formerpolicyholder"/>
+      <RoleRef contactRoleCode="formerunderwriter"/>
+      <RoleRef contactRoleCode="insured">
+        <RoleConstraint constraintType="Exclusive"/>
+        <RoleConstraint constraintType="Required"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="maincontact"/>
+      <RoleRef contactRoleCode="other"/>
+      <RoleRef contactRoleCode="policyholder">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="underwriter">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="wccarrier"/>
+    </EntityRef>
+    <EntityRef entityType="PropertyIncident" superType="Incident">
+      <RoleRef contactRoleCode="AppraisalSource"/>
+      <RoleRef contactRoleCode="assessor"/>
+      <RoleRef contactRoleCode="fnolassessor">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="other"/>
+      <RoleRef contactRoleCode="witness"/>
+      <RoleRef contactRoleCode="incidentowner">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+    </EntityRef>
+    <EntityRef entityType="VehicleIncident" superType="MobilePropertyIncident">
+      <RoleRef contactRoleCode="AppraisalSource"/>
+      <RoleRef contactRoleCode="InsuredRep">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="TowingAgcy">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="assessor"/>
+      <RoleRef contactRoleCode="driver">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="fnolassessor">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="incidentowner">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="other"/>
+      <RoleRef contactRoleCode="passenger"/>
+      <RoleRef contactRoleCode="repairshop">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="witness"/>
+      <RoleRef contactRoleCode="recoveryagent">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="salvagebuyer">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+      <RoleRef contactRoleCode="salvageservice">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+    </EntityRef>
+    <EntityRef entityType="LivingExpensesIncident" superType="PropertyIncident">
+      <RoleRef contactRoleCode="lodgingprovider">
+        <RoleConstraint constraintType="Exclusive"/>
+      </RoleRef>
+    </EntityRef>
+  </EntityRoleConstraint>
+</EntityRoleConstraintsConfig>

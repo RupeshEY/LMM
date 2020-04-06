@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="% of Reserve Change from Initial Reserve"
+  entity="PercentReserveChangeClaimMetric"
+  final="false"
+  priority="7"
+  supertype="PercentClaimMetric">
+  <implementsInterface
+    iface="gw.api.metric.MetricMethods"
+    impl="gw.claim.metric.financials.PercentReserveChangeClaimMetricMethodsImpl"/>
+  <column
+    desc="Initial Reserve Amount of the Claim."
+    name="InitialReserve"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="precision"
+      value="20"/>
+    <columnParam
+      name="scale"
+      value="4"/>
+  </column>
+  <column
+    desc="Total Reserve Amount change"
+    name="TotalReserveChange"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="precision"
+      value="20"/>
+    <columnParam
+      name="scale"
+      value="4"/>
+  </column>
+</subtype>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="true"
+    canVisit="perm.Claim.view(claim) and perm.Evaluation.view(claim) and perm.System.viewclaimevals"
+    id="ClaimEvaluations"
+    title="DisplayKey.get(&quot;Web.ClaimPlanOfAction.Evaluations&quot;)">
+    <LocationEntryPoint
+      signature="ClaimEvaluations(claim : Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Screen
+      id="ClaimEvaluationsScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="NewEvaluation.go(claim)"
+          hideIfEditable="true"
+          id="CE_Add"
+          label="DisplayKey.get(&quot;Web.ClaimPlanOfAction.Evaluations.NewEvaluation&quot;)"
+          shortcut="N"
+          visible="perm.Claim.createevaluation(claim)"/>
+        <IteratorButtons
+          addVisible="false"
+          iterator="EditableEvaluationsLV.EditableEvaluationsLV"
+          removeLabel="DisplayKey.get(&quot;Button.Delete&quot;)"
+          removeVisible="perm.Evaluation.edit(claim)"/>
+      </Toolbar>
+      <ListDetailPanel
+        lockWhileEditing="true"
+        selectionName="evaluation"
+        selectionType="Evaluation">
+        <PanelRef
+          def="EditableEvaluationsLV(claim.Evaluations, claim)"/>
+        <CardViewPanel>
+          <Card
+            id="DetailViewTitleCard"
+            title="DisplayKey.get(&quot;Web.ClaimPlanOfAction.Evaluations.DetailViewTitle&quot;, evaluation)">
+            <PanelRef
+              def="ClaimEvaluationDetailsDV(evaluation)"
+              mode="claim.LossType">
+              <Toolbar>
+                <EditButtons
+                  editVisible="perm.Evaluation.edit(claim)"/>
+              </Toolbar>
+            </PanelRef>
+          </Card>
+        </CardViewPanel>
+      </ListDetailPanel>
+    </Screen>
+  </Page>
+</PCF>

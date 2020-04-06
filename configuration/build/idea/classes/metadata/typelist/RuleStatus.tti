@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Business Rule Status"
+  name="RuleStatus"
+  platform="true">
+  <typecode
+    code="draft"
+    desc="The rule is being developed"
+    name="Draft"
+    priority="1"/>
+  <typecode
+    code="staged"
+    desc="The rule is being tested"
+    name="Staged"
+    priority="20"/>
+  <typecode
+    code="approved"
+    desc="The rule is approved for production"
+    name="Approved"
+    priority="50"/>
+</typelist>

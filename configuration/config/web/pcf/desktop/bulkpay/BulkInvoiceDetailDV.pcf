@@ -1,0 +1,351 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    editable="!bulkInvoice.PendingItemValidation"
+    id="BulkInvoiceDetailDV">
+    <Require
+      name="bulkInvoice"
+      type="BulkInvoice"/>
+    <Require
+      name="payeeLinkStatus"
+      type="gw.api.contact.ContactSystemLinkStatus"/>
+    <Require
+      name="paymentMethodHelper"
+      type="gw.api.financials.PaymentMethodHelper"/>
+    <Require
+      name="showMailingAddressFields"
+      type="org.apache.commons.lang3.mutable.MutableBoolean"/>
+    <Variable
+      initialValue="bulkInvoice.PayeeChangeable"
+      name="isPayeeChangeable"
+      type="boolean"/>
+    <Variable
+      initialValue="bulkInvoice.hasApprovalHistory()"
+      name="invoiceHasApprovalHistory"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="bulkInvoice.hasArchivedClaims()"
+      name="invoiceHasArchivedClaims"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Basics&quot;)"/>
+      <TextInput
+        editable="true"
+        id="InvoiceNumber"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.InvoiceNumber&quot;)"
+        numCols="15"
+        value="bulkInvoice.InvoiceNumber"/>
+      <DateInput
+        editable="true"
+        id="ReceivedDate"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.DateReceived&quot;)"
+        requestValidationExpression="((gw.api.util.DateUtil.compareIgnoreTime(gw.api.util.DateUtil.currentDate(), (VALUE)) &lt; 0) ? DisplayKey.get(&quot;Web.Financials.BulkPay.Error.ReceivedDateAfterCurrentDate&quot;) : null)"
+        value="bulkInvoice.ReceivedDate"/>
+      <BooleanRadioInput
+        editable="true"
+        falseLabel="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.EnterIndividualAmounts&quot;)"
+        id="SplitEqually"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.SplitEqually&quot;)"
+        stacked="true"
+        trueLabel="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.DistributeEvenly&quot;)"
+        value="bulkInvoice.SplitEqually">
+        <PostOnChange
+          onChange="bulkInvoice.recalculateSplitAmounts(); if (!bulkInvoice.SplitEqually) {bulkInvoice.BulkInvoiceAmountComponent.Amount = java.math.BigDecimal.ZERO}"/>
+      </BooleanRadioInput>
+      <CurrencyInput
+        available="true"
+        editable="bulkInvoice.SplitEqually"
+        formatType="currency"
+        id="TotalAmount"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.AmountToDistribute&quot;)"
+        numCols="15"
+        required="true"
+        value="bulkInvoice.BulkInvoiceAmountComponent"
+        valueType="gw.api.financials.IMutableMoney"
+        visible="bulkInvoice.SplitEqually">
+        <PostOnChange
+          onChange="bulkInvoice.recalculateSplitAmounts()"/>
+      </CurrencyInput>
+      <TypeKeyInput
+        editable="true"
+        id="Currency"
+        label="DisplayKey.get(&quot;Financials.Multicurrency.Currency&quot;)"
+        value="bulkInvoice.Currency"
+        valueType="typekey.Currency"
+        visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <BooleanRadioInput
+        available="bulkInvoice.Currency != gw.api.util.CurrencyUtil.getReportingCurrency()"
+        editable="perm.ExchangeRate.edit"
+        falseLabel="DisplayKey.get(&quot;Financials.Multicurrency.Automatic&quot;)"
+        id="ExchangeRateOverride"
+        label="DisplayKey.get(&quot;Financials.Multicurrency.ExchangeRateMode&quot;)"
+        trueLabel="DisplayKey.get(&quot;Financials.Multicurrency.Manual&quot;)"
+        value="bulkInvoice.OverrideTransToReportingExchangeRate"
+        visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode() and bulkInvoice.Currency != gw.api.util.CurrencyUtil.getReportingCurrency()">
+        <PostOnChange/>
+      </BooleanRadioInput>
+      <TextInput
+        available="bulkInvoice.OverrideTransToReportingExchangeRate"
+        editable="true"
+        format="getExchangeRateFormatPattern( bulkInvoice.TransToReportingExchangeRate )"
+        formatType="exactNumber"
+        id="ExchangeRate"
+        label="DisplayKey.get(&quot;Financials.Multicurrency.ExchangeRate&quot;)"
+        numCols="8"
+        required="true"
+        value="bulkInvoice.TransToReportingExchangeRateRate"
+        valueType="java.math.BigDecimal"
+        visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode() and bulkInvoice.Currency != gw.api.util.CurrencyUtil.getReportingCurrency()">
+        <PostOnChange/>
+      </TextInput>
+      <TextInput
+        editable="bulkInvoice.OverrideTransToReportingExchangeRate"
+        id="RateSet_Description"
+        label="DisplayKey.get(&quot;Financials.Multicurrency.RateSetDescription&quot;)"
+        value="bulkInvoice.TransToReportingExchangeRate.ExchangeRateSet.Description"
+        visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode() and bulkInvoice.Currency != gw.api.util.CurrencyUtil.getReportingCurrency()"/>
+      <DateInput
+        id="RateSet_Date"
+        label="DisplayKey.get(&quot;Financials.Multicurrency.ExchangeRateDate&quot;)"
+        value="bulkInvoice.TransToReportingExchangeRate.UpdateTime"
+        visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode() and bulkInvoice.Currency != gw.api.util.CurrencyUtil.getReportingCurrency()"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Status&quot;)"/>
+      <TypeKeyInput
+        id="Status"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Status&quot;)"
+        value="bulkInvoice.Status"
+        valueType="typekey.BulkInvoiceStatus"/>
+      <DateInput
+        id="ApprovalDate"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.DateApproved&quot;)"
+        value="bulkInvoice.ApprovalDate"/>
+      <CurrencyInput
+        formatType="currency"
+        id="TotalApprovedAmount"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.TotalApprovedAmount&quot;)"
+        value="bulkInvoice.ApprovedCurrencyAmount"
+        valueType="gw.api.financials.CurrencyAmountPair"/>
+      <DateInput
+        id="IssueDate"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.IssueDate&quot;)"
+        value="bulkInvoice.IssueDate"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.InvoiceItemDefaults&quot;)"/>
+      <TypeKeyInput
+        editable="true"
+        id="DefaultCostType"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.DefaultCostType&quot;)"
+        value="bulkInvoice.DefaultCostType"
+        valueType="typekey.CostType">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <TypeKeyInput
+        editable="true"
+        id="DefaultCostCategory"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.DefaultCostCategory&quot;)"
+        value="bulkInvoice.DefaultCostCategory"
+        valueType="typekey.CostCategory">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <TypeKeyInput
+        editable="true"
+        id="DefaultPaymentType"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.DefaultPaymentType&quot;)"
+        value="bulkInvoice.DefaultPaymentType"
+        valueType="typekey.PaymentType">
+        <PostOnChange/>
+      </TypeKeyInput>
+    </InputColumn>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.CheckDetails&quot;)"/>
+      <Label
+        label="payeeLinkStatus.LinkStatusMessage"
+        visible="!bulkInvoice.New"/>
+      <Label
+        hideIfReadOnly="true"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Alert.PayeeNotChangeable&quot;)"
+        visible="!isPayeeChangeable"/>
+      <InputSetRef
+        def="PaymentMethodInputSet(bulkInvoice, paymentMethodHelper, isPayeeChangeable, showMailingAddressFields)"/>
+      <TypeKeyInput
+        editable="true"
+        id="Reportability"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Reportability&quot;)"
+        value="bulkInvoice.Reportability"
+        valueType="typekey.ReportabilityType"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Instructions&quot;)"/>
+      <DateInput
+        editable="true"
+        id="ScheduledSendDate"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.DateToSend&quot;)"
+        required="true"
+        value="bulkInvoice.ScheduledSendDate"/>
+      <TypeKeyInput
+        editable="true"
+        id="CheckInstructions"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.CheckInstructions&quot;)"
+        value="bulkInvoice.CheckInstructions"
+        valueType="typekey.CheckHandlingInstructions"/>
+      <TextInput
+        editable="true"
+        id="Memo"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Memo&quot;)"
+        numCols="20"
+        value="bulkInvoice.Memo"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Comments&quot;)"/>
+      <TextInput
+        id="Comments"
+        labelAbove="true"
+        value="bulkInvoice.Comments"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputDivider/>
+      <TextInput
+        boldLabel="true"
+        id="BulkInvoiceValidLabel"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Validation.IsValid&quot;, bulkInvoice.LastValidatedDate.formatTime(SHORT),bulkInvoice.LastValidatedDate.formatDate(MEDIUM))"
+        value="null"
+        valueType="java.lang.Object"
+        visible="bulkInvoice.Valid"/>
+      <TextInput
+        boldLabel="true"
+        id="BulkInvoiceInvalidLabel"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Validation.IsNotValid&quot;, bulkInvoice.LastValidatedDate.formatTime(SHORT),bulkInvoice.LastValidatedDate.formatDate(MEDIUM))"
+        value="null"
+        valueType="java.lang.Object"
+        visible="bulkInvoice.LastValidatedDate != null and !bulkInvoice.Valid and bulkInvoice.ValidationAlerts.length &gt; 0"/>
+      <ListViewInput
+        visible="bulkInvoice.LastValidatedDate != null and !bulkInvoice.Valid and bulkInvoice.ValidationAlerts.length &gt; 0">
+        <Toolbar/>
+        <ListViewPanel
+          id="BulkInvoiceValidationAlertsLV">
+          <RowIterator
+            editable="false"
+            elementName="validationAlert"
+            pageSize="5"
+            value="bulkInvoice.ValidationAlerts"
+            valueType="entity.BIValidationAlert[]">
+            <Row>
+              <TypeKeyCell
+                id="AlertType"
+                label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Validation.AlertType&quot;)"
+                value="validationAlert.AlertType"
+                valueType="typekey.BIValidationAlertType"/>
+              <TextCell
+                id="AlertMsg"
+                label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Validation.AlertMsg&quot;)"
+                value="validationAlert.AlertMsg"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </ListViewInput>
+      <TextInput
+        boldLabel="true"
+        id="BulkInvoiceNeedsValidationLabel"
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Validation.NeedsValidation&quot;)"
+        value="null"
+        valueType="java.lang.Object"
+        visible="!bulkInvoice.Valid and (bulkInvoice.ValidationAlerts.length == 0 or bulkInvoice.LastValidatedDate == null)"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Approval.History&quot;)"
+        visible="!bulkInvoice.New"/>
+      <TextInput
+        id="NoApprovalHistory"
+        labelAbove="true"
+        value="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Approval.NoHistory&quot;)"
+        visible="not bulkInvoice.New and not invoiceHasApprovalHistory and not invoiceHasArchivedClaims"/>
+      <ListViewInput
+        visible="invoiceHasApprovalHistory">
+        <Toolbar/>
+        <ListViewPanel
+          id="BulkInvoiceApprovalHistoryLV">
+          <RowIterator
+            editable="false"
+            elementName="approvalHistory"
+            pageSize="5"
+            value="bulkInvoice.ApprovalHistory"
+            valueType="java.util.List&lt;entity.Activity&gt;">
+            <Row>
+              <DateCell
+                dateFormat="short"
+                id="ApprovalHistory_Date"
+                label="DisplayKey.get(&quot;LV.Financials.ApprovalHistory.Listview.ApprovalHistory.Date&quot;)"
+                sortDirection="descending"
+                sortOrder="1"
+                timeFormat="short"
+                value="approvalHistory.CloseDate"/>
+              <TextCell
+                id="User"
+                label="DisplayKey.get(&quot;LV.Financials.ApprovalHistory.User&quot;)"
+                value="getApprovalUserOrGroupString( approvalHistory )"/>
+              <TextCell
+                id="Approved"
+                label="DisplayKey.get(&quot;LV.Financials.ApprovalHistory.Approved&quot;)"
+                value="getApprovalString(approvalHistory)"/>
+              <TextCell
+                id="ApprovalIssue"
+                label="DisplayKey.get(&quot;LV.Financials.ApprovalHistory.ApprovalIssue&quot;)"
+                value="approvalHistory.ApprovalIssue"/>
+              <TextCell
+                id="ApprovalRationale"
+                label="DisplayKey.get(&quot;LV.Financials.ApprovalHistory.ApprovalRationale&quot;)"
+                value="approvalHistory.ApprovalRationale"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </ListViewInput>
+      <TextInput
+        id="ArchivedClaimsWarning"
+        value="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Approval.ArchivedClaims&quot;)"
+        visible="invoiceHasArchivedClaims"/>
+    </InputFooterSection>
+    <Code><![CDATA[function getExchangeRateFormatPattern( rate : ExchangeRate ) : String {
+  return "1 " + rate.BaseCurrency.DisplayName + " = #.###### " + rate.PriceCurrency.DisplayName;
+}
+
+function getApprovalUserOrGroupString(approvalHistory : Activity) : String {
+  var closeUser = approvalHistory.CloseUser
+  var assignedUser = approvalHistory.AssignedUser
+  var assignedGroup = approvalHistory.AssignedGroup
+  
+  if( closeUser != null )  {
+    return closeUser.DisplayName
+  } 
+  else if( assignedUser != null ) {
+    return assignedUser.DisplayName
+  }  
+  else if( assignedGroup != null ) {
+    return assignedGroup.DisplayName
+  } 
+  else {
+    return ""
+  }
+}
+
+function getApprovalString( activity : Activity ) : String {
+  if (activity.Approved == null) {
+    return DisplayKey.get("Java.ApprovalHistory.PendingApproval")
+  } else if (activity.Approved) {
+    return DisplayKey.get("Java.ApprovalHistory.Approved")
+  } else {
+    return DisplayKey.get("Java.ApprovalHistory.Rejected")
+  }
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,28 @@
+package rules.Assignment.DefaultGroupActivityAssignmentRules_dir
+
+@gw.rules.RuleName("DGA05000 - Assign to Subro group")
+internal class DGA05000AssigntoSubrogroup {
+  static function doCondition(activity : entity.Activity) : boolean {
+    
+/*start00rule*/
+return activity.ActivityPattern.Code == "subro_check"
+/*end00rule*/
+
+  }
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+
+/*start00rule*/
+var userRoleAssignments = activity.Claim.RoleAssignments.where(
+    \ contact -> contact.Role == TC_SUBROGATIONOWNER)
+	
+if (not userRoleAssignments.IsEmpty) {
+  var assignment = userRoleAssignments.last()
+  if (activity.CurrentAssignment.assign(assignment.AssignedGroup, assignment.AssignedUser)) {
+    {actions.exit()}
+  }
+}
+/*end00rule*/
+
+  }
+}

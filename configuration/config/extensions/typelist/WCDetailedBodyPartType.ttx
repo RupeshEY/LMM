@@ -1,0 +1,502 @@
+<?xml version="1.0"?>
+<!-- Based on the WCIO (Workers' Comp Insurance Organizations) "Part of Body" Injury Description Codes  DEPRECATED: Use DetailedBodyPartType instead. -->
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="WCDetailedBodyPartType">
+  <typecode
+    code="10"
+    desc="Multiple head injuries - Any combination of head injuries"
+    name="Multiple head injuries"
+    priority="1">
+    <category
+      code="head"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="11"
+    desc="Skull"
+    name="Skull"
+    priority="2">
+    <category
+      code="head"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="12"
+    desc="Brain"
+    name="Brain"
+    priority="3">
+    <category
+      code="head"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="13"
+    desc="Ear(s) - includes: hearing, inside eardrum"
+    name="Ear(s)"
+    priority="4">
+    <category
+      code="head"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="14"
+    desc="Eye(s) - includes: optic nerves, vision, eye lids"
+    name="Eye(s)"
+    priority="5">
+    <category
+      code="head"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="15"
+    desc="Nose - includes: nasal passage, sinus, sense of smell"
+    name="Nose"
+    priority="6">
+    <category
+      code="head"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="16"
+    desc="Teeth"
+    name="Teeth"
+    priority="7">
+    <category
+      code="head"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="17"
+    desc="Mouth - includes: lips, tongue, throat, taste"
+    name="Mouth"
+    priority="8">
+    <category
+      code="head"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="18"
+    desc="Soft tissue (head)"
+    name="Soft tissue (head)"
+    priority="9">
+    <category
+      code="head"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="19"
+    desc="Facial bones - includes: jaw"
+    name="Facial bones"
+    priority="10">
+    <category
+      code="head"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="20"
+    desc="Multiple neck injuries - any combination of neck injuries"
+    name="Multiple neck injuries"
+    priority="11">
+    <category
+      code="neck"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="21"
+    desc="Vertebrae - includes: spinal column bone, cervical segment"
+    name="Vertebrae"
+    priority="12">
+    <category
+      code="neck"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="22"
+    desc="Disc (neck) - includes: spinal column cartilage, cervical segment"
+    name="Disc (neck)"
+    priority="13">
+    <category
+      code="neck"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="23"
+    desc="Spinal cord (neck) - includes: nerve tissue, cervical segment"
+    name="Spinal cord (neck)"
+    priority="14">
+    <category
+      code="neck"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="24"
+    desc="Larynx - includes: cartilage, vocal cords"
+    name="Larynx"
+    priority="15">
+    <category
+      code="neck"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="25"
+    desc="Soft tissue (neck) - Other than larynx or trachea"
+    name="Soft tissue (neck)"
+    priority="16">
+    <category
+      code="neck"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="26"
+    desc="Trachea"
+    name="Trachea"
+    priority="17">
+    <category
+      code="neck"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="30"
+    desc="Multiple upper extremities - any combination of arm and hand injuries"
+    name="Multiple upper extremities"
+    priority="18">
+    <category
+      code="upper"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="31"
+    desc="Upper arm - humorous and corresponding muscles, excluding clavicle and scapula"
+    name="Upper arm"
+    priority="19">
+    <category
+      code="upper"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="32"
+    desc="Elbow - radial head"
+    name="Elbow"
+    priority="20">
+    <category
+      code="upper"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="33"
+    desc="Lower arm - forearm: radius, ulna, and corresponding muscle"
+    name="Lower arm"
+    priority="21">
+    <category
+      code="upper"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="34"
+    desc="Wrist - carpals and corresponding muscles"
+    name="Wrist"
+    priority="22">
+    <category
+      code="upper"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="35"
+    desc="Hand - metacarpals and corresponding muscles, excluding wrists and fingers"
+    name="Hand"
+    priority="23">
+    <category
+      code="upper"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="36"
+    desc="Finger(s) - other than thumb and corresponding muscles"
+    name="Finger(s)"
+    priority="24">
+    <category
+      code="upper"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="37"
+    desc="Thumb"
+    name="Thumb"
+    priority="25">
+    <category
+      code="upper"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="38"
+    desc="Shoulder(s) - armpit, rotator cuff, trapezius, clavicle, scapula"
+    name="Shoulder(s)"
+    priority="26">
+    <category
+      code="upper"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="39"
+    desc="Wrist(s) and hand(s)"
+    name="Wrist(s) and Hand(s)"
+    priority="27">
+    <category
+      code="upper"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="40"
+    desc="Multiple trunk injuries - any combination of trunk injuries"
+    name="Multiple trunk injuries"
+    priority="28">
+    <category
+      code="trunk"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="41"
+    desc="Upper back area - (thoracic area) upper back muscles, excluding vertebrae, disc, spinal cord"
+    name="Upper back area"
+    priority="29">
+    <category
+      code="trunk"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="42"
+    desc="Lower back area - (lumbar area) lower back muscles, excluding sacrum, coccyx, pelvis, vertebrae, disc, spinal cord"
+    name="Lower back area"
+    priority="30">
+    <category
+      code="trunk"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="43"
+    desc="Disc (back) - spinal column cartilage other than cervical segment"
+    name="Disc (back)"
+    priority="31">
+    <category
+      code="trunk"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="44"
+    desc="Chest - including: ribs, sternum, soft tissue"
+    name="Chest"
+    priority="32">
+    <category
+      code="trunk"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="45"
+    desc="Sacrum and coccyx - first nine vertebrae"
+    name="Sacrum and coccyx"
+    priority="33">
+    <category
+      code="trunk"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="46"
+    desc="Pelvis"
+    name="Pelvis"
+    priority="34">
+    <category
+      code="trunk"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="47"
+    desc="Spinal cord (back) - nerve tissue other than cervical segment"
+    name="Spinal cord (back)"
+    priority="35">
+    <category
+      code="trunk"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="48"
+    desc="Internal organs - other than heart and lungs"
+    name="Internal organs"
+    priority="36">
+    <category
+      code="trunk"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="49"
+    desc="Heart"
+    name="Heart"
+    priority="37">
+    <category
+      code="trunk"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="50"
+    desc="Multiple lower appendages - any combination of leg and foot injuries"
+    name="Multiple lower appendages"
+    priority="42">
+    <category
+      code="lower"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="51"
+    desc="Hip"
+    name="Hip"
+    priority="43">
+    <category
+      code="lower"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="52"
+    desc="Upper leg - femur and corresponding muscles"
+    name="Upper leg"
+    priority="44">
+    <category
+      code="lower"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="53"
+    desc="Knee - Patella"
+    name="Knee"
+    priority="45">
+    <category
+      code="lower"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="54"
+    desc="Lower leg - tibia, fibula and corresponding muscles"
+    name="Lower leg"
+    priority="46">
+    <category
+      code="lower"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="55"
+    desc="Ankle - tarsals"
+    name="Ankle"
+    priority="47">
+    <category
+      code="lower"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="56"
+    desc="Foot - metatarsals, heel, Achilles tendon and corresponding muscles, excluding ankle or toes"
+    name="Foot"
+    priority="48">
+    <category
+      code="lower"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="57"
+    desc="Toes"
+    name="Toes"
+    priority="49">
+    <category
+      code="lower"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="58"
+    desc="Great toe"
+    name="Great toe"
+    priority="50">
+    <category
+      code="lower"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="60"
+    desc="Lungs"
+    name="Lungs"
+    priority="38">
+    <category
+      code="trunk"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="61"
+    desc="Abdomen including groin - excluding injury to internal organs"
+    name="Abdomen including groin"
+    priority="39">
+    <category
+      code="trunk"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="62"
+    desc="Buttocks - Soft tissue"
+    name="Buttocks"
+    priority="40">
+    <category
+      code="trunk"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="63"
+    desc="Lumbar or sacral vertebrae - bone portion of the spinal column"
+    name="Lumbar or sacral vertebrae"
+    priority="41">
+    <category
+      code="trunk"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="64"
+    desc="Artificial appliance - braces, etc."
+    name="Artificial appliance"
+    priority="51">
+    <category
+      code="multiple"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="65"
+    desc="Unclassified - insufficient info to properly identify"
+    name="Unclassified - insufficient info to properly identify"
+    priority="52">
+    <category
+      code="multiple"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="66"
+    desc="No physical injury - mental disorder"
+    name="No physical injury"
+    priority="53">
+    <category
+      code="multiple"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="90"
+    desc="Multiple body parts - applies when more than one major body part has been affect (such as an arm and a leg)"
+    name="Multiple body parts"
+    priority="54">
+    <category
+      code="multiple"
+      typelist="WCBodyPartType"/>
+  </typecode>
+  <typecode
+    code="91"
+    desc="Body systems (with no external injury) - applies to the functioning of an entire body system without external injury (e.g. poisoning, inflammation)"
+    name="Body systems (with no external injury)"
+    priority="55">
+    <category
+      code="multiple"
+      typelist="WCBodyPartType"/>
+  </typecode>
+</typelistextension>

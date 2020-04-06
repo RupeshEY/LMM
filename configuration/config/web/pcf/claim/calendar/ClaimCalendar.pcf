@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="(Claim.State != ClaimState.TC_DRAFT)"
+    id="ClaimCalendar"
+    title="DisplayKey.get(&quot;Web.ClaimCalendar.Title&quot;)">
+    <LocationEntryPoint
+      signature="ClaimCalendar(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="ClaimCalendarScreen">
+      <Toolbar/>
+      <Calendar
+        calendarSource="new gw.api.calendar.MyClaimCalendarActivitySource(Claim)"
+        context="/MyClaimCalendar"/>
+    </Screen>
+  </Page>
+</PCF>

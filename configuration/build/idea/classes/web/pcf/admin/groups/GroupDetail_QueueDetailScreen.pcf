@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="GroupDetail_QueueDetailScreen">
+    <Require
+      name="AssignableQueue"
+      type="AssignableQueue"/>
+    <Require
+      name="Group"
+      type="Group"/>
+    <Toolbar>
+      <EditButtons/>
+    </Toolbar>
+    <PanelRef
+      def="AssignableQueueDetailDV(AssignableQueue, Group)"/>
+  </Screen>
+</PCF>

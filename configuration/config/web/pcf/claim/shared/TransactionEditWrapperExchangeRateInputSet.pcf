@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="TransactionEditWrapperExchangeRateInputSet"
+    visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode() and transaction.Currency != transaction.ReservingCurrency">
+    <Require
+      name="transactionEditWrapper"
+      type="TransactionEditWrapper"/>
+    <Variable
+      initialValue="transactionEditWrapper.Transaction"
+      name="transaction"
+      type="Transaction"/>
+    <BooleanRadioInput
+      editable="perm.ExchangeRate.edit"
+      falseLabel="DisplayKey.get(&quot;Web.Claim.TransactionEditWrapperExchangeRateInputSet.Automatic&quot;)"
+      id="ManualOrAutomatic"
+      label="DisplayKey.get(&quot;Web.Claim.TransactionEditWrapperExchangeRateInputSet.ExchangeRateMode&quot;)"
+      trueLabel="DisplayKey.get(&quot;Web.Claim.TransactionEditWrapperExchangeRateInputSet.Manual&quot;)"
+      value="transactionEditWrapper.OverrideExchangeRate">
+      <PostOnChange/>
+    </BooleanRadioInput>
+    <TextInput
+      editable="transaction.OverrideTransToReservingExchangeRate"
+      format="var rate = transaction.TransToReservingExchangeRate; return &quot;1 &quot; + rate.BaseCurrency.DisplayName + &quot; = #.###### &quot; + rate.PriceCurrency.DisplayName;"
+      formatType="exactNumber"
+      id="ExchangeRate"
+      label="DisplayKey.get(&quot;Web.Claim.TransactionEditWrapperExchangeRateInputSet.ExchangeRate&quot;)"
+      numCols="8"
+      value="transactionEditWrapper.ExchangeRateRate"
+      valueType="java.math.BigDecimal">
+      <PostOnChange/>
+    </TextInput>
+    <TextInput
+      editable="transaction.OverrideTransToReservingExchangeRate"
+      id="Description"
+      label="DisplayKey.get(&quot;Web.Claim.TransactionEditWrapperExchangeRateInputSet.RateSetDescription&quot;)"
+      value="transaction.TransToReservingExchangeRate.ExchangeRateSet.Description"/>
+    <DateInput
+      id="Date"
+      label="DisplayKey.get(&quot;Web.Claim.TransactionEditWrapperExchangeRateInputSet.ExchangeRateDate&quot;)"
+      value="transaction.TransToReservingExchangeRate.ExchangeRateSet.EffectiveDate"/>
+  </InputSet>
+</PCF>

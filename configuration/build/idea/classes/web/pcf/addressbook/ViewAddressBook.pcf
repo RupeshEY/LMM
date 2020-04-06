@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Forward
+    action="AddressBookContactDetailPopup.push(externalContactSource.wrap(linkedContact), allowEditInAddressBook)"
+    id="ViewAddressBook">
+    <LocationEntryPoint
+      signature="ViewAddressBook(linkedContact : Contact)"/>
+    <LocationEntryPoint
+      signature="ViewAddressBook(linkedContact : Contact, allowEditInAddressBook : boolean)"/>
+    <Variable
+      name="linkedContact"
+      type="Contact"/>
+    <Variable
+      initialValue="new gw.api.contact.ProximitySearchPageHelper()"
+      name="proximitySearchPageHelper"
+      recalculateOnRefresh="true"
+      type="gw.api.contact.ProximitySearchPageHelper"/>
+    <Variable
+      initialValue="gw.api.contact.AddressBookUtil.newAddressBookContactSource()"
+      name="externalContactSource"
+      recalculateOnRefresh="true"
+      type="gw.api.contact.ExternalContactSource"/>
+    <Variable
+      initialValue="true"
+      name="allowEditInAddressBook"
+      type="boolean"/>
+  </Forward>
+</PCF>

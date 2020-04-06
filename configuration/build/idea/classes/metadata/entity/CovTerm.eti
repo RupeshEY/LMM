@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Additional terms and conditions that may be specified on a Coverage."
+  entity="CovTerm"
+  exportable="true"
+  extendable="true"
+  final="false"
+  platform="false"
+  table="coverageterms"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.policy.entity.CovTerm"
+    impl="com.guidewire.cc.domain.policy.impl.CovTermImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Identifier for the coverage term in an external policy system"
+    name="PolicySystemId"
+    nullok="true"
+    type="policysystemid"/>
+  <foreignkey
+    columnName="CoverageID"
+    desc="Coverage to which the coverage term belongs."
+    exportable="true"
+    fkentity="Coverage"
+    name="Coverage"
+    nullok="false"/>
+</entity>

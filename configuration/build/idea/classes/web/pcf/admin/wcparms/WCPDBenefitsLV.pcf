@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="WCPDBenefitsLV">
+    <ExposeIterator
+      valueType="entity.ref_WC_PD_benefits"
+      widget="WCPDBenefitsLV"/>
+    <Require
+      name="ref_WC_PD_BenefitsList"
+      type="gw.api.database.IQueryBeanResult&lt;ref_WC_PD_benefits&gt;"/>
+    <RowIterator
+      editable="true"
+      elementName="ref_WC_PD_Benefits"
+      hasCheckBoxes="true"
+      numEntriesToAdd="1"
+      toCreateAndAdd="new ref_WC_PD_benefits()"
+      toRemove="ref_WC_PD_Benefits.remove()"
+      value="ref_WC_PD_BenefitsList"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.ref_WC_PD_benefits&gt;">
+      <Row>
+        <TypeKeyCell
+          editable="true"
+          filter="VALUE.hasCategory(JurisdictionType.TC_INSURANCE)"
+          id="JurisdictionState"
+          label="DisplayKey.get(&quot;LV.Admin.ref_WC_PD_Benefits.JurisdictionState&quot;)"
+          required="true"
+          sortOrder="1"
+          value="ref_WC_PD_Benefits.JurisdictionState"
+          valueType="typekey.Jurisdiction"
+          wrapLabel="true"/>
+        <DateCell
+          editable="true"
+          id="PD_BenefitStartDate"
+          label="DisplayKey.get(&quot;LV.Admin.ref_WC_PD_Benefits.PD_BenefitStartDate&quot;)"
+          required="true"
+          sortOrder="2"
+          validationExpression="(ref_WC_PD_Benefits.PD_BenefitStartDate &gt; ref_WC_PD_Benefits.PD_BenefitEndDate ? DisplayKey.get(&quot;Rules.Validation.Admin.EffDateGTExpiryDate&quot;) : null)"
+          value="ref_WC_PD_Benefits.PD_BenefitStartDate"
+          wrapLabel="true"/>
+        <DateCell
+          editable="true"
+          id="PD_BenefitEndDate"
+          label="DisplayKey.get(&quot;LV.Admin.ref_WC_PD_Benefits.PD_BenefitEndDate&quot;)"
+          required="true"
+          sortOrder="3"
+          validationExpression="(ref_WC_PD_Benefits.PD_BenefitStartDate &gt; ref_WC_PD_Benefits.PD_BenefitEndDate ? DisplayKey.get(&quot;Rules.Validation.Admin.EffDateGTExpiryDate&quot;) : null)"
+          value="ref_WC_PD_Benefits.PD_BenefitEndDate"
+          wrapLabel="true"/>
+        <TextCell
+          editable="true"
+          id="Min_DisabilityPercent"
+          label="DisplayKey.get(&quot;LV.Admin.ref_WC_PD_Benefits.Min_DisabilityPercent&quot;)"
+          required="true"
+          sortOrder="4"
+          validationExpression="(  ref_WC_PD_Benefits.Min_DisabilityPercent &gt; ref_WC_PD_Benefits.Max_DisabilityPercent   ? DisplayKey.get(&quot;Rules.Validation.Admin.MaxLTMin&quot;): null)"
+          value="ref_WC_PD_Benefits.Min_DisabilityPercent"
+          valueType="java.math.BigDecimal"
+          wrapLabel="true"/>
+        <TextCell
+          editable="true"
+          id="Max_DisabilityPercent"
+          label="DisplayKey.get(&quot;LV.Admin.ref_WC_PD_Benefits.Max_DisabilityPercent&quot;)"
+          required="true"
+          sortOrder="5"
+          validationExpression="(  ref_WC_PD_Benefits.Min_DisabilityPercent &gt; ref_WC_PD_Benefits.Max_DisabilityPercent   ? DisplayKey.get(&quot;Rules.Validation.Admin.MaxLTMin&quot;): null)"
+          value="ref_WC_PD_Benefits.Max_DisabilityPercent"
+          valueType="java.math.BigDecimal"
+          wrapLabel="true"/>
+        <TextCell
+          editable="true"
+          id="PD_MinBenefit"
+          label="DisplayKey.get(&quot;LV.Admin.ref_WC_PD_Benefits.PD_MinBenefit&quot;)"
+          required="true"
+          sortOrder="6"
+          validationExpression="(  ref_WC_PD_Benefits.PD_MinBenefit &gt; ref_WC_PD_Benefits.PD_MaxBenefit  ? DisplayKey.get(&quot;Rules.Validation.Admin.MaxLTMin&quot;): null)"
+          value="ref_WC_PD_Benefits.PD_MinBenefit"
+          valueType="java.math.BigDecimal"
+          wrapLabel="true"/>
+        <TextCell
+          editable="true"
+          id="PD_MaxBenefit"
+          label="DisplayKey.get(&quot;LV.Admin.ref_WC_PD_Benefits.PD_MaxBenefit&quot;)"
+          required="true"
+          sortOrder="7"
+          validationExpression="(ref_WC_PD_Benefits.PD_MinBenefit &gt; ref_WC_PD_Benefits.PD_MaxBenefit  ? DisplayKey.get(&quot;Rules.Validation.Admin.MaxLTMin&quot;): null)"
+          value="ref_WC_PD_Benefits.PD_MaxBenefit"
+          valueType="java.math.BigDecimal"
+          wrapLabel="true"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

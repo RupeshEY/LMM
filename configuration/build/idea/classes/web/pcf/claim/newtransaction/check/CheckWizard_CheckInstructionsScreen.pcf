@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="CheckWizard_CheckInstructionsScreen">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="wizard"
+      type="gw.api.financials.CheckWizardInfo"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarDivider/>
+      <PickerToolbarButton
+        action="PickExistingDocumentPopup.push(claim)"
+        available="documentsActionsHelper.DocumentMetadataActionsAvailable"
+        id="Button_Reserve_LinkDocument"
+        label="DisplayKey.get(&quot;Button.Reserve.LinkDocument&quot;)"
+        onPick="gw.api.financials.TransactionSetLinkDocumentHelper.linkDocument(PickedValue, wizard.CheckGroupProxy.CheckSet)"
+        visible="perm.System.viewdocs"/>
+    </Toolbar>
+    <Verbatim
+      id="DeductionsChangedWarning"
+      label="DisplayKey.get(&quot;Wizard.CheckWizard.DeductionsChangedWarning&quot;)"
+      visible="wizard.isDeductionWarningNeeded()"
+      warning="true"/>
+    <AlertBar
+      id="IDCSDisabledAlert"
+      label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.ContentPlugin.Disabled&quot;)"
+      visible="not documentsActionsHelper.ContentSourceEnabled"/>
+    <AlertBar
+      id="IDCSUnavailableAlert"
+      label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.ContentPlugin.Unavailable&quot;)"
+      visible="documentsActionsHelper.ShowContentServerDownWarning"/>
+    <AlertBar
+      id="IDMSUnavailableAlert"
+      label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.MetadataPlugin.Unavailable&quot;)"
+      visible="documentsActionsHelper.ShowMetadataServerDownWarning"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <ContentInput
+          labelAbove="true"
+          visible="wizard.Check.LinkedToServiceRequests  and  wizard.Check.GrossAmount.compareTo(wizard.Check.ServiceRequestInvoices.sum( \ invoice -&gt; invoice.Amount)) != 0">
+          <Link
+            icon="gw.vendormanagement.ServiceRequestStatus.ATTENTION.Icon"
+            id="InvoiceWithNoQuoteAlert"/>
+          <Link
+            id="AmountDiffersFromInvoiceWarning"
+            label="DisplayKey.get(&quot;Wizard.NewCheckWizard.AmountDiffersFromInvoiceWarning&quot;)"/>
+        </ContentInput>
+      </InputColumn>
+    </DetailViewPanel>
+    <PanelRef
+      def="NewPaymentInstructionsDV(wizard.CheckGroupProxy, wizard)"
+      mode="wizard.isRecurrenceEditable() and !wizard.Check.containsDeductible() ? &quot;&quot; : &quot;single&quot;"/>
+  </Screen>
+</PCF>

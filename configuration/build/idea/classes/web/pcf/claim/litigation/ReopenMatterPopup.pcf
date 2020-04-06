@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="reopenMatterInfo.beforeCommit()"
+    canEdit="true"
+    id="ReopenMatterPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.ReopenMatter.Title&quot;, matter)">
+    <LocationEntryPoint
+      signature="ReopenMatterPopup(matter : Matter)"/>
+    <Variable
+      name="matter"
+      type="Matter"/>
+    <Variable
+      initialValue="createInfo()"
+      name="reopenMatterInfo"
+      type="ReopenMatterInfo"/>
+    <Screen
+      id="ReopenMatterScreen">
+      <Toolbar>
+        <EditButtons
+          updateLabel="DisplayKey.get(&quot;Web.Matter.ReopenMatter&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="ReopenMatterInfoDV(reopenMatterInfo)"/>
+    </Screen>
+    <Code><![CDATA[
+function createInfo() : ReopenMatterInfo {
+        var info = new ReopenMatterInfo();
+        info.Matter = matter;
+        return info;
+      }
+    ]]></Code>
+  </Popup>
+</PCF>

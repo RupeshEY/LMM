@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="fixedPropertyIncident.Claim.cleanAndFinishServiceRequests(unusedServiceRequests); fixedPropertyIncident.Claim.instructNewServiceRequests()"
+    canEdit="true"
+    canVisit="perm.Claim.createincident(claim)"
+    id="NewFixedPropertyIncidentPopup"
+    returnType="FixedPropertyIncident"
+    startInEditMode="true"
+    title="claim.Policy.PolicyType == TC_HOMEOWNERS ? DisplayKey.get(&quot;Web.NewFixedPropertyIncident.PropertyLiability.Title&quot;) : DisplayKey.get(&quot;Web.NewFixedPropertyIncident.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewFixedPropertyIncidentPopup(claim : Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="claim.newIncident(entity.FixedPropertyIncident) as FixedPropertyIncident"
+      name="fixedPropertyIncident"
+      type="entity.FixedPropertyIncident"/>
+    <Variable
+      initialValue="new java.util.HashSet&lt;ServiceRequest&gt;()"
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Screen
+      id="NewFixedPropertyIncidentScreen">
+      <TitleBar
+        icon="fixedPropertyIncident.HeaderIcon"/>
+      <Toolbar>
+        <EditButtons
+          pickValue="fixedPropertyIncident"/>
+        <ToolbarDivider/>
+        <PrintToolbarButton
+          hideIfEditable="true"
+          id="FixedPropertyIncident_PrintButton"
+          label="DisplayKey.get(&quot;Button.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="FixPropIncidentDetailDV(fixedPropertyIncident, unusedServiceRequests)"/>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Status of exposure with ISO - checked, not of interest"
+  final="false"
+  name="ISOStatus">
+  <typecode
+    code="None"
+    desc="Not checked by ISO"
+    name="None"
+    priority="1"/>
+  <typecode
+    code="Sent"
+    desc="Sent to ISO database"
+    name="Sent"
+    priority="2"/>
+  <typecode
+    code="NotOfInterest"
+    desc="Not of interest to ISO"
+    name="Not of Interest"
+    priority="3"/>
+  <typecode
+    code="ResendPending"
+    desc="Request has been made to resend to ISO"
+    name="Resend pending"
+    priority="4"/>
+</typelist>

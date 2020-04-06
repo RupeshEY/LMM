@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_policy.xml -->
+  <ListViewPanel
+    id="EditableLocationItemsLV">
+    <ExposeIterator
+      valueType="entity.PropertyItem"
+      widget="EditableLocationItemsLV"/>
+    <Require
+      name="PolicyLocation"
+      type="PolicyLocation"/>
+    <RowIterator
+      editable="true"
+      elementName="PropertyItem"
+      hideCheckBoxesIfReadOnly="true"
+      toAdd="PolicyLocation.addToHighValueItems(PropertyItem)"
+      toRemove="PolicyLocation.removeFromHighValueItems(PropertyItem)"
+      value="PolicyLocation.HighValueItems"
+      valueType="entity.PropertyItem[]">
+      <Row>
+        <TextCell
+          editable="true"
+          id="Description"
+          label="DisplayKey.get(&quot;LV.Policy.EditableLocationItems.PropertyItem.Description&quot;)"
+          required="true"
+          sortOrder="1"
+          value="PropertyItem.Description"/>
+        <CurrencyCell
+          editable="true"
+          formatType="currency"
+          id="Value"
+          label="DisplayKey.get(&quot;LV.Policy.EditableLocationItems.PropertyItem.Value&quot;)"
+          required="true"
+          value="PropertyItem.AppraisedValue"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Links a lienholder to a vehicle."
+  entity="VehicleOwner"
+  exportable="true"
+  platform="false"
+  table="vehicleowner"
+  type="joinarray">
+  <implementsInterface
+    iface="gw.cc.policy.entity.VehicleOwner"
+    impl="com.guidewire.cc.domain.policy.impl.VehicleOwnerImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <typekey
+    desc="Whether the lienholder is a partial owner or the sole owner."
+    name="OwnerType"
+    nullok="true"
+    typelist="OwnerType"/>
+  <foreignkey
+    columnName="VehicleID"
+    desc="The related vehicle."
+    exportable="false"
+    fkentity="Vehicle"
+    name="Vehicle"
+    nullok="false"
+    triggersValidation="true"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="LienholderID"
+    desc="The related lienholder."
+    fkentity="Contact"
+    name="Lienholder"
+    nullok="false"
+    triggersValidation="true"/>
+  <index
+    desc="Enforce uniqueness, only one lienholder of a given type per vehicle"
+    name="vehicleowneru1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="VehicleID"/>
+    <indexcol
+      keyposition="2"
+      name="LienholderID"/>
+    <indexcol
+      keyposition="3"
+      name="OwnerType"/>
+  </index>
+</entity>

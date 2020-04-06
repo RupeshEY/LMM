@@ -1,0 +1,82 @@
+<?xml version="1.0"?>
+<internaltypelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="The type of claim/exposure history"
+  name="HistoryType">
+  <typecode
+    code="archived"
+    desc="Claim was archived"
+    name="Archived"/>
+  <typecode
+    code="assignment"
+    desc="Claim, exposure or subrogation was assigned"
+    name="Assigned"/>
+  <typecode
+    code="viewing"
+    desc="Claim or exposure was viewed by a user"
+    name="Viewed"/>
+  <typecode
+    code="closed"
+    desc="Claim, exposure, or subrogation was closed"
+    name="Closed"/>
+  <typecode
+    code="reopened"
+    desc="Claim or exposure was reopened"
+    name="Reopened"/>
+  <typecode
+    code="flagged"
+    desc="Claim flagged indicator status was changed"
+    name="Flagged"/>
+  <typecode
+    code="import"
+    desc="Claim or exposure was imported"
+    name="Imported"/>
+  <typecode
+    code="delayed"
+    desc="Due date on an activity was changed"
+    name="Activity due date changed"/>
+  <typecode
+    code="opened"
+    desc="A new claim or exposure was opened"
+    name="Opened"/>
+  <typecode
+    code="policyselected"
+    desc="A different policy was selected for the claim, or the existing policy was refreshed"
+    name="Policy selected or refreshed"/>
+  <typecode
+    code="escalationmvd"
+    desc="The escalation date on an activity was changed"
+    name="Activity escalation date moved"/>
+  <typecode
+    code="checkvoided"
+    desc="A check was voided"
+    name="Check voided"/>
+  <typecode
+    code="checkstopped"
+    desc="A check was stopped"
+    name="Check stopped"/>
+  <typecode
+    code="checkdeleted"
+    desc="A check was deleted"
+    name="Check deleted"/>
+  <typecode
+    code="checktransferred"
+    desc="A check was transferred to another claim"
+    name="Check transferred"/>
+  <typecode
+    code="litigated"
+    desc="Claim was litigated"
+    name="Litigated"/>
+  <typecode
+    code="catastrophe"
+    desc="Catastrophe warning"
+    name="Catastrophe warning"/>
+  <typecode
+    code="restored"
+    desc="Archived claim was retrieved"
+    name="Retrieved"/>
+  <typecode
+    code="referred"
+    desc="Subrogation was referred"
+    name="Referred"/>
+</internaltypelistextension>

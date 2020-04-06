@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <DetailViewPanel
+    id="NewPaymentInstructionsDV"
+    mode="single">
+    <Require
+      name="Check"
+      type="Check"/>
+    <Require
+      name="Wizard"
+      type="gw.api.financials.CheckWizardInfo"/>
+    <InputColumn>
+      <InputSetRef
+        def="CheckWizardCheckSummaryInputSet(Check, Wizard)"/>
+      <InputDivider/>
+      <InputSetRef
+        def="ServiceRequestInvoiceInputSet(Wizard, false)"
+        mode="Wizard.Check.ServiceRequestInvoices.Count == 1 ? &quot;single&quot; : &quot;multiple&quot;"
+        visible="Wizard.Check.LinkedToServiceRequests"/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentInstructionsSingle.Check.Instructions&quot;)"/>
+      <TypeKeyInput
+        filter="VALUE !=  PaymentMethod.TC_MANUAL"
+        id="PaymentMethod"
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentInstructionsSingle.Check.PaymentMethod&quot;)"
+        value="Check.PaymentMethod"
+        valueType="typekey.PaymentMethod"/>
+      <TypeKeyInput
+        editable="true"
+        id="CheckBatching"
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentInstructionsSingle.Check.CheckBatching&quot;)"
+        value="Check.CheckBatching"
+        valueType="typekey.CheckBatching"/>
+      <DateInput
+        editable="true"
+        id="ScheduledSendDate"
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentInstructionsSingle.Check.ScheduledSendDate&quot;)"
+        validationExpression="Check.New and Check.ScheduledSendDate.before(java.util.Date.Today) ? DisplayKey.get(&quot;Java.Validation.Date.ForbidPast&quot;) : null"
+        value="Check.ScheduledSendDate"/>
+      <TypeKeyInput
+        editable="true"
+        id="CheckInstructions"
+        label="DisplayKey.get(&quot;NVV.Financials.NewPaymentInstructionsSingle.Check.CheckInstructions&quot;)"
+        value="Check.CheckInstructions"
+        valueType="typekey.CheckHandlingInstructions"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

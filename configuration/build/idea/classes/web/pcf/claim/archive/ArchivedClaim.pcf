@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    autosaveable="false"
+    canEdit="perm.ClaimInfo.edit(ClaimInfo)"
+    canVisit="perm.ClaimInfo.view(ClaimInfo)"
+    countsAsWork="false"
+    id="ArchivedClaim"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ArchivedClaim.Title&quot;)">
+    <LocationEntryPoint
+      signature="ArchivedClaim(ClaimInfo : ClaimInfo)"/>
+    <Variable
+      name="ClaimInfo"
+      type="ClaimInfo"/>
+    <Variable
+      initialValue="new ArchivedClaimInfo()"
+      name="ArchivedClaimInfo"
+      type="ArchivedClaimInfo"/>
+    <ScreenRef
+      def="ArchivedClaimDetailScreen(ClaimInfo, ArchivedClaimInfo)"/>
+  </Page>
+</PCF>

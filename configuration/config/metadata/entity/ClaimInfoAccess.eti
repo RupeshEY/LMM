@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Records information about users and groups that are allowed to access an archived claim."
+  entity="ClaimInfoAccess"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="claiminfoaccess"
+  type="versionable">
+  <implementsInterface
+    iface="gw.cc.claim.archiving.entity.ClaimInfoAccess"
+    impl="com.guidewire.cc.domain.claim.archiving.impl.ClaimInfoAccessImpl"/>
+  <implementsEntity
+    name="ClaimAccessData"/>
+  <foreignkey
+    columnName="ClaimInfoID"
+    desc="A foreign key to the claim info."
+    exportable="false"
+    fkentity="ClaimInfo"
+    name="ClaimInfo"
+    nullok="false"/>
+  <index
+    desc="Enforce uniqueness and is also a covering index to speed up access list search"
+    name="claimaccess1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Permission"/>
+    <indexcol
+      keyposition="2"
+      name="ClaimInfoID"/>
+    <indexcol
+      keyposition="3"
+      name="UserID"/>
+    <indexcol
+      keyposition="4"
+      name="GroupID"/>
+    <indexcol
+      keyposition="5"
+      name="SecurityZoneID"/>
+    <indexcol
+      keyposition="6"
+      name="Anyone"/>
+  </index>
+</entity>

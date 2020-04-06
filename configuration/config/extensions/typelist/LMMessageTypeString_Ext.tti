@@ -1,0 +1,156 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="LMMessageTypeString_Ext" desc="ECF Message Types intended for use in the UI">
+  <typecode
+    code="ECFMessageClaimNotifyRq_Ext"
+    name="Claim Notify request"/>
+  <typecode
+    code="RespondErrorNotify"
+    name="Respond Error Notify"/>
+  <typecode
+    code="TransactionErrorNotify"
+    name="Transaction Error Notify"/>
+  <typecode
+    code="ECFMessageClaimResponseRq_Ext"
+    name="Claim Response request"/>
+  <typecode
+    code="ECFMessageClaimResponseRs_Ext"
+    name="Claim Response response"/>
+  <typecode
+    code="ECFMessageClaimRetrieveRq_Ext"
+    name="Claim Retrieve request"/>
+  <typecode
+    code="ECFMessageClaimRetrieveRs_Ext"
+    name="Claim Retrieve response"/>
+  <typecode
+    code="ECFMessageDocumentSearchRq_Ext"
+    name="Document Search request"/>
+  <typecode
+    code="ECFMessageDocumentSearchRs_Ext"
+    name="Document Search response"/>
+  <typecode
+    code="ECFMessageDocumentDownloadRq_Ext"
+    name="Document Download request"/>
+  <typecode
+    code="ECFMessageDocumentDownloadRs_Ext"
+    name="Document Download response"/>
+  <typecode
+    code="ECFMessageDocumentUploadRq_Ext"
+    name="Document Upload request"/>
+  <typecode
+    code="ECFMessageDocumentUploadRs_Ext"
+    name="Document Upload response"/>
+  <typecode
+    code="RepositorySearchReceipt"
+    name="Document Search receipt"/>
+  <typecode
+    code="RepositoryDownloadReceipt"
+    name="Document Download receipt"/>
+  <typecode
+    code="RepositoryUploadReceipt"
+    name="Document Upload receipt"/>
+  <typecode
+    code="LMMessageLloydsSCM_Ext"
+    name="SCM message"/>
+  <typecode
+    code="Unknown"
+    desc="Unknown message type"
+    name="Unknown"/>
+  <typefilter
+    desc="Inbound"
+    name="Inbound">
+    <include
+      code="ECFMessageClaimNotifyRq_Ext"/>
+    <include
+      code="RespondErrorNotify"/>
+    <include
+      code="TransactionErrorNotify"/>
+    <include
+      code="ECFMessageClaimResponseRs_Ext"/>
+    <include
+      code="ECFMessageClaimRetrieveRs_Ext"/>
+    <include
+      code="ECFMessageDocumentDownloadRs_Ext"/>
+    <include
+      code="ECFMessageDocumentSearchRs_Ext"/>
+    <include
+      code="ECFMessageDocumentUploadRs_Ext"/>
+    <include
+      code="LMMessageLloydsSCM_Ext"/>
+    <include
+      code="RepositorySearchReceipt"/>
+    <include
+      code="RepositoryDownloadReceipt"/>
+    <include
+      code="RepositoryUploadReceipt"/>
+  </typefilter>
+  <typefilter
+    desc="Outbound"
+    name="Outbound">
+    <include
+      code="ECFMessageClaimResponseRq_Ext"/>
+    <include
+      code="ECFMessageClaimRetrieveRq_Ext"/>
+    <include
+      code="ECFMessageDocumentDownloadRq_Ext"/>
+    <include
+      code="ECFMessageDocumentSearchRq_Ext"/>
+    <include
+      code="ECFMessageDocumentUploadRq_Ext"/>
+  </typefilter>
+  <typefilter
+    desc="The claim notify message types"
+    name="ClaimNotify">
+    <include
+      code="ECFMessageClaimNotifyRq_Ext"/>
+    <include
+      code="RespondErrorNotify"/>
+    <include
+      code="TransactionErrorNotify"/>
+  </typefilter>
+  <typefilter
+    desc="The claim response message types"
+    name="ClaimResponse">
+    <include
+      code="ECFMessageClaimResponseRs_Ext"/>
+    <include
+      code="ECFMessageClaimResponseRq_Ext"/>
+  </typefilter>
+  <typefilter
+    desc="The claim retrieve message types"
+    name="ClaimRetrieve">
+    <include
+      code="ECFMessageClaimRetrieveRs_Ext"/>
+    <include
+      code="ECFMessageClaimRetrieveRq_Ext"/>
+  </typefilter>
+  <typefilter
+    desc="The document search message types"
+    name="DocumentSearch">
+    <include
+      code="ECFMessageDocumentSearchRs_Ext"/>
+    <include
+      code="ECFMessageDocumentSearchRq_Ext"/>
+    <include
+      code="RepositorySearchReceipt"/>
+  </typefilter>
+  <typefilter
+    desc="The document upload message types"
+    name="DocumentUpload">
+    <include
+      code="ECFMessageDocumentUploadRs_Ext"/>
+    <include
+      code="ECFMessageDocumentUploadRq_Ext"/>
+    <include
+      code="RepositoryUploadReceipt"/>
+  </typefilter>
+  <typefilter
+    desc="The document download message types"
+    name="DocumentDownload">
+    <include
+      code="ECFMessageDocumentDownloadRs_Ext"/>
+    <include
+      code="ECFMessageDocumentDownloadRq_Ext"/>
+    <include
+      code="RepositoryDownloadReceipt"/>
+  </typefilter>
+</typelist>

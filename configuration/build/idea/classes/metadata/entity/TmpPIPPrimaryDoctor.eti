@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table used to store the ids of the primary doctor roles to be copied to PIP injury incidents during the 4.0.x-5.0.x upgrade"
+  entity="TmpPIPPrimaryDoctor"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="tmppipprimarydoctor"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.TmpPIPPrimaryDoctor"
+    impl="com.guidewire.cc.domain.exposure.impl.TmpPIPPrimaryDoctorImpl"/>
+  <column
+    desc="The ID of the claim contact role to be copied"
+    name="ClaimContactRoleID"
+    nullok="true"
+    type="softentityreference"/>
+  <column
+    desc="The ID of the incident to which the copied claim contact role will refer"
+    name="IncidentID"
+    nullok="true"
+    type="softentityreference"/>
+</entity>

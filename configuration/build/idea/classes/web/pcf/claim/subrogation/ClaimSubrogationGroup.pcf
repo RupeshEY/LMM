@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="(perm.Claim.view(Claim) and perm.System.viewsubrodetails and Claim.SubrogationSummary != null)"
+    id="ClaimSubrogationGroup"
+    title="DisplayKey.get(&quot;Web.Claim.Subrogation&quot;)">
+    <LocationEntryPoint
+      signature="ClaimSubrogationGroup(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.Claim.SubrogationGeneral&quot;)"
+      location="SubrogationGeneral(Claim)"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.Claim.SubrogationParty&quot;)"
+      location="SubrogationParties(Claim)"/>
+  </LocationGroup>
+</PCF>

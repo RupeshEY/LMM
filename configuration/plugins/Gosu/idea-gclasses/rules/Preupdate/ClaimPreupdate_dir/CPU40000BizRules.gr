@@ -1,0 +1,18 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+uses gw.bizrules.context.ClaimTriggeringPoint
+
+@gw.rules.RuleName("CPU40000 - BizRules")
+internal class CPU40000BizRules {
+  static function doCondition(claim : entity.Claim) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+/*start00rule*/
+gw.bizrules.BizRulesExecutor.getInstance().trigger(new ClaimTriggeringPoint(TriggeringPointKey.TC_UPDATE, claim))
+/*end00rule*/
+  }
+}

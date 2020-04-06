@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ServiceRequestHistoryLV">
+    <Require
+      name="serviceRequest"
+      type="ServiceRequest"/>
+    <Variable
+      name="firstChange"
+      type="ServiceRequestChange"/>
+    <Variable
+      initialValue="DetailsColumnVisible"
+      name="viewDetails"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <RowIterator
+      editable="false"
+      elementName="history"
+      pageSize="30"
+      value="var serviceRequestHistory = serviceRequest.OrderedHistory.reverse(); firstChange = serviceRequestHistory.first(); return serviceRequestHistory"
+      valueType="java.util.List&lt;entity.ServiceRequestChange&gt;">
+      <Row>
+        <DateCell
+          dateFormat="short"
+          id="Date"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.History.Date&quot;)"
+          sortDirection="descending"
+          sortOrder="1"
+          timeFormat="short"
+          value="history.Timestamp"
+          width="200"/>
+        <TextCell
+          id="Initiator"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.History.Initiator&quot;)"
+          value="history.Initiator"
+          valueType="entity.Contact"/>
+        <TextCell
+          id="Description"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.History.Description&quot;)"
+          value="history.Description"
+          width="400"/>
+        <LinkCell
+          visible="viewDetails">
+          <Link
+            action="pcf.ClaimServiceRequestForward.go(serviceRequest.Claim, serviceRequest, history.RelatedStatement as ServiceRequestInvoice) "
+            id="InvoiceDetail"
+            label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.History.ViewInvoice&quot;)"
+            styleClass="bigButton"
+            visible="history.RelatedStatement typeis ServiceRequestInvoice"/>
+          <Link
+            action="pcf.ClaimServiceRequestForward.go(serviceRequest.Claim, serviceRequest.PromotionServiceRequest) "
+            id="PromotedServiceDetail"
+            label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.History.ViewService&quot;)"
+            styleClass="bigButton"
+            visible="serviceRequest.AlreadyPromoted and history == firstChange"/>
+          <Link
+            action="QuoteDetailsPopup.push(history.RelatedStatement as ServiceRequestQuote)"
+            id="QuoteDetail"
+            label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.History.ViewQuote&quot;)"
+            styleClass="bigButton"
+            visible="history.RelatedStatement typeis ServiceRequestQuote"/>
+        </LinkCell>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[property get DetailsColumnVisible(): boolean {
+  if (serviceRequest != null) {
+    return serviceRequest.AlreadyPromoted or serviceRequest.History.hasMatch(\ c -> c.RelatedStatement != null)
+  } 
+  return false
+}]]></Code>
+  </ListViewPanel>
+</PCF>

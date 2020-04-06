@@ -1,0 +1,52 @@
+package rules.InitialReserve.InitialReserve_dir.IRR02000Travel_dir.IRR02100BaggageDamage_dir
+
+uses gw.api.upgrade.Coercions
+uses gw.api.util.DateUtil
+
+@gw.rules.RuleName("IRR02110 - Baggage Delay")
+internal class IRR02110BaggageDelay {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.BaggageIncident.DelayOnly == true
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* If baggage is lost for more than 4 hours and less than a day:
+ *   Set the reserve to the InitialReserve_TravelBaggageLoss global variable if it is lower than 
+ *   the exposure limit.  Otherwise, set to the exposure limit. 
+ * If baggage is lost for more than a day:
+ *   Calculate the number of days lost. Set the reserve to the InitialReserve_TravelBaggageLoss global
+ *   variable, multiplied by the number of days lost, if this product is lower than the exposure limit.  
+ *   Otherwise, set to the exposure limit. 
+ */
+if(exposure.Claim.applyFinancialHolds()) {
+  exposure.Claim.createNoteIfInitialReservesNotCreated()
+} else {
+  var hoursDelayed = DateUtil.hoursSince(exposure.BaggageIncident.BaggageMissingFrom) - 
+                      DateUtil.hoursSince(exposure.BaggageIncident.BaggageRecoveredOn) 
+  if(hoursDelayed > 4 and hoursDelayed < 24) {
+    if(exposure.Coverage.ExposureLimit > Coercions.makeCurrencyAmountFrom(ScriptParameters.InitialReserve_TravelBaggageLoss)) {
+      exposure.createInitialReserve(TC_CLAIMCOST, TC_BAGGAGE, ScriptParameters.InitialReserve_TravelBaggageLoss)
+    } else {
+      exposure.createInitialReserve(TC_CLAIMCOST, TC_BAGGAGE, exposure.Coverage.ExposureLimit)
+    }
+  } else if (hoursDelayed > 24) {
+    var daysDelayed = DateUtil.daysBetween(exposure.BaggageIncident.BaggageRecoveredOn, 
+                                            exposure.BaggageIncident.BaggageMissingFrom)
+    if(exposure.Coverage.ExposureLimit > Coercions.makeCurrencyAmountFrom(daysDelayed*ScriptParameters.InitialReserve_TravelBaggageLoss)) {
+      exposure.createInitialReserve(TC_CLAIMCOST, TC_BAGGAGE, 
+                            daysDelayed*ScriptParameters.InitialReserve_TravelBaggageLoss)
+    } else {
+      exposure.createInitialReserve(TC_CLAIMCOST, TC_BAGGAGE, exposure.Coverage.ExposureLimit)
+  }
+}
+}
+/*end00rule*/
+
+  }
+}

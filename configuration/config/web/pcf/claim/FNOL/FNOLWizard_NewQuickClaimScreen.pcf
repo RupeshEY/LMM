@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="FNOLWizard_NewQuickClaimScreen">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarDivider/>
+      <ToolbarButton
+        action="Wizard.returnToFullWizard(&quot;FindPolicy&quot;, &quot;BasicInfo&quot;)"
+        confirmMessage="DisplayKey.get(&quot;Web.NewClaimWizard.AutoFirstAndFinal.GoToFullClaimConfirm&quot;)"
+        id="NewClaimWizard_QuickClaimScreen_ReturnFromQuickClaimButton"
+        label="DisplayKey.get(&quot;Button.Wizard.ReturnFromQuickClaim&quot;)"
+        shortcut="R"/>
+    </Toolbar>
+    <PanelRef
+      def="QuickClaimDV(Claim, Wizard)"
+      mode="Wizard.QuickClaim.Mode"/>
+  </Screen>
+</PCF>

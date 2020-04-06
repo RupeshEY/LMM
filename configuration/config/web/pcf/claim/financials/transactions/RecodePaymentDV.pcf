@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <DetailViewPanel
+    id="RecodePaymentDV">
+    <Require
+      name="Payment"
+      type="Payment"/>
+    <Require
+      name="reserveLineInputSetHelper"
+      type="gw.api.financials.ReserveLineInputSetHelper"/>
+    <Variable
+      initialValue="Payment.SharedDeductible"
+      name="deductible"
+      recalculateOnRefresh="true"
+      type="Deductible"/>
+    <InputColumn>
+      <InputSetRef
+        def="EditTransactionInputSet(Payment, reserveLineInputSetHelper)"/>
+      <TypeKeyInput
+        id="Payment_PaymentType"
+        label="DisplayKey.get(&quot;NVV.Financials.RecodePayment.Payment.PaymentType&quot;)"
+        value="Payment.PaymentType"
+        valueType="typekey.PaymentType">
+        <PostOnChange
+          onChange="gw.api.financials.FinancialsUtil.refreshErodesReserves(Payment)"/>
+      </TypeKeyInput>
+      <CurrencyInput
+        formatType="currency"
+        id="Transaction_AvailableReserves"
+        label="DisplayKey.get(&quot;NVV.Financials.RecodePayment.Transaction.AvailableReserves&quot;)"
+        value="gw.api.financials.FinancialsCalculationsForEditedTransaction.getAvailableReserves(Payment).ReservingAmountTransactionAmountPair"
+        valueType="gw.api.financials.IPairedMoney"
+        visible="Payment.ReserveLine != null and not Payment.ReserveLine.New"/>
+      <ListViewInput
+        def="EditableRecodeLineItemsLV(Payment)"
+        editable="Payment.CostCategory != null"
+        label="DisplayKey.get(&quot;NVV.Financials.RecodePayment.Transaction.LineItems&quot;)">
+        <Toolbar>
+          <IteratorButtons
+            addVisible="gw.api.financials.FinancialsUtil.isAllowMultiplePayments()"
+            iterator="EditableRecodeLineItemsLV.EditableRecodeLineItemsLV"
+            removeVisible="gw.api.financials.FinancialsUtil.isAllowMultiplePayments()"/>
+          <AddButton
+            id="ApplyDeductibleButton"
+            iterator="EditableRecodeLineItemsLV.EditableRecodeLineItemsLV"
+            label="DisplayKey.get(&quot;NVV.Financials.NewPaymentDetail.Transaction.ApplyDeductible&quot;)"
+            toCreateAndAdd="Payment.addDeductibleLineItem()"
+            visible="gw.api.financials.FinancialsUtil.isAllowMultipleLineItems() and !Payment.Check.CheckSet.Recurring and deductible != null and !deductible.Paid and !deductible.Waived and gw.api.financials.FinancialsUtil.isUseDeductibleHandling()"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

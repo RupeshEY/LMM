@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_claim.xml -->
+  <ListViewPanel
+    id="NewClaimSummaryPeopleInvolvedLV">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Require
+      name="ClaimContactList"
+      type="ClaimContact[]"/>
+    <RowIterator
+      editable="false"
+      elementName="ClaimContact"
+      value="ClaimContactList"
+      valueType="entity.ClaimContact[]">
+      <Row>
+        <TextCell
+          action="NewClaimWizard_PartyInvolvedPopup.push(Wizard, ClaimContact, false)"
+          id="PeopleInvolved_Name"
+          label="DisplayKey.get(&quot;LV.Claim.PeopleInvolved.Name&quot;)"
+          sortOrder="1"
+          value="ClaimContact.Contact"
+          valueType="entity.Contact"/>
+        <TextCell
+          id="PeopleInvolved_Roles"
+          label="DisplayKey.get(&quot;LV.Claim.PeopleInvolved.Roles&quot;)"
+          printWidth="3"
+          value="ClaimContact.Roles.join( &quot;, &quot; )"/>
+        <TextCell
+          id="PeopleInvolved_Phone"
+          label="DisplayKey.get(&quot;LV.Claim.PeopleInvolved.Phone&quot;)"
+          value="ClaimContact.Contact.PrimaryPhoneValue"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

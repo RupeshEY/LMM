@@ -1,0 +1,209 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <InputSet
+    id="RentalServiceInputSet">
+    <Require
+      name="rentalServiceRequest"
+      type="ServiceRequest"/>
+    <Require
+      name="vehicleIncident"
+      type="VehicleIncident"/>
+    <Require
+      name="unusedServices"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Variable
+      initialValue="gw.vendormanagement.SpecialistServiceCodeConstants.AUTORENTAL"
+      name="autoRentalServiceCode"
+      type="String"/>
+    <Variable
+      initialValue="vehicleIncident.getCoverageDescription(vehicleIncident.Claim.Policy.RentalCoverageType)"
+      name="coverageValue"
+      type="String"/>
+    <Variable
+      initialValue="rentalServiceRequest != null"
+      name="rentalSelected"
+      type="boolean"/>
+    <InputGroup
+      allowToggle="isEditableServiceRequest()"
+      childrenVisible="rentalSelected"
+      id="RentalInputGroup"
+      label="coverageValue != null ? DisplayKey.get(&quot;Web.VehicleIncidentRentalDV.Rental.ValueLabel&quot;) : DisplayKey.get(&quot;Web.VehicleIncidentRentalDV.LabelNoCoverage&quot;)"
+      onToggle="toggleServiceRequest(VALUE)">
+      <InputSet
+        visible="rentalSelected">
+        <TextInput
+          id="RentalCoverage"
+          label="DisplayKey.get(&quot;Web.VehicleIncidentRentalDV.RentalCoverage.Label&quot;)"
+          value="coverageValue == null ? DisplayKey.get(&quot;Web.VehicleIncidentRentalDV.RentalCoverage.NoCoverage.Value&quot;) : coverageValue"/>
+        <DateInput
+          available="true"
+          editable="true"
+          id="RentalBeginDate"
+          label="DisplayKey.get(&quot;Web.VehicleIncidentRentalDV.RentalBeginDate.Label&quot;)"
+          required="true"
+          value="RentalBeginDate">
+          <PostOnChange/>
+        </DateInput>
+        <DateInput
+          available="true"
+          editable="true"
+          id="RentalEndDate"
+          label="DisplayKey.get(&quot;Web.VehicleIncidentRentalDV.RentalEndDate.Label&quot;)"
+          required="true"
+          validationExpression="vehicleIncident.RentalBeginDate != null and vehicleIncident.RentalEndDate != null and vehicleIncident.RentalEndDate &lt; vehicleIncident.RentalBeginDate ? DisplayKey.get(&quot;Java.Validation.AdminCatastrophe.Date.ForbidValidReverse&quot;) : null"
+          value="RentalEndDate">
+          <PostOnChange/>
+        </DateInput>
+        <CurrencyInput
+          available="true"
+          editable="true"
+          id="RentalRate"
+          label="DisplayKey.get(&quot;Web.VehicleIncidentRentalDV.RentalDailyRate.Label&quot;)"
+          required="true"
+          value="RentalRate">
+          <PostOnChange/>
+        </CurrencyInput>
+        <TextInput
+          available="true"
+          editable="true"
+          id="ReservationNumber"
+          label="DisplayKey.get(&quot;Web.VehicleIncidentRentalDV.ReservationNumber.Label&quot;)"
+          value="ReservationNumber">
+          <PostOnChange/>
+        </TextInput>
+        <ClaimContactInput
+          claim="vehicleIncident.Claim"
+          editable="rentalServiceRequest.IsEditableInUI"
+          id="RentalAgency"
+          label="DisplayKey.get(&quot;Web.VehicleIncidentRentalDV.RentalAgency.Label&quot;)"
+          newContactMenu="ClaimNewVendorOnlyPickerMenuItemSet"
+          required="true"
+          specialistServices="{SpecialistService.getForCode(autoRentalServiceCode)}"
+          value="rentalServiceRequest.SpecialistAndCreateClaimContact"
+          valueRange="vehicleIncident.Claim.RelatedCompanyArray">
+          <PostOnChange
+            target="OtherServiceRequestInfo"/>
+        </ClaimContactInput>
+        <InputSet
+          id="OtherServiceRequestInfo"
+          visible="rentalServiceRequest.Specialist != null">
+          <TextInput
+            id="RentalAgencyAddress"
+            label="DisplayKey.get(&quot;Web.VehicleIncidentRentalDV.RentalAgencyLocation.Label&quot;)"
+            value="rentalServiceRequest.Specialist.PrimaryAddress"
+            valueType="entity.Address"/>
+          <TextInput
+            id="RentalAgencyPhone"
+            label="DisplayKey.get(&quot;Web.VehicleIncidentDV.RentalAgencyPhone&quot;)"
+            value="rentalServiceRequest.Specialist.PrimaryPhoneValue"/>
+          <InputSetRef
+            def="NewServiceRequestInstructionInputSet(rentalServiceRequest, DisplayKey.get(&quot;Web.VehicleIncidentTowingDV.PickUpLocation&quot;), null)"
+            editable="isEditableServiceRequest()"
+            mode="&quot;rental&quot;"/>
+        </InputSet>
+      </InputSet>
+    </InputGroup>
+    <Code><![CDATA[uses gw.api.financials.CurrencyAmount
+uses gw.api.locale.DisplayKey
+uses gw.api.util.CurrencyUtil
+uses gw.api.util.LocaleUtil
+uses gw.vendormanagement.ServiceRequestPrefixedAdditionalInstructionsTextHelper
+
+uses java.util.Date
+
+function isEditableServiceRequest() : boolean {
+  return rentalServiceRequest == null or rentalServiceRequest.IsEditableInUI
+}
+
+function updateInstructionText() {
+  ServiceRequestPrefixedAdditionalInstructionsTextHelper.updateInstructionText(rentalServiceRequest, getInstructionTextPrefix())
+}
+
+private function getInstructionTextPrefix() : String {  
+  return DisplayKey.get("Web.VehicleIncidentRentalDV.InstructionPrefix", getFormattedDate(RentalBeginDate), getFormattedDate(RentalEndDate), FormattedRentalRate)
+}
+
+property get FormattedRentalRate() : String {
+  return vehicleIncident.RentalDailyRate != null ? CurrencyUtil.renderAsCurrency(vehicleIncident.RentalDailyRate) : null
+}
+
+function getFormattedDate(date : Date) : String {
+  return date != null ? LocaleUtil.getCurrentLocale().getOutputDateFormat(null, null).format(date) : null
+}
+
+property get RentalBeginDate() : Date {
+  return vehicleIncident.RentalBeginDate
+}
+
+property set RentalBeginDate(beginDate : Date) {
+  vehicleIncident.RentalBeginDate = beginDate
+  if (!isEditableServiceRequest()) {
+    var reasonForChange = DisplayKey.get("Web.VehicleIncidentRentalDV.ServiceRequestChange.RentalBeginDateChanged", getFormattedDate(RentalBeginDate))
+    rentalServiceRequest.recordChange(reasonForChange, null, null, User.util.CurrentUser.Contact)
+  } else {
+    updateInstructionText()
+  }
+}
+
+property get RentalEndDate() : Date {
+  return vehicleIncident.RentalEndDate
+}
+
+property set RentalEndDate(endDate : Date) {
+  vehicleIncident.RentalEndDate = endDate
+  rentalServiceRequest.RequestedServiceCompletionDateMoveToEndOfDay = endDate
+  if (!isEditableServiceRequest()) {
+    var reasonForChange = DisplayKey.get("Web.VehicleIncidentRentalDV.ServiceRequestChange.RentalEndDateChanged", getFormattedDate(RentalEndDate))
+    rentalServiceRequest.recordChange(reasonForChange, null, null, User.util.CurrentUser.Contact)
+  } else {
+    updateInstructionText()
+  }
+}
+
+property get RentalRate() : CurrencyAmount {
+  return vehicleIncident.RentalDailyRate
+}
+
+property set RentalRate(rate : CurrencyAmount) {
+  vehicleIncident.RentalDailyRate = rate
+  if (!isEditableServiceRequest()) {
+    var reasonForChange = DisplayKey.get("Web.VehicleIncidentRentalDV.ServiceRequestChange.RentalDailyRateChanged", FormattedRentalRate)
+    rentalServiceRequest.recordChange(reasonForChange, null, null, User.util.CurrentUser.Contact)
+  } else {
+    updateInstructionText()
+  }
+}
+
+property get ReservationNumber() : String{
+  return vehicleIncident.RentalReserveNo
+}
+
+property set ReservationNumber(resNum : String) {
+  vehicleIncident.RentalReserveNo = resNum
+  rentalServiceRequest.ServiceRequestReferenceNumber = resNum
+  if (!isEditableServiceRequest()) {
+    var reasonForChange = DisplayKey.get("Web.VehicleIncidentRentalDV.ServiceRequestChange.RentalReserveNoChanged", rentalServiceRequest.ServiceRequestReferenceNumber)
+    rentalServiceRequest.recordChange(reasonForChange, null, null, User.util.CurrentUser.Contact)
+  }
+}
+
+function toggleServiceRequest(checkboxValue : boolean) {
+  if (rentalServiceRequest == null) {
+    if (checkboxValue) {
+      rentalServiceRequest = vehicleIncident.Claim.newServiceRequest(vehicleIncident.Claim.maincontact, vehicleIncident)
+      rentalServiceRequest.Instruction.addServiceFoundByCode(autoRentalServiceCode)
+      rentalServiceRequest.Kind = ServiceRequestKind.TC_SERVICEONLY
+    }
+  } else {
+    if (not checkboxValue) {
+      unusedServices.add(rentalServiceRequest)
+    } else {
+      unusedServices.remove(rentalServiceRequest)
+    }
+  }
+  rentalSelected = checkboxValue
+}]]></Code>
+  </InputSet>
+</PCF>

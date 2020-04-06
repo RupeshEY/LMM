@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    canEdit="perm.System.editsubrodetails"
+    canVisit="perm.System.viewsubrodetails"
+    id="NewSubroAdversePartyPopup"
+    parent="Claim(claim)"
+    returnType="entity.SubroAdverseParty"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Subrogation.SubrogationParties.NewSubroAdverseParty.New&quot;)">
+    <LocationEntryPoint
+      signature="NewSubroAdversePartyPopup(claim : Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="claim.newSubroAdverseParty()"
+      name="SubroAdverseParty"
+      type="SubroAdverseParty"/>
+    <Screen
+      id="NewSubroAdversePartyScreen">
+      <Toolbar/>
+      <PanelRef
+        def="SubrogationPartyDetailDV(SubroAdverseParty)">
+        <Toolbar>
+          <EditButtons
+            pickValue="SubroAdverseParty"/>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+  </Popup>
+</PCF>

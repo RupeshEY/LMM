@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AddressBookBusinessContactInfoInputSet">
+    <!-- Note the name of this symbol cannot be "contact"; otherwise, it interferes with the symbol defined by
+    the ContactInput widget that is used to implement the "View Details" action. -->
+    <Require
+      name="businessContact"
+      type="Contact"/>
+    <Require
+      name="externalContactSource"
+      type="gw.api.contact.ExternalContactSource"/>
+    <Require
+      name="allowEditContact"
+      type="boolean"/>
+    <InputDivider/>
+    <Label
+      label="topLabel()"/>
+    <AddressBookContactInput
+      allowEditContact="allowEditContact"
+      editable="true"
+      forceContactSubtype="entity.Person"
+      id="PrimaryContact"
+      label="DisplayKey.get(&quot;Web.ContactDetail.PrimaryContact&quot;)"
+      parentContact="businessContact"
+      value="businessContact.PrimaryContact"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(businessContact, Contact#WorkPhone), DisplayKey.get(&quot;Web.ContactDetail.Phone.Work&quot;), false))"
+      editable="true"
+      id="Work"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(businessContact, Contact#HomePhone), DisplayKey.get(&quot;Web.ContactDetail.Phone.Home&quot;), false))"
+      editable="true"
+      id="Home"
+      visible="businessContact typeis Person"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(createCellPhoneDelegate(), DisplayKey.get(&quot;Web.ContactDetail.Phone.Cell&quot;), false))"
+      editable="true"
+      id="Cell"
+      visible="businessContact typeis Person"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(businessContact, Contact#FaxPhone), DisplayKey.get(&quot;Web.ContactDetail.Phone.Fax&quot;), false))"
+      editable="true"
+      id="Fax"/>
+    <TypeKeyInput
+      editable="true"
+      id="PrimaryPhone"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Phone.PrimaryPhone&quot;)"
+      validationExpression="(businessContact.PrimaryPhone == null or (businessContact.PrimaryPhone == TC_WORK and businessContact.WorkPhone != null) or  (businessContact.PrimaryPhone == TC_HOME and businessContact.HomePhone != null) or (businessContact.PrimaryPhone == TC_MOBILE and (businessContact as Person).CellPhone != null)) ? null : DisplayKey.get(&quot;Web.ContactDetail.Phone.PrimaryPhone.Error&quot;)"
+      value="(businessContact as Person).PrimaryPhone"
+      valueType="typekey.PrimaryPhoneType"
+      visible="businessContact typeis Person"/>
+    <InputDivider
+      visible="businessContact typeis Person"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.ContactDetail.Email&quot;)"
+      visible="businessContact typeis Person"/>
+    <TextInput
+      editable="true"
+      formatType="email"
+      id="Email1"
+      label="mainEmailLabel()"
+      value="businessContact.EmailAddress1"/>
+    <TextInput
+      editable="true"
+      formatType="email"
+      id="Email2"
+      label="alternateEmailLabel()"
+      value="businessContact.EmailAddress2"/>
+    <Code><![CDATA[function createCellPhoneDelegate() : gw.api.phone.ContactPhoneDelegate {
+  if (businessContact typeis Person) {
+    return new gw.api.phone.ContactPhoneDelegate(businessContact, businessContact#CellPhone)
+  } else {
+    return null
+  }
+}
+
+
+function topLabel() : String {
+  if (businessContact typeis Person) {
+    return DisplayKey.get("Web.ContactDetail.Phone")
+  } else {
+    return DisplayKey.get("Web.ContactDetail.ContactInfo")
+  }
+}
+
+function mainEmailLabel() : String {
+  if (businessContact typeis Person) {
+    return DisplayKey.get("Web.ContactDetail.Email.Primary")
+  } else {
+    return DisplayKey.get("Web.ContactDetail.PrimaryContact.Email1")
+  }
+}
+
+function alternateEmailLabel() : String {
+  if (businessContact typeis Person) {
+    return DisplayKey.get("Web.ContactDetail.Email.Secondary")
+  } else {
+    return DisplayKey.get("Web.ContactDetail.PrimaryContact.Email2")
+  }
+}]]></Code>
+  </InputSet>
+</PCF>

@@ -1,0 +1,100 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="First column of contributing factors array"
+  name="PriContributingFactors">
+  <typecode
+    code="Environment"
+    desc="Environmental conditions"
+    name="Environmental conditions">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="TRAV"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="DriverFactors"
+    desc="Driver factors"
+    name="Driver factors">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="TRAV"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="ProtectFactors"
+    desc="Protection factors"
+    name="Protection factors">
+    <category
+      code="PR"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="Enviro"
+    desc="Environment"
+    name="Environment">
+    <category
+      code="PR"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="HumanInvolve"
+    desc="Human involvement"
+    name="Human involvement">
+    <category
+      code="PR"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="Defect"
+    desc="Defect"
+    name="Defect">
+    <category
+      code="GL"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="Commun"
+    desc="Communication"
+    name="Communication">
+    <category
+      code="GL"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="HumanInvolveGL"
+    desc="Human involvement"
+    name="Human involvement">
+    <category
+      code="GL"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="EnviroGL"
+    desc="Environment"
+    name="Environment">
+    <category
+      code="GL"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="notapplic"
+    desc="Not applicable"
+    name="Not applicable">
+    <category
+      code="GL"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="contacts"
+    desc="Contracts"
+    name="Contracts">
+    <category
+      code="GL"
+      typelist="LossType"/>
+  </typecode>
+</typelistextension>

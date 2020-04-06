@@ -1,0 +1,26 @@
+package rules.Validation.ExposureClosedValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("ECV01000 - Open activities")
+internal class ECV01000Openactivities {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.Claim.Activities.toList().hasMatch(\ activity -> (activity.Exposure == exposure 
+              and activity.Status == TC_OPEN 
+              and activity.ActivityPattern != null 
+              and not activity.ActivityPattern.ClosedClaimAvlble)
+)
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.reject(TC_NEWLOSS, DisplayKey.get("Rules.Validation.Exposure.CompleteOpenActivities"), null, null)
+/*end00rule*/
+
+  }
+}

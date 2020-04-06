@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <InputSet
+    id="ClaimSnapshotExposureCodingInputSet"
+    mode="600">
+    <Require
+      name="ExposureParam"
+      type="dynamic.Dynamic"/>
+    <Variable
+      initialValue="ExposureParam"
+      name="Exposure"
+      type="dynamic.Dynamic"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.ClaimSnapshotExposureDV.Default.Coding&quot;)"/>
+    <TextInput
+      id="Segment"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.Segment&quot;)"
+      value="Exposure.Segment"
+      valueType="dynamic.Dynamic"/>
+    <TextInput
+      id="Strategy"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.Strategy&quot;)"
+      value="Exposure.Strategy"
+      valueType="dynamic.Dynamic"/>
+  </InputSet>
+</PCF>

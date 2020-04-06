@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="contact denormed fields"
+  entity="ContactInfo"
+  exportable="false"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="contactinfo"
+  type="editable">
+  <implementsInterface
+    iface="gw.cc.claim.archiving.entity.ContactInfo"
+    impl="com.guidewire.cc.domain.claim.archiving.impl.ContactInfoImpl"/>
+  <implementsEntity
+    name="GlobalContactName"/>
+  <implementsEntity
+    name="GlobalPersonName"/>
+  <foreignkey
+    columnName="ClaimInfoID"
+    desc="The contact for the archived claim"
+    fkentity="ClaimInfo"
+    name="ClaimInfo"
+    nullok="false"/>
+  <typekey
+    desc="The role of the contact in relation to the claim, exposure, or matter."
+    name="Role"
+    nullok="false"
+    typelist="contactrole"/>
+  <column
+    desc="This contact's name on Contact or Last name on person."
+    name="Name"
+    nullok="true"
+    supportsLinguisticSearch="true"
+    type="companyname">
+    <columnParam
+      name="logicalSize"
+      value="60"/>
+  </column>
+  <column
+    desc="First name on Person."
+    name="FirstName"
+    nullok="true"
+    supportsLinguisticSearch="true"
+    type="firstname"/>
+  <column
+    desc="Last name on Person."
+    name="LastName"
+    nullok="true"
+    supportsLinguisticSearch="true"
+    type="lastname"/>
+  <column
+    desc="Middle name or initial."
+    name="MiddleName"
+    nullok="true"
+    type="firstname"/>
+  <typekey
+    desc="Prefix for the person's name."
+    name="Prefix"
+    nullok="true"
+    typelist="NamePrefix"/>
+  <typekey
+    desc="Suffix for the person's name."
+    name="Suffix"
+    nullok="true"
+    typelist="NameSuffix"/>
+  <column
+    desc="Tax ID for the contact (SSN or EIN) on contact."
+    name="TaxID"
+    nullok="true"
+    type="ssn"/>
+  <index
+    desc="Speed up search for archived claim by TaxID"
+    name="taxidkey"
+    trackUsage="true">
+    <indexcol
+      keyposition="1"
+      name="TaxID"/>
+    <indexcol
+      keyposition="2"
+      name="Role"/>
+    <indexcol
+      keyposition="3"
+      name="ClaimInfoID"/>
+  </index>
+  <index
+    desc="Speed up search for archived claim by contact name"
+    name="CompanyName"
+    trackUsage="true">
+    <indexcol
+      keyposition="1"
+      name="NameDenorm"/>
+    <indexcol
+      keyposition="2"
+      name="Role"/>
+    <indexcol
+      keyposition="3"
+      name="ClaimInfoID"/>
+  </index>
+  <index
+    desc="Speed up search for archived claim by person first and last name"
+    name="PersonNames"
+    trackUsage="true">
+    <indexcol
+      keyposition="1"
+      name="LastNameDenorm"/>
+    <indexcol
+      keyposition="2"
+      name="FirstNameDenorm"/>
+    <indexcol
+      keyposition="3"
+      name="Role"/>
+    <indexcol
+      keyposition="4"
+      name="ClaimInfoID"/>
+  </index>
+</entity>

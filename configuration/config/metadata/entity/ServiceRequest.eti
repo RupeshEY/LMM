@@ -1,0 +1,182 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  consistentchildren="true"
+  desc="A unit of work requested of a specialist or vendor"
+  entity="ServiceRequest"
+  exportable="true"
+  loadable="false"
+  table="servicerequest"
+  type="editable">
+  <implementsInterface
+    iface="gw.cc.vendormanagement.entity.ServiceRequest"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestInternal"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestImpl"/>
+  <implementsEntity
+    name="CCAssignable"/>
+  <implementsInterface
+    iface="gw.cc.assignment.entity.CCAssignable"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.assignment.AssignablePublicMethods"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.assignment.impl.AssignableInternalMethods"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.entity.PermissionAssignableCheck"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestImpl"/>
+  <implementsEntity
+    name="Validatable"/>
+  <implementsInterface
+    iface="gw.api.assignment.CCAssignableMethods"
+    impl="gw.assignment.ServiceRequestAssignableMethodsImpl"/>
+  <implementsInterface
+    iface="gw.api.vendormanagement.ServiceRequestContactMethods"
+    impl="gw.api.vendormanagement.ServiceRequestContactMethodsImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+    Represents a unit of work requested of a specialist or vendor, including instructions that describe the work to be
+    done and the current state of the ServiceRequest.
+  ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The related claim."
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="SpecialistID"
+    desc="The vendor or internal entity selected to do the work requested by this service request."
+    fkentity="Contact"
+    name="Specialist"
+    nullok="false"/>
+  <column
+    desc="A globally-unique, user-readable identifier for this service request. This number is normally generated within ClaimCenter."
+    name="ServiceRequestNumber"
+    nullok="false"
+    type="shorttext"/>
+  <array
+    arrayentity="ServiceRequestChange"
+    cascadeDelete="true"
+    desc="The changes that have been applied to this service request, which together comprise its history."
+    name="History"
+    setterScriptability="hidden"
+    triggersValidation="true"/>
+  <column
+    desc="The timestamp of the latest ServiceRequestChange in the History. This value is denormalized here for ease of ordering ServiceRequests in queries. This is non-nullable because History cannot be empty."
+    name="LatestChangeTimestampDenorm"
+    nullok="false"
+    setterScriptability="hidden"
+    type="datetime"/>
+  <array
+    arrayentity="ServiceRequestInstruction"
+    cascadeDelete="true"
+    desc="All instructions that have been created for this service request, including instructions that are no longer active."
+    name="InstructionHistory"/>
+  <typekey
+    desc="The currency of this service request, which is used for its quotes, invoices, and checks."
+    name="Currency"
+    nullok="false"
+    typelist="Currency"/>
+  <!-- changes to the following properties are recorded with ServiceRequestChanges -->
+  <typekey
+    desc="This service request's current place in its life cycle."
+    name="Progress"
+    nullok="false"
+    typelist="ServiceRequestProgress"/>
+  <typekey
+    desc="The current quote status for this service request."
+    name="QuoteStatus"
+    nullok="false"
+    typelist="ServiceRequestQuoteStatus"/>
+  <typekey
+    desc="The kind for this service request."
+    name="Kind"
+    nullok="false"
+    typelist="ServiceRequestKind"/>
+  <typekey
+    desc="The tier of this service request."
+    name="Tier"
+    nullok="true"
+    typelist="ServiceRequestTier"/>
+  <edgeForeignKey
+    desc="The active instruction associated with this service request."
+    edgeTableName="servreqactinst"
+    extractable="true"
+    fkentity="ServiceRequestInstruction"
+    name="Instruction"
+    nullok="false"/>
+  <edgeForeignKey
+    desc="The originating quote-only service request for this service request. Note: This will be non-null only when a quote-only service request is promoted to a quote and service service request."
+    edgeTableEntityName="ServiceRequestPromotion"
+    edgeTableName="origservreq"
+    extractable="true"
+    fkentity="ServiceRequest"
+    name="OriginatingServiceRequest"
+    nullok="true"/>
+  <array
+    arrayentity="ServiceRequestPromotion"
+    arrayfield="ForeignEntity"
+    desc="Array of ServiceRequestPromotions linking this ServiceRequest to other ServiceRequests to which this was promoted."
+    exportable="false"
+    getterScriptability="doesNotExist"
+    name="ServiceRequestPromotions"
+    setterScriptability="doesNotExist"/>
+  <edgeForeignKey
+    desc="The latest quote associated with this service request. It is null if no quote has been added to the service request"
+    edgeTableName="servreqltstqte"
+    extractable="true"
+    fkentity="ServiceRequestQuote"
+    name="LatestQuote"
+    nullok="true"/>
+  <array
+    arrayentity="ServiceRequestDocumentLink"
+    cascadeDelete="true"
+    desc="The link information for documents associated with this service request"
+    name="DocumentLinks"
+    setterScriptability="hidden"/>
+  <array
+    arrayentity="ServiceRequestQuote"
+    cascadeDelete="true"
+    desc="The Quotes associated with this service request"
+    name="Quotes"
+    triggersValidation="true"/>
+  <array
+    arrayentity="ServiceRequestInvoice"
+    cascadeDelete="true"
+    desc="The Invoices associated with this service request"
+    name="Invoices"
+    triggersValidation="true"/>
+  <array
+    arrayentity="Note"
+    cascadeDelete="true"
+    desc="The notes associated with this service request"
+    name="Notes"/>
+  <array
+    arrayentity="Activity"
+    cascadeDelete="true"
+    desc="The activities associated with this service request"
+    name="Activities"/>
+  <array
+    arrayentity="ServiceRequestMetric"
+    cascadeDelete="true"
+    desc="Metrics related to this service request"
+    exportable="false"
+    ignoreforevents="true"
+    name="ServiceRequestMetrics">
+    <link-association>
+      <subtype-map/>
+    </link-association>
+  </array>
+  <array
+    arrayentity="ServiceRequestMessage"
+    cascadeDelete="true"
+    desc="Messages related to this service request"
+    name="Messages"
+    triggersValidation="true"/>
+</entity>

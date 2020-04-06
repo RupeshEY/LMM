@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_activity.xml -->
+  <InputSet
+    id="ActivityTrackingInputSet">
+    <Require
+      name="Activity"
+      type="Activity"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityTracking.Activity.Tracking&quot;)"/>
+    <DateInput
+      dateFormat="short"
+      id="CompleteDate"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityTracking.Activity.CompleteDate&quot;)"
+      value="Activity.CloseDate"/>
+    <TextInput
+      id="CloseUser"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityTracking.Activity.CloseUser&quot;)"
+      value="Activity.CloseUser.DisplayName"/>
+    <BooleanRadioInput
+      id="Recurring"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityTracking.Activity.Recurring&quot;)"
+      value="Activity.Recurring"/>
+  </InputSet>
+</PCF>

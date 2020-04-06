@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Note">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.note.impl.NoteCoreExtMethods"
+    impl="com.guidewire.cc.domain.note.impl.NoteCoreExtMethodsImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.relatedto.RelatedToBean"
+    impl="com.guidewire.cc.domain.relatedto.RelatedToBeanImpl"/>
+  <description><![CDATA[
+            Information entered by a user into a text field in the ClaimCenter interface.
+            ClaimCenter associates a note with a specific claim, and may additionally associate
+            it with one of the following also: an exposure, a matter, a claimant, or a service request.
+    ]]></description>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Associated claim."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <!-- Exposure, claimant, matter, and service request are mutually exclusive -->
+  <foreignkey
+    columnName="ExposureID"
+    desc="Associated exposure."
+    exportable="false"
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="true"/>
+  <foreignkey
+    columnName="MatterID"
+    desc="Associated matter."
+    exportable="false"
+    fkentity="Matter"
+    name="Matter"
+    nullok="true"/>
+  <foreignkey
+    columnName="ClaimContactID"
+    desc="Associated Claim Contact (either a person or a company)."
+    exportable="false"
+    fkentity="ClaimContact"
+    name="ClaimContact"
+    nullok="true"/>
+  <foreignkey
+    columnName="ServiceRequestID"
+    desc="Associated service request."
+    exportable="false"
+    fkentity="ServiceRequest"
+    name="ServiceRequest"
+    nullok="true"/>
+  <events/>
+  <index
+    desc="note/author query - otherwise, Oracle choosing wrong index"
+    name="note4"
+    trackUsage="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="AuthorID"/>
+  </index>
+  <index
+    desc="Force index on (MatterID) when running against Oracle to work around optimizer issue.  (Optimizer chooses          wrong access method on (MatterID, Retired).  Most values of MatterID will be null, but costing does not see          that.)"
+    name="note5"
+    trackUsage="true">
+    <forceindex
+      oracle="true"/>
+    <indexcol
+      keyposition="1"
+      name="MatterID"/>
+  </index>
+  <index
+    desc="chunking query for 1st N notes on a claim"
+    name="note6"
+    trackUsage="true"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="SecurityType"/>
+    <indexcol
+      keyposition="4"
+      name="AuthoringDate"/>
+    <indexcol
+      keyposition="5"
+      name="CreateTime"/>
+    <indexcol
+      keyposition="6"
+      name="ID"/>
+  </index>
+  <checkconstraint
+    desc="A note can be associated with a claimant or an exposure, but not both."
+    predicate="ClaimContactID IS NULL OR ExposureID IS NULL"/>
+</internalExtension>

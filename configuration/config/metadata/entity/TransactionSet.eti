@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!-- ********************************************************************************************************************
+    TRANSACTIONSET TABLES
+  ******************************************************************************************************************** -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="A group of items submitted at once for approval."
+  entity="TransactionSet"
+  exportable="true"
+  final="false"
+  platform="false"
+  table="transactionset"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.impl.TransactionSetInternal"/>
+  <implementsInterface
+    iface="gw.cc.financials.entity.TransactionSet"/>
+  <implementsEntity
+    name="Validatable"/>
+  <implementsEntity
+    name="Approvable"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+      A set of transactions submitted for approval together. Subtypes include ReserveSet, RecoverySet, and
+      RecoveryReserveSet, which contain the respective Transaction types. A CheckSet contains Checks and Payments.
+      There is no PaymentSet.
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The claim entity to which this TransactionSet belongs."
+    exportable="true"
+    exportasid="true"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <array
+    arrayentity="TransactionSetDocument"
+    arrayfield="TransactionSet"
+    desc="Set of documents linked to this transaction set."
+    exportable="true"
+    name="Documents"
+    owner="true"/>
+  <array
+    arrayentity="Activity"
+    arrayfield="TransactionSet"
+    desc="Set of approval / approval denial activities linked to this transaction set."
+    exportable="true"
+    name="Activities"
+    owner="false"/>
+  <validatetypekeyinset
+    columnname="ApprovalStatus">
+    <typecodes>
+      <typecode
+        typecode="approved"/>
+    </typecodes>
+  </validatetypekeyinset>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.financials.dbchecks.TransactionSetDBCheckBuilder"/>
+</entity>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <CardViewPanel
+    id="ExposureDetailDV"
+    mode="Vehicledamage">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Card
+      id="VehicleDamage_DetailsCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.VehicleDamage.Details&quot;)">
+      <PanelRef
+        def="VehicleDamageDV(Exposure)"/>
+    </Card>
+    <Card
+      id="SubView_AutoTotalLossCalculatorCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.SubView.AutoTotalLossCalculator&quot;)">
+      <PanelRef
+        def="TotalLossCalculatorDV(Exposure)"/>
+    </Card>
+    <Card
+      id="VehicleDamage_VehicleSalvageCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.VehicleDamage.VehicleSalvage&quot;)"
+      visible="Exposure.VehicleIncident.TotalLoss == true">
+      <PanelRef
+        def="VehicleSalvageDV(Exposure)"/>
+    </Card>
+    <Card
+      id="Exposure_ISOCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.ISO&quot;)"
+      visible="!Exposure.Claim.ISOClaimLevelMessaging">
+      <PanelRef
+        def="ISODetailsDV(Exposure)"/>
+    </Card>
+  </CardViewPanel>
+</PCF>

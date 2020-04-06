@@ -1,0 +1,379 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The set of data organized around a single lawsuit or potential lawsuit."
+  entity="Matter"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="matter"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.matter.entity.Matter"
+    impl="com.guidewire.cc.domain.matter.impl.MatterImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.matter.impl.MatterInternal"
+    impl="com.guidewire.cc.domain.matter.impl.MatterImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.ClaimContactRoleOwner"
+    impl="com.guidewire.cc.domain.matter.impl.MatterImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.CommitCallback"
+    impl="com.guidewire.cc.domain.matter.impl.MatterImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.entity.LevelAwareValidatableBean"
+    impl="com.guidewire.cc.domain.matter.impl.MatterImpl"/>
+  <implementsEntity
+    name="Validatable"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="CCAssignable"/>
+  <implementsInterface
+    iface="gw.cc.assignment.entity.CCAssignable"
+    impl="com.guidewire.cc.domain.matter.impl.MatterImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.assignment.AssignablePublicMethods"
+    impl="com.guidewire.cc.domain.matter.impl.MatterImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.assignment.impl.AssignableInternalMethods"
+    impl="com.guidewire.cc.domain.matter.impl.MatterImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.entity.PermissionAssignableCheck"
+    impl="com.guidewire.cc.domain.matter.impl.MatterImpl"/>
+  <implementsInterface
+    iface="gw.api.assignment.CCAssignableMethods"
+    impl="gw.assignment.MatterAssignableMethodsImpl"/>
+  <implementsEntity
+    name="ClaimContactRoleOwner"/>
+  <fulldescription><![CDATA[
+            Represents the set of data organized around a single lawsuit or potential lawsuit.
+            It contains data fields (such as case number and trail date). A Matter is associated with a single claim. 
+            
+    ]]></fulldescription>
+  <column
+    desc="Then name for this matter. Typically of the form 'X vs. Y' once the matter goes to trial."
+    name="Name"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="128"/>
+  </column>
+  <column
+    desc="Official reference number for the lawsuit"
+    name="CaseNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="128"/>
+  </column>
+  <column
+    desc="Room number in the venue."
+    name="Room"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="32"/>
+  </column>
+  <column
+    desc="Whether the court has been asked to make a declaratory judgment."
+    name="DeclaratoryJgmt"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Whether a suit has gone into arbitration."
+    name="Arbitration"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Whether this matter is a good candidate for structured settlement."
+    name="StructuredSettle"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Whether this matter has a motion for summary judgment."
+    name="MotionSummaryJgmt"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Date this matter entered mediation."
+    name="MediationDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Current schedule trial date."
+    name="TrialDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date the trial was filed in court."
+    name="FileDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The final legal cost."
+    name="FinalLegalCost"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="The final settlement cost."
+    name="FinalSettleCost"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="The actual date of the final settlement (as opposed to the date of the payment)."
+    name="FinalSettleDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date the defense counsel was appointed to this matter."
+    name="DefenseApptDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date this matter was sent to the defense attorney."
+    name="SentToDefenseDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Whether the lawsuit was the first notice of the claim."
+    name="FirstNotice"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    desc="The type of suit."
+    name="SuitType"
+    nullok="true"
+    typelist="SuitType"/>
+  <typekey
+    desc="The type of resolution."
+    name="Resolution"
+    nullok="true"
+    typelist="ResolutionType"/>
+  <typekey
+    desc="The reason for reopening the matter."
+    name="ReopenedReason"
+    nullok="true"
+    typelist="MatterReopenedReason"/>
+  <typekey
+    desc="Why the lawsuit was brought in the first place."
+    name="PrimaryCause"
+    nullok="true"
+    typelist="PrimaryCauseType"/>
+  <typekey
+    desc="Describes the overall risk on this matter."
+    name="RiskType"
+    nullok="true"
+    typelist="MatterRiskType"/>
+  <typekey
+    desc="Validation level the matter passed (if any) the last time it was checked."
+    name="ValidationLevel"
+    nullok="true"
+    typelist="ValidationLevel"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The claim associated with this legal matter."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    columnName="SubrogationSummaryID"
+    desc="Subrogation information related to this matter."
+    exportable="false"
+    fkentity="SubrogationSummary"
+    name="SubrogationSummary"
+    nullok="true"/>
+  <array
+    arrayentity="MatterExposure"
+    desc="The list of exposures to which this matter relates."
+    name="Exposures"
+    owner="true"/>
+  <array
+    arrayentity="LitStatusTypeLine"
+    desc="The progression of status type lines on this matter."
+    exportable="false"
+    name="StatusTypeLines"
+    triggersValidation="true"/>
+  <array
+    arrayentity="ClaimContactRole"
+    desc="The roles that this claimcontact has."
+    name="Roles"
+    triggersValidation="true"/>
+  <typekey
+    default="General"
+    desc="Type of Matter such as General, Lawsuit, Arbitration, Hearing or Mediation"
+    name="MatterType"
+    nullok="true"
+    typelist="MatterType"/>
+  <column
+    desc="Boolean field to mark if Matter related to Subrogation"
+    name="SubroRelated"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Case number"
+    name="MatterCaseNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="20"/>
+  </column>
+  <column
+    desc="Current schedule trial date."
+    name="ArbitrationDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Current scheduled matter hearing date"
+    name="HearingDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Room number in the arbitration venue."
+    name="ArbitrationRoom"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="32"/>
+  </column>
+  <column
+    desc="Room number in the hearing venue."
+    name="HearingRoom"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="32"/>
+  </column>
+  <column
+    desc="Room number in the mediation venue."
+    name="MediationRoom"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="32"/>
+  </column>
+  <column
+    desc="Court docket number"
+    name="DocketNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="20"/>
+  </column>
+  <typekey
+    default="state"
+    desc="Court type"
+    name="CourtType"
+    nullok="true"
+    typelist="MatterCourtType"/>
+  <typekey
+    desc="Court jurisdictional district"
+    name="CourtDistrict"
+    nullok="true"
+    typelist="MatterCourtDistrict"/>
+  <typekey
+    desc="Legal specialty needed for this matter"
+    name="LegalSpecialty"
+    nullok="true"
+    typelist="LegalSpecialty"/>
+  <typekey
+    desc="Rating of venue for this matter"
+    name="VenueRating"
+    nullok="true"
+    typelist="MatterVenueRating"/>
+  <column
+    desc="Filing date"
+    name="FilingDate"
+    nullok="true"
+    type="dateonly"/>
+  <column
+    desc="Service date"
+    name="ServiceDate"
+    nullok="true"
+    type="dateonly"/>
+  <typekey
+    desc="Method served"
+    name="MethodServed"
+    nullok="true"
+    typelist="MatterMethodServed"/>
+  <column
+    desc="Response Due"
+    name="ResponseDue"
+    nullok="true"
+    type="dateonly"/>
+  <column
+    desc="Response filed"
+    name="ResponseFiled"
+    nullok="true"
+    type="dateonly"/>
+  <column
+    desc="Was Ad Damnum specified?"
+    name="AdDamnumSpecified"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Ad Damnum Amount"
+    name="AdDamnumAmount"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Punitive damages?"
+    name="PunitiveDamages"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Punitive damages amount"
+    name="PunitiveAmount"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <array
+    arrayentity="BudgetLine"
+    desc="An array of budget line records"
+    name="BudgetLines"/>
+  <events/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.RequiredRolesDBCheckBuilder"/>
+  <index
+    desc="Index to speed up team page which shows matters assigned to a particular group"
+    name="matter1"
+    trackUsage="true"
+    unique="false">
+    <indexcol
+      keyposition="1"
+      name="AssignedGroupID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="CloseDate"/>
+    <indexcol
+      keyposition="4"
+      name="CreateTime"/>
+  </index>
+</entity>

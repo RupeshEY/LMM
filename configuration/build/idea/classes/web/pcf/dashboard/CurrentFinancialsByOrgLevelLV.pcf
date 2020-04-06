@@ -1,0 +1,117 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_dashboard.xml -->
+  <ListViewPanel
+    id="CurrentFinancialsByOrgLevelLV">
+    <Require
+      name="DashboardStatsList"
+      type="DashboardStats[]"/>
+    <Row
+      renderAsSmartHeader="true">
+      <TextCell
+        align="center"
+        colspan="1"
+        id="Group1"
+        value="&quot; &quot;"/>
+      <TextCell
+        align="center"
+        colspan="1"
+        id="Group2"
+        value="&quot; &quot;"/>
+      <TextCell
+        align="center"
+        colspan="1"
+        id="Group3"
+        value="&quot; &quot;"/>
+      <TextCell
+        align="center"
+        colspan="1"
+        id="Group4"
+        value="&quot; &quot;"/>
+      <TextCell
+        align="center"
+        colspan="3"
+        id="Group5"
+        value="DisplayKey.get(&quot;LV.Dashboard.CurrentFinancials.Payments&quot;)"/>
+      <TextCell
+        align="center"
+        colspan="1"
+        id="Group6"
+        value="&quot; &quot;"/>
+      <TextCell
+        align="center"
+        colspan="1"
+        id="Group7"
+        value="&quot; &quot;"/>
+    </Row>
+    <RowIterator
+      editable="false"
+      elementName="DashboardStats"
+      value="DashboardStatsList"
+      valueType="entity.DashboardStats[]">
+      <Row>
+        <TextCell
+          id="ByOrgLevel"
+          label="DisplayKey.get(&quot;LV.Dashboard.ByOrgLevel&quot;)"
+          value="DashboardStats.Group.DisplayName"
+          width="150"/>
+        <TextCell
+          id="CurrentFinancials_OpenExposures"
+          label="DisplayKey.get(&quot;LV.Dashboard.CurrentFinancials.OpenExposures&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.CurrentFinancials.OpenExposures.ToolTip&quot;)"
+          value="DashboardStats.OpenExposures"
+          valueType="java.lang.Integer"/>
+        <TextCell
+          id="CurrentFinancials_OpenClaims"
+          label="DisplayKey.get(&quot;LV.Dashboard.CurrentFinancials.OpenClaims&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.CurrentFinancials.OpenClaims.ToolTip&quot;)"
+          value="DashboardStats.OpenClaims"
+          valueType="java.lang.Integer"/>
+        <TextCell
+          formatType="currency"
+          id="CurrentFinancials_OpenReserves"
+          label="DisplayKey.get(&quot;LV.Dashboard.CurrentFinancials.OpenReserves&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.CurrentFinancials.OpenReserves.ToolTip.Claim&quot;)"
+          value="DashboardStats.OpenReserves.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          valueType="java.math.BigDecimal"/>
+        <TextCell
+          formatType="currency"
+          id="CurrentFinancials_ExpensesPaid"
+          label="DisplayKey.get(&quot;LV.Dashboard.CurrentFinancials.ExpensesPaid&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.CurrentFinancials.ExpensesPaid.ToolTip.Claim&quot;)"
+          value="DashboardStats.ExpensesPaid.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          valueType="java.math.BigDecimal"/>
+        <TextCell
+          formatType="currency"
+          id="CurrentFinancials_ClaimCostsPaid"
+          label="DisplayKey.get(&quot;LV.Dashboard.CurrentFinancials.ClaimCostsPaid&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.CurrentFinancials.ClaimCostsPaid.ToolTip.Claim&quot;)"
+          value="DashboardStats.ClaimCostsPaid.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          valueType="java.math.BigDecimal"/>
+        <TextCell
+          formatType="currency"
+          id="CurrentFinancials_TotalPaid"
+          label="DisplayKey.get(&quot;LV.Dashboard.CurrentFinancials.TotalPaid&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.CurrentFinancials.TotalPaid.ToolTip.Claim&quot;)"
+          value="DashboardStats.TotalPaid.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          valueType="java.math.BigDecimal"/>
+        <TextCell
+          formatType="currency"
+          id="CurrentFinancials_TotalIncurredNet"
+          label="DisplayKey.get(&quot;LV.Dashboard.CurrentFinancials.TotalIncurredNet&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.CurrentFinancials.TotalIncurredNet.ToolTip.Claim&quot;)"
+          value="DashboardStats.TotalIncurredNet.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          valueType="java.math.BigDecimal"/>
+        <TextCell
+          formatType="currency"
+          id="AvgIncurred_Claim"
+          label="DisplayKey.get(&quot;LV.Dashboard.CurrentFinancials.AvgIncurred.Claim&quot;)"
+          tooltip="DisplayKey.get(&quot;LV.Dashboard.CurrentFinancials.AvgIncurred.Claim.ToolTip&quot;)"
+          value="DashboardStats.AvgIncurred.divide(1000).setScale(2, gw.api.util.CurrencyUtil.getRoundingMode())"
+          valueType="java.math.BigDecimal"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

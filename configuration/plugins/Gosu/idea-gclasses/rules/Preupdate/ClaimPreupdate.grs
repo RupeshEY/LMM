@@ -1,0 +1,13 @@
+package rules.Preupdate
+
+@gw.rules.RuleName("Claim Pre-update")
+@gw.rules.RuleSetDescription("This is the Claim Preupdate rule set to permit modification of the claim and related entities. Exceptions will cause the bounding database transaction to roll back, effectively vetoing the update.")
+class ClaimPreupdate extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Claim) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Claim) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Claim Pre-update", ClaimPreupdate )
+  }
+}

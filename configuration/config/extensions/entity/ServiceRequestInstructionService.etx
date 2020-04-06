@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ServiceRequestInstructionService">
+  <index
+    desc="Prevents the same specific service from appearing multiple times on a ServiceRequestInstruction"
+    name="services"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ServiceRequestInstructionID"/>
+    <indexcol
+      keyposition="2"
+      name="SpecialistServiceID"/>
+  </index>
+</extension>

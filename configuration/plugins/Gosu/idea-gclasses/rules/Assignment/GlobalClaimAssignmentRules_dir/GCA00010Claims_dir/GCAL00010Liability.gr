@@ -1,0 +1,59 @@
+package rules.Assignment.GlobalClaimAssignmentRules_dir.GCA00010Claims_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+
+@gw.rules.RuleName("GCAL00010 - Liability")
+internal class GCAL00010Liability {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.LossType == TC_GL
+// Use the function getGroupTypeBasedOnClaimSegment to find the top two group type choices for 
+// assigning this claim.  Then try these assignment options, in this order, until one succeeds:
+// 1. Primary group type, near claim's loss location.  2. Secondary group type, near claim's lossloc.
+// 3. Primary group type, near insured's primary address.  4. Secondary group type, near insured's pr addr.
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+var logger = CCLoggerCategory.ASSIGNMENT
+
+var result = libraries.Claimassignment.getGroupTypeBasedOnClaimSegment(claim.LossType, claim.Segment)
+var primarygrouptype = result[0]
+var secondarygrouptype = result[1]
+
+if (claim.LossLocation != null) {
+  if (claim.CurrentAssignment.assignGroupByLocation(primarygrouptype, claim.LossLocation, 
+                                                    false, claim.CurrentAssignment.AssignedGroup)) {
+    logger.debug(DisplayKey.get("Rules.Assignment.Global.Claim", actions.ShortRuleName))
+    logger.debug(DisplayKey.get("Rules.Assignment.AssignedGroupIs", claim.AssignedGroup))
+    actions.exit()
+  }
+  if (claim.CurrentAssignment.assignGroupByLocation(secondarygrouptype, claim.LossLocation, 
+                                                    false, claim.CurrentAssignment.AssignedGroup)) {
+    logger.debug(DisplayKey.get("Rules.Assignment.Global.Claim", actions.ShortRuleName))
+    logger.debug(DisplayKey.get("Rules.Assignment.AssignedGroupIs", claim.AssignedGroup))
+    actions.exit()
+  }
+}
+if (claim.Insured.PrimaryAddress != null) {
+  if (claim.CurrentAssignment.assignGroupByLocation(primarygrouptype, claim.Insured.PrimaryAddress, 
+                                                    false, claim.CurrentAssignment.AssignedGroup)) {
+    logger.debug(DisplayKey.get("Rules.Assignment.Global.Claim", actions.ShortRuleName))
+    logger.debug(DisplayKey.get("Rules.Assignment.AssignedGroupIs", claim.AssignedGroup))
+    actions.exit()
+  }
+  if (claim.CurrentAssignment.assignGroupByLocation(secondarygrouptype, claim.Insured.PrimaryAddress, 
+                                                    false, claim.CurrentAssignment.AssignedGroup)) {
+    logger.debug(DisplayKey.get("Rules.Assignment.Global.Claim", actions.ShortRuleName))
+    logger.debug(DisplayKey.get("Rules.Assignment.AssignedGroupIs", claim.AssignedGroup))
+    actions.exit()
+  }
+}
+/*end00rule*/
+
+  }
+}

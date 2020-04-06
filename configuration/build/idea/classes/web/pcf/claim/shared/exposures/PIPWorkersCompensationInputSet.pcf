@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="PIPWorkersCompensationInputSet">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Exposure.WorkersCompCollected&quot;)"/>
+    <BooleanRadioInput
+      editable="true"
+      id="WorkersCompCollected_Question"
+      label="DisplayKey.get(&quot;NVV.Exposure.WorkersCompCollected.Question&quot;)"
+      value="Exposure.WCBenefit">
+      <PostOnChange/>
+    </BooleanRadioInput>
+    <ClaimContactInput
+      claim="Exposure.Claim"
+      editable="true"
+      id="PIPDamages_WCCarrier"
+      label="DisplayKey.get(&quot;NVV.Exposure.WageBenefits.PIPDamages.WCCarrier&quot;)"
+      value="Exposure.wccarrier"
+      valueRange="Exposure.Claim.RelatedCompanyArray"
+      valueType="entity.Company"
+      visible=" Exposure.WCBenefit == true"/>
+    <TextInput
+      id="WCCarrier_PrimaryAddress"
+      label="DisplayKey.get(&quot;NVV.Exposure.WageBenefits.PIPDamages.WCCarrier.PrimaryAddress&quot;)"
+      value="Exposure.wccarrier.PrimaryAddressDisplayValue"
+      visible=" Exposure.WCBenefit == true">
+      <Reflect
+        triggerIds="PIPDamages_WCCarrier"
+        value="VALUE.PrimaryAddressDisplayValue"/>
+    </TextInput>
+    <TextInput
+      id="WCCarrier_PrimaryContact"
+      label="DisplayKey.get(&quot;NVV.Exposure.WageBenefits.PIPDamages.WCCarrier.PrimaryContact&quot;)"
+      value="Exposure.wccarrier.PrimaryContact.DisplayName"
+      visible=" Exposure.WCBenefit == true">
+      <Reflect
+        triggerIds="PIPDamages_WCCarrier"
+        value="VALUE.PrimaryContact.DisplayName"/>
+    </TextInput>
+    <TextInput
+      id="WCCarrier_PrimaryPhone"
+      label="DisplayKey.get(&quot;NVV.Exposure.WageBenefits.PIPDamages.WCCarrier.PrimaryPhone&quot;)"
+      value="Exposure.wccarrier.PrimaryPhoneValue"
+      visible=" Exposure.WCBenefit == true">
+      <Reflect
+        triggerIds="PIPDamages_WCCarrier"
+        value="VALUE.PrimaryPhoneValue"/>
+    </TextInput>
+    <DateInput
+      editable="true"
+      id="WCBenefits_BenefitsBeginDate"
+      label="DisplayKey.get(&quot;NVV.Exposure.WageBenefits.PIPDamages.WCBenefits.BenefitsBeginDate&quot;)"
+      value="Exposure.WCBenefits.BenefitsBeginDate"
+      visible=" Exposure.WCBenefit == true"/>
+  </InputSet>
+</PCF>

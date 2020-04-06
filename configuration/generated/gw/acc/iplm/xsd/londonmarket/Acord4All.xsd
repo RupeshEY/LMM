@@ -1,0 +1,322 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+    This Schema contains all Extensions used in the transformation of the listed XIS messages 
+    to ACORD TechAccount or ClaimMovement messages in the ACORD4ALL service
+    The XIS messages covered below are included in this sequence: 
+    DSIGNS 
+    ILUCSM
+    LIMCLM
+    USM
+    SCM
+
+Note there are no Extensions for either WSETT or ILUCSB.
+
+Version 30-11-2011: First 2010-2b issue
+-->
+<xs:schema xmlns="http://www.xchanging.com/ACORD4ALLEDI/xml" xmlns:rlc="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1" xmlns:xs="http://www.w3.org/2001/XMLSchema" targetNamespace="http://www.xchanging.com/ACORD4ALLEDI/xml" elementFormDefault="unqualified" attributeFormDefault="unqualified" version="1.0.0">
+    <!--Import the ACORD Schema used for ACORD elements-->
+    <xs:import namespace="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1" schemaLocation="JvInsReinsurance.xsd"/>
+    <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+    <!-- xxxxxxxxxxxxxxxxxxxxxxx      DSIGNS Extensions       xxxxxxxxxxxxxxxxxxxxxxx-->
+    <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+    <!--**************************************************************-->
+    <!--ComplexTypes and SimpleTypes-->
+    <!--**************************************************************-->
+    <xs:complexType name="DeductionsPercentageRate_type">
+        <xs:simpleContent>
+            <xs:extension base="xs:decimal">
+                <xs:attribute name="RateUnit" type="xs:string" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="InsurancePremiumTaxPercentageRate_type">
+        <xs:simpleContent>
+            <xs:extension base="xs:decimal">
+                <xs:attribute name="RateUnit" type="xs:string" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:simpleType name="DelinkedIndicator_type">
+        <xs:restriction base="xs:string">
+            <xs:enumeration value="delinked"/>
+            <xs:enumeration value="not_delinked"/>
+        </xs:restriction>
+    </xs:simpleType>
+    <!--**************************************************************-->
+    <!--Elements-->
+    <!--**************************************************************-->
+    <xs:element name="DeductionsPercentageRate" type="DeductionsPercentageRate_type"/>
+    <xs:element name="InsurancePremiumTaxPercentageRate" type="InsurancePremiumTaxPercentageRate_type"/>
+    <xs:element name="InsurancePremiumTaxPartOrWholeIndicator" type="xs:string"/>
+    <xs:element name="InsurancePremiumTaxSettledOrRecordedIndicator" type="xs:string"/>
+    <xs:element name="DelinkedIndicator" type="DelinkedIndicator_type"/>
+    <xs:element name="RateOfExchange" type="xs:string"/>
+    <xs:element name="SettlementGroupCode" type="xs:string"/>
+    <!-- xxxxxxxxxxxxxxxxxxxxxxx      DSIGNS Extensions END      xxxxxxxxxxxxxxxxxxxxxxx-->
+    <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+    <!-- xxxxxxxxxxxxxxxxxxxxxxx      ILUCSM Extensions       xxxxxxxxxxxxxxxxxxxxxxx-->
+    <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+    <!--**************************************************************-->
+    <!--ComplexType based on rlcAnyPartyType-->
+    <!--**************************************************************-->
+    <xs:complexType name="ClaimSettlingAgent_type">
+        <xs:sequence>
+            <xs:element ref="rlc:Party"/>
+            <xs:element ref="rlc:Contact" minOccurs="0"/>
+            <xs:element ref="rlc:Address" minOccurs="0"/>
+            <xs:element name="Extension" type="rlc:AnyParty_ExtensionType" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!--**************************************************************-->
+    <!--Elements-->
+    <!--**************************************************************-->
+    <xs:element name="WarRiskOnly" type="xs:string"/>
+    <xs:element name="WarIndicator" type="xs:string"/>
+    <xs:element name="VesselAssuredOrAircraft" type="xs:string"/>
+    <xs:element name="TaxBasis" type="xs:string"/>
+    <xs:element name="SumInsuredNarrative" type="xs:string"/>
+    <xs:element name="SlipOrderNarrative" type="xs:string"/>
+    <xs:element name="SlipLeaderName" type="xs:string"/>
+    <xs:element name="SimultaneousReinstatementIndicator" type="xs:string"/>
+    <xs:element name="SettlementIndicator" type="xs:string"/>
+    <!--Commented out because already defined in DSIGNS
+    <xs:element name="SettlementGroupCode" type="xs:string"/>-->
+    <xs:element name="RiskClassificationCode" type="xs:string"/>
+    <xs:element name="ReinsuranceIndicator" type="xs:string"/>
+    <xs:element name="ReinstatementsWarNbr" type="xs:string"/>
+    <xs:element name="ReinstatementsNbr" type="xs:string"/>
+    <xs:element name="ReinstatementPercentage" type="rlc:AnyRateType"/>
+    <xs:element name="ReinstatementDeductionPercentage" type="rlc:AnyRateType"/>
+    <xs:element name="ReinstatementCalculationType" type="xs:string"/>
+    <xs:element name="RateOrPremiumNarrative" type="xs:string"/>
+    <!--Commented out because already defined in DSIGNS
+    <xs:element name="RateOfExchange" type="xs:string"/>-->
+    <xs:element name="PreviousClaimSigningReference" type="xs:string"/>
+    <xs:element name="PeriodOfPolicyNarrative" type="xs:string"/>
+    <xs:element name="PerilsOrConditionsNarrative" type="xs:string"/>
+    <xs:element name="OverseasClientName" type="xs:string"/>
+    <xs:element name="OutstandingAmountStatus" type="xs:string"/>
+    <xs:element name="OtherDeductionsPercentage" type="rlc:AnyRateType"/>
+    <xs:element name="OtherDeductionsDescription" type="xs:string"/>
+    <xs:element name="OtherDeductionsBasis" type="xs:string"/>
+    <xs:element name="ObjectionPeriod" type="xs:string"/>
+    <xs:element name="NonStandardDeductionsIndicator" type="xs:string"/>
+    <xs:element name="LossLocation" type="xs:string"/>
+    <xs:element name="LossDetails" type="xs:string"/>
+    <xs:element name="LossDateNarrative" type="xs:string"/>
+    <xs:element name="LocationVoyage" type="xs:string"/>
+    <xs:element name="LetterOfCreditReference" type="xs:string"/>
+    <xs:element name="LawyerName" type="xs:string"/>
+    <xs:element name="InsurancePremiumTaxPercentage" type="rlc:AnyRateType"/>
+    <xs:element name="InsurancePremiumTaxPartWholeIndicator" type="xs:string"/>
+    <xs:element name="InsurancePremiumTaxCollectedRecordedIndicator" type="xs:string"/>
+    <xs:element name="ImportedServicesNarrative" type="xs:string"/>
+    <xs:element name="DirectIndicator" type="xs:string"/>
+    <!--Commented out because already defined in DSIGNS
+    <xs:element name="DelinkedIndicator" type="xs:string"/>-->
+    <xs:element name="DeductionsNarrative" type="xs:string"/>
+    <xs:element name="ClaimSettlingAgent" type="ClaimSettlingAgent_type"/>
+    <xs:element name="CertificateNumber" type="xs:string"/>
+    <xs:element name="BureauSigningReferenceRelated" type="xs:string"/>
+    <xs:element name="BureauLeadingInsurerOrReinsurer" type="xs:string"/>
+    <xs:element name="BrokerageBasis" type="xs:string"/>
+    <xs:element name="AuditDtiCode" type="xs:string"/>
+    <xs:element name="AdjusterName" type="xs:string"/>
+    <xs:element name="AdditionalAccountTransactionDescription" type="xs:string"/>
+    <!--xxxxxxxxxxxxxxxxxxxxxxx       ILUCSM Extensions END  xxxxxxxxxxxxxxxxxxxxxxx-->
+    <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+    <!-- xxxxxxxxxxxxxxxxxxxxxxx      LIMCLM Extensions      xxxxxxxxxxxxxxxxxxxxxxx-->
+    <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+    <!--Note LIMCLM Extensions apply to both LIRMA and ILU LIMCLM Messages-->
+    <!--**************************************************************-->
+    <!--ComplexTypes-->
+    <!--**************************************************************-->
+    <xs:complexType name="ClaimsSequenceNbr_type">
+        <xs:sequence>
+            <xs:element ref="Count"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="OutstandingResponsesNbr_type">
+        <xs:sequence>
+            <xs:element ref="Count"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!--**************************************************************-->
+    <!--Elements-->
+    <!--**************************************************************-->
+    <xs:element name="ClaimsSequenceNbr" type="ClaimsSequenceNbr_type"/>
+    <xs:element name="OutstandingResponsesNbr" type="OutstandingResponsesNbr_type"/>
+    <xs:element name="Count" type="xs:int"/>
+    <!--Commented out because already declared for ILUCSM
+    <xs:element name="SumInsuredNarrative" type="xs:string"/>-->
+    <xs:element name="Description" type="xs:string"/>
+    <xs:element name="TypeOfClaim" type="xs:string"/>
+    <xs:element name="ContractualAgreementIndicator" type="xs:string"/>
+    <xs:element name="ExcessOfLossAggregateBasis" type="xs:string"/>
+    <xs:element name="BureauLeaderComments" type="xs:string"/>
+    <xs:element name="SlipLeaderComments" type="xs:string"/>
+    <xs:element name="BureauLeadAdditionalDetails" type="xs:string"/>
+    <xs:element name="CurrentEstimateFguNarrative" type="xs:string"/>
+    <xs:element name="AdditionalDetails" type="xs:string"/>
+    <xs:element name="AmendmentNarrative" type="xs:string"/>
+    <xs:element name="WarningErrorText" type="xs:string"/>
+    <xs:element name="AggregateDetails" type="xs:string"/>
+    <xs:element name="UserIndexDetails" type="xs:string"/>
+    <xs:element name="ChaseupResponse" type="xs:string"/>
+    <xs:element name="ConflictIndicator" type="xs:string"/>
+    <xs:element name="NonParticipantIndicator" type="xs:string"/>
+    <xs:element name="NoFurtherResponseIndicator" type="xs:string"/>
+    <xs:element name="OriginalBulkClaimReference" type="xs:string"/>
+    <xs:element name="OriginalBulkTransactionClaimReference" type="xs:string"/>
+    <xs:element name="OriginalBulkSequenceNbr" type="xs:string"/>
+    <xs:element name="BusinessClass" type="xs:string"/>
+    <xs:element name="ClaimCategory" type="xs:string"/>
+    <xs:element name="ClaimSubCategory" type="xs:string"/>
+    <!--xxxxxxxxxxxxxxxxxxxxxxx  LIMCLM Extensions END    xxxxxxxxxxxxxxxxxxxxxxx-->
+    <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+    <!-- xxxxxxxxxxxxxxxxxxxxxxx      USM Extensions      xxxxxxxxxxxxxxxxxxxxxxx-->
+    <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+    <!--**************************************************************-->
+    <!--ComplexTypes-->
+    <!--**************************************************************-->
+    <xs:complexType name="OriginalBroker_Type">
+        <xs:sequence>
+            <xs:element ref="rlc:Party" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CountryOfRisk_Type">
+        <xs:sequence>
+            <xs:element ref="rlc:Location" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CountryOfOrigin_Type">
+        <xs:sequence>
+            <xs:element ref="rlc:Location" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="LloydsTotalSignedLine_Type">
+        <xs:sequence>
+            <xs:element ref="rlc:Rate" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="TotalDiscountPercentage_Type">
+        <xs:sequence>
+            <xs:element ref="rlc:Rate" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="LloydsNarrative_Type">
+        <xs:sequence>
+            <xs:element ref="TreatySectionReference" minOccurs="0"/>
+            <xs:element ref="LineNbr" minOccurs="0"/>
+            <xs:element ref="Line" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!--**************************************************************-->
+    <!--Elements-->
+    <!--**************************************************************-->
+    <xs:element name="OriginalBroker" type="OriginalBroker_Type"/>
+    <xs:element name="FinancialAccountReference" type="xs:string"/>
+    <xs:element name="AssociatedSubaccountReference" type="xs:string"/>
+    <xs:element name="AssociatedClosingSectionReference" type="xs:string"/>
+    <xs:element name="LloydsProcessingCode" type="xs:string"/>
+    <xs:element name="LloydsCategoryCode" type="xs:string"/>
+    <xs:element name="LloydsQualifyingCategoryCode" type="xs:string"/>
+    <xs:element name="InstalmentType" type="xs:string"/>
+    <xs:element name="BulkSettlementIndicator" type="xs:string"/>
+    <xs:element name="SourceSystemIndicator" type="xs:string"/>
+    <xs:element name="BusinessCategory" type="xs:string"/>
+    <xs:element name="PaymentIndicator" type="xs:string"/>
+    <xs:element name="TypeOfPaymentIndicator" type="xs:string"/>
+    <xs:element name="TrustFundCode" type="xs:string"/>
+    <xs:element name="CountryOfRisk" type="CountryOfRisk_Type"/>
+    <xs:element name="CountryOfOrigin" type="CountryOfOrigin_Type"/>
+    <xs:element name="FILMarketCode" type="xs:string"/>
+    <xs:element name="LloydsMarineAuditCode" type="xs:string"/>
+    <xs:element name="LloydsNonMarineAuditCode" type="xs:string"/>
+    <xs:element name="LloydsAviationAuditCode" type="xs:string"/>
+    <xs:element name="LloydsMarketType" type="xs:string"/>
+    <!--AuditDtiCode commented out because already declared for ILUCSM 
+    <xs:element name="AuditDtiCode" type="xs:string"/>-->
+    <xs:element name="LloydsAdjustableIndicator" type="xs:string"/>
+    <xs:element name="LloydsOcaContraIndicator" type="xs:string"/>
+    <xs:element name="ClaimsPayableAbroadIndicator" type="xs:string"/>
+    <xs:element name="AttachmentIndicator" type="xs:string"/>
+    <xs:element name="RiskCode" type="xs:string"/>
+    <xs:element name="FILCode" type="xs:string"/>
+    <xs:element name="FILCode2" type="xs:string"/>
+    <xs:element name="LloydsTotalSignedLine" type="LloydsTotalSignedLine_Type"/>
+    <xs:element name="TotalDiscountPercentage" type="TotalDiscountPercentage_Type"/>
+    <xs:element name="SyndicateRiBrokerInformation" type="xs:string"/>
+    <xs:element name="BureauTreatyNbr" type="xs:string"/>
+    <xs:element name="LloydsTreatySerialNbr" type="xs:string"/>
+    <xs:element name="InstalmentNbr" type="xs:string"/>
+    <xs:element name="LloydsNarrative" type="LloydsNarrative_Type"/>
+    <xs:element name="PlannedSettlementDate" type="xs:string"/>
+    <xs:element name="OriginatingClaimsOfficeReference" type="xs:string"/>
+    <xs:element name="SyndicateMarketCode" type="xs:string"/>
+    <!--AuditDtiCode commented out because already declared for ILUCSM 
+    <xs:element name="RateOfExchange" type="xs:string"/>-->
+    <xs:element name="TreatySectionReference" type="xs:string"/>
+    <xs:element name="LineNbr" type="xs:string"/>
+    <xs:element name="Line" type="xs:string"/>
+    <xs:element name="UniqueTransactionReference" type="xs:string"/>
+    <!-- xxxxxxxxxxxxxxxxxxxxxxx      USM Extensions END     xxxxxxxxxxxxxxxxxxxxxxx-->
+    <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+    <!-- xxxxxxxxxxxxxxxxxxxxxxx      SCM Extensions     xxxxxxxxxxxxxxxxxxxxxxx-->
+    <!--XXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXXX-->
+    <!--**************************************************************-->
+    <!--ComplexTypes-->
+    <!--**************************************************************-->
+    <xs:complexType name="ServiceProviderShare_type">
+        <xs:sequence>
+            <xs:element ref="rlc:Rate" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="CoverPeriod_Type">
+        <xs:sequence>
+            <xs:element ref="StartDate" minOccurs="0"/>
+            <xs:element ref="EndDate" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <!--**************************************************************-->
+    <!--Elements-->
+    <!--**************************************************************-->
+    <xs:element name="ServiceProviderShare" type="ServiceProviderShare_type"/>
+    <xs:element name="SignedIndicator" type="xs:string"/>
+    <xs:element name="CoverOperatingBasisDescription" type="xs:string"/>
+    <xs:element name="CoverOperatingBasis" type="xs:string"/>
+    <xs:element name="ClaimTypeCode" type="xs:string"/>
+    <xs:element name="BlockIndicator" type="xs:string"/>
+    <!--Commented out because already defined for USM
+    <xs:element name="FILMarketCode" type="xs:string"/>-->
+    <xs:element name="CoverPeriod" type="CoverPeriod_Type"/>
+    <xs:element name="StartDate" type="xs:string"/>
+    <xs:element name="EndDate" type="xs:string"/>
+    <xs:element name="LimitsInsuredValueExcessDescription" type="xs:string"/>
+    <xs:element name="DateClaimMadeNarrative" type="xs:string"/>
+    <xs:element name="ExtendedLossDetails" type="xs:string"/>
+    <xs:element name="ExtendedPolicyDetails" type="xs:string"/>
+    <xs:element name="TransactionDetails" type="xs:string"/>
+    <xs:element name="DateLastSeen" type="xs:string"/>
+    <xs:element name="TrustFundCountryCode" type="xs:string"/>
+    <!--Commented out because already defined for USM
+    <xs:element name="TrustFundCode" type="xs:string"/>
+    <xs:element name="FILCode" type="xs:string"/>-->
+    <xs:element name="StateOfOrigin" type="xs:string"/>
+    <xs:element name="AccountingType" type="xs:string"/>
+    <xs:element name="LloydsClaimReference" type="xs:string"/>
+    <!--changed from "lloyds" to "Lloyds" w.e.f. 2010-2b-->
+    <!--Commented out because already defined for USM
+    <xs:element name="FILCode2" type="xs:string"/>-->
+    <xs:element name="PreviouslyPaidIndicator" type="xs:string"/>
+    <xs:element name="LossReserveIndicator" type="xs:string"/>
+    <xs:element name="AdvancePaymentIndicator" type="xs:string"/>
+    <!--Commented out because already defined for USM
+    <xs:element name="RiskCode" type="xs:string"/>-->
+    <xs:element name="BureauPrimaryReference2" type="xs:string"/>
+    <xs:element name="MovementReference" type="xs:string"/>
+    <!--Commented out because already defined for ILUCSM
+    <xs:element name="RateOfExchange" type="xs:string"/>-->
+    <xs:element name="SettlementCurrency" type="xs:string"/>
+    <!-- xxxxxxxxxxxxxxxxxxxxxxx      SCM Extensions END     xxxxxxxxxxxxxxxxxxxxxxx-->
+</xs:schema>

@@ -1,0 +1,115 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuActions
+    flatten="true"
+    id="ClaimMenuActions"
+    numEntriesPerColumn="3"
+    subMenuOnDemand="true">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <MenuItemSetRef
+      def="ClaimNewOtherMenuItemSet(Claim)"/>
+    <MenuItem
+      id="ClaimMenuActions_NewTransaction"
+      label="DisplayKey.get(&quot;Web.ClaimMenuActions.NewTransaction&quot;)"
+      shortcut="R"
+      visible="perm.Claim.createanytransaction(Claim)">
+      <MenuItem
+        action="NewReserveSet.go(Claim, null, true)"
+        available="gw.api.financials.FinancialsUtil.isReserveAllowed(Claim)"
+        hideIfDisabled="false"
+        id="ClaimMenuActions_NewTransaction_ReserveSet"
+        label="DisplayKey.get(&quot;TransactionSet.Subtypes.ReserveSet&quot;)"
+        tooltip="gw.api.financials.FinancialsUtil.getReserveTooltip(Claim)"
+        visible="perm.Claim.createreserve(Claim)"/>
+      <MenuItem
+        action="NormalCreateCheckWizardForward.go(Claim)"
+        available="gw.api.financials.FinancialsUtil.isNormalCheckAllowed(Claim)"
+        hideIfDisabled="false"
+        id="ClaimMenuActions_NewTransaction_CheckSet"
+        label="DisplayKey.get(&quot;TransactionSet.Subtypes.CheckSet&quot;)"
+        tooltip="gw.api.financials.FinancialsUtil.getNormalCheckTooltip(Claim)"
+        visible="perm.Claim.createpayment(Claim)"/>
+      <MenuItem
+        id="ClaimMenuActions_NewOtherTrans"
+        label="DisplayKey.get(&quot;Web.ClaimMenuActions.NewOtherTrans&quot;)"
+        visible="perm.Claim.createanytransaction(Claim)">
+        <MenuItem
+          action="ManualCreateCheckWizardForward.go(Claim)"
+          available="gw.api.financials.FinancialsUtil.isManualCheckAllowed(Claim)"
+          hideIfDisabled="false"
+          id="ClaimMenuActions_NewTransaction_Check"
+          label="DisplayKey.get(&quot;Java.Financials.Manual.Check&quot;)"
+          tooltip="gw.api.financials.FinancialsUtil.getManualCheckTooltip(Claim)"
+          visible="perm.Claim.createmanualpayment(Claim)"/>
+        <MenuItem
+          action="NewRecoverySet.go(Claim)"
+          available="gw.api.financials.FinancialsUtil.isRecoveryAllowed(Claim)"
+          hideIfDisabled="false"
+          id="ClaimMenuActions_NewTransaction_RecoverySet"
+          label="DisplayKey.get(&quot;TransactionSet.Subtypes.RecoverySet&quot;)"
+          tooltip="gw.api.financials.FinancialsUtil.getRecoveryTooltip(Claim)"
+          visible="perm.Claim.createrecovery(Claim)"/>
+        <MenuItem
+          action="NewRecoveryReserveSet.go(Claim)"
+          available="gw.api.financials.FinancialsUtil.isRecoveryReserveAllowed(Claim)"
+          hideIfDisabled="false"
+          id="ClaimMenuActions_NewTransaction_RecoveryReserveSet"
+          label="DisplayKey.get(&quot;TransactionSet.Subtypes.RecoveryReserveSet&quot;)"
+          tooltip="gw.api.financials.FinancialsUtil.getRecoveryReserveTooltip(Claim)"
+          visible="perm.Claim.createrecoveryreserve(Claim)"/>
+      </MenuItem>
+    </MenuItem>
+    <MenuItem
+      id="ClaimMenuActions_NewDocument"
+      label="DisplayKey.get(&quot;Web.ClaimMenuActions.NewDocument&quot;)"
+      shortcut="W"
+      visible="perm.Claim.createdocument(Claim)">
+      <MenuItemSetRef
+        def="ClaimNewDocumentMenuItemSet(Claim)"/>
+    </MenuItem>
+    <MenuItem
+      id="ClaimMenuActions_NewActivity"
+      label="DisplayKey.get(&quot;Web.ClaimMenuActions.NewActivity&quot;)"
+      shortcut="V">
+      <MenuItemSetRef
+        def="NewActivityMenuItemSet(Claim)"/>
+    </MenuItem>
+    <MenuItem
+      available="!Claim.Closed"
+      id="ClaimMenuActions_NewExposure"
+      label="DisplayKey.get(&quot;Web.ClaimMenuActions.NewExposure&quot;)"
+      shortcut="X"
+      visible="Claim.ExposureListChangeable">
+      <MenuItemSetRef
+        def="NewExposureMenuItemSet(Claim)"
+        mode="getNewExposureMenuMode()"/>
+    </MenuItem>
+    <MenuItemSetRef
+      def="ClaimFileMenuItemSet(Claim)"/>
+    <Code><![CDATA[
+function getNewExposureMenuMode() : String {
+        // Return "none" if claim doesn't show new exposure menu at all
+        if (!Claim.isExposureListChangeable()) {
+          return "none";
+        }
+
+        var byCoverageType = gw.api.exposure.NewExposureMenuUtil.showChooseByCoverageTypeMenu(Claim);
+        var byCoverage = gw.api.exposure.NewExposureMenuUtil.showChooseByCoverageMenu(Claim);
+
+        if (byCoverageType and byCoverage) {
+          return "both";
+        } else if (byCoverageType) {
+          return "coveragetype";
+        } else if (byCoverage) {
+          return "coverage";
+        } else {
+          throw new java.lang.IllegalStateException("Claim loss type " + Claim.LossType + " is not configured to show the new exposure menu either by coverage type or by coverage");
+        }
+      }
+    ]]></Code>
+  </MenuActions>
+</PCF>

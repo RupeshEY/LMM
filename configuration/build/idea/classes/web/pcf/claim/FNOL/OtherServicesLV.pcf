@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    available="true"
+    id="OtherServicesLV"
+    visible="true">
+    <Require
+      name="otherServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <ExposeIterator
+      name="OtherServicesLV"
+      valueType="entity.ServiceRequest"
+      widget="OtherServicesIterator"/>
+    <Require
+      name="alsoRemove"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <RowIterator
+      canPick="false"
+      checkBoxVisible="CurrentLocation.InEditMode and (serviceRequest.IsEditableInUI)"
+      editable="false"
+      elementName="serviceRequest"
+      hasCheckBoxes="true"
+      id="OtherServicesIterator"
+      toRemove="removeServiceRequest(serviceRequest)"
+      value="otherServiceRequests.toList()"
+      valueType="java.util.List&lt;entity.ServiceRequest&gt;">
+      <Row>
+        <BooleanRadioCell
+          icon="serviceRequest.Kind.Icon"
+          iconLabel="serviceRequest.Kind.Label"
+          id="Kind"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.Kind&quot;)"
+          showHeaderIcon="false"
+          value="true"
+          valueType="boolean"/>
+        <TextCell
+          id="RelatedTo"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.RelatesTo&quot;)"
+          value="serviceRequest.RelatedToName"/>
+        <TextCell
+          id="Services"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.Services&quot;)"
+          value="serviceRequest.ServicesString"/>
+        <TextCell
+          id="Specialist"
+          label="DisplayKey.get(&quot;LV.Claim.ServiceRequest.Specialist&quot;)"
+          value="serviceRequest.SpecialistName"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function removeServiceRequest(sr : ServiceRequest) {
+  otherServiceRequests.remove(sr)
+  alsoRemove?.remove(sr)
+  //safe to just delete the SR, since it's in draft and therefore no quotes / invoices / statements exist, and everything is deleted in a cascade
+  sr.remove()
+}]]></Code>
+  </ListViewPanel>
+</PCF>

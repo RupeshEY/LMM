@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    alwaysInEditMode="true"
+    beforeCommit="performOperation()"
+    canEdit="true"
+    canVisit="true"
+    id="OperationReasonPromptPopup"
+    startInEditMode="true"
+    title="&quot;default&quot;">
+    <LocationEntryPoint
+      signature="OperationReasonPromptPopup(serviceRequest : ServiceRequest, operation : ServiceRequestOperation)"/>
+    <LocationEntryPoint
+      signature="OperationReasonPromptPopup(serviceRequest : ServiceRequest, invoice: ServiceRequestInvoice, operation : ServiceRequestOperation)"/>
+    <Variable
+      name="serviceRequest"
+      type="ServiceRequest"/>
+    <Variable
+      initialValue="&quot;&quot;"
+      name="operationReason"
+      type="String"/>
+    <Variable
+      name="operation"
+      type="ServiceRequestOperation"/>
+    <Variable
+      initialValue="DisplayKey.get(&quot;Web.ServiceRequest.StateTransition.OperationReasonPopup.Update&quot;)"
+      name="updateLabel"
+      type="String"/>
+    <Variable
+      initialValue="DisplayKey.get(&quot;Web.ServiceRequest.StateTransition.OperationReasonPopup.Cancel&quot;)"
+      name="cancelLabel"
+      type="String"/>
+    <Variable
+      name="invoice"
+      type="ServiceRequestInvoice"/>
+    <Screen>
+      <TitleBar
+        title="gw.vendormanagement.ServiceRequestOperationDisplayHelper.getPopupTitle(operation, invoice)"/>
+      <Toolbar>
+        <EditButtons
+          cancelLabel="gw.vendormanagement.ServiceRequestOperationDisplayHelper.getCancelLabel(operation)"
+          updateLabel="gw.vendormanagement.ServiceRequestOperationDisplayHelper.getUpdateLabel(operation)"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextAreaInput
+            editable="true"
+            id="ReasonForOperation"
+            label="gw.vendormanagement.ServiceRequestOperationDisplayHelper.getReasonLabel(operation)"
+            numRows="4"
+            required="false"
+            value="operationReason"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[uses gw.vendormanagement.servicerequeststate.ServiceRequestOperationDefinition
+uses gw.vendormanagement.servicerequeststate.ServiceRequestInvoiceOperationDefinition
+function performOperation() {
+  if (invoice != null) {
+    var context = new ServiceRequestInvoiceOperationDefinition.OperationContext(){:Reason = operationReason}
+    invoice.performOperation(operation, context, false) 
+  } else {
+    var context = new ServiceRequestOperationDefinition.OperationContext(){:Reason = operationReason}
+    serviceRequest.performOperation(operation, context, false)
+  } 
+}]]></Code>
+  </Popup>
+</PCF>

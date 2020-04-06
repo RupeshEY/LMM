@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Standard states for a claim, such as open or closed"
+  final="true"
+  name="ClaimState">
+  <typecode
+    code="draft"
+    desc="Draft"
+    name="Draft"
+    priority="1"/>
+  <typecode
+    code="open"
+    desc="Open"
+    name="Open"
+    priority="2"/>
+  <typecode
+    code="closed"
+    desc="Closed"
+    name="Closed"
+    priority="3"/>
+  <typecode
+    code="archived"
+    desc="Archived"
+    name="Archived"
+    priority="5"/>
+</typelist>

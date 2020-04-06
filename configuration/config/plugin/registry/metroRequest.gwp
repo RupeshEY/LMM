@@ -1,0 +1,10 @@
+<?xml version="1.0"?>
+<plugin
+  interface="MessageRequest"
+  name="metroRequest">
+  <!-- <plugin-java
+    javaclass="com.guidewire.pl.plugin.contact.internal.ContactSearchDemoAdapter"
+    name="IContactSearchAdapter"/> -->
+  <plugin-java
+    javaclass="com.guidewire.cc.plugin.metro.internal.MetroMessageRequestImpl"/>
+</plugin>

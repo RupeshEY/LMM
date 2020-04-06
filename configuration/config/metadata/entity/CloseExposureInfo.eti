@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="CloseExposureInfo"
+  supertype="ExpCloseReopenInfo">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.CloseExposureInfo"
+    impl="com.guidewire.cc.domain.exposure.impl.CloseExposureInfoImpl"/>
+  <fulldescription><![CDATA[
+      Temporary entity that holds transitional internal state information during the
+      close exposure operation.
+    ]]></fulldescription>
+  <typekey
+    name="outcome"
+    nullok="true"
+    typelist="ExposureClosedOutcomeType"/>
+</subtype>

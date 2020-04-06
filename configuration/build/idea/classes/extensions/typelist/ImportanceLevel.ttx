@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="ImportanceLevel">
+  <typecode
+    code="top"
+    desc="Top importance level"
+    name="Top"
+    priority="1">
+    <category
+      code="supervisor"
+      typelist="CalendarContext"/>
+    <category
+      code="desktop"
+      typelist="CalendarContext"/>
+    <category
+      code="claim"
+      typelist="CalendarContext"/>
+    <category
+      code="matter"
+      typelist="CalendarContext"/>
+  </typecode>
+  <typecode
+    code="high"
+    desc="High importance level"
+    name="High"
+    priority="2">
+    <category
+      code="desktop"
+      typelist="CalendarContext"/>
+    <category
+      code="claim"
+      typelist="CalendarContext"/>
+    <category
+      code="matter"
+      typelist="CalendarContext"/>
+  </typecode>
+  <typecode
+    code="medium"
+    desc="Medium importance level"
+    name="Medium"
+    priority="3">
+    <category
+      code="claim"
+      typelist="CalendarContext"/>
+    <category
+      code="matter"
+      typelist="CalendarContext"/>
+  </typecode>
+  <typecode
+    code="low"
+    desc="Low importance level"
+    name="Low"
+    priority="4">
+    <category
+      code="matter"
+      typelist="CalendarContext"/>
+  </typecode>
+</typelistextension>

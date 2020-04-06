@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <InputSet
+    id="TransactionTrackingInputSet">
+    <Require
+      name="Transaction"
+      type="Transaction"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.TransactionTracking.Transaction.Tracking&quot;)"/>
+    <TypeKeyInput
+      id="Status"
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.TransactionTracking.Transaction.Status&quot;)"
+      value="Transaction.Status"
+      valueType="typekey.TransactionStatus"/>
+    <ClaimContactInput
+      claim="Transaction.Claim"
+      id="EnteredBy"
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.TransactionTracking.Transaction.EnteredBy&quot;)"
+      value="Transaction.TransactionSet.CreateUser.Contact"
+      valueRange="Transaction.Claim.RelatedUserContactArray"
+      valueType="entity.UserContact"/>
+    <DateInput
+      id="CreateTime"
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.TransactionTracking.Transaction.CreateTime&quot;)"
+      value="Transaction.CreateTime"/>
+  </InputSet>
+</PCF>

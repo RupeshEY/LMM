@@ -1,0 +1,21 @@
+package rules.Assignment.GlobalExposureAssignmentRules_dir
+
+@gw.rules.RuleName("GEA02000 - Non-auto claims")
+internal class GEA02000Nonautoclaims {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.Claim.LossType != TC_AUTO
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+// For property, liability, and WC claims, all exposures should go to the claim owner.
+// This whole branch is actually unnecessary, since Default will catch it, but is here for completeness.
+/*end00rule*/
+
+  }
+}

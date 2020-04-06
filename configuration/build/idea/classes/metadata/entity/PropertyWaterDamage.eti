@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="PropertyWaterDamage"
+  exportable="true"
+  extendable="true"
+  final="true"
+  platform="false"
+  table="propertywaterdamage"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.PropertyWaterDamage"
+    impl="com.guidewire.cc.domain.claim.impl.PropertyWaterDamageImpl"/>
+  <fulldescription><![CDATA[    Represents details about water damage to a property
+  ]]></fulldescription>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Claim that owns this damage object."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <typekey
+    desc="Where is the water entering the property from?"
+    name="WaterSource"
+    nullok="true"
+    typelist="WaterSource"/>
+  <column
+    desc="Is the roof damage protected?"
+    name="IsRoofProtected"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Has the water to the house/room been turned off?"
+    name="HasWaterBeenTurnedOff"
+    nullok="true"
+    type="bit"/>
+</entity>

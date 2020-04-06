@@ -1,0 +1,600 @@
+<?xml version="1.0"?>
+<!-- Typelists related to security -->
+<internaltypelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Defines all permissions that can be granted to users via privileges and roles"
+  name="SystemPermissionType">
+  <typecode
+    code="claimraown"
+    desc="Permission to reassign your own claims"
+    name="Reassign owned claims"/>
+  <typecode
+    code="claimraunown"
+    desc="Permission to reassign claims owned by other users"
+    name="Reassign unowned claims"/>
+  <typecode
+    code="expraown"
+    desc="Permission to reassign your own exposures"
+    name="Reassign owned exposures"/>
+  <typecode
+    code="expraunown"
+    desc="Permission to reassign exposures owned by other users"
+    name="Reassign unowned exposures"/>
+  <typecode
+    code="mttrraown"
+    desc="Permission to reassign your own matters"
+    name="Reassign owned matters"/>
+  <typecode
+    code="mttrraunown"
+    desc="Permission to reassign matters owned by other users"
+    name="Reassign unowned matters"/>
+  <!-- Matters permissions -->
+  <typecode
+    code="mttrcreate"
+    desc="Permission to create new matters on a claim"
+    name="Create matters"/>
+  <typecode
+    code="mttrclose"
+    desc="Permission to close matters on a claim"
+    name="Close matters"/>
+  <typecode
+    code="mttrreopen"
+    desc="Permission to reopen matters on a claim"
+    name="Reopen matters"/>
+  <!-- Notes Permissions -->
+  <typecode
+    code="noteviewconf"
+    desc="Permission to view confidential notes"
+    name="View confidential notes"/>
+  <!-- Reinsurance Permissions -->
+  <typecode
+    code="reinsuranceedit"
+    desc="Permission to edit the reinsurance reportable status on a claim"
+    name="Edit reinsurance reportable"/>
+  <typecode
+    code="reinsthresholdedit"
+    desc="Permission to edit the reinsurance reportable thresholds"
+    name="Edit reinsurance reportable thresholds"/>
+  <typecode
+    code="reinsthresholdview"
+    desc="Permission to view the reinsurance reportable thresholds"
+    name="View reinsurance reportable thresholds"/>
+  <!-- Screen Permissions -->
+  <typecode
+    code="viewmatters"
+    desc="Permission to view matters"
+    name="View claim Matters page"/>
+  <typecode
+    code="viewclaimhistory"
+    desc="Permission to view audit trail (history) for a claim"
+    name="View claim History page"/>
+  <typecode
+    code="viewclaimbasics"
+    desc="Permission to view the claim Loss Details page"
+    name="View claim Loss Details page"/>
+  <typecode
+    code="viewclaimsummary"
+    desc="Permission to view the claim Summary page"
+    name="View claim Summary page"/>
+  <typecode
+    code="viewexposures"
+    desc="Permission to view the claim Exposures page"
+    name="View claim Exposures page"/>
+  <typecode
+    code="viewclaimparties"
+    desc="Permission to view the claim Parties Involved page"
+    name="View claim Parties Involved page"/>
+  <typecode
+    code="viewclaimnotes"
+    desc="Permission to view the claim Notes page"
+    name="View claim Notes page"/>
+  <typecode
+    code="viewfinsum"
+    desc="Permission to view the Financials Summary and Transaction subtabs on a claim"
+    name="View claim Financials"/>
+  <typecode
+    code="viewassociations"
+    desc="Permission to view the claim Associations subtab"
+    name="View Claim Associations subtab"/>
+  <typecode
+    code="viewsnapshot"
+    desc="Permission to view the FNOL snapshot for a claim"
+    name="View claim Snapshot"/>
+  <typecode
+    code="viewclaimevals"
+    desc="Permission to view the claim Evaluations page"
+    name="View claim Evaluations"/>
+  <typecode
+    code="viewclaimngtns"
+    desc="Permission to view the claim Negotiations page"
+    name="View claim Negotiations"/>
+  <typecode
+    code="viewvacation"
+    desc="Permission to view the Vacation tab"
+    name="View Vacation"/>
+  <typecode
+    code="viewdocs"
+    desc="Permission to view the claim Documents page"
+    name="View claim Documents page"/>
+  <typecode
+    code="viewworkplan"
+    desc="Permission to view the claim Workplan page"
+    name="View claim Workplan"/>
+  <typecode
+    code="viewpolicy"
+    desc="Permission to view the claim Policy page"
+    name="View claim Policy page"/>
+  <!-- UI tab permissions -->
+  <typecode
+    code="viewadmin"
+    desc="Permission to view the Admin tab"
+    name="View Admin"/>
+  <!-- Supervisor -->
+  <typecode
+    code="edbclaimcounts"
+    desc="Permission to view the Dashboard claim counts screen"
+    name="View Dashboard claim counts"/>
+  <typecode
+    code="edbclaimact"
+    desc="Permission to view the Dashboard claim activity screen"
+    name="View Dashboard claim activity"/>
+  <typecode
+    code="edbcurrfin"
+    desc="Permission to view the Dashboard current financials screen"
+    name="View Dashboard current financials"/>
+  <typecode
+    code="edbpdfin"
+    desc="Permission to view the Dashboard period financials screen"
+    name="View Dashboard period financials"/>
+  <typecode
+    code="viewsupcalendar"
+    desc="Permission to view the supervisor calendar screen"
+    name="View Supervisor Calendar"/>
+  <typecode
+    code="claimremflag"
+    desc="Permission to remove the flag from flagged claims"
+    name="Remove claim flag"/>
+  <typecode
+    code="metriclimitmanage"
+    desc="Permission to create, edit, and delete claim and exposure metric limits"
+    name="Manage Metric Limits"/>
+  <!-- Adjuster -->
+  <typecode
+    code="claimown"
+    desc="Permission to own a claim and see the Desktop Claims page"
+    name="Own claim"/>
+  <typecode
+    code="expown"
+    desc="Permission to own an exposure and to see the Desktop Exposures page"
+    name="Own exposure"/>
+  <typecode
+    code="mttrown"
+    desc="Permission to own a matter and to see the Desktop Matters page"
+    name="Own matter"/>
+  <!-- Financials -->
+  <typecode
+    code="claimviewres"
+    desc="Permission to view reserves (and derived information) on a claim"
+    name="View reserves"/>
+  <typecode
+    code="claimviewrec"
+    desc="Permission to view recoveries (and derived information) on a claim"
+    name="View recoveries"/>
+  <typecode
+    code="claimviewrecres"
+    desc="Permission to view recovery reserves (and derived information) on a claim"
+    name="View recovery reserves"/>
+  <typecode
+    code="claimviewpay"
+    desc="Permission to view checks and payments (and derived information) on a claim"
+    name="View payments"/>
+  <typecode
+    code="claimcreate"
+    desc="Permission to create a new claim"
+    name="Create claims"/>
+  <typecode
+    code="expcreate"
+    desc="Permission to create a new exposure"
+    name="Create exposures"/>
+  <typecode
+    code="claimclose"
+    desc="Permission to close a claim"
+    name="Close claims"/>
+  <typecode
+    code="expclose"
+    desc="Permission to close an exposure"
+    name="Close exposures"/>
+  <typecode
+    code="expreopen"
+    desc="Permission to reopen an exposure"
+    name="Reopen exposures"/>
+  <typecode
+    code="claimreopen"
+    desc="Permission to reopen a claim"
+    name="Reopen claims"/>
+  <typecode
+    code="notecreateclsd"
+    desc="Permission to add a note to a closed claim"
+    name="Create notes on closed claims"/>
+  <typecode
+    code="actcreateclsd"
+    desc="Permission to create a new activity associated with a closed claim"
+    name="Create activities on closed claim"/>
+  <typecode
+    code="doccreateclsd"
+    desc="Permission to add documents to a closed claim"
+    name="Create documents on closed claim"/>
+  <typecode
+    code="docdeleteclsd"
+    desc="Permission to remove documents from a closed claim"
+    name="Delete documents on closed claim"/>
+  <typecode
+    code="reccreate"
+    desc="Permission to create recovery transactions"
+    name="Create recoveries"/>
+  <typecode
+    code="recedit"
+    desc="Permission to edit recovery transactions"
+    name="Edit recoveries"/>
+  <typecode
+    code="recdelete"
+    desc="Permission to delete recovery transactions"
+    name="Delete recoveries"/>
+  <typecode
+    code="recvoid"
+    desc="Permission to void recovery transactions"
+    name="Void recoveries"/>
+  <typecode
+    code="rescreate"
+    desc="Permission to create reserve transactions"
+    name="Create reserves"/>
+  <typecode
+    code="recrescreate"
+    desc="Permission to create recovery reserve transactions"
+    name="Create recovery reserves"/>
+  <typecode
+    code="recresedit"
+    desc="Permission to edit recovery reserve transactions"
+    name="Edit recovery reserves"/>
+  <typecode
+    code="recresdelete"
+    desc="Permission to delete recovery reserve transactions"
+    name="Delete recovery reserves"/>
+  <typecode
+    code="resedit"
+    desc="Permission to edit reserve transactions"
+    name="Edit reserves"/>
+  <typecode
+    code="resdelete"
+    desc="Permission to delete reserve transactions"
+    name="Delete reserves"/>
+  <typecode
+    code="catmanage"
+    desc="Permission to create, edit, and activate/deactivate catastrophes"
+    name="Manage catastrophes"/>
+  <typecode
+    code="catview"
+    desc="Permission to view the list of catastrophes and details of individual catastrophes"
+    name="View catastrophes"/>
+  <typecode
+    code="covverifymanage"
+    desc="Permission to create, edit, and delete Coverage Verification values"
+    name="Manage Coverage Verification"/>
+  <typecode
+    code="covverifyview"
+    desc="Permission to view the list of Coverage Verification values"
+    name="View Coverage Verification"/>
+  <typecode
+    code="wcrefmanage"
+    desc="Permission to create, edit, and delete values on WC disability rate tables"
+    name="Manage WC disability rates"/>
+  <typecode
+    code="wcrefview"
+    desc="Permission to view the values on WC disability rate tables"
+    name="View WC disability rates"/>
+  <typecode
+    code="exchratemanual"
+    desc="Permission to override exchange rate with a custom exchange rate."
+    name="Exchange Rate Manual Override"/>
+  <!-- bulkinvoices -->
+  <typecode
+    code="bulkinvcreate"
+    desc="Permission to create bulk invoices"
+    name="Create bulk invoices"/>
+  <typecode
+    code="bulkinvedit"
+    desc="Permission to edit bulk invoices"
+    name="Edit bulk invoices"/>
+  <typecode
+    code="bulkinvdelete"
+    desc="Permission to delete bulk invoices"
+    name="Delete bulk invoices"/>
+  <typecode
+    code="bulkinvview"
+    desc="Permission to view bulk invoices"
+    name="View bulk invoices"/>
+  <!-- Permission to modify authority limits for a user -->
+  <typecode
+    code="alpmanage"
+    desc="Permission create, edit, or delete authority limit profiles"
+    name="Manage authority limit profiles"/>
+  <typecode
+    code="claimedit"
+    desc="Permission to edit a claim"
+    name="Edit claim"/>
+  <typecode
+    code="claimprtsmanage"
+    desc="Permission to create, edit, or delete parties from a claim"
+    name="Manage claim parties"/>
+  <typecode
+    code="assocmanage"
+    desc="Permission to create, edit, or delete claim associations"
+    name="Manage claim associations"/>
+  <typecode
+    code="claimprint"
+    desc="Permission to print a claim"
+    name="Print claims"/>
+  <typecode
+    code="expedit"
+    desc="Permission to edit an exposure on a claim"
+    name="Edit exposures"/>
+  <typecode
+    code="mttredit"
+    desc="Permission to edit a matter on a claim"
+    name="Edit matters"/>
+  <typecode
+    code="mttreditclsd"
+    desc="Permission to edit a closed matter on a claim"
+    name="Edit closed matters"/>
+  <typecode
+    code="claimvalidate"
+    desc="Permission to run validation rules on a claim"
+    name="Validate claims"/>
+  <typecode
+    code="viewclaimsync"
+    desc="Permission to view claim sync screens"
+    name="View claim sync screens"/>
+  <typecode
+    code="claimintegadmin"
+    desc="Permission to perform integration admin functions on a claim"
+    name="Manage claim integration"/>
+  <typecode
+    code="assocview"
+    desc="Permission to view claim associations on a claim"
+    name="View claim associations"/>
+  <typecode
+    code="expview"
+    desc="Permission to view exposures on a claim"
+    name="View exposures"/>
+  <typecode
+    code="expvalidate"
+    desc="Permission to run validation rules on exposures"
+    name="Validate exposures"/>
+  <typecode
+    code="claimview"
+    desc="General permission to view a claim"
+    name="View claims"/>
+  <typecode
+    code="claimeditclsd"
+    desc="Permission to edit a closed claim"
+    name="Edit closed claims"/>
+  <typecode
+    code="claimslplcyclsd"
+    desc="Permission to select a new policy for a closed claim"
+    name="Select policy on closed claims"/>
+  <typecode
+    code="claimprtsmanclsd"
+    desc="Permission to manage parties involved on a closed claim"
+    name="Manage parties on closed claims"/>
+  <typecode
+    code="claimusermanage"
+    desc="Permission to manage claim users"
+    name="Manage claim users"/>
+  <typecode
+    code="claimusermanclsd"
+    desc="Permission to manage claim users on a closed claim"
+    name="Manage users on closed claims"/>
+  <typecode
+    code="expeditclsd"
+    desc="Permission to edit a closed exposure"
+    name="Edit closed exposures"/>
+  <typecode
+    code="claimselectplcy"
+    desc="Permission to select a new policy for an existing claim"
+    name="Select policy"/>
+  <!-- UI Permissions -->
+  <typecode
+    code="evalcreate"
+    desc="Permission to create an evaluation on a claim"
+    name="Create evaluations"/>
+  <typecode
+    code="evalview"
+    desc="Permission to view an evaluation on a claim"
+    name="View evaluations"/>
+  <typecode
+    code="evaledit"
+    desc="Permission to edit an evaluation on a claim"
+    name="Edit evaluations"/>
+  <typecode
+    code="evaleditclsd"
+    desc="Permission to edit an evaluation on a closed claim"
+    name="Edit evaluation on a closed claim"/>
+  <typecode
+    code="ngtncreate"
+    desc="Permission to create a negotiation on a claim"
+    name="Create negotiations"/>
+  <typecode
+    code="ngtnview"
+    desc="Permission to view a negotiation on a claim"
+    name="View negotiations"/>
+  <typecode
+    code="ngtnedit"
+    desc="Permission to edit a negotiation on a claim"
+    name="Edit negotiations"/>
+  <typecode
+    code="ngtneditclsd"
+    desc="Permission to edit a negotiation on a closed claim"
+    name="Edit negotiations on closed claims"/>
+  <typecode
+    code="mttrview"
+    desc="Permission to view matters"
+    name="View matters"/>
+  <!-- purge permissions -->
+  <typecode
+    code="ignoreacl"
+    desc="Permission that grants the user permissions as if they were always on a claim's ACL with every possible ClaimAccessType"
+    name="Ignore ACLs"/>
+  <typecode
+    code="plcyview"
+    desc="Permission to view policy information"
+    name="View policies"/>
+  <typecode
+    code="paycreate"
+    desc="Permission to create payment transactions"
+    name="Create payments"/>
+  <typecode
+    code="manpaycreate"
+    desc="Permission to create manual payment transactions"
+    name="Create manual payments"/>
+  <typecode
+    code="manpayedit"
+    desc="Permission to edit manual payment transactions"
+    name="Edit manual payments"/>
+  <typecode
+    code="manpaydelete"
+    desc="Permission to delete manual payment transactions"
+    name="Delete manual payments"/>
+  <typecode
+    code="payedit"
+    desc="Permission to edit payment transactions"
+    name="Edit payments"/>
+  <typecode
+    code="paydelete"
+    desc="Permission to delete payment transactions"
+    name="Delete payments"/>
+  <typecode
+    code="payvoid"
+    desc="Permission to void a check"
+    name="Void payments"/>
+  <typecode
+    code="paystop"
+    desc="Permission to stop a check"
+    name="Stop payments"/>
+  <typecode
+    code="clearedpayvoid"
+    desc="Permission to void a cleared check"
+    name="Void cleared payments"/>
+  <typecode
+    code="payrecode"
+    desc="Permission to recode a payment"
+    name="Recode payments"/>
+  <typecode
+    code="checktransfer"
+    desc="Permission to transfer a check"
+    name="Transfer checks"/>
+  <typecode
+    code="plcyedit"
+    desc="Permission to edit an unverified policy"
+    name="Edit policies"/>
+  <typecode
+    code="plcymakeeditable"
+    desc="Permission to create an unverified policy"
+    name="Make policies editable"/>
+  <!-- Service Provider Management (Reviews) permissions -->
+  <typecode
+    code="reviewviewlist"
+    desc="Permission to view the list of Reviews and the reviews tab on a Contact"
+    name="View reviews list"/>
+  <typecode
+    code="reviewviewdetail"
+    desc="Permission view the Review page to see the answers entered for each claim"
+    name="View review details"/>
+  <typecode
+    code="reviewedit"
+    desc="Permission to edit the Review page where the scores are entered for each claim"
+    name="Edit review"/>
+  <typecode
+    code="reviewcreate"
+    desc="Permission to create a new Review"
+    name="Create review"/>
+  <typecode
+    code="reviewdeleteincomplete"
+    desc="Permission to delete a Review"
+    name="Delete incomplete review"/>
+  <typecode
+    code="reviewdeletecompleted"
+    desc="Permission to delete a Review"
+    name="Delete completed review"/>
+  <typecode
+    code="sendemail"
+    desc="Permission to send Email"
+    name="Send Email"/>
+  <typecode
+    code="editdeductible"
+    desc="Permission to edit Deductible"
+    name="Edit Deductible"/>
+  <!-- Account permissions -->
+  <typecode
+    code="accountview"
+    desc="Permission to view accounts"
+    name="View Account"/>
+  <typecode
+    code="accountmng"
+    desc="Permission to add, edit, or delete accounts"
+    name="Manage Account"/>
+  <!-- Service Tier permissions -->
+  <typecode
+    code="custsvctierview"
+    desc="Permission to view service tiers"
+    name="View service tier"/>
+  <typecode
+    code="custsvctiermng"
+    desc="Permission to add, edit, or delete service tiers"
+    name="Manage service tier"/>
+  <!-- Weighted Workload permissions -->
+  <typecode
+    code="wwlcview"
+    desc="Permission to view weighted workload classifications"
+    name="View workload classifications"/>
+  <typecode
+    code="wwlcmanage"
+    desc="Permission to create, edit, or delete weighted workload classifications"
+    name="Manage workload classifications"/>
+  <typecode
+    code="wwlview"
+    desc="Permission to view classification and supplemental workload weight"
+    name="View workload weight"/>
+  <typecode
+    code="wwlmanage"
+    desc="Permission to edit supplemental weight"
+    name="Manage supplemental workload weight"/>
+  <typecode
+    code="unsetcovinquestion"
+    desc="Permission to allow user to set the coverage in question to no from yes"
+    name="Unset the coverage in question field"/>
+  <typecode
+    code="subroown"
+    desc="Permission to own a subrogation and to see the Desktop Subrogation page"
+    name="Own subrogation"/>
+  <!-- Business Rules -->
+  <typecode
+    code="activityruleedit"
+    desc="Permission to edit Rule"
+    name="Edit Rule"/>
+  <typecode
+    code="activityruleview"
+    desc="Permission to view Rule"
+    name="View Rule"/>
+  <typecode
+    code="activityruleapprove"
+    desc="Permission to approve Rule"
+    name="Approve Rule"/>
+  <typecode
+    code="activityruledeploy"
+    desc="Permission to deploy Rule"
+    name="Deploy Rule"/>
+  <typecode
+    code="activityruleimport"
+    desc="Permission to import Rule"
+    name="Import Rule"/>
+</internaltypelistextension>

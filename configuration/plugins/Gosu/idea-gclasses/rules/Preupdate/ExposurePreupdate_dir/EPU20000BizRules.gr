@@ -1,0 +1,18 @@
+package rules.Preupdate.ExposurePreupdate_dir
+
+uses gw.bizrules.context.ExposureTriggeringPoint
+
+@gw.rules.RuleName("EPU20000 - BizRules")
+internal class EPU20000BizRules {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+/*start00rule*/
+gw.bizrules.BizRulesExecutor.getInstance().trigger(new ExposureTriggeringPoint(TriggeringPointKey.TC_UPDATE, exposure))
+/*end00rule*/
+  }
+}

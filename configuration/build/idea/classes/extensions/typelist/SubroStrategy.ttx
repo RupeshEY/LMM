@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="SubroStrategy">
+  <typecode
+    code="pursueins"
+    desc="Pursue against Insurer"
+    name="Pursue against Insurer"
+    priority="1">
+    <category
+      code="insured"
+      typelist="Subroclassification"/>
+  </typecode>
+  <typecode
+    code="negotiate"
+    desc="Negotiate against Insurer"
+    name="Negotiate against Insurer"
+    priority="2">
+    <category
+      code="insured"
+      typelist="Subroclassification"/>
+  </typecode>
+  <typecode
+    code="arbitrate"
+    desc="Arbitration"
+    name="Arbitration"
+    priority="3">
+    <category
+      code="insured"
+      typelist="Subroclassification"/>
+  </typecode>
+  <typecode
+    code="pursue"
+    desc="Pursue"
+    name="Pursue"
+    priority="21">
+    <category
+      code="uninsured"
+      typelist="Subroclassification"/>
+  </typecode>
+  <typecode
+    code="collection"
+    desc="Collection Agency"
+    name="Utilize Collection Agency"
+    priority="22">
+    <category
+      code="uninsured"
+      typelist="Subroclassification"/>
+  </typecode>
+  <typecode
+    code="lawsuit"
+    desc="Lawsuit"
+    name="Lawsuit"
+    priority="90">
+    <category
+      code="uninsured"
+      typelist="Subroclassification"/>
+    <category
+      code="insured"
+      typelist="Subroclassification"/>
+  </typecode>
+  <typecode
+    code="drop"
+    desc="Drop Pursuit"
+    name="Drop Pursuit"
+    priority="99">
+    <category
+      code="uninsured"
+      typelist="Subroclassification"/>
+    <category
+      code="insured"
+      typelist="Subroclassification"/>
+  </typecode>
+</typelistextension>

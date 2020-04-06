@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <MenuItemSet
+    id="ClaimNewOtherMenuItemSet">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <MenuItem
+      id="ClaimMenuActions_NewOther"
+      label="DisplayKey.get(&quot;Web.ClaimMenuActions.NewOther&quot;)"
+      visible="Claim != null">
+      <MenuItem
+        action="NewNoteWorksheet.goInWorkspace(Claim)"
+        id="ClaimMenuActions_NewNote"
+        label="DisplayKey.get(&quot;Web.ClaimMenuActions.NewNote&quot;)"
+        shortcut="O"
+        visible="perm.Claim.createnote(Claim)"/>
+      <MenuItem
+        action="EmailWorksheet.goInWorkspace(Claim)"
+        id="ClaimMenuActions_Email"
+        label="DisplayKey.get(&quot;Web.Email.NewEmail&quot;)"/>
+      <MenuItem
+        action="NewMatter.go(Claim)"
+        available="!Claim.Closed"
+        id="ClaimMenuActions_NewMatter"
+        label="DisplayKey.get(&quot;Web.ClaimMenuActions.NewMatter&quot;)"
+        visible="perm.Claim.creatematter(Claim)"/>
+      <MenuItem
+        action="NewEvaluation.go(Claim)"
+        id="ClaimMenuActions_NewEvaluation"
+        label="DisplayKey.get(&quot;Web.ClaimMenuActions.NewEvaluation&quot;)"
+        visible="perm.Claim.createevaluation(Claim)"/>
+      <MenuItem
+        action="NewNegotiation.go(Claim)"
+        id="ClaimMenuActions_NewNegotiation"
+        label="DisplayKey.get(&quot;Web.ClaimMenuActions.NewNegotiation&quot;)"
+        visible="perm.Claim.createnegotiation(Claim)"/>
+      <MenuItem
+        action="NewServiceRequest.go(Claim)"
+        id="ClaimMenuActions_NewServiceRequest"
+        label="DisplayKey.get(&quot;Web.ClaimMenuActions.NewServiceRequest&quot;)"/>
+    </MenuItem>
+  </MenuItemSet>
+</PCF>

@@ -1,0 +1,17 @@
+package rules.Closed.ActivityClosed_dir
+
+
+@gw.rules.RuleName("CAC-IPLM01000 - ECF Financial Authorization_Ext")
+internal class CACIPLM01000ECFFinancialAuthorization_Ext {
+  static function doCondition(activity       :       entity.Activity) : boolean {
+/*start00rule*/
+return activity.ECFApproval
+/*end00rule*/
+}
+
+  static function doAction(activity       :       entity.Activity, actions : gw.rules.Action) {
+/*start00rule*/
+ 
+/*end00rule*/
+  }
+}

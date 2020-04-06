@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    editable="true"
+    id="PrivateCommentsInputSet">
+    <Require
+      name="claimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <Variable
+      initialValue="claimResponseRq.PrivateComments.Count + claimResponseRq.ClaimDataResponded.PrivateComments.Count"
+      name="privateCommentCount"
+      recalculateOnRefresh="true"
+      type="int"/>
+    <Label
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.PrivateCommentsTitle&quot;)"/>
+    <TextInput
+      id="PreviousPrivateComments"
+      labelAbove="true"
+      labelStyleClass="x-hide-display"
+      value="claimResponseRq.ClaimDataResponded.FormattedPrivateComments"/>
+    <InputSet
+      id="PrivateCommentEditableInputSet"
+      visible="claimResponseRq.PrivateCommentEditable">
+      <TextAreaInput
+        desc="Not having PostOnChange target a specific field may hurt performance. However, by using a target and a regex at the same time, when inserting an invalid character here and loosing focus of this Text Area, all the changes were being erased and the text area was reverted to the previous text."
+        editable="true"
+        id="PrivateCommentInput"
+        labelAbove="true"
+        numCols="50"
+        numRows="15"
+        regex="&quot;[a-zA-Z0-9,.\\-_+&lt;&gt;!?%&amp;@*()\\\\/'\&quot;:;=\\n ]*&quot;"
+        required="true"
+        validationExpression="claimResponseRq.validatePrivateComments()"
+        value="claimResponseRq.NewPrivateComments">
+        <PostOnChange/>
+      </TextAreaInput>
+      <TextInput
+        boldValue="true"
+        id="RemainingPrivateCommentsCount"
+        labelAbove="true"
+        value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.CommentLinesRemaining&quot;,claimResponseRq.RemainingPrivateLineCount,claimResponseRq.PrivateCommentsLimit)"/>
+    </InputSet>
+    <TextInput
+      boldValue="true"
+      id="PrivateCommentNotEditable"
+      labelAbove="true"
+      value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFClaimResponse.PrivateCommentNotEditable&quot;)"
+      visible="not claimResponseRq.PrivateCommentEditable"/>
+  </InputSet>
+</PCF>

@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Nonpersistent Bean for display of statistics."
+  entity="UserStatsBean">
+  <implementsInterface
+    iface="gw.cc.statistics.entity.UserStatsBean"
+    impl="com.guidewire.cc.domain.statistics.impl.UserStatsBeanImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.statistics.impl.UserStatsBeanInternal"
+    impl="com.guidewire.cc.domain.statistics.impl.UserStatsBeanImpl"/>
+  <fulldescription><![CDATA[
+        Supports display of user statistics. This is an internal, virtual entity, the system does not store it.
+      
+    ]]></fulldescription>
+  <column
+    desc="Number of activities open."
+    name="OpenActs"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of activities overdue."
+    name="OverdueActs"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of activities completed."
+    name="CompletedActs"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of claims open."
+    name="OpenClaims"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of claims closed."
+    name="ClosedClaims"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of claims new."
+    name="NewClaims"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of exposures open."
+    name="OpenExposures"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of exposures closed."
+    name="ClosedExposures"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of matters open."
+    name="OpenMatters"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of matters closed."
+    name="ClosedMatters"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of activities overdue for the team."
+    name="TeamOverdueActs"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of claims open for the team."
+    name="TeamOpenClaims"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of claims closed for the team."
+    name="TeamClosedClaims"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of claims new for the team."
+    name="TeamNewClaims"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of FNOLs new."
+    name="FNOLNew"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of FNOLs open."
+    name="FNOLOpen"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of FNOLs flagged."
+    name="FNOLFlagged"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of FNOLs completed."
+    name="FNOLCompleted"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Number of FNOLs in the queue."
+    name="FNOLInQueue"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Time of last update."
+    name="StatsUpdateTime"
+    nullok="true"
+    type="datetime"/>
+</nonPersistentEntity>

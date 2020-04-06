@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="false"
+    canVisit="(isoMatchReport.ISOExposure != null and perm.Exposure.view(isoMatchReport.ISOExposure)) or perm.Claim.view(isoMatchReport.ISOClaim)"
+    id="ISOMatchReportDetailPopup"
+    parent="ISOReportableForward(isoMatchReport.ISOReportable)"
+    title="if (isoMatchReport.ISOExposure != null) {return DisplayKey.get(&quot;JSP.ISOMatchReport.Title&quot;, isoMatchReport.ISOExposure)} else {return DisplayKey.get(&quot;JSP.ISOMatchReport.Title&quot;, isoMatchReport.ISOClaim)}">
+    <LocationEntryPoint
+      signature="ISOMatchReportDetailPopup(isoMatchReport : ISOMatchReport)"/>
+    <Variable
+      name="isoMatchReport"
+      type="ISOMatchReport"/>
+    <Screen
+      id="ISOMatchReportDetailScreen">
+      <Toolbar/>
+      <PanelRef
+        def="ISOMatchReportDV(isoMatchReport)"/>
+    </Screen>
+  </Popup>
+</PCF>

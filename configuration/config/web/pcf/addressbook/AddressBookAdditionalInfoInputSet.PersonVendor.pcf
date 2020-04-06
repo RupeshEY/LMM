@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AddressBookAdditionalInfoInputSet"
+    mode="PersonVendor|Attorney|Doctor">
+    <Require
+      name="contact"
+      type="Person"/>
+    <Require
+      name="externalContactSource"
+      type="gw.api.contact.ExternalContactSource"/>
+    <Require
+      name="allowEditContact"
+      type="boolean"/>
+    <InputSetRef
+      def="AddressBookDoctorAdditionalInfoInputSet(contact as PersonVendor)"
+      mode="contact typeis Doctor ? &quot;Doctor&quot; : null"/>
+    <InputSetRef
+      def="AddressBookAttorneyAdditionalInfoInputSet(contact as PersonVendor)"
+      mode="contact typeis Attorney ? &quot;Attorney&quot; : null"/>
+    <BooleanRadioInput
+      editable="perm.Contact.createpreferredab"
+      id="IsPreferredVendor"
+      label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo.IsPreferredVendor&quot;)"
+      value="(contact as PersonVendor).Preferred"/>
+    <TypeKeyInput
+      editable="true"
+      id="Currency"
+      label="DisplayKey.get(&quot;Financials.Multicurrency.PreferredCurrency&quot;)"
+      value="contact.PreferredCurrency"
+      valueType="typekey.Currency"
+      visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()"/>
+    <InputSetRef
+      def="AddressBookBusinessContactInfoInputSet((contact as PersonVendor), externalContactSource,allowEditContact)"/>
+    <InputDivider/>
+    <Label
+      label="DisplayKey.get(&quot;Web.ContactDetail.TaxInfo&quot;)"/>
+    <PrivacyInput
+      editable="true"
+      encryptionExpression="contact.maskTaxId(VALUE)"
+      id="SSN"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Name.TaxID.SSN&quot;)"
+      required="true"
+      value="(contact as PersonVendor).TaxID"/>
+    <InputSetRef
+      def="AddressBookVendorW9InfoInputSet((contact as PersonVendor))"
+      visible="gw.api.admin.BaseAdminUtil.getDefaultCountry() == Country.TC_US"/>
+  </InputSet>
+</PCF>

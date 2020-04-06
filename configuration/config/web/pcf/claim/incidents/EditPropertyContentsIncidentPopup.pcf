@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="incident.updatePropertyContentsLineItemsBeforeCommit(); incident.Claim.instructNewServiceRequests()"
+    canEdit="perm.Incident.edit(incident)"
+    canVisit="incident != null"
+    id="EditPropertyContentsIncidentPopup"
+    startInEditMode="startInEditMode"
+    title="DisplayKey.get(&quot;Web.EditPropertyContentsIncident.Title&quot;)">
+    <LocationEntryPoint
+      signature="EditPropertyContentsIncidentPopup(incident : PropertyContentsIncident, startInEditMode : boolean)"/>
+    <LocationEntryPoint
+      signature="EditPropertyContentsIncidentPopup(incident : PropertyContentsIncident)"/>
+    <Variable
+      name="incident"
+      type="PropertyContentsIncident"/>
+    <Variable
+      initialValue="false"
+      name="startInEditMode"
+      type="boolean"/>
+    <Screen
+      id="EditPropertyContentsIncidentScreen">
+      <TitleBar
+        icon="incident.HeaderIcon"/>
+      <Toolbar>
+        <EditButtons/>
+        <ToolbarDivider/>
+        <PrintToolbarButton
+          hideIfEditable="true"
+          id="PropertyContentsIncident_PrintButton"
+          label="DisplayKey.get(&quot;Button.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="PropertyContentsIncidentPanelSet(incident)"/>
+    </Screen>
+  </Popup>
+</PCF>

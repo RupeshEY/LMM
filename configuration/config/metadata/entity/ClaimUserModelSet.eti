@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Defines a set of ClaimUserModels"
+  entity="ClaimUserModelSet">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.impl.ClaimUserModelSetInternal"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimUserModelSetImpl"/>
+  <implementsInterface
+    iface="gw.cc.claim.entity.ClaimUserModelSet"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimUserModelSetImpl"/>
+  <fulldescription><![CDATA[
+      Contains an array of ClaimUserModel entities.  Each array member represents a single user-to-group pair on the claim.
+      The system does not store ClaimUserModelSet entities.
+    
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    fkentity="Claim"
+    name="Claim"
+    nullok="true"/>
+  <array
+    arrayentity="ClaimUserModel"
+    name="ClaimUserModels"/>
+</nonPersistentEntity>

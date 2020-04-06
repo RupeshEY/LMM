@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="perm.Matter.view(Claim) and perm.System.viewmatters"
+    id="MatterDetailGroup"
+    parent="ClaimMatters(Claim)"
+    title="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Litigation&quot;)">
+    <LocationEntryPoint
+      signature="MatterDetailGroup(Claim : Claim, Matter : Matter)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Matter"
+      type="Matter"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.MatterDetail.Tab&quot;)"
+      location="MatterDetailPage(Claim, Matter)"/>
+  </LocationGroup>
+</PCF>

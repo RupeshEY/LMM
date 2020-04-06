@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Entity
+  name="UserRegion">
+  <Columns>
+    <Column
+      beanPath="UserRegion.User"
+      displayName="true"
+      name="User"/>
+    <Column
+      beanPath="UserRegion.Region"
+      displayName="true"
+      name="Region"/>
+  </Columns>
+  <DisplayName><![CDATA[return User + ", "+ Region]]></DisplayName>
+</Entity>

@@ -1,0 +1,30 @@
+package rules.Preupdate.ClaimPreupdate_dir
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CPU32000 - Subro Assigned")
+internal class CPU32000SubroAssigned {
+  static function doCondition(claim : entity.Claim) : boolean {
+/*start00rule*/
+return claim.SubrogationSummary != null
+and not claim.SubrogationSummary.isFieldChanged(SubrogationSummary#EscalateSubro)
+and claim.SubrogationSummary.Subrogations?.hasMatch( \ subro -> subro.isFieldChanged(Subrogation#AssignedUser))
+/*end00rule*/
+}
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+/*start00rule*/
+
+for(var subro in claim.SubrogationSummary.Subrogations) {
+  if(subro.isFieldChanged(Subrogation#AssignedUser)) {
+    if(subro.Exposure != null) {
+      claim.createSubrogationHistoryEvent(HistoryType.TC_ASSIGNMENT, subro, DisplayKey.get("Web.Subrogation.History.Assigned.Exposure", subro, subro.AssignedUser))
+    }
+    else {
+      claim.createSubrogationHistoryEvent(HistoryType.TC_ASSIGNMENT, subro, DisplayKey.get("Web.Subrogation.History.Assigned.Claim", subro.AssignedUser))
+    }
+  }
+}
+
+/*end00rule*/
+  }
+}

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="perm.Claim.edit(Claim) and perm.Policy.edit(Claim)"
+    id="ClaimPolicyVehicleDetail"
+    parent="ClaimPolicyVehicles(Claim)"
+    title="DisplayKey.get(&quot;Web.ClaimPolicy.VehicleDetail&quot;)">
+    <LocationEntryPoint
+      signature="ClaimPolicyVehicleDetail(Claim : Claim, VehicleRU : VehicleRU)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="VehicleRU"
+      type="VehicleRU"/>
+    <Screen
+      id="ClaimPolicyVehiclesScreen">
+      <Toolbar>
+        <EditButtons
+          editVisible="!Claim.Policy.Verified"/>
+      </Toolbar>
+      <PanelRef
+        def="PolicyVehicleDetailPanelSet(VehicleRU)"/>
+    </Screen>
+  </Page>
+</PCF>

@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="PolicySearchCriteria">
+  <column
+    desc="This contact's name in kanji (used only for Japanese names and will be null otherwise)"
+    name="NameKanji"
+    nullok="true"
+    type="companyname"/>
+  <column
+    desc="First name in kanji (used only for Japanese names and will be null otherwise)"
+    name="FirstNameKanji"
+    nullok="true"
+    type="firstname"/>
+  <column
+    desc="Last name in kanji (used only for Japanese names and will be null otherwise)"
+    name="LastNameKanji"
+    nullok="true"
+    type="lastname"/>
+</extension>

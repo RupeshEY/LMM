@@ -1,0 +1,102 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="RIAgreement">
+  <typecode
+    code="RIAgreement"
+    desc="RIAgreement"
+    name="RIAgreement"
+    priority="0"/>
+  <typecode
+    code="NonProportionalRIAgreement"
+    desc="Non Proportional Reinsurance Agreement"
+    name="Non Proportional RI Agreement"
+    priority="2"/>
+  <typecode
+    code="ProportionalRIAgreement"
+    desc="Proportional Reinsurance Agreement"
+    name="Proportional RI Agreement"
+    priority="1"/>
+  <typecode
+    code="ExcessOfLossRITreaty"
+    desc="Excess Of Loss Reinsurance Treaty Agreement"
+    name="Excess Of Loss RI Treaty Agreement"
+    priority="8">
+    <category
+      code="treaty"
+      typelist="RIArrangementType"/>
+  </typecode>
+  <typecode
+    code="NetExcessOfLossRITreaty"
+    desc="Net Excess Of Loss Reinsurance Treaty Agreement"
+    name="Net Excess Of Loss RI Treaty Agreement"
+    priority="9">
+    <category
+      code="treaty"
+      typelist="RIArrangementType"/>
+  </typecode>
+  <typecode
+    code="FacNetExcessOfLossRIAgreement"
+    desc="Net Excess Of Loss Facultative Agreement"
+    name="Net Excess Of Loss Fac Agreement"
+    priority="9">
+    <category
+      code="facultative"
+      typelist="RIArrangementType"/>
+  </typecode>
+  <typecode
+    code="QuotaShareRITreaty"
+    desc="Quota Share Reinsurance Treaty Agreement"
+    name="Quota Share RI Treaty Agreement"
+    priority="5">
+    <category
+      code="treaty"
+      typelist="RIArrangementType"/>
+  </typecode>
+  <typecode
+    code="FacProportionalRIAgreement"
+    desc="Fac Proportional Reinsurance Agreement"
+    name="Fac Proportional RI Agreement"
+    priority="7">
+    <category
+      code="facultative"
+      typelist="RIArrangementType"/>
+  </typecode>
+  <typecode
+    code="SurplusRITreaty"
+    desc="Surplus Reinsurance Treaty Agreement"
+    name="Surplus RI Treaty Agreement"
+    priority="6">
+    <category
+      code="treaty"
+      typelist="RIArrangementType"/>
+  </typecode>
+  <typecode
+    code="FacExcessOfLossRIAgreement"
+    desc="Excess Of Loss Facultative Agreement"
+    name="Excess Of Loss Fac Agreement"
+    priority="8">
+    <category
+      code="facultative"
+      typelist="RIArrangementType"/>
+  </typecode>
+  <typecode
+    code="PerEventRITreaty"
+    desc="Per Event Reinsurance Treaty Agreement"
+    name="Per Event RI Treaty Agreement"
+    priority="3">
+    <category
+      code="treaty"
+      typelist="RIArrangementType"/>
+  </typecode>
+  <typecode
+    code="AnnualAggregateRITreaty"
+    desc="Annual Aggregate Reinsurance Treaty Agreement"
+    name="Annual Aggregate RI Treaty Agreement"
+    priority="4">
+    <category
+      code="treaty"
+      typelist="RIArrangementType"/>
+  </typecode>
+</typelistextension>

@@ -1,0 +1,440 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="perm.ClaimMetricLimit.edit"
+    canVisit="perm.ClaimMetricLimit.view"
+    id="KeyMetrics"
+    title="DisplayKey.get(&quot;Web.Admin.KeyMetrics&quot;)">
+    <LocationEntryPoint
+      signature="KeyMetrics()"/>
+    <Variable
+      initialValue="typekey.PolicyType.TC_PERSONALAUTO"
+      name="policyType"
+      type="PolicyType"/>
+    <Variable
+      initialValue="getThreshold(LargeLossNotificationType.TC_CC)"
+      name="ccThreshold"
+      type="LargeLossThreshold"/>
+    <Variable
+      initialValue="getThreshold(LargeLossNotificationType.TC_PS)"
+      name="psThreshold"
+      type="LargeLossThreshold"/>
+    <Variable
+      initialValue="PolicyTypeMetricLimits.cache.limitsForPolicyType(policyType).ensureDefaultLimitsCreated()"
+      name="limits"
+      type="entity.PolicyTypeMetricLimits"/>
+    <Variable
+      initialValue="1000"
+      name="MAX_METRIC_DAYS"
+      type="int"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+        <ToolbarDivider/>
+        <ToolbarRangeInput
+          available="not CurrentLocation.InEditMode"
+          id="PolicyType"
+          label="DisplayKey.get(&quot;Web.Admin.KeyMetrics.PolicyType&quot;)"
+          required="true"
+          value="policyType"
+          valueRange="typekey.PolicyType.getTypeKeys( false )"
+          valueType="typekey.PolicyType">
+          <PostOnChange
+            onChange="policyTypeChanged()"/>
+        </ToolbarRangeInput>
+      </Toolbar>
+      <CardViewPanel>
+        <Card
+          id="ClaimMetricsCard"
+          title="DisplayKey.get(&quot;Web.Admin.KeyMetrics.ClaimKeyMetricsLimitsTitle&quot;)">
+          <PanelRef>
+            <Toolbar>
+              <IteratorButtons
+                addVisible="false"
+                iterator="ClaimMetricLimitCategoryIterator"
+                removeFlags="all CanRemoveLimit"/>
+            </Toolbar>
+            <ListViewPanel>
+              <Row
+                renderAsSmartHeader="true">
+                <TextCell
+                  enableSort="false"
+                  id="LabelHeader"
+                  value="DisplayKey.get(&quot;Web.Admin.KeyMetrics.LabelHeader&quot;)"/>
+                <TextCell
+                  enableSort="false"
+                  id="UnitsHeader"
+                  value="DisplayKey.get(&quot;Web.Admin.KeyMetrics.UnitHeader&quot;)"/>
+                <TextCell
+                  enableSort="false"
+                  id="TargetValueHeader"
+                  value="DisplayKey.get(&quot;Web.Admin.KeyMetrics.TargetValueHeader&quot;)"
+                  wrapLabel="true"/>
+                <BooleanRadioCell
+                  enableSort="false"
+                  icon="&quot;rating_yellow.png&quot;"
+                  id="YellowValueHeader"
+                  value="true"
+                  valueType="boolean"/>
+                <BooleanRadioCell
+                  enableSort="false"
+                  icon="&quot;rating_red.png&quot;"
+                  id="RedValueHeader"
+                  value="true"
+                  valueType="boolean"/>
+              </Row>
+              <RowIterator
+                editable="true"
+                elementName="category"
+                id="ClaimMetricLimitCategoryIterator"
+                value="ClaimMetricCategory.getTypeKeys(false).toTypedArray()"
+                valueType="typekey.ClaimMetricCategory[]">
+                <Row
+                  useTitleStyle="true">
+                  <TextCell
+                    colspan="5"
+                    id="ClaimMetricLimitCategoryHeader"
+                    value="category.DisplayName"/>
+                </Row>
+                <RowIterator
+                  checkBoxVisible="false"
+                  editable="true"
+                  elementName="defaultLimit"
+                  id="ClaimMetricDefaultLimitIterator"
+                  pageSize="0"
+                  value="limits.ClaimMetricLimits.where(\ l -&gt; l.ClaimMetricCategory == category and l.DefaultLimit).sortBy(\ l -&gt; l.Currency).sortBy(\ l -&gt; l.ClaimMetricType)"
+                  valueType="entity.ClaimMetricLimit[]">
+                  <Row>
+                    <TextCell
+                      hideChildrenIfReadOnly="false"
+                      id="Label"
+                      value="defaultLimit.ClaimMetricType.DisplayName">
+                      <AddMenuItemIterator
+                        elementName="tier"
+                        id="CreateLimitMenu"
+                        value="getClaimTiersWithNoLimit(defaultLimit)"
+                        valueType="typekey.ClaimTier[]"
+                        visible="CurrentLocation.InEditMode">
+                        <IteratorSort
+                          sortBy="tier"
+                          sortOrder="1"/>
+                        <AddMenuItem
+                          id="CreateLimitForTier"
+                          iterator="ClaimMetricLimitIterator"
+                          label="tier.DisplayName"
+                          toCreateAndAdd="defaultLimit.copyWithTier(tier)"/>
+                      </AddMenuItemIterator>
+                    </TextCell>
+                    <TextCell
+                      id="Unit"
+                      value="defaultLimit.UnitLabel"/>
+                    <MetricLimitValueCell
+                      align="center"
+                      editable="true"
+                      id="TargetValue"
+                      numCols="8"
+                      validationExpression="validateMetricInput(defaultLimit.EditableValues.TargetValue, defaultLimit)"
+                      value="defaultLimit.EditableValues.TargetValue"/>
+                    <MetricLimitValueCell
+                      align="center"
+                      editable="true"
+                      id="YellowValue"
+                      numCols="8"
+                      validationExpression="validateMetricInput(defaultLimit.EditableValues.YellowValue, defaultLimit)"
+                      value="defaultLimit.EditableValues.YellowValue"/>
+                    <MetricLimitValueCell
+                      align="center"
+                      editable="true"
+                      id="RedValue"
+                      numCols="8"
+                      validationExpression="validateMetricInput(defaultLimit.EditableValues.RedValue, defaultLimit)"
+                      value="defaultLimit.EditableValues.RedValue"/>
+                  </Row>
+                  <RowIterator
+                    editable="true"
+                    elementName="limit"
+                    hasCheckBoxes="true"
+                    hideCheckBoxesIfReadOnly="true"
+                    id="ClaimMetricLimitIterator"
+                    pageSize="0"
+                    toRemove="limits.removeFromClaimMetricLimits(limit)"
+                    value="getSortedClaimMetricLimits( category, defaultLimit )"
+                    valueType="entity.ClaimMetricLimit[]">
+                    <ToolbarFlag
+                      name="CanRemoveLimit"/>
+                    <Row>
+                      <TextCell
+                        id="Tier"
+                        value="DisplayKey.get(&quot;Web.Admin.KeyMetrics.Indent&quot;, limit.ClaimTier.DisplayName)"/>
+                      <TextCell
+                        id="Unit"
+                        value="limit.UnitLabel"/>
+                      <MetricLimitValueCell
+                        align="center"
+                        editable="true"
+                        id="TargetValue"
+                        numCols="8"
+                        validationExpression="validateMetricInput(limit.EditableValues.TargetValue, limit)"
+                        value="limit.EditableValues.TargetValue"/>
+                      <MetricLimitValueCell
+                        align="center"
+                        editable="true"
+                        id="YellowValue"
+                        numCols="8"
+                        validationExpression="validateMetricInput(limit.EditableValues.YellowValue, limit)"
+                        value="limit.EditableValues.YellowValue"/>
+                      <MetricLimitValueCell
+                        align="center"
+                        editable="true"
+                        id="RedValue"
+                        numCols="8"
+                        validationExpression="validateMetricInput(limit.EditableValues.RedValue, limit)"
+                        value="limit.EditableValues.RedValue"/>
+                    </Row>
+                  </RowIterator>
+                </RowIterator>
+              </RowIterator>
+            </ListViewPanel>
+          </PanelRef>
+        </Card>
+        <Card
+          id="ExposureMetricsCard"
+          title="DisplayKey.get(&quot;Web.Admin.KeyMetrics.ExposureMetricsLimitsTitle&quot;)">
+          <PanelRef>
+            <Toolbar>
+              <IteratorButtons
+                addVisible="false"
+                iterator="ExposureMetricDefaultLimitIterator"
+                removeFlags="all CanRemoveLimit"/>
+            </Toolbar>
+            <ListViewPanel>
+              <Row
+                renderAsSmartHeader="true">
+                <TextCell
+                  enableSort="false"
+                  id="ExposureLabelHeader"
+                  value="DisplayKey.get(&quot;Web.Admin.KeyMetrics.LabelHeader&quot;)"/>
+                <TextCell
+                  enableSort="false"
+                  id="ExposureUnitsHeader"
+                  value="DisplayKey.get(&quot;Web.Admin.KeyMetrics.UnitHeader&quot;)"/>
+                <TextCell
+                  enableSort="false"
+                  id="ExposureTargetValueHeader"
+                  value="DisplayKey.get(&quot;Web.Admin.KeyMetrics.TargetValueHeader&quot;)"
+                  wrapLabel="true"/>
+                <BooleanRadioCell
+                  enableSort="false"
+                  icon="&quot;rating_yellow.png&quot;"
+                  id="ExposureYellowValueHeader"
+                  value="true"
+                  valueType="boolean"/>
+                <BooleanRadioCell
+                  enableSort="false"
+                  icon="&quot;rating_red.png&quot;"
+                  id="ExposureRedValueHeader"
+                  value="true"
+                  valueType="boolean"/>
+              </Row>
+              <Row
+                useTitleStyle="true">
+                <TextCell
+                  colspan="5"
+                  id="ExposureMetricLimitsHeader"
+                  value="DisplayKey.get(&quot;Web.Admin.KeyMetrics.Exposures&quot;)"/>
+              </Row>
+              <RowIterator
+                checkBoxVisible="false"
+                editable="true"
+                elementName="defaultExposureLimit"
+                id="ExposureMetricDefaultLimitIterator"
+                pageSize="0"
+                value="limits.ExposureMetricLimits.where(\ l -&gt; l.DefaultLimit).sortBy(\ l -&gt; l.ExposureMetricType)"
+                valueType="entity.ExposureMetricLimit[]">
+                <Row>
+                  <TextCell
+                    hideChildrenIfReadOnly="false"
+                    id="Label"
+                    value="defaultExposureLimit.ExposureMetricType.DisplayName">
+                    <AddMenuItemIterator
+                      elementName="tier"
+                      id="CreateLimitMenu"
+                      value="getExposureTiersWithNoLimit(defaultExposureLimit)"
+                      valueType="typekey.ExposureTier[]"
+                      visible="CurrentLocation.InEditMode">
+                      <IteratorSort
+                        sortBy="tier"
+                        sortOrder="1"/>
+                      <AddMenuItem
+                        id="CreateLimitForTier"
+                        iterator="ExposureMetricLimitIterator"
+                        label="tier.DisplayName"
+                        toCreateAndAdd="defaultExposureLimit.copyWithTier(tier)"/>
+                    </AddMenuItemIterator>
+                  </TextCell>
+                  <TextCell
+                    id="Unit"
+                    value="defaultExposureLimit.UnitLabel"/>
+                  <MetricLimitValueCell
+                    align="center"
+                    editable="true"
+                    id="TargetValue"
+                    numCols="8"
+                    validationExpression="validateMetricInput(defaultExposureLimit.EditableValues.TargetValue, defaultExposureLimit)"
+                    value="defaultExposureLimit.EditableValues.TargetValue"/>
+                  <MetricLimitValueCell
+                    align="center"
+                    editable="true"
+                    id="YellowValue"
+                    numCols="8"
+                    validationExpression="validateMetricInput(defaultExposureLimit.EditableValues.YellowValue, defaultExposureLimit)"
+                    value="defaultExposureLimit.EditableValues.YellowValue"/>
+                  <MetricLimitValueCell
+                    align="center"
+                    editable="true"
+                    id="RedValue"
+                    numCols="8"
+                    validationExpression="validateMetricInput(defaultExposureLimit.EditableValues.RedValue, defaultExposureLimit)"
+                    value="defaultExposureLimit.EditableValues.RedValue"/>
+                </Row>
+                <RowIterator
+                  editable="true"
+                  elementName="limit"
+                  hasCheckBoxes="true"
+                  hideCheckBoxesIfReadOnly="true"
+                  id="ExposureMetricLimitIterator"
+                  pageSize="0"
+                  toRemove="limits.removeFromExposureMetricLimits(limit)"
+                  value="getSortedExposureMetricLimits(defaultExposureLimit)"
+                  valueType="entity.ExposureMetricLimit[]">
+                  <ToolbarFlag
+                    name="CanRemoveLimit"/>
+                  <Row>
+                    <TextCell
+                      id="Tier"
+                      value="DisplayKey.get(&quot;Web.Admin.KeyMetrics.Indent&quot;, limit.ExposureTier.DisplayName)"/>
+                    <TextCell
+                      id="Unit"
+                      value="limit.UnitLabel"/>
+                    <MetricLimitValueCell
+                      align="center"
+                      editable="true"
+                      id="TargetValue"
+                      numCols="8"
+                      validationExpression="validateMetricInput(limit.EditableValues.TargetValue, limit)"
+                      value="limit.EditableValues.TargetValue"/>
+                    <MetricLimitValueCell
+                      align="center"
+                      editable="true"
+                      id="YellowValue"
+                      numCols="8"
+                      validationExpression="validateMetricInput(limit.EditableValues.YellowValue, limit)"
+                      value="limit.EditableValues.YellowValue"/>
+                    <MetricLimitValueCell
+                      align="center"
+                      editable="true"
+                      id="RedValue"
+                      numCols="8"
+                      validationExpression="validateMetricInput(limit.EditableValues.RedValue, limit)"
+                      value="limit.EditableValues.RedValue"/>
+                  </Row>
+                </RowIterator>
+              </RowIterator>
+            </ListViewPanel>
+          </PanelRef>
+        </Card>
+        <Card
+          id="LargeLossThresholdCard"
+          title="DisplayKey.get(&quot;Web.Admin.LargeLossThreshold&quot;)">
+          <DetailViewPanel>
+            <InputColumn>
+              <InputSetRef
+                def="LargeLossThresholdInputSet(policyType, ccThreshold, psThreshold)"/>
+            </InputColumn>
+          </DetailViewPanel>
+        </Card>
+      </CardViewPanel>
+    </Screen>
+    <Code><![CDATA[function policyTypeChanged() {
+  limits = PolicyTypeMetricLimits.cache.limitsForPolicyType(policyType).ensureDefaultLimitsCreated()
+  initThresholds()
+}
+
+function getThreshold(type : LargeLossNotificationType) : LargeLossThreshold {
+  var result = LargeLossThreshold.getThreshold( policyType, type )
+  if (result == null) {
+    result = new LargeLossThreshold()
+    result.PolicyType = policyType
+    result.NotificationType = type
+  }
+  return result
+}
+
+function initThresholds() {
+  ccThreshold = getThreshold(LargeLossNotificationType.TC_CC)
+  psThreshold = getThreshold(LargeLossNotificationType.TC_PS)
+}
+
+function getClaimTiersWithNoLimit(defaultLimit : ClaimMetricLimit) : ClaimTier[] {
+  var existingTiers = defaultLimit.PolicyTypeMetricLimits.ClaimMetricLimits
+          .where(\l -> l != defaultLimit and l.ClaimMetricType == defaultLimit.ClaimMetricType and l.ClaimTier != null and l.Currency == defaultLimit.Currency)
+          .map(\l -> l.ClaimTier)
+          .toSet()
+  return ClaimTier.getTypeKeys(false)
+          .where(\ t -> t.hasCategory(defaultLimit.PolicyTypeMetricLimits.PolicyType) and not existingTiers.contains(t))
+          .toTypedArray()
+}
+
+function getSortedClaimMetricLimits(category : ClaimMetricCategory, defaultLimit : ClaimMetricLimit) : ClaimMetricLimit[] {
+  return limits.ClaimMetricLimits.where(\ l -> l.ClaimMetricCategory == category 
+                                           and l.ClaimMetricType == defaultLimit.ClaimMetricType 
+                                           and not l.DefaultLimit 
+                                           and l.Currency == defaultLimit.Currency)
+                                 .sortBy(\ l -> l.ClaimTier)  
+}
+
+function getExposureTiersWithNoLimit(defaultLimit : ExposureMetricLimit) : ExposureTier[] {
+  var existingTiers = defaultLimit.PolicyTypeMetricLimits.ExposureMetricLimits
+          .where(\l -> l != defaultLimit and l.ExposureMetricType == defaultLimit.ExposureMetricType and l.ExposureTier != null and l.Currency == defaultLimit.Currency)
+          .map(\l -> l.ExposureTier)
+          .toSet()
+  return ExposureTier.getTypeKeys(false)
+          .where(\ t -> t.hasCategory(defaultLimit.PolicyTypeMetricLimits.PolicyType) and not existingTiers.contains(t))
+          .toTypedArray()
+}
+
+function getSortedExposureMetricLimits(defaultLimit : ExposureMetricLimit) : ExposureMetricLimit[] {
+  return limits.ExposureMetricLimits.where(\ l -> l.ExposureMetricType == defaultLimit.ExposureMetricType 
+                                           and not l.DefaultLimit 
+                                           and l.Currency == defaultLimit.Currency)
+                                 .sortBy(\ l -> l.ExposureTier)  
+}
+
+/**
+ * Ensure that the input is valid for the given metric.
+ */
+function validateMetricInput(input:gw.api.metric.EditableMetricLimitValue, metricLimit:ClaimMetricLimit) : String {
+  var validationResult:String = null
+  switch(metricLimit.Unit) {
+    case MetricUnit.TC_DAYS:
+        if(input.IntegerValue > MAX_METRIC_DAYS) {
+          validationResult = DisplayKey.get("Web.Admin.KeyMetrics.Input.MaxDaysExceeded", MAX_METRIC_DAYS, metricLimit.ClaimMetricType)
+        }
+  }
+  return validationResult
+}
+
+function validateMetricInput(input:gw.api.metric.EditableMetricLimitValue, metricLimit:ExposureMetricLimit) : String {
+  var validationResult:String = null
+  switch(metricLimit.Unit) {
+        case MetricUnit.TC_DAYS:
+        if(input.IntegerValue > MAX_METRIC_DAYS) {
+          validationResult = DisplayKey.get("Web.Admin.KeyMetrics.Input.MaxDaysExceeded", MAX_METRIC_DAYS, metricLimit.ExposureMetricType)
+        }
+  }
+  return validationResult
+}]]></Code>
+  </Page>
+</PCF>

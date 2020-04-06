@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="ECFClaimResponsePanelSet"
+    mode="LloydsAgreementParty">
+    <Require
+      name="ecfClaimData"
+      type="ECFMessageClaimData_Ext"/>
+    <Require
+      name="claimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <InputSetRef
+          def="MessageBeingRespondedToInputSet(ecfClaimData)"/>
+        <InputDivider/>
+        <InputSetRef
+          def="InsurerTransactionReferenceInputSet(claimResponseRq)"/>
+        <InputSetRef
+          def="CatastropheCodesInputSet(ecfClaimData, claimResponseRq)"/>
+        <InputDivider/>
+        <InputSetRef
+          def="PublicCommentsInputSet(claimResponseRq)"/>
+        <InputDivider/>
+        <InputSetRef
+          def="PrivateCommentsInputSet(claimResponseRq)"/>
+      </InputColumn>
+      <InputColumn>
+        <TextInput
+          desc="passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:InsurerOrReinsurerClaimReference1"
+          editable="true"
+          id="claimReference1"
+          inputConversion="VALUE == ecfClaimData.InsurerOrReinsurerClaimRef1 ? null : VALUE"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ClaimReference1&quot;)"
+          maxChars="15"
+          outputConversion="VALUE == null ? ecfClaimData.InsurerOrReinsurerClaimRef1 : VALUE"
+          value="claimResponseRq.InsurerOrReinsurerClaimRef1"/>
+        <TextInput
+          desc="passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:InsurerOrReinsurerClaimReference2"
+          editable="true"
+          id="claimReference2"
+          inputConversion="VALUE == ecfClaimData.InsurerOrReinsurerClaimRef1? null : VALUE "
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ClaimReference2&quot;)"
+          maxChars="15"
+          outputConversion="VALUE == null ? ecfClaimData.InsurerOrReinsurerClaimRef2 : VALUE"
+          value="claimResponseRq.InsurerOrReinsurerClaimRef2"/>
+        <InputSetRef
+          def="ResponseInputSet(claimResponseRq, false)"/>
+        <InputSetRef
+          def="QueryReasonsInputSet(claimResponseRq)"/>
+      </InputColumn>
+    </DetailViewPanel>
+  </PanelSet>
+</PCF>

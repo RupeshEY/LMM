@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="serviceRequest.acceptWorkAndRecordChange(newExpectedCompletionDate.moveToEndOfDay(), false)"
+    canEdit="true"
+    canVisit="true"
+    id="AcceptedWorkPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ServiceRequest.StateTransition.AcceptedWorkPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="AcceptedWorkPopup(serviceRequest : ServiceRequest)"/>
+    <Variable
+      name="serviceRequest"
+      type="ServiceRequest"/>
+    <Variable
+      initialValue="serviceRequest.createStateHandler()"
+      name="stateHandler"
+      type="gw.vendormanagement.servicerequeststate.ServiceRequestStateHandler"/>
+    <Variable
+      initialValue="serviceRequest.nextExpectedCompletionDate(stateHandler)"
+      name="newExpectedCompletionDate"
+      type="java.util.Date"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <DateInput
+            dateFormat="short"
+            editable="true"
+            id="ExpectedCompletionDate"
+            label="serviceRequest.isInstructedToProvideQuote(stateHandler) ? DisplayKey.get(&quot;Web.ServiceRequest.ExpectedQuoteCompletionDate&quot;) : DisplayKey.get(&quot;Web.ServiceRequest.ExpectedServiceCompletionDate&quot;)"
+            required="true"
+            validationExpression="newExpectedCompletionDate &lt; gw.api.util.DateUtil.currentDate().trimToMidnight() ? DisplayKey.get(&quot;Web.ServiceRequest.DateInPast&quot;) : null"
+            value="newExpectedCompletionDate"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,84 @@
+/* Style Sheet for the Data Dictionary */
+
+/* Applied to every element of the page; probably should just set the font*/
+body { font-family:arial }
+
+/* Style for the header, i.e. with table or typelist name and attributes */
+p.header { font-size: 10pt; line-height:14pt }
+
+/* Style for an entry for a column */
+p.item { font-size: 10pt; line-height:12pt }
+
+/* Style for the title of a screen item*/
+.itemtitle {font-size:12pt; color:#007700; font-weight:bold}
+
+/* Style for the title of a column in a table added by a customer extension*/
+.fieldname {font-size:12pt; color:#000077; font-weight:bold}
+
+/* Style for the title of a column in a table added by a customer extension*/
+.valuepath {font-size:12pt; color:#000077; font-weight:bold}
+
+/* Style for the title of a column in a table added by a customer extension*/
+.entity {font-size:12pt; color:#000077; font-weight:bold}
+
+/* Style for the title of a column in a table added by a customer extension*/
+.dbtable {font-size:12pt; color:#000077; font-weight:bold}
+
+/* Style for the title of a column in a table that's added by a subtype*/
+.subtypetitle {font-size:12pt; color:#770000; font-weight:bold}
+
+/* Style for the title of a filter in a typelist */
+.filtertitle {font-size:12pt; font-weight:bold}
+
+/* Style for the title of a table or typelist */
+.tabletitle {font-size:14pt; font-wieght:bold}
+
+/* Style for the references from other pages */
+.ref {font-weight:bold; font-style: italic}
+
+/* Style for the "Referenced as . . ." or whatever intro statement, which
+also takes care of indenting the text */
+.refintro {font-weight:bold; font-style: italic; padding-left: 2.3em}
+
+/* Style for the properties list for a table or typelist.  Just indents them */
+.propslist {padding-left: 2.3em}
+
+/* Style for the header of a typelist table */
+.typelistheader {background-color: #CCFFCC; font-weight: bold}
+
+/* Style for the text in the typelist tables */
+.typelistbody {font-size: 10pt}
+
+/* Style for the header of a screen reference table */
+.screenrefheader {background-color: #9966FF; font-weight: bold}
+
+/* Style for the text in the screen reference tables */
+.screenrefbody {font-size: 9pt}
+
+.titlebox {background-color: #FFF6E1}
+
+.pagetitle {font-weight: bold; font-size:18pt }
+
+/* Style for description tags */
+.desc {color:#6f6f6f; font-size: 10pt}
+
+.reftext {font-size:10pt }
+
+.entityname {font-size:12pt }
+
+.spaceandsize {color: #007700; font-size:7pt }
+
+.refbox_odd {background-color:#FFEBFF}
+.refbox_even {background-color:#FFCBFF}
+
+.attrbox {background-color:#ECF8FF}
+
+.attrtitle {font-color: #6f6f6f; font-size: 10pt}
+
+.attrtext {font-size:10pt}
+
+.filtertitle {font-size:12pt; font-weight:bold}
+
+.arraystitle {font-size:12pt; font-weight:bold}
+
+.arraysbox {background-color: #ECFFEC}

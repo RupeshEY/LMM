@@ -1,0 +1,20 @@
+package rules.Closed.ExposureClosed_dir
+
+@gw.rules.RuleName("CEX01000 - Notify external systems")
+internal class CEX01000Notifyexternalsystems {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return true /* Always notify */
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.addEvent("exposure_closed")
+/*end00rule*/
+
+  }
+}

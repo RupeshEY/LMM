@@ -1,0 +1,1171 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  consistentchildren="true"
+  desc="Insurance claim"
+  entity="Claim"
+  exportable="true"
+  lockable="true"
+  table="claim"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.entity.LevelAwareValidatableBean"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.impl.ClaimInternal"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsInterface
+    iface="gw.cc.claim.entity.Claim"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsInterface
+    iface="gw.api.assignment.UserRoleOwner"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.assignment.impl.UserRoleOwnerInternalMethods"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.ClaimContactRoleOwner"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.CommitCallback"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsInterface
+    iface="gw.api.question.AnswerSetContainer"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.purging.Purgeable"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.contact.ContactGraphGenerator"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.RemoveCallback"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsInterface
+    iface="gw.api.question.AnswerContainer"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsEntity
+    name="Validatable"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="CCAssignable"/>
+  <implementsInterface
+    iface="gw.cc.assignment.entity.CCAssignable"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.assignment.AssignablePublicMethods"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.assignment.impl.AssignableInternalMethods"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.entity.PermissionAssignableCheck"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsEntity
+    name="WorkloadDelegate"/>
+  <implementsInterface
+    iface="gw.api.assignment.CCAssignableMethods"
+    impl="gw.assignment.ClaimAssignableMethodsImpl"/>
+  <implementsInterface
+    iface="gw.api.assignment.workload.entity.WeightedWorkloadMethods"
+    impl="gw.assignment.workload.entity.ClaimWeightedWorkloadMethodsImpl"/>
+  <implementsInterface
+    iface="gw.api.specialhandling.ClaimSpecialHandlingMethods"
+    impl="gw.specialhandling.ClaimSpecialHandlingMethodsImpl"/>
+  <implementsInterface
+    iface="gw.api.heatmap.CatastropheMethods"
+    impl="gw.claim.catastrophe.CatastropheMethodsImpl"/>
+  <implementsInterface
+    iface="gw.api.financials.CheckCreatorProvider"
+    impl="gw.api.financials.CheckCreatorProviderImpl"/>
+  <implementsInterface
+    iface="gw.api.metric.ClaimUpdateMetricsMethods"
+    impl="gw.claim.metric.ClaimUpdateMetricsMethodsImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.email.CCEmailSupport"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimEmailSupportImpl"/>
+  <fulldescription><![CDATA[
+      Centralizes all the information, contacts, and business activities associated with a claimant's loss. The Claim
+      entity is the primary object in the ClaimCenter system.
+      
+    ]]></fulldescription>
+  <implementsEntity
+    name="ISOReportable"/>
+  <implementsInterface
+    iface="gw.cc.iso.entity.ISOReportable"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimImpl"/>
+  <implementsEntity
+    name="UserRoleOwner"/>
+  <implementsEntity
+    name="ClaimContactRoleOwner"/>
+  <column
+    desc="The external identifier of the claim."
+    name="ClaimNumber"
+    nullok="false"
+    soapnullok="true"
+    type="claimnumber"/>
+  <column
+    desc="Workers' Comp only. Date when the claimant reported incident to insured (employer)."
+    name="ClaimantRprtdDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Whether the claim is covered by the claimant's policies."
+    name="CoverageInQuestion"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Description of the accident or loss."
+    name="Description"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    desc="Workers' Comp only. Whether the injury occurred in course of employment."
+    name="EmploymentInjury"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Workers' Comp only. Date when the exposure began."
+    name="ExposureBegan"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Workers' Comp only. Date when the exposure ended."
+    name="ExposureEnded"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Insured's probable percentage of fault."
+    name="Fault"
+    nullok="true"
+    type="percentagedec"/>
+  <column
+    desc="Reports, incident number, and other information from the fire department."
+    name="FireDeptInfo"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The date and time the claim was initially flagged.  When the flag is unset, this date is set to null and will be set to a new date if a new reason for flagging the claim is found later."
+    name="FlaggedDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The reason this claim is flagged."
+    name="FlaggedReason"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    desc="True if this is an incident report only and the claim will not be processed."
+    name="IncidentReport"
+    nullok="true"
+    type="bit"/>
+  <column
+    createhistogram="true"
+    desc="The date on which the loss occurred."
+    name="LossDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Reports, incident number, and other information from the police deptartment."
+    name="PoliceDeptInfo"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Date at which the claim should be purged. Configurations can use this field to decide when to mark the claim for purge, and there are sample Claim Closed and Claim Reopened rules to set it. It is not used by the internal purge logic."
+    name="PurgeDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date claim was reopened."
+    name="ReOpenDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date on which the loss was reported."
+    name="ReportedDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Acknowledgment number of the state file for this claim."
+    name="StateAckNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="20"/>
+  </column>
+  <column
+    desc="Number of the state file for this claim."
+    name="StateFileNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="20"/>
+  </column>
+  <column
+    desc="Date at which the statute of limitations expires for this claim."
+    name="StatuteDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Boolean field to mark a claim as involving mold."
+    name="Mold"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Boolean field to mark a claim as involving hazardous waste."
+    name="HazardousWaste"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Boolean field to indicate suit at the time of the first notice."
+    name="FirstNoticeSuit"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="The date the agent was notified about the claim."
+    name="DateRptdToAgent"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The date the insured was notified about the claim."
+    name="DateRptdToInsured"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The manifestation date."
+    name="ManifestationDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Location Code for the Loss Location."
+    name="LossLocationCode"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="5"/>
+  </column>
+  <column
+    desc="The date the claim was reported to the employer."
+    name="DateRptdToEmployer"
+    nullok="true"
+    type="datetime"/>
+  <column
+    default="true"
+    desc="Is this field enabled for ISO."
+    name="ISOEnabled"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="An ID assigned to indicate company and office a claim is being submitted by, this data is used by ISO integration"
+    name="AgencyId"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="9"/>
+  </column>
+  <column
+    desc="True if this claim has exceeded the Reinsurance Reporting Threshold"
+    name="ReinsuranceReportable"
+    nullok="true"
+    type="bit"/>
+  <!-- New Work Comp Fields for claim loss type -->
+  <column
+    desc="The date the compensability Decision (for entire claim) was Due."
+    name="DateCompDcsnDue"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The date the compensability Decision (for entire claim) was Made."
+    name="DateCompDcsnMade"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Indicates if the benefits decision has been made yet."
+    name="BenefitsStatusDcsn"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="The date the work comp form was given to an employee."
+    name="DateFormGivenToEmp"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The date the work comp form was returned by an employee."
+    name="DateFormRetByEmp"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Is Modified Duty Available at Work."
+    name="ModifiedDutyAvail"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Was the employee injured on the premesis."
+    name="InjuredOnPremises"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Was the employee injured while doing his or her regular job."
+    name="InjuredRegularJob"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Was safety equipment provided."
+    name="SafetyEquipProv"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Was safety equipment used."
+    name="SafetyEquipUsed"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Whether computer security issues were involved."
+    name="ComputerSecurity"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Date of death (if injury type is death)."
+    name="DeathDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The date and time that this claim will become eligible for archiving. While this field is null or set to a date in the future, this claim is not selected by the archive batch process. (Note that being passed over by the archive batch process is different from being 'skipped' or 'excluded'.)"
+    name="DateEligibleForArchive"
+    nullok="true"
+    type="datetime"/>
+  <typekey
+    desc="Detailed accident type; augments LossCause."
+    name="AccidentType"
+    nullok="true"
+    typelist="AccidentType">
+    <keyfilters>
+      <keyfilter
+        name="LossCause"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="Information about how Claim was entered into the System."
+    name="ClaimSource"
+    nullok="true"
+    typelist="ClaimSource"/>
+  <typekey
+    desc="The outcome reached when closing the claim."
+    name="ClosedOutcome"
+    nullok="true"
+    typelist="ClaimClosedOutcomeType"/>
+  <typekey
+    desc="The currency for the claim, copied from the policy."
+    name="Currency"
+    nullok="false"
+    setterScriptability="hidden"
+    soapnullok="true"
+    typelist="Currency"/>
+  <typekey
+    desc="The reason for reopening the claim."
+    name="ReopenedReason"
+    nullok="true"
+    typelist="ClaimReopenedReason"/>
+  <typekey
+    default="neverflagged"
+    desc="This claim's status as a flagged claim."
+    name="Flagged"
+    nullok="false"
+    typelist="FlaggedType"/>
+  <typekey
+    desc="How the claim was reported."
+    name="HowReported"
+    nullok="true"
+    typelist="HowReportedType"/>
+  <typekey
+    desc="The state of jurisdiction. This indicates jurisdiction that covers the loss, which may differ from the state in which the loss occurred. The Jurisdiction must be associated with JurisdictionType.TC_INSURANCE."
+    name="JurisdictionState"
+    nullok="true"
+    typelist="Jurisdiction"/>
+  <typekey
+    desc="The status of the litigation."
+    name="LitigationStatus"
+    nullok="true"
+    typelist="LitigationStatus"/>
+  <typekey
+    desc="Line of Business code; typically related to the policy."
+    name="LOBCode"
+    nullok="true"
+    typelist="LobCode">
+    <keyfilters>
+      <keyfilter
+        name="LossType"/>
+      <keyfilter
+        name="Policy.PolicyType"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="General cause of loss; dependent on loss type."
+    name="LossCause"
+    nullok="true"
+    typelist="LossCause">
+    <keyfilters>
+      <keyfilter
+        name="LossType"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="High level claim type (for example, Auto or Property)."
+    name="LossType"
+    nullok="false"
+    typelist="LossType"/>
+  <typekey
+    desc="Relationship of the main contact to the insured."
+    name="MainContactType"
+    nullok="true"
+    typelist="PersonRelationType"/>
+  <typekey
+    desc="If non-null, this is an additional permission that users are required to have to view or work on this claim. This field is used to restrict access to sensitive or private claims; for example, those involving an employee or that are under litigation."
+    name="PermissionRequired"
+    nullok="true"
+    typelist="ClaimSecurityType"/>
+  <typekey
+    desc="Description of the progress of an open claim."
+    exportable="false"
+    name="Progress"
+    nullok="true"
+    typelist="ClaimProgressType"/>
+  <typekey
+    desc="Relationship of the person who reported the claim to the insured."
+    name="ReportedByType"
+    nullok="true"
+    typelist="PersonRelationType"/>
+  <typekey
+    desc="Segmentation type of the claim. Both the claim and the exposure may be segmented."
+    name="Segment"
+    nullok="true"
+    typelist="ClaimSegment"/>
+  <typekey
+    default="draft"
+    desc="Internal state of the claim."
+    exportable="false"
+    name="State"
+    nullok="false"
+    setterScriptability="hidden"
+    typelist="ClaimState"/>
+  <typekey
+    desc="Segmentation type of the claim. Both the claim and the exposure may be segmented."
+    name="Strategy"
+    nullok="true"
+    typelist="ClaimStrategy"/>
+  <typekey
+    desc="Validation level that this object passed (if any) before it was stored."
+    exportable="false"
+    name="ValidationLevel"
+    nullok="true"
+    typelist="ValidationLevel"/>
+  <typekey
+    desc="Weather conditions at the time of accident."
+    name="Weather"
+    nullok="true"
+    typelist="WeatherType"/>
+  <typekey
+    desc="The salvage status for a claim."
+    name="SalvageStatus"
+    nullok="true"
+    typelist="SalvageStatus"/>
+  <typekey
+    desc="The SIU status for a claim"
+    name="SIUStatus"
+    nullok="true"
+    typelist="SIUStatus"/>
+  <typekey
+    desc="The Other Recoverable status for a claim."
+    name="OtherRecovStatus"
+    nullok="true"
+    typelist="OtherRecoverableStatus"/>
+  <typekey
+    desc="The reinsurance flagged status for a claim."
+    name="ReinsuranceFlaggedStatus"
+    nullok="true"
+    typelist="ReinsuranceFlaggedStatus"/>
+  <!-- New Work Comp Fields for claim loss type -->
+  <typekey
+    desc="Did the employee have concurrent employment."
+    name="ConcurrentEmp"
+    nullok="true"
+    typelist="YesNo"/>
+  <typekey
+    desc="Does the employer question the validity of the claim."
+    name="EmpQusValidity"
+    nullok="true"
+    typelist="YesNo"/>
+  <typekey
+    desc="Does the employer question the validity of the claim."
+    name="DrugsInvolved"
+    nullok="true"
+    typelist="YesNo"/>
+  <typekey
+    desc="Indicates in the insured is at fault."
+    name="FaultRating"
+    nullok="true"
+    typelist="FaultRating"/>
+  <typekey
+    desc="Current state of SIU trigger rule processing for this Claim."
+    name="SIULifeCycleState"
+    nullok="true"
+    typelist="ClaimLifeCycleState"/>
+  <typekey
+    desc="The status of large loss notices."
+    name="LargeLossNotificationStatus"
+    nullok="true"
+    typelist="LargeLossNotificationStatus"/>
+  <typekey
+    desc="The tier of this claim, used to decide how to rate the claim metrics."
+    name="ClaimTier"
+    nullok="true"
+    typelist="ClaimTier"/>
+  <onetoone
+    desc="If this claim is draft, and an attempt to save it has failed, contains the claim number that was allocated before the failure. Otherwise null."
+    exportable="false"
+    fkentity="AllocatedClaimNumber"
+    ignoreforevents="true"
+    name="AllocatedClaimNumber"
+    nullok="true"
+    setterScriptability="doesNotExist"/>
+  <!-- Worker's Compensation -->
+  <foreignkey
+    archivingOwner="source"
+    columnName="ClaimWorkCompID"
+    desc="Claim's worker's compensation data"
+    fkentity="ClaimWorkComp"
+    name="ClaimWorkComp"
+    nullok="true"
+    triggersValidation="true"/>
+  <!-- Subrogation -->
+  <onetoone
+    desc="Claim's subrogation-related data"
+    fkentity="SubrogationSummary"
+    name="SubrogationSummary"
+    nullok="true"
+    triggersValidation="true"/>
+  <foreignkey
+    columnName="CatastropheID"
+    desc="Associated catastrophe."
+    exportasid="true"
+    fkentity="Catastrophe"
+    name="Catastrophe"
+    nullok="true"/>
+  <onetoone
+    desc="Link to get the associated policy location summary (from policy system for catastrophe)."
+    exportable="false"
+    fkentity="PolicyLocationSummaryJoin"
+    name="PolicyLocationSummaryJoin"
+    nullok="true"/>
+  <edgeForeignKey
+    desc="Workers' Comp only. Details about the claimant's employment."
+    edgeTableName="claimempdata"
+    extractable="true"
+    fkentity="EmploymentData"
+    loadable="true"
+    name="EmploymentData"
+    nullok="true"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="LocationCodeID"
+    desc="Workers' Comp only. Location at the employer's facilities where the accident occurred."
+    fkentity="PolicyLocation"
+    name="LocationCode"
+    nullok="true"
+    triggersValidation="true"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="LossLocationID"
+    createbackingindex="false"
+    desc="Location of the loss."
+    fkentity="Address"
+    importableagainstexistingobject="false"
+    name="LossLocation"
+    nullok="true"
+    triggersValidation="true"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="PolicyID"
+    desc="The policy associated with this claim."
+    fkentity="Policy"
+    name="Policy"
+    nullok="false"
+    triggersValidation="true"/>
+  <onetoone
+    desc="The calculated financials data for this claim."
+    exportable="false"
+    fkentity="ClaimRpt"
+    ignoreforevents="true"
+    name="ClaimRpt"
+    nullok="true"
+    setterScriptability="doesNotExist"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="ClaimantDenormID"
+    desc="Claimant FK denorm."
+    exportable="false"
+    fkentity="Contact"
+    ignoreforevents="true"
+    name="ClaimantDenorm"
+    nullok="true"
+    overwrittenInStagingTable="true"/>
+  <onetoone
+    desc="The claim info is used to cache information for when this claim is archived."
+    exportable="false"
+    fkentity="ClaimInfo"
+    ignoreforevents="true"
+    name="ClaimInfo"
+    nullok="true"
+    setterScriptability="doesNotExist"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="InsuredDenormID"
+    desc="Insured FK denorm."
+    exportable="false"
+    fkentity="Contact"
+    ignoreforevents="true"
+    name="InsuredDenorm"
+    nullok="true"
+    overwrittenInStagingTable="true"/>
+  <array
+    arrayentity="ClaimAccess"
+    cascadeDelete="true"
+    desc="The access control objects for this claim."
+    exportable="false"
+    ignoreforevents="true"
+    name="Access"
+    setterScriptability="doesNotExist"/>
+  <array
+    arrayentity="Activity"
+    desc="The activities for this claim."
+    name="Activities"
+    triggersValidation="true"/>
+  <array
+    arrayentity="UserRoleAssignment"
+    desc="The user role assignments for this claim."
+    exportable="false"
+    name="RoleAssignments"
+    triggersValidation="true"/>
+  <array
+    arrayentity="ClaimISOMatchReport"
+    desc="ISO match reports for this claim."
+    name="ClaimISOMatchReports"/>
+  <array
+    arrayentity="ClaimSynchState"
+    desc="The sync states related to this claim."
+    exportable="false"
+    name="ClaimSynchStates"
+    owner="true"/>
+  <array
+    arrayentity="ConcurrentEmployment"
+    desc="Details of concurrent employment for workers' comp claims."
+    name="ConcurrentEmpl"
+    triggersValidation="true"/>
+  <array
+    arrayentity="ClaimContact"
+    desc="The contacts involved with this claim. Including indirectly involved, like Exposures contacts."
+    name="Contacts"
+    triggersValidation="true"/>
+  <array
+    arrayentity="Document"
+    desc="The documents associated with this claim; for example, FNOL accord form or police report. Warning: do not rely on the contents of this array when the IDocumentMetadataSource plugin is enabled; use DocumentsUtil.getAllDocumentsForClaim instead."
+    name="Documents"
+    triggersValidation="true"/>
+  <array
+    arrayentity="Exposure"
+    desc="The exposures related to this claim. Note: if triggersValidation is false, exposure metrics will not be run automatically."
+    name="Exposures"
+    triggersValidation="true"/>
+  <array
+    arrayentity="History"
+    desc="The history events related to this claim."
+    exportable="false"
+    ignoreforevents="true"
+    name="History"/>
+  <array
+    arrayentity="Incident"
+    desc="Descriptions of incidents related to this claim. Note: In Gosu, it's preferred to use Claim.VehicleIncidentsOnly and similar properties for each Incident subtype. See the Application Guide."
+    name="Incidents"
+    triggersValidation="true"/>
+  <array
+    arrayentity="Matter"
+    desc="The legal matters related to this claim."
+    name="Matters"
+    triggersValidation="true"/>
+  <array
+    arrayentity="Note"
+    desc="The notes particular to this claim. Notes can also be associated with a particular exposure."
+    name="Notes"
+    triggersValidation="true"/>
+  <array
+    arrayentity="Official"
+    desc="Details of officials associated with claim."
+    name="Officials"
+    triggersValidation="true"/>
+  <array
+    arrayentity="MetroReport"
+    desc="Details of reports associated with claim."
+    name="MetroReports"
+    triggersValidation="true"/>
+  <array
+    arrayentity="OtherBenefit"
+    desc="Details of other benefits for workers comp claim."
+    name="OtherBenefits"
+    triggersValidation="true"/>
+  <array
+    arrayentity="ReserveLine"
+    desc="ReserveLines relating to this claim."
+    exportable="false"
+    name="ReserveLines"/>
+  <array
+    arrayentity="RICoding"
+    desc="RICodings relating to this claim."
+    exportable="false"
+    name="RICodings"/>
+  <array
+    arrayentity="ClaimText"
+    desc="Large text fields associated with claim."
+    name="Text"
+    owner="true"
+    triggersValidation="true"/>
+  <array
+    arrayentity="Transaction"
+    deprecated="true"
+    desc="Transactions relating to this claim.  For rules, it is much better to use one of the getXXXIterator() methods and for the UI it is much better to use one of the getXXXQuery() methods to retrieve all transactions or a specific subtype of Transactions for the claim."
+    exportable="false"
+    name="Transactions"/>
+  <array
+    arrayentity="Negotiation"
+    desc="The negotiations related to this claim."
+    name="Negotiations"
+    triggersValidation="true"/>
+  <array
+    arrayentity="Evaluation"
+    desc="The original cost estimate followed by any modifications to that estimate."
+    name="Evaluations"
+    triggersValidation="true"/>
+  <array
+    arrayentity="ClaimWorkflow"
+    desc="Set of workflows associated with this Claim."
+    exportable="false"
+    name="Workflows"/>
+  <array
+    arrayentity="Deductible"
+    desc="Deductibles associated with this claim."
+    exportable="false"
+    name="Deductibles"
+    setterScriptability="doesNotExist"/>
+  <array
+    arrayentity="ServiceRequest"
+    desc="Service requests associated with this claim. Note: if triggersValidation is false, service request metrics will not be run automatically."
+    name="ServiceRequests"
+    triggersValidation="true"/>
+  <!-- Claim Metrics -->
+  <array
+    arrayentity="ClaimMetric"
+    desc="Metrics related to this claim."
+    exportable="false"
+    ignoreforevents="true"
+    name="ClaimMetrics">
+    <link-association>
+      <subtype-map/>
+    </link-association>
+    <array-association>
+      <typelist-map
+        field="ClaimMetricCategory"/>
+    </array-association>
+  </array>
+  <array
+    arrayentity="ClaimIndicator"
+    desc="Indicators related to this claim."
+    exportable="false"
+    ignoreforevents="true"
+    name="ClaimIndicators">
+    <link-association>
+      <subtype-map/>
+    </link-association>
+  </array>
+  <array
+    arrayentity="RIAgreementGroup"
+    desc="The reinsurance agreement groups for this claim."
+    name="RIAgreementGroups"
+    triggersValidation="true"/>
+  <onetoone
+    desc="Tracks when Claim metrics and indicators need to be recalculated"
+    exportable="false"
+    fkentity="ClaimMetricRecalculationTime"
+    ignoreforevents="true"
+    name="ClaimMetricRecalculationTime"
+    nullok="true"/>
+  <!-- Special Handling Financials -->
+  <onetoone
+    desc="Tracks previously calculated financial values used by AutomatedHandlerTriggers that trigger on financial thresholds"
+    exportable="false"
+    fkentity="SpecialHandlingFinancialState"
+    ignoreforevents="true"
+    name="SpecialHandlingFinancialState"
+    nullok="true"/>
+  <!-- Commercial Property / Homeowners -->
+  <typekey
+    desc="the Location where the property was stolen."
+    name="LocationOfTheft"
+    nullok="true"
+    typelist="LocationOfTheft"/>
+  <!-- Homeowners -->
+  <column
+    desc="Is related to weather"
+    name="WeatherRelated"
+    nullok="true"
+    type="bit"/>
+  <onetoone
+    desc="Details of fire damage to property"
+    fkentity="PropertyFireDamage"
+    name="PropertyFireDamage"
+    nullok="true"
+    triggersValidation="true"/>
+  <onetoone
+    desc="Details of water damage to property"
+    fkentity="PropertyWaterDamage"
+    name="PropertyWaterDamage"
+    nullok="true"
+    triggersValidation="true"/>
+  <!-- Dependent fields  for workers comp claims -->
+  <column
+    desc="The reason the employer questions the validity of the claim."
+    name="EmployerValidityReason"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="255"/>
+  </column>
+  <!-- Special Investigations -->
+  <column
+    default="0"
+    desc="Special Investigations Score."
+    name="SIScore"
+    nullok="true"
+    type="integer"/>
+  <typekey
+    default="No"
+    desc="Escalate to SIU team."
+    name="SIEscalateSIU"
+    nullok="true"
+    typefilter="YesNoOnly"
+    typelist="YesNo"/>
+  <column
+    desc="Date escalated to SIU team."
+    name="SIEscalateSIUdate"
+    nullok="true"
+    type="datetime"/>
+  <array
+    arrayentity="SITrigger"
+    desc="The triggers for Special Investigations linked to this Claim"
+    name="SITriggers"
+    owner="true"/>
+  <!-- END Special Investigations BEGIN Contributing Factors -->
+  <array
+    arrayentity="ContribFactor"
+    name="ContribFactors"
+    owner="true"
+    triggersValidation="true"/>
+  <!-- END Contributing Factors   BEGIN Workers' Comp Med Case Mgr Screen Content -->
+  <typekey
+    default="Yes"
+    desc="Show Medical First info section."
+    name="ShowMedicalFirstInfo"
+    nullok="true"
+    typefilter="YesNoOnly"
+    typelist="YesNo"/>
+  <column
+    desc="Date of the Examination."
+    name="ExaminationDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Has the patient been treated before."
+    name="TreatedPatientBfr"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Is the diagnostic consistent."
+    name="DiagnosticCnsistnt"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Current conditions"
+    name="CurrentConditions"
+    nullok="true"
+    type="bit"/>
+  <!-- <typekey
+    xmlns=""
+    desc="Type of treatment received."
+    name="MedicalTreatmentType"
+    typelist="WCMedicalTreatmentType"/> -->
+  <column
+    desc="Is further treatment required."
+    name="FurtherTreatment"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Date admitted to the hospital."
+    name="HospitalDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Estimated Days in hospital."
+    name="HospitalDays"
+    nullok="true"
+    type="integer"/>
+  <column
+    default="false"
+    desc="Whether the injured person had a pre-existing disability."
+    name="PreexDisblty"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Is Primary Treating Physician in MPN?"
+    name="PTPinMPN"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Date that Insurer sent out the MPN Notification."
+    name="InsurerSentMPNNotice"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date that the Employer sent out the MPN Notification."
+    name="EmpSentMPNNotice"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date that the injured Worker moved to MPN."
+    name="InjWkrInMPN"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date Maximum Medical Improvement was reached."
+    name="MMIdate"
+    nullok="true"
+    type="datetime"/>
+  <array
+    arrayentity="MedicalContactStatus"
+    name="MedicalContactStatus"
+    owner="true"/>
+  <array
+    arrayentity="MedicalTreatment"
+    name="MedicalTreatments"
+    owner="true"/>
+  <array
+    arrayentity="DrugPrescribed"
+    name="DrugsPrescribed"
+    owner="true"/>
+  <!-- END Workers' Comp Med Case Mgr Screen Content  BEGIN General Content - Claim Storage Info -->
+  <column
+    desc="Date file shipped to storage facility."
+    name="StorageDate"
+    nullok="true"
+    type="datetime"/>
+  <typekey
+    desc="Storage Location State."
+    name="StorageLocationState"
+    nullok="true"
+    typelist="State"/>
+  <typekey
+    desc="Storage Category."
+    name="StorageCategory"
+    nullok="true"
+    typelist="StorageCategory"/>
+  <typekey
+    desc="Storage Type."
+    name="StorageType"
+    nullok="true"
+    typelist="StorageType"/>
+  <column
+    desc="Storage Box Number."
+    name="StorageBoxNum"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="10"/>
+  </column>
+  <column
+    desc="Storage Bar Code Number."
+    name="StorageBarCodeNum"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="10"/>
+  </column>
+  <column
+    desc="Storage Volumes."
+    name="StorageVolumes"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="10"/>
+  </column>
+  <!-- END General Content - Claim Storage Info  BEGIN Question set arrays/foreign keys -->
+  <array
+    arrayentity="SIUAnswerSet"
+    desc="Link to Answer set for SIU"
+    name="SIAnswerSet"
+    triggersValidation="true"/>
+  <!-- END Question set foreign keys -->
+  <events>
+    <event
+      description="Deprecated - test for validity directly in rules.  Fired only if DeprecatedEventGeneration is set to true in config.xml.  This event denotes that a new Claim is valid or an existing Claim has become valid.  All other events raised in this database transaction related to the Claim, including events related to Exposures and other objects associated with the Claim, will be subsumed into this event."
+      name="ClaimValid"/>
+    <event
+      description="Claim resync event. Generated only as a result of an administrator requesting a claim resync.  All pending messages for the claim are dumped and the event is fired.  Implementors will generally handle this event to dump the entire claim to bring the remote system up to date."
+      name="ClaimResync"/>
+    <event
+      description="Claim purged event."
+      name="ClaimPurged"/>
+  </events>
+  <index
+    desc="Enforce claim number uniqueness and also speed up claim search by claim number"
+    name="claimu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimNumber"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+  </index>
+  <index
+    desc="Index to speed search for open claims assigned to current user"
+    name="claimu2"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="AssignedUserID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="AssignmentStatus"/>
+    <indexcol
+      keyposition="4"
+      name="State"/>
+    <indexcol
+      keyposition="5"
+      name="Flagged"/>
+    <indexcol
+      keyposition="6"
+      name="ClaimNumber"/>
+    <indexcol
+      keyposition="7"
+      name="ID"/>
+  </index>
+  <index
+    desc="Index to speed up team page which shows claims assigned to a particular group"
+    name="claimu3"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="AssignedGroupID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="State"/>
+    <indexcol
+      keyposition="4"
+      name="ID"/>
+  </index>
+  <index
+    desc="Index to speed up search for claims assigned to a particular group, search is usually restricted by loss date as well"
+    name="claimu4"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="AssignedGroupID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="LossDate"/>
+    <indexcol
+      keyposition="4"
+      name="ID"/>
+  </index>
+  <index
+    desc="Index to speed up search for claims created by a particular user and closed within a date range"
+    name="claimu5"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="CreateUserID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="CloseDate"/>
+    <indexcol
+      keyposition="4"
+      name="ID"/>
+  </index>
+  <index
+    desc="Index to prevent sharing of Claim loss location addresses"
+    name="claimu8"
+    unique="true">
+    <forceindex
+      oracle="true"
+      sqlserver="true"/>
+    <indexcol
+      keyposition="1"
+      name="LossLocationID"/>
+  </index>
+  <!-- <index
+    xmlns=""
+    desc="Index for all searches that join with claim (claimant, insured, etc)"
+    name="claimu6"
+    trackUsage="true"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Retired"/>
+    <indexcol
+      keyposition="2"
+      name="LossDate"/>
+    <indexcol
+      keyposition="3"
+      name="ID"/>
+  </index> -->
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.DenormalizedClaimClaimantDBCheckBuilder"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.DenormalizedPolicyInsuredDBCheckBuilder"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.RequiredRolesDBCheckBuilder"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.UniqueClaimPolicyDBCheckBuilder"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.ClaimPolicyDBCheckBuilder"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.archiving.schema.ClaimMapsToClaimInfoDBCheckBuilder"/>
+  <searchColumn
+    name="LossLocationSpatialDenorm"
+    sourceColumn="SpatialPoint"
+    sourceForeignKey="LossLocation"/>
+</entity>

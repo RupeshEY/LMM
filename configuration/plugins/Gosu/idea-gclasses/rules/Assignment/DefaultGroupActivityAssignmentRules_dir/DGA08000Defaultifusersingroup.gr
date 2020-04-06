@@ -1,0 +1,28 @@
+package rules.Assignment.DefaultGroupActivityAssignmentRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+
+@gw.rules.RuleName("DGA08000 - Default - if users in group")
+internal class DGA08000Defaultifusersingroup {
+  static function doCondition(activity : entity.Activity) : boolean {
+    
+/*start00rule*/
+return /* As long as the group contains at least 1 user */
+activity.CurrentAssignment.AssignedGroup.Users.toList().hasMatch(\ aUser -> true)
+/*end00rule*/
+
+  }
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+if (activity.CurrentAssignment.assignUserByRoundRobin(false, activity.CurrentAssignment.AssignedGroup)) {
+  CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.DefaultGroup.Activity", actions.ShortRuleName))
+  CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.AssignedUserIs", activity.AssignedUser))
+  actions.exit()
+}
+/*end00rule*/
+
+  }
+}

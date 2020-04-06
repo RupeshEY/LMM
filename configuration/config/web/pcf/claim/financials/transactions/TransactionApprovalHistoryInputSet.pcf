@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <InputSet
+    id="TransactionApprovalHistoryInputSet">
+    <Require
+      name="Transaction"
+      type="Transaction"/>
+    <ListViewInput
+      boldLabel="true"
+      def="ApprovalHistoryLV(Transaction.TransactionSet.ApprovalHistory?.toTypedArray())"
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.TransactionApprovalHistory.Transaction.ApprovalHistory&quot;)"
+      labelAbove="true">
+      <Toolbar/>
+    </ListViewInput>
+  </InputSet>
+</PCF>

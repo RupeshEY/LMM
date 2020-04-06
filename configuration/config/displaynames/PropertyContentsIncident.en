@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Entity
+  name="PropertyContentsIncident">
+  <Columns>
+    <Column
+      beanPath="PropertyContentsIncident.Description"
+      name="Description"/>
+  </Columns>
+  <DisplayName><![CDATA[
+if (Description != null )
+  return Description
+else 
+  return gw.api.locale.DisplayKey.get("Web.NewLossDetailsScreen.IncidentIterator.PropertyContents.Property.Value")
+  ]]></DisplayName>
+</Entity>

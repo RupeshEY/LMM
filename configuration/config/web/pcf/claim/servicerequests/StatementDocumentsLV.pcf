@@ -1,0 +1,112 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    available="true"
+    id="StatementDocumentsLV">
+    <Require
+      name="currentStatement"
+      type="ServiceRequestStatement"/>
+    <Require
+      name="documentsRemovable"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <RowIterator
+      editable="false"
+      elementName="statementDocumentLinkPair"
+      id="ActiveStatementDocuments"
+      value="currentStatement.ViewableDocumentLinksAndDocuments"
+      valueType="java.util.List&lt;gw.util.Pair&lt;entity.ServiceRequestStatementDocumentLink, entity.Document&gt;&gt;">
+      <Variable
+        initialValue="statementDocumentLinkPair.Second"
+        name="document"
+        type="Document"/>
+      <Row>
+        <BooleanRadioCell
+          icon="document.Icon"
+          id="Icon"
+          showHeaderIcon="false"
+          value="true"
+          valueType="boolean"/>
+        <LinkCell
+          id="Name"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.Name&quot;)"
+          printWidth="4"
+          width="300">
+          <Link
+            available="documentsActionsHelper.isViewDocumentContentAvailable(document) and not CurrentLocation.InEditMode"
+            download="inline"
+            action="document.downloadContent()"
+            id="NameLink"
+            label="document.Name"
+            styleClass="none"
+            tooltip="documentsActionsHelper.getViewDocumentContentTooltip(document)"/>
+        </LinkCell>
+        <LinkCell
+          id="Actions"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.ViewAndEdit&quot;)">
+          <Link
+            action="DocumentDetailsPopup.push(document, not currentStatement.ServiceRequest.AlreadyPromoted)"
+            available="documentsActionsHelper.DocumentMetadataActionsAvailable"
+            icon="documentsActionsHelper.DocumentMetadataActionsAvailable ? &quot;info_16.png&quot; : &quot;info_16_disabled.png&quot;"
+            id="ViewPropertiesLink"
+            styleClass="miniButton"
+            tooltip="documentsActionsHelper.ViewDocumentPropertiesTooltip"
+            visible="not CurrentLocation.InEditMode"/>
+          <Link
+            action="document.downloadContent()"
+            available="documentsActionsHelper.isDownloadDocumentContentAvailable(document)"
+            download="attachment"
+            icon="documentsActionsHelper.isDownloadDocumentContentAvailable(document) ? &quot;download_document_16.png&quot; : &quot;download_document_disabled_16.png&quot; "
+            id="DownloadLink"
+            styleClass="miniButton"
+            tooltip="documentsActionsHelper.DownloadDocumentContentTooltip"
+            visible="documentsActionsHelper.isDownloadDocumentContentVisible(document) and not CurrentLocation.InEditMode and not currentStatement.ServiceRequest.AlreadyPromoted"/>
+          <Link
+            action="UploadDocumentContentPopup.push(document)"
+            available="documentsActionsHelper.isUploadDocumentContentAvailable(document)"
+            icon="documentsActionsHelper.isUploadDocumentContentAvailable(document) ? &quot;upload_document_16.png&quot; : &quot;upload_document_disabled_16.png&quot;"
+            id="UploadLink"
+            styleClass="none"
+            tooltip="documentsActionsHelper.UploadDocumentContentTooltip"
+            visible="documentsActionsHelper.isUploadDocumentContentVisible(document)and not CurrentLocation.InEditMode and not currentStatement.ServiceRequest.AlreadyPromoted "/>
+          <Link
+            action="currentStatement.unlinkDocumentForUI(document, currentStatement.New ? false : true) "
+            available="documentsActionsHelper.DocumentMetadataActionsAvailable"
+            icon="documentsActionsHelper.DocumentMetadataActionsAvailable ? &quot;remove_document_16.png&quot; : &quot;remove_document_disabled_16.png&quot;  "
+            id="Unlink"
+            styleClass="miniButton"
+            tooltip="documentsActionsHelper.RemoveDocumentLinkTooltip()"
+            visible="documentsRemovable"/>
+          <Link
+            id="DocumentsLV_ActionsDisabled"
+            label="documentsActionsHelper.AsynchronousActionsMessage"
+            styleClass="none"
+            visible="documentsActionsHelper.isDocumentPending(document)"/>
+        </LinkCell>
+        <TypeKeyCell
+          id="Type"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.Type&quot;)"
+          value="document.Type"
+          valueType="typekey.DocumentType"/>
+        <TextCell
+          id="Author"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.Author&quot;)"
+          value="document.Author"/>
+        <DateCell
+          dateFormat="short"
+          id="DateModified"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.DateModified&quot;)"
+          sortDirection="descending"
+          sortOrder="1"
+          timeFormat="short"
+          value="document.DateModified"
+          width="174"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    alwaysInEditMode="false"
+    beforeCommit="verifyNotADuplicate()"
+    canEdit="canEdit"
+    canVisit="true"
+    id="AutomatedNotificationHandlerDetailPopup"
+    startInEditMode="startInEditMode"
+    title="DisplayKey.get(&quot;Web.Admin.AutomatedNotificationHandlerDetailPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="AutomatedNotificationHandlerDetailPopup(automatedHandler : AutomatedNotificationHandler, startInEditMode : boolean, canEdit : boolean)"/>
+    <Variable
+      name="automatedHandler"
+      type="AutomatedNotificationHandler"/>
+    <Variable
+      name="startInEditMode"
+      type="boolean"/>
+    <Variable
+      initialValue="false"
+      name="canEdit"
+      type="boolean"/>
+    <Screen>
+      <Toolbar
+        visible="perm.System.accountmng">
+        <EditButtons
+          showUpdateConfirmMessage="false"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Web.Admin.AutomatedHandlerBase.HeaderCondition&quot;)"/>
+          <InputSetRef
+            def="AutomatedHandlerBaseInputSet(automatedHandler)"/>
+          <InputSetRef
+            def="AutomatedHandlerTriggerInputSet(automatedHandler)"
+            mode="(typeof automatedHandler.Trigger).DisplayName"/>
+          <Label
+            label="DisplayKey.get(&quot;Web.Admin.AutomatedHandlerBase.HeaderAction&quot;)"/>
+          <InputSetRef
+            def="AutomatedHandlerActionInputSet(automatedHandler)"
+            mode="&quot;notification&quot;"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[function verifyNotADuplicate() {
+  if (automatedHandler.isDuplicateOfExistingHandler()) {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Web.Admin.NewAutomatedNotificationHandlerPopup.DuplicateAutomatedNotification"))
+  }
+}]]></Code>
+  </Popup>
+</PCF>

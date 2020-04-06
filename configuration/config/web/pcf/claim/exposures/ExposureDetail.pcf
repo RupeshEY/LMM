@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    beforeCommit="exposure.cleanupBenefits(); exposure.totalLossCalculatorPreUpdate(); exposure.Claim.cleanAndFinishServiceRequests(unusedServiceRequests); exposure.Claim.instructNewServiceRequests()"
+    canEdit="perm.Exposure.edit(exposure)"
+    canVisit="exposure.Claim.ExposureListChangeable and perm.Exposure.view(exposure)"
+    id="ExposureDetail"
+    parent="ClaimExposures(exposure.Claim)"
+    showUpLink="true"
+    startEditing="exposure.ensureIncidentCreated(); exposure.createBenefits()"
+    title="DisplayKey.get(&quot;Web.PrintValue&quot;, exposure)"
+    validationParameter="exposure">
+    <LocationEntryPoint
+      signature="ExposureDetail(exposure : Exposure)"/>
+    <Variable
+      name="exposure"
+      type="Exposure"/>
+    <Variable
+      initialValue="new java.util.HashSet&lt;ServiceRequest&gt;()"
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <ScreenRef
+      def="ExposureDetailScreen(exposure, User.util.CurrentUser, unusedServiceRequests)"/>
+  </Page>
+</PCF>

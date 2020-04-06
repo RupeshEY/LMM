@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="AnswerDelegate">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.question.impl.AnswerDelegateInternal"
+    impl="com.guidewire.cc.domain.question.impl.AnswerDelegateImpl"/>
+  <implementsInterface
+    iface="gw.cc.question.entity.AnswerDelegate"
+    impl="com.guidewire.cc.domain.question.impl.AnswerDelegateImpl"/>
+  <fulldescription><![CDATA[
+      Text, Logical and Numeric Answers supplied in a specific Question Set.
+      Question Sets are groupings of questions utilized in the risk qualification process
+      or to develop supplemental underwriting information. Specific to PolicyCenter
+    ]]></fulldescription>
+  <foreignkey
+    columnName="QuestionID"
+    desc="Question that this answer answers"
+    fkentity="Question"
+    name="Question"
+    nullok="false"/>
+  <column
+    desc="Yes / no component of answer."
+    name="BooleanAnswer"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="The answer in date form."
+    name="DateAnswer"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Either the answer's text."
+    name="TextAnswer"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    desc="Numeric component of answer."
+    name="IntegerAnswer"
+    nullok="true"
+    type="integer"/>
+  <foreignkey
+    columnName="ChoiceAnswerID"
+    desc="Choice of the answer."
+    fkentity="QuestionChoice"
+    name="ChoiceAnswer"
+    nullok="true"/>
+</delegate>

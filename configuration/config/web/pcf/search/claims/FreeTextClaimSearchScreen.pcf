@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="FreeTextClaimSearchScreen">
+    <Require
+      name="archiveSearchEnabled"
+      type="boolean"/>
+    <Variable
+      initialValue="&quot;FreeTextClaimSearchResultsLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="true"
+      name="dismissInvalidSearchCriteriaAlert"
+      type="boolean"/>
+    <SearchPanel
+      criteriaName="criteriaWrapper"
+      maxSearchResults="java.lang.Integer.MAX_VALUE // gw.api.search.MaxSearchResults.forClaims()"
+      resultCachingEnabled="false"
+      resultsName="claimSearchResults"
+      search="criteriaWrapper.Criteria.performFreeTextSearch(isArchived(criteriaWrapper.Criteria))"
+      searchCriteria="gw.api.claim.ClaimUtil.getClaimSearchCriteria()"
+      searchCriteriaType="gw.cc.claim.ClaimSearchCriteriaWrapper"
+      searchOnEnter="false"
+      searchResultsType="gw.api.search.FreeTextClaimSearchResults">
+      <PanelRef
+        def="FreeTextClaimSearchDV(criteriaWrapper.Criteria, archiveSearchEnabled)"/>
+      <PanelRef
+        def="FreeTextClaimSearchResultsLV(claimSearchResults)"
+        mode="criteriaWrapper.Criteria.FreeTextClaimSearchType.Code">
+        <TitleBar
+          appendListViewPaging="true"
+          title="DisplayKey.get(&quot;JSP.ClaimSearch.Search.Results&quot;)"/>
+        <Toolbar>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="AssignClaimsPopup.push(new gw.api.claim.ClaimAssignmentPopup(CheckedValues))"
+            id="ClaimSearchScreen_AssignButton"
+            iterator="FreeTextClaimSearchResultsLV.FreeTextClaimSearchResultsIterator"
+            label="DisplayKey.get(&quot;Web.ClaimSearch.Toolbar.Assign&quot;)"
+            shortcut="G"
+            visible="!isArchived(criteriaWrapper.Criteria)"/>
+          <ToolbarDivider/>
+          <ToolbarButton
+            action="gw.api.print.ListViewPrintOptionPopupAction.printListViewOnlyWithOptions(PrintTargetLV, DisplayKey.get(&quot;JSP.ClaimSearch.Search.Results&quot;), null)"
+            available="perm.User.printlistviews"
+            id="ClaimSearchScreen_PrintButton"
+            label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+            shortcut="N"/>
+        </Toolbar>
+      </PanelRef>
+    </SearchPanel>
+    <Code><![CDATA[function isArchived(csc : ClaimSearchCriteria) : boolean {
+      return csc.FreeTextClaimSearchType == FreeTextClaimSearchType.TC_BYCONTACTINFOARCHIVE;
+}]]></Code>
+  </Screen>
+</PCF>

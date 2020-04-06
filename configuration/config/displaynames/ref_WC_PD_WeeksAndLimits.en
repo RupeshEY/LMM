@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<Entity
+  name="ref_WC_PD_WeeksAndLimits">
+  <Columns>
+    <Column
+      beanPath="ref_WC_PD_WeeksAndLimits.DisabilityPercent"
+      name="DisabilityPercent"/>
+    <Column
+      beanPath="ref_WC_PD_WeeksAndLimits.PD_BenefitStartDate"
+      name="StartDate"/>
+    <Column
+      beanPath="ref_WC_PD_WeeksAndLimits.PD_BenefitEndDate"
+      name="EndDate"/>
+    <Column
+      beanPath="ref_WC_PD_WeeksAndLimits.JurisdictionState"
+      name="JurisdictionState"/>
+  </Columns>
+  <DisplayName><![CDATA[
+var shortStartDate = StartDate != null ? StartDate.format("short") : ""
+var shortEndDate = EndDate != null ? EndDate.format("short") : ""
+
+return gw.api.locale.DisplayKey.get("Web.Admin.WCPDWeeksAndLimits.Display", 
+    JurisdictionState,
+    shortStartDate,
+    shortEndDate,
+    DisabilityPercent)
+    
+  ]]></DisplayName>
+</Entity>

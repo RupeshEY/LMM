@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_financials.xml -->
+  <ListViewPanel
+    id="RecurrenceChecksLV">
+    <Require
+      name="CheckSet"
+      type="CheckSet"/>
+    <RowIterator
+      editable="false"
+      elementName="Check"
+      pageSize="3"
+      value="CheckSet.Checks"
+      valueType="entity.Check[]">
+      <Row>
+        <DateCell
+          id="ScheduledSendDate"
+          label="DisplayKey.get(&quot;LV.Financials.RecurrenceChecks.ScheduledSendDate&quot;)"
+          sortOrder="1"
+          value="Check.ScheduledSendDate"/>
+        <CurrencyCell
+          action="ClaimFinancialsChecksDetail.go(Check.Claim, Check)"
+          formatType="currency"
+          id="Amount"
+          label="DisplayKey.get(&quot;LV.Financials.RecurrenceChecks.Amount&quot;)"
+          value="Check.GrossAmountPair"
+          valueType="gw.api.financials.CurrencyAmountPair"/>
+        <TextCell
+          id="PayTo"
+          label="DisplayKey.get(&quot;LV.Financials.RecurrenceChecks.PayTo&quot;)"
+          value="Check.PayTo"/>
+        <TypeKeyCell
+          id="Status"
+          label="DisplayKey.get(&quot;LV.Financials.RecurrenceChecks.Status&quot;)"
+          value="Check.Status"
+          valueType="typekey.TransactionStatus"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.User.view"
+    id="UserExposuresPage"
+    title="DisplayKey.get(&quot;Web.Admin.UserDetail&quot;, User.DisplayName)">
+    <LocationEntryPoint
+      signature="UserExposuresPage(User : User)"/>
+    <Variable
+      name="User"
+      type="User"/>
+    <Variable
+      initialValue="ExposureDesktopView.finder.findAll()"
+      name="ExposureDesktopViewList"
+      type="gw.api.database.IQueryBeanResult&lt;ExposureDesktopView&gt;"/>
+    <Screen
+      id="UserExposuresScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.Admin.UserDetail.Exposures&quot;, User.DisplayName)"/>
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="AssignExposuresPopup.push(new gw.api.exposure.ExposureAssignmentPopup(CheckedValues))"
+          default="true"
+          flags="any ExposureDesktopView"
+          id="UserExposuresPage_AssignButton"
+          iterator="DesktopExposuresLV.DesktopExposuresLV"
+          label="DisplayKey.get(&quot;Web.DesktopExposures.Assign&quot;)"
+          shortcut="G"/>
+        <ToolbarDivider/>
+      </Toolbar>
+      <PanelRef
+        def="DesktopExposuresLV(ExposureDesktopViewList, User)"/>
+    </Screen>
+  </Page>
+</PCF>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Provides a way to store a state value for extended lifecycle processing; for example, for SIU processing over time"
+  name="ClaimLifeCycleState">
+  <typecode
+    code="step1"
+    desc="First step in the lifecycle"
+    name="Step 1"
+    priority="1"/>
+  <typecode
+    code="step2"
+    desc="Second step in the lifecycle"
+    name="Step 2"
+    priority="2"/>
+  <typecode
+    code="step3"
+    desc="Third step in the lifecycle"
+    name="Step 3"
+    priority="3"/>
+</typelistextension>

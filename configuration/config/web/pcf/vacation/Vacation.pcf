@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    id="Vacation"
+    menuActions="VacationMenuActions()"
+    title="DisplayKey.get(&quot;Web.TabBar.Vacation&quot;)">
+    <LocationRef
+      location="VacationActivities()"/>
+    <LocationRef
+      location="VacationClaims()"/>
+    <LocationRef
+      location="VacationExposures()"/>
+  </LocationGroup>
+</PCF>

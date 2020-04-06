@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ECFMessageDetailsCrossMarketCommentLV">
+    <Require
+      name="comments"
+      type="ECFMessageCrossMarketComment_Ext[]"/>
+    <RowIterator
+      editable="true"
+      elementName="comment"
+      value="comments"
+      valueType="ECFMessageCrossMarketComment_Ext[]">
+      <Row>
+        <TextCell
+          enableSort="false"
+          id="Detail"
+          desc="Comments made by an agreement party that may be viewed by all participants on the mixed bureau claim"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Comment.Comment&quot;)"
+          sortBy="comment.LineNumber"
+          value="comment.Detail"/>
+        <TextCell
+          enableSort="false"
+          id="BureauAgency"
+          desc="The bureau that the cross market comments are related to"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Comment.BureauAgency&quot;)"
+          value="comment.BureauAgency.DisplayName"/>
+        <TextCell
+          enableSort="false"
+          id="SyndicateName"
+          desc="The name of the agreement party who has made the comment on the mixed bureau claim"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.Comment.SyndicateName&quot;)"
+          value="comment.SyndicateName"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

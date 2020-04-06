@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Exposure.own and perm.System.viewdesktop"
+    id="DesktopExposures"
+    title="DisplayKey.get(&quot;Web.DesktopExposures&quot;)">
+    <LocationEntryPoint
+      signature="DesktopExposures()"/>
+    <Variable
+      initialValue="ExposureDesktopView.finder.findAll()"
+      name="ExposureDesktopViewList"
+      recalculateOnRefresh="true"
+      type="gw.api.database.IQueryBeanResult&lt;entity.ExposureDesktopView&gt;"/>
+    <Variable
+      initialValue="&quot;DesktopExposuresLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <Screen
+      id="DesktopExposuresScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.DesktopExposures&quot;)"/>
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="AssignExposuresPopup.push(new gw.api.exposure.ExposureAssignmentPopup(CheckedValues))"
+          default="true"
+          flags="any ExposureDesktopView"
+          id="DesktopExposures_AssignButton"
+          iterator="DesktopExposuresLV.DesktopExposuresLV"
+          label="DisplayKey.get(&quot;Web.DesktopExposures.Assign&quot;)"
+          shortcut="G"/>
+        <ToolbarDivider/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="gw.api.print.ListViewPrintOptionPopupAction.printListViewWithOptions(PrintTargetLV)"
+          available="perm.User.printlistviews"
+          id="DesktopExposures_PrintButton"
+          label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="DesktopExposuresLV(ExposureDesktopViewList, User.util.CurrentUser)"/>
+    </Screen>
+  </Page>
+</PCF>

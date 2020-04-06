@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A miscellaneous type of RiskUnit. Examples are Accounts Receivable, Scheduled Equipment, Signs etc."
+  entity="LocationMiscRU"
+  supertype="LocationBasedRU">
+  <implementsInterface
+    iface="gw.cc.policy.entity.LocationMiscRU"
+    impl="com.guidewire.cc.domain.policy.impl.LocationMiscRUImpl"/>
+  <typekey
+    desc="Type of location based miscellaneous risk unit"
+    name="OtherRiskType"
+    nullok="true"
+    typelist="OtherRiskType"/>
+</subtype>

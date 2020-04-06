@@ -1,0 +1,26 @@
+package rules.Validation.ExposureValidationRules_dir.EXV05000ISOValidation_dir.EXV05700VehicleExposure_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("EXV05710 - Vehicle")
+internal class EXV05710Vehicle {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.VehicleIncident.Vehicle == null 
+or exposure.VehicleIncident.Vehicle.Year == null 
+or (exposure.VehicleIncident.Vehicle.Make == null 
+    and exposure.VehicleIncident.Vehicle.Manufacturer == null)
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.rejectField("VehicleIncident.Vehicle", TC_ISO, 
+                     DisplayKey.get("Rules.Validation.Exposure.VehicleMustHaveYearAndMake"), null, null)
+/*end00rule*/
+
+  }
+}

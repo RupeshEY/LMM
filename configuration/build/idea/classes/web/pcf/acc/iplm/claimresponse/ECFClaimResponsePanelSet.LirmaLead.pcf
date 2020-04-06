@@ -1,0 +1,159 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="ECFClaimResponsePanelSet"
+    mode="LirmaLead">
+    <Require
+      name="ecfClaimData"
+      type="ECFMessageClaimData_Ext"/>
+    <Require
+      name="claimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <PanelRow>
+      <PanelColumn>
+        <DetailViewPanel
+          columnDivider="false">
+          <InputColumn>
+            <InputSetRef
+              def="MessageBeingRespondedToInputSet(ecfClaimData)"/>
+            <InputSetRef
+              def="InsurerTransactionReferenceInputSet(claimResponseRq)"/>
+          </InputColumn>
+          <InputColumn>
+            <InputSet
+              editable="true">
+              <InputSetRef
+                def="ResponseInputSet(claimResponseRq, true)"/>
+            </InputSet>
+          </InputColumn>
+        </DetailViewPanel>
+        <DetailViewPanel>
+          <InputColumn>
+            <InputGroup
+              allowToggle="ecfClaimData.LirmaLeadCirculated"
+              childrenVisible="claimResponseRq.LIRMALeadActions"
+              id="leadActionsInputGroup"
+              label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.LIRMALeadActions&quot;)"
+              onToggle="claimResponseRq.LIRMALeadActions = not claimResponseRq.LIRMALeadActions">
+              <InputSet
+                id="leadActions">
+                <InputSetRef
+                  def="LeadContactDetailsInputSet(claimResponseRq)"
+                  editable="true"/>
+                <InputDivider/>
+                <InputSet>
+                  <Label
+                    id="responseDetailsLabel"
+                    label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ResponseDetails&quot;)"/>
+                  <RangeInput
+                    desc="passed in wb:ClaimResponseRq/wb:ContractSection/JvClassOfBusiness"
+                    editable="true"
+                    id="classOfBusiness"
+                    label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ClassOfBusiness&quot;)"
+                    optionLabel="VALUE.Description"
+                    required="claimResponseRq.ClassOfBusinessRequired"
+                    value="claimResponseRq.ClassOfBusiness"
+                    valueRange="ECFClassOfBusiness_Ext.TF_LIRMA.getTypeKeys()"
+                    valueType="ECFClassOfBusiness_Ext"/>
+                  <RangeInput
+                    desc="passed in wb:ClaimResponseRq/wb:Claim/wb:ClaimCategoryCode"
+                    editable="true"
+                    id="claimCategory"
+                    label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ClaimCategory&quot;)"
+                    optionLabel="VALUE.Description"
+                    required="true"
+                    value="claimResponseRq.CategoryCodeTypeKey"
+                    valueRange="ECFClaimCategoryCode_Ext.AllTypeKeys"
+                    valueType="ECFClaimCategoryCode_Ext"/>
+                  <RangeInput
+                    desc="passed in wb:ClaimResponseRq/wb:Claim/wb:ClaimSubCategoryCode"
+                    editable="true"
+                    id="claimSubCategory"
+                    label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ClaimSubcategory&quot;)"
+                    optionLabel="VALUE.Description"
+                    required="true"
+                    value="claimResponseRq.SubCategoryCodeTypeKey"
+                    valueRange="ECFClaimSubCatCode_Ext.AllTypeKeys"
+                    valueType="ECFClaimSubCatCode_Ext"/>
+                  <CheckBoxInput
+                    desc="passed in wb:ClaimResponseRq/wb:Claim/wb:Indicators/wb:CedantInLiquidationIndicator"
+                    editable="true"
+                    id="cedantIndicator"
+                    label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.CedantInLiquidation&quot;)"
+                    value="claimResponseRq.CedantInLiquidationIndicatorBoolean"/>
+                  <CheckBoxInput
+                    desc="passed in wb:ClaimResponseRq/wb:Claim/wb:Indicators/wb:SimultaneousRIPIndicator"
+                    editable="true"
+                    id="simultaneousRIPIndicator"
+                    label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.SimultaneousRIP&quot;)"
+                    value="claimResponseRq.SimultaneousRIPIndicatorBoolean"/>
+                  <CheckBoxInput
+                    desc="passed in wb:ClaimResponseRq/wb:Claim/wb:Indicators/wb:MinorPrecautionaryIndicator"
+                    editable="true"
+                    id="minorPrecautionaryIndicator"
+                    label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.MinorPrecautionary&quot;)"
+                    value="claimResponseRq.MinorPrecautionaryIndicatorBoolean"/>
+                  <CheckBoxInput
+                    desc="passed in wb:ClaimResponseRq/wb:Claim/wb:Indicators/wb:ChaseUpIndicator/wb:Indicator"
+                    editable="true"
+                    id="chaseUpIndicator"
+                    label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ChaseUpRequired&quot;)"
+                    value="claimResponseRq.ChaseUpIndicatorBoolean">
+                    <PostOnChange
+                      target="chaseUpPeriodMonths"/>
+                  </CheckBoxInput>
+                  <RangeInput
+                    desc="passed in wb:ClaimResponseRq/wb:Claim/wb:Indicators/wb:ChaseUpIndicator/wb:Interval"
+                    editable="true"
+                    id="chaseUpPeriodMonths"
+                    label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ChaseUpPeriodMonths&quot;)"
+                    required="true"
+                    value="claimResponseRq.ChaseUpIndicatorIntervalInteger"
+                    valueRange="gw.acc.iplm.utils.ECFConstants.CHASE_UP_PERIOD_MONTHS"
+                    visible="claimResponseRq.ChaseUpIndicatorBoolean"
+                    valueType="java.lang.Integer"></RangeInput>
+                  <RangeInput
+                    desc="passed in wb:ClaimResponseRq/wb:Claim/wb:Indicators/wb:ContractualConditionsMayApplyIndicator"
+                    editable="true"
+                    id="contractualConditionsIndicator"
+                    label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ContractualConditionsMayApply&quot;)"
+                    required="true"
+                    value="claimResponseRq.ContractConditionsApplyInd"
+                    valueRange="ECFContractConditions_Ext.AllTypeKeys"
+                    valueType="ECFContractConditions_Ext"/>
+                  <CheckBoxInput
+                    desc="passed in wb:ClaimResponseRq/wb:Claim/wb:Indicators/wb:AllUnderwritersToSeeFileIndicator"
+                    editable="true"
+                    id="allUWToSeeIndicator"
+                    label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.AllUnderwritersToSeeFile&quot;)"
+                    value="claimResponseRq.AllUnderwritersToSeeFileIndBoolean"/>
+                </InputSet>
+                <InputDivider/>
+                <InputSetRef
+                  def="LirmaCommentsInputSet(claimResponseRq)"/>
+              </InputSet>
+              <PostOnChange/>
+            </InputGroup>
+            <InputGroup
+              childrenVisible="not claimResponseRq.LIRMALeadActions"
+              id="sapActionsInputGroup"
+              label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.LIRMACompanyActions&quot;)"
+              onToggle="claimResponseRq.LIRMALeadActions = not claimResponseRq.LIRMALeadActions"
+              visible="ecfClaimData.LirmaLeadCirculated">
+              <InputSetRef
+                def="LirmaSAPActionsInputSet(claimResponseRq, ecfClaimData)"/>
+              <PostOnChange/>
+            </InputGroup>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelColumn>
+    </PanelRow>
+    <PanelDivider
+      visible="claimResponseRq.LIRMALeadActions"/>
+    <PanelRef
+      def="LeadFinancialsAndBulkClaimPR(ecfClaimData, claimResponseRq)"
+      visible="claimResponseRq.LIRMALeadActions"/>
+  </PanelSet>
+</PCF>

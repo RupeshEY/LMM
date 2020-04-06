@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="true"
+    id="TripRUPopup"
+    returnType="TripRU"
+    startInEditMode="aTripRUParam == null or startEditable == true"
+    title="aTripRUParam != null ? DisplayKey.get(&quot;Web.ClaimPolicy.Trips.TripPopup&quot;) : DisplayKey.get(&quot;Web.ClaimPolicy.Trips.NewTripPopup&quot;)">
+    <LocationEntryPoint
+      signature="TripRUPopup(aClaim : Claim)"/>
+    <LocationEntryPoint
+      signature="TripRUPopup(aClaim : Claim, aTripRUParam : TripRU, startEditable : Boolean)"/>
+    <Variable
+      name="aClaim"
+      type="Claim"/>
+    <Variable
+      initialValue="true"
+      name="startEditable"
+      type="Boolean"/>
+    <Variable
+      initialValue="aTripRUParam == null ?  addRUToPolicy()  : aTripRUParam"
+      name="aTripRU"
+      type="TripRU"/>
+    <Variable
+      name="aTripRUParam"
+      type="TripRU"/>
+    <ScreenRef
+      def="TripRUScreen(aClaim, startEditable, aTripRU, aTripRUParam)"/>
+    <Code><![CDATA[function addRUToPolicy() : TripRU {
+    var newTripRU = new TripRU()
+    aClaim.Policy.addToRiskUnitsAndAssignRUNumber( newTripRU )
+    return newTripRU
+  }]]></Code>
+  </Popup>
+</PCF>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    id="ClaimContactPrintDetails"
+    parent="ClaimPrintout(claim)"
+    title="DisplayKey.get(&quot;Web.ClaimContacts.Title&quot;)">
+    <LocationEntryPoint
+      signature="ClaimContactPrintDetails(claim : Claim, selectedClaimContact : ClaimContact)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      name="selectedClaimContact"
+      type="ClaimContact"/>
+    <Variable
+      initialValue="selectedClaimContact.Contact==null ? null : gw.api.contact.ContactSystemUtil.INSTANCE.generateLinkStatus(selectedClaimContact.Contact)"
+      name="linkStatus"
+      type="gw.api.contact.ContactSystemLinkStatus"/>
+    <Screen
+      id="ClaimContactPrintDetailScreen">
+      <PanelRef
+        def="ContactBasicsDV(selectedClaimContact, true, linkStatus, claim)"
+        mode="selectedClaimContact.Contact.Subtype"/>
+      <PanelRef
+        def="AddressesPanelSet(selectedClaimContact)"/>
+      <DetailViewPanel>
+        <InputColumn>
+          <ListViewInput
+            def="ClaimContactRelatedContactsLV(selectedClaimContact, claim)">
+            <Toolbar/>
+          </ListViewInput>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Page>
+</PCF>

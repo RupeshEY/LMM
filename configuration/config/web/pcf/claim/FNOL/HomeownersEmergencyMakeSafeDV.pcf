@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <DetailViewPanel
+    id="HomeownersEmergencyMakeSafeDV">
+    <Require
+      name="emsService"
+      type="ServiceRequest"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="incident"
+      type="PropertyIncident"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;entity.ServiceRequest&gt;"/>
+    <Variable
+      initialValue="gw.vendormanagement.SpecialistServiceCodeConstants.PROPEMSMAKESAFE"
+      name="emsmakesafeServiceCode"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="emsService != null"
+      name="emsServiceSelected"
+      type="boolean"/>
+    <InputColumn>
+      <InputGroup
+        allowToggle="isEditableServiceRequest()"
+        childrenVisible="emsServiceSelected"
+        id="EMSMakeSafeInputGroup"
+        label="DisplayKey.get(&quot;Web.ServicesScreen.Property.EmergencyServicesMakeSafe&quot;)"
+        onToggle="toggleServiceRequest(VALUE)">
+        <InputSet
+          editable="isEditableServiceRequest()"
+          visible="emsServiceSelected">
+          <ClaimContactInput
+            claim="claim"
+            editable="true"
+            id="EMSPicker"
+            label="DisplayKey.get(&quot;Web.ServicesScreen.EMSVendor&quot;)"
+            newContactMenu="ClaimNewVendorOnlyPickerMenuItemSet"
+            required="true"
+            specialistServices="{SpecialistService.getForCode(emsmakesafeServiceCode)}"
+            value="emsService.SpecialistAndCreateClaimContact"
+            valueRange="claim.RelatedCompanyArray">
+            <PostOnChange
+              target="OtherServiceRequestInfo"/>
+          </ClaimContactInput>
+          <InputSet
+            id="OtherServiceRequestInfo"
+            visible="emsService.Specialist != null">
+            <TextInput
+              id="EMSPhone"
+              label="DisplayKey.get(&quot;Web.ServicesScreen.EMSPhone&quot;)"
+              value="emsService.Specialist.PrimaryPhoneValue"/>
+            <InputSetRef
+              def="NewServiceRequestInstructionInputSet(emsService, null, null)"/>
+          </InputSet>
+        </InputSet>
+      </InputGroup>
+    </InputColumn>
+    <Code><![CDATA[function isEditableServiceRequest() : boolean {
+  return emsService == null or emsService.IsEditableInUI
+}
+
+function toggleServiceRequest(checkboxValue : boolean) {
+  if (emsService == null) {
+    if (checkboxValue) {
+      emsService = claim.newServiceRequest(claim.maincontact, incident)
+      emsService.Instruction.addServiceFoundByCode(emsmakesafeServiceCode)
+      emsService.Kind = ServiceRequestKind.TC_QUOTEANDSERVICE
+    }
+  } else {
+    if (not checkboxValue) {
+      unusedServiceRequests.add(emsService)
+    } else {
+      unusedServiceRequests.remove(emsService)
+    }
+  }
+  emsServiceSelected = checkboxValue
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

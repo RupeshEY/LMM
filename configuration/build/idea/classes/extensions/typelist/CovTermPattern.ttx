@@ -1,0 +1,5662 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="The types of coverage terms for each coverage type"
+  name="CovTermPattern">
+  <typecode
+    code="WCFedEmpLiabCovProgram"
+    desc="WC Fed Liability Program Type I / II"
+    name="Program I / II">
+    <category
+      code="WCFedEmpLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="WCFedEmpLiabLimit"
+    desc="Per Accident Limit"
+    name="Limit per Accident">
+    <category
+      code="WCFedEmpLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="FedEmpLiabAct"
+    desc="WC Federal Liability Act"
+    name="WC Fed Liab Act">
+    <category
+      code="WCFedEmpLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="WCFedEmpLiabilityLaw"
+    desc="WC Fed Liab Law"
+    name="WC Fed Liab Law">
+    <category
+      code="WCFedEmpLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="FELADisease"
+    desc="Disease Aggregate Limit"
+    name="Disease Aggregate Limit">
+    <category
+      code="WCFedEmpLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="WCEmpLiabLimit"
+    desc="Employer's Liability Limit"
+    name="Employer's Liability Limit">
+    <category
+      code="WCEmpLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="WCStopGapOpt"
+    desc="Stop Gap"
+    name="Stop Gap">
+    <category
+      code="WCEmpLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="WCIncludedMonopolisticStates"
+    desc="Included Monopolistic States"
+    name="Included Monopolistic States">
+    <category
+      code="WCEmpLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="WCOtherStatesOpt"
+    desc="Covered States"
+    name="Covered States">
+    <category
+      code="WCOtherStatesInsurance"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="WCIncludedStates"
+    desc="Included States"
+    name="Included States">
+    <category
+      code="WCOtherStatesInsurance"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="WCExcludedStates"
+    desc="Excluded States"
+    name="Excluded States">
+    <category
+      code="WCOtherStatesInsurance"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="WCDeductible"
+    desc="Deductible"
+    name="Deductible">
+    <category
+      code="WCWorkCompDeductCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="IMSignLimit"
+    desc="Inland Marine Sign Limit"
+    name="Limit">
+    <category
+      code="IMSignCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="IMSignDeductible"
+    desc="Inland Marine Sign Deductible"
+    name="Deductible">
+    <category
+      code="IMSignCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipSchedCovLimit"
+    desc="Contractors Scheduled Equipment Limit"
+    name="Limit">
+    <category
+      code="ContractorsEquipSchedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipSchedCovDeductible"
+    desc="Contractors Scheduled Equipment Deductible"
+    name="Deductible">
+    <category
+      code="ContractorsEquipSchedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipSchedCovValuation"
+    desc="Contractors Scheduled Equipment Valuation"
+    name="Valuation">
+    <category
+      code="ContractorsEquipSchedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipRentalReibursementOccurrenceLimit"
+    desc="Contractors Rental Reimbursemet - Per Occurrence"
+    name="Occurrence Limit">
+    <category
+      code="ContractorsEquipRentalReibursement"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipRentalReibursementDeductible"
+    desc=""
+    name="Deductible">
+    <category
+      code="ContractorsEquipRentalReibursement"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipRentalPolicyLimit"
+    desc="Per Policy Aggregate"
+    name="Aggregate Limit">
+    <category
+      code="ContractorsEquipRentalReibursement"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipRentedEquipmentLimit"
+    desc=""
+    name="Limit">
+    <category
+      code="ContractorsEquipRentedEquipment"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipRentedEquipmentDeductible"
+    desc=""
+    name="Deductible">
+    <category
+      code="ContractorsEquipRentedEquipment"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipRentedEquipmentMaxIndivItemVal"
+    desc="Rented Equipment, maximum item value"
+    name="Max Individual Item Value">
+    <category
+      code="ContractorsEquipRentedEquipment"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipEmployeesToolsLimit"
+    desc="Employees' Tools Limit"
+    name="Limit">
+    <category
+      code="ContractorsEquipEmployeesTools"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipEmployeesToolsDeductible"
+    desc="Employees' Tools Deductible"
+    name="Deductible">
+    <category
+      code="ContractorsEquipEmployeesTools"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipEmployeesToolsMaxIndivItemVal"
+    desc="Max Individual Item Value"
+    name="Max Individual Item Value">
+    <category
+      code="ContractorsEquipEmployeesTools"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipMiscUnscheduledLimit"
+    desc=""
+    name="Limit">
+    <category
+      code="ContractorsEquipMiscUnscheduledCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipMiscUnscheduledDeductible"
+    desc="Unscheduled Items Deductible"
+    name="Deductible">
+    <category
+      code="ContractorsEquipMiscUnscheduledCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ContractorsEquipMiscUnschItemMaxItemVal"
+    desc="Maximum limit per unscheduled item"
+    name="Max Individual Item Value">
+    <category
+      code="ContractorsEquipMiscUnscheduledCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="AccountsRecOffPremisesPropertyLimit"
+    desc="Limit"
+    name="Limit">
+    <category
+      code="AccountsRecOffPremisesProperty"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="AccountsRecOffPremisesPropertyDescription"
+    desc="Description of Off Premises Account Receivables Records"
+    name="Description">
+    <category
+      code="AccountsRecOffPremisesProperty"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="IMAccountsReceivableLimit"
+    desc="Accounts Receivable Limit"
+    name="Limit">
+    <category
+      code="IMAccountReceivableCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAExcessElectronicsLimit"
+    desc="Electronic Equipment Increased Limit"
+    name="Increased Limit">
+    <category
+      code="PAExcessElectronicsCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PARentalLossOfUseLimit"
+    desc="Rental Car Loss of Use Limit"
+    name="Rental Car Loss of Use Limit">
+    <category
+      code="PALossOfUseCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PATapeDiscMediaLimit"
+    desc="Tape / Disc Media Limit"
+    name="Tape / Disc Media Limit">
+    <category
+      code="PATapeDiscMediaCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PALiability"
+    desc="Auto Liability Package"
+    name="Auto Liability Package">
+    <category
+      code="PALiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAFullLimitedTort"
+    desc="Full / Limited Tort"
+    name="Full / Limited Tort">
+    <category
+      code="PALiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAMedLimit"
+    desc="Medical Limit"
+    name="Medical Limit">
+    <category
+      code="PAMedPayCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAMedPayCoordinateBene"
+    desc="Coordinate Medical Benefits"
+    name="Coordinate Benefits">
+    <category
+      code="PAMedPayCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPropProtectLimit"
+    desc="Property protection limits"
+    name="Property protection limits">
+    <category
+      code="PAPropProtectionCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAUIMBI"
+    desc="Underinsured Motorist Bodily Injury Package"
+    name="Underinsured Motorist BI Limits">
+    <category
+      code="PAUIMBICov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAUIMBIstacked"
+    desc="Stacked Limits"
+    name="Stacked Limits">
+    <category
+      code="PAUIMBICov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAUIMPDlimit"
+    desc="Underinsured Motorist - Property Damage Limit"
+    name="Underinsured Motorist - Property Damage Limit">
+    <category
+      code="PAUIMPDCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAUIMPDstack"
+    desc="Stacked Limits"
+    name="Stacked Limits">
+    <category
+      code="PAUIMPDCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAUMBI"
+    desc="Uninsured Motorist - BI Limits"
+    name="Uninsured Motorist - BI Limits">
+    <category
+      code="PAUMBICov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAUMBIIncludeUIM"
+    desc=""
+    name="Include Underinsured">
+    <category
+      code="PAUMBICov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAUMBIstacked"
+    desc="Stacked Limits"
+    name="Stacked Limits">
+    <category
+      code="PAUMBICov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAUMPDLimit"
+    desc="Uninsured Motorist - Property Damage Limit"
+    name="Uninsured Motorist - Property Damage Limit">
+    <category
+      code="PAUMPDCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAUMPDstacked"
+    desc="Stacked Limits"
+    name="Stacked Limits">
+    <category
+      code="PAUMPDCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PACollDeductible"
+    desc="Collision Deductible"
+    name="Collision Deductible">
+    <category
+      code="PACollisionCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PACollisionBroad"
+    desc="Broadened Collision"
+    name="Broadened Collision">
+    <category
+      code="PACollisionCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PACompDeductible"
+    desc="Comprehensive Deductible"
+    name="Comprehensive Deductible">
+    <category
+      code="PAComprehensiveCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PACompZeroGlass"
+    desc="No deductible for glass"
+    name="No deductible for glass">
+    <category
+      code="PAComprehensiveCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PARental"
+    desc="Rental Package"
+    name="Rental Package">
+    <category
+      code="PARentalCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="TowingAndLaborLimit"
+    desc="Towing and Labor Limit"
+    name="Towing and Labor Limit">
+    <category
+      code="PATowingLaborCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="DeathBenefit"
+    desc="Death Benefit"
+    name="Death Benefit">
+    <category
+      code="PADeathDisabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="DisabilityBenefit"
+    desc="Disability Benefit - weekly"
+    name="Disability Benefit - weekly">
+    <category
+      code="PADeathDisabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="DismembermentBenefitLimit"
+    desc="Dismemberment and Fracture Benefit"
+    name="Dismemberment and Fracture Benefit">
+    <category
+      code="PADeathDisabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_AR_Med"
+    desc="Medical"
+    name="Medical">
+    <category
+      code="PAPIP_AR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_AR_WorkLoss"
+    desc="Income"
+    name="Income">
+    <category
+      code="PAPIP_AR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_AR_Death"
+    desc="Death"
+    name="Death">
+    <category
+      code="PAPIP_AR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_DC_Medical"
+    desc="Medical"
+    name="Medical">
+    <category
+      code="PAPIP_DC"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_DC_Funeral"
+    desc="Funeral"
+    name="Funeral">
+    <category
+      code="PAPIP_DC"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_DC_WorkLoss"
+    desc="Income"
+    name="Income">
+    <category
+      code="PAPIP_DC"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_DE_Deductible"
+    desc="PIP Deductible"
+    name="PIP Deductible">
+    <category
+      code="PAPIP_DE"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_DE_Deduct_WhoApplies"
+    desc="Apply PIP Deductible to"
+    name="Apply PIP Deductible to">
+    <category
+      code="PAPIP_DE"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_DE_LIM"
+    desc="PIP  Limit"
+    name="PIP Limit">
+    <category
+      code="PAPIP_DE"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_FL_LIMIT"
+    desc="PIP Limit"
+    name="PIP Limit">
+    <category
+      code="PAPIP_FL"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_FL_Deductible"
+    desc="PIP Deductible"
+    name="PIP Deductible">
+    <category
+      code="PAPIP_FL"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_FL_WorkWaiver"
+    desc="Waive Income"
+    name="Waive Income">
+    <category
+      code="PAPIP_FL"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_FL_ApplyDeductible"
+    desc="Apply PIP Deductible to"
+    name="Apply PIP Deductible to">
+    <category
+      code="PAPIP_FL"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_HI_MedRehab"
+    desc="Medical"
+    name="Medical">
+    <category
+      code="PAPIP_HI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_HI_WageLoss"
+    desc="Income"
+    name="Income">
+    <category
+      code="PAPIP_HI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_HI_Death"
+    desc="Death"
+    name="Death">
+    <category
+      code="PAPIP_HI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_HI_Funeral"
+    desc="Funeral"
+    name="Funeral">
+    <category
+      code="PAPIP_HI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_HI_AltTreatment"
+    desc="Alternative Expenses"
+    name="Alternative Expenses">
+    <category
+      code="PAPIP_HI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_HI_MANAGED_CARE"
+    desc="Managed Care"
+    name="Managed Care">
+    <category
+      code="PAPIP_HI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_HI_MGDCARE_COPAY_DEDUCT"
+    desc="Managed Care Copays / Deductibles"
+    name="Managed Care Copays / Deductibles">
+    <category
+      code="PAPIP_HI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_HI_DEDUCTIBLE"
+    desc="PIP Deductible"
+    name="PIP Deductible">
+    <category
+      code="PAPIP_HI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPKS_MED"
+    desc="Medical"
+    name="Medical">
+    <category
+      code="PAPIP_KS"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPKS_REHAB"
+    desc="Rehabilitation"
+    name="Rehabilitation">
+    <category
+      code="PAPIP_KS"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPKS_SERVICES"
+    desc="Services"
+    name="Services">
+    <category
+      code="PAPIP_KS"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPKS_FUNERAL"
+    desc="Funeral"
+    name="Funeral">
+    <category
+      code="PAPIP_KS"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPKS_WORK"
+    desc="Income"
+    name="Income">
+    <category
+      code="PAPIP_KS"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPKS_SURVIVOR"
+    desc="Survivor"
+    name="Survivor">
+    <category
+      code="PAPIP_KS"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPKY_Motorcycle"
+    desc="Motorcycle Coverage"
+    name="Motorcycle Coverage">
+    <category
+      code="PAPIP_KY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPKY_GuestONLY"
+    desc="Guest Coverage Only"
+    name="Guest Coverage Only">
+    <category
+      code="PAPIP_KY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPKY_AggLimit"
+    desc="PIP Aggregate Limit"
+    name="PIP Aggregate Limit">
+    <category
+      code="PAPIP_KY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPKY_Funeral"
+    desc="Funeral"
+    name="Funeral">
+    <category
+      code="PAPIP_KY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPKYWEEKLY"
+    desc="Income"
+    name="Income">
+    <category
+      code="PAPIP_KY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMA_LIMIT"
+    desc="PIP Limit"
+    name="PIP Limit">
+    <category
+      code="PAPIP_MA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMA_DEDUCTIBLE"
+    desc="PIP Deductible"
+    name="PIP Deductible">
+    <category
+      code="PAPIP_MA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMA_WC"
+    desc="WC Discount"
+    name="WC Discount">
+    <category
+      code="PAPIP_MA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMA_AIRBAG"
+    desc="Passive Restraint Discount"
+    name="Passive Restraint Discount">
+    <category
+      code="PAPIP_MA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMD_LIMIT"
+    desc="PIP Limit"
+    name="PIP Limit">
+    <category
+      code="PAPIP_MD"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMD_WAIVER"
+    desc="Waived Individuals"
+    name="Waived Individuals">
+    <category
+      code="PAPIP_MD"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMD_GUEST"
+    desc="Guest PIP Only"
+    name="Guest PIP Only">
+    <category
+      code="PAPIP_MD"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMI_OtherProvider"
+    desc="COORDINATE PIP"
+    name="COORDINATE PIP ">
+    <category
+      code="PAPIP_MI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMI_DEDUCTIBLE"
+    desc="PIP Deductible"
+    name="PIP Deductible">
+    <category
+      code="PAPIP_MI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMI_MED"
+    desc="PIP Medical - Unlimited"
+    name="PIP Medical">
+    <category
+      code="PAPIP_MI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMI_FUNERAL"
+    desc="PIP Funeral"
+    name="PIP Funeral">
+    <category
+      code="PAPIP_MI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMI_INCOME"
+    desc="PIP Income"
+    name="PIP Income">
+    <category
+      code="PAPIP_MI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMI_SURVIVOR"
+    desc="PIP Survivor"
+    name="PIP Survivor">
+    <category
+      code="PAPIP_MI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMI_SERVICES"
+    desc="PIP Services"
+    name="PIP Services">
+    <category
+      code="PAPIP_MI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMN_MEDICAL"
+    desc="Medical"
+    name="Medical">
+    <category
+      code="PAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMN_OTHER"
+    desc="Other Than Med PIP Benefits"
+    name="Other Than Med">
+    <category
+      code="PAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMN_MED_DEDUCT"
+    desc="Medical Deductible"
+    name="Medical Deductible">
+    <category
+      code="PAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMN_OTH_DEDUCT"
+    desc="Deductible for all PIP coverages other than Medical"
+    name="Other Than Med Deductible">
+    <category
+      code="PAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMN_STACK"
+    desc="Stack Pip Limits - requires 2+ vehicles"
+    name="Stack Pip Limits">
+    <category
+      code="PAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMN_EXC_WORK"
+    desc="Exclude Income"
+    name="Exclude Income">
+    <category
+      code="PAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMN_CYCLE"
+    desc="Extend PIP coverage to Motorcycles"
+    name="Motorcycles">
+    <category
+      code="PAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMN_WORK"
+    desc="Income"
+    name="Income">
+    <category
+      code="PAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMN_SERVICES"
+    desc="Services"
+    name="Services">
+    <category
+      code="PAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPMN_SURVIVOR"
+    desc="Survivor"
+    name="Survivor">
+    <category
+      code="PAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_ND_INCOME"
+    desc="PIP Income"
+    name="PIP Income">
+    <category
+      code="PAPIP_ND"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPND_SERVICE"
+    desc="Services"
+    name="Services">
+    <category
+      code="PAPIP_ND"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPND_FUNERAL"
+    desc="Funeral"
+    name="Funeral">
+    <category
+      code="PAPIP_ND"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_ND_MEDICAL"
+    desc="PIP Medical"
+    name="PIP Medical">
+    <category
+      code="PAPIP_ND"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPND_AGG"
+    desc=""
+    name="ND PIP AGGREGATE Limit">
+    <category
+      code="PAPIP_ND"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPND_SURVIVOR"
+    desc="NORTH DAKOTA ;"
+    name="ND PIP Survivor Benefit">
+    <category
+      code="PAPIP_ND"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPNJ_MEDLIMIT"
+    desc="Medical"
+    name="Medical">
+    <category
+      code="PAPIP_NJ"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPNJ_MEDDEDUCT"
+    desc="Medical Deductible"
+    name="Medical Deductible">
+    <category
+      code="PAPIP_NJ"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPNJ_MEDDEDUCTappliesto"
+    desc="Medical Deductible applies to"
+    name="Medical Deductible applies to ">
+    <category
+      code="PAPIP_NJ"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPNJ_MEDONLY"
+    desc="Med Only option"
+    name="Med Only option">
+    <category
+      code="PAPIP_NJ"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPNJ_MEDsecondary"
+    desc="PIP Med is secondary"
+    name="PIP Med is secondary">
+    <category
+      code="PAPIP_NJ"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPNJ_MED_COPAY"
+    desc="Medical Copay Option"
+    name="Medical Copay Option">
+    <category
+      code="PAPIP_NJ"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPNJ_OTHER_LIMS"
+    desc="NON-Medical Benefits (weekly income/max income |daily services/max services | funeral / death)"
+    name="NON-Medical Benefits">
+    <category
+      code="PAPIP_NJ"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPNY_DEDUCTIBLE"
+    desc="Deductible"
+    name="Deductible">
+    <category
+      code="PAPIP_NY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPNY_MOTORCYCLE"
+    desc="Motorcycle"
+    name="Motorcycle">
+    <category
+      code="PAPIP_NY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPNY_EXMED"
+    desc="Exclude Medical"
+    name="Exclude Medical">
+    <category
+      code="PAPIP_NY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPNY_DEATH"
+    desc="Death"
+    name="Death">
+    <category
+      code="PAPIP_NY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPNY_OBEL"
+    desc="Opt. Basic Econ. Loss"
+    name="Opt. Basic Econ. Loss">
+    <category
+      code="PAPIP_NY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIP_NY_AGGREGATE"
+    desc="PIP Aggregate "
+    name="PIP Aggregate ">
+    <category
+      code="PAPIP_NY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPNY_INCOME"
+    desc="PIP Income"
+    name="PIP Income">
+    <category
+      code="PAPIP_NY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPNY_EXPENSE"
+    desc="PIP Expense"
+    name="PIP Expense">
+    <category
+      code="PAPIP_NY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPOR_DEDUCT"
+    desc="Deductible"
+    name="Deductible">
+    <category
+      code="PAPIP_OR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPOR_DEDUCTIBLEappliesto"
+    desc="Deductible Applies To"
+    name="Deductible Applies To">
+    <category
+      code="PAPIP_OR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPOR_MED"
+    desc="PIP Medical"
+    name="PIP Medical">
+    <category
+      code="PAPIP_OR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPOR_INCOME"
+    desc="PIP Income"
+    name="PIP Income">
+    <category
+      code="PAPIP_OR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPOR_SERVICES"
+    desc="PIP Services"
+    name="PIP Services">
+    <category
+      code="PAPIP_OR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPOR_CHILDCARE"
+    desc="PIP Childcare"
+    name="PIP Childcare">
+    <category
+      code="PAPIP_OR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPOR_FUNERAL"
+    desc="PIP Funeral"
+    name="PIP Funeral">
+    <category
+      code="PAPIP_OR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPPA_MEDICAL"
+    desc="Medical"
+    name="Medical">
+    <category
+      code="PAPIP_PA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPPA_INCOME"
+    desc="Income"
+    name="Income">
+    <category
+      code="PAPIP_PA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPPA_DEATH"
+    desc="Death"
+    name="Death">
+    <category
+      code="PAPIP_PA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPPA_FUNERAL"
+    desc="Funeral"
+    name="Funeral">
+    <category
+      code="PAPIP_PA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPPA_COMBINED"
+    desc="COMBINED Limit"
+    name="COMBINED Limit">
+    <category
+      code="PAPIP_PA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPPA_EXTRAMED"
+    desc="Extraordinary Medical"
+    name="Extraordinary Medical">
+    <category
+      code="PAPIP_PA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPTX_LIMIT"
+    desc="PIP Limit"
+    name="PIP Limit">
+    <category
+      code="PAPIP_TX"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPUT_MEDICAL"
+    desc="Medical"
+    name="Medical">
+    <category
+      code="PAPIP_UT"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPUT_WORK"
+    desc="Income"
+    name="Income">
+    <category
+      code="PAPIP_UT"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPUT_FUNERAL"
+    desc="Funeral"
+    name="Funeral">
+    <category
+      code="PAPIP_UT"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPUT_SURVIVOR"
+    desc="Survivor"
+    name="Survivor">
+    <category
+      code="PAPIP_UT"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPWA_MED"
+    desc="PIP Medical"
+    name="PIP Medical">
+    <category
+      code="PAPIP_WA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPWA_INCOME"
+    desc="PIP Income"
+    name="PIP Income">
+    <category
+      code="PAPIP_WA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPWA_SERVICES"
+    desc="PIP Services"
+    name="PIP Services">
+    <category
+      code="PAPIP_WA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PAPIPWA_FUNERAL"
+    desc="PIP Funeral"
+    name="PIP Funeral">
+    <category
+      code="PAPIP_WA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgCovLimit"
+    desc="Limit"
+    name="Limit">
+    <category
+      code="CPBldgCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgCovDeductible"
+    desc="Deductible"
+    name="Deductible">
+    <category
+      code="CPBldgCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgCovWindDeductible"
+    desc="Wind % Deductible"
+    name="Wind % Deductible">
+    <category
+      code="CPBldgCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgCovCoinsurance"
+    desc="Coinsurance"
+    name="Coinsurance">
+    <category
+      code="CPBldgCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgCovCauseOfLoss"
+    desc="Cause Of Loss"
+    name="Cause Of Loss">
+    <category
+      code="CPBldgCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgCovValuationMethod"
+    desc="Valuation Method"
+    name="Valuation Method">
+    <category
+      code="CPBldgCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgCovAutoIncrease"
+    desc="Auto Increase %"
+    name="Auto Increase %">
+    <category
+      code="CPBldgCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgCovExcludeVandalism"
+    desc="Exclude Vandalism"
+    name="Exclude Vandalism">
+    <category
+      code="CPBldgCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgCovExcludeSprinkler"
+    desc="Exclude Sprinkler"
+    name="Exclude Sprinkler">
+    <category
+      code="CPBldgCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgCovExcludeTheft"
+    desc="Exclude Theft"
+    name="Exclude Theft">
+    <category
+      code="CPBldgCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBPPCovLimit"
+    desc="Limit"
+    name="Limit">
+    <category
+      code="CPBPPCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBPPCovCauseOfLoss"
+    desc="Cause Of Loss"
+    name="Cause Of Loss">
+    <category
+      code="CPBPPCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBPPCovDeductible"
+    desc="Deductible"
+    name="Deductible">
+    <category
+      code="CPBPPCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBPPCovWindDeductible"
+    desc="Wind Deductible %"
+    name="Wind Deductible %">
+    <category
+      code="CPBPPCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBPPCovCoinsurance"
+    desc="Coinsurance %"
+    name="Coinsurance %">
+    <category
+      code="CPBPPCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBPPValuationMethod"
+    desc="Valuation Method"
+    name="Valuation Method">
+    <category
+      code="CPBPPCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBPPCovReportingForm"
+    desc="Reporting Form"
+    name="Reporting Form">
+    <category
+      code="CPBPPCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBPPCovExcludeVandalism"
+    desc="Exclude Vandalism"
+    name="Exclude Vandalism">
+    <category
+      code="CPBPPCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBPPCovExcludeSprinkler"
+    desc="Exclude Sprinkler"
+    name="Exclude Sprinkler">
+    <category
+      code="CPBPPCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBPPCovExcludeTheft"
+    desc="Exclude Theft"
+    name="Exclude Theft">
+    <category
+      code="CPBPPCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgBusIncomeCovCoinsurance"
+    desc="Coinsurance %"
+    name="Coinsurance %">
+    <category
+      code="CPBldgBusIncomeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgBusIncomeCovCauseOfLoss"
+    desc="Cause Of Loss"
+    name="Cause Of Loss">
+    <category
+      code="CPBldgBusIncomeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgBusIncomeCovPeriod"
+    desc="Period of Coverage (in days)"
+    name="Period of Coverage (in days)">
+    <category
+      code="CPBldgBusIncomeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgBusIncomeCovWaiting"
+    desc="Waiting Period (in hours)"
+    name="Waiting Period (in hours)">
+    <category
+      code="CPBldgBusIncomeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BusIncomeOtherLimit"
+    desc="Money limit for Business Income - other than mfg or rental"
+    name="Income Limit - Not Mfg or Rental">
+    <category
+      code="CPBldgBusIncomeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BusIncomeMfgLimit"
+    desc="Money Limit for Business Income - Mfg Income only"
+    name="Income Limit - Mfg Only">
+    <category
+      code="CPBldgBusIncomeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BusIncomeRentalLimit"
+    desc="Money Limit for Business Income - Rental Income only"
+    name="Income Limit - Rental Only">
+    <category
+      code="CPBldgBusIncomeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgExtraExpenseCovLimit"
+    desc="Limit"
+    name="Limit">
+    <category
+      code="CPBldgExtraExpenseCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgExtraExpenseCovMonthLimit"
+    desc="Monthly Limit"
+    name="Monthly Limit">
+    <category
+      code="CPBldgExtraExpenseCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgStockCovLimit"
+    desc="Limit"
+    name="Limit">
+    <category
+      code="CPBldgStockCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgStockCovCauseOfLoss"
+    desc="Cause Of Loss"
+    name="Cause Of Loss">
+    <category
+      code="CPBldgStockCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgStockCovDeductible"
+    desc="Deductible"
+    name="Deductible">
+    <category
+      code="CPBldgStockCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgStockCovWindDeductible"
+    desc="Wind Deductible%"
+    name="Wind Deductible %">
+    <category
+      code="CPBldgStockCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgStockCovValuationMethod"
+    desc="Valuation Method"
+    name="Valuation Method">
+    <category
+      code="CPBldgStockCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgStockCovCoinsurance"
+    desc="Coinsurance %"
+    name="Coinsurance %">
+    <category
+      code="CPBldgStockCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgStockCovReportingForm"
+    desc=""
+    name="Reporting Form">
+    <category
+      code="CPBldgStockCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgStockCovExcludeVandalism"
+    desc="Exclude Vandalism"
+    name="Exclude Vandalism">
+    <category
+      code="CPBldgStockCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgStockCovExcludeSprinkler"
+    desc="Exclude Sprinkler"
+    name="Exclude Sprinkler">
+    <category
+      code="CPBldgStockCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBldgStockCovExcludeTheft"
+    desc="Exclude Theft"
+    name="Exclude Theft">
+    <category
+      code="CPBldgStockCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBlanketDeductible"
+    desc="Deductible"
+    name="Deductible">
+    <category
+      code="CPBlanketCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBlanketCoinsurance"
+    desc="Coinsurance"
+    name="Coinsurance">
+    <category
+      code="CPBlanketCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CPBlanketLimit"
+    desc="Blanket Limit"
+    name="Limit">
+    <category
+      code="CPBlanketCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPBldgLim"
+    desc="Building Limit"
+    name="Building Limit">
+    <category
+      code="BOPBuildingCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPBldgValuation"
+    desc="Valuation Method"
+    name="Valuation Method">
+    <category
+      code="BOPBuildingCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPBuildingCoin"
+    desc="Coinsurance"
+    name="Coinsurance">
+    <category
+      code="BOPBuildingCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPBldgAnnualIncrease"
+    desc=""
+    name="Building Annual Increase %">
+    <category
+      code="BOPBuildingCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPOrdLawCov1yesno"
+    desc="BOP Ordinance or Law Coverage 1 Election"
+    name="BOP Ordinance or Law Coverage 1 Election">
+    <category
+      code="BOPOrdinanceCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPOrdLawCov23Lim"
+    desc="BOP Ordinance or Law Combined 2,3 Limit"
+    name="BOP Ordinance or Law Combined 2,3 Limit">
+    <category
+      code="BOPOrdinanceCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPOrdLawCov2Lim"
+    desc="Ordinance or Law Coverage 2 Limit"
+    name="Ordinance or Law Coverage 2 Limit">
+    <category
+      code="BOPOrdinanceCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPOrdLawCov3Lim"
+    desc="BOP Ordinance or Law Coverage 3 Limit"
+    name="BOP Ordinance or Law Coverage 3 Limit">
+    <category
+      code="BOPOrdinanceCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPOrdLawIncomeExpense"
+    desc="Ordinance or Law - Income/Expense"
+    name="Ordinance or Law - Income/Expense">
+    <category
+      code="BOPOrdinanceCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPOrdLawIncomeExpenseDeduct"
+    desc="BOP Ordinance or Law - Income/Expense Deductible"
+    name="BOP Ordinance or Law - Income/Expense Deductible">
+    <category
+      code="BOPOrdinanceCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPBPPBldgLim"
+    desc="Business Personal Property Limit"
+    name="Business Personal Property Limit">
+    <category
+      code="BOPPersonalPropCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPBPPValuation"
+    desc="Valuation Method"
+    name="Valuation Method">
+    <category
+      code="BOPPersonalPropCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPPersonalPropCoin"
+    desc="Coinsurance"
+    name="Coinsurance">
+    <category
+      code="BOPPersonalPropCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPARonPremLim"
+    desc="AR On Premises Limit"
+    name="AR On Premises Limit">
+    <category
+      code="BOPReceivablesCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPReceivablesOffPremLim"
+    desc="AR Off Premises Limi"
+    name="AR Off Premises Limit">
+    <category
+      code="BOPReceivablesCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPValPaperOnPremLim"
+    desc="Papers On Premises Limit"
+    name="Papers On Premises Limit">
+    <category
+      code="BOPValuablePapersCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPValPapersOffPremLimit"
+    desc="Papers Off Premises Limit"
+    name="Papers Off Premises Limit">
+    <category
+      code="BOPValuablePapersCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CondoMiscProp"
+    desc="Condo Unit owner"
+    name="CondoMiscProp">
+    <category
+      code="BOPCondoUnitOwnCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CondoLossAssessment"
+    desc="CondoLossAssessment"
+    name="CondoLossAssessment">
+    <category
+      code="BOPCondoUnitOwnCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CondoOwnerLimit"
+    desc="CondoOwnerLimit"
+    name="CondoOwnerLimit">
+    <category
+      code="BOPCondoUnitOwnCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CondoMiscPropDed"
+    desc="CondoMiscPropDed"
+    name="CondoMiscPropDed">
+    <category
+      code="BOPCondoUnitOwnCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPElectricalSchedLimit"
+    desc="Electrical Equipment - Scheduled Limit"
+    name="Electrical Equipment - Scheduled Limit">
+    <category
+      code="BOPElectricalSchedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPFuncPerPropLim"
+    desc="Functional Business Personal Property Limit"
+    name="Functional Business Personal Property Limit">
+    <category
+      code="BOPFuncPerPropCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPTenantsLiabLim"
+    desc="Tenants Liability Limit"
+    name="Tenants Liability Limit">
+    <category
+      code="BOPTenantsLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPVacancyChange"
+    desc="Vacancy Change - Pct Occupied"
+    name="Vacancy Change - Pct Occupied">
+    <category
+      code="BOPVacancyChangeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPSprinklerLeak"
+    desc="Sprinkler Leakage"
+    name="BOPSprinklerLeak">
+    <category
+      code="BOPVacancyCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPVacancyCovFromDate"
+    desc="From"
+    name="FromDate">
+    <category
+      code="BOPVacancyCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPVacancyCovToDate"
+    desc="To Date"
+    name="ToDate">
+    <category
+      code="BOPVacancyCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPVandalism"
+    desc="Vandalism"
+    name="BOPVandalism">
+    <category
+      code="BOPVacancyCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPMechBreakdownLim"
+    desc="Breakdown Limit"
+    name="Breakdown Limit">
+    <category
+      code="BOPMechBreakdownCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPMechBreakdownDeduct"
+    desc="Breakdown Deductible"
+    name="Breakdown Deductible">
+    <category
+      code="BOPMechBreakdownCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPMechBreakdownIncomeDeduct"
+    desc="Business Income Deductible"
+    name="Business Income Deductible">
+    <category
+      code="BOPMechBreakdownCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPUtilDirectComm"
+    desc="Communications (not O/H lines)"
+    name="Communications (not O/H lines)">
+    <category
+      code="BOPUtilDirectCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPUtilDirectCommOH"
+    desc="Communications (inc O/H lines)"
+    name="Communications (inc O/H lines)">
+    <category
+      code="BOPUtilDirectCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPUtilDirectLim"
+    desc="Direct Loss Limit"
+    name="Direct Loss Limit">
+    <category
+      code="BOPUtilDirectCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPUtilDirectPower"
+    desc="Power (not O/H lines)"
+    name="Power (not O/H lines)">
+    <category
+      code="BOPUtilDirectCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPUtilDirectPowerOH"
+    desc="Power (inc O/H lines)"
+    name="Power (inc O/H lines)">
+    <category
+      code="BOPUtilDirectCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPUtilDirectWater"
+    desc="Water Supply"
+    name="Water Supply">
+    <category
+      code="BOPUtilDirectCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPUtilTimeComm"
+    desc="Communications (not O/H lines)"
+    name="Communications (not O/H lines)">
+    <category
+      code="BOPUtilTimeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPUtilTimeCommOH"
+    desc="Communications (inc O/H lines)"
+    name="Communications (inc O/H lines)">
+    <category
+      code="BOPUtilTimeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPUtilTimeLim"
+    desc="Utilities Time Element Limit"
+    name="Utilities Time Element Limit">
+    <category
+      code="BOPUtilTimeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPUtilTimePower"
+    desc="Power (not O/H lines)"
+    name="Power (not O/H lines)">
+    <category
+      code="BOPUtilTimeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPUtilTimePowerOH"
+    desc="Power (inc O/H lines)"
+    name="Power (inc O/H lines)">
+    <category
+      code="BOPUtilTimeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPUtilTimeWater"
+    desc="Water Supply"
+    name="Water Supply">
+    <category
+      code="BOPUtilTimeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPToolsSchedLim"
+    desc="Contractors Tools - Scheduled Limit"
+    name="Contractors Tools - Scheduled Limit">
+    <category
+      code="BOPToolsSchedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPBurgRobLim"
+    desc="Burglary and Robbery Limit"
+    name="Burglary and Robbery Limit">
+    <category
+      code="BOPBurgRobCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPComputerFraudLim"
+    desc="Computer and Funds Transfer Fraud Limit"
+    name="BOPComputerFraudLim">
+    <category
+      code="BOPComputerFraudCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPForgeAltLimit"
+    desc="Forgery and Alteration Limit"
+    name="Forgery and Alteration Limit">
+    <category
+      code="BOPForgeAltCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPMoneyOnPremLim"
+    desc="Money and Securities On Premise Limit"
+    name="Money and Securities On Premise Limit">
+    <category
+      code="BOPMoneySecCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPMoneyOffPremLim"
+    desc="Money and Securities Off Premise Limit"
+    name="Money and Securities Off Premise Limit">
+    <category
+      code="BOPMoneySecCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPBIDepPropLim"
+    desc="Dependent Prop. Limit"
+    name="Bus. Income-Dependent Prop. Limit">
+    <category
+      code="BOPBusIncDepPrpCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BusIncomeExtended"
+    desc="Business Income - Extended Period"
+    name="Business Income - Extended Period">
+    <category
+      code="BOPBusIncExtCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BusIncomeOrdPayroll"
+    desc="Business Income - Ordinary Payroll"
+    name="Business Income - Ordinary Payroll">
+    <category
+      code="BOPBusIncPayrollCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPY2KIncomeExpenseLim"
+    desc="Location Aggregate Limit"
+    name="Location Aggregate Limit">
+    <category
+      code="BOPY2KIncomeExpenseCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="SBSpecialPacks"
+    desc="Special Coverages Packages"
+    name="Special Coverages Packages">
+    <category
+      code="BOPAdditionalCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPLiability"
+    desc="Limits: Occurrence / Prod Agg / Gen Agg"
+    name="Limits: Occurrence / Prod Agg / Gen Agg">
+    <category
+      code="BOPLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPLiabPDDeductible"
+    desc="PD Deductible"
+    name="PD Deductible">
+    <category
+      code="BOPLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPLiabDeductType"
+    desc="PD Deductible Type"
+    name="PD Deductible Type">
+    <category
+      code="BOPLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPMedExpenseLimit"
+    desc="Premises Medical Expense Limit"
+    name="Premises Medical Expense Limit">
+    <category
+      code="BOPMedExpCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPTenantsFireLiabBaseLimit"
+    desc="Tenants Fire Liability Limit"
+    name="Tenants Fire Liability Limit">
+    <category
+      code="BOPTenantFireCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPEmpBenAggLim"
+    desc="Employees Benefits Agg Limit"
+    name="Employees Benefits Agg Limit">
+    <category
+      code="BOPEmpBenefits"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPEmpBenEachEmpDed"
+    desc="Employees Benefits Each Employee Deductible"
+    name="Employees Benefits Each Employee Deductible">
+    <category
+      code="BOPEmpBenefits"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPEmpBenEachEmpLim"
+    desc="Employees Benefits Each Employee Limit"
+    name="Employees Benefits Each Employee Limit">
+    <category
+      code="BOPEmpBenefits"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPEmpBenRetroDate"
+    desc="Retroactive Date"
+    name="Retroactive Date">
+    <category
+      code="BOPEmpBenefits"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPPollutionLim"
+    desc="Limited Pollution Liability Agg Limit"
+    name="Limited Pollution Liability Agg Limit">
+    <category
+      code="BOPPollutionCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPFoodContamAdvLim"
+    desc="Food Contamination Adv. Limit"
+    name="Food Contamination Adv. Limit">
+    <category
+      code="BOPFoodContamCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPFoodContamLim"
+    desc="Food Contamination Limit"
+    name="Food Contamination Limit">
+    <category
+      code="BOPFoodContamCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPFungiPropLim"
+    desc="Fungi Aggregate Limit"
+    name="Fungi Aggregate Limit">
+    <category
+      code="BOPFungiPropCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPFungiAggLevel"
+    desc="Agg Limit Level"
+    name="Agg Limit Level">
+    <category
+      code="BOPFungiPropCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPFungiTimeCov"
+    desc="Time Element Limit"
+    name="Time Element Limit">
+    <category
+      code="BOPFungiPropCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BusIncWaitingPeriod"
+    desc="Waiting Period"
+    name="Waiting Period">
+    <category
+      code="BusIncChangeCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPLiquorAggLim"
+    desc="Liquor Liability Aggregate Limit"
+    name="Liquor Liability Aggregate Limit">
+    <category
+      code="BOPLiquorCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPLiquorCauseBILim"
+    desc="Liquor Liability Each Common Cause BI Limit"
+    name="Liquor Liability Each Common Cause BI Limit">
+    <category
+      code="BOPLiquorCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPLiquorCauseLim"
+    desc="Liquor Liability Common Cause Limit"
+    name="Liquor Liability Common Cause Limit">
+    <category
+      code="BOPLiquorCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPLiquorCauseMSLim"
+    desc="Liquor Liability Each Comon Cause Loss of Means of Support Limit"
+    name="Liquor Liability Each Comon Cause Loss of Means of Support Limit">
+    <category
+      code="BOPLiquorCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPLiquorMSLim"
+    desc="Liquor Liability Loss Of Means Of Support Or Loss Of Society Limit"
+    name="Liquor Liability Loss Of Means Of Support Or Loss Of Society Limit">
+    <category
+      code="BOPLiquorCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPLiquorPersonBILim"
+    desc="Liquor Liability Each Person BI Limit"
+    name="Liquor Liability Each Person BI Limit">
+    <category
+      code="BOPLiquorCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPLiquorPersonLim"
+    desc="Liquor Liability Each Person Limit"
+    name="Liquor Liability Each Person Limit">
+    <category
+      code="BOPLiquorCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPLiquorPersonMSLim"
+    desc="Liquor Liability Each Person Loss of Means of Support Limit"
+    name="Liquor Liability Each Person Loss of Means of Support Limit">
+    <category
+      code="BOPLiquorCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPLiquorPersonPDLim"
+    desc="Liquor Liability Each Person PD Limit"
+    name="Liquor Liability Each Person PD Limit">
+    <category
+      code="BOPLiquorCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="LiqLiabEventsDescription"
+    desc="Event Description"
+    name="Event Description">
+    <category
+      code="BOPLiquorEvents"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="LiqLiabEventDate"
+    desc=""
+    name="Event Date">
+    <category
+      code="BOPLiquorEvents"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPWindHailDed"
+    desc="Windstorm/Hail  % Deductible"
+    name="Windstorm/Hail  % Deductible">
+    <category
+      code="BOPLocWindHailCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPWindHailMoneyDed"
+    desc="Windstorm/Hail $ Deductible"
+    name="Windstorm/Hail $ Deductible">
+    <category
+      code="BOPLocWindHailCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPOutdoorPropLim"
+    desc="Outdoor Property Limit(Per Item/Agg)"
+    name="Outdoor Property Limit(Per Item/Agg)">
+    <category
+      code="BOPOutdoorProp"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPOutdoorSignLim"
+    desc="Outdoor Sign Limit"
+    name="Outdoor Sign Limit">
+    <category
+      code="BOPOutSignCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPOverflowLim"
+    desc="Backup/Overflow Limit"
+    name="Backup/Overflow Limit">
+    <category
+      code="BOPOverflowCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPPersEffectsLim"
+    desc="Personal Effects Limit"
+    name="Personal Effects Limit">
+    <category
+      code="BOPPersonalEffects"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPPerPropOffPremLim"
+    desc="Off Premises Personal Property"
+    name="Off Premises Personal Property">
+    <category
+      code="BOPPersPropOffPrem"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPSpoilageCovDescription"
+    desc="Description of Coverage or Schedule of Covered items"
+    name="Description">
+    <category
+      code="BOPSpoilageCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPPowerOutage"
+    desc="Power Outage"
+    name="BOPPowerOutage">
+    <category
+      code="BOPSpoilageCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPFridgeMaintenance"
+    desc="Refrigeration Maintenance Agreement"
+    name="BOPFridgeMaintenance">
+    <category
+      code="BOPSpoilageCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPBreakContam"
+    desc="Breakdown or Contamination"
+    name="BOPBreakContam">
+    <category
+      code="BOPSpoilageCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPSpoilageDed"
+    desc="Deductible"
+    name="Deductible">
+    <category
+      code="BOPSpoilageCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPSpoilageLim"
+    desc="Limit"
+    name="Limit">
+    <category
+      code="BOPSpoilageCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPBarberBeautNum"
+    desc="Licensed Individuals - Count"
+    name="Licensed Individuals - Count">
+    <category
+      code="BOPBarberCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPFuneralDirNum"
+    desc="Licensed Individuals - Count"
+    name="Licensed Individuals - Count">
+    <category
+      code="BOPFuneralDirCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPHearingAidSales"
+    desc="Gross Sales"
+    name="Gross Sales">
+    <category
+      code="BOPHearingAidCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPPhamacistSales"
+    desc="Gross Sales"
+    name="Gross Sales">
+    <category
+      code="BOPPharmacistCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPPrinterSales"
+    desc="Gross Sales"
+    name="Gross Sales">
+    <category
+      code="BOPPrinterCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPVetNum"
+    desc="Licensed Individuals - Count"
+    name="Licensed Individuals - Count">
+    <category
+      code="BOPVetCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPInstallationLim"
+    desc="PerJob/All Jobs Limit"
+    name="PerJob/All Jobs Limit">
+    <category
+      code="BOPToolsInstallUnschedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPToolsBlanketLim"
+    desc="Contractors Tools Blanket"
+    name="Contractors Tools Blanket">
+    <category
+      code="BOPToolsInstallUnschedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPToolsEmployees"
+    desc="Contractors Employees Tools"
+    name="Contractors Employees Tools">
+    <category
+      code="BOPToolsInstallUnschedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPToolsNonOwnedLim"
+    desc="Contractors NonOwned Tools"
+    name="Contractors NonOwned Tools">
+    <category
+      code="BOPToolsInstallUnschedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPAlaskaAFGLLim"
+    desc="Alaska Attorney Fees Limit"
+    name="Alaska Attorney Fees Limit">
+    <category
+      code="BOPAlaskaAFGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPCAEqBldgRecLimit"
+    desc="CA Earthquake Reconstruction Cost  Limit"
+    name="CA Earthquake Reconstruction Cost  Limit">
+    <category
+      code="BOPCAEqBldgRecCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPCAEqBldgSubDed"
+    desc="CA Earthquake - Building Sublimits Deductible"
+    name="CA Earthquake - Building Sublimits Deductible">
+    <category
+      code="BOPCAEqBldgSubCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPCAEqBldgSubLim"
+    desc="CA Earthquake - Building Sublimits"
+    name="CA Earthquake - Building Sublimits">
+    <category
+      code="BOPCAEqBldgSubCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPCertTerrorCapLimit"
+    desc="Aggregate Limit"
+    name="Aggregate Limit">
+    <category
+      code="BOPCertTerrorCap"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPBaseDed"
+    desc="Property Base Deductible"
+    name="Property Base Deductible">
+    <category
+      code="BOPPropertyCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPGlassDed"
+    desc="Glass Deductible"
+    name="Glass Deductible">
+    <category
+      code="BOPPropertyCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPOptCovDed"
+    desc="Optional Coverages Deductible"
+    name="Optional Coverages Deductible">
+    <category
+      code="BOPPropertyCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPPropBuildDed"
+    desc="Property Optional Deductible"
+    name="Property Optional Deductible">
+    <category
+      code="BOPPropertyCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPPropertyCovCauseOfLoss"
+    desc="Building Coverage Form"
+    name="CauseOfLoss">
+    <category
+      code="BOPPropertyCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="EQDeductible"
+    desc="EQ % Deductible"
+    name="EQ % Deductible">
+    <category
+      code="BOPEqBldgCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPMineSubLim"
+    desc="Mine Subsidence Limit"
+    name="Mine Subsidence Limit">
+    <category
+      code="BOPMineSubCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPEmpDisLimit"
+    desc="Employee Dishonesty Limit"
+    name="Employee Dishonesty Limit">
+    <category
+      code="BOPEmpDisCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPEmpDisNumEmp"
+    desc="Number of Covered Employees"
+    name="Number of Covered Employees">
+    <category
+      code="BOPEmpDisCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPEmpDisNumLoc"
+    desc="Number of Covered Locations"
+    name="Number of Covered Locations">
+    <category
+      code="BOPEmpDisCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GuestPropClaimLim"
+    desc="Guest Property - limit per Guest"
+    name="Guest Property - limit per Guest">
+    <category
+      code="BOPGuestPropCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GuestPropOccLim"
+    desc="Guests Property Occurrence Limit"
+    name="Guests Property Occurrence Limit">
+    <category
+      code="BOPGuestPropCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BOPGuestSafeDepLimit"
+    desc="Guest Property - Safe Deposit Limit"
+    name="Guest Property - Safe Deposit Limit">
+    <category
+      code="BOPGuestSafeDepCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLCGLAggLimit"
+    desc="Aggregate Limit"
+    name="Aggregate Limit">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLCGLBIAggLimit"
+    desc="Bodily Injury Aggregate Limit"
+    name="Bodily Injury Aggregate Limit">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLCGLBILimit"
+    desc="Bodily Injury Occurrence Limit"
+    name="Bodily Injury Occurrence Limit">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLCGLMedPayLimit"
+    desc="Medical Payments per person"
+    name="Medical Payments per person">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLCGLOccLimit"
+    desc="Occurrence Limit"
+    name="Occurrence Limit">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLCGLPDAggLimit"
+    desc="Property Damage Aggregate Limit"
+    name="Property Damage Aggregate Limit">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLCGLPDLimit"
+    desc="Property Damage Occurrence Limit"
+    name="Property Damage Occurrence Limit">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLCGLPersAdLimit"
+    desc="Personal and Advertising Injury Limit"
+    name="Personal and Advertising Injury">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLCGLRentedPropLimit"
+    desc="Damage to Rented Premises Limit"
+    name="Damage to Rented Premises">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CGLProductsAggLim"
+    desc="Products/Comp.Ops Aggregate"
+    name="Products/Comp.Ops Aggregate">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CGLProdCompOpBIAgg"
+    desc="Products/Comp. Ops BI Agg"
+    name="Products/Comp. Ops BI Agg">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CGLProdCompOpsPDAgg"
+    desc="Products/Comp. Ops PD Agg"
+    name="Products/Comp. Ops PD Agg">
+    <category
+      code="GLCGLCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ClaimBasis"
+    desc="Deductible Basis"
+    name="Deductible Basis">
+    <category
+      code="GLDeductible"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLCSLDeductible"
+    desc="Optional Deductible - not for split limit policies"
+    name="Deductible - CSD">
+    <category
+      code="GLDeductible"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLBIDeductible"
+    desc="BI Deductible when policy uses split limits"
+    name="Deductible - BI">
+    <category
+      code="GLDeductible"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLPDDeductible"
+    desc="PD deductible used when policy has split limits"
+    name="Deductible - PD">
+    <category
+      code="GLDeductible"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="DesignatedPollutants"
+    desc="Designated Pollutants"
+    name="Designated Pollutants">
+    <category
+      code="GLPollutionDesignatedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="NamedPerilsOnly"
+    desc=""
+    name="Named Perils Only">
+    <category
+      code="GLPollutionShortTermCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PollutionLimitType"
+    desc="Pollution Limit"
+    name="Pollution Limit">
+    <category
+      code="PollutionBroadLimited"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PollutionSubLimit"
+    desc="Pollution Sub Limit"
+    name="Pollution Sub Limit">
+    <category
+      code="PollutionBroadLimited"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLLiquorEvent"
+    desc="Boolean restricts coverage to specified events"
+    name="Event Coverage Only">
+    <category
+      code="GLLiquorEndorsement"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLLiquorEventDesc"
+    desc="Event Description"
+    name="Event Description">
+    <category
+      code="GLLiquorEndorsement"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLContractualLiabRRDescription"
+    desc="Description of Contracted Work"
+    name="Description">
+    <category
+      code="GLContractualLiabRR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLLimitedPAandInjuryCovDescription"
+    desc="Description of Contracts"
+    name="Description">
+    <category
+      code="GLLimitedPAandInjuryCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLElectronicDataLimit"
+    desc="Electronic Data Limit"
+    name="Electronic Data Limit">
+    <category
+      code="GLElectronicDataLiability"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLLitdFungiBacteriaLimit"
+    desc="Fungi or Bacteria Limit"
+    name="Fungi or Bacteria Limit">
+    <category
+      code="GLLtdFungiBacteriaCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLUndergroundResourceLimit"
+    desc="Underground Resource Aggregate Limit"
+    name="Underground Resource Aggregate Limit">
+    <category
+      code="GLUndergroundResourceCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ProdWithdrawAgg"
+    desc="Aggregate Limit"
+    name="Aggregate Limit">
+    <category
+      code="ProductWithdrawalLtd"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ProductWithdrawDeduct"
+    desc="Deductible"
+    name="Deductible">
+    <category
+      code="ProductWithdrawalLtd"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ProductWithdrawPercent"
+    desc="Participating Percent"
+    name="Participating Percent">
+    <category
+      code="ProductWithdrawalLtd"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="ProductWithdrawCutOffDate"
+    desc="Cut Off Date"
+    name="Cut Off Date">
+    <category
+      code="ProductWithdrawalLtd"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLEmpBenefitsAggLimit"
+    desc="Aggregate Limit"
+    name="Aggregate Limit">
+    <category
+      code="GLEmpBenefitsLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLEmpBenefitsLiabDeduct"
+    desc="Deductible"
+    name="Deductible">
+    <category
+      code="GLEmpBenefitsLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLEmpBenefitsLiabilityCovRetroactiveDate"
+    desc="Retroactive date of employee benefits liability coverage"
+    name="RetroactiveDate">
+    <category
+      code="GLEmpBenefitsLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="GLEmpBenefitsPerEmpLimit"
+    desc="Per Employee Limit"
+    name="Per Employee Limit">
+    <category
+      code="GLEmpBenefitsLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="Y2KBILimit"
+    desc="BI Limit"
+    name="BI Limit">
+    <category
+      code="Y2KLimitedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="Y2KPDLimit"
+    desc="PD Limit"
+    name="PD Limit">
+    <category
+      code="Y2KLimitedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="Y2KPersAdvrtInjuryLimit"
+    desc="Personal and Advertising Injury Limit"
+    name="Personal and Advertising Injury Limit">
+    <category
+      code="Y2KLimitedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="Y2KDescription"
+    desc=""
+    name="Description of Operations">
+    <category
+      code="Y2KLimitedCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="XCULocOpsHazBasis"
+    desc="XCU Locations/Ops/Hazard/Basis"
+    name="XCU Locations/Ops/Hazard/Basis">
+    <category
+      code="XCUSpecified"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BADOCCollisionDeduct"
+    desc="Collision Deductible"
+    name="Collision Deductible">
+    <category
+      code="BADOCCollisionCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BADOCCompDeduct"
+    desc="Comprehensive Deductible"
+    name="Comprehensive Deductible">
+    <category
+      code="BADOCCompCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BADOCLiabilityLiab"
+    desc="Auto Liability Package"
+    name="Auto Liability Package">
+    <category
+      code="BADOCLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BADOCMedPayLimit"
+    desc="Medical Limit"
+    name="Medical Limit">
+    <category
+      code="BADOCMedPayCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BADOCUnderinsBI"
+    desc="Underinsured Motorist Bodily Injury Package"
+    name="Underinsured Motorist Bodily Injury Package">
+    <category
+      code="BADOCUnderinsCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BADOCUninsuredBI"
+    desc="Uninsured Motorist Bodily Injury Package"
+    name="Uninsured Motorist Bodily Injury Package">
+    <category
+      code="BADOCUninsuredCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAAudVisDataEquipDed"
+    desc="Audio Visual Data Equipment Deductible"
+    name="Audio Visual Data Equipment Deductible">
+    <category
+      code="BAAudVisDataEqip2Cov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAAudVisDataEquipLim"
+    desc="Audio, Visual, Electronic Equipment"
+    name="Audio, Visual, Electronic Equipment">
+    <category
+      code="BAAudVisDataEqip2Cov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAHiredCollDeduct"
+    desc="Hired Auto Collision Deductible"
+    name="Hired Auto Collision Deductible">
+    <category
+      code="BAHiredCollisionCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAHiredCompDeduct"
+    desc="Hired Auto Comprehensive Deductible"
+    name="Hired Auto Comprehensive Deductible">
+    <category
+      code="BAHiredCompCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAHiredLiabilityBI"
+    desc="Liability BI"
+    name="Liability BI">
+    <category
+      code="BAHiredLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAHiredSpecPerilCovHiredCauseOfLoss"
+    desc="Cause of loss"
+    name="Cause of Loss">
+    <category
+      code="BAHiredSpecPerilCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAHiredSpecPerilDdct"
+    desc="Deductible"
+    name="Deductible">
+    <category
+      code="BAHiredSpecPerilCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BANonownedLiabBI"
+    desc="Liability Bodily Injury"
+    name="Liability Bodily Injury">
+    <category
+      code="BANonownedLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BADealerLimitLiabClass1"
+    desc="Class 1 Employees"
+    name="Class 1 Employees">
+    <category
+      code="BADealerLimitLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BADealerLimitLiabClass2"
+    desc=""
+    name="Class 2 Employees">
+    <category
+      code="BADealerLimitLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BADealerLimitLiabTotalEmp"
+    desc=""
+    name="Total Employees - Class 1">
+    <category
+      code="BADealerLimitLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BADealerLimitLiabCustomer"
+    desc=""
+    name="Unlimited Customer Liability">
+    <category
+      code="BADealerLimitLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BADealerLimitLiabLimit"
+    desc=""
+    name="Limit">
+    <category
+      code="BADealerLimitLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAOwnedLiabilityLimit"
+    desc="Liability Limit - BI and PD"
+    name="Liability Limit">
+    <category
+      code="BAOwnedLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BALiabilityTort"
+    desc=""
+    name="Full or Limited Tort">
+    <category
+      code="BAOwnedLiabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAOwnedMedPayLimit"
+    desc="Medical Payment Limit"
+    name="Limit">
+    <category
+      code="BAOwnedMedPayCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAOwnedMedPayCoordinate"
+    desc="Coordinate Benefilts"
+    name="Coordinate Benefilts">
+    <category
+      code="BAOwnedMedPayCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BASeasonalTrailerLiabDesc"
+    desc="Description of Trailers"
+    name="Description of Trailers">
+    <category
+      code="BASeasonTrailerLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BASeasonTrailerLiabProdTransp"
+    desc="Produce Transported"
+    name="Produce Transported">
+    <category
+      code="BASeasonTrailerLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BASeasonTrailerLiabCount"
+    desc="Trailer Count"
+    name="Trailer Count">
+    <category
+      code="BASeasonTrailerLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BASeasonTrailerLiabStartDate"
+    desc="Start Coverage"
+    name="Start Coverage">
+    <category
+      code="BASeasonTrailerLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BASeasonTrailerLiabEndDate"
+    desc="End Coverage"
+    name="End Coverage">
+    <category
+      code="BASeasonTrailerLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BASeasonTrailerLiabLimit"
+    desc="Limit"
+    name="Limit">
+    <category
+      code="BASeasonTrailerLiabCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BACollisionDeduct"
+    desc="Collision Deductible"
+    name="Collision Deductible">
+    <category
+      code="BACollisionCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BACollisionBroad"
+    desc="Collision Broadened"
+    name="Collision Broadened">
+    <category
+      code="BACollisionCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAComprehensiveDdct"
+    desc="Comprehensive Deductible"
+    name="Comprehensive Deductible">
+    <category
+      code="BAComprehensiveCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAZeroGlass"
+    desc="No Deductible for Glass"
+    name="No Deductible for Glass">
+    <category
+      code="BAComprehensiveCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BASpecCausesLossCovSpecifiedCauseOfLoss"
+    desc="Specified Cause of Loss"
+    name="Specified Cause of Loss">
+    <category
+      code="BASpecCausesLossCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BASpecCausesLossDdct"
+    desc="Deductible"
+    name="Deductible">
+    <category
+      code="BASpecCausesLossCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BATow"
+    desc=""
+    name="Towing Limit">
+    <category
+      code="BATowingLaborCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BARental"
+    desc="Rental Package"
+    name="Rental Package">
+    <category
+      code="BARentalCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BATapeDiscLimit"
+    desc="Tape Disc Record Limit"
+    name="Tape Disc Record Limit">
+    <category
+      code="BATapeDiscRecordCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BALimitedPropDamLmt"
+    desc="Limited Property Damage Limit"
+    name="Limited Property Damage Limit">
+    <category
+      code="BALimitedPropDamCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAOwnedUIMBI"
+    desc="Underinsured Motorist Bodily Injury Package"
+    name="Underinsured Motorist Bodily Injury Package">
+    <category
+      code="BAOwnedUIMBICov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAUIMPDLimit"
+    desc="Underinsured Motorist - Property Damage Limit"
+    name="Underinsured Motorist - Property Damage Limit">
+    <category
+      code="BAOwnedUIMPDCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAOwnedUMBI"
+    desc="Uninsured Motorist Bodily Injury Package"
+    name="Uninsured Motorist Bodily Injury Package">
+    <category
+      code="BAOwnedUMBICov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAUMEconomicOnly"
+    desc="Economic Only"
+    name="Economic Only">
+    <category
+      code="BAOwnedUMBICov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAOwnedUMStack"
+    desc="Stack UM Coverage"
+    name="Stack UM Coverage">
+    <category
+      code="BAOwnedUMBICov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAOwnedUMStackUIM"
+    desc="Stack UM / UIM Coveages"
+    name="Stack UM / UIM Coveages">
+    <category
+      code="BAOwnedUMBICov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAOwnedUMConversion"
+    desc="UIM Conversion"
+    name="UIM Conversion">
+    <category
+      code="BAOwnedUMBICov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAOwnedUMBISuppBI"
+    desc="Liability BI"
+    name="Liability BI">
+    <category
+      code="BAOwnedUMBISuppCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAUMPDLimit"
+    desc="Uninsured Motorist - Property Damage Limit"
+    name="Uninsured Motorist - Property Damage Limit">
+    <category
+      code="BAOwnedUMPDCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAPropProtectLimit"
+    desc="Property protection limits"
+    name="Property protection limits">
+    <category
+      code="BAPropProtectionCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="DeathBenefitLimit"
+    desc="Death Benefit"
+    name="Death Benefit">
+    <category
+      code="CADeathDisabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="DisabilityBenefitLimit"
+    desc="Disability Benefit / weekly"
+    name="Disability Benefit / weekly">
+    <category
+      code="CADeathDisabilityCov"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIP_DE_Deductible"
+    desc="PIP Deductible"
+    name="PIP Deductible">
+    <category
+      code="CAPIP_DE"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIP_DE_Deduct_WhoApplies"
+    desc="Apply PIP Deductible to"
+    name="Apply PIP Deductible to">
+    <category
+      code="CAPIP_DE"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAPIP_DE_LIM"
+    desc="PIP  Limit"
+    name="PIP Limit">
+    <category
+      code="CAPIP_DE"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CAPIP_FL_LIMIT"
+    desc="PIP Limit"
+    name="PIP Limit">
+    <category
+      code="CAPIP_FL"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CAPIP_FL_Deductible"
+    desc="PIP Deductible"
+    name="PIP Deductible">
+    <category
+      code="CAPIP_FL"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CAPIP_FL_WorkWaiver"
+    desc="Waive Income"
+    name="Waive Income">
+    <category
+      code="CAPIP_FL"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CAPIP_FL_ApplyDeductible"
+    desc="Apply PIP Deductible to"
+    name="Apply PIP Deductible to">
+    <category
+      code="CAPIP_FL"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIP_HI_MedRehab"
+    desc="Medical"
+    name="Medical">
+    <category
+      code="CAPIP_HI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="WageLoss"
+    desc="Income"
+    name="Income">
+    <category
+      code="CAPIP_HI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="HI_Death"
+    desc="Death"
+    name="Death">
+    <category
+      code="CAPIP_HI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIP_HI_Funeral"
+    desc="Funeral"
+    name="Funeral">
+    <category
+      code="CAPIP_HI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPAltTreatment"
+    desc="Alternative Expenses"
+    name="Alternative Expenses">
+    <category
+      code="CAPIP_HI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPHI_MANAGED_CARE"
+    desc="Managed Care"
+    name="Managed Care">
+    <category
+      code="CAPIP_HI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPHI_MGDCARE_COPAY_DEDUCT"
+    desc="Managed Care Copays / Deductibles"
+    name="Managed Care Copays / Deductibles">
+    <category
+      code="CAPIP_HI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPHI_DEDUCTIBLE"
+    desc="PIP Deductible"
+    name="PIP Deductible">
+    <category
+      code="CAPIP_HI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPKS_MED"
+    desc="Medical"
+    name="Medical">
+    <category
+      code="CAPIP_KS"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPKS_REHAB"
+    desc="Rehabilitation"
+    name="Rehabilitation">
+    <category
+      code="CAPIP_KS"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPKS_SERVICES"
+    desc="Services"
+    name="Services">
+    <category
+      code="CAPIP_KS"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPKS_FUNERAL"
+    desc="Funeral"
+    name="Funeral">
+    <category
+      code="CAPIP_KS"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPKS_WORK"
+    desc="Income"
+    name="Income">
+    <category
+      code="CAPIP_KS"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPKS_SURVIVOR"
+    desc="Survivor"
+    name="Survivor">
+    <category
+      code="CAPIP_KS"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="KYPIP_Motorcylce"
+    desc="Motorcycle Coverage"
+    name="Motorcycle Coverage">
+    <category
+      code="CAPIP_KY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPKY_GuestONLY"
+    desc="Guest Coverage Only"
+    name="Guest Coverage Only">
+    <category
+      code="CAPIP_KY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPKY_AggLimit"
+    desc="PIP Aggregate Limit"
+    name="PIP Aggregate">
+    <category
+      code="CAPIP_KY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPKY_Funeral"
+    desc="Funeral"
+    name="Funeral">
+    <category
+      code="CAPIP_KY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPKYWEEKLY"
+    desc="Income"
+    name="Income">
+    <category
+      code="CAPIP_KY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMA_PIP"
+    desc="PIP Limit"
+    name="PIP Limit">
+    <category
+      code="CAPIP_MA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMA_DEDUCTIBLE"
+    desc="PIP Deductible"
+    name="PIP Deductible">
+    <category
+      code="CAPIP_MA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMA_WC"
+    desc="WC Discount"
+    name="WC Discount">
+    <category
+      code="CAPIP_MA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMA_AIRBAG"
+    desc="Passive Restraint Discount"
+    name="Passive Restraint Discount">
+    <category
+      code="CAPIP_MA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMD_PIP"
+    desc="PIP Limit"
+    name="PIP Limit">
+    <category
+      code="CAPIP_MD"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMD_WAIVER"
+    desc="Waived Individuals"
+    name="Waived Individuals">
+    <category
+      code="CAPIP_MD"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMD_GUEST"
+    desc="Guest Pip Only"
+    name="Guest Pip Only">
+    <category
+      code="CAPIP_MD"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMI_OtherProvider"
+    desc="Coordinate PIP"
+    name="Coordinate PIP ">
+    <category
+      code="CAPIP_MI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMI_DEDUCTIBLE"
+    desc="PIP Deductible"
+    name="PIP Deductible">
+    <category
+      code="CAPIP_MI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMI_MED"
+    desc="PIP Medical - Unlimited"
+    name="PIP Medical">
+    <category
+      code="CAPIP_MI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMI_FUNERAL"
+    desc="PIP Funeral"
+    name="PIP Funeral">
+    <category
+      code="CAPIP_MI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMI_INCOME"
+    desc="PIP Income"
+    name="PIP Income">
+    <category
+      code="CAPIP_MI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMI_SURVIVOR"
+    desc="PIP Survivor"
+    name="PIP Survivor">
+    <category
+      code="CAPIP_MI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMI_SERVICES"
+    desc="PIP Services"
+    name="PIP Services">
+    <category
+      code="CAPIP_MI"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMN_MEDICAL"
+    desc="Medical"
+    name="Medical">
+    <category
+      code="CAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMN_OTHER"
+    desc="Other Than Med PIP Benefits"
+    name="Other Than Med">
+    <category
+      code="CAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMN_MED_DEDUCT"
+    desc="Medical Deductible"
+    name="Medical Deductible">
+    <category
+      code="CAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMN_OTH_DEDUCT"
+    desc="Deductible for all PIP coverages other than Medical"
+    name="Other Than Med Deductible">
+    <category
+      code="CAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMN_STACK"
+    desc="Stack PIP Limits - requires 2+ vehicles"
+    name="Stack PIP Limits">
+    <category
+      code="CAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMN_EXC_WORK"
+    desc="Exclude Income"
+    name="Exclude Income">
+    <category
+      code="CAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMN_CYCLE"
+    desc="Extend PIP coverage to Motorcycles"
+    name="Motorcycles">
+    <category
+      code="CAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMN_WORK"
+    desc="Income"
+    name="Income">
+    <category
+      code="CAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMN_SERVICES"
+    desc="Services"
+    name="Services">
+    <category
+      code="CAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPMN_SURVIVOR"
+    desc="Survivor"
+    name="Survivor">
+    <category
+      code="CAPIP_MN"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CAPIP_ND_INCOME"
+    desc="PIP Income"
+    name="PIP Income">
+    <category
+      code="CAPIP_ND"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPND_SERVICE"
+    desc=""
+    name="Services">
+    <category
+      code="CAPIP_ND"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPND_FUNERAL"
+    desc=""
+    name="Funeral">
+    <category
+      code="CAPIP_ND"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CAPIP_ND_MEDICAL"
+    desc="PIP Medical"
+    name="PIP Medical">
+    <category
+      code="CAPIP_ND"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPND_AGG"
+    desc=""
+    name="ND PIP Aggregate Limit">
+    <category
+      code="CAPIP_ND"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPND_SURVIVOR"
+    desc="North Dakota ;"
+    name="ND PIP Survivor Benefit">
+    <category
+      code="CAPIP_ND"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPNJ_MEDLIMIT"
+    desc="Medical"
+    name="Medical">
+    <category
+      code="CAPIP_NJ"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPNJ_MEDDEDUCT"
+    desc="Medical Deductible"
+    name="Medical Deductible">
+    <category
+      code="CAPIP_NJ"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPNJ_MEDDEDUCTappliesto"
+    desc="Medical Deductible applies to"
+    name="Medical Deductible applies to ">
+    <category
+      code="CAPIP_NJ"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPNJ_MEDONLY"
+    desc="Med Only Option"
+    name="Med Only Option">
+    <category
+      code="CAPIP_NJ"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPNJ_MEDsecondary"
+    desc="PIP Med is secondary"
+    name="PIP Med is secondary">
+    <category
+      code="CAPIP_NJ"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPNJ_MED_COPAY"
+    desc="Medical Copay Option"
+    name="Medical Copay Option">
+    <category
+      code="CAPIP_NJ"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPNJ_OTHER_LIMS"
+    desc="Non-Medical Benefits (weekly income/max income |daily services/max services | funeral / death)"
+    name="Non-Medical Benefits">
+    <category
+      code="CAPIP_NJ"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPNY_DEDUCTIBLE"
+    desc=""
+    name="Deductible">
+    <category
+      code="CAPIP_NY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPNY_MOTORCYCLE"
+    desc="Motorcycle"
+    name="Motorcycle">
+    <category
+      code="CAPIP_NY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPNY_EXMED"
+    desc="Exclude Medical"
+    name="Exclude Medical">
+    <category
+      code="CAPIP_NY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPNY_DEATH"
+    desc="Death"
+    name="Death">
+    <category
+      code="CAPIP_NY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPNY_OBEL"
+    desc="Opt. Basic Econ. Loss"
+    name="Opt. Basic Econ. Loss">
+    <category
+      code="CAPIP_NY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="CAPIP_NY_AGGREGATE"
+    desc=""
+    name="PIP Aggregate ">
+    <category
+      code="CAPIP_NY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPNY_INCOME"
+    desc="PIP Income"
+    name="PIP Income">
+    <category
+      code="CAPIP_NY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="NYPIP_EXPENSE"
+    desc=""
+    name="PIP EXPENSE">
+    <category
+      code="CAPIP_NY"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPOR_DEDUCT"
+    desc="Deductible"
+    name="Deductible">
+    <category
+      code="CAPIP_OR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPOR_DEDUCTIBLEappliesto"
+    desc="Deductible Applies To"
+    name="Deductible Applies To">
+    <category
+      code="CAPIP_OR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPOR_MED"
+    desc="PIP Medical"
+    name="PIP Medical">
+    <category
+      code="CAPIP_OR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPOR_INCOME"
+    desc=""
+    name="PIP Income">
+    <category
+      code="CAPIP_OR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPOR_SERVICES"
+    desc="PIP Services"
+    name="PIP Services">
+    <category
+      code="CAPIP_OR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPOR_CHILDCARE"
+    desc="PIP Childcare"
+    name="PIP Childcare">
+    <category
+      code="CAPIP_OR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPOR_FUNERAL"
+    desc="PIP Funeral"
+    name="PIP Funeral">
+    <category
+      code="CAPIP_OR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPPA_MEDICAL"
+    desc="Medical"
+    name="Medical">
+    <category
+      code="CAPIP_PA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPPA_INCOME"
+    desc="Income"
+    name="Income">
+    <category
+      code="CAPIP_PA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPPA_DEATH"
+    desc="Death"
+    name="Death">
+    <category
+      code="CAPIP_PA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPPA_FUNERAL"
+    desc=""
+    name="Funeral">
+    <category
+      code="CAPIP_PA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPPA_COMBINED"
+    desc=""
+    name="Combined Limit">
+    <category
+      code="CAPIP_PA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPPA_EXTRAMED"
+    desc=""
+    name="Extraordinary Medical">
+    <category
+      code="CAPIP_PA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPTX_PIP"
+    desc=""
+    name="PIP Limit">
+    <category
+      code="CAPIP_TX"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPUT_MEDICAL"
+    desc="Medical"
+    name="Medical">
+    <category
+      code="CAPIP_UT"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPUT_WORK"
+    desc="Income"
+    name="Income">
+    <category
+      code="CAPIP_UT"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPUT_FUNERAL"
+    desc=""
+    name="Funeral">
+    <category
+      code="CAPIP_UT"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPUT_SURVIVOR"
+    desc=""
+    name="Survivor">
+    <category
+      code="CAPIP_UT"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPWA_MED"
+    desc="PIP Medical"
+    name="PIP Medical">
+    <category
+      code="CAPIP_WA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPWA_INCOME"
+    desc=""
+    name="PIP Income">
+    <category
+      code="CAPIP_WA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPWA_SERVICES"
+    desc="PIP Services"
+    name="PIP Services">
+    <category
+      code="CAPIP_WA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIPWA_FUNERAL"
+    desc=""
+    name="PIP Funeral">
+    <category
+      code="CAPIP_WA"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAPIP_AR_Med"
+    desc="Medical"
+    name="Medical">
+    <category
+      code="CA_PIP_AR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAPIP_AR_WorkLoss"
+    desc="Income"
+    name="Income">
+    <category
+      code="CA_PIP_AR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="PIP_AR_Death"
+    desc="Death"
+    name="Death">
+    <category
+      code="CA_PIP_AR"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAPIP_DC_Medical"
+    desc="Medical"
+    name="Medical">
+    <category
+      code="CA_PIP_DC"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAPIP_DC_Funeral"
+    desc="Funeral"
+    name="Funeral">
+    <category
+      code="CA_PIP_DC"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="BAPIP_DC_WorkLoss"
+    desc="Income"
+    name="Income">
+    <category
+      code="CA_PIP_DC"
+      typelist="CoverageType"/>
+    <category
+      code="PC"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="pc_custom_blanket"
+    desc="Blanket Coverage"
+    name="Blanket Coverage">
+    <category
+      code="PC-Custom"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="pc_custom_occurLimit"
+    desc="Occurrence Limit"
+    name="Occurrence Limit">
+    <category
+      code="PC-Custom"
+      typelist="SourceSystem"/>
+  </typecode>
+  <typecode
+    code="pc_custom_coinsurance"
+    desc="Coinsurance"
+    name="Coinsurance">
+    <category
+      code="PC-Custom"
+      typelist="SourceSystem"/>
+  </typecode>
+</typelistextension>

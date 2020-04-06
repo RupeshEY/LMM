@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterEnter="if ((Exposure != null) &amp;&amp; (Exposure.Claimant typeis Person)) { InjuryIncident.injured = Exposure.Claimant }"
+    canEdit="true"
+    canVisit="perm.Claim.createincident(Claim)"
+    id="NewInjuryIncidentPopup"
+    returnType="InjuryIncident"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.NewInjuryIncident.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewInjuryIncidentPopup(Claim : Claim)"/>
+    <LocationEntryPoint
+      signature="NewInjuryIncidentPopup(Claim : Claim, Exposure : Exposure)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Exposure"
+      type="Exposure"/>
+    <Variable
+      initialValue="Claim.newIncident(entity.InjuryIncident) as InjuryIncident"
+      name="InjuryIncident"
+      type="entity.InjuryIncident"/>
+    <Screen
+      id="NewInjuryIncidentScreen">
+      <TitleBar
+        icon="InjuryIncident.HeaderIcon"/>
+      <Toolbar>
+        <EditButtons
+          pickValue="InjuryIncident"/>
+      </Toolbar>
+      <PanelRef
+        def="InjuryIncidentDV(InjuryIncident)"/>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,21 @@
+package rules.Validation.ClaimValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV06500 - Total liability percentage in evaluation can not exceed 100")
+internal class CLV06500Totalliabilitypercentageinevaluationcannotexceed100 {
+  static function doCondition(claim: entity.Claim): boolean {
+/*start00rule*/
+    return claim.Evaluations.where(\evaluation -> evaluation.isChanged()).hasMatch(\evaluation -> {
+      var liabilities = {evaluation.InsuredLiability, evaluation.ClaimantLiability, evaluation.OtherLiability}
+      return liabilities.where(\liability -> liability != null).sum() > 100
+    })
+/*end00rule*/
+  }
+
+  static function doAction(claim: entity.Claim, actions: gw.rules.Action) {
+/*start00rule*/
+    claim.reject(claim.ValidationLevel, DisplayKey.get("Rules.Validation.Claim.TotalLiabilityPercentageOfEvaluationCannotExceed100"), null, null)
+/*end00rule*/
+  }
+}

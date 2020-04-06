@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="StatuteLimitationsType">
+  <typecode
+    code="federal"
+    desc="Federal statute"
+    name="Federal Involved"
+    priority="3">
+    <category
+      code="gov"
+      typelist="SubroGovernmentInvolved"/>
+  </typecode>
+  <typecode
+    code="state"
+    desc="State statute"
+    name="State Involved"
+    priority="4">
+    <category
+      code="gov"
+      typelist="SubroGovernmentInvolved"/>
+  </typecode>
+  <typecode
+    code="City"
+    desc="City statute"
+    name="City Involved"
+    priority="5">
+    <category
+      code="gov"
+      typelist="SubroGovernmentInvolved"/>
+  </typecode>
+  <typecode
+    code="medical"
+    desc="Medical"
+    name="Medical"
+    priority="1">
+    <category
+      code="gov"
+      typelist="SubroGovernmentInvolved"/>
+    <category
+      code="nongov"
+      typelist="SubroGovernmentInvolved"/>
+  </typecode>
+  <typecode
+    code="damage"
+    desc="Damage"
+    name="Damage"
+    priority="2">
+    <category
+      code="gov"
+      typelist="SubroGovernmentInvolved"/>
+    <category
+      code="nongov"
+      typelist="SubroGovernmentInvolved"/>
+  </typecode>
+  <typecode
+    code="other"
+    desc="Other"
+    name="Other"
+    priority="99">
+    <category
+      code="gov"
+      typelist="SubroGovernmentInvolved"/>
+    <category
+      code="nongov"
+      typelist="SubroGovernmentInvolved"/>
+  </typecode>
+</typelistextension>

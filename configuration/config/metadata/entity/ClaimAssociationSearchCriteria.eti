@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Non-persistent set of criteria to use in searching for a specific claim association."
+  entity="ClaimAssociationSearchCriteria"
+  extendable="true">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claimassoc.impl.ClaimAssociationSearchCriteriaInternal"
+    impl="com.guidewire.cc.domain.claimassoc.impl.ClaimAssociationSearchCriteriaImpl"/>
+  <implementsInterface
+    iface="gw.cc.claimassoc.entity.ClaimAssociationSearchCriteria"
+    impl="com.guidewire.cc.domain.claimassoc.impl.ClaimAssociationSearchCriteriaImpl"/>
+  <implementsInterface
+    iface="java.io.Serializable"
+    impl="com.guidewire.cc.domain.claimassoc.impl.ClaimAssociationSearchCriteriaImpl"/>
+  <fulldescription><![CDATA[
+Non-persistent set of criteria to use in searching for a specific {@link ClaimAssociation}. Several of the properties on this entity correspond to properties on the Claims included in the ClaimAssociations, rather than properties of the ClaimAssociations themselves.
+<p>
+Note that the search controlled by this search criteria entity cannot be customized through the search-config.xml mechanism, and that therefore extensions to this entity will have no effect on the performed search.
+      
+    ]]></fulldescription>
+  <column
+    desc="Desired ClaimAssociation title."
+    name="Title"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Number of a Claim included in the ClaimAssociation."
+    name="ClaimNumber"
+    nullok="true"
+    type="claimnumber"/>
+  <column
+    desc="Loss date of a Claim included in the ClaimAssociation."
+    name="LossDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Last name of an insured of a Claim included in the ClaimAssociation."
+    name="LastName"
+    nullok="true"
+    type="lastname"/>
+  <column
+    desc="First name of an insured of a Claim included in the ClaimAssociation."
+    name="FirstName"
+    nullok="true"
+    type="firstname"/>
+  <column
+    desc="Company name of an insured of a Claim included in the ClaimAssociation."
+    name="CompanyName"
+    nullok="true"
+    type="companyname"/>
+</nonPersistentEntity>

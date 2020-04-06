@@ -1,0 +1,103 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  admin="true"
+  desc="Weighted Workload Classification"
+  displayName="Weighted Workload Classification"
+  entity="WorkloadClassification"
+  exportable="false"
+  extendable="true"
+  final="false"
+  ignoreForEvents="true"
+  table="workloadclassification"
+  type="editable">
+  <implementsEntity
+    name="Validatable"/>
+  <column
+    desc="Name"
+    name="Name"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="256"/>
+    <localization
+      nullok="true"
+      tableName="wclass_name_l10n"/>
+  </column>
+  <column
+    default="true"
+    desc="True if this rule is active."
+    name="Active"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="1"
+    name="Priority"
+    nullok="false"
+    type="positiveinteger"/>
+  <column
+    desc="Description"
+    name="Description"
+    nullok="true"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="wclass_desc_l10n"/>
+  </column>
+  <column
+    desc="Weight that matching assignables will be given"
+    name="Weight"
+    nullok="false"
+    type="nonnegativeinteger"/>
+  <array
+    arrayentity="ClassificationCondition"
+    cascadeDelete="true"
+    desc="Filtering criteria associated with this classification"
+    exportable="false"
+    ignoreforevents="true"
+    name="Conditions"
+    triggersValidation="true">
+    <link-association>
+      <subtype-map/>
+    </link-association>
+  </array>
+  <typekey
+    desc="Line of Business code; typically related to the policy."
+    name="ClaimLOBCode"
+    nullok="true"
+    typelist="LobCode">
+    <keyfilters>
+      <keyfilter
+        name="ClaimLossType"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="Type of Policy"
+    name="ClaimPolicyType"
+    nullok="true"
+    typelist="PolicyType">
+    <keyfilters>
+      <keyfilter
+        name="ClaimLOBCode"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="Loss Type of Claim"
+    name="ClaimLossType"
+    nullok="true"
+    typelist="LossType"/>
+  <!-- Index to ensure that classifications are unique based on Subtype and Priority -->
+  <index
+    desc="Ensure that priority is unique for Rules based on Subtype"
+    name="prisubtypeindex"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Priority"/>
+    <indexcol
+      keyposition="2"
+      name="Subtype"/>
+  </index>
+</entity>

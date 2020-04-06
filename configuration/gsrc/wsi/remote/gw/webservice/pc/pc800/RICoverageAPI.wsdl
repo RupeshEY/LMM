@@ -1,0 +1,313 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:gwsoap="http://guidewire.com/ws/soapheaders" xmlns:gwwsdl="http://guidewire.com/pl/wsdl" xmlns:pogo="http://guidewire.com/pc/ws/gw/webservice/pc/pc800/reinsurance/RIRiskInfo" xmlns:pogo2="http://guidewire.com/pc/ws/gw/webservice/pc/pc800/reinsurance/RIAgreementInfo" xmlns:pogo3="http://guidewire.com/pc/typekey" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://guidewire.com/pc/ws/gw/webservice/pc/pc800/reinsurance/RICoverageAPI" name="RICoverageAPI" targetNamespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc800/reinsurance/RICoverageAPI">
+  <wsdl:types>
+    <xs:schema xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc800/reinsurance/RICoverageAPI">
+      <xs:import namespace="http://guidewire.com/ws/soapheaders" schemaLocation="soapheaders.xsd"/>
+      <xs:import namespace="http://guidewire.com/pc/typekey"/>
+      <xs:import namespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc800/reinsurance/RIAgreementInfo"/>
+      <xs:import namespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc800/reinsurance/RIRiskInfo"/>
+      <!-- findRIRiskByCoverableID(String, String, String, Date) : RIRiskInfo -->
+      <xs:element name="findRIRiskByCoverableID">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="policyNumber" type="xs:string"/>
+            <xs:element minOccurs="0" name="coverableID" type="xs:string"/>
+            <xs:element minOccurs="0" name="coverageCode" type="xs:string"/>
+            <xs:element gw:type="java.util.Date" minOccurs="0" name="date" type="xs:dateTime"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="findRIRiskByCoverableIDResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="pogo:RIRiskInfo"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SOAPException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="RequiredFieldException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="FieldConversionException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="BadIdentifierException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="WsiAuthenticationException">
+        <xs:complexType/>
+      </xs:element>
+      <!-- findRIPolicyRisk(String, String, Date) : RIRiskInfo -->
+      <xs:element name="findRIPolicyRisk">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="policyNumber" type="xs:string"/>
+            <xs:element minOccurs="0" name="coverageCode" type="xs:string"/>
+            <xs:element gw:type="java.util.Date" minOccurs="0" name="date" type="xs:dateTime"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="findRIPolicyRiskResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return" type="pogo:RIRiskInfo"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc800/reinsurance/RIRiskInfo">
+      <xs:import namespace="http://guidewire.com/pc/typekey"/>
+      <xs:import namespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc800/reinsurance/RIAgreementInfo"/>
+      <xs:complexType name="RIRiskInfo">
+        <xs:sequence>
+          <xs:element xmlns:gw="http://guidewire.com/xsd" gw:viewas="array" minOccurs="0" name="Agreements">
+            <xs:complexType>
+              <xs:sequence>
+                <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="pogo2:RIAgreementInfo"/>
+              </xs:sequence>
+            </xs:complexType>
+          </xs:element>
+          <xs:element minOccurs="0" name="Description" type="xs:string"/>
+          <xs:element minOccurs="0" name="RIRiskID" type="xs:string"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:gw="http://guidewire.com/xsd" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc800/reinsurance/RIAgreementInfo">
+      <xs:import namespace="http://guidewire.com/pc/typekey"/>
+      <xs:import namespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc800/reinsurance/RIRiskInfo"/>
+      <xs:complexType name="RIAgreementInfo">
+        <xs:sequence>
+          <xs:element minOccurs="0" name="AgreementNumber" type="xs:string"/>
+          <xs:element gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="AttachmentPoint" type="xs:string"/>
+          <xs:element minOccurs="0" name="AttachmentPointIndexed" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="CededShare" type="xs:decimal"/>
+          <xs:element minOccurs="0" name="Comments" type="xs:string"/>
+          <xs:element minOccurs="0" name="Currency" type="pogo3:Currency"/>
+          <xs:element minOccurs="0" name="Draft" type="xs:boolean"/>
+          <xs:element gw:type="java.util.Date" minOccurs="0" name="EffectiveDate" type="xs:dateTime"/>
+          <xs:element gw:type="java.util.Date" minOccurs="0" name="ExpirationDate" type="xs:dateTime"/>
+          <xs:element minOccurs="0" name="Name" type="xs:string"/>
+          <xs:element gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="NotificationThreshold" type="xs:string"/>
+          <xs:element minOccurs="0" name="ProportionalPercentage" type="xs:decimal"/>
+          <xs:element gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="RecoveryLimit" type="xs:string"/>
+          <xs:element gw:type="gw.pl.currency.MonetaryAmount" minOccurs="0" name="TopOfLayer" type="xs:string"/>
+          <xs:element minOccurs="0" name="TopOfLayerIndexed" type="xs:boolean"/>
+          <xs:element minOccurs="0" name="Type" type="pogo3:RIAgreement"/>
+        </xs:sequence>
+      </xs:complexType>
+    </xs:schema>
+    <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/pc/typekey">
+      <xs:import namespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc800/reinsurance/RIAgreementInfo"/>
+      <xs:import namespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc800/reinsurance/RIRiskInfo"/>
+      <xs:simpleType name="Currency">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="usd"/>
+          <xs:enumeration value="eur"/>
+          <xs:enumeration value="gbp"/>
+          <xs:enumeration value="cad"/>
+          <xs:enumeration value="aud"/>
+          <xs:enumeration value="rub"/>
+          <xs:enumeration value="jpy"/>
+        </xs:restriction>
+      </xs:simpleType>
+      <xs:simpleType name="RIAgreement">
+        <xs:restriction base="xs:string">
+          <xs:enumeration value="RIAgreement"/>
+          <xs:enumeration value="ProportionalRIAgreement"/>
+          <xs:enumeration value="NonProportionalRIAgreement"/>
+          <xs:enumeration value="PerEventRITreaty"/>
+          <xs:enumeration value="AnnualAggregateRITreaty"/>
+          <xs:enumeration value="QuotaShareRITreaty"/>
+          <xs:enumeration value="SurplusRITreaty"/>
+          <xs:enumeration value="FacProportionalRIAgreement"/>
+          <xs:enumeration value="FacExcessOfLossRIAgreement"/>
+          <xs:enumeration value="ExcessOfLossRITreaty"/>
+          <xs:enumeration value="FacNetExcessOfLossRIAgreement"/>
+          <xs:enumeration value="NetExcessOfLossRITreaty"/>
+        </xs:restriction>
+      </xs:simpleType>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:portType name="RICoverageAPIPortType">
+    <wsdl:operation name="findRIRiskByCoverableID">
+      <wsdl:input message="tns:findRIRiskByCoverableID" name="findRIRiskByCoverableID"/>
+      <wsdl:output message="tns:findRIRiskByCoverableIDResponse" name="findRIRiskByCoverableIDResponse"/>
+      <!-- If communication errors occur -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- If policyNumber, coverableID, coverageCode, or date is not set -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <!-- If there is no coverage pattern with the given coverageCode -->
+      <wsdl:fault message="tns:FieldConversionException" name="FieldConversionException"/>
+      <!-- If there is no Coverable with the given coverableID -->
+      <wsdl:fault message="tns:BadIdentifierException" name="BadIdentifierException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="findRIPolicyRisk">
+      <wsdl:input message="tns:findRIPolicyRisk" name="findRIPolicyRisk"/>
+      <wsdl:output message="tns:findRIPolicyRiskResponse" name="findRIPolicyRiskResponse"/>
+      <!-- If communication errors occur -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- If required field is missing -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <!-- If cannot find entity with given identifier -->
+      <wsdl:fault message="tns:BadIdentifierException" name="BadIdentifierException"/>
+      <!-- If there is no coverage pattern with the given coverageCode -->
+      <wsdl:fault message="tns:FieldConversionException" name="FieldConversionException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="RICoverageAPISoap12Binding" type="tns:RICoverageAPIPortType">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="findRIRiskByCoverableID">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="findRIRiskByCoverableID">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findRIRiskByCoverableIDResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="FieldConversionException">
+        <soap12:fault name="FieldConversionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findRIPolicyRisk">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="findRIPolicyRisk">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findRIPolicyRiskResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap12:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="FieldConversionException">
+        <soap12:fault name="FieldConversionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="RICoverageAPISoap11Binding" type="tns:RICoverageAPIPortType">
+    <soap11:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="findRIRiskByCoverableID">
+      <soap11:operation style="document"/>
+      <wsdl:input name="findRIRiskByCoverableID">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findRIRiskByCoverableIDResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="FieldConversionException">
+        <soap11:fault name="FieldConversionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="findRIPolicyRisk">
+      <soap11:operation style="document"/>
+      <wsdl:input name="findRIPolicyRisk">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="findRIPolicyRiskResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="BadIdentifierException">
+        <soap11:fault name="BadIdentifierException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="FieldConversionException">
+        <soap11:fault name="FieldConversionException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="RICoverageAPI">
+    <wsdl:port binding="tns:RICoverageAPISoap12Binding" name="RICoverageAPISoap12Port">
+      <soap12:address location="http://localhost:8180/pc/ws/gw/webservice/pc/pc800/reinsurance/RICoverageAPI"/>
+      <gwwsdl:address location="${pc}/ws/gw/webservice/pc/pc800/reinsurance/RICoverageAPI"/>
+    </wsdl:port>
+    <wsdl:port binding="tns:RICoverageAPISoap11Binding" name="RICoverageAPISoap11Port">
+      <soap11:address location="http://localhost:8180/pc/ws/gw/webservice/pc/pc800/reinsurance/RICoverageAPI/soap11"/>
+      <gwwsdl:address location="${pc}/ws/gw/webservice/pc/pc800/reinsurance/RICoverageAPI/soap11"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:message name="findRIRiskByCoverableID">
+    <wsdl:part element="tns:findRIRiskByCoverableID" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="findRIRiskByCoverableIDResponse">
+    <wsdl:part element="tns:findRIRiskByCoverableIDResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="SOAPException">
+    <wsdl:part element="tns:SOAPException" name="SOAPException"/>
+  </wsdl:message>
+  <wsdl:message name="RequiredFieldException">
+    <wsdl:part element="tns:RequiredFieldException" name="RequiredFieldException"/>
+  </wsdl:message>
+  <wsdl:message name="FieldConversionException">
+    <wsdl:part element="tns:FieldConversionException" name="FieldConversionException"/>
+  </wsdl:message>
+  <wsdl:message name="BadIdentifierException">
+    <wsdl:part element="tns:BadIdentifierException" name="BadIdentifierException"/>
+  </wsdl:message>
+  <wsdl:message name="WsiAuthenticationException">
+    <wsdl:part element="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+  </wsdl:message>
+  <wsdl:message name="findRIPolicyRisk">
+    <wsdl:part element="tns:findRIPolicyRisk" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="findRIPolicyRiskResponse">
+    <wsdl:part element="tns:findRIPolicyRiskResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="gw-authentication">
+    <wsdl:part element="gwsoap:authentication" name="gw-authentication"/>
+  </wsdl:message>
+  <wsdl:message name="gw-locale">
+    <wsdl:part element="gwsoap:locale" name="gw-locale"/>
+  </wsdl:message>
+</wsdl:definitions>

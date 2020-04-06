@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="SpecialHandlingFinancialState"
+  exportable="false"
+  extendable="true"
+  ignoreForEvents="true"
+  loadable="false"
+  table="shfinancialstate"
+  type="versionable">
+  <implementsInterface
+    iface="gw.cc.specialhandling.entity.SpecialHandlingFinancialState"
+    impl="com.guidewire.cc.domain.specialhandling.impl.SpecialHandlingFinancialStateImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+    A set of previously calculated financial amounts for use by Automated Handling triggers that fire when a financial threshold is reached.
+    A previously saved value is compared against the triggering threshold amount in order to avoid firing the trigger repeatedly once
+      the threshold has been reached.
+  ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Claim that owns this SpecialHandlingFinancialState object."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <array
+    arrayentity="SpecialHandlingPreviousAmount"
+    desc=""
+    exportable="false"
+    ignoreforevents="true"
+    name="PreviousAmount"
+    owner="true"
+    triggersValidation="false">
+    <link-association
+      hasGetter="true"
+      hasSetter="true">
+      <typelist-map
+        field="FinancialThreshold"/>
+    </link-association>
+  </array>
+</entity>

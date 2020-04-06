@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!-- ****************************************************************************
+    Calendar Typelists
+  **************************************************************************** -->
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The context for a calendar"
+  final="true"
+  name="CalendarContext">
+  <typecode
+    code="supervisor"
+    desc="A calendar that displays activities assigned to the logged in supervisor's subordinates"
+    name="Supervisor"/>
+  <typecode
+    code="desktop"
+    desc="A calendar that displays assigned activities across all claims"
+    name="Desktop"/>
+  <typecode
+    code="claim"
+    desc="A calendar that displays assigned activities for a single claim"
+    name="Claim"/>
+  <typecode
+    code="matter"
+    desc="A calendar that displays assigned activities for a single matter"
+    name="Matter"/>
+</typelist>

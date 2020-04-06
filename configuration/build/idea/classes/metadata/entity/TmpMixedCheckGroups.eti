@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table used to store IDs of CheckGroups that have a mixture of canceled (i.e., voided/stopped) and non-canceled checks.  This would only happen if one or more checks in the group were reissued"
+  entity="TmpMixedCheckGroups"
+  exportable="false"
+  extendable="false"
+  loadable="false"
+  platform="false"
+  table="tmpmixedcheckgroups"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.financials.check.entity.TmpMixedCheckGroups"
+    impl="com.guidewire.cc.domain.financials.check.impl.TmpMixedCheckGroupsImpl"/>
+  <column
+    exportable="false"
+    name="CheckGroupID"
+    nullok="false"
+    type="softentityreference"/>
+  <column
+    default="1"
+    exportable="false"
+    name="HasMixedChecks"
+    nullok="false"
+    type="bit"/>
+  <index
+    desc="A CheckGroup's id should appear at most once in this table, if it has a mixture of canceled and non-canceled checks."
+    name="tmpmixedchkgroups1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="CheckGroupID"/>
+  </index>
+</entity>

@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    desc="Encapsulates a label and property row for reuse in the the comparison rule condition section."
+    id="RuleComparisonConditionInputSet">
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RuleVersionComparisonController"/>
+    <InputSetRef
+      def="RuleComparisonSectionLabelInputSet(controller, DisplayKey.get(&quot;BizRules.Import.Comparison.RuleCondition&quot;))"
+      id="RuleConditionSectionLabel"/>
+    <InputSetRef
+      def="RuleComparisonRowConditionInputSet(controller.ConditionRow)"/>
+  </InputSet>
+</PCF>

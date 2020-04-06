@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <InputSet
+    id="ClassCodeInputSet">
+    <Require
+      name="classCode"
+      type="ClassCode"/>
+    <TextInput
+      editable="true"
+      id="Code"
+      label="DisplayKey.get(&quot;LV.Policy.EditableClassCodes.ClassCode&quot;)"
+      value="classCode.Code"/>
+    <TextAreaInput
+      editable="true"
+      id="Description"
+      label="DisplayKey.get(&quot;LV.Policy.EditableClassCodes.Description&quot;)"
+      numRows="4"
+      value="classCode.Description"/>
+    <TextAreaInput
+      editable="true"
+      id="Comments"
+      label="DisplayKey.get(&quot;LV.Policy.EditableClassCodes.Comments&quot;)"
+      numRows="4"
+      value="classCode.Comments"/>
+  </InputSet>
+</PCF>

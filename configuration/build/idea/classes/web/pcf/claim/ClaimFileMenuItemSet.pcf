@@ -1,0 +1,114 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuItemSet
+    id="ClaimFileMenuItemSet">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="gw.api.validation.ValidationUtil.getValidationLevelsInReverseOrder(new ValidationLevel[] {})"
+      name="validationLevels"
+      type="typekey.ValidationLevel[]"/>
+    <MenuItem
+      id="ClaimMenuActions_ClaimActions"
+      label="DisplayKey.get(&quot;Java.ClaimMenu.ClaimActions&quot;)"
+      visible="Claim != null">
+      <MenuItem
+        action="AssignClaimsPopup.push(new gw.api.claim.ClaimAssignmentPopup(Claim));"
+        id="ClaimMenuActions_Assign"
+        label="DisplayKey.get(&quot;Java.Assign.AssignClaim&quot;)"
+        visible="perm.Claim.assign(Claim)"/>
+      <MenuItem
+        action="CloseClaimPopup.push(Claim)"
+        id="ClaimMenuActions_CloseClaim"
+        label="DisplayKey.get(&quot;Java.OpenClose.CloseClaim&quot;)"
+        visible="Claim.canClose(User.util.CurrentUser)"/>
+      <MenuItem
+        action="if (gw.api.claim.ReopenUtil.requireExplanation(entity.Claim)) {ReopenClaimPopup.push(Claim);} else {gw.api.claim.ReopenUtil.reopenClaimWithoutExplanation(Claim);}"
+        id="ClaimMenuActions_ReopenClaim"
+        label="DisplayKey.get(&quot;Java.OpenClose.ReopenClaim&quot;)"
+        visible="Claim.canReopen(User.util.CurrentUser)"/>
+      <MenuItem
+        action="CloseExposurePopup.push(CurrentExposure())"
+        id="ClaimMenuActions_CloseExposure"
+        label="DisplayKey.get(&quot;Java.OpenClose.CloseExposure&quot;)"
+        visible="CurrentExposure() != null and CurrentExposure().canClose(User.util.CurrentUser)"/>
+      <MenuItem
+        action="if (gw.api.claim.ReopenUtil.requireExplanation(entity.Exposure)) {ReopenExposurePopup.push(CurrentExposure());} else {gw.api.claim.ReopenUtil.reopenExposureWithoutExplanation(CurrentExposure());}"
+        id="ClaimMenuActions_ReopenExposure"
+        label="DisplayKey.get(&quot;Java.OpenClose.ReopenExposure&quot;)"
+        visible="CurrentExposure() != null and CurrentExposure().canReopen(User.util.CurrentUser)"/>
+      <MenuItem
+        action="ClaimPrintout.push(Claim)"
+        id="ClaimMenuActions_Print"
+        label="DisplayKey.get(&quot;Java.ClaimMenu.PrintClaim&quot;)"/>
+      <MenuItem
+        action="ClaimSyncStatusPopup.push(Claim)"
+        id="ClaimMenuActions_SyncStatus"
+        label="DisplayKey.get(&quot;Java.ClaimMenu.SyncStatus&quot;)"/>
+      <MenuItem
+        id="ClaimMenuActions_ClaimValidation"
+        label="DisplayKey.get(&quot;Java.ClaimMenu.ClaimValidation&quot;)"
+        visible="perm.Claim.validate(Claim)">
+        <MenuItemIterator
+          elementName="ValidationLevel"
+          value="validationLevels"
+          valueType="typekey.ValidationLevel[]">
+          <MenuItem
+            action="gw.api.validation.ValidationUtil.validateClaim(Claim, ValidationLevel)"
+            id="item"
+            label="ValidationLevel.DisplayName"/>
+        </MenuItemIterator>
+      </MenuItem>
+      <MenuItem
+        id="ClaimMenuActions_ClaimExposureValidation"
+        label="DisplayKey.get(&quot;Java.ClaimMenu.ClaimExposureValidation&quot;)"
+        visible="perm.Claim.validate(Claim)">
+        <MenuItemIterator
+          elementName="ValidationLevel"
+          value="validationLevels"
+          valueType="typekey.ValidationLevel[]">
+          <MenuItem
+            action="gw.api.validation.ValidationUtil.validateClaimAndExposures(Claim, ValidationLevel)"
+            id="item"
+            label="ValidationLevel.DisplayName"/>
+        </MenuItemIterator>
+      </MenuItem>
+      <MenuItem
+        id="ClaimMenuActions_PolicyValidation"
+        label="DisplayKey.get(&quot;Java.ClaimMenu.PolicyValidation&quot;)"
+        visible="perm.Claim.validate(Claim)">
+        <MenuItemIterator
+          elementName="ValidationLevel"
+          value="validationLevels"
+          valueType="typekey.ValidationLevel[]">
+          <MenuItem
+            action="gw.api.validation.ValidationUtil.validatePolicyForClaim(Claim, ValidationLevel)"
+            id="item"
+            label="ValidationLevel.DisplayName"/>
+        </MenuItemIterator>
+      </MenuItem>
+      <MenuItem
+        id="ClaimMenuActions_ExposureValidation"
+        label="DisplayKey.get(&quot;Java.ClaimMenu.ExposureValidation&quot;)"
+        visible="CurrentExposure() != null and perm.Exposure.validate(CurrentExposure())">
+        <MenuItemIterator
+          elementName="ValidationLevel"
+          value="validationLevels"
+          valueType="typekey.ValidationLevel[]">
+          <MenuItem
+            action="gw.api.validation.ValidationUtil.validateExposureUnit(CurrentExposure(), ValidationLevel)"
+            id="item"
+            label="ValidationLevel.DisplayName"/>
+        </MenuItemIterator>
+      </MenuItem>
+    </MenuItem>
+    <Code><![CDATA[
+function CurrentExposure() : Exposure {
+        return gw.api.exposure.CurrentExposureHelper.getCurrentExposure();
+      }
+    ]]></Code>
+  </MenuItemSet>
+</PCF>

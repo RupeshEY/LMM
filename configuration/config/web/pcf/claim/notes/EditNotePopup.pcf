@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="true"
+    id="EditNotePopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Note.EditNote&quot;)">
+    <LocationEntryPoint
+      signature="EditNotePopup(note : entity.Note)"/>
+    <LocationEntryPoint
+      signature="EditNotePopup(note : entity.Note, topicEditable : boolean, relatedToEditable : boolean)"/>
+    <Variable
+      name="note"
+      type="entity.Note"/>
+    <Variable
+      initialValue="true"
+      name="topicEditable"
+      type="boolean"/>
+    <Variable
+      initialValue="true"
+      name="relatedToEditable"
+      type="boolean"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <PanelRef
+        def="NoteDetailDV(note, topicEditable, relatedToEditable)"/>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageDocumentUploadAccessParty_Ext"
+  table="ecfmsgdocuploadacpar_ext"
+  type="retireable"
+  exportable="true">
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    name="PartyName"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    name="PartyId"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    name="PartyRole"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Access rights for the uploaded document. Either 'change' or 'read'"
+    name="AccessRight"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Action to be done on the uploaded document. Either 'add' or 'remove'"
+    name="ListAction"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <foreignkey
+    desc="The document upload request which this access party belongs to"
+    fkentity="ECFMessageDocumentUploadRq_Ext"
+    name="ECFMessageDocumentUploadRq"
+    nullok="true"/>
+  <column
+    default="true"
+    desc="Set by user on UI for a Document Upload Request - This identifies if the party has access to the document or not"
+    name="CanAccess"
+    nullok="false"
+    type="bit"/>
+</entity>

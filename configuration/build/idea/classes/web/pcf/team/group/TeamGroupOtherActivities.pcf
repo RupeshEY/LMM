@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.User.viewteam"
+    id="TeamGroupOtherActivities"
+    title="DisplayKey.get(&quot;Web.Team.OtherActivitiesTitle&quot;)">
+    <LocationEntryPoint
+      signature="TeamGroupOtherActivities(Group : Group)"/>
+    <Variable
+      name="Group"
+      type="Group"/>
+    <Variable
+      initialValue="gw.api.team.TeamOtherActivityFilterSet.TEAM_GROUP_OTHER_ACTIVITY_FILTER"
+      name="FilterSet"
+      type="gw.api.team.TeamGroupActivityFilterSet"/>
+    <Variable
+      initialValue="ActivityTeamView.finder.findStaleOrFailedAssignmentsByGroup(Group)"
+      name="ActivityTeamViewList"
+      recalculateOnRefresh="true"
+      type="gw.api.database.IQueryBeanResult&lt;gw.pl.persistence.core.Bean&gt;"/>
+    <Variable
+      initialValue="&quot;TeamGroupActivitiesLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <Screen
+      id="TeamGroupOtherActivitiesScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.Team.OtherActivitiesTitle&quot;)"/>
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="AssignActivitiesPopup.push(new gw.api.activity.ActivityAssignmentPopup(CheckedValues))"
+          flags="all ActivityTeamView"
+          id="TeamGroupOtherActivities_Assign"
+          iterator="TeamGroupActivitiesLV.TeamGroupActivitiesLV"
+          label="DisplayKey.get(&quot;Web.Team.Toolbar.Assign&quot;)"
+          shortcut="G"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="gw.api.print.ListViewPrintOptionPopupAction.printListViewWithOptions(PrintTargetLV)"
+          available="perm.User.printlistviews"
+          id="TeamGroupOtherActivities_Print"
+          label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="TeamGroupActivitiesLV(ActivityTeamViewList as gw.api.database.IQueryBeanResult&lt;ActivityTeamView&gt;, FilterSet)"/>
+    </Screen>
+  </Page>
+</PCF>

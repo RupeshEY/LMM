@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <PanelSet
+    id="RuleListPanelSet"
+    visible="dataHolder.VisibleIfEmpty || !dataHolder.Empty">
+    <Require
+      name="navigationSupport"
+      type="gw.bizrules.pcf.BizRulesPageNavigationSupport"/>
+    <Require
+      name="dataHolder"
+      type="gw.bizrules.pcf.LVDataHolder&lt;RuleVersion&gt;"/>
+    <Variable
+      initialValue="new gw.bizrules.pcf.RuleListPageHelper(navigationSupport.VersionController)"
+      name="pageHelper"
+      type="gw.bizrules.pcf.RuleListPageHelper"/>
+    <DetailViewPanel
+      visible="!org.apache.commons.lang3.StringUtils.isEmpty(dataHolder.Description)">
+      <InputColumn>
+        <TextInput
+          id="Description"
+          labelAbove="true"
+          value="dataHolder.Description"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <ListViewPanel
+      id="LV">
+      <RowIterator
+        editable="false"
+        elementName="entry"
+        pageSize="10"
+        value="dataHolder.Entries"
+        valueType="gw.api.database.IQueryBeanResult&lt;RuleVersion&gt;">
+        <Row>
+          <TextCell
+            action="navigationSupport.pushRuleVersionDetailsPopup(entry, false)"
+            enableSort="false"
+            id="Name"
+            label="DisplayKey.get('BizRules.RulesPage.LV.Name')"
+            value="entry.Rule.Name"/>
+          <BooleanRadioCell
+            enableSort="false"
+            icon="&quot;ok.png&quot;"
+            iconLabel="DisplayKey.get('Button.Yes')"
+            id="AvailableToRun"
+            label="DisplayKey.get('BizRules.RulesPage.LV.Available')"
+            showHeaderIcon="false"
+            value="entry.Rule.AvailableToRun"/>
+          <TextCell
+            enableSort="false"
+            id="Status"
+            label="DisplayKey.get('BizRules.RulesPage.LV.Status')"
+            value="pageHelper.getStatusText(entry)"/>
+        </Row>
+      </RowIterator>
+    </ListViewPanel>
+  </PanelSet>
+</PCF>

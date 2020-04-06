@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Summary information for a risk unit item on a policy summary."
+  entity="PolicySummaryRiskUnit"
+  exportable="true"
+  final="false">
+  <implementsInterface
+    iface="gw.cc.policy.entity.PolicySummaryRiskUnit"
+    impl="com.guidewire.cc.domain.policy.impl.PolicySummaryRiskUnitImpl"/>
+  <column
+    desc="Indicates whether the risk unit should be included when fetching the policy from the policy system."
+    name="Selected"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Identifier for the risk in an external policy system"
+    name="PolicySystemId"
+    nullok="true"
+    type="policysystemid"/>
+  <foreignkey
+    columnName="PolicySummaryID"
+    desc="Related policy."
+    exportable="false"
+    fkentity="PolicySummary"
+    name="PolicySummary"
+    nullok="false"/>
+</nonPersistentEntity>

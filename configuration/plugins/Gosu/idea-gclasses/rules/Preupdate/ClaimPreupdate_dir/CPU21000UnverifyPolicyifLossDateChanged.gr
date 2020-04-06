@@ -1,0 +1,23 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+uses gw.api.upgrade.Coercions
+
+@gw.rules.RuleName("CPU21000 - Unverify Policy if Loss Date Changed")
+internal class CPU21000UnverifyPolicyifLossDateChanged {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.getOriginalValue("LossDate") != null 
+and claim.LossDate != (Coercions.makeDateFrom(claim.getOriginalValue("LossDate")))
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.Policy.Verified = false
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="SItriggersInputSet">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <ListViewInput
+      boldLabel="true"
+      def="SItriggersLV(Claim)"
+      label="DisplayKey.get(&quot;NVV.Claim.SubView.SItriggers&quot;)"
+      labelAbove="true">
+      <Toolbar/>
+    </ListViewInput>
+  </InputSet>
+</PCF>

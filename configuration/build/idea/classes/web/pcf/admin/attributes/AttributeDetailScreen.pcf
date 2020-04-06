@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="AttributeDetailScreen">
+    <Require
+      name="Attribute"
+      type="Attribute"/>
+    <Toolbar>
+      <EditButtons/>
+    </Toolbar>
+    <PanelRef
+      def="AttributeDetailDV(Attribute)"/>
+    <PanelRef
+      def="LocalizedValuesDV(Attribute, { &quot;Name&quot;, &quot;Description&quot;}, { DisplayKey.get(&quot;Web.Admin.AttributeDetailDV.Name&quot;), DisplayKey.get(&quot;Web.Admin.AttributeDetailDV.Description&quot;)})"/>
+  </Screen>
+</PCF>

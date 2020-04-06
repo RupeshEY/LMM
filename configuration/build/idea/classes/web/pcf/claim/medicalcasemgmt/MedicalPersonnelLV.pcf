@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="MedicalPersonnelLV">
+    <ExposeIterator
+      valueType="entity.ClaimContact"
+      widget="MedicalPersonnelLV"/>
+    <Require
+      name="ClaimContactList"
+      type="ClaimContact[]"/>
+    <RowIterator
+      editable="false"
+      elementName="ClaimContact"
+      value="ClaimContactList"
+      valueType="entity.ClaimContact[]">
+      <Row>
+        <TextCell
+          id="MedicalPersonnel_ProviderName"
+          label="DisplayKey.get(&quot;MedicalPersonnel.ProviderName&quot;)"
+          value="ClaimContact.Contact.DisplayName"/>
+        <TypeKeyCell
+          id="MedicalPersonnel_ProviderSpecialty"
+          label="DisplayKey.get(&quot;MedicalPersonnel.ProviderSpecialty&quot;)"
+          value="(ClaimContact.Contact typeis Doctor) ? ClaimContact.Contact.DoctorSpecialty : ((ClaimContact.Contact typeis MedicalCareOrg) ? ClaimContact.Contact.MedicalOrgSpecialty : null)"
+          valueType="typekey.SpecialtyType"/>
+        <DateCell
+          id="MedicalPersonnel_ValidFrom"
+          label="DisplayKey.get(&quot;MedicalPersonnel.ValidFrom&quot;)"
+          value="ClaimContact.ContactValidFrom"/>
+        <DateCell
+          id="MedicalPersonnel_ValidTo"
+          label="DisplayKey.get(&quot;MedicalPersonnel.ValidTo&quot;)"
+          value="ClaimContact.ContactValidTo"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

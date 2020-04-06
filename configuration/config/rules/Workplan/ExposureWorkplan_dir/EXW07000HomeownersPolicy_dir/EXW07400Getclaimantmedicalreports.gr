@@ -1,0 +1,22 @@
+package rules.Workplan.ExposureWorkplan_dir.EXW07000HomeownersPolicy_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("EXW07400 - Get claimant medical reports")
+internal class EXW07400Getclaimantmedicalreports {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ExposureType == TC_MEDPAY
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.Claim.createActivityFromPattern(
+    exposure, ActivityPattern.finder.getActivityPatternByCode("medical_report_claimant"))
+/*end00rule*/
+
+  }
+}

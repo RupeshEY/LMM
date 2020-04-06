@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <Popup
+      canEdit="true"
+      canVisit="true"
+      id="AttachDocumentsPopup"
+      startInEditMode="true"
+      title="DisplayKey.get('Web.ServiceRequest.AttachDocumentPopup.Title')">
+    <LocationEntryPoint
+        signature="AttachDocumentsPopup(serviceRequest : ServiceRequest, visibleToSpecialist : boolean)"/>
+    <Variable
+        name="serviceRequest"
+        type="ServiceRequest"/>
+    <Variable
+        name="visibleToSpecialist"
+        type="boolean"/>
+    <Variable
+        initialValue="new gw.document.DocumentCCContext(serviceRequest.Claim,
+      \ doc -> {
+         doc.RelatedTo = serviceRequest
+         serviceRequest.attachDocument(doc, visibleToSpecialist)
+       }, true)"
+        name="DocumentApplicationContext"
+        type="gw.document.DocumentApplicationContext"/>
+    <ScreenRef
+        def="UploadDocumentScreen(DocumentApplicationContext)"/>
+  </Popup>
+</PCF>

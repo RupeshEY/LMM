@@ -1,0 +1,23 @@
+package rules.EventMessage.EventFired_dir.EFR02000Metro_dir.EFR02100MetroReport_dir
+
+@gw.rules.RuleName("EFR02120 - Send Inquiry Message")
+internal class EFR02120SendInquiryMessage {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return (messageContext.Root as MetroReport).Status == TC_SENDINGINQUIRY &&
+((messageContext.Root as MetroReport).Claim.State!=TC_DRAFT)
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+var metroReport = messageContext.Root as MetroReport
+
+libraries.Metro.composeOrderInquiryFileMessage(messageContext, metroReport)
+/*end00rule*/
+
+  }
+}

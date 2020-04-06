@@ -1,0 +1,23 @@
+package rules.Validation.ClaimValidationRules_dir.CLV09000ISOValidation_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV091100 - Description")
+internal class CLV091100Description {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.ISOClaimLevelMessaging and !claim.Description.HasContent
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.rejectField("Description", TC_ISO,
+                  DisplayKey.get("Rules.Validation.Claim.DescriptionNotNull"), null, null)
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,596 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Specific loss subtypes"
+  name="LossCause">
+  <typecode
+    code="animalcollision"
+    desc="Collision with animal"
+    name="Collision with animal"
+    retired="true">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="animal"
+    desc="Animal"
+    name="Animal">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="bikecollision"
+    desc="Collision with bicycle"
+    name="Collision with bicycle">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="fixedobjcoll"
+    desc="Collision with fixed object"
+    name="Collision with fixed object">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="vehcollision"
+    desc="Collision with motor vehicle"
+    name="Collision with motor vehicle">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="otherobjcoll"
+    desc="Collision with other object"
+    name="Collision with other object">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="pedcollision"
+    desc="Collision with pedestrian"
+    name="Collision with pedestrian">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="trainbuscoll"
+    desc="Collision with train or bus"
+    name="Collision with train or bus">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="loadingdamage"
+    desc="Damage in loading or unloading"
+    name="Damage in loading or unloading">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="FallingObject"
+    desc="Falling or moving object"
+    name="Falling or moving object">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="earthquake"
+    desc="Earthquake"
+    name="Earthquake">
+    <category
+      code="PR"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="explosion"
+    desc="Explosion"
+    name="Explosion">
+    <category
+      code="PR"
+      typelist="losstype"/>
+    <category
+      code="GL"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="firedamage"
+    desc="Fire damage to vehicle"
+    name="Fire damage to vehicle"
+    retired="true">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="waterdamage"
+    desc="Water Damage"
+    name="Water damage">
+    <category
+      code="PR"
+      typelist="losstype"/>
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="glassbreakage"
+    desc="Glass breakage"
+    name="Glass breakage">
+    <category
+      code="PR"
+      typelist="losstype"/>
+    <category
+      code="GL"
+      typelist="losstype"/>
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="vandalism"
+    desc="Malicious mischief and vandalism"
+    name="Malicious mischief and vandalism">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+    <category
+      code="PR"
+      typelist="losstype"/>
+    <category
+      code="GL"
+      typelist="losstype"/>
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="rearend"
+    desc="Rear-end collision"
+    name="Rear-end collision">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="riotandcivil"
+    desc="Riot and civil commotion"
+    name="Riot and civil commotion">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+    <category
+      code="PR"
+      typelist="losstype"/>
+    <category
+      code="GL"
+      typelist="losstype"/>
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="theftentire"
+    desc="Theft of entire vehicle"
+    name="Theft of entire vehicle">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="theftparts"
+    desc="Theft Audio or other parts"
+    name="Theft Audio or other parts">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="fire"
+    desc="Fire"
+    name="Fire">
+    <category
+      code="PR"
+      typelist="losstype"/>
+    <category
+      code="GL"
+      typelist="losstype"/>
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="wind"
+    desc="Wind"
+    name="Wind">
+    <category
+      code="PR"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="hail"
+    desc="Hail"
+    name="Hail">
+    <category
+      code="PR"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="mold"
+    desc="Mold"
+    name="Mold">
+    <category
+      code="PR"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="structfailure"
+    desc="Structural failure"
+    name="Structural failure">
+    <category
+      code="PR"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="snowice"
+    desc="Snow/ice"
+    name="Snow/ice">
+    <category
+      code="PR"
+      typelist="losstype"/>
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="burglary"
+    desc="Burglary"
+    name="Burglary">
+    <category
+      code="PR"
+      typelist="losstype"/>
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="animal_bite"
+    desc="Animal/insect bite/scratch/sting"
+    name="Animal/insect bite/scratch/sting">
+    <category
+      code="GL"
+      typelist="losstype"/>
+    <category
+      code="PR"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="broken_glass"
+    desc="Broken glass"
+    name="Broken glass">
+    <category
+      code="GL"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="electrical_curr"
+    desc="Contact with electric current"
+    name="Contact with electric current">
+    <category
+      code="GL"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="air_crash"
+    desc="Crash of airplane"
+    name="Crash of airplane">
+    <category
+      code="GL"
+      typelist="losstype"/>
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="rail_crash"
+    desc="Crash of rail vehicle"
+    name="Crash of rail vehicle">
+    <category
+      code="GL"
+      typelist="losstype"/>
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="water_veh_crash"
+    desc="Crash of water vehicle"
+    name="Crash of water vehicle">
+    <category
+      code="GL"
+      typelist="losstype"/>
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="construction"
+    desc="Faulty construction"
+    name="Faulty construction">
+    <category
+      code="GL"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="errors"
+    desc="Errors and omissions"
+    name="Errors and omissions">
+    <category
+      code="GL"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="breach"
+    desc="Breach of contract"
+    name="Breach of contract">
+    <category
+      code="GL"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="burn_scald"
+    desc="Burn or scald - heat or cold exposures - contact with"
+    name="Burn or scald - heat or cold exposures - contact with">
+    <category
+      code="WC"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="caught_in"
+    desc="Caught in, under, or between"
+    name="Caught in, under, or between">
+    <category
+      code="WC"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="cut"
+    desc="Cut, puncture, scrape, injured by"
+    name="Cut, puncture, scrape, injured by">
+    <category
+      code="WC"
+      typelist="losstype"/>
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="fall"
+    desc="Fall, slip, or trip injury"
+    name="Fall, slip, or trip injury">
+    <category
+      code="WC"
+      typelist="losstype"/>
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="motorvehicle"
+    desc="Motor vehicle"
+    name="Motor vehicle">
+    <category
+      code="WC"
+      typelist="losstype"/>
+    <category
+      code="trav"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="strain"
+    desc="Strain or injury by"
+    name="Strain or injury by">
+    <category
+      code="WC"
+      typelist="losstype"/>
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="striking"
+    desc="Striking against or stepping on"
+    name="Striking against or stepping on">
+    <category
+      code="WC"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="struck"
+    desc="Struck or injured by"
+    name="Struck or injured by">
+    <category
+      code="WC"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="rubbed"
+    desc="Rubbed or abraded by"
+    name="Rubbed or abraded by">
+    <category
+      code="WC"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="miscellaneous"
+    desc="Miscellaneous causes"
+    name="Miscellaneous causes">
+    <category
+      code="WC"
+      typelist="losstype"/>
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="leftcollision"
+    desc="Collision while turning left"
+    name="Collision while turning left">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="assault"
+    desc="Assault or battery"
+    name="Assault or battery">
+    <category
+      code="GL"
+      typelist="losstype"/>
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="med_error"
+    desc="Medical error"
+    name="Medical error">
+    <category
+      code="GL"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="product"
+    desc="Product failure"
+    name="Product failure">
+    <category
+      code="GL"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="excess"
+    desc="Excess liability"
+    name="Excess liability">
+    <category
+      code="GL"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="rollover"
+    desc="Rollover"
+    name="Rollover">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="personal_misconduct"
+    desc="Personal Misconduct"
+    name="Personal misconduct">
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="professional_sports"
+    desc="Professional or Organized Sports"
+    name="Professional or organized sports">
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="official_duty"
+    desc="Mandatory official duty (military, jury etc)"
+    name="Mandatory official duty (military, jury etc)">
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="death"
+    desc="Death"
+    name="Death">
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="preex_med_condition"
+    desc="Pre existing medical condition"
+    name="Pre existing medical condition">
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="abandonment"
+    desc="Abandonment"
+    name="Abandonment">
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="delay"
+    desc="Delay"
+    name="Delay">
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="cancellation"
+    desc="Cancellation"
+    name="Cancellation">
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="terrorism_hijack"
+    desc="Terrorism or Hijack"
+    name="Terrorism or Hijack">
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="missed_departure"
+    desc="Missed departure"
+    name="Missed departure">
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="documents"
+    desc="Loss of documents like passport, tickets, driver's license"
+    name="Documents">
+    <category
+      code="TRAV"
+      typelist="losstype"/>
+  </typecode>
+</typelistextension>

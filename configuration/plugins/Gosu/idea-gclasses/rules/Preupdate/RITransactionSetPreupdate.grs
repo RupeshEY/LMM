@@ -1,0 +1,13 @@
+package rules.Preupdate
+
+@gw.rules.RuleName("RITransactionSetPreupdate")
+@gw.rules.RuleSetDescription("This is the RITransactionSet preupdate rule set to permit modification of RITransaction entities and related entities. Do NOT modify the amount of an RITransaction in this ruleset. Exceptions will cause the bounding database transaction to roll back, effectively vetoing the update. IMPORTANT The ClaimAmount, ReportingAmount, ReserveLine, and RIAgreement fields of an RITransaction entity must not be modified in the RITransactionSet Preupdate rules. Changes made in this rule set to RITransaction entities do not affect automatic reinsurance financials calculations for RITransaction entities because the calculations are updated when the RITransaction object is created. You can modify the IReinsuranceTransactionPlugin implementation to set the ClaimAmount, ReportingAmount, ReserveLine, and RIAgreement fields correctly when an RITransaction object is created.")
+class RITransactionSetPreupdate extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.RITransactionSet) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.RITransactionSet) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "RITransactionSetPreupdate", RITransactionSetPreupdate )
+  }
+}

@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    beforeCommit="verifyNoDuplicate(); checkAccountReferences()"
+    canEdit="perm.System.accountmng"
+    canVisit="perm.System.accountview"
+    id="AccountDetail"
+    parent="AccountAdmin()"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.Admin.Account.Detail.Label&quot;)">
+    <LocationEntryPoint
+      signature="AccountDetail()"/>
+    <LocationEntryPoint
+      signature="AccountDetail(account:Account)"/>
+    <LocationEntryPoint
+      signature="AccountDetail(account : Account, showAccountHandlingCardToStart : boolean)"/>
+    <Variable
+      initialValue="initializeAccountIfNecessary(account)"
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="new java.util.ArrayList&lt;Policy&gt;()"
+      name="checkedPolicies"
+      type="List&lt;Policy&gt;"/>
+    <Variable
+      initialValue="false"
+      name="showAccountHandlingCardToStart"
+      type="boolean"/>
+    <ScreenRef
+      def="AccountDetailScreen(account, showAccountHandlingCardToStart)"/>
+    <Code><![CDATA[uses gw.api.database.Query
+
+function verifyNoDuplicate() {
+  if(account.ChangedFields.contains("AccountNumber") and Query.make(entity.Account).compare("AccountNumber", Equals, account.AccountNumber).select().Count > 0) {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Web.Admin.Account.Duplicate", account.AccountNumber))
+  }
+}
+
+function initializeAccountIfNecessary(acct : Account) : Account {
+  if (null == acct) {
+    acct = new Account()
+    acct.SpecialHandling = new AccountSpecialHandling()
+  }
+  
+  return acct
+}
+
+/**
+ * Called from beforeCommit(). Checks for Policies that reference the original
+ * Account Number, and displays a warning if there are 1 or more.
+ */
+function checkAccountReferences() {
+  if(account.ChangedFields.contains("AccountNumber")) {
+    var origAccountNumber = account.getOriginalValue("AccountNumber") as String
+    var refPolicies = searchForAccountReferences(origAccountNumber)
+    if(!checkedPolicies.containsAll(refPolicies)) {
+      checkedPolicies.addAll(refPolicies)
+      ExistingAccountRefWorksheet.goInWorkspace(account,refPolicies)
+      throw new gw.api.util.DisplayableException(DisplayKey.get("Web.Admin.Account.Number.ChangeWarning", origAccountNumber))
+    }
+  }
+}
+
+function searchForAccountReferences(accountNum:String) : java.util.List<Policy> {
+  return Query.make(entity.Policy).compare("AccountNumber", Equals, accountNum).select().toList()
+}]]></Code>
+  </Page>
+</PCF>

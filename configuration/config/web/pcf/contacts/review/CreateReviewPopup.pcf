@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="!review.isCompleted()"
+    canVisit="true"
+    id="CreateReviewPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Reviews.Review&quot;)">
+    <LocationEntryPoint
+      signature="CreateReviewPopup(reviewType: ReviewType, contact: Contact, claim: Claim)"/>
+    <LocationEntryPoint
+      signature="CreateReviewPopup(reviewType: ReviewType, contact: Contact)"/>
+    <Variable
+      name="reviewType"
+      type="ReviewType"/>
+    <Variable
+      name="contact"
+      type="Contact"/>
+    <Variable
+      initialValue="null"
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="createNewReview()"
+      name="review"
+      type="entity.Review"/>
+    <Variable
+      initialValue="review.Claim == null"
+      name="allowClaimEdit"
+      type="boolean"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="review.updateScores();CurrentLocation.commit()"
+          id="UpdateButton"
+          label="DisplayKey.get(&quot;Button.Activity.Update&quot;)"
+          visible="CurrentLocation.isInEditMode()"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="CancelButton"
+          label="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          shortcut="L"/>
+        <ToolbarDivider
+          hideIfEditable="true"/>
+        <ToolbarButton
+          action="review.complete()"
+          confirmMessage="DisplayKey.get(&quot;Web.Reviews.Complete.Warning&quot;)"
+          hideIfEditable="true"
+          id="ReviewScreen_CompleteButton"
+          label="DisplayKey.get(&quot;Web.Reviews.Complete&quot;)"
+          visible="!review.Completed"/>
+        <ToolbarButton
+          action="review.delete(); CurrentLocation.cancel();"
+          confirmMessage="DisplayKey.get(&quot;Web.Reviews.Delete.Warning&quot;)"
+          hideIfEditable="true"
+          id="ReviewScreen_DeleteButton"
+          label="DisplayKey.get(&quot;Web.Reviews.Delete&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="ReviewDV(review, allowClaimEdit)"/>
+    </Screen>
+    <Code><![CDATA[
+function createNewReview() : Review {
+        review = gw.api.contact.ReviewUtil.createNewReview(reviewType,contact,claim);
+        review.Claim = claim;
+        return review
+      }
+    ]]></Code>
+  </Popup>
+</PCF>

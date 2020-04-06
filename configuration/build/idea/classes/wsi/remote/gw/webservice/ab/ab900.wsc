@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<webservice-collection xmlns="http://guidewire.com/config/webservicecollection">
+  <resources>
+    <resource>
+      <url>${ab}/ws/gw/webservice/ab/ab900/abcontactapi/ABContactAPI?wsdl</url>
+    </resource>
+    <resource>
+      <url>${ab}/ws/gw/webservice/ab/ab900/abvendorevaluationapi/ABVendorEvaluationAPI?wsdl</url>
+    </resource>
+  </resources>
+  <settings>
+    <configuration-provider>
+      <type-name>wsi.remote.gw.webservice.ab.ABConfigurationProvider</type-name>
+    </configuration-provider>
+  </settings>
+</webservice-collection>

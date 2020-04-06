@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Entity
+  name="UserRoleAssignment">
+  <Columns>
+    <Column
+      beanPath="UserRoleAssignment.Role"
+      name="name"
+      sortOrder="1"/>
+    <Column
+      beanPath="UserRoleAssignment.Active"
+      name="isActive"
+      sortOrder="2"/>
+  </Columns>
+  <DisplayName><![CDATA[var retString : String = name != null ? name.DisplayName : "";
+if (isActive == false) {
+  retString = retString + gw.api.locale.DisplayKey.get("Java.PeopleInvolved.Inactive");
+}
+return retString;]]></DisplayName>
+</Entity>

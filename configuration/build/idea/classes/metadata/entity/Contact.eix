@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Contact">
+  <foreignkey-override
+    importableagainstexistingobject="false"
+    name="PrimaryAddress"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="OverlapTable"/>
+  <implementsInterface
+    iface="gw.api.contact.ContactMinimalTags"
+    impl="gw.api.contact.CCContactMinimalTagsImpl"/>
+  <implementsInterface
+    iface="gw.api.contact.ContactLifecycle"
+    impl="gw.api.contact.CCContactLifecycle"/>
+  <column
+    desc="Identifier for the contact in an external policy system"
+    name="PolicySystemId"
+    nullok="true"
+    type="policysystemid"/>
+  <column
+    default="false"
+    desc="whether the contact link messasge is still pending from ContactManager"
+    name="PendingLinkMessage"
+    nullok="false"
+    type="bit"/>
+  <events>
+    <event
+      description="This contact has been updated by CC in AddressBook"
+      name="ContactUpdatedInAB"/>
+    <event
+      description="This contact has had its tags updated"
+      name="ContactTagsUpdated"/>
+  </events>
+</internalExtension>

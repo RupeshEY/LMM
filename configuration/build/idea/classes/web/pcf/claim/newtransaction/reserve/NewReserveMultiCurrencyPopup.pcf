@@ -1,0 +1,60 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="NewReserveMultiCurrencyPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Financials.ReserveSet.NewReserveMultiCurrencyPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewReserveMultiCurrencyPopup(WizardHelper : gw.api.financials.ReserveWizardHelper, EditWrapper : TransactionEditWrapper)"/>
+    <Variable
+      name="EditWrapper"
+      type="TransactionEditWrapper"/>
+    <Variable
+      initialValue="EditWrapper.Transaction"
+      name="Transaction"
+      type="Transaction"/>
+    <Variable
+      name="WizardHelper"
+      type="gw.api.financials.ReserveWizardHelper"/>
+    <Screen
+      id="NewReserveMultiCurrencyPopupScreen">
+      <Toolbar>
+        <EditButtons
+          cancelLabel="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          cancelVisible="true"
+          editVisible="false"
+          updateLabel="DisplayKey.get(&quot;Button.Save&quot;)"
+          updateVisible="true"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <!-- <Label
+            label="Transaction.getSubType().getDisplayName()?"/> -->
+        </InputColumn>
+      </DetailViewPanel>
+      <DetailViewPanel>
+        <InputColumn>
+          <ListViewInput
+            def="EditableMultiCurrencyReservesLV(WizardHelper,EditWrapper)"
+            editable="true"
+            labelAbove="true"
+            mode="WizardHelper.getReservesUIMode()">
+            <Toolbar/>
+          </ListViewInput>
+        </InputColumn>
+      </DetailViewPanel>
+      <DetailViewPanel>
+        <InputColumn>
+          <Label
+            label="DisplayKey.get(&quot;Web.Financials.ReserveSet.NewReserveMultiCurrencyPopup.ExchangeRate&quot;)"
+            visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode() and Transaction.Currency != Transaction.ReservingCurrency"/>
+          <InputSetRef
+            def="TransactionEditWrapperExchangeRateInputSet(EditWrapper)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

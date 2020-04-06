@@ -1,0 +1,50 @@
+package rules.Validation.ClaimValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV07000 -  Liability can not exceed 100")
+internal class CLV07000Liabilitycannotexceed100 {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.SubrogationSummary != null 
+and claim.SubrogationSummary.SubroAdverseParties.length > 0
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+var totalExpLiability = claim.AdversePartyLiabilityPercent()
+var ruleNumber = actions.ShortRuleName
+
+if (totalExpLiability > 100) {
+  claim.reject(TC_NEWLOSS, 
+               DisplayKey.get("Subrogation.Validation.Claim.LiabExceedsAdOnly", ruleNumber,totalExpLiability), null, null)
+} else {
+  if (claim.FaultRating == TC_1){
+    totalExpLiability = totalExpLiability + claim.Fault
+    if (totalExpLiability > 100) {
+      claim.reject(TC_NEWLOSS, 
+                   DisplayKey.get("Subrogation.Validation.Claim.LiabExceedsAdPlusIns", ruleNumber,totalExpLiability), null, null)
+    }
+  }
+}
+
+for (var subrogation in claim.SubrogationSummary.Subrogations) {
+  if (subrogation.Exposure != null and subrogation.TotalLiabilityPercent > 100) {
+    claim.rejectSubField(
+      subrogation,
+      "OverridesForAllParties",
+      TC_NEWLOSS,
+      DisplayKey.get("Subrogation.Validation.Claim.LiabilityExceeds100ForExposure", subrogation.Exposure),
+      null,
+      null
+    )
+  }
+}
+/*end00rule*/
+
+  }
+}

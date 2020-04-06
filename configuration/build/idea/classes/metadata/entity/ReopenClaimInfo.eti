@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temporary entity that holds transitional internal state information during claim reopen operation."
+  entity="ReopenClaimInfo"
+  supertype="ClaimCloseReopenInfo">
+  <implementsInterface
+    iface="gw.cc.claim.entity.ReopenClaimInfo"
+    impl="com.guidewire.cc.domain.claim.impl.ReopenClaimInfoImpl"/>
+  <fulldescription><![CDATA[
+        Holds transitional internal state information during the reopen claim operation. The system does not store this entity.
+      
+    ]]></fulldescription>
+  <typekey
+    desc="Reason the claim is being reopened."
+    name="reopenReason"
+    nullok="true"
+    typelist="ClaimReopenedReason"/>
+</subtype>

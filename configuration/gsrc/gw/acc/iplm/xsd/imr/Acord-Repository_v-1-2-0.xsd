@@ -1,0 +1,283 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+
+This is the ACORD Document Repository Interface Message specification's 
+
+**** version 1.2.0 Schema **** 
+
+Generated: February 17, 2006                                                        
+
+COPYRIGHT NOTICE:
+(c) 2001-2006 ACORD.  All Rights Reserved.
+
+   Use of this Schema and its documentation are covered by the terms and
+   conditions file that was included in the distribution file in which you
+   found this Schema.
+
+   http://www.acord.org
+
+-->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0" xmlns:rlc="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/2005-2" targetNamespace="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:include schemaLocation="AcordMsgSvc_base_v-1-4-0.xsd"/>
+	<xs:import namespace="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/2005-2" schemaLocation="Jv-Ins-Reinsurance-2005-2-DRI-Slice.xsd"/>
+	<xs:complexType name="AccessControlListType">
+		<xs:sequence>
+			<xs:element ref="AccessParty" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="AccessPartyType">
+		<xs:sequence>
+			<xs:element ref="ListActionCd"/>
+			<xs:element ref="AccessRightCd"/>
+			<xs:group ref="TRANSPARTY_Group"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="AccessRightCdType">
+		<xs:restriction base="EnumType">
+			<xs:enumeration value="change"/>
+			<xs:enumeration value="read"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AcknowledgementLevelIndicatorType">
+		<xs:restriction base="EnumType">
+			<xs:enumeration value="application_validation"/>
+			<xs:enumeration value="translation_validation"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="AcknowledgementStatusCdType">
+		<xs:restriction base="EnumType">
+			<xs:enumeration value="acknowledged"/>
+			<xs:enumeration value="processed_with_data_modification"/>
+			<xs:enumeration value="rejected"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ApplicationXRefType">
+		<xs:sequence>
+			<xs:choice>
+				<xs:sequence>
+					<xs:element ref="MsgId"/>
+					<xs:element ref="MsgReference" minOccurs="0"/>
+				</xs:sequence>
+				<xs:element ref="MsgReference"/>
+			</xs:choice>
+			<xs:element ref="MsgTypeCd"/>
+			<xs:element ref="CreationDtTime" minOccurs="0"/>
+			<xs:element ref="OperationTotalNbr"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DocumentType">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element ref="DocumentId"/>
+				<xs:element ref="DocumentReference"/>
+			</xs:choice>
+			<xs:element ref="DocumentVersion" minOccurs="0"/>
+			<xs:element ref="DocumentVersionDtTime" minOccurs="0"/>
+			<xs:element ref="DocumentURL" minOccurs="0"/>
+			<xs:element ref="InheritIndicator" minOccurs="0"/>
+			<xs:element ref="FileId" minOccurs="0"/>
+			<xs:element ref="FileFormatCd" minOccurs="0"/>
+			<xs:element ref="FileSize" minOccurs="0"/>
+			<xs:element ref="DocumentTypeCd" minOccurs="0"/>
+			<xs:element ref="Description" minOccurs="0"/>
+			<xs:element ref="ParentFolder" minOccurs="0"/>
+			<xs:element ref="ParentDocument" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DocumentItemType">
+		<xs:sequence>
+			<xs:choice minOccurs="0">
+				<xs:element ref="Folder"/>
+				<xs:element ref="Document"/>
+			</xs:choice>
+			<xs:element ref="Owner" minOccurs="0"/>
+			<xs:element ref="Originator" minOccurs="0"/>
+			<xs:element ref="AccessControlList" minOccurs="0"/>
+			<xs:element ref="NotificationList" minOccurs="0"/>
+			<xs:element ref="rlc:ReferredObjects" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="DocumentListType">
+		<xs:sequence>
+			<xs:element ref="HierarchySortIndicator"/>
+			<xs:element ref="Operator" minOccurs="0"/>
+			<xs:element ref="RepositoryService" minOccurs="0"/>
+			<xs:element ref="DocumentItem" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="DocumentRelationTypeCdType">
+		<xs:restriction base="EnumType"/>
+	</xs:simpleType>
+	<xs:simpleType name="DocumentTypeListType">
+		<xs:list>
+			<xs:simpleType>
+				<xs:restriction base="EnumType"/>
+			</xs:simpleType>
+		</xs:list>
+	</xs:simpleType>
+	<xs:simpleType name="ErrorIndicatorType">
+		<xs:restriction base="EnumType"/>
+	</xs:simpleType>
+	<xs:complexType name="FolderType">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element ref="FolderId"/>
+				<xs:element ref="FolderReference"/>
+			</xs:choice>
+			<xs:element ref="FolderURL" minOccurs="0"/>
+			<xs:element ref="InheritIndicator" minOccurs="0"/>
+			<xs:element ref="Description" minOccurs="0"/>
+			<xs:element ref="ParentFolder" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="ListActionCdType">
+		<xs:restriction base="EnumType">
+			<xs:enumeration value="add"/>
+			<xs:enumeration value="remove"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:simpleType name="MsgTypeListType">
+		<xs:list>
+			<xs:simpleType>
+				<xs:restriction base="EnumType"/>
+			</xs:simpleType>
+		</xs:list>
+	</xs:simpleType>
+	<xs:complexType name="NotificationListType">
+		<xs:sequence>
+			<xs:element ref="NotificationText" minOccurs="0"/>
+			<xs:element ref="NotificationParty" maxOccurs="unbounded"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="NotificationPartyType">
+		<xs:sequence>
+			<xs:element ref="ListActionCd"/>
+			<xs:group ref="TRANSPARTY_Group"/>
+			<xs:element ref="PartyContact" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ParentDocumentType">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element ref="DocumentId"/>
+				<xs:element ref="DocumentReference"/>
+			</xs:choice>
+			<xs:element ref="DocumentVersion" minOccurs="0"/>
+			<xs:element ref="DocumentURL" minOccurs="0"/>
+			<xs:element ref="DocumentRelationTypeCd" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="ParentFolderType">
+		<xs:sequence>
+			<xs:choice>
+				<xs:element ref="FolderId"/>
+				<xs:element ref="FolderReference"/>
+			</xs:choice>
+			<xs:element ref="FolderURL" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RepositoryOperationRqType">
+		<xs:sequence>
+			<xs:element ref="MsgId"/>
+			<xs:element ref="CreationDtTime"/>
+			<xs:element ref="RepositoryOperationTypeCd"/>
+			<xs:element ref="Sender"/>
+			<xs:element ref="Receiver"/>
+			<xs:element ref="Application"/>
+			<xs:element ref="ApplicationXRef" minOccurs="0"/>
+			<xs:element ref="DocumentList" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="SearchCriteria" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="RepositoryOperationRsType">
+		<xs:sequence>
+			<xs:element ref="MsgId"/>
+			<xs:element ref="CreationDtTime"/>
+			<xs:element ref="RepositoryOperationTypeCd"/>
+			<xs:element ref="ResponseInfo"/>
+			<xs:element ref="Sender"/>
+			<xs:element ref="Receiver"/>
+			<xs:element ref="Application"/>
+			<xs:element ref="ApplicationXRef" minOccurs="0"/>
+			<xs:element ref="DocumentList" minOccurs="0" maxOccurs="unbounded"/>
+			<xs:element ref="SearchCriteria" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:simpleType name="RepositoryOperationTypeCdType">
+		<xs:restriction base="EnumType">
+			<xs:enumeration value="RepositoryChangeAttributes"/>
+			<xs:enumeration value="RepositoryCreateFolder"/>
+			<xs:enumeration value="RepositoryDownload"/>
+			<xs:enumeration value="RepositoryDownloadFolder"/>
+			<xs:enumeration value="RepositoryNotify"/>
+			<xs:enumeration value="RepositorySearch"/>
+			<xs:enumeration value="RepositoryUpload"/>
+			<xs:enumeration value="RepositoryView"/>
+			<xs:enumeration value="RepositoryViewFolder"/>
+		</xs:restriction>
+	</xs:simpleType>
+	<xs:complexType name="ResponseInfoType">
+		<xs:sequence>
+			<xs:element ref="MsgId"/>
+			<xs:element ref="AcknowledgementLevelIndicator"/>
+			<xs:element ref="AcknowledgementStatusCd"/>
+			<xs:element ref="ErrorIndicator" minOccurs="0"/>
+			<xs:element ref="ResponseDescription" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:complexType name="SearchCriteriaType">
+		<xs:sequence>
+			<xs:element ref="SearchAllIndicator" minOccurs="0"/>
+			<xs:element ref="SearchLimit"/>
+			<xs:element ref="SearchStart"/>
+			<xs:element ref="SearchString" minOccurs="0"/>
+			<xs:element ref="SearchStartDtTime" minOccurs="0"/>
+			<xs:element ref="SearchEndDtTime" minOccurs="0"/>
+			<xs:element ref="DocumentTypeList" minOccurs="0"/>
+		</xs:sequence>
+	</xs:complexType>
+	<xs:element name="AccessControlList" type="AccessControlListType"/>
+	<xs:element name="AccessParty" type="AccessPartyType"/>
+	<xs:element name="AccessRightCd" type="AccessRightCdType"/>
+	<xs:element name="AcknowledgementLevelIndicator" type="AcknowledgementLevelIndicatorType"/>
+	<xs:element name="AcknowledgementStatusCd" type="AcknowledgementStatusCdType"/>
+	<xs:element name="ApplicationXRef" type="ApplicationXRefType"/>
+	<xs:element name="CreationDtTime" type="FlexibleDateTime2_Type"/>
+	<xs:element name="Document" type="DocumentType"/>
+	<xs:element name="DocumentItem" type="DocumentItemType"/>
+	<xs:element name="DocumentList" type="DocumentListType"/>
+	<xs:element name="DocumentRelationTypeCd" type="DocumentRelationTypeCdType"/>
+	<xs:element name="DocumentTypeList" type="DocumentTypeListType"/>
+	<xs:element name="DocumentURL" type="xs:anyURI"/>
+	<xs:element name="ErrorIndicator" type="ErrorIndicatorType"/>
+	<xs:element name="Folder" type="FolderType"/>
+	<xs:element name="FolderId" type="UUIdType"/>
+	<xs:element name="FolderReference" type="xs:string"/>
+	<xs:element name="FolderURL" type="xs:anyURI"/>
+	<xs:element name="HierarchySortIndicator" type="xs:boolean"/>
+	<xs:element name="InheritIndicator" type="xs:boolean"/>
+	<xs:element name="ListActionCd" type="ListActionCdType"/>
+	<xs:element name="MsgTypeList" type="MsgTypeListType"/>
+	<xs:element name="NotificationList" type="NotificationListType"/>
+	<xs:element name="NotificationParty" type="NotificationPartyType"/>
+	<xs:element name="NotificationText" type="xs:string"/>
+	<xs:element name="OperationTotalNbr" type="xs:unsignedInt"/>
+	<xs:element name="Originator" type="GENERALPARTY_Type"/>
+	<xs:element name="ParentDocument" type="ParentDocumentType"/>
+	<xs:element name="ParentFolder" type="ParentFolderType"/>
+	<xs:element name="Receiver" type="GENERALPARTY_Type"/>
+	<xs:element name="RepositoryOperationRq" type="RepositoryOperationRqType"/>
+	<xs:element name="RepositoryOperationRs" type="RepositoryOperationRsType"/>
+	<xs:element name="RepositoryOperationTypeCd" type="RepositoryOperationTypeCdType"/>
+	<xs:element name="ResponseDescription" type="xs:string"/>
+	<xs:element name="ResponseInfo" type="ResponseInfoType"/>
+	<xs:element name="SearchAllIndicator" type="xs:boolean"/>
+	<xs:element name="SearchCriteria" type="SearchCriteriaType"/>
+	<xs:element name="SearchEndDtTime" type="xs:dateTime"/>
+	<xs:element name="SearchLimit" type="xs:unsignedInt"/>
+	<xs:element name="SearchStart" type="xs:unsignedInt"/>
+	<xs:element name="SearchStartDtTime" type="xs:dateTime"/>
+	<xs:element name="SearchString" type="xs:string"/>
+	<xs:element name="Sender" type="GENERALPARTY_Type"/>
+	<xs:element name="TransactionTypeCd" type="EnumType"/>
+</xs:schema>

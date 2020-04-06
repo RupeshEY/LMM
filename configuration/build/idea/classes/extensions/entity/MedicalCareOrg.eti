@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents a medical care organization (hospital, clinic, or similar) as a CompanyVendor."
+  displayName="Medical Care Organization"
+  entity="MedicalCareOrg"
+  supertype="CompanyVendor">
+  <fulldescription><![CDATA[
+Represents a medical care organization (hospital, clinic, or similar) as a CompanyVendor.
+A MedicalCareOrg may have a specific medical specialty.
+    ]]></fulldescription>
+  <typekey
+    desc="Medical specialty"
+    name="MedicalOrgSpecialty"
+    nullok="true"
+    typelist="SpecialtyType"/>
+</subtype>

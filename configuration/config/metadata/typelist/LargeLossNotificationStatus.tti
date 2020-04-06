@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The status of large loss notification messages."
+  final="false"
+  name="LargeLossNotificationStatus"
+  tableName="LargeLossNotificationStat">
+  <typecode
+    code="None"
+    desc="No notification sent"
+    name="None"
+    priority="1"/>
+  <typecode
+    code="InQueue"
+    desc="Notification message created and waiting to be sent"
+    name="InQueue"
+    priority="2"/>
+  <typecode
+    code="Sent"
+    desc="Notification successfully sent"
+    name="Sent"
+    priority="3"/>
+</typelist>

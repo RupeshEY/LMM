@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Limits for metrics related to a claim"
+  entity="ClaimMetricLimit"
+  exportable="true"
+  final="false"
+  ignoreForEvents="true"
+  loadable="false"
+  table="claimmetriclimit"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.metric.entity.ClaimMetricLimit"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.metric.impl.ClaimMetricLimitInternal"/>
+  <implementsEntity
+    name="CopyOnWriteMetricLimitDelegate"/>
+  <implementsInterface
+    iface="gw.api.metric.MetricLimit"
+    impl="gw.api.claim.metric.ClaimMetricLimitMethodsImpl"/>
+  <foreignkey
+    columnName="PolicyTypeMetricLimitsID"
+    desc="Back pointer to policy type metric limits object that owns this limit."
+    exportable="false"
+    fkentity="PolicyTypeMetricLimits"
+    name="PolicyTypeMetricLimits"
+    nullok="false"/>
+  <typekey
+    desc="Type of claim metric to which this limit applies."
+    name="ClaimMetricType"
+    nullok="false"
+    typelist="ClaimMetric"/>
+  <typekey
+    desc="Claim tier to which this limit applies, or null if this is a default limit"
+    name="ClaimTier"
+    nullok="true"
+    typelist="ClaimTier"/>
+  <typekey
+    desc="Currency for this limit, for non money based limits this is always the default currency."
+    name="Currency"
+    nullok="false"
+    typefilter="metriclimit"
+    typelist="Currency"/>
+  <typekey
+    desc="Category of this claim metric limit, corresponds to category of metric."
+    name="ClaimMetricCategory"
+    nullok="false"
+    typelist="ClaimMetricCategory"/>
+  <typekey
+    desc="Units for this type of metric."
+    name="MetricUnit"
+    nullok="false"
+    typelist="MetricUnit"/>
+  <column
+    default="true"
+    desc="Boolean field to indicate the direction of comparison for value validation "
+    name="AscendingLimitOrder"
+    nullok="false"
+    type="bit"/>
+  <index
+    desc="Index to ensure there is only one limit per combination of policy type/metric type/claim tier/currency"
+    name="claimmetriclimitu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="PolicyTypeMetricLimitsID"/>
+    <indexcol
+      keyposition="2"
+      name="ClaimMetricType"/>
+    <indexcol
+      keyposition="3"
+      name="ClaimTier"/>
+    <indexcol
+      keyposition="4"
+      name="Currency"/>
+    <indexcol
+      keyposition="5"
+      name="Retired"/>
+  </index>
+</entity>

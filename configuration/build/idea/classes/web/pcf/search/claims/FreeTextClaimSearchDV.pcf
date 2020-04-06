@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- The next area controls the Claim Search -->
+  <DetailViewPanel
+    id="FreeTextClaimSearchDV">
+    <Require
+      name="ClaimSearchCriteria"
+      type="ClaimSearchCriteria"/>
+    <Require
+      name="archiveSearchEnabled"
+      type="boolean"/>
+    <InputHeaderSection/>
+    <InputColumn>
+      <InputSetRef
+        def="FreeTextClaimSearchInputSet(ClaimSearchCriteria)"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="FreeTextClaimSearchFilterInputSet(ClaimSearchCriteria)"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="ClaimSearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  entity="ActivitySubjectSearchCriteria"
+  extendable="true">
+  <implementsInterface
+    iface="gw.cc.activity.entity.ActivitySubjectSearchCriteria"
+    impl="com.guidewire.cc.domain.activity.impl.ActivitySubjectSearchCriteriaImpl"/>
+  <fulldescription><![CDATA[<p>A component of ActivitySearchCriteria, which encapsulates the search criteria for the activity subject line.</p>
+    ]]></fulldescription>
+  <typekey
+    name="SubjectSearchType"
+    nullok="true"
+    typelist="ActivitySubjectSearchType"/>
+  <column
+    name="Subject"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    columnName="PatternID"
+    desc="Activity pattern to match against"
+    fkentity="ActivityPattern"
+    name="Pattern"
+    nullok="true"/>
+</nonPersistentEntity>

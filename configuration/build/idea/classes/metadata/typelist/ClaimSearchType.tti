@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<!-- ****************************************************************************
+    Simple Claim Search Typelists
+  **************************************************************************** -->
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Type of claim searches available"
+  name="ClaimSearchType">
+  <typecode
+    code="active"
+    desc="Claims stored on active database"
+    name="Active Database"
+    priority="1"/>
+  <typecode
+    code="archived"
+    desc="Claims stored in archive"
+    name="Archive"
+    priority="2"/>
+  <typecode
+    code="all"
+    desc="Claims stored in both live and archive"
+    name="All Sources"
+    priority="3"/>
+</typelist>

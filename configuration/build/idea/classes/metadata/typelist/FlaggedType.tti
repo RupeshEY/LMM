@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The type of flagged states a claim can be in"
+  final="true"
+  name="FlaggedType">
+  <typecode
+    code="isflagged"
+    desc="Currently flagged"
+    name="Is flagged"
+    priority="1"/>
+  <typecode
+    code="wasflagged"
+    desc="Previously flagged"
+    name="Was flagged"
+    priority="2"/>
+  <typecode
+    code="neverflagged"
+    desc="Never flagged"
+    name="Never flagged"
+    priority="3"/>
+</typelist>

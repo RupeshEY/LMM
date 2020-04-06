@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="InjuryIncidentDV">
+    <Require
+      name="InjuryIncident"
+      type="InjuryIncident"/>
+    <Variable
+      initialValue="InjuryIncident.Claim"
+      name="Claim"
+      type="Claim"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.InjuryIncidentDV.Injured&quot;)"/>
+      <ClaimContactInput
+        claim="Claim"
+        editable="true"
+        id="Injured_Picker"
+        label="DisplayKey.get(&quot;Web.InjuryIncidentDV.Injured.Picker&quot;)"
+        newContactMenu="ClaimNewPersonOnlyPickerMenuItemSet"
+        required="true"
+        value="InjuryIncident.injured"
+        valueRange="Claim.RelatedPersonArray"
+        valueType="entity.Person"/>
+      <InputSetRef
+        def="InjuryIncidentInputSet(InjuryIncident)"
+        visible="true"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

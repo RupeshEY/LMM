@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="TransactionExchangeRateInputSet"
+    visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode() and transaction.Currency != transaction.ReservingCurrency">
+    <Require
+      name="transaction"
+      type="Transaction"/>
+    <BooleanRadioInput
+      editable="perm.ExchangeRate.edit"
+      falseLabel="DisplayKey.get(&quot;Web.Claim.ExchangeRateInputSet.Automatic&quot;)"
+      id="Transaction_ExchangeRateOverride"
+      label="DisplayKey.get(&quot;Web.Claim.ExchangeRateInputSet.ExchangeRateMode&quot;)"
+      trueLabel="DisplayKey.get(&quot;Web.Claim.ExchangeRateInputSet.Manual&quot;)"
+      value="transaction.OverrideTransToReservingExchangeRate">
+      <PostOnChange/>
+    </BooleanRadioInput>
+    <TextInput
+      editable="transaction.OverrideTransToReservingExchangeRate"
+      format="var rate = transaction.TransToReservingExchangeRate; return &quot;1 &quot; + rate.BaseCurrency.DisplayName + &quot; = #.###### &quot; + rate.PriceCurrency.DisplayName;"
+      formatType="exactNumber"
+      id="Transaction_ExchangeRate"
+      label="DisplayKey.get(&quot;Web.Claim.ExchangeRateInputSet.ExchangeRate&quot;)"
+      numCols="8"
+      value="transaction.TransToReservingExchangeRateRate"
+      valueType="java.math.BigDecimal">
+      <PostOnChange/>
+    </TextInput>
+    <TextInput
+      editable="transaction.OverrideTransToReservingExchangeRate"
+      id="Transaction_RateSet_Description"
+      label="DisplayKey.get(&quot;Web.Claim.ExchangeRateInputSet.RateSetDescription&quot;)"
+      value="transaction.TransToReservingExchangeRate.ExchangeRateSet.Description"/>
+    <DateInput
+      id="Transaction_RateSet_Date"
+      label="DisplayKey.get(&quot;Web.Claim.ExchangeRateInputSet.ExchangeRateDate&quot;)"
+      value="transaction.TransToReservingExchangeRate.ExchangeRateSet.EffectiveDate"/>
+  </InputSet>
+</PCF>

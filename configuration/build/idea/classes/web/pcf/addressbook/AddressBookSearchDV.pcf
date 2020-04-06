@@ -1,0 +1,241 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="AddressBookSearchDV">
+    <Require
+      name="searchCriteria"
+      type="ContactSearchCriteria"/>
+    <Require
+      name="proximitySearchPageHelper"
+      type="gw.api.contact.CCProximitySearchPageHelper"/>
+    <Require
+      name="requiredContactType"
+      type="Type"/>
+    <Require
+      name="externalSearchEnabled"
+      type="boolean"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="performVendorSearch"
+      type="boolean"/>
+    <Variable
+      initialValue="getDistinctContactSubtypes()"
+      name="distinctContactSubtypes"
+      type="List&lt;typekey.Contact&gt;"/>
+    <InputColumn>
+      <TypeKeyInput
+        editable="true"
+        id="SearchType"
+        label="DisplayKey.get(&quot;Web.AddressBook.Search.SearchType&quot;)"
+        required="true"
+        value="searchCriteria.SearchType"
+        valueType="typekey.ContactSearchType"
+        visible="externalSearchEnabled and ContactSearchType.getTypeKeys(false).Count &gt; 1">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <RangeInput
+        editable="true"
+        filter="not(VALUE == TC_USERCONTACT)"
+        id="ContactSubtype"
+        label="DisplayKey.get(&quot;Web.AddressBook.Search.Type&quot;)"
+        required="true"
+        value="searchCriteria.ContactSubtype"
+        valueRange="searchCriteria.getAvailableSubtypes(requiredContactType)"
+        valueType="typekey.Contact">
+        <PostOnChange
+          onChange="postOnChangeAction()"/>
+      </RangeInput>
+      <InputSetRef
+        def="NameInputSet(searchCriteria)"
+        mode="searchCriteria.isSearchFor(entity.Person) ? &quot;Person&quot; : &quot;Contact&quot;"/>
+      <InputSet
+        visible="searchCriteria.isSearchFor(entity.Company) or (searchCriteria.isSearchFor(entity.Person) and !searchCriteria.isSearchFor(entity.UserContact) and !searchCriteria.isSearchFor(entity.Adjudicator))">
+        <TextInput
+          editable="true"
+          id="TaxID"
+          label="DisplayKey.get(&quot;Web.AddressBook.Search.TaxID&quot;)"
+          value="searchCriteria.TaxID"/>
+      </InputSet>
+      <InputSet
+        visible="searchCriteria.isSearchFor(entity.Attorney)">
+        <TypeKeyInput
+          editable="true"
+          id="AttorneySpecialty"
+          label="DisplayKey.get(&quot;Web.AddressBook.Search.AttorneySpecialty&quot;)"
+          value="searchCriteria.AttorneySpecialty"
+          valueType="typekey.LegalSpecialty"/>
+      </InputSet>
+      <InputSet
+        visible="searchCriteria.isSearchFor(entity.Doctor)">
+        <TypeKeyInput
+          editable="true"
+          id="DoctorSpecialty"
+          label="DisplayKey.get(&quot;Web.AddressBook.Search.DoctorSpecialty&quot;)"
+          value="searchCriteria.DoctorSpecialty"
+          valueType="typekey.SpecialtyType"/>
+      </InputSet>
+      <InputSet
+        visible="searchCriteria.isSearchFor(entity.Adjudicator)">
+        <TypeKeyInput
+          editable="true"
+          id="AdjudicativeDomain"
+          label="DisplayKey.get(&quot;Web.AddressBook.Search.AdjudicativeDomain&quot;)"
+          value="searchCriteria.AdjudicativeDomain"
+          valueType="typekey.AdjudicativeDomain"/>
+      </InputSet>
+      <InputSet
+        visible="searchCriteria.isSearchFor(entity.MedicalCareOrg)">
+        <TypeKeyInput
+          editable="true"
+          id="MedicalSpecialty"
+          label="DisplayKey.get(&quot;Web.AddressBook.Search.MedicalSpecialty&quot;)"
+          value="searchCriteria.MedicalOrgSpecialty"
+          valueType="typekey.SpecialtyType"/>
+      </InputSet>
+      <InputSet
+        visible="searchCriteria.isSearchFor(entity.LawFirm)">
+        <TypeKeyInput
+          editable="true"
+          id="LawFirmSpecialty"
+          label="DisplayKey.get(&quot;Web.AddressBook.Search.LawFirmSpecialty&quot;)"
+          value="searchCriteria.LawFirmSpecialty"
+          valueType="typekey.LegalSpecialty"/>
+      </InputSet>
+      <InputSet
+        visible="searchCriteria.isSearchFor(entity.PersonVendor) or searchCriteria.isSearchFor(entity.CompanyVendor)">
+        <BooleanRadioInput
+          editable="true"
+          id="PreferredVendors"
+          label="DisplayKey.get(&quot;Web.AddressBook.Search.PreferredVendors&quot;)"
+          value="searchCriteria.PreferredVendors"/>
+        <RangeInput
+          editable="true"
+          id="MinimumScore"
+          label="DisplayKey.get(&quot;Web.Reviews.MinimumScore&quot;)"
+          value="searchCriteria.Score"
+          valueRange="scoreRange()"
+          valueType="java.lang.Integer"
+          visible="distinctContactSubtypes.contains(searchCriteria.ContactSubtype)"/>
+      </InputSet>
+      <CheckBoxInput
+        editable="true"
+        id="IncludePendingContacts"
+        labelAbove="true"
+        value="searchCriteria.IncludePendingContacts"
+        valueLabel="DisplayKey.get(&quot;Web.AddressBook.Search.IncludePendingCreates&quot;)"/>
+      <CheckBoxInput
+        available="not performVendorSearch"
+        editable="true"
+        id="IncludeSpecialistService"
+        labelAbove="true"
+        value="searchCriteria.VendorContactTag"
+        valueLabel="DisplayKey.get(&quot;Web.AddressBook.Search.VendorServicesCheckbox&quot;)">
+        <PostOnChange
+          target="SpecialistServicesInputSet"/>
+      </CheckBoxInput>
+      <InputSet
+        id="SpecialistServicesInputSet">
+        <ListViewInput
+          boldLabel="true"
+          label="DisplayKey.get(&quot;Web.AddressBook.Search.ServicesLVLabel&quot;)"
+          labelAbove="true"
+          visible="searchCriteria.VendorContactTag">
+          <Toolbar>
+            <AddButton
+              conversionExpression="PickedValue.each( \ elt -&gt; searchCriteria.addToSpecialistServiceCodes(new SpecialistServiceSearchCriteria() { : SpecialistServiceCode = elt.Code })); return PickedValue"
+              id="AddSpecialistService"
+              iterator="SpecialistServicesLV"
+              label="DisplayKey.get(&quot;Button.Add&quot;)"
+              pickLocation="SelectServicesPopup.push(SpecialistServices)"/>
+            <CheckedValuesToolbarButton
+              checkedRowAction="searchCriteria.removeFromSpecialistServiceCodes(searchCriteria.SpecialistServiceCodes.firstWhere( \ elt -&gt; elt.SpecialistServiceCode == CheckedValue.Code )); gw.api.web.PebblesUtil.invalidateIterators(CurrentLocation, SpecialistService)"
+              id="RemoveSpecialService"
+              iterator="InstructionServicesIterator"
+              label="DisplayKey.get(&quot;Button.Remove&quot;)"/>
+          </Toolbar>
+          <ListViewPanel
+            id="SpecialistServicesLV">
+            <RowIterator
+              canPick="false"
+              checkBoxVisible="true"
+              editable="false"
+              elementName="service"
+              hasCheckBoxes="true"
+              id="InstructionServicesIterator"
+              value="SpecialistServices"
+              valueType="java.util.List&lt;entity.SpecialistService&gt;">
+              <Row>
+                <TextCell
+                  id="ServiceType0"
+                  label="DisplayKey.get(&quot;Web.ServiceRequest.ServiceToPerform.Category&quot;)"
+                  required="true"
+                  sortBy="service.getEditHelper(0).Value.Name"
+                  value="service.getEditHelper(0).Value"
+                  valueType="entity.SpecialistService"/>
+                <TextCell
+                  id="ServiceType1"
+                  label="DisplayKey.get(&quot;Web.ServiceRequest.ServiceToPerform.SubCategory&quot;)"
+                  sortBy="service.getEditHelper(1).Value.Name"
+                  value="service.getEditHelper(1).Value"
+                  valueType="entity.SpecialistService"/>
+                <TextCell
+                  id="ServiceType2"
+                  label="DisplayKey.get(&quot;Web.ServiceRequest.ServiceToPerform.ServiceType&quot;)"
+                  sortBy="service.getEditHelper(2).Value.Name"
+                  value="service.getEditHelper(2).Value"
+                  valueType="entity.SpecialistService"/>
+              </Row>
+            </RowIterator>
+          </ListViewPanel>
+        </ListViewInput>
+      </InputSet>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="CCAddressBookSearchLocationInputSet(searchCriteria)"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="CCAddressBookSearchProximityAddressInputSet(searchCriteria, proximitySearchPageHelper, claim)"
+        visible="proximitySearchPageHelper.useGeocodeUIinAddressBook()"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+    <Code><![CDATA[uses gw.api.path.Paths
+
+uses gw.api.database.QuerySelectColumns
+
+uses gw.api.database.Query
+
+function scoreRange() : java.lang.Integer[] {
+        return new java.lang.Integer[]{ 0, 10, 20, 30, 40, 50, 60, 70, 80, 90 };
+      }
+
+function getDistinctContactSubtypes() : java.util.List<typekey.Contact> {
+  var q = Query.make(entity.ReviewType).withDistinct(true).select({QuerySelectColumns.path(Paths.make(ReviewType#ContactSubtype))}).transformQueryRow(\row -> row.getColumn(0) as typekey.Contact)
+  return q.toList();
+}
+
+property get SpecialistServices() : java.util.List<SpecialistService> {
+  return searchCriteria.SpecialistServiceCodes.map( \ scw -> SpecialistService.getForCode(scw.SpecialistServiceCode) ).toList()
+}
+
+        function postOnChangeAction() {
+          if (not performVendorSearch) {
+            if ((searchCriteria.isSearchFor(PersonVendor) or searchCriteria.isSearchFor(CompanyVendor))) {
+              searchCriteria.VendorContactTag = true
+            } else {
+              if (not searchCriteria.ContactIntrinsicType.isAssignableFrom(PersonVendor) and not searchCriteria.ContactIntrinsicType.isAssignableFrom(CompanyVendor)) {
+                searchCriteria.VendorContactTag = false
+              }
+            }
+          }
+        }]]></Code>
+  </DetailViewPanel>
+</PCF>

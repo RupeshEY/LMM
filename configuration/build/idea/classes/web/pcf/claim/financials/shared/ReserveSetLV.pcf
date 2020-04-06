@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ReserveSetLV">
+    <Require
+      name="ReserveList"
+      type="Reserve[]"/>
+    <Variable
+      initialValue="gw.api.financials.TransactionWizardHelper.haveSingleTransactionCurrency(ReserveList.toList())"
+      name="haveSingleTransactionCurrency"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="gw.api.financials.TransactionWizardHelper.haveSingleReservingCurrency(ReserveList.toList())"
+      name="haveSingleReservingCurrency"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <RowIterator
+      editable="false"
+      elementName="Reserve"
+      pageSize="6"
+      value="ReserveList"
+      valueType="entity.Reserve[]">
+      <Row>
+        <TextCell
+          footerLabel="(haveSingleTransactionCurrency or haveSingleReservingCurrency) ? DisplayKey.get(&quot;LV.Financials.Total&quot;) : null"
+          id="Exposure"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.Reserves.Exposure&quot;)"
+          sortOrder="1"
+          value="Reserve.Exposure.FullDescription == null ? DisplayKey.get(&quot;Web.Financials.Exposure.ClaimLevel&quot;) : Reserve.Exposure.FullDescription"/>
+        <TypeKeyCell
+          id="Coverage"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.Reserves.Coverage&quot;)"
+          sortOrder="2"
+          value="Reserve.Exposure.PrimaryCoverage"
+          valueType="typekey.CoverageType"/>
+        <TypeKeyCell
+          id="CostType"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.Reserves.CostType&quot;)"
+          sortOrder="3"
+          value="Reserve.CostType"
+          valueType="typekey.CostType"/>
+        <TypeKeyCell
+          id="CostCategories"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.Reserves.CostCategories&quot;)"
+          value="Reserve.CostCategory"
+          valueType="typekey.CostCategory"/>
+        <TypeKeyCell
+          id="ReservingCurrency"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.Reserves.ReservingCurrency&quot;)"
+          value="Reserve.ReservingCurrency"
+          valueType="typekey.Currency"
+          visible="gw.util.CCConfigUtil.AllowExplicitReservingCurrency"/>
+        <CurrencyCell
+          formatType="currency"
+          id="OpenReserves"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.Reserves.OpenReserves&quot;)"
+          value="gw.api.financials.FinancialsCalculations.getOpenReserves().withReserveLine(Reserve.ReserveLine).ReservingAmount"/>
+        <CurrencyCell
+          action="ClaimFinancialsTransactionsDetail.goInMain(Reserve.Claim, Reserve)"
+          footerSumValue="gw.api.financials.TransactionWizardHelper.getAmountForSumComputation(Reserve, haveSingleReservingCurrency, haveSingleTransactionCurrency)"
+          formatType="currency"
+          id="Amount"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.Reserves.Amount&quot;)"
+          value="Reserve.TransactionAmountReservingAmountPair"
+          valueType="gw.api.financials.IPairedMoney"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

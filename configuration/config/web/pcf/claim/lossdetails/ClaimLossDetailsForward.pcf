@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- Forward used after saving claim loss details. If the user changed the security of the claim they may no longer
+    be able to see it after the commit. This forward will take them to the loss details again if they can still see
+    the claim, otherwise it backs off to the special "cannot view claim" page. Note that ForwardCondition automatically
+    checks if the user has permission to visit its destination, and the condition is skipped if the user doesn't have
+    permission -->
+  <Forward
+    id="ClaimLossDetailsForward">
+    <LocationEntryPoint
+      signature="ClaimLossDetailsForward(Claim : Claim)"/>
+    <LocationEntryPoint
+      signature="ClaimLossDetailsForward(Claim : Claim,  fromCompensationActivity: boolean)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="false"
+      name="fromCompensationActivity"
+      type="boolean"/>
+    <ForwardCondition
+      action="ClaimLossDetails.go(Claim, fromCompensationActivity)"
+      condition="fromCompensationActivity"/>
+    <ForwardCondition
+      action="ClaimLossDetails.go(Claim)"/>
+    <ForwardCondition
+      action="CannotViewClaim.go()"/>
+  </Forward>
+</PCF>

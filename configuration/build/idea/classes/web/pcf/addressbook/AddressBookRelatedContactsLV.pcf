@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ListViewPanel
+    desc="List of Related Contacts"
+    id="AddressBookRelatedContactsLV">
+    <ExposeIterator
+      flags="relationship"
+      valueType="entity.ContactContact"
+      widget="AddressBookRelatedContactsLV"/>
+    <Require
+      name="primaryContact"
+      type="Contact"/>
+    <Require
+      name="externalContactSource"
+      type="gw.api.contact.ExternalContactSource"/>
+    <Require
+      name="allowEditContact"
+      type="boolean"/>
+    <RowIterator
+      editable="true"
+      elementName="contactContact"
+      hideCheckBoxesIfReadOnly="true"
+      pageSize="10"
+      toAdd="primaryContact.addContactContact(contactContact)"
+      toRemove="primaryContact.removeContactContact(contactContact)"
+      value="primaryContact.AllContactContacts"
+      valueType="entity.ContactContact[]">
+      <ToolbarFlag
+        name="relationship"/>
+      <Row>
+        <AddressBookContactCell
+          allowEditContact="allowEditContact"
+          editable="true"
+          forceContactSubtype="new util.lvwrapper.ContactContactLVWrapper(contactContact, primaryContact).OtherContactType"
+          id="Contact"
+          label="DisplayKey.get(&quot;Web.RelatedContactsLV.Contact&quot;)"
+          parentContact="primaryContact"
+          printWidth="0.6"
+          required="true"
+          setNoneSelected="new util.lvwrapper.ContactContactLVWrapper(contactContact, primaryContact).setNoneSelected()"
+          sortBy="contactContact.getOtherContact(primaryContact).PrimarySortValue,contactContact.getOtherContact(primaryContact).SecondarySortValue,contactContact.getOtherContact(primaryContact).TertiarySortValue,contactContact.getOtherContact(primaryContact).QuaternarySortValue"
+          sortOrder="2"
+          value="new util.lvwrapper.ContactContactLVWrapper(contactContact, primaryContact).OtherContact">
+          <PostOnChange/>
+        </AddressBookContactCell>
+        <RangeCell
+          editable="true"
+          id="Rel"
+          label="DisplayKey.get(&quot;Web.RelatedContactsLV.Rel&quot;)"
+          printWidth="0.4"
+          required="true"
+          sortOrder="1"
+          value="new util.lvwrapper.ContactContactLVWrapper(contactContact, primaryContact).BidiRel"
+          valueRange="primaryContact.getPossibleBidiRelsToContact(contactContact.getOtherContact(primaryContact))"
+          valueType="typekey.ContactBidiRel">
+          <PostOnChange/>
+        </RangeCell>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="An annual or lifetime aggregate limit on a policy or coverage."
+  entity="AggregateLimitRpt"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="agglimitrpt"
+  type="editable">
+  <implementsInterface
+    iface="gw.cc.aggregatelimit.entity.AggregateLimitRpt"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.AggregateLimitRptImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.aggregatelimit.impl.AggregateLimitRptInternal"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.AggregateLimitRptImpl"/>
+  <fulldescription><![CDATA[Represents denormalized aggregate limit used calculations (i.e., the amount of the limit that has been used to date) for a
+    PolicyPeriod and, optionally, a coverageline.
+  ]]></fulldescription>
+  <implementsEntity
+    name="AggregateLimitRptDelegate"/>
+  <index
+    desc="Index to assure the uniqueness of one AggregateLimitRpt for each unique combination of PolicyPeriod, CoverageLine, LimitType and ValueType"
+    name="agglimitrptu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="PolicyPeriodID"/>
+    <indexcol
+      keyposition="2"
+      name="CoverageLineID"/>
+    <indexcol
+      keyposition="3"
+      name="LimitType"/>
+    <indexcol
+      keyposition="4"
+      name="ValueType"/>
+    <indexcol
+      keyposition="5"
+      name="AggLimitCalcCriteria"/>
+  </index>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.aggregatelimit.dbchecks.AggregateLimitRptDBCheckBuilder"/>
+</entity>

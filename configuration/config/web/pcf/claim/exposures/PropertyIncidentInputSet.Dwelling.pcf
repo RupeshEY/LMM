@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="PropertyIncidentInputSet"
+    mode="Dwelling">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <RangeInput
+      editable="true"
+      hideChildrenIfReadOnly="false"
+      id="Dwelling_Incident"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.Dwelling.Exposure.DwellingIncident&quot;)"
+      required="true"
+      value="Exposure.DwellingIncident"
+      valueRange="Exposure.Claim.DwellingIncidentsOnly"
+      valueType="entity.DwellingIncident">
+      <MenuItem
+        action="NewDwellingIncidentPopup.push(Exposure.Claim)"
+        hideIfReadOnly="true"
+        id="PropertyDamageDV_NewIncidentMenuItem"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.Dwelling.Exposure.NewIncident&quot;)"/>
+      <MenuItem
+        action="EditDwellingIncidentPopup.push(Exposure.DwellingIncident, true)"
+        hideIfReadOnly="true"
+        id="PropertyDamageDV_EditIncidentMenuItem"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.Dwelling.Exposure.EditIncident&quot;)"/>
+      <MenuItem
+        action="EditDwellingIncidentPopup.push(Exposure.DwellingIncident, false)"
+        hideIfEditable="true"
+        id="PropertyDamageDV_ViewIncidentMenuItem"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.Dwelling.Exposure.ViewIncident&quot;)"/>
+    </RangeInput>
+  </InputSet>
+</PCF>

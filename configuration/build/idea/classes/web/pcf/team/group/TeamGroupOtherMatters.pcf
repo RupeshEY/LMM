@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.User.viewteam"
+    id="TeamGroupOtherMatters"
+    title="DisplayKey.get(&quot;Web.Team.OtherMattersTitle&quot;)">
+    <LocationEntryPoint
+      signature="TeamGroupOtherMatters(Group : Group)"/>
+    <Variable
+      name="Group"
+      type="Group"/>
+    <Variable
+      initialValue="MatterTeamView.finder.findStaleOrFailedAssignmentsByGroup(Group)"
+      name="MatterTeamViewList"
+      recalculateOnRefresh="true"
+      type="gw.api.database.IQueryBeanResult&lt;gw.pl.persistence.core.Bean&gt;"/>
+    <Variable
+      initialValue="&quot;TeamMattersLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <Screen
+      id="TeamGroupOtherMattersScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.Team.OtherMattersTitle&quot;)"/>
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="AssignMattersPopup.push(new gw.api.matter.MatterAssignmentPopup(CheckedValues))"
+          flags="all CanAssignMatter"
+          id="TeamGroupOtherMatters_Assign"
+          iterator="TeamMattersLV.TeamMattersLV"
+          label="DisplayKey.get(&quot;Web.Team.Toolbar.Assign&quot;)"
+          shortcut="G"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="gw.api.print.ListViewPrintOptionPopupAction.printListViewWithOptions(PrintTargetLV)"
+          available="perm.User.printlistviews"
+          id="TeamGroupOtherMatters_Print"
+          label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="TeamMattersLV(MatterTeamViewList)"/>
+    </Screen>
+  </Page>
+</PCF>

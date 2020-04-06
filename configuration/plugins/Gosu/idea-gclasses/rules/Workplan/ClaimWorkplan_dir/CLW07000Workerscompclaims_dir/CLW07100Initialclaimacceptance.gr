@@ -1,0 +1,115 @@
+package rules.Workplan.ClaimWorkplan_dir.CLW07000Workerscompclaims_dir
+
+uses gw.api.locale.DisplayKey
+uses java.util.Date
+
+@gw.rules.RuleName("CLW07100 - Initial claim acceptance")
+internal class CLW07100Initialclaimacceptance {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.LossDate != null
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+//---------------------------------------------
+//--------------  Key Variables   -------------
+//---------------------------------------------
+
+// Note:  Claim.DateRptdToEmployer or Claim.ClaimantRprtdDate or 
+// Claim.ReportedDate are all candidates for NoticeDate
+// Some customers may use the eariler of the three
+var noticeDate = claim.ReportedDate
+
+// Number of business days to escalate before or after the jurisdictional due date
+// Use a negative number to escalate prior to the due date 
+var numDaysToEscPriorToDueDate = -3
+
+// business calendar location to calculate the dates
+var location = claim.LossLocation
+
+//---------------------------------------------
+
+var additionalComment : String = null
+// As the effective & expiration dates are set for Date ranges & are 
+// for the entire day, therefore, time of day can be ignored
+var dayOfLoss = claim.LossDate.trimToMidnight()
+
+// If no denial record is found, the defaults from the Activity Pattern will be utilized.
+var specificDenialPeriod = gw.api.database.Query.make(WCDenialPeriod)
+                                                .compare("JurisdictionState", Equals, claim.JurisdictionState)
+                                                .or(\ restriction -> restriction.compare("EffectiveDate", LessThanOrEquals, dayOfLoss)
+                                                                                .compare("EffectiveDate", Equals, null))
+                                                .or(\ restriction -> restriction.compare("ExpiryDate", GreaterThanOrEquals, dayOfLoss)
+                                                                                .compare("ExpiryDate", Equals, null))
+                                                                                .select().AtMostOneRow
+
+var dueDateBasedOnLoss : Date = null
+var dueDateBasedOnNotice : Date = null
+
+if (specificDenialPeriod.TargetDaysFromLoss != null
+        and claim.LossDate != null 
+        and specificDenialPeriod.TargetIncludeDays != null) {
+  if (specificDenialPeriod.TargetIncludeDays == TC_BUSINESSDAYS) {
+    dueDateBasedOnLoss = claim.LossDate.addBusinessDays(specificDenialPeriod.TargetDaysFromLoss, location)
+  } else { // Calendar Days
+    dueDateBasedOnLoss = claim.LossDate.addDays(specificDenialPeriod.TargetDaysFromLoss)
+  }
+} 
+
+if (specificDenialPeriod.TargetDaysFromNotice != null
+        and noticeDate != null 
+        and specificDenialPeriod.TargetIncludeDays != null) {
+  if (specificDenialPeriod.TargetIncludeDays == TC_BUSINESSDAYS) {
+    dueDateBasedOnNotice = noticeDate.addBusinessDays(specificDenialPeriod.TargetDaysFromNotice, location)
+  } else { // Calendar Days
+    dueDateBasedOnNotice = noticeDate.addDays(specificDenialPeriod.TargetDaysFromNotice)
+  }
+} 
+
+var activity = claim.createActivityFromPattern(
+                  null, ActivityPattern.finder.getActivityPatternByCode("claim_acceptance"))
+
+switch (specificDenialPeriod.DueDateFormula) {
+  case TC_AFTERLOSSDATE :
+    if (dueDateBasedOnLoss != null) {
+      activity.TargetDate = dueDateBasedOnLoss  
+    } else {
+      additionalComment = DisplayKey.get("Rules.Workplan.Compensable.NoJurisdictionalData")
+    }
+    break
+  case TC_AFTERNOTICEDATE :
+    if (dueDateBasedOnNotice != null) {
+      activity.TargetDate = dueDateBasedOnNotice
+    } else {
+      additionalComment = DisplayKey.get("Rules.Workplan.Compensable.NoJurisdictionalData")
+    }
+    break
+  case TC_AFTERLOSSANDNOTICE :
+    if (dueDateBasedOnNotice != null and dueDateBasedOnLoss != null) {
+      if (dueDateBasedOnNotice > dueDateBasedOnLoss) {
+        activity.TargetDate = dueDateBasedOnNotice
+      } else {
+        activity.TargetDate = dueDateBasedOnLoss
+      }
+    } else {
+      additionalComment = DisplayKey.get("Rules.Workplan.Compensable.NoJurisdictionalData")
+    }
+    break
+  default:  
+    additionalComment = DisplayKey.get("Rules.Workplan.Compensable.NoJurisdictionalData")
+}
+
+if (additionalComment != null) {
+  activity.Description = additionalComment + activity.Description
+}
+activity.EscalationDate = activity.TargetDate.addBusinessDays(numDaysToEscPriorToDueDate, location)
+claim.DateCompDcsnDue = activity.TargetDate
+/*end00rule*/
+
+  }
+}

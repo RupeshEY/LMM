@@ -1,0 +1,155 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- ### ============================================================================
+###  ListViewDef instances
+### ============================================================================
+  This file automatically generated from lv_activity.xml -->
+  <ListViewPanel
+    id="DesktopActivitiesLV">
+    <ExposeIterator
+      flags="CanAssignActivity,CanSkipActivity,CanCompleteActivity,CanApproveActivity"
+      valueType="entity.ActivityDesktopView"
+      widget="DesktopActivitiesLV"/>
+    <Require
+      name="ActivityDesktopViewList"
+      type="gw.api.database.IQueryBeanResult&lt;gw.pl.persistence.core.Bean&gt;"/>
+    <Variable
+      initialValue="new gw.api.desktop.DesktopActivityFilterSet()"
+      name="FilterSet"
+      type="gw.api.desktop.DesktopActivityFilterSet"/>
+    <RowIterator
+      editable="false"
+      elementName="ActivityDesktopView"
+      hasCheckBoxes="true"
+      type="entity.ActivityDesktopView"
+      value="ActivityDesktopViewList"
+      valueType="gw.api.database.IQueryBeanResult&lt;gw.pl.persistence.core.Bean&gt;">
+      <ToolbarFlag
+        condition="ActivityDesktopView.canAssign() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(ActivityDesktopView.ID)"
+        name="CanAssignActivity"/>
+      <ToolbarFlag
+        condition="ActivityDesktopView.canSkip() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(ActivityDesktopView.ID)"
+        name="CanSkipActivity"/>
+      <ToolbarFlag
+        condition="ActivityDesktopView.canComplete() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(ActivityDesktopView.ID)"
+        name="CanCompleteActivity"/>
+      <ToolbarFlag
+        condition="ActivityDesktopView.canApprove() &amp;&amp; !gw.api.activity.ActivityUtil.isWorksheetOpen(ActivityDesktopView.ID)"
+        name="CanApproveActivity"/>
+      <ToolbarFilter
+        name="DesktopActivitiesFilter">
+        <ToolbarFilterOption
+          filter="FilterSet.NotReviewOpenDueTodayFilter"
+          label="DisplayKey.get(&quot;Java.ToolBar.Activities.CurrentOpen&quot;)"
+          selectOnEnter="true"/>
+        <ToolbarFilterOption
+          filter="FilterSet.getNotReviewOpenDueInNDaysFilter(7)"
+          label="DisplayKey.get(&quot;Java.ToolBar.Activities.DueNDays&quot;, 7)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.NotReviewOpenFilter"
+          label="DisplayKey.get(&quot;Java.ToolBar.Activities.AllOpen&quot;)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.NotReviewOpenOverdueFilter"
+          label="DisplayKey.get(&quot;Java.ToolBar.Activities.Overdue&quot;)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.NotReviewExternalOpenFilter"
+          label="DisplayKey.get(&quot;Java.ToolBar.Activities.AllOpenExternal&quot;)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.getNotReviewCompletedLastNDaysFilter(30)"
+          label="DisplayKey.get(&quot;Java.ToolBar.Activities.ClosedLastNDays&quot;, 30)"/>
+      </ToolbarFilter>
+      <Row>
+        <BooleanRadioCell
+          enableSort="false"
+          icon="&quot;new.png&quot;"
+          iconLabel="DisplayKey.get(&quot;LV.Activity.Updated.Tip&quot;)"
+          id="Updated"
+          printWidth="0.02"
+          tooltip="DisplayKey.get(&quot;LV.Activity.Updated.Tip&quot;)"
+          value="ActivityDesktopView.UpdatedSinceLastViewed"/>
+        <BooleanRadioCell
+          enableSort="false"
+          icon="&quot;escalated.png&quot;"
+          iconLabel="DisplayKey.get(&quot;LV.Activity.Escalated.Tip&quot;)"
+          id="Escalated"
+          printWidth="0.02"
+          tooltip="DisplayKey.get(&quot;LV.Activity.Escalated.Tip&quot;)"
+          value="ActivityDesktopView.Escalated"/>
+        <DateCell
+          fontColor="ActivityDesktopView.Overdue ? &quot;Red&quot; : &quot;&quot;"
+          id="DueDate"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.DueDate&quot;)"
+          printWidth="0.1"
+          sortOrder="2"
+          value="ActivityDesktopView.TargetDate"/>
+        <TypeKeyCell
+          id="Priority"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.Priority&quot;)"
+          printWidth="0.1"
+          sortOrder="1"
+          value="ActivityDesktopView.Priority"
+          valueType="typekey.Priority"/>
+        <TextCell
+          action="goToActivity(ActivityDesktopView)"
+          id="Subject"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.Subject&quot;)"
+          printWidth="0.30"
+          value="ActivityDesktopView.Subject"/>
+        <TextCell
+          action="pcf.Claim.go(ActivityDesktopView.Claim)"
+          id="CaseID"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.CaseID&quot;)"
+          printWidth="0.16"
+          sortOrder="3"
+          value="ActivityDesktopView.ClaimNumber"/>
+        <TextCell
+          action="ClaimContactDetailPopup.push(ActivityDesktopView.ClaimInsured, ActivityDesktopView.Claim)"
+          id="Insured"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.Insured&quot;)"
+          printWidth="0.2"
+          value="ActivityDesktopView.ClaimInsuredName"/>
+        <TextCell
+          enableSort="false"
+          id="Exposure"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.Exposure&quot;)"
+          maxChars="120"
+          printWidth="0"
+          value="ActivityDesktopView.Exposure"/>
+        <BooleanRadioCell
+          id="ExternallyOwned"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.ExternallyOwned&quot;)"
+          printWidth="0.1"
+          value="ActivityDesktopView.ExternallyOwned"/>
+        <TypeKeyCell
+          id="LOB"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.LOB&quot;)"
+          printWidth="0"
+          value="ActivityDesktopView.LOBCode"
+          valueType="typekey.LOBCode"/>
+        <TypeKeyCell
+          id="State"
+          label="DisplayKey.get(&quot;LV.Activity.Activities.State&quot;)"
+          printWidth="0"
+          value="ActivityDesktopView.JurisdictionState"
+          valueType="typekey.Jurisdiction"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[/**
+ * For performance reasons, we cannot just disable the activity subject link if the user cannot view the activity - it
+ * would require us to read in every activity and claim on the page. Instead we only check permissions if the user actually
+ * clicks on the activity subject link (so we only load the claim and activity for the entry that is clicked on)
+ */
+function goToActivity(activityView : ActivityDesktopView) {
+  if (perm.Claim.view(activityView.Claim) and perm.Activity.view(activityView.Activity)) {
+    ClaimWorkplan.go(activityView.Claim)
+    if (not gw.api.activity.ActivityUtil.isWorksheetOpen(activityView.Activity.ID)) {
+      ActivityDetailForward.goInWorkspace(activityView.Claim, activityView.Activity)
+    }
+  } else {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Web.DesktopActivities.CannotView"))
+  }
+}]]></Code>
+  </ListViewPanel>
+</PCF>

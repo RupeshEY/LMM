@@ -1,0 +1,205 @@
+<?xml version="1.0" encoding="UTF-8"?><wsdl:definitions xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:gwsoap="http://guidewire.com/ws/soapheaders" xmlns:gwwsdl="http://guidewire.com/pl/wsdl" xmlns:soap11="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:tns="http://guidewire.com/pc/ws/gw/webservice/pc/pc900/ccintegration/CCPolicySearchIntegration" name="CCPolicySearchIntegration" targetNamespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc900/ccintegration/CCPolicySearchIntegration">
+  <wsdl:types>
+    <xs:schema xmlns:gw="http://guidewire.com/xsd" xmlns:imported="http://guidewire.com/pc/ccintegration" xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" targetNamespace="http://guidewire.com/pc/ws/gw/webservice/pc/pc900/ccintegration/CCPolicySearchIntegration">
+      <xs:import namespace="http://guidewire.com/ws/soapheaders" schemaLocation="soapheaders.xsd"/>
+      <xs:import namespace="http://guidewire.com/pc/ccintegration" schemaLocation="entities.xsd"/>
+      <!-- searchForPolicies(CCPCSearchCriteria, CCPCFilteringCriteria) : CCPolicySummary[] -->
+      <xs:element name="searchForPolicies">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="criteria" type="imported:CCPCSearchCriteria"/>
+            <xs:element minOccurs="0" name="filter" type="imported:CCPCFilteringCriteria"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="searchForPoliciesResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element gw:viewas="array" minOccurs="0" name="return">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element maxOccurs="unbounded" minOccurs="0" name="Entry" nillable="true" type="imported:CCPolicySummary"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="SOAPException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="RequiredFieldException">
+        <xs:complexType/>
+      </xs:element>
+      <xs:element name="WsiAuthenticationException">
+        <xs:complexType/>
+      </xs:element>
+      <!-- retrievePolicy(String, Date, CCPCFilteringCriteria) : Envelope -->
+      <xs:element name="retrievePolicy">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="policyNumber" type="xs:string"/>
+            <xs:element gw:type="java.util.Date" minOccurs="0" name="asOfDate" type="xs:dateTime"/>
+            <xs:element minOccurs="0" name="filter" type="imported:CCPCFilteringCriteria"/>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+      <xs:element name="retrievePolicyResponse">
+        <xs:complexType>
+          <xs:sequence>
+            <xs:element minOccurs="0" name="return">
+              <xs:complexType>
+                <xs:sequence>
+                  <xs:element ref="imported:Envelope"/>
+                </xs:sequence>
+              </xs:complexType>
+            </xs:element>
+          </xs:sequence>
+        </xs:complexType>
+      </xs:element>
+    </xs:schema>
+  </wsdl:types>
+  <wsdl:portType name="CCPolicySearchIntegrationPortType">
+    <wsdl:operation name="searchForPolicies">
+      <wsdl:input message="tns:searchForPolicies" name="searchForPolicies"/>
+      <wsdl:output message="tns:searchForPoliciesResponse" name="searchForPoliciesResponse"/>
+      <!-- If too many results were returned by the search -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- If criteria is null -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+    <wsdl:operation name="retrievePolicy">
+      <wsdl:input message="tns:retrievePolicy" name="retrievePolicy"/>
+      <wsdl:output message="tns:retrievePolicyResponse" name="retrievePolicyResponse"/>
+      <!-- If too many results were returned by the search -->
+      <wsdl:fault message="tns:SOAPException" name="SOAPException"/>
+      <!-- If criteria is null -->
+      <wsdl:fault message="tns:RequiredFieldException" name="RequiredFieldException"/>
+      <wsdl:fault message="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="CCPolicySearchIntegrationSoap12Binding" type="tns:CCPolicySearchIntegrationPortType">
+    <soap12:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="searchForPolicies">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="searchForPolicies">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchForPoliciesResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrievePolicy">
+      <soap12:operation soapActionRequired="false" style="document"/>
+      <wsdl:input name="retrievePolicy">
+        <soap12:body use="literal"/>
+        <soap12:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap12:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrievePolicyResponse">
+        <soap12:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap12:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap12:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap12:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="CCPolicySearchIntegrationSoap11Binding" type="tns:CCPolicySearchIntegrationPortType">
+    <soap11:binding style="document" transport="http://schemas.xmlsoap.org/soap/http"/>
+    <wsdl:operation name="searchForPolicies">
+      <soap11:operation style="document"/>
+      <wsdl:input name="searchForPolicies">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="searchForPoliciesResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+    <wsdl:operation name="retrievePolicy">
+      <soap11:operation style="document"/>
+      <wsdl:input name="retrievePolicy">
+        <soap11:body use="literal"/>
+        <soap11:header message="tns:gw-authentication" part="gw-authentication" use="literal"/>
+        <soap11:header message="tns:gw-locale" part="gw-locale" use="literal"/>
+      </wsdl:input>
+      <wsdl:output name="retrievePolicyResponse">
+        <soap11:body use="literal"/>
+      </wsdl:output>
+      <wsdl:fault name="SOAPException">
+        <soap11:fault name="SOAPException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="RequiredFieldException">
+        <soap11:fault name="RequiredFieldException" use="literal"/>
+      </wsdl:fault>
+      <wsdl:fault name="WsiAuthenticationException">
+        <soap11:fault name="WsiAuthenticationException" use="literal"/>
+      </wsdl:fault>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="CCPolicySearchIntegration">
+    <wsdl:port binding="tns:CCPolicySearchIntegrationSoap12Binding" name="CCPolicySearchIntegrationSoap12Port">
+      <soap12:address location="http://localhost:8180/pc/ws/gw/webservice/pc/pc900/ccintegration/CCPolicySearchIntegration"/>
+      <gwwsdl:address location="${pc}/ws/gw/webservice/pc/pc900/ccintegration/CCPolicySearchIntegration"/>
+    </wsdl:port>
+    <wsdl:port binding="tns:CCPolicySearchIntegrationSoap11Binding" name="CCPolicySearchIntegrationSoap11Port">
+      <soap11:address location="http://localhost:8180/pc/ws/gw/webservice/pc/pc900/ccintegration/CCPolicySearchIntegration/soap11"/>
+      <gwwsdl:address location="${pc}/ws/gw/webservice/pc/pc900/ccintegration/CCPolicySearchIntegration/soap11"/>
+    </wsdl:port>
+  </wsdl:service>
+  <wsdl:message name="searchForPolicies">
+    <wsdl:part element="tns:searchForPolicies" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="searchForPoliciesResponse">
+    <wsdl:part element="tns:searchForPoliciesResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="SOAPException">
+    <wsdl:part element="tns:SOAPException" name="SOAPException"/>
+  </wsdl:message>
+  <wsdl:message name="RequiredFieldException">
+    <wsdl:part element="tns:RequiredFieldException" name="RequiredFieldException"/>
+  </wsdl:message>
+  <wsdl:message name="WsiAuthenticationException">
+    <wsdl:part element="tns:WsiAuthenticationException" name="WsiAuthenticationException"/>
+  </wsdl:message>
+  <wsdl:message name="retrievePolicy">
+    <wsdl:part element="tns:retrievePolicy" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="retrievePolicyResponse">
+    <wsdl:part element="tns:retrievePolicyResponse" name="parameters"/>
+  </wsdl:message>
+  <wsdl:message name="gw-authentication">
+    <wsdl:part element="gwsoap:authentication" name="gw-authentication"/>
+  </wsdl:message>
+  <wsdl:message name="gw-locale">
+    <wsdl:part element="gwsoap:locale" name="gw-locale"/>
+  </wsdl:message>
+</wsdl:definitions>

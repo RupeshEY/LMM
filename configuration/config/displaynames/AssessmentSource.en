@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<Entity
+  name="AssessmentSource">
+  <Columns>
+    <Column
+      beanPath="AssessmentSource.SourceName"
+      name="Name"/>
+    <Column
+      beanPath="AssessmentSource.SourceType"
+      name="Source"/>
+  </Columns>
+  <DisplayName><![CDATA[
+var retString = gw.api.locale.DisplayKey.get("DisplayName.Unnamed.History");
+        if (Name != null and Name.length() > 0)
+         {
+          retString = Name + " ";
+         }
+        if (Source != null)
+         {
+          retString = retString + " - " + Source.DisplayName
+          }
+
+      return retString;
+  ]]></DisplayName>
+</Entity>

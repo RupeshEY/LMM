@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="incident.Claim.instructNewServiceRequests()"
+    canEdit="perm.Incident.edit(incident)"
+    canVisit="incident != null"
+    id="EditLivingExpensesIncidentPopup"
+    startInEditMode="startInEditMode"
+    title="DisplayKey.get(&quot;Web.LivingExpensesIncident.PopupHeader&quot;)">
+    <LocationEntryPoint
+      signature="EditLivingExpensesIncidentPopup(incident : LivingExpensesIncident)"/>
+    <LocationEntryPoint
+      signature="EditLivingExpensesIncidentPopup(incident : LivingExpensesIncident, startInEditMode : Boolean)"/>
+    <Variable
+      name="incident"
+      type="LivingExpensesIncident"/>
+    <Variable
+      initialValue="false"
+      name="startInEditMode"
+      type="Boolean"/>
+    <Screen
+      id="EditLivingExpensesIncidentScreen">
+      <TitleBar
+        icon="incident.HeaderIcon"/>
+      <Toolbar>
+        <EditButtons/>
+        <ToolbarDivider/>
+        <PrintToolbarButton
+          hideIfEditable="true"
+          id="LivingExpensesIncident_PrintButton"
+          label="DisplayKey.get(&quot;Button.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="LivingExpensesIncidentPanelSet(incident)"/>
+    </Screen>
+  </Popup>
+</PCF>

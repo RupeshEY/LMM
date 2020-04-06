@@ -1,0 +1,26 @@
+package rules.Validation.TransactionSetValidationRules_dir
+
+uses gw.api.financials.FinancialsCalculations
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("TXV20000 - Warning When Submitting Final Payment If Other Transacions Are Pending")
+internal class TXV20000WarningWhenSubmittingFinalPaymentIfOtherTransacionsArePending {
+  static function doCondition(transactionSet: entity.TransactionSet): boolean {
+/*start00rule*/
+    return transactionSet typeis CheckSet
+/*end00rule*/
+  }
+
+  static function doAction(transactionSet: entity.TransactionSet, actions: gw.rules.Action) {
+/*start00rule*/
+    for (transaction in transactionSet.Transactions) {
+      if (transaction typeis Payment && transaction.PaymentType == PaymentType.TC_FINAL) {
+        if (FinancialsCalculations.PendingApprovalReserves.withReserveLine(transaction.ReserveLine).hasContributingTransactions()) {
+          transactionSet.reject(null, null, ValidationLevel.TC_PAYMENT,
+              DisplayKey.get("Rules.Validation.Transaction.FinalPaymentWhenOtherTransactionIsPendingApproval"))
+        }
+      }
+    } 
+/*end00rule*/
+  }
+}

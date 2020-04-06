@@ -1,0 +1,21 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+@gw.rules.RuleName("CPU03000 - Set SIU Life Cycle")
+internal class CPU03000SetSIULifeCycle {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.SIULifeCycleState == null
+      and claim.State !=TC_DRAFT
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.SIULifeCycleState=TC_STEP1
+/*end00rule*/
+
+  }
+}

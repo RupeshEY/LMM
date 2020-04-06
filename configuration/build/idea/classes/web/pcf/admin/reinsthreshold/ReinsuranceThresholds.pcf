@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    beforeCommit="verifyThreshold()"
+    canEdit="perm.System.reinsthresholdedit"
+    canVisit="perm.System.reinsthresholdview"
+    id="ReinsuranceThresholds"
+    title="DisplayKey.get(&quot;Web.Admin.ReinsuranceThresholds&quot;)">
+    <Screen
+      id="ReinsuranceThresholdsScreen">
+      <Variable
+        initialValue="gw.api.database.Query.make(entity.ReinsuranceThreshold).select()"
+        name="ReinsuranceThreshold"
+        type="gw.api.database.IQueryBeanResult&lt;ReinsuranceThreshold&gt;"/>
+      <ListDetailPanel
+        id="ReinsuranceThresholdListDetail"
+        selectionName="selectedReinsuranceThreshold"
+        selectionType="ReinsuranceThreshold">
+        <PanelRef
+          def="ReinsuranceThresholdLV(ReinsuranceThreshold)">
+          <Toolbar>
+            <EditButtons/>
+            <IteratorButtons
+              addVisible="true"
+              iterator="ReinsuranceThresholdLV.ReinsuranceThresholdLV"
+              removeVisible="true"/>
+          </Toolbar>
+        </PanelRef>
+        <CardViewPanel>
+          <Card
+            id="ReinsuranceThresholdDetail"
+            title="DisplayKey.get(&quot;LV.ReinsuranceThreshold.Detail&quot;)">
+            <DetailViewPanel>
+              <InputColumn>
+                <Label
+                  label="DisplayKey.get(&quot;LV.ReinsuranceThreshold.DetailedInfo&quot;) "/>
+              </InputColumn>
+            </DetailViewPanel>
+            <DetailViewPanel>
+              <InputColumn>
+                <ListViewInput
+                  boldLabel="true"
+                  def="ReinsuranceThresholdLossCausesLV(selectedReinsuranceThreshold)"
+                  label="DisplayKey.get(&quot;LV.ReinsuranceThreshold.LossCauses&quot;)"
+                  labelAbove="true">
+                  <Toolbar>
+                    <IteratorButtons
+                      iterator="ReinsuranceThresholdLossCausesLV.ReinsuranceThresholdLossCausesLV"/>
+                  </Toolbar>
+                </ListViewInput>
+                <ListViewInput
+                  boldLabel="true"
+                  def="ReinsuranceThresholdCoveragesLV(selectedReinsuranceThreshold)"
+                  label="DisplayKey.get(&quot;LV.ReinsuranceThreshold.Coverages&quot;)"
+                  labelAbove="true">
+                  <Toolbar>
+                    <IteratorButtons
+                      iterator="ReinsuranceThresholdCoveragesLV.ReinsuranceThresholdCoveragesLV"/>
+                  </Toolbar>
+                </ListViewInput>
+              </InputColumn>
+            </DetailViewPanel>
+          </Card>
+        </CardViewPanel>
+      </ListDetailPanel>
+    </Screen>
+    <Code><![CDATA[uses gw.api.database.Query
+
+function verifyThreshold() {
+  var foundError = false
+  var bundle = gw.transaction.Transaction.getCurrent()
+  
+  var modifiedEntries = bundle.getInsertedAndUpdatedBeansOfType(entity.ReinsuranceThreshold)
+  var modifiedAndRemoved = bundle.getAllModifiedBeansOfType(entity.ReinsuranceThreshold)
+    
+  var modifiedByTreaty = modifiedEntries.partition(\ r -> r.TreatyType)
+  for (treaty in modifiedByTreaty.Keys) {
+    // map of thresholds organized by treaty. 
+    var modifiedThresholdWithTreaty = modifiedByTreaty[treaty]
+    var modifiedByPolicy = modifiedThresholdWithTreaty.partition( \ r -> r.PolicyType )
+    for (policy in modifiedByPolicy.Keys) {
+      var modifiedThresholdWithPolicy = modifiedByPolicy[policy]
+      var unmodifiedThresholdWithTreatyAndPolicy = new java.util.ArrayList<ReinsuranceThreshold>()
+      
+      // find all reinsurance thresholds with the same treaty
+      for (ref in Query.make(entity.ReinsuranceThreshold).compare("TreatyType", Equals, treaty).compare("PolicyType", Equals, policy).select()) {
+        //if the list of modified thresholds does not contain the threshold, add it to the unmodified list
+        if (!modifiedAndRemoved.contains(ref)) {
+          unmodifiedThresholdWithTreatyAndPolicy.add(ref)
+        }
+      }
+      
+      for (ref in modifiedThresholdWithPolicy index i) {
+        var overlapsWithModified = ref.findOverlaps(modifiedThresholdWithPolicy.toList().subList(i + 1, modifiedThresholdWithPolicy.Count))
+        var overlapsWithUnmodified = ref.findOverlaps(unmodifiedThresholdWithTreatyAndPolicy)
+        if (overlapsWithModified or overlapsWithUnmodified) {
+          foundError = true
+        }
+      }   
+    }
+  }
+  
+  if (foundError) {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Web.Admin.ReinsuranceThresholds.ConflictWarning"))
+  }
+}]]></Code>
+  </Page>
+</PCF>

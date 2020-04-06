@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="PercentMetricDelegate">
+  <implementsInterface
+    iface="gw.cc.metric.entity.PercentMetricDelegate"
+    impl="com.guidewire.cc.domain.metric.impl.PercentMetricDelegateImpl"/>
+  <fulldescription><![CDATA[Delegate used by percent claim and exposure metrics to store a percent value
+    ]]></fulldescription>
+  <column
+    desc="Percent field to store the value."
+    name="PercentValue"
+    nullok="true"
+    type="percentagemetric"/>
+</delegate>

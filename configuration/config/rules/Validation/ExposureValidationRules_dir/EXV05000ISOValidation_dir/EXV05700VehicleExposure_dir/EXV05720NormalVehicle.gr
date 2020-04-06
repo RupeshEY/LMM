@@ -1,0 +1,23 @@
+package rules.Validation.ExposureValidationRules_dir.EXV05000ISOValidation_dir.EXV05700VehicleExposure_dir
+
+@gw.rules.RuleName("EXV05720 - Normal Vehicle")
+internal class EXV05720NormalVehicle {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.VehicleIncident.Vehicle != null
+and exposure.VehicleIncident.Vehicle.Style != TC_ATV
+and exposure.VehicleIncident.Vehicle.Style != TC_SNOWMOBILE
+and exposure.VehicleIncident.Vehicle.Style != TC_BOAT
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

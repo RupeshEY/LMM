@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.BulkInvoice.view"
+    id="BulkPay"
+    title="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.BulkInvoices&quot;)">
+    <LocationEntryPoint
+      signature="BulkPay()"/>
+    <Variable
+      initialValue="new gw.api.financials.BulkPayHelper()"
+      name="helper"
+      type="gw.api.financials.BulkPayHelper"/>
+    <Variable
+      initialValue="DisplayKey.get(&quot;Web.Financials.BulkPay.Filter.All&quot;)"
+      name="bulkPayFilter"
+      type="String"/>
+    <Screen
+      editable="true"
+      id="BulkPayScreen">
+      <Toolbar>
+        <ToolbarRangeInput
+          id="BulkPayFilter"
+          required="true"
+          value="bulkPayFilter"
+          valueRange="BulkPayFilterOptions"
+          valueType="java.lang.String">
+          <PostOnChange/>
+        </ToolbarRangeInput>
+        <ToolbarButton
+          action="NewBulkInvoiceDetail.go()"
+          id="CreateNewButton"
+          label="DisplayKey.get(&quot;Web.Financials.BulkPay.Button.CreateNew&quot;)"
+          visible="perm.BulkInvoice.create"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="CheckedValue.delete()"
+          confirmMessage="DisplayKey.get(&quot;Web.Financials.BulkPay.Invoice.Delete.Confirm&quot;)"
+          flags="all Deletable"
+          id="DeleteButton"
+          iterator="BulkInvoicesLV.BulkInvoicesLV"
+          label="DisplayKey.get(&quot;Web.Financials.BulkPay.Button.Delete&quot;)"
+          visible="perm.BulkInvoice.delete"/>
+        <ToolbarDivider/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="validateAndSubmit(CheckedValue)"
+          flags="any ValidatableOrSubmittable, all ValidatableOrSubmittable"
+          id="SubmitButton"
+          iterator="BulkInvoicesLV.BulkInvoicesLV"
+          label="DisplayKey.get(&quot;Web.Financials.BulkPay.Button.Submit&quot;)"
+          visible="perm.BulkInvoice.edit"/>
+        <ToolbarDivider/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="CheckedValue.stopBulkInvoice()"
+          flags="one Stoppable, all Stoppable"
+          id="StopButton"
+          iterator="BulkInvoicesLV.BulkInvoicesLV"
+          label="DisplayKey.get(&quot;Web.Financials.BulkPay.Button.Stop&quot;)"
+          visible="perm.BulkInvoice.edit"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="CheckedValue.voidBulkInvoice()"
+          flags="one Voidable, all Voidable"
+          id="VoidButton"
+          iterator="BulkInvoicesLV.BulkInvoicesLV"
+          label="DisplayKey.get(&quot;Web.Financials.BulkPay.Button.Void&quot;)"
+          visible="perm.BulkInvoice.edit"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="helper.clearMessages()"
+          id="RefreshButton"
+          label="DisplayKey.get(&quot;Web.Financials.BulkPay.Button.Refresh&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="BulkInvoicesLV(helper.getBulkInvoicesByStatus(BulkInvoiceActiveStatus))"/>
+    </Screen>
+    <Code><![CDATA[uses gw.api.financials.BulkInvoiceUIHelper
+
+property get BulkInvoiceActiveStatus() : BulkInvoiceStatus[] {
+  if (DisplayKey.get("Web.Financials.BulkPay.Filter.Active") == bulkPayFilter) {
+    return new BulkInvoiceStatus[]{BulkInvoiceStatus.TC_AWAITINGSUBMISSION, BulkInvoiceStatus.TC_DRAFT, BulkInvoiceStatus.TC_INREVIEW,
+           BulkInvoiceStatus.TC_INVALIDITEMS, BulkInvoiceStatus.TC_ONHOLD, BulkInvoiceStatus.TC_PENDINGITEMVALIDATION,
+           BulkInvoiceStatus.TC_PENDINGSTOP, BulkInvoiceStatus.TC_PENDINGVOID, BulkInvoiceStatus.TC_REJECTED,
+           BulkInvoiceStatus.TC_REQUESTED, BulkInvoiceStatus.TC_REQUESTING}
+  } else {
+    return null
+ }
+}
+
+property get BulkPayFilterOptions() : String[] {
+  return {DisplayKey.get("Web.Financials.BulkPay.Filter.Active"), DisplayKey.get("Web.Financials.BulkPay.Filter.All")}
+}
+
+function validateAndSubmit(bi : BulkInvoice) {
+  bi.validate()
+
+  if (bi.Submittable) {
+    BulkInvoiceUIHelper.beforeSubmit(bi)
+    bi.refresh()
+    bi.submitForApproval()
+  }
+}]]></Code>
+  </Page>
+</PCF>

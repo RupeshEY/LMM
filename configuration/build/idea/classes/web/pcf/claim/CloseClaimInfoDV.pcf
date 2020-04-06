@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <!-- NVVs for closing and reopening a Claim
+   This file automatically generated from nvv_claim.xml -->
+  <DetailViewPanel
+    id="CloseClaimInfoDV">
+    <Require
+      name="CloseClaimInfo"
+      type="CloseClaimInfo"/>
+    <InputColumn>
+      <TextAreaInput
+        editable="true"
+        id="Note"
+        label="DisplayKey.get(&quot;NVV.Claim.CloseClaim.Note&quot;)"
+        numCols="30"
+        numRows="3"
+        value="CloseClaimInfo.note"/>
+      <TypeKeyInput
+        editable="true"
+        id="Outcome"
+        label="DisplayKey.get(&quot;NVV.Claim.CloseClaim.Outcome&quot;)"
+        value="CloseClaimInfo.outcome"
+        valueType="typekey.ClaimClosedOutcomeType"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

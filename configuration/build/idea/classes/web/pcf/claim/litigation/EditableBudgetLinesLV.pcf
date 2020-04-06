@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="EditableBudgetLinesLV">
+    <ExposeIterator
+      valueType="entity.BudgetLine"
+      widget="EditableBudgetLinesLV"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Matter"
+      type="Matter"/>
+    <RowIterator
+      editable="true"
+      elementName="BudgetLine"
+      toAdd="Matter.addToBudgetLines(BudgetLine)"
+      value="Matter.BudgetLines"
+      valueType="entity.BudgetLine[]">
+      <Row>
+        <TypeKeyCell
+          editable="BudgetLine.BudgetLineType == null"
+          footerLabel="DisplayKey.get(&quot;LV.Financials.Total&quot;)"
+          id="BudgetLineType"
+          label="DisplayKey.get(&quot;LV.BudgetLine.BudgetLineType&quot;)"
+          required="true"
+          sortOrder="1"
+          value="BudgetLine.BudgetLineType"
+          valueType="typekey.LineCategory"/>
+        <CurrencyCell
+          align="right"
+          editable="true"
+          footerSumValue="BudgetLine.OriginalEstimate"
+          formatType="currency"
+          id="OriginalEstimate"
+          label="DisplayKey.get(&quot;LV.BudgetLine.OriginalEstimate&quot;)"
+          required="false"
+          sortOrder="2"
+          value="BudgetLine.OriginalEstimate">
+          <PostOnChange/>
+        </CurrencyCell>
+        <CurrencyCell
+          align="right"
+          footerSumValue="Matter.getTotalPaidForMatterCostCategory( BudgetLine.BudgetLineType )"
+          formatType="currency"
+          id="TotalPayments"
+          label="DisplayKey.get(&quot;LV.BudgetLine.TotalPayments&quot;)"
+          required="false"
+          value="Matter.getTotalPaidForMatterCostCategory( BudgetLine.BudgetLineType )"/>
+        <CurrencyCell
+          align="right"
+          bold="true"
+          footerSumValue="BudgetLine.difference"
+          formatType="currency"
+          id="Difference"
+          label="DisplayKey.get(&quot;LV.BudgetLine.Difference&quot;)"
+          required="false"
+          value="BudgetLine.difference"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

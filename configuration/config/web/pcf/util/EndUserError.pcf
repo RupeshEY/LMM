@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    autosaveable="false"
+    canEdit="false"
+    id="EndUserError"
+    parent="ErrorGroup()"
+    title="DisplayKey.get(&quot;Web.EndUserErrorPage.Title&quot;)">
+    <LocationEntryPoint
+      signature="EndUserError(Message : String)"/>
+    <Variable
+      name="Message"
+      type="String"/>
+    <Screen
+      id="EndUserErrorScreen">
+      <Toolbar/>
+      <Verbatim
+        label="Message"/>
+    </Screen>
+  </Page>
+</PCF>

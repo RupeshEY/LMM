@@ -1,0 +1,44 @@
+package rules.Preupdate.UserPreupdate_dir
+
+uses gw.api.system.CCLoggerCategory
+
+@gw.rules.RuleName("UPU00005 - User Workload Resync On Status Change")
+internal class UPU00005UserWorkloadResyncOnStatusChange {
+  static function doCondition(user : entity.User) : boolean {
+    
+/*start00rule*/
+return // If weighted workload is enabled and 
+// the user's vacation status has been changed or that users active status has been
+// changed
+  gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value
+    and
+  user.isFieldChanged("VacationStatus") or user.Credential.isFieldChanged("Active")
+/*end00rule*/
+
+  }
+
+  static function doAction(user : entity.User, actions : gw.rules.Action) {
+
+/*start00rule*/
+var username = user.Credential.UserName
+
+var logger = CCLoggerCategory.ASSIGNMENT_WEIGHTED_WORKLOAD
+
+if (logger.InfoEnabled) {
+  logger.info("User '" + username + "' status changed - workload resyncing")
+}
+
+// trigger resync of workloads on all group/user relationships for this user
+for (gu in user.GroupUsers) {
+  if (logger.InfoEnabled) {
+    logger.info("user '" + username + "'workload for group '" + gu.Group.DisplayName + "' starting sync...")
+  }
+  var workload = gu.syncWorkload()
+  if (logger.InfoEnabled) {
+    logger.info("user '" + username + "'workload for group '" + gu.Group.DisplayName + "'  workload has been synced to " + workload)
+  }
+}
+/*end00rule*/
+
+  }
+}

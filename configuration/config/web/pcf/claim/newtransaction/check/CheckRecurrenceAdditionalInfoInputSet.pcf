@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="CheckRecurrenceAdditionalInfoInputSet">
+    <Require
+      name="recurrenceHelper"
+      type="gw.financials.CheckRecurrenceUIHelper"/>
+    <TextInput
+      editable="true"
+      id="TotalNumOfChecks"
+      label="DisplayKey.get(&quot;Wizard.NewCheckWizard.CheckInstructions.Recurrence.AdditionalInfo.NumChecks&quot;)"
+      numCols="3"
+      required="true"
+      validationExpression="if(recurrenceHelper.CheckRecurrence.NumChecks &lt; 2) {return DisplayKey.get(&quot;Wizard.NewCheckWizard.CheckInstructions.Recurrence.AdditionalInfo.NumChecks.LessThanTwo&quot;)} else return null"
+      value="recurrenceHelper.CheckRecurrence.NumChecks"
+      valueType="java.lang.Integer">
+      <PostOnChange/>
+    </TextInput>
+    <CurrencyInput
+      formatType="currency"
+      id="TotalRecurrenceAmount"
+      label="DisplayKey.get(&quot;Wizard.NewCheckWizard.CheckInstructions.Recurrence.AdditionalInfo.RecurrenceAmt&quot;)"
+      value="recurrenceHelper.TotalAmount"
+      valueType="gw.api.financials.CurrencyAmountPair"/>
+  </InputSet>
+</PCF>

@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="validateValidRiskUnits()"
+    canEdit="(gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Properties&quot;) or gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Classcodes&quot;)) and perm.Claim.edit(Claim) and perm.Policy.edit(Claim)"
+    canVisit="(gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Properties&quot;) or gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Classcodes&quot;)) and perm.Claim.edit(Claim) and perm.Policy.view(Claim)"
+    id="PolicyLocationPopup"
+    returnType="PolicyLocation"
+    startInEditMode="EditMode and (!Claim.Policy.Verified and perm.Claim.edit(Claim) and perm.Policy.edit(Claim))"
+    title="DisplayKey.get(&quot;LV.Policy.Locations&quot;)">
+    <LocationEntryPoint
+      signature="PolicyLocationPopup(PolicyLocation : PolicyLocation, Claim : Claim, EditMode : Boolean)"/>
+    <Variable
+      name="PolicyLocation"
+      type="PolicyLocation"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="EditMode"
+      type="Boolean"/>
+    <Variable
+      initialValue="new gw.api.address.PolicyLocationAddressOwner(PolicyLocation)"
+      name="AddressOwner"
+      type="gw.api.address.CCAddressOwner"/>
+    <ScreenRef
+      def="PolicyLocationScreen(PolicyLocation, Claim, EditMode)"/>
+    <Code><![CDATA[function validateValidRiskUnits() {
+  if (Claim.Policy.hasValidRiskUnits()) return
+  throw new gw.api.util.DisplayableException(DisplayKey.get("JSP.ClaimPolicy.Policy.CombinationMustBeUnique"))
+}]]></Code>
+  </Popup>
+</PCF>

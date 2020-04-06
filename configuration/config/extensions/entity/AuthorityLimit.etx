@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!-- ====================================================================  AuthorityLimit  ==================================================================== -->
+
+<!--
+The use of Claim in an authority limit has been strongly deprecated. In particular, the use of
+Claim in AuthorityLimit in conjunction with claim archiving is problematic.
+
+If you absolutely must add Claim back in to authority limits, you will need perform the following steps:
+
+ 1.) Uncomment the commented code below.
+ 2.) Adjust the keypositions in the index authoritylimitu1 below.
+ 3.) Regen entities
+ 4.) Uncomment the Claim-related code in AuthorityLimitTester.gs and AuthorityLimitsConfiguration.gs
+-->
+
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="AuthorityLimit">
+  <!-- <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="If non-null, the limit applies only to this claim."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="true"/> -->
+  <index
+    desc="Two authority limits must differ in at least one of LimitType, Profile, LOB, PolicyType, CoverageType, CostType, or Retired."
+    name="authoritylimitu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="LimitType"/>
+    <indexcol
+      keyposition="2"
+      name="ProfileID"/>
+<!--
+    <indexcol
+      keyposition="3"
+      name="ClaimID"/>
+-->
+    <indexcol
+      keyposition="3"
+      name="PolicyType"/>
+    <indexcol
+      keyposition="4"
+      name="CoverageType"/>
+    <indexcol
+      keyposition="5"
+      name="CostType"/>
+    <indexcol
+      keyposition="6"
+      name="Retired"/>
+  </index>
+</extension>

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A piece of text to be displayed in a bulleted list bellow a question."
+  entity="SubQuestion"
+  exportable="true"
+  extendable="false"
+  ignoreForEvents="true"
+  platform="false"
+  readOnly="false"
+  table="subquestion"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.question.entity.SubQuestion"
+    impl="com.guidewire.cc.domain.question.impl.SubQuestionImpl"/>
+  <foreignkey
+    columnName="QuestionID"
+    fkentity="Question"
+    name="Question"
+    nullok="false"/>
+  <column
+    name="Text"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="1024"/>
+    <localization
+      nullok="true"
+      tableName="sbqsntext_l10n"/>
+  </column>
+  <column
+    default="-1"
+    desc="Sort order priority"
+    name="Priority"
+    nullok="true"
+    type="integer"/>
+</entity>

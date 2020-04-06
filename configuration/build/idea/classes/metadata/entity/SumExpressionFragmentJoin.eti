@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="SumExpressionFragmentJoin"
+  table="sumexprfragjoin"
+  final="true"
+  loadable="false"
+  platform="true"
+  type="joinarray">
+  <implementsEntity
+    name="RuleVersionDependent"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.bizrules.domain.SumExpressionFragmentJoinImpl"/>
+  <foreignkey
+    fkentity="ExpressionFragment"
+    name="NumericTransformExpression"
+    nullok="false"/>
+  <foreignkey
+    fkentity="SumExpressionFragment"
+    name="SumExpressionFragment"
+    nullok="false"/>
+  <index
+    desc="For ensuring a one-to-one join between fragments"
+    name="onetoone1"
+    unique="true">
+    <indexcol keyposition="1" name="NumericTransformExpression"/>
+  </index>
+  <index
+    desc="For ensuring a one-to-one join between fragments"
+    name="onetoone2"
+    unique="true">
+    <indexcol keyposition="1" name="SumExpressionFragment"/>
+  </index>
+</entity>

@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="specificWorkStatus.validateNonConflicting(specificWorkStatus.EmploymentData)"
+    canEdit="true"
+    canVisit="true"
+    id="WorkStatusPopup"
+    startInEditMode="willStartInEditMode"
+    title="DisplayKey.get(&quot;DV.Incident.WorkStatus&quot;)">
+    <LocationEntryPoint
+      signature="WorkStatusPopup(specificWorkStatus : WorkStatus, willStartInEditMode: Boolean)"/>
+    <Variable
+      initialValue="null"
+      name="specificWorkStatus"
+      type="WorkStatus"/>
+    <Variable
+      initialValue="true"
+      name="willStartInEditMode"
+      type="Boolean"/>
+    <Screen>
+      <PanelRef
+        def="WorkStatusDV(specificWorkStatus)">
+        <Toolbar>
+          <EditButtons/>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+  </Popup>
+</PCF>

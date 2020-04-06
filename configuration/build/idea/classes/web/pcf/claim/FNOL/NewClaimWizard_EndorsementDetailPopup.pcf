@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="NewClaimWizard_EndorsementDetailPopup"
+    returnType="Endorsement"
+    startInEditMode="!Policy.Verified"
+    title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPolicyEndorsement.Edit&quot;)">
+    <LocationEntryPoint
+      signature="NewClaimWizard_EndorsementDetailPopup(Policy : Policy, Endorsement : Endorsement)"/>
+    <Variable
+      name="Policy"
+      type="Policy"/>
+    <Variable
+      name="Endorsement"
+      type="Endorsement"/>
+    <Screen
+      id="NewClaimWizard_EndorsementDetailScreen">
+      <Toolbar>
+        <EditButtons
+          editVisible="!Policy.Verified"
+          pickValue="Endorsement"/>
+      </Toolbar>
+      <PanelRef
+        def="EndorsementDetailDV(Endorsement)"/>
+    </Screen>
+  </Popup>
+</PCF>

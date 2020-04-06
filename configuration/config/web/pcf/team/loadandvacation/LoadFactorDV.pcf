@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- new NVVs for the web   This file automatically generated from nvv_admin.xml -->
+  <DetailViewPanel
+    id="LoadFactorDV">
+    <Require
+      name="Group"
+      type="Group"/>
+    <InputColumn>
+      <TextInput
+        editable="true"
+        id="GroupLoadFactor"
+        label="DisplayKey.get(&quot;NVV.Admin.LoadFactor.GroupLoadFactor&quot;)"
+        required="true"
+        validationExpression="!(Group.LoadFactor &lt; 0 || Group.LoadFactor &gt; 100) ? null : DisplayKey.get(&quot;NVV.Admin.LoadFactor.GroupLoadFactor.OutOfRange&quot;)"
+        value="Group.LoadFactor"
+        valueType="java.lang.Integer"/>
+      <ListViewInput
+        def="EditableLoadFactorsLV(Group.MembersNoSystemUsers)"
+        editable="true"
+        label="DisplayKey.get(&quot;NVV.Admin.LoadFactor.UserLoadFactors&quot;)">
+        <Toolbar/>
+      </ListViewInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

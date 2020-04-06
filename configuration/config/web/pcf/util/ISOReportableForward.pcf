@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Forward
+    id="ISOReportableForward">
+    <LocationEntryPoint
+      signature="ISOReportableForward(isoReportable : ISOReportable)"/>
+    <Variable
+      name="isoReportable"
+      type="ISOReportable"/>
+    <ForwardCondition
+      action="pcf.ClaimLossDetails.go(isoReportable.ISOClaim)"
+      condition="isoReportable.ISOExposure == null"/>
+    <ForwardCondition
+      action="pcf.ExposureDetailForward.go(isoReportable.ISOClaim, isoReportable.ISOExposure)"
+      condition="isoReportable.ISOExposure != null"/>
+  </Forward>
+</PCF>

@@ -1,0 +1,28 @@
+<WidgetTemplate name="PolicyDescriptionWidget" inputWidgetName="PolicyDescriptionInput">
+
+  <Choice option="true" value="#{value}.PolicyVerified" valueType="boolean" visible="perm.Policy.createunverifiedpolicy and Wizard.QuickClaim == null" id="#{id}Verified">
+    <PickerInput value="#{value}.VerifiedPolicyNumber" valueType="java.lang.String" label="DisplayKey.get('Java.NewClaimWizard.Policy.SelectVerifiedPolicy')" id="ClaimPolicy"
+            pickLocation="#{pickLocation}" freeInputEnabled="true" editable="#{editable}" required="true"
+            onPick="#{value}.pickVerifiedPolicy(PickedValue as PolicySummary)"
+            showConfirmMessage="!Wizard.AtHighWaterMark and !#{value}.Changed"
+            confirmMessage="DisplayKey.get('Java.NewClaimWizard.Policy.WillLosePolicyReferences')"/>
+  </Choice>
+  <Choice option="false" value="#{value}.PolicyVerified" valueType="boolean" visible="perm.Policy.createunverifiedpolicy and Wizard.QuickClaim == null" id="#{id}Unverified">
+    <TextInput value="#{value}.UnverifiedPolicyNumber" valueType="java.lang.String" label="DisplayKey.get('Java.NewClaimWizard.Policy.CreateUnverifiedPolicy')" id="ClaimUnverifiedPolicy"
+            editable="#{editable}" required="true"
+            showConfirmMessage="!Wizard.AtHighWaterMark and !#{value}.Changed"
+            confirmMessage="DisplayKey.get('Java.NewClaimWizard.Policy.WillLosePolicyReferences')"/>
+    <RangeInput value="#{value}.UnverifiedPolicyType" label="DisplayKey.get('Java.NewClaimWizard.Policy.UnverifiedPolicyType')" id="PolicyType"
+            valueRange="Wizard.AvailablePolicyTypes" valueType="typekey.PolicyType" sortValueRange="true" editable="#{editable}" required="true"
+            showConfirmMessage="!Wizard.AtHighWaterMark and !#{value}.Changed"
+            confirmMessage="DisplayKey.get('Java.NewClaimWizard.Policy.WillLosePolicyReferences')"/>
+  </Choice>
+  <PickerInput value="#{value}.VerifiedPolicyNumber" valueType="java.lang.String" label="DisplayKey.get('Java.NewClaimWizard.Policy.SelectVerifiedPolicy')" id="#{id}Simple"
+          pickLocation="#{pickLocation}" freeInputEnabled="true" editable="#{editable}" required="true" boldLabel="false"
+          visible="!perm.Policy.createunverifiedpolicy or Wizard.QuickClaim != null"
+          onPick="#{value}.pickVerifiedPolicy(PickedValue as PolicySummary)"
+          showConfirmMessage="!Wizard.AtHighWaterMark and !#{value}.Changed"
+          confirmMessage="DisplayKey.get('Java.NewClaimWizard.Policy.WillLosePolicyReferences')"/>
+  <TextValue id="copyHack" value="null" editable="false" visible="false" argInitialValue="Wizard.copyPolicyDescription(#{value}) as String" argType="String"/>
+
+</WidgetTemplate>

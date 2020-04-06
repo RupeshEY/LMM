@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<internaltypelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Key to a RuleContextDefinition"
+  name="RuleContextDefinitionKey">
+  <typecode
+    code="Claim"
+    desc="Rule executes for a Claim. Available Symbols: claim"
+    name="Claim"
+    priority="1"/>
+  <typecode
+    code="ExposureIterative"
+    desc="Rule executes for each Exposure in a Claim. Available Symbols: claim, exposure"
+    name="Claim: Repeat for each Exposure"
+    priority="3"/>
+  <typecode
+    code="Exposure"
+    desc="Rule executes for an Exposure. Available Symbols: claim, exposure"
+    name="Exposure"
+    priority="2"/>
+  <typecode
+    code="CheckSetIterative"
+    desc="Rule executes for each Check in a CheckSet. Available Symbols: claim, checkset, check"
+    name="CheckSet: Repeat for each Check"
+    priority="5"/>
+  <typecode
+    code="RecoverySetIterative"
+    desc="Rule executes for each Recovery in a RecoverySet. Available Symbols: claim, recoveryset, recovery"
+    name="RecoverySet: Repeat for each Recovery"
+    priority="6"/>
+  <typecode
+    code="ReserveSetIterative"
+    desc="Rule executes for each Reserve in a ReserveSet. Available Symbols: claim, reserveset, reserve"
+    name="ReserveSet: Repeat for each Reserve"
+    priority="7"/>
+  <typecode
+    code="RecoveryReserveSetIterative"
+    desc="Rule executes for each RecoveryReserve in a RecoveryReserveSet. Available Symbols: claim, recoveryreserveset, recoveryreserve"
+    name="RecoveryReserveSet: Repeat for each RecoveryReserve"
+    priority="8"/>
+  <typecode
+    code="SubrogationIterative"
+    desc="Rule executes for each Subrogation on a Claim. Available Symbols: claim, subrogation"
+    name="Claim: Repeat for each Subrogation"
+    priority="4"/>
+</internaltypelistextension>

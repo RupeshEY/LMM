@@ -1,0 +1,181 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="ECFMessageDetailsBulkClaimDetailPanelSet">
+    <Require
+      name="bulkClaim"
+      type="ECFMessageBulkClaim_Ext"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <ListViewInput
+          boldLabel="true"
+          labelAbove="true">
+          <Toolbar/>
+          <ListViewPanel
+            id="BulkClaimDetailsLV">
+            <RowIterator
+              editable="true"
+              elementName="name"
+              value="{'tableActingAsFields'}"
+              valueType="java.lang.String[]">
+              <Row>
+                <TextCell
+                  id="SettlementAmount1Lbl"
+                  desc="SettlementAmount"
+                  label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.BulkClaim.BulkClaimDetailTitle&quot;)"
+                  value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.BulkClaim.SettlementAmount&quot;)"/>
+                <MonetaryAmountCell
+                  id="SettlementAmount1"
+                  value="bulkClaim.Details[0]?.SettlementAmount"
+                  label="bulkClaim.Details[0]?.Currency"
+                  visible="bulkClaim.Details.length > 0"/>
+                <MonetaryAmountCell
+                  id="SettlementAmount2"
+                  value="bulkClaim.Details[1]?.SettlementAmount"
+                  label="bulkClaim.Details[1]?.Currency"
+                  visible="bulkClaim.Details.length > 1"/>
+                <MonetaryAmountCell
+                  id="SettlementAmount3"
+                  value="bulkClaim.Details[2]?.SettlementAmount"
+                  label="bulkClaim.Details[2]?.Currency"
+                  visible="bulkClaim.Details.length > 2"/>
+              </Row>
+              <Row>
+                <TextCell
+                  id="SettlementCurrency1Lbl"
+                  desc="SettlementCurrency"
+                  value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.BulkClaim.SettlementCurrency&quot;)"/>
+                <TextCell
+                  colspan="3"
+                  id="SettlementCurrency1"
+                  value="bulkClaim.Details[0]?.SettlementCurrency.DisplayName"
+                  visible="bulkClaim.Details.length > 0"/>
+              </Row>
+              <Row>
+                <TextCell
+                  id="OutstandingAmount1Lbl"
+                  desc="CashOutstandingAmount"
+                  value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.BulkClaim.OutstandingAmount&quot;)"/>
+                <MonetaryAmountCell
+                  id="OutstandingAmount1"
+                  value="bulkClaim.Details[0]?.OutstandingAmount"
+                  visible="bulkClaim.Details.length > 0"/>
+                <MonetaryAmountCell
+                  id="OutstandingAmount2"
+                  value="bulkClaim.Details[1]?.OutstandingAmount"
+                  visible="bulkClaim.Details.length > 1"/>
+                <MonetaryAmountCell
+                  id="OutstandingAmount3"
+                  value="bulkClaim.Details[2]?.OutstandingAmount"
+                  visible="bulkClaim.Details.length > 2"/>
+              </Row>
+              <Row>
+                <TextCell
+                  id="PreviouslyPaidAmount1Lbl"
+                  desc="PreviouslyPaidAmount"
+                  value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.BulkClaim.PreviouslyPaidAmount&quot;)"/>
+                <MonetaryAmountCell
+                  id="PreviouslyPaidAmount1"
+                  value="bulkClaim.Details[0]?.PreviouslyPaidAmount"
+                  visible="bulkClaim.Details.length > 0"/>
+                <MonetaryAmountCell
+                  id="PreviouslyPaidAmount2"
+                  value="bulkClaim.Details[1]?.PreviouslyPaidAmount"
+                  visible="bulkClaim.Details.length > 1"/>
+                <MonetaryAmountCell
+                  id="PreviouslyPaidAmount3"
+                  value="bulkClaim.Details[2]?.PreviouslyPaidAmount"
+                  visible="bulkClaim.Details.length > 2"/>
+              </Row>
+              <Row>
+                <TextCell
+                  id="IncurredAmount1Lbl"
+                  desc="IncurredAmount"
+                  value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.BulkClaim.IncurredAmount&quot;)"/>
+                <MonetaryAmountCell
+                  id="IncurredAmount1"
+                  value="bulkClaim.Details[0]?.IncurredAmount"
+                  visible="bulkClaim.Details.length > 0"/>
+                <MonetaryAmountCell
+                  id="IncurredAmount2"
+                  value="bulkClaim.Details[1]?.IncurredAmount"
+                  visible="bulkClaim.Details.length > 1"/>
+                <MonetaryAmountCell
+                  id="IncurredAmount3"
+                  value="bulkClaim.Details[2]?.IncurredAmount"
+                  visible="bulkClaim.Details.length > 2"/>
+              </Row>
+              <Row>
+                <TextCell
+                  id="VatAmount1Lbl"
+                  desc="VatAmount"
+                  value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.BulkClaim.VatAmount&quot;)"/>
+                <MonetaryAmountCell
+                  id="VatAmount1"
+                  value="bulkClaim.Details[0]?.VatAmount"
+                  visible="bulkClaim.Details.length > 0"/>
+                <MonetaryAmountCell
+                  id="VatAmount2"
+                  value="bulkClaim.Details[1]?.VatAmount"
+                  visible="bulkClaim.Details.length > 1"/>
+                <MonetaryAmountCell
+                  id="VatAmount3"
+                  value="bulkClaim.Details[2]?.VatAmount"
+                  visible="bulkClaim.Details.length > 2"/>
+              </Row>
+              <Row>
+                <TextCell
+                  id="PaidThisTimeAmount1Lbl"
+                  desc="PaidThisTimeAmount"
+                  value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.BulkClaim.PaidThisTimeAmount&quot;)"/>
+                <MonetaryAmountCell
+                  id="PaidThisTimeAmount1"
+                  value="bulkClaim.Details[0]?.PaidThisTimeAmount"
+                  visible="bulkClaim.Details.length > 0"/>
+                <MonetaryAmountCell
+                  id="PaidThisTimeAmount2"
+                  value="bulkClaim.Details[1]?.PaidThisTimeAmount"
+                  visible="bulkClaim.Details.length > 1"/>
+                <MonetaryAmountCell
+                  id="PaidThisTimeAmount3"
+                  value="bulkClaim.Details[2]?.PaidThisTimeAmount"
+                  visible="bulkClaim.Details.length > 2"/>
+              </Row>
+              <Row>
+                <TextCell
+                  id="ImportedServicesAmount1Lbl"
+                  desc="ImportedServicesAmount"
+                  value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.BulkClaim.ImportedServicesAmount&quot;)"/>
+                <MonetaryAmountCell
+                  id="ImportedServicesAmount1"
+                  value="bulkClaim.Details[0]?.ImportedServicesAmount"
+                  visible="bulkClaim.Details.length > 0"/>
+                <MonetaryAmountCell
+                  id="ImportedServicesAmount2"
+                  value="bulkClaim.Details[1]?.ImportedServicesAmount"
+                  visible="bulkClaim.Details.length > 1"/>
+                <MonetaryAmountCell
+                  id="ImportedServicesAmount3"
+                  value="bulkClaim.Details[2]?.ImportedServicesAmount"
+                  visible="bulkClaim.Details.length > 2"/>
+              </Row>
+              <Row>
+                <TextCell
+                  id="ImportedServicesNarrative1Lbl"
+                  desc="ImportedServicesNarrative"
+                  value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetails.BulkClaim.ImportedServicesNarrative&quot;)"/>
+                <TextCell
+                  colspan="3"
+                  id="ImportedServicesNarrative1"
+                  value="bulkClaim.Details[0]?.ImportedServicesNarrative"
+                  visible="bulkClaim.Details.length > 0"/>
+              </Row>
+            </RowIterator>
+          </ListViewPanel>
+        </ListViewInput>
+      </InputColumn>
+    </DetailViewPanel>
+  </PanelSet>
+</PCF>

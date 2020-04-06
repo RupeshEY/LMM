@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <xsd:element name="BeanSnapshot">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" maxOccurs="unbounded" ref="Object"/>
+      </xsd:sequence>
+      <xsd:attribute name="version" type="xsd:integer"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="Object">
+    <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="Field"/>
+        <xsd:element ref="Array"/>
+      </xsd:choice>
+      <xsd:attribute name="gwType" type="xsd:NMTOKEN" use="required"/>
+      <xsd:attribute name="id" type="xsd:NMTOKEN" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="Field">
+    <xsd:complexType mixed="true">
+      <xsd:attribute name="name" type="xsd:string" use="required"/>
+      <xsd:attribute name="type" type="fieldtype" use="required"/>
+      <xsd:attribute name="gwType" type="xsd:NMTOKEN" use="optional"/>
+      <xsd:attribute name="refid" type="xsd:NMTOKEN" use="optional"/>
+      <xsd:attribute name="gwPublicId" type="xsd:string" use="optional"/>
+      <xsd:attribute name="displayValue" type="xsd:string" use="optional"/>
+      <xsd:attribute name="currency" type="xsd:string" use="optional"/>
+      <xsd:attribute name="encryptionId" type="xsd:string" use="optional"/>  
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="Array">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element minOccurs="0" maxOccurs="unbounded" ref="ArrayElement"/>
+      </xsd:sequence>
+      <xsd:attribute name="name" type="xsd:string" use="required"/>
+      <xsd:attribute name="type" type="fieldtype" use="required"/>
+      <xsd:attribute name="gwType" type="xsd:NMTOKEN" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="ArrayElement">
+    <xsd:complexType>
+      <xsd:attribute name="refid" type="xsd:NMTOKEN" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:simpleType name="fieldtype">
+    <xsd:restriction base="xsd:NMTOKEN">
+      <xsd:enumeration value="boolean"/>
+      <xsd:enumeration value="date"/>
+      <xsd:enumeration value="decimal"/>
+      <xsd:enumeration value="integer"/>
+      <xsd:enumeration value="money"/>
+      <xsd:enumeration value="currency"/>
+      <xsd:enumeration value="object"/>
+      <xsd:enumeration value="string"/>
+      <xsd:enumeration value="typekey"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+
+</xsd:schema>

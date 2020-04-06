@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_financials.xml -->
+  <ListViewPanel
+    id="EditableRecurrenceChecksLV">
+    <ExposeIterator
+      flags="Removeable"
+      valueType="entity.Check"
+      widget="EditableRecurrenceChecksLV"/>
+    <Require
+      name="CheckSet"
+      type="CheckSet"/>
+    <Variable
+      initialValue="CheckSet.getPrimaryChecksSortedByDate()"
+      name="CheckList"
+      type="Check[]"/>
+    <RowIterator
+      checkBoxVisible="Check.Editable"
+      editable="true"
+      elementName="Check"
+      toRemove="Check.delete(); if (Check.CheckSet.Checks.length &gt; 0) {Check.CheckSet.updateServicePeriods(true)}"
+      value="CheckSet.PrimaryChecksSortedByDate"
+      valueType="entity.Check[]">
+      <ToolbarFlag
+        condition="Check.Editable"
+        name="Removeable"/>
+      <Row
+        editable="Check.Editable">
+        <DateCell
+          editable="true"
+          id="ScheduledSendDate"
+          label="DisplayKey.get(&quot;LV.Financials.EditableRecurrenceChecks.ScheduledSendDate&quot;)"
+          required="true"
+          sortOrder="1"
+          value="Check.ScheduledSendDate"/>
+        <CurrencyCell
+          editable="Check.Payments.length == 1 and Check.Payments[0].LineItems.length == 1"
+          formatType="currency"
+          id="Amount"
+          label="DisplayKey.get(&quot;LV.Financials.EditableRecurrenceChecks.Amount&quot;)"
+          required="true"
+          value="Check.GrossAmountSettableComponent"
+          valueType="gw.api.financials.IMoney"/>
+        <DateCell
+          editable="Check.hasExposureWithServicePeriod()"
+          id="ServicePeriodStart"
+          label="DisplayKey.get(&quot;LV.Financials.EditableRecurrenceChecks.ServicePeriodStart&quot;)"
+          value="Check.ServicePdStart"/>
+        <DateCell
+          editable="Check.hasExposureWithServicePeriod()"
+          id="ServicePeriodEnd"
+          label="DisplayKey.get(&quot;LV.Financials.EditableRecurrenceChecks.ServicePeriodEnd&quot;)"
+          value="Check.ServicePdEnd"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

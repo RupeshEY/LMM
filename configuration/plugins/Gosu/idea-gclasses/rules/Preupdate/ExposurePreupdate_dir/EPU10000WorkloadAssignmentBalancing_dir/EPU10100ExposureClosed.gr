@@ -1,0 +1,33 @@
+package rules.Preupdate.ExposurePreupdate_dir.EPU10000WorkloadAssignmentBalancing_dir
+
+uses gw.assignment.workload.rules.ExposureWorkloadPreupdateRuleActions
+
+@gw.rules.RuleName("EPU10100 - Exposure Closed")
+internal class EPU10100ExposureClosed {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return
+/*
+ * Condition: The exposure state has been changed to "closed"
+ */
+exposure.isFieldChanged("State") and exposure.State == ExposureState.TC_CLOSED
+
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+// Logging of this rule will be categorized under "Assignment"
+var logger = gw.api.system.CCLoggerCategory.ASSIGNMENT_WEIGHTED_WORKLOAD
+if (logger.DebugEnabled) {
+  logger.debug(actions.getRule().DisplayName + " - Exposure '" + ExposureWorkloadPreupdateRuleActions.getExposureNameForLogging(exposure) + "' closed - updating user workload")
+}
+
+ExposureWorkloadPreupdateRuleActions.updateUserWorkloadOnExposureClose(exposure)
+/*end00rule*/
+
+  }
+}

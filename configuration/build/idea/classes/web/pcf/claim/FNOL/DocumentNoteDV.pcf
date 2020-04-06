@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- The following name value view controls the note screen
+   This file automatically generated from nvv_claim.xml -->
+  <DetailViewPanel
+    id="DocumentNoteDV">
+    <Require
+      name="Note"
+      type="Note"/>
+    <InputColumn>
+      <TypeKeyInput
+        editable="Note.New"
+        id="Topic"
+        label="DisplayKey.get(&quot;NVV.Claim.DocumentNote.Claim.Note.Topic&quot;)"
+        required="true"
+        value="Note.Topic"
+        valueType="typekey.NoteTopicType"/>
+      <TextInput
+        editable="true"
+        id="Subject"
+        label="DisplayKey.get(&quot;NVV.Claim.DocumentNote.Claim.Note.Subject&quot;)"
+        value="Note.Subject"/>
+      <!-- Unable to convert defaultValue 'false'
+PCF does not support defaultValue, please read InitialValues.txt for details
+The converter recorded this value/defaultValue pair and has added an entry
+to the suggested Gosu in InitialValues.txt -->
+      <BooleanRadioInput
+        editable="true"
+        id="Confidential"
+        label="DisplayKey.get(&quot;NVV.Claim.DocumentNote.Claim.Note.Confidential&quot;)"
+        required="true"
+        value="Note.Confidential"/>
+      <TextAreaInput
+        editable="Note.New"
+        id="Body"
+        label="DisplayKey.get(&quot;NVV.Claim.DocumentNote.Claim.Note.Body&quot;)"
+        numCols="30"
+        numRows="3"
+        required="true"
+        value="Note.Body"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

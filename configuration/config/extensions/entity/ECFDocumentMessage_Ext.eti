@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<subtype
+  abstract="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFDocumentMessage_Ext"
+  desc="ECF Messages which require a Foriegn Key to a Document entity"
+  supertype="ECFMessage_Ext">
+  <foreignkey
+    fkentity="Document"
+    name="Document"
+    desc="The Document which relates to this message."
+    nullok="true"/>
+</subtype>

@@ -1,0 +1,50 @@
+<html>
+  <head>
+    <title><%= TitleKey %></title>
+    <base href="<%= BaseURL %>">
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <meta http-equiv="Cache-Control" content="no-cache">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <style>
+      .about-body {
+        background-color: #ffffff;
+        margin: auto;
+      }
+      .about-body a:link, .about-body a:visited, .about-body a:active {
+        color: #0000ff;
+      }
+      .about-text {
+        font-family: Courier New, Courier, monotype;
+        font-size: 11px;
+        font-weight: normal;
+        color: #47637e;
+        z-index: 10;
+        margin-left: 20px;
+      }
+      .preview-text {
+        font-family: Courier New, Courier, monotype;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        color: #47637e;
+        z-index: 20;
+      }
+    </style>
+  </head>
+  <body class="about-body">
+    <form action="About.do?inFrame=about" method="POST" name="about">
+      <img src="images/app/about-splash.png" >
+      <div class="preview-text">
+        <%= PreviewWarning %><br>
+      </div>
+      <div class="about-text">
+        <%= AppVersionKey %> <%= AppVersion %><br>
+        <%= PlatformVersionKey %> <%= PlatformVersion %><br>
+        <%= SchemaVersionKey %> <%= SchemaVersion %><br>
+        <%= CustomerVersionKey %> <%= CustomerVersion %><br>
+        <%= ServerInstanceKey %> <%= ServerInstance %>&nbsp;&nbsp;<%= ConfigEnvKey %> <%= ConfigEnv %><br>
+      </div>
+    </form>
+  </body>
+</html>

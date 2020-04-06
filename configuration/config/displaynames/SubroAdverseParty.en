@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<Entity
+  name="SubroAdverseParty">
+  <Columns>
+    <Column
+      beanPath="SubroAdverseParty.AdverseParty"
+      displayName="true"
+      name="name"
+      sortOrder="1"/>
+  </Columns>
+  <DisplayName><![CDATA[name != null ? name : gw.api.locale.DisplayKey.get("Java.DisplayName.NewlyCreated")]]></DisplayName>
+</Entity>

@@ -1,0 +1,137 @@
+<?xml version="1.0"?>
+<!-- T-Account related typelists -->
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The type of a specific TAccount for a ReserveLine"
+  final="true"
+  name="TAccountType">
+  <typecode
+    code="stagingcashin"
+    desc="Staging cash in T-account"
+    name="Staging cash in"/>
+  <typecode
+    code="stagingcashout"
+    desc="Staging cash out T-account"
+    name="Staging cash out"/>
+  <typecode
+    code="stagingexpenses"
+    desc="Staging expenses T-account"
+    name="Staging expenses"/>
+  <typecode
+    code="draftpayments"
+    desc="Draft payments T-account"
+    name="Draft payments"/>
+  <typecode
+    code="pendappnonerodingpmts"
+    desc="Pending approval non-eroding payments T-account"
+    name="Pending approval non-eroding payments"/>
+  <typecode
+    code="pendapperodingpmts"
+    desc="Pending approval eroding payments T-account"
+    name="Pending approval eroding payments"/>
+  <typecode
+    code="pendingappreserves"
+    desc="Pending approval reserves T-account"
+    name="Pending approval reserves"/>
+  <typecode
+    code="pendingapprecreserves"
+    desc="Pending approval recovery reserves T-account"
+    name="Pending approval recovery reserves"/>
+  <typecode
+    code="pendingapprecoveries"
+    desc="Pending approval recoveries T-account"
+    name="Pending approval recoveries"/>
+  <typecode
+    code="futureerodingpmts"
+    desc="Future eroding payment T-account"
+    name="Future eroding payments"/>
+  <typecode
+    code="futurenonerodingpmts"
+    desc="Reserves auto-created to offset future non-eroding payments"
+    name="Future non-eroding payments"/>
+  <typecode
+    code="awserodingpmts"
+    desc="Awaiting submission eroding payments T-account"
+    name="Awaiting submission eroding payments"/>
+  <typecode
+    code="awsnonerodingpmts"
+    desc="Non-eroding awaiting submission payments T-account"
+    name="Awaiting submission non-eroding payments"/>
+  <typecode
+    code="committednonerodepmts"
+    desc="Committed non-eroding payments T-account"
+    name="Committed non-eroding payments"/>
+  <typecode
+    code="committederodepmts"
+    desc="Committed eroding payments T-account"
+    name="Committed eroding payments"/>
+  <typecode
+    code="pendingcashout"
+    desc="Pending cash out T-account"
+    name="Pending cash out"/>
+  <typecode
+    code="pendingexpense"
+    desc="Pending expense T-account"
+    name="Pending expense"/>
+  <typecode
+    code="pendingreserves"
+    desc="Pending reserves T-account"
+    name="Pending reserves"/>
+  <typecode
+    code="claimexpenses"
+    desc="Claim expenses T-account"
+    name="Claim expenses"/>
+  <typecode
+    code="reserves"
+    desc="Submitted reserves T-account"
+    name="Reserves"/>
+  <typecode
+    code="recoveryreserves"
+    desc="Submitted recovery reserves T-account"
+    name="Recovery reserves"/>
+  <typecode
+    code="recoveries"
+    desc="Submitted recoveries T-account"
+    name="Recoveries"/>
+  <typecode
+    code="cashout"
+    desc="Cash out T-account"
+    name="Cash Out"/>
+  <typecode
+    code="cashin"
+    desc="Cash in T-account"
+    name="Cash In"/>
+  <typecode
+    code="erodingforexchange"
+    desc="T-account to hold foreign exchange adjustments for eroding payments"
+    name="Eroding Payments Foreign Exchange"/>
+  <typecode
+    code="nonerodingforexchange"
+    desc="T-account to hold foreign exchange adjustments for non-eroding payments"
+    name="Non-Eroding Payments Foreign Exchange"/>
+  <!-- For Reinsurance Transactions -->
+  <typecode
+    code="cmtdnonadjcededres"
+    desc="Non-adjustment RICededReserve transactions sent downstream."
+    name="Committed non-adjustment RI Ceded Reserves"/>
+  <typecode
+    code="cmtdadjcededres"
+    desc="Adjustment RICededReserve transactions sent downstream."
+    name="Committed adjustment RI Ceded Reserves"/>
+  <typecode
+    code="cededreservesout"
+    desc="Total RICededReserve transactions sent downstream."
+    name="Committed RI Ceded Reserves"/>
+  <typecode
+    code="cmtdnonadjrecoverable"
+    desc="Non-adjustment RIRecoverable transactions sent downstream."
+    name="Committed non-adjustment RI Recoverables"/>
+  <typecode
+    code="cmtdadjrecoverable"
+    desc="Adjustment RIRecoverable transactions sent downstream."
+    name="Committed adjustment RI Recoverable"/>
+  <typecode
+    code="recoverablesout"
+    desc="Total RIRecoverable transactions sent downstream."
+    name="Committed RI Recoverable"/>
+</typelist>

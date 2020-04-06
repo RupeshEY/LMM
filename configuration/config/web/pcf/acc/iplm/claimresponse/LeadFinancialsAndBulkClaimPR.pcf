@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelRow
+    id="LeadFinancialsAndBulkClaimPR">
+    <Require
+      name="ecfClaimData"
+      type="ECFMessageClaimData_Ext"/>
+    <Require
+      name="claimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <PanelColumn>
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSetRef
+            def="LeadFinancialsInputSet(ecfClaimData, claimResponseRq)"/>
+          <TextInput
+            desc="editable, 20 characters; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ClaimEntryAmounts/wb:ImportedServicesNarrative (up to 3 places)"
+            editable="true"
+            id="importedServicesNarrative"
+            visible="ecfClaimData.Financials.first() != null"
+            maxChars="20"
+            label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ImportedServicesNarrative&quot;)"
+            value="claimResponseRq.ImportedServicesNarrative1"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <DetailViewPanel
+        desc="Only visible if the Claim Notify has any bulk claims"
+        visible="ecfClaimData.BulkClaimNoOfItems &gt; 0">
+        <InputColumn>
+          <Label
+            id="bulkClaimsLabel"
+            label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.BulkClaims&quot;)"/>
+          <TextInput
+            desc="taken from wb:ClaimNotifyEventRq/wb:ClaimMovement/wb:Extension/wb:ClaimEntry/wb:BulkClaimInformation/wb:HeaderUniqueClaimReference"
+            id="bulkHeaderRef"
+            label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.BulkClaimUCR&quot;)"
+            maxChars="17"
+            editable="false"
+            value="ecfClaimData.BulkClaimHeaderUCR"/>
+          <TextInput
+            desc="taken from wb:ClaimNotifyEventRq/wb:ClaimMovement/wb:Extension/wb:ClaimEntry/wb:BulkClaimInformation/wb:HeaderTransactionReference"
+            id="bulkHeaderTR"
+            label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.BulkClaimTR&quot;)"
+            maxChars="17"
+            editable="false"
+            value="ecfClaimData.BulkClaimHeaderTR"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <ListDetailPanel
+        desc="Only visible if the Claim Notify has any bulk claims"
+        id="selectBulkClaimLV"
+        selectionName="selectedBulkClaim"
+        selectionType="ECFMessageBulkClaim_Ext">
+        <ListViewPanel>
+          <RowIterator
+            editable="false"
+            elementName="bulkClaim"
+            id="bulkClaimIterator"
+            pageSize="0"
+            value="ecfClaimData.BulkClaims"
+            valueType="ECFMessageBulkClaim_Ext[]"
+            visible="ecfClaimData.BulkClaimNoOfItems &gt; 0">
+            <Row>
+              <TextCell
+                desc="taken from wb:ClaimNotifyEventRq/wb:ClaimMovement/wb:Extension/wb:ClaimEntry/wb:BulkClaimInformation/wb:Component/wb:ComponentClaimLineDetails/wb:ComponentUCR; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:BulkList/wb:Component/wb:ComponentUCR"
+                id="componentUCR"
+                label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ComponentUCR&quot;)"
+                editable="false"
+                value="bulkClaim.UCR"/>
+              <TextCell
+                desc="taken from wb:ClaimNotifyEventRq/wb:ClaimMovement/wb:Extension/wb:ClaimEntry/wb:BulkClaimInformation/wb:Component/wb:ComponentClaimLineDetails/wb:ComponentTR; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:BulkList/wb:Component/wb:ComponentTR"
+                id="componentTR"
+                label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ComponentTR&quot;)"
+                editable="false"
+                value="bulkClaim.TR"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+        <CardViewPanel
+          hideTabIfSingle="true">
+          <Card
+            id="bulkClaimDetails"
+            title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.BulkClaimDetails&quot;)"
+            visible="ecfClaimData.BulkClaimNoOfItems &gt; 0">
+            <DetailViewPanel>
+              <InputColumn>
+                <ListViewInput
+                  labelAbove="true"
+                  visible="selectedBulkClaim != null">
+                  <Toolbar
+                    id="bulkClaimFinancialsToolbar"/>
+                  <ListViewPanel
+                    id="bulkClaimFinancialsTableLV">
+                    <RowIterator
+                      editable="false"
+                      elementName="dtos"
+                      value="{'tableInsteadOfFields'}"
+                      valueType="java.lang.String[]">
+                      <Row>
+                        <TextCell
+                          id="emptyCell"/>
+                        <TextCell
+                          desc="editable, required if any values entered below; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:BulkList/wb:Component@Ccy"
+                          editable="false"
+                          id="currency1"
+                          value="selectedBulkClaim.Details.Count &gt; 0 ? selectedBulkClaim.Details[0]?.Currency.DisplayName : null"/>
+                        <TextCell
+                          desc="editable, required if any values entered below; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:BulkList/wb:Component@Ccy"
+                          editable="false"
+                          id="currency2"
+                          value="selectedBulkClaim.Details.Count &gt; 1 ? selectedBulkClaim.Details[1]?.Currency.DisplayName : null"/>
+                        <TextCell
+                          desc="editable, required if any values entered below; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:BulkList/wb:Component@Ccy"
+                          editable="false"
+                          id="currency3"
+                          value="selectedBulkClaim.Details.Count &gt; 2 ? selectedBulkClaim.Details[2]?.Currency.DisplayName : null"/>
+                      </Row>
+                      <Row>
+                        <TextCell
+                          id="financialLabel2"
+                          value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.VATAmount&quot;)"/>
+                        <MonetaryAmountCell
+                          desc="editable, set currency from header value; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:BulkList/wb:Component/wb:VATAmount"
+                          editable="false"
+                          value="selectedBulkClaim.Details.Count &gt; 0 ? selectedBulkClaim.Details[0]?.VatAmount : null"
+                          id="vatAmount1"/>
+                        <MonetaryAmountCell
+                          desc="editable, set currency from header value; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:BulkList/wb:Component/wb:VATAmount"
+                          editable="false"
+                          value="selectedBulkClaim.Details.Count &gt; 1 ? selectedBulkClaim.Details[1]?.VatAmount : null"
+                          id="vatAmount2"/>
+                        <MonetaryAmountCell
+                          desc="editable, set currency from header value; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:BulkList/wb:Component/wb:VATAmount"
+                          editable="false"
+                          value="selectedBulkClaim.Details.Count &gt; 2 ? selectedBulkClaim.Details[2]?.VatAmount : null"
+                          id="vatAmount3"/>
+                      </Row>
+                      <Row>
+                        <TextCell
+                          id="financialLabel3"
+                          value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ImportedServicesAmount&quot;)"/>
+                        <MonetaryAmountCell
+                          desc="editable, set currency from header value; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:BulkList/wb:Component/wb:ImportedServicesAmount"
+                          editable="false"
+                          value="selectedBulkClaim.Details.Count &gt; 0 ? selectedBulkClaim.Details[0]?.ImportedServicesAmount : null"
+                          id="importedServicesAmount1"/>
+                        <MonetaryAmountCell
+                          desc="editable, set currency from header value; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:BulkList/wb:Component/wb:ImportedServicesAmount"
+                          editable="false"
+                          value="selectedBulkClaim.Details.Count &gt; 1 ? selectedBulkClaim.Details[1]?.ImportedServicesAmount : null"
+                          id="importedServicesAmount2"/>
+                        <MonetaryAmountCell
+                          desc="editable, set currency from header value; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:BulkList/wb:Component/wb:ImportedServicesAmount"
+                          editable="false"
+                          value="selectedBulkClaim.Details.Count &gt; 2 ? selectedBulkClaim.Details[2]?.ImportedServicesAmount : null"
+                          id="importedServicesAmount3"/>
+                      </Row>
+                    </RowIterator>
+                  </ListViewPanel>
+                </ListViewInput>
+                <TextInput
+                  desc="editable, 20 characters; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:BulkList/wb:Component/wb:ImportedServicesNarrative (up to 3 places)"
+                  editable="false"
+                  id="bulkClaimImportedServicesNarrative"
+                  visible="selectedBulkClaim.Details.Count > 0"
+                  maxChars="20"
+                  label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ImportedServicesNarrative&quot;)"
+                  value="selectedBulkClaim.Details[0].ImportedServicesNarrative"/>
+              </InputColumn>
+            </DetailViewPanel>
+          </Card>
+        </CardViewPanel>
+      </ListDetailPanel>
+    </PanelColumn>
+  </PanelRow>
+</PCF>

@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<!-- The N-M table joining Claims with ClaimAssociations -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Links a Claim with a ClaimAssociation."
+  entity="ClaimInAssociation"
+  exportable="true"
+  extendable="false"
+  loadable="true"
+  platform="false"
+  table="claiminassoc"
+  type="joinarray">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claimassoc.impl.ClaimInAssociationInternal"
+    impl="com.guidewire.cc.domain.claimassoc.impl.ClaimInAssociationImpl"/>
+  <implementsInterface
+    iface="gw.cc.claimassoc.entity.ClaimInAssociation"
+    impl="com.guidewire.cc.domain.claimassoc.impl.ClaimInAssociationImpl"/>
+  <fulldescription><![CDATA[
+Links a {@link Claim} with a {@link ClaimAssociation}. Each ClaimAssociation will contain two or more Claims, via ClaimInAssociation entities.
+       
+     ]]></fulldescription>
+  <column
+    default="false"
+    desc="True if the given Claim is the primary Claim of the ClaimAssociation."
+    name="PrimaryClaim"
+    nullok="false"
+    type="bit"/>
+  <foreignkey
+    columnName="ClaimInfoID"
+    desc="ClaimInfo that belongs to the ClaimAssociation."
+    exportable="false"
+    fkentity="ClaimInfo"
+    name="ClaimInfo"
+    nullok="false"/>
+  <foreignkey
+    columnName="ClaimAssociationID"
+    desc="ClaimAssociation which contains the Claim."
+    exportable="false"
+    fkentity="ClaimAssociation"
+    name="ClaimAssociation"
+    nullok="false"/>
+  <index
+    desc="Enforce uniqueness, a particular claim can only appear once per claim association"
+    name="claiminassocu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimInfoID"/>
+    <indexcol
+      keyposition="2"
+      name="ClaimAssociationID"/>
+  </index>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claimassoc.dbchecks.ClaimInAssociationDBCheckBuilder"/>
+</entity>

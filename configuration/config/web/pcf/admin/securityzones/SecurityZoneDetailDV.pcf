@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="SecurityZoneDetailDV">
+    <Require
+      name="SecurityZone"
+      type="SecurityZone"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.Admin.SecurityZoneDetailDV.SecurityZone&quot;)"/>
+      <TextInput
+        editable="true"
+        id="Name"
+        label="DisplayKey.get(&quot;Web.Admin.SecurityZoneDetailDV.Name&quot;)"
+        required="true"
+        value="SecurityZone.Name"/>
+      <TextAreaInput
+        editable="true"
+        id="Description"
+        label="DisplayKey.get(&quot;Web.Admin.SecurityZoneDetailDV.Description&quot;)"
+        numRows="3"
+        value="SecurityZone.Description"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

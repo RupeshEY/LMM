@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="EditableFixedPropertyIncidentsLV">
+    <ExposeIterator
+      flags="Removeable"
+      valueType="entity.FixedPropertyIncident"
+      widget="EditableFixedPropertyIncidentsLV"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <RowIterator
+      editable="true"
+      elementName="FixedPropertyIncident"
+      hideCheckBoxesIfReadOnly="true"
+      pageSize="5"
+      pickLocation="NewFixedPropertyIncidentPopup.push(Claim)"
+      toRemove="Claim.removeNewServiceRequests(FixedPropertyIncident); Claim.removeFromIncidents(FixedPropertyIncident)"
+      value="Claim.FixedPropertyIncidentsOnly"
+      valueType="entity.FixedPropertyIncident[]">
+      <ToolbarFlag
+        condition="!FixedPropertyIncident.UsedByExposure"
+        name="Removeable"/>
+      <Row>
+        <TextCell
+          action="EditFixedPropertyIncidentPopup.push(FixedPropertyIncident, CurrentLocation.InEditMode)"
+          id="Address1"
+          label="DisplayKey.get(&quot;Web.Address.Default.Address&quot;)"
+          outputConversion="VALUE.Property.Address.AddressLine1 != null ? VALUE.Property.Address.AddressLine1 : DisplayKey.get(&quot;Web.EditableFixedPropertyIncidentsLV.Unknown&quot;)"
+          sortOrder="1"
+          value="FixedPropertyIncident"
+          valueType="entity.FixedPropertyIncident"/>
+        <TextCell
+          action="EditFixedPropertyIncidentPopup.push(FixedPropertyIncident, CurrentLocation.InEditMode)"
+          id="City"
+          label="DisplayKey.get(&quot;Web.Address.Default.City&quot;)"
+          sortBy="FixedPropertyIncident.Property.Address.City"
+          sortOrder="2"
+          value="FixedPropertyIncident.Property.Address.DisplayCity"/>
+        <TypeKeyCell
+          id="State"
+          label="DisplayKey.get(&quot;Web.Address.Default.State&quot;)"
+          sortOrder="3"
+          value="FixedPropertyIncident.Property.Address.State"
+          valueType="typekey.State"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

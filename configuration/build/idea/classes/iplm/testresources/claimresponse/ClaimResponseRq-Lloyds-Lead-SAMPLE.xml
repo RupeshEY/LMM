@@ -1,0 +1,183 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<wb:ClaimResponseRq
+  Sender="insurer"
+  Receiver="serviceprovider"
+  xmlns:wb="http://www.xchanging.com/claimResponse/rq/1"
+  xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1">
+  <UUId>20150514-4710-a0f8-0101-1aa177771965</UUId>
+  <wb:AsOfDate>2016-09-06T13:27:42.421+01:00</wb:AsOfDate>
+  <wb:ReferredUUId>20150514-4710-a0f8-0101-1aa177771966</wb:ReferredUUId>
+  <wb:InsurerTransactionReference>InsurerTrnsRef1</wb:InsurerTransactionReference>
+  <CreationDate>2016-07-13T18:18:30+01:00</CreationDate>
+  <wb:Insurer>
+    <Party>
+      <Id
+        Agency="lloyds">urn:lloyds:6027
+      </Id>
+      <Name>RK2034</Name>
+    </Party>
+    <wb:Contact>
+      <PersonName>XXXXX</PersonName>
+      <Telephone>XXXXX</Telephone>
+      <Email>XXXXX@XXXXX.com</Email>
+      <wb:ClassUserId>CWSA1</wb:ClassUserId>
+      <wb:AccountCode>CWSA</wb:AccountCode>
+    </wb:Contact>
+  </wb:Insurer>
+  <ServiceProvider>
+    <Party>
+      <Id
+        Agency="DUNS_dun_and_bradstreet">urn:duns:236196817
+      </Id>
+      <Name>Xchanging</Name>
+    </Party>
+  </ServiceProvider>
+  <wb:Contract>
+    <BrokerReference>B0001JUL13SP1TSC</BrokerReference>
+  </wb:Contract>
+  <wb:ContractSection>
+    <wb:RiskCode>KA</wb:RiskCode>
+  </wb:ContractSection>
+  <wb:ClaimEntry>
+    <BrokerReference>B0001VTR01</BrokerReference>
+  </wb:ClaimEntry>
+  <wb:Claim>
+    <BrokerReference>B0001JUL13SP01TSC</BrokerReference>
+    <PcsReference>A23</PcsReference>
+    <LcoCatastropheReference>69C</LcoCatastropheReference>
+    <wb:ClaimType>000</wb:ClaimType>
+    <wb:ClaimsScheme>2010</wb:ClaimsScheme>
+    <wb:TriageCategory>CTP-Complex</wb:TriageCategory>
+    <wb:Indicators>
+      <wb:SimultaneousRIPIndicator>N</wb:SimultaneousRIPIndicator>
+    </wb:Indicators>
+  </wb:Claim>
+  <wb:ClaimResponse>
+    <wb:ParticipantFunction>Lead</wb:ParticipantFunction>
+    <wb:ClaimLineNo>1</wb:ClaimLineNo>
+    <wb:InsurerOrReinsurerClaimReference1>REFERENCE 01</wb:InsurerOrReinsurerClaimReference1>
+    <wb:InsurerOrReinsurerClaimReference2>REFERENCE 02</wb:InsurerOrReinsurerClaimReference2>
+    <!-- STARTS, This is only for ILU and Lloyd's agreement parties
+<wb:AgreementPartyResponse>
+<wb:IluAgreementPartyResponse>AUT</wb:IluAgreementPartyResponse>
+<wb:LloydsAgreeementPartyResponse>SEEN-ACTION</wb:LloydsAgreeementPartyResponse>
+<Contact>
+<PersonName>wb:ContactName</PersonName>
+<Telephone>0201102211</Telephone>
+<Email>aki@aki.com</Email>
+</Contact>
+<wb:PrivateComments>
+<wb:CommentDetails>PrivateComments 1</wb:CommentDetails>
+</wb:PrivateComments>
+<wb:PublicComments>
+<wb:CommentDetails>PublicComments 1</wb:CommentDetails>
+</wb:PublicComments>
+<wb:PublicComments>
+<wb:CommentDetails>PublicComments 2</wb:CommentDetails>
+</wb:PublicComments>
+</wb:AgreementPartyResponse>
+
+END -->
+    <!-- This is only for LIRMA company
+<wb:LirmaCompany>
+   <wb:LirmaCompanyResponse>ACC</wb:LirmaCompanyResponse>
+   <wb:RequestToBroker>
+      <wb:Request>Request</wb:Request>
+   </wb:RequestToBroker>
+   <wb:PrivateFootnote>PrivateFootnote</wb:PrivateFootnote>
+</wb:LirmaCompany>
+
+-->
+    <wb:LeadResponse>
+      <wb:LeadContact>
+        <PersonName>LeadXXXXX</PersonName>
+        <Telephone>LEADXXXXX</Telephone>
+        <Email>LloydLead@XXXXX.COM</Email>
+      </wb:LeadContact>
+      <wb:ContractMarket>
+        <wb:InsurerOrReinsurer>
+          <wb:AgreementPartyModifiedIndicator>add</wb:AgreementPartyModifiedIndicator>
+          <Party>
+            <Id
+              Agency="lloyds">urn:lloyds:2033
+            </Id>
+            <Name>Agreement Party</Name>
+          </Party>
+        </wb:InsurerOrReinsurer>
+        <wb:InsurerOrReinsurer>
+          <wb:AgreementPartyModifiedIndicator>rem</wb:AgreementPartyModifiedIndicator>
+          <Party>
+            <Id
+              Agency="lloyds">urn:lloyds:2031
+            </Id>
+            <Name>Follower</Name>
+          </Party>
+        </wb:InsurerOrReinsurer>
+      </wb:ContractMarket>
+      <wb:LloydsLead>
+        <wb:LloydsResponse>SEEN-ACTION</wb:LloydsResponse>
+        <wb:OutstandingAmountQualifier>S</wb:OutstandingAmountQualifier>
+        <CauseOfLoss>PAAC</CauseOfLoss>
+        <wb:PrivateComments>
+          <wb:CommentDetails>privateXXXXX</wb:CommentDetails>
+        </wb:PrivateComments>
+        <wb:PublicComments>
+          <wb:CommentDetails>publicXXXXX</wb:CommentDetails>
+        </wb:PublicComments>
+      </wb:LloydsLead>
+      <!-- This is only for ILU
+       <wb:IluLead>
+          <wb:IluResponse>AUT</wb:IluResponse>
+          <wb:PrivateComments>
+          <wb:CommentDetails>PrivateComments 1</wb:CommentDetails>
+       </wb:PrivateComments>
+       <wb:PublicComments>
+          <wb:CommentDetails>PublicComments 1</wb:CommentDetails>
+       </wb:PublicComments>
+       <wb:PublicComments>
+          <wb:CommentDetails>PublicComments 2</wb:CommentDetails>
+       </wb:PublicComments>
+       </wb:IluLead>
+       -->
+      <!-- This is only for LIRMA
+<wb:LirmaLead>
+   <wb:LirmaResponse>CIR</wb:LirmaResponse>
+   <wb:LeadComments>
+      <wb:CommentDetails>LeadComments</wb:CommentDetails>
+   </wb:LeadComments>
+</wb:LirmaLead>
+-->
+      <wb:ClaimEntryAmounts
+        Ccy="GBP">
+        <TargetCurrency>
+          <Ccy>GBP</Ccy>
+        </TargetCurrency>
+        <wb:VatAmount>100.00</wb:VatAmount>
+        <wb:LeadReserveAmount>21212121.28</wb:LeadReserveAmount>
+        <wb:LeadReserveFees>21212121.28</wb:LeadReserveFees>
+      </wb:ClaimEntryAmounts>
+      <!-- This is only for ILU/LIRMA
+       <wb:BulkList>
+          <wb:BulkBrokerClaimReference>TST</wb:BulkBrokerClaimReference>
+          <wb:BulkTransactionReference>TST</wb:BulkTransactionReference>
+          <wb:Component Ccy="GBP">
+             <wb:ComponentUCR>UCR</wb:ComponentUCR>
+             <wb:ComponentTR>TR</wb:ComponentTR>
+             <wb:ComponentLineNo>1</wb:ComponentLineNo>
+             <wb:VatAmount>10.00</wb:VatAmount>
+             <wb:ImportedServicesAmount>10.01</wb:ImportedServicesAmount>
+             <wb:ImportedServicesNarrative>Narrative</wb:ImportedServicesNarrative>
+          </wb:Component>
+           <wb:Component Ccy="EUR">
+             <wb:ComponentUCR>UCR</wb:ComponentUCR>
+             <wb:ComponentTR>TR</wb:ComponentTR>
+             <wb:ComponentLineNo>2</wb:ComponentLineNo>
+             <wb:VatAmount>11.11</wb:VatAmount>
+             <wb:ImportedServicesAmount>10.10</wb:ImportedServicesAmount>
+             <wb:ImportedServicesNarrative>Narrative</wb:ImportedServicesNarrative>
+          </wb:Component>
+       </wb:BulkList>
+       -->
+    </wb:LeadResponse>
+  </wb:ClaimResponse>
+</wb:ClaimResponseRq>

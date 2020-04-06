@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ItemFieldMap xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="itemfieldmap.xsd">
+
+  <!--
+    You can put mappings here that hardcode field references for items.  You can match on name, value, or both.
+    If both a name and value are specified, it will attempt to match on both.  If only name is specified,
+    any items with that name will be mapped to the given field, whereas if only a value is specifed, for
+    NVVItemMap elements any item with that as either the value or display value field will be mapped,
+    whereas for LVItemMap elements any column with that as the value will be mapped to the given DB field.
+  -->
+  <NVVItemMap entity="Claim" field="AssignedUser" value="ClientAction.getClaimAssignmentStatus(Claim)"/>
+
+</ItemFieldMap>

@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    id="StatusTransitionToolbarButtonSet">
+    <Require
+      name="stateHolder"
+      type="gw.bizrules.pcf.RuleDetailsStateHolder"/>
+    <ToolbarButton
+      action="CurrentLocation.startEditing(); stateHolder.makeLatestVersionEditable()"
+      available="!stateHolder.ImportInProgress &amp;&amp; gw.bizrules.pcf.RulePermissionUIHelper.canEditRule(stateHolder.getSelectedVersion())"
+      hideIfEditable="true"
+      id="Edit"
+      label="DisplayKey.get('Button.Edit')"
+      tooltip="gw.bizrules.pcf.RulePermissionUIHelper.checkAndGetEditPermissionMsg(stateHolder.getSelectedVersion())"
+      shortcut="E"
+      visible="stateHolder.LatestVersionSelected"/>
+    <ToolbarButton
+      action="CurrentLocation.commit()"
+      hideIfReadOnly="true"
+      id="Update"
+      label="DisplayKey.get('Button.Update')"
+      shortcut="U"/>
+    <ToolbarButton
+      action="CurrentLocation.cancel()"
+      hideIfReadOnly="true"
+      id="Cancel"
+      label="DisplayKey.get('Button.Cancel')"
+      shortcut="C"/>
+    <ToolbarButton
+      action="CurrentLocation.startEditing(); stateHolder.createDraftBasedOnSelectedVersion()"
+      available="!stateHolder.ImportInProgress &amp;&amp; gw.bizrules.pcf.RulePermissionUIHelper.canEditRule(stateHolder.getSelectedVersion())"
+      hideIfEditable="true"
+      id="Revert"
+      label="DisplayKey.get('BizRules.StatusTransitionToolbarButtonSet.Revert')"
+      tooltip="gw.bizrules.pcf.RulePermissionUIHelper.checkAndGetEditPermissionMsg(stateHolder.getSelectedVersion())"
+      visible="stateHolder.NotLatestVersionSelected &amp;&amp; !stateHolder.Head.HeadVersion.Editable"/>
+    <ToolbarButton
+      action="stateHolder.deleteDraftInNewBundle()"
+      available="!stateHolder.ImportInProgress &amp;&amp; gw.bizrules.pcf.RulePermissionUIHelper.canEditRule(stateHolder.getSelectedVersion())"
+      confirmMessage="DisplayKey.get('BizRules.StatusTransitionToolbarButtonSet.DeleteVersionConfirmation')"
+      hideIfEditable="true"
+      id="DeleteDraft"
+      label="DisplayKey.get('BizRules.StatusTransitionToolbarButtonSet.DeleteDraft')"
+      tooltip="gw.bizrules.pcf.RulePermissionUIHelper.checkAndGetEditPermissionMsg(stateHolder.getSelectedVersion())"
+      visible="stateHolder.DeleteDraftVisible"/>
+    <ToolbarButton
+      action="stateHolder.deleteWipInNewBundle()"
+      available="!stateHolder.ImportInProgress &amp;&amp; gw.bizrules.pcf.RulePermissionUIHelper.canEditRule(stateHolder.getSelectedVersion())"
+      confirmMessage="stateHolder.History.Count == 1 ? DisplayKey.get('BizRules.StatusTransitionToolbarButtonSet.DeleteRuleConfirmation') : DisplayKey.get('BizRules.StatusTransitionToolbarButtonSet.DeleteVersionConfirmation')"
+      hideIfEditable="true"
+      id="DeleteWip"
+      label="DisplayKey.get('Button.Delete')"
+      tooltip="gw.bizrules.pcf.RulePermissionUIHelper.checkAndGetEditPermissionMsg(stateHolder.getSelectedVersion())"
+      visible="stateHolder.DeleteWipVisible"/>
+    <ToolbarButton
+      action="stateHolder.changeHeadVersionStatusInNewBundle(TC_STAGED)"
+      available="!stateHolder.ImportInProgress &amp;&amp; gw.bizrules.pcf.RulePermissionUIHelper.canEditRule(stateHolder.getSelectedVersion())"
+      hideIfEditable="true"
+      id="PromoteToStaged"
+      label="DisplayKey.get(&quot;BizRules.StatusTransitionToolbarButtonSet.PromoteToStaged&quot;)"
+      tooltip="gw.bizrules.pcf.RulePermissionUIHelper.checkAndGetEditPermissionMsg(stateHolder.getSelectedVersion())"
+      visible="stateHolder.LatestVersionSelected &amp;&amp; stateHolder.SelectedVersion.Status == RuleStatus.TC_DRAFT"/>
+    <ToolbarButton
+      action="stateHolder.changeHeadVersionStatusInNewBundle(RuleStatus.TC_APPROVED)"
+      available="!stateHolder.ImportInProgress and gw.bizrules.pcf.RulePermissionUIHelper.canApproveRule(stateHolder.getSelectedVersion())"
+      hideIfEditable="true"
+      id="PromoteToApproved"
+      label="DisplayKey.get(&quot;BizRules.StatusTransitionToolbarButtonSet.PromoteToApproved&quot;)"
+      tooltip="gw.bizrules.pcf.RulePermissionUIHelper.checkAndGetApprovePermissionMsg(stateHolder.getSelectedVersion())"
+      visible="stateHolder.LatestVersionSelected &amp;&amp; stateHolder.SelectedVersion.Status == RuleStatus.TC_STAGED"/>
+    <ToolbarButton
+      action="stateHolder.deploySelectedVersion()"
+      available="gw.bizrules.pcf.RulePermissionUIHelper.canDeployRule(stateHolder.getSelectedVersion())"
+      confirmMessage="stateHolder.getDeployConfirmationText()"
+      hideIfEditable="true"
+      id="Deploy"
+      label="DisplayKey.get(&quot;BizRules.StatusTransitionToolbarButtonSet.Deploy&quot;)"
+      tooltip="gw.bizrules.pcf.RulePermissionUIHelper.checkAndGetDeployPermissionMsg(stateHolder.getSelectedVersion())"
+      visible="stateHolder.DeploymentEnabled &amp;&amp; stateHolder.SelectedVersionDeployable"/>
+  </ToolbarButtonSet>
+</PCF>

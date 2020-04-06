@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<Entity
+  name="ClaimInfo">
+  <Columns>
+    <Column
+      beanPath="ClaimInfo.ClaimNumber"
+      name="claimNumber"
+      sortOrder="1"/>
+  </Columns>
+  <DisplayName><![CDATA[claimNumber]]></DisplayName>
+  <DisplayName
+    type="ContactRoleMessage"><![CDATA[(claimNumber == null ? gw.api.locale.DisplayKey.get("DisplayName.Claim.TheClaim") : claimNumber)]]></DisplayName>
+</Entity>

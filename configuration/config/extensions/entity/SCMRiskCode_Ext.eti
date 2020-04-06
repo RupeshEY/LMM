@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="SCMRiskCode_Ext"
+  desc="SCM message risk codes"
+  table="scmriskcode_ext"
+  type="retireable"
+  exportable="true">
+  <column
+    desc="The entity's code"
+    name="Code"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="2"/>
+  </column>
+  <column
+    desc="The description of the risk the code applies to"
+    name="Description"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="100"/>
+  </column>
+  <typekey
+    desc="The category the code belongs to"
+    name="Category"
+    nullok="false"
+    typelist="ECFClassOfBusiness_Ext"/>
+  <column
+    desc="The name of the code"
+    name="Name"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="10"/>
+  </column>
+  <index
+    desc="Enforces a unique constraint on the Code column"
+    name="Codes"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Code"/>
+  </index>
+</entity>

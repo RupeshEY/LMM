@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A monthly recurrence schedule. Subtype of CheckRecurrence."
+  entity="MonthlyCheckRecurrence"
+  final="true"
+  supertype="CheckRecurrence">
+  <implementsInterface
+    iface="gw.cc.financials.check.entity.MonthlyCheckRecurrence"
+    impl="com.guidewire.cc.domain.financials.check.impl.MonthlyCheckRecurrenceImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.check.impl.MonthlyCheckRecurrenceInternal"
+    impl="com.guidewire.cc.domain.financials.check.impl.MonthlyCheckRecurrenceImpl"/>
+  <column
+    default="1"
+    desc="A check is made every n month(s)."
+    name="MonthlyFrequency"
+    nullok="false"
+    type="monthlyfrequency"/>
+  <column
+    desc="Day of every month the check is due."
+    name="RecurrenceDate"
+    nullok="true"
+    type="integer"/>
+  <typekey
+    desc="Week in the month the check is due."
+    name="RecurrenceWeek"
+    nullok="true"
+    typelist="RecurrenceWeek"/>
+</subtype>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  admin="true"
+  desc="Condition Filter"
+  entity="ConditionFilter"
+  exportable="false"
+  extendable="true"
+  final="false"
+  ignoreForEvents="true"
+  platform="false"
+  table="conditionfilter"
+  type="editable">
+  <foreignkey
+    columnName="ClassificationConditionID"
+    desc="Classification condition associated with this filter"
+    exportable="false"
+    fkentity="ClassificationCondition"
+    name="Condition"
+    nullok="false"/>
+</entity>

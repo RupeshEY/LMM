@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="ActivityPatterns.go()"
+    afterCommit="ActivityPatterns.go()"
+    canEdit="true"
+    canVisit="perm.ActivityPattern.create"
+    id="NewActivityPattern"
+    parent="ActivityPatterns()"
+    showUpLink="true"
+    startEditing="ActivityPattern.Category = Category; ActivityPattern.setInitialValues()"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.NewActivityPattern.Admin.NewActivityPatternName&quot;)">
+    <LocationEntryPoint
+      signature="NewActivityPattern(Category : ActivityCategory)"/>
+    <Variable
+      name="Category"
+      type="ActivityCategory"/>
+    <Variable
+      initialValue="new ActivityPattern()"
+      name="ActivityPattern"
+      type="ActivityPattern"/>
+    <ScreenRef
+      def="ActivityPatternDetailScreen(ActivityPattern)"/>
+  </Page>
+</PCF>

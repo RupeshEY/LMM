@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_admin.xml -->
+  <DetailViewPanel
+    id="UserVacationDV">
+    <Require
+      name="User"
+      type="User"/>
+    <InputColumn>
+      <TypeKeyInput
+        editable="true"
+        id="VacationStatus"
+        label="DisplayKey.get(&quot;NVV.Admin.UserVacation.VacationStatus&quot;)"
+        required="true"
+        value="User.VacationStatus"
+        valueType="typekey.VacationStatusType"/>
+      <UserInput
+        editable="true"
+        id="BackupUser"
+        label="DisplayKey.get(&quot;NVV.Admin.UserVacation.BackupUser&quot;)"
+        value="User.BackupUser"
+        valueType="entity.User"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,23 @@
+package rules.Assignment.GlobalActivityAssignmentRules_dir
+
+
+@gw.rules.RuleName("GAA-IPLM01000 - Assign ECF Transaction Authorisation")
+internal class GAAIPLM01000AssignECFTransactionAuthorisation {
+  static function doCondition(activity  :  entity.Activity) : boolean {
+/*start00rule*/
+return activity.ECFApproval
+/*end00rule*/
+}
+
+  static function doAction(activity  :  entity.Activity, actions : gw.rules.Action) {
+/*start00rule*/
+//default assignment for London Market ECF Claim Response Transaction Authorisation Activity.
+    var supervisor = (User.util.CurrentUser.getAllGroups().
+        firstWhere(\group -> (group as Group).Supervisor != User.util.CurrentUser) as Group)?.Supervisor
+    supervisor = supervisor?:User.util.CurrentUser.RootGroup.Supervisor
+
+    activity.assignUserAndDefaultGroup(supervisor)
+    actions.exit()
+/*end00rule*/
+  }
+}

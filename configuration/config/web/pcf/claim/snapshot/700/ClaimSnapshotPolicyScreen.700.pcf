@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="ClaimSnapshotPolicyScreen"
+    mode="700">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="SnapshotParam"
+      type="dynamic.Dynamic"/>
+    <Toolbar/>
+    <CardViewPanel>
+      <Card
+        id="ClaimSnapshotPolicyGeneral700Card"
+        title="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.General&quot;)">
+        <PanelRef
+          def="ClaimSnapshotPolicyGeneral700DetailPanelSet(Claim, SnapshotParam)"/>
+      </Card>
+      <Card
+        id="ClaimSnapshotPolicyVehicles700Card"
+        title="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.Vehicles&quot;)"
+        visible="gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_VEHICLES)">
+        <ListDetailPanel
+          selectionName="VehicleRU"
+          selectionType="dynamic.Dynamic">
+          <PanelRef
+            def="ClaimSnapshotPolicyVehicles700LV(Claim, SnapshotParam)">
+            <Toolbar/>
+          </PanelRef>
+          <CardViewPanel>
+            <Card
+              id="PolicyVehicleCard"
+              title="util.Snapshot.renderValue(VehicleRU)">
+              <PanelRef
+                def="ClaimSnapshotPolicyVehicle700PanelSet(Claim, VehicleRU)"/>
+            </Card>
+          </CardViewPanel>
+        </ListDetailPanel>
+      </Card>
+      <Card
+        id="ClaimSnapshotPolicyLocations700Screen"
+        title=" gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_PROPERTIES) ?               DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.Locations&quot;) :               DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.ClassCodes&quot;)"
+        visible="gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_PROPERTIES) or               gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_CLASSCODES)">
+        <ListDetailPanel
+          selectionName="PolicyLocation"
+          selectionType="dynamic.Dynamic">
+          <PanelRef
+            def="ClaimSnapshotPolicyLocations700LV(Claim, SnapshotParam)">
+            <Toolbar/>
+          </PanelRef>
+          <CardViewPanel
+            hideTabIfSingle="true">
+            <Card
+              id="PolicyPropertyCard"
+              selectOnNewEntry="true"
+              title="util.Snapshot.renderValue(PolicyLocation)">
+              <PanelRef
+                def="ClaimSnapshotPolicyLocation700PanelSet(Claim, PolicyLocation)"/>
+            </Card>
+          </CardViewPanel>
+        </ListDetailPanel>
+      </Card>
+      <Card
+        id="ClaimSnapshotPolicyTrips700Card"
+        title="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.Trips&quot;)"
+        visible="gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_TRIPS)">
+        <ListDetailPanel
+          selectionName="aTripRU"
+          selectionType="dynamic.Dynamic">
+          <PanelRef
+            def="ClaimSnapshotPolicyTrips700LV(Claim, SnapshotParam)">
+            <Toolbar/>
+          </PanelRef>
+          <CardViewPanel
+            hideTabIfSingle="true">
+            <Card
+              id="CoverageDetail"
+              title="&quot;&quot;">
+              <DetailViewPanel>
+                <InputColumn>
+                  <Label
+                    label="DisplayKey.get(&quot;LV.Policy.CoverageDetail&quot;)"/>
+                </InputColumn>
+              </DetailViewPanel>
+              <ListDetailPanel
+                id="TripCoverageLDP"
+                selectionName="SelectedCoverage"
+                selectionType="dynamic.Dynamic">
+                <PanelRef>
+                  <Toolbar/>
+                  <ListViewPanel
+                    id="CoveragesLV">
+                    <RowIterator
+                      editable="false"
+                      elementName="TripCoverage"
+                      type="dynamic.Dynamic"
+                      value="aTripRU.Coverages"
+                      valueType="dynamic.Dynamic">
+                      <Row>
+                        <TextCell
+                          id="CoverageType"
+                          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyTripDV.CoverageType&quot;)"
+                          sortOrder="1"
+                          value="TripCoverage.Type"
+                          valueType="dynamic.Dynamic"/>
+                        <TextCell
+                          formatType="currency"
+                          id="Deductible"
+                          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyTripDV.Deductible&quot;)"
+                          value="TripCoverage.Deductible"
+                          valueType="dynamic.Dynamic"/>
+                        <TextCell
+                          formatType="currency"
+                          id="ExposureLimit"
+                          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyTripDV.ExposureLimit&quot;)"
+                          value="TripCoverage.ExposureLimit"
+                          valueType="dynamic.Dynamic"/>
+                        <TextCell
+                          formatType="currency"
+                          id="IncidentLimit"
+                          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyTripDV.IncidentLimit&quot;)"
+                          value="TripCoverage.IncidentLimit"
+                          valueType="dynamic.Dynamic"/>
+                        <TextCell
+                          id="Notes"
+                          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyTripDV.Notes&quot;)"
+                          value="TripCoverage.Notes"
+                          valueType="dynamic.Dynamic"/>
+                      </Row>
+                    </RowIterator>
+                  </ListViewPanel>
+                </PanelRef>
+                <PanelRef
+                  def="ClaimSnapshotPolicyCovTermsCV(SelectedCoverage)"
+                  mode="700"/>
+              </ListDetailPanel>
+            </Card>
+          </CardViewPanel>
+        </ListDetailPanel>
+      </Card>
+      <Card
+        id="ClaimSnapshotPolicyStatCodes700Card"
+        title="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.StatCodes&quot;)"
+        visible="gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_STATCODES)">
+        <PanelRef
+          def="ClaimSnapshotPolicyStatCodes700LV(Claim, SnapshotParam)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+      <Card
+        id="ClaimSnapshotPolicyEndorsements700Card"
+        title="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.Endorsements&quot;)"
+        visible="gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_ENDORSEMENTS)">
+        <PanelRef
+          def="ClaimSnapshotPolicyEndorsements700LV(Claim, SnapshotParam)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+    </CardViewPanel>
+    <Code><![CDATA[
+function getTrips(riskUnits : dynamic.Dynamic) : dynamic.Dynamic {
+  var list = new java.util.ArrayList()
+  for (ru in riskUnits) {
+    if (ru.Subtype.Name == "TripRU") {
+      list.add( ru )
+    }
+  }
+  return list.toArray()
+}
+    ]]></Code>
+  </Screen>
+</PCF>

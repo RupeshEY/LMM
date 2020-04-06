@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="RISubtypeAndGroupInputSet">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="agreement"
+      type="RIAgreement"/>
+    <TextInput
+      id="AgreementSubtype"
+      label="DisplayKey.get(&quot;Web.Claim.Reinsurance.AgreementSubtype&quot;)"
+      value="(typeof agreement).DisplayName"/>
+    <RangeInput
+      editable="true"
+      id="AgreementGroup"
+      label="DisplayKey.get(&quot;Web.Claim.Reinsurance.AgreementGroup&quot;)"
+      required="true"
+      sortValueRange="false"
+      value="agreement.RIAgreementGroup"
+      valueRange="getOrderedAgreementGroups(claim)"
+      valueType="entity.RIAgreementGroup">
+      <MenuItem
+        action="RIAgreementGroupPopup.push(claim, agreement)"
+        hideIfReadOnly="true"
+        id="AgreementGroupMenu_Edit"
+        label="DisplayKey.get(&quot;Web.Claim.Reinsurance.AgreementGroup.MenuItem.Edit&quot;)"/>
+      <MenuItem
+        action=";"
+        available="false"
+        hideIfReadOnly="true"
+        id="AgreementGroupMenu_noNothing"
+        label="&quot;&quot;"/>
+      <PostOnChange/>
+    </RangeInput>
+    <Code><![CDATA[static function getOrderedAgreementGroups( clm : Claim ) : RIAgreementGroup[] {
+  // New group before existing groups
+  var possibleAgreementGroups = clm.RIAgreementGroups.where(\ r -> r.isUserEditable)
+  return possibleAgreementGroups.sort(\ r, r2 -> (r.New != r2.New) ? (r.New && !r2.New) : (r.DisplayName < r2.DisplayName) )
+}]]></Code>
+  </InputSet>
+</PCF>

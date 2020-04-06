@@ -1,0 +1,20 @@
+package rules.Preupdate.TransactionSetPreupdate_dir.TPU04000Reinsurance_dir
+
+@gw.rules.RuleName("TPU04100 - Large Loss Identification")
+internal class TPU04100LargeLossIdentification {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+transactionSet.Claim.setReinsuranceIfTotalIncurredOverThreshold()
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    autosaveable="false"
+    beforeCommit="closeClaimInfo.beforeCommit()"
+    canEdit="true"
+    id="CloseClaimPopup"
+    parent="Claim(Claim)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.CloseClaim.Title&quot;, Claim)">
+    <LocationEntryPoint
+      signature="CloseClaimPopup(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="createInfo()"
+      name="closeClaimInfo"
+      type="CloseClaimInfo"/>
+    <Screen
+      id="CloseClaimScreen">
+      <Toolbar>
+        <EditButtons
+          showUpdateConfirmMessage="Claim.hasAwaitingSubmissionPaymentsForToday()"
+          updateConfirmMessage="DisplayKey.get(&quot;Web.Claim.CloseClaim.AwaitingSubmissionPaymentForTodayWarning&quot;)"
+          updateLabel="DisplayKey.get(&quot;Web.Claim.CloseClaim&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="CloseClaimInfoDV(closeClaimInfo)"/>
+    </Screen>
+    <Code><![CDATA[function createInfo() : CloseClaimInfo {
+        var info = new CloseClaimInfo();
+        info.Claim = Claim;
+        return info;
+      }]]></Code>
+  </Popup>
+</PCF>

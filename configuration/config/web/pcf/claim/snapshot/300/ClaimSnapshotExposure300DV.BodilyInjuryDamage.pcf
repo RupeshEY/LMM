@@ -1,0 +1,270 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="ClaimSnapshotExposure300DV"
+    mode="BodilyInjuryDamage">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="SnapshotParam"
+      type="dynamic.Dynamic"/>
+    <Require
+      name="Exposure"
+      type="dynamic.Dynamic"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.General&quot;)"/>
+      <TextInput
+        id="LossParty"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.LossParty&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;LossParty&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="PrimaryCoverage"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.PrimaryCoverage&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;PrimaryCoverage&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="CoverageSubType"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.CoverageSubType&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;CoverageSubType&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="Coverage"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.Coverage&quot;)"
+        value="util.Snapshot.getCoverageName(SnapshotParam, util.Snapshot.getPropertyValue(Exposure, &quot;Coverage&quot;))"/>
+      <TextInput
+        id="Contact"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.Contact&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;AssignedUser&quot;)[&quot;Contact&quot;]"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="State"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.State&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;State&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="CreateTime"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.CreateTime&quot;)"
+        value="util.Snapshot.renderValue( util.Snapshot.getPropertyValue(Exposure, &quot;CreateTime&quot;) )"/>
+      <TextInput
+        id="CloseDate"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.CloseDate&quot;)"
+        value="util.Snapshot.renderValue( util.Snapshot.getPropertyValue(Exposure, &quot;CloseDate&quot;) )"/>
+      <TextInput
+        id="ReOpenDate"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.ReOpenDate&quot;)"
+        value="util.Snapshot.renderValue( util.Snapshot.getPropertyValue(Exposure, &quot;ReOpenDate&quot;) )"/>
+      <TextInput
+        id="ClosedOutcome"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.ClosedOutcome&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;ClosedOutcome&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="StatLine"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.StatLine&quot;)"
+        value="util.Snapshot.renderValue( util.Snapshot.getPropertyValue(Exposure, &quot;StatLine&quot;) )"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.Claimant&quot;)"/>
+      <TextInput
+        id="Claimant"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.Claimant&quot;)"
+        value="util.Snapshot.renderValue( util.Snapshot.getClaimant(SnapshotParam, Exposure)[&quot;Contact&quot;] )"/>
+      <TextInput
+        id="ClaimantType"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.ClaimantType&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;ClaimantType&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <BooleanRadioInput
+        falseLabel="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.ContactProhibited&quot;)"
+        id="ContactProhibited"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.ContactProhibited_1&quot;)"
+        trueLabel="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.ContactProhibited_2&quot;)"
+        value="util.Snapshot.getClaimant(SnapshotParam, Exposure)[&quot;ContactProhibited&quot;]"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="PrimaryPhone"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.PrimaryPhone&quot;)"
+        value="util.Snapshot.getPrimaryPhone( util.Snapshot.getClaimant(SnapshotParam, Exposure)[&quot;Contact&quot;] )"/>
+      <TextInput
+        id="ClaimantAddress"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.ClaimantAddress&quot;)"
+        value="util.Snapshot.renderValue( util.Snapshot.getClaimant(SnapshotParam, Exposure)[&quot;Contact&quot;][&quot;PrimaryAddress&quot;] )"/>
+      <InputDivider/>
+      <TextInput
+        id="AltContact"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.AltContact&quot;)"
+        value="util.Snapshot.renderValue(util.Snapshot.getPropertyValue(Exposure, &quot;AltContact&quot;))"/>
+    </InputColumn>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.Injury&quot;)"/>
+      <TextInput
+        id="Severity"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.Severity&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;Severity&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="LeadingInjury"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.LeadingInjury&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;LeadingInjury&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="DetailedInjury"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.DetailedInjury&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;DetailedInjury&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="PrimaryBodyPart"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.PrimaryBodyPart&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;PrimaryBodyPart&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="DetailedBodyPart"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.DetailedBodyPart&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;DetailedBodyPart&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextAreaInput
+        id="Description"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.Description&quot;)"
+        numCols="30"
+        numRows="3"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;Description&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="Doctor"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.Doctor&quot;)"
+        value="util.Snapshot.renderValue(util.Snapshot.getPropertyValue(Exposure, &quot;Doctor&quot;))"/>
+      <TextInput
+        id="MedicalTreatment"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.MedicalTreatment&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;MedicalTreatment&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <BooleanRadioInput
+        falseLabel="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.ContactProhibited&quot;)"
+        id="LostWages"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.LostWages_1&quot;)"
+        trueLabel="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.ContactProhibited_2&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;LostWages&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="Impairment"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.Impairment&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;Impairment&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="LossEstimate"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.LossEstimate&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;LossEstimate&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.Coding&quot;)"/>
+      <TextInput
+        id="Segment"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.Segment&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;Segment&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="Strategy"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.Strategy&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;Strategy&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="JurisdictionState"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.JurisdictionState&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;JurisdictionState&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.Other&quot;)"/>
+      <BooleanRadioInput
+        falseLabel="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.ContactProhibited&quot;)"
+        id="OtherCoverage"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.OtherCoverage_1&quot;)"
+        trueLabel="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.ContactProhibited_2&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;OtherCoverage&quot;)"
+        valueType="dynamic.Dynamic"/>
+      <ListViewInput
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.Details&quot;)">
+        <Toolbar/>
+        <ListViewPanel
+          id="OtherCoverageDetLV">
+          <RowIterator
+            editable="false"
+            elementName="OtherCoverageDet"
+            type="dynamic.Dynamic"
+            value="util.Snapshot.getPropertyValue(Exposure, &quot;OtherCoverageDet&quot;) as Object[]"
+            valueType="java.lang.Object[]">
+            <Row>
+              <TextCell
+                id="Insurer"
+                label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.Insurer&quot;)"
+                value="OtherCoverageDet.Insurer"
+                valueType="dynamic.Dynamic"/>
+              <TextCell
+                id="PolicyNumber"
+                label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.PolicyNumber&quot;)"
+                value="OtherCoverageDet.PolicyNumber"
+                valueType="dynamic.Dynamic"/>
+              <TextCell
+                id="ContactName"
+                label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.ContactName&quot;)"
+                value="OtherCoverageDet.ContactName"
+                valueType="dynamic.Dynamic"/>
+              <TextCell
+                id="ContactPhone"
+                label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.ContactPhone&quot;)"
+                value="OtherCoverageDet.ContactPhone"
+                valueType="dynamic.Dynamic"/>
+              <TextCell
+                id="Notes"
+                label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.Notes&quot;)"
+                value="OtherCoverageDet.Notes"
+                valueType="dynamic.Dynamic"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </ListViewInput>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.Financials&quot;)"
+        visible="perm.Claim.viewtransactiondetails(Claim)"/>
+      <TextInput
+        id="RemainingReserves"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.RemainingReserves&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;ExposureRpt&quot;)[&quot;RemainingReserves&quot;]"
+        valueType="dynamic.Dynamic"
+        visible="perm.Claim.viewreserves(Claim)"/>
+      <TextInput
+        id="FuturePayments"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.FuturePayments&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;ExposureRpt&quot;)[&quot;FuturePayments&quot;]"
+        valueType="dynamic.Dynamic"
+        visible="perm.Claim.viewpayments(Claim)"/>
+      <TextInput
+        id="TotalPayments"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.TotalPayments&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;ExposureRpt&quot;)[&quot;TotalPayments&quot;]"
+        valueType="dynamic.Dynamic"
+        visible="perm.Claim.viewpayments(Claim)"/>
+      <TextInput
+        id="TotalRecoveries"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.TotalRecoveries&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;TotalRecoveries&quot;)"
+        valueType="dynamic.Dynamic"
+        visible="perm.Claim.viewrecoveries(Claim)"/>
+      <TextInput
+        id="TotalIncurredNet"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshotExposure300DV.Bodilyinjurydamage.TotalIncurredNet&quot;)"
+        value="util.Snapshot.getPropertyValue(Exposure, &quot;ExposureRpt&quot;)[&quot;TotalIncurredNet&quot;]"
+        valueType="dynamic.Dynamic"
+        visible="perm.Claim.viewnettotalincurred(Claim)"/>
+      <InputDivider/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

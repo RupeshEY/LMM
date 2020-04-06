@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<entity
+  desc="ECF Message Claim Notify Request Carrier"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageBulkClaimDetail_Ext"
+  table="ecfmsgbulkclaimdetail_ext"
+  exportable="true"
+  final="true"
+  type="retireable">
+  <implementsEntity name="Extractable"/>
+  <typekey
+    typelist="Currency"
+    desc="Reference Currency i.e. Original Currency"
+    name="Currency"
+    nullok="false"/>
+  <monetaryamount
+    desc="The 100% settlement amount in settlement currency for the component claim"
+    name="SettlementAmount"
+    nullok="true"
+    precision="15"
+    scale="2"/>
+  <typekey
+    typelist="Currency"
+    desc="The target currency"
+    name="SettlementCurrency"
+    nullok="true"/>
+  <monetaryamount
+    desc="100 % outstanding amount in original currency"
+    name="OutstandingAmount"
+    nullok="true"
+    precision="15"
+    scale="2"/>
+  <monetaryamount
+    desc="100% previously paid amount in original currency"
+    name="PreviouslyPaidAmount"
+    nullok="true"
+    precision="15"
+    scale="2"/>
+  <monetaryamount
+    desc="100 % incurred amount in original currency"
+    name="IncurredAmount"
+    nullok="true"
+    precision="15"
+    scale="2"/>
+  <monetaryamount
+    desc="The VAT amount which is included in the settlement amount in original currency"
+    name="VatAmount"
+    nullok="true"
+    precision="15"
+    scale="2"/>
+  <monetaryamount
+    desc="100 % paid this time amount in original currency"
+    name="PaidThisTimeAmount"
+    nullok="true"
+    precision="15"
+    scale="2"/>
+  <monetaryamount
+    desc="The component claim imported services amount in original currency"
+    name="ImportedServicesAmount"
+    nullok="true"
+    precision="15"
+    scale="2"/>
+  <column
+    name="ImportedServicesNarrative"
+    desc="Free format narrative to support the component claim imported services amount."
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    fkentity="ECFMessageBulkClaim_Ext"
+    name="BulkClaim"
+    nullok="false"/>
+  <column
+    desc="The component line number"
+    name="ComponentLineNo"
+    nullok="true"
+    type="longint"/>
+</entity>

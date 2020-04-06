@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="NewClaimWizard_PolicyGeneralScreen">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarDivider/>
+      <ToolbarButton
+        action="Wizard.deverifyPolicy()"
+        confirmMessage="DisplayKey.get(&quot;JSP.ClaimPolicyGeneral.EditVerifiedPolicy&quot;)"
+        default="true"
+        id="NewClaimWizard_PolicyGeneralScreen_EditExternalFieldsButton"
+        label="DisplayKey.get(&quot;Button.EditExternalFields&quot;)"
+        shortcut="P"
+        visible="Claim.Policy.Verified and perm.Policy.makeeditable(Claim) and perm.Policy.edit(Claim)"/>
+    </Toolbar>
+    <Verbatim
+      label="Claim.Policy.Verified ? DisplayKey.get(&quot;JSP.NewClaimPolicyGeneral.ReviewPolicyInformation.Tip&quot;)                         : DisplayKey.get(&quot;JSP.NewClaimPolicyGeneral.ReviewOrEditPolicyInformation.Tip&quot;)"/>
+    <PanelRef
+      def="NewClaimPolicyGeneralPanelSet(Claim.Policy)"
+      editable="!Claim.Policy.Verified"
+      mode="Claim.LossType"/>
+  </Screen>
+</PCF>

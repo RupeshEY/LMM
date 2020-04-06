@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="ExposureWorkloadInputSet"
+    visible="gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value and perm.System.wwlview">
+    <Require
+      name="exposure"
+      type="Exposure"/>
+    <Variable
+      initialValue="exposure.findMatchingClassification()"
+      name="classification"
+      recalculateOnRefresh="true"
+      type="entity.WorkloadClassification"/>
+    <InputDivider/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.Workload&quot;)"/>
+    <TextInput
+      id="Classification"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.Workload.Classification&quot;)"
+      value="classification"
+      valueType="entity.WorkloadClassification"
+      visible="not exposure.Closed"/>
+    <TextInput
+      id="ClassificationWorkload"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.Workload.ClassificationWeight&quot;)"
+      value="classification.Weight"
+      valueType="java.lang.Integer"
+      visible="not exposure.Closed"/>
+    <TextInput
+      editable="perm.System.wwlmanage"
+      id="SupplementalWorkloadWeight"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.Workload.SupplementalWeight&quot;)"
+      value="exposure.SupplementalWorkloadWeight"
+      valueType="java.lang.Integer"/>
+    <TextInput
+      id="TotalWorkloadWeight"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.Workload.TotalWeight&quot;)"
+      value="exposure.WorkloadWeight"
+      valueType="java.lang.Integer"/>
+  </InputSet>
+</PCF>

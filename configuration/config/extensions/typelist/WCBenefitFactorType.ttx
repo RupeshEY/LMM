@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="WCBenefitFactorType"
+  name="WCBenefitFactorType">
+  <typecode
+    code="countdayofinjury"
+    desc="Day of Injury does count as one day of disability"
+    name="Day of Injury does count as one day of disability">
+    <category
+      code="DateRelated"
+      typelist="WCBenefitFactorCategory"/>
+  </typecode>
+  <typecode
+    code="other"
+    desc="Used to track misc issues"
+    name="Other">
+    <category
+      code="Other"
+      typelist="WCBenefitFactorCategory"/>
+    <category
+      code="Override"
+      typelist="WCBenefitFactorCategory"/>
+    <category
+      code="DateRelated"
+      typelist="WCBenefitFactorCategory"/>
+    <category
+      code="MaxDuration"
+      typelist="WCBenefitFactorCategory"/>
+    <category
+      code="Offset"
+      typelist="WCBenefitFactorCategory"/>
+    <category
+      code="WeeklyWage"
+      typelist="WCBenefitFactorCategory"/>
+    <category
+      code="WorkerFactor"
+      typelist="WCBenefitFactorCategory"/>
+    <category
+      code="WaitingPeriod"
+      typelist="WCBenefitFactorCategory"/>
+  </typecode>
+  <typecode
+    code="weeksofbenefit"
+    desc="Max Weeks of Benefit x % impairment rating"
+    name="(Max Weeks of Benefit) x (% impairment rating)">
+    <category
+      code="MaxDuration"
+      typelist="WCBenefitFactorCategory"/>
+  </typecode>
+  <typecode
+    code="duration"
+    desc="Duration of Disability"
+    name="Duration of Disability">
+    <category
+      code="MaxDuration"
+      typelist="WCBenefitFactorCategory"/>
+  </typecode>
+  <typecode
+    code="maxnumweeks"
+    desc="Maximum Period: # of weeks: (which should be in value field"
+    name="# of weeks">
+    <category
+      code="MaxDuration"
+      typelist="WCBenefitFactorCategory"/>
+  </typecode>
+  <typecode
+    code="aftertaxearnings"
+    desc="Weekly Wage should be EE's spendable/after-tax earnings"
+    name="EEs spendable / after-tax earnings">
+    <category
+      code="MaxDuration"
+      typelist="WCBenefitFactorCategory"/>
+  </typecode>
+  <typecode
+    code="offsets_ss_ui"
+    desc="Subject to Social Security and Unemployment (UI)  benefit offsets"
+    name="Social Security and UI benefits">
+    <category
+      code="Offset"
+      typelist="WCBenefitFactorCategory"/>
+  </typecode>
+  <typecode
+    code="offsets_many"
+    desc="Social Security, Unemployment Insurance, severance pay and employer funded pension plan"
+    name="SS, UI, severance pay and employer funded pension plan">
+    <category
+      code="Offset"
+      typelist="WCBenefitFactorCategory"/>
+  </typecode>
+  <typecode
+    code="age"
+    desc="Please review state rules if EE has reached age of 70"
+    name="Special rules beginning at age">
+    <category
+      code="WorkerFactor"
+      typelist="WCBenefitFactorCategory"/>
+  </typecode>
+  <typecode
+    code="lifetime"
+    desc="Maximum Period Exception: Lifetime if paraplegic, quadriplegic, or brain damaged"
+    name="Maximum Period Exception: Lifetime if paraplegic, quadriplegic, or brain damaged">
+    <category
+      code="MaxDuration"
+      typelist="WCBenefitFactorCategory"/>
+  </typecode>
+</typelistextension>

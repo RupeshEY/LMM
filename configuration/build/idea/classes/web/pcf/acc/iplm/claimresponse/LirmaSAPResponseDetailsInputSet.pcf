@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="LirmaSAPResponseDetailsInputSet">
+
+    <Require
+      name="claimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <Label
+    id="responseDetailsLabel"
+    label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ResponseDetails&quot;)"/>
+  <CheckBoxInput
+    desc="passed in wb:ClaimResponseRq/wb:Claim/wb:Indicators/NoFurtherResponseIndicator"
+    editable="true"
+    id="noFurtherResponseIndicator"
+    label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.NoFurtherResponse&quot;)"
+    value="claimResponseRq.NoFurtherResponseIndicatorBoolean">
+  </CheckBoxInput>
+  <CheckBoxInput
+    desc="passed in wb:ClaimResponseRq/wb:Claim/wb:Indicators/wb:ImmediatePartCollectionIndicator"
+    editable="true"
+    id="immediatePartCollectionIndicator"
+    label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ImmediatePartCollection&quot;)"
+    value="claimResponseRq.ImmediatePartCollectionIndicatorBoolean">
+  </CheckBoxInput>
+  <CheckBoxInput
+    desc="passed in wb:ClaimResponseRq/wb:Claim/wb:Indicators/wb:MultipleResponseIndicator"
+    editable="true"
+    id="multipleResponseIndicator"
+    label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.MultipleResponses&quot;)"
+    value="claimResponseRq.MultipleResponseIndicatorBoolean">
+  </CheckBoxInput>
+  </InputSet>
+</PCF>

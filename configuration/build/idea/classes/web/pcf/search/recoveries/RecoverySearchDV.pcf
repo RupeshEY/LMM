@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <DetailViewPanel
+    id="RecoverySearchDV">
+    <Require
+      name="RecoverySearchCriteria"
+      type="RecoverySearchCriteria"/>
+    <InputColumn
+      width="500">
+      <InputSetRef
+        def="RecoverySearchRequiredInputSet(RecoverySearchCriteria)"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="RecoverySearchOptionalInputSet(RecoverySearchCriteria)"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

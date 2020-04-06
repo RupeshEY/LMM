@@ -1,0 +1,153 @@
+<?xml version="1.0"?>
+<!-- Contact and contact related extensions -->
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ClaimContact">
+  <!-- ATTENTION: Outside of PartiesInvolved Page, ClaimContacts are not instantiated at the time when the Contacts are created.
+			Should add the following available attribute to the input widget for the extended fields to avoid exceptions
+			when the field is updated:         available="claimContact != null"   This is extended as part of content enhancement for 4.0  BEGIN Content Enhancement -->
+  <column
+    desc="Start Date when this Contact is valid on this claim "
+    name="ContactValidFrom"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date when this Contact is no longer valid on this claim"
+    name="ContactValidTo"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Benefit end date"
+    name="BenefitEndDate"
+    nullok="true"
+    type="datetime"/>
+  <typekey
+    desc="Reason benefits ended - typelist"
+    name="BenefitEndReasonType"
+    nullok="true"
+    typelist="BenefitEndReasonType"/>
+  <!-- NOTE: This BenefitEndReason column is considered deprecated, in favor of BenefitEndReasonType -->
+  <column
+    desc="Reason benefits ended (deprecated in favor of BenefitEndReasonType)"
+    name="BenefitEndReason"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    desc="Type of dependent - spouse, child etc."
+    name="DependentType"
+    nullok="true"
+    typelist="DependentType"/>
+  <!-- END Content EnhancementBEGIN PIP -->
+  <typekey
+    desc="Type essential service provided by contact"
+    name="EssentialServiceType"
+    nullok="true"
+    typelist="EssentialServiceType"/>
+  <typekey
+    desc="Provider type"
+    name="ProviderType"
+    nullok="true"
+    typelist="ProviderType"/>
+  <column
+    desc="The service provided by contact"
+    name="Service"
+    nullok="true"
+    type="mediumtext"/>
+  <!-- <searchColumn
+    xmlns=""
+    desc="denormalization of contact name kanji, to speed up search for claim by contact name"
+    name="ContactNameKanjiDenorm"
+    sourceColumn="NameKanji"
+    sourceForeignKey="Contact"/> -->
+  <!-- <searchColumn
+    xmlns=""
+    desc="denormalization of person first name kanji, to speed up search for claim by person name"
+    name="PersonFirstNameKanjiDenorm"
+    sourceColumn="FirstNameKanji"
+    sourceForeignKey="Contact"
+    sourceSubtype="Person"/> -->
+  <!-- <searchColumn
+    xmlns=""
+    desc="denormalization of person last name kanji, to speed up search for claim by person name"
+    name="PersonLastNameKanjiDenorm"
+    sourceColumn="LastNameKanji"
+    sourceForeignKey="Contact"
+    sourceSubtype="Person"/> -->
+  <!-- <index
+    xmlns=""
+    desc="Covering index for search by name"
+    name="CompanyNameK2"
+    trackUsage="true"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ContactNameKanjiDenorm"/>
+    <indexcol
+      keyposition="2"
+      name="ClaimantFlag"/>
+    <indexcol
+      keyposition="3"
+      name="Retired"/>
+    <indexcol
+      keyposition="4"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="5"
+      name="ID"/>
+  </index> -->
+  <!-- <index
+    xmlns=""
+    desc="Covering index for search by person last name"
+    expectedtobecovering="true"
+    name="PersonLastFirstNK"
+    trackUsage="true"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="PersonLastNameKanjiDenorm"/>
+    <indexcol
+      keyposition="2"
+      name="PersonFirstNameKanjiDenorm"/>
+    <indexcol
+      keyposition="3"
+      name="ClaimantFlag"/>
+    <indexcol
+      keyposition="4"
+      name="Retired"/>
+    <indexcol
+      keyposition="5"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="6"
+      name="ID"/>
+  </index> -->
+
+  <!-- Uncomment these indexes and remove the ClmConLastFirstN index if you are using Partitioning -->
+  <!--
+  <index desc="Covering index for search by person last name" expectedtobecovering="true" name="ClmConLastFirstNIn" trackUsage="true" unique="true">
+    <indexcol keyposition="1" name="PersonLastNameDenorm"/>
+    <indexcol keyposition="2" name="PersonFirstNameDenorm"/>
+    <indexcol keyposition="3" name="Retired"/>
+    <indexcol keyposition="4" name="ClaimID"/>
+    <indexcol keyposition="5" name="ID"/>
+  </index>
+
+  <index desc="Covering index for search by person last name" expectedtobecovering="true" name="ClmConLastFirstNCl" trackUsage="true" unique="true">
+    <indexcol keyposition="1" name="ClaimantFlag"/>
+    <indexcol keyposition="2" name="PersonLastNameDenorm"/>
+    <indexcol keyposition="3" name="PersonFirstNameDenorm"/>
+    <indexcol keyposition="4" name="Retired"/>
+    <indexcol keyposition="5" name="ClaimID"/>
+    <indexcol keyposition="6" name="ID"/>
+  </index>
+  -->
+
+  <index desc="Covering index for search by person last name" expectedtobecovering="true" name="ClmConLastFirstN" trackUsage="true" unique="true">
+    <indexcol keyposition="1" name="PersonLastNameDenorm"/>
+    <indexcol keyposition="2" name="PersonFirstNameDenorm"/>
+    <indexcol keyposition="3" name="ClaimantFlag"/>
+    <indexcol keyposition="4" name="Retired"/>
+    <indexcol keyposition="5" name="ClaimID"/>
+    <indexcol keyposition="6" name="ID"/>
+  </index>
+</extension>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="perm.System.editsubrodetails"
+    canVisit="perm.Claim.view(party.SubrogationSummary.Claim) and perm.System.viewsubrodetails"
+    id="SubroAdversePartyDetail"
+    parent="SubrogationGeneral(party.SubrogationSummary.Claim)"
+    showUpLink="true"
+    title="party.DisplayName">
+    <LocationEntryPoint
+      signature="SubroAdversePartyDetail(party : SubroAdverseParty)"/>
+    <Variable
+      name="party"
+      type="SubroAdverseParty"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <PanelRef
+        def="SubrogationPartyDetailDV(party)"/>
+    </Screen>
+  </Page>
+</PCF>

@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Table linking Reviews to QuestionSet"
+  entity="ReviewCategoryQuestionSet"
+  exportable="true"
+  platform="false"
+  table="reviewcategoryquestionset"
+  type="joinarray">
+  <implementsInterface
+    iface="gw.cc.contact.entity.ReviewCategoryQuestionSet"
+    impl="com.guidewire.cc.domain.contact.impl.ReviewCategoryQuestionSetImpl"/>
+  <typekey
+    default="general"
+    desc="Category of this QuestionSet."
+    name="ReviewCategory"
+    nullok="false"
+    typelist="ReviewCategory"/>
+  <column
+    name="ElementOrder"
+    nullok="false"
+    type="integer"/>
+  <foreignkey
+    columnName="ReviewTypeID"
+    desc="Associated ReviewType."
+    fkentity="ReviewType"
+    name="ReviewType"
+    nullok="false"/>
+  <foreignkey
+    columnName="QuestionSetID"
+    desc="Associated QuestionSet."
+    fkentity="QuestionSet"
+    name="QuestionSet"
+    nullok="false"/>
+  <index
+    desc="Ensures uniqueness, question sets cannot be shared across review types or categories"
+    name="reviewcatqsetu2"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="QuestionSetID"/>
+  </index>
+</entity>

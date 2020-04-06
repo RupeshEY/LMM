@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="View entity for efficiently displaying ClaimInfo on the Simple Claim search page."
+  entity="ClaimInfoSearchView"
+  exportable="false"
+  primaryEntity="ClaimInfo">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.archiving.impl.ClaimInfoSearchViewInternal"
+    impl="com.guidewire.cc.domain.claim.archiving.impl.ClaimInfoSearchViewImpl"/>
+  <implementsInterface
+    iface="gw.cc.claim.ArchivedClaimCompatible"
+    impl="com.guidewire.cc.domain.claim.archiving.impl.ClaimInfoSearchViewImpl"/>
+  <implementsInterface
+    iface="gw.cc.claim.archiving.entity.ClaimInfoSearchView"
+    impl="com.guidewire.cc.domain.claim.archiving.impl.ClaimInfoSearchViewImpl"/>
+  <fulldescription><![CDATA[
+        Supports the efficient creation of claimInfo lists returned through ClaimCenter's search function. This is a virtual
+        entity and is not stored in the database.
+      
+    ]]></fulldescription>
+  <viewEntityColumn
+    name="ClaimNumber"
+    path="ClaimNumber"/>
+  <viewEntityLink
+    name="Claim"
+    path="Claim"/>
+  <viewEntityLink
+    name="ClaimInfo"
+    path="ID"/>
+  <viewEntityColumn
+    name="PolicyNumber"
+    path="PolicyNumber"/>
+  <viewEntityColumn
+    name="CreateTime"
+    path="CreateTime"/>
+  <viewEntityColumn
+    name="LossDate"
+    path="LossDate"/>
+  <viewEntityTypekey
+    name="ArchiveState"
+    path="ArchiveState"/>
+  <viewEntityName
+    name="ArchivedAdjuster"
+    path="Adjuster"/>
+</viewEntity>

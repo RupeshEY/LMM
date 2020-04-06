@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_financials.xml -->
+  <ListViewPanel
+    id="TransactionLineItemsLV">
+    <Require
+      name="Transaction"
+      type="Transaction"/>
+    <RowIterator
+      editable="false"
+      elementName="TransactionLineItem"
+      value="Transaction.LineItems"
+      valueType="entity.TransactionLineItem[]">
+      <Row>
+        <TypeKeyCell
+          id="LineCategory"
+          label="DisplayKey.get(&quot;LV.Financials.TransactionLineItems.TransactionLineItem.LineCategory&quot;)"
+          value="TransactionLineItem.LineCategory"
+          valueType="typekey.LineCategory"/>
+        <TextCell
+          id="Comments"
+          label="DisplayKey.get(&quot;LV.Financials.TransactionLineItems.TransactionLineItem.Comments&quot;)"
+          value="TransactionLineItem.Comments"/>
+        <CurrencyCell
+          formatType="currency"
+          id="Amount"
+          label="DisplayKey.get(&quot;LV.Financials.TransactionLineItems.TransactionLineItem.Amount&quot;)"
+          value="TransactionLineItem.TransactionAmountReservingAmountPair"
+          valueType="gw.api.financials.IPairedMoney"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

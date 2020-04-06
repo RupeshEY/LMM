@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <MenuItemSet
+    desc="Used to construct the New Contact menu for Doctor Contact pickers"
+    id="ClaimNewDoctorOnlyPickerMenuItemSet">
+    <Require
+      name="requiredContactType"
+      type="Type"/>
+    <Require
+      name="parentContact"
+      type="Contact"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <MenuItem
+      action="NewContactPopup.push(typekey.Contact.TC_DOCTOR, parentContact, claim)"
+      id="NewContactPickerMenuItemSet_Doctor"
+      label="DisplayKey.get(&quot;Web.NewContactMenu.NewDoctor&quot;)"
+      visible="true"/>
+  </MenuItemSet>
+</PCF>

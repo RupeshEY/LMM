@@ -1,0 +1,13 @@
+package rules.Closed
+
+@gw.rules.RuleName("Claim Closed")
+@gw.rules.RuleSetDescription("This is the Claim Closed rule set. These rules execute after a claim has been closed, after Claim Closed Validation rules but before preupdate and validation rules, in order to take automated actions on close.")
+class ClaimClosed extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Claim) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Claim) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Claim Closed", ClaimClosed )
+  }
+}

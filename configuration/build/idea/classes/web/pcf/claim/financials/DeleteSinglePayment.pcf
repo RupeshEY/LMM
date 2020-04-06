@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCommit="if (afterCommitAction != null) {afterCommitAction()}"
+    beforeCommit="if (beforeCommitAction != null) {beforeCommitAction()}"
+    canEdit="true"
+    canVisit="perm.Payment.view(Payment)"
+    id="DeleteSinglePayment"
+    parent="ClaimFinancialsChecksDetail(Claim, Payment.Check)"
+    title="DisplayKey.get(&quot;JSP.DeleteCheck.Confirm.Title&quot;)">
+    <LocationEntryPoint
+      signature="DeleteSinglePayment(Claim : Claim, Payment : Payment)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Payment"
+      type="Payment"/>
+    <Variable
+      initialValue="Payment.Check"
+      name="Check"
+      recalculateOnRefresh="true"
+      type="entity.Check"/>
+    <Variable
+      initialValue="null"
+      name="beforeCommitAction"
+      type="block()"/>
+    <Variable
+      initialValue="null"
+      name="afterCommitAction"
+      type="block()"/>
+    <Screen
+      id="DeleteSinglePaymentScreen">
+      <Toolbar>
+        <!-- Need to finish permissions and other visible/available controls -->
+        <ToolbarButton
+          action="ClaimFinancialsTransactionsDetail.go(Claim, Payment)"
+          id="DeleteSinglePayment_CancelButton"
+          label="DisplayKey.get(&quot;Button.Cancel&quot;)"/>
+        <ToolbarButton
+          action="ensureLocationEditing(); beforeCommitAction = \ -&gt; deleteCheck(Check); afterCommitAction = \ -&gt; saveAndGo();  CurrentLocation.commit()"
+          available="Check.Deletable and perm.Payment.edit(Check)"
+          id="DeleteSinglePayment_DeleteButton"
+          label="DisplayKey.get(&quot;Button.Delete&quot;)"
+          visible="perm.Payment.edit(Check)"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            boldLabel="true"
+            id="DeletePaymentWarningMessage"
+            label="DeleteCheckWarningMessage"
+            labelAbove="true"
+            value="&quot;&quot;"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="CheckDV(Check)"
+        visible="!Check.Retired"/>
+    </Screen>
+    <Code><![CDATA[function deleteCheck(aCheck: Check) {
+  aCheck.unlinkDeductibles()
+  aCheck.delete()
+}
+
+function saveAndGo() {
+  gw.api.financials.ClaimFinancialsTransactionsOption.PAYMENT.saveOption(Claim)
+  ClaimFinancialsTransactions.go(Claim)
+}
+
+function ensureLocationEditing() {
+  if (!CurrentLocation.InEditMode) {
+    CurrentLocation.startEditing();
+  }
+}
+
+property get DeleteCheckWarningMessage(): String {
+  var invoiceList = Check.BulletedListOfServiceRequestInvoicesForWarning
+  if (invoiceList != null) {
+    return DisplayKey.get("Java.Financials.DeleteCheckWithInvoices.Tip.Payment", ServiceRequestInvoiceStatus.TC_APPROVED.DisplayName, invoiceList)
+  } else {
+    return DisplayKey.get("Java.Financials.DeleteCheck.Tip.Payment")
+}
+}]]></Code>
+  </Page>
+</PCF>

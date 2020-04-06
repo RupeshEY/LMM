@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="CheckWizard_PaymentDeductionsPagePopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.NewCheckDeductions.Deductions.Title&quot;)">
+    <LocationEntryPoint
+      signature="CheckWizard_PaymentDeductionsPagePopup(Claim : Claim, Wizard : gw.api.financials.CheckWizardInfo, Check : Check)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Wizard"
+      type="gw.api.financials.CheckWizardInfo"/>
+    <Variable
+      name="Check"
+      type="Check"/>
+    <Screen
+      id="CheckWizard_AddPayeeScreen">
+      <Toolbar>
+        <EditButtons/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="Wizard.computeDeductions(Check)"
+          id="CheckWizard_PaymentDeductionsPagePopup_RecalculateButton"
+          label="DisplayKey.get(&quot;Java.Financials.Deductions.Reportable.Amount.Recalculate&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="PaymentDeductionsDV(Check, Wizard)"/>
+    </Screen>
+  </Popup>
+</PCF>

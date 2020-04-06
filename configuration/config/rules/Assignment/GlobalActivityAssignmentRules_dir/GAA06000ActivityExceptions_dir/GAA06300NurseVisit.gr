@@ -1,0 +1,49 @@
+package rules.Assignment.GlobalActivityAssignmentRules_dir.GAA06000ActivityExceptions_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+
+@gw.rules.RuleName("GAA06300 -  Nurse Visit")
+internal class GAA06300NurseVisit {
+  static function doCondition(activity : entity.Activity) : boolean {
+    
+/*start00rule*/
+return activity.ActivityPattern.Code == "nurse_visit"
+and activity.Claim.Insured.PrimaryAddress != null
+/*end00rule*/
+
+  }
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+
+/*start00rule*/
+// Try to assign to a nursing team by the insured's address
+var logger = CCLoggerCategory.ASSIGNMENT
+
+var usergroup : Group
+var result = libraries.Activityassignment.getUserRoleGroupTypeBasedonActivityPattern(activity.ActivityPattern.Code)
+var userrole = result[0]
+var grouptype = result[1]
+
+for (assign in activity.Claim.RoleAssignments) {
+  if (assign.Role == typekey.UserRole.get(userrole)) {
+    usergroup = assign.AssignedGroup
+    if (activity.CurrentAssignment.assignGroup(usergroup)) {
+      logger.debug(DisplayKey.get("Rules.Assignment.Global.Activity", actions.ShortRuleName))
+      logger.debug(DisplayKey.get("Rules.Assignment.AssignedGroupIs", activity.AssignedGroup))
+      actions.exit()
+    }
+  }
+} 
+
+if (activity.CurrentAssignment.assignGroupByLocation(typekey.GroupType.get(grouptype), activity.Claim.Insured.PrimaryAddress,
+                                                      true, activity.CurrentAssignment.AssignedGroup)) {
+  logger.debug(DisplayKey.get("Rules.Assignment.Global.Activity", actions.ShortRuleName))
+  logger.debug(DisplayKey.get("Rules.Assignment.AssignedGroupIs", activity.AssignedGroup))
+  actions.exit()
+}
+
+// If there is no address, let the adjuster get the activity
+/*end00rule*/
+
+  }
+}

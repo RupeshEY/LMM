@@ -1,0 +1,397 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<!--
+  ClaimCenter schema to Solr schema index and query mapping configuration.
+-->
+<SolrSchemaMapping
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="solr-search-config.xsd"
+  version="1">
+
+  <!--
+    <Indexer>
+      <IndexField field="solr_field_name" mapper="mapper_class>
+        <DataProperty name="fq_bean_name" property="property_name"/>
+        ... additional entity properties, if any
+      </IndexField>
+
+      ... additional index entries as needed
+
+    </Indexer>
+  -->
+
+  <!-- Map Solr Index to persistent entities or pogo(s) for indexing -->
+  <Indexer>
+
+    <Root name="root" type="entity.ClaimContact"/>
+
+    <IndexField field="urn" mapper="gw.solr.mapper.BuildURN" key="true">
+      <DataProperty path="root.Claim.PublicID"/>
+      <DataProperty path="root.Contact.PublicID"/>
+    </IndexField>
+
+    <IndexField field="claimNumber">
+      <DataProperty path="root.Claim.ClaimNumber"/>
+    </IndexField>
+
+    <IndexField field="policyNumber">
+      <DataProperty path="root.Claim.Policy.PolicyNumber"/>
+    </IndexField>
+
+    <IndexField field="roles" mapper="gw.solr.mapper.BuildRoles">
+      <DataProperty path="root.Roles"/>
+    </IndexField>
+
+    <IndexField field="firstName">
+      <DataProperty path="root.(Contact as entity.Person).FirstName"/>
+    </IndexField>
+
+    <IndexField field="lastName">
+      <DataProperty path="root.(Contact as entity.Person).LastName"/>
+    </IndexField>
+
+    <IndexField field="businessName">
+      <DataProperty path="root.(Contact as entity.Company).Name"/>
+    </IndexField>
+
+      <!-- Search across entire name -->
+    <IndexField field="fullName">
+        <DataProperty path="root.Contact.DisplayName"/>
+    </IndexField>
+
+    <IndexField field="phones" mapper="gw.solr.mapper.BuildPhones">
+      <DataProperty path="root.(Contact as entity.Person).HomePhone">
+        <DataProperty path="root.(Contact as entity.Person).HomePhoneCountry" property="phonecountrycodeProperty" />
+        <DataProperty path="root.(Contact as entity.Person).HomePhoneExtension" property="extensionProperty" />
+      </DataProperty>
+      <DataProperty path="root.(Contact as entity.Person).CellPhone">
+        <DataProperty path="root.(Contact as entity.Person).CellPhoneCountry" property="phonecountrycodeProperty" />
+        <DataProperty path="root.(Contact as entity.Person).CellPhoneExtension" property="extensionProperty" />
+      </DataProperty>
+      <DataProperty path="root.Contact.WorkPhone">
+        <DataProperty path="root.Contact.WorkPhoneCountry" property="phonecountrycodeProperty" />
+        <DataProperty path="root.Contact.WorkPhoneExtension" property="extensionProperty" />
+      </DataProperty>
+    </IndexField>
+
+    <IndexField field="licenseNumber">
+      <DataProperty path="root.(Contact as entity.Person).LicenseNumber"/>
+    </IndexField>
+
+    <IndexField field="address" mapper="gw.solr.mapper.BuildAddressLines">
+      <DataProperty path="root.Contact.PrimaryAddress.AddressLine1"/>
+      <DataProperty path="root.Contact.PrimaryAddress.AddressLine2"/>
+      <DataProperty path="root.Contact.PrimaryAddress.AddressLine3"/>
+    </IndexField>
+
+    <IndexField field="city">
+      <DataProperty path="root.Contact.PrimaryAddress.City"/>
+    </IndexField>
+
+    <IndexField field="state">
+      <DataProperty path="root.Contact.PrimaryAddress.State"/>
+    </IndexField>
+
+    <IndexField field="postalCode">
+      <DataProperty path="root.Contact.PrimaryAddress.PostalCode"/>
+    </IndexField>
+
+    <IndexField field="lossDate" mapper="gw.solr.mapper.CCBuildDate">
+      <DataProperty path="root.Claim.LossDate"/>
+    </IndexField>
+
+    <IndexField field="reportedDate" mapper="gw.solr.mapper.CCBuildDate">
+      <DataProperty path="root.Claim.ReportedDate"/>
+    </IndexField>
+
+    <IndexField field="closeDate" mapper="gw.solr.mapper.CCBuildDate">
+      <DataProperty path="root.Claim.CloseDate"/>
+    </IndexField>
+
+    <IndexField field="createTime" mapper="gw.solr.mapper.CCBuildDate">
+      <DataProperty path="root.Claim.CreateTime"/>
+    </IndexField>
+
+    <IndexField field="userIds" mapper="gw.solr.mapper.BuildACLInfo">
+      <DataProperty name="ACLInfo" property="UserIds"/>
+    </IndexField>
+
+    <IndexField field="groupIds" mapper="gw.solr.mapper.BuildACLInfo">
+      <DataProperty name="ACLInfo" property="GroupIds"/>
+    </IndexField>
+
+    <IndexField field="securityZoneIds" mapper="gw.solr.mapper.BuildACLInfo">
+      <DataProperty name="ACLInfo" property="SecurityZoneIds"/>
+    </IndexField>
+
+    <IndexField field="anyone">
+      <DataProperty name="ACLInfo" property="Anyone"/>
+    </IndexField>
+
+  </Indexer>
+
+  <!--
+    <Query>
+
+      Optional term to enable grouping of query results by the specified field (must be indexed, must be stored)
+      <Group enabled="true" field="group_by_field" limit="2"/>
+
+      <QueryTerm type="term/subquery/selection" required="t/f" mapper="pkg.mapper" tagger="pkg.taghandler" encoder="pkg.encoder">
+        <DataProperty name="fq_bean_name" property="property_name"/>
+        ... additional entity properties, if any
+        <QueryField field="solr_field" match="exact/prefix/synonym/phonetic" boost="#.#"/>
+        ... additional query fields, if any (e.g. subqueries)
+      </QueryTerm>
+
+      ... additional query terms as needed
+
+    </Query>
+  -->
+  <!-- Map Solr Index to search criteria non-persistent entity or pogo -->
+
+  <Query applyFilterOnEmptyQuery="false">
+
+    <Root name="root" type="entity.ClaimSearchCriteria"/>
+
+    <QueryTerm type="subquery" encoder="gw.solr.mapper.query.PhraseEncoder" tagger="gw.solr.mapper.query.DefaultTagHandler">
+      <DataProperty path="root.NameCriteria.FirstName"/>
+      <QueryField field="firstName" match="exact" boost="5.0"/>
+      <QueryField field="firstNamePrefix" match="prefix" boost="4.0"/>
+      <QueryField field="firstNameSynonym" match="synonym" boost="3.0"/>
+      <QueryField field="firstNamePhonetic" match="phonetic" boost="2.0"/>
+    </QueryTerm>
+
+    <QueryTerm type="subquery" encoder="gw.solr.mapper.query.PhraseEncoder" tagger="gw.solr.mapper.query.DefaultTagHandler">
+      <DataProperty path="root.NameCriteria.LastName"/>
+      <QueryField field="lastName" match="exact" boost="5.0"/>
+      <QueryField field="lastNamePrefix" match="prefix" boost="4.0"/>
+      <QueryField field="lastNamePhonetic" match="phonetic" boost="2.0"/>
+    </QueryTerm>
+
+    <QueryTerm type="subquery" encoder="gw.solr.mapper.query.PhraseEncoder" tagger="gw.solr.mapper.query.DefaultTagHandler">
+      <DataProperty path="root.NameCriteria.CompanyName"/>
+      <QueryField field="businessName" match="exact" boost="5.0"/>
+      <QueryField field="businessNamePrefix" match="prefix" boost="4.0"/>
+      <QueryField field="businessNamePhonetic" match="phonetic" boost="2.0"/>
+    </QueryTerm>
+
+    <QueryTerm type="subquery" encoder="gw.solr.mapper.query.PhraseEncoder" tagger="gw.solr.mapper.query.DefaultTagHandler">
+      <DataProperty path="root.NameCriteria.Name"/>
+      <QueryField field="fullName" match="exact" boost="5.0"/>
+      <QueryField field="fullNamePrefix" match="prefix" boost="4.0"/>
+      <QueryField field="fullNamePhonetic" match="phonetic" boost="2.0"/>
+    </QueryTerm>
+
+    <QueryTerm type="term" mapper="gw.solr.mapper.BuildPhones">
+      <DataProperty path="root.NameCriteria.Phone"/>
+      <QueryField field="phones" match="exact" boost="3.0"/>
+    </QueryTerm>
+
+    <QueryTerm type="subquery" encoder="gw.solr.mapper.query.PhraseEncoder" tagger="gw.solr.mapper.query.DefaultTagHandler">
+      <DataProperty path="root.NameCriteria.LicenseNumber"/>
+      <QueryField field="licenseNumber" match="exact" boost="5.0"/>
+    </QueryTerm>
+
+    <QueryTerm type="subquery" encoder="gw.solr.mapper.query.PhraseEncoder" tagger="gw.solr.mapper.query.DefaultTagHandler">
+      <DataProperty path="root.AddressCriteria.AddressLine1"/> <!-- Use AddressLine1 for query -->
+      <QueryField field="address" match="exact" boost="4.0"/>
+      <QueryField field="addressPrefix" match="prefix" boost="3.2"/>
+      <QueryField field="addressPhonetic" match="phonetic" boost="1.6"/>
+    </QueryTerm>
+
+    <QueryTerm type="subquery" encoder="gw.solr.mapper.query.PhraseEncoder" tagger="gw.solr.mapper.query.DefaultTagHandler">
+      <DataProperty path="root.AddressCriteria.City"/>
+      <QueryField field="city" match="exact" boost="3.0"/>
+      <QueryField field="cityPrefix" match="prefix" boost="2.4"/>
+      <QueryField field="cityPhonetic" match="phonetic" boost="1.2"/>
+    </QueryTerm>
+
+    <QueryFilter>
+      <FilterTerm mapper="gw.solr.mapper.BuildRoles">
+        <DataProperty path="root.FreeTextNameSearchType"/>
+        <QueryField field="roles" match="exact" boost="5.0"/>
+      </FilterTerm>
+
+      <FilterTerm>
+      <DataProperty path="root.AddressCriteria.State"/>
+      <QueryField field="state" match="exact" boost="3.0"/>
+      </FilterTerm>
+
+      <FilterTerm>
+      <DataProperty path="root.AddressCriteria.PostalCode"/>
+      <QueryField field="postalCode" match="exact" boost="3.0"/>
+      </FilterTerm>
+
+      <FilterTerm mapper="gw.solr.mapper.CCBuildDate">
+      <DataProperty name="LossDate"/>
+      <QueryField field="lossDate" match="range" boost="1.0"/>
+      </FilterTerm>
+
+      <FilterTerm mapper="gw.solr.mapper.CCBuildDate">
+      <DataProperty name="ReportedDate"/>
+      <QueryField field="reportedDate" match="range" boost="1.0"/>
+      </FilterTerm>
+
+      <FilterTerm mapper="gw.solr.mapper.CCBuildDate">
+      <DataProperty name="CloseDate"/>
+      <QueryField field="closeDate" match="range" boost="1.0"/>
+      </FilterTerm>
+
+      <FilterTerm mapper="gw.solr.mapper.CCBuildDate">
+      <DataProperty name="CreateDate"/>
+      <QueryField field="createTime" match="range" boost="1.0"/>
+      </FilterTerm>
+
+      <OrFilter>
+        <FilterTerm mapper="gw.solr.mapper.BuildACLInfo" encoder="">
+          <DataProperty name="ACLInfo" property="UserIds"/>
+          <QueryField field="userIds" match="exact" boost="1.0"/>
+        </FilterTerm>
+
+        <FilterTerm mapper="gw.solr.mapper.BuildACLInfo" encoder="">
+          <DataProperty name="ACLInfo" property="GroupIds"/>
+          <QueryField field="groupIds" match="exact" boost="1.0"/>
+        </FilterTerm>
+
+        <FilterTerm mapper="gw.solr.mapper.BuildACLInfo" encoder="">
+          <DataProperty name="ACLInfo" property="SecurityZoneIds"/>
+          <QueryField field="securityZoneIds" match="exact" boost="1.0"/>
+        </FilterTerm>
+
+        <FilterTerm mapper="gw.solr.mapper.BuildACLInfo" encoder="">
+          <DataProperty name="ACLInfo" property="Anyone"/>
+          <QueryField field="anyone" match="exact" boost="1.0"/>
+        </FilterTerm>
+      </OrFilter>
+
+    </QueryFilter>
+
+<!--
+    <QueryTerm type="term" required="true" mapper="gw.solr.mapper.BuildACLInfo" encoder="">
+      <DataProperty name="ACLInfo" property="UserIds"/>
+      <QueryField field="userIds" match="exact" boost="1.0"/>
+    </QueryTerm>
+
+    <QueryTerm type="term" required="true" mapper="gw.solr.mapper.BuildACLInfo" encoder="">
+      <DataProperty name="ACLInfo" property="GroupIds"/>
+      <QueryField field="groupIds" match="exact" boost="1.0"/>
+    </QueryTerm>
+
+    <QueryTerm type="term" required="true" mapper="gw.solr.mapper.BuildACLInfo" encoder="">
+      <DataProperty name="ACLInfo" property="SecurityZoneIds"/>
+      <QueryField field="securityZoneIds" match="exact" boost="1.0"/>
+    </QueryTerm>
+
+    <QueryTerm type="term" required="true" mapper="gw.solr.mapper.BuildACLInfo" encoder="">
+      <DataProperty name="ACLInfo" property="Anyone"/>
+      <QueryField field="anyone" match="exact" boost="1.0"/>
+    </QueryTerm>
+ -->
+  </Query>
+
+  <!--
+    <QueryResult>
+      <ResultProperty name="property_name" mapper="pkg.mapper">
+        <ResultField field="solr_field_name"/>
+        ... additional result fields, if any
+        <DataProperty name="fq_bean_name" property="property_name"/>
+        ... additional entity properties, if any
+      </ResultProperty>
+    </QueryResult>
+  -->
+
+  <!-- Map Solr query result to search result non-persistent entity or pogo -->
+  <QueryResult>
+
+    <ResultProperty name="Urn">
+      <ResultField name="urn"/>
+    </ResultProperty>
+
+    <ResultProperty name="ClaimNumber">
+      <ResultField name="claimNumber" sortFieldName="claimNumber"/>
+    </ResultProperty>
+
+    <ResultProperty name="PolicyNumber">
+      <ResultField name="policyNumber"/>
+    </ResultProperty>
+
+    <ResultProperty name="Status" mapper="gw.solr.mapper.BuildStatus">
+      <ResultField name="claimNumber"/>
+    </ResultProperty>
+
+    <ResultProperty name="Roles" mapper="gw.solr.mapper.BuildRoles">
+      <ResultField name="roles"/>
+    </ResultProperty>
+
+    <ResultProperty name="FirstName">
+      <ResultField name="firstName"/>
+    </ResultProperty>
+
+    <ResultProperty name="LastName">
+      <ResultField name="lastName"/>
+    </ResultProperty>
+
+    <ResultProperty name="BusinessName">
+      <ResultField name="businessName"/>
+    </ResultProperty>
+
+    <ResultProperty name="FullName">
+       <ResultField name="fullName"/>
+    </ResultProperty>
+
+    <ResultProperty name="Phone" mapper="gw.solr.mapper.BuildPhones">
+      <ResultField name="phones"/>
+      <DataProperty path="root.NameCriteria.Phone"/>
+    </ResultProperty>
+
+    <ResultProperty name="LicenseNumber">
+      <ResultField name="licenseNumber"/>
+    </ResultProperty>
+
+    <ResultProperty name="Address">
+        <ResultField name="address"/>
+    </ResultProperty>
+
+    <ResultProperty name="City">
+      <ResultField name="city"/>
+    </ResultProperty>
+
+    <ResultProperty name="State">
+      <ResultField name="state"/>
+    </ResultProperty>
+
+    <ResultProperty name="PostalCode">
+      <ResultField name="postalCode" sortFieldName="postalCode"/>
+    </ResultProperty>
+
+    <ResultProperty name="Date" mapper="gw.solr.mapper.CCBuildDate">
+      <ResultField name="lossDate" sortFieldName="lossDate" key="LossDate"/>
+      <ResultField name="reportedDate" sortFieldName="reportedDate" key="ReportedDate"/>
+      <ResultField name="createTime" sortFieldName="createTime" key="CreateTime"/>
+      <ResultField name="closeDate" sortFieldName="closeDate" key="CloseDate"/>
+      <DataProperty name="DateFieldSelection"/>
+    </ResultProperty>
+
+    <ResultProperty name="LossDate" mapper="gw.solr.mapper.CCBuildDate">
+      <ResultField name="lossDate"/>
+    </ResultProperty>
+
+    <ResultProperty name="ReportedDate" mapper="gw.solr.mapper.CCBuildDate">
+      <ResultField name="reportedDate"/>
+    </ResultProperty>
+
+    <ResultProperty name="CreateTime" mapper="gw.solr.mapper.CCBuildDate">
+      <ResultField name="createTime"/>
+    </ResultProperty>
+
+    <ResultProperty name="CloseDate" mapper="gw.solr.mapper.CCBuildDate">
+      <ResultField name="closeDate"/>
+    </ResultProperty>
+
+    <ResultProperty name="Score" mapper="gw.solr.mapper.BuildNumber.DECIMAL">
+      <ResultField name="score" sortFieldName="score"/>
+    </ResultProperty>
+
+  </QueryResult>
+
+</SolrSchemaMapping>

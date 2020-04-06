@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?><s:schema xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:tns="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      
+<s:element name="SubmitToISO">
+        
+<s:complexType>
+          
+<s:sequence>
+            
+<s:element maxOccurs="1" minOccurs="0" name="xml" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      
+<s:element name="SubmitToISOResponse">
+        
+<s:complexType>
+          
+<s:sequence>
+            
+<s:element maxOccurs="1" minOccurs="0" name="SubmitToISOResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      
+<s:element name="ISOLogin" type="tns:ISOLogin"/>
+      
+<s:complexType name="ISOLogin">
+        
+<s:sequence>
+          
+<s:element maxOccurs="1" minOccurs="0" name="userName" type="s:string"/>
+          
+<s:element maxOccurs="1" minOccurs="0" name="password" type="s:string"/>
+        </s:sequence>
+      </s:complexType>
+      
+<s:element name="VaildateSchema">
+        
+<s:complexType>
+          
+<s:sequence>
+            
+<s:element maxOccurs="1" minOccurs="0" name="xml" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      
+<s:element name="VaildateSchemaResponse">
+        
+<s:complexType>
+          
+<s:sequence>
+            
+<s:element maxOccurs="1" minOccurs="0" name="VaildateSchemaResult" type="s:string"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>

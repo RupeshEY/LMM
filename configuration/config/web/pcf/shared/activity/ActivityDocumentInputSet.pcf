@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="ActivityDocumentInputSet">
+    <Require
+      name="Activity"
+      type="Activity"/>
+    <ListViewInput
+      boldLabel="true"
+      def="ActivityDocumentsLV(Activity)"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDocument.Documents&quot;)"
+      labelAbove="true"
+      visible="perm.System.viewdocs">
+      <Toolbar/>
+    </ListViewInput>
+  </InputSet>
+</PCF>

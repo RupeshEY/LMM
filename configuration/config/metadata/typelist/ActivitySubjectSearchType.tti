@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!-- ### ===========================================================================
+###  tl_activity.xml
+### ===========================================================================
+### tl_activity.xml contains typelists that are used exclusively in elements
+### referenced in md_activity.xml.  General-purpose typelists are stored in
+### tl_general.xml
+  
+    Claim/general exposure-related typelists -->
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The types of subject searches for activity pattens"
+  final="true"
+  name="ActivitySubjectSearchType">
+  <typecode
+    code="activitypattern"
+    desc="Search by activity pattern id"
+    name="Activity Pattern"/>
+  <typecode
+    code="contains"
+    desc="Search by contains text"
+    name="Contains Search"/>
+</typelist>

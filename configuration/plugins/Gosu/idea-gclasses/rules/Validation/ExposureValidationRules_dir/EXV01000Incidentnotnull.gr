@@ -1,0 +1,22 @@
+package rules.Validation.ExposureValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("EXV01000 - Incident not null")
+internal class EXV01000Incidentnotnull {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.Incident == null
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.reject(TC_LOADSAVE, DisplayKey.get("Rules.Validation.Exposure.NoIncident"), null, null)
+/*end00rule*/
+
+  }
+}

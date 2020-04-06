@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<!-- TAccountOwnerDelegate - Used by ReserveLine and RICoding. -->
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="TAccountOwnerDelegate">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.impl.TAccountOwnerDelegateInternal"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountOwnerDelegateImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.TAccountOwnerDelegate"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountOwnerDelegateImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.TAccountOwnerDelegateAdapter"/>
+</delegate>

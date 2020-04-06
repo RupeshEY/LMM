@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Forward
+    desc="Forward used by the ClaimMetrics entry point to go to the claim key metrics for the claim with the given number"
+    id="ClaimMetricsEntryPointForward">
+    <LocationEntryPoint
+      signature="ClaimMetricsEntryPointForward(claimNumber : String)"/>
+    <Variable
+      name="claimNumber"
+      type="String"/>
+    <Variable
+      initialValue="gw.api.database.Query.make(entity.Claim).compare(&quot;ClaimNumber&quot;, Equals, claimNumber).select().FirstResult"
+      name="claim"
+      type="entity.Claim"/>
+    <ForwardCondition
+      action="EndUserError.go(DisplayKey.get(&quot;Web.EntryPoint.ClaimMetricsEntryPointForward.CouldNotFindClaim&quot;, claimNumber))"
+      condition="claim == null"/>
+    <ForwardCondition
+      action="ClaimKeyMetrics.go(claim)"/>
+    <ForwardCondition
+      action="EndUserError.go(DisplayKey.get(&quot;Web.EntryPoint.ClaimMetricsEntryPointForward.CouldNotVisitClaim&quot;, claimNumber))"/>
+  </Forward>
+</PCF>

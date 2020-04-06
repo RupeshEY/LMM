@@ -1,0 +1,42 @@
+<WidgetTemplate name="MetricLimitValueTemplate" cellWidgetName="MetricLimitValueCell">
+
+  <TextValue
+          editable="true"
+          id="Integer#{id}"
+          numCols="#{numCols}"
+          value="#{value}.IntegerValue"
+          valueType="java.lang.Integer"
+          visible="#{value}.DataType.Name == &quot;integer&quot;"/>
+  <TextValue
+          editable="true"
+          id="Decimal#{id}"
+          numCols="#{numCols}"
+          value="#{value}.DecimalValue"
+          valueType="java.math.BigDecimal"
+          visible="#{value}.DataType.Name == &quot;decimalmetric&quot;"/>
+  <TextValue
+          editable="true"
+          formatType="percentagePoints"
+          hideIfEditable="true"
+          id="PercentReadonly#{id}"
+          numCols="#{numCols}"
+          value="#{value}.PercentValue"
+          valueType="java.math.BigDecimal"
+          visible="#{value}.DataType.Name == &quot;percentagemetric&quot;"/>
+  <TextValue
+          editable="true"
+          hideIfReadOnly="true"
+          id="Percent#{id}"
+          numCols="#{numCols}"
+          value="#{value}.PercentValue"
+          valueType="java.math.BigDecimal"
+          visible="#{value}.DataType.Name == &quot;percentagemetric&quot;"/>
+  <CurrencyValue
+          editable="true"
+          id="Money#{id}"
+          numCols="#{numCols}"
+          value="#{value}.MoneyValue"
+          valueType="gw.api.financials.CurrencyAmount"
+          visible="#{value}.DataType.Name == &quot;currencyamount&quot;"/>
+
+</WidgetTemplate>

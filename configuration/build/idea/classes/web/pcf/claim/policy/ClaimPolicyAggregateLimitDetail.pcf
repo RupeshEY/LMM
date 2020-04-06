@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="PageHelper.afterCancel()"
+    afterCommit="PageHelper.afterCommit()"
+    beforeCommit="PageHelper.beforeCommit(AggregateLimit)"
+    canEdit="perm.Policy.edit(Claim)"
+    canVisit="perm.Policy.view(Claim)"
+    id="ClaimPolicyAggregateLimitDetail"
+    parent="ClaimPolicyAggregateLimits(Claim)"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;JSP.ClaimPolicy.Policy.AggregateLimitDetail&quot;)">
+    <LocationEntryPoint
+      signature="ClaimPolicyAggregateLimitDetail(Claim : Claim, AggregateLimit : AggregateLimit)"/>
+    <Variable
+      initialValue="new gw.api.admin.AggregateLimitHelper()"
+      name="PageHelper"
+      type="gw.api.admin.AggregateLimitHelper"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="AggregateLimit"
+      type="AggregateLimit"/>
+    <ScreenRef
+      def="ClaimPolicyAggregateLimitDetailScreen(Claim, AggregateLimit, PageHelper)"/>
+  </Page>
+</PCF>

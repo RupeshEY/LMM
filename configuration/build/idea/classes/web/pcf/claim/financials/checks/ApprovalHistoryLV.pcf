@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_financials.xml -->
+  <ListViewPanel
+    id="ApprovalHistoryLV">
+    <Require
+      name="ActivityList"
+      type="Activity[]"/>
+    <RowIterator
+      editable="false"
+      elementName="Activity"
+      pageSize="6"
+      value="ActivityList"
+      valueType="entity.Activity[]">
+      <Row>
+        <DateCell
+          dateFormat="short"
+          id="ApprovalHistory_Date"
+          label="DisplayKey.get(&quot;LV.Financials.ApprovalHistory.Listview.ApprovalHistory.Date&quot;)"
+          sortDirection="descending"
+          sortOrder="1"
+          timeFormat="short"
+          value="Activity.CloseDate"/>
+        <TextCell
+          id="User"
+          label="DisplayKey.get(&quot;LV.Financials.ApprovalHistory.User&quot;)"
+          value="getApprovalUserOrGroupString( Activity )"/>
+        <TextCell
+          id="Approved"
+          label="DisplayKey.get(&quot;LV.Financials.ApprovalHistory.Approved&quot;)"
+          value="getApprovalString(Activity)"/>
+        <TextCell
+          id="ApprovalIssue"
+          label="DisplayKey.get(&quot;LV.Financials.ApprovalHistory.ApprovalIssue&quot;)"
+          value="Activity.ApprovalIssue"/>
+        <TextCell
+          id="ApprovalRationale"
+          label="DisplayKey.get(&quot;LV.Financials.ApprovalHistory.ApprovalRationale&quot;)"
+          value="Activity.ApprovalRationale"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[
+function getApprovalUserOrGroupString(approvalHistory : Activity) : String {
+  var closeUser = approvalHistory.CloseUser
+  var assignedUser = approvalHistory.AssignedUser
+  var assignedGroup = approvalHistory.AssignedGroup
+  
+  if( closeUser != null )  {
+    return closeUser.DisplayName
+  } 
+  else if( assignedUser != null ) {
+    return assignedUser.DisplayName
+  }  
+  else if( assignedGroup != null ) {
+    return assignedGroup.DisplayName
+  } 
+  else {
+    return ""
+  }
+}
+
+function getApprovalString( activity : Activity ) : String {
+  if (activity.Approved == null) {
+    return DisplayKey.get("Java.ApprovalHistory.PendingApproval")
+  } else if (activity.Approved) {
+    return DisplayKey.get("Java.ApprovalHistory.Approved")
+  } else {
+    return DisplayKey.get("Java.ApprovalHistory.Rejected")
+  }
+}
+    ]]></Code>
+  </ListViewPanel>
+</PCF>

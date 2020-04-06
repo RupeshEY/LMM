@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_claim.xml -->
+  <DetailViewPanel
+    id="ReopenMatterInfoDV">
+    <Require
+      name="ReopenMatterInfo"
+      type="ReopenMatterInfo"/>
+    <InputColumn>
+      <TextAreaInput
+        editable="true"
+        id="Note"
+        label="DisplayKey.get(&quot;NVV.Matter.ReopenMatter.Note&quot;)"
+        numCols="30"
+        numRows="3"
+        value="ReopenMatterInfo.note"/>
+      <TypeKeyInput
+        editable="true"
+        id="Reason"
+        label="DisplayKey.get(&quot;NVV.Matter.ReopenMatter.Reason&quot;)"
+        value="ReopenMatterInfo.reopenReason"
+        valueType="typekey.MatterReopenedReason"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

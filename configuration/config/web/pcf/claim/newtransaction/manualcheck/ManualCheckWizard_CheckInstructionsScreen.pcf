@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="ManualCheckWizard_CheckInstructionsScreen">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.financials.CheckWizardInfo"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentActionsUIHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarDivider/>
+      <PickerToolbarButton
+        action="PickExistingDocumentPopup.push(Claim)"
+        available="documentActionsUIHelper.DocumentMetadataActionsAvailable"
+        id="Button_Reserve_LinkDocument"
+        label="DisplayKey.get(&quot;Button.Reserve.LinkDocument&quot;)"
+        onPick="gw.api.financials.TransactionSetLinkDocumentHelper.linkDocument(PickedValue, Wizard.CheckGroupProxy.CheckSet)"
+        visible="perm.System.viewdocs"/>
+    </Toolbar>
+    <Verbatim
+      id="DeductionsChangedWarning"
+      label="DisplayKey.get(&quot;Wizard.CheckWizard.DeductionsChangedWarning&quot;)"
+      visible="Wizard.isDeductionWarningNeeded()"
+      warning="true"/>
+    <PanelRef
+      def="ManualCheckPaymentInstructionsDV(Wizard.CheckGroupProxy, Wizard)"/>
+  </Screen>
+</PCF>

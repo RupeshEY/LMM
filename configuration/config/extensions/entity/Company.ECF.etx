@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Company">
+  <typekey
+    desc="Coded indication of the maintenance agency (Bureau)."
+    name="ECFBureauType_Ext"
+    nullok="true"
+    typelist="ECFBureauType_Ext"/>
+  <column
+    name="ECFBureauId_Ext"
+    nullok="true"
+    type="shorttext"/>
+</extension>

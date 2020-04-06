@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="TripSegmentDelegate">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.TripSegmentDelegate"
+    impl="com.guidewire.cc.domain.exposure.impl.TripSegmentDelegateImpl"/>
+  <fulldescription><![CDATA[Fields common to both TripSegment and AddnlTripSegment
+    ]]></fulldescription>
+  <typekey
+    desc="Type of transport, airline, cruise ship, taxi etc"
+    name="TransportType"
+    nullok="true"
+    typelist="TransportType"/>
+  <column
+    desc="Name of the airline, cruise ship, bus etc"
+    name="CarrierName"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="250"/>
+  </column>
+  <column
+    desc="Flight, ship, bus number etc"
+    name="CarrierNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Boarding airport, port, city etc"
+    name="PortOfEmbarkation"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Arrival airport, port, city etc"
+    name="PortOfDisembarkation"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Transit airports, ports, cities etc"
+    name="PortOfTransit"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="100"/>
+  </column>
+</delegate>

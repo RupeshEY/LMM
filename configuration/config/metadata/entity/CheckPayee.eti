@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Links a Check to a Contact that is a Payee of the check."
+  entity="CheckPayee"
+  exportable="true"
+  platform="false"
+  table="checkpayee"
+  type="joinarray">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.check.impl.CheckPayeeInternal"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckPayeeImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.check.entity.CheckPayee"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckPayeeImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="CheckID"
+    desc="The check."
+    exportable="false"
+    fkentity="Check"
+    importableagainstexistingobject="false"
+    name="Check"
+    nullok="false"/>
+  <foreignkey
+    columnName="ClaimContactID"
+    desc="The payee as a ClaimContact."
+    exportable="true"
+    fkentity="ClaimContact"
+    name="ClaimContact"
+    nullok="false"
+    triggersValidation="true"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="PayeeDenormID"
+    desc="Payee FK denorm"
+    exportable="false"
+    fkentity="Contact"
+    ignoreforevents="true"
+    loadable="true"
+    loadedByCallback="true"
+    name="PayeeDenorm"
+    nullok="true"/>
+  <typekey
+    desc="The payee type. This is used for tax reporting purposes."
+    name="PayeeType"
+    nullok="false"
+    typefilter="payee"
+    typelist="contactrole"/>
+  <index
+    desc="The link between a ClaimContact and a Check should exist only once."
+    name="checkpayeeu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimContactID"/>
+    <indexcol
+      keyposition="2"
+      name="CheckID"/>
+  </index>
+  <index
+    desc="Covering index for payee searches"
+    expectedtobecovering="true"
+    name="checkpayeeu2"
+    trackUsage="true"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="PayeeDenormID"/>
+    <indexcol
+      keyposition="2"
+      name="CheckID"/>
+  </index>
+</entity>

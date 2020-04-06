@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="ArchivedClaimDetailScreen">
+    <Require
+      name="ClaimInfo"
+      type="ClaimInfo"/>
+    <Require
+      name="ArchivedClaimInfo"
+      type="ArchivedClaimInfo"/>
+    <Variable
+      initialValue="new gw.api.claim.ClaimArchiveRestoreHelper(ClaimInfo)"
+      name="Page"
+      type="gw.api.claim.ClaimArchiveRestoreHelper"/>
+    <Toolbar>
+      <ToolbarButton
+        action="restoreAction()"
+        available="Page.canRestore() and perm.ClaimInfo.edit(ClaimInfo)"
+        id="Restore"
+        label="DisplayKey.get(&quot;Web.Claim.Restore&quot;)"/>
+      <EditButtons
+        showUpdateConfirmMessage="false"
+        updateVisible="false"/>
+    </Toolbar>
+    <PanelRef
+      def="ArchivedClaimDV(ClaimInfo, ArchivedClaimInfo)"/>
+    <Code><![CDATA[function restoreAction() {
+  if (!ArchivedClaimInfo.Comment.HasContent)
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Java.Validation.MissingRequired", DisplayKey.get("Web.ArchivedClaim.Comment")));
+  
+  var claim = Page.restore(ArchivedClaimInfo.Comment);
+  pcf.ClaimForward.go(claim)
+}]]></Code>
+  </Screen>
+</PCF>

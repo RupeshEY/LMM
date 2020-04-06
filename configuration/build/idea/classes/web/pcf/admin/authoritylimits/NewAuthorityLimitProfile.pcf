@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="AuthorityLimitProfiles.go()"
+    afterCommit="AuthorityLimitProfiles.go()"
+    canEdit="true"
+    canVisit="perm.AuthorityLimitProfile.create"
+    id="NewAuthorityLimitProfile"
+    parent="AuthorityLimitProfiles()"
+    showUpLink="true"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.NewAuthorityLimitProfile.Admin.NewAuthorityLimitProfileName&quot;)">
+    <LocationEntryPoint
+      signature="NewAuthorityLimitProfile()"/>
+    <Variable
+      initialValue="new AuthorityLimitProfile()"
+      name="AuthorityLimitProfile"
+      type="AuthorityLimitProfile"/>
+    <ScreenRef
+      def="AuthorityLimitProfileDetailScreen(AuthorityLimitProfile)"/>
+  </Page>
+</PCF>

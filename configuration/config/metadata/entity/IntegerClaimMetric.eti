@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Integer based claim metric."
+  entity="IntegerClaimMetric"
+  final="false"
+  priority="3"
+  supertype="ClaimMetric">
+  <implementsInterface
+    iface="gw.cc.claim.metric.entity.IntegerClaimMetric"
+    impl="com.guidewire.cc.domain.claim.metric.impl.IntegerClaimMetricImpl"/>
+  <implementsInterface
+    iface="gw.api.metric.MetricMethods"
+    impl="gw.api.claim.metric.IntegerClaimMetricMethodsImpl"/>
+  <implementsEntity
+    name="IntegerMetricDelegate"/>
+</subtype>

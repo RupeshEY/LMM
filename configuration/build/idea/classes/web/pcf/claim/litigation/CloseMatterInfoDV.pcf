@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- NVVs for closing and reopening a matter
+    This file automatically generated from nvv_claim.xml -->
+  <DetailViewPanel
+    id="CloseMatterInfoDV">
+    <Require
+      name="CloseMatterInfo"
+      type="CloseMatterInfo"/>
+    <InputColumn>
+      <TextAreaInput
+        editable="true"
+        id="Note"
+        label="DisplayKey.get(&quot;NVV.Matter.CloseMatter.Note&quot;)"
+        numCols="30"
+        numRows="3"
+        value="CloseMatterInfo.note"/>
+      <TypeKeyInput
+        editable="true"
+        id="Resolution"
+        label="DisplayKey.get(&quot;NVV.Matter.CloseMatter.Resolution&quot;)"
+        value="CloseMatterInfo.resolution"
+        valueType="typekey.ResolutionType"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

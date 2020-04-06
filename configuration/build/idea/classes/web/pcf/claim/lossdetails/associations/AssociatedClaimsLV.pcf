@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_claim.xml -->
+  <ListViewPanel
+    id="AssociatedClaimsLV">
+    <ExposeIterator
+      valueType="entity.ClaimAssociation"
+      widget="AssociatedClaimsLV"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="ClaimAssociationList"
+      type="ClaimAssociation[]"/>
+    <RowIterator
+      checkBoxVisible="true"
+      editable="false"
+      elementName="ClaimAssociation"
+      hasCheckBoxes="true"
+      value="ClaimAssociationList"
+      valueType="entity.ClaimAssociation[]">
+      <Row>
+        <TextCell
+          action="ClaimAssociationDetail.drilldown(Claim, ClaimAssociation)"
+          id="Association"
+          label="DisplayKey.get(&quot;LV.Claim.AssociatedClaims.Association&quot;)"
+          sortOrder="1"
+          value="ClaimAssociation.Title"/>
+        <ClaimAssociationsCell
+          enableSort="false"
+          id="Claim"
+          label="DisplayKey.get(&quot;LV.Claim.AssociatedClaims.Claim&quot;)"
+          value="ClaimAssociation.ClaimsInAssoc"
+          valueType="entity.ClaimInAssociation[]"
+          wrap="true"/>
+        <TypeKeyCell
+          id="Type"
+          label="DisplayKey.get(&quot;LV.Claim.AssociatedClaims.Type&quot;)"
+          value="ClaimAssociation.ClaimAssocType"
+          valueType="typekey.ClaimAssocType"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

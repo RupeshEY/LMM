@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    countsAsWork="false"
+    id="StartRuleImportPopup"
+    returnType="RuleImportTask"
+    startInEditMode="true"
+    title="DisplayKey.get('BizRules.Import')">
+    <LocationEntryPoint
+      signature="StartRuleImportPopup(navigationSupport: gw.bizrules.pcf.BizRulesPageNavigationSupport)"/>
+    <Variable
+      name="navigationSupport"
+      type="gw.bizrules.pcf.BizRulesPageNavigationSupport"/>
+    <Variable
+      name="file"
+      type="gw.api.web.WebFile"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="navigationSupport.VersionController.ExportImportController.startRulesImportFromWebFile(file); CurrentLocation.cancel(); navigationSupport.goToExportImportStatusPage()"
+          available="file != null &amp;&amp; gw.bizrules.pcf.RulePermissionUIHelper.canImportRule()"
+          id="ImportButton"
+          label="DisplayKey.get('BizRules.Import')"
+          tooltip="gw.bizrules.pcf.RulePermissionUIHelper.checkAndGetImportPermissionMsg()"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          available="gw.bizrules.pcf.RulePermissionUIHelper.canImportRule()"
+          id="CancelButton"
+          label="DisplayKey.get('Button.Cancel')"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSet>
+            <TextInput
+              id="fileLabel"
+              labelAbove="true"
+              value="DisplayKey.get('BizRules.StartRuleImportPopup.FileDescription', navigationSupport.VersionController.ExportImportController.RulesFileExtension)"/>
+            <FileInput
+              editable="true"
+              id="File"
+              labelAbove="true"
+              required="true"
+              value="file"/>
+          </InputSet>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

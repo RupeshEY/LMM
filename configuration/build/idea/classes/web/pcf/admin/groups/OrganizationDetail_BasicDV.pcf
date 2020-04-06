@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="OrganizationDetail_BasicDV">
+    <Require
+      name="Group"
+      type="Group"/>
+    <Require
+      name="Organization"
+      type="Organization"/>
+    <InputColumn>
+      <TextInput
+        editable="true"
+        id="Name"
+        label="DisplayKey.get(&quot;Web.Admin.OrganizationDetail.BasicDV.Name&quot;)"
+        required="true"
+        value="OrganizationName"/>
+      <TypeKeyInput
+        editable="Organization.New and !Organization.Carrier"
+        id="Type"
+        label="DisplayKey.get(&quot;Web.Admin.OrganizationDetail.BasicDV.Type&quot;)"
+        value="Organization.Type"
+        valueType="typekey.BusinessType">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <InputSetRef
+        def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(Organization.Contact, Contact#WorkPhone), DisplayKey.get(&quot;Web.Admin.ContactDetailDV.Phone&quot;), false))"
+        editable="true"
+        id="Work"/>
+      <InputSetRef
+        def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(Organization.Contact, Contact#FaxPhone), DisplayKey.get(&quot;Web.Admin.ContactDetailDV.Fax&quot;), false))"
+        editable="true"
+        id="Fax"/>
+      <TextInput
+        editable="true"
+        id="Email"
+        label="DisplayKey.get(&quot;Web.Admin.ContactDetailDV.Email&quot;)"
+        value="Organization.Contact.EmailAddress1"/>
+      <InputSetRef
+        def="CCAddressInputSet(Organization.Contact.AddressOwner)"/>
+      <ListViewInput
+        def="GroupUsersLV(Group)"
+        editable="true"
+        label="DisplayKey.get(&quot;Web.Admin.GroupDetail.BasicDV.Users&quot;)">
+        <Toolbar>
+          <IteratorButtons
+            iterator="GroupUsersLV.GroupUsersLV"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputColumn>
+    <Code><![CDATA[
+property get OrganizationName() : String {
+    return Organization.Name
+  }
+  
+  property set OrganizationName(name : String) {
+    Organization.setNameAndRootGroupName(name)
+  }
+    ]]></Code>
+  </DetailViewPanel>
+</PCF>

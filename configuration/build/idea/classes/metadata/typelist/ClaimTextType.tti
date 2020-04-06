@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Text fields on claim, stored in the ClaimText array"
+  final="true"
+  name="ClaimTextType">
+  <typecode
+    code="BenefitsDecisionReason"
+    desc="Explanation of benefits decision"
+    name="BenefitsDecisionReason"
+    priority="1"/>
+  <typecode
+    code="MedicalDiagnosis"
+    desc="Medical Diagnosis for workers' comp claim"
+    name="MedicalDiagnosis"
+    priority="3"/>
+  <typecode
+    code="SubjComplaints"
+    desc="Subjective description of complaint for workers' comp claim"
+    name="SubjComplaints"
+    priority="4"/>
+  <typecode
+    code="ObjFindings"
+    desc="Objective description of condition for workers' comp claim"
+    name="ObjFindings"
+    priority="5"/>
+  <typecode
+    code="TreatmentRend"
+    desc="Description of treatment rendered for workers' comp claim"
+    name="TreatmentRend"
+    priority="6"/>
+  <typecode
+    code="MMInote"
+    desc="Maximum medical improvement notes for workers' comp claim"
+    name="MMInote"
+    priority="7"/>
+  <typecode
+    code="PreexDisbltyInfo"
+    desc="Description of preexisting disability for workers' comp claim"
+    name="PreexDisbltyInfo"
+    priority="8"/>
+  <typecode
+    code="StorageNotes"
+    desc="Claim storage notes"
+    name="StorageNotes"
+    priority="9"/>
+  <typecode
+    code="SIEscalateSIUNote"
+    desc="Description of reason for decision on SIU escalation"
+    name="SIEscalateSIUNote"
+    priority="10"/>
+  <typecode
+    code="ISOErrorMessage"
+    desc="Error message if most recent ISO ClaimSearch request failed"
+    name="ISOErrorMessage"
+    priority="11"/>
+  <typecode
+    code="ReinsuranceReason"
+    desc="Description of reason for marking or unmarking a claim for reinsurance"
+    name="ReinsuranceReason"
+    priority="12"/>
+  <!-- InjuryDescription is obsolete, but required for upgrade from 4.0.x. -->
+  <typecode
+    code="InjuryDescription"
+    desc="Description of injury for workers' comp claim"
+    name="InjuryDescription"
+    priority="2"
+    retired="true"/>
+</typelist>

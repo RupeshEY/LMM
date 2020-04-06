@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Calculation method for a service metric limit"
+  final="false"
+  name="ServiceRequestMetricLimitType"
+  tableName="servicereqmetriclimittype">
+  <typecode
+    code="nooffset"
+    desc="Standard limit comparison, no computation"
+    name="No Offset"/>
+  <typecode
+    code="absoluteoffset"
+    desc="Offsets must be computed before comparison"
+    name="Absolute Offset"/>
+  <typecode
+    code="percentageoffset"
+    desc="Offsets must be computed before comparison"
+    name="Percentage Offset"/>
+</typelist>

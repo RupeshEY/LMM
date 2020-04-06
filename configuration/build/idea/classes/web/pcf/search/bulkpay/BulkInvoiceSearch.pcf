@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.BulkInvoice.view and perm.System.viewsearch"
+    countsAsWork="false"
+    id="BulkInvoiceSearch"
+    title="DisplayKey.get(&quot;Financials.BulkPay.Search.SearchBulkInvoices&quot;)">
+    <Variable
+      initialValue="&quot;BulkInvoiceSearchResultsLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="false"
+      name="searchHasBeenRun"
+      type="boolean"/>
+    <Screen
+      id="BulkInvoiceSearchScreen">
+      <SearchPanel
+        criteriaName="BulkInvoiceSearchCriteria"
+        maxSearchResults="gw.api.search.MaxSearchResults.forBulkInvoices()"
+        resultsName="BulkInvoiceSearchViewList"
+        search="var searchResult = BulkInvoiceSearchCriteria.performSearch(); searchHasBeenRun = ((null != searchResult) ? true : false); return searchResult"
+        searchCriteria="new BulkInvoiceSearchCriteria()"
+        searchCriteriaType="entity.BulkInvoiceSearchCriteria"
+        searchOnRefresh="false"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;BulkInvoiceSearchView&gt;">
+        <PanelRef
+          def="BulkInvoiceSearchDV(BulkInvoiceSearchCriteria)"/>
+        <PanelRef
+          def="BulkInvoiceSearchResultsLV(BulkInvoiceSearchViewList, BulkInvoiceSearchCriteria)">
+          <TitleBar
+            appendListViewPaging="true"
+            title="DisplayKey.get(&quot;Financials.BulkPay.Search.Results&quot;)"/>
+          <Toolbar/>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Page>
+</PCF>

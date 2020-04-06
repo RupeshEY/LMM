@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="NewNotePopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Note.NewNote&quot;)">
+    <LocationEntryPoint
+      signature="NewNotePopup(claim : Claim, relatedTo : KeyableBean)"/>
+    <LocationEntryPoint
+      signature="NewNotePopup(claim : Claim, topic : NoteTopicType)"/>
+    <LocationEntryPoint
+      signature="NewNotePopup(claim : Claim, relatedTo : KeyableBean, topic : NoteTopicType)"/>
+    <LocationEntryPoint
+      signature="NewNotePopup(claim : Claim)"/>
+    <Variable
+      initialValue="claim.newNote(topic, relatedTo)"
+      name="note"
+      type="Note"/>
+    <Variable
+      name="relatedTo"
+      type="KeyableBean"/>
+    <Variable
+      name="topic"
+      type="NoteTopicType"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="topic == null"
+      name="topicEditable"
+      type="boolean"/>
+    <Variable
+      initialValue="relatedTo == null"
+      name="relatedToEditable"
+      type="boolean"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <PanelRef
+        def="NoteDetailDV(note, topicEditable, relatedToEditable)"/>
+    </Screen>
+  </Popup>
+</PCF>

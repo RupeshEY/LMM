@@ -1,0 +1,13 @@
+package rules.Validation
+
+@gw.rules.RuleName("SubrogationValidationRules")
+@gw.rules.RuleSetDescription("This is the Subrogation Validation rule set. These rules can be used to describe complex data requirements and ensure that subrogation data is valid and consistent. ")
+class SubrogationValidationRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Subrogation) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Subrogation) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "SubrogationValidationRules", SubrogationValidationRules )
+  }
+}

@@ -1,0 +1,24 @@
+package rules.Validation.MatterClosedValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("MCV01000 - Close Before Trial")
+internal class MCV01000CloseBeforeTrial {
+  static function doCondition(matter : entity.Matter) : boolean {
+    
+/*start00rule*/
+return matter.TrialDate > gw.api.util.DateUtil.currentDate()
+/*end00rule*/
+
+  }
+
+  static function doAction(matter : entity.Matter, actions : gw.rules.Action) {
+
+/*start00rule*/
+// This is a test rule, introduced to test validation warnings in closed validation rules
+matter.reject(null, null, TC_LOADSAVE, 
+              DisplayKey.get("Rules.Validation.CloseMatter.CloseBeforeTrialDate"))
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="ECFClaimResponsePanelSet"
+    mode="IluAgreementParty">
+    <Require
+      name="ecfClaimData"
+      type="ECFMessageClaimData_Ext"/>
+    <Require
+      name="claimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <InputSetRef
+          def="MessageBeingRespondedToInputSet(ecfClaimData)"/>
+        <InputDivider/>
+        <InputSetRef
+          def="InsurerTransactionReferenceInputSet(claimResponseRq)"/>
+        <InputDivider/>
+        <InputSetRef
+          def="PublicCommentsInputSet(claimResponseRq)"/>
+        <InputDivider/>
+        <InputSetRef
+          def="PrivateCommentsInputSet(claimResponseRq)"/>
+      </InputColumn>
+      <InputColumn>
+        <InputSet>
+          <InputSetRef
+            def="ResponseInputSet(claimResponseRq, false)"/>
+          <InputSetRef
+            def="QueryReasonsInputSet(claimResponseRq)"/>
+        </InputSet>
+      </InputColumn>
+    </DetailViewPanel>
+  </PanelSet>
+</PCF>

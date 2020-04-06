@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="RuleImportTaskEntry"
+  extendable="false"
+  final="true"
+  loadable="false"
+  platform="true"
+  table="bizruleimtaskentry"
+  type="versionable">
+  <foreignkey
+    fkentity="RuleImportTask"
+    name="Task"
+    nullok="false"/>
+  <onetoone
+    desc="The rule head"
+    fkentity="RuleHead"
+    name="Head"
+    nullok="true"/>
+  <column
+    name="RuleName"
+    nullok="false"
+    type="shorttext"/>
+  <foreignkey
+    desc="The existing version."
+    fkentity="RuleVersion"
+    name="ExistingVersion"
+    nullok="true"/>
+  <foreignkey
+    desc="The imported rule version."
+    fkentity="RuleVersion"
+    name="ImportedVersion"
+    nullok="true"/>
+  <typekey
+    desc="The current import entry status"
+    name="Status"
+    nullok="false"
+    typelist="RuleImportStatus"/>
+  <foreignkey
+    desc="The new head version"
+    fkentity="RuleVersion"
+    name="NewHeadVersion"
+    nullok="true"/>
+  <typekey
+    desc="The NewHeadVersion is an exact copy of the given import side"
+    name="ChosenSide"
+    nullok="true"
+    typelist="RuleImportSide"/>
+</entity>

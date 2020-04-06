@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    id="DesktopCalendarGroup"
+    title="DisplayKey.get(&quot;Web.DesktopMenuLinks.Calendar&quot;)">
+    <LocationEntryPoint
+      signature="DesktopCalendarGroup()"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.LitigationCalendar.General.Tab&quot;)"
+      location="Calendar()"
+      shortcut="Y"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.LitigationCalendar.Supervisor.Tab&quot;)"
+      location="SupervisorCalendar()"
+      shortcut="S"/>
+  </LocationGroup>
+</PCF>

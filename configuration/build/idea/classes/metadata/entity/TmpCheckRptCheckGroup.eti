@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table used for recalculating CheckRpt.GrossAmount values for checks that are part of a group (i.e., primary and secondary payee checks)"
+  entity="TmpCheckRptCheckGroup"
+  extendable="false"
+  loadable="false"
+  table="tmpcheckrptcheckgroup"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.financials.check.entity.TmpCheckRptCheckGroup"
+    impl="com.guidewire.cc.domain.financials.check.impl.TmpCheckRptCheckGroupImpl"/>
+  <column
+    desc="The ID of the CheckGroup to which the aggregates correspond"
+    exportable="false"
+    name="CheckGroupID"
+    nullok="false"
+    type="softentityreference"/>
+  <column
+    desc="Total payments for the primary check of the CheckGroup in the Check Currency"
+    exportable="false"
+    name="TotalPayments"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="Total payments for the primary check of the CheckGroup in the Reserving Currency"
+    exportable="false"
+    name="TotalPaymentsReservingAmount"
+    nullok="false"
+    type="money"/>
+  <column
+    desc="Total payments for the primary check of the CheckGroup in the Claim Currency"
+    exportable="false"
+    name="TotalPaymentsClaimAmount"
+    nullok="false"
+    type="money"/>
+  <typekey
+    desc="The transaction currency of the checks in this group."
+    exportable="false"
+    getterScriptability="hidden"
+    name="Currency"
+    nullok="false"
+    setterScriptability="hidden"
+    typelist="Currency"/>
+  <typekey
+    desc="The reserving currency of the checks in this group."
+    exportable="false"
+    getterScriptability="hidden"
+    name="ReservingCurrency"
+    nullok="false"
+    setterScriptability="hidden"
+    typelist="Currency"/>
+  <index
+    desc="A CheckGroup should have its values calculated in this table at most once."
+    name="tmpcrptcheckgroup1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="CheckGroupID"/>
+  </index>
+</entity>

@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="ClaimSnapshotFixedPropertyIncidentScreen"
+    mode="500">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="IncidentParam"
+      type="dynamic.Dynamic"/>
+    <Require
+      name="SnapshotParam"
+      type="dynamic.Dynamic"/>
+    <Variable
+      initialValue="IncidentParam"
+      name="FixedPropertyIncident"
+      type="dynamic.Dynamic"/>
+    <Toolbar/>
+    <PanelRef
+      def="ClaimSnapshotFixedPropertyIncident500DV(Claim, IncidentParam)"/>
+  </Screen>
+</PCF>

@@ -1,0 +1,160 @@
+<?xml version="1.0"?>
+<!-- ********************************************************************************************************************
+    Denormalized financial calculation tables
+  ******************************************************************************************************************** -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Calculated financial values for claims."
+  entity="ClaimRpt"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="claimrpt"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.impl.ClaimRptInternal"
+    impl="com.guidewire.cc.domain.financials.impl.ClaimRptImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.entity.ClaimRpt"
+    impl="com.guidewire.cc.domain.financials.impl.ClaimRptImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    default="0"
+    desc="The open reserves."
+    name="OpenReserves"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    columnName="OpenReservesRprtng"
+    default="0"
+    desc="The open reserves on a claim, in Reporting/Default Currency."
+    name="OpenReservesReporting"
+    nullok="false"
+    type="currencyamount"/>
+  <column
+    default="0"
+    desc="The remaining reserves on a claim."
+    name="RemainingReserves"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    columnName="RemainingResrvRprtng"
+    default="0"
+    desc="The remaining reserves on a claim, in Reporting/Default Currency."
+    name="RemainingReservesReporting"
+    nullok="false"
+    type="currencyamount"/>
+  <column
+    default="0"
+    desc="The available reserves on a claim."
+    name="AvailableReserves"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    columnName="AvailableResrvRprtng"
+    default="0"
+    desc="The available reserves on a claim, in Reporting/Default Currency."
+    name="AvailableReservesReporting"
+    nullok="false"
+    type="currencyamount"/>
+  <column
+    default="0"
+    desc="The total payments."
+    name="TotalPayments"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    columnName="TotalPaymentsRprtng"
+    default="0"
+    desc="The total payments on a claim, in Reporting/Default Currency."
+    name="TotalPaymentsReporting"
+    nullok="false"
+    type="currencyamount"/>
+  <column
+    default="0"
+    desc="The future payments total."
+    name="FuturePayments"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    columnName="FuturePaymentsRprtng"
+    default="0"
+    desc="The future payments total on a claim, in Reporting/Default Currency."
+    name="FuturePaymentsReporting"
+    nullok="false"
+    type="currencyamount"/>
+  <column
+    default="0"
+    desc="The total recoveries on a claim."
+    name="TotalRecoveries"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    columnName="TotalRecoveriesRprtng"
+    default="0"
+    desc="The total recoveries on a claim, in Reporting/Default Currency."
+    name="TotalRecoveriesReporting"
+    nullok="false"
+    type="currencyamount"/>
+  <column
+    default="0"
+    desc="The open recovery reserves on the claim."
+    name="OpenRecoveryReserves"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    columnName="OpenRecoveryResRprtng"
+    default="0"
+    desc="The open recovery reserves on a claim, in Reporting/Default Currency."
+    name="OpenRecoveryReservesReporting"
+    nullok="false"
+    type="currencyamount"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The claim that the calculations are on."
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <!-- A unique index on (ClaimID,Retired) will automatically be created for the onetoone foreign key, but we create
+       this additional index that doesn't include Retired because there should not be multiple ClaimRpts for a Claim
+       (even retired), and the queries that keep the rpt up to date may depend on that being true -->
+  <index
+    desc="One and only one claimrpt is associated with a given claim."
+    name="claimrptu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimID"/>
+  </index>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.financials.dbchecks.ClaimRptDBCheckBuilder"/>
+</entity>

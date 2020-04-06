@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterCancel="serviceRequest.remove()"
+    beforeCommit="validateAndFinishServiceRequest()"
+    canEdit="true"
+    canVisit="true"
+    id="OtherServiceRequestPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ServiceRequest.Title&quot;)">
+    <LocationEntryPoint
+      signature="OtherServiceRequestPopup(claim: Claim, incident: Incident)"/>
+    <LocationEntryPoint
+      signature="OtherServiceRequestPopup(claim: Claim, incident: Incident, incidentOtherServices: java.util.Set&lt;ServiceRequest&gt;, incidentsToExclude: java.util.Collection&lt;Incident&gt;)"/>
+    <Variable
+      name="claim"
+      type="entity.Claim"/>
+    <Variable
+      name="incident"
+      type="entity.Incident"/>
+    <Variable
+      initialValue="InitializeServiceRequest"
+      name="serviceRequest"
+      type="entity.ServiceRequest"/>
+    <Variable
+      name="incidentOtherServices"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Variable
+      initialValue="{}"
+      name="incidentsToExclude"
+      type="java.util.Collection&lt;Incident&gt;"/>
+    <Screen>
+      <Toolbar
+        visible="true">
+        <EditButtons
+          showUpdateConfirmMessage="false"/>
+      </Toolbar>
+      <PanelRef
+        def="NewServiceRequestDV(serviceRequest, incident == null ? false : true, incidentsToExclude)"/>
+    </Screen>
+    <Code><![CDATA[property get InitializeServiceRequest() : ServiceRequest{
+  return claim.newServiceRequest(null, incident);
+}
+
+function validateAndFinishServiceRequest() {
+  
+  serviceRequest.Instruction.verifyServiceTypesForUI()
+  if (incidentOtherServices != null) {
+    incidentOtherServices.add(serviceRequest) 
+  } 
+  serviceRequest.finishSetup()
+}]]></Code>
+  </Popup>
+</PCF>

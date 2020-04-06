@@ -1,0 +1,45 @@
+package rules.Preupdate.ClaimPreupdate_dir.CPU30000WorkloadAssignmentBalancing_dir
+
+@gw.rules.RuleName("CPU30200 - Claim Reassignment")
+internal class CPU30200ClaimReassignment {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+/*
+ * Condition: The assigned user or group has been changed.
+ */
+return
+  (
+      claim.isFieldChanged("AssignedGroup")
+          and
+      claim.getOriginalValue("AssignedGroup") != null
+  )
+    or
+  (
+      claim.isFieldChanged("AssignedUser")
+          and
+      (
+          claim.getOriginalValue("AssignedUser") != null
+              or
+          // The user field may be null earlier if previous assignment was done to a group directly.
+          claim.getOriginalValue("AssignedGroup") != null
+      )
+  )
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+// Logging of this rule will be categorized under "Assignment"
+var logger = gw.api.system.CCLoggerCategory.ASSIGNMENT_WEIGHTED_WORKLOAD
+if (logger.DebugEnabled) {
+  logger.debug(actions.getRule().DisplayName + " - Claim '" + claim.ClaimNumber+ "' reassigned - updating user workload")
+}
+
+gw.assignment.workload.rules.ClaimWorkloadPreupdateRuleActions.updateUserWorkloadOnClaimReassignment(claim)
+/*end00rule*/
+
+  }
+}

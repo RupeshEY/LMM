@@ -1,0 +1,192 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="ActivityDetailScreen"
+    mode="editable">
+    <Require
+      name="Activity"
+      type="Activity"/>
+    <Require
+      name="activityDetailHelper"
+      type="gw.api.activity.ActivityDetailHelper"/>
+    <Require
+      name="hasParent"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <Variable
+      initialValue="new gw.acc.iplm.controller.LMActivityDetailsScreenController(Activity, CurrentLocation)"
+      name="LMActivityDetailsScreenController"
+      type="gw.acc.iplm.controller.LMActivityDetailsScreenController"/>
+    <Toolbar>
+      <ToolbarButton
+        action="LMActivityDetailsScreenController.approveActivity()"
+        available="true"
+        id="ApprovalDetailScreen_ApproveButton"
+        label="DisplayKey.get(&quot;JSP.ApprovalActivityDetailHeader.Toolbar.Approve&quot;)"
+        visible="Activity.canApprove()"/>
+      <ToolbarButton
+        action="LMActivityDetailsScreenController.rejectActivity()"
+        id="ApprovalDetailScreent_RejectButton"
+        label="DisplayKey.get(&quot;JSP.ApprovalActivityDetailHeader.Toolbar.Reject&quot;)"
+        visible="Activity.canApprove()"/>
+      <ToolbarButton
+        action="CurrentLocation.startEditing()"
+        hideIfEditable="true"
+        id="Edit"
+        label="DisplayKey.get(&quot;Button.Activity.Edit&quot;)"
+        visible="Activity.canEdit() and not Activity.ECFApproval"/>
+      <ToolbarButton
+        action="CurrentLocation.commit(); activityDetailHelper.doReturn(Activity)"
+        hideIfReadOnly="true"
+        id="Update"
+        label="DisplayKey.get(&quot;Button.Activity.Update&quot;)"
+        shortcut="U"/>
+      <ToolbarButton
+        action="CurrentLocation.cancel(); activityDetailHelper.doReturn(Activity)"
+        hideIfReadOnly="true"
+        id="Cancel"
+        label="DisplayKey.get(&quot;Button.Activity.Cancel&quot;)"
+        shortcut="L"/>
+      <ToolbarDivider/>
+      <ToolbarButton
+        action="completeActivity()"
+        hideIfEditable="true"
+        id="ActivityDetailScreen_CompleteButton"
+        label="DisplayKey.get(&quot;Button.Activity.Complete&quot;)"
+        shortcut="P"
+        visible="Activity.canComplete()"/>
+      <ToolbarButton
+        action="completeActivityAndGoToNew()"
+        hideIfEditable="true"
+        id="ActivityDetailScreen_RecurButton"
+        label="DisplayKey.get(&quot;Button.Activity.Recur&quot;)"
+        visible="Activity.canRecur()"/>
+      <ToolbarButton
+        action="skipActivity()"
+        hideIfEditable="true"
+        id="ActivityDetailScreen_SkipButton"
+        label="DisplayKey.get(&quot;Button.Activity.Skip&quot;)"
+        shortcut="K"
+        visible="Activity.canSkip()"/>
+      <ToolbarButton
+        action="assignActivity()"
+        hideIfEditable="true"
+        id="ActivityDetailScreen_AssignButton"
+        label="DisplayKey.get(&quot;Button.Activity.Assign&quot;)"
+        shortcut="G"
+        visible="Activity.canAssign() and not Activity.ECFApproval"/>
+      <ToolbarDivider/>
+      <ToolbarButton
+        action="EmailWorksheet.push(Activity)"
+        hideIfEditable="true"
+        id="ActivityDetailScreen_CreateEMailButton"
+        label="DisplayKey.get(&quot;Web.Email.CreateEmail&quot;)"
+        visible="Activity.EmailTemplate != null"/>
+      <ToolbarButton
+        action="gw.api.activity.ActivityUtil.createDocumentFromTemplate(CurrentLocation,Activity)"
+        available="documentsActionsHelper.DocumentTemplateActionsAvailable"
+        hideIfEditable="true"
+        id="ActivityDetailScreen_ActionButton"
+        label="DisplayKey.get(&quot;Button.Activity.Action&quot;)"
+        shortcut="T"
+        visible="(Activity.DocumentTemplate != null) and (Activity.DocumentTemplate != &quot;&quot;) and Activity.canEdit()"/>
+      <PickerToolbarButton
+        action="PickExistingDocumentPopup.push(Activity.Claim)"
+        available="documentsActionsHelper.DocumentMetadataActionsAvailable"
+        hideIfEditable="true"
+        id="ActivityDetailScreen_AddDocumentButton"
+        label="DisplayKey.get(&quot;Button.Activity.AddDocument&quot;)"
+        onPick="gw.api.activity.ActivityUIHelper.onPickDocument(PickedValue, Activity)"
+        shortcut="E"
+        visible="Activity.canEdit() and perm.Claim.view(Activity.Claim) and perm.System.viewdocs and not Activity.ECFApproval"/>
+      <ToolbarDivider/>
+      <ToolbarButton
+        action="ActivityNotesPage.goInMain(Activity.Claim, Activity)"
+        hideIfEditable="true"
+        id="ActivityDetailScreen_NotesButton"
+        label="DisplayKey.get(&quot;Button.Activity.Notes&quot;)"
+        shortcut="N"
+        visible="perm.Claim.view(Activity.Claim) and perm.System.viewclaimnotes and not Activity.ECFApproval"/>
+      <ToolbarDivider/>
+      <ToolbarButton
+        action="gw.api.web.workspace.WorkspaceUtil.closeActiveWorksheet(); activityDetailHelper.worksheetClosed(Activity)"
+        hideIfEditable="true"
+        id="Close"
+        label="DisplayKey.get(&quot;Button.Activity.Close&quot;)"/>
+      <ToolbarDivider/>
+      <ToolbarButton
+        action="gw.api.web.workspace.WorkspaceUtil.closeActiveWorksheet(); activityDetailHelper.worksheetClosed(Activity); ECFMessageDetailsPopup.push(Activity.LMMessage_Ext as ECFMessageClaimData_Ext)"
+        hideIfEditable="true"
+        id="ActivityDetailScreen_MessageDetails"
+        label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ActivityDetailScreen.MessageDetailsButton.Title&quot;)"
+        showConfirmMessage="false"
+        visible="ECFMessageClaimData_Ext.Type.isAssignableFrom(typeof Activity?.LMMessage_Ext)"/>
+    </Toolbar>
+    <AlertBar
+      id="IDCSDisabledAlert"
+      label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.ContentPlugin.Disabled&quot;)"
+      visible="not documentsActionsHelper.ContentSourceEnabled"/>
+    <AlertBar
+      id="IDCSUnavailableAlert"
+      label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.ContentPlugin.Unavailable&quot;)"
+      visible="documentsActionsHelper.ShowContentServerDownWarning"/>
+    <AlertBar
+      id="IDMSUnavailableAlert"
+      label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.MetadataPlugin.Unavailable&quot;)"
+      visible="documentsActionsHelper.ShowMetadataServerDownWarning"/>
+    <PanelRef
+      def="ActivityDV(Activity)"
+      mode="Activity.ActivityPattern.Code"/>
+    <Code><![CDATA[/* completes and commits the activity */
+function completeActivity() {
+  if (!CurrentLocation.isInEditMode()) {
+    CurrentLocation.startEditing()
+  }
+  Activity.complete()
+  var commited = false
+  try {
+    CurrentLocation.commit()
+    commited = true
+  } finally {
+    if (!commited) {
+      Activity.Status = Activity.getOriginalValue(Activity#Status)
+    }
+  }
+}
+
+  /* completes and commits the activity, and navigates to the NewActivity page */
+  function completeActivityAndGoToNew() {
+    completeActivity()
+    NewActivity.goInMain(Activity.Claim, Activity.ActivityPattern)
+  }
+
+  /* skips and commits the activity */
+  function skipActivity() {
+    if (!CurrentLocation.isInEditMode()) {
+      CurrentLocation.startEditing()
+    }
+    Activity.skip()
+    commitAndClose()
+  }
+
+  function assignActivity() {
+    commitAndClose()
+    if (hasParent) {
+      ActivityDetailForward.goInWorkspace(Activity.Claim, Activity) // original behavior
+    } else {
+      pcf.ActivityDetailViaClaimWorksheet.goInWorkspace(Activity.Claim, Activity)
+    }
+    gw.api.assignment.AssignmentUtil.assignActivity(Activity)
+  }
+
+  function commitAndClose() {
+    CurrentLocation.commit()
+    activityDetailHelper.worksheetClosed(Activity)
+  }]]></Code>
+  </Screen>
+</PCF>

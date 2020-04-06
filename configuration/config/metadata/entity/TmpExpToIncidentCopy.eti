@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table used to copy a variety of injury related fields from the cc_incident table to the cc_exposure table"
+  entity="TmpExpToIncidentCopy"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="tmpexptoincidentcopy"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.TmpExpToIncidentCopy"
+    impl="com.guidewire.cc.domain.exposure.impl.TmpExpToIncidentCopyImpl"/>
+  <column
+    desc="The ID of the incident to be updated by a join to this temp table"
+    name="IncidentID"
+    nullok="false"
+    type="softentityreference"/>
+  <typekey
+    desc="The GeneralInjuryType value to copy from cc_exposure to cc_incident"
+    name="GeneralInjuryTypeTmp"
+    nullok="true"
+    typelist="InjuryType"/>
+  <typekey
+    desc="The DetailedInjuryType value to copy from cc_exposure to cc_incident"
+    name="DetailedInjuryTypeTmp"
+    nullok="true"
+    typelist="DetailedInjuryType"/>
+  <typekey
+    desc="The MedicalTreatmentType value to copy from cc_exposure to cc_incident"
+    name="MedicaltrtmntTypeTmp"
+    nullok="true"
+    typelist="MedicalTreatmentType"/>
+  <column
+    desc="The LostWages value to copy from cc_exposure to cc_incident"
+    name="LostWagesTmp"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    desc="The SeverityType value to copy from cc_exposure to cc_incident"
+    name="SeverityTmp"
+    nullok="true"
+    typelist="SeverityType"/>
+  <column
+    desc="The Impairment value to copy from cc_exposure to cc_incident"
+    name="ImpairmentTmp"
+    nullok="true"
+    type="percentagedec"/>
+  <index
+    desc="Primary key index of this temp table, used for join to cc_incident table during final update"
+    name="exptoincidentu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="IncidentID"/>
+  </index>
+</entity>

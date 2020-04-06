@@ -1,0 +1,20 @@
+package rules.Reopened.ExposureReopened_dir
+
+@gw.rules.RuleName("ERO01000 - Notify external systems")
+internal class ERO01000Notifyexternalsystems {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return true /* always notify */
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.Claim.addEvent("exposure_reopened")
+/*end00rule*/
+
+  }
+}

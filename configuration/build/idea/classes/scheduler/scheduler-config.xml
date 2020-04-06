@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<Schedule xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="scheduler-config.xsd"
+          server="#scheduler" initialDelay="180">
+  <!-- Claim Exception monitoring occurs every day at 2AM -->
+  <ProcessSchedule process="ClaimException">
+    <CronSchedule hours="2"/>
+  </ProcessSchedule>
+  <!-- User Exception monitoring occurs every day at 3AM -->
+  <ProcessSchedule process="UserException">
+    <CronSchedule hours="3"/>
+  </ProcessSchedule>
+  <!-- Group Exception monitoring occurs every day at 4AM -->
+  <ProcessSchedule process="GroupException">
+    <CronSchedule hours="4"/>
+  </ProcessSchedule>
+  <!-- Activity Escalation happens every 30 minutes -->
+  <ProcessSchedule process="ActivityEsc">
+    <CronSchedule minutes="0,30"/>
+  </ProcessSchedule>
+  <!-- Financials Escalation occurs every day at 6:05AM and 6:05PM -->
+  <ProcessSchedule process="FinancialsEsc">
+    <CronSchedule hours="6,18" minutes="5"/>
+  </ProcessSchedule>
+  <!-- BulkInvoices Escalation occurs every day at 6:35AM and 6:35PM -->
+  <ProcessSchedule process="BulkInvoiceEsc">
+    <CronSchedule hours="6,18" minutes="35"/>
+  </ProcessSchedule>
+  <!-- BulkInvoices workflow occurs every 30 minutes -->
+  <ProcessSchedule process="BulkInvoiceWF">
+    <CronSchedule minutes="0,30"/>
+  </ProcessSchedule>
+  <!-- TAccounts Escalation occurs every day at 12:01AM. This moves Checks/Payments scheduled for today
+       into AwaitingSubmission state. Please refer to the documentation for more information. -->
+  <ProcessSchedule process="TAccountEsc">
+    <CronSchedule hours="0" minutes="1"/>
+  </ProcessSchedule>
+  <!-- Idle claim exception monitoring happens at noon on Sunday every week -->
+  <ProcessSchedule process="IdleClaim">
+    <CronSchedule dayofmonth="?" dayofweek="SUN" hours="12"/>
+  </ProcessSchedule>
+  <!-- Idle closed claim exception monitoring happens at noon on Sunday every week -->
+<!--
+  <ProcessSchedule process="IdleClosedClaim">
+    <CronSchedule dayofmonth="?" dayofweek="SUN" hours="12"/>
+  </ProcessSchedule>
+-->
+  <!-- Calculate stats every hour at 3 past the hour -->
+  <ProcessSchedule process="Statistics">
+    <CronSchedule minutes="3"/>
+  </ProcessSchedule>
+  <!-- Calculate dashboard stats every night at 1 am -->
+  <ProcessSchedule process="DashboardStatistics">
+    <CronSchedule hours="1"/>
+  </ProcessSchedule>
+  <!-- Workflow process executes every ten minutes unless any WorkflowType is mapped
+       to the "fastinternal" handler, in which case the workflow process will execute
+       once every ten seconds.  Workflow cannot advance any faster in the background
+       than this schedule. -->
+  <ProcessSchedule process="Workflow">
+    <CronSchedule minutes="5,15,25,35,45,55"/>
+  </ProcessSchedule>
+  <!-- Purges completed workflows once a month. -->
+  <ProcessSchedule process="PurgeWorkflows">
+    <CronSchedule dayofmonth="1" hours="1" minutes="30"/>
+  </ProcessSchedule>
+  <!-- Purges logs from completed workflows once a month. -->
+  <ProcessSchedule process="PurgeWorkflowLogs">
+    <CronSchedule dayofmonth="1" hours="2" minutes="30"/>
+  </ProcessSchedule>
+  <ProcessSchedule process="PurgeProfilerData">
+    <CronSchedule hours="2"/>
+  </ProcessSchedule>
+  <!-- Find metrics that need recalculation every night at 3:30 -->
+  <ProcessSchedule process="RecalculateMetrics">
+    <CronSchedule hours="3" minutes="30"/>
+  </ProcessSchedule>
+  <!-- Find service request metrics that need to be escalated every half hour -->
+  <ProcessSchedule process="ServiceRequestMetricEscalation">
+    <CronSchedule minutes="10,40"/>
+  </ProcessSchedule>
+  <!-- Purge old messages at 4:30 am every Sunday -->
+  <ProcessSchedule process="PurgeMessageHistory">
+    <CronSchedule dayofmonth="?" dayofweek="SUN" hours="4" minutes="30"/>
+  </ProcessSchedule>
+  <!-- Disconnect claim graph objects from retired policy objects every week. Scheduled
+      to run periodically to clean up extraneous policies created during FNOL. -->
+  <ProcessSchedule process="RetiredPolicyGraphDisconnector">
+    <CronSchedule dayofmonth="?" dayofweek="SUN" hours="4" minutes="45"/>
+  </ProcessSchedule>
+  <!-- Run the first of every month after midnight-->
+  <ProcessSchedule process="PurgeFailedWorkItems">
+    <CronSchedule dayofmonth="1" hours="1"/>
+  </ProcessSchedule>
+  <!-- Purges old WorkItemSets -->
+  <ProcessSchedule process="WorkItemSetPurge">
+    <CronSchedule dayofmonth="2" hours="1" minutes="30"/>
+  </ProcessSchedule>
+  <ProcessSchedule process="WorkQueueInstrumentationPurge">
+    <CronSchedule dayofmonth="2" hours="2" minutes="30"/>
+  </ProcessSchedule>
+  <ProcessSchedule process="PurgeClusterMembers">
+    <CronSchedule dayofmonth="1" hours="2"/>
+  </ProcessSchedule>
+  <!-- Purges the batch process history on the 2nd day of every month -->
+  <ProcessSchedule process="ProcessHistoryPurge">
+    <CronSchedule dayofmonth="3" hours="1" minutes="30"/>
+  </ProcessSchedule>
+
+    <!-- Upgrade encryption on snapshots at 1 am every day -->
+  <ProcessSchedule process="EncryptionUpgrade">
+      <CronSchedule hours="1"/>
+  </ProcessSchedule>
+  <!-- Find claims that are related to a catastrophe every night at 4:30 -->
+  <ProcessSchedule process="CatastropheClaimFinder">
+    <CronSchedule hours="4" minutes="30"/>
+  </ProcessSchedule>
+
+  <!-- Download policy location data for catastrophes at 2:00 am -->
+<!--
+  <ProcessSchedule process="CatastrophePolicyLocationDownload">
+    <CronSchedule hours="2"/>
+  </ProcessSchedule>
+-->
+
+  <!-- New addresses searched for geocoding at 1:30 am -->
+<!--
+  <ProcessSchedule process="Geocode">
+      <CronSchedule hours="1" minutes="30"/>
+  </ProcessSchedule>
+-->
+  <!-- Create a new ExchangeRateSet every day at 2 am; requires IExchangeRateSetPlugin to be configured and enabled -->
+<!--
+  <ProcessSchedule process="ExchangeRate">
+    <CronSchedule hours="2"/>
+  </ProcessSchedule>
+-->
+  <!-- Contact Auto Sync batch process should run every day at 5 am and 5 pm.
+  It should run before FinancialsEsc to prevent that batch process from encountering validation errors due to out-of-sync contacts.-->
+  <ProcessSchedule process="ContactAutoSync">
+    <CronSchedule hours="5,17"/>
+  </ProcessSchedule>
+  <!-- Enable to transmit Reviews to Contact Center; default is hourly -->
+<!--
+  <ProcessSchedule process="ReviewSync">
+    <CronSchedule minutes="20"/>
+  </ProcessSchedule>
+-->
+  <!-- Add claim metrics to loaded or upgraded claims that don't have them. -->
+<!--
+  <ProcessSchedule process="ClaimHealthCalc">
+      <CronSchedule hours="0" minutes="45"/>
+  </ProcessSchedule>
+-->
+  <!-- ContactRetre batch process should run every day at 1am -->
+  <ProcessSchedule process="ContactRetire">
+    <CronSchedule hours="1"/>
+  </ProcessSchedule>
+  <!-- Look for claims eligible for archiving at 2:20am -->
+<!--
+  <ProcessSchedule process="Archive">
+    <CronSchedule hours="2" minutes="20"/>
+  </ProcessSchedule>
+-->
+
+  <!-- Run DBConsistencyCheck on the first Sunday of every 6th month at 4PM -->
+  <ProcessSchedule process="DBConsistencyCheck">
+      <CronSchedule month="/6" hours="16" dayofmonth="?" dayofweek="1#1"/>
+  </ProcessSchedule>
+
+  <!-- BulkPurge should run each day at 2:00AM -->
+  <ProcessSchedule process="BulkPurge">
+    <CronSchedule hours="2"/>
+  </ProcessSchedule>
+
+</Schedule>

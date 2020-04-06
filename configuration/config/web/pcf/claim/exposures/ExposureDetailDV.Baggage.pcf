@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <CardViewPanel
+    id="ExposureDetailDV"
+    mode="Baggage">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Card
+      id="BaggageDamage_DetailsCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.Baggage.Details&quot;)">
+      <PanelRef
+        def="BaggageDamageDV(Exposure)"/>
+    </Card>
+    <Card
+      id="Exposure_ISOCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.ISO&quot;)"
+      visible="!Exposure.Claim.ISOClaimLevelMessaging">
+      <PanelRef
+        def="ISODetailsDV(Exposure)"/>
+    </Card>
+  </CardViewPanel>
+</PCF>

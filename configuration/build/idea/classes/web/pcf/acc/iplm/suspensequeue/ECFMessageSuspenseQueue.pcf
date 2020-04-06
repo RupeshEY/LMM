@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterReturnFromPopup="wasChildPopupCommitted = popupCommitted"
+    id="ECFMessageSuspenseQueue"
+    title="DisplayKey.get(&quot;Accelerator.IPLM.Web.Desktop.SuspenseQueue.Title&quot;)">
+    <Variable
+      name="wasChildPopupCommitted"
+      type="boolean"/>
+    <ScreenRef
+      def="ECFMessageSuspenseQueueScreen(wasChildPopupCommitted)"/>
+  </Page>
+</PCF>

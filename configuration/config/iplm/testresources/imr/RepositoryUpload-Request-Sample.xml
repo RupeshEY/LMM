@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RepositoryOperationRq xmlns="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0" xmlns:rlc="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/2005-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0 Acord-Repository_v-1-2-0.xsd">
+   <MsgId>20142830-42b4-0712-0061-113508251139</MsgId>
+   <!-- <CreationDtTime>2010-01-11T15:43:18.7071781-00:00</CreationDtTime>-->
+   <CreationDtTime>2015-01-22T15:16:30+01:00</CreationDtTime>
+   <RepositoryOperationTypeCd>RepositoryUpload</RepositoryOperationTypeCd>
+   <Sender>
+      <PartyId>urn:lloyds:0001</PartyId>
+      <PartyRoleCd>Insurer</PartyRoleCd>
+      <PartyName>writeback-carrier</PartyName>
+   </Sender>
+   <Receiver>
+      <PartyId>urn:duns:236196817</PartyId>
+      <PartyRoleCd>ServiceProvider</PartyRoleCd>
+      <PartyName>Xchanging</PartyName>
+   </Receiver>
+   <Application>
+      <ApplicationCd>Jv-Ins-Reinsurance</ApplicationCd>
+      <SchemaVersion>http://www.ACORD.org/Standards/Jv-Ins-Reinsurance/2005-2</SchemaVersion>
+   </Application>
+   <DocumentList>
+      <HierarchySortIndicator>0</HierarchySortIndicator>
+      <DocumentItem>
+         <Document>
+            <DocumentId>20112809-42b4-0709-111D-010001121171</DocumentId>
+            <DocumentVersion>1</DocumentVersion>
+            <DocumentVersionDtTime>2011-01-25T12:04:01+00:00</DocumentVersionDtTime>
+            <FileId>Image.jpeg</FileId>
+            <FileFormatCd>image/jpeg</FileFormatCd>
+            <FileSize>
+               <NumUnits>1</NumUnits>
+               <UnitMeasurementCd>KB</UnitMeasurementCd>
+            </FileSize>
+            <DocumentTypeCd>form_correction</DocumentTypeCd>
+            <Description>MYTest</Description>
+         </Document>
+         <AccessControlList>
+            <AccessParty>
+               <ListActionCd>remove</ListActionCd>
+               <AccessRightCd>read</AccessRightCd>
+               <PartyId>urn:lloyds:0001</PartyId>
+               <PartyRoleCd>Broker</PartyRoleCd>
+               <PartyName>TEST BROKER 6666</PartyName>
+            </AccessParty>
+         </AccessControlList>
+         <rlc:ReferredObjects xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/2005-2">
+            <rlc:Contract>
+               <rlc:BrokerReference>B0001UMR001</rlc:BrokerReference>
+            </rlc:Contract>
+            <rlc:Claim>
+               <rlc:BrokerReference>B0001UCR001</rlc:BrokerReference>
+            </rlc:Claim>
+            <rlc:ClaimEntry>
+               <rlc:BrokerReference>B0001TR0001</rlc:BrokerReference>
+            </rlc:ClaimEntry>
+         </rlc:ReferredObjects>
+      </DocumentItem>
+   </DocumentList>
+</RepositoryOperationRq>

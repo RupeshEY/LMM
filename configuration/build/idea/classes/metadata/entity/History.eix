@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="History">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.history.impl.HistoryCoreExtInternalMethods"
+    impl="com.guidewire.cc.domain.history.impl.HistoryCoreExtMethodsImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.history.impl.HistoryCoreExtMethods"
+    impl="com.guidewire.cc.domain.history.impl.HistoryCoreExtMethodsImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <description><![CDATA[
+        Represents a claim event. Each History entity represents a single claim-related event. The event
+        may or may not have a related exposure or matter. A rule that results in a History event can
+        provide a rule ID that is stored with the event. The set of History events related to an individual
+        claim represent an event audit trail for that claim.
+      
+    ]]></description>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Associated claim."
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="Associated exposure. Optional."
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="true"/>
+  <foreignkey
+    columnName="MatterID"
+    desc="Associated matter. Optional."
+    fkentity="Matter"
+    name="Matter"
+    nullok="true"/>
+  <foreignkey
+    columnName="TransactionSetID"
+    desc="Associated transaction set. Optional."
+    fkentity="TransactionSet"
+    name="TransactionSet"
+    nullok="true"/>
+  <foreignkey
+    columnName="BulkInvoiceID"
+    desc="Associated bulk invoice. Optional."
+    fkentity="BulkInvoice"
+    name="BulkInvoice"
+    nullok="true"/>
+  <index
+    desc="Index to speed lookup of history events by user"
+    name="cchistory2">
+    <indexcol
+      keyposition="1"
+      name="UserId"/>
+    <indexcol
+      keyposition="2"
+      name="ClaimID"/>
+  </index>
+  <foreignkey
+    columnName="SubrogationID"
+    fkentity="Subrogation"
+    name="Subrogation"
+    nullok="true"/>
+</internalExtension>

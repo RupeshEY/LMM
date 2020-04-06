@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Claim.viewtransactiondetails(Claim)"
+    id="ClaimFinancialsTransactionsPrint"
+    parent="ClaimPrintout(Claim)"
+    title="gw.api.print.ClaimPrintoutHelper.getTitleForFinancialTransactions(Claim, requestedOption.UiMode)">
+    <LocationEntryPoint
+      signature="ClaimFinancialsTransactionsPrint(Claim : Claim, requestedOption : gw.api.financials.ClaimFinancialsTransactionsOption)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="gw.api.financials.ClaimFinancialsTransactionsOption.ALL"
+      name="requestedOption"
+      type="gw.api.financials.ClaimFinancialsTransactionsOption"/>
+    <Screen
+      id="ClaimFinancialsTransactionsPrintScreen">
+      <Toolbar/>
+      <PanelRef
+        def="TransactionsLV(Claim, requestedOption)"
+        mode="requestedOption.UiMode"/>
+    </Screen>
+  </Page>
+</PCF>

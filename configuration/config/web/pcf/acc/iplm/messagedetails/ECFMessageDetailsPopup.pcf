@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Popup
+    canEdit="false"
+    id="ECFMessageDetailsPopup"
+    title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetailsPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="ECFMessageDetailsPopup(claimDataMsg: ECFMessageClaimData_Ext)"/>
+    <Variable
+      name="claimDataMsg"
+      type="ECFMessageClaimData_Ext"/>
+    <Screen>
+      <CardViewPanel
+        hideTabIfSingle="true">
+        <Card
+          id="Summary"
+          title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetailsPopup.Summary&quot;)">
+          <PanelRef
+            def="ECFMessageDetailsSummaryPanelSet(claimDataMsg)"/>
+        </Card>
+        <Card
+          id="Policy"
+          title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetailsPopup.Policy&quot;)">
+          <PanelRef
+            def="ECFMessageDetailsPolicyPanelSet(claimDataMsg)"/>
+        </Card>
+        <Card
+          id="Financials"
+          title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetailsPopup.Financials&quot;)">
+          <PanelRef
+            def="ECFMessageDetailsFinancialsPanelSet(claimDataMsg)"/>
+        </Card>
+        <Card
+          id="BulkClaims"
+          title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetailsPopup.BulkClaims&quot;)"
+          visible="claimDataMsg.BulkClaimNoOfItems &gt; 0bd">
+          <PanelRef
+            def="ECFMessageDetailsBulkClaimPanelSet(claimDataMsg)"/>
+        </Card>
+        <Card
+          id="Comments"
+          title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetailsPopup.Comments&quot;)">
+          <PanelRef
+            def="ECFMessageDetailsCommentDV(claimDataMsg)"/>
+        </Card>
+        <Card
+          id="XMLContent"
+          title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFMessageDetailsPopup.XMLContent&quot;)">
+          <PanelRef
+            def="IPLMMessageXMLContentDV(claimDataMsg)"/>
+        </Card>
+      </CardViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

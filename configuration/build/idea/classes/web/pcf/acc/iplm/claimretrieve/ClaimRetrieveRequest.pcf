@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterCommit="ClaimSummary.go(claim); gw.api.util.LocationUtil.addRequestScopedInfoMessage(DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimRetrieve.SucessfullySent&quot;))"
+    alwaysInEditMode="true"
+    autosaveable="false"
+    beforeCommit="claimRetrieveController.sendRequest(claimRetrieveRq)"
+    canEdit="true"
+    canVisit="true"
+    id="ClaimRetrieveRequest"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Accelerator.IPLM.ClaimRetrieve.Title&quot;)">
+    <LocationEntryPoint
+      signature="ClaimRetrieveRequest(claim:Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="new gw.acc.iplm.controller.ECFClaimRetrieveController()"
+      name="claimRetrieveController"
+      type="gw.acc.iplm.controller.ECFClaimRetrieveController"/>
+    <Variable
+      initialValue="claimRetrieveController.initializeNewClaimRetrieve(claim, CurrentLocation.Bundle)"
+      name="claimRetrieveRq"
+      type="ECFMessageClaimRetrieveRq_Ext"/>
+    <ScreenRef
+      def="ClaimRetrieveRequestScreen(claimRetrieveRq, claimRetrieveController, true)"/>
+  </Page>
+</PCF>

@@ -1,0 +1,22 @@
+package rules.Validation.ExposureValidationRules_dir.EXV05000ISOValidation_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("EXV05100 - Not Draft")
+internal class EXV05100NotDraft {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.State == TC_DRAFT
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.rejectField("State", TC_ISO, DisplayKey.get("Rules.Validation.Exposure.MustNotBeDraft"), null, null)
+/*end00rule*/
+
+  }
+}

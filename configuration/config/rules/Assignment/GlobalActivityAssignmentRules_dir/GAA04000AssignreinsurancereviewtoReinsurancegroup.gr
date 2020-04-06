@@ -1,0 +1,44 @@
+package rules.Assignment.GlobalActivityAssignmentRules_dir
+
+uses gw.api.database.Query
+
+@gw.rules.RuleName("GAA04000 - Assign reinsurance review to Reinsurance group")
+internal class GAA04000AssignreinsurancereviewtoReinsurancegroup {
+  static function doCondition(activity : entity.Activity) : boolean {
+    
+/*start00rule*/
+return activity.ActivityPattern.Code=="claim_reinsurance_review"
+or activity.ActivityPattern.Code == "reinsurance_review"
+or activity.ActivityPattern.Code == "reinsurance_needs_synchronization"
+/*end00rule*/
+
+  }
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+
+/*start00rule*/
+var reinsUser : User
+
+// retrieve the reinsurance manager if it exists as a role on the claim
+var roleAssignment = activity.Claim.getUserRoleAssignmentByRole(TC_REINSMGR)
+if (roleAssignment != null) {
+  reinsUser = roleAssignment.AssignedUser
+}
+
+// if an reinsurance manager already exists on the claim, assign this reinsurance 
+// review to the same user and group
+if (reinsUser != null) {
+  if (activity.assign(roleAssignment.AssignedGroup, reinsUser)) {
+    actions.exit()
+  }
+} else {
+  // assign a user in the Reinsurance Unit to review this claim  
+  var reinsUserGroup = Query.make(Group).compare("GroupType", Equals, GroupType.TC_REINSURANCE).select().FirstResult
+  if (reinsUserGroup != null && activity.assignUserByRoundRobin(true, reinsUserGroup)) {
+    actions.exit()  
+  }
+}
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,92 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    editable="true"
+    id="ClaimIndicatorInputSet"
+    mode="LitigationClaimIndicator">
+    <Require
+      name="indicator"
+      type="ClaimIndicator"/>
+    <Variable
+      initialValue="findLitigationStart()"
+      name="litigationStart"
+      type="java.util.Date"/>
+    <Variable
+      initialValue="CurrentLocation.InEditMode"
+      name="inEditMode"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <RangeRadioInput
+      id="LitigationStatusView"
+      label="DisplayKey.get(&quot;Web.Claim.LitigationClaimIndicator.LitigationStatus&quot;)"
+      optionIcon="VALUE == TC_LITIGATED or VALUE == TC_COMPLETE ? indicator.Icon : null"
+      optionLabel="indicator.HoverText"
+      value="indicator.Claim.LitigationStatus"
+      valueRange="LitigationStatus.getTypeKeys(false)"
+      valueType="typekey.LitigationStatus"
+      visible="!inEditMode"/>
+    <TypeKeyInput
+      editable="true"
+      hideIfReadOnly="true"
+      id="LitigationStatusEdit"
+      label="DisplayKey.get(&quot;Web.Claim.LitigationClaimIndicator.LitigationStatus&quot;)"
+      value="indicator.Claim.LitigationStatus"
+      valueType="typekey.LitigationStatus"/>
+    <DateInput
+      dateFormat="short"
+      id="LitigationIdentified"
+      label="DisplayKey.get(&quot;Web.Claim.LitigationClaimIndicator.LitigationIdentified&quot;)"
+      value="litigationStart"/>
+    <TextInput
+      id="DaysAfterFNOL"
+      label="(indicator.Claim.LossType == LossType.TC_WC) ? DisplayKey.get(&quot;Web.Claim.LitigationClaimIndicator.DaysAfterFirstReportOfInjury&quot;): DisplayKey.get(&quot;Web.Claim.LitigationClaimIndicator.DaysAfterFNOL&quot;)"
+      value="calculateDaysAfterFNOL(litigationStart)"
+      valueType="java.lang.Integer"/>
+    <BooleanRadioInput
+      editable="true"
+      id="FirstNoticeSuit"
+      label="DisplayKey.get(&quot;Web.Claim.LitigationClaimIndicator.FirstNoticeSuit&quot;)"
+      value="indicator.Claim.FirstNoticeSuit"/>
+    <DateInput
+      dateFormat="short"
+      id="NextTrialDate"
+      label="DisplayKey.get(&quot;Web.Claim.LitigationClaimIndicator.NextTrialDate&quot;)"
+      value="findNextTrialDate()"/>
+    <Code><![CDATA[uses gw.api.path.Paths
+      uses gw.api.database.QuerySelectColumns
+      uses gw.api.database.Query
+
+      function findLitigationStart(): java.util.Date {
+        var finder = Query.make(entity.Matter).compare("Claim", Equals, indicator.Claim).select()
+        finder.orderBy(QuerySelectColumns.path(Paths.make(Matter#CreateTime)))
+        finder.setPageSize(1)
+        var firstMatter = finder.getFirstResult()
+        return firstMatter.CreateTime
+      }
+
+      function calculateDaysAfterFNOL(litigationStartTime: java.util.Date): java.lang.Integer {
+        var result: java.lang.Integer = null
+        if (litigationStartTime != null and indicator.Claim.ReportedDate != null) {
+          result = gw.api.util.DateUtil.differenceInDays(indicator.Claim.ReportedDate, litigationStartTime)
+          if (result < 0) {
+            result = 0
+          }
+        }
+        return result
+      }
+
+      function findNextTrialDate(): java.util.Date {
+        var startOfDay = java.util.Date.CurrentDate.trimToMidnight()
+        var finder = Query.make(entity.Matter).compare("Claim", Equals, indicator.Claim)
+          .compare("CloseDate", Equals, null)
+          .compare("TrialDate", NotEquals, null)
+          .compare("TrialDate", GreaterThanOrEquals, startOfDay).select()
+        finder.orderBy(QuerySelectColumns.path(Paths.make(Matter#TrialDate)))
+        finder.setPageSize(1)
+        var earliestTrialMatter = finder.getFirstResult()
+        return earliestTrialMatter.TrialDate
+      }]]></Code>
+  </InputSet>
+</PCF>

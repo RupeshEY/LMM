@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<entity
+  desc="Represents any modifications made to Agreement Parties by the user sending a claim response"
+  exportable="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFResponseAPModification_Ext"
+  table="ecfresponseapmod_ext"
+  type="retireable">
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    fkentity="ECFMessageClaimResponseRq_Ext"
+    name="ECFMessageClaimResponseRq_Ext"
+    nullok="false"/>
+  <column
+    desc="Boolean representation of a promotion/demotion. True = Promoted to AP. False = demoted to Follower"
+    name="Promotion"
+    nullok="false"
+    type="bit"/>
+  <column
+    desc="The ID of the Agreement Party that was modified"
+    name="PartyId"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="The agency of the Agreement Party that was modified"
+    name="Agency"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="The name of the Agreement Party that was modified"
+    name="Name"
+    nullok="true"
+    type="shorttext"/>
+</entity>

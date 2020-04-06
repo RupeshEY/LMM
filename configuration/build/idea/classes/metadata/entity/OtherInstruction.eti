@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Other instructions for account special handling"
+  entity="OtherInstruction"
+  exportable="true"
+  extendable="true"
+  final="false"
+  platform="false"
+  table="otherinstruction"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.specialhandling.entity.OtherInstruction"
+    impl="com.guidewire.cc.domain.specialhandling.impl.OtherInstructionImpl"/>
+  <foreignkey
+    columnName="SpecialHandlingID"
+    desc="The special handling object this other instruction relates to."
+    fkentity="SpecialHandling"
+    name="SpecialHandling"
+    nullok="false"/>
+  <typekey
+    desc="The policy type this instruction relates to. If no policy type is specified, it will relate to all types."
+    name="PolicyType"
+    nullok="true"
+    typelist="PolicyType"/>
+  <typekey
+    desc="The instruction category this instruction relates to."
+    name="InstructionCategory"
+    nullok="true"
+    typelist="InstructionCategory"/>
+  <typekey
+    desc="The specific instruction type this instruction relates to."
+    name="InstructionType"
+    nullok="true"
+    typelist="InstructionType">
+    <keyfilters>
+      <keyfilter
+        name="InstructionCategory"/>
+    </keyfilters>
+  </typekey>
+  <column
+    desc="Special handling other instruction comment"
+    name="Comments"
+    nullok="true"
+    type="mediumtext">
+    <localization
+      nullok="true"
+      tableName="inst_comm_l10n"/>
+  </column>
+</entity>

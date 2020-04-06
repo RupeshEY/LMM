@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="NewOnsetPaymentsLV">
+    <Require
+      name="OriginalPayment"
+      type="Payment"/>
+    <Require
+      name="PaymentList"
+      type="java.util.ArrayList&lt;Payment&gt;"/>
+    <ExposeIterator
+      valueType="entity.Payment"
+      widget="NewOnsetPaymentsLV"/>
+    <RowIterator
+      editable="false"
+      elementName="Payment"
+      toCreateAndAdd="addPayment()"
+      toRemove="removePayment(Payment)"
+      value="PaymentList"
+      valueType="java.util.ArrayList&lt;entity.Payment&gt;">
+      <Row>
+        <TextCell
+          id="Exposure"
+          label="DisplayKey.get(&quot;LV.Financials.NewCheckPayments.Payments.Exposure&quot;)"
+          outputConversion="((Payment.ReserveLine != null) ? ((null == VALUE) ? DisplayKey.get(&quot;LV.Financials.NewCheckPayments.Payments.Exposure.None&quot;) : VALUE.DisplayName) : null)"
+          value="Payment.Exposure"
+          valueType="entity.Exposure"/>
+        <TypeKeyCell
+          id="Coverage"
+          label="DisplayKey.get(&quot;LV.Financials.NewCheckPayments.Payments.Coverage&quot;)"
+          value="Payment.Exposure.PrimaryCoverage"
+          valueType="typekey.CoverageType"/>
+        <TypeKeyCell
+          id="CostType"
+          label="DisplayKey.get(&quot;LV.Financials.NewCheckPayments.Payments.CostType&quot;)"
+          value="Payment.CostType"
+          valueType="typekey.CostType"/>
+        <TypeKeyCell
+          id="CostCategory"
+          label="DisplayKey.get(&quot;LV.Financials.NewCheckPayments.Payments.CostCategory&quot;)"
+          value="Payment.CostCategory"
+          valueType="typekey.CostCategory"/>
+        <TypeKeyCell
+          id="ReservingCurrency"
+          label="DisplayKey.get(&quot;LV.Financials.NewCheckPayments.Payments.ReservingCurrency&quot;)"
+          value="Payment.ReservingCurrency"
+          valueType="typekey.Currency"
+          visible="gw.util.CCConfigUtil.AllowExplicitReservingCurrency"/>
+        <CurrencyCell
+          footerSumValue="Payment.TransactionAmountReservingAmountPair"
+          formatType="currency"
+          id="Amount"
+          label="DisplayKey.get(&quot;LV.Financials.NewCheckPayments.Payments.Amount&quot;)"
+          value="Payment.TransactionAmountReservingAmountPair"
+          valueType="gw.api.financials.IPairedMoney"/>
+        <TypeKeyCell
+          id="PaymentType"
+          label="DisplayKey.get(&quot;LV.Financials.NewCheckPayments.Payments.PaymentType&quot;)"
+          value="Payment.PaymentType"
+          valueType="typekey.PaymentType"/>
+        <TextCell
+          id="Comments"
+          label="DisplayKey.get(&quot;LV.Financials.NewCheckPayments.Payments.Comments&quot;)"
+          value="Payment.Comments"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function addPayment() : Payment { 
+  var newPayment = OriginalPayment.createOnsetPayment(true, false)
+  PaymentList.add(newPayment)
+  return newPayment 
+}
+
+function removePayment(payment : Payment) { 
+  if(PaymentList.Count == 1) {
+    gw.api.util.LocationUtil.addRequestScopedErrorMessage(DisplayKey.get("Web.Financials.Payment.Recode.MustHaveAtLeastOnePayment"))
+  } else {
+    if(payment.hasDeductibleLineItem()) {
+      payment.unlinkDeductible()
+    }
+    PaymentList.remove(payment)
+    payment.remove()
+  }
+}]]></Code>
+  </ListViewPanel>
+</PCF>

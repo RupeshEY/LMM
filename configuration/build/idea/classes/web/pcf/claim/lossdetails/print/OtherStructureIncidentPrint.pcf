@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="incident != null and perm.Incident.view(incident)"
+    id="OtherStructureIncidentPrint"
+    parent="ClaimPrintout(c)"
+    title="DisplayKey.get(&quot;Web.OtherStructureIncident.PopupHeader&quot;)">
+    <LocationEntryPoint
+      signature="OtherStructureIncidentPrint(c : Claim, incident : OtherStructureIncident)"/>
+    <Variable
+      name="c"
+      type="Claim"/>
+    <Variable
+      name="incident"
+      type="OtherStructureIncident"/>
+    <Screen>
+      <PanelRef
+        def="OtherStructureIncidentPanelSet(incident)"/>
+    </Screen>
+  </Page>
+</PCF>

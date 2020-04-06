@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    autosaveable="false"
+    canVisit="perm.Claim.view(Claim) and perm.System.viewdocs"
+    countsAsWork="false"
+    id="PickExistingDocumentPopup"
+    returnType="Document"
+    title="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Documents&quot;)">
+    <LocationEntryPoint
+      signature="PickExistingDocumentPopup(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="Claim_DocumentsScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="CurrentLocation.cancel();"
+          id="PickExistingDocumentPopup_CancelButton"
+          label="DisplayKey.get(&quot;Button.Cancel&quot;)"/>
+      </Toolbar>
+      <SearchPanel
+        criteriaName="DocumentSearchCriteria"
+        resultsName="DocumentList"
+        search="DocumentSearchCriteria.performSearch() as gw.api.database.IQueryBeanResult&lt;Document&gt;"
+        searchCriteria="return createSearchCriteria();"
+        searchCriteriaType="entity.DocumentSearchCriteria"
+        searchOnEnter="true"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;Document&gt;">
+        <PanelRef
+          def="ClaimDocumentSearchDV(DocumentSearchCriteria)">
+          <TitleBar
+            title="DisplayKey.get(&quot;NVV.Claim.ClaimDocumentsFilter.Title&quot;)"/>
+        </PanelRef>
+        <PanelRef
+          def="PickExistingDocumentsLV(DocumentList)">
+          <Toolbar/>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+    <Code><![CDATA[
+      function createSearchCriteria() : DocumentSearchCriteria {
+        var searchCriteria = new DocumentSearchCriteria();
+        searchCriteria.Claim = Claim;
+        searchCriteria.IncludeObsoletes = false;
+        return searchCriteria;
+      }
+    ]]></Code>
+  </Popup>
+</PCF>

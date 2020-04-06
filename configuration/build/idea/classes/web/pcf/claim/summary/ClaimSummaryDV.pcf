@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- The next name value view controls the claim summary area of the summary screen
+    This file automatically generated from nvv_claim.xml -->
+  <DetailViewPanel
+    id="ClaimSummaryDV">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <InputColumn
+      width="40%">
+      <DateInput
+        dateFormat="short"
+        id="LossDate"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimSummary.LossDate&quot;)"
+        timeFormat="short"
+        value="Claim.LossDate"/>
+      <DateInput
+        id="ReportDate"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimSummary.ReportDate&quot;)"
+        value="Claim.ReportedDate"/>
+      <InputSetRef
+        def="ReturnToWorkInputSet(Claim.LossType == TC_WC ? Claim.ensureClaimInjuryIncident() : null, false)"
+        id="WC_RTW"
+        mode="&quot;WC&quot;"
+        visible="Claim.LossType == TC_WC and Claim.getLossTimeExposure() != null"/>
+    </InputColumn>
+    <InputColumn
+      width="60%">
+      <TextInput
+        id="Location"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimSummary.Location&quot;)"
+        value="Claim.LossLocation.Description"/>
+      <TextAreaInput
+        id="Description"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimSummary.Description&quot;)"
+        numRows="3"
+        value="Claim.Description"/>
+      <TextInput
+        id="WCInjuryWorkStatus"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimSummary.WorkStatus&quot;)"
+        value="Claim.getWorkStatusMessage()"
+        visible="Claim.LossType == TC_WC"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

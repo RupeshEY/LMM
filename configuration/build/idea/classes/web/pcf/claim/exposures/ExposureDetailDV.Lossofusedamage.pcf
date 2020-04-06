@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_exposure.xml -->
+  <CardViewPanel
+    id="ExposureDetailDV"
+    mode="Lossofusedamage">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Card
+      id="LossOfUseDamage_DetailsCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.LossOfUseDamage.Details&quot;)">
+      <PanelRef
+        def="LossOfUseDamageDV(Exposure)"/>
+    </Card>
+    <Card
+      id="Exposure_ISOCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.ISO&quot;)"
+      visible="!Exposure.Claim.ISOClaimLevelMessaging">
+      <PanelRef
+        def="ISODetailsDV(Exposure)"/>
+    </Card>
+  </CardViewPanel>
+</PCF>

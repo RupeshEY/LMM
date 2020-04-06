@@ -1,0 +1,266 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Transaction (either reserve, payment, recovery, or recovery reserve) for a particular claim or exposure."
+  entity="Transaction"
+  exportable="true"
+  final="false"
+  table="transaction"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.impl.TransactionInternal"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.RemoveCallback"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.entity.Transaction"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="TransactionTAccountOperationsDelegate"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.TransactionTAccountOperationsDelegateAdapter"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TransactionTAccountOperationsDelegateAdapterNormalImpl"/>
+  <fulldescription><![CDATA[
+        Represents a financial operation, such as creating a reserve or scheduling
+        a payment. It is an abstract supertype, and the UI uses only its four subtypes:
+        <ul><li>Reserve - expected payments</li><li>Payment - money paid out or liability incurred</li>
+        <li> RecoveryReserve - expected recoveries</li><li>Recovery - credit or money received</li></ul>
+        <p>
+        Every transaction is made against a single ReserveLine. It contains a non-null
+        array of TransactionLineItem entities holding the amount(s) of the transaction. Checks
+        are not transactions. A single transaction will affect multiple T-accounts.
+    ]]></fulldescription>
+  <column
+    desc="Comments about the transaction, such as a reason."
+    name="Comments"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    desc="The Currency of the transaction amount."
+    name="Currency"
+    nullok="false"
+    typelist="Currency"/>
+  <foreignkey
+    columnName="ReserveLineID"
+    desc="The ReserveLine associated with this transaction.  For all transaction subtypes this ReserveLine will have matching Claim, Exposure, CostType and CostCategory."
+    existingreferencesallowed="false"
+    exportable="false"
+    fkentity="ReserveLine"
+    name="ReserveLine"
+    nullok="false"
+    overwrittenInStagingTable="true"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The related claim.&lt;p&gt;Setting the claim also sets this transaction's currency to the claim's currency if it is null."
+    exportasid="true"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="The related exposure."
+    exportasid="true"
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="true"/>
+  <foreignkey
+    columnName="TransactionSetID"
+    desc="Set that groups together one or more transactions for approval."
+    exportable="false"
+    fkentity="TransactionSet"
+    importableagainstexistingobject="false"
+    name="TransactionSet"
+    nullok="false"
+    triggersValidation="true"/>
+  <foreignkey
+    desc="ExchangeRate to use when converting TransactionAmount to ReservingAmount. Setting this value updates the reserving amounts. Also sets the same ExchangeRate as TransToClaimExchangeRate if ClaimCurrency and ReservingCurrency are equal."
+    exportable="false"
+    fkentity="ExchangeRate"
+    name="TransToReservingExchangeRate"
+    nullok="true"/>
+  <foreignkey
+    desc="ExchangeRate to use when converting TransactionAmount to ClaimAmount. Setting this value updates the claim and reporting amounts. Also sets the same ExchangeRate as TransToReservingExchangeRate if ClaimCurrency and ReservingCurrency are equal."
+    exportable="false"
+    fkentity="ExchangeRate"
+    name="TransToClaimExchangeRate"
+    nullok="true"/>
+  <foreignkey
+    desc="ExchangeRate to use when converting ClaimAmount to ReportingAmount. Setting this value updates the reporting amounts."
+    exportable="false"
+    fkentity="ExchangeRate"
+    name="ClaimToReportingExchangeRate"
+    nullok="true"/>
+  <typekey
+    desc="Type of cost (for example, claim cost or adjusting overhead)."
+    name="CostType"
+    nullok="false"
+    typelist="costtype"/>
+  <typekey
+    desc="The CostCategory for this transaction."
+    name="CostCategory"
+    nullok="false"
+    typelist="costcategory">
+    <keyfilters>
+      <keyfilter
+        name="Exposure.PrimaryCoverage"/>
+      <keyfilter
+        name="CostType"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="Reserving Currency of this transaction's ReserveLine. Indicates the currency in which reserves are to be set aside and eroded."
+    name="ReservingCurrency"
+    nullok="false"
+    soapnullok="true"
+    typelist="Currency"/>
+  <column
+    desc="Unused. May be removed in a future release."
+    name="SubmitDate"
+    nullok="true"
+    type="datetime"/>
+  <array
+    arrayentity="TransactionLineItem"
+    cascadeDelete="true"
+    desc="Set of line items that further categorize the transaction amount."
+    name="LineItems"
+    triggersValidation="true"/>
+  <array
+    arrayentity="TransactionOffset"
+    arrayfield="Transaction"
+    desc="Transactions that offset this transaction. A transaction should have at most one item in this array. This array is applicable only to a payment or recovery."
+    name="Offsets"
+    owner="true"
+    triggersValidation="true"/>
+  <array
+    arrayentity="TransactionOnset"
+    arrayfield="Transaction"
+    desc="Transactions that onset this transaction. This array is applicable only to a payment or recovery."
+    name="Onsets"
+    owner="true"
+    triggersValidation="true"/>
+  <array
+    arrayentity="TAccountTransaction"
+    desc="Set of T-account transactions that make up the lifecycle of this Transaction."
+    exportable="false"
+    name="TAccountTransactions"/>
+  <array
+    arrayentity="RecTAccountTransaction"
+    desc="Set of T-account transactions that make up the lifecycle of this Transaction. Only applicable to Recoveries and RecoveryReserves."
+    exportable="false"
+    getterScriptability="hidden"
+    name="RecTAccountTransactions"
+    setterScriptability="hidden"/>
+  <events/>
+  <index
+    desc="Index to speed consistency checks for consistentchildren property on claim."
+    name="transaction1">
+    <indexcol
+      keyposition="1"
+      name="TransactionSetID"/>
+    <indexcol
+      keyposition="2"
+      name="ClaimID"/>
+  </index>
+  <index
+    desc="Index to speed consistency checks for consistentchildren property on claim."
+    name="transaction2">
+    <indexcol
+      keyposition="1"
+      name="ExposureID"/>
+    <indexcol
+      keyposition="2"
+      name="ClaimID"/>
+  </index>
+  <index
+    desc="Index to speed consistency checks for consistentchildren property on claim."
+    name="transaction3">
+    <indexcol
+      keyposition="1"
+      name="ExposureID"/>
+    <indexcol
+      keyposition="2"
+      name="Subtype"/>
+    <indexcol
+      keyposition="3"
+      name="Status"/>
+  </index>
+  <index
+    desc="Index used for claim exception query that finds all modified transactions on a claim."
+    name="transaction4">
+    <indexcol
+      keyposition="1"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="UpdateTime"/>
+  </index>
+  <index
+    desc="CheckSearchCreatedByMeWithPayTo, CheckSearchCreatedByMyPendingApproval, RecoverySearchCreatedByMe, RecoverySearchLimitedByCreateTime."
+    name="transaction5"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="CreateUserID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="Subtype"/>
+    <indexcol
+      keyposition="4"
+      name="CreateTime"/>
+    <indexcol
+      keyposition="5"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="6"
+      name="ID"/>
+  </index>
+  <index
+    desc="Index to help speed up the t-account escalation batch process"
+    name="transaction9"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="LifeCycleState"/>
+    <indexcol
+      keyposition="2"
+      name="Subtype"/>
+    <indexcol
+      keyposition="3"
+      name="Retired"/>
+    <indexcol
+      keyposition="4"
+      name="ID"/>
+  </index>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.financials.dbchecks.TransactionDBCheckBuilder"/>
+  <foreignkey
+    columnName="RecoveryCodingID"
+    desc="The RecoveryCoding to which this transaction is coded."
+    fkentity="RecoveryCoding"
+    getterScriptability="doesNotExist"
+    name="RecoveryCoding"
+    nullok="true"
+    setterScriptability="doesNotExist"/>
+  <onetoone
+    desc="TransactionOnset join entity pointing to this Transaction as an Onset."
+    fkentity="TransactionOnset"
+    linkField="Onset"
+    name="OriginTransactionOnset"
+    nullok="true"/>
+</entity>

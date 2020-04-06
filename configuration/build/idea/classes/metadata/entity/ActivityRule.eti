@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="ActivityRule"
+  final="true"
+  supertype="Rule">
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.cc.domain.bizrules.ActivityRuleImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.RuleDomainMethods"
+    impl="com.guidewire.cc.domain.bizrules.ActivityRuleImpl"/>
+  <array
+    arrayentity="ActivityRuleVersion"
+    getterScriptability="hidden"
+    name="Versions"
+    setterScriptability="doesNotExist"/>
+  <array
+    arrayentity="AppCritLossType"
+    name="LossTypes"
+    owner="true"/>
+  <array
+    arrayentity="AppCritPolicyType"
+    name="PolicyTypes"
+    owner="true"/>
+  <array
+    arrayentity="AppCritJurisdiction"
+    name="Jurisdictions"
+    owner="true"/>
+</subtype>

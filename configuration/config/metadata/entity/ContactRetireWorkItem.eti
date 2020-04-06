@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Queue of Contacts to be checked for retirement. This is a system-internal entity."
+  entity="ContactRetireWorkItem"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  table="contactretireworkitem"
+  type="keyable">
+  <implementsInterface
+    iface="gw.cc.contact.entity.ContactRetireWorkItem"
+    impl="com.guidewire.cc.domain.contact.impl.ContactRetireWorkItemImpl"/>
+  <implementsEntity
+    name="WorkItem"/>
+  <fulldescription><![CDATA[Queue of Contacts which should be checked to see if they can be retired. Work items are recorded as the ID value of (ClaimCenter) Contact entities. This is a system-internal entity.
+    ]]></fulldescription>
+  <column
+    desc="The public ID of the Contact we want to retire."
+    name="ContactPublicID"
+    nullok="false"
+    type="publicid"/>
+  <index
+    desc="Enforce uniqueness for ContactPublicID so we only have one work item per PublicID"
+    name="crwiu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ContactPublicID"/>
+  </index>
+</entity>

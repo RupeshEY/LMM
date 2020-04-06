@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Subtype of TransactionSet that contains one or more reserve transactions submitted together for approval."
+  entity="ReserveSet"
+  final="true"
+  supertype="TransactionSet">
+  <implementsInterface
+    iface="gw.cc.financials.reserve.entity.ReserveSet"
+    impl="com.guidewire.cc.domain.financials.reserve.impl.ReserveSetImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.reserve.impl.ReserveSetInternal"
+    impl="com.guidewire.cc.domain.financials.reserve.impl.ReserveSetImpl"/>
+  <array
+    arrayentity="Reserve"
+    desc="Reserves in the set."
+    exportable="true"
+    name="Reserves"
+    triggersValidation="true"/>
+</subtype>

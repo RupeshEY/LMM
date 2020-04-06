@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    editable="true"
+    id="AdditionalTripAccommodationLV">
+    <ExposeIterator
+      flags="approve_add_acc,review_add_acc,deny_add_acc,row_add_acc,clear_add_acc"
+      valueType="entity.AddnlTripAccommodation"
+      widget="TripAccommodationIterator"/>
+    <Require
+      name="affectedTripAccommodation"
+      type="TripAccommodation"/>
+    <RowIterator
+      checkBoxVisible="true"
+      editable="true"
+      elementName="anAddnlTripAccommodation"
+      hasCheckBoxes="true"
+      hideCheckBoxesIfReadOnly="true"
+      id="TripAccommodationIterator"
+      pickLocation="AdditionalTripAccommodationAddressPopup.push(new  AddnlTripAccommodation(), affectedTripAccommodation, true)"
+      toRemove="affectedTripAccommodation.removeFromAddnlTripAccommodations( anAddnlTripAccommodation )"
+      value="affectedTripAccommodation.AddnlTripAccommodations"
+      valueType="entity.AddnlTripAccommodation[]">
+      <ToolbarFlag
+        condition="anAddnlTripAccommodation.Assessment == TC_APPROVE "
+        name="approve_add_acc"/>
+      <ToolbarFlag
+        condition="anAddnlTripAccommodation.Assessment == TC_REVIEW "
+        name="review_add_acc"/>
+      <ToolbarFlag
+        condition="anAddnlTripAccommodation.Assessment == TC_DENY "
+        name="deny_add_acc"/>
+      <ToolbarFlag
+        name="row_add_acc"/>
+      <ToolbarFlag
+        condition="anAddnlTripAccommodation.Assessment == null"
+        name="clear_add_acc"/>
+      <Row>
+        <TextCell
+          action="AdditionalTripAccommodationAddressPopup.push( anAddnlTripAccommodation,  affectedTripAccommodation, CurrentLocation.InEditMode)"
+          id="AddnlTripAccommodation_DisplayName"
+          label="DisplayKey.get(&quot;Web.TripIncidentScreen.AdditionalTripAccommodationLV.Description&quot;)"
+          value="anAddnlTripAccommodation.DisplayName"/>
+        <TypeKeyCell
+          formatType="general"
+          id="AddnlTripSegment_Assessment"
+          label="DisplayKey.get(&quot;Web.TripIncidentScreen.AdditionalTripAccommodationLV.Assessment&quot;)"
+          value="anAddnlTripAccommodation.Assessment"
+          valueType="typekey.AssessmentAction"/>
+        <CurrencyCell
+          formatType="currency"
+          id="AddnlTripSegment_TotalIncurred"
+          label="DisplayKey.get(&quot;Web.TripIncidentScreen.AdditionalTripAccommodationLV.ApprovedAmt&quot;)"
+          value="anAddnlTripAccommodation.getFinancialImpact(AssessmentAction.TC_APPROVE)"/>
+        <TextCell
+          available="anAddnlTripAccommodation.ReasonForDenial == null or anAddnlTripAccommodation.ReasonForDenial.length == 0"
+          editable="anAddnlTripAccommodation.Assessment == TC_DENY ? true : false"
+          id="ReasonForDenial"
+          label="DisplayKey.get(&quot;Web.TripIncidentAccommodationLV.ReasonForDenial&quot;)"
+          required="true"
+          value="anAddnlTripAccommodation.ReasonForDenial"
+          valueVisible="anAddnlTripAccommodation.Assessment == TC_DENY ? true : false"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

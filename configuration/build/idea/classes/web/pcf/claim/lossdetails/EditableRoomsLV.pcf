@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="EditableRoomsLV">
+    <ExposeIterator
+      valueType="entity.DwellingRoomDamage"
+      widget="EditableRoomsLV"/>
+    <Require
+      name="dwellingIncident"
+      type="DwellingIncident"/>
+    <RowIterator
+      editable="true"
+      elementName="room"
+      hideCheckBoxesIfReadOnly="true"
+      toAdd="dwellingIncident.addToDwellingRoomDamages( room )"
+      toRemove="dwellingIncident.removeFromDwellingRoomDamages( room )"
+      value="dwellingIncident.DwellingRoomDamages"
+      valueType="entity.DwellingRoomDamage[]">
+      <Row>
+        <TextCell
+          editable="true"
+          enableSort="false"
+          id="NumberOfRooms"
+          label="DisplayKey.get(&quot;Web.EditableRooms.NumberOfRooms&quot;)"
+          numCols="2"
+          required="true"
+          value="room.NumberOfRooms"
+          valueType="java.lang.Integer"
+          wrapLabel="true"/>
+        <TypeKeyCell
+          editable="true"
+          id="RoomType"
+          label="DisplayKey.get(&quot;Web.EditableRooms.RoomType&quot;)"
+          required="true"
+          sortOrder="1"
+          value="room.RoomType"
+          valueType="typekey.RoomType"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

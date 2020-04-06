@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="ReinsuranceThreshold"
+  exportable="true"
+  platform="false"
+  table="reinsurancethreshold"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.ReinsuranceThreshold"
+    impl="com.guidewire.cc.domain.claim.impl.ReinsuranceThresholdImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.impl.ReinsuranceThresholdInternal"
+    impl="com.guidewire.cc.domain.claim.impl.ReinsuranceThresholdImpl"/>
+  <fulldescription><![CDATA[
+        This reference table contains the information necessary to determine whether a claim has exceeded the
+        reinsurance reportable threshold notification limit based upon the claim's policy type, coverage types and loss causes.
+      
+    ]]></fulldescription>
+  <typekey
+    desc="Type of reinsurance treaty."
+    name="TreatyType"
+    nullok="false"
+    typelist="ReinsuranceTreatyType"/>
+  <typekey
+    desc="Type of policy."
+    name="PolicyType"
+    nullok="false"
+    typelist="PolicyType"/>
+  <typekey
+    desc="Type of loss."
+    name="LossType"
+    nullok="false"
+    typelist="LossType"/>
+  <array
+    arrayentity="reinsurancelosscause"
+    name="LossCauses"/>
+  <array
+    arrayentity="reinsurancecoverage"
+    name="CoverageTypes"/>
+  <column
+    desc="Reinsurance threshold value."
+    name="ThresholdValue"
+    nullok="false"
+    type="nonnegativemoney"/>
+  <column
+    desc="Reinsurance reporting threshold percentage for which a claim is marked reinsurance reportable."
+    name="ReportingThreshold"
+    nullok="false"
+    type="percentage"/>
+  <column
+    desc="Start Date"
+    name="StartDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="End Date"
+    name="EndDate"
+    nullok="true"
+    type="datetime"/>
+</entity>

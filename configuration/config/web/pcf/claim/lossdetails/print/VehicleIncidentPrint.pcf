@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.Claim.view(Claim) and perm.System.viewclaimbasics"
+    id="VehicleIncidentPrint"
+    parent="ClaimLossDetails(Claim)"
+    title="DisplayKey.get(&quot;NVV.Claim.SubView.LossDetailsAuto.Claim.Vehicles&quot;)">
+    <LocationEntryPoint
+      signature="VehicleIncidentPrint(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="VehicleIncidentPrintScreen">
+      <Toolbar/>
+      <PanelRef
+        def="EditableVehicleIncidentsLV(Claim)"/>
+    </Screen>
+  </Page>
+</PCF>

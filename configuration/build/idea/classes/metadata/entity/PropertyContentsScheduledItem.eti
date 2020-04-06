@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Describes a lost or damaged item listed in the policy's high value item array"
+  displayName="PropertyContentsLineItem"
+  entity="PropertyContentsScheduledItem"
+  exportable="true"
+  platform="false"
+  table="propcontentsscheditem"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.PropertyContentsScheduledItem"
+    impl="com.guidewire.cc.domain.exposure.impl.PropertyContentsScheduledItemImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="OrderedItemDelegate"/>
+  <fulldescription><![CDATA[
+      Describes a lost or damaged item listed in the policy's high value item array
+    ]]></fulldescription>
+  <foreignkey
+    columnName="IncidentID"
+    desc="Incident that owns this scheduled item"
+    fkentity="PropertyContentsIncident"
+    name="Incident"
+    nullok="false"/>
+  <foreignkey
+    columnName="PropertyItemID"
+    desc="The high value item listed on the policy"
+    fkentity="PropertyItem"
+    name="PropertyItem"
+    nullok="true"/>
+  <index
+    desc="Enforce uniqueness, item order should be unique per incident"
+    name="uscheditem1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="IncidentID"/>
+    <indexcol
+      keyposition="2"
+      name="ItemOrder"/>
+    <indexcol
+      keyposition="3"
+      name="Retired"/>
+  </index>
+  <index
+    desc="Enforce uniqueness, each item can only appear once in the scheduled item list"
+    name="uscheditem2"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="IncidentID"/>
+    <indexcol
+      keyposition="2"
+      name="PropertyItemID"/>
+    <indexcol
+      keyposition="3"
+      name="Retired"/>
+  </index>
+</entity>

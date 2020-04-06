@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="DocumentTemplateContextObjectInputSet"
+    mode="contact">
+    <Require
+      name="documentApplicationContext"
+      type="gw.document.DocumentApplicationContext"/>
+    <Require
+      name="documentCreationInfo"
+      type="gw.document.DocumentCreationInfo"/>
+    <Require
+      name="dynamicWidgetInfo"
+      type="gw.document.DocumentCreationInfo.DynamicWidgetInfo"/>
+    <ReferencedWidget
+      widget="DocumentCreationScreen"/>
+    <ClaimContactInput
+      claim="documentCreationInfo.Document.Claim"
+      editable="documentApplicationContext.DocumentCreationReadOnly"
+      id="DynamicInput"
+      label="dynamicWidgetInfo.DisplayName"
+      newContactMenu="ContextObjectContactPickerMenuItemSet(documentCreationInfo, dynamicWidgetInfo)"
+      required="!dynamicWidgetInfo.ShowNoneSelected"
+      showSearchInMenu="false"
+      value="ContextObjectContact"
+      valueRange="documentCreationInfo.getPossibleContextObjectValues(dynamicWidgetInfo.Name) as Contact[]"
+      visible="true">
+      <PostOnChange
+        onChange="documentCreationInfo.evaluateDependentDynamicWidgets(dynamicWidgetInfo.Name); documentApplicationContext.DocumentCreationResetState.execute()"
+        target="DocumentCreationScreen"/>
+    </ClaimContactInput>
+    <Code><![CDATA[property get ContextObjectContact(): Contact {
+      return documentCreationInfo.getContextObjectValue(dynamicWidgetInfo.Name) as Contact
+    }
+
+      property set ContextObjectContact(value : Contact){
+        documentCreationInfo.setContextObjectValue(dynamicWidgetInfo.Name, value)
+      }]]></Code>
+  </InputSet>
+</PCF>

@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="View entity for efficiently displaying Claims on the Desktop page."
+  entity="ClaimDesktopView"
+  exportable="false"
+  final="false"
+  primaryEntity="Claim"
+  supertypeEntity="ClaimAbstractView">
+  <implementsInterface
+    iface="gw.cc.claim.entity.ClaimDesktopView"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimDesktopViewImpl"/>
+  <fulldescription><![CDATA[
+        Supports the efficient creation of claim lists appearing on ClaimCenter's desktop view. This is a virtual
+        entity and is not stored in the database. 
+      
+    ]]></fulldescription>
+  <computedcolumn
+    expression="${1} + ${2} - ${3}"
+    name="TotalIncurredNet"
+    paths="ClaimRpt.OpenReserves, ClaimRpt.TotalPayments, ClaimRpt.TotalRecoveries"/>
+</viewEntity>

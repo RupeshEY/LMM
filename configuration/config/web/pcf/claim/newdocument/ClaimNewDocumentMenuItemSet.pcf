@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <MenuItemSet
+    id="ClaimNewDocumentMenuItemSet">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <MenuItem
+      action="ClaimNewDocumentFromTemplateWorksheet.goInWorkspace(Claim)"
+      available="documentsActionsHelper.DocumentTemplateActionsAvailable"
+      id="ClaimNewDocumentMenuItemSet_Create"
+      label="DisplayKey.get(&quot;JSP.CreateDocument_Options.Option.Create&quot;)"/>
+    <MenuItem
+      action="ClaimNewDocumentLinkedWorksheet.goInWorkspace(Claim)"
+      available="documentsActionsHelper.DocumentMetadataActionsAvailable and documentsActionsHelper.DocumentContentActionsAvailable"
+      id="ClaimNewDocumentMenuItemSet_Link"
+      label="DisplayKey.get(&quot;JSP.CreateDocument_Options.Option.Link&quot;)"/>
+    <MenuItem
+      action="ClaimNewDocumentExistsWorksheet.goInWorkspace(Claim)"
+      available="documentsActionsHelper.DocumentMetadataActionsAvailable"
+      id="ClaimNewDocumentMenuItemSet_IndicateExists"
+      label="DisplayKey.get(&quot;JSP.CreateDocument_Options.Option.IndicateExists&quot;)"/>
+  </MenuItemSet>
+</PCF>

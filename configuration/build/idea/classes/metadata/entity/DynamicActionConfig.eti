@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="DynamicActionConfig"
+  exportable="true"
+  extendable="false"
+  lockable="true"
+  table="dynact"
+  type="editable">
+  <column
+    desc="The root entity for the dynamic action"
+    name="RootEntity"
+    nullok="false"
+    type="mediumtext"/>
+  <column
+    desc="The name for the dynamic action"
+    name="Name"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="The description for the dynamic action"
+    name="Description"
+    nullok="false"
+    type="mediumtext"/>
+  <column
+    default="true"
+    name="Enabled"
+    nullok="false"
+    type="bit"/>
+  <typekey
+    name="Action"
+    nullok="false"
+    typelist="ResultingAction"/>
+  <column
+    name="EffectiveDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    name="ExpirationDate"
+    nullok="true"
+    type="datetime"/>
+  <typekey
+    name="Category"
+    nullok="false"
+    typelist="DynamicActionCategory"/>
+  <array
+    arrayentity="BaseCriterionConfig"
+    desc="The ANDed criteria for determining whether or not to execute the Action"
+    name="Criteria"
+    owner="true"/>
+</entity>

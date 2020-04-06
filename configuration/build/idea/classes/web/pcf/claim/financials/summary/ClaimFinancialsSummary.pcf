@@ -1,0 +1,104 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Claim.view(Claim) and perm.System.viewfinsum and perm.Claim.viewtransactiondetails(Claim)"
+    id="ClaimFinancialsSummary"
+    title="perm.Claim.viewnettotalincurred(Claim) ? DisplayKey.get(&quot;JSP.ClaimFinancials.Financials.Incurred&quot;, gw.api.util.CurrencyUtil.renderAsCurrency(gw.api.util.Math.Nz(gw.api.financials.FinancialsCalculations.getTotalIncurredNet().withClaim(Claim).Amount.Amount), Claim.Currency), DisplayKey.get(&quot;JSP.ClaimFinancials.Financials.Summary&quot;)) : DisplayKey.get(&quot;JSP.ClaimFinancials.Financials.NoIncurred&quot;, DisplayKey.get(&quot;JSP.ClaimFinancials.Financials.Summary&quot;))">
+    <LocationEntryPoint
+      signature="ClaimFinancialsSummary(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="gw.api.financials.FinancialsUtil.getFinancialsSummaryOption(Claim)"
+      name="savedOption"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="&quot;Exposure&quot;"
+      name="defaultOption"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="savedOption != null ? savedOption : defaultOption "
+      name="filterOption"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="false"
+      name="useFloatingFinancials"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.api.financials.summary.FinancialSummaryBridge(Claim, filterOption)"
+      name="financialSummaryBridge"
+      type="gw.api.financials.summary.FinancialSummaryBridge"/>
+    <Screen
+      id="ClaimFinancialsSummaryScreen">
+      <PanelRef
+        def="FinancialsSummaryPanelSet(Claim, useFloatingFinancials, financialSummaryBridge)"
+        id="financialsPanel"
+        mode="filterOption">
+        <Toolbar>
+          <ToolbarRangeInput
+            id="FinancialsSummaryRangeInput"
+            label="DisplayKey.get(&quot;Web.Financials.Summary.View&quot;)"
+            optionLabel="getFilterOptionLabel(VALUE)"
+            required="true"
+            value="filterOption"
+            valueRange="AvailableFilterOptions"
+            valueType="java.lang.String">
+            <PostOnChange
+              onChange="gw.api.financials.FinancialsUtil.setFinancialsSummaryOption(Claim, filterOption); financialSummaryBridge.changeFilterOption(filterOption, useFloatingFinancials)"
+              target="financialsPanel"/>
+          </ToolbarRangeInput>
+          <ToolbarDivider/>
+          <ToolbarRangeInput
+            editable="true"
+            id="floatingFinancialsInputWidget"
+            label="DisplayKey.get(&quot;Web.Financials.Summary.ExchangeRate&quot;)"
+            optionLabel="getViewAmountsOptionLabel(VALUE)"
+            required="true"
+            value="useFloatingFinancials"
+            valueRange="{false, true}"
+            valueType="java.lang.Boolean"
+            visible="gw.util.CCConfigUtil.EnableMulticurrencyReserving and filterOption != &quot;ReservingCurrency&quot;">
+            <PostOnChange
+              onChange="financialSummaryBridge.changeFilterOption(filterOption, useFloatingFinancials)"
+              target="DATA_ONLY"/>
+          </ToolbarRangeInput>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+    <Code><![CDATA[uses gw.util.CCConfigUtil
+
+property get AvailableFilterOptions() : java.util.List<String> {
+  var options = {"Exposure", "Claimant", "Coverage", "ClaimCostOnly", "ExposureOnly", "RecoveryCategory"}
+  
+  if(CCConfigUtil.AllowExplicitReservingCurrency) {
+    options.add("ReservingCurrency")
+  }
+  
+  return options
+}
+
+function getFilterOptionLabel(option : String) : String {
+  switch (option) {
+    case "ClaimCostOnly": return DisplayKey.get("Web.Financials.Summary.ClaimCostOnly")
+    case "Claimant": return DisplayKey.get("Web.Financials.Summary.Claimant")
+    case "Coverage": return DisplayKey.get("Web.Financials.Summary.Coverage")
+    case "Exposure": return DisplayKey.get("Web.Financials.Summary.Exposure")
+    case "ExposureOnly": return DisplayKey.get("Web.Financials.Summary.ExposureOnly")
+    case "ReservingCurrency": return DisplayKey.get("Web.Financials.Summary.ReservingCurrency")
+    case "RecoveryCategory": return DisplayKey.get("Web.Financials.Summary.RecoveryCategory")
+    default: return null
+  }
+}
+
+function getViewAmountsOptionLabel(option : boolean) : String {
+  return option ? 
+      DisplayKey.get("Web.Financials.Summary.ExchangeRate.Market") : 
+      DisplayKey.get("Web.Financials.Summary.ExchangeRate.Fixed")
+}
+]]></Code>
+  </Page>
+</PCF>

@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_claim.xml -->
+  <ListViewPanel
+    id="EditableSubrogationPartiesLV">
+    <ExposeIterator
+      valueType="gw.subrogation.financials.AdversePartyWrapper"
+      widget="EditableSubrogationPartiesLV"/>
+    <Require
+      name="subroAdversePartyList"
+      type="List&lt;gw.subrogation.financials.AdversePartyWrapper&gt;"/>
+    <Require
+      name="claim"
+      type="entity.Claim"/>
+    <RowIterator
+      checkBoxVisible="perm.System.editsubrodetails and adversePartyWrapper.AdverseParty != null"
+      editable="false"
+      elementName="adversePartyWrapper"
+      pageSize="0"
+      toRemove="claim.SubrogationSummary.removeFromSubroAdverseParties(adversePartyWrapper.AdverseParty); subroAdversePartyList.remove(adversePartyWrapper)"
+      value="subroAdversePartyList"
+      valueType="java.util.List&lt;gw.subrogation.financials.AdversePartyWrapper&gt;">
+      <ToolbarFlag
+        condition="perm.Evaluation.edit(claim)"
+        name="Deletable"/>
+      <Row
+        useSubHeaderStyle="adversePartyWrapper.AdverseParty == null"
+        visible="adversePartyWrapper.AdverseParty != null or !CurrentLocation.InEditMode">
+        <LinkCell>
+          <Link
+            icon="&quot;viewdetail_16.png&quot;"
+            id="PayeeLink"
+            tooltip="DisplayKey.get(&quot;LV.Subro.AdverseParty.Sum.Tooltip&quot;)"
+            visible="adversePartyWrapper.AdverseParty == null"/>
+        </LinkCell>
+        <TextCell
+          enableSort="false"
+          id="SubroRecoveryPayee1"
+          label="DisplayKey.get(&quot;LV.Claim.Subro.AdversePartyList.Contact&quot;)"
+          required="true"
+          unique="true"
+          value="adversePartyWrapper.AdverseParty != null ? adversePartyWrapper.AdverseParty.AdverseParty.DisplayName : DisplayKey.get(&quot;LV.Subro.AdverseParty.Sum&quot;)"/>
+        <TextCell
+          enableSort="false"
+          id="LiabilityPercentage1"
+          label="DisplayKey.get(&quot;LV.Claim.Subro.AdversePartyList.Liability&quot;)"
+          required="true"
+          sortDirection="descending"
+          value="gw.subrogation.financials.SubrogationFinancialsHelper.getLiabilityForUI(claim, adversePartyWrapper)"/>
+        <TextCell
+          enableSort="false"
+          id="ExpectedRecovery"
+          label="DisplayKey.get(&quot;LV.Claim.Subro.AdversePartyList.Expectedrecovery&quot;)"
+          required="true"
+          value="gw.subrogation.financials.SubrogationFinancialsHelper.getExpectedRecoveryPercentForUI(claim, adversePartyWrapper)"/>
+        <TypeKeyCell
+          enableSort="false"
+          id="Classification1"
+          label="DisplayKey.get(&quot;LV.Claim.Subro.AdversePartyList.Classification&quot;)"
+          required="false"
+          value="adversePartyWrapper.AdverseParty.Classification"
+          valueType="typekey.SubroClassification"/>
+        <TypeKeyCell
+          enableSort="false"
+          id="Strategy1"
+          label="DisplayKey.get(&quot;LV.Claim.Subro.AdversePartyList.Strategy&quot;)"
+          required="false"
+          value="adversePartyWrapper.AdverseParty.Strategy"
+          valueType="typekey.SubroStrategy"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

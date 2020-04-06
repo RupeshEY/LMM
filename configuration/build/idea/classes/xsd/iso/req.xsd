@@ -1,0 +1,3508 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by KISHORE NARRA (INSURANCE SERVICES OFFICE) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+    <xs:element name="ClaimInvestigationAddRq">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:group ref="CLAIMSMSGRQINFO"/>
+                <xs:element name="ReplacementInd" type="String" minOccurs="0"/>
+                <xs:element ref="com.iso_Update" minOccurs="0"/>
+                <xs:element ref="SuppressMatchInd" minOccurs="0"/>
+                <xs:element ref="SearchBasisCd" minOccurs="0"/>
+                <xs:element ref="ReferralInd" minOccurs="0"/>
+                <xs:group ref="CLAIMSINVESTIGATIONINFO"/>
+                <xs:element ref="InvestigationInfo" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="com.iso_AddCovInfo" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="com.iso_CovInfo1" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="com.iso_CMSIncidentDt" type="String" minOccurs="0"/><!--Guidewire: Added type -->
+                                        <xs:element name="Addr" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="StateProvCd" type="StringCd" minOccurs="0"/><!--Guidewire: Added type -->
+                                                </xs:sequence>
+                                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                                                <xs:attribute name="codelistref" type="xs:IDREF" use="optional"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="com.iso_NFLTLimit" type="String" minOccurs="0"/><!--Guidewire: Added type -->
+                                        <xs:element name="com.iso_ExhaustDt" type="String" minOccurs="0"/><!--Guidewire: Added type -->
+                                        <xs:element name="com.iso_ORMInd" type="String" minOccurs="0"/><!--Guidewire: Added type -->
+                                        <xs:element name="com.iso_ORMDt" type="String" minOccurs="0"/><!--Guidewire: Added type -->
+                                        <xs:element name="com.iso_TPOCDt" type="String" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xs:element name="com.iso_TPOCAmt" type="String" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xs:element name="com.iso_TPOCStartDt" type="String" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xs:element name="ICDDiagnosticCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/><!--Guidewire: Added type -->
+                                        <xs:element name="com.iso_ICD10Cd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/><!--Guidewire: Added type -->
+                                        <xs:element name="InjuryNatureDesc" type="String" minOccurs="0"/><!--Guidewire: Added type -->
+                                        <xs:element name="com.iso_CauseofInjuryCd" type="StringCd" minOccurs="0"/><!--Guidewire: Added type -->
+                                        <xs:element name="com.iso_DeleteFromCMS" minOccurs="0"/>
+                                        <xs:element name="com.iso_NotSendCovCMS" minOccurs="0"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                                    <xs:attribute name="ItemRef" type="xs:IDREF" use="optional"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="com.iso_CovInfo2" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="com.iso_ProdLiabInd" type="String" minOccurs="0"/><!--Guidewire: Added type -->
+                                        <xs:element name="com.iso_GenName" type="String" minOccurs="0"/><!--Guidewire: Added type -->
+                                        <xs:element name="com.iso_BrandName" type="String" minOccurs="0"/><!--Guidewire: Added type -->
+                                        <xs:element name="com.iso_ProdMfr" type="String" minOccurs="0"/><!--Guidewire: Added type -->
+                                        <xs:element name="com.iso_AllegedHarm" type="String" minOccurs="0"/><!--Guidewire: Added type -->
+                                        <xs:element name="com.iso_ICD10CauseOfInjuryCd" minOccurs="0"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                                    <xs:attribute name="ItemRef" type="xs:IDREF" use="optional"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="com.iso_CMS" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="com.iso_CMSWarning" type="String" minOccurs="0" maxOccurs="unbounded"/><!--Guidewire: Added type -->
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                                    <xs:attribute name="ItemRef" type="xs:IDREF" use="optional"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="com.iso_APDFastcheckInd" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_ClaimDirectorInd" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_ConvertLegacyToUFInd" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_RecallRqInd" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Addr">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="AddrTypeCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="Addr1" type="String" minOccurs="0"/>
+                <xs:element name="Addr2" type="String" minOccurs="0"/>
+                <xs:element name="Addr3" type="String" minOccurs="0"/>
+                <xs:element name="Addr4" type="String" minOccurs="0"/>
+                <xs:element name="City" type="String" minOccurs="0"/>
+                <xs:element name="StateProvCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="StateProv" type="String" minOccurs="0"/>
+                <xs:element name="PostalCode" type="String" minOccurs="0"/>
+                <xs:element name="CountryCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="Country" type="String" minOccurs="0"/>
+                <xs:element name="Latitude" type="String" minOccurs="0"/>
+                <xs:element name="Longitude" type="String" minOccurs="0"/>
+                <xs:element name="County" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_VerifiedAddrInd" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_FirstDt" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_LastDt" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ItemIdInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="AgencyId" type="String" minOccurs="0"/><!--Guidewire: Added type -->
+                <xs:element name="QueueId" minOccurs="0"/>
+                <xs:element name="InsurerId" type="String" minOccurs="0"/>
+                <xs:element name="SystemId" type="String" minOccurs="0"/>
+                <xs:element name="OtherIdentifier" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="OtherIdTypeCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                            <xs:element name="OtherId" type="String" minOccurs="0"/>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ItemDefinition">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ItemTypeCd" type="StringCd"/>
+                <xs:element name="Manufacturer" type="String" minOccurs="0"/>
+                <xs:element name="Model" type="String" minOccurs="0"/>
+                <xs:element name="SerialIdNumber" type="String" minOccurs="0"/>
+                <xs:element name="ModelYear" type="String" minOccurs="0"/>
+                <xs:element name="ItemDesc" type="String" minOccurs="0"/>
+                <xs:element name="ManufacturerCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ModelCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="BodyTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ChassisSerialNumber" type="String" minOccurs="0"/>
+                <xs:element name="EngineSerialNumber" type="String" minOccurs="0"/>
+                <xs:element name="TransmissionSerialNumber" type="String" minOccurs="0"/>
+                <xs:element ref="Registration" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GeneralPartyInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="NameInfo" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Addr" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="PreferredContact" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="PreferencePriority" type="String" minOccurs="0"/>
+                            <xs:element name="ContactDuration" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="EffectiveDt" type="String" minOccurs="0"/>
+                                        <xs:element name="ExpirationDt" type="String" minOccurs="0"/>
+                                        <xs:element name="StartTime" type="String" minOccurs="0"/>
+                                        <xs:element name="EndTime" type="String" minOccurs="0"/>
+                                        <xs:element name="LocalStandardTimeInd" type="String" minOccurs="0"/>
+                                        <xs:element ref="DurationPeriod" minOccurs="0"/>
+                                        <xs:element name="ContinuousInd" type="String" minOccurs="0"/>
+                                        <xs:element name="Description" type="String" minOccurs="0"/>
+                                        <xs:element name="GB.BothDaysInclusiveInd" type="String" minOccurs="0"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="BlackoutDuration" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="EffectiveDt" type="String" minOccurs="0"/>
+                                        <xs:element name="ExpirationDt" type="String" minOccurs="0"/>
+                                        <xs:element name="StartTime" type="String" minOccurs="0"/>
+                                        <xs:element name="EndTime" type="String" minOccurs="0"/>
+                                        <xs:element name="LocalStandardTimeInd" type="String" minOccurs="0"/>
+                                        <xs:element ref="DurationPeriod" minOccurs="0"/>
+                                        <xs:element name="ContinuousInd" type="String" minOccurs="0"/>
+                                        <xs:element name="Description" type="String" minOccurs="0"/>
+                                        <xs:element name="GB.BothDaysInclusiveInd" type="String" minOccurs="0"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="Communications" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="NameInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:choice>
+                    <xs:element ref="CommlName"/>
+                    <xs:element ref="FamilyName"/>
+                    <xs:element ref="PersonName"/>
+                </xs:choice>
+                <xs:element name="LegalEntityCd" type="StringCd" minOccurs="0"/>
+                <xs:element ref="TaxIdentity" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="NonTaxIdentity" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="NonTaxIdTypeCd" type="StringCd"/>
+                            <xs:element name="NonTaxId" type="String"/>
+                            <xs:element name="PrimaryNonTaxInd" type="String" minOccurs="0"/>
+                            <xs:element name="StateProvCd" type="StringCd" minOccurs="0"/>
+                            <xs:element name="StateProv" type="String" minOccurs="0"/>
+                            <xs:element name="CountryCd" type="StringCd" minOccurs="0"/>
+                            <xs:element name="Country" type="String" minOccurs="0"/>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CommlName">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="CommercialName" type="String"/>
+                <xs:element name="IndexName" type="String" minOccurs="0"/>
+                <xs:element name="SupplementaryNameInfo" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="SupplementaryNameCd" type="StringCd"/>
+                            <xs:element name="SupplementaryName" type="String"/>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FamilyName">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="TitlePrefix" type="String" minOccurs="0"/>
+                <xs:element name="FamilyNames" type="String"/>
+                <xs:element name="Surname" type="String"/>
+                <xs:element name="NameSuffix" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="TaxIdentity">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="TaxIdTypeCd" type="StringCd"/>
+                <xs:element name="TaxId" type="String"/>
+                <xs:element name="TaxIdSource" type="String" minOccurs="0"/>
+                <xs:element name="StateProvCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="StateProv" type="String" minOccurs="0"/>
+                <xs:element name="CountryCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="Country" type="String" minOccurs="0"/>
+                <xs:element name="County" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DurationPeriod">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="MEASUREMENT">
+                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Communications">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="PhoneInfo" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="PhoneTypeCd" type="StringCd" minOccurs="0"/>
+                            <xs:element name="CommunicationUseCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                            <xs:element name="PhoneNumber" type="String"/>
+                            <xs:element name="EmailAddr" type="String" minOccurs="0"/>
+                            <xs:element name="com.iso_PhoneName" type="String" minOccurs="0"/>
+                            <xs:element name="com.iso_PublishedInd" type="String" minOccurs="0"/>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="EmailInfo" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="CommunicationUseCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                            <xs:element name="EmailAddr" type="String"/>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="WebsiteInfo" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="CommunicationUseCd" type="StringCd" minOccurs="0"/>
+                            <xs:element name="WebsiteURL" type="String"/>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AdjusterPartyInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="AssignedDt" type="String" minOccurs="0"/>
+                <xs:element name="CoverageCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="LossCauseCd" type="StringCd" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="AssignmentRef" type="xs:IDREF" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AdjusterParty">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ItemIdInfo" minOccurs="0"/>
+                <xs:element ref="GeneralPartyInfo" minOccurs="0"/>
+                <xs:element ref="AdjusterPartyInfo" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AutoLossInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="VehInfo" minOccurs="0"/>
+                <xs:element name="ManufacturerCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ModelCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="com.iso_EDRInd" minOccurs="0"/>
+                <xs:element name="InventoryNumberId" type="String" minOccurs="0"/>
+                <xs:element ref="AirbagInfo" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="ObjectLossDesc" type="String" minOccurs="0"/>
+                <xs:element name="ImpactPointCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="DamageDesc" type="String" minOccurs="0"/>
+                <xs:element name="WhereSeenDesc" type="String" minOccurs="0"/>
+                <xs:element name="OtherInsuranceInd" type="String" minOccurs="0"/>
+                <xs:element name="ProbableIncurredAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="Coverage" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="ViewItemRef" type="xs:IDREF" use="optional"/>
+            <xs:attribute name="OwnerRef" type="xs:IDREF" use="optional"/>
+            <xs:attribute name="LossPayeeRef" type="xs:IDREF" use="optional"/>
+            <xs:attribute name="ClaimsPartyRefs" type="xs:IDREFS" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="PCBASICVEH">
+        <xs:sequence>
+            <xs:element ref="ItemIdInfo" minOccurs="0"/>
+            <xs:element name="Manufacturer" type="String" minOccurs="0"/>
+            <xs:element name="Model" type="String" minOccurs="0"/>
+            <xs:element name="ModelYear" type="String" minOccurs="0"/>
+            <xs:element name="VehBodyTypeCd" type="StringCd" minOccurs="0"/>
+            <xs:element name="VehTypeCd" type="StringCd" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PCVEH">
+        <xs:complexContent>
+            <xs:extension base="PCBASICVEH">
+                <xs:sequence minOccurs="0">
+                    <xs:element name="CostNewAmt" minOccurs="0">
+                        <xs:complexType>
+                            <xs:complexContent>
+                                <xs:extension base="CURRENCY">
+                                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                                </xs:extension>
+                            </xs:complexContent>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="NumDaysDrivenPerWeek" type="String" minOccurs="0"/>
+                    <xs:element name="EstimatedAnnualDistance" minOccurs="0">
+                        <xs:complexType>
+                            <xs:complexContent>
+                                <xs:extension base="MEASUREMENT">
+                                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                                </xs:extension>
+                            </xs:complexContent>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="FullTermAmt" minOccurs="0">
+                        <xs:complexType>
+                            <xs:complexContent>
+                                <xs:extension base="CURRENCY">
+                                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                                </xs:extension>
+                            </xs:complexContent>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="Displacement" minOccurs="0">
+                        <xs:complexType>
+                            <xs:complexContent>
+                                <xs:extension base="MEASUREMENT">
+                                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                                </xs:extension>
+                            </xs:complexContent>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="LeasedVehInd" type="String" minOccurs="0"/>
+                    <xs:element name="LeasedDt" type="String" minOccurs="0"/>
+                    <xs:element ref="Registration" minOccurs="0" maxOccurs="unbounded"/>
+                    <xs:element name="NumCylinders" type="String" minOccurs="0"/>
+                    <xs:element name="PurchaseDt" type="String" minOccurs="0"/>
+                    <xs:element name="TerritoryCd" type="StringCd" minOccurs="0"/>
+                    <xs:element name="VehIdentificationNumber" type="String" minOccurs="0"/>
+                    <xs:element name="ChassisSerialNumber" type="String" minOccurs="0"/>
+                    <xs:element name="EngineSerialNumber" type="String" minOccurs="0"/>
+                    <xs:element name="TransmissionSerialNumber" type="String" minOccurs="0"/>
+                    <xs:element name="ColorCd" type="StringCd" minOccurs="0"/>
+                    <xs:element name="VehSymbolCd" type="StringCd" minOccurs="0"/>
+                    <xs:element name="AdditionalInterest" minOccurs="0" maxOccurs="unbounded">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element ref="GeneralPartyInfo" minOccurs="0"/>
+                                <xs:element ref="AdditionalInterestInfo" minOccurs="0"/>
+                            </xs:sequence>
+                            <xs:attribute name="id" type="xs:ID" use="optional"/>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="Catastrophe">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="CatastropheCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="CatastropheCdSourceName" type="String" minOccurs="0"/>
+                <xs:element name="CatastropheCodeSourceCd" type="StringCd" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ClaimsDriverInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="DriversLicense" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="PurposeUse" type="String" minOccurs="0"/>
+                <xs:element name="PermissionInd" type="String" minOccurs="0"/>
+                <xs:element name="OperatorAtFaultInd" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="DriversLicense">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="LicensedDt" type="String" minOccurs="0"/>
+                <xs:element name="DriversLicenseNumber" type="String"/>
+                <xs:element name="FirstLicensedCurrentStateDt" type="String" minOccurs="0"/>
+                <xs:element name="LicenseClassCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="StateProvCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="StateProv" type="String" minOccurs="0"/>
+                <xs:element name="CountryCd" type="StringCd" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ClaimsInjury">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="InjuryNatureCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="InjuryNatureDesc" type="String" minOccurs="0"/>
+                <xs:element name="LossCauseCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="LossCauseDesc" type="String" minOccurs="0"/>
+                <xs:element name="BodyPartCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="BodyPartDesc" type="String" minOccurs="0"/>
+                <xs:element name="ImpairmentPct" type="String" minOccurs="0"/>
+                <xs:element name="InjurySeverityCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ClaimsInjuredInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="LossActCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="Age" type="String" minOccurs="0"/>
+                <xs:element name="ActivitiesDesc" type="String" minOccurs="0"/>
+                <xs:element name="WorkProcessDesc" type="String" minOccurs="0"/>
+                <xs:element name="EquipmentUsedDesc" type="String" minOccurs="0"/>
+                <xs:element name="EventsDesc" type="String" minOccurs="0"/>
+                <xs:element name="FatalityInd" type="String" minOccurs="0"/>
+                <xs:element name="PreExistingDisabilityCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="InitialTreatmentCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ICDDiagnosticCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="com.iso_FatalityInd" minOccurs="0"/>
+                <xs:element name="com.iso_AmbulanceUsedInd" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_DisabledDueToAccidentInd" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_CPT" type="String" minOccurs="0"/>
+                <xs:element name="SurgeryInd" type="String" minOccurs="0"/>
+                <xs:element name="WhereTakenDesc" type="String" minOccurs="0"/>
+                <xs:element name="LostTimeInd" type="String" minOccurs="0"/>
+                <xs:element name="TimeLostPeriod" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="DURATION">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="RestrictedWorkPeriod" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="DURATION">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="EventInfo" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ClaimsInjury" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="InjuredTakenRef" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EventInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="EventCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="EventDt" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ClaimsOccurrence">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ClaimNoticeCd" type="StringCd" minOccurs="0"/>
+                <xs:element ref="ItemIdInfo" minOccurs="0"/>
+                <xs:element name="ClaimTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="PolicyRenewalInd" type="String" minOccurs="0"/>
+                <xs:element name="ClaimStatusCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="PreviouslyReportedInd" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_PoliceReportFiledInd" type="String" minOccurs="0"/>
+                <xs:element ref="ClaimsReported" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="LossDt" type="String" minOccurs="0"/>
+                <xs:element name="LossTime" type="String" minOccurs="0"/>
+                <xs:element name="IncidentDesc" type="String" minOccurs="0"/>
+                <xs:element name="DamageDesc" type="String" minOccurs="0"/>
+                <xs:element name="ResponsibleDept" type="String" minOccurs="0"/>
+                <xs:element name="WhereOccurredDesc" type="String" minOccurs="0"/>
+                <xs:element ref="Addr" minOccurs="0"/>
+                <xs:element name="CountyTownCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="AdditionalClaimInd" type="String" minOccurs="0"/>
+                <xs:element ref="Catastrophe" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="CatastropheLossInd" type="String" minOccurs="0"/>
+                <xs:element name="ViolationsCitationsInd" type="String" minOccurs="0"/>
+                <xs:element name="CurrentRetroactiveDt" type="String" minOccurs="0"/>
+                <xs:element name="ExtendedReptDt" type="String" minOccurs="0"/>
+                <xs:element name="FullTailInd" type="String" minOccurs="0"/>
+                <xs:element name="ProbableIncurredAmt" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="idref" type="xs:string" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="EventInfo" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="QuestionableClaimInfo" minOccurs="0"/>
+                <xs:element name="LitigationInd" type="String" minOccurs="0"/>
+                <xs:element name="LitigationStatusCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="com.iso_SingleVehInvolvedInd" minOccurs="0"/>
+                <xs:element name="com.iso_PhantomVehInd" type="String" minOccurs="0"/><!--Guidewire: Added type -->
+                <xs:element name="com.iso_AccidentWitnessedInd" type="String" minOccurs="0"/><!--Guidewire: Added type -->
+                <xs:element name="com.iso_MoldInd" minOccurs="0"/>
+                <xs:element name="com.iso_HitAndRunInd" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_StatementOfDisputeInd" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_AutoUpdateInd" minOccurs="0"/>
+                <xs:element name="com.iso_NICBReferralInd" minOccurs="0"/>
+                <xs:element name="com.iso_InsurerFraudRingInvestigation" minOccurs="0"/>
+                <xs:element name="com.iso_ReceiveDt" minOccurs="0"/>
+                <xs:element name="com.iso_MassTortInd" minOccurs="0"/>
+                <xs:element name="com.iso_SelfInsuredInd" type="String" minOccurs="0"/><!--Guidewire: Added type -->
+                <xs:element name="com.iso_RRECd" minOccurs="0"/>
+                <xs:element name="TaxIdentity" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="TaxIdTypeCd">
+                                <xs:complexType>
+                                    <xs:simpleContent>
+                                        <xs:extension base="String">
+                                            <xs:attribute name="codelistref" type="xs:IDREF" use="optional"/>
+                                        </xs:extension>
+                                    </xs:simpleContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="TaxId" type="String"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="com.iso_SiteId" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="CURRENCY">
+        <xs:sequence>
+            <xs:element name="Amt" type="String"/>
+            <xs:element name="CurCd" type="StringCd" minOccurs="0"/>
+        </xs:sequence>
+        <xs:attribute name="ConversionRateRef" type="xs:IDREF" use="optional"/>
+    </xs:complexType>
+    <xs:complexType name="MEASUREMENT">
+        <xs:sequence>
+            <xs:element name="NumUnits" type="String"/>
+            <xs:element name="UnitMeasurementCd" type="StringCd" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PCCOVERAGE">
+        <xs:sequence>
+            <xs:element name="CoverageCd" type="StringCd"/>
+            <xs:element name="IterationNumber" type="String" minOccurs="0"/>
+            <xs:element name="CoverageDesc" type="String" minOccurs="0"/>
+            <xs:element ref="Limit" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="Deductible" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="Option" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="CurrentTermAmt" minOccurs="0">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="CURRENCY">
+                            <xs:attribute name="id" type="xs:ID" use="optional"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CreditOrSurcharge" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="PCCREDITSURCHARGE">
+                            <xs:attribute name="id" type="xs:ID" use="optional"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="EffectiveDt" type="String" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="ExpirationDt" type="String" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="Rate" type="String" minOccurs="0"/>
+            <xs:element name="PremiumBasisCd" type="StringCd" minOccurs="0"/>
+            <xs:element name="TerritoryCd" type="StringCd" minOccurs="0"/>
+            <xs:element ref="Form" minOccurs="0"/>
+            <xs:element ref="MiscParty" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="PCCREDITSURCHARGE">
+        <xs:sequence>
+            <xs:element name="CreditSurchargeDt" type="String" minOccurs="0"/>
+            <xs:element name="CreditSurchargeCd" type="StringCd"/>
+            <xs:element name="NumericValue" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="FORMATTEDNUMBER">
+                            <xs:attribute name="id" type="xs:ID" use="optional"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="SecondaryCd" type="StringCd" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:complexType name="FORMATTEDNUMBER">
+        <xs:choice minOccurs="0">
+            <xs:element name="FormatInteger" type="String"/>
+            <xs:element name="FormatCurrencyAmt">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="CURRENCY">
+                            <xs:attribute name="id" type="xs:ID" use="optional"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="FormatModFactor" type="String"/>
+            <xs:element name="FormatPct" type="String"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:complexType name="PCLIMIT">
+        <xs:complexContent>
+            <xs:extension base="FORMATTEDNUMBER">
+                <xs:sequence>
+                    <xs:element name="LimitBasisCd" type="StringCd" minOccurs="0"/>
+                    <xs:element name="ValuationCd" type="StringCd" minOccurs="0"/>
+                    <xs:element name="LimitAppliesToCd" type="StringCd" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="Limit">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="PCLIMIT">
+                    <xs:sequence>
+                        <xs:element ref="IndexAdjustment" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="IndexAdjustment">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="IndexAdjustmentAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="Rate" type="String" minOccurs="0"/>
+                <xs:element name="EffectiveDt" type="String" minOccurs="0"/>
+                <xs:element name="IndexAdjustmentFrequencyCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="IndexAdjustmentDesc" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Deductible">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="PCDEDUCTIBLE">
+                    <xs:sequence>
+                        <xs:element ref="IndexAdjustment"/>
+                    </xs:sequence>
+                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="PCDEDUCTIBLE">
+        <xs:complexContent>
+            <xs:extension base="FORMATTEDNUMBER">
+                <xs:sequence>
+                    <xs:element name="DeductibleBasisCd" type="StringCd" minOccurs="0"/>
+                    <xs:element name="DeductibleTypeCd" type="StringCd" minOccurs="0"/>
+                    <xs:element name="DeductibleAppliesToCd" type="StringCd" minOccurs="0"/>
+                </xs:sequence>
+            </xs:extension>
+        </xs:complexContent>
+    </xs:complexType>
+    <xs:element name="Option">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="OptionTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="OptionCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="OptionValue" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Form">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="FormNumber" type="String" minOccurs="0"/>
+                <xs:element name="FormName" type="String" minOccurs="0"/>
+                <xs:element name="CopyrightOwnerCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="CopyrightOwnerNameCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="FormDesc" type="String" minOccurs="0"/>
+                <xs:element name="EditionDt" type="String" minOccurs="0"/>
+                <xs:element name="FormDataArea" type="String" minOccurs="0"/>
+                <xs:element name="IterationNumber" type="String" minOccurs="0"/>
+                <xs:element name="FormSequencingNumber" type="String" minOccurs="0"/>
+                <xs:element name="BondFormOwner" type="String" minOccurs="0"/>
+                <xs:element name="BondFormNumberOwner" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MiscParty">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ItemIdInfo">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="AgencyId" type="String"/><!--Guidewire: Added type -->
+                            <xs:element name="QueueId" minOccurs="0"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="GeneralPartyInfo" minOccurs="0"/>
+                <xs:element name="com.iso_SIUInfo" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element ref="GeneralPartyInfo" minOccurs="0"/>
+                            <xs:element name="com.iso_CommlName" minOccurs="0"/>
+                            <xs:element name="com.iso_SurName" minOccurs="0"/>
+                            <xs:element name="com.iso_GivenName" minOccurs="0"/>
+                            <xs:element name="com.iso_OtherGivenName" minOccurs="0"/>
+                            <xs:element name="com.iso_SIUPhoneInfo" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="PhoneTypeCd" type="StringCd" minOccurs="0"/>
+                                        <xs:element name="CommunicationUseCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xs:element name="PhoneNumber" type="String" minOccurs="0"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="com.iso_InsurerFraudRingInvestigation" minOccurs="0"/>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="com.iso_AddInfo" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="com.iso_EntityId" minOccurs="0"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="MiscPartyInfo" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MiscPartyInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="MiscPartyRoleCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="MiscPartySubRoleCd" type="StringCd" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Coverage">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="PCCOVERAGE">
+                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ClaimsParty">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ItemIdInfo" minOccurs="0"/>
+                <xs:element ref="GeneralPartyInfo" minOccurs="0"/>
+                <xs:element ref="PersonInfo" minOccurs="0"/>
+                <xs:element ref="ClaimsPartyInfo" minOccurs="0"/>
+                <xs:element ref="ClaimsDriverInfo" minOccurs="0"/>
+                <xs:element ref="ClaimsInjuredInfo" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="PartyInvestigationInfo" minOccurs="0"/>
+                <xs:element ref="com.iso_PartyScoringInfo" minOccurs="0"/>
+                <xs:element name="com.iso_ClaimsPartyVehInfo" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="com.iso_OccupantOfVIN" type="String" minOccurs="0"/>
+                            <xs:element name="com.iso_PhysicalDamageInd" minOccurs="0"/>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="com.iso_ClaimDirectorRules" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="com.iso_AppendDS" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="com.iso_CSLNInd" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="AuthorizedRepRef" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PersonInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="GenderCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="com.iso_Age" type="String" minOccurs="0"/>
+                <xs:element name="BirthDt" type="String" minOccurs="0"/>
+                <xs:element name="MaritalStatusCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="OccupationClassCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="OccupationDesc" type="String" minOccurs="0"/>
+                <xs:element name="LengthTimeEmployed" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="MEASUREMENT">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="LengthTimeCurrentOccupation" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="MEASUREMENT">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="LengthTimeWithPreviousEmployer" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="MEASUREMENT">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="MiscParty" minOccurs="0"/>
+                <xs:element name="com.iso_1stDoctorDt" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ClaimsPartyInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ClaimsPartyRoleCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="ClaimsPartyLocCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ClaimsPartyLocDesc" type="String" minOccurs="0"/>
+                <xs:element name="PartyTitle" type="String" minOccurs="0"/>
+                <xs:element name="InvolvementDesc" type="String" minOccurs="0"/>
+                <xs:element name="RelationshipToInsuredCd" type="StringCd" minOccurs="0"/>
+                <xs:element ref="OtherOrPriorPolicy" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="AccountNumberId" type="String" minOccurs="0"/>
+                <xs:element name="AuthorizedRepInd" type="String" minOccurs="0"/>
+                <xs:element name="SuitFiledInd" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                                <xs:attribute name="idref" type="xs:string"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ClosedDt" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:simpleContent>
+                            <xs:extension base="xs:string">
+                                <xs:attribute name="idref" type="xs:string"/>
+                            </xs:extension>
+                        </xs:simpleContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="OtherOrPriorPolicy">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="PolicyCd" type="StringCd"/>
+                <xs:element name="PolicyNumber" type="String" minOccurs="0"/>
+                <xs:element name="LOBCd" type="StringCd"/>
+                <xs:element name="LOBSubCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="NAICCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="InsurerName" type="String" minOccurs="0"/>
+                <xs:element name="ContractTerm" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="DURATION">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="OriginalInceptionDt" type="String" minOccurs="0"/>
+                <xs:element name="PolicyTerminatedCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="PolicyTransferInd" type="String" minOccurs="0"/>
+                <xs:element name="LengthTimeWithPreviousInsurer" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="MEASUREMENT">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="Coverage" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="PolicyAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="RatingFactor" type="String" minOccurs="0"/>
+                <xs:element name="CompanyProductCd" type="StringCd" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="DURATION">
+        <xs:sequence>
+            <xs:element name="EffectiveDt" type="String" minOccurs="0"/>
+            <xs:element name="ExpirationDt" type="String" minOccurs="0"/>
+            <xs:element name="StartTime" type="String" minOccurs="0"/>
+            <xs:element name="EndTime" type="String" minOccurs="0"/>
+            <xs:element name="LocalStandardTimeInd" type="String" minOccurs="0"/>
+            <xs:element ref="DurationPeriod" minOccurs="0"/>
+            <xs:element name="ContinuousInd" type="String" minOccurs="0"/>
+            <xs:element name="Description" type="String" minOccurs="0"/>
+            <xs:element name="GB.BothDaysInclusiveInd" type="String" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="ClaimsPayment">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="PaymentTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element ref="ClaimsPaymentCovInfo" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="TotalPaymentAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="LossCauseCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="MethodPaymentCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="CheckNumber" type="String" minOccurs="0"/>
+                <xs:element name="PaymentDt" type="String" minOccurs="0"/>
+                <xs:element name="ServiceDuration" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="DURATION">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="InsuredOrPrincipal" minOccurs="0"/>
+                <xs:element name="PaymentDesc" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="idref" type="xs:IDREF" use="optional"/>
+            <xs:attribute name="ClaimsPartyRef" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ClaimsPaymentCovInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="CoverageCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="PaymentReasonCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="PaymentAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ClaimStatusCd" type="StringCd" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InsuredOrPrincipal">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ItemIdInfo" minOccurs="0"/>
+                <xs:element ref="GeneralPartyInfo" minOccurs="0"/>
+                <xs:element ref="InsuredOrPrincipalInfo" minOccurs="0"/>
+                <xs:element name="LengthTimeKnownByAgentBroker" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="MEASUREMENT">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InsuredOrPrincipalInfo">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="INSUREDORPRINCIPALENTITY">
+                    <xs:sequence>
+                        <xs:element name="InsuredOrPrincipalRoleCd" type="StringCd" minOccurs="0"/>
+                    </xs:sequence>
+                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="INSUREDORPRINCIPALENTITY">
+        <xs:choice>
+            <xs:element ref="PersonInfo"/>
+            <xs:element ref="BusinessInfo"/>
+            <xs:element ref="PrincipalInfo"/>
+        </xs:choice>
+    </xs:complexType>
+    <xs:element name="BusinessInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="SICCd" type="String" minOccurs="0"/>
+                <xs:element name="NAICSCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="NatureBusinessCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="NumEmployees" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PrincipalInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="LiensSuitsJudgementsAgainstPrincipalInd" type="String" minOccurs="0"/>
+                <xs:element name="SICCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="StateProvCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="KnownSinceDt" type="String" minOccurs="0"/>
+                <xs:element name="CreditScoreInfo" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Loss">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ItemIdInfo" minOccurs="0"/>
+                <xs:element name="CatastropheLossInd" type="String" minOccurs="0"/>
+                <xs:element ref="Catastrophe" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="ClaimSettledInd" type="String" minOccurs="0"/>
+                <xs:element name="CoverageCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="LOBCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="LOBSubCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="LossDt" type="String" minOccurs="0"/>
+                <xs:element name="LossDesc" type="String" minOccurs="0"/>
+                <xs:element name="LossLocationCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="LossLocationDesc" type="String" minOccurs="0"/>
+                <xs:element name="ProbableIncurredAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ProbableExpenseIncurredAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="TotalExpenseAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="TotalPaidAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Watercraft">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="PCBASICWATERCRAFT">
+                    <xs:sequence>
+                        <xs:element name="HullDesignTypeCd" type="StringCd" minOccurs="0"/>
+                        <xs:element name="HullMaterialTypeCd" type="StringCd" minOccurs="0"/>
+                        <xs:element name="NameBoat" type="String" minOccurs="0"/>
+                        <xs:element name="NumOperatorsUnder21Yrs" type="String" minOccurs="0"/>
+                        <xs:element ref="Registration" minOccurs="0"/>
+                        <xs:element name="LayUpPeriod" type="String" minOccurs="0"/>
+                        <xs:element name="NumBeds" type="String" minOccurs="0"/>
+                        <xs:element name="FuelTankCd" type="StringCd" minOccurs="0"/>
+                        <xs:element name="PropulsionTypeCd" type="StringCd" minOccurs="0"/>
+                        <xs:element ref="AdditionalInterest" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element ref="Coverage" minOccurs="0" maxOccurs="unbounded"/>
+                        <xs:element ref="QuestionAnswer" minOccurs="0" maxOccurs="unbounded"/>
+                    </xs:sequence>
+                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="PCBASICWATERCRAFT">
+        <xs:sequence>
+            <xs:element name="WaterUnitTypeCd" type="StringCd"/>
+            <xs:element name="NumUnits" type="String" minOccurs="0"/>
+            <xs:element ref="ItemDefinition" maxOccurs="unbounded"/>
+            <xs:element name="CostNewAmt" minOccurs="0">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="CURRENCY">
+                            <xs:attribute name="id" type="xs:ID" use="optional"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PurchasePriceAmt" minOccurs="0">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="CURRENCY">
+                            <xs:attribute name="id" type="xs:ID"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="PurchaseDt" type="String" minOccurs="0"/>
+            <xs:element name="PresentValueAmt" minOccurs="0">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="CURRENCY">
+                            <xs:attribute name="id" type="xs:ID" use="optional"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Length" minOccurs="0">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="MEASUREMENT">
+                            <xs:attribute name="id" type="xs:ID" use="optional"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="Speed" minOccurs="0">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="MEASUREMENT">
+                            <xs:attribute name="id" type="xs:ID" use="optional"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="WatersNavigatedCd" type="StringCd" minOccurs="0"/>
+            <xs:element name="Horsepower" minOccurs="0">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="MEASUREMENT">
+                            <xs:attribute name="id" type="xs:ID" use="optional"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="AdditionalInterest">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="GeneralPartyInfo" minOccurs="0"/>
+                <xs:element ref="AdditionalInterestInfo" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="QuestionAnswer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="QuestionCd" type="StringCd"/>
+                <xs:element name="YesNoCd" type="StringCd"/>
+                <xs:element name="Explanation" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CodeList">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="CodeListName" type="String" minOccurs="0"/>
+                <xs:element name="CodeListVersion" type="String" minOccurs="0"/>
+                <xs:element name="CodeListOwnerCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="Description" type="String" minOccurs="0"/>
+                <xs:element name="WebsiteURL" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ConversionRate">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:choice>
+                    <xs:element name="TargetMeasurement">
+                        <xs:complexType>
+                            <xs:complexContent>
+                                <xs:extension base="MEASUREMENT">
+                                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                                </xs:extension>
+                            </xs:complexContent>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="TargetCurrency">
+                        <xs:complexType>
+                            <xs:complexContent>
+                                <xs:extension base="CURRENCY">
+                                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                                </xs:extension>
+                            </xs:complexContent>
+                        </xs:complexType>
+                    </xs:element>
+                </xs:choice>
+                <xs:element name="ConversionFactor" type="String" minOccurs="0"/>
+                <xs:element name="ConversionDt" type="String" minOccurs="0"/>
+                <xs:element name="ConversionSource" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Producer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ItemIdInfo" minOccurs="0"/>
+                <xs:element ref="GeneralPartyInfo" minOccurs="0"/>
+                <xs:element ref="ProducerInfo" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ProducerInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ContractNumber" type="String" minOccurs="0"/>
+                <xs:element name="ProducerSubCode" type="String" minOccurs="0"/>
+                <xs:element name="PlacingOffice" type="String" minOccurs="0"/>
+                <xs:element ref="NonResLicense" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="ResProducerLicenseNumber" type="String" minOccurs="0"/>
+                <xs:element name="ResProducerLicenseExpirationDt" type="String" minOccurs="0"/>
+                <xs:element name="ProducerRoleCd" type="StringCd" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="NonResLicense">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="NonResProducerLicenseNumber" type="String"/>
+                <xs:element name="NonResProducerLicenseExpirationDt" type="String" minOccurs="0"/>
+                <xs:element name="StateProvCd" type="StringCd" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Policy">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="PCPOLICY">
+                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="PCPOLICY">
+        <xs:sequence>
+            <xs:element name="PolicyNumber" type="String" minOccurs="0"/>
+            <xs:element name="PolicyVersion" type="String" minOccurs="0"/>
+            <xs:element name="CompanyProductCd" type="StringCd" minOccurs="0"/>
+            <xs:element name="LOBCd" type="StringCd"/>
+            <xs:element name="LOBSubCd" type="StringCd" minOccurs="0"/>
+            <xs:element name="NAICCd" type="StringCd" minOccurs="0"/>
+            <xs:element name="ControllingStateProvCd" type="StringCd" minOccurs="0"/>
+            <xs:element name="ContractTerm" minOccurs="0">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="DURATION">
+                            <xs:attribute name="id" type="xs:ID" use="optional"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="BillingAccountNumber" type="String" minOccurs="0"/>
+            <xs:element name="BillingMethodCd" type="StringCd" minOccurs="0"/>
+            <xs:element name="CurrentTermAmt" minOccurs="0">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="CURRENCY">
+                            <xs:attribute name="id" type="xs:ID" use="optional"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="CustomerServicingCd" type="StringCd" minOccurs="0"/>
+            <xs:element name="SignedDt" type="String" minOccurs="0"/>
+            <xs:element name="GroupId" type="String" minOccurs="0"/>
+            <xs:element name="LanguageCd" type="StringCd" minOccurs="0"/>
+            <xs:element name="MailingResponsibiltyCd" type="StringCd" minOccurs="0"/>
+            <xs:element name="OriginalInceptionDt" type="String" minOccurs="0"/>
+            <xs:element name="OtherInsuranceWithCompanyCd" type="StringCd" minOccurs="0"/>
+            <xs:element name="PayorCd" type="StringCd" minOccurs="0"/>
+            <xs:element name="PrintedDocumentsRequestedInd" type="String" minOccurs="0"/>
+            <xs:element name="RateEffectiveDt" type="String" minOccurs="0"/>
+            <xs:element name="RenewalBillingMethodCd" type="StringCd" minOccurs="0"/>
+            <xs:element name="RenewalPayorCd" type="StringCd" minOccurs="0"/>
+            <xs:element name="RenewalTerm" minOccurs="0">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="DURATION">
+                            <xs:attribute name="id" type="xs:ID" use="optional"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="ShortTermPremiumMethodCd" type="StringCd" minOccurs="0"/>
+            <xs:element name="SignatureFormTypeCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="SignedByCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="CounterSignature" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="Binder" minOccurs="0"/>
+            <xs:element ref="Form" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="Loss" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="TotalPaidLossAmt" minOccurs="0">
+                <xs:complexType>
+                    <xs:complexContent>
+                        <xs:extension base="CURRENCY">
+                            <xs:attribute name="id" type="xs:ID" use="optional"/>
+                        </xs:extension>
+                    </xs:complexContent>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="NumLosses" type="String" minOccurs="0"/>
+            <xs:element name="NumLossesYrs" type="String" minOccurs="0"/>
+            <xs:element ref="OtherOrPriorPolicy" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="PaymentOption" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="QuoteInfo" minOccurs="0"/>
+            <xs:element ref="AdditionalInterest" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="CreditScoreInfo" minOccurs="0"/>
+            <xs:element name="AccountNumberId" type="String" minOccurs="0"/>
+            <xs:element ref="MiscParty" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="QuestionAnswer" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="AssignedRiskInd" type="String" minOccurs="0"/>
+        </xs:sequence>
+    </xs:complexType>
+    <xs:element name="CounterSignature">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="StateProvCd" type="StringCd"/>
+                <xs:element name="FieldOfficeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ContractNumber" type="String" minOccurs="0"/>
+                <xs:element name="CommissionRatePct" type="String" minOccurs="0"/>
+                <xs:element name="PrintedDocumentsRequestedInd" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Binder">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="AgencyBinderNumber" type="String" minOccurs="0"/>
+                <xs:element name="BinderPurposeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ContractTerm">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="DURATION">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="EffectiveDtTime" type="String"/>
+                <xs:element name="ExpirationDtTime" type="String"/>
+                <xs:element name="FormNumber" type="String" minOccurs="0"/>
+                <xs:element name="NewBinderInd" type="String" minOccurs="0"/>
+                <xs:element name="NonStandardConditionsInd" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PaymentOption">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="PaymentPlanCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="DayMonthDue" type="String" minOccurs="0"/>
+                <xs:element name="CollectedByAgentAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="MethodPaymentCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="NextTermPaymentPlanCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="DepositAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="DownPaymentPct" type="String" minOccurs="0"/>
+                <xs:element name="InstallmentFeeAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="InstallmentPct" type="String" minOccurs="0"/>
+                <xs:element ref="InstallmentInfo" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="FirstPaymentDueDt" type="String" minOccurs="0"/>
+                <xs:element name="PaymentIntervalCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="NumPayments" type="String" minOccurs="0"/>
+                <xs:element name="Description" type="String" minOccurs="0"/>
+                <xs:element name="CheckNumber" type="String" minOccurs="0"/>
+                <xs:element ref="ElectronicFundsTransfer" minOccurs="0"/>
+                <xs:element name="LOBCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="LOBSubCd" type="StringCd" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="QuoteInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="CompanysQuoteNumber" type="String"/>
+                <xs:element ref="ItemIdInfo" minOccurs="0"/>
+                <xs:element name="IterationNumber" type="String" minOccurs="0"/>
+                <xs:element name="InsuredFullToBePaidAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="QuoteDeclinedInd" type="String" minOccurs="0"/>
+                <xs:element name="QuoteDeclinationReason" type="String" minOccurs="0"/>
+                <xs:element name="QuoteConditionsInd" type="String" minOccurs="0"/>
+                <xs:element name="QuoteConditionsReason" type="String" minOccurs="0"/>
+                <xs:element name="CoverageDeclinedInd" type="String" minOccurs="0"/>
+                <xs:element name="CoverageDeclinationReason" type="String" minOccurs="0"/>
+                <xs:element name="CoverageConditionsInd" type="String" minOccurs="0"/>
+                <xs:element name="CoverageConditionsReason" type="String" minOccurs="0"/>
+                <xs:element name="InitialQuoteRequestDt" type="String" minOccurs="0"/>
+                <xs:element name="QuotePreparedDt" type="String" minOccurs="0"/>
+                <xs:element name="QuoteValidUntilDt" type="String" minOccurs="0"/>
+                <xs:element name="Description" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CreditScoreInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ReferenceNumber" type="String" minOccurs="0"/>
+                <xs:element name="CreditScore" type="String"/>
+                <xs:element name="CreditScoreDt" type="String"/>
+                <xs:element name="CSPolicyTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="CSReasonCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="CSReasonDesc" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AdditionalInterestInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="NatureInterestCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="InterestRank" type="String" minOccurs="0"/>
+                <xs:element name="AccountNumberId" type="String" minOccurs="0"/>
+                <xs:element name="InterestIdNumber" type="String" minOccurs="0"/>
+                <xs:element name="PayorInd" type="String" minOccurs="0"/>
+                <xs:element name="BillFrequencyCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="CertificateFrequencyCd" type="String" minOccurs="0"/>
+                <xs:element name="CertificateRequiredDt" type="String" minOccurs="0"/>
+                <xs:element name="CertificateIssuedDt" type="String" minOccurs="0"/>
+                <xs:element name="PolicyRequiredDt" type="String" minOccurs="0"/>
+                <xs:element name="PolicyIssuedDt" type="String" minOccurs="0"/>
+                <xs:element name="InterestEndDt" type="String" minOccurs="0"/>
+                <xs:element name="InformationalBillingInd" type="String" minOccurs="0"/>
+                <xs:element name="PolicyFrequencyCd" type="StringCd" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InstallmentInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="InstallmentAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="InstallmentDueDt" type="String" minOccurs="0"/>
+                <xs:element name="InstallmentNumber" type="String" minOccurs="0"/>
+                <xs:element name="FirstInstallmentPct" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ElectronicFundsTransfer">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="FromAcct" minOccurs="0"/>
+                <xs:element ref="ToAcct" minOccurs="0"/>
+                <xs:element name="TransferAmt">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="Fee" minOccurs="0"/>
+                <xs:element name="EFTFrequencyCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="EffectiveDt" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FromAcct">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="AccountNumberId" type="String"/>
+                <xs:element name="AcctTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="CreditCardExpirationDt" type="String" minOccurs="0"/>
+                <xs:element ref="BankInfo" minOccurs="0"/>
+                <xs:element name="CheckNumber" type="String" minOccurs="0"/>
+                <xs:element ref="PayrollDeductionInfo" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ToAcct">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="AccountNumberId" type="String"/>
+                <xs:element name="AcctTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="CreditCardExpirationDt" type="String" minOccurs="0"/>
+                <xs:element ref="BankInfo"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Fee">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="FeeDesc" type="String" minOccurs="0"/>
+                <xs:element name="FeeAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="BankInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="BankId" type="String"/>
+                <xs:element name="BranchId" type="String" minOccurs="0"/>
+                <xs:element ref="MiscParty" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PayrollDeductionInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="NameInfo" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="EmployerId" type="String" minOccurs="0"/>
+                <xs:element name="EmployeeId" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LiabilityLossInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ItemIdInfo" minOccurs="0"/>
+                <xs:element name="SubjectInsuranceCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="InsuredInterestCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ItemDesc" type="String" minOccurs="0"/>
+                <xs:element name="ObjectLossDesc" type="String" minOccurs="0"/>
+                <xs:element name="WhereSeenDesc" type="String" minOccurs="0"/>
+                <xs:element name="OtherInsuranceInd" type="String" minOccurs="0"/>
+                <xs:element name="OperationsDesc" type="String" minOccurs="0"/>
+                <xs:element name="OtherExposureDesc" type="String" minOccurs="0"/>
+                <xs:element name="ProbableIncurredAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="Coverage" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="ViewItemRef" type="xs:IDREF" use="optional"/>
+            <xs:attribute name="ClaimsPartyRef" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PropertyLossInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ItemIdInfo" minOccurs="0"/>
+                <xs:element name="BldgNumberId" minOccurs="0"/>
+                <xs:element ref="ItemInfo" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="Watercraft" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="PropertySchedule" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="ClaimsSubjectInsuranceInfo" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="SubjectInsuranceCd" type="StringCd" minOccurs="0"/>
+                            <xs:element name="InsuranceAmt" type="CURRENCY" minOccurs="0"/>
+                            <xs:element name="ProbableIncurredAmt" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:complexContent>
+                                        <xs:extension base="CURRENCY">
+                                            <xs:attribute name="id" type="xs:ID" use="optional"/>
+                                        </xs:extension>
+                                    </xs:complexContent>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element ref="ClaimsPayment" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="RealEstateTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="RealEstateTypeOtherDesc" type="String" minOccurs="0"/>
+                <xs:element name="LossKindCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ObjectLossDesc" type="String" minOccurs="0"/>
+                <xs:element name="DamageDesc" type="String" minOccurs="0"/>
+                <xs:element name="WhereSeenDesc" type="String" minOccurs="0"/>
+                <xs:element name="OtherInsuranceInd" type="String" minOccurs="0"/>
+                <xs:element name="MortgageeInd" type="String" minOccurs="0"/>
+                <xs:element name="OccupancyTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="IncendiaryFireInd" type="String" minOccurs="0"/>
+                <xs:element name="TheftLocationCd" type="StringCd" minOccurs="0"/>
+                <xs:element ref="Coverage" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="com.iso_ContentTheftInd" type="StringCd" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="ViewItemRef" type="xs:IDREF" use="optional"/>
+            <xs:attribute name="LossPayeeRef" type="xs:IDREF" use="optional"/>
+            <xs:attribute name="ClaimsPartyRefs" type="xs:IDREFS" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="WorkCompLossInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ItemIdInfo" minOccurs="0"/>
+                <xs:element name="JurisdictionCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="JurisdictionDesc" type="String" minOccurs="0"/>
+                <xs:element name="WCClaimTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="LossCondiTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="LossCondiRecoveryTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="LossCondiSettlementTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="SecondInjuryFundInd" type="String" minOccurs="0"/>
+                <xs:element name="OtherInsuranceInd" type="String" minOccurs="0"/>
+                <xs:element name="FraudulentClaimCd" type="StringCd" minOccurs="0"/>
+                <xs:element ref="EmployeeInfo" minOccurs="0"/>
+                <xs:element ref="EmployerInfo" minOccurs="0"/>
+                <xs:element name="CoverageCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="VesselCallId" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="SecondInjuryFundRef" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="FileAttachmentInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ItemIdInfo" minOccurs="0"/>
+                <xs:element name="AttachmentDesc" type="String" minOccurs="0"/>
+                <xs:element name="AttachmentTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="AttachmentResponsibilityCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="MIMEContentTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="MIMEEncodingTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="AttachmentFilename" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PropertySchedule">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="IsSummaryInd" type="String"/>
+                <xs:element ref="ItemIdInfo" minOccurs="0"/>
+                <xs:element name="ItemValuationTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ItemValueAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="Limit" minOccurs="0"/>
+                <xs:element name="PropertyClassCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="TerritoryCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ValuationTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element ref="Coverage" minOccurs="0"/>
+                <xs:element ref="ItemDefinition" minOccurs="0"/>
+                <xs:element ref="PropertyScheduleModifications" minOccurs="0"/>
+                <xs:element ref="SalesReceiptAppraisal" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EmployerInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="NCCIIDNumber" type="String" minOccurs="0"/>
+                <xs:element name="SelfInsuredInd" type="String" minOccurs="0"/>
+                <xs:element name="LessorInd" type="String" minOccurs="0"/>
+                <xs:element name="SpecificProductsDesc" type="String" minOccurs="0"/>
+                <xs:element name="EmployerPayrollCd" type="StringCd" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EmployeeInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="HiredStateProvCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="HiredStateProv" type="String" minOccurs="0"/>
+                <xs:element name="HiredDt" type="String" minOccurs="0"/>
+                <xs:element name="StartedCurrentJobDt" type="String" minOccurs="0"/>
+                <xs:element name="ControllingStateProvCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ControllingStateProv" type="String" minOccurs="0"/>
+                <xs:element name="RatingClassificationCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="EmploymentStatusCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="CurrentEmploymentStatusCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="TaxFilingStatusCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="NumDependents" type="String" minOccurs="0"/>
+                <xs:element name="NumExemptsEntitled" type="String" minOccurs="0"/>
+                <xs:element name="NumExemptsWithholding" type="String" minOccurs="0"/>
+                <xs:element name="RegularDept" type="String" minOccurs="0"/>
+                <xs:element name="BorrowedDept" type="String" minOccurs="0"/>
+                <xs:element name="LostTimeInd" type="String" minOccurs="0"/>
+                <xs:element name="RestrictedWorkPeriod" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="DURATION">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="FullPayDayInjuredInd" type="String" minOccurs="0"/>
+                <xs:element name="SalaryContinuanceInd" type="String" minOccurs="0"/>
+                <xs:element name="OccurredPremisesCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="WorkBeganTime" type="String" minOccurs="0"/>
+                <xs:element name="SafeguardsDesc" type="String" minOccurs="0"/>
+                <xs:element name="SafeguardsProvidedInd" type="String" minOccurs="0"/>
+                <xs:element name="SafeguardsUsedInd" type="String" minOccurs="0"/>
+                <xs:element name="SafetyEquipProvidedDesc" type="String" minOccurs="0"/>
+                <xs:element name="SafetyEquipUsedInd" type="String" minOccurs="0"/>
+                <xs:element name="ControvertedCaseInd" type="String" minOccurs="0"/>
+                <xs:element name="AuthorizeMedRecsInd" type="String" minOccurs="0"/>
+                <xs:element name="AuthorizeSSNInd" type="String" minOccurs="0"/>
+                <xs:element ref="EmployeePay" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="EmployeeSchedule" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="com.iso_PreExistingDisabilityInd" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_EmployedInd" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PropertyScheduleModifications">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="BlanketNumber" type="String" minOccurs="0"/>
+                <xs:element name="BlanketInd" type="String" minOccurs="0"/>
+                <xs:element name="ExhibitedInd" type="String" minOccurs="0"/>
+                <xs:element name="InVaultInd" type="String" minOccurs="0"/>
+                <xs:element name="ProfessionalCommercialUseInd" type="String" minOccurs="0"/>
+                <xs:element name="QualifierTypeCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SalesReceiptAppraisal">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ACORDAppraisalFormInd" type="String" minOccurs="0"/>
+                <xs:element name="SalesReceiptAppraisalAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="SalesReceiptAppraisalDt" type="String" minOccurs="0"/>
+                <xs:element name="PhotoAvailableInd" type="String" minOccurs="0"/>
+                <xs:element name="SalesReceiptAppraisalTypeCd" type="StringCd"/>
+                <xs:element ref="MiscParty" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="SalesReceiptNumber" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EmployeePay">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="PayKindCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="AvgAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="NumUnits" type="String" minOccurs="0"/>
+                <xs:element name="PayFrequencyCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="PayDeterminationCd" type="StringCd" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="EmployeeSchedule">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="EmployeeScheduleCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="StartTime" type="String" minOccurs="0"/>
+                <xs:element name="NumHoursPerDay" type="String" minOccurs="0"/>
+                <xs:element name="NumHoursPerWeek" type="String" minOccurs="0"/>
+                <xs:element name="NumDaysPerWeek" type="String" minOccurs="0"/>
+                <xs:element name="OtherPartTimeInd" type="String" minOccurs="0"/>
+                <xs:element name="NumEmployeesFullTime" type="String" minOccurs="0"/>
+                <xs:element name="NumEmployeesPartTime" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ClaimsReported">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ReportedDt" type="String" minOccurs="0"/>
+                <xs:element name="ReportNumber" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="ReportedByRef" type="xs:IDREF" use="optional"/>
+            <xs:attribute name="ReportedToRef" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AppraiserActivityInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="AppraiserActivityDt" type="String" minOccurs="0"/>
+                <xs:element name="AppraiserActivityCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="AppraisedValueAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="AppraiserRef" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Registration">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="RegistrationTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="RegistrationNumber" type="String" minOccurs="0"/>
+                <xs:element name="RegistrationEffectiveDt" type="String" minOccurs="0"/>
+                <xs:element name="RegistrationExpirationDt" type="String" minOccurs="0"/>
+                <xs:element name="StateProvCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="StateProv" type="String" minOccurs="0"/>
+                <xs:element name="CountryCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="Country" type="String" minOccurs="0"/>
+                <xs:element name="LastRegisteredYear" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AirbagInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="AirbagTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="AirbagStatusCd" type="StringCd" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AdditionalMatchInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ItemIdInfo" minOccurs="0"/>
+                <xs:element name="MatchTypeCd" type="StringCd"/>
+                <xs:element name="MatchData" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="idref" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="AutoInvestigationInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="DeliveryDestinationDesc" type="String" minOccurs="0"/>
+                <xs:element name="RentalStatusCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="RentalStatusDt" type="String" minOccurs="0"/>
+                <xs:element name="ShippedConditionDesc" type="String" minOccurs="0"/>
+                <xs:element ref="EventInfo" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="com.iso_PoliceReportNo" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_ImpoundInfo" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="ImpoundAgencyRef" type="xs:IDREF" use="optional"/>
+            <xs:attribute name="ImpoundFacilityRef" type="xs:IDREF" use="optional"/>
+            <xs:attribute name="PortOriginRef" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PersVehInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="AlteredInd" type="String" minOccurs="0"/>
+                <xs:element name="AntiLockBrakeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="AntiTheftDeviceCreditPct" type="String" minOccurs="0"/>
+                <xs:element name="BumperDiscountInd" type="String" minOccurs="0"/>
+                <xs:element name="CarpoolInd" type="String" minOccurs="0"/>
+                <xs:element name="DamageabilityCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="DaytimeRunningLightInd" type="String" minOccurs="0"/>
+                <xs:element name="EngineTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ExistingUnrepairedDamageInd" type="String" minOccurs="0"/>
+                <xs:element name="GaragingCd" type="String" minOccurs="0"/>
+                <xs:element name="Length" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="MEASUREMENT">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="MaximumSpeed" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="MEASUREMENT">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="DistanceOneWay" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="MEASUREMENT">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="MultiCarDiscountInd" type="String" minOccurs="0"/>
+                <xs:element name="NewVehInd" type="String" minOccurs="0"/>
+                <xs:element name="NonOwnedVehInd" type="String" minOccurs="0"/>
+                <xs:element name="NumAxles" type="String" minOccurs="0"/>
+                <xs:element name="LengthTimePerMonth" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="MEASUREMENT">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="NumYouthfulOperators" type="String" minOccurs="0"/>
+                <xs:element name="OdometerReading" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="MEASUREMENT">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="PhysicalDamageRateClassCd" type="String" minOccurs="0"/>
+                <xs:element name="PricingCd" type="String" minOccurs="0"/>
+                <xs:element name="AntiTheftDeviceCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="PrincipalOperatorInd" type="String" minOccurs="0"/>
+                <xs:element name="RateClassCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ResidualMarketFacilityInd" type="String" minOccurs="0"/>
+                <xs:element name="SeenCarInd" type="String" minOccurs="0"/>
+                <xs:element name="TerritoryCodeCommutingDestinationCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="TractionControlInd" type="String" minOccurs="0"/>
+                <xs:element name="RegisteredVehInd" type="String" minOccurs="0"/>
+                <xs:element name="AlterationsAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="VehInspectionStatusCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="VehPerformanceCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="VehSalvageTitleNumber" type="String" minOccurs="0"/>
+                <xs:element name="VehUseCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="FourWheelDriveInd" type="String" minOccurs="0"/>
+                <xs:element ref="QuestionAnswer" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="SeatBeltTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="AirBagTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element ref="Coverage" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="QuestionableClaimInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="QuestionableReasonCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ReasonDesc" type="String" minOccurs="0"/>
+                <xs:element ref="ReferralInfo" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="InvestigatingPartyInfo" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ReferralInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ReferredToCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ReferredToDesc" type="String" minOccurs="0"/>
+                <xs:element name="StateProvCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="StateProv" type="String" minOccurs="0"/>
+                <xs:element name="CountryCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="CountryDesc" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InvestigatingPartyInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ActivityCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ActivityDt" type="String" minOccurs="0"/>
+                <xs:element name="CaseNumber" type="String" minOccurs="0"/>
+                <xs:element name="CaseClosedInd" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="InvestigatorRef" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PartyInvestigationInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="SuppressMatchInd" type="String" minOccurs="0"/>
+                <xs:element name="DisputeStatementDesc" type="String" minOccurs="0"/>
+                <xs:element name="SocialSecurityIssuancePeriod" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="DURATION">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="SSNValidationCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="TINValidationCd" type="StringCd" minOccurs="0"/>
+                <xs:element ref="ProfessionalSanctionInfo" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ProfessionalSanctionInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="SpecialtyDesc" type="String" minOccurs="0"/>
+                <xs:element name="SanctionDt" type="String" minOccurs="0"/>
+                <xs:element name="ProfessionalSanctionCd" type="String" minOccurs="0"/>
+                <xs:element name="SanctioningOrganization" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ClaimsPartyRelationship">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ClaimsPartyRole1Cd" minOccurs="0"/>
+                <xs:element name="ClaimsPartyRole2Cd" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="ClaimsParty1Ref" type="xs:IDREF" use="required"/>
+            <xs:attribute name="ClaimsParty2Ref" type="xs:IDREF" use="required"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="InvestigationInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ValidVINInd" type="String" minOccurs="0"/>
+                <xs:element name="FailedVIN" type="String" minOccurs="0"/>
+                <xs:element name="VINMissingInd" type="String" minOccurs="0"/>
+                <xs:element name="VehDispositionCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="com.iso_TheftTypeInd" type="String" minOccurs="0"/>
+                <xs:element name="EngineMissingInd" type="String" minOccurs="0"/>
+                <xs:element name="TransmissionMissingInd" type="String" minOccurs="0"/>
+                <xs:element name="NCICItemTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="NCICStatusCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="NCICStatusDt" type="String" minOccurs="0"/>
+                <xs:element ref="AutoInvestigationInfo" minOccurs="0"/>
+                <xs:element ref="RecoveryInfo" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="SalvageInfo" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="AppraiserActivityInfo" minOccurs="0"/>
+                <xs:element ref="com.iso_VehRecall" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="com.iso_SFNMVTIS" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="ItemRef" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="com.iso_SFNMVTIS">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="com.iso_NMVTISCd" type="String"/>
+                <xs:element name="com.iso_TotalLossDt" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_TotalLossName" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence minOccurs="0">
+                            <xs:element name="NameInfo" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:choice minOccurs="0">
+                                        <xs:element name="CommlName" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence minOccurs="0">
+                                                    <xs:element name="CommercialName" type="String" minOccurs="0"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="PersonName" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence minOccurs="0">
+                                                    <xs:element name="Surname" type="String" minOccurs="0"/>
+                                                    <xs:element name="GivenName" type="String" minOccurs="0"/>
+                                                    <xs:element name="OtherGivenName" type="String" minOccurs="0"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:choice>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="com.iso_ReportFiledName" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence minOccurs="0">
+                            <xs:element name="NameInfo" minOccurs="0">
+                                <xs:complexType>
+                                    <xs:choice minOccurs="0">
+                                        <xs:element name="CommlName" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence minOccurs="0">
+                                                    <xs:element name="CommercialName" type="String" minOccurs="0"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="PersonName" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence minOccurs="0">
+                                                    <xs:element name="Surname" type="String" minOccurs="0"/>
+                                                    <xs:element name="GivenName" type="String" minOccurs="0"/>
+                                                    <xs:element name="OtherGivenName" type="String" minOccurs="0"/>
+                                                </xs:sequence>
+                                            </xs:complexType>
+                                        </xs:element>
+                                    </xs:choice>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="ItemRef" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="com.iso_VehRecall">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ModelYear" type="String" minOccurs="0"/>
+                <xs:element name="Manufacturer" type="String" minOccurs="0"/>
+                <xs:element name="Model" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_NHTSAid" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_RecallDt" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_Component" minOccurs="0"/>
+                <xs:element name="com.iso_RecallSum" type="String"/>
+                <xs:element name="com.iso_Consqs" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_VehAffected" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_ProdMfr" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="ItemRef" type="xs:IDREF" use="optional"/>
+            <xs:attribute name="ClaimsPartyRef" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RecoveryInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="RecoveryStatusCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="CannedRecoveryCd" type="String" minOccurs="0"/>
+                <xs:element name="RecoveryDt" type="String" minOccurs="0"/>
+                <xs:element ref="Addr" minOccurs="0"/>
+                <xs:element name="RecoveryLocDesc" type="String" minOccurs="0"/>
+                <xs:element ref="Communications" minOccurs="0"/>
+                <xs:element name="com.iso_RecoveryVehNumber" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_TheftVerification" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="com.iso_NCICDt" minOccurs="0"/>
+                            <xs:element name="com.iso_PoliceAgency" type="String" minOccurs="0"/>
+                            <xs:element name="com.iso_OCA" type="String" minOccurs="0"/>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="com.iso_VehRecoveryInd" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="ItemRef" type="xs:IDREF" use="optional"/>
+            <xs:attribute name="RecoveryAgencyRef" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SalvageInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="SalvageDt" type="String" minOccurs="0"/>
+                <xs:element name="ItemAppraisedValueAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ItemValuePriorToLossAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ItemValueReceivedAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="OwnerRetainingSalvageInd" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="ItemRef" type="xs:IDREF" use="optional"/>
+            <xs:attribute name="SalvageAgencyRef" type="xs:IDREF" use="optional"/>
+            <xs:attribute name="BuyerRef" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="LitigationInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="CourtTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="Caption" type="String" minOccurs="0"/>
+                <xs:element name="CourtName" type="String" minOccurs="0"/>
+                <xs:element ref="Addr" minOccurs="0"/>
+                <xs:element name="DocketNum" type="String" minOccurs="0"/>
+                <xs:element name="LitigationStatusCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="LitigationDispositionCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="DefenseTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ThresholdTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ThresholdStateProvCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ThresholdAmt" minOccurs="0">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="CURRENCY">
+                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="EventInfo" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="AuthorizedRepRef" type="xs:IDREF" use="optional"/>
+            <xs:attribute name="PlaintiffRefs" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MatchDetails">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:group ref="CLAIMSINVESTIGATIONINFO" minOccurs="0"/>
+                <xs:element ref="MatchReasonInfo" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="com.iso_SumReasonInfo" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="com.iso_SumIdentifier" minOccurs="0" maxOccurs="unbounded"/>
+                            <xs:element name="com.iso_SumReasonCd" minOccurs="0" maxOccurs="unbounded"/>
+                            <xs:element name="com.iso_TotalLossType" minOccurs="0"/>
+                            <xs:element name="com.iso_TotalSIUInvolvement" minOccurs="0"/>
+                            <xs:element name="com.iso_TotalName" minOccurs="0"/>
+                            <xs:element name="com.iso_TotalAddress" minOccurs="0"/>
+                            <xs:element name="com.iso_TotalSSN" minOccurs="0"/>
+                            <xs:element name="com.iso_TotalPhone" minOccurs="0"/>
+                            <xs:element name="com.iso_TotalDriversLic" minOccurs="0"/>
+                            <xs:element name="com.iso_TotalVIN" minOccurs="0"/>
+                            <xs:element name="com.iso_TotalLicPlate" minOccurs="0"/>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                        <xs:attribute name="ClaimsPartyRef" type="xs:IDREF" use="optional"/>
+                        <xs:attribute name="ClaimsParty2Ref" type="xs:IDREF" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="com.iso_KeyReasonInfo" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="com.iso_KeyReasonCd" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                        <xs:attribute name="ClaimsPartyRef" type="xs:IDREF" use="optional"/>
+                        <xs:attribute name="ClaimsParty2Ref" type="xs:IDREF" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="InvestigationInfo" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MatchInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="NumMatches" type="String" minOccurs="0"/>
+                <xs:element name="NumPersonMatches" type="String" minOccurs="0"/>
+                <xs:element name="NumVehMatches" type="String" minOccurs="0"/>
+                <xs:element ref="AdditionalMatchInfo" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ClaimInvestigationAddRs">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:group ref="CLAIMSMSGRSINFO"/>
+                <xs:element name="ReplacementInd" minOccurs="0">
+                    <xs:complexType>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="SuppressMatchInd" minOccurs="0">
+                    <xs:complexType>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="SearchBasisCd" minOccurs="0">
+                    <xs:complexType>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ReferralInd" minOccurs="0">
+                    <xs:complexType>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:group ref="CLAIMSINVESTIGATIONINFO" minOccurs="0"/>
+                <xs:element ref="InvestigationInfo" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="com.iso_AddCovInfo" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence>
+                            <xs:element name="com.iso_CovInfo1" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="com.iso_CMSIncidentDt" minOccurs="0"/>
+                                        <xs:element name="Addr" minOccurs="0">
+                                            <xs:complexType>
+                                                <xs:sequence>
+                                                    <xs:element name="StateProvCd" minOccurs="0"/>
+                                                </xs:sequence>
+                                                <xs:attribute name="id" type="xs:ID" use="optional"/>
+                                                <xs:attribute name="codelistref" type="xs:IDREF" use="optional"/>
+                                            </xs:complexType>
+                                        </xs:element>
+                                        <xs:element name="com.iso_NFLTLimit" minOccurs="0"/>
+                                        <xs:element name="com.iso_ExhaustDt" minOccurs="0"/>
+                                        <xs:element name="com.iso_ORMInd" minOccurs="0"/>
+                                        <xs:element name="com.iso_ORMDt" minOccurs="0"/>
+                                        <xs:element name="com.iso_TPOCDt" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xs:element name="com.iso_TPOCAmt" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xs:element name="com.iso_TPOCStartDt" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xs:element name="ICDDiagnosticCd" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xs:element name="com.iso_ICD10Cd" minOccurs="0" maxOccurs="unbounded"/>
+                                        <xs:element name="InjuryNatureDesc" minOccurs="0"/>
+                                        <xs:element name="com.iso_CauseofInjuryCd" minOccurs="0"/>
+                                        <xs:element name="com.iso_DeleteFromCMS" minOccurs="0"/>
+                                        <xs:element name="com.iso_NotSendCovCMS" minOccurs="0"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                                    <xs:attribute name="ItemRef" type="xs:IDREF" use="optional"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="com.iso_CovInfo2" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="com.iso_ProdLiabInd" minOccurs="0"/>
+                                        <xs:element name="com.iso_GenName" minOccurs="0"/>
+                                        <xs:element name="com.iso_BrandName" minOccurs="0"/>
+                                        <xs:element name="com.iso_ProdMfr" minOccurs="0"/>
+                                        <xs:element name="com.iso_allegedHarm" minOccurs="0"/>
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                                    <xs:attribute name="ItemRef" type="xs:IDREF" use="optional"/>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element name="com.iso_CMS" minOccurs="0" maxOccurs="unbounded">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="com.iso_CMSWarning" type="StringCd" minOccurs="0" maxOccurs="unbounded"/> <!--Guidewire: Added type -->
+                                    </xs:sequence>
+                                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                                    <xs:attribute name="ItemRef" type="xs:IDREF" use="optional"/>
+                                </xs:complexType>
+                            </xs:element>
+                        </xs:sequence>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="MatchReportTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="com.iso_APDFastcheckInd" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_ClaimDirectorInd" type="String" minOccurs="0"/>
+                <xs:element ref="com.iso_ClaimsScoringInfo" minOccurs="0"/>
+                <xs:element ref="MatchInfo" minOccurs="0"/>
+                <xs:element ref="MatchDetails" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MsgStatus">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="MsgStatusCd" type="StringCd"/>
+                <xs:element name="MsgErrorCd" type="StringCd" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation/>
+                        <xs:appinfo>
+                            <seeDesc/>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="MsgStatusDesc" type="String" minOccurs="0"/>
+                <xs:element name="PendingResponseAvailDt" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation/>
+                        <xs:appinfo>
+                            <seeDesc/>
+                        </xs:appinfo>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="PendingResponseExpDt" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation/>
+                        <xs:appinfo>
+                            <seeDesc/>
+                        </xs:appinfo>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="ExtendedStatus" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="ChangeStatus" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ExtendedStatus">
+        <xs:annotation>
+            <xs:appinfo>
+                <seeDesc/>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ExtendedStatusCd" type="StringCd"/>
+                <xs:element name="ExtendedStatusDesc" type="String" minOccurs="0"/>
+                <xs:element name="MissingElementPath" type="String" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="idRefs" type="xs:IDREFS" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ChangeStatus">
+        <xs:annotation>
+            <xs:appinfo>
+                <seeDesc/>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ActionCd">
+                    <xs:annotation>
+                        <xs:appinfo>
+                            <revhist>MR2907</revhist>
+                        </xs:appinfo>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="PreviousValue" minOccurs="0">
+                    <xs:annotation>
+                        <xs:appinfo>
+                            <revhist>MR2907</revhist>
+                        </xs:appinfo>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="RefNameCd" minOccurs="0">
+                    <xs:annotation>
+                        <xs:appinfo>
+                            <revhist>MR2907</revhist>
+                        </xs:appinfo>
+                    </xs:annotation>
+                    <xs:complexType>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="ChangeDesc" minOccurs="0">
+                    <xs:complexType>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ACORD">
+        <xs:annotation>
+            <xs:documentation>Root Element</xs:documentation>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:choice>
+                <xs:group ref="ACORDREQ"/>
+                <xs:group ref="ACORDRSP"/>
+            </xs:choice>
+        </xs:complexType>
+    </xs:element>
+    <xs:group name="ACORDREQ">
+        <xs:sequence>
+            <xs:element ref="SignonRq"/>
+            <xs:element ref="SuppressNotificationInd" minOccurs="0"/>
+            <xs:element name="BaseSvcRq" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="RqUID"/>
+                        <xs:element ref="SPName" minOccurs="0"/>
+                        <xs:group ref="BASESVCRQMSGS"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element ref="ClaimsSvcRq" minOccurs="0" maxOccurs="unbounded"/><!--Guidewire: Added bounds -->
+            <xs:element name="SignoffRq" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element ref="CustId" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="ACORDRSP">
+        <xs:sequence>
+            <xs:element ref="Status" minOccurs="0"/>
+            <xs:element ref="SignonRs" minOccurs="0"/>
+            <xs:element ref="SuppressNotificationInd" minOccurs="0"/>
+            <xs:element ref="PendingResponseInfo" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="BaseSvcRs" minOccurs="0">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:group ref="BASESVCRSMSGS"/>
+                    </xs:sequence>
+                </xs:complexType>
+            </xs:element>
+            <xs:element ref="ClaimsSvcRs" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="SignoffRs" minOccurs="0"/>
+        </xs:sequence>
+    </xs:group>
+    <xs:element name="SignonRq">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:choice minOccurs="0">
+                    <xs:element name="SignonPswd">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element ref="SignonRoleCd" minOccurs="0"/>
+                                <xs:element ref="CustId"/>
+                                <xs:element name="CustPswd">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="EncryptionTypeCd" type="xs:string"/>
+                                            <xs:choice>
+                                                <xs:element name="Pswd">
+                                                    <xs:simpleType>
+                                                        <xs:restriction base="xs:string">
+                                                            <xs:minLength value="0"/>
+                                                            <xs:maxLength value="32"/>
+                                                        </xs:restriction>
+                                                    </xs:simpleType>
+                                                </xs:element>
+                                                <xs:element name="EncryptedPswd">
+                                                    <xs:complexType>
+                                                        <xs:sequence>
+                                                            <xs:element name="ContentTypeCd" type="xs:string" minOccurs="0"/>
+                                                            <xs:element name="BinLength" type="xs:long"/>
+                                                            <xs:element name="BinData" type="xs:string"/>
+                                                        </xs:sequence>
+                                                    </xs:complexType>
+                                                </xs:element>
+                                            </xs:choice>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                                <xs:element ref="GenSessKey" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="SignonCert">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element ref="SignonRoleCd" minOccurs="0"/>
+                                <xs:element ref="CustId"/>
+                                <xs:element name="Certificate">
+                                    <xs:complexType>
+                                        <xs:sequence>
+                                            <xs:element name="ContentTypeCd" type="xs:string" minOccurs="0"/>
+                                            <xs:element name="BinLength" type="xs:long"/>
+                                            <xs:element name="BinData" type="xs:string"/>
+                                        </xs:sequence>
+                                    </xs:complexType>
+                                </xs:element>
+                                <xs:element ref="GenSessKey" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="SignonTransport">
+                        <xs:complexType>
+                            <xs:sequence>
+                                <xs:element ref="SignonRoleCd" minOccurs="0"/>
+                                <xs:element ref="CustId"/>
+                                <xs:element ref="GenSessKey" minOccurs="0"/>
+                            </xs:sequence>
+                        </xs:complexType>
+                    </xs:element>
+                    <xs:element name="SessKey" type="xs:string"/>
+                </xs:choice>
+                <xs:element ref="ClientDt"/>
+                <xs:element ref="CustLangPref"/>
+                <xs:element ref="ClientApp"/>
+                <xs:element ref="ProxyClient" minOccurs="0"/>
+                <xs:element name="SuppressEcho" type="xs:boolean" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CustId">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="SPName">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:minLength value="0"/>
+                            <xs:maxLength value="36"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element name="CustPermId" type="String" minOccurs="0"/>
+                <xs:element ref="CustLoginId"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="GenSessKey" type="xs:string"/>
+    <xs:element name="SignonRoleCd" type="xs:string"/>
+    <xs:element name="ClientDt" type="xs:dateTime"/>
+    <xs:element name="CustLangPref" type="xs:string"/>
+    <xs:element name="Org" type="xs:string"/>
+    <xs:element name="Version" type="xs:string"/>
+    <xs:element name="CustLoginId" type="xs:string"/>
+    <xs:element name="ClaimsSvcRq">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="RqUID"/>
+                <xs:element ref="SPName" minOccurs="0"/>
+                <xs:group ref="CLAIMSSVCRQMSGS" minOccurs="0" maxOccurs="25"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="RqUID">
+        <xs:annotation>
+            <xs:documentation/>
+            <xs:appinfo>
+                <revhist>MR2786</revhist>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:restriction base="String">
+                    <xs:minLength value="1"/>
+                </xs:restriction>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SPName" type="xs:string">
+        <xs:annotation>
+            <xs:documentation/>
+            <xs:appinfo>
+                <revhist>MR2786</revhist>
+            </xs:appinfo>
+        </xs:annotation>
+    </xs:element>
+    <xs:group name="CLAIMSSVCRQMSGS">
+        <xs:choice>
+            <xs:element ref="ClaimInvestigationAddRq"/>
+        </xs:choice>
+    </xs:group>
+    <xs:group name="CLAIMSMSGRQINFO">
+        <xs:sequence>
+            <xs:element ref="RqUID"/>
+            <xs:element ref="TransactionRequestDt"/>
+            <xs:element ref="CurCd"/>
+            <xs:element ref="CodeList" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="ConversionRate" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:group>
+    <xs:element name="TransactionRequestDt" type="String"/>
+    <xs:element name="CurCd" type="String"/>
+    <xs:group name="CLAIMSINVESTIGATIONINFO">
+        <xs:sequence>
+            <xs:element ref="Producer" minOccurs="0"/>
+            <xs:element ref="InsuredOrPrincipal" minOccurs="0"/>
+            <xs:element ref="Policy" minOccurs="0"/>
+            <xs:element ref="ClaimsOccurrence" minOccurs="0"/>
+            <xs:element ref="ClaimsParty" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element name="ClaimsPartyRelationship" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="ClaimsPartyRole1Cd" type="StringCd" minOccurs="0"/>
+                        <xs:element name="ClaimsPartyRole2Cd" type="StringCd" minOccurs="0"/>
+                    </xs:sequence>
+                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    <xs:attribute name="ClaimsParty1Ref" type="xs:IDREF" use="required"/>
+                    <xs:attribute name="ClaimsParty2Ref" type="xs:IDREF" use="required"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element name="com.iso_SIUParty" minOccurs="0" maxOccurs="unbounded">
+                <xs:complexType>
+                    <xs:sequence>
+                        <xs:element name="com.iso_SIUInvolved" minOccurs="0"/>
+                        <xs:element name="com.iso_ClaimNotPaid" minOccurs="0"/>
+                        <xs:element name="com.iso_EnforcementActionSubject" minOccurs="0"/>
+                        <xs:element name="com.iso_CriteriaForFraudBureau" minOccurs="0"/>
+                        <xs:element name="com.iso_NICBAlert" minOccurs="0"/>
+                        <xs:element name="EventInfo" minOccurs="0">
+                            <xs:complexType>
+                                <xs:sequence>
+                                    <xs:element name="EventCd" type="StringCd" minOccurs="0"/>
+                                    <xs:element name="EventDt" type="String" minOccurs="0"/>
+                                </xs:sequence>
+                            </xs:complexType>
+                        </xs:element>
+                        <xs:element name="com.iso_MedicareEligibleInd" type="String" minOccurs="0"/><!--Guidewire: Added type -->
+                        <xs:element name="com.iso_NotSendToCMS" type="String" minOccurs="0"/><!--Guidewire: Added type -->
+                        <xs:element name="com.iso_HICN" type="String" minOccurs="0"/><!--Guidewire: Added type -->
+                        <xs:element name="com.iso_StopCMSQuery" minOccurs="0"/>
+                        <xs:element ref="Communications" minOccurs="0"/>
+                    </xs:sequence>
+                    <xs:attribute name="ClaimsPartyRef"/>
+                    <xs:attribute name="ClaimsParty1Ref"/>
+                    <xs:attribute name="ClaimsParty2Ref"/>
+                </xs:complexType>
+            </xs:element>
+            <xs:element ref="AdjusterParty" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="AutoLossInfo" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="LiabilityLossInfo" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="PropertyLossInfo" minOccurs="0" maxOccurs="unbounded"/><!--Guidewire: Added unbounded -->
+            <xs:element ref="WorkCompLossInfo" minOccurs="0" maxOccurs="unbounded"/><!--Guidewire: Added unbounded -->
+            <xs:element ref="LitigationInfo" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="ClaimsPayment" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="RemarkText" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="FileAttachmentInfo" minOccurs="0" maxOccurs="unbounded"/>
+        </xs:sequence>
+    </xs:group>
+    <xs:element name="SuppressMatchInd" type="String"/>
+    <xs:element name="SearchBasisCd" type="StringCd"/>
+    <xs:element name="ReferralInd" type="String"/>
+    <xs:group name="CLAIMSMSGRSINFO">
+        <xs:sequence>
+            <xs:element name="com.iso_CustLoginId"/>
+            <xs:element name="com.iso_CustLoginPwd"/>
+            <xs:element name="com.iso_CustDomain"/>
+            <xs:element ref="RqUID"/>
+            <xs:element ref="TransactionResponseDt"/>
+            <xs:element ref="CurCd"/>
+            <xs:element ref="CodeList" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="ConversionRate" minOccurs="0" maxOccurs="unbounded"/>
+            <xs:element ref="MsgStatus"/>
+        </xs:sequence>
+    </xs:group>
+    <xs:group name="CLAIMSSVCRSMSGS">
+        <xs:choice>
+            <xs:element ref="ClaimInvestigationAddRs"/>
+        </xs:choice>
+    </xs:group>
+    <xs:element name="RemarkText">
+        <xs:complexType>
+            <xs:simpleContent>
+                <xs:extension base="String">
+                    <xs:attribute name="idref" type="xs:IDREF" use="required"/>
+                </xs:extension>
+            </xs:simpleContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="Status">
+        <xs:annotation>
+            <xs:documentation/>
+            <xs:appinfo>
+                <revhist>MR2786</revhist>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="StatusCd"/>
+                <xs:element ref="StatusDesc" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="StatusCd"/>
+    <xs:element name="StatusDesc"/>
+    <xs:element name="SignonRs">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Status" minOccurs="0"/>
+                <xs:element ref="SignonRoleCd" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation/>
+                        <xs:appinfo>
+                            <echoed/>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="CustId" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation/>
+                        <xs:appinfo>
+                            <echoed/>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="GenSessKey" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation/>
+                        <xs:appinfo>
+                            <echoed/>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="ClientDt">
+                    <xs:annotation>
+                        <xs:documentation/>
+                        <xs:appinfo>
+                            <echoed/>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="CustLangPref">
+                    <xs:annotation>
+                        <xs:documentation/>
+                        <xs:appinfo>
+                            <echoed/>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="ClientApp"/>
+                <xs:element ref="ProxyClient" minOccurs="0"/>
+                <xs:element ref="ServerDt"/>
+                <xs:element ref="SessKey" minOccurs="0"/>
+                <xs:element ref="ExpDt" minOccurs="0"/>
+                <xs:element ref="Language"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ServerDt"/>
+    <xs:element name="SessKey"/>
+    <xs:element name="ExpDt"/>
+    <xs:element name="Language"/>
+    <xs:element name="ClientApp">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Org"/>
+                <xs:element name="Name" type="xs:string"/>
+                <xs:element ref="Version"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ProxyClient">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Org"/>
+                <xs:element name="Name">
+                    <xs:simpleType>
+                        <xs:restriction base="xs:string">
+                            <xs:minLength value="0"/>
+                            <xs:maxLength value="40"/>
+                        </xs:restriction>
+                    </xs:simpleType>
+                </xs:element>
+                <xs:element ref="Version"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SuppressNotificationInd" type="xs:string"/>
+    <xs:element name="PendingResponseInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="MsgRqUID"/>
+                <xs:element ref="MsgNameCd"/>
+                <xs:element ref="TransactionRequestDt" minOccurs="0"/>
+                <xs:element ref="NotificationDt" minOccurs="0"/>
+                <xs:element ref="PendingResponseExpDt" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="MsgRqUID" type="xs:string"/>
+    <xs:element name="MsgNameCd" type="xs:string">
+        <xs:annotation>
+            <xs:documentation>As used here, the name of the original message request.</xs:documentation>
+        </xs:annotation>
+    </xs:element>
+    <xs:element name="NotificationDt" type="xs:date"/>
+    <xs:element name="PendingResponseExpDt" type="xs:date"/>
+    <xs:element name="ClaimsSvcRs">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Status" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation/>
+                        <xs:appinfo>
+                            <revhist>MR2786</revhist>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="RqUID">
+                    <xs:annotation>
+                        <xs:documentation/>
+                        <xs:appinfo>
+                            <revhist>MR2786</revhist>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="SPName" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation/>
+                        <xs:appinfo>
+                            <revhist>MR2786</revhist>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+                <xs:group ref="CLAIMSSVCRSMSGS" minOccurs="0" maxOccurs="unbounded">
+                    <xs:annotation>
+                        <xs:documentation/>
+                        <xs:appinfo>
+                            <revhist>MR2786</revhist>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:group>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SignoffRs">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="Status" minOccurs="0"/>
+                <xs:element ref="CustId" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:group name="BASESVCRQMSGS">
+        <xs:sequence>
+            <xs:element ref="PendingResponseInqRq"/>
+        </xs:sequence>
+    </xs:group>
+    <xs:element name="PendingResponseInqRq">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="RqUID"/>
+                <xs:element ref="TransactionRequestDt"/>
+                <xs:element ref="PendingResponseInfo" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:group name="BASESVCRSMSGS">
+        <xs:sequence>
+            <xs:element ref="PendingResponseInqRs"/>
+        </xs:sequence>
+    </xs:group>
+    <xs:element name="PendingResponseInqRs">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="RqUID"/>
+                <xs:element ref="TransactionRequestDt"/>
+                <xs:element name="TransactionResponseDt"/>
+                <xs:element ref="MsgStatus"/>
+                <xs:element ref="PendingResponseInfo" maxOccurs="unbounded"/>
+                <xs:group ref="CLAIMSSVCRSMSGS" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="TaxCodeInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="TaxCd" type="StringCd"/>
+                <xs:element name="TaxTypeCd" type="StringCd" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SubLocation">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ItemIdInfo"/>
+                <xs:element name="SubLocationDesc" type="String" minOccurs="0"/>
+                <xs:element ref="Addr" minOccurs="0"/>
+                <xs:element ref="AdditionalInterest" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="NameInfoRef" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:complexType name="String">
+        <xs:simpleContent>
+            <xs:extension base="xs:string">
+                <xs:attribute name="id" type="xs:ID" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:complexType name="StringCd">
+        <xs:simpleContent>
+            <xs:extension base="String">
+                <xs:attribute name="codelistref" type="xs:IDREF" use="optional"/>
+            </xs:extension>
+        </xs:simpleContent>
+    </xs:complexType>
+    <xs:element name="com.iso_PartyScoringInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="com.iso_APDScore" type="String" minOccurs="0"/>
+                <xs:element name="NumMatches" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_SearchableElementCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="com.iso_ScoredMatch" minOccurs="0" maxOccurs="12"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="VehInfo">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="PCVEH">
+                    <xs:sequence>
+                        <xs:element ref="PersVehInfo" minOccurs="0"/>
+                        <xs:element ref="CommlVehInfo" minOccurs="0"/>
+                        <xs:element name="com.iso_RentedVehInd" minOccurs="0"/>
+                    </xs:sequence>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CommlVehInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="CommlVehSupplement" minOccurs="0"/>
+                <xs:element name="CommlCoverage" minOccurs="0" maxOccurs="unbounded">
+                    <xs:complexType>
+                        <xs:complexContent>
+                            <xs:extension base="PCCOVERAGE">
+                                <xs:sequence>
+                                    <xs:element ref="CommlCoverageSupplement" minOccurs="0"/>
+                                </xs:sequence>
+                            </xs:extension>
+                        </xs:complexContent>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element ref="CreditOrSurcharge" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CommlVehSupplement">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="AnnualLeaseReceiptsAmt" type="CURRENCY" minOccurs="0"/>
+                <xs:element name="PresentValueAmt" type="CURRENCY" minOccurs="0"/>
+                <xs:element name="PurchaseDt" type="String" minOccurs="0"/>
+                <xs:element name="FarmRanchInd" type="String" minOccurs="0"/>
+                <xs:element name="FarZoneCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="FinancedAmt" type="CURRENCY" minOccurs="0"/>
+                <xs:element name="FleetInd" type="String" minOccurs="0"/>
+                <xs:element name="GrossVehOrCombinedWeight" type="String" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>As used here, the expected measurement in the USA is pounds.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="LeasedAmt" type="CURRENCY" minOccurs="0"/>
+                <xs:element name="LengthTimeVehLeased" type="MEASUREMENT" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>As used here, the expected measurement in the USA is months.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="MotorCarrierActInd" type="String" minOccurs="0"/>
+                <xs:element name="NearZoneCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="NewVehInd" type="String" minOccurs="0"/>
+                <xs:element name="OptionCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="PrimaryClassCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="PrimaryRatingFactorLiability" type="String" minOccurs="0"/>
+                <xs:element name="PrimaryRatingFactorPhysicalDamage" type="String" minOccurs="0"/>
+                <xs:element name="RadiusUse" type="MEASUREMENT" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>As used here, the expected measurement in the USA is whole miles.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="RatingCreditCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="SeatingCapacity" type="String" minOccurs="0"/>
+                <xs:element name="SecondaryClassCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="SecondaryRatingFactor" type="String" minOccurs="0"/>
+                <xs:element name="SelfPropelledVehInd" type="String" minOccurs="0"/>
+                <xs:element name="SpecialClassCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="SpecialUseCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="UseLeasedVehDesc" type="String" minOccurs="0"/>
+                <xs:element name="VehAlteredInd" type="String" minOccurs="0"/>
+                <xs:element name="VehLeasedCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="VehUseCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="ZoneCombinationCd" type="StringCd" minOccurs="0"/>
+                <xs:element ref="Addr" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>As used here, the garaging City, State and Zip Code.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="ReplacedVehIdentificationNumber" type="String" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation/>
+                        <xs:appinfo>
+                            <revhist>MR2728</revhist>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="DMVTransactionCd" type="StringCd" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation/>
+                        <xs:appinfo>
+                            <revhist>MR2727</revhist>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="VehTypeCd" type="StringCd" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation/>
+                        <xs:appinfo>
+                            <revhist>MR2726</revhist>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="FleetRef" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CreditOrSurcharge">
+        <xs:complexType>
+            <xs:complexContent>
+                <xs:extension base="PCCREDITSURCHARGE">
+                    <xs:attribute name="id" type="xs:ID" use="optional"/>
+                </xs:extension>
+            </xs:complexContent>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="SelfInsuredRetentionInfo">
+        <xs:annotation>
+            <xs:documentation/>
+            <xs:appinfo>
+                <revhist>MR2908</revhist>
+            </xs:appinfo>
+        </xs:annotation>
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="SelfInsuredRetentionTypeCd" type="StringCd" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation/>
+                        <xs:appinfo>
+                            <revhist>MR2908</revhist>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element name="SelfInsuredRetentionAmt" type="CURRENCY" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation/>
+                        <xs:appinfo>
+                            <revhist>MR2908</revhist>
+                        </xs:appinfo>
+                    </xs:annotation>
+                </xs:element>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="CommlCoverageSupplement">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="BlanketNumber" type="String" minOccurs="0"/>
+                <xs:element name="CoverageSubCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="CurrentRetroactiveDt" type="String" minOccurs="0">
+                    <xs:annotation>
+                        <xs:documentation>As used here, the retroactive date applicable to a claims made policy.</xs:documentation>
+                    </xs:annotation>
+                </xs:element>
+                <xs:element ref="SelfInsuredRetentionInfo" minOccurs="0"/>
+                <xs:element name="FootnoteInd" type="String" minOccurs="0"/>
+                <xs:element name="CoinsurancePct" type="String" minOccurs="0"/>
+                <xs:element name="ProposedRetroactiveDt" type="String" minOccurs="0"/>
+                <xs:element name="RatingFactor" type="String" minOccurs="0"/>
+                <xs:element name="ReportingPeriodCd" type="String" minOccurs="0"/>
+                <xs:element name="SubjectOptionsTitleCd" type="StringCd" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="ItemInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element ref="ItemIdInfo" minOccurs="0"/>
+                <xs:element ref="ItemDefinition" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="PersonName">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="Surname" type="String"/>
+                <xs:element name="GivenName" type="String" minOccurs="0"/>
+                <xs:element name="OtherGivenName" type="String" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="TitlePrefix" type="String" minOccurs="0"/>
+                <xs:element name="NameSuffix" type="String" minOccurs="0"/>
+                <xs:element name="NickName" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="com.iso_Update">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="com.iso_UpdateInd" type="String"/> <!--Guidewire: Added type -->
+                <xs:element name="com.iso_OriginalFields" minOccurs="0">
+                    <xs:complexType>
+                        <xs:choice>
+                            <xs:element name="com.iso_KeyFields">
+                                <xs:complexType>
+                                    <xs:sequence>
+                                        <xs:element name="PolicyNumber" type="String"/>
+                                        <xs:element ref="ItemIdInfo"/>
+                                        <xs:element name="LossDt" type="String"/>
+                                    </xs:sequence>
+                                </xs:complexType>
+                            </xs:element>
+                            <xs:element ref="CommlName"/>
+                            <xs:element ref="PersonName"/>
+                        </xs:choice>
+                    </xs:complexType>
+                </xs:element>
+                <xs:element name="com.iso_RepeatSearchInd" type="String" minOccurs="0"/>
+            </xs:sequence>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="TransactionResponseDt"/>
+    <xs:element name="MatchReasonInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="MatchReasonCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+            <xs:attribute name="ClaimsPartyRef" type="xs:IDREF" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="com.iso_ClaimsScoringInfo">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="com.iso_ClaimDirectorScore" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_ExceededLifeOfClaimInd" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_CharacteristicsFoundInd" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_EmailSentInd" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_NumberTimesScored" type="String" minOccurs="0"/>
+                <xs:element ref="com.iso_ClaimsHandlingCharacteristics" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element ref="com.iso_ClaimDirectorRules" minOccurs="0" maxOccurs="unbounded"/>
+                <xs:element name="com.iso_ClaimsScoreReport" minOccurs="0">
+                    <xs:complexType>
+                        <xs:sequence minOccurs="0">
+                            <xs:element name="com.iso_RawScore" minOccurs="0"/>
+                            <xs:element name="com.iso_AdjustedScore" minOccurs="0"/>
+                            <xs:element name="NumMatches" type="String" minOccurs="0"/>
+                            <xs:element name="com.iso_SearchableElementCd" type="StringCd" minOccurs="0" maxOccurs="unbounded"/>
+                            <xs:element ref="com.iso_ScoredMatch" minOccurs="0" maxOccurs="unbounded"/>
+                        </xs:sequence>
+                        <xs:attribute name="id" type="xs:ID" use="optional"/>
+                    </xs:complexType>
+                </xs:element>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="com.iso_ClaimsHandlingCharacteristics">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="com.iso_CharacteristicCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="com.iso_CharacteristicText" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="com.iso_ClaimDirectorRules">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="com.iso_RuleCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="com.iso_RuleTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="com.iso_RuleWeight" type="String" minOccurs="0"/>
+                <xs:element name="com.iso_RuleDesc" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="com.iso_ScoredMatch">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="com.iso_MatchScoreRank" type="String" minOccurs="0"/>
+                <xs:element ref="ItemIdInfo" minOccurs="0"/>
+                <xs:element name="LossDt" type="String" minOccurs="0"/>
+                <xs:element name="CoverageCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="LossCauseCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="MatchReasonCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="com.iso_MatchRecordTypeCd" type="StringCd" minOccurs="0"/>
+                <xs:element name="com.iso_MatchScore" type="String" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+    <xs:element name="com.iso_AppendDS">
+        <xs:complexType>
+            <xs:sequence>
+                <xs:element name="ADSResponseCd" type="String" minOccurs="0"/>
+                <xs:element ref="GeneralPartyInfo" minOccurs="0"/>
+                <xs:element ref="PersonInfo" minOccurs="0"/>
+            </xs:sequence>
+            <xs:attribute name="id" type="xs:ID" use="optional"/>
+        </xs:complexType>
+    </xs:element>
+</xs:schema>

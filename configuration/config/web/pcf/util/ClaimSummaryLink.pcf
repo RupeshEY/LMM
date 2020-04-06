@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Forward
+    id="ClaimSummaryLink">
+    <LocationEntryPoint
+      signature="ClaimSummaryLink(claimNumber : String)"/>
+    <Variable
+      name="claimNumber"
+      type="String"/>
+    <Variable
+      initialValue="(gw.api.database.Query.make(entity.ClaimInfo).compare(&quot;ClaimNumber&quot;, Equals, claimNumber).select()).getAtMostOneRow()"
+      name="retriveClaimInfo"
+      type="ClaimInfo"/>
+    <Variable
+      initialValue="getErrorMessage()"
+      name="errorMessage"
+      type="String"/>
+    <ForwardCondition
+      action="ClaimSummary.go(retriveClaimInfo.Claim)"
+      condition="retriveClaimInfo != null and retriveClaimInfo.ArchiveState == null"/>
+    <ForwardCondition
+      action="pcf.ArchivedClaim.go(retriveClaimInfo)"
+      condition="retriveClaimInfo != null and retriveClaimInfo.ArchiveState != null"/>
+    <ForwardCondition
+      action="ClaimSearch.go(errorMessage)"
+      condition="retriveClaimInfo == null"/>
+    <Code><![CDATA[
+function getErrorMessage() : String {
+        if (retriveClaimInfo == null) {
+          return DisplayKey.get("Web.ClaimSearch.Error.NoClaimFound", claimNumber)
+        }
+        return null
+      }
+      
+    ]]></Code>
+  </Forward>
+</PCF>

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Operators for biz rules"
+  final="true"
+  name="RuleOperator"
+  platform="true">
+  <typecode
+    code="GreaterThan"
+    desc="Greater Than"
+    name="&gt;"
+    priority="5"/>
+  <typecode
+    code="GreaterThanOrEqual"
+    desc="Greater Than Or Equal"
+    name="&gt;="
+    priority="6"/>
+  <typecode
+    code="LessThan"
+    desc="Less Than"
+    name="&lt;"
+    priority="3"/>
+  <typecode
+    code="LessThanOrEqual"
+    desc="Less Than Or Equal"
+    name="&lt;="
+    priority="4"/>
+  <typecode
+    code="Equals"
+    desc="Equals"
+    name="="
+    priority="1"/>
+  <typecode
+    code="NotEquals"
+    desc="NotEquals"
+    name="Is Not Equal To"
+    priority="2"/>
+  <typecode
+    code="IsTrue"
+    desc="Is True"
+    name="Is True"
+    priority="7"/>
+  <typecode
+    code="IsFalse"
+    desc="Is False"
+    name="Is False"
+    priority="8"/>
+  <typecode
+    code="IsIn"
+    desc="The right-hand-side operand must evaluate to an array, and the left-hand-side operand must evaluate to a type matching a single element in the array. Evaluates to true if at least one of the elements in the array matches the left-hand operand."
+    name="Is In"
+    priority="9"/>
+  <typecode
+    code="IsNotIn"
+    desc="The opposite of IsIn"
+    name="Is Not In"
+    priority="10"/>
+  <typecode
+    code="Contains"
+    desc="When the left-hand-side operand evaluates to an array, this operator is the only one that is available. Evaluates to true if at least one of the elements in the array matches the right-hand operand."
+    name="Contains"
+    priority="11"/>
+  <typecode
+    code="DoesNotContain"
+    desc="The opposite of Contains"
+    name="Does Not Contain"
+    priority="12"/>
+  <typecode
+    code="HasAValue"
+    desc="Has a Value"
+    name="Has a Value"
+    priority="13"/>
+  <typecode
+    code="HasNoValue"
+    desc="Has No Value"
+    name="Has No Value"
+    priority="14"/>
+</typelist>

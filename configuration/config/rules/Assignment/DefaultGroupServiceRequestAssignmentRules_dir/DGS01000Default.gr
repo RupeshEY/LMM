@@ -1,0 +1,26 @@
+package rules.Assignment.DefaultGroupServiceRequestAssignmentRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+
+@gw.rules.RuleName("DGS01000 - Default")
+internal class DGS01000Default {
+  static function doCondition(serviceRequest : entity.ServiceRequest) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(serviceRequest : entity.ServiceRequest, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+serviceRequest.CurrentAssignment.assignUserByRoundRobin(false, serviceRequest.CurrentAssignment.AssignedGroup)
+CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.DefaultGroup.ServiceRequest", actions.ShortRuleName))
+CCLoggerCategory.ASSIGNMENT.debug(DisplayKey.get("Rules.Assignment.AssignedUserIs", serviceRequest.AssignedUser))
+actions.exit()
+/*end00rule*/
+
+  }
+}

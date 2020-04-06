@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="Outcome">
+  <typecode
+    code="denied"
+    desc="Denied - no payment"
+    name="Denied - no payment"/>
+  <typecode
+    code="closednopayment"
+    desc="Closed - no payment"
+    name="Closed - no payment"/>
+  <typecode
+    code="settled"
+    desc="Settled with payment"
+    name="Settled with payment"/>
+  <typecode
+    code="lit_settled"
+    desc="Litigation: settled"
+    name="Litigation: settled"/>
+  <typecode
+    code="litigation_won"
+    desc="Litigation: won a judgment"
+    name="Litigation: won a judgment"/>
+  <typecode
+    code="litigation_lost"
+    desc="Litigation: lost a judgment"
+    name="Litigation: lost a judgment"/>
+  <typecode
+    code="dropped"
+    desc="Claimant stopped pursuing claim"
+    name="Claimant stopped pursuing claim"/>
+</typelistextension>

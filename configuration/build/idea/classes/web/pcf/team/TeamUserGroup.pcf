@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    id="TeamUserGroup"
+    parent="Team()"
+    title="DisplayKey.get(&quot;Web.TabBar.Team&quot;)">
+    <LocationEntryPoint
+      signature="TeamUserGroup(User : User, Group : Group)"/>
+    <Variable
+      name="User"
+      type="User"/>
+    <Variable
+      name="Group"
+      type="Group"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.GroupClaimsTab&quot;)"
+      location="TeamUserClaims(User, Group)"
+      shortcut="L"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.GroupExposuresTab&quot;)"
+      location="TeamUserExposures(User, Group)"
+      shortcut="X"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.GroupActivitiesTab&quot;)"
+      location="TeamUserActivities(User, Group)"
+      shortcut="E"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.GroupMattersTab&quot;)"
+      location="TeamUserMatters(User, Group)"
+      shortcut="R"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.Subrogations&quot;)"
+      location="TeamUserSubrogations(User, Group)"/>
+  </LocationGroup>
+</PCF>

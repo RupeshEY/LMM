@@ -1,0 +1,257 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The top level entity for Bulk Pay"
+  entity="BulkInvoice"
+  exportable="true"
+  loadable="false"
+  table="bulkinvoice"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.bulkpay.entity.BulkInvoice"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceInternal"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceImpl"/>
+  <implementsEntity
+    name="Approvable"/>
+  <implementsEntity
+    name="EFTDataDelegate"/>
+  <fulldescription><![CDATA[
+    The top level entity for Bulk Pay, which corresponds to the incoming invoice or bill to be
+    paid. It has a unique ID (which may correspond to the invoice), some data fields (such as payee and a scheduled send
+    date), and a non-null array of bulk invoice items (refer to the BulkInvoiceItem entity for details). A bulk invoice
+    is not associated with a single claim, but each line item (each BulkInvoiceItem) is associated with a different claim.
+    ]]></fulldescription>
+  <column
+    desc="Amount to be split evenly across all invoice items, or zero if item amounts are to be entered individually."
+    name="BulkInvoiceTotal"
+    nullok="false"
+    soapnullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="Currency"/>
+  </column>
+  <column
+    desc="The check or EFT identifier for the single large check generated for this invoice."
+    name="CheckNumber"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Comments about the check, such as a reason it was voided."
+    name="Comments"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Unique number of the physical invoice related to this bulk pay invoice."
+    name="InvoiceNumber"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Date the check was issued."
+    name="IssueDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The date that this BulkInvoice was last validated. This property is always non-null when Valid is true."
+    name="LastValidatedDate"
+    nullok="true"
+    setterScriptability="doesNotExist"
+    type="datetime"/>
+  <column
+    desc="Name of the person/company to whom the check should be mailed."
+    name="MailTo"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Memo to include on the check."
+    name="Memo"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Pay to the order of value for the bulk check."
+    name="PayTo"
+    nullok="true"
+    supportsLinguisticSearch="true"
+    type="shorttext"/>
+  <column
+    default="0"
+    desc="Boolean flag to indicate whether the invoice's items are currently being processed."
+    getterScriptability="hidden"
+    name="ProcessingItems"
+    nullok="false"
+    setterScriptability="hidden"
+    type="bit"/>
+  <column
+    desc="Date that the invoice was received or entered."
+    name="ReceivedDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="(Unused. May be removed in a future release.) Reportable amount of the BI check (for deductions)."
+    name="ReportableAmount"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Date that the bulk invoice should be submitted to the downstream system."
+    name="ScheduledSendDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    default="false"
+    desc="Designates whether or not the amount for each individual line-item should be automatically calculated as an even share of the total amount."
+    name="SplitEqually"
+    nullok="false"
+    type="bit"/>
+  <column
+    default="0"
+    desc="Indicates whether this BulkInvoice has been validated and if so whether the validation was successful."
+    name="Valid"
+    nullok="false"
+    setterScriptability="doesNotExist"
+    type="bit"/>
+  <column
+    desc="Denormalized value of total amount in reporting currency of all invoice items."
+    name="TotalReportingAmount"
+    nullok="false"
+    setterScriptability="hidden"
+    soapnullok="true"
+    type="currencyamount"/>
+  <column
+    desc="Denormalized value of total amount in transaction currency of all invoice items."
+    name="TotalTransactionAmount"
+    nullok="false"
+    setterScriptability="hidden"
+    soapnullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="Currency"/>
+  </column>
+  <column
+    desc="Denormalized value of amount in reporting currency of all approved invoice items."
+    name="ApprovedReportingAmount"
+    nullok="false"
+    setterScriptability="hidden"
+    soapnullok="true"
+    type="currencyamount"/>
+  <column
+    desc="Denormalized value of amount in transaction currency of all approved invoice items."
+    name="ApprovedTransactionAmount"
+    nullok="false"
+    setterScriptability="hidden"
+    soapnullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="Currency"/>
+  </column>
+  <foreignkey
+    archivingOwner="source"
+    columnName="PayeeID"
+    desc="The Payee for all the bulkinvoiceitems on this bulkinvoice."
+    exportasid="true"
+    fkentity="Contact"
+    name="Payee"
+    nullok="false"/>
+  <foreignkey
+    desc="The Transaction-to-Reporting exchange rate used to select Transaction-to-Claim and Transaction-to-Reporting exchange rates for the checks created for this bulk invoice. If this refers to a market exchange rate, current market rates will be selected. Otherwise, a market Claim-to-Reporting exchange rate will be selected and a custom Transaction-to-Claim rate will be created such that, when multiplied together, they equal this rate."
+    exportable="false"
+    fkentity="ExchangeRate"
+    name="TransToReportingExchangeRate"
+    nullok="true"/>
+  <typekey
+    desc="Special handling instructions for the check."
+    name="CheckInstructions"
+    nullok="true"
+    typelist="checkhandlinginstructions"/>
+  <typekey
+    desc="Currency that the line items on this BulkInvoice should use."
+    name="Currency"
+    nullok="false"
+    soapnullok="true"
+    typelist="currency"/>
+  <typekey
+    desc="The CostCategory, if any, shared by every payment on this BulkInvoice unless overriden by a particular line-item."
+    name="DefaultCostCategory"
+    nullok="true"
+    typelist="CostCategory"/>
+  <typekey
+    desc="The CostType, if any, shared by every payment on this BulkInvoice unless overriden by a particular line-item."
+    name="DefaultCostType"
+    nullok="true"
+    typelist="CostType"/>
+  <typekey
+    desc=" The PaymentType, if any, shared by every payment on this BulkInvoice unless overriden by a particular line-item."
+    name="DefaultPaymentType"
+    nullok="true"
+    typelist="PaymentType"/>
+  <typekey
+    desc="Requested delivery method for the bulk check."
+    name="DeliveryMethod"
+    nullok="true"
+    typelist="deliverymethod"/>
+  <typekey
+    desc="Requested payment method for all payments in the check."
+    name="PaymentMethod"
+    nullok="true"
+    typelist="paymentmethod"/>
+  <typekey
+    desc="Whether the bulk payment should be reported to the IRS as income."
+    name="Reportability"
+    nullok="true"
+    typelist="ReportabilityType"/>
+  <typekey
+    desc="Business status of this bulk invoice."
+    name="Status"
+    nullok="false"
+    typelist="BulkInvoiceStatus"/>
+  <array
+    arrayentity="BulkInvoiceItem"
+    desc="The collection of BulkInvoiceItems on this invoice, corresponding to the line-items on the real-world invoice."
+    name="InvoiceItems"/>
+  <array
+    arrayentity="bivalidationalert"
+    desc="Any alerts returned by the most recent validation call.  If empty, then the BulkInvoice is considered valid."
+    name="ValidationAlerts"
+    setterScriptability="doesNotExist"/>
+  <events>
+    <event
+      description="Fired when the BulkInvoice is added, and each time its status changes."
+      name="BulkInvoiceStatusChanged"/>
+  </events>
+  <index
+    desc="Index to speed up the bulk invoice workflow batch process query"
+    name="bulkinvoice1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Status"/>
+    <indexcol
+      keyposition="2"
+      name="ProcessingItems"/>
+    <indexcol
+      keyposition="3"
+      name="Retired"/>
+    <indexcol
+      keyposition="4"
+      name="ID"/>
+  </index>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.financials.dbchecks.BulkInvoiceDBCheckBuilder"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="MailingAddressID"
+    desc="Address of the person/company to whom this invoice should be mailed. This represents an Address entity."
+    fkentity="Address"
+    name="MailingAddress"
+    nullok="true"
+    triggersValidation="true"/>
+</entity>

@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="ClaimSnapshotPolicyScreen"
+    mode="400">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="SnapshotParam"
+      type="dynamic.Dynamic"/>
+    <Toolbar/>
+    <CardViewPanel>
+      <Card
+        id="ClaimSnapshotPolicyGeneral400Card"
+        title="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.General&quot;)">
+        <PanelRef
+          def="ClaimSnapshotPolicyGeneral400DV(Claim, SnapshotParam)"/>
+      </Card>
+      <Card
+        id="ClaimSnapshotPolicyVehicles400Card"
+        title="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.Vehicles&quot;)"
+        visible="gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_VEHICLES)">
+        <ListDetailPanel
+          selectionName="PolicyVehicle"
+          selectionType="dynamic.Dynamic">
+          <PanelRef
+            def="ClaimSnapshotPolicyVehicles400LV(Claim, SnapshotParam)">
+            <Toolbar/>
+          </PanelRef>
+          <CardViewPanel>
+            <Card
+              id="PolicyVehicleCard"
+              title="util.Snapshot.renderValue(PolicyVehicle)">
+              <PanelRef
+                def="ClaimSnapshotPolicyVehicle400DV(Claim, PolicyVehicle)"/>
+            </Card>
+          </CardViewPanel>
+        </ListDetailPanel>
+      </Card>
+      <Card
+        id="ClaimSnapshotPolicyLocations400Screen"
+        title=" gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_PROPERTIES) ?               DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.Locations&quot;) :               DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.ClassCodes&quot;)"
+        visible="gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_PROPERTIES) or               gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_CLASSCODES)">
+        <ListDetailPanel
+          selectionName="PolicyProperty"
+          selectionType="dynamic.Dynamic">
+          <PanelRef
+            def="ClaimSnapshotPolicyLocations400LV(Claim, SnapshotParam)">
+            <Toolbar/>
+          </PanelRef>
+          <CardViewPanel>
+            <Card
+              id="PolicyPropertyCard"
+              title="util.Snapshot.renderValue(PolicyProperty)">
+              <PanelRef
+                def="ClaimSnapshotPolicyLocation400DV(Claim, PolicyProperty)"/>
+            </Card>
+          </CardViewPanel>
+        </ListDetailPanel>
+      </Card>
+      <Card
+        id="ClaimSnapshotPolicyEndorsements400Card"
+        title="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.Endorsements&quot;)"
+        visible="gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_ENDORSEMENTS)">
+        <PanelRef
+          def="ClaimSnapshotPolicyEndorsements400LV(Claim, SnapshotParam)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+      <Card
+        id="ClaimSnapshotPolicyStatCodes400Card"
+        title="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy.StatCodes&quot;)"
+        visible="gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, typekey.PolicyTab.TC_STATCODES)">
+        <PanelRef
+          def="ClaimSnapshotPolicyStatCodes400LV(Claim, SnapshotParam)">
+          <Toolbar/>
+        </PanelRef>
+      </Card>
+    </CardViewPanel>
+  </Screen>
+</PCF>

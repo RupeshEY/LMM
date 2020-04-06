@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Claim.own and perm.System.viewdesktop"
+    id="DesktopClaims"
+    title="DisplayKey.get(&quot;Web.DesktopClaims&quot;)">
+    <LocationEntryPoint
+      signature="DesktopClaims()"/>
+    <Variable
+      initialValue="ClaimDesktopView.finder.findAllAndAttachClaimants()"
+      name="ClaimDesktopViewList"
+      recalculateOnRefresh="true"
+      type="gw.api.database.IQueryBeanResult&lt;entity.ClaimDesktopView&gt;"/>
+    <Variable
+      initialValue="&quot;DesktopClaimsLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <Screen
+      id="DesktopClaimsScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.DesktopClaims&quot;)"/>
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="AssignClaimsPopup.push(new gw.api.claim.ClaimAssignmentPopup(CheckedValues))"
+          default="true"
+          flags="any ClaimDesktopView"
+          id="DesktopClaims_AssignButton"
+          iterator="DesktopClaimsLV.DesktopClaimsLV"
+          label="DisplayKey.get(&quot;Web.DesktopExposures.Assign&quot;)"
+          shortcut="G"/>
+        <ToolbarDivider/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="gw.api.print.ListViewPrintOptionPopupAction.printListViewWithOptions(PrintTargetLV)"
+          available="perm.User.printlistviews"
+          id="DesktopClaims_PrintButton"
+          label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="DesktopClaimsLV(ClaimDesktopViewList, User.util.CurrentUser, true)"/>
+    </Screen>
+  </Page>
+</PCF>

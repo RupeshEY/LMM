@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_claim.xml -->
+  <ListViewPanel
+    id="EditableEvaluationsLV">
+    <ExposeIterator
+      flags="Deletable"
+      valueType="entity.Evaluation"
+      widget="EditableEvaluationsLV"/>
+    <Require
+      name="EvaluationList"
+      type="Evaluation[]"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <RowIterator
+      editable="false"
+      elementName="Evaluation"
+      toRemove="claim.removeFromEvaluations(Evaluation)"
+      value="EvaluationList"
+      valueType="entity.Evaluation[]">
+      <ToolbarFlag
+        condition="perm.Evaluation.edit(claim)"
+        name="Deletable"/>
+      <Row>
+        <TextCell
+          id="Name"
+          label="DisplayKey.get(&quot;LV.Claim.EditableEvaluations.Name&quot;)"
+          sortOrder="1"
+          value="Evaluation.Name"/>
+        <DateCell
+          dateFormat="short"
+          id="CreateTime"
+          label="DisplayKey.get(&quot;LV.Claim.EditableEvaluations.CreateTime&quot;)"
+          timeFormat="short"
+          value="Evaluation.CreateTime"/>
+        <CurrencyCell
+          id="Amount"
+          label="DisplayKey.get(&quot;LV.Claim.EditableEvaluations.Amount&quot;)"
+          value="Evaluation.Amount"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

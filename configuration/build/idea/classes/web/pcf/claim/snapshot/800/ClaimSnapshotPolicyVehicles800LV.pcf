@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ClaimSnapshotPolicyVehicles800LV">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="SnapshotParam"
+      type="dynamic.Dynamic"/>
+    <Variable
+      initialValue="(SnapshotParam).Policy"
+      name="Policy"
+      type="dynamic.Dynamic"/>
+    <RowIterator
+      editable="false"
+      elementName="VehicleRU"
+      value="getVehicles(Policy.RiskUnits)"
+      valueType="dynamic.Dynamic">
+      <Row>
+        <TextCell
+          id="VehicleNumber"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyVehiclesLV.VehicleNumber&quot;)"
+          sortOrder="1"
+          value="(VehicleRU).RUNumber"
+          valueType="dynamic.Dynamic"/>
+        <TextCell
+          id="Make"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyVehiclesLV.Make&quot;)"
+          value="(VehicleRU).Vehicle.Make"
+          valueType="dynamic.Dynamic"/>
+        <TextCell
+          id="Model"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyVehiclesLV.Model&quot;)"
+          value="(VehicleRU).Vehicle.Model"
+          valueType="dynamic.Dynamic"/>
+        <TextCell
+          id="Year"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyVehiclesLV.Year&quot;)"
+          value="(VehicleRU).Vehicle.Year"
+          valueType="dynamic.Dynamic"/>
+        <TextCell
+          id="Color"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyVehiclesLV.Color&quot;)"
+          value="(VehicleRU).Vehicle.Color"
+          valueType="dynamic.Dynamic"/>
+        <TextCell
+          id="VIN"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyVehiclesLV.VIN&quot;)"
+          value="(VehicleRU).Vehicle.VIN"
+          valueType="dynamic.Dynamic"/>
+        <TextCell
+          id="State"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyVehiclesLV.State&quot;)"
+          value="(VehicleRU).Vehicle.State"
+          valueType="dynamic.Dynamic"/>
+        <TextCell
+          id="LicensePlate"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyVehiclesLV.LicensePlate&quot;)"
+          value="(VehicleRU).Vehicle.LicensePlate"
+          valueType="dynamic.Dynamic"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function getVehicles(riskUnits : dynamic.Dynamic) : dynamic.Dynamic {
+  var list = new java.util.ArrayList()
+  for (ru in riskUnits) {
+    if (ru.Subtype.Code == "VehicleRU") {
+      list.add( ru )
+    }
+  }
+  return list.toArray()
+}]]></Code>
+  </ListViewPanel>
+</PCF>

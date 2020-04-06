@@ -1,0 +1,13 @@
+package rules.Validation
+
+@gw.rules.RuleName("Exposure Reopened Validation Rules")
+@gw.rules.RuleSetDescription("This is the Exposure Reopened Validation rule set. These rules are executed when an exposure is reopened. They execute before data is committed, before the Exposure Reopened rule set and then the normal preupdate and validation rule sets. They enable you to raise validation errors or warnings if the exposure should not be reopened.")
+class ExposureReopenedValidationRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Exposure) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Exposure) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Exposure Reopened Validation Rules", ExposureReopenedValidationRules )
+  }
+}

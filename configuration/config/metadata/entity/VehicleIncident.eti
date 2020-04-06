@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Report of an incident involving a vehicle."
+  entity="VehicleIncident"
+  final="false"
+  priority="3"
+  supertype="MobilePropertyIncident">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.VehicleIncident"
+    impl="com.guidewire.cc.domain.exposure.impl.VehicleIncidentImpl"/>
+  <column
+    desc="Boolean field to indicate if a claim involves hit and run"
+    name="HitAndRun"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Boolean field to indicate if Owner will retain the salvaged car or not"
+    name="OwnerRetainingSalvage"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Unknown 3rd party vehicle involved or not(e.g. Hit and Run)."
+    name="PhantomVehicle"
+    nullok="true"
+    type="bit"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="RecoveryLocationID"
+    desc="The Address at which the recovery was made."
+    fkentity="Address"
+    name="RecoveryLocation"
+    nullok="true"
+    triggersValidation="true"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="VehicleID"
+    desc="Vehicle associated with the incident."
+    fkentity="Vehicle"
+    name="Vehicle"
+    nullok="true"
+    triggersValidation="true"/>
+  <index
+    desc="Covering index to improve VIN search"
+    expectedtobecovering="true"
+    name="vehicleincident1"
+    trackUsage="true">
+    <indexcol
+      keyposition="1"
+      name="VehicleID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="Subtype"/>
+    <indexcol
+      keyposition="4"
+      name="ClaimID"/>
+  </index>
+</subtype>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="ActivityCatastropheInputSet">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <ListViewInput
+      boldLabel="true"
+      label="DisplayKey.get(&quot;NVV.Activity.SubView.Catastrophes.PossibleRelatedCatastrophes&quot;)"
+      labelAbove="true">
+      <Toolbar/>
+      <ListViewPanel
+        id="ActivityCatastropheLV">
+        <RowIterator
+          editable="false"
+          elementName="catastrophe"
+          value="claim.getCatastropheMatchesByZone()"
+          valueType="entity.Catastrophe[]">
+          <Row>
+            <TextCell
+              id="CatastropheNumber"
+              label="DisplayKey.get(&quot;LV.Claim.Catastrophes.Catastrophe.Number&quot;)"
+              value="catastrophe.CatastropheNumber"/>
+            <TextCell
+              id="CatastropheName"
+              label="DisplayKey.get(&quot;LV.Claim.Catastrophes.Catastrophe.Name&quot;)"
+              value="catastrophe.Name"/>
+            <TextCell
+              id="CatastropheValidDates"
+              label="DisplayKey.get(&quot;LV.Claim.Catastrophes.Catastrophe.ValidDates&quot;)"
+              value="DisplayKey.get(&quot;LV.Claim.Catastrophes.Catastrophe.ValidToAndFrom&quot;, catastrophe.CatastropheValidFrom.format(gw.api.util.LocaleUtil.getCurrentLocale().DateFormat.Short), catastrophe.CatastropheValidTo.format(gw.api.util.LocaleUtil.getCurrentLocale().DateFormat.Short))"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </ListViewInput>
+  </InputSet>
+</PCF>

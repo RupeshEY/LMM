@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <CardViewPanel
+    id="VehIncidentDetailDV">
+    <Require
+      name="VehicleIncident"
+      type="VehicleIncident"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Card
+      id="Vehicle_DetailsCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.VehicleDamage.Details&quot;)">
+      <PanelRef
+        def="VehicleIncidentDV(VehicleIncident, unusedServiceRequests)"/>
+    </Card>
+    <Card
+      id="Incident_Assessment"
+      title="DisplayKey.get(&quot;NVV.Incident.Vehicle.Assessment&quot;)">
+      <PanelRef
+        def="VehIncidentAssessDV(VehicleIncident)">
+        <!-- <Toolbar>
+          <IteratorButtons/>
+        </Toolbar> -->
+      </PanelRef>
+    </Card>
+  </CardViewPanel>
+</PCF>

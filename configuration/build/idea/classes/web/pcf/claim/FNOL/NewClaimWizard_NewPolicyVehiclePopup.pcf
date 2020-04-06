@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="NewClaimWizard_NewPolicyVehiclePopup"
+    returnType="VehicleRU"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPolicyVehicle.New&quot;)">
+    <LocationEntryPoint
+      signature="NewClaimWizard_NewPolicyVehiclePopup(Policy : Policy)"/>
+    <Variable
+      name="Policy"
+      type="Policy"/>
+    <Variable
+      initialValue="Policy.createVehicleRU()"
+      name="VehicleRU"
+      type="VehicleRU"/>
+    <Screen
+      id="NewClaimWizard_NewPolicyVehicleScreen">
+      <Toolbar>
+        <EditButtons
+          pickValue="VehicleRU"/>
+      </Toolbar>
+      <PanelRef
+        def="PolicyVehicleDetailPanelSet(VehicleRU)"/>
+    </Screen>
+  </Popup>
+</PCF>

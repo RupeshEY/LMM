@@ -1,0 +1,13 @@
+package rules.Assignment
+
+@gw.rules.RuleName("Global Claim Assignment Rules")
+@gw.rules.RuleSetDescription("This is the Global Claim Assignment rule set. These rules are used to make the first assignment decision for claims (for example, \"To which office should the claim be sent?\") when no group has already been assigned.")
+class GlobalClaimAssignmentRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Claim) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Claim) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Global Claim Assignment Rules", GlobalClaimAssignmentRules )
+  }
+}

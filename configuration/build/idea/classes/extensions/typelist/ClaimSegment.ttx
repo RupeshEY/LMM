@@ -1,0 +1,161 @@
+<?xml version="1.0"?>
+<!-- ****************************************************************************
+    CASE TYPELISTS
+  **************************************************************************** -->
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Types of segments a claim can have"
+  name="ClaimSegment">
+  <typecode
+    code="unknown"
+    desc="Unknown segment, or segment not automatically set by rules"
+    name="Unknown"/>
+  <typecode
+    code="auto_low"
+    desc="Auto - low complexity"
+    name="Auto - low complexity">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="auto_mid"
+    desc="Auto - mid complexity"
+    name="Auto - mid complexity">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="auto_high"
+    desc="Auto - high complexity"
+    name="Auto - high complexity">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="prop_low"
+    desc="Property - low complexity"
+    name="Property - low complexity">
+    <category
+      code="PR"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="prop_mid"
+    desc="Property - mid complexity"
+    name="Property - mid complexity">
+    <category
+      code="PR"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="prop_high"
+    desc="Property - high complexity"
+    name="Property - high complexity">
+    <category
+      code="PR"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="liab_low"
+    desc="Liability - low complexity"
+    name="Liability - low complexity">
+    <category
+      code="GL"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="liab_mid"
+    desc="Liability - mid complexity"
+    name="Liability - mid complexity">
+    <category
+      code="GL"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="liab_high"
+    desc="Liability - high complexity"
+    name="Liability - high complexity">
+    <category
+      code="GL"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="wc_med_only"
+    desc="Workers' Comp - med only"
+    name="Workers' Comp - med only">
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="wc_lost_time"
+    desc="Workers' Comp - indemnity"
+    name="Workers' Comp - indemnity">
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="auto_glass"
+    desc="Auto - glass"
+    name="Auto - glass">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="injury_low"
+    desc="Injury - low complexity"
+    name="Injury - low complexity"/>
+  <typecode
+    code="injury_mid"
+    desc="Injury - mid complexity"
+    name="Injury - mid complexity"/>
+  <typecode
+    code="injury_high"
+    desc="Injury - high complexity"
+    name="Injury - high complexity"/>
+  <typecode
+    code="contents_low"
+    desc="Contents - low complexity"
+    name="Contents - low complexity"/>
+  <typecode
+    code="contents_high"
+    desc="Contents - high complexity"
+    name="Contents - high complexity"/>
+  <typecode
+    code="wc_liability"
+    desc="Workers' Comp - employer's liability"
+    name="Workers' Comp - employer's liability">
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="travel_low"
+    desc="Travel - low complexity"
+    name="Travel - low complexity">
+    <category
+      code="TRAV"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="travel_mid"
+    desc="Travel - mid complexity"
+    name="Travel - mid complexity">
+    <category
+      code="TRAV"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="travel_high"
+    desc="Travel - high complexity"
+    name="Travel - high complexity">
+    <category
+      code="TRAV"
+      typelist="LossType"/>
+  </typecode>
+</typelistextension>

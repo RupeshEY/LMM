@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<wb:ClaimResponseRq Sender="insurer" Receiver="serviceprovider" xmlns:wb="http://www.xchanging.com/claimResponse/rq/1" xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1">
+  <UUId>8c925739-ee83-4a94-9d24-018d886ac613</UUId>
+  <wb:AsOfDate>2017-06-28T11:28:42</wb:AsOfDate>
+  <wb:ReferredUUId>7286a170-b513-47e3-aa69-02df1488969c</wb:ReferredUUId>
+  <wb:InsurerTransactionReference>BEAS01</wb:InsurerTransactionReference>
+  <CreationDate>2017-06-28T14:42:39+01:00</CreationDate>
+  <wb:Insurer>
+    <Party>
+      <Id Agency="ilu">urn:ilu:402801</Id>
+      <Name>Zurich 402801</Name>
+    </Party>
+    <wb:Contact>
+      <wb:ClassUserId>123454</wb:ClassUserId>
+      <wb:AccountCode>12324</wb:AccountCode>
+    </wb:Contact>
+  </wb:Insurer>
+  <ServiceProvider>
+    <Party>
+      <Id Agency="DUNS_dun_and_bradstreet">urn:duns:236196817</Id>
+      <Name>Xchanging</Name>
+    </Party>
+  </ServiceProvider>
+  <wb:Contract>
+    <BrokerReference>UMR123</BrokerReference>
+  </wb:Contract>
+  <wb:ClaimEntry>
+    <BrokerReference>TR1</BrokerReference>
+  </wb:ClaimEntry>
+  <wb:Claim>
+    <BrokerReference>DAVEDEMO</BrokerReference>
+    <wb:ClaimType>000</wb:ClaimType>
+  </wb:Claim>
+  <wb:ClaimResponse>
+    <wb:ParticipantFunction>Agreement Party</wb:ParticipantFunction>
+    <wb:ClaimLineNo>1</wb:ClaimLineNo>
+    <wb:AgreementPartyResponse>
+      <wb:IluAgreementPartyResponse>AUT</wb:IluAgreementPartyResponse>
+      <wb:QueryReason>5</wb:QueryReason>
+      <wb:QueryReason>4</wb:QueryReason>
+      <wb:QueryReason>3</wb:QueryReason>
+      <wb:PrivateComments>
+        <wb:CommentDetails>This is a private comment.</wb:CommentDetails>
+      </wb:PrivateComments>
+      <wb:PublicComments>
+        <wb:CommentDetails>This is a public comment.</wb:CommentDetails>
+      </wb:PublicComments>
+    </wb:AgreementPartyResponse>
+  </wb:ClaimResponse>
+</wb:ClaimResponseRq>

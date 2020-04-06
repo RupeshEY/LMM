@@ -1,0 +1,30 @@
+package rules.Validation.RIAgreementValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("RIAV03000 - Proportional Agreement Percentage Total")
+internal class RIAV03000ProportionalAgreementPercentageTotal {
+  static function doCondition(rIAgreement : entity.RIAgreement) : boolean {
+    
+/*start00rule*/
+return rIAgreement.RIAgreementGroup != null and
+rIAgreement typeis ProportionalRIAgreement
+
+/*end00rule*/
+
+  }
+
+  static function doAction(rIAgreement : entity.RIAgreement, actions : gw.rules.Action) {
+
+/*start00rule*/
+var proportionalAgreementsInSameAgreementGroup = 
+rIAgreement.RIAgreementGroup.Agreements.where(\ r -> r typeis ProportionalRIAgreement)
+var totalProportionalSharePercentage = 
+   proportionalAgreementsInSameAgreementGroup.sum(\ r -> r.ProportionalShare ?: 0)
+if (totalProportionalSharePercentage > 100) {
+   rIAgreement.rejectField("ProportionalShare", TC_NEWLOSS, DisplayKey.get("Java.Financials.Exception.ProportionalShareAgreementExceeds100Percent"), null, null)
+}
+/*end00rule*/
+
+  }
+}

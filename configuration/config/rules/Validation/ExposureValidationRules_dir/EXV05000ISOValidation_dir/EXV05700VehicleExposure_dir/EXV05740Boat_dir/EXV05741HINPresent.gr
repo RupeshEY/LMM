@@ -1,0 +1,26 @@
+package rules.Validation.ExposureValidationRules_dir.EXV05000ISOValidation_dir.EXV05700VehicleExposure_dir.EXV05740Boat_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("EXV05741 - HIN Present")
+internal class EXV05741HINPresent {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.LossParty != TC_THIRD_PARTY 
+and exposure.VehicleIncident.Vehicle.Year != null
+and exposure.VehicleIncident.Vehicle.Year >= gw.api.iso.ISOValidationConstants.YEAR_HIN_REQUIRED
+and exposure.VehicleIncident.Vehicle.SerialNumber == null
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.rejectField("VehicleIncident.Vehicle", TC_ISO, 
+                     DisplayKey.get("Rules.Validation.Exposure.BoatHINRequired"), null, null)
+/*end00rule*/
+
+  }
+}

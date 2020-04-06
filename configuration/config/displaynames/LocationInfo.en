@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<Entity
+  name="LocationInfo">
+  <Columns>
+    <Column
+      beanPath="LocationInfo.AddressLine1"
+      name="addressLine1"
+      sortOrder="1"/>
+    <Column
+      beanPath="LocationInfo.AddressLine2"
+      name="addressLine2"
+      sortOrder="3"/>
+    <Column
+      beanPath="LocationInfo.AddressLine3"
+      name="addressLine3"
+      sortOrder="5"/>
+    <Column
+      beanPath="LocationInfo.City"
+      name="city"
+      sortOrder="6"/>
+    <Column
+      beanPath="LocationInfo.State"
+      name="stateCode"
+      sortOrder="9"/>
+    <Column
+      beanPath="LocationInfo.PostalCode"
+      name="postalCode"
+      sortOrder="10"/>
+    <Column
+      beanPath="LocationInfo.AddressLine1Kanji"
+      name="addressLine1Kanji"
+      sortOrder="2"/>
+    <Column
+      beanPath="LocationInfo.AddressLine2Kanji"
+      name="addressLine2Kanji"
+      sortOrder="4"/>
+    <Column
+      beanPath="LocationInfo.CEDEX"
+      name="CEDEX"
+      sortOrder="11"/>
+    <Column
+      beanPath="LocationInfo.County"
+      name="county"
+      sortOrder="8"/>
+    <Column
+      beanPath="LocationInfo.CEDEXBureau"
+      name="CEDEXBureau"
+      sortOrder="13"/>
+    <Column
+      beanPath="LocationInfo.CityKanji"
+      name="cityKanji"
+      sortOrder="7"/>
+    <Column
+      beanPath="LocationInfo.Country"
+      name="country"
+      sortOrder="0"/>
+  </Columns>
+  <DisplayName><![CDATA[var formatter =  new gw.api.address.AddressFormatter() {
+    :Country = country,
+    :AddressLine1 = addressLine1,
+    :AddressLine2 = addressLine2,
+    :AddressLine3 = addressLine3,
+    :City = city,
+    :County = county,
+    :State = stateCode,
+    :PostalCode = postalCode,
+    :AddressLine1Kanji = addressLine1Kanji,
+    :AddressLine2Kanji = addressLine2Kanji,
+    :CityKanji = cityKanji,
+    :CEDEX = CEDEX,
+    :CEDEXBureau = CEDEXBureau
+}
+
+return formatter.format(formatter, ", ")
+]]></DisplayName>
+</Entity>

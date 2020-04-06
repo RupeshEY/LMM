@@ -1,0 +1,105 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <Popup
+    id="DuplicateContactPopup"
+    title="DisplayKey.get(&quot;Web.AddressBook.Search.Result.DuplicateContactFound&quot;)">
+    <LocationEntryPoint
+      signature="DuplicateContactPopup(addressBookMatch : gw.api.contact.AddressBookMatch, claimContact : ClaimContact)"/>
+    <LocationEntryPoint
+      signature="DuplicateContactPopup(addressBookMatch : gw.api.contact.AddressBookMatch, claimContact : ClaimContact, wizard : gw.api.claim.NewClaimWizardInfoBase)"/>
+    <Variable
+      name="addressBookMatch"
+      type="gw.api.contact.AddressBookMatch"/>
+    <Variable
+      initialValue="new gw.api.contact.ProximitySearchPageHelper()"
+      name="proximitySearchPageHelper"
+      type="gw.api.contact.ProximitySearchPageHelper"/>
+    <Variable
+      initialValue="true"
+      name="onlyPrimaryRelationships"
+      type="boolean"/>
+    <Variable
+      initialValue="gw.api.contact.AddressBookUtil.newAddressBookContactSource()"
+      name="externalSource"
+      type="gw.api.contact.ExternalContactSource"/>
+    <Variable
+      name="claimContact"
+      type="ClaimContact"/>
+    <Variable
+      name="wizard"
+      type="gw.api.claim.NewClaimWizardInfoBase"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="DuplicateContact_CancelButton"
+          label="DisplayKey.get(&quot;Web.AddressBook.Search.Cancel&quot;)"/>
+      </Toolbar>
+      <Verbatim
+        id="matchMessage"
+        label="DisplayKey.get(&quot;Java.Contact.SelectDuplicateContact&quot;)"/>
+      <Verbatim
+        id="matchMessageWarning"
+        label="DisplayKey.get(&quot;Java.Contact.SelectDuplicateContactWarning&quot;)"/>
+      <ListViewPanel
+        id="DuplicateContactLV">
+        <RowIterator
+          canPick="false"
+          editable="false"
+          elementName="contact"
+          value="(addressBookMatch as gw.api.contact.DuplicateContactMatch ).retrieveContactList()"
+          valueType="java.util.List&lt;entity.Contact&gt;">
+          <Row>
+            <TextCell
+              action="selectRow(contact)"
+              id="SelectContact"
+              value="DisplayKey.get(&quot;Web.AddressBook.Search.Result.Select&quot;)"/>
+            <TextCell
+              id="DisplayName"
+              label="DisplayKey.get(&quot;Web.AddressBook.Search.Result.Name&quot;)"
+              value="contact.DisplayName"/>
+            <TextCell
+              id="MatchType"
+              label="DisplayKey.get(&quot;Web.AddressBook.Search.Result.MatchType&quot;)"
+              value="matchTypeValue(contact)"/>
+            <TextCell
+              id="PrimaryAddress"
+              label="DisplayKey.get(&quot;Web.Address.Default.Address&quot;)"
+              value="contact.PrimaryAddress"
+              valueType="entity.Address"/>
+            <TextCell
+              id="PhoneNumber"
+              label="DisplayKey.get(&quot;Web.AddressBook.Search.Result.Phone&quot;)"
+              value="contact.PrimaryPhoneValue"/>
+            <TypeKeyCell
+              id="ContactSubtype"
+              label="DisplayKey.get(&quot;Web.AddressBook.Search.Result.Type&quot;)"
+              value="contact.Subtype"
+              valueType="typekey.Contact"/>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </Screen>
+    <Code><![CDATA[function matchTypeValue(contact : Contact) : String {
+  if ((addressBookMatch as gw.api.contact.DuplicateContactMatch).isExactMatch(contact)) {
+    return DisplayKey.get("Web.AddressBook.Search.Result.ExactMatch")
+  }  
+  
+  return DisplayKey.get("Web.AddressBook.Search.Result.PotentialMatch")
+}
+
+function selectRow(contact : Contact) {
+  if (claimContact != null) {
+    if (wizard == null) {
+      gw.api.contact.ContactUtil.toAddExistingPopup(contact, claimContact)
+    } else {
+      gw.api.contact.ContactUtil.toAddExistingPopupFNOL(wizard, contact, claimContact)
+    }
+  } else {
+    gw.api.contact.ContactUtil.pickContact(contact)
+  }
+}]]></Code>
+  </Popup>
+</PCF>

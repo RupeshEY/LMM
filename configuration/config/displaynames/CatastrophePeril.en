@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<!-- 01-20-2007  Begin - New Catastrophe Display Name  01-20-2007  End - New Catastrophe Display Name -->
+<Entity
+  name="CatastrophePeril">
+  <Columns>
+    <Column
+      beanPath="CatastrophePeril.LossType"
+      name="LossType"
+      sortOrder="0"/>
+    <Column
+      beanPath="CatastrophePeril.LossCause"
+      name="LossCause"
+      sortOrder="1"/>
+  </Columns>
+  <DisplayName><![CDATA[if (LossType != null and LossCause != null) {
+  return (LossType.DisplayName + LossCause.DisplayName);
+} else {
+  return gw.api.locale.DisplayKey.get("DisplayName.CatastrophePeril.NoData");
+}]]></DisplayName>
+</Entity>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<Entity
+  name="QuestionFilter">
+  <Columns>
+    <Column
+      beanPath="QuestionFilter.FilterQuestion"
+      name="FilterQuestion"
+      sortOrder="0"/>
+    <Column
+      beanPath="QuestionFilter.Question"
+      name="Question"
+      sortOrder="1"/>
+  </Columns>
+  <DisplayName><![CDATA[return gw.api.locale.DisplayKey.get("DisplayName.QuestionFilter", FilterQuestion, Question)]]></DisplayName>
+</Entity>

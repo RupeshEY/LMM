@@ -1,0 +1,27 @@
+package rules.Archive.DefaultGroupClaimArchivingRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("ARC05000 - Incomplete Review Rule")
+internal class ARC05000IncompleteReviewRule {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return // Skip claims with incomplete reviews.
+  gw.api.database.Query.make(Review)
+  .compare("Claim", Equals, claim)
+  .compare("Completed", Equals, false)
+  .select()
+  .Count > 0
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.skipFromArchiving(DisplayKey.get("Rules.Archive.IncompleteReviews"))
+/*end00rule*/
+
+  }
+}

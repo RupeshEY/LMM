@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="ClaimIndicatorInputSet"
+    mode="FatalityClaimIndicator">
+    <Require
+      name="indicator"
+      type="ClaimIndicator"/>
+    <ContentInput
+      id="Fatalities"
+      label="DisplayKey.get(&quot;Web.Claim.FatalityClaimIndicator.FatalitiesLabel&quot;)">
+      <Link
+        icon="indicator.Icon"
+        id="FatalityIcon"
+        tooltip="indicator.HoverText"
+        visible="indicator.IsOn"/>
+      <Link
+        id="FatalityText"
+        label="indicator.Text"/>
+    </ContentInput>
+  </InputSet>
+</PCF>

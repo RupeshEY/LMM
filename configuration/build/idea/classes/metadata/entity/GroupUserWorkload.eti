@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  admin="true"
+  desc="Tracks the amount of workload assigned to a group user"
+  entity="GroupUserWorkload"
+  ignoreForEvents="true"
+  platform="false"
+  table="groupuserworkload"
+  type="keyable">
+  <column
+    default="0"
+    desc="Total workload assigned to group user"
+    name="Workload"
+    nullok="true"
+    type="nonnegativeinteger"/>
+  <column
+    desc="Last time user workload was calculated and updated"
+    name="WorkloadUpdated"
+    nullok="true"
+    type="datetime"/>
+</entity>

@@ -1,0 +1,26 @@
+package rules.Exception.ClaimExceptionRules_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("CER04000 - Recalculate claim metrics ")
+internal class CER04000Recalculateclaimmetrics {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return true
+/* Verifies that all claim metrics, exposure metrics and claim indicators are
+   created on every claim. Any missing metrics or indicators are added onto
+   the claim. This should only be enabled when a new metric or indicator
+   has been added to the system, and it is desired that all existing claims
+   have the new metric or indicator. */
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.forceRecalculateMetrics()
+/*end00rule*/
+
+  }
+}

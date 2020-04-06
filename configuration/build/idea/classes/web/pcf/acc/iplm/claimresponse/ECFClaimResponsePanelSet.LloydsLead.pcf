@@ -1,0 +1,142 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="ECFClaimResponsePanelSet"
+    mode="LloydsLead">
+    <Require
+      name="ecfClaimData"
+      type="ECFMessageClaimData_Ext"/>
+    <Require
+      name="claimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <InputSet>
+          <InputSetRef
+            def="MessageBeingRespondedToInputSet(ecfClaimData)"/>
+          <TextInput
+            desc="passed in wb:ClaimResponseRq/wb:ContractSection/UnderwritingYear"
+            id="underwritingYear"
+            label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.UnderwritingYear&quot;)"
+            value="ecfClaimData.UnderwritingYear"
+            valueType="java.lang.Integer"/>
+          <InputDivider/>
+          <InputSetRef
+            def="InsurerTransactionReferenceInputSet(claimResponseRq)"/>
+          <InputDivider/>
+          <InputSetRef
+            def="LeadContactDetailsInputSet(claimResponseRq)"
+            editable="true"/>
+          <InputDivider/>
+          <Label
+            id="responseDetailsLabel"
+            label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ResponseDetails&quot;)"/>
+          <RangeInput
+            desc="goes to ClaimResponseRq/ContractSection/RiskCode"
+            editable="true"
+            id="ecfRiskCode"
+            label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.RiskCode&quot;)"
+            noneSelectedLabel="gw.util.GosuStringUtil.isBlank(ecfClaimData.RiskCode?.UiDisplayDescription) ? DisplayKey.get(&quot;Java.NameValueView.NoneSelected&quot;) : ecfClaimData.RiskCode.UiDisplayDescription"
+            optionLabel="VALUE.UiDisplayDescription"
+            value="claimResponseRq.RiskCode"
+            valueRange="ECFRiskCode_Ext.riskCodesByCOB(ecfClaimData.ClassOfBusiness).where(\elt -&gt; elt != ecfClaimData.RiskCode)"
+            valueType="ECFRiskCode_Ext"/>
+          <RangeInput
+            desc="passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:LloydsLead/wb:CauseOfLoss"
+            editable="true"
+            id="causeOfLoss"
+            label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.CauseOfLoss&quot;)"
+            noneSelectedLabel="ecfClaimData.LossCause"
+            value="claimResponseRq.CauseOfLossCode"
+            valueRange="ECFCauseOfLossCode_Ext.getTypeKeys(false).where(\elt -&gt; elt.Code != ecfClaimData.LossCause)"
+            valueType="ECFCauseOfLossCode_Ext"/>
+          <InputSetRef
+            def="CatastropheCodesInputSet(ecfClaimData, claimResponseRq)"/>
+          <RangeInput
+            desc="passed in wb:ClaimResponseRq/wb:Claim/wb:ClaimsScheme"
+            editable="true"
+            id="claimScheme"
+            label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.Scheme&quot;)"
+            required="true"
+            value="claimResponseRq.ClaimsScheme"
+            valueRange="ECFScheme_Ext.getTypeKeys(false)"
+            valueType="ECFScheme_Ext">
+            <PostOnChange
+              target="triageCategory"/>
+          </RangeInput>
+          <RangeInput
+            desc="passed in wb:ClaimResponseRq/wb:Claim/wb:TriageCategory"
+            editable="true"
+            id="triageCategory"
+            inputConversion="VALUE == ecfClaimData.TriageCategory.DisplayName ? null : VALUE"
+            label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.TriageCategory&quot;)"
+            noneSelectedLabel="(ecfClaimData.TriageCategory != null and claimResponseRq.ClaimsScheme == ecfClaimData.ClaimsScheme) ? ecfClaimData.TriageCategory.DisplayName : DisplayKey.get(&quot;Java.NameValueView.NoneSelected&quot;)"
+            value="claimResponseRq.TriageCategory"
+            valueRange="claimResponseRq.getAvailableTriageCategories(ecfClaimData)"
+            valueType="ECFTriageCode_Ext" />
+          <RangeInput
+            desc="passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:LloydsLead/wb:OutstandingAmountQualifier"
+            editable="true"
+            id="outstandingAmountQualifier"
+            label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.OutstandingAmountQualifier&quot;)"
+            validationExpression="claimResponseRq.validateUberPrecautionary()"
+            value="claimResponseRq.OutstandingQualifierCode"
+            valueRange="ECFOutstandingQualifierCode_Ext.getTypeKeys(false).where(\elt -&gt; elt != ecfClaimData.OutstandingAmountQualifier)"
+            noneSelectedLabel="gw.util.GosuStringUtil.isBlank(ecfClaimData.OutstandingAmountQualifier?.DisplayName) ? DisplayKey.get(&quot;Java.NameValueView.NoneSelected&quot;) : ecfClaimData.OutstandingAmountQualifier.DisplayName "
+            valueType="ECFOutstandingQualifierCode_Ext"/>
+          <CheckBoxInput
+            desc="passed in wb:ClaimResponseRq/wb:Claim/wb:Indicators/wb:SimultaneousRIPIndicator"
+            editable="true"
+            id="simultaneousRIPIndicator"
+            label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.SimultaneousRIP&quot;)"
+            value="claimResponseRq.SimultaneousRIPIndicatorBoolean"/>
+          <CheckBoxInput
+            desc="passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:LloydsLead/wb:XcsToAgreeIndicator"
+            editable="true"
+            id="xcsToAgreeIndicator"
+            label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.XCSToAgree&quot;)"
+            value="claimResponseRq.XcsToAgreeIndicatorBoolean"/>
+        </InputSet>
+        <InputDivider/>
+        <InputSetRef
+          def="PublicCommentsInputSet(claimResponseRq)"/>
+        <InputDivider/>
+        <InputSetRef
+          def="PrivateCommentsInputSet(claimResponseRq)"/>
+      </InputColumn>
+      <InputColumn>
+        <TextInput
+          desc="passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:InsurerOrReinsurerClaimReference1"
+          editable="true"
+          id="claimReference1"
+          inputConversion="VALUE == ecfClaimData.InsurerOrReinsurerClaimRef1? null : VALUE"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ClaimReference1&quot;)"
+          maxChars="15"
+          outputConversion="VALUE == null ? ecfClaimData.InsurerOrReinsurerClaimRef1 : VALUE"
+          value="claimResponseRq.InsurerOrReinsurerClaimRef1"/>
+        <TextInput
+          desc="passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:InsurerOrReinsurerClaimReference2"
+          editable="true"
+          id="claimReference2"
+          inputConversion="VALUE == ecfClaimData.InsurerOrReinsurerClaimRef2? null : VALUE"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ClaimReference2&quot;)"
+          maxChars="15"
+          outputConversion="VALUE == null ? ecfClaimData.InsurerOrReinsurerClaimRef2 : VALUE"
+          value="claimResponseRq.InsurerOrReinsurerClaimRef2"/>
+        <InputSetRef
+          def="ResponseInputSet(claimResponseRq, false)"/>
+        <InputSetRef
+          def="QueryReasonsInputSet(claimResponseRq)"/>
+        <InputSet>
+          <InputSetRef
+            def="ClaimParticipantRolesInputSet(claimResponseRq)"/>
+          <InputSetRef
+            def="LeadFinancialsInputSet(ecfClaimData, claimResponseRq)"/>
+        </InputSet>
+      </InputColumn>
+    </DetailViewPanel>
+    <PanelSet/>
+  </PanelSet>
+</PCF>

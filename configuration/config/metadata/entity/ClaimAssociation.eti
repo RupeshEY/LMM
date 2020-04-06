@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<!-- ### ============================================================================
+ ###  Claim Associations
+ ### ============================================================================ -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents a grouping of a set of claims."
+  entity="ClaimAssociation"
+  exportable="true"
+  extendable="true"
+  loadable="true"
+  platform="false"
+  table="claimassoc"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claimassoc.entity.ClaimAssociation"
+    impl="com.guidewire.cc.domain.claimassoc.impl.ClaimAssociationImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.claimassoc.impl.ClaimAssociationImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.claimassoc.impl.ClaimAssociationImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claimassoc.impl.ClaimAssociationInternal"
+    impl="com.guidewire.cc.domain.claimassoc.impl.ClaimAssociationImpl"/>
+  <fulldescription><![CDATA[
+Represents a typed grouping of a set of claims. The relationship between Claim and ClaimAssociation is N-M; in other
+words, each Claim may be referenced by multiple ClaimAssociations, and each Claim Association references multiple Claims.
+In addition, the same two Claims may be joined by multiple associations. The type of each association is one of the values
+ in the ClaimAssocType typelist.
+<p>
+In a Claim purge, an Association will only be purged if it has no remaining Claims in it.      
+      
+    ]]></fulldescription>
+  <column
+    desc="A brief title for the association."
+    name="Title"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    desc="Type of the association among the claims."
+    name="ClaimAssocType"
+    nullok="true"
+    typelist="ClaimAssocType"/>
+  <column
+    desc="Description of the association."
+    name="Description"
+    nullok="true"
+    type="mediumtext"/>
+  <array
+    arrayentity="ClaimInAssociation"
+    desc="The claims belonging to this association."
+    name="ClaimsInAssoc"
+    owner="true"
+    requiredmatch="nonretired"/>
+  <events/>
+</entity>

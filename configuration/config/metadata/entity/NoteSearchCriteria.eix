@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="NoteSearchCriteria">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.note.impl.NoteSearchCriteriaCoreExtMethods"
+    impl="com.guidewire.cc.domain.note.impl.NoteSearchCriteriaCoreExtMethodsImpl"/>
+  <description><![CDATA[
+            Non-persistent set of criteria to use in searching for a specific note.
+            This can include such things as the note topic or text, the note author, the date,
+            the related claim or exposure, and similar items.
+    ]]></description>
+  <column
+    default="false"
+    desc="Sort ascending or not"
+    name="SortAscending"
+    nullok="true"
+    type="bit"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Associated claim"
+    fkentity="Claim"
+    name="Claim"
+    nullok="true"/>
+  <foreignkey
+    columnName="DateCriterionChoiceID"
+    desc="Date search"
+    fkentity="DateCriterionChoice"
+    name="DateCriterionChoice"
+    nullok="true"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="Exposure for RelatedTo search."
+    exportasid="true"
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="true"/>
+  <foreignkey
+    columnName="MatterID"
+    desc="Matter for RelatedTo search."
+    exportasid="true"
+    fkentity="Matter"
+    name="Matter"
+    nullok="true"/>
+  <foreignkey
+    columnName="ClaimContactID"
+    desc="ClaimContact for RelatedTo search."
+    exportasid="true"
+    fkentity="ClaimContact"
+    name="ClaimContact"
+    nullok="true"/>
+  <foreignkey
+    columnName="ServiceRequestID"
+    desc="Service Request for RelatedTo search."
+    exportasid="true"
+    fkentity="ServiceRequest"
+    name="ServiceRequest"
+    nullok="true"/>
+</internalExtension>

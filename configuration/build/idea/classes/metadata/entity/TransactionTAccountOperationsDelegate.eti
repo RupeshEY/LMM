@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="TransactionTAccountOperationsDelegate">
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.TransactionTAccountOperationsDelegate"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TransactionTAccountOperationsDelegateImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.impl.TransactionTAccountOperationsDelegateInternal"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TransactionTAccountOperationsDelegateImpl"/>
+  <fulldescription><![CDATA[
+    Delegate used by Transactions for operations on its TAccounts.
+  ]]></fulldescription>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.TransactionTAccountOperationsDelegateAdapter"/>
+  <typekey
+    createhistogram="true"
+    desc="Status of the transaction. Further refines the LifeCycleState. Can only change status directly to another status in the same LifeCycleState, which does not affect Taccounts."
+    name="Status"
+    nullok="false"
+    typefilter="transaction"
+    typelist="transactionstatus"/>
+  <typekey
+    createhistogram="true"
+    desc="Current internal lifecycle state of the transaction. Changing state affects T-accounts."
+    exportable="false"
+    getterScriptability="hidden"
+    name="LifeCycleState"
+    nullok="false"
+    overwrittenInStagingTable="true"
+    setterScriptability="hidden"
+    typelist="transactionlifecyclestate"/>
+</delegate>

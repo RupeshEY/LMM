@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<!-- TripSegment -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Used to track the original and changed segments on the travel schedule for the insured/claimant"
+  entity="TripSegment"
+  exportable="true"
+  platform="false"
+  table="tripsegment"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.TripSegment"
+    impl="com.guidewire.cc.domain.exposure.impl.TripSegmentImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="TripSegmentDelegate"/>
+  <implementsEntity
+    name="TripExpenseCancellationDelegate"/>
+  <implementsInterface
+    iface="gw.cc.exposure.entity.TripExpenseCancellationDelegate"
+    impl="com.guidewire.cc.domain.exposure.impl.TripSegmentImpl"/>
+  <implementsInterface
+    iface="gw.cc.exposure.entity.TripExpenseDelegate"
+    impl="com.guidewire.cc.domain.exposure.impl.TripSegmentImpl"/>
+  <foreignkey
+    columnName="TripIncidentID"
+    desc="Incident this schedule is related to"
+    fkentity="TripIncident"
+    name="TripIncident"
+    nullok="false"/>
+  <array
+    arrayentity="AddnlTripSegment"
+    desc="All new/additional trip segments associated with this segment"
+    name="AddnlTripSegments"
+    triggersValidation="true"/>
+</entity>

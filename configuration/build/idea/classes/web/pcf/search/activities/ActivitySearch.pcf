@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.Claim.genericviewactivity and perm.System.viewsearch"
+    countsAsWork="false"
+    id="ActivitySearch"
+    title="DisplayKey.get(&quot;JSP.ActivitySearch.Search.ActivitySearch&quot;)">
+    <Variable
+      initialValue="&quot;ActivitySearchResultsLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <Screen
+      id="ActivitySearchScreen">
+      <SearchPanel
+        criteriaName="ActivitySearchCriteria"
+        maxSearchResults="gw.api.search.MaxSearchResults.forActivities()"
+        resultsName="ActivitySearchViewList"
+        search="ActivitySearchCriteria.performSearch()"
+        searchCriteria="new ActivitySearchCriteria()"
+        searchCriteriaType="entity.ActivitySearchCriteria"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;ActivitySearchView&gt;">
+        <PanelRef
+          def="ActivitySearchDV(ActivitySearchCriteria)"/>
+        <PanelRef
+          def="ActivitySearchResultsLV(ActivitySearchViewList)">
+          <TitleBar
+            appendListViewPaging="true"
+            title="DisplayKey.get(&quot;JSP.ActivitySearch.Search.Results&quot;)"/>
+          <Toolbar>
+            <CheckedValuesToolbarButton
+              allCheckedRowsAction="AssignActivitiesPopup.push(new gw.api.activity.ActivityAssignmentPopup(CheckedValues))"
+              id="ActivitySearch_AssignButton"
+              iterator="ActivitySearchResultsLV.ActivitySearchResultsLV"
+              label="DisplayKey.get(&quot;Web.ActivitySearch.Toolbar.Assign&quot;)"
+              shortcut="G"/>
+            <ToolbarDivider/>
+            <ToolbarButton
+              action="gw.api.print.ListViewPrintOptionPopupAction.printListViewOnlyWithOptions(PrintTargetLV, DisplayKey.get(&quot;JSP.ActivitySearch.Search.Results&quot;), null)"
+              available="perm.User.printlistviews"
+              id="ActivitySearch_PrintButton"
+              label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+              shortcut="N"/>
+          </Toolbar>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Page>
+</PCF>

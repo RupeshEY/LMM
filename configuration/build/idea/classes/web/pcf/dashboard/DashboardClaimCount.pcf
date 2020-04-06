@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.User.viewedbclaimcounts"
+    id="DashboardClaimCount"
+    title="DisplayKey.get(&quot;Java.Dashboard.Title&quot;, DisplayKey.get(&quot;Java.Dashboard.ClaimCount.Title&quot;))">
+    <LocationEntryPoint
+      signature="DashboardClaimCount(GroupInfo : gw.api.dashboard.DashboardTreeGroupInfo)"/>
+    <Variable
+      name="GroupInfo"
+      type="gw.api.dashboard.DashboardTreeGroupInfo"/>
+    <Variable
+      initialValue="gw.api.dashboard.DashboardUtil.getHelper()"
+      name="Stats"
+      type="gw.api.dashboard.DashboardStatsHelper"/>
+    <Variable
+      initialValue="gw.api.dashboard.DashboardUtil.getMode()"
+      name="ModeSource"
+      type="String"/>
+    <Screen
+      id="DashboardClaimCountScreen">
+      <Toolbar>
+        <PrintToolbarButton
+          available="perm.User.printlistviews"
+          id="PrintButton"
+          label="DisplayKey.get(&quot;Button.Print&quot;)"/>
+        <ToolbarDivider/>
+        <ToolbarInput
+          boldLabel="true"
+          id="label"
+          label="DisplayKey.get(&quot;Java.Dashboard.AsOf&quot;)"
+          value="Stats.WhenLastCalculatedString"
+          valueType="java.lang.String"/>
+      </Toolbar>
+      <PanelRef
+        def="ClaimCountByOrgLevelLV(Stats.getOrgStatsAsArray(GroupInfo.AllGroups?.toTypedArray()))"
+        mode="ModeSource"/>
+      <PanelRef
+        def="ClaimCountByLOBLV(Stats.LOBStats?.toTypedArray())"
+        mode="ModeSource"
+        visible="GroupInfo.isRoot() &amp;&amp; gw.api.dashboard.DashboardUtil.isShowByLineOrLoss()">
+        <Toolbar/>
+      </PanelRef>
+      <PanelRef
+        def="ClaimCountByLossTypeLV(Stats.LossTypeStats?.toTypedArray())"
+        mode="ModeSource"
+        visible="GroupInfo.isRoot() &amp;&amp; gw.api.dashboard.DashboardUtil.isShowByLineOrLoss()">
+        <Toolbar/>
+      </PanelRef>
+      <PanelRef>
+        <Verbatim
+          label="Stats.getIncurredLimitTip()"
+          visible="ModeSource == &quot;default&quot;"/>
+        <DetailViewPanel
+          id="DummyDV">
+          <InputColumn/>
+        </DetailViewPanel>
+      </PanelRef>
+    </Screen>
+  </Page>
+</PCF>

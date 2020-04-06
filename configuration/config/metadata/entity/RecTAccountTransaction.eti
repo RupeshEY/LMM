@@ -1,0 +1,69 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Contains the lineitems created to credit/debit the proper t-accounts as the associated Recovery or RecoveryReserve moves through its lifecycle"
+  entity="RecTAccountTransaction"
+  extendable="false"
+  ignoreForEvents="true"
+  overwrittenInStagingTable="true"
+  setterScriptability="hidden"
+  table="rectaccounttransaction"
+  type="editable">
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="TAccountTransactionDelegate"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.impl.TAccountTransactionDelegateInternal"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.RecTAccountTransactionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.TAccountTransactionDelegateAdapter"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountTransactionDelegateAdapterRecoveryImpl"/>
+  <fulldescription><![CDATA[
+Contains the TAccountLineItems that change a pair of T-accounts to account for a transaction as it moves through its LifeCycle State.
+Each TAccountTransaction has a link to its succeeding TAccountTransaction, thus providing a history of the life of the associated transaction.
+ ]]></fulldescription>
+  <foreignkey
+    columnName="TransactionID"
+    desc="The higher-level financial transaction for which this t-account transaction was created."
+    existingreferencesallowed="false"
+    exportable="false"
+    fkentity="Transaction"
+    getterScriptability="hidden"
+    ignoreforevents="true"
+    importableagainstexistingobject="false"
+    includeIdInIndex="true"
+    name="Transaction"
+    nullok="false"
+    overwrittenInStagingTable="true"
+    setterScriptability="hidden"/>
+  <edgeForeignKey
+    desc="The t-account transaction that chronologically succeeds this one in a Transaction's lifecycle.  For the most recent TAccountTransaction, this will be NULL."
+    edgeTableName="rectaccttxnhist"
+    exportable="false"
+    extractable="true"
+    fkentity="RecTAccountTransaction"
+    getterScriptability="hidden"
+    importableagainstexistingobject="false"
+    name="NextTransaction"
+    nullok="true"
+    setterScriptability="hidden"/>
+  <array
+    arrayentity="RecoveryTAccountLineItem"
+    arrayfield="CreditingTransaction"
+    desc="Set of TAccountLineItems that are used by this TAccountTransaction to credit a TAccount."
+    exportable="false"
+    getterScriptability="hidden"
+    ignoreforevents="true"
+    name="CreditingLineItems"
+    setterScriptability="hidden"/>
+  <array
+    arrayentity="RecoveryTAccountLineItem"
+    arrayfield="DebitingTransaction"
+    desc="Set of TAccountLineItems that are used by this TAccountTransaction to debit a TAccount."
+    exportable="false"
+    getterScriptability="hidden"
+    ignoreforevents="true"
+    name="DebitingLineItems"
+    setterScriptability="hidden"/>
+</entity>

@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  admin="true"
+  desc="The history of catastrophe finder batch process runs."
+  entity="CatastropheClaimsHistory"
+  exportable="true"
+  platform="false"
+  table="catastropheclaimshistory"
+  type="versionable">
+  <implementsInterface
+    iface="gw.cc.catastrophe.entity.CatastropheClaimsHistory"
+    impl="com.guidewire.cc.domain.catastrophe.impl.CatastropheClaimsHistoryImpl"/>
+  <column
+    desc="Description of the history event."
+    name="Description"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    desc="Timestamp when the event occurred."
+    name="EventTimestamp"
+    nullok="true"
+    type="datetime"/>
+  <foreignkey
+    columnName="CatastropheId"
+    desc="The catastrophe."
+    fkentity="Catastrophe"
+    name="Catastrophe"
+    nullok="false"/>
+</entity>

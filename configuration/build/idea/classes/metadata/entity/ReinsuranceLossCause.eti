@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="ReinsuranceLossCause"
+  exportable="true"
+  platform="false"
+  table="reinsurancelosscause"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.ReinsuranceLossCause"
+    impl="com.guidewire.cc.domain.claim.impl.ReinsuranceLossCauseImpl"/>
+  <fulldescription><![CDATA[
+      This reference table contains the loss cause that is related to a Reinsurance Threshold.
+      
+    ]]></fulldescription>
+  <typekey
+    desc="General cause of loss; dependent on loss type."
+    name="LossCause"
+    nullok="true"
+    typelist="LossCause">
+    <keyfilters>
+      <keyfilter
+        name="ReinsuranceThreshold.LossType"/>
+    </keyfilters>
+  </typekey>
+  <foreignkey
+    columnName="ReinsuranceThresholdID"
+    desc="Related reinsurance threshold."
+    exportable="false"
+    fkentity="ReinsuranceThreshold"
+    name="ReinsuranceThreshold"
+    nullok="false"/>
+  <index
+    desc="Ensure uniqueness of lines within ReinsuranceLossCause lookup table"
+    name="RLCIndex"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="LossCause"/>
+    <indexcol
+      keyposition="2"
+      name="ReinsuranceThresholdID"/>
+  </index>
+</entity>

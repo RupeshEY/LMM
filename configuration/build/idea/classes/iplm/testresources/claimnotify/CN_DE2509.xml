@@ -1,0 +1,861 @@
+<soapenv:Envelope xmlns:ns2="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1" xmlns:ns3="http://www.xchanging.com/claimnotify/rq/1" xmlns:ns4="http://www.ACORD.org/Standards/AcordMsgSvc/1" xmlns:ns5="http://www.xchanging.com/wsdl/generated" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xh="http://www.xchanging.com/wsdl/ClaimService/">
+  <soapenv:Header>
+    <wsse:Security soap:mustUnderstand="1">
+      <ds:Signature Id="SIG-3AEAAC205336794BCD148733836778224" xmlns:ds="http://www.w3.org/2000/09/xmldsig#">
+        <ds:SignedInfo>
+          <ds:CanonicalizationMethod Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#">
+            <ec:InclusiveNamespaces PrefixList="ns2 ns3 ns4 ns5 soap soapenv wsse wsu xh" xmlns:ec="http://www.w3.org/2001/10/xml-exc-c14n#" />
+          </ds:CanonicalizationMethod>
+          <ds:SignatureMethod Algorithm="http://www.w3.org/2000/09/xmldsig#rsa-sha1" />
+          <ds:Reference URI="#Id-56A9B7D1-2F72-40EB-9466-777E55F5438E">
+            <ds:Transforms>
+              <ds:Transform Algorithm="http://www.w3.org/2001/10/xml-exc-c14n#">
+                <ec:InclusiveNamespaces PrefixList="ns2 ns3 ns4 ns5 soap wsse xh" xmlns:ec="http://www.w3.org/2001/10/xml-exc-c14n#" />
+              </ds:Transform>
+            </ds:Transforms>
+            <ds:DigestMethod Algorithm="http://www.w3.org/2000/09/xmldsig#sha1" />
+            <ds:DigestValue>3E88IZFH8GyyNtpIXm4HOGC+ofQ=</ds:DigestValue>
+          </ds:Reference>
+        </ds:SignedInfo>
+        <ds:SignatureValue>EtyIffBBF9VG6hShxRuJe7C5GF7SXc1293nqcVrl2CMA9a7kenAcmkb7w4761YwXdFOM6I22wzwh URjgAglflgF++cJUSE7JlIszCYCOTSauO25tNbXaKX6GTK42aBvLtUPvsj1eowSV4SUkraTwpPya G5lXezDr3jSVjG4UGRPuOkOwPCzDBMQuFEZDrhjA1VRDKb63M7i/DgSWsX+6KoOlt0Or3pyZmxnj b2czX+CFeSHThULvQWweN1uVDH0V6fy1P2iPkBwOqgKgKRr0Q18McuEAYpnlAVsIWNa3toK4ZRvp 5jpMR6V7vqp4/HqX8TBAtqBfB6IjN5/lkrwRLw==
+        </ds:SignatureValue>
+        <ds:KeyInfo Id="KI-3AEAAC205336794BCD148733836778222">
+          <wsse:SecurityTokenReference wsu:Id="STR-3AEAAC205336794BCD148733836778223">
+            <wsse:KeyIdentifier EncodingType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-soap-message-security-1.0#Base64Binary" ValueType="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-x509-token-profile-1.0#X509v3">MIIDdzCCAl+gAwIBAgIEUJlRJjANBgkqhkiG9w0BAQsFADBsMRAwDgYDVQQGEwdVbmtub3duMRAwDgYDVQQIEwdVbmtub3duMRAwDgYDVQQHEwdVbmtub3duMRAwDgYDVQQKEwdVbmtub3duMRAwDgYDVQQLEwdVbmtub3duMRAwDgYDVQQDEwdVbmtub3duMB4XDTE2MDYzMDEyNTAwMloXDTE2MDkyODEyNTAwMlowbDEQMA4GA1UEBhMHVW5rbm93bjEQMA4GA1UECBMHVW5rbm93bjEQMA4GA1UEBxMHVW5rbm93bjEQMA4GA1UEChMHVW5rbm93bjEQMA4GA1UECxMHVW5rbm93bjEQMA4GA1UEAxMHVW5rbm93bjCCASIwDQYJKoZIhvcNAQEBBQADggEPADCCAQoCggEBALQOL3kAvgv5I9+vfF5siJtqSZc7uqkI3wlw/+/eOZPNn8FeamRPJ0+tglEVl38qPsFbON9278DSL6sx+/5tIgny03Hp2J/YICbNvurTRuKvZrUaCAJCwzWPLGyM8DQcP54ehEAMgXQ5kg5p54Dvu1rLM6NWdfhI5cnx//caln1xDPNBMpuJBu5oEAe3RSOh8ecF5Qv/28kNeZmA8kwMdKK0kMUAzbtUPW/51fWQfIS1qa822XpzpPJPi9in22GvQsSlhs1wpgCZRd8b14DQZejmef+di2cajB8cQh8zNyiOMGARxws2gd5uS/zboYxOjSglKYtJZQWPRPueJNFllIsCAwEAAaMhMB8wHQYDVR0OBBYEFBdVnhGkENXVz8ZyM+iKucohwMjsMA0GCSqGSIb3DQEBCwUAA4IBAQAiv+rmBdAEQznQy+5IBigxzPT98oyY0NX5z2kB+FjSmcpPuYxZY9VzSwk0lLau5Sm7/Rfz0qQ+vsfYeJ2LYx+OQ8EqhcWh96yIvR+FFpg63w98XNs0zg84+156DWFsb1J/m4xxECo8mPMSNndhzpRqiRgcPhHd/KGEG+UOOKjVl5AsrC4lWWRbWFRoNgwmpigfmCCZiWizkjRVPSV8JMF6fQ60Km+zoddz1DjPEFfs4jIVj7EwOMJ4VuLs9DsLB1gAcmqzpYTX14gQrsztBhwoMgf4VX6Uj7l11Wv9/sxA38KDTFJgdLtq8HhZVc8vFJyJJ0wDMjLSR1MOKM8JVvph</wsse:KeyIdentifier>
+          </wsse:SecurityTokenReference>
+        </ds:KeyInfo>
+      </ds:Signature>
+    </wsse:Security>
+    <xh:xchangingheader>
+      <xh:Sender>
+        <xh:Party>
+          <xh:Id>urn:duns:236196817</xh:Id>
+        </xh:Party>
+      </xh:Sender>
+      <xh:Receiver>
+        <xh:Party>
+          <xh:Id>urn:ilu:402801</xh:Id>
+        </xh:Party>
+      </xh:Receiver>
+      <xh:MsgTypeCd>ClaimNotify</xh:MsgTypeCd>
+      <xh:Timestamp>2015-11-28T11:01:26Z</xh:Timestamp>
+      <xh:RequestUUId>08589f9f-754f-47dd-ae13-1c9ad7634ea0</xh:RequestUUId>
+    </xh:xchangingheader>
+  </soapenv:Header>
+  <soapenv:Body wsu:Id="Id-56A9B7D1-2F72-40EB-9466-777E55F5438E">
+    <ns3:ClaimNotifyEventRq Receiver="insurer" Sender="serviceprovider">
+      <ns2:UUId>e7d43d39-7510-4eb4-a22b-389857055887</ns2:UUId>
+      <ns2:CreationDate>2015-11-28T11:01:26+00:00</ns2:CreationDate>
+      <ns3:ClaimMovement Receiver="insurer" Sender="serviceprovider">
+        <ns2:UUId>5cd06b65-b725-496e-9862-d680f60d9488</ns2:UUId>
+        <ns2:ServiceProviderReference>a867087d-4265-4124-b767-cbf2119a075a</ns2:ServiceProviderReference>
+        <ns2:CreationDate>2015-11-28T11:01:26+00:00</ns2:CreationDate>
+        <ns2:Explanation>A</ns2:Explanation>
+        <ns2:ClaimAdviceInitialOrSubsequentIndicator>FirstAdvice</ns2:ClaimAdviceInitialOrSubsequentIndicator>
+        <ns2:Insurer>
+          <ns2:Party>
+            <ns2:Id Agency="ilu">urn:ilu:402801</ns2:Id>
+            <ns2:Name>Zurich 402801</ns2:Name>
+          </ns2:Party>
+        </ns2:Insurer>
+        <ns2:Broker>
+          <ns2:Party>
+            <ns2:Id Agency="ilu">urn:ilu:0001</ns2:Id>
+            <ns2:Name>TEST BROKER 0001</ns2:Name>
+          </ns2:Party>
+          <ns2:Contact>
+            <ns2:PersonName>xxxxx</ns2:PersonName>
+            <ns2:Telephone>1234</ns2:Telephone>
+          </ns2:Contact>
+        </ns2:Broker>
+        <ns2:ServiceProvider>
+          <ns2:Party>
+            <ns2:Id Agency="DUNS_dun_and_bradstreet">urn:duns:236196817</ns2:Id>
+            <ns2:Name>Xchanging</ns2:Name>
+          </ns2:Party>
+          <ns2:Contact>
+            <ns2:PersonName>xxxxxx</ns2:PersonName>
+            <ns2:Telephone>12345</ns2:Telephone>
+          </ns2:Contact>
+        </ns2:ServiceProvider>
+        <ns2:Insured>
+          <ns2:Party>
+            <ns2:Name>xxxxxx</ns2:Name>
+          </ns2:Party>
+        </ns2:Insured>
+        <ns2:BureauLeadingInsurerOrReinsurer>
+          <ns2:Party>
+            <ns2:Name>SYNDICATE 0566</ns2:Name>
+          </ns2:Party>
+          <ns2:Contact>
+            <ns2:PersonName>xxxxxx</ns2:PersonName>
+          </ns2:Contact>
+        </ns2:BureauLeadingInsurerOrReinsurer>
+        <ns2:Contract>
+          <ns2:BrokerReference>B1111OCT28SP2FOF</ns2:BrokerReference>
+          <ns2:InsurerRiskReference>23-502012</ns2:InsurerRiskReference>
+        </ns2:Contract>
+        <ns2:ClaimEntry>
+          <ns2:BrokerReference>B1111VTR01</ns2:BrokerReference>
+        </ns2:ClaimEntry>
+        <ns2:Claim>
+          <ns2:LossOrEventName>BUS</ns2:LossOrEventName>
+          <ns2:BrokerReference>B1111UCR000000054</ns2:BrokerReference>
+          <ns2:CauseOfLoss>PRAB</ns2:CauseOfLoss>
+          <ns2:LossLocation>
+            <ns2:Location>
+              <ns2:Description>London</ns2:Description>
+            </ns2:Location>
+          </ns2:LossLocation>
+          <ns2:AdjusterName>ADJUSTER</ns2:AdjusterName>
+          <ns2:LawyerName>LAWYER</ns2:LawyerName>
+        </ns2:Claim>
+        <ns2:ClaimOriginalPolicy>
+          <ns2:JvClassOfBusiness>M</ns2:JvClassOfBusiness>
+        </ns2:ClaimOriginalPolicy>
+        <ns3:MessageSequenceNumber>140</ns3:MessageSequenceNumber>
+        <ns3:AsOfDate>2015-10-28T11:01:19Z</ns3:AsOfDate>
+        <ns3:ActionParticipantType>C</ns3:ActionParticipantType>
+        <ns3:ActionParticipant>402801</ns3:ActionParticipant>
+        <ns3:ResponseCode>QUERY-RETURN</ns3:ResponseCode>
+        <ns3:Reinsured>
+          <ns2:Party>
+            <ns2:Name>xxxxxx</ns2:Name>
+          </ns2:Party>
+        </ns3:Reinsured>
+        <ns3:ContractSection>
+          <ns2:InsuredRiskOrInterestDescription>TEST</ns2:InsuredRiskOrInterestDescription>
+          <ns2:ContractPeriod>
+            <ns2:StartDate>2015-01-01</ns2:StartDate>
+            <ns2:EndDate>2015-12-31</ns2:EndDate>
+          </ns2:ContractPeriod>
+          <ns2:ContractPeriodDescription>TEST</ns2:ContractPeriodDescription>
+          <ns2:UnderwritingYear>2014</ns2:UnderwritingYear>
+          <ns2:InsurerSharePercentage>
+            <ns2:Rate RateUnit="Percentage">50.0000000</ns2:Rate>
+          </ns2:InsurerSharePercentage>
+        </ns3:ContractSection>
+        <ns3:LossDateNarrative>TEST</ns3:LossDateNarrative>
+        <ns3:LossDetails>TEST</ns3:LossDetails>
+        <ns3:ClaimAmounts Ccy="GBP">
+          <ns2:ClaimMovementAmtItem Type="fgu_amount_of_loss_incurred_by_all_layers_or_policies_from_zero">
+            <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">20000.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="loss_and_expense_incurred_for_contract_before_retention">
+            <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">20000.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="outstanding_loss_plus_expense_for_contract_before_retention">
+            <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1234567890123.11
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="100_percent_losses_and_expenses_paid_for_contract_before_retention">
+            <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">0.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="current_payment_losses_and_expenses_for_contract">
+            <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">10000.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="current_payment_losses_for_the_contract">
+            <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">10000.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="professional_advisor_fees_outstanding">
+            <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">0.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="professional_advisor_fees_current_payment">
+            <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">10000.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+        </ns3:ClaimAmounts>
+        <ns3:ClaimAmounts Ccy="EUR">
+          <ns2:ClaimMovementAmtItem Type="fgu_amount_of_loss_incurred_by_all_layers_or_policies_from_zero">
+            <ns2:Amt Ccy="EUR" CcyIndic="reference_currency" Share="hundred_percent">20000.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="loss_and_expense_incurred_for_contract_before_retention">
+            <ns2:Amt Ccy="EUR" CcyIndic="reference_currency" Share="hundred_percent">20000.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="outstanding_loss_plus_expense_for_contract_before_retention">
+            <ns2:Amt Ccy="EUR" CcyIndic="reference_currency" Share="hundred_percent">10000.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="100_percent_losses_and_expenses_paid_for_contract_before_retention">
+            <ns2:Amt Ccy="EUR" CcyIndic="reference_currency" Share="hundred_percent">0.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="current_payment_losses_and_expenses_for_contract">
+            <ns2:Amt Ccy="EUR" CcyIndic="reference_currency" Share="hundred_percent">10000.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="current_payment_losses_for_the_contract">
+            <ns2:Amt Ccy="EUR" CcyIndic="reference_currency" Share="hundred_percent">10000.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="professional_advisor_fees_outstanding">
+            <ns2:Amt Ccy="EUR" CcyIndic="reference_currency" Share="hundred_percent">0.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="professional_advisor_fees_current_payment">
+            <ns2:Amt Ccy="EUR" CcyIndic="reference_currency" Share="hundred_percent">10000.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+        </ns3:ClaimAmounts>
+        <ns3:ClaimAmounts Ccy="USD">
+          <ns2:ClaimMovementAmtItem Type="fgu_amount_of_loss_incurred_by_all_layers_or_policies_from_zero">
+            <ns2:Amt Ccy="USD" CcyIndic="reference_currency" Share="hundred_percent">30000.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="loss_and_expense_incurred_for_contract_before_retention">
+            <ns2:Amt Ccy="USD" CcyIndic="reference_currency" Share="hundred_percent">20000.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="outstanding_loss_plus_expense_for_contract_before_retention">
+            <ns2:Amt Ccy="USD" CcyIndic="reference_currency" Share="hundred_percent">10000.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="100_percent_losses_and_expenses_paid_for_contract_before_retention">
+            <ns2:Amt Ccy="USD" CcyIndic="reference_currency" Share="hundred_percent">20.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="current_payment_losses_and_expenses_for_contract">
+            <ns2:Amt Ccy="USD" CcyIndic="reference_currency" Share="hundred_percent">10000.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="current_payment_losses_for_the_contract">
+            <ns2:Amt Ccy="USD" CcyIndic="reference_currency" Share="hundred_percent">10000.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="professional_advisor_fees_outstanding">
+            <ns2:Amt Ccy="USD" CcyIndic="reference_currency" Share="hundred_percent">0.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="professional_advisor_fees_current_payment">
+            <ns2:Amt Ccy="USD" CcyIndic="reference_currency" Share="hundred_percent">10000.00
+            </ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+        </ns3:ClaimAmounts>
+        <ns3:Extension>
+          <ns3:Contract>
+            <ns2:RiskLocation>
+              <ns2:Location>
+                <ns2:Description>TEST</ns2:Description>
+              </ns2:Location>
+            </ns2:RiskLocation>
+            <ns3:RiskCode>XT</ns3:RiskCode>
+            <ns3:SlipLeadName>
+              <ns2:Party>
+                <ns2:Name>SYNDICATE 0566</ns2:Name>
+              </ns2:Party>
+            </ns3:SlipLeadName>
+            <ns3:ContractMarket Agency="ilu">
+              <ns3:InsurerOrReinsurer>
+                <ns2:Party>
+                  <ns2:Id Agency="ilu">402801</ns2:Id>
+                  <ns2:Name>Zurich 402801</ns2:Name>
+                </ns2:Party>
+                <ns2:Contact>
+                  <ns2:PersonName>xxxxxx</ns2:PersonName>
+                </ns2:Contact>
+                <ns2:InsurerSharePercentage>
+                  <ns2:Rate RateUnit="Percentage">50.0000000</ns2:Rate>
+                </ns2:InsurerSharePercentage>
+                <ns3:InsurerOrReinsurerClaimReference1>REFERENCE 01</ns3:InsurerOrReinsurerClaimReference1>
+                <ns3:InsurerOrReinsurerClaimReference2>REFERENCE 02</ns3:InsurerOrReinsurerClaimReference2>
+                <ns3:ParticipantFunction>Agreement Party</ns3:ParticipantFunction>
+                <ns3:ManagingAgentCode>1010E</ns3:ManagingAgentCode>
+                <ns3:ClaimLineNumber>1</ns3:ClaimLineNumber>
+              </ns3:InsurerOrReinsurer>
+              <ns3:InsurerOrReinsurer>
+                <ns2:Party>
+                  <ns2:Id Agency="ilu">GW2001</ns2:Id>
+                  <ns2:Name>SYNDICATE 2001</ns2:Name>
+                </ns2:Party>
+                <ns2:InsurerSharePercentage>
+                  <ns2:Rate RateUnit="Percentage">50.0000000</ns2:Rate>
+                </ns2:InsurerSharePercentage>
+                <ns3:InsurerOrReinsurerClaimReference1>TEST1</ns3:InsurerOrReinsurerClaimReference1>
+                <ns3:ParticipantFunction>Follower</ns3:ParticipantFunction>
+                <ns3:ManagingAgentCode>1901D</ns3:ManagingAgentCode>
+                <ns3:ClaimLineNumber>2</ns3:ClaimLineNumber>
+              </ns3:InsurerOrReinsurer>
+            </ns3:ContractMarket>
+            <ns3:SlipOrder1>100.0000000</ns3:SlipOrder1>
+            <ns3:SlipOrder2>100.0000000</ns3:SlipOrder2>
+            <ns3:ContractCoverage CoverageType="NA">
+              <ns3:CoverageAmount>
+                <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">10000.00</ns2:Amt>
+              </ns3:CoverageAmount>
+            </ns3:ContractCoverage>
+            <ns3:ContractValueInterest>
+              <ns3:ValueInterestAmount>
+                <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">10000.00</ns2:Amt>
+              </ns3:ValueInterestAmount>
+            </ns3:ContractValueInterest>
+            <ns3:ContractDeductible>
+              <ns3:DeductibleAmount>
+                <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">10000.00</ns2:Amt>
+              </ns3:DeductibleAmount>
+            </ns3:ContractDeductible>
+          </ns3:Contract>
+          <ns3:Claim>
+            <ns3:ClaimLineNumber>1</ns3:ClaimLineNumber>
+            <ns3:LeadClaimReference>REFERENCE 01</ns3:LeadClaimReference>
+            <ns3:LeadClaimReference2>REFERENCE 02</ns3:LeadClaimReference2>
+            <ns3:ClaimStatus>Open</ns3:ClaimStatus>
+            <ns3:LossPeriod>
+              <ns3:LossDateQualifier>L</ns3:LossDateQualifier>
+              <ns3:StartDate>2013-12</ns3:StartDate>
+              <ns3:EndDate>2015</ns3:EndDate>
+            </ns3:LossPeriod>
+            <ns3:ClaimType>000</ns3:ClaimType>
+            <ns3:ClaimsScheme>2010</ns3:ClaimsScheme>
+            <ns3:ECFIndicator>Y</ns3:ECFIndicator>
+            <ns3:TriageCategory>CTP-Standard</ns3:TriageCategory>
+            <ns3:Indicators>
+              <ns3:ConflictOfInterestIndicator>N</ns3:ConflictOfInterestIndicator>
+              <ns3:SimultaneousReinstatementRequired>N</ns3:SimultaneousReinstatementRequired>
+              <ns3:WarIndicator>N</ns3:WarIndicator>
+            </ns3:Indicators>
+            <ns3:BrokerClaimReference1>REF1</ns3:BrokerClaimReference1>
+          </ns3:Claim>
+          <ns3:ClaimEntry>
+            <ns3:TransactionSequence>001</ns3:TransactionSequence>
+            <ns3:LloydsStatus>10-AWAITING/QUERIED</ns3:LloydsStatus>
+            <ns3:AddedCirculatedOrAuthorisedDate>2015-10-28</ns3:AddedCirculatedOrAuthorisedDate>
+            <ns3:Comments>
+              <ns3:Broker>
+                <ns3:LineNumber>1</ns3:LineNumber>
+                <ns3:CommentDetails>AJH DCF DWHC UDHSF UFHUFHV DFOUI DFUH UDHV UHFVUFHVUFHVB</ns3:CommentDetails>
+              </ns3:Broker>
+              <ns3:PrivateComments>
+                <ns3:Comment>
+                  <ns3:LineNumber>1</ns3:LineNumber>
+                  <ns3:CommentDetails>private comments 1</ns3:CommentDetails>
+                </ns3:Comment>
+                <ns3:Comment>
+                  <ns3:LineNumber>2</ns3:LineNumber>
+                  <ns3:CommentDetails>XCS Query Private</ns3:CommentDetails>
+                </ns3:Comment>
+              </ns3:PrivateComments>
+              <ns3:PublicComments>
+                <ns3:Comment>
+                  <ns3:LineNumber>1</ns3:LineNumber>
+                  <ns3:CommentDetails>public comments 1</ns3:CommentDetails>
+                </ns3:Comment>
+                <ns3:Comment>
+                  <ns3:LineNumber>2</ns3:LineNumber>
+                  <ns3:CommentDetails>XCS Query</ns3:CommentDetails>
+                </ns3:Comment>
+              </ns3:PublicComments>
+              <ns3:CrossMarketComments PrivateCommentIndicator="Y">
+                <ns3:Bureau Agency="ilu">
+                  <ns3:Claim>
+                    <ns2:BrokerReference>B1111UCR000000054</ns2:BrokerReference>
+                    <ns3:TransactionReference>B1111VTR01</ns3:TransactionReference>
+                    <ns2:CreationDate>2015-10-28T07:23:35+00:00</ns2:CreationDate>
+                    <ns3:Syndicate Name="ILU'S SYNDICATE TEST ACCOUNT">
+                      <ns3:Comment>
+                        <ns3:LineNumber>1</ns3:LineNumber>
+                        <ns3:CommentDetails>swaty1</ns3:CommentDetails>
+                      </ns3:Comment>
+                      <ns3:Response>QUERY-RETURN</ns3:Response>
+                    </ns3:Syndicate>
+                  </ns3:Claim>
+                </ns3:Bureau>
+              </ns3:CrossMarketComments>
+              <ns3:CrossMarketComments PrivateCommentIndicator="N">
+                <ns3:Bureau Agency="ilu">
+                  <ns3:Claim>
+                    <ns2:BrokerReference>B1111UCR000000054</ns2:BrokerReference>
+                    <ns3:TransactionReference>B1111VTR01</ns3:TransactionReference>
+                    <ns2:CreationDate>2015-10-28T07:23:35+00:00</ns2:CreationDate>
+                    <ns3:Syndicate Name="WRITE BACK TEST">
+                      <ns3:Comment>
+                        <ns3:LineNumber>1</ns3:LineNumber>
+                        <ns3:CommentDetails>writeback test</ns3:CommentDetails>
+                      </ns3:Comment>
+                    </ns3:Syndicate>
+                    <ns3:Syndicate Name="WRITE BACK TEST">
+                      <ns3:Comment>
+                        <ns3:LineNumber>1</ns3:LineNumber>
+                        <ns3:CommentDetails>Request to Broker</ns3:CommentDetails>
+                      </ns3:Comment>
+                      <ns3:Response>INF</ns3:Response>
+                    </ns3:Syndicate>
+                  </ns3:Claim>
+                </ns3:Bureau>
+                <ns3:Bureau Agency="ilu">
+                  <ns3:Claim>
+                    <ns2:BrokerReference>B1111UCR000000054</ns2:BrokerReference>
+                    <ns3:TransactionReference>B1111VTR01</ns3:TransactionReference>
+                    <ns2:CreationDate>2015-10-28T07:23:35+00:00</ns2:CreationDate>
+                    <ns3:Syndicate Name="ILU'S SYNDICATE TEST ACCOUNT">
+                      <ns3:Comment>
+                        <ns3:LineNumber>1</ns3:LineNumber>
+                        <ns3:CommentDetails>tetsing writeback</ns3:CommentDetails>
+                      </ns3:Comment>
+                      <ns3:Response>QUERY-RETURN</ns3:Response>
+                    </ns3:Syndicate>
+                  </ns3:Claim>
+                </ns3:Bureau>
+              </ns3:CrossMarketComments>
+            </ns3:Comments>
+            <ns3:ClaimEntryFinancialAmounts Ccy="GBP">
+              <ns3:OutstandingAmountQualifier>S</ns3:OutstandingAmountQualifier>
+              <ns3:ServiceProviderOriginalSplitReference>1245014052014</ns3:ServiceProviderOriginalSplitReference>
+              <ns3:ServiceProviderOriginalSplitReference>2245014052014</ns3:ServiceProviderOriginalSplitReference>
+              <ns3:ServiceProviderOriginalSplitReference>3245014052014</ns3:ServiceProviderOriginalSplitReference>
+              <ns3:ServiceProviderOriginalSplitReference>4245014052014</ns3:ServiceProviderOriginalSplitReference>
+              <ns2:ClaimMovementAmtItem Type="Vat_Amount">
+                <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1000.00
+                </ns2:Amt>
+              </ns2:ClaimMovementAmtItem>
+              <ns2:ClaimMovementAmtItem Type="Lead_Reserve_Amount">
+                <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1000.00
+                </ns2:Amt>
+              </ns2:ClaimMovementAmtItem>
+              <ns2:ClaimMovementAmtItem Type="Lead_Reserve_Fees">
+                <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1000.00
+                </ns2:Amt>
+              </ns2:ClaimMovementAmtItem>
+              <ns2:ClaimMovementAmtItem Type="Reserve_Released_Amount">
+                <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1000.00
+                </ns2:Amt>
+              </ns2:ClaimMovementAmtItem>
+              <ns2:ClaimMovementAmtItem Type="Reserve_Retained_Amount">
+                <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1000.00
+                </ns2:Amt>
+              </ns2:ClaimMovementAmtItem>
+              <ns2:ClaimMovementAmtItem Type="Interest_On_Reserve_Amount">
+                <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1000.00
+                </ns2:Amt>
+              </ns2:ClaimMovementAmtItem>
+              <ns2:ClaimMovementAmtItem Type="Tax_On_Interest_Amount">
+                <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1000.00
+                </ns2:Amt>
+              </ns2:ClaimMovementAmtItem>
+              <ns2:ClaimMovementAmtItem Type="Imported_Services_Amount">
+                <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1000.00
+                </ns2:Amt>
+              </ns2:ClaimMovementAmtItem>
+              <ns2:ClaimMovementAmtItem Type="Letter_Of_Credit_Amount">
+                <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1000.00
+                </ns2:Amt>
+              </ns2:ClaimMovementAmtItem>
+              <ns3:ImportedServicesNarrative>ISN</ns3:ImportedServicesNarrative>
+              <ns2:LetterOfCreditReference>LOCR</ns2:LetterOfCreditReference>
+              <ns3:FguNarrative>FN</ns3:FguNarrative>
+              <ns3:TargetCurrency>
+                <ns2:Ccy>EUR</ns2:Ccy>
+              </ns3:TargetCurrency>
+              <ns3:SettlementAmount>10000.00</ns3:SettlementAmount>
+              <ns3:ExchangeRate>1.00000</ns3:ExchangeRate>
+              <ns3:FinancialAmountInformation>
+                <ns2:ClaimMovementAmtItem Type="Outstanding_Amount">
+                  <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1000.00
+                  </ns2:Amt>
+                </ns2:ClaimMovementAmtItem>
+                <ns2:ClaimMovementAmtItem Type="Previously_Paid_Amount">
+                  <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1000.00
+                  </ns2:Amt>
+                </ns2:ClaimMovementAmtItem>
+                <ns2:ClaimMovementAmtItem Type="Incurred_Amount">
+                  <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1000.00
+                  </ns2:Amt>
+                </ns2:ClaimMovementAmtItem>
+                <ns2:ClaimMovementAmtItem Type="Vat_Amount">
+                  <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1000.00
+                  </ns2:Amt>
+                </ns2:ClaimMovementAmtItem>
+                <ns2:ClaimMovementAmtItem Type="Paid_This_Time_Amount">
+                  <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1000.00
+                  </ns2:Amt>
+                </ns2:ClaimMovementAmtItem>
+                <ns2:ClaimMovementAmtItem Type="Agree_This_Time_Amount">
+                  <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1000.00
+                  </ns2:Amt>
+                </ns2:ClaimMovementAmtItem>
+                <ns2:ClaimMovementAmtItem Type="Prev_Agreed_Not_Collected_Amount">
+                  <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1000.00
+                  </ns2:Amt>
+                </ns2:ClaimMovementAmtItem>
+                <ns2:ClaimMovementAmtItem Type="Prev_Agreed_Not_Collected_Amount_Claim">
+                  <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1000.00
+                  </ns2:Amt>
+                </ns2:ClaimMovementAmtItem>
+                <ns2:ClaimMovementAmtItem Type="Previously_Paid_Amount_Claim">
+                  <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">1000.00
+                  </ns2:Amt>
+                </ns2:ClaimMovementAmtItem>
+              </ns3:FinancialAmountInformation>
+            </ns3:ClaimEntryFinancialAmounts>
+            <!--ns3:ClaimEntryFinancialAmounts
+  Ccy="USD">
+  <ns3:OutstandingAmountQualifier>S</ns3:OutstandingAmountQualifier>
+  <ns2:ClaimMovementAmtItem
+    Type="Vat_Amount">
+    <ns2:Amt
+      Ccy="USD"
+      Share="hundred_percent"
+      CcyIndic="reference_currency">1000.00
+    </ns2:Amt>
+  </ns2:ClaimMovementAmtItem>
+  <ns2:ClaimMovementAmtItem
+    Type="Lead_Reserve_Amount">
+    <ns2:Amt
+      Ccy="USD"
+      Share="hundred_percent"
+      CcyIndic="reference_currency">1000.00
+    </ns2:Amt>
+  </ns2:ClaimMovementAmtItem>
+  <ns2:ClaimMovementAmtItem
+    Type="Lead_Reserve_Fees">
+    <ns2:Amt
+      Ccy="USD"
+      Share="hundred_percent"
+      CcyIndic="reference_currency">1000.00
+    </ns2:Amt>
+  </ns2:ClaimMovementAmtItem>
+  <ns2:ClaimMovementAmtItem
+    Type="Reserve_Released_Amount">
+    <ns2:Amt
+      Ccy="USD"
+      Share="hundred_percent"
+      CcyIndic="reference_currency">1000.00
+    </ns2:Amt>
+  </ns2:ClaimMovementAmtItem>
+  <ns2:ClaimMovementAmtItem
+    Type="Reserve_Retained_Amount">
+    <ns2:Amt
+      Ccy="USD"
+      Share="hundred_percent"
+      CcyIndic="reference_currency">1000.00
+    </ns2:Amt>
+  </ns2:ClaimMovementAmtItem>
+  <ns2:ClaimMovementAmtItem
+    Type="Interest_On_Reserve_Amount">
+    <ns2:Amt
+      Ccy="USD"
+      Share="hundred_percent"
+      CcyIndic="reference_currency">1000.00
+    </ns2:Amt>
+  </ns2:ClaimMovementAmtItem>
+  <ns2:ClaimMovementAmtItem
+    Type="Tax_On_Interest_Amount">
+    <ns2:Amt
+      Ccy="USD"
+      Share="hundred_percent"
+      CcyIndic="reference_currency">1000.00
+    </ns2:Amt>
+  </ns2:ClaimMovementAmtItem>
+  <ns2:ClaimMovementAmtItem
+    Type="Imported_Services_Amount">
+    <ns2:Amt
+      Ccy="USD"
+      Share="hundred_percent"
+      CcyIndic="reference_currency">1000.00
+    </ns2:Amt>
+  </ns2:ClaimMovementAmtItem>
+  <ns2:ClaimMovementAmtItem
+    Type="Letter_Of_Credit_Amount">
+    <ns2:Amt
+      Ccy="USD"
+      Share="hundred_percent"
+      CcyIndic="reference_currency">1000.00
+    </ns2:Amt>
+  </ns2:ClaimMovementAmtItem>
+  <ns3:ImportedServicesNarrative>ISN</ns3:ImportedServicesNarrative>
+  <ns2:LetterOfCreditReference>LOCR</ns2:LetterOfCreditReference>
+  <ns3:FguNarrative>FN</ns3:FguNarrative>
+
+  <ns3:SettlementAmount>10000.00</ns3:SettlementleaderAmount>
+  <ns3:ExchangeRate>1.00000</ns3:ExchangeRate>
+  <ns3:FinancialAmountInformation>
+    <ns2:ClaimMovementAmtItem
+      Type="Outstanding_Amount">
+      <ns2:Amt
+        Ccy="USD"
+        Share="hundred_percent"
+        CcyIndic="reference_currency">1000.00
+      </ns2:Amt>
+    </ns2:ClaimMovementAmtItem>
+    <ns2:ClaimMovementAmtItem
+      Type="WRONGTYPE_Previously_Paid_Amount">
+      <ns2:Amt
+        Ccy="USD"
+        Share="hundred_percent"
+        CcyIndic="reference_currency">1000.00
+      </ns2:Amt>
+    </ns2:ClaimMovementAmtItem>
+    <ns2:ClaimMovementAmtItem
+      Type="Incurred_Amount">
+      <ns2:Amt
+        Ccy="USD"
+        Share="hundred_percent"
+        CcyIndic="reference_currency">1000.00
+      </ns2:Amt>
+    </ns2:ClaimMovementAmtItem>
+    <ns2:ClaimMovementAmtItem
+      Type="Vat_Amount">
+      <ns2:Amt
+        Ccy="USD"
+        Share="hundred_percent"
+        CcyIndic="reference_currency">1000.00
+      </ns2:Amt>
+    </ns2:ClaimMovementAmtItem>
+    <ns2:ClaimMovementAmtItem
+      Type="Paid_This_Time_Amount">
+      <ns2:Amt
+        Ccy="USD"
+        Share="hundred_percent"
+        CcyIndic="reference_currency">1000.00
+      </ns2:Amt>
+    </ns2:ClaimMovementAmtItem>
+    <ns2:ClaimMovementAmtItem
+      Type="Agree_This_Time_Amount">
+      <ns2:Amt
+        Ccy="USD"
+        Share="hundred_percent"
+        CcyIndic="reference_currency">1000.00
+      </ns2:Amt>
+    </ns2:ClaimMovementAmtItem>
+    <ns2:ClaimMovementAmtItem
+      Type="Prev_Agreed_Not_Collected_Amount">
+      <ns2:Amt
+        Ccy="USD"
+        Share="hundred_percent"
+        CcyIndic="reference_currency">1000.00
+      </ns2:Amt>
+    </ns2:ClaimMovementAmtItem>
+    <ns2:ClaimMovementAmtItem
+      Type="Prev_Agreed_Not_Collected_Amount_Claim">
+      <ns2:Amt
+        Ccy="USD"
+        Share="hundred_percent"
+        CcyIndic="reference_currency">1000.00
+      </ns2:Amt>
+    </ns2:ClaimMovementAmtItem>
+    <ns2:ClaimMovementAmtItem
+      Type="Previously_Paid_Amount_Claim">
+      <ns2:Amt
+        Ccy="USD"
+        Share="hundred_percent"
+        CcyIndic="reference_currency">1000.00
+      </ns2:Amt>
+    </ns2:ClaimMovementAmtItem>
+  </ns3:FinancialAmountInformation>
+</ns3:ClaimEntryFinancialAmounts-->
+          </ns3:ClaimEntry>
+        </ns3:Extension>
+      </ns3:ClaimMovement>
+      <ns3:SupportingDocument>
+        <ns4:DocumentId>8228264e-73b9-4f7b-8d2a-c373c5ca0de6</ns4:DocumentId>
+        <ns4:DocumentVersion>1.0</ns4:DocumentVersion>
+        <ns4:DocumentVersionDtTime>2015-10-28T10:01:27.000Z</ns4:DocumentVersionDtTime>
+        <ns4:FileId>Doc3 - Copy (14) - Copy</ns4:FileId>
+        <ns4:FileFormatCd>application/vnd.openxmlformats-officedocument.wordprocessingml.document</ns4:FileFormatCd>
+        <ns4:FileSize>
+          <ns4:NumUnits>135</ns4:NumUnits>
+          <ns4:UnitMeasurementCd>KB</ns4:UnitMeasurementCd>
+        </ns4:FileSize>
+        <ns4:DocumentTypeCd>document</ns4:DocumentTypeCd>
+        <ns3:ReferredObjects>
+          <ns2:ServiceProvider>
+            <ns2:Party>
+              <ns2:Name>Xchanging</ns2:Name>
+            </ns2:Party>
+            <ns2:Contact>
+              <ns2:Description>B0001OCT28SP2FOF-B0001OCT28SP02FOF-B0001VTR01</ns2:Description>
+            </ns2:Contact>
+          </ns2:ServiceProvider>
+          <ns3:Contract>
+            <ns2:BrokerReference>B1111OCT28SP2FOF</ns2:BrokerReference>
+          </ns3:Contract>
+          <ns3:Claim>
+            <ns2:BrokerReference>B1111UCR000000054</ns2:BrokerReference>
+          </ns3:Claim>
+          <ns3:ClaimEntry>
+            <ns2:BrokerReference>B1111VTR01</ns2:BrokerReference>
+          </ns3:ClaimEntry>
+        </ns3:ReferredObjects>
+      </ns3:SupportingDocument>
+      <ns3:SupportingDocument>
+        <ns4:DocumentId>59c4d06f-763f-428b-a0c8-3527119d016a</ns4:DocumentId>
+        <ns4:DocumentVersion>1.0</ns4:DocumentVersion>
+        <ns4:DocumentVersionDtTime>2015-10-28T10:01:26.000Z</ns4:DocumentVersionDtTime>
+        <ns4:FileId>Doc3 - Copy (13) - Copy</ns4:FileId>
+        <ns4:FileFormatCd>application/vnd.openxmlformats-officedocument.wordprocessingml.document</ns4:FileFormatCd>
+        <ns4:FileSize>
+          <ns4:NumUnits>135</ns4:NumUnits>
+          <ns4:UnitMeasurementCd>KB</ns4:UnitMeasurementCd>
+        </ns4:FileSize>
+        <ns4:DocumentTypeCd>inquiry_loss_response</ns4:DocumentTypeCd>
+        <ns3:ReferredObjects>
+          <ns2:ServiceProvider>
+            <ns2:Party>
+              <ns2:Name>Xchanging</ns2:Name>
+            </ns2:Party>
+            <ns2:Contact>
+              <ns2:Description>B0001OCT28SP2FOF-B0001OCT28SP02FOF-B0001VTR01</ns2:Description>
+            </ns2:Contact>
+          </ns2:ServiceProvider>
+          <ns3:Contract>
+            <ns2:BrokerReference>B1111OCT28SP2FOF</ns2:BrokerReference>
+          </ns3:Contract>
+          <ns3:Claim>
+            <ns2:BrokerReference>B1111UCR000000054</ns2:BrokerReference>
+          </ns3:Claim>
+          <ns3:ClaimEntry>
+            <ns2:BrokerReference>B1111VTR01</ns2:BrokerReference>
+          </ns3:ClaimEntry>
+        </ns3:ReferredObjects>
+      </ns3:SupportingDocument>
+      <ns3:SupportingDocument>
+        <ns4:DocumentId>229207fe-c65d-4e2b-b623-95ea69c01465</ns4:DocumentId>
+        <ns4:DocumentVersion>1.0</ns4:DocumentVersion>
+        <ns4:DocumentVersionDtTime>2015-10-28T10:01:25.000Z</ns4:DocumentVersionDtTime>
+        <ns4:FileId>Doc3 - Copy (12)</ns4:FileId>
+        <ns4:FileFormatCd>application/vnd.openxmlformats-officedocument.wordprocessingml.document</ns4:FileFormatCd>
+        <ns4:FileSize>
+          <ns4:NumUnits>135</ns4:NumUnits>
+          <ns4:UnitMeasurementCd>KB</ns4:UnitMeasurementCd>
+        </ns4:FileSize>
+        <ns4:DocumentTypeCd>bordereau_outstanding_loss_and_loss_adju</ns4:DocumentTypeCd>
+        <ns3:ReferredObjects>
+          <ns2:ServiceProvider>
+            <ns2:Party>
+              <ns2:Name>Xchanging</ns2:Name>
+            </ns2:Party>
+            <ns2:Contact>
+              <ns2:Description>B0001OCT28SP2FOF-B0001OCT28SP02FOF-B0001VTR01</ns2:Description>
+            </ns2:Contact>
+          </ns2:ServiceProvider>
+          <ns3:Contract>
+            <ns2:BrokerReference>B1111OCT28SP2FOF</ns2:BrokerReference>
+          </ns3:Contract>
+          <ns3:Claim>
+            <ns2:BrokerReference>B1111UCR000000054</ns2:BrokerReference>
+          </ns3:Claim>
+          <ns3:ClaimEntry>
+            <ns2:BrokerReference>B1111VTR01</ns2:BrokerReference>
+          </ns3:ClaimEntry>
+        </ns3:ReferredObjects>
+      </ns3:SupportingDocument>
+      <ns3:SupportingDocument>
+        <ns4:DocumentId>10c48a8c-1e37-4f0a-8ab3-ce99d4901ea6</ns4:DocumentId>
+        <ns4:DocumentVersion>1.0</ns4:DocumentVersion>
+        <ns4:DocumentVersionDtTime>2015-10-28T10:01:23.000Z</ns4:DocumentVersionDtTime>
+        <ns4:FileId>Doc3 - Copy (12) - Copy</ns4:FileId>
+        <ns4:FileFormatCd>application/vnd.openxmlformats-officedocument.wordprocessingml.document</ns4:FileFormatCd>
+        <ns4:FileSize>
+          <ns4:NumUnits>135</ns4:NumUnits>
+          <ns4:UnitMeasurementCd>KB</ns4:UnitMeasurementCd>
+        </ns4:FileSize>
+        <ns4:DocumentTypeCd>calculation_reinstatement_premium</ns4:DocumentTypeCd>
+        <ns3:ReferredObjects>
+          <ns2:ServiceProvider>
+            <ns2:Party>
+              <ns2:Name>Xchanging</ns2:Name>
+            </ns2:Party>
+            <ns2:Contact>
+              <ns2:Description>B0001OCT28SP2FOF-B0001OCT28SP02FOF-B0001VTR01</ns2:Description>
+            </ns2:Contact>
+          </ns2:ServiceProvider>
+          <ns3:Contract>
+            <ns2:BrokerReference>B1111OCT28SP2FOF</ns2:BrokerReference>
+          </ns3:Contract>
+          <ns3:Claim>
+            <ns2:BrokerReference>B1111UCR000000054</ns2:BrokerReference>
+          </ns3:Claim>
+          <ns3:ClaimEntry>
+            <ns2:BrokerReference>B1111VTR01</ns2:BrokerReference>
+          </ns3:ClaimEntry>
+        </ns3:ReferredObjects>
+      </ns3:SupportingDocument>
+      <ns3:SupportingDocument>
+        <ns4:DocumentId>a4a8a08e-fa5b-457d-b794-1975517a4d1c</ns4:DocumentId>
+        <ns4:DocumentVersion>1.0</ns4:DocumentVersion>
+        <ns4:DocumentVersionDtTime>2015-10-28T10:01:22.000Z</ns4:DocumentVersionDtTime>
+        <ns4:FileId>Doc3 - Copy (11)</ns4:FileId>
+        <ns4:FileFormatCd>application/vnd.openxmlformats-officedocument.wordprocessingml.document</ns4:FileFormatCd>
+        <ns4:FileSize>
+          <ns4:NumUnits>135</ns4:NumUnits>
+          <ns4:UnitMeasurementCd>KB</ns4:UnitMeasurementCd>
+        </ns4:FileSize>
+        <ns4:DocumentTypeCd>correspondence_settlement_documentation</ns4:DocumentTypeCd>
+        <ns3:ReferredObjects>
+          <ns2:ServiceProvider>
+            <ns2:Party>
+              <ns2:Name>Xchanging</ns2:Name>
+            </ns2:Party>
+            <ns2:Contact>
+              <ns2:Description>B0001OCT28SP2FOF-B0001OCT28SP02FOF-B0001VTR01</ns2:Description>
+            </ns2:Contact>
+          </ns2:ServiceProvider>
+          <ns3:Contract>
+            <ns2:BrokerReference>B1111OCT28SP2FOF</ns2:BrokerReference>
+          </ns3:Contract>
+          <ns3:Claim>
+            <ns2:BrokerReference>B1111UCR000000054</ns2:BrokerReference>
+          </ns3:Claim>
+          <ns3:ClaimEntry>
+            <ns2:BrokerReference>B1111VTR01</ns2:BrokerReference>
+          </ns3:ClaimEntry>
+        </ns3:ReferredObjects>
+      </ns3:SupportingDocument>
+      <ns3:SupportingDocument>
+        <ns4:DocumentId>bf8f8c50-1211-4c70-809e-8f2b2518d77d</ns4:DocumentId>
+        <ns4:DocumentVersion>1.0</ns4:DocumentVersion>
+        <ns4:DocumentVersionDtTime>2015-10-28T10:01:21.000Z</ns4:DocumentVersionDtTime>
+        <ns4:FileId>Doc3 - Copy (10)</ns4:FileId>
+        <ns4:FileFormatCd>application/vnd.openxmlformats-officedocument.wordprocessingml.document</ns4:FileFormatCd>
+        <ns4:FileSize>
+          <ns4:NumUnits>135</ns4:NumUnits>
+          <ns4:UnitMeasurementCd>KB</ns4:UnitMeasurementCd>
+        </ns4:FileSize>
+        <ns4:DocumentTypeCd>bordereau_paid_loss_and_lae_and_outstand</ns4:DocumentTypeCd>
+        <ns3:ReferredObjects>
+          <ns2:ServiceProvider>
+            <ns2:Party>
+              <ns2:Name>Xchanging</ns2:Name>
+            </ns2:Party>
+            <ns2:Contact>
+              <ns2:Description>B0001OCT28SP2FOF-B0001OCT28SP02FOF-B0001VTR01</ns2:Description>
+            </ns2:Contact>
+          </ns2:ServiceProvider>
+          <ns3:Contract>
+            <ns2:BrokerReference>B1111OCT28SP2FOF</ns2:BrokerReference>
+          </ns3:Contract>
+          <ns3:Claim>
+            <ns2:BrokerReference>B1111UCR000000054</ns2:BrokerReference>
+          </ns3:Claim>
+          <ns3:ClaimEntry>
+            <ns2:BrokerReference>B1111VTR01</ns2:BrokerReference>
+          </ns3:ClaimEntry>
+        </ns3:ReferredObjects>
+      </ns3:SupportingDocument>
+      <ns3:SupportingDocument>
+        <ns4:DocumentId>58cd4945-aa37-4b95-908a-99db7832a400</ns4:DocumentId>
+        <ns4:DocumentVersion>1.0</ns4:DocumentVersion>
+        <ns4:DocumentVersionDtTime>2015-10-28T10:16:21.000Z</ns4:DocumentVersionDtTime>
+        <ns4:FileId>Doc1</ns4:FileId>
+        <ns4:FileFormatCd>application/vnd.openxmlformats-officedocument.wordprocessingml.document</ns4:FileFormatCd>
+        <ns4:FileSize>
+          <ns4:NumUnits>298</ns4:NumUnits>
+          <ns4:UnitMeasurementCd>KB</ns4:UnitMeasurementCd>
+        </ns4:FileSize>
+        <ns4:DocumentTypeCd>correspondence_client</ns4:DocumentTypeCd>
+        <ns3:ReferredObjects>
+          <ns3:Contract>
+            <ns2:BrokerReference>B1111OCT28SP2FOF</ns2:BrokerReference>
+          </ns3:Contract>
+        </ns3:ReferredObjects>
+      </ns3:SupportingDocument>
+    </ns3:ClaimNotifyEventRq>
+  </soapenv:Body>
+</soapenv:Envelope>

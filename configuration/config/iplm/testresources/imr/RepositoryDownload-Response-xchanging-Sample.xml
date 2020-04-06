@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RepositoryOperationRs xmlns="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0" xmlns:rlc="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/2005-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0 Acord-Repository_v-1-2-0.xsd">
+   <MsgId>406453bd-89f2-4560-b9c3-0272ebe69d1b</MsgId>
+   <CreationDtTime>2015-01-29T07:30:54Z</CreationDtTime>
+   <RepositoryOperationTypeCd>RepositoryDownload</RepositoryOperationTypeCd>
+   <ResponseInfo>
+      <MsgId>E972D91E-912C-42D4-A998-050D09CED856</MsgId>
+      <AcknowledgementLevelIndicator>application_validation</AcknowledgementLevelIndicator>
+      <AcknowledgementStatusCd>acknowledged</AcknowledgementStatusCd>
+   </ResponseInfo>
+   <Sender>
+      <PartyId>urn:duns:236196817</PartyId>
+      <PartyRoleCd>ServiceProvider</PartyRoleCd>
+      <PartyName>Xchanging</PartyName>
+   </Sender>
+   <Receiver>
+		<PartyId>urn:lloyds:0001</PartyId>
+     	<PartyRoleCd>Insurer</PartyRoleCd>
+      	<PartyName>writeback-carrier</PartyName>
+   </Receiver>
+   <Application>
+      <ApplicationCd>Jv-Ins-Reinsurance</ApplicationCd>
+      <SchemaVersion>http://www.ACORD.org/standards/Jv-Ins-Reinsurance/2005-2</SchemaVersion>
+   </Application>
+   <DocumentList>
+      <HierarchySortIndicator>0</HierarchySortIndicator>
+      <DocumentItem>
+         <Document>
+            <DocumentId>20112809-42b4-0709-111D-010001121171</DocumentId>
+            <DocumentVersion>1.0</DocumentVersion>
+            <DocumentVersionDtTime>2011-01-25 12:04:01.0</DocumentVersionDtTime>
+            <InheritIndicator>0</InheritIndicator>
+            <FileId>Image.jpeg</FileId>
+            <FileFormatCd>image/jpeg</FileFormatCd>
+            <FileSize>
+               <NumUnits>412</NumUnits>
+               <UnitMeasurementCd>KB</UnitMeasurementCd>
+            </FileSize>
+            <DocumentTypeCd>cs::invoice</DocumentTypeCd>
+            <Description>MYTest</Description>
+         </Document>
+         <Owner>
+            <PartyId>urn:lloyds:0001</PartyId>
+            <PartyRoleCd>Broker</PartyRoleCd>
+            <PartyName>Testing36C</PartyName>
+            <PartyContact />
+         </Owner>
+         <AccessControlList>
+            <AccessParty>
+               <ListActionCd>add</ListActionCd>
+               <AccessRightCd>read</AccessRightCd>
+               <PartyId>urn::ECF1</PartyId>
+               <PartyRoleCd>Insurer</PartyRoleCd>
+               <PartyName />
+            </AccessParty>
+            <AccessParty>
+               <ListActionCd>add</ListActionCd>
+               <AccessRightCd>read</AccessRightCd>
+               <PartyId>urn:lirma:G1111</PartyId>
+               <PartyRoleCd>Insurer</PartyRoleCd>
+               <PartyName />
+            </AccessParty>
+            <AccessParty>
+               <ListActionCd>add</ListActionCd>
+               <AccessRightCd>read</AccessRightCd>
+               <PartyId>urn:lloyds:1230</PartyId>
+               <PartyRoleCd>Insurer</PartyRoleCd>
+               <PartyName />
+            </AccessParty>
+            <AccessParty>
+               <ListActionCd>add</ListActionCd>
+               <AccessRightCd>read</AccessRightCd>
+               <PartyId>urn:lloyds:2031</PartyId>
+               <PartyRoleCd>Insurer</PartyRoleCd>
+               <PartyName />
+            </AccessParty>
+            <AccessParty>
+               <ListActionCd>add</ListActionCd>
+               <AccessRightCd>read</AccessRightCd>
+               <PartyId>urn:lloyds:2032</PartyId>
+               <PartyRoleCd>Insurer</PartyRoleCd>
+               <PartyName />
+            </AccessParty>
+            <AccessParty>
+               <ListActionCd>add</ListActionCd>
+               <AccessRightCd>read</AccessRightCd>
+               <PartyId>urn:lloyds:2033</PartyId>
+               <PartyRoleCd>Insurer</PartyRoleCd>
+               <PartyName />
+            </AccessParty>
+            <AccessParty>
+               <ListActionCd>add</ListActionCd>
+               <AccessRightCd>read</AccessRightCd>
+               <PartyId>urn:lirma:G1115</PartyId>
+               <PartyRoleCd>Insurer</PartyRoleCd>
+               <PartyName />
+            </AccessParty>
+            <AccessParty>
+               <ListActionCd>add</ListActionCd>
+               <AccessRightCd>read</AccessRightCd>
+               <PartyId>urn:lirma:G1116</PartyId>
+               <PartyRoleCd>Insurer</PartyRoleCd>
+               <PartyName />
+            </AccessParty>
+            <AccessParty>
+               <ListActionCd>add</ListActionCd>
+               <AccessRightCd>read</AccessRightCd>
+               <PartyId>urn:lirma:G1114</PartyId>
+               <PartyRoleCd>Insurer</PartyRoleCd>
+               <PartyName />
+            </AccessParty>
+            <AccessParty>
+               <ListActionCd>add</ListActionCd>
+               <AccessRightCd>read</AccessRightCd>
+               <PartyId>urn:lloyds:0001</PartyId>
+               <PartyRoleCd>Broker</PartyRoleCd>
+               <PartyName />
+            </AccessParty>
+         </AccessControlList>
+         <rlc:ReferredObjects>
+            <rlc:Contract>
+               <rlc:BrokerReference>B0001UMR001</rlc:BrokerReference>
+            </rlc:Contract>
+            <rlc:Claim>
+               <rlc:BrokerReference>B0001UCR001</rlc:BrokerReference>
+            </rlc:Claim>
+            <rlc:ClaimEntry>
+               <rlc:BrokerReference>B0001TR0001</rlc:BrokerReference>
+            </rlc:ClaimEntry>
+         </rlc:ReferredObjects>
+      </DocumentItem>
+   </DocumentList>
+</RepositoryOperationRs> 
+<!-- placeholder for document binary stream -->

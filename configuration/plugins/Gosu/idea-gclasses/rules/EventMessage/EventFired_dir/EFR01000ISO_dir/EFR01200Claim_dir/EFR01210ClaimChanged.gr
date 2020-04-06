@@ -1,0 +1,21 @@
+package rules.EventMessage.EventFired_dir.EFR01000ISO_dir.EFR01200Claim_dir
+
+@gw.rules.RuleName("EFR01210 - Claim Changed")
+internal class EFR01210ClaimChanged {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return messageContext.EventName == "ClaimChanged" or 
+messageContext.EventName == "ClaimValid"
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+libraries.ISO.checkForClaimChanges(messageContext, messageContext.Root as Claim)
+/*end00rule*/
+
+  }
+}

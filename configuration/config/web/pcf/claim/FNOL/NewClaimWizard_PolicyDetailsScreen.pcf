@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="NewClaimWizard_PolicyDetailsScreen">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Variable
+      initialValue="gw.api.policy.PolicyTabUtil.getTabSet(Claim)"
+      name="PolicyTabSet"
+      type="java.util.Set"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarDivider/>
+      <ToolbarButton
+        action="Wizard.deverifyPolicy()"
+        confirmMessage="DisplayKey.get(&quot;JSP.ClaimPolicyGeneral.EditVerifiedPolicy&quot;)"
+        default="true"
+        id="NewClaimWizard_PolicyDetailsScreen_EditExternalFieldsButton"
+        label="DisplayKey.get(&quot;Button.EditExternalFields&quot;)"
+        shortcut="P"
+        visible="Claim.Policy.Verified and perm.Policy.makeeditable(Claim) and perm.Policy.edit(Claim)"/>
+    </Toolbar>
+    <Verbatim
+      label="Claim.Policy.Verified ? DisplayKey.get(&quot;JSP.NewClaimPolicyDetails.ReviewPolicyDetails.Tip&quot;) :                      DisplayKey.get(&quot;JSP.NewClaimPolicyDetails.ReviewOrEditPolicyDetails.Tip&quot;)"/>
+    <!-- Vehicles -->
+    <PanelRef
+      def="NewClaimVehiclesLV(Claim.Policy.Vehicles, Claim.Policy)"
+      visible="PolicyTabSet.contains(&quot;Vehicles&quot;)">
+      <TitleBar
+        title=" (!Claim.Policy.Verified or (Claim.Policy.TotalVehicles == Claim.Policy.Vehicles.length)) ? DisplayKey.get(&quot;JSP.NewClaimPolicyDetails.Policy.Vehicles&quot;) as String : DisplayKey.get(&quot;JSP.NewClaimPolicyDetails.Policy.Vehicles.PartialList&quot;, Claim.Policy.TotalVehicles)"/>
+      <Toolbar>
+        <IteratorButtons
+          addVisible=" !Claim.Policy.Verified and perm.Policy.edit(Claim)"
+          iterator="NewClaimVehiclesLV.NewClaimVehiclesLV"
+          removeVisible="perm.Policy.edit(Claim)"/>
+      </Toolbar>
+    </PanelRef>
+    <PanelRef
+      def="PolicyLocationsLV(Claim.Policy.PolicyLocations, Claim)"
+      visible="PolicyTabSet.contains(&quot;Properties&quot;) or PolicyTabSet.contains(&quot;Classcodes&quot;)">
+      <TitleBar
+        title=" !Claim.Policy.Verified or (Claim.Policy.TotalProperties == Claim.Policy.Properties.length) ? DisplayKey.get(&quot;JSP.NewClaimPolicyDetails.Policy.Locations&quot;) as String : DisplayKey.get(&quot;JSP.NewClaimPolicyDetails.Policy.Locations.PartialList&quot;, Claim.Policy.TotalProperties)"/>
+      <Toolbar>
+        <IteratorButtons
+          addVisible="!Claim.Policy.Verified and perm.Claim.edit(Claim) and perm.Policy.edit(Claim)"
+          iterator="PolicyLocationsLV.PolicyLocationIterator"
+          removeVisible="!Claim.Policy.Verified and perm.Claim.edit(Claim) and perm.Policy.edit(Claim)"/>
+      </Toolbar>
+    </PanelRef>
+    <PanelRef
+      def="PolicyTripLV( Claim, Wizard )"
+      visible="PolicyTabSet != null &amp;&amp; PolicyTabSet.contains(&quot;Trips&quot;)">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.ClaimPolicy.Trips&quot;)"/>
+      <Toolbar>
+        <IteratorButtons
+          addVisible=" !Claim.Policy.Verified and perm.Policy.edit(Claim)"
+          iterator="PolicyTripLV.PolicyTripLV"
+          removeVisible=" !Claim.Policy.Verified and perm.Policy.edit(Claim)"/>
+      </Toolbar>
+    </PanelRef>
+    <!-- Endorsements -->
+    <PanelRef
+      def="NewClaimEndorsementsLV(Claim.Policy.Endorsements, Claim.Policy)"
+      visible="PolicyTabSet.contains(&quot;Endorsements&quot;)">
+      <TitleBar
+        title="DisplayKey.get(&quot;JSP.NewClaimPolicyDetails.Endorsements.Title&quot;)"/>
+      <Toolbar>
+        <IteratorButtons
+          addVisible=" !Claim.Policy.Verified and perm.Policy.edit(Claim)"
+          iterator="NewClaimEndorsementsLV.NewClaimEndorsementsLV"
+          removeVisible=" !Claim.Policy.Verified and perm.Policy.edit(Claim)"/>
+      </Toolbar>
+    </PanelRef>
+    <!-- Stat Codes -->
+    <PanelRef
+      def="NewClaimStatCodesLV(Claim.Policy.StatCodes, Claim.Policy)"
+      visible="PolicyTabSet.contains(&quot;Statcodes&quot;)">
+      <TitleBar
+        title="DisplayKey.get(&quot;JSP.NewClaimPolicyDetails.Policy.StatCodes&quot;)"/>
+      <Toolbar>
+        <IteratorButtons
+          addVisible=" !Claim.Policy.Verified and perm.Policy.edit(Claim)"
+          iterator="NewClaimStatCodesLV.NewClaimStatCodesLV"
+          removeVisible=" !Claim.Policy.Verified and perm.Policy.edit(Claim)"/>
+      </Toolbar>
+    </PanelRef>
+  </Screen>
+</PCF>

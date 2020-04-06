@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Claim.view(Claim) and perm.System.viewworkplan and (Claim.State != ClaimState.TC_DRAFT)"
+    id="ClaimWorkplan"
+    title="DisplayKey.get(&quot;Web.Claim.ClaimWorkplan&quot;)">
+    <LocationEntryPoint
+      signature="ClaimWorkplan(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="ClaimWorkplanScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.Claim.ClaimWorkplan&quot;)"/>
+      <Toolbar>
+        <ToolbarDivider/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="pushAssignmentPopup(CheckedValues)"
+          flags="all CanAssignActivity"
+          id="ClaimWorkplan_AssignButton"
+          iterator="WorkplanLV.WorkplanLV"
+          label="DisplayKey.get(&quot;JSP.ClaimWorkplan.Toolbar.Assign&quot;)"
+          shortcut="G"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction=" CheckedValue.skip()"
+          flags="all CanSkipActivity"
+          id="ClaimWorkplan_SkipButton"
+          iterator="WorkplanLV.WorkplanLV"
+          label="DisplayKey.get(&quot;JSP.ClaimWorkplan.Toolbar.Skip&quot;)"
+          shortcut="I"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction=" CheckedValue.complete()"
+          flags="all CanCompleteActivity"
+          id="ClaimWorkplan_CompleteButton"
+          iterator="WorkplanLV.WorkplanLV"
+          label="DisplayKey.get(&quot;JSP.ClaimWorkplan.Toolbar.Complete&quot;)"
+          shortcut="L"/>
+        <ToolbarDivider/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="CheckedValue.approve()"
+          flags="all CanApproveActivity"
+          id="ClaimWorkplan_ApproveButton"
+          iterator="WorkplanLV.WorkplanLV"
+          label="DisplayKey.get(&quot;JSP.ClaimWorkplan.Toolbar.Approve&quot;)"
+          shortcut="P"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction=" CheckedValue.reject()"
+          flags="all CanApproveActivity"
+          id="ClaimWorkplan_RejectButton"
+          iterator="WorkplanLV.WorkplanLV"
+          label="DisplayKey.get(&quot;JSP.ClaimWorkplan.Toolbar.Reject&quot;)"
+          shortcut="J"/>
+        <ToolbarDivider/>
+      </Toolbar>
+      <PanelRef
+        def="WorkplanLV(Claim, gw.api.database.Query.make(entity.Activity).compare(&quot;claim&quot;, Equals, Claim).select())"/>
+    </Screen>
+    <Code><![CDATA[
+function pushAssignmentPopup(Activities : Activity[]){
+        var popup = new gw.api.activity.ActivityAssignmentPopup(Activities);
+        AssignActivitiesPopup.push(popup)
+      }
+    ]]></Code>
+  </Page>
+</PCF>

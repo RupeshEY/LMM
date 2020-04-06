@@ -1,0 +1,358 @@
+<soap:Envelope xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/">
+  <SOAP-ENV:Header xmlns:SOAP-ENV="http://schemas.xmlsoap.org/soap/envelope/">
+    <cla:xchangingheader xmlns:cla="http://www.xchanging.com/wsdl/ClaimService/">
+      <cla:Sender>
+        <cla:Party>
+          <cla:Id>urn:duns:236196817</cla:Id>
+        </cla:Party>
+      </cla:Sender>
+      <cla:Receiver>
+        <cla:Party>
+          <cla:Id>urn:lloyds:0623</cla:Id>
+        </cla:Party>
+      </cla:Receiver>
+      <cla:MsgTypeCd>RetrieveClaim</cla:MsgTypeCd>
+      <cla:Timestamp>2016-11-10T09:34:26Z</cla:Timestamp>
+      <cla:ResponseUUId>e35d5a51-c536-431d-988b-0b80fa5d697e</cla:ResponseUUId>
+      <cla:RequestUUId>e0a47592-be38-423f-8b56-476c489daa73</cla:RequestUUId>
+    </cla:xchangingheader>
+  </SOAP-ENV:Header>
+  <soap:Body>
+    <ns5:RetrieveClaimRs xmlns:ns2="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1" xmlns:ns3="http://www.xchanging.com/retrieveClaim/rq/1" xmlns:ns4="http://www.ACORD.org/Standards/AcordMsgSvc/1" xmlns:ns5="http://www.xchanging.com/retrieveClaim/rs/1" xmlns:xh="http://www.xchanging.com/wsdl/ClaimService/" Receiver="insurer" Sender="serviceprovider">
+      <ns2:UUId>e0a47592-be38-423f-8b56-476c489daa73</ns2:UUId>
+      <ns2:CreationDate>2016-11-10T09:34:31+00:00</ns2:CreationDate>
+      <ns5:ReferredUUId>e35d5a51-c536-431d-988b-0b80fa5d697e</ns5:ReferredUUId>
+      <ns5:ClaimMovement Receiver="insurer" Sender="serviceprovider">
+        <ns2:UUId>e0a47592-be38-423f-8b56-476c489daa73</ns2:UUId>
+        <ns2:ServiceProviderReference>1609a9a7-acb7-456a-bfaa-464df25c1261</ns2:ServiceProviderReference>
+        <ns2:CreationDate>2016-11-10T09:34:31+00:00</ns2:CreationDate>
+        <ns2:ClaimAdviceInitialOrSubsequentIndicator>InterimAdvice</ns2:ClaimAdviceInitialOrSubsequentIndicator>
+        <ns2:Insurer>
+          <ns2:Party>
+            <ns2:Id Agency="lloyds">urn:lloyds:0623</ns2:Id>
+          </ns2:Party>
+        </ns2:Insurer>
+        <ns2:Broker>
+          <ns2:Party>
+            <ns2:Id Agency="lloyds">urn:lloyds:9979</ns2:Id>
+            <ns2:Name>TEST BROKER 9979</ns2:Name>
+          </ns2:Party>
+          <ns2:Contact>
+            <ns2:PersonName>MICHELLE PHIPPS</ns2:PersonName>
+            <ns2:Telephone>1234</ns2:Telephone>
+          </ns2:Contact>
+        </ns2:Broker>
+        <ns2:ServiceProvider>
+          <ns2:Party>
+            <ns2:Id Agency="DUNS_dun_and_bradstreet">urn:duns:236196817</ns2:Id>
+            <ns2:Name>Xchanging</ns2:Name>
+          </ns2:Party>
+        </ns2:ServiceProvider>
+        <ns2:Insured>
+          <ns2:Party>
+            <ns2:Name>M SHIPS</ns2:Name>
+          </ns2:Party>
+        </ns2:Insured>
+        <ns2:BureauLeadingInsurerOrReinsurer>
+          <ns2:Party>
+            <ns2:Name>SYNDICATE 4444</ns2:Name>
+          </ns2:Party>
+          <ns2:Contact>
+            <ns2:PersonName>CANOPIUS</ns2:PersonName>
+            <ns2:Telephone>5623489</ns2:Telephone>
+            <ns2:Email>CASEY.ABRAHAMSE@XCHANGING.COM</ns2:Email>
+          </ns2:Contact>
+        </ns2:BureauLeadingInsurerOrReinsurer>
+        <ns2:Contract>
+          <ns2:BrokerReference>B9979ECF2WB5006</ns2:BrokerReference>
+          <ns2:InsurerRiskReference>CNPECF2WB006</ns2:InsurerRiskReference>
+        </ns2:Contract>
+        <ns2:ClaimEntry>
+          <ns2:BrokerReference>B9979002</ns2:BrokerReference>
+        </ns2:ClaimEntry>
+        <ns2:Claim>
+          <ns2:LossOrEventName>SC7C TR2</ns2:LossOrEventName>
+          <ns2:BrokerReference>B9979ECF2WBSC7CN</ns2:BrokerReference>
+          <ns2:CauseOfLoss>AAAA</ns2:CauseOfLoss>
+          <ns2:LossLocation>
+            <ns2:Location>
+              <ns2:Description>-</ns2:Description>
+            </ns2:Location>
+          </ns2:LossLocation>
+        </ns2:Claim>
+        <ns2:ClaimOriginalPolicy>
+          <ns2:JvClassOfBusiness>M</ns2:JvClassOfBusiness>
+        </ns2:ClaimOriginalPolicy>
+        <ns5:AsOfDate>2016-11-10T09:34:29.521Z</ns5:AsOfDate>
+        <ns5:LossDetails>SC7C</ns5:LossDetails>
+        <ns5:ClaimAmounts Ccy="GBP">
+          <ns2:ClaimMovementAmtItem Type="loss_and_expense_incurred_for_contract_before_retention">
+            <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">0.00</ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="outstanding_loss_plus_expense_for_contract_before_retention">
+            <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">0.00</ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="100_percent_losses_and_expenses_paid_for_contract_before_retention">
+            <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">0.00</ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="current_payment_losses_and_expenses_for_contract">
+            <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">0.00</ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+        </ns5:ClaimAmounts>
+        <ns5:ClaimAmounts Ccy="EUR">
+          <ns2:ClaimMovementAmtItem Type="loss_and_expense_incurred_for_contract_before_retention">
+            <ns2:Amt Ccy="EUR" CcyIndic="reference_currency" Share="hundred_percent">0.00</ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="outstanding_loss_plus_expense_for_contract_before_retention">
+            <ns2:Amt Ccy="EUR" CcyIndic="reference_currency" Share="hundred_percent">0.00</ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="100_percent_losses_and_expenses_paid_for_contract_before_retention">
+            <ns2:Amt Ccy="EUR" CcyIndic="reference_currency" Share="hundred_percent">0.00</ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="current_payment_losses_and_expenses_for_contract">
+            <ns2:Amt Ccy="EUR" CcyIndic="reference_currency" Share="hundred_percent">0.00</ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+        </ns5:ClaimAmounts>
+        <ns5:Extension>
+          <ns5:Contract>
+            <ns5:RiskCode>EC</ns5:RiskCode>
+            <ns5:SlipLeadName>
+              <ns2:Party>
+                <ns2:Name>SYNDICATE 4444</ns2:Name>
+              </ns2:Party>
+            </ns5:SlipLeadName>
+            <ns5:ContractMarket Agency="lloyds">
+              <ns5:InsurerOrReinsurer>
+                <ns2:Party>
+                  <ns2:Id Agency="lloyds">urn:lloyds:4444</ns2:Id>
+                  <ns2:Name>SYNDICATE 4444</ns2:Name>
+                </ns2:Party>
+                <ns2:Contact>
+                  <ns2:PersonName>CANOPIUS</ns2:PersonName>
+                  <ns2:Telephone>5623489</ns2:Telephone>
+                  <ns2:Email>CASEY.ABRAHAMSE@XCHANGING.COM</ns2:Email>
+                </ns2:Contact>
+                <ns2:InsurerSharePercentage>
+                  <ns2:Rate RateUnit="Percentage">40.0000000</ns2:Rate>
+                </ns2:InsurerSharePercentage>
+                <ns5:InsurerOrReinsurerClaimReference1>CNPECF2WB006</ns5:InsurerOrReinsurerClaimReference1>
+                <ns5:ParticipantFunction>Lead</ns5:ParticipantFunction>
+                <ns5:ManagingAgentCode> 0228D</ns5:ManagingAgentCode>
+                <ns5:ClaimLineNumber>1</ns5:ClaimLineNumber>
+              </ns5:InsurerOrReinsurer>
+              <ns5:InsurerOrReinsurer>
+                <ns2:Party>
+                  <ns2:Id Agency="lloyds">urn:lloyds:5000</ns2:Id>
+                  <ns2:Name>SYNDICATE 5000</ns2:Name>
+                </ns2:Party>
+                <ns2:InsurerSharePercentage>
+                  <ns2:Rate RateUnit="Percentage">20.0000000</ns2:Rate>
+                </ns2:InsurerSharePercentage>
+                <ns5:InsurerOrReinsurerClaimReference1>TRVECF2WB006</ns5:InsurerOrReinsurerClaimReference1>
+                <ns5:ParticipantFunction>Follower</ns5:ParticipantFunction>
+                <ns5:ManagingAgentCode> 1993N</ns5:ManagingAgentCode>
+                <ns5:ClaimLineNumber>2</ns5:ClaimLineNumber>
+              </ns5:InsurerOrReinsurer>
+              <ns5:InsurerOrReinsurer>
+                <ns2:Party>
+                  <ns2:Id Agency="lloyds">urn:lloyds:1218</ns2:Id>
+                  <ns2:Name>SYNDICATE 1218</ns2:Name>
+                </ns2:Party>
+                <ns2:InsurerSharePercentage>
+                  <ns2:Rate RateUnit="Percentage">20.0000000</ns2:Rate>
+                </ns2:InsurerSharePercentage>
+                <ns5:InsurerOrReinsurerClaimReference1>NWLECF2WB006</ns5:InsurerOrReinsurerClaimReference1>
+                <ns5:ParticipantFunction>Follower</ns5:ParticipantFunction>
+                <ns5:ManagingAgentCode> 2042X</ns5:ManagingAgentCode>
+                <ns5:ClaimLineNumber>3</ns5:ClaimLineNumber>
+              </ns5:InsurerOrReinsurer>
+              <ns5:InsurerOrReinsurer>
+                <ns2:Party>
+                  <ns2:Id Agency="lloyds">urn:lloyds:2623</ns2:Id>
+                  <ns2:Name>SYNDICATE 2623</ns2:Name>
+                </ns2:Party>
+                <ns2:InsurerSharePercentage>
+                  <ns2:Rate RateUnit="Percentage">18.0000000</ns2:Rate>
+                </ns2:InsurerSharePercentage>
+                <ns5:InsurerOrReinsurerClaimReference1>AFBECF2WB006</ns5:InsurerOrReinsurerClaimReference1>
+                <ns5:ParticipantFunction>Follower</ns5:ParticipantFunction>
+                <ns5:ManagingAgentCode> 0064H</ns5:ManagingAgentCode>
+                <ns5:ClaimLineNumber>4</ns5:ClaimLineNumber>
+              </ns5:InsurerOrReinsurer>
+              <ns5:InsurerOrReinsurer>
+                <ns2:Party>
+                  <ns2:Id Agency="lloyds">urn:lloyds:0623</ns2:Id>
+                  <ns2:Name>SYNDICATE 0623</ns2:Name>
+                </ns2:Party>
+                <ns2:InsurerSharePercentage>
+                  <ns2:Rate RateUnit="Percentage">2.0000000</ns2:Rate>
+                </ns2:InsurerSharePercentage>
+                <ns5:InsurerOrReinsurerClaimReference1>AFBECF2WB006</ns5:InsurerOrReinsurerClaimReference1>
+                <ns5:ParticipantFunction>Follower</ns5:ParticipantFunction>
+                <ns5:ManagingAgentCode> 0064H</ns5:ManagingAgentCode>
+                <ns5:ClaimLineNumber>5</ns5:ClaimLineNumber>
+              </ns5:InsurerOrReinsurer>
+            </ns5:ContractMarket>
+            <ns5:SlipOrder1>100.0000000</ns5:SlipOrder1>
+            <ns5:SlipOrder2>0.0000000</ns5:SlipOrder2>
+          </ns5:Contract>
+          <ns5:Claim>
+            <ns5:ClaimLineNumber>1</ns5:ClaimLineNumber>
+            <ns5:LeadClaimReference>CNPECF2WB006</ns5:LeadClaimReference>
+            <ns5:ClaimStatus>Open</ns5:ClaimStatus>
+            <ns5:LossPeriod>
+              <ns5:LossDateQualifier>L</ns5:LossDateQualifier>
+              <ns5:StartDate>2016-03-31</ns5:StartDate>
+            </ns5:LossPeriod>
+            <ns5:ClaimType>000</ns5:ClaimType>
+            <ns5:ClaimsScheme>2010</ns5:ClaimsScheme>
+            <ns5:ECFIndicator>Y</ns5:ECFIndicator>
+            <ns5:TriageCategory>CTP-Standard</ns5:TriageCategory>
+            <ns5:Indicators>
+              <ns5:ConflictOfInterestIndicator>N</ns5:ConflictOfInterestIndicator>
+              <ns5:SimultaneousReinstatementRequired>N</ns5:SimultaneousReinstatementRequired>
+              <ns5:WarIndicator>N</ns5:WarIndicator>
+            </ns5:Indicators>
+          </ns5:Claim>
+          <ns5:ClaimEntry>
+            <ns5:TransactionSequence>002</ns5:TransactionSequence>
+            <ns5:LloydsStatus>14-PART-AUT</ns5:LloydsStatus>
+            <ns5:AddedCirculatedOrAuthorisedDate>2016-10-27</ns5:AddedCirculatedOrAuthorisedDate>
+            <ns5:Comments>
+              <ns5:Broker>
+                <ns5:LineNumber>1</ns5:LineNumber>
+                <ns5:CommentDetails>RE-RELEASE</ns5:CommentDetails>
+              </ns5:Broker>
+              <ns5:PrivateComments>
+                <ns5:Comment>
+                  <ns5:LineNumber>1</ns5:LineNumber>
+                  <ns5:CommentDetails>Executed-7c-TR2</ns5:CommentDetails>
+                </ns5:Comment>
+              </ns5:PrivateComments>
+              <ns5:PublicComments>
+                <ns5:Comment>
+                  <ns5:LineNumber>1</ns5:LineNumber>
+                  <ns5:CommentDetails>Lead responds with seen action</ns5:CommentDetails>
+                </ns5:Comment>
+              </ns5:PublicComments>
+              <ns5:CrossMarketComments PrivateCommentIndicator="Y">
+                <ns5:Bureau Agency="lloyds">
+                  <ns5:Claim>
+                    <ns2:BrokerReference>B9979ECF2WBSC7CN</ns2:BrokerReference>
+                    <ns5:TransactionReference>B9979002</ns5:TransactionReference>
+                    <ns2:CreationDate>2016-10-27T07:26:07+01:00</ns2:CreationDate>
+                    <ns5:Syndicate Name="CANOPIUS">
+                      <ns5:Comment>
+                        <ns5:LineNumber>1</ns5:LineNumber>
+                        <ns5:CommentDetails>Executed-7c-TR2</ns5:CommentDetails>
+                      </ns5:Comment>
+                      <ns5:Response>SEEN-ACTION</ns5:Response>
+                    </ns5:Syndicate>
+                  </ns5:Claim>
+                </ns5:Bureau>
+              </ns5:CrossMarketComments>
+              <ns5:CrossMarketComments PrivateCommentIndicator="N">
+                <ns5:Bureau Agency="lloyds">
+                  <ns5:Claim>
+                    <ns2:BrokerReference>B9979ECF2WBSC7CN</ns2:BrokerReference>
+                    <ns5:TransactionReference>B9979002</ns5:TransactionReference>
+                    <ns2:CreationDate>2016-10-27T07:26:07+01:00</ns2:CreationDate>
+                    <ns5:Syndicate Name="CANOPIUS">
+                      <ns5:Comment>
+                        <ns5:LineNumber>1</ns5:LineNumber>
+                        <ns5:CommentDetails>Lead responds with seen action</ns5:CommentDetails>
+                      </ns5:Comment>
+                      <ns5:Response>SEEN-ACTION</ns5:Response>
+                    </ns5:Syndicate>
+                  </ns5:Claim>
+                </ns5:Bureau>
+              </ns5:CrossMarketComments>
+            </ns5:Comments>
+            <ns5:ClaimEntryFinancialAmounts Ccy="GBP">
+              <ns5:OutstandingAmountQualifier>T</ns5:OutstandingAmountQualifier>
+              <ns5:ServiceProviderOriginalSplitReference>1100005102016</ns5:ServiceProviderOriginalSplitReference>
+              <ns2:ClaimMovementAmtItem Type="Vat_Amount">
+                <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">0.00</ns2:Amt>
+              </ns2:ClaimMovementAmtItem>
+              <ns2:ClaimMovementAmtItem Type="Lead_Reserve_Amount">
+                <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">0.00</ns2:Amt>
+              </ns2:ClaimMovementAmtItem>
+              <ns2:ClaimMovementAmtItem Type="Lead_Reserve_Fees">
+                <ns2:Amt Ccy="GBP" CcyIndic="reference_currency" Share="hundred_percent">0.00</ns2:Amt>
+              </ns2:ClaimMovementAmtItem>
+              <ns5:SettlementAmount>0.00</ns5:SettlementAmount>
+              <ns5:ExchangeRate>1.00000</ns5:ExchangeRate>
+            </ns5:ClaimEntryFinancialAmounts>
+            <ns5:ClaimEntryFinancialAmounts Ccy="EUR">
+              <ns5:OutstandingAmountQualifier>T</ns5:OutstandingAmountQualifier>
+              <ns5:ServiceProviderOriginalSplitReference>1100105102016</ns5:ServiceProviderOriginalSplitReference>
+              <ns2:ClaimMovementAmtItem Type="Vat_Amount">
+                <ns2:Amt Ccy="EUR" CcyIndic="reference_currency" Share="hundred_percent">0.00</ns2:Amt>
+              </ns2:ClaimMovementAmtItem>
+              <ns2:ClaimMovementAmtItem Type="Lead_Reserve_Amount">
+                <ns2:Amt Ccy="EUR" CcyIndic="reference_currency" Share="hundred_percent">0.00</ns2:Amt>
+              </ns2:ClaimMovementAmtItem>
+              <ns2:ClaimMovementAmtItem Type="Lead_Reserve_Fees">
+                <ns2:Amt Ccy="EUR" CcyIndic="reference_currency" Share="hundred_percent">0.00</ns2:Amt>
+              </ns2:ClaimMovementAmtItem>
+              <ns5:SettlementAmount>0.00</ns5:SettlementAmount>
+              <ns5:ExchangeRate>1.00000</ns5:ExchangeRate>
+            </ns5:ClaimEntryFinancialAmounts>
+          </ns5:ClaimEntry>
+        </ns5:Extension>
+      </ns5:ClaimMovement>
+      <ns5:SupportingDocument>
+        <ns4:DocumentId>8649c145-be74-4b04-aef5-aaba4dbe47b6</ns4:DocumentId>
+        <ns4:DocumentVersion>1.0</ns4:DocumentVersion>
+        <ns4:DocumentVersionDtTime>2016-10-04T14:01:36+01:00</ns4:DocumentVersionDtTime>
+        <ns4:FileId>Slip</ns4:FileId>
+        <ns4:FileFormatCd>application/vnd.openxmlformats-officedocument.wordprocessingml.document</ns4:FileFormatCd>
+        <ns4:FileSize>
+          <ns4:NumUnits>12</ns4:NumUnits>
+          <ns4:UnitMeasurementCd>KB</ns4:UnitMeasurementCd>
+        </ns4:FileSize>
+        <ns4:DocumentTypeCd>document_slip</ns4:DocumentTypeCd>
+        <ns4:FolderReference>Slip Documents</ns4:FolderReference>
+        <ns5:ReferredObjects>
+          <ns5:Contract>
+            <ns2:BrokerReference>B9979ECF2WB5006</ns2:BrokerReference>
+          </ns5:Contract>
+        </ns5:ReferredObjects>
+      </ns5:SupportingDocument>
+      <ns5:SupportingDocument>
+        <ns4:DocumentId>88e72d7f-d4e4-4c1d-bc3c-91e55738111d</ns4:DocumentId>
+        <ns4:DocumentVersion>1.0</ns4:DocumentVersion>
+        <ns4:DocumentVersionDtTime>2016-10-27T01:00:00+01:00</ns4:DocumentVersionDtTime>
+        <ns4:FileId>20161027CLAIM01Document</ns4:FileId>
+        <ns4:FileFormatCd>application/pdf</ns4:FileFormatCd>
+        <ns4:FileSize>
+          <ns4:NumUnits>90</ns4:NumUnits>
+          <ns4:UnitMeasurementCd>KB</ns4:UnitMeasurementCd>
+        </ns4:FileSize>
+        <ns4:DocumentTypeCd>document</ns4:DocumentTypeCd>
+        <ns4:FolderReference>Claim Related Documents</ns4:FolderReference>
+        <ns5:ReferredObjects>
+          <ns2:ServiceProvider>
+            <ns2:Party>
+              <ns2:Name>Xchanging</ns2:Name>
+            </ns2:Party>
+          </ns2:ServiceProvider>
+          <ns5:Contract>
+            <ns2:BrokerReference>B9979ECF2WB5006</ns2:BrokerReference>
+          </ns5:Contract>
+          <ns5:Claim>
+            <ns2:BrokerReference>B9979ECF2WBSC7CN</ns2:BrokerReference>
+          </ns5:Claim>
+          <ns5:ClaimEntry>
+            <ns2:BrokerReference>B9979002</ns2:BrokerReference>
+          </ns5:ClaimEntry>
+        </ns5:ReferredObjects>
+      </ns5:SupportingDocument>
+      <ns2:Response>
+        <ns2:AcknowledgementLevelIndicator>application_validation</ns2:AcknowledgementLevelIndicator>
+        <ns2:AcknowledgementStatus>acknowledged</ns2:AcknowledgementStatus>
+        <ns2:ResponseDescription>Success</ns2:ResponseDescription>
+      </ns2:Response>
+    </ns5:RetrieveClaimRs>
+  </soap:Body>
+</soap:Envelope>

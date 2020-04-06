@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Business Rule Version"
+  entity="RuleVersion"
+  extendable="false"
+  final="false"
+  loadable="false"
+  platform="true"
+  table="bizruleversion"
+  type="versionable">
+  <implementsEntity
+    name="RuleVersionAware"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.RuleVersionDomainMethods"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.management.RuleVersionInternalMethods"/>
+  <column
+    desc="Identifies the RuleHead to which this version applies."
+    name="GlobalRuleID"
+    nullok="false"
+    type="publicid"/>
+  <column
+    name="CreateTime"
+    nullok="false"
+    setterScriptability="hidden"
+    type="datetime"/>
+  <column
+    desc="The name of the user who created this version."
+    name="CreateUserName"
+    nullok="false"
+    setterScriptability="hidden"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="30"/>
+  </column>
+  <column
+    desc="Identifier of the system on which the version was created."
+    name="CreateSystemId"
+    nullok="false"
+    setterScriptability="hidden"
+    type="shorttext"/>
+  <column
+    name="LockedInternal"
+    columnName="locked"
+    nullok="true"
+    getterScriptability="hidden"
+    type="bit"
+    setterScriptability="hidden"/>
+  <array
+    arrayentity="RuleVersionParentEdge"
+    arrayfield="Owner"
+    name="ParentEdges"
+    getterScriptability="doesNotExist"
+    owner="true"
+    setterScriptability="doesNotExist"/>
+  <typekey
+    name="Status"
+    nullok="false"
+    typelist="RuleStatus"/>
+  <array
+    arrayentity="DeployedRuleTag"
+    name="DeploymentTags"
+    owner="true"/>
+  <onetoone
+    fkentity="RuleImportAuditRecord"
+    name="ImportRecord"
+    nullok="true"
+    setterScriptability="doesNotExist"/>
+</entity>

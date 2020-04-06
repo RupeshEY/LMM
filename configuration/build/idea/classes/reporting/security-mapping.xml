@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<SecurityMapping
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="security-mapping.xsd">
+
+  <Mapping permission="report_manager"   mappedUser="manager" password="password2"/>
+  <Mapping permission="report_user"      mappedUser="user" password="password1"/>
+</SecurityMapping>

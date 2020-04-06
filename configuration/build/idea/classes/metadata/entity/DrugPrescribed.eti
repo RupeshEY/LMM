@@ -1,0 +1,57 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="DrugPrescribed"
+  exportable="true"
+  extendable="true"
+  loadable="true"
+  platform="false"
+  table="drugprescribed"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.DrugPrescribed"
+    impl="com.guidewire.cc.domain.claim.impl.DrugPrescribedImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Maintains medication information related to a Workmen's Compensation claim. This entity tracks the Contact
+        prescribing the drug, the drug name, and expiration on the prescription.
+      
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Fkey to Claim entity."
+    exportable="true"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    columnName="ClaimContactID"
+    desc="Fkey to ClaimContact entity."
+    fkentity="ClaimContact"
+    name="ClaimContact"
+    nullok="false"/>
+  <column
+    desc="Name of drug prescribed."
+    name="DrugName"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Date drug was prescribed."
+    name="DatePrescribed"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date drug prescription expires."
+    name="DateScriptExpires"
+    nullok="true"
+    type="datetime"/>
+  <datetimeordering
+    firstcolumnname="DatePrescribed"
+    operator="LE"
+    secondcolumnname="DateScriptExpires"/>
+</entity>

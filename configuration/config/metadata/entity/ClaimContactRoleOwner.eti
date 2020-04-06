@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="ClaimContactRoleOwner"
+  requiresType="editable">
+  <implementsInterface
+    iface="gw.api.contact.ClaimContactRoleOwner"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.ClaimContactRoleOwner"/>
+  <fulldescription><![CDATA[Interface for entities that can "own" ClaimContactRoles. Marking an entity as a
+  ClaimContactRoleOwner means that it can be associated with ContactRoles. In practical terms, this means the entity
+  will get ContactRole-based accessors that can then be used as items in NVVs. This gives a customers a way to add
+  arbitrary Contacts to an entity, and have those roles appear in Parties Involved.
+  ]]></fulldescription>
+</delegate>

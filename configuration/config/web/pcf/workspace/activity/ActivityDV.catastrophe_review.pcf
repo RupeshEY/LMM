@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="ActivityDV"
+    mode="catastrophe_review">
+    <Require
+      name="Activity"
+      type="Activity"/>
+    <InputColumn>
+      <InputSetRef
+        def="ActivityCompensableInputSet(Activity.Claim, Activity)"
+        visible="Activity.ActivityPattern.PublicID == &quot;default_data:10019&quot; /* claim_acceptance */"/>
+      <InputSetRef
+        def="ActivityDetailsInputSet(Activity)"/>
+      <InputDivider/>
+      <InputSetRef
+        def="ActivityOwnerInputSet(Activity)"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="ActivityCatastropheInputSet(Activity.Claim)"/>
+      <InputDivider/>
+      <InputSetRef
+        def="ActivityDocumentInputSet(Activity)"/>
+      <InputDivider/>
+      <InputSetRef
+        def="ActivityNoteInputSet(Activity)"/>
+      <InputDivider
+        visible="perm.Note.create"/>
+      <InputSetRef
+        def="ActivityBulkInvoiceWarningInputSet(Activity.BulkInvoice)"
+        visible="null != Activity.BulkInvoice"/>
+      <InputDivider
+        visible="null != Activity.BulkInvoice"/>
+      <InputSetRef
+        def="ActivityTrackingInputSet(Activity)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

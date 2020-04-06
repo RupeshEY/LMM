@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="BulkInvoiceSearchOptionalInputSet">
+    <Require
+      name="BulkInvoiceSearchCriteria"
+      type="BulkInvoiceSearchCriteria"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Search.OptionalParameters&quot;)"/>
+    <FinancialCriterionMultiCurrencyChoiceInput
+      editable="true"
+      id="InvoiceTotal"
+      label="DisplayKey.get(&quot;Financials.BulkPay.Search.InvoiceTotal&quot;)"
+      required="false"
+      value="BulkInvoiceSearchCriteria.FinancialCriterion"/>
+    <TextInput
+      editable="true"
+      id="PayTo"
+      label="DisplayKey.get(&quot;Financials.BulkPay.Search.PayTo&quot;)"
+      value="BulkInvoiceSearchCriteria.PayTo"/>
+    <DateCriterionChoiceInput
+      chosenOptionVisible="true"
+      editable="true"
+      id="DateSearch"
+      label="DisplayKey.get(&quot;Financials.BulkPay.Search.DateSearch&quot;)"
+      required="false"
+      value="BulkInvoiceSearchCriteria.DateCriterionChoice"/>
+  </InputSet>
+</PCF>

@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    id="UserDetailGroup"
+    parent="Admin()"
+    title="DisplayKey.get(&quot;Web.TabBar.Administration&quot;)">
+    <LocationEntryPoint
+      signature="UserDetailGroup(User : User)"/>
+    <Variable
+      name="User"
+      type="User"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Admin.UserDetail.UserDetails&quot;)"
+      location="UserDetailPage(User)"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.UserDetail.User.Activities&quot;)"
+      location="UserActivitiesPage(User)"
+      shortcut="V"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.UserDetail.User.Claims&quot;)"
+      location="UserClaimsPage(User)"
+      shortcut="S"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.UserDetail.User.Exposures&quot;)"
+      location="UserExposuresPage(User)"
+      shortcut="X"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.UserDetail.User.Matters&quot;)"
+      location="UserMattersPage(User)"/>
+  </LocationGroup>
+</PCF>

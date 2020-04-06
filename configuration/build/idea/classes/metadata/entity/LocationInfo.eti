@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="location denormed fields"
+  entity="LocationInfo"
+  exportable="false"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="locationinfo"
+  type="editable">
+  <implementsInterface
+    iface="gw.cc.claim.archiving.entity.LocationInfo"
+    impl="com.guidewire.cc.domain.claim.archiving.impl.LocationInfoImpl"/>
+  <implementsEntity
+    name="GlobalAddress"/>
+  <foreignkey
+    columnName="ClaimInfoID"
+    desc="The location for the archived claim"
+    fkentity="ClaimInfo"
+    name="ClaimInfo"
+    nullok="false"/>
+  <column
+    desc="First line of original mailing address."
+    name="AddressLine1"
+    nullok="true"
+    type="addressline"/>
+  <column
+    desc="Second line of original mailing address."
+    name="AddressLine2"
+    nullok="true"
+    type="addressline"/>
+  <column
+    desc="Third line of mailing address."
+    name="AddressLine3"
+    nullok="true"
+    type="addressline"/>
+  <column
+    desc="Original City."
+    name="City"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Original County."
+    name="County"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    desc="Original Postal code; string to handle Zip+4 and international codes."
+    name="PostalCode"
+    nullok="true"
+    type="postalcode"/>
+  <typekey
+    desc="Original State."
+    name="State"
+    nullok="true"
+    typelist="State"/>
+  <typekey
+    desc="Original Country."
+    name="Country"
+    nullok="true"
+    typelist="Country"/>
+  <index
+    desc="Index covering address for search on state. (NOTE: We put id before state because of an oracle optimizer bug - it wasn't choosing the index for PersonLastNameSearchWithState when the 1st 2 columns were reversed.)"
+    name="addressu1"
+    trackUsage="true"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ID"/>
+    <indexcol
+      keyposition="2"
+      name="State"/>
+  </index>
+</entity>

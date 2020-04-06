@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<Entity
+  name="OfficialID">
+  <Columns>
+    <Column
+      beanPath="OfficialID.OfficialIDType"
+      name="type"/>
+    <Column
+      beanPath="OfficialID.OfficialIDValue"
+      name="value"/>
+  </Columns>
+  <DisplayName><![CDATA[uses java.lang.StringBuilder
+
+var sb = new StringBuilder()
+sb.append(type)
+if(value!=null) {
+  sb.append(": ").append(value)
+}
+return sb.toString()]]></DisplayName>
+</Entity>

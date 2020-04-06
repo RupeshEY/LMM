@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ExitPoint
+    id="ViewContact"
+    popup="true"
+    url="{abContactDetailURL}">
+    <LocationEntryPoint
+      signature="ViewContact(abContactDetailURL:String, addressBookUID:String)"/>
+    <ExitPointParameter
+      locationParam="abContactDetailURL"
+      type="String"
+      urlParam="abContactDetailURL"/>
+    <ExitPointParameter
+      locationParam="addressBookUID"
+      type="String"
+      urlParam="ABContactLinkId"/>
+  </ExitPoint>
+</PCF>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="AssigneeAdditionalInfoInputSet"
+    mode="role">
+    <Require
+      name="commandDefinition"
+      type="gw.bizrules.pcf.RuleCommandDefinitionHolder"/>
+    <Require
+      name="state"
+      type="gw.bizrules.ruleaction.generateactivity.GenerateActivityCommandDefinitionState"/>
+    <Require
+      name="config"
+      type="gw.bizrules.ruleaction.generateactivity.config.GenerateActivityCommandParameterConfig"/>
+    <InputSetRef
+      def="ValidatingCommandParameterInputSet(commandDefinition.getParameterHolder(config.ROLE.Name))"
+      id="Role"/>
+  </InputSet>
+</PCF>

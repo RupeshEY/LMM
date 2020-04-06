@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="MetroFlows.go()"
+    afterCommit="MetroFlows.go()"
+    id="MetroFlowDetail"
+    parent="MetroFlows()"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.InternalTools.MetroFlowDetail&quot;)">
+    <LocationEntryPoint
+      signature="MetroFlowDetail(Workflow : Workflow)"/>
+    <Variable
+      name="Workflow"
+      type="Workflow"/>
+    <Screen
+      id="MetroFlowDetailScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="MetroFlows.go()"
+          id="MetroFlowDetail_PreciousButton"
+          label="DisplayKey.get(&quot;Button.Previous&quot;)"/>
+        <ToolbarButton
+          action="null"
+          id="MetroFlowDetail_RefreshButtonButton"
+          label="DisplayKey.get(&quot;Button.Refresh&quot;)"/>
+        <ToolbarButton
+          action="gw.api.admin.WorkflowUtil.suspend(Workflow)"
+          confirmMessage="DisplayKey.get(&quot;Web.InternalTools.MetroFlowDetail.ConfirmCancel&quot;)"
+          id="MetroFlowDetail_SuspendButton"
+          label="DisplayKey.get(&quot;Web.InternalTools.MetroFlowDetail.SuspendButton&quot;)"
+          visible="(Workflow.State == TC_ACTIVE)"/>
+        <ToolbarButton
+          action="gw.api.admin.WorkflowUtil.resumeWorkflow(Workflow)"
+          id="MetroFlowDetail_ResumeButton"
+          label="DisplayKey.get(&quot;Button.Resume&quot;)"
+          visible="Workflow.State == TC_ERROR"/>
+      </Toolbar>
+      <PanelRef
+        def="MetroFlowDetailDV(Workflow)"/>
+    </Screen>
+  </Page>
+</PCF>

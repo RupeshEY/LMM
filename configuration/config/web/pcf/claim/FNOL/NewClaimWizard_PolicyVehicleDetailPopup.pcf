@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="NewClaimWizard_PolicyVehicleDetailPopup"
+    startInEditMode="!Policy.Verified &amp;&amp; VehicleRU != null"
+    title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimPolicyVehicle.Edit&quot;)">
+    <LocationEntryPoint
+      signature="NewClaimWizard_PolicyVehicleDetailPopup(VehicleRU : VehicleRU, Policy : Policy)"/>
+    <Variable
+      name="VehicleRU"
+      type="VehicleRU"/>
+    <Variable
+      name="Policy"
+      type="Policy"/>
+    <Screen
+      id="NewClaimWizard_PolicyVehicleDetailScreen">
+      <Toolbar
+        visible="VehicleRU != null">
+        <EditButtons
+          editVisible="!Policy.Verified"/>
+      </Toolbar>
+      <PanelRef
+        def="PolicyVehicleDetailPanelSet(VehicleRU)"
+        visible="VehicleRU != null"/>
+      <DetailViewPanel
+        editable="false"
+        id="NotOnPolicyDV"
+        visible="VehicleRU == null">
+        <InputColumn>
+          <Label
+            id="NotOnPolicy"
+            label="DisplayKey.get(&quot;Web.FNOLPolicyVehicleDetailPopup.VehicleNotOnPolicy&quot;)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

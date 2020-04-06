@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<Entity
+  name="ReinsuranceThreshold">
+  <Columns>
+    <Column
+      beanPath="ReinsuranceThreshold.TreatyType"
+      name="TreatyType"/>
+    <Column
+      beanPath="ReinsuranceThreshold.PolicyType"
+      name="PolicyType"/>
+    <Column
+      beanPath="ReinsuranceThreshold.ThresholdValue"
+      name="ThresholdValue"/>
+    <Column
+      beanPath="ReinsuranceThreshold.ReportingThreshold"
+      name="ReportingThreshold"/>
+    <Column
+      beanPath="ReinsuranceThreshold.StartDate"
+      name="StartDate"/>
+    <Column
+      beanPath="ReinsuranceThreshold.EndDate"
+      name="EndDate"/>
+  </Columns>
+  <DisplayName><![CDATA[
+if(StartDate==null or EndDate==null) {
+  return gw.api.locale.DisplayKey.get("Web.Admin.ReinsuranceThresholds.DisplayWithoutDateRange",  TreatyType, PolicyType, ThresholdValue, ReportingThreshold)
+} else {
+  return gw.api.locale.DisplayKey.get("Web.Admin.ReinsuranceThresholds.DisplayWithDateRange",  TreatyType, PolicyType, ThresholdValue, ReportingThreshold, StartDate.format(gw.api.util.LocaleUtil.getCurrentLocale().DateFormat.Short), EndDate.format(gw.api.util.LocaleUtil.getCurrentLocale().DateFormat.Short))
+}
+  ]]></DisplayName>
+</Entity>

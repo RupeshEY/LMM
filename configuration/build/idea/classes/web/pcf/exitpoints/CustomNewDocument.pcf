@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <!-- This ExitPoint is only for backwards-compatibility, if the New Document menu should be rendered
+        based on an IDocumentCreationOptions implementation, rather than based on the normal pcf configuration
+        See the documentation for more details. -->
+  <ExitPoint
+    id="CustomNewDocument"
+    popup="true"
+    url="http://localhost:8080/cc/NewDocument.do">
+    <LocationEntryPoint
+      signature="CustomNewDocument()"/>
+    <LocationEntryPoint
+      signature="CustomNewDocument(ClaimID : String, Option : java.lang.Double)"/>
+    <ExitPointParameter
+      locationParam="ClaimID"
+      type="String"
+      urlParam="claimId"/>
+    <ExitPointParameter
+      locationParam="Option"
+      type="java.lang.Double"
+      urlParam="option"/>
+  </ExitPoint>
+</PCF>

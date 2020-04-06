@@ -1,0 +1,27 @@
+package rules.Segmentation.ClaimSegmentationRules_dir.CSG05000Travel_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.util.Logger
+
+@gw.rules.RuleName("CSG05200 - Travel Default")
+internal class CSG05200TravelDefault {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.Segment == null
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.Segment = TC_TRAVEL_LOW
+Logger.logDebug(DisplayKey.get("Rules.Segmentation.Claim", actions.ShortRuleName))
+Logger.logDebug(DisplayKey.get("Rules.Segmentation.Claim.SegmentedTo", claim.Segment))
+actions.exit()
+
+/*end00rule*/
+
+  }
+}

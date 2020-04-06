@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="perm.System.custsvctiermng"
+    canVisit="perm.System.custsvctierview"
+    id="CustomerServiceTierDetail"
+    parent="CustomerServiceTierAdmin()"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.Admin.CustomerServiceTier.Details&quot;, aCustomerServiceTier.CustomerServiceTier.DisplayName)">
+    <LocationEntryPoint
+      signature="CustomerServiceTierDetail(aCustomerServiceTier : CustomerServiceTierSpecialHandling)"/>
+    <LocationEntryPoint
+      signature="CustomerServiceTierDetail(aCustomerServiceTier : CustomerServiceTierSpecialHandling, startInEditModeFlag : boolean)"/>
+    <Variable
+      name="aCustomerServiceTier"
+      type="CustomerServiceTierSpecialHandling"/>
+    <Variable
+      initialValue="false"
+      name="startInEditModeFlag"
+      type="boolean"/>
+    <ScreenRef
+      def="CustomerServiceTierDetailScreen(aCustomerServiceTier, false)"/>
+  </Page>
+</PCF>

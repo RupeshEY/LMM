@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Ref table for PD Weeks paid by disability percentage "
+  entity="ref_WC_PD_WeeksAndLimits"
+  platform="false"
+  table="ref_WC_PD_WeeksAndLimits"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.ref_WC_PD_WeeksAndLimits"
+    impl="com.guidewire.cc.domain.exposure.impl.ref_WC_PD_WeeksAndLimitsImpl"/>
+  <implementsEntity
+    name="WC_PD_LimitsDelegate"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.exposure.impl.WC_PD_LimitsDelegateInternal"
+    impl="com.guidewire.cc.domain.exposure.impl.ref_WC_PD_WeeksAndLimitsImpl"/>
+  <fulldescription><![CDATA[
+      Reference table tracking state-specific permanent disability weeks to be paid by
+      PD percentages for particular date ranges.
+    ]]></fulldescription>
+  <column
+    desc="PD Disability Percentage"
+    name="DisabilityPercent"
+    nullok="true"
+    type="percentagedec"/>
+  <column
+    desc="Number of weeks of PD Benefit to be paid"
+    name="PD_NumWeeks"
+    nullok="true"
+    type="money"/>
+</entity>

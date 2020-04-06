@@ -1,0 +1,22 @@
+package rules.Loaded.ExposureLoaded_dir
+
+@gw.rules.RuleName("ELR01000 - Set up a new exposure")
+internal class ELR01000Setupanewexposure {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return /* Separate setup is required for a new exposure added to an existing claim */
+(exposure.State == null or exposure.State == TC_DRAFT) 
+and exposure.Claim.State == TC_OPEN
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* Should run setup function here */
+/*end00rule*/
+
+  }
+}

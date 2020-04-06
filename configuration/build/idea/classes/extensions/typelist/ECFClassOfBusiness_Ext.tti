@@ -1,0 +1,113 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="ECFClassOfBusiness_Ext" desc="ECF ClaimRespRq.ClassOfBusiness.JvClassOfBusiness">
+  <typecode
+    code="NM"
+    name="NM"
+    desc="NON,MARINE DIRECT FACULTATIVE INSURANCE"/>
+  <typecode
+    code="RI"
+    name="RI"
+    desc="NON MARINE FACULTATIVE REINSURANCE"/>
+  <typecode
+    code="BA"
+    name="BA"
+    desc="BINDING AUTHORITY"/>
+  <typecode
+    code="XL"
+    name="XL"
+    desc="NON MARINE EXCESS OF LOSS"/>
+  <typecode
+    code="MX"
+    name="MX"
+    desc="MARINE EXCESS OF LOSS"/>
+  <typecode
+    code="AX"
+    name="AX"
+    desc="AVIATION EXCESS OF LOSS"/>
+  <typecode
+    code="AH"
+    name="AH"
+    desc="NON,MARINE DIRECT FACULTATIVE INSURANCE"/>
+  <typecode
+    code="MH"
+    name="MH"
+    desc="NON MARINE FACULTATIVE REINSURANCE"/>
+  <typecode
+    code="AL"
+    name="AL"
+    desc="AVIATION LIABILITY"/>
+  <typecode
+    code="ML"
+    name="ML"
+    desc="MARINE LIABILITY"/>
+  <typecode
+    code="MC"
+    name="MC"
+    desc="MARINE CARGO"/>
+  <typecode
+    code="ME"
+    name="ME"
+    desc="MARINE ENERGY"/>
+  <typecode
+    code="MP"
+    name="MP"
+    desc="MARINE POLLUTION"/>
+  <typecode
+    code="M"
+    name="M"
+    desc="Marine"/>
+  <typecode
+    code="N"
+    name="N"
+    desc="Non-Marine"/>
+  <typecode
+    code="A"
+    name="A"
+    desc="Aviation"/>
+  <typefilter
+    desc="LIRMA"
+    name="LIRMA">
+    <include
+      code="NM"/>
+    <include
+      code="RI"/>
+    <include
+      code="BA"/>
+    <include
+      code="XL"/>
+    <include
+      code="MX"/>
+    <include
+      code="AX"/>
+  </typefilter>
+  <typefilter
+    desc="ILU"
+    name="ILU">
+    <include
+      code="AX"/>
+    <include
+      code="AH"/>
+    <include
+      code="MH"/>
+    <include
+      code="AL"/>
+    <include
+      code="ML"/>
+    <include
+      code="MC"/>
+    <include
+      code="ME"/>
+    <include
+      code="MP"/>
+  </typefilter>
+  <typefilter
+    desc="Lloyd's"
+    name="Lloyds">
+    <include
+      code="M"/>
+    <include
+      code="N"/>
+    <include
+      code="A"/>
+  </typefilter>
+</typelist>

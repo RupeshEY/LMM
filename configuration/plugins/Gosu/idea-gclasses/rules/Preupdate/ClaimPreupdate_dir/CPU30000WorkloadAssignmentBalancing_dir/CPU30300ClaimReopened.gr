@@ -1,0 +1,35 @@
+package rules.Preupdate.ClaimPreupdate_dir.CPU30000WorkloadAssignmentBalancing_dir
+
+@gw.rules.RuleName("CPU30300 - Claim Reopened")
+internal class CPU30300ClaimReopened {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+ /*
+ * Condition: The claim state has been changed from "closed" to "open"
+ */
+return
+  claim.isFieldChanged("State")
+    and
+  claim.getOriginalValue("State") == ClaimState.TC_CLOSED
+    and
+  claim.State == ClaimState.TC_OPEN
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+// Logging of this rule will be categorized under "Assignment"
+var user = claim.AssignedUser
+var logger = gw.api.system.CCLoggerCategory.ASSIGNMENT_WEIGHTED_WORKLOAD
+if (logger.DebugEnabled) {
+  logger.debug(actions.getRule().DisplayName + " - Claim '" + claim.ClaimNumber + "' reopened - updating user '" + user.Credential.UserName + "' workload")
+}
+
+gw.assignment.workload.rules.ClaimWorkloadPreupdateRuleActions.updateUserWorkloadOnClaimReopen(claim)
+/*end00rule*/
+
+  }
+}

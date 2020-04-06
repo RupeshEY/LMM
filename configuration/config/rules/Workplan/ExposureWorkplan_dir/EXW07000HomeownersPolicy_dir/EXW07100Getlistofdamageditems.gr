@@ -1,0 +1,23 @@
+package rules.Workplan.ExposureWorkplan_dir.EXW07000HomeownersPolicy_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("EXW07100 - Get list of damaged items")
+internal class EXW07100Getlistofdamageditems {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ExposureType == TC_CONTENT 
+and exposure.CoverageSubType == TC_HODWPERSONALPROP
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.Claim.createActivityFromPattern(
+    exposure, ActivityPattern.finder.getActivityPatternByCode("damaged_items"))
+/*end00rule*/
+
+  }
+}

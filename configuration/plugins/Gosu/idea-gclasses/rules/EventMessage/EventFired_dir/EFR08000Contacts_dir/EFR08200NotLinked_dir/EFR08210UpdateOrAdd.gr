@@ -1,0 +1,29 @@
+package rules.EventMessage.EventFired_dir.EFR08000Contacts_dir.EFR08200NotLinked_dir
+uses gw.api.contact.ContactTokenThreadLocal
+uses gw.api.contact.ContactSystemPluginAdapter
+
+@gw.rules.RuleName("EFR08210 - Update Or Add")
+internal class EFR08210UpdateOrAdd {
+  static function doCondition(messageContext  :  entity.MessageContext) : boolean {
+/*start00rule*/
+return (messageContext.EventName == "ContactAdded" or
+messageContext.EventName == "ContactChanged") and
+gw.plugin.Plugins.isEnabled(gw.plugin.contact.ContactSystemPlugin)
+/*end00rule*/
+}
+
+  static function doAction(messageContext  :  entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+var plugin = ContactSystemPluginAdapter.getAdapter()
+
+if (plugin != null) {
+  var contact = messageContext.Root as Contact
+
+  // Don't send an update to AB if the change being committed came from AB
+  if (!ContactTokenThreadLocal.isTokenSet("ab", contact.AddressBookUID, "Contact")) {
+    plugin.createAsyncUpdate(messageContext)
+  }
+} 
+/*end00rule*/
+  }
+}

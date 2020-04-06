@@ -1,0 +1,41 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.document.DocumentProduction
+uses gw.plugin.Plugins
+uses gw.plugin.document.IDocumentTemplateSource
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("CPU02000 - Create Document Asynchronously")
+internal class CPU02000CreateDocumentAsynchronously {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.isFieldChanged("Description")
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+var contextObjects = new java.util.HashMap()
+contextObjects.put("Claim", claim)
+contextObjects.put("To", claim.maincontact)
+contextObjects.put("From", claim.AssignedUser.Contact)
+contextObjects.put("CC", null)
+
+var fieldValues = new java.util.HashMap()
+fieldValues.put("Claim", claim)
+fieldValues.put("Name", DisplayKey.get("Rules.PreUpdate.Claim.CreatedByRule", gw.api.util.Math.random(100000)))
+fieldValues.put("Type", "letter_received")
+fieldValues.put("Status", "draft")
+
+//...possibly more property setting
+
+var template = Plugins.get(IDocumentTemplateSource).getDocumentTemplate("SampleAcrobat.pdf", null)
+DocumentProduction.createDocumentAsynchronously(template, contextObjects, fieldValues)
+/*end00rule*/
+
+  }
+}

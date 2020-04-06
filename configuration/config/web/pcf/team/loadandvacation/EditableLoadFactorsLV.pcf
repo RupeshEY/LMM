@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_admin.xml -->
+  <ListViewPanel
+    id="EditableLoadFactorsLV">
+    <Require
+      name="GroupUserList"
+      type="GroupUser[]"/>
+    <RowIterator
+      editable="true"
+      elementName="GroupUser"
+      value="GroupUserList"
+      valueType="entity.GroupUser[]">
+      <Row>
+        <UserCell
+          id="LoadFactor_User"
+          label="DisplayKey.get(&quot;LV.Admin.EditableLoadFactors.LoadFactor.User&quot;)"
+          sortOrder="1"
+          value="GroupUser.User"
+          valueType="entity.User"
+          width="125"/>
+        <TextCell
+          editable="true"
+          id="LoadFactor"
+          label="DisplayKey.get(&quot;LV.Admin.EditableLoadFactors.LoadFactor&quot;)"
+          sortOrder="2"
+          value="GroupUser.LoadFactor"
+          valueType="java.lang.Integer"/>
+        <TypeKeyCell
+          editable="true"
+          id="VacationStatus"
+          label="DisplayKey.get(&quot;LV.Admin.EditableLoadFactors.VacationStatus&quot;)"
+          value="GroupUser.User.VacationStatus"
+          valueType="typekey.VacationStatusType"/>
+        <UserCell
+          editable="true"
+          id="BackupUser"
+          label="DisplayKey.get(&quot;LV.Admin.EditableLoadFactors.BackupUser&quot;)"
+          value="GroupUser.User.BackupUser"
+          valueType="entity.User"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

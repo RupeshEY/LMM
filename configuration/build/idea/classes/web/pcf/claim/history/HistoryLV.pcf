@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_claim.xml -->
+  <ListViewPanel
+    id="HistoryLV">
+    <Require
+      name="HistoryList"
+      type="gw.api.database.IQueryBeanResult&lt;History&gt;"/>
+    <RowIterator
+      editable="false"
+      elementName="History"
+      pageSize="20"
+      value="HistoryList"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.History&gt;">
+      <ToolbarFilter
+        name="HistoryFilter">
+        <ToolbarFilterOptionGroup
+          filters="new gw.api.filters.TypeKeyFilterSet(History#Type.PropertyInfo).getFilterOptions()"/>
+      </ToolbarFilter>
+      <Row>
+        <TextCell
+          id="Type"
+          label="DisplayKey.get(&quot;LV.Claim.History.Type&quot;)"
+          printWidth="0.1"
+          sortBy="History.Type, History.CustomType"
+          value="(History.Type == HistoryType.TC_CUSTOM ? History.CustomType.DisplayName : History.Type.DisplayName)"/>
+        <TextCell
+          id="RelatedTo"
+          label="DisplayKey.get(&quot;LV.Claim.History.RelatedTo&quot;)"
+          printWidth="0.15"
+          sortBy="History.Claim, History.Exposure, History.Matter, History.Subrogation"
+          value="getClaimRelatedToString(History)"/>
+        <TextCell
+          enableSort="false"
+          id="User"
+          label="DisplayKey.get(&quot;LV.Claim.History.User&quot;)"
+          printWidth="0.1"
+          value="History.User != null ? History.User.DisplayName : DisplayKey.get(&quot;Java.HistoryView.AutomatedEntry&quot;)"/>
+        <DateCell
+          dateFormat="short"
+          id="EventTimeStamp"
+          label="DisplayKey.get(&quot;LV.Claim.History.EventTimeStamp&quot;)"
+          printWidth="0.1"
+          sortDirection="descending"
+          sortOrder="1"
+          timeFormat="short"
+          value="History.EventTimestamp"/>
+        <TextCell
+          id="Description"
+          label="DisplayKey.get(&quot;LV.Claim.History.Description&quot;)"
+          printWidth="0.45"
+          value="History.Description"/>
+        <TextCell
+          action="HistoryForward.go(History)"
+          enableSort="false"
+          id="Link"
+          label="DisplayKey.get(&quot;LV.Claim.History.Link&quot;)"
+          printWidth="0.1"
+          value="History.Type == TC_APPROVAL ? DisplayKey.get(&quot;Java.HistoryView.Details&quot;) : &quot;&quot;"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function getClaimRelatedToString( history : History ) : String {
+  var result : String
+  var exposure = history.Exposure
+
+  //Is the history related to subrogation
+  if(history.Subrogation != null) {
+    return DisplayKey.get("Web.Subrogation.History.Category")
+  }
+
+  // Are we examining history related to an exposure?
+  if (exposure != null) {
+    /*
+    var caseOrder = (exposure.ClaimOrder != null ? exposure.ClaimOrder as String : "")
+    var lossCategory = (exposure.LossCategory != null ? exposure.LossCategory.DisplayName : "")
+    var lossParty = (exposure.LossParty != null ? exposure.LossParty.DisplayName : "")
+    */
+    result = exposure.DisplayName //"(" + caseOrder + ")" + " " + lossCategory + " - " + lossParty
+  }
+
+  // Are we examining history related to a matter?
+  else if (history.Matter != null) {
+    result = history.Matter.Name
+  }
+
+  // Unspecific--show the default "Entire Claim"
+  else {
+    result = DisplayKey.get("Java.HistoryView.EntireClaim")
+  }
+
+  return result
+}]]></Code>
+  </ListViewPanel>
+</PCF>

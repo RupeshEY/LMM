@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    desc="Toolbar buttons for the Payment Details Panel"
+    id="TransactionDetailToolbarButtonSet"
+    mode="payment">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Transaction"
+      type="Transaction"/>
+    <Variable
+      initialValue="Transaction as Payment"
+      name="Payment"
+      type="Payment"/>
+    <ToolbarButton
+      action="EditCheckWizard.go(Claim, Payment.Check)"
+      available="!Payment.Check.Bulked and Payment.Editable and perm.Payment.edit(Transaction)"
+      id="TransactionDetailToolbarButtonSet_EditButton"
+      label="DisplayKey.get(&quot;Button.Edit&quot;)"
+      shortcut="E"
+      visible="perm.Payment.edit(Transaction)"/>
+    <ToolbarButton
+      action="DeleteSinglePayment.go(Claim, Payment)"
+      available="!Payment.Check.Bulked and Payment.Check.Deletable and perm.Payment.edit(Transaction)"
+      id="TransactionDetailToolbarButtonSet_DeleteButton"
+      label="DisplayKey.get(&quot;Button.Delete&quot;)"
+      shortcut="L"
+      visible="perm.Payment.edit(Transaction)"/>
+    <ToolbarButton
+      action="RecodePayment.go(Claim, Payment)"
+      available="Payment.Recodeable and perm.Payment.recode(Transaction)"
+      id="TransactionDetailToolbarButtonSet_RecodeButton"
+      label="DisplayKey.get(&quot;Button.Payment.Recode&quot;)"
+      visible="perm.Payment.recode(Transaction)"/>
+    <ToolbarDivider/>
+    <ToolbarButton
+      action="ClaimFinancialsChecksDetail.go(Claim, Payment.Check)"
+      id="TransactionDetailToolbarButtonSet_ViewButton"
+      label="DisplayKey.get(&quot;Button.Check.View&quot;)"
+      shortcut="I"
+      visible="perm.Payment.view(Payment.Check)"/>
+    <ToolbarDivider/>
+    <ToolbarButton
+      action="NewRecoverySet.go(Claim, Payment)"
+      available=" Payment.canCreateRecovery() and perm.Claim.createrecovery(Claim)"
+      id="TransactionDetailToolbarButtonSet_CreateRecoveryButton"
+      label="DisplayKey.get(&quot;Button.Payment.CreateRecovery&quot;)"
+      shortcut="Y"
+      visible="perm.Claim.createrecovery(Claim)"/>
+  </ToolbarButtonSet>
+</PCF>

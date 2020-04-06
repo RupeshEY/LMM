@@ -1,0 +1,96 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents the period during which an insurance policy provides coverage."
+  entity="PolicyPeriod"
+  exportable="true"
+  platform="false"
+  table="policyperiod"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.aggregatelimit.impl.PolicyPeriodInternal"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.PolicyPeriodImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.RemoveCallback"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.PolicyPeriodImpl"/>
+  <implementsInterface
+    iface="gw.cc.aggregatelimit.entity.PolicyPeriod"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.PolicyPeriodImpl"/>
+  <fulldescription><![CDATA[Represents the period during which an insurance policy provides coverage. Every claim entered into ClaimCenter is associated
+    with a unique policy entity, even if it shares the same real-world policy with multiple claims.  A policy entity is essentially a "snapshot" of the
+    real-world policy at the time the claim was entered into ClaimCenter.  The PolicyPeriod entity groups these separate, but related, policy entities
+    together for the purpose of determining the amount of an aggregate limit or deductible that has been used by the associated claims.
+    ]]></fulldescription>
+  <column
+    desc="Number of the policy (generally a string)."
+    name="PolicyNumber"
+    nullok="true"
+    type="policynumber"/>
+  <column
+    desc="Date on which the policy is effective."
+    name="EffectiveDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date on which the policy expires."
+    name="ExpirationDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Indicates each unique period that a policy has been in effect.  (Sometimes called 'Mod' or 'Module.')"
+    name="PolicySuffix"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Account number that the policies of this PolicyPeriod belong to."
+    name="AccountNumber"
+    nullok="true"
+    type="account"/>
+  <typekey
+    desc="Type of policy to which this period applies."
+    name="PolicyType"
+    nullok="false"
+    typelist="PolicyType"/>
+  <typekey
+    default="policy"
+    desc="Type of policy period: account or policy."
+    name="PolicyPeriodType"
+    nullok="false"
+    typelist="PolicyPeriodType"/>
+  <array
+    arrayentity="AggregateLimit"
+    arrayfield="PolicyPeriod"
+    desc="Aggregate limits for the policies in this period."
+    exportable="true"
+    name="AggregateLimits"
+    setterScriptability="hidden"/>
+  <array
+    arrayentity="AggregateLimitRpt"
+    arrayfield="PolicyPeriod"
+    desc="Denormalized data for this period."
+    exportable="false"
+    name="AggregateLimitRpts"
+    setterScriptability="hidden"/>
+  <array
+    arrayentity="ClaimAggregateLimitRpt"
+    desc="Denormalized data for this period per claim."
+    exportable="false"
+    name="ClaimAggregateLimitRpts"
+    setterScriptability="hidden"/>
+  <array
+    arrayentity="CoverageLine"
+    desc="Coverage lines associated with this period."
+    name="CoverageLines"
+    setterScriptability="hidden"/>
+  <array
+    arrayentity="PeriodPolicy"
+    desc="Policies that belong to this period."
+    exportable="false"
+    name="Policies"
+    owner="true"
+    setterScriptability="hidden"/>
+  <tableAugmenter
+    className="com.guidewire.cc.domain.aggregatelimit.tableaugmentors.PolicyPeriodIndexBuilder"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.aggregatelimit.dbchecks.PolicyPeriodDBCheckBuilder"/>
+</entity>

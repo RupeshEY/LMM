@@ -1,0 +1,561 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterEnter="initializeVariable()"
+    beforeCancel="Wizard.VehicleIncidentOtherServiceRequests.removeWhere( \ sr -&gt; not vehicleIncidentOtherServiceRequestsCopy.contains(sr))"
+    beforeCommit="cleanBeforeCommit()"
+    canEdit="true"
+    canVisit="true"
+    id="FNOLVehicleIncidentPopup"
+    returnType="VehicleIncident"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="FNOLVehicleIncidentPopup(VehicleIncident : VehicleIncident, Wizard : gw.api.claim.NewClaimWizardInfo)"/>
+    <LocationEntryPoint
+      signature="FNOLVehicleIncidentPopup(Claim: Claim, Wizard : gw.api.claim.NewClaimWizardInfo)"/>
+    <Variable
+      name="VehicleIncident"
+      type="VehicleIncident"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="InsurerLoss"
+      type="boolean"/>
+    <Variable
+      name="NewVehicle"
+      type="boolean"/>
+    <Variable
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Variable
+      initialValue="Wizard.VehicleIncidentOtherServiceRequests.copy()"
+      name="vehicleIncidentOtherServiceRequestsCopy"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Screen
+      id="FNOLVehicleIncidentScreen">
+      <TitleBar
+        icon="VehicleIncident.HeaderIcon"/>
+      <Toolbar>
+        <EditButtons
+          pickValue="VehicleIncident"/>
+      </Toolbar>
+      <PanelRow>
+        <PanelColumn>
+          <DetailViewPanel>
+            <InputColumn>
+              <Label
+                label="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.VehicleBasicsLabel&quot;)"/>
+              <BooleanRadioInput
+                editable="true"
+                falseLabel="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.LossParty.False.Label&quot;)"
+                id="LossParty"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.Vehicle.LossParty&quot;)"
+                trueLabel="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.LossParty.True.Label&quot;)"
+                value="InsurerLoss">
+                <PostOnChange
+                  onChange="VehicleIncident.VehicleLossParty = (InsurerLoss ? LossPartyType.TC_INSURED : LossPartyType.TC_THIRD_PARTY)"/>
+              </BooleanRadioInput>
+              <RangeInput
+                editable="true"
+                id="Vehicle_Picker"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.Vehicle.Picker&quot;)"
+                required="true"
+                sortValueRange="false"
+                value="VehicleIncident.Vehicle"
+                valueRange="VehicleIncident.AvailableVehicles"
+                valueType="entity.Vehicle"
+                visible="InsurerLoss">
+                <MenuItem
+                  action="NewClaimWizard_PolicyVehicleDetailPopup.push(Claim.Policy.getVehicleRU( VehicleIncident.Vehicle?.ID ), Claim.Policy)"
+                  id="VehicleDetailMenuItem"
+                  label="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.VehicleDetailMenuItem.Label&quot;)"/>
+                <MenuItem
+                  action="VehicleIncident.Vehicle = new Vehicle(); NewVehicle = true;"
+                  id="NewVehicleMenuItem"
+                  label="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.NewVehicleMenuItem.Label&quot;)"/>
+              </RangeInput>
+              <TypeKeyInput
+                editable="true"
+                id="Vehicle_VehicleType"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.Vehicle.Type&quot;)"
+                value="VehicleIncident.VehicleType"
+                valueType="typekey.VehicleType"
+                visible="NewVehicle or VehicleIncident.VehicleLossParty == LossPartyType.TC_THIRD_PARTY">
+                <Reflect
+                  triggerIds="Vehicle_Picker">
+                  <ReflectCondition
+                    condition="VehicleIncident.Claim.Policy.isPolicyVehicle(VALUE)"
+                    value="&quot;listed&quot;"/>
+                </Reflect>
+              </TypeKeyInput>
+              <TextInput
+                available="Claim.canEditVehicle(VehicleIncident.Vehicle)"
+                editable="true"
+                id="Vehicle_Year"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.Vehicle.Year&quot;)"
+                value="VehicleIncident.Vehicle.Year"
+                valueType="java.lang.Integer"
+                visible="!InsurerLoss or NewVehicle">
+                <Reflect
+                  available="Claim.canEditVehicle(VALUE)"
+                  triggerIds="Vehicle_Picker"
+                  value="VALUE.Year"/>
+              </TextInput>
+              <TextInput
+                available="Claim.canEditVehicle(VehicleIncident.Vehicle)"
+                editable="true"
+                id="Vehicle_Make"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.Vehicle.Make&quot;)"
+                required="false"
+                value="VehicleIncident.Vehicle.Make"
+                visible="!InsurerLoss or NewVehicle">
+                <Reflect
+                  available="Claim.canEditVehicle(VALUE)"
+                  triggerIds="Vehicle_Picker"
+                  value="VALUE.Make"/>
+              </TextInput>
+              <TextInput
+                available="Claim.canEditVehicle(VehicleIncident.Vehicle)"
+                editable="true"
+                id="Vehicle_Model"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.Vehicle.Model&quot;)"
+                required="false"
+                value="VehicleIncident.Vehicle.Model"
+                visible="!InsurerLoss or NewVehicle">
+                <Reflect
+                  available="Claim.canEditVehicle(VALUE)"
+                  triggerIds="Vehicle_Picker"
+                  value="VALUE.Model"/>
+              </TextInput>
+              <TypeKeyInput
+                available="Claim.canEditVehicle(VehicleIncident.Vehicle)"
+                editable="true"
+                id="Vehicle_Style"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.Vehicle.Style&quot;)"
+                required="false"
+                value="VehicleIncident.Vehicle.Style"
+                valueType="typekey.VehicleStyle"
+                visible="!InsurerLoss or NewVehicle">
+                <Reflect
+                  available="Claim.canEditVehicle(VALUE)"
+                  triggerIds="Vehicle_Picker"
+                  value="VALUE.Style"/>
+                <PostOnChange/>
+              </TypeKeyInput>
+              <TextInput
+                available="Claim.canEditVehicle(VehicleIncident.Vehicle)"
+                editable="true"
+                id="Vehicle_Color"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.Vehicle.Color&quot;)"
+                value="VehicleIncident.Vehicle.Color"
+                visible="!InsurerLoss or NewVehicle">
+                <Reflect
+                  available="Claim.canEditVehicle(VALUE)"
+                  triggerIds="Vehicle_Picker"
+                  value="VALUE.Color"/>
+              </TextInput>
+              <TextInput
+                available="Claim.canEditVehicle(VehicleIncident.Vehicle)"
+                editable="true"
+                id="Vehicle_LicensePlate"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.Vehicle.LicensePlate&quot;)"
+                value="VehicleIncident.Vehicle.LicensePlate"
+                visible="!InsurerLoss or NewVehicle">
+                <Reflect
+                  available="Claim.canEditVehicle(VALUE)"
+                  triggerIds="Vehicle_Picker"
+                  value="VALUE.LicensePlate"/>
+              </TextInput>
+              <TypeKeyInput
+                available="Claim.canEditVehicle(VehicleIncident.Vehicle)"
+                editable="true"
+                filter="VALUE.hasCategory(JurisdictionType.TC_VEHICLE_REG)"
+                id="Vehicle_State"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.Vehicle.State&quot;)"
+                value="VehicleIncident.Vehicle.State"
+                valueType="typekey.Jurisdiction"
+                visible="(!InsurerLoss or NewVehicle)">
+                <Reflect
+                  available="Claim.canEditVehicle(VALUE)"
+                  triggerIds="Vehicle_Picker"
+                  value="VALUE.State"/>
+              </TypeKeyInput>
+              <TextInput
+                available="Claim.canEditVehicle(VehicleIncident.Vehicle)"
+                editable="true"
+                id="Vehicle_VIN"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.Vehicle.VIN&quot;)"
+                value="VehicleIncident.Vehicle.Vin"
+                visible="(!InsurerLoss or NewVehicle) and VehicleIncident.Vehicle.Style != VehicleStyle.TC_BOAT and VehicleIncident.Vehicle.Style != VehicleStyle.TC_ATV and VehicleIncident.Vehicle.Style != VehicleStyle.TC_SNOWMOBILE">
+                <Reflect
+                  available="Claim.canEditVehicle(VALUE)"
+                  triggerIds="Vehicle_Picker"
+                  value="VALUE.Vin"/>
+              </TextInput>
+              <ClaimContactInput
+                claim="Claim"
+                editable="true"
+                id="Owner_Picker"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.Owner.Picker&quot;)"
+                value="VehicleIncident.incidentowner"
+                valueRange="Claim.RelatedContacts"
+                visible="VehicleIncident.VehicleLossParty == LossPartyType.TC_THIRD_PARTY"/>
+              <BooleanRadioInput
+                editable="true"
+                id="Theft_Indicator"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.TheftIndicator&quot;)"
+                value="VehicleIncident.VehStolenInd"
+                visible="InsurerLoss">
+                <PostOnChange/>
+              </BooleanRadioInput>
+              <BooleanRadioInput
+                editable="true"
+                id="VehicleParked"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.VehicleParked&quot;)"
+                value="VehicleIncident.VehicleParked">
+                <PostOnChange/>
+              </BooleanRadioInput>
+            </InputColumn>
+          </DetailViewPanel>
+          <DetailViewPanel
+            visible="true">
+            <InputColumn>
+              <InputDivider/>
+              <Label
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.Damage&quot;)"/>
+              <TextAreaInput
+                editable="true"
+                id="Description"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.Description&quot;)"
+                numCols="30"
+                numRows="3"
+                value="VehicleIncident.Description"/>
+              <BooleanRadioInput
+                editable="true"
+                id="TotalLoss"
+                label="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.PossibleTotalLoss.Label&quot;)"
+                value="VehicleIncident.TotalLoss">
+                <MenuItem
+                  action="TotalLossCalculatorPopup.push(VehicleIncident)"
+                  id="CalculateButton"
+                  label="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.PossibleTotalLoss.CalculateButton.Label&quot;)"/>
+              </BooleanRadioInput>
+              <TextInput
+                id="TotalLossPoints"
+                label="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.TotalLossPoints.Label&quot;)"
+                value="VehicleIncident.TotalLossPoints"
+                valueType="java.lang.Integer"/>
+              <BooleanRadioInput
+                editable="true"
+                id="Operable"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.Operable&quot;)"
+                value="VehicleIncident.VehicleOperable"/>
+              <BooleanRadioInput
+                editable="true"
+                id="Exposure_AirbagsDeployed"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.AirbagsDeployed&quot;)"
+                value="VehicleIncident.AirbagsDeployed"
+                visible="!VehicleIncident.VehStolenInd">
+                <PostOnChange
+                  onChange="VehicleIncident.TotalLossCalculatorPreUpdate()"/>
+              </BooleanRadioInput>
+              <BooleanRadioInput
+                editable="true"
+                id="Exposure_EquipmentFailure"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.EquipmentFailure&quot;)"
+                value="VehicleIncident.EquipmentFailure"
+                visible="!VehicleIncident.VehStolenInd"/>
+            </InputColumn>
+          </DetailViewPanel>
+          <DetailViewPanel
+            id="OtherDetailsDV">
+            <InputColumn>
+              <InputDivider/>
+              <Label
+                label="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.OtherDetailsLabel&quot;)"/>
+              <TextInput
+                editable="true"
+                id="Speed"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.Speed&quot;)"
+                value="VehicleIncident.Speed"
+                valueType="java.lang.Integer"
+                visible="!(VehicleIncident.VehStolenInd or VehicleIncident.VehicleParked)"/>
+              <TypeKeyInput
+                editable="true"
+                id="VehicleDirection"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.VehicleDirection&quot;)"
+                value="VehicleIncident.VehicleDirection"
+                valueType="typekey.VehicleDirection"
+                visible="!(VehicleIncident.VehStolenInd or VehicleIncident.VehicleParked)"/>
+              <TypeKeyInput
+                editable="true"
+                id="CollisionPoint"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.CollisionPoint&quot;)"
+                value="VehicleIncident.CollisionPoint"
+                valueType="typekey.CollisionPoint"
+                visible="!VehicleIncident.VehStolenInd"/>
+              <BooleanRadioInput
+                editable="true"
+                id="LoanInformation_Loan"
+                label="DisplayKey.get(&quot;Web.LoanInformationDV.Loan&quot;)"
+                value="VehicleIncident.Vehicle.Loan">
+                <PostOnChange/>
+              </BooleanRadioInput>
+              <CurrencyInput
+                editable="true"
+                id="MonthlyPayment"
+                label="DisplayKey.get(&quot;Web.LoanInformationDV.MonthlyPayment&quot;)"
+                value="VehicleIncident.Vehicle.LoanMonthlyPayment"
+                visible=" VehicleIncident.Vehicle.Loan == true  "/>
+              <TextInput
+                editable="true"
+                id="MonthsRemaining"
+                label="DisplayKey.get(&quot;Web.LoanInformationDV.MonthsRemaining&quot;)"
+                value="VehicleIncident.Vehicle.LoanMonthsRemaining"
+                valueType="java.lang.Integer"
+                visible=" VehicleIncident.Vehicle.Loan == true "/>
+              <CurrencyInput
+                editable="true"
+                id="PayoffAmount"
+                label="DisplayKey.get(&quot;Web.LoanInformationDV.PayoffAmount&quot;)"
+                value="VehicleIncident.Vehicle.LoanPayoffAmount"
+                visible=" VehicleIncident.Vehicle.Loan == true "/>
+              <ListViewInput
+                boldLabel="true"
+                def="DriverCitationsLV(VehicleIncident)"
+                editable="true"
+                labelAbove="true"
+                visible="!VehicleIncident.VehStolenInd">
+                <Toolbar>
+                  <ToolbarInput
+                    boldValue="true"
+                    id="CitationToolbarLabel"
+                    value="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.Citations.Label&quot;)"
+                    valueType="java.lang.String"/>
+                  <IteratorButtons
+                    iterator="DriverCitationsLV.DriverCitationsLV"/>
+                </Toolbar>
+              </ListViewInput>
+            </InputColumn>
+          </DetailViewPanel>
+        </PanelColumn>
+        <PanelColumn>
+          <DetailViewPanel
+            visible="!VehicleIncident.VehStolenInd">
+            <InputColumn>
+              <ListViewInput
+                boldLabel="true"
+                editable="true"
+                label="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.OccupantsLabel&quot;)"
+                labelAbove="true">
+                <Toolbar>
+                  <ToolbarButton
+                    action="FNOLContactPopup.push(Claim, null, ContactRole.TC_DRIVER, VehicleIncident, Wizard);"
+                    icon="&quot;btn_icon_driver.png&quot;"
+                    id="AddDriverButton"
+                    label="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.AddDriverButton.Label&quot;)"
+                    visible="VehicleIncident.driver == null"/>
+                  <ToolbarButton
+                    action="FNOLContactPopup.push(Claim, null, ContactRole.TC_PASSENGER, VehicleIncident, Wizard);"
+                    icon="&quot;btn_icon_passenger.png&quot;"
+                    id="AddPassengerButton"
+                    label="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.AddPassengerButton.Label&quot;)"
+                    shortcut="P"/>
+                  <IteratorButtons
+                    addVisible="false"
+                    iterator="OccupantLV"/>
+                </Toolbar>
+                <ListViewPanel
+                  id="OccupantLV">
+                  <RowIterator
+                    checkBoxVisible="true"
+                    editable="false"
+                    elementName="ContactPerson"
+                    toRemove="removeContact(ContactPerson)"
+                    value="VehicleIncident.getContactsByRoles( {ContactRole.TC_DRIVER, ContactRole.TC_PASSENGER} )"
+                    valueType="entity.Contact[]">
+                    <Row>
+                      <BooleanRadioCell
+                        icon="Wizard.getInjurySeverity(Claim.getClaimContact(ContactPerson)) == SeverityType.TC_FATAL ? &quot;icon_fatality.png&quot; : &quot;icon_injury.png&quot;"
+                        iconLabel="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.InjuredIcon.Label&quot;)"
+                        id="InjuredIcon"
+                        showHeaderIcon="false"
+                        value="Wizard.isInjured(Claim.getClaimContact(ContactPerson))"/>
+                      <BooleanRadioCell
+                        icon="VehicleIncident.driver == ContactPerson ? &quot;icon_driver.png&quot; : &quot;icon_passenger.png&quot;"
+                        iconLabel="VehicleIncident.driver == ContactPerson ? DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.DriverIcon.Label&quot;) : DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.PassengerIcon.Label&quot;)"
+                        id="RoleIcon"
+                        showHeaderIcon="false"
+                        value="true"
+                        valueType="boolean"/>
+                      <TextCell
+                        action="FNOLContactPopup.push(Claim, Claim.getClaimContact(ContactPerson), typekey.ContactRole.get(VehicleIncident.driver == ContactPerson ? &quot;driver&quot; : &quot;passenger&quot;), VehicleIncident, Wizard)"
+                        id="name"
+                        label="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.Name.Label&quot;)"
+                        value="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.NamePosition&quot;, ContactPerson.DisplayName, (VehicleIncident.driver == ContactPerson ? ContactRole.TC_DRIVER.DisplayName : ContactRole.TC_PASSENGER.DisplayName))"/>
+                      <TextCell
+                        id="Injuries"
+                        label="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.Injuries.Label&quot;)"
+                        value="Wizard.getInjuryDescription( Claim.getClaimContact(ContactPerson) )"/>
+                    </Row>
+                  </RowIterator>
+                </ListViewPanel>
+              </ListViewInput>
+            </InputColumn>
+          </DetailViewPanel>
+          <DetailViewPanel
+            visible="VehicleIncident.VehStolenInd">
+            <InputColumn>
+              <Label
+                label="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.StolenVehicleLabel&quot;)"/>
+              <BooleanRadioInput
+                editable="true"
+                id="Theft_VehLockInd"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.VehLockInd&quot;)"
+                value="VehicleIncident.VehLockInd">
+                <PostOnChange/>
+              </BooleanRadioInput>
+              <BooleanRadioInput
+                editable="true"
+                id="Theft_AntiThftInd"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.AntiThftInd&quot;)"
+                value="VehicleIncident.AntiThftInd">
+                <PostOnChange/>
+              </BooleanRadioInput>
+              <TextInput
+                editable="true"
+                id="Theft_OdomRead"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.OdomRead&quot;)"
+                value="VehicleIncident.OdomRead"
+                valueType="java.lang.Integer">
+                <PostOnChange/>
+              </TextInput>
+              <TypeKeyInput
+                editable="true"
+                id="Theft_AffdvCmplInd"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.AffdvCmplInd&quot;)"
+                required="false"
+                value="VehicleIncident.AffdvCmplInd"
+                valueType="typekey.YesNo">
+                <PostOnChange/>
+              </TypeKeyInput>
+              <!-- <ClaimContactInput
+                claim="Claim"
+                editable="true"
+                id="Theft_AffdvCmplBy"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.AffdvCmplBy&quot;)"
+                required="false"
+                value="VehicleIncident.InsuredRep"
+                valueRange="Exposure.Claim.RelatedContacts"
+                visible="VehicleIncident.AffdvCmplInd == &quot;Yes&quot;"/> -->
+              <ClaimContactInput
+                claim="Claim"
+                editable="true"
+                id="Theft_AffdvCmplBy"
+                label="DisplayKey.get(&quot;Web.VehicleIncidentDV.AffdvCmplBy&quot;)"
+                required="false"
+                value="VehicleIncident.InsuredRep"
+                valueRange="Claim.RelatedContacts"
+                visible="VehicleIncident.AffdvCmplInd == TC_YES"/>
+            </InputColumn>
+          </DetailViewPanel>
+          <PanelDivider/>
+          <DetailViewPanel>
+            <InputColumn>
+              <Label
+                label="DisplayKey.get(&quot;Web.FNOLVehicleIncidentPopup.ServiceNeededLabel&quot;)"/>
+              <TextInput
+                id="ServiceRequestSubmitMessage"
+                labelAbove="true"
+                value="DisplayKey.get(&quot;Web.ServiceRequest.FNOL.SubmitMessage&quot;)"/>
+            </InputColumn>
+          </DetailViewPanel>
+          <PanelRef
+            def="VehicleIncidentPanelSet(VehicleIncident, Wizard.UnusedServiceRequests, Wizard.VehicleIncidentOtherServiceRequests)"/>
+        </PanelColumn>
+      </PanelRow>
+    </Screen>
+    <Code><![CDATA[uses gw.api.claim.FnolServiceRequestHelper
+
+function initializeVariable() {
+  if (Claim == null) {
+    Claim = VehicleIncident.getClaim();
+  }
+  if (VehicleIncident == null) {
+    VehicleIncident = new VehicleIncident();
+    VehicleIncident.Vehicle = new Vehicle();
+    NewVehicle = true;
+    if (Claim.VehicleIncidentsOnly.length == 0) {
+      InsurerLoss = true;
+      VehicleIncident.VehicleLossParty = LossPartyType.TC_INSURED;
+    } else if(Claim.LossType == TC_TRAV) {
+      //Travel vehicle incidents should default to 3rd party
+      InsurerLoss = false;
+      VehicleIncident.VehicleLossParty = LossPartyType.TC_THIRD_PARTY;
+    } else {
+      InsurerLoss = false;
+      VehicleIncident.VehicleLossParty = LossPartyType.TC_THIRD_PARTY;
+    }
+    Claim.addToIncidents(VehicleIncident);
+  }
+  else {
+    InsurerLoss = checkForIncident();
+  }
+}    
+
+function checkForIncident() : boolean {
+  if (VehicleIncident.VehicleLossParty == LossPartyType.TC_INSURED) {
+    return true;
+  } else if (VehicleIncident.VehicleLossParty == LossPartyType.TC_THIRD_PARTY) {
+    return false;
+  } else {
+    for (currentVehicle in Claim.Policy.Vehicles) {
+      if ((currentVehicle).Vehicle == VehicleIncident.Vehicle) {
+        VehicleIncident.VehicleLossParty = LossPartyType.TC_INSURED;
+        return true;
+      }
+    }
+    VehicleIncident.VehicleLossParty = LossPartyType.TC_THIRD_PARTY;
+    return false;
+  }
+}
+
+/**
+ * Removes any orphaned injury incidents that were created that no longer have any involvement 
+ * with the vehicle incident.  Also finishes initializing any service requests that were created.
+ */
+function cleanBeforeCommit() {   
+  // Travel LOB does not need to remove the injury incidents
+  if(VehicleIncident.Claim.LossType != TC_TRAV) {
+    var involvedPersons = new java.util.HashSet<Contact>();
+    var injuryIncidents = VehicleIncident.Claim.InjuryIncidentsOnly
+    
+    // retrieve a list of all drivers and passegners on the all vehicle incidents
+    Claim.VehicleIncidentsOnly.each(\ v -> v.getContactsByRoles( {ContactRole.TC_DRIVER, ContactRole.TC_PASSENGER} ).each(\ c -> involvedPersons.add(c)))
+    Claim.getContactsByRole(ContactRole.TC_PEDESTRIAN).each(\ c-> involvedPersons.add(c))
+    
+    injuryIncidents.each( \ ii -> {
+      // if the injured person for the incident is not related to any contacts on a vehicle incidents, remove it. 
+      if (!involvedPersons.contains( ii.injured )) {
+        Claim.removeFromIncidents( ii )
+        gw.api.claim.FnolServiceRequestHelper.removeIncidentServiceRequests(ii, Wizard)
+      }
+    })
+  }
+  
+  FnolServiceRequestHelper.cleanAndFinishServiceRequests(Wizard)
+}
+
+function removeContact(contact : Contact) {  
+  if (VehicleIncident.driver == contact) {
+    VehicleIncident.driver = null;
+  } else {
+    VehicleIncident.removeRole( ContactRole.TC_PASSENGER, contact );
+  }
+}]]></Code>
+  </Popup>
+</PCF>

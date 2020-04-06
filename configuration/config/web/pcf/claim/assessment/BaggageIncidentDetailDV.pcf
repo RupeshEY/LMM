@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <CardViewPanel
+    hideTabIfSingle="true"
+    id="BaggageIncidentDetailDV">
+    <Require
+      name="aBaggageIncident"
+      type="BaggageIncident"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Card
+      id="Baggage_DetailsCard"
+      title="DisplayKey.get(&quot;Web.BaggageIncident.Details&quot;)">
+      <PanelRef
+        def="BaggageIncidentDV(aBaggageIncident, unusedServiceRequests)"/>
+    </Card>
+  </CardViewPanel>
+</PCF>

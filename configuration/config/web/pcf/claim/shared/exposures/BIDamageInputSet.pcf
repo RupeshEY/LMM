@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="BIDamageInputSet">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.BodilyInjuryDamage.Exposure.Incident.Overview&quot;)"/>
+    <RangeInput
+      editable="true"
+      hideChildrenIfReadOnly="false"
+      id="Injury_Incident"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.BodilyInjuryDamage.Exposure.Incident.InjuryIncident&quot;)"
+      optionLabel="VALUE.DisplayNameWithInjuredParty"
+      required="true"
+      value="Exposure.InjuryIncident"
+      valueRange="Exposure.Claim.InjuryIncidentsOnly"
+      valueType="entity.InjuryIncident">
+      <!-- <Reflect
+        triggerIds="LossParty"
+        valueRange="Exposure.getInjuryIncidentsWithMatchingLossParty(VALUE)"/> -->
+      <MenuItem
+        action="NewInjuryIncidentPopup.push(Exposure.Claim, Exposure)"
+        hideIfReadOnly="true"
+        id="BodilyInjuryDamageDV_NewIncidentMenuItem"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.BodilyInjuryDamage.Exposure.Incident.NewIncident&quot;)"/>
+      <MenuItem
+        action="EditInjuryIncidentPopup.push(Exposure.InjuryIncident, true)"
+        hideIfReadOnly="true"
+        id="BodilyInjuryDamageDV_EditIncidentMenuItem"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.BodilyInjuryDamage.Exposure.Incident.EditIncident&quot;)"/>
+      <MenuItem
+        action="EditInjuryIncidentPopup.push(Exposure.InjuryIncident, false)"
+        hideIfEditable="true"
+        id="BodilyInjuryDamageDV_ViewIncidentMenuItem"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.BodilyInjuryDamage.Exposure.Incident.ViewIncident&quot;)"/>
+    </RangeInput>
+    <TextInput
+      id="Incident_Injured"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.BodilyInjuryDamage.Exposure.Incident.InjuredPerson&quot;)"
+      value="Exposure.InjuryIncident.injured"
+      valueType="entity.Person">
+      <Reflect
+        triggerIds="Injury_Incident"
+        value="VALUE.injured"/>
+    </TextInput>
+    <TypeKeyInput
+      id="Incident_Severity"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.BodilyInjuryDamage.Exposure.Incident.Severity&quot;)"
+      value="Exposure.InjuryIncident.Severity"
+      valueType="typekey.SeverityType">
+      <Reflect
+        triggerIds="Injury_Incident"
+        value="VALUE.Severity"/>
+    </TypeKeyInput>
+    <TextInput
+      id="Incident_Description"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.BodilyInjuryDamage.Exposure.Incident.Description&quot;)"
+      value="Exposure.InjuryIncident.Description">
+      <Reflect
+        triggerIds="Injury_Incident"
+        value="VALUE.Description"/>
+    </TextInput>
+  </InputSet>
+</PCF>

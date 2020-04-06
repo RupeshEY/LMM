@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A quote received from a specialist for a Service Request."
+  entity="ServiceRequestQuote"
+  supertype="ServiceRequestStatement">
+  <column
+    desc="Number of business days the specialist expects it will take to perform the service."
+    name="ExpectedDaysToPerformService"
+    nullok="false"
+    type="integer"/>
+</subtype>

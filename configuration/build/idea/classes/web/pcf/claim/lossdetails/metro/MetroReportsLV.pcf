@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="MetroReportsLV">
+    <ExposeIterator
+      flags="MetroReport,RemovableMetroReport,NotRemovableMetroReport"
+      valueType="entity.MetroReport"
+      widget="MetroReportsLV"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <RowIterator
+      editable="true"
+      elementName="MetroReport"
+      hideCheckBoxesIfReadOnly="true"
+      pageSize="5"
+      pickLocation="NewMetroReportDetailsPopup.push(Claim)"
+      toRemove="Claim.removeFromMetroReports(MetroReport)"
+      value="Claim.MetroReports"
+      valueType="entity.MetroReport[]">
+      <ToolbarFlag
+        name="MetroReport"/>
+      <ToolbarFlag
+        condition="MetroReport.Status == TC_NEW or                                                           MetroReport.Status == TC_INSUFFICIENTDATA or                                                           MetroReport.Status == TC_ORDERFAILED or                                                           MetroReport.Status == TC_INQUIRYFAILED"
+        name="RemovableMetroReport"/>
+      <ToolbarFlag
+        condition="MetroReport.Status != TC_NEW and                                                              MetroReport.Status != TC_INSUFFICIENTDATA and                                                              MetroReport.Status != TC_ORDERFAILED and                                                              MetroReport.Status != TC_INQUIRYFAILED"
+        name="NotRemovableMetroReport"/>
+      <Row>
+        <TypeKeyCell
+          action="MetroReportDetailsPopup.push(Claim, MetroReport)"
+          id="MetroReportType"
+          label="DisplayKey.get(&quot;LV.Claim.MetroReports.ReportType&quot;)"
+          required="false"
+          value="MetroReport.MetroReportType"
+          valueType="typekey.MetroReportType"/>
+        <TypeKeyCell
+          id="MetroReportStatus"
+          label="DisplayKey.get(&quot;LV.Claim.MetroReports.ReportStatus&quot;)"
+          required="false"
+          value="MetroReport.Status"
+          valueType="typekey.MetroReportStatus"/>
+        <DateCell
+          id="MetroReportOrderDate"
+          label="DisplayKey.get(&quot;LV.Claim.MetroReports.OrderDate&quot;)"
+          required="false"
+          value="MetroReport.SentDate"/>
+        <LinkCell
+          label="DisplayKey.get(&quot;LV.Claim.MetroReports.Document&quot;)"
+          width="300">
+          <Link
+            available="documentsActionsHelper.isViewDocumentContentAvailable(MetroReport.Document)"
+            download="inline"
+            action="MetroReport.Document.downloadContent()"
+            id="MetroReportDocument"
+            label="MetroReport.Document.Name"
+            styleClass="none"
+            tooltip="documentsActionsHelper.getViewDocumentContentTooltip(MetroReport.Document)"
+            visible="MetroReport.hasDocument()"/>
+        </LinkCell>
+        <LinkCell
+          id="Action"
+          label="DisplayKey.get(&quot;LV.Claim.Documents.Document.ViewAndEdit&quot;)">
+          <Link
+            action="MetroReport.Status = TC_NEW"
+            available="MetroReport.Status == TC_INSUFFICIENTDATA"
+            hideIfReadOnly="true"
+            id="ReSubmit"
+            label="DisplayKey.get(&quot;LV.Claim.MetroReports.ReSubmit&quot;)"
+            styleClass="miniButton"/>
+        </LinkCell>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

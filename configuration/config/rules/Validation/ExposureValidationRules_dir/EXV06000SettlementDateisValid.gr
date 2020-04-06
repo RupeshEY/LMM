@@ -1,0 +1,30 @@
+package rules.Validation.ExposureValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("EXV06000 - Settlement Date is Valid")
+internal class EXV06000SettlementDateisValid {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.Claim.LossType == TC_WC
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+var settleDate = exposure.SettleDate
+
+if (null != settleDate) {
+  var today = gw.api.util.DateUtil.currentDate()
+  if (gw.api.util.DateUtil.compareIgnoreTime(today, settleDate) < 0) {
+    exposure.rejectField("SettleDate", TC_NEWLOSS, 
+             DisplayKey.get("Rules.Validation.Exposure.SettlementDateInTheFuture"), null, null)
+  }
+}
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="An event status line for a assessment e.g., an appointment date with a garage"
+  entity="AssessmentLine"
+  exportable="true"
+  platform="false"
+  table="assessmentline"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.AssessmentLine"
+    impl="com.guidewire.cc.domain.exposure.impl.AssessmentLineImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Date the event took place"
+    name="StatusDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Notes or comments explaining the reasoning behind this event status line."
+    name="Note"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    columnName="AssessmentSourceID"
+    desc="Related Incident."
+    exportable="false"
+    fkentity="AssessmentSource"
+    name="AssessmentSource"
+    nullok="false"/>
+  <typekey
+    desc="The event of this assessment line."
+    name="Event"
+    nullok="true"
+    typelist="AssessmentEvent"/>
+</entity>

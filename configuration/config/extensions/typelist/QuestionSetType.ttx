@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="A kind of question set"
+  name="QuestionSetType">
+  <typecode
+    code="newclaim"
+    desc="New Claim Wizard Questionaire"
+    name="NewClaim"
+    priority="1"/>
+  <typecode
+    code="siucar"
+    desc="Auto SIU questions - applicable for auto claims"
+    name="SIUCar"
+    priority="3"/>
+  <typecode
+    code="siugen"
+    desc="General SIU questions - applicable to all."
+    name="SIUGen"
+    priority="2"/>
+  <typecode
+    code="siuwork"
+    desc="Workers comp SIU questions - applicable for workers compensation claims."
+    name="SIUwork"
+    priority="4"/>
+  <typecode
+    code="spmreview"
+    desc="Review for Service Provider Management"
+    name="SPMReview"
+    priority="5"/>
+</typelistextension>

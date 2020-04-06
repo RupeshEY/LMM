@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Contact">
+  <column
+    desc="The original insurer reference"
+    name="OriginalInsurerReference_Ext"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="20"/>
+  </column>
+  <column
+    desc="The ID of the ECF Contact."
+    name="LMContactID_Ext"
+    nullok="true"
+    type="shorttext"/>
+</extension>

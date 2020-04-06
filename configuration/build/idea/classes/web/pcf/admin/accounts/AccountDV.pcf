@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    editable="perm.System.accountmng"
+    id="AccountDV">
+    <Require
+      name="account"
+      type="Account"/>
+    <Variable
+      initialValue="gw.api.contact.AddressBookUtil.newAddressBookContactSource()"
+      name="externalContactSource"
+      type="gw.api.contact.ExternalContactSource"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.Admin.Account.Detail.Label&quot;)"/>
+      <TextInput
+        editable="true"
+        id="AccountNumber"
+        label="DisplayKey.get(&quot;Web.Admin.Account.Number&quot;)"
+        required="true"
+        value="account.AccountNumber"/>
+      <AddressBookContactInput
+        allowEditContact="false"
+        editable="true"
+        id="AccountHolder"
+        label="DisplayKey.get(&quot;Web.Admin.Account.Holder&quot;)"
+        required="true"
+        value="account.AccountHolder"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

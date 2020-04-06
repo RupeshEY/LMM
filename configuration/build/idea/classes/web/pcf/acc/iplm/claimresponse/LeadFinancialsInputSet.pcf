@@ -1,0 +1,245 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="LeadFinancialsInputSet">
+    <Require
+      name="ecfClaimData"
+      type="ECFMessageClaimData_Ext"/>
+    <Require
+      name="claimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <ListViewInput
+      boldLabel="true"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.Financials&quot;)"
+      labelAbove="true">
+      <Toolbar/>
+      <ListViewPanel
+        id="financialsTableLV">
+        <RowIterator
+          editable="true"
+          elementName="name"
+          value="{'tableInsteadOfFields'}"
+          valueType="java.lang.String[]">
+          <Row>
+            <TextCell
+              id="emptyCell"/>
+            <TextCell
+              desc="editable, required if any values entered below; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ClaimEntryAmounts@Ccy"
+              editable="false"
+              id="currency1"
+              value="claimResponseRq.Currency1.DisplayName"/>
+            <TextCell
+              desc="editable, required if any values entered below; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ClaimEntryAmounts@Ccy"
+              editable="false"
+              id="currency2"
+              value="claimResponseRq.Currency2.DisplayName"/>
+            <TextCell
+              desc="editable, required if any values entered below; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ClaimEntryAmounts@Ccy"
+              editable="false"
+              id="currency3"
+              value="claimResponseRq.Currency3.DisplayName"/>
+          </Row>
+          <Row>
+            <TextCell
+              id="vatAmountLabel"
+              value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.VATAmount&quot;)"/>
+            <MonetaryAmountCell
+              currency="claimResponseRq.Currency1"
+              desc="editable, set currency from header value; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ClaimEntryAmounts/wb:VATAmount"
+              editable="claimResponseRq.VATAmount1 != null"
+              outputConversion="VALUE.Amount == 0?&quot;&quot;:VALUE.Amount?.toString()"
+              value="claimResponseRq.VATAmount1"
+              id="vatAmount1">
+              <PostOnChange
+                target="DATA_ONLY"/>
+            </MonetaryAmountCell>
+            <MonetaryAmountCell
+              currency="claimResponseRq.Currency2"
+              desc="editable, set currency from header value; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ClaimEntryAmounts/wb:VATAmount"
+              editable="claimResponseRq.VATAmount2 != null"
+              outputConversion="VALUE.Amount == 0?&quot;&quot;:VALUE.Amount?.toString()"
+              value="claimResponseRq.VATAmount2"
+              id="vatAmount2">
+              <PostOnChange
+                target="DATA_ONLY"/>
+            </MonetaryAmountCell>
+            <MonetaryAmountCell
+              currency="claimResponseRq.Currency3"
+              desc="editable, set currency from header value; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ClaimEntryAmounts/wb:VATAmount"
+              editable="claimResponseRq.VATAmount3 != null"
+              outputConversion="VALUE.Amount == 0?&quot;&quot;:VALUE.Amount?.toString()"
+              value="claimResponseRq.VATAmount3"
+              id="vatAmount3">
+              <PostOnChange
+                target="DATA_ONLY"/>
+            </MonetaryAmountCell>
+          </Row>
+          <Row
+            visible="ecfClaimData.LloydsLeadClaim or ecfClaimData.LirmaLeadClaim">
+            <TextCell
+              id="leadReserveAmountLabel"
+              value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.LeadReserveAmount&quot;)"/>
+            <MonetaryAmountCell
+              currency="claimResponseRq.LeadReserveAmount1.Currency"
+              desc="editable, set currency from header value; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ClaimEntryAmounts/wb:LeadReserveAmount"
+              editable="claimResponseRq.LeadReserveAmount1 != null"
+              outputConversion="VALUE.Amount == 0?&quot;&quot;:VALUE.Amount?.toString()"
+              value="claimResponseRq.LeadReserveAmount1"
+              id="leadReserveAmount1">
+              <PostOnChange
+                target="DATA_ONLY"/>
+            </MonetaryAmountCell>
+            <MonetaryAmountCell
+              currency="claimResponseRq.LeadReserveAmount2.Currency"
+              desc="editable, set currency from header value; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ClaimEntryAmounts/wb:LeadReserveAmount"
+              editable="claimResponseRq.LeadReserveAmount2 != null"
+              outputConversion="VALUE.Amount == 0?&quot;&quot;:VALUE.Amount?.toString()"
+              value="claimResponseRq.LeadReserveAmount2"
+              id="leadReserveAmount2">
+              <PostOnChange
+                target="DATA_ONLY"/>
+            </MonetaryAmountCell>
+            <MonetaryAmountCell
+              currency="claimResponseRq.LeadReserveAmount3.Currency"
+              desc="editable, set currency from header value; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ClaimEntryAmounts/wb:LeadReserveAmount"
+              editable="claimResponseRq.LeadReserveAmount3 != null"
+              outputConversion="VALUE.Amount == 0?&quot;&quot;:VALUE.Amount?.toString()"
+              value="claimResponseRq.LeadReserveAmount3"
+              id="leadReserveAmount3">
+              <PostOnChange
+                target="DATA_ONLY"/>
+            </MonetaryAmountCell>
+          </Row>
+          <Row
+            visible="ecfClaimData.LloydsLeadClaim">
+            <TextCell
+              id="leadReserveFeesLabel"
+              value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.LeadReserveFees&quot;)"/>
+            <MonetaryAmountCell
+              currency="claimResponseRq.LeadReserveFees1.Currency"
+              desc="editable, set currency from header value; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ClaimEntryAmounts/wb:LeadReserveAmount"
+              editable="claimResponseRq.LeadReserveFees1 != null"
+              outputConversion="VALUE.Amount == 0?&quot;&quot;:VALUE.Amount?.toString()"
+              value="claimResponseRq.LeadReserveFees1"
+              id="leadReserveFees1">
+              <PostOnChange
+                target="DATA_ONLY"/>
+            </MonetaryAmountCell>
+            <MonetaryAmountCell
+              currency="claimResponseRq.LeadReserveFees2.Currency"
+              desc="editable, set currency from header value; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ClaimEntryAmounts/wb:LeadReserveAmount"
+              editable="claimResponseRq.LeadReserveFees2 != null"
+              outputConversion="VALUE.Amount == 0?&quot;&quot;:VALUE.Amount?.toString()"
+              value="claimResponseRq.LeadReserveFees2"
+              id="leadReserveFees2">
+              <PostOnChange
+                target="DATA_ONLY"/>
+            </MonetaryAmountCell>
+            <MonetaryAmountCell
+              currency="claimResponseRq.LeadReserveFees3.Currency"
+              desc="editable, set currency from header value; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ClaimEntryAmounts/wb:LeadReserveAmount"
+              editable="claimResponseRq.LeadReserveFees3 != null"
+              outputConversion="VALUE.Amount == 0?&quot;&quot;:VALUE.Amount?.toString()"
+              value="claimResponseRq.LeadReserveFees3"
+              id="leadReserveFees3">
+              <PostOnChange
+                target="DATA_ONLY"/>
+            </MonetaryAmountCell>
+          </Row>
+          <Row
+           visible="not ecfClaimData.LloydsLeadClaim">
+            <TextCell
+              id="importedServicesAmountLabel"
+              value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ImportedServicesAmount&quot;)"/>
+            <MonetaryAmountCell
+              currency="claimResponseRq.ImportedServicesAmount1.Currency"
+              desc="editable, set currency from header value; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ClaimEntryAmounts/wb:ImportedServicesAmount"
+              editable="claimResponseRq.ImportedServicesAmount1 != null"
+              outputConversion="VALUE.Amount == 0?&quot;&quot;:VALUE.Amount?.toString()"
+              value="claimResponseRq.ImportedServicesAmount1"
+              id="importedServicesAmount1">
+              <PostOnChange
+                target="DATA_ONLY"/>
+            </MonetaryAmountCell>
+            <MonetaryAmountCell
+              currency="claimResponseRq.ImportedServicesAmount2.Currency"
+              desc="editable, set currency from header value; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ClaimEntryAmounts/wb:ImportedServicesAmount"
+              editable="claimResponseRq.ImportedServicesAmount2 != null"
+              outputConversion="VALUE.Amount == 0?&quot;&quot;:VALUE.Amount?.toString()"
+              value="claimResponseRq.ImportedServicesAmount2"
+              id="importedServicesAmount2">
+              <PostOnChange
+                target="DATA_ONLY"/>
+            </MonetaryAmountCell>
+            <MonetaryAmountCell
+              currency="claimResponseRq.ImportedServicesAmount3.Currency"
+              desc="editable, set currency from header value; passed in wb:ClaimResponseRq/wb:ClaimResponse/wb:LeadResponse/wb:ClaimEntryAmounts/wb:ImportedServicesAmount"
+              editable="claimResponseRq.ImportedServicesAmount3 != null"
+              outputConversion="VALUE.Amount == 0?&quot;&quot;:VALUE.Amount?.toString()"
+              value="claimResponseRq.ImportedServicesAmount3"
+              id="importedServicesAmount3">
+              <PostOnChange
+                target="DATA_ONLY"/>
+            </MonetaryAmountCell>
+          </Row>
+          <Row
+          visible="true">
+          <TextCell
+            id="LossAndExpenseBeforeRetentionLabel"
+            value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.LossAndExpenseBeforeRetention&quot;)"/>
+          <MonetaryAmountCell
+            currency="claimResponseRq.Currency1"
+            desc="not editable; passed in ClaimNotifyEventRq/ClaimMovement/ClaimAmounts/ClaimMovementAmtItem[@Type='loss_and_expense_incurred_for_contract_before_retention']/Amt"
+            outputConversion="VALUE.Amount == 0?&quot;&quot;:VALUE.Amount?.toString()"
+            value="ecfClaimData.Financials.firstWhere(\elt -&gt; elt.Currency == claimResponseRq.Currency1).LossAndExpensesIncurred"
+            id="LossAndExpensesIncurred1">
+          </MonetaryAmountCell>
+          <MonetaryAmountCell
+            currency="claimResponseRq.Currency2"
+            desc="not editable; passed in ClaimNotifyEventRq/ClaimMovement/ClaimAmounts/ClaimMovementAmtItem[@Type='loss_and_expense_incurred_for_contract_before_retention']/Amt"
+            outputConversion="VALUE.Amount == 0?&quot;&quot;:VALUE.Amount?.toString()"
+            value="ecfClaimData.Financials.firstWhere(\elt -&gt; elt.Currency == claimResponseRq.Currency2).LossAndExpensesIncurred"
+            id="LossAndExpensesIncurred2">
+          </MonetaryAmountCell>
+          <MonetaryAmountCell
+            currency="claimResponseRq.Currency3"
+            desc="not editable; passed in ClaimNotifyEventRq/ClaimMovement/ClaimAmounts/ClaimMovementAmtItem[@Type='loss_and_expense_incurred_for_contract_before_retention']/Amt"
+            outputConversion="VALUE.Amount == 0?&quot;&quot;:VALUE.Amount?.toString()"
+            value="ecfClaimData.Financials.firstWhere(\elt -&gt; elt.Currency == claimResponseRq.Currency3).LossAndExpensesIncurred"
+            id="LossAndExpensesIncurred3">
+          </MonetaryAmountCell>
+        </Row>
+          <Row
+            visible="not ecfClaimData.LloydsLeadClaim">
+            <TextCell
+              id="ProfAdvisorFeesOutstandingLabel"
+              value="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ProfAdvisorFeesOutstanding&quot;)"/>
+            <MonetaryAmountCell
+              currency="claimResponseRq.Currency1"
+              desc="not editable; passed in ClaimNotifyEventRq/ClaimMovement/ClaimAmounts/ClaimMovementAmtItem[@Type='professional_advisor_fees_outstanding']/Amt"
+              outputConversion="VALUE.Amount == 0?&quot;&quot;:VALUE.Amount?.toString()"
+              value="ecfClaimData.Financials.firstWhere(\elt -&gt; elt.Currency == claimResponseRq.Currency1).ProfAdvisorFeesOutstanding"
+              id="ProfAdvisorFeesOutstanding1">
+            </MonetaryAmountCell>
+            <MonetaryAmountCell
+              currency="claimResponseRq.Currency2"
+              desc="not editable; passed in ClaimNotifyEventRq/ClaimMovement/ClaimAmounts/ClaimMovementAmtItem[@Type='professional_advisor_fees_outstanding']/Amt"
+              outputConversion="VALUE.Amount == 0?&quot;&quot;:VALUE.Amount?.toString()"
+              value="ecfClaimData.Financials.firstWhere(\elt -&gt; elt.Currency == claimResponseRq.Currency2).ProfAdvisorFeesOutstanding"
+              id="ProfAdvisorFeesOutstanding2">
+            </MonetaryAmountCell>
+            <MonetaryAmountCell
+              currency="claimResponseRq.Currency3"
+              desc="not editable; passed in ClaimNotifyEventRq/ClaimMovement/ClaimAmounts/ClaimMovementAmtItem[@Type='professional_advisor_fees_outstanding']/Amt"
+              outputConversion="VALUE.Amount == 0?&quot;&quot;:VALUE.Amount?.toString()"
+              value="ecfClaimData.Financials.firstWhere(\elt -&gt; elt.Currency == claimResponseRq.Currency3).ProfAdvisorFeesOutstanding"
+              id="ProfAdvisorFeesOutstanding3">
+            </MonetaryAmountCell>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </ListViewInput>
+  </InputSet>
+</PCF>

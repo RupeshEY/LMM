@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="NewClaimWizard_QuickClaimScreen">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Toolbar>
+      <WizardButtons/>
+      <ToolbarDivider/>
+      <ToolbarButton
+        action="Wizard.returnToFullWizard(ReturnStep, HighWaterStep)"
+        id="NewClaimWizard_QuickClaimScreen_ReturnFromQuickClaimButton"
+        label="DisplayKey.get(&quot;Button.Wizard.ReturnFromQuickClaim&quot;)"
+        shortcut="R"/>
+    </Toolbar>
+    <PanelRef
+      def="QuickClaimDV(Claim, Wizard)"
+      mode="Wizard.QuickClaim.Mode"/>
+    <Code><![CDATA[
+property get ReturnStep() : String {
+  return usesClassicWizard() ?  "ClassicMainContacts" : "MainContacts"
+}
+
+property get HighWaterStep() : String {
+  return usesClassicWizard() ?  "ClassicSummary" : "Summary"
+}
+
+function usesClassicWizard() : boolean {
+  switch (Wizard.QuickClaim.Mode) {
+  case "QuickClaimProperty":
+  case "GL":
+    return true
+  default:
+    return false
+  }
+}
+    ]]></Code>
+  </Screen>
+</PCF>

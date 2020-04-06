@@ -1,0 +1,22 @@
+package rules.Validation.ClaimClosedValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CCV01000 - Open exposures")
+internal class CCV01000Openexposures {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.Exposures.toList().hasMatch(\ exp -> not (exp.State == TC_CLOSED))
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.reject(TC_NEWLOSS, DisplayKey.get("Rules.Validation.CloseClaim.CloseAllOpenExposures"), null, null)
+/*end00rule*/
+
+  }
+}

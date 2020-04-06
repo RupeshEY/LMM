@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="A subtype of AutomatedHandler that generates an activity when a trigger is executed."
+  entity="AutomatedActivityHandler"
+  final="false"
+  supertype="AutomatedHandler">
+  <implementsInterface
+    iface="gw.cc.specialhandling.entity.AutomatedActivityHandler"
+    impl="com.guidewire.cc.domain.specialhandling.impl.AutomatedActivityHandlerImpl"/>
+  <fulldescription><![CDATA[
+        A subtype of AutomatedHandler that causes activities to be generated when the associated trigger is executed by
+        changes to a Claim.
+    ]]></fulldescription>
+  <implementsInterface
+    iface="gw.api.specialhandling.AutomatedHandlerMethods"
+    impl="gw.specialhandling.AutomatedActivityHandlerMethodsImpl"/>
+  <foreignkey
+    columnName="ActivityPatternID"
+    desc="Activity pattern to use for activity generation"
+    fkentity="ActivityPattern"
+    name="ActivityPattern"
+    nullok="false"/>
+  <column
+    desc="Optional alternate template to use for activity generation"
+    name="EmailTemplateOverride"
+    nullok="true"
+    type="shorttext"/>
+</subtype>

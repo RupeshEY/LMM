@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- This is the XCHANGING Retrieve Claim Request Service Interface **** 
+	version 3.4 Schema **** Generated: November 22 2016 COPYRIGHT NOTICE: (c) 
+	2015 XCHANGING. All Rights Reserved. -->
+<xs:schema attributeFormDefault="unqualified"
+	xmlns="http://www.xchanging.com/retrieveClaim/rq/1" elementFormDefault="qualified"
+	xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:jv="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1"
+	targetNamespace="http://www.xchanging.com/retrieveClaim/rq/1" version="3.4">
+
+	<xs:import namespace="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1"
+		schemaLocation="../Jv-Ins-Reinsurance-2014-06.xsd" />
+
+	<xs:element name="RetrieveClaimRq">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element ref="jv:UUId" />
+				<xs:element ref="jv:ReinsurerReference" minOccurs="0" />
+				<xs:element ref="jv:InsurerReference" minOccurs="0" />
+				<xs:element ref="jv:CreationDate" />
+				<xs:element ref="jv:Reinsurer" minOccurs="0" />
+				<xs:element ref="jv:Insurer" minOccurs="0" />
+				<xs:element ref="jv:ServiceProvider" />
+				<xs:element name="ReferredObjects">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Contract">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="jv:BrokerReference" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="Claim">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="jv:BrokerReference" />
+										<xs:element name="ClaimLineNumber" type="xs:integer" />
+										<xs:element name="ClaimType">
+											<xs:simpleType>
+												<xs:restriction base="xs:string">
+													<xs:minLength value="0" />
+													<xs:maxLength value="16" />
+												</xs:restriction>
+											</xs:simpleType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ClaimEntry">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element ref="jv:BrokerReference" />
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+			<xs:attribute name="Sender">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="0" />
+						<xs:maxLength value="35" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+			<xs:attribute name="Receiver">
+				<xs:simpleType>
+					<xs:restriction base="xs:string">
+						<xs:minLength value="0" />
+						<xs:maxLength value="35" />
+					</xs:restriction>
+				</xs:simpleType>
+			</xs:attribute>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

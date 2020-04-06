@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterCancel="ClaimFinancialsTransactionsDetail.go(claim, originalRecovery)"
+    afterCommit="ClaimFinancialsTransactions.go(claim, gw.api.financials.ClaimFinancialsTransactionsOption.RECOVERY)"
+    canEdit="true"
+    id="RecodeRecovery"
+    parent="ClaimFinancialsTransactionsDetail(originalRecovery.Claim, originalRecovery)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.RecodeRecovery.Title&quot;)">
+    <LocationEntryPoint
+      signature="RecodeRecovery(originalRecovery : Recovery)"/>
+    <Variable
+      name="originalRecovery"
+      type="Recovery"/>
+    <Variable
+      initialValue="originalRecovery.createOnsetRecovery()"
+      name="onsetRecovery"
+      type="Recovery"/>
+    <Variable
+      initialValue="gw.api.financials.ReserveLineInputSetStrategyForRecoveryRecode.newHelper(originalRecovery.TransToReservingExchangeRate)"
+      name="reserveLineInputSetHelper"
+      type="gw.api.financials.ReserveLineInputSetHelper"/>
+    <Variable
+      initialValue="originalRecovery.Claim"
+      name="claim"
+      type="Claim"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="doRecode()"
+          id="RecodeButton"
+          label="DisplayKey.get(&quot;Web.Claim.RecodeRecovery.RecodeButton&quot;)"/>
+        <EditButtons
+          cancelLabel="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          cancelVisible="true"
+          editVisible="false"
+          updateVisible="false"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSetRef
+            def="ReserveLineInputSet(onsetRecovery, reserveLineInputSetHelper)"/>
+          <TypeKeyInput
+            editable="true"
+            id="RecoveryCategory"
+            label="DisplayKey.get(&quot;Web.Claim.RecodeRecovery.RecoveryCategory&quot;)"
+            required="true"
+            value="onsetRecovery.RecoveryCategory"
+            valueType="typekey.RecoveryCategory">
+            <PostOnChange/>
+          </TypeKeyInput>
+          <TextInput
+            editable="true"
+            id="Comments"
+            label="DisplayKey.get(&quot;Web.Claim.RecodeRecovery.Comments&quot;)"
+            numCols="14"
+            value="onsetRecovery.Comments"/>
+          <ListViewInput
+            boldLabel="true"
+            def="EditableRecodeLineItemsLV(onsetRecovery)"
+            editable="onsetRecovery.ReserveLine != null"
+            label="DisplayKey.get(&quot;Web.Claim.RecodeRecovery.LineItems&quot;)"
+            labelAbove="true">
+            <Toolbar/>
+          </ListViewInput>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[
+function doRecode() {
+  gw.api.util.CCLocationUtil.runAndCommit(\ -> originalRecovery.recode(), CurrentLocation)
+}
+      
+    ]]></Code>
+  </Page>
+</PCF>

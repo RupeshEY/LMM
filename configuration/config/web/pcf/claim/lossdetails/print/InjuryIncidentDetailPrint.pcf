@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Incident.view(injuryIncident)"
+    id="InjuryIncidentDetailPrint"
+    parent="ClaimLossDetails(injuryIncident.Claim)"
+    title="DisplayKey.get(&quot;Web.EditInjuryIncident.Title&quot;)">
+    <LocationEntryPoint
+      signature="InjuryIncidentDetailPrint(injuryIncident : InjuryIncident)"/>
+    <Variable
+      name="injuryIncident"
+      type="InjuryIncident"/>
+    <Screen
+      id="InjuryIncidentDetailScreen">
+      <Toolbar/>
+      <PanelRef
+        def="InjuryIncidentDV(injuryIncident)"/>
+    </Screen>
+  </Page>
+</PCF>

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="AttributeDetailDV">
+    <Require
+      name="Attribute"
+      type="Attribute"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.Admin.AttributeDetailDV.Attribute&quot;)"/>
+      <TextInput
+        editable="true"
+        id="Name"
+        label="DisplayKey.get(&quot;Web.Admin.AttributeDetailDV.Name&quot;)"
+        required="true"
+        value="Attribute.Name"/>
+      <TextAreaInput
+        editable="true"
+        id="Description"
+        label="DisplayKey.get(&quot;Web.Admin.AttributeDetailDV.Description&quot;)"
+        numRows="3"
+        value="Attribute.Description"/>
+      <TypeKeyInput
+        editable="true"
+        id="Type"
+        label="DisplayKey.get(&quot;Web.Admin.AttributeDetailDV.Type&quot;)"
+        required="true"
+        value="Attribute.Type"
+        valueType="typekey.UserAttributeType"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

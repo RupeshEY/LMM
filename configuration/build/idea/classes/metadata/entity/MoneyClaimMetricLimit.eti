@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Money based claim metric limit."
+  entity="MoneyClaimMetricLimit"
+  final="false"
+  priority="2"
+  supertype="ClaimMetricLimit">
+  <implementsInterface
+    iface="gw.cc.claim.metric.entity.ClaimMetricLimit"
+    impl="com.guidewire.cc.domain.claim.metric.impl.MoneyClaimMetricLimitImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.metric.impl.ClaimMetricLimitInternal"
+    impl="com.guidewire.cc.domain.claim.metric.impl.MoneyClaimMetricLimitImpl"/>
+  <implementsInterface
+    iface="gw.cc.claim.metric.entity.MoneyClaimMetricLimit"
+    impl="com.guidewire.cc.domain.claim.metric.impl.MoneyClaimMetricLimitImpl"/>
+  <implementsInterface
+    iface="gw.api.metric.MetricLimit"
+    impl="gw.api.claim.metric.MoneyClaimMetricLimitMethodsImpl"/>
+  <implementsEntity
+    name="MoneyMetricLimitDelegate"/>
+  <implementsInterface
+    iface="gw.cc.metric.entity.MoneyMetricLimitDelegate"
+    impl="com.guidewire.cc.domain.claim.metric.impl.MoneyClaimMetricLimitImpl"/>
+</subtype>

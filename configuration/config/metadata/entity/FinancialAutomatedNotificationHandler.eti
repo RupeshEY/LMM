@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="FinancialAutomatedNotificationHandler"
+  supertype="AutomatedNotificationHandler">
+  <implementsInterface
+    iface="gw.cc.specialhandling.entity.FinancialAutomatedNotificationHandler"
+    impl="com.guidewire.cc.domain.specialhandling.impl.FinancialAutomatedNotificationHandlerImpl"/>
+  <fulldescription><![CDATA[
+        A subtype of Automated Handler that generates an email when a specified FinancialThreshold for a given Claim changes its value.
+    ]]></fulldescription>
+  <implementsInterface
+    iface="gw.api.specialhandling.AutomatedHandlerMethods"
+    impl="gw.specialhandling.FinancialAutomatedNotificationHandlerMethodsImpl"/>
+  <onetoone
+    desc="The associated FinancialThresholdTrigger whose execution would result in an email being generated according to the specifications of this handler"
+    fkentity="FinancialThresholdTrigger"
+    name="FinancialThresholdTrigger"
+    nullok="true"/>
+</subtype>

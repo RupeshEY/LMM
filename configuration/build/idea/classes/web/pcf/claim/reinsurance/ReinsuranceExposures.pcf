@@ -1,0 +1,209 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="true"
+    canVisit="perm.System.riview"
+    id="ReinsuranceExposures"
+    parent="ReinsuranceSummary(claim)"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.Claim.Reinsurance.ExposuresAndReinsurance&quot;)">
+    <LocationEntryPoint
+      signature="ReinsuranceExposures(claim : Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="claim.RIAgreementGroups.sort().where(\ group -&gt; group.isUserEditable).first()"
+      name="selectedAgreement"
+      type="RIAgreementGroup"/>
+    <Screen
+      editable="true">
+      <DetailViewPanel>
+        <InputColumn>
+          <Label
+            id="label"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.ExposuresWithReinsurance&quot;)"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        id="WithReinsurancePanel">
+        <Toolbar>
+          <RemoveButton
+            flags="any Selected, no ReadOnlyExposure, no GroupSelected"
+            id="RemoveExposureFromAgreementGroup"
+            iterator="RiskAgreementIterator"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.RemoveExposureButton&quot;)"/>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="syncAgreementGroups(CheckedValues.toList())"
+            flags="any GroupSelected, no Selected, no ReadOnlyExposure"
+            id="RetrieveReinsuranceButton"
+            iterator="RiskAgreementIterator"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.RetrieveReinsurance&quot;)"
+            showConfirmMessage="false"
+            visible="gw.reins.RIPluginUtil.RIEnabled"/>
+        </Toolbar>
+        <ListViewPanel
+          id="ExposuresWithReinsuranceLV">
+          <RowIterator
+            canPick="false"
+            checkBoxVisible="gw.reins.RIPluginUtil.RIEnabled"
+            editable="false"
+            elementName="riskAgreementGroup"
+            hasCheckBoxes="true"
+            id="RiskAgreementIterator"
+            pageSize="0"
+            value="claim.RIAgreementGroups.where(\ group -&gt; group.Exposures.length &gt; 0)"
+            valueType="entity.RIAgreementGroup[]">
+            <IteratorSort
+              sortBy="riskAgreementGroup.DisplayName"
+              sortOrder="1"/>
+            <ToolbarFlag
+              name="GroupSelected"/>
+            <Row
+              useTitleStyle="true">
+              <TextCell
+                id="riAgreementGroup"
+                value="riskAgreementGroup.DisplayName"
+                wrap="true"/>
+            </Row>
+            <RowIterator
+              canPick="false"
+              editable="false"
+              elementName="exposure"
+              hasCheckBoxes="true"
+              id="ExposureWithRIIterator"
+              pageSize="0"
+              toRemove="clearAgreementGroup(exposure)"
+              value="riskAgreementGroup.Exposures.where( \ exp -&gt; exp.RIAgreementGroup != null)"
+              valueType="entity.Exposure[]">
+              <ToolbarFlag
+                condition="!exposure.RIGroupSetExternally"
+                name="Selected"/>
+              <IteratorSort
+                sortBy="exposure.ClaimOrder"
+                sortOrder="1"/>
+              <ToolbarFlag
+                condition="exposure.RIGroupSetExternally"
+                name="ReadOnlyExposure"/>
+              <Row>
+                <TextCell
+                  enableSort="false"
+                  flex="1"
+                  id="ExposureName"
+                  value="exposure.DisplayName"
+                  width="800"
+                  wrap="true"/>
+              </Row>
+            </RowIterator>
+          </RowIterator>
+        </ListViewPanel>
+      </PanelRef>
+      <DetailViewPanel>
+        <InputColumn>
+          <Label
+            id="label2"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.ExposuresWithoutReinsurance&quot;)"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        id="WithoutReinsurancePanel">
+        <Toolbar>
+          <ToolbarRangeInput
+            id="SelectedAgreementDropdown"
+            value="selectedAgreement"
+            valueRange="claim.RIAgreementGroups.where(\ group -&gt; group.isUserEditable).sort()"
+            valueType="entity.RIAgreementGroup">
+            <PostOnChange/>
+          </ToolbarRangeInput>
+          <CheckedValuesToolbarButton
+            available="selectedAgreement != null"
+            checkedRowAction="exposure.RIAgreementGroup = selectedAgreement"
+            id="AddToAgreementGroupButton"
+            iterator="ExposureWithoutRIIterator"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.AddToAgreementGroup&quot;)"/>
+          <ToolbarDivider/>
+          <CheckedValuesToolbarButton
+            allCheckedRowsAction="syncExposures(CheckedValues); pcf.ReinsuranceExposures.go(claim)"
+            id="RetrieveReinsuranceButton"
+            iterator="ExposureWithoutRIIterator"
+            label="DisplayKey.get(&quot;Web.Claim.Reinsurance.RetrieveReinsurance&quot;)"
+            showConfirmMessage="false"
+            visible="gw.reins.RIPluginUtil.RIEnabled"/>
+        </Toolbar>
+        <ListViewPanel
+          id="ExposuresWithoutReinsuranceLV">
+          <RowIterator
+            checkBoxVisible="true"
+            editable="false"
+            elementName="exposure"
+            hasCheckBoxes="true"
+            id="ExposureWithoutRIIterator"
+            pageSize="0"
+            value="claim.Exposures.where( \ exp -&gt; exp.RIAgreementGroup == null)"
+            valueType="entity.Exposure[]">
+            <IteratorSort
+              sortBy="exposure.ClaimOrder"
+              sortOrder="1"/>
+            <Row>
+              <TextCell
+                enableSort="false"
+                id="ExposureName"
+                label="&quot;&quot;"
+                value="exposure.DisplayName"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </PanelRef>
+    </Screen>
+    <Code><![CDATA[//Synchronizes the exposures, retrieving the reinsurance info
+function syncExposures( exposures : Exposure[] ) {
+  var commitAtEnd = false
+  if ( not CurrentLocation.InEditMode ) {
+    CurrentLocation.startEditing()
+    commitAtEnd = true
+  }
+  try {
+    gw.reins.RIPluginUtil.invokeRIPlugin(exposures.toList())
+    if (commitAtEnd) {
+      CurrentLocation.commit()     
+    }
+  } catch(e : java.lang.Throwable) {
+    if (commitAtEnd) {
+      CurrentLocation.cancel()
+    }
+    throw e
+  }
+}
+
+
+function syncAgreementGroups( riAgreementGroups : java.util.Collection<RIAgreementGroup> ) {
+  var commitAtEnd = false
+  if ( not CurrentLocation.InEditMode ) {
+    CurrentLocation.startEditing()
+    commitAtEnd = true
+  }
+  try {
+    for (group in riAgreementGroups) {
+      syncExposures(group.Exposures)
+    }
+    if (commitAtEnd) {
+      CurrentLocation.commit()
+    }
+  } catch(e : java.lang.Throwable) {
+    if (commitAtEnd) {
+      CurrentLocation.cancel()
+    }
+    throw e
+  }
+}
+
+function clearAgreementGroup(exposure : Exposure) {
+  gw.transaction.Transaction.runWithNewBundle( \ bundle -> {
+    var localSource = bundle.add( exposure )
+    localSource.RIAgreementGroup = null
+  })
+}]]></Code>
+  </Page>
+</PCF>

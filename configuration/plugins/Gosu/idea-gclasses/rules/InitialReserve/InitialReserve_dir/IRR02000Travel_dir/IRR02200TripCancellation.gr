@@ -1,0 +1,31 @@
+package rules.InitialReserve.InitialReserve_dir.IRR02000Travel_dir
+
+@gw.rules.RuleName("IRR02200 - Trip Cancellation")
+internal class IRR02200TripCancellation {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ExposureType == TC_TRIPCANCELLATIONDELAY
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+if(exposure.Claim.applyFinancialHolds() == true) {
+  exposure.Claim.createNoteIfInitialReservesNotCreated()
+} else { 
+/* Set the reserve to the total financial impact if available AND it is lower than 
+ * the exposure limit.  Otherwise, set to the exposure limit. */
+  var finImpact = exposure.TripIncident.getTotalFinancialImpact(TC_APPROVE).Amount
+
+  if(finImpact > 0 and finImpact < (exposure.Coverage.ExposureLimit as java.lang.Double))
+    exposure.createInitialReserve(TC_CLAIMCOST, TC_TRIP_CANCEL_DELAY, finImpact)
+  else if(exposure.HasCoverageLimit)
+    exposure.createInitialReserve(TC_CLAIMCOST, TC_TRIP_CANCEL_DELAY, exposure.Coverage.ExposureLimit)}
+
+/*end00rule*/
+
+  }
+}

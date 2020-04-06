@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    id="NullClaimContactDetailPopup"
+    title="&quot;&quot;">
+    <LocationEntryPoint
+      signature="NullClaimContactDetailPopup()"/>
+    <Screen
+      id="NullClaimContactDetailScreen">
+      <Toolbar/>
+      <Verbatim
+        label="DisplayKey.get(&quot;Web.NullClaimContactPopup.Message&quot;)"/>
+    </Screen>
+  </Popup>
+</PCF>

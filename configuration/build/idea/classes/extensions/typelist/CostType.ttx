@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="User-defined types of transaction costs.  Financial transactions can optionally be coded to a CostType for accounting purposes"
+  name="CostType">
+  <typecode
+    code="unspecified"
+    desc="Unspecified Cost Type"
+    name="Unspecified Cost Type"
+    priority="1"/>
+  <typecode
+    code="aoexpense"
+    desc="Adjusting and other expenses"
+    name="Expense - A&amp;O"
+    priority="3"/>
+  <typecode
+    code="dccexpense"
+    desc="Defense and cost containment"
+    name="Expense - D&amp;CC"
+    priority="4"/>
+</typelistextension>

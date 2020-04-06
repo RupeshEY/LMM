@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="LocationBasedRULV">
+    <Require
+      name="PolicyLocation"
+      type="PolicyLocation"/>
+    <ExposeIterator
+      valueType="entity.LocationBasedRU"
+      widget="LocationBasedRUIterator"/>
+    <RowIterator
+      editable="true"
+      elementName="RU"
+      hasCheckBoxes="true"
+      hideCheckBoxesIfReadOnly="true"
+      id="LocationBasedRUIterator"
+      toCreateAndAdd="PolicyLocation.addLocationBasedRU(typekey.RiskUnit.TC_LOCATIONBASEDRU.Description)"
+      toRemove="PolicyLocation.removeLocationBasedRU(RU)"
+      value="PolicyLocation.LocationBasedRisks"
+      valueType="entity.LocationBasedRU[]">
+      <Row>
+        <TextCell
+          id="RUNumber"
+          label="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Risks.Number&quot;)"
+          value="RU.RUNumber"
+          valueType="java.lang.Integer"/>
+        <TextCell
+          id="RUDescription"
+          label="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Risks.Description&quot;)"
+          value="RU.Description"/>
+        <TextCell
+          id="RUType"
+          label="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Risks.Type&quot;)"
+          value="RU.Subtype.Description"/>
+        <TextCell
+          id="BuildingNumber"
+          label="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Building.Number&quot;)"
+          value="RU.Building.BuildingNumber"
+          visible="PolicyLocation.Policy.PolicyType != PolicyType.TC_WORKERSCOMP"/>
+        <TextCell
+          id="Lienholders"
+          label="DisplayKey.get(&quot;LV.Policy.Locations.Lienholders&quot;)"
+          value="RU.Lienholders.join(&quot;, &quot;)"
+          visible="PolicyLocation.Policy.PolicyType != PolicyType.TC_WORKERSCOMP"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

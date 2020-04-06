@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<Entity
+  name="Coverage">
+  <Columns>
+    <Column
+      beanPath="Coverage.Subtype"
+      name="subtype"
+      sortOrder="1"/>
+    <Column
+      beanPath="PropertyCoverage.RiskUnit"
+      displayName="true"
+      name="prop"
+      sortOrder="2"/>
+    <Column
+      beanPath="VehicleCoverage.RiskUnit"
+      displayName="true"
+      name="vehicle"
+      sortOrder="3"/>
+    <Column
+      beanPath="Coverage.Type"
+      name="type"
+      sortOrder="4"/>
+  </Columns>
+  <DisplayName><![CDATA[var retString = "";
+if (subtype == TC_PROPERTYCOVERAGE) {
+  retString = prop;
+}
+if (subtype == TC_VEHICLECOVERAGE) {
+  retString = vehicle;
+}
+if (subtype == TC_POLICYCOVERAGE) {
+  retString = gw.api.locale.DisplayKey.get("DisplayName.Coverage.PolicyLevel", type.DisplayName);
+}
+return retString;]]></DisplayName>
+</Entity>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="PropertyIncidentInputSet"
+    mode="Propertydamage">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <RangeInput
+      editable="true"
+      hideChildrenIfReadOnly="false"
+      id="Property_Incident"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.PropertyDamage.Exposure.FixedPropertyIncident&quot;)"
+      required="true"
+      value="Exposure.FixedPropertyIncident"
+      valueRange="Exposure.Claim.FixedPropertyIncidentsOnly"
+      valueType="entity.FixedPropertyIncident">
+      <MenuItem
+        action="NewFixedPropertyIncidentPopup.push(Exposure.Claim)"
+        hideIfReadOnly="true"
+        id="PropertyDamageDV_NewIncidentMenuItem"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.PropertyDamage.Exposure.NewIncident&quot;)"/>
+      <MenuItem
+        action="EditFixedPropertyIncidentPopup.push(Exposure.FixedPropertyIncident, true)"
+        hideIfReadOnly="true"
+        id="PropertyDamageDV_EditIncidentMenuItem"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.PropertyDamage.Exposure.EditIncident&quot;)"/>
+      <MenuItem
+        action="EditFixedPropertyIncidentPopup.push(Exposure.FixedPropertyIncident, false)"
+        hideIfEditable="true"
+        id="PropertyDamageDV_ViewIncidentMenuItem"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.PropertyDamage.Exposure.ViewIncident&quot;)"/>
+    </RangeInput>
+  </InputSet>
+</PCF>

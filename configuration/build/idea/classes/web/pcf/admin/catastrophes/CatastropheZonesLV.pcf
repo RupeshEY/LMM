@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="CatastropheZonesLV">
+    <ExposeIterator
+      valueType="entity.CatastropheZone"
+      widget="CatastropheZonesLV"/>
+    <Require
+      name="catastrophe"
+      type="Catastrophe"/>
+    <Require
+      name="zoneType"
+      type="ZoneType"/>
+    <Require
+      name="country"
+      type="Country"/>
+    <RowIterator
+      canPick="false"
+      editable="true"
+      elementName="catastropheZone"
+      hasCheckBoxes="true"
+      hideCheckBoxesIfReadOnly="true"
+      toCreateAndAdd="createNewCatastropheZone()"
+      toRemove="catastrophe.removeFromCatastropheZones(catastropheZone)"
+      value="catastrophe.getCatastropheZones(zoneType)"
+      valueType="entity.CatastropheZone[]">
+      <IteratorSort
+        sortBy="catastropheZone.Code"
+        sortOrder="1"/>
+      <Row>
+        <TextCell
+          autoComplete="new gw.api.admin.ZoneAutocompleteHandler(country, zoneType)"
+          editable="true"
+          id="ZoneCode"
+          label="DisplayKey.get(&quot;Web.Admin.AdminCatastropheDV.ZoneCode&quot;)"
+          numCols="10"
+          required="true"
+          unique="true"
+          value="catastropheZone.Code"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[
+function createNewCatastropheZone() : CatastropheZone {
+  var newCatastropheZone = new CatastropheZone()
+  newCatastropheZone.ZoneType = zoneType
+  newCatastropheZone.Country = country
+  catastrophe.addToCatastropheZones(newCatastropheZone)
+  return newCatastropheZone
+}
+      
+    ]]></Code>
+  </ListViewPanel>
+</PCF>

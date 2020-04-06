@@ -1,0 +1,33 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="GroupDetailPage.go(Group)"
+    afterCommit="GroupDetailPage.go(Group)"
+    canEdit="true"
+    id="NewAssignableQueue"
+    parent="GroupDetailPage(Group)"
+    showUpLink="true"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Admin.NewAssignableQueue&quot;)">
+    <LocationEntryPoint
+      signature="NewAssignableQueue(Group : Group)"/>
+    <Variable
+      name="Group"
+      type="Group"/>
+    <Variable
+      initialValue="createQueue()"
+      name="AssignableQueue"
+      type="AssignableQueue"/>
+    <ScreenRef
+      def="GroupDetail_QueueDetailScreen(AssignableQueue, Group)"/>
+    <Code><![CDATA[
+      function createQueue() : AssignableQueue {
+        var queue = new AssignableQueue(Group);
+        queue.Group = Group;
+        return queue
+      }
+    ]]></Code>
+  </Page>
+</PCF>

@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="MetricLimitTimeDelegate">
+  <implementsInterface
+    iface="gw.cc.metric.entity.MetricLimitTimeDelegate"
+    impl="com.guidewire.cc.domain.metric.impl.MetricLimitTimeDelegateImpl"/>
+  <fulldescription><![CDATA[Delegate used to store the time a metric reached or will reach its limits
+    ]]></fulldescription>
+  <column
+    desc="Time the yellow limit was or will be reached."
+    name="ReachYellowTime"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Time the red limit was or will be reached"
+    name="ReachRedTime"
+    nullok="true"
+    type="datetime"/>
+</delegate>

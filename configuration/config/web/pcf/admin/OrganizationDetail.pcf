@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    canEdit="true"
+    id="OrganizationDetail"
+    parent="Organizations()"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.Admin.OrganizationDetail&quot;, Organization.Name)">
+    <LocationEntryPoint
+      signature="OrganizationDetail(Organization : Organization)"/>
+    <Variable
+      name="Organization"
+      type="Organization"/>
+    <Variable
+      initialValue="Organization.RootGroup"
+      name="Parent"
+      type="Group"/>
+    <Screen
+      id="OrganizationDetailScreen">
+      <Toolbar>
+        <EditButtons/>
+        <ToolbarButton
+          action="gw.api.admin.BaseAdminUtil.deleteOrganization(Organization); OrganizationSearchPage.go()"
+          available="Organization.SafeToDelete"
+          confirmMessage="DisplayKey.get(&quot;Web.Admin.OrganizationDetail.DeleteConfirm&quot;)"
+          hideIfEditable="true"
+          id="OrganizationDetail_DeleteButton"
+          label="DisplayKey.get(&quot;Button.Delete&quot;)"
+          visible="true"/>
+      </Toolbar>
+      <CardViewPanel>
+        <Card
+          id="OrganizationDetail_BasicCard"
+          title="DisplayKey.get(&quot;Web.Admin.OrganizationDetail.Basic&quot;)">
+          <PanelRef
+            def="OrganizationDetail_BasicDV(Organization.RootGroup, Organization)"/>
+        </Card>
+      </CardViewPanel>
+    </Screen>
+  </Page>
+</PCF>

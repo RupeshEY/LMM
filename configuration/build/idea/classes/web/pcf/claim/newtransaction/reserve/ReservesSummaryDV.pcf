@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <DetailViewPanel
+    id="ReservesSummaryDV">
+    <ExposeIterator
+      flags="Removeable"
+      name="EditableReservesLV"
+      valueType="entity.TransactionEditWrapper"
+      widget="EditableReservesLV.EditableReservesLV"/>
+    <Require
+      name="NewReserveSet"
+      type="gw.api.financials.ReserveWizardHelper"/>
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <Require
+      name="addNew"
+      type="Boolean"/>
+    <InputColumn>
+      <ListViewInput
+        def="EditableReservesLV(NewReserveSet,Exposure, addNew)"
+        editable="true"
+        labelAbove="true">
+        <Toolbar>
+          <ToolbarInput
+            id="filterText"
+            value="NewReserveSet.FilterText"
+            valueType="java.lang.String"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputColumn>
+    <InputFooterSection>
+      <ListViewInput
+        boldLabel="true"
+        def="ReserveSetDocumentsLV(NewReserveSet)"
+        label="DisplayKey.get(&quot;NVV.Financials.ReservesSummary.ReserveSet.Documents&quot;)"
+        labelAbove="true"
+        visible="perm.System.viewdocs">
+        <Toolbar/>
+      </ListViewInput>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

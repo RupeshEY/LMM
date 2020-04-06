@@ -1,0 +1,56 @@
+package rules.Validation.RITransactionSetValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.financials.FinancialsCalculations
+uses gw.api.util.CurrencyUtil
+uses java.util.HashSet
+
+@gw.rules.RuleName("RITSV02000 - Ceded Reserves Are Positive")
+internal class RITSV02000CededReservesArePositive {
+  static function doCondition(rITransactionSet : entity.RITransactionSet) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(rITransactionSet : entity.RITransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+var agreements = new HashSet<RIAgreement>()
+
+for (rITransaction in rITransactionSet.RITransactions) {
+  if (rITransaction typeis RICededReserve) {
+    agreements.add(rITransaction.RIAgreement)
+  }
+}
+
+for (agreement in agreements) {
+
+  var cededReservesUnadjusted = FinancialsCalculations.getRITotalCededReservesNonAdjustments()
+        .withClaim(rITransactionSet.Claim)
+        .withRIAgreement(agreement)
+        .noNulls()
+        .Amount
+  var cededReservesTotal = FinancialsCalculations.getRIOpenCededReserves()
+        .withClaim(rITransactionSet.Claim)
+        .withRIAgreement(agreement)
+        .noNulls()
+        .Amount
+
+  if (cededReservesUnadjusted.Amount < 0) {
+    var message = DisplayKey.get("Rules.Validation.RITransaction.CalculatedRICededReservesMustBeGreaterThanZero", 
+              CurrencyUtil.renderAsCurrency(cededReservesUnadjusted))
+    rITransactionSet.warnOrCreateActivity(message)
+  }
+  if (cededReservesTotal.Amount < 0) {
+    var message = DisplayKey.get("Rules.Validation.RITransaction.TotalRICededReservesMustBeGreaterThanZero", 
+              CurrencyUtil.renderAsCurrency(cededReservesTotal))
+    rITransactionSet.warnOrCreateActivity(message)
+  }
+}
+/*end00rule*/
+
+  }
+}

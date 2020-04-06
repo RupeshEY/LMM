@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Initial Treatment"
+  name="InitialTreatment">
+  <typecode
+    code="0"
+    desc="No medical treatment"
+    name="No medical treatment"
+    priority="1"/>
+  <typecode
+    code="1"
+    desc="Minor on-site remedies by employer medical staff"
+    name="Minor on-site remedies by employer medical staff"
+    priority="2"/>
+  <typecode
+    code="2"
+    desc="Minor clinic/hospital medical remedies and diagnostic testing"
+    name="Minor clinic/hospital medical remedies and diagnostic testing"
+    priority="3"/>
+  <typecode
+    code="3"
+    desc="Emergency evaluation, diagnostic testing, and medical procedures"
+    name="Emergency evaluation, diagnostic testing, and medical procedures"
+    priority="4"/>
+  <typecode
+    code="4"
+    desc="Hospitalization greater than 24 hours"
+    name="Hospitalization greater than 24 hours"
+    priority="5"/>
+  <typecode
+    code="5"
+    desc="Future major medical/Lost time anticipated (i.e. hernia case)"
+    name="Future major medical/Lost time anticipated (i.e. hernia case)"
+    priority="6"/>
+</typelistextension>

@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_financials.xml -->
+  <InputSet
+    id="CheckWizardCheckSummaryInputSet">
+    <Require
+      name="Check"
+      type="Check"/>
+    <Require
+      name="Wizard"
+      type="gw.api.financials.CheckWizardInfo"/>
+    <ListViewInput
+      boldLabel="true"
+      def="NewCheckGroupChecksLV(Check.Group)"
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.CheckWizardCheckSummary.Check.Group.Checks&quot;)"
+      visible="Check.isGroupMember(false)">
+      <Toolbar/>
+    </ListViewInput>
+    <TextInput
+      boldLabel="true"
+      id="Check_PayTo"
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.CheckWizardCheckSummary.Check.PayTo&quot;)"
+      value="Check.PayTo"
+      visible="!Check.isGroupMember(false) and Check.PaymentMethod == PaymentMethod.TC_CHECK"/>
+    <TextAreaInput
+      boldLabel="true"
+      id="PayTo_AccountName"
+      label="DisplayKey.get(&quot;Web.Financials.Check.BankData.BankAcctHolderName&quot;)"
+      numRows="1"
+      value="Check.PayTo"
+      visible="Check.PaymentMethod == PaymentMethod.TC_EFT"/>
+    <TextInput
+      boldLabel="true"
+      id="Check_MailTo"
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.CheckWizardCheckSummary.Check.MailTo&quot;)"
+      value="Check.FormatAddressSummary(true)"
+      visible="!Check.isGroupMember(false) and Check.PaymentMethod == PaymentMethod.TC_CHECK"/>
+    <CurrencyInput
+      boldLabel="true"
+      formatType="currency"
+      id="Amount_Gross"
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.CheckWizardCheckSummary.Check.Amount.Gross&quot;)"
+      value="(!Check.isGroupMember(false) ? Check.GrossAmountPair : Check.Group.GrossAmountPair)"
+      valueType="gw.api.financials.CurrencyAmountPair"/>
+    <CurrencyInput
+      action="CheckWizard_PaymentDeductionsPagePopup.push(Check.Claim, Wizard, Check)"
+      available="Check.Deductions.length != 0"
+      boldLabel="true"
+      formatType="currency"
+      id="Check_Deductions"
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.CheckWizardCheckSummary.Check.Deductions&quot;)"
+      value="Check.DeductionsTotalPair"
+      valueType="gw.api.financials.CurrencyAmountPair"/>
+    <CurrencyInput
+      boldLabel="true"
+      formatType="currency"
+      id="Amount_Net"
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.CheckWizardCheckSummary.Check.Amount.Net&quot;)"
+      value="(!Check.isGroupMember(false) ? Check.NetAmountPair : Check.Group.NetAmountPair)"
+      valueType="gw.api.financials.CurrencyAmountPair"/>
+    <ClaimContactInput
+      boldLabel="true"
+      claim="Check.Claim"
+      id="Check_Claimant"
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.CheckWizardCheckSummary.Check.Claimant&quot;)"
+      value="Check.Claimant"
+      valueRange="Check.Claim.RelatedContacts"/>
+    <DateInput
+      boldLabel="true"
+      editable="true"
+      id="Check_DateOfService"
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.CheckWizardCheckSummary.Check.DateOfService&quot;)"
+      value="Check.DateOfService"
+      visible="!Check.hasExposureWithServicePeriod()"/>
+    <DateInput
+      boldLabel="true"
+      editable="Check.Editable and !Check.CheckSet.Recurring"
+      id="ServicePeriod_Start"
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.CheckWizardCheckSummary.Check.ServicePeriod.Start&quot;)"
+      validationExpression="validateServiceStartDate()"
+      value="Check.ServicePdStart"
+      visible="Check.hasExposureWithServicePeriod()"/>
+    <DateInput
+      boldLabel="true"
+      editable="Check.Editable and !Check.CheckSet.Recurring"
+      id="ServicePeriod_End"
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.CheckWizardCheckSummary.Check.ServicePeriod.End&quot;)"
+      validationExpression="validateServicePeriod()"
+      value="Check.ServicePdEnd"
+      visible="Check.hasExposureWithServicePeriod()"/>
+    <TextInput
+      boldLabel="true"
+      id="Check_PrevServiceDate"
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.CheckWizardCheckSummary.Check.PrevServiceDate&quot;)"
+      value="Check.PrevPaidOrScheduledServicePeriod"
+      visible="Check.hasExposureWithServicePeriod()"/>
+    <TextInput
+      boldLabel="true"
+      editable="true"
+      id="Check_InvoiceNumber"
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.CheckWizardCheckSummary.Check.InvoiceNumber&quot;)"
+      value="Check.InvoiceNumber"/>
+    <TextInput
+      boldLabel="true"
+      editable="true"
+      id="Check_Memo"
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.CheckWizardCheckSummary.Check.Memo&quot;)"
+      value="Check.Memo"/>
+    <InputDivider/>
+    <ListViewInput
+      boldLabel="true"
+      def="TransactionSetDocumentsLV(Check.CheckSet)"
+      label="DisplayKey.get(&quot;NVV.Financials.NewPaymentInstructions.Check.Documents&quot;)"
+      visible="perm.System.viewdocs">
+      <Toolbar/>
+    </ListViewInput>
+    <Code><![CDATA[function validateServicePeriod(): String {
+      var result: String = null
+
+      if ((Check.ServicePdStart != null and Check.ServicePdEnd == null)
+        or (Check.ServicePdStart == null and Check.ServicePdEnd != null)) {
+        result = DisplayKey.get("Web.Financials.Check.ServicePeriodNotInSync")
+      } else if (Check.ServicePdEnd != null and !Check.ServicePdEnd.after(Check.ServicePdStart)) {
+        result = DisplayKey.get("Web.Financials.Check.ServicePeriodRangeError")
+      }
+
+      return result
+    }
+
+      function validateServiceStartDate(): String {
+        var result: String = null
+        if (Check.ServicePdStart != null and Check.Claim.LossDate != null) {
+          if (Check.ServicePdStart.before(Check.Claim.LossDate.trimToMidnight())) {
+            result = DisplayKey.get("Web.Financials.Check.ServicePeriodStartDate")
+          }
+        }
+        return result
+      }
+]]></Code>
+  </InputSet>
+</PCF>

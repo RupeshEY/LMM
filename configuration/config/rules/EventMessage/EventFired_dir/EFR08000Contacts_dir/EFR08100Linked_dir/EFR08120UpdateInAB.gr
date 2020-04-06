@@ -1,0 +1,22 @@
+package rules.EventMessage.EventFired_dir.EFR08000Contacts_dir.EFR08100Linked_dir
+
+@gw.rules.RuleName("EFR08120 - UpdateInAB")
+internal class EFR08120UpdateInAB {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return messageContext.EventName == "ContactUpdatedInAB"
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+var contact = messageContext.Root as Contact
+
+messageContext.createMessage(contact.AddressBookUID)
+/*end00rule*/
+
+  }
+}

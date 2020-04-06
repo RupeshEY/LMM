@@ -1,0 +1,190 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="RITransaction for a particular claim or exposure."
+  entity="RITransaction"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="ritransaction"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.financials.impl.RITransactionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.impl.RITransactionInternal"
+    impl="com.guidewire.cc.domain.financials.impl.RITransactionImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.entity.RITransaction"
+    impl="com.guidewire.cc.domain.financials.impl.RITransactionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.financials.impl.RITransactionImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="Validatable"/>
+  <implementsEntity
+    name="TransactionTAccountOperationsDelegate"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.TransactionTAccountOperationsDelegateAdapter"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TransactionTAccountOperationsDelegateAdapterRIImpl"/>
+  <fulldescription><![CDATA[
+    Represents a reinsurance financial operation, adding to the reinsurance financials calculations
+    as a consequence of the creation of Reserves or Payments. As normal financials transactions are made,
+    reinsurance transactions are automatically or manually created to indicate the expected recovery
+    of such amounts from Reinsurance agreements.
+  ]]></fulldescription>
+  <column
+    desc="Comments about the transaction, such as a reason."
+    exportable="true"
+    name="Comments"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    columnName="RICodingID"
+    desc="The RICoding on which this RI transaction is coded. The Claim, Exposure, CostType, CostCategory, and RIAgreement fields on an RI transaction match those same fields on its RICoding."
+    existingreferencesallowed="false"
+    exportable="false"
+    fkentity="RICoding"
+    name="RICoding"
+    nullok="false"
+    setterScriptability="hidden"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The related claim.&lt;p&gt;Setting the claim also sets this transaction's currency (if null) to the claim's currency."
+    existingreferencesallowed="true"
+    exportable="true"
+    exportasid="true"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"
+    setterScriptability="hidden"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="The related exposure."
+    exportable="true"
+    exportasid="true"
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="false"
+    setterScriptability="hidden"/>
+  <foreignkey
+    columnName="TransactionSetID"
+    desc="Set that groups together one or more transactions for approval."
+    exportable="false"
+    fkentity="RITransactionSet"
+    importableagainstexistingobject="false"
+    name="TransactionSet"
+    nullok="false"
+    setterScriptability="hidden"
+    triggersValidation="true"/>
+  <foreignkey
+    desc="ExchangeRate to use when converting ClaimAmount to ReportingAmount. This must be null when the server is configured to run in single-currency mode and non-null otherwise."
+    exportable="false"
+    fkentity="ExchangeRate"
+    name="ClaimToReportingExchangeRate"
+    nullok="true"
+    setterScriptability="hidden"/>
+  <typekey
+    desc="Type of cost (for example, claim cost or adjusting overhead)."
+    exportable="true"
+    name="CostType"
+    nullok="false"
+    setterScriptability="hidden"
+    typelist="costtype"/>
+  <typekey
+    desc="The CostCategory for this transaction."
+    exportable="true"
+    name="CostCategory"
+    nullok="false"
+    setterScriptability="hidden"
+    typelist="costcategory">
+    <keyfilters>
+      <keyfilter
+        name="Exposure.PrimaryCoverage"/>
+      <keyfilter
+        name="CostType"/>
+    </keyfilters>
+  </typekey>
+  <foreignkey
+    exportasid="true"
+    fkentity="RIAgreement"
+    name="RIAgreement"
+    nullok="false"
+    setterScriptability="hidden"/>
+  <column
+    default="false"
+    desc="True if this RITransaction was created to adjust the totals on its RICoding. This is usually used to distinguish explicit, user-requested adjustments from RITransactions that were created automatically for non-reinsurance Transactions."
+    exportable="true"
+    name="Adjustment"
+    nullok="false"
+    setterScriptability="hidden"
+    type="bit"/>
+  <column
+    desc="The amount of this RITransaction in the Claim's currency."
+    exportable="true"
+    getterScriptability="all"
+    name="ClaimAmount"
+    nullok="false"
+    setterScriptability="hidden"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="The amount of this line item in the app's default currency (reporting currency)."
+    exportable="true"
+    getterScriptability="all"
+    name="ReportingAmount"
+    nullok="false"
+    setterScriptability="hidden"
+    type="currencyamount"/>
+  <array
+    arrayentity="RITAccountTransaction"
+    desc="Set of T-account transactions that make up the lifecycle of this Transaction."
+    exportable="false"
+    name="TAccountTransactions"
+    setterScriptability="hidden"/>
+  <events/>
+  <index
+    desc="Index to speed consistency checks for consistentchildren property on claim."
+    name="transaction1"
+    trackUsage="true">
+    <indexcol
+      keyposition="1"
+      name="TransactionSetID"/>
+    <indexcol
+      keyposition="2"
+      name="ClaimID"/>
+  </index>
+  <index
+    desc="Index to speed consistency checks for consistentchildren property on claim."
+    name="transaction2"
+    trackUsage="true">
+    <indexcol
+      keyposition="1"
+      name="ExposureID"/>
+    <indexcol
+      keyposition="2"
+      name="ClaimID"/>
+  </index>
+  <index
+    desc="Index used for claim exception query that finds all modified transactions on a claim."
+    name="transaction4"
+    trackUsage="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="UpdateTime"/>
+  </index>
+</entity>

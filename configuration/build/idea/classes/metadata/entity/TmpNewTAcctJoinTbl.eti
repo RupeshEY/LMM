@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="table used to do a cartesian join to produce the 2 new taccounts for rejection of transactions in Nozomi"
+  entity="TmpNewTAcctJoinTbl"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="tmpnewtacctjointbl"
+  temporary="true"
+  type="nonkeyable">
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.TmpNewTAcctJoinTbl"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TmpNewTAcctJoinTblImpl"/>
+  <typekey
+    desc="Either the new Recoveries or new CommittedErodingPmts TAccountType"
+    name="TAccountType"
+    nullok="false"
+    typelist="taccounttype"/>
+</entity>

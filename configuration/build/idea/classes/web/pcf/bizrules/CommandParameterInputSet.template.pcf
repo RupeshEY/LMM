@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="CommandParameterInputSet"
+    mode="template">
+    <Require
+      name="parameterHolder"
+      type="gw.bizrules.pcf.RuleCommandParameterHolder"/>
+    <Variable
+      initialValue="parameterHolder.FragHolder as gw.bizrules.pcf.TextExpressionFragmentHolder"
+      name="fragHolder"
+      recalculateOnRefresh="true"
+      type="gw.bizrules.pcf.TextExpressionFragmentHolder"/>
+    <TextInput
+      autoComplete="fragHolder.AutocompleteHandler"
+      enableAutoCompleteMarkup="true"
+      editable="true"
+      id="TemplateExpression"
+      inputConversion="fragHolder.inputConversion(VALUE)"
+      label="parameterHolder.ParameterLabel"
+      numCols="parameterHolder.UIConfig.NumCols"
+      outputConversion="fragHolder.outputConversion()"
+      value="fragHolder.Fragment"
+      valueType="entity.ExpressionFragment">
+      <PostOnChange/>
+      <MenuItemSetRef
+        def="CommandParameterMenuItemSet(parameterHolder)"/>
+    </TextInput>
+  </InputSet>
+</PCF>

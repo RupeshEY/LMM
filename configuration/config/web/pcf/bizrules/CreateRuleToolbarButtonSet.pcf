@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    id="CreateRuleToolbarButtonSet">
+    <ReferencedIterator
+      flags="AlwaysTrue"
+      valueType="RuleVersion"
+      widget="Rules"/>
+    <Require
+      name="navigationSupport"
+      type="gw.bizrules.pcf.BizRulesPageNavigationSupport"/>
+    <ToolbarButton
+      action="navigationSupport.goToCreateRulePage()"
+      available="gw.bizrules.pcf.RulePermissionUIHelper.canEditRule()"
+      id="Add"
+      label="DisplayKey.get('Button.Add')"
+      tooltip="gw.bizrules.pcf.RulePermissionUIHelper.checkAndGetEditPermissionMsg()"/>
+    <CheckedValuesToolbarButton
+      allCheckedRowsAction="navigationSupport.goToCloneRulePage(CheckedValues.single().Rule)"
+      available="gw.bizrules.pcf.RulePermissionUIHelper.canEditRule()"
+      flags="one AlwaysTrue"
+      id="Clone"
+      iterator="Rules"
+      label="DisplayKey.get('BizRules.RulesPage.CloneButton')"
+      tooltip="gw.bizrules.pcf.RulePermissionUIHelper.checkAndGetEditPermissionMsg()"/>
+  </ToolbarButtonSet>
+</PCF>

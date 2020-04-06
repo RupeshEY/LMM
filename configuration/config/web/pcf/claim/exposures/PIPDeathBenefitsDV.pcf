@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from nvv_exposure.xml -->
+  <DetailViewPanel
+    id="PIPDeathBenefitsDV">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Exposure.PIPDeathBenefits.Compensation&quot;)"/>
+      <DateInput
+        editable="true"
+        id="LostWagesBenefits_BenefitsBeginDate"
+        label="DisplayKey.get(&quot;NVV.Exposure.PIPDeathBenefits.LostWagesBenefits.BenefitsBeginDate&quot;)"
+        value="Exposure.PIPDeathBenefits.BenefitsBeginDate"/>
+      <DateInput
+        editable="true"
+        id="LostWagesBenefits_BenefitsEndDate"
+        label="DisplayKey.get(&quot;NVV.Exposure.PIPDeathBenefits.LostWagesBenefits.BenefitsEndDate&quot;)"
+        validationExpression="!(Exposure.PIPDeathBenefits.BenefitsBeginDate &gt; Exposure.PIPDeathBenefits.BenefitsEndDate) ? null : DisplayKey.get(&quot;JSP.PIPDetail.PIP.Date.ValidationError&quot;)"
+        value="Exposure.PIPDeathBenefits.BenefitsEndDate"/>
+      <CurrencyInput
+        editable="true"
+        formatType="currency"
+        id="LostWagesBenefits_WeeklyCompRate"
+        label="DisplayKey.get(&quot;NVV.Exposure.PIPDeathBenefits.LostWagesBenefits.WeeklyCompRate&quot;)"
+        value="Exposure.PIPDeathBenefits.WeeklyCompRate"/>
+      <TypeKeyInput
+        editable="true"
+        id="LostWagesBenefits_PaymentFrequency"
+        label="DisplayKey.get(&quot;NVV.Exposure.PIPDeathBenefits.LostWagesBenefits.PaymentFrequency&quot;)"
+        value="Exposure.PIPDeathBenefits.PaymentFrequency"
+        valueType="typekey.PaymentFrequencyType"/>
+      <CurrencyInput
+        editable="true"
+        formatType="currency"
+        id="LostWagesBenefits_MaxBurialRate"
+        label="DisplayKey.get(&quot;NVV.Exposure.PIPDeathBenefits.LostWagesBenefits.MaxBurialRate&quot;)"
+        value="Exposure.PIPDeathBenefits.MaxBurialRate"/>
+      <TextInput
+        editable="true"
+        id="LostWagesBenefits_Description"
+        label="DisplayKey.get(&quot;NVV.Exposure.PIPDeathBenefits.LostWagesBenefits.Description&quot;)"
+        value="Exposure.PIPDeathBenefits.Description"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

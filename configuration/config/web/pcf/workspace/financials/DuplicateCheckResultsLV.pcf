@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_financials.xml -->
+  <ListViewPanel
+    id="DuplicateCheckResultsLV">
+    <Require
+      name="CheckList"
+      type="Check[]"/>
+    <RowIterator
+      editable="false"
+      elementName="Check"
+      value="CheckList"
+      valueType="entity.Check[]">
+      <Row>
+        <TextCell
+          id="PayTo"
+          label="DisplayKey.get(&quot;LV.Financials.DuplicateCheckResults.PayTo&quot;)"
+          sortOrder="1"
+          value="Check.PayTo"/>
+        <TextCell
+          id="MailingAddress"
+          label="DisplayKey.get(&quot;LV.Financials.DuplicateCheckResults.MailingAddress&quot;)"
+          value="Check.FormatAddressSummary(false)"/>
+        <DateCell
+          id="ScheduledSendDate"
+          label="DisplayKey.get(&quot;LV.Financials.DuplicateCheckResults.ScheduledSendDate&quot;)"
+          value="Check.ScheduledSendDate"/>
+        <TypeKeyCell
+          id="Status"
+          label="DisplayKey.get(&quot;LV.Financials.DuplicateCheckResults.Status&quot;)"
+          value="Check.Status"
+          valueType="typekey.TransactionStatus"/>
+        <CurrencyCell
+          id="Amount"
+          label="DisplayKey.get(&quot;LV.Financials.DuplicateCheckResults.Amount&quot;)"
+          value="Check.GrossAmountPair"
+          valueType="gw.api.financials.CurrencyAmountPair"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

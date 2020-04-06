@@ -1,0 +1,13 @@
+package rules.Presetup
+
+@gw.rules.RuleName("Transaction Pre-setup")
+@gw.rules.RuleSetDescription("This is the TransactionSet Pre-setup rule set. These rules run at the end of every Transaction creation or edit through the ClaimCenter User Interface to handle any actions that should be taken before the TransactionSet is submitted for approval and saved.")
+class TransactionSetPresetup extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.TransactionSet) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.TransactionSet) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Transaction Pre-setup", TransactionSetPresetup )
+  }
+}

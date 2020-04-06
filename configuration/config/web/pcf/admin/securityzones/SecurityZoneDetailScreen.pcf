@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="SecurityZoneDetailScreen">
+    <Require
+      name="securityZone"
+      type="SecurityZone"/>
+    <Toolbar>
+      <EditButtons/>
+      <ToolbarButton
+        action="deleteSecurityZone()"
+        available="!isSecurityZoneInUse()"
+        hideIfEditable="true"
+        id="Delete"
+        label="DisplayKey.get(&quot;Web.Admin.SecurityZoneDetail.Delete&quot;)"
+        visible="perm.SecurityZone.delete &amp;&amp; !securityZone.New"/>
+    </Toolbar>
+    <PanelRef
+      def="SecurityZoneDetailDV(securityZone)"/>
+    <PanelRef
+      def="LocalizedValuesDV(securityZone, { &quot;Name&quot;, &quot;Description&quot; }, { DisplayKey.get(&quot;Web.Admin.SecurityZoneDetailDV.Name&quot;), DisplayKey.get(&quot;Web.Admin.SecurityZoneDetailDV.Description&quot;) })"/>
+    <Code><![CDATA[uses gw.api.database.Query
+
+function deleteSecurityZone() {
+  gw.transaction.Transaction.runWithNewBundle(\ bundle -> {
+    bundle.add(securityZone).remove()
+  })
+  SecurityZones.go()
+}
+
+function isSecurityZoneInUse() : boolean {
+  return !securityZone.New and Query.make(entity.Group).compare("SecurityZone", Equals, securityZone).select().Count > 0
+}]]></Code>
+  </Screen>
+</PCF>

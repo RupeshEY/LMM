@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="RuleVersionDependent"
+  platform="true"
+  requiresType="versionable">
+  <implementsEntity
+    name="RuleVersionAware"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.management.RuleVersionAwareInternal"
+    impl="com.guidewire.bizrules.management.RuleVersionDependentImpl"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"/>
+</delegate>

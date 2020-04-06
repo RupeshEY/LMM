@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Counts the number of times the specialist delays the expected completion date"
+  entity="NumberOfDelaysServiceRequestMetric"
+  final="false"
+  supertype="IntegerServiceRequestMetric">
+  <implementsInterface
+    iface="gw.api.metric.MetricMethods"
+    impl="gw.vendormanagement.metric.NumberOfDelaysServiceRequestMetricMethodsImpl"/>
+</subtype>

@@ -1,0 +1,3 @@
+## This is a sample property file like format for a Validation template
+ClaimNumber=<%=Claim.ClaimNumber%>
+JurisdictionState=<%=Claim.JurisdictionState != null ? Claim.JurisdictionState.Code : ""%>

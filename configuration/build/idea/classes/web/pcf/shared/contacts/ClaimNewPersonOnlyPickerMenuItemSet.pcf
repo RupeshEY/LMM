@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <MenuItemSet
+    desc="A NewPerson single-menu-item for Person only, without subtypes"
+    id="ClaimNewPersonOnlyPickerMenuItemSet">
+    <Require
+      name="requiredContactType"
+      type="Type"/>
+    <Require
+      name="parentContact"
+      type="Contact"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <MenuItem
+      action="NewContactPopup.push(typekey.Contact.TC_PERSON, parentContact, claim)"
+      id="ClaimNewPersonOnlyPickerMenuItemSet_NewPersonMenuItem"
+      label="DisplayKey.get(&quot;Web.NewContactMenu.NewPerson&quot;)"
+      visible="requiredContactType.isAssignableFrom(entity.Person)"/>
+  </MenuItemSet>
+</PCF>

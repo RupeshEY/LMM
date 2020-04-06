@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Style of snowmobile or ATV (wheels, tracks etc.). Used by ISO"
+  name="OffRoadVehicleStyle">
+  <!-- Contains entries for ATVs and snowmobiles, taken from the NCIC 2000 Vehicle
+    Codes Manual. These are used to populate the "ModelCd" field in ISO mobile
+    equipment requests. -->
+  <typecode
+    code="CYL"
+    desc="Cycle only"
+    name="Cycle only">
+    <category
+      code="ATV"
+      typelist="VehicleStyle"/>
+  </typecode>
+  <typecode
+    code="SKT"
+    desc="Skis and tracks"
+    name="Skis and tracks">
+    <category
+      code="snowmobile"
+      typelist="VehicleStyle"/>
+  </typecode>
+  <typecode
+    code="SKW"
+    desc="Skis and wheels"
+    name="Skis and wheels">
+    <category
+      code="snowmobile"
+      typelist="VehicleStyle"/>
+  </typecode>
+  <typecode
+    code="TRA"
+    desc="Tracks only"
+    name="Tracks only">
+    <category
+      code="ATV"
+      typelist="VehicleStyle"/>
+    <category
+      code="snowmobile"
+      typelist="VehicleStyle"/>
+  </typecode>
+  <typecode
+    code="TRW"
+    desc="Tracks and wheels"
+    name="Tracks and wheels">
+    <category
+      code="ATV"
+      typelist="VehicleStyle"/>
+    <category
+      code="snowmobile"
+      typelist="VehicleStyle"/>
+  </typecode>
+  <typecode
+    code="WHE"
+    desc="Wheels only"
+    name="Wheels only">
+    <category
+      code="ATV"
+      typelist="VehicleStyle"/>
+    <category
+      code="snowmobile"
+      typelist="VehicleStyle"/>
+  </typecode>
+</typelistextension>

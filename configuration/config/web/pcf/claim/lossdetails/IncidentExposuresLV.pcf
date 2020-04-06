@@ -1,0 +1,56 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="IncidentExposuresLV">
+    <Require
+      name="incident"
+      type="Incident"/>
+    <RowIterator
+      editable="false"
+      elementName="exposure"
+      value="incident.Claim.OrderedExposures.where(\ e -&gt; e.Incident == incident and !e.New)"
+      valueType="entity.Exposure[]">
+      <Row>
+        <TextCell
+          action="ExposureDetailForward.go(exposure.Claim, exposure)"
+          id="ClaimOrder"
+          label="DisplayKey.get(&quot;Web.IncidentExposures.ClaimOrder&quot;)"
+          sortOrder="1"
+          value="exposure.ClaimOrder"
+          valueType="java.lang.Integer"/>
+        <FormatCell
+          id="Overview"
+          label="DisplayKey.get(&quot;Web.IncidentExposures.Overview&quot;)">
+          <ContentInput
+            id="Coverage">
+            <Link
+              action="ExposureDetailForward.go(exposure.Claim, exposure)"
+              id="CoverageLink"
+              label="exposure.PrimaryCoverage"/>
+          </ContentInput>
+          <TextInput
+            id="Assignee"
+            value="exposure.AssigneeDisplayString"/>
+        </FormatCell>
+        <FormatCell
+          id="Financials"
+          label="DisplayKey.get(&quot;Web.IncidentExposures.Financials&quot;)">
+          <TextInput
+            id="Paid"
+            label="DisplayKey.get(&quot;Web.IncidentExposures.Paid&quot;)"
+            value="exposure.ExposureRpt.TotalPayments"
+            valueType="gw.api.financials.CurrencyAmount"
+            visible="perm.Claim.viewpayments(exposure.Claim)"/>
+          <TextInput
+            id="RemainingReserves"
+            label="DisplayKey.get(&quot;Web.IncidentExposures.RemainingReserves&quot;)"
+            value="exposure.ExposureRpt.RemainingReserves"
+            valueType="gw.api.financials.CurrencyAmount"
+            visible="perm.Claim.viewreserves(exposure.Claim)"/>
+        </FormatCell>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

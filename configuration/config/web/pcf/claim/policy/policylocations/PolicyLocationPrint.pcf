@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canVisit="(gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Properties&quot;) or gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Classcodes&quot;)) and perm.Policy.view(Claim) and perm.System.viewpolicy"
+    id="PolicyLocationPrint"
+    parent="ClaimPrintout(Claim)"
+    title="DisplayKey.get(&quot;LV.Policy.Locations&quot;)">
+    <LocationEntryPoint
+      signature="PolicyLocationPrint(PolicyLocation : PolicyLocation, Claim : Claim)"/>
+    <Variable
+      name="PolicyLocation"
+      type="PolicyLocation"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="new gw.api.address.PolicyLocationAddressOwner(PolicyLocation)"
+      name="AddressOwner"
+      type="gw.api.address.CCAddressOwner"/>
+    <ScreenRef
+      def="PolicyLocationScreen(PolicyLocation, Claim, false)"/>
+  </Page>
+</PCF>

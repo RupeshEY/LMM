@@ -1,0 +1,175 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- for creating new activities   This file automatically generated from nvv_activity.xml, but excluded during the development cycle -->
+  <DetailViewPanel
+    id="NewActivityDV">
+    <Require
+      name="Activity"
+      type="Activity"/>
+    <Require
+      name="AssigneeHolder"
+      type="gw.api.assignment.Assignee[]"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="symbolProvider"
+      type="gw.document.SymbolProvider"
+      initialValue="createSymbolProvider()"/>
+    <InputColumn>
+      <TextInput
+        editable="true"
+        id="Activity_Subject"
+        label="DisplayKey.get(&quot;NVV.Activity.NewActivity.Activity.Subject&quot;)"
+        required="true"
+        value="Activity.Subject"/>
+      <TextAreaInput
+        editable="true"
+        id="Activity_Description"
+        label="DisplayKey.get(&quot;NVV.Activity.NewActivity.Activity.Description&quot;)"
+        numCols="50"
+        numRows="2"
+        value="Activity.Description"/>
+      <RangeInput
+        editable="true"
+        id="Activity_RelatedTo"
+        label="DisplayKey.get(&quot;NVV.Activity.NewActivity.Activity.RelatedTo&quot;)"
+        optionGroupLabel="gw.pcf.RelatedToUtil.getOptionGroupLabel(VALUE as KeyableBean)"
+        optionLabel="gw.pcf.RelatedToUtil.getOptionLabel(VALUE as KeyableBean)"
+        required="true"
+        sortValueRange="false"
+        value="Activity.RelatedTo"
+        valueRange="Activity.Claim.RelatedToCandidates"
+        valueType="gw.pl.persistence.core.Bean">
+        <PostOnChange/>
+      </RangeInput>
+      <InputDivider/>
+      <DateInput
+        dateFormat="short"
+        editable="true"
+        id="Activity_DueDate"
+        label="DisplayKey.get(&quot;NVV.Activity.NewActivity.Activity.DueDate&quot;)"
+        required="Activity.Importance != TC_NOTONCALENDAR"
+        value="Activity.TargetDate"
+        visible="Activity.ActivityClass != TC_EVENT"/>
+      <DateInput
+        dateFormat="short"
+        editable="true"
+        id="Activity_StartDate"
+        label="DisplayKey.get(&quot;NVV.Activity.NewActivity.Activity.StartDate&quot;)"
+        required="Activity.Importance != TC_NOTONCALENDAR"
+        timeFormat="short"
+        value="Activity.TargetDate"
+        visible="Activity.ActivityClass == TC_EVENT"/>
+      <DateInput
+        dateFormat="short"
+        editable="true"
+        id="Activity_EndDate"
+        label="DisplayKey.get(&quot;NVV.Activity.NewActivity.Activity.EndDate&quot;)"
+        timeFormat="short"
+        value="Activity.EndDate"
+        visible="Activity.ActivityClass == TC_EVENT"/>
+      <DateInput
+        dateFormat="short"
+        editable="true"
+        id="Activity_EscalationDate"
+        label="DisplayKey.get(&quot;NVV.Activity.NewActivity.Activity.EscalationDate&quot;)"
+        value="Activity.EscalationDate"/>
+      <TypeKeyInput
+        editable="true"
+        id="Activity_Priority"
+        label="DisplayKey.get(&quot;NVV.Activity.NewActivity.Activity.Priority&quot;)"
+        required="true"
+        value="Activity.Priority"
+        valueType="typekey.Priority"/>
+      <BooleanRadioInput
+        editable="Activity.canMakeMandatory()"
+        id="Activity_Mandatory"
+        label="DisplayKey.get(&quot;NVV.Activity.NewActivity.Activity.Mandatory&quot;)"
+        required="true"
+        value="Activity.Mandatory"/>
+      <TypeKeyInput
+        editable="true"
+        id="Activity_Importance"
+        label="DisplayKey.get(&quot;NVV.Activity.SubView.ActivityDetails.Activity.Importance&quot;)"
+        required="true"
+        value="Activity.Importance"
+        valueType="typekey.ImportanceLevel"/>
+      <BooleanRadioInput
+        id="Activity_Recurring"
+        label="DisplayKey.get(&quot;NVV.Activity.NewActivity.Activity.Recurring&quot;)"
+        value="Activity.Recurring"/>
+      <BooleanRadioInput
+        editable="true"
+        id="Activity_ExternallyOwned"
+        label="DisplayKey.get(&quot;NVV.Activity.NewActivity.Activity.ExternallyOwned&quot;)"
+        required="true"
+        value="Activity.ExternallyOwned"/>
+      <ClaimContactInput
+        claim="Activity.Claim"
+        editable="true"
+        id="Activity_ExternalOwner"
+        label="DisplayKey.get(&quot;NVV.Activity.NewActivity.Activity.ExternalOwner&quot;)"
+        value="Activity.ExternalOwner"
+        valueRange="Activity.Claim.RelatedContacts"/>
+      <InputDivider/>
+      <DocumentTemplateInput
+        available="new gw.document.DocumentsActionsUIHelper().DocumentTemplateSourceAvailable"
+        conversionExpression="PickedValue.TemplateId"
+        editable="true"
+        freeInputEnabled="false"
+        id="Activity_CreateDocument"
+        label="DisplayKey.get(&quot;NVV.Activity.NewActivity.Activity.CreateDocument&quot;)"
+        pickLocation="DocumentTemplateSearchPopup.push(symbolProvider)"
+        value="Activity.DocumentTemplate"
+        valueType="java.lang.String"/>
+      <PickerInput
+        conversionExpression="PickedValue.getFilename()"
+        editable="true"
+        freeInputEnabled="false"
+        id="EmailTemplate"
+        label="DisplayKey.get(&quot;Web.Email.EmailTemplate&quot;)"
+        outputConversion="getDisplayName(VALUE)"
+        pickLocation="PickEmailTemplatePopup.push(new gw.api.email.EmailTemplateSearchCriteria({&quot;Activity&quot;}))"
+        value="Activity.EmailTemplate"
+        valueType="java.lang.String"/>
+      <InputDivider/>
+      <CCAssigneeInput
+        assignable="Activity"
+        claim="Claim"
+        editable="true"
+        id="Activity_AssignActivity"
+        label="DisplayKey.get(&quot;NVV.Activity.NewActivity.Activity.AssignActivity&quot;)"
+        required="true"
+        sortValueRange="false"
+        value="AssigneeHolder[0]"
+        valueRange="Activity.SuggestedAssignees"/>
+      <InputDivider/>
+      <InputSetRef
+        def="ActivityDocumentInputSet(Activity)"
+        visible="gw.document.DocumentsUtil.claimHasDocuments(Activity.Claim) and perm.Claim.view(Activity.Claim) and perm.System.viewdocs"/>
+    </InputColumn>
+    <Code><![CDATA[uses gw.document.GosuCaseInsensitiveBackwardsCompatibleSymbolProvider
+
+function createSymbolProvider() : GosuCaseInsensitiveBackwardsCompatibleSymbolProvider {
+  return new GosuCaseInsensitiveBackwardsCompatibleSymbolProvider({
+      "Activity" -> Activity,
+      "AssigneeHolder" -> AssigneeHolder,
+      "Claim" -> Claim
+  })
+}
+
+function getDisplayName(templateFilename:String):String{
+  if(templateFilename==null){
+    return null;
+  }
+  var ets=gw.pcf.specialhandling.EmailTemplateUtil.EmailTemplatePlugin
+  if(ets.getEmailTemplate(templateFilename)==null){
+    return DisplayKey.get("Web.Email.TemplateNotFound")
+  }
+  return ets.getEmailTemplate(templateFilename).getName()
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

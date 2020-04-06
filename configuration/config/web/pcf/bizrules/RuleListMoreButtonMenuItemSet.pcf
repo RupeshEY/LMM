@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuItemSet
+    id="RuleListMoreButtonMenuItemSet">
+    <Require
+      name="navigationSupport"
+      type="gw.bizrules.pcf.BizRulesPageNavigationSupport"/>
+    <Require
+      name="iteratorId"
+      type="java.lang.String"/>
+    <Require
+      name="allQuery"
+      type="gw.api.database.Query&lt;RuleVersion&gt;"/>
+    <Variable
+      initialValue="gw.bizrules.pcf.IteratorCheckedValuesAccessor.create(CurrentLocation, iteratorId, RuleVersion)"
+      name="checkedValuesAccessor"
+      type="gw.bizrules.pcf.IteratorCheckedValuesAccessor&lt;RuleVersion&gt;"/>
+    <MenuItem
+      action="StartRuleImportPopup.push(navigationSupport)"
+      available="gw.bizrules.pcf.RulePermissionUIHelper.canImportRule()"
+      id="Import"
+      label="DisplayKey.get('BizRules.RuleExportImportMenuItemSet.ImportFromFile')"/>
+    <MenuItem
+      action="gw.bizrules.pcf.RuleExportPageHelper.exportSelected(navigationSupport, checkedValuesAccessor.CheckedValues)"
+      id="ExportSelected"
+      label="DisplayKey.get('BizRules.RuleExportImportMenuItemSet.ExportSelected')"/>
+    <MenuItem
+      action="gw.bizrules.pcf.RuleExportPageHelper.exportAll(navigationSupport, allQuery)"
+      id="ExportAll"
+      label="DisplayKey.get('BizRules.RuleExportImportMenuItemSet.ExportAll')"/>
+  </MenuItemSet>
+</PCF>

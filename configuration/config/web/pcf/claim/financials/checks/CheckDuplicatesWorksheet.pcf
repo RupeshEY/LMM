@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Worksheet
+    canEdit="false"
+    id="CheckDuplicatesWorksheet"
+    tabLabel="DisplayKey.get(&quot;JSP.WorkspaceTabBar.DuplicateChecks&quot;)"
+    title="DisplayKey.get(&quot;JSP.NewCheckInstructions.DuplicateCheck.Title&quot;)">
+    <LocationEntryPoint
+      signature="CheckDuplicatesWorksheet(DuplicateChecks : Check[], Claim : Claim, wizard : gw.api.financials.CheckWizardInfoBase)"/>
+    <Scope
+      location="*"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="DuplicateChecks"
+      type="Check[]"/>
+    <Variable
+      name="wizard"
+      type="gw.api.financials.CheckWizardInfoBase"/>
+    <Screen
+      id="NewCheckDuplicatesScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="wizard.searchForDuplicates()"
+          id="CheckDuplicatesWorksheet_RefreshButton"
+          label="DisplayKey.get(&quot;Button.Refresh&quot;)"
+          shortcut="F"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="CheckDuplicatesWorksheet_CloseButton"
+          label="DisplayKey.get(&quot;Button.Close&quot;)"
+          shortcut="E"/>
+      </Toolbar>
+      <Verbatim
+        label="DisplayKey.get(&quot;Java.NewPayment.Warning.DuplicateCheck&quot;)"
+        visible="DuplicateChecks.length &gt; 0"/>
+      <PanelRef
+        def="DuplicateCheckResultsLV(DuplicateChecks)"
+        visible="DuplicateChecks.length &gt; 0"/>
+    </Screen>
+  </Worksheet>
+</PCF>

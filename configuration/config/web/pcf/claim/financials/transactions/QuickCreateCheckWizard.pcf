@@ -1,0 +1,59 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Wizard
+    afterCancel="ClaimFinancialsChecks.go(claim)"
+    afterFinish="wizard.Finishing = false; wizard.performAfterFinish(); ClaimFinancialsChecks.go(claim)"
+    beforeCancel="wizard.closeCheckDuplicatesWorksheets()"
+    beforeCommit="gw.api.system.bundle.BundleCommitCondition.verify(claim); wizard.Finishing = true; wizard.doFinalChecksAndSetup(true); wizard.performBeforeFinish()"
+    cancelWarning="DisplayKey.get(&quot;Wizard.QuickCheckWizard.CancelWarning&quot;)"
+    id="QuickCreateCheckWizard"
+    onResume="gw.api.system.bundle.BundleCommitCondition.verify(claim)"
+    parent="QuickCreateCheckWizardForward(claim)">
+    <LocationEntryPoint
+      signature="QuickCreateCheckWizard(claim : Claim)"/>
+    <LocationEntryPoint
+      signature="QuickCreateCheckWizard(claim : Claim, exposure : Exposure, costType : CostType, costCategory : CostCategory, reservingCurrency : Currency, setReserveLine : Boolean)"/>
+    <Variable
+      initialValue="new gw.api.financials.QuickCreateCheckWizardInfo()"
+      name="wizard"
+      type="gw.api.financials.QuickCreateCheckWizardInfo"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="null"
+      name="exposure"
+      type="Exposure"/>
+    <Variable
+      initialValue="null"
+      name="costType"
+      type="CostType"/>
+    <Variable
+      initialValue="null"
+      name="costCategory"
+      type="CostCategory"/>
+    <Variable
+      initialValue="Boolean.FALSE"
+      name="setReserveLine"
+      type="Boolean"/>
+    <Variable
+      name="reservingCurrency"
+      type="Currency"/>
+    <WizardStep
+      allowFinish="wizard.AllowStep1Finish"
+      id="QuickCheckBasics"
+      label="DisplayKey.get(&quot;Wizard.QuickCheckWizard.QuickCheckBasics.Label&quot;)"
+      onExit="wizard.validatePayments(); wizard.setInstructionsDefaults(); wizard.validateAllCheckPayees();"
+      onFirstEnter="claim.freezeCurrency(); wizard.setupCheckWizardInfo(claim, exposure, costType, costCategory, reservingCurrency, setReserveLine)"
+      screen="QuickCheckWizard_QuickCheckBasicsScreen(claim, wizard)"
+      title="DisplayKey.get(&quot;Wizard.QuickCheckWizard.QuickCheckBasics.Step&quot;,  wizard.CurrentStepNumber ,  wizard.TotalNumberOfSteps)"/>
+    <WizardStep
+      id="QuickCheckDetails"
+      label="DisplayKey.get(&quot;Wizard.QuickCheckWizard.QuickCheckDetails.Label&quot;)"
+      onEnter="wizard.doFinalChecksAndSetup()"
+      screen="CheckWizard_CheckInstructionsScreen(claim, wizard)"
+      title="DisplayKey.get(&quot;Wizard.QuickCheckWizard.QuickCheckDetails.Step&quot;,  wizard.CurrentStepNumber ,  wizard.TotalNumberOfSteps)"/>
+  </Wizard>
+</PCF>

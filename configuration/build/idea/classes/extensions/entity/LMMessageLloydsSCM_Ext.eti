@@ -1,0 +1,139 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="LMMessageLloydsSCM_Ext"
+  desc="Syndicate Claim Message (SCM) subtype for London Market messages. Applies to Lloyd's."
+  supertype="LMMessage_Ext">
+  <column
+    name="CreationDate"
+    desc="Message creation date"
+    nullok="true"
+    type="dateonly"/>
+  <column
+    name="AsOfDate"
+    desc="Message as of date"
+    nullok="true"
+    type="datetime"/>
+  <column
+    name="OCR"
+    desc="Originating Claim Office Reference"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    name="MovementReferenceSequence"
+    desc="Movement Reference. Formatted as XX - Message Sequence"
+    nullok="false"
+    type="shorttext"/>
+  <column
+    desc="Message Sequence Number. Each OCR gets a new sequence number starting at 1."
+    name="MessageSequence"
+    nullok="true"
+    type="decimal">
+  <columnParam
+    name="precision"
+    value="20"/>
+  <columnParam
+    name="scale"
+    value="0"/>
+  </column>
+  <column
+    name="PolicyNumber"
+    desc="Stores the Policy Number received in the message. Can either be the ReinsurerReference or InsurerReference."
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Message's narrative"
+    name="Narrative"
+    nullok="true"
+    type="text"/>
+  <column
+    name="LossStartDate"
+    desc="Loss start date"
+    nullok="true"
+    type="datetime"/>
+  <column
+    name="LossEndDate"
+    desc="Loss end date"
+    nullok="true"
+    type="datetime"/>
+  <column
+    name="LossDescription"
+    desc="Loss description"
+    nullok="true"
+    type="text"/>
+  <column
+    name="LossLocation"
+    desc="Loss location"
+    type="shorttext"
+    nullok="true"/>
+  <column
+    desc="Cedent party name"
+    name="CedentPartyName"
+    nullok="true"
+    type="mediumtext"/>
+  <foreignkey
+    desc="All contact information."
+    fkentity="SCMMessageClaimDataContacts_Ext"
+    name="ContactData"
+    nullok="true"/>
+  <column
+    desc="Bureau leading insurer or reinsurer comments"
+    name="BureauLeadingInsurerComments"
+    nullok="true"
+    type="mediumtext"/>
+  <typekey
+    desc="The original currency of the message"
+    name="OriginalCurrency"
+    nullok="true"
+    typelist="Currency"/>
+  <typekey
+    desc="The currency in which amounts will be settled"
+    name="SettlementCurrency"
+    nullok="true"
+    typelist="Currency"/>
+  <foreignkey
+    fkentity="SCMRiskCode_Ext"
+    name="SCMRiskCode"
+    nullok="true"/>
+  <monetaryamount
+    desc="Financial amount of Indemnity Paid This Time"
+    name="PaidThisTimeIndemnity"
+    nullok="true"/>
+  <monetaryamount
+    desc="Financial amount of Fees Paid This Time"
+    name="PaidThisTimeFees"
+    nullok="true"/>
+  <monetaryamount
+    desc="Financial amount of Indemnity Paid To Date"
+    name="PaidToDateIndemnity"
+    nullok="true"/>
+  <monetaryamount
+    desc="Financial amount of Fees Paid To Date"
+    name="PaidToDateFees"
+    nullok="true"/>
+  <monetaryamount
+    desc="Financial amount of Outstanding Indemnity"
+    name="OutstandingIndemnity"
+    nullok="true"/>
+  <monetaryamount
+    desc="Financial amount of Outstanding Fees"
+    name="OutstandingFees"
+    nullok="true"/>
+  <column
+    desc="Syndicate's Line Number on this Claim"
+    name="SyndicateLineNumber"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Insurer/Reinsurer (depending on which is the receiver) share on this claim"
+    name="ReceiverShare"
+    nullok="false"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="7"/>
+    <columnParam
+      name="precision"
+      value="10"/>
+  </column>
+</subtype>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents a law firm as a type of CompanyVendor."
+  displayName="Law Firm"
+  entity="LawFirm"
+  supertype="CompanyVendor">
+  <fulldescription><![CDATA[
+Represents a law firm as a type of CompanyVendor. A law firm may have a specific legal specialty.
+    ]]></fulldescription>
+  <typekey
+    desc="Law firm specialty"
+    name="LawFirmSpecialty"
+    nullok="true"
+    typelist="LegalSpecialty"/>
+</subtype>

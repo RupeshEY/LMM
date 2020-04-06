@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<!-- edited with XMLSPY v2004 rel. 3 U (http://www.xmlspy.com) by KISHORE NARRA (INSURANCE SERVICES OFFICE) -->
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified" attributeFormDefault="unqualified">
+	<xs:element name="ACORD">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="RqUID" type="xs:string" minOccurs="0"/>
+				<xs:element name="TransactionResponseDt" type="xs:dateTime" minOccurs="0"/>
+				<xs:element name="Trandt" type="xs:date" minOccurs="0"/>
+				<xs:element name="Tranid" type="xs:unsignedInt" minOccurs="0"/>
+				<xs:element name="Status" minOccurs="0">
+					<xs:complexType mixed="true">
+						<xs:sequence>
+							<xs:element name="StatusCd" type="xs:unsignedLong" minOccurs="0"/>
+							<xs:element name="StatusDesc" minOccurs="0">
+								<xs:complexType mixed="true">
+									<xs:sequence minOccurs="0">
+										<xs:element name="StatusDescShort" type="xs:string" minOccurs="0"/>
+										<xs:element name="StatusDescCode" type="xs:string" minOccurs="0"/>
+										<xs:element name="StatusDescDetail" type="xs:string" minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="SignonRs" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Status" minOccurs="0">
+								<xs:complexType mixed="true">
+									<xs:sequence>
+										<xs:element name="StatusCd" type="xs:unsignedLong" minOccurs="0"/>
+										<xs:element name="StatusDesc" minOccurs="0">
+											<xs:complexType mixed="true">
+												<xs:sequence minOccurs="0">
+													<xs:element name="StatusDescShort" type="xs:string" minOccurs="0"/>
+													<xs:element name="StatusDescCode" type="xs:string" minOccurs="0"/>
+													<xs:element name="StatusDescDetail" type="xs:string" minOccurs="0"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="CustId" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="SPName" type="xs:string" minOccurs="0"/>
+										<xs:element name="CustLoginId" type="xs:string" minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ClientDt" type="xs:dateTime" minOccurs="0"/>
+							<xs:element name="CustLangPref" type="xs:string" minOccurs="0"/>
+							<xs:element name="ClientApp" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence minOccurs="0">
+										<xs:element name="Org" type="xs:string" minOccurs="0"/>
+										<xs:element name="Name" type="xs:string" minOccurs="0"/>
+										<xs:element name="Version" type="xs:string" minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="ServerDt" type="xs:dateTime" minOccurs="0"/>
+							<xs:element name="Language" type="xs:string" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ClaimsSvcRs" minOccurs="0" maxOccurs="unbounded">
+					<xs:complexType mixed="true">
+						<xs:sequence>
+							<xs:element name="Status" minOccurs="0">
+								<xs:complexType mixed="true">
+									<xs:sequence minOccurs="0">
+										<xs:element name="StatusCd" type="xs:string" minOccurs="0"/>
+										<xs:element name="StatusDesc" type="xs:string" minOccurs="0"/>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+							<xs:element name="RqUID" type="xs:string" minOccurs="0"/>
+							<xs:element name="ClaimInvestigationAddRs" minOccurs="0">
+								<xs:complexType>
+									<xs:sequence>
+										<xs:element name="RqUID" type="xs:string" minOccurs="0"/>
+										<xs:element name="TransactionResponseDt" minOccurs="0"/>
+										<xs:element name="CurCd" type="xs:string" minOccurs="0"/>
+										<xs:element name="MsgStatus" minOccurs="0">
+											<xs:complexType>
+												<xs:sequence minOccurs="0">
+													<xs:element name="MsgStatusCd" type="xs:string" minOccurs="0"/>
+													<xs:element name="MsgErrorCd" type="xs:string" minOccurs="0"/>
+													<xs:element name="MsgStatusDesc" type="xs:string" minOccurs="0"/>
+												</xs:sequence>
+											</xs:complexType>
+										</xs:element>
+									</xs:sequence>
+								</xs:complexType>
+							</xs:element>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+	<xs:element name="ClaimInvestigationAddRs">
+		<xs:complexType>
+			<xs:sequence>
+				<xs:element name="RqUID" type="xs:string" minOccurs="0"/>
+				<xs:element name="TransactionResponseDt" type="xs:dateTime" minOccurs="0"/>
+				<xs:element name="CurCd" type="xs:string" minOccurs="0"/>
+				<xs:element name="MsgStatus" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="MsgStatusCd" type="xs:string" minOccurs="0"/>
+							<xs:element name="MsgErrorCd" minOccurs="0"/>
+							<xs:element name="MsgStatusDesc" type="xs:string" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+				<xs:element name="ClientDt" type="xs:dateTime" minOccurs="0"/>
+				<xs:element name="CustLangPref" type="xs:string" minOccurs="0"/>
+				<xs:element name="ClientApp" minOccurs="0">
+					<xs:complexType>
+						<xs:sequence>
+							<xs:element name="Org" type="xs:string" minOccurs="0"/>
+							<xs:element name="Name" type="xs:string" minOccurs="0"/>
+							<xs:element name="Version" type="xs:decimal" minOccurs="0"/>
+						</xs:sequence>
+					</xs:complexType>
+				</xs:element>
+			</xs:sequence>
+		</xs:complexType>
+	</xs:element>
+</xs:schema>

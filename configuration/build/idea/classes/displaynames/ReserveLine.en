@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<Entity
+  name="ReserveLine">
+  <Columns>
+    <Column
+      beanPath="ReserveLine.Exposure"
+      name="exposure"/>
+    <Column
+      beanPath="ReserveLine.Exposure"
+      displayName="true"
+      name="exposureDisplayName"
+      sortOrder="0"/>
+    <Column
+      beanPath="ReserveLine.CostType"
+      name="costType"
+      sortOrder="1"/>
+    <Column
+      beanPath="ReserveLine.CostCategory"
+      name="costCategory"
+      sortOrder="2"/>
+    <Column
+      beanPath="ReserveLine.ReservingCurrency"
+      name="currency"
+      sortOrder="3"/>
+  </Columns>
+  <DisplayName><![CDATA[uses gw.util.CCConfigUtil
+
+var retBuf = new java.lang.StringBuffer()
+
+if (null == exposure) {
+  retBuf.append(gw.api.locale.DisplayKey.get("Financials.ReserveLine.NoExposure"))
+} else {
+  retBuf.append(exposureDisplayName)
+}
+
+if (null != costType || null != costCategory) {
+  retBuf.append("; ")
+}
+
+if (null != costType) {
+  retBuf.append(costType.DisplayName)
+
+  if (null != costCategory) {
+    retBuf.append("/")
+  }
+}
+
+if (null != costCategory) {
+  retBuf.append(costCategory.DisplayName)
+}
+
+if (null != currency and CCConfigUtil.AllowExplicitReservingCurrency) {
+  retBuf.append("; ").append(currency.DisplayName)
+}
+
+return retBuf.toString();
+]]></DisplayName>
+</Entity>

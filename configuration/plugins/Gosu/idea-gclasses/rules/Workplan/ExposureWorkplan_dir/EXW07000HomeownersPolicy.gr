@@ -1,0 +1,21 @@
+package rules.Workplan.ExposureWorkplan_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("EXW07000 -  Homeowners Policy")
+internal class EXW07000HomeownersPolicy {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.Claim.Policy.PolicyType == TC_HOMEOWNERS
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Forward
+    canVisit="!(Claim.State == ClaimState.TC_DRAFT)"
+    id="ClaimNewNoteForward">
+    <LocationEntryPoint
+      signature="ClaimNewNoteForward(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <ForwardCondition
+      action="pcf.ArchivedClaim.go(Claim.ClaimInfo)"
+      condition="Claim.ClaimInfo.ArchiveState != null"/>
+    <ForwardCondition
+      action="pcf.NewNoteWorksheet.goInWorkspace(Claim);"/>
+  </Forward>
+</PCF>

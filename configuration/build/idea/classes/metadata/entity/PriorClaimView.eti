@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  entity="PriorClaimView"
+  exportable="false"
+  primaryEntity="Claim">
+  <implementsInterface
+    iface="gw.cc.claim.entity.PriorClaimView"
+    impl="com.guidewire.cc.domain.claim.impl.PriorClaimViewImpl"/>
+  <fulldescription><![CDATA[
+        Aggregates the information needed to display one claim row in the New Claim Wizard's prior claims list.
+        The prior claims list shows prior claims made on the same policy as the new claim. 
+      
+    ]]></fulldescription>
+  <viewEntityLink
+    name="Claim"
+    path="ID"/>
+  <viewEntityColumn
+    name="ClaimNumber"
+    path="ClaimNumber"/>
+  <viewEntityColumn
+    name="LossDate"
+    path="LossDate"/>
+  <viewEntityTypekey
+    name="LossCause"
+    path="LossCause"/>
+  <viewEntityTypekey
+    name="LossType"
+    path="LossType"/>
+  <viewEntityColumn
+    name="IncidentReport"
+    path="IncidentReport"/>
+  <viewEntityColumn
+    name="Description"
+    path="Description"/>
+  <viewEntityTypekey
+    name="State"
+    path="State"/>
+  <viewEntityColumn
+    name="ReportedDate"
+    path="ReportedDate"/>
+  <!-- The following are needed for AssigneeDisplayString. -->
+  <viewEntityTypekey
+    name="AssignmentStatus"
+    path="AssignmentStatus"/>
+  <viewEntityName
+    name="AssignedUserDisplayName"
+    path="AssignedUser"/>
+  <viewEntityName
+    name="AssignedQueueDisplayName"
+    path="AssignedQueue"/>
+</viewEntity>

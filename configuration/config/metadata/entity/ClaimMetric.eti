@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="Metrics related to a claim"
+  entity="ClaimMetric"
+  exportable="true"
+  extendable="true"
+  final="false"
+  loadable="false"
+  platform="false"
+  table="claimmetric"
+  type="editable">
+  <implementsInterface
+    iface="gw.cc.claim.metric.entity.ClaimMetric"
+    impl="com.guidewire.cc.domain.claim.metric.impl.ClaimMetricImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsInterface
+    iface="gw.api.metric.MetricMethods"
+    impl="gw.api.claim.metric.ClaimMetricMethodsImpl"/>
+  <implementsEntity
+    name="MetricLimitTimeDelegate"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Claim to which this metric is related."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    columnName="MetricLimitDenormID"
+    desc="The metric limit for the metric, denormalized from the claim's inital claim metric limits array."
+    exportable="false"
+    fkentity="ClaimMetricLimit"
+    name="MetricLimitDenorm"
+    nullok="true"/>
+  <typekey
+    desc="Category of Claim Metric."
+    name="ClaimMetricCategory"
+    nullok="false"
+    typelist="ClaimMetricCategory"/>
+</entity>

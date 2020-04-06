@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- Used for exposure links from desktop; forwards to the exposure detail which may be under the
+    exposure list, loss details or at the top level depending on the type of the claim and the
+    customer configuration -->
+  <Forward
+    canVisit="Exposure != null and perm.Exposure.view(Exposure)"
+    id="ExposureDetailForward"
+    parent="Claim(Claim)">
+    <LocationEntryPoint
+      signature="ExposureDetailForward(Claim : Claim, Exposure : Exposure)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Exposure"
+      type="Exposure"/>
+    <ForwardCondition
+      action="LossDetailsExposureDetail.go(Exposure)"
+      condition="Exposure.Claim.ExposureListVisibleInLossDetails"/>
+    <ForwardCondition
+      action="TopLevelExposureDetail.go(Exposure)"
+      condition="Exposure.Claim.ExposureListVisibleInClaimFile"/>
+    <ForwardCondition
+      action="ExposureDetail.go(Exposure)"/>
+  </Forward>
+</PCF>

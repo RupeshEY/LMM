@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Reserve.delete(Reserve)"
+    countsAsWork="false"
+    id="DeleteReserveSet"
+    parent="ClaimFinancialsTransactions(Claim)"
+    title="DisplayKey.get(&quot;JSP.DeleteReserveSet.Confirm.Title&quot;)">
+    <LocationEntryPoint
+      signature="DeleteReserveSet(Claim : Claim, Reserve : Reserve)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Reserve"
+      type="Reserve"/>
+    <Screen
+      id="DeleteReserveSetScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="gw.api.financials.FinancialsUtil.deleteReserve(Reserve); gw.api.financials.ClaimFinancialsTransactionsOption.RESERVE.saveOption(Claim); ClaimFinancialsTransactions.go(Claim)"
+          id="DeleteReserveSet_DeleteButton"
+          label="DisplayKey.get(&quot;Button.Delete&quot;)"/>
+        <ToolbarButton
+          action="ClaimFinancialsTransactionsDetail.go(Claim, Reserve)"
+          id="DeleteReserveSet_CancelButton"
+          label="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          shortcut="L"
+          visible="true"/>
+      </Toolbar>
+      <Verbatim
+        label="DisplayKey.get(&quot;JSP.DeleteReserveSet.Delete.Helper&quot;)"/>
+      <PanelRef
+        def="DeleteReserveSetDV(Reserve.TransactionSet)"/>
+    </Screen>
+  </Page>
+</PCF>

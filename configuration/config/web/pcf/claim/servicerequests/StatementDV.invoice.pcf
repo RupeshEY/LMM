@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="StatementDV"
+    mode="invoice">
+    <Require
+      name="currentInvoice"
+      type="ServiceRequestStatement"/>
+    <Require
+      name="previousTotal"
+      type="gw.api.financials.CurrencyAmount"/>
+    <Require
+      name="readOnly"
+      type="boolean"/>
+    <InputColumn>
+      <TextInput
+        editable="currentInvoice.New"
+        id="ReferenceNumber"
+        label="DisplayKey.get(&quot;Web.ServiceRequest.Invoice.ReferenceNumber&quot;)"
+        required="false"
+        value="currentInvoice.ReferenceNumber"
+        visible="currentInvoice != null or CurrentLocation.InEditMode"/>
+      <TypeKeyInput
+        id="InvoiceStatus"
+        label="DisplayKey.get(&quot;Web.ServiceRequest.Invoice.InvoiceStatus&quot;)"
+        value="(currentInvoice as ServiceRequestInvoice).Status"
+        valueType="typekey.ServiceRequestInvoiceStatus"
+        visible="currentInvoice != null and not CurrentLocation.InEditMode"/>
+      <TextAreaInput
+        editable="currentInvoice.New"
+        id="Description"
+        label="DisplayKey.get(&quot;Web.ServiceRequest.Invoice.Description&quot;)"
+        numRows="2"
+        required="true"
+        value="currentInvoice.Description"
+        visible="currentInvoice != null or CurrentLocation.InEditMode"/>
+      <ListViewInput
+        def="StatementLineItemLV(currentInvoice)"
+        label="DisplayKey.get(&quot;Web.ServiceRequest.LineItems&quot;)"
+        labelAbove="true">
+        <Toolbar>
+          <IteratorButtons
+            iterator="StatementLineItemLV.lineItemsIterator"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

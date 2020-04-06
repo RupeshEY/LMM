@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A Reinsurance (RI) transaction which reflects an amount of payments recoverable via a Reinsurance agreement."
+  entity="RIRecoverable"
+  final="true"
+  supertype="RITransaction">
+  <implementsInterface
+    iface="gw.cc.financials.ri.entity.RIRecoverable"
+    impl="com.guidewire.cc.domain.financials.ri.impl.RIRecoverableImpl"/>
+  <fulldescription><![CDATA[
+    A subtype of <code>RITransaction</code> that indicates an Amount of Payments attributable to a particular RIAgreement.
+    Money has been paid out, so the reinsurer behind the RIAgreement is obligated to
+    reimburse us for this amount according to the RI treaty.
+    Like both types of RITransactions, RIRecoverables behave similar to Reserve transactions as entities: they are immutable,
+    and so multiple positive or negative transactions are created to adjust the total on a particular RICoding.
+    To get the Total RI Recoverables and other RI financials calculations,
+    use the <code>FinancialsCalculationUtil</code> class.
+  ]]></fulldescription>
+</subtype>

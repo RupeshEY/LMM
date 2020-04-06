@@ -1,0 +1,21 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+@gw.rules.RuleName("CPU18000 - Update Claim Health")
+internal class CPU18000UpdateClaimHealth {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.scheduleHealthUpdate()
+//Updates clam health metrics
+/*end00rule*/
+
+  }
+}

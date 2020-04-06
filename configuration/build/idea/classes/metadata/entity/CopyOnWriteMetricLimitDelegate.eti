@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="CopyOnWriteMetricLimitDelegate">
+  <implementsInterface
+    iface="gw.cc.metric.entity.CopyOnWriteMetricLimitDelegate"
+    impl="com.guidewire.cc.domain.metric.impl.CopyOnWriteMetricLimitDelegateImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.metric.impl.CopyOnWriteMetricLimitDelegateInternal"
+    impl="com.guidewire.cc.domain.metric.impl.CopyOnWriteMetricLimitDelegateImpl"/>
+  <fulldescription><![CDATA[Delegate used by integer claim and exposure metric limits to implement copy on write behavior
+    ]]></fulldescription>
+  <column
+    desc="Generation number at which this limit was created"
+    exportable="false"
+    name="CreatedGeneration"
+    nullok="false"
+    type="integer"/>
+  <column
+    desc="Generation number at which this limit was retired, or null if still active"
+    exportable="false"
+    name="RetiredGeneration"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Date at which this limit was retired, or null if still active."
+    exportable="false"
+    name="RetiredDate"
+    nullok="true"
+    type="datetime"/>
+</delegate>

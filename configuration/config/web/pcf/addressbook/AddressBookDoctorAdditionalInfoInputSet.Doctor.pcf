@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AddressBookDoctorAdditionalInfoInputSet"
+    mode="Doctor">
+    <Require
+      name="personVendor"
+      type="PersonVendor"/>
+    <TextInput
+      editable="true"
+      id="MedicalLicense"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Doctor.MedicalLicense&quot;)"
+      value="(personVendor as Doctor).MedicalLicense"/>
+    <TypeKeyInput
+      editable="true"
+      id="DoctorSpecialty"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Doctor.DoctorSpecialty&quot;)"
+      value="(personVendor as Doctor).DoctorSpecialty"
+      valueType="typekey.SpecialtyType"/>
+  </InputSet>
+</PCF>

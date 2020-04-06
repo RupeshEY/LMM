@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="incident.Claim.instructNewServiceRequests()"
+    canEdit="perm.Incident.edit(incident)"
+    canVisit="incident != null"
+    id="EditOtherStructureIncidentPopup"
+    startInEditMode="startInEditMode"
+    title="DisplayKey.get(&quot;Web.OtherStructureIncident.PopupHeader&quot;)">
+    <LocationEntryPoint
+      signature="EditOtherStructureIncidentPopup(incident : OtherStructureIncident)"/>
+    <LocationEntryPoint
+      signature="EditOtherStructureIncidentPopup(incident : OtherStructureIncident, startInEditMode : Boolean)"/>
+    <Variable
+      name="incident"
+      type="OtherStructureIncident"/>
+    <Variable
+      initialValue="false"
+      name="startInEditMode"
+      type="Boolean"/>
+    <Screen
+      id="EditOtherStructureIncidentScreen">
+      <TitleBar
+        icon="incident.HeaderIcon"/>
+      <Toolbar>
+        <EditButtons/>
+        <ToolbarDivider/>
+        <PrintToolbarButton
+          hideIfEditable="true"
+          id="OtherStructureIncident_PrintButton"
+          label="DisplayKey.get(&quot;Button.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="OtherStructureIncidentCV(incident)"/>
+    </Screen>
+  </Popup>
+</PCF>

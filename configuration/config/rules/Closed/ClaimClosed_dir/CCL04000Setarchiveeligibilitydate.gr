@@ -1,0 +1,27 @@
+package rules.Closed.ClaimClosed_dir
+
+uses gw.api.system.CCConfigParameters
+uses gw.api.util.DateUtil
+
+@gw.rules.RuleName("CCL04000 - Set archive eligibility date")
+internal class CCL04000Setarchiveeligibilitydate {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return // Note that this checks whether Archiving is "enabled", rather than the stricter check that it is
+// "available", since we want to set the eligibility date even if the archive is temporarily unavailable
+  gw.api.claim.ClaimUtil.isArchivingEnabled()
+
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.DateEligibleForArchive = DateUtil.addDays(DateUtil.currentDate(), CCConfigParameters.DaysClosedBeforeArchive.Value)
+
+/*end00rule*/
+
+  }
+}

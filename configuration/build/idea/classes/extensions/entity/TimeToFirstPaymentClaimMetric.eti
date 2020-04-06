@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Time to First Loss Payment"
+  entity="TimeToFirstPaymentClaimMetric"
+  final="false"
+  priority="5"
+  supertype="TimeBasedClaimMetric">
+  <implementsInterface
+    iface="gw.api.metric.MetricMethods"
+    impl="gw.claim.metric.financials.TimeToFirstPaymentClaimMetricMethodsImpl"/>
+</subtype>

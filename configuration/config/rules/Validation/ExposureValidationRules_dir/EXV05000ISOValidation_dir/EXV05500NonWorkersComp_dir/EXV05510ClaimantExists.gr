@@ -1,0 +1,23 @@
+package rules.Validation.ExposureValidationRules_dir.EXV05000ISOValidation_dir.EXV05500NonWorkersComp_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("EXV05510 - Claimant Exists")
+internal class EXV05510ClaimantExists {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.Claimant == null
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.rejectField("Claimant", TC_ISO, 
+                     DisplayKey.get("Rules.Validation.Exposure.ClaimantNotNull"), null, null)
+/*end00rule*/
+
+  }
+}

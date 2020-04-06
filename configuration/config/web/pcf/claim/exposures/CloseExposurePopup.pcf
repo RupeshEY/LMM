@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="closeExposureInfo.beforeCommit()"
+    canEdit="true"
+    id="CloseExposurePopup"
+    parent="Claim(exposure.Claim)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.CloseExposure.Title&quot;, exposure)">
+    <LocationEntryPoint
+      signature="CloseExposurePopup(exposure : Exposure)"/>
+    <Variable
+      name="exposure"
+      type="Exposure"/>
+    <Variable
+      initialValue="createInfo()"
+      name="closeExposureInfo"
+      type="CloseExposureInfo"/>
+    <Screen
+      id="CloseExposureScreen">
+      <Toolbar>
+        <EditButtons
+          showUpdateConfirmMessage="exposure.hasAwaitingSubmissionPaymentsForToday()"
+          updateConfirmMessage="DisplayKey.get(&quot;NVV.Exposure.CloseExposure.AwaitingSubmissionPaymentForTodayWarning&quot;)"
+          updateLabel="DisplayKey.get(&quot;Web.Exposure.CloseExposure&quot;)"/>
+      </Toolbar>
+      <PanelRef
+        def="CloseExposureInfoDV(closeExposureInfo)"/>
+    </Screen>
+    <Code><![CDATA[
+function createInfo() : CloseExposureInfo {
+        var info = new CloseExposureInfo();
+        info.Exposure = exposure;
+        return info;
+      }
+    ]]></Code>
+  </Popup>
+</PCF>

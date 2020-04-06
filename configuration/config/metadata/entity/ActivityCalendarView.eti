@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Displays activities efficiently in the supervisor calendar"
+  entity="ActivityCalendarView"
+  exportable="false"
+  final="false"
+  primaryEntity="Activity">
+  <implementsInterface
+    iface="gw.cc.activity.entity.ActivityCalendarView"
+    impl="com.guidewire.cc.domain.activity.impl.ActivityCalendarViewImpl"/>
+  <!-- This view entity is motiviated by performance improvements to Supervisor Desktop Calendar, and may therefore not cover
+         the Supervisor Matter and Claim calendars comprehensively. -->
+  <viewEntityLink
+    name="Activity"
+    path="ID"/>
+  <!-- Base supervsior query -->
+  <viewEntityTypekey
+    name="Status"
+    path="Status"/>
+  <viewEntityTypekey
+    name="AssignmentStatus"
+    path="AssignmentStatus"/>
+  <viewEntityTypekey
+    name="Importance"
+    path="Importance"/>
+  <viewEntityColumn
+    name="TargetDate"
+    path="TargetDate"/>
+  <!-- Queries for group, used in Supervisor Desktop and Matter calendars -->
+  <viewEntityColumn
+    name="AssignedGroupID"
+    path="AssignedGroup"/>
+  <!-- Part of buildEvents in My Claim Calendar -->
+  <viewEntityColumn
+    name="AssignedUserID"
+    path="AssignedUser"/>
+  <!-- Filter related links/typekeys -->
+  <viewEntityTypekey
+    name="Priority"
+    path="Priority"/>
+  <viewEntityLink
+    name="Matter"
+    path="Matter"/>
+  <!-- Also used by Supervisor Matter Calendar query -->
+  <viewEntityLink
+    name="ActivityPattern"
+    path="ActivityPattern"/>
+  <!-- Make Events -->
+  <viewEntityColumn
+    name="EndDate"
+    path="EndDate"/>
+  <viewEntityColumn
+    name="Subject"
+    path="Subject"/>
+  <viewEntityTypekey
+    name="ActivityClass"
+    path="ActivityClass"/>
+  <!-- ClaimEventContext -->
+  <viewEntityLink
+    name="Claim"
+    path="Claim"/>
+</viewEntity>

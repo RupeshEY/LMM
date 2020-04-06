@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="The results of performing segmentation and strategy."
+  entity="SegmentationResult"
+  exportable="true">
+  <implementsInterface
+    iface="gw.cc.segmentation.entity.SegmentationResult"
+    impl="com.guidewire.cc.domain.segmentation.impl.SegmentationResultImpl"/>
+  <column
+    desc="The type of segment for a claim.&lt;br&gt; For example: &lt;tt&gt;auto_low&lt;/tt&gt; means &quot;Auto - low complexity&quot;"
+    name="SegmentType"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="The type of strategy for a claim.&lt;br&gt; For example: &lt;tt&gt;auto_fast&lt;/t&gt; means &quot;Auto - Fast Track&quot;"
+    name="StrategyType"
+    nullok="true"
+    type="shorttext"/>
+</nonPersistentEntity>

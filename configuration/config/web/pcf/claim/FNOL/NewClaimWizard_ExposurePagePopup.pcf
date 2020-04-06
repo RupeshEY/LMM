@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="validateAndFinish()"
+    canEdit="true"
+    id="NewClaimWizard_ExposurePagePopup"
+    parent="FNOLWizard()"
+    startEditing="Exposure.createBenefits()"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Wizard.NewClaimWizard.NewClaimExposure.Edit&quot;)">
+    <LocationEntryPoint
+      signature="NewClaimWizard_ExposurePagePopup(Claim : Claim, Exposure : Exposure, Wizard : gw.api.claim.NewClaimWizardInfo)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Exposure"
+      type="Exposure"/>
+    <Variable
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Screen
+      id="NewClaimWizard_ExposurePageScreen">
+      <Toolbar>
+        <EditButtons/>
+      </Toolbar>
+      <PanelRef
+        def="NewClaimExposureDV(Exposure, Wizard.UnusedServiceRequests)"
+        mode="Exposure.ExposureType"/>
+    </Screen>
+    <Code><![CDATA[uses gw.api.exposure.ExposureDuplicateChecker
+
+// Validate Exposures and Service Requests added to an exposure incident
+function validateAndFinish() {
+  Exposure.cleanupBenefits()
+  ExposureDuplicateChecker.verifyExposureClaimantCoverageSubtypeUnique(Exposure)
+  gw.api.claim.FnolServiceRequestHelper.cleanAndFinishServiceRequests(Wizard);
+}
+      ]]></Code>
+  </Popup>
+</PCF>

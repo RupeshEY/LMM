@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="CatastrophePeril">
+  <index
+    desc="Enforce unique LossType/LossCause pairs per catastrophe"
+    name="catperilextindex1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="CatastropheID"/>
+    <indexcol
+      keyposition="2"
+      name="LossType"/>
+    <indexcol
+      keyposition="3"
+      name="LossCause"/>
+  </index>
+</extension>

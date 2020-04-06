@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents the relationship between a transaction and its onset."
+  entity="TransactionOnset"
+  exportable="true"
+  overwrittenInStagingTable="false"
+  platform="false"
+  table="transactiononset"
+  type="joinarray">
+  <implementsInterface
+    iface="gw.cc.financials.entity.TransactionOnset"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionOnsetImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.impl.TransactionOnsetInternal"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionOnsetImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[A TransactionOnset relates a transaction to its onsetting
+    transactions (if any).  It contains two links, one to the original transaction and one to the new onset transaction.
+    A TransactionOnset is created whenever a user recodes or transfers a payment in ClaimCenter. In the case of a
+    recode or transfer the onset payment has the same line items as the original payment but a different ReserveLine coding.
+  ]]></fulldescription>
+  <foreignkey
+    columnName="TransactionID"
+    desc="The transaction being onset."
+    exportable="true"
+    fkentity="Transaction"
+    importableagainstexistingobject="false"
+    name="Transaction"
+    nullok="false"/>
+  <foreignkey
+    columnName="OnsetID"
+    desc="The onset (recode or transfer) transaction, same as the original but on the new ReserveLine/Claim."
+    exportable="true"
+    fkentity="Transaction"
+    importableagainstexistingobject="false"
+    name="Onset"
+    nullok="true"
+    triggersValidation="true"/>
+  <column
+    desc="PublicID of the onset, used when the FK to the onset has been severed for archiving."
+    name="OnsetPublicID"
+    nullok="true"
+    setterScriptability="hidden"
+    type="publicid"/>
+  <!-- The transaction and onset must be different transactions. -->
+  <index
+    desc="Enforce uniqueness of the Transaction/Onset pair"
+    name="transactionoffseu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="TransactionID"/>
+    <indexcol
+      keyposition="2"
+      name="OnsetID"/>
+  </index>
+  <index
+    desc="Restoring archived claims requires searching for TransactionOnsets with matching OnsetPublicIDs"
+    name="transactionoffseu5"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="OnsetPublicID"/>
+  </index>
+</entity>

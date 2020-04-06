@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DocumentTemplateDescriptor
+    id="ISOMatchReport.gosu.xml"
+    name="ISO Match Report"
+    description="Matching Claims from ISO ClaimSearch"
+    scope="gosu"
+    type="iso"
+    lob="GLLine"
+    state="CA"
+    mime-type="text/html"
+    date-effective="2003-03-15"
+    date-expires="2009-03-15"
+    keywords="ISO, Match">
+
+  <ContextObject name="xsl_file" type="string">
+    <DefaultObjectValue>"http://localhost:8080/cc/resources/iso/xsl/CS_Xml_Output.xsl"</DefaultObjectValue>
+  </ContextObject>
+
+  <ContextObject name="html" type="string">
+    <DefaultObjectValue></DefaultObjectValue>
+  </ContextObject>
+
+  <FormFieldGroup name="default">
+    <DisplayValues>
+      <NullDisplayValue>None</NullDisplayValue>
+    </DisplayValues>
+    <FormField name="html">html</FormField>
+  </FormFieldGroup>
+
+</DocumentTemplateDescriptor>

@@ -1,0 +1,20 @@
+package rules.Reopened.ClaimReopened_dir
+
+@gw.rules.RuleName("CRO04000 - Clear archive eligibility date")
+internal class CRO04000Cleararchiveeligibilitydate {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return gw.api.claim.ClaimUtil.isArchivingEnabled()
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.DateEligibleForArchive = null
+/*end00rule*/
+
+  }
+}

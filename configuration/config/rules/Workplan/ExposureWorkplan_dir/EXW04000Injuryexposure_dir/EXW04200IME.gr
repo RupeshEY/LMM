@@ -1,0 +1,22 @@
+package rules.Workplan.ExposureWorkplan_dir.EXW04000Injuryexposure_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("EXW04200 - IME")
+internal class EXW04200IME {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.Strategy == TC_INJURY_NORMAL
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.Claim.createActivityFromPattern(
+    exposure, ActivityPattern.finder.getActivityPatternByCode("IME"))
+/*end00rule*/
+
+  }
+}

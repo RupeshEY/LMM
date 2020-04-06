@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="FixedPropertyIncident">
+  <!-- BEGIN Property Attributes -->
+  <typekey
+    desc="Property attribute class type for Building details"
+    name="ClassType"
+    nullok="true"
+    typelist="ClassType"/>
+  <column
+    desc="Number of Stories in the building/property"
+    name="NumStories"
+    nullok="true"
+    type="nonnegativeinteger"/>
+  <typekey
+    desc="Roof Deck Materials for property"
+    name="RoofMaterial"
+    nullok="true"
+    typelist="RoofMaterial"/>
+  <typekey
+    desc="External Wall material at scene."
+    name="ExtWallMat"
+    nullok="true"
+    typelist="ExtWallMat"/>
+  <typekey
+    desc="Loss Area of Property"
+    name="LossArea"
+    nullok="true"
+    typelist="LossArea"/>
+  <column
+    desc="dummy field for fire details"
+    name="FireProtDetails"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="1"/>
+  </column>
+  <typekey
+    desc="Alarm Type for property"
+    name="AlarmType"
+    nullok="true"
+    typelist="AlarmType"/>
+  <typekey
+    desc="Sprinkler type for property"
+    name="SprinklerType"
+    nullok="true"
+    typelist="SprinklerType"/>
+  <column
+    desc="Number of Sprinklers at Scene"
+    name="NumSprinkler"
+    nullok="true"
+    type="nonnegativeinteger"/>
+  <column
+    desc="Number of sprinklers that were operated"
+    name="NumSprinkOper"
+    nullok="true"
+    type="nonnegativeinteger"/>
+  <typekey
+    desc="Sprinklers returned to service."
+    name="SprinkRetServ"
+    nullok="true"
+    typelist="SprinkRetServ"/>
+  <typekey
+    desc="Was Mold Involved?"
+    name="MoldInvolved"
+    nullok="true"
+    typelist="YesNo"/>
+  <typekey
+    desc="Was Hazardous Waste Involved?"
+    name="HazardInvolved"
+    nullok="true"
+    typelist="YesNo"/>
+</extension>

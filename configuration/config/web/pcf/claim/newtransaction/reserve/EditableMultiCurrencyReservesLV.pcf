@@ -1,0 +1,126 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="EditableMultiCurrencyReservesLV">
+    <Require
+      name="WizardHelper"
+      type="gw.api.financials.ReserveWizardHelper"/>
+    <Require
+      name="EditWrapper"
+      type="entity.TransactionEditWrapper"/>
+    <RowIterator
+      editable="true"
+      elementName="ReserveWrapper"
+      value="new TransactionEditWrapper[] { EditWrapper }"
+      valueType="entity.TransactionEditWrapper[]">
+      <Row>
+        <TextCell
+          enableSort="false"
+          id="Exposure"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.MulticurrencyReserves.Exposure&quot;)"
+          outputConversion="VALUE == null ? DisplayKey.get(&quot;Web.Financials.Exposure.ClaimLevel&quot;) : VALUE"
+          value="EditWrapper.Transaction.Exposure.DisplayName"
+          width="100"
+          wrapLabel="true"/>
+        <TextCell
+          enableSort="false"
+          id="Coverage"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.MulticurrencyReserves.Coverage&quot;)"
+          value="EditWrapper.Transaction.Exposure.PrimaryCoverage"
+          valueType="typekey.CoverageType"/>
+        <TextCell
+          enableSort="false"
+          id="CostType"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.MulticurrencyReserves.CostType&quot;)"
+          numCols="5"
+          value="EditWrapper.Transaction.CostType"
+          valueType="typekey.CostType"
+          wrapLabel="true"/>
+        <TextCell
+          enableSort="false"
+          id="CostCategory"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.MulticurrencyReserves.CostCategory&quot;)"
+          numCols="5"
+          value="EditWrapper.Transaction.CostCategory"
+          valueType="typekey.CostCategory"
+          wrapLabel="true"/>
+        <TextCell
+          enableSort="false"
+          id="ReservingCurrency"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.MulticurrencyReserves.ReservingCurrency&quot;)"
+          numCols="5"
+          value="EditWrapper.Transaction.ReservingCurrency"
+          valueType="typekey.Currency"
+          visible="gw.util.CCConfigUtil.AllowExplicitReservingCurrency"
+          wrapLabel="true"/>
+        <CurrencyCell
+          enableSort="false"
+          formatType="currency"
+          id="AvailableReserves"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.MulticurrencyReserves.AvailableReserves&quot;)"
+          value="WizardHelper.getAvailableReservesAmountPair( ReserveWrapper.Transaction )"
+          valueType="gw.api.financials.IPairedMoney"
+          wrapLabel="true">
+          <PostOnChange/>
+        </CurrencyCell>
+        <CurrencyCell
+          enableSort="false"
+          formatType="currency"
+          id="PendingReserves"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.MulticurrencyReserves.PendingReserves&quot;)"
+          value="WizardHelper.getPendingApprovalReservesAmountPair( ReserveWrapper.Transaction )"
+          valueType="gw.api.financials.IPairedMoney"
+          wrapLabel="true"/>
+        <TypeKeyCell
+          editable="true"
+          id="Currency"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.MulticurrencyReserves.Currency&quot;)"
+          required="true"
+          value="EditWrapper.Currency"
+          valueType="typekey.Currency">
+          <PostOnChange
+            onChange="setNewTransactionAmountToInitialValue()"/>
+        </TypeKeyCell>
+        <CurrencyCell
+          editable="true"
+          enableSort="false"
+          formatType="currency"
+          id="NewAvailableReserves"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.MulticurrencyReserves.NewAvailableReserves&quot;)"
+          numCols="12"
+          required="true"
+          value="ReserveWrapper.NewAmountInTransactionCurrency"
+          valueType="gw.api.financials.IMutableMoney"
+          wrapLabel="true">
+          <PostOnChange/>
+        </CurrencyCell>
+        <CurrencyCell
+          enableSort="false"
+          formatType="currency"
+          id="ChangeAmount"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.MulticurrencyReserves.ChangeAmount&quot;)"
+          value="WizardHelper.getChangeAmountPair(ReserveWrapper)"
+          valueType="gw.api.financials.IPairedMoney"
+          wrapLabel="true"/>
+        <TextCell
+          editable="true"
+          enableSort="false"
+          id="Comments"
+          label="DisplayKey.get(&quot;LV.Financials.ReserveSet.MulticurrencyReserves.Comments&quot;)"
+          numCols="10"
+          value="ReserveWrapper.Transaction.Comments"
+          wrapLabel="true"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[
+function setNewTransactionAmountToInitialValue() {
+  var initialValue = WizardHelper.getAvailableReservesAmountPair( EditWrapper.Transaction ).Amount + WizardHelper.getPendingApprovalReservesAmountPair( EditWrapper.Transaction ).Amount
+  // this sets the transaction and reserving amounts
+  EditWrapper.NewAmountInTransactionCurrency.setAmount( initialValue )
+}
+      
+    ]]></Code>
+  </ListViewPanel>
+</PCF>

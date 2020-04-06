@@ -1,0 +1,20 @@
+package rules.Preupdate.ClaimPreupdate_dir.CPU04000SITriggers_dir
+
+@gw.rules.RuleName("CPU04100 - SIU Life Cycle Stage 1")
+internal class CPU04100SIULifeCycleStage1 {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.SIULifeCycleState == TC_STEP1
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+//Run Child Rules
+/*end00rule*/
+
+  }
+}

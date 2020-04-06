@@ -1,0 +1,13 @@
+package rules.Closed
+
+@gw.rules.RuleName("Matter Closed")
+@gw.rules.RuleSetDescription("This is the Matter Closed rule set. These rules execute after a matter has been closed, after Matter Closed Validation rules but before preupdate and validation rules, in order to take automated actions on close.")
+class MatterClosed extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Matter) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Matter) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Matter Closed", MatterClosed )
+  }
+}

@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="SegmentConditionsLV">
+    <Require
+      name="classification"
+      type="WorkloadClassification"/>
+    <ExposeIterator
+      valueType="SegmentConditionFilter"
+      widget="SegmentConditionsLV"/>
+    <RowIterator
+      editable="true"
+      elementName="segment"
+      hideCheckBoxesIfReadOnly="true"
+      toAdd="classification.SegmentCondition.addToConditionFilters(segment)"
+      toRemove="classification.SegmentCondition.removeFromConditionFilters(segment)"
+      value="classification.SegmentCondition.ConditionFilters"
+      valueType="entity.SegmentConditionFilter[]">
+      <Row>
+        <RangeCell
+          editable="true"
+          id="SegmentType"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.SegmentType&quot;)"
+          required="true"
+          value="segment.Segment"
+          valueRange="getValidClaimSegmentRange(classification.ClaimLossType)"
+          valueType="typekey.ClaimSegment">
+          <PostOnChange/>
+        </RangeCell>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function getValidClaimSegmentRange(lossType : LossType) : java.util.List<ClaimSegment> {
+  var codes = ClaimSegment.getTypeKeys(false)
+  if (lossType != null) {
+    codes = codes.where(\ claimSegment ->claimSegment.hasCategory(lossType))
+  }
+  return codes
+}]]></Code>
+  </ListViewPanel>
+</PCF>

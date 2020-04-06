@@ -1,0 +1,178 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    alternateEntryStyle="false"
+    editable="true"
+    id="ReinsuranceSummaryLV">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Row
+      renderAsSmartHeader="true"
+      useTitleStyle="true">
+      <TextCell
+        id="AgreementHeaderRow2"
+        value="DisplayKey.get(&quot;Web.Claim.Reinsurance.ReinsuranceSummary.AgreementHeader&quot;)"/>
+      <TextCell
+        id="ShareHeaderRow2"
+        value="DisplayKey.get(&quot;Web.Claim.Reinsurance.ReinsuranceSummary.ShareHeader&quot;)"
+        width="175"
+        wrapLabel="true"/>
+      <TextCell
+        id="ExceedsNotThresholdHeaderRow2"
+        value="DisplayKey.get(&quot;Web.Claim.Reinsurance.ReinsuranceSummary.ExceedsNotThresholdHeader&quot;)"
+        width="200"/>
+      <TextCell
+        id="PaymentRecoverableHeaderRow2"
+        value="DisplayKey.get(&quot;Web.Claim.Reinsurance.ReinsuranceSummary.PaymentRecoverableHeader&quot;)"/>
+      <TextCell
+        id="CededReservesHeaderRow2"
+        value="DisplayKey.get(&quot;Web.Claim.Reinsurance.ReinsuranceSummary.OpenCededReservesHeader&quot;)"/>
+      <TextCell
+        id="EditAdjustmentsHeaderRow2"
+        visible="hasAdjustments()"/>
+    </Row>
+    <RowIterator
+      editable="true"
+      elementName="agreementGroup"
+      id="AgreementGroup"
+      value="claim.RIAgreementGroups.sortBy(\ r -&gt; r.PublicID)"
+      valueType="entity.RIAgreementGroup[]">
+      <Row
+        useTitleStyle="true">
+        <TextCell
+          colspan="6"
+          id="GroupDescription"
+          value="agreementGroup.AgreementGroupSummaryString"/>
+      </Row>
+      <Row>
+        <TextCell
+          bold="true"
+          id="Label"
+          value="agreementGroup.RiskName "
+          wrap="true"/>
+        <TextCell
+          align="center"
+          bold="true"
+          format="&quot;#.######'%'&quot;"
+          id="PropShareHeader"
+          value="agreementGroup.ProportionalShare"
+          valueType="java.math.BigDecimal"/>
+        <EmptyCell
+          align="center"
+          bold="true"
+          id="ExceedsNotThreshHeader"/>
+        <CurrencyCell
+          align="center"
+          bold="true"
+          id="PaymentRecovHeader"
+          value="gw.api.financials.FinancialsCalculations.getRITotalRecoverables().withClaim(claim).withRIAgreementGroup(agreementGroup).Amount"/>
+        <CurrencyCell
+          align="center"
+          bold="true"
+          id="CededReservesHeader"
+          value="gw.api.financials.FinancialsCalculations.getRIOpenCededReserves().withClaim(claim).withRIAgreementGroup(agreementGroup).Amount"/>
+        <EmptyCell
+          bold="true"
+          id="EditAdjustmentsHeaderRow"
+          visible="hasAdjustments()"/>
+      </Row>
+      <RowIterator
+        canPick="false"
+        editable="true"
+        elementName="agreement"
+        id="Agreement"
+        pageSize="0"
+        value="agreementGroup.Agreements"
+        valueType="entity.RIAgreement[]"
+        visible="true">
+        <IteratorSort
+          sortBy="agreement.Subtype.Priority"
+          sortOrder="1"/>
+        <ToolbarFlag
+          name="Row"/>
+        <IteratorSort
+          sortBy="agreement.AttachmentPoint"
+          sortOrder="2"/>
+        <Row>
+          <FormatCell
+            id="agreementCell"
+            sortOrder="1"
+            wrap="true">
+            <ContentInput>
+              <Link
+                action="pcf.ReinsuranceAgreementDetails.push(agreement, claim)"
+                id="Agreement"
+                label="agreement.AgreementName"/>
+            </ContentInput>
+            <TextInput
+              id="AgreementDesc"
+              value="getAgreementDescription(agreement)"/>
+          </FormatCell>
+          <TextCell
+            align="center"
+            format="&quot;#.######'%'&quot;"
+            id="ProportionalShare"
+            value="agreement.ProportionalShare"
+            valueType="java.math.BigDecimal"/>
+          <BooleanRadioCell
+            align="center"
+            id="ExceedsNotificationThreshold"
+            value="agreement.ExceedsNotificationThreshold"/>
+          <CurrencyCell
+            align="center"
+            id="PaymentRecoverable"
+            value="gw.api.financials.FinancialsCalculations.getRITotalRecoverables().withClaim(claim).withRIAgreement(agreement).Amount"/>
+          <CurrencyCell
+            align="center"
+            id="CededReserves"
+            value="gw.api.financials.FinancialsCalculations.getRIOpenCededReserves().withClaim(claim).withRIAgreement(agreement).Amount"/>
+          <ButtonCell
+            action="pcf.AdjustRIRecoverablesPopup.push(agreement, claim)"
+            id="EditAdjustments"
+            value="DisplayKey.get(&quot;Button.Edit&quot;)"
+            visible="hasAdjustments()"/>
+        </Row>
+      </RowIterator>
+    </RowIterator>
+    <Row
+      useTitleStyle="true">
+      <TextCell
+        bold="true"
+        id="LabelFooter"
+        value="DisplayKey.get(&quot;Web.Claim.Reinsurance.ReinsuranceSummary.LVTotal&quot;)"/>
+      <EmptyCell
+        id="PropShareFooter"/>
+      <EmptyCell
+        id="ExceedsNotThreshFooter"/>
+      <CurrencyCell
+        align="center"
+        bold="true"
+        id="PaymentRecovFooter"
+        value="gw.api.financials.FinancialsCalculations.getRITotalRecoverables().withClaim(claim).Amount"/>
+      <CurrencyCell
+        align="center"
+        bold="true"
+        id="CededReservesFooter"
+        value="gw.api.financials.FinancialsCalculations.getRIOpenCededReserves().withClaim(claim).Amount"/>
+      <EmptyCell
+        id="EditButtonColumnFooter"/>
+    </Row>
+    <Code><![CDATA[uses gw.api.util.CurrencyUtil
+
+function getAgreementDescription (agreement : RIAgreement) : String {
+  if (agreement typeis entity.NonProportionalRIAgreement) {
+    return DisplayKey.get("Web.Claim.Reinsurance.ReinsuranceSummary.AttachmentPoint") + CurrencyUtil.renderAsCurrency(agreement.AttachmentPoint)
+           + "  "
+           + DisplayKey.get("Web.Claim.Reinsurance.ReinsuranceSummary.TopOfLayer") + CurrencyUtil.renderAsCurrency(agreement.TopOfLayer)
+  }
+  return ""
+}
+
+function hasAdjustments () : boolean {
+  return true;
+}]]></Code>
+  </ListViewPanel>
+</PCF>

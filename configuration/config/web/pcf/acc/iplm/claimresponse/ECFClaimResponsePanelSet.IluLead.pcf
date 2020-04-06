@@ -1,0 +1,95 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="ECFClaimResponsePanelSet"
+    mode="IluLead">
+    <Require
+      name="ecfClaimData"
+      type="ECFMessageClaimData_Ext"/>
+    <Require
+      name="claimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <PanelRow>
+      <PanelColumn>
+        <DetailViewPanel>
+          <InputColumn>
+            <InputSetRef
+              def="MessageBeingRespondedToInputSet(ecfClaimData)"/>
+            <InputDivider/>
+            <InputSetRef
+              def="InsurerTransactionReferenceInputSet(claimResponseRq)"/>
+            <InputDivider/>
+            <InputSetRef
+              def="LeadContactDetailsInputSet(claimResponseRq)"
+              editable="true"/>
+            <InputDivider/>
+            <InputSet>
+              <Label
+                id="responseDetailsLabel"
+                label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ResponseDetails&quot;)"/>
+              <RangeInput
+                desc="passed in wb:ClaimResponseRq/wb:ContractSection/JvClassOfBusiness"
+                editable="true"
+                id="classOfBusiness"
+                label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ClassOfBusiness&quot;)"
+                required="claimResponseRq.ClassOfBusinessRequired"
+                value="claimResponseRq.ClassOfBusiness"
+                valueRange="ECFClassOfBusiness_Ext.TF_ILU.TypeKeys"
+                valueType="ECFClassOfBusiness_Ext"/>
+              <CheckBoxInput
+                desc="passed in wb:ClaimResponseRq/wb:Claim/wb:Indicators/wb:CedantInLiquidationIndicator"
+                editable="true"
+                id="cedantIndicator"
+                label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.CedantInLiquidation&quot;)"
+                value="claimResponseRq.CedantInLiquidationIndicatorBoolean">
+              </CheckBoxInput>
+              <CheckBoxInput
+                desc="passed in wb:ClaimResponseRq/wb:Claim/wb:Indicators/wb:SimultaneousRIPIndicator"
+                editable="true"
+                id="simultaneousRIPIndicator"
+                label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.SimultaneousRIP&quot;)"
+                value="claimResponseRq.SimultaneousRIPIndicatorBoolean"/>
+              <CheckBoxInput
+                desc="passed in wb:ClaimResponseRq/wb:Claim/wb:Indicators/wb:ChaseUpIndicator/wb:Indicator"
+                editable="true"
+                id="chaseUpIndicator"
+                label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ChaseUpRequired&quot;)"
+                value="claimResponseRq.ChaseUpIndicatorBoolean">
+                <PostOnChange
+                  target="chaseUpPeriodMonths"/>
+              </CheckBoxInput>
+              <RangeInput
+                desc="passed in wb:ClaimResponseRq/wb:Claim/wb:Indicators/wb:ChaseUpIndicator/wb:Interval"
+                editable="true"
+                id="chaseUpPeriodMonths"
+                visible="claimResponseRq.ChaseUpIndicatorBoolean"
+                label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ChaseUpPeriodMonths&quot;)"
+                required="true"
+                value="claimResponseRq.ChaseUpIndicatorIntervalInteger"
+                valueRange="gw.acc.iplm.utils.ECFConstants.CHASE_UP_PERIOD_MONTHS"
+                valueType="java.lang.Integer"/>
+            </InputSet>
+            <InputDivider/>
+            <InputSetRef
+              def="PublicCommentsInputSet(claimResponseRq)"/>
+            <InputDivider/>
+            <InputSetRef
+              def="PrivateCommentsInputSet(claimResponseRq)"/>
+          </InputColumn>
+          <InputColumn>
+            <InputSet>
+              <InputSetRef
+                def="ResponseInputSet(claimResponseRq, false)"/>
+            </InputSet>
+            <InputSetRef
+              def="ClaimParticipantRolesInputSet(claimResponseRq)"/>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelColumn>
+    </PanelRow>
+    <PanelRef
+      def="LeadFinancialsAndBulkClaimPR(ecfClaimData, claimResponseRq)"/>
+  </PanelSet>
+</PCF>

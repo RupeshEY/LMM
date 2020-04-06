@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="perm.ActivityPattern.edit"
+    canVisit="perm.ActivityPattern.view"
+    id="ActivityPatternDetail"
+    parent="ActivityPatterns()"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.Admin.ActivityPatternDetail&quot;, ActivityPattern.Subject != null ? ActivityPattern.Subject : DisplayKey.get(&quot;Web.ActivityPattern.NoSubject&quot;))">
+    <LocationEntryPoint
+      signature="ActivityPatternDetail(ActivityPattern : ActivityPattern)"/>
+    <Variable
+      name="ActivityPattern"
+      type="ActivityPattern"/>
+    <ScreenRef
+      def="ActivityPatternDetailScreen(ActivityPattern)"/>
+  </Page>
+</PCF>

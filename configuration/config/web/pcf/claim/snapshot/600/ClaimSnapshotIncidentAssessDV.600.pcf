@@ -1,0 +1,206 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="ClaimSnapshotIncidentAssessDV"
+    mode="600">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="incidentParam"
+      type="dynamic.Dynamic"/>
+    <Require
+      name="snapshot"
+      type="dynamic.Dynamic"/>
+    <Variable
+      initialValue="incidentParam"
+      name="incident"
+      type="dynamic.Dynamic"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.Summary&quot;)"/>
+      <TextInput
+        id="Display_Name"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.Involving&quot;)"
+        value="incident.DisplayName"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="General_Description"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.Description&quot;)"
+        required="false"
+        value="incident.AssessmentName"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="Status"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.Status&quot;)"
+        required="false"
+        value="incident.AssessmentStatus"
+        valueType="dynamic.Dynamic">
+        <PostOnChange/>
+      </TextInput>
+      <DateInput
+        dateFormat="short"
+        id="TargetCloseDate"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.TargetCloseDate&quot;)"
+        value="incident.AssessmentTargetCloseDate"
+        valueType="dynamic.Dynamic"/>
+      <DateInput
+        dateFormat="short"
+        id="CloseDate"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.ActualCloseDate&quot;)"
+        required="true"
+        value="incident.AssessmentCloseDate"
+        valueType="dynamic.Dynamic"
+        visible=" incident.AssessmentStatus.Code == &quot;closed&quot; "/>
+    </InputColumn>
+    <InputColumn>
+      <TextInput
+        available="true"
+        id="InternalUser_Name"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.InternalUser&quot;)"
+        value="incident.InternalUser.DisplayName"
+        valueType="dynamic.Dynamic"/>
+      <TextInput
+        id="General_Comment"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.Comment&quot;)"
+        value="incident.AssessmentComment"
+        valueType="dynamic.Dynamic"/>
+      <CurrencyInput
+        formatType="currency"
+        id="ApproveTotal"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.ApprovedTotal&quot;)"
+        value="approvedTotal(incident.ItemLine)"/>
+      <CurrencyInput
+        formatType="currency"
+        id="ReviewTotal"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.ReviewTotal&quot;)"
+        value="reviewTotal(incident.ItemLine)"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputDivider/>
+      <ListViewInput
+        boldLabel="true"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.AssessmentSource&quot;)"
+        labelAbove="true">
+        <Toolbar/>
+        <ListViewPanel
+          id="IncidentAssessSourceLV">
+          <RowIterator
+            editable="false"
+            elementName="AssessmentSource"
+            hideCheckBoxesIfReadOnly="true"
+            value="incident.SourceLine"
+            valueType="dynamic.Dynamic">
+            <Row>
+              <TextCell
+                id="Name"
+                label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.AssessmentSource.Name&quot;)"
+                required="true"
+                value="AssessmentSource.SourceName"
+                valueType="dynamic.Dynamic"
+                width="100"/>
+              <TextCell
+                id="Source"
+                label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.AssessmentSource.SourceType&quot;)"
+                value="AssessmentSource.SourceType"
+                valueType="dynamic.Dynamic"/>
+              <ClaimContactCell
+                claim="AssessmentSource.Incident.Claim"
+                id="Assessor"
+                label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.AssessmentSource.ExtAssessor&quot;)"
+                value="AssessmentSource.Assessor"
+                valueRange="AssessmentSource.Incident.Claim.RelatedContacts"
+                valueType="dynamic.Dynamic"/>
+              <TextCell
+                id="Description"
+                label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.AssessmentSource.Description&quot;)"
+                value="AssessmentSource.Description"
+                valueType="dynamic.Dynamic"
+                width="200"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </ListViewInput>
+      <InputDivider/>
+      <ListViewInput
+        boldLabel="true"
+        label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.AssessmentLine&quot;)"
+        labelAbove="true">
+        <Toolbar/>
+        <ListViewPanel
+          id="IncidentAssessItemLV">
+          <RowIterator
+            editable="false"
+            elementName="assessmentItem"
+            hideCheckBoxesIfReadOnly="true"
+            value="incident.ItemLine"
+            valueType="dynamic.Dynamic">
+            <Row>
+              <TextCell
+                id="Category"
+                label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.AssessmentLine.Category&quot;)"
+                value="assessmentItem.PropertyCategory"
+                valueType="dynamic.Dynamic"/>
+              <TextCell
+                id="Description"
+                label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.AssessmentLine.Description&quot;)"
+                required="true"
+                value="assessmentItem.Description"
+                valueType="dynamic.Dynamic"
+                width="200"/>
+              <TextCell
+                id="Action"
+                label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.AssessmentLine.Action&quot;)"
+                value="assessmentItem.Action"
+                valueType="dynamic.Dynamic"/>
+              <TextCell
+                formatType="currency"
+                id="EstimateAmount"
+                label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.AssessmentLine.EstimateAmount&quot;)"
+                value="assessmentItem.EstimateAmount"
+                valueType="dynamic.Dynamic"
+                visible="true"/>
+              <TextCell
+                id="Comment"
+                label="DisplayKey.get(&quot;Web.ClaimSnapshot.ClaimSnapshotIncidentAssess.AssessmentLine.Comment&quot;)"
+                value="assessmentItem.ItemComment"
+                valueType="dynamic.Dynamic"
+                width="200"/>
+              <RangeCell
+                id="AssessmentSource"
+                label="DisplayKey.get(&quot;Web.Incident.Assessment.AssessmentLine.RelatedSource&quot;)"
+                value="assessmentItem.AssessmentSource"
+                valueRange="assessmentItem.Incident.SourceLine"
+                valueType="dynamic.Dynamic"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </ListViewInput>
+    </InputFooterSection>
+    <Code><![CDATA[function approvedTotal(itemLine : dynamic.Dynamic) : gw.api.financials.CurrencyAmount {
+  var TotalOfApproved: gw.api.financials.CurrencyAmount = gw.api.util.CCCurrencyUtil.getStrict(java.math.BigDecimal.ZERO, Claim.Currency)
+  for (aline in itemLine) {
+    if (aline.Action == "approve") {
+      if (aline.EstimateAmount != null) {
+        TotalOfApproved = TotalOfApproved + (aline.EstimateAmount as gw.api.financials.CurrencyAmount)
+      }
+    }
+  }
+  return TotalOfApproved;
+}
+
+function reviewTotal(itemLine : dynamic.Dynamic) : gw.api.financials.CurrencyAmount {
+  var TotalOfInReview: gw.api.financials.CurrencyAmount = gw.api.util.CCCurrencyUtil.getStrict(java.math.BigDecimal.ZERO, Claim.Currency)
+  for (aline in itemLine) {
+    if (aline.Action == "Review" or aline.Action == null) {
+      if (aline.EstimateAmount != null) {
+        TotalOfInReview = TotalOfInReview + (aline.EstimateAmount as gw.api.financials.CurrencyAmount)
+      }
+    }
+  }
+  return TotalOfInReview;
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

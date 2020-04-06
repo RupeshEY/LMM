@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- Worker's Comp embedded LV for work status information -->
+  <ListViewPanel
+    id="EditableWorkStatusChangesLV">
+    <ExposeIterator
+      valueType="entity.WorkStatus"
+      widget="EditableWorkStatusChangesLV"/>
+    <Require
+      name="EmploymentData"
+      type="EmploymentData"/>
+    <RowIterator
+      checkBoxVisible="true"
+      editable="true"
+      elementName="WorkStatus"
+      hideCheckBoxesIfReadOnly="true"
+      pageSize="3"
+      pickLocation="NewWorkStatusPopup.push(EmploymentData, verifyEmploymentDataExists())"
+      toAdd="EmploymentData.addToWorkStatusChanges( WorkStatus )"
+      toRemove="EmploymentData.removeFromWorkStatusChanges(WorkStatus)"
+      value="EmploymentData.WorkStatusChanges"
+      valueType="entity.WorkStatus[]">
+      <Row>
+        <DateCell
+          action="WorkStatusPopup.push(WorkStatus, CurrentLocation.InEditMode)"
+          id="Date"
+          label="DisplayKey.get(&quot;LV.Claim.WorkStatus.Claim.EmploymentData.WorkStatus.Date&quot;)"
+          value="WorkStatus.StatusDate"/>
+        <DateCell
+          id="EndDate"
+          label="DisplayKey.get(&quot;LV.Claim.WorkStatus.Claim.EmploymentData.WorkStatus.EndDate&quot;)"
+          value="WorkStatus.StatusEndDate"/>
+        <TypeKeyCell
+          id="Type"
+          label="DisplayKey.get(&quot;LV.Claim.WorkStatus.Claim.EmploymentData.WorkStatus.Type&quot;)"
+          required="true"
+          value="WorkStatus.Status"
+          valueType="typekey.WorkCapacity"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[
+function verifyEmploymentDataExists() : boolean {
+  if (EmploymentData == null) {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("NVV.Claim.SubView.LossDetailsWorkersComp.Claim.EmploymentData.Missing"))
+  } 
+  return true
+}
+      
+    ]]></Code>
+  </ListViewPanel>
+</PCF>

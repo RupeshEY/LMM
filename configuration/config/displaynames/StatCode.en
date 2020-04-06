@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<Entity
+  name="StatCode">
+  <Columns>
+    <Column
+      beanPath="StatCode.LineNumber"
+      name="lineNumber"
+      sortOrder="0"/>
+    <Column
+      beanPath="StatCode.InsuranceLine"
+      name="InsuranceLine"
+      sortOrder="none"/>
+    <Column
+      beanPath="StatCode.InsuranceSubLine"
+      name="InsuranceSubLine"
+      sortOrder="none"/>
+    <Column
+      beanPath="StatCode.BuildingNumber"
+      name="BuildingNumber"
+      sortOrder="none"/>
+    <Column
+      beanPath="StatCode.VehicleNumber"
+      name="VehicleNumber"
+      sortOrder="none"/>
+    <Column
+      beanPath="StatCode.LocationNumber"
+      name="LocationNumber"
+      sortOrder="none"/>
+    <Column
+      beanPath="StatCode.ClassCode"
+      name="ClassCode"
+      sortOrder="none"/>
+  </Columns>
+  <DisplayName><![CDATA[var sb = new java.lang.StringBuffer();
+
+      sb.append(lineNumber).append(". ").append(InsuranceLine).append(" / ").append(InsuranceSubLine).append(" (");
+      if (BuildingNumber != null and BuildingNumber.length() > 0) {
+        sb.append(BuildingNumber);
+      } else
+      if (VehicleNumber != null and VehicleNumber.length() > 0) {
+        sb.append(VehicleNumber);
+      } else
+      if (LocationNumber != null and LocationNumber.length() > 0) {
+        sb.append(LocationNumber);
+      } else
+      if (ClassCode != null and ClassCode.length() > 0) {
+        sb.append(ClassCode);
+      }
+      sb.append( ")");
+
+      return sb.toString();]]></DisplayName>
+</Entity>

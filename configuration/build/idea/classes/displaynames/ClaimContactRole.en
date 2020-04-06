@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<Entity
+  name="ClaimContactRole">
+  <Columns>
+    <Column
+      beanPath="ClaimContactRole.Role"
+      name="role"
+      sortOrder="1"/>
+    <Column
+      beanPath="ClaimContactRole.Active"
+      name="isActive"
+      sortOrder="2"/>
+  </Columns>
+  <DisplayName><![CDATA[var retString : String = role != null ? role.DisplayName : "";
+if (isActive == false) {
+  retString = retString + gw.api.locale.DisplayKey.get("Java.PeopleInvolved.Inactive");
+}
+return retString;]]></DisplayName>
+</Entity>

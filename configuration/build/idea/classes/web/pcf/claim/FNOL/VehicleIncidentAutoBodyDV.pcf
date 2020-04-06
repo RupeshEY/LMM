@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    editable="isEditableServiceRequest()"
+    id="VehicleIncidentAutoBodyDV">
+    <Require
+      name="repairServiceRequest"
+      type="ServiceRequest"/>
+    <Require
+      name="vehicleIncident"
+      type="VehicleIncident"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Variable
+      initialValue="gw.vendormanagement.SpecialistServiceCodeConstants.AUTOBODYREPAIR"
+      name="autoRepairServiceCode"
+      type="String"/>
+    <Variable
+      initialValue="repairServiceRequest != null"
+      name="autoRepairSelected"
+      type="boolean"/>
+    <InputColumn>
+      <InputGroup
+        allowToggle="isEditableServiceRequest()"
+        childrenVisible="autoRepairSelected"
+        id="AutobodyInputGroup"
+        label="HasCoverage ? DisplayKey.get(&quot;Web.VehicleIncidentAutoBodyDV.Autobody.ValueLabel&quot;) : DisplayKey.get(&quot;Web.VehicleIncidentAutoBodyDV.Autobody.LabelNoCoverage&quot;)"
+        onToggle="toggleServiceRequest(VALUE)">
+        <InputSet
+          visible="autoRepairSelected">
+          <InputIterator
+            elementName="coverage"
+            id="Coverages"
+            value="ApplicableCoverageTypes"
+            valueType="java.util.List&lt;typekey.CoverageType&gt;">
+            <TextInput
+              id="Coverage"
+              label="coverage.DisplayName"
+              value="getCoverageDescription(coverage)"/>
+          </InputIterator>
+          <ClaimContactInput
+            claim="vehicleIncident.Claim"
+            editable="true"
+            id="RepairShop"
+            label="DisplayKey.get(&quot;Web.VehicleIncidentDV.RepairShopPicker&quot;)"
+            newContactMenu="ClaimNewRepairShopOnlyPickerMenuItemSet"
+            required="true"
+            specialistServices="{SpecialistService.getForCode(autoRepairServiceCode)}"
+            value="repairServiceRequest.SpecialistAndCreateClaimContact"
+            valueRange="vehicleIncident.Claim.RelatedAutoRepairShopArray">
+            <PostOnChange
+              target="OtherServiceRequestInfo"/>
+          </ClaimContactInput>
+          <InputSet
+            id="OtherServiceRequestInfo"
+            visible="repairServiceRequest.Specialist != null">
+            <TextInput
+              id="RepairShopAddress"
+              label="DisplayKey.get(&quot;Web.Address.Default.Name&quot;)"
+              value="repairServiceRequest.Specialist.PrimaryAddress"
+              valueType="entity.Address"/>
+            <TextInput
+              id="RepairShopPhone"
+              label="DisplayKey.get(&quot;Web.VehicleIncidentDV.RepairShopPhone&quot;)"
+              value="repairServiceRequest.Specialist.PrimaryPhoneValue"/>
+            <InputSetRef
+              def="NewServiceRequestInstructionInputSet(repairServiceRequest, null, null)"
+              mode="&quot;default&quot;"/>
+          </InputSet>
+        </InputSet>
+      </InputGroup>
+    </InputColumn>
+    <Code><![CDATA[uses java.util.List
+
+function getCoverageDescription(coverageType : CoverageType) : String {
+  var coverageDescription = vehicleIncident.getCoverageDescription(coverageType)
+  return coverageDescription == null ? DisplayKey.get("Web.VehicleIncidentAutoBodyDV.NoCoverage") : coverageDescription
+}
+
+property get ApplicableCoverageTypes() : java.util.List<CoverageType> {
+  if(vehicleIncident.VehicleLossParty == LossPartyType.TC_INSURED) {
+    return {vehicleIncident.Claim.Policy.CollisionCoverageType,
+            vehicleIncident.Claim.Policy.ComprehensiveCoverageType}
+  }
+  else {
+    return {vehicleIncident.Claim.Policy.AutoBodilyInjuryCoverageType}
+  }
+}
+
+property get HasCoverage() : boolean {
+  return ApplicableCoverageTypes.hasMatch( \ covType -> getCoverageDescription(covType) != DisplayKey.get("Web.VehicleIncidentAutoBodyDV.NoCoverage") ) 
+}
+
+function isEditableServiceRequest() : boolean {
+  return repairServiceRequest == null or repairServiceRequest.IsEditableInUI
+}
+
+function toggleServiceRequest(checkboxValue : boolean) {
+  if (repairServiceRequest == null) {
+    if (checkboxValue) {
+      repairServiceRequest = vehicleIncident.Claim.newServiceRequest(vehicleIncident.Claim.maincontact, vehicleIncident)
+      repairServiceRequest.Instruction.addServiceFoundByCode(autoRepairServiceCode)
+      repairServiceRequest.Kind = ServiceRequestKind.TC_QUOTEANDSERVICE
+    }
+  } else {
+    if (not checkboxValue) {
+      unusedServiceRequests.add(repairServiceRequest)
+    } else {
+      unusedServiceRequests.remove(repairServiceRequest)
+    }
+  }
+  vehicleIncident.BodyShopSelected = checkboxValue
+  autoRepairSelected = checkboxValue
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

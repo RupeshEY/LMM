@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.Claim.genericviewclaim and perm.System.viewsearch"
+    countsAsWork="false"
+    id="ClaimSearch"
+    title="DisplayKey.get(&quot;JSP.ClaimSearch.Search.ClaimSearch&quot;)">
+    <LocationEntryPoint
+      signature="ClaimSearch()"/>
+    <LocationEntryPoint
+      signature="ClaimSearch(ErrorMessage : String)"/>
+    <Variable
+      name="ErrorMessage"
+      type="String"/>
+    <Variable
+      initialValue="populateErrorMessage()"
+      name="CheckedErrorMessage"
+      recalculateOnRefresh="true"
+      type="java.lang.String"/>
+    <ScreenRef
+      def="ClaimSearchScreen(isArchivingAvailable())"/>
+    <Code><![CDATA[
+      function populateErrorMessage() : String{
+        if(ErrorMessage != null) {
+          gw.api.util.LocationUtil.addRequestScopedErrorMessage(ErrorMessage)
+        }
+        return ErrorMessage
+      }
+
+      function isArchivingAvailable() : boolean {
+        return gw.api.claim.ClaimUtil.isArchivingEnabled() and gw.api.claim.ClaimUtil.isArchivingAvailable()
+      }
+    ]]></Code>
+  </Page>
+</PCF>

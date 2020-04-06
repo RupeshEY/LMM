@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  entity="BulkInvoiceSearchCriteria">
+  <implementsInterface
+    iface="gw.cc.financials.bulkpay.entity.BulkInvoiceSearchCriteria"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceSearchCriteriaImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceSearchCriteriaInternal"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceSearchCriteriaImpl"/>
+  <implementsInterface
+    iface="java.io.Serializable"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceSearchCriteriaImpl"/>
+  <fulldescription><![CDATA[
+      Encapsulates the search criteria for a Bulk Invoice search. The system does not store BulkInvoiceSearchCriteria
+      entities; they only exist for a search and are discarded after use.
+      
+    ]]></fulldescription>
+  <column
+    desc="Match by claim number."
+    name="ClaimNumber"
+    nullok="true"
+    type="claimnumber"/>
+  <column
+    desc="Match by invoice number."
+    name="InvoiceNumber"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    columnName="NameCriteriaID"
+    fkentity="CCNameCriteria"
+    name="NameCriteria"
+    nullok="false"/>
+  <column
+    desc="Match by check number."
+    name="CheckNumber"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    columnName="FinancialCriterionID"
+    fkentity="FinancialCriterionMC"
+    name="FinancialCriterion"
+    nullok="false"/>
+  <column
+    desc="Match by PayTo."
+    name="PayTo"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    columnName="DateCriterionChoiceID"
+    fkentity="DateCriterionChoice"
+    name="DateCriterionChoice"
+    nullok="false"/>
+</nonPersistentEntity>

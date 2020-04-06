@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Page
+    id="ActivityRuleExportImportStatus"
+    parent="ActivityRules()"
+    showUpLink="true"
+    title="DisplayKey.get('BizRules.RuleExportImportStatusScreen.Title')">
+    <ScreenRef
+      def="RuleExportImportStatusScreen(gw.bizrules.ActivityRulesNavigationSupport.Instance)"/>
+  </Page>
+</PCF>

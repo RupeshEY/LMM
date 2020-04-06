@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Queue of biz rules validation to run. This is a system-internal entity."
+  entity="BizRulesValidatorWorkItem"
+  extendable="false"
+  loadable="false"
+  platform="true"
+  table="validatorworkitem"
+  type="keyable">
+  <implementsEntity
+    name="WorkItem"/>
+  <column
+    desc="A reference to the Rule entity to be validated"
+    name="RuleID"
+    nullok="false"
+    type="softentityreference"/>
+</entity>

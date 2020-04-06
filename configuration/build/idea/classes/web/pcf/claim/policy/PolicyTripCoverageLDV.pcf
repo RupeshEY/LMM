@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListDetailPanel
+    id="PolicyTripCoverageLDV"
+    selectionName="coverage"
+    selectionType="Coverage">
+    <Require
+      name="aTripRU"
+      type="TripRU"/>
+    <PanelRef
+      def="EditableTripCoveragesLV(aTripRU)"
+      editable="true">
+      <TitleBar
+        subtitle="DisplayKey.get(&quot;Web.ClaimPolicy.Trips.Coverages.Subtitle&quot;)"
+        title="DisplayKey.get(&quot;Web.ClaimPolicy.Trips.Coverages&quot;)"
+        visible="coverage != null"/>
+      <Toolbar>
+        <IteratorButtons
+          iterator="EditableTripCoveragesLV.EditableTripCoveragesLV"/>
+      </Toolbar>
+    </PanelRef>
+    <PanelRef
+      def="ClaimPolicyCovTermsCV(coverage)"
+      editable="true"/>
+  </ListDetailPanel>
+</PCF>

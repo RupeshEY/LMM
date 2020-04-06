@@ -1,0 +1,49 @@
+package rules.Validation.ServiceRequestValidationRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.cc.vendormanagement.entity.ServiceRequestChange
+uses gw.api.vendormanagement.ServiceRequestChangePropertySet
+uses gw.entity.IEntityPropertyInfo
+uses java.util.HashMap
+uses gw.api.upgrade.Coercions
+
+@gw.rules.RuleName("SRVR01000 - Service Request History")
+internal class SRVR01000ServiceRequestHistory {
+  static function doCondition(serviceRequest  :  entity.ServiceRequest) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(serviceRequest  :  entity.ServiceRequest, actions : gw.rules.Action) {
+/*start00rule*/
+var changedFields = ServiceRequestChangePropertySet.getAll()
+var currentHistoryValueByProperty = new HashMap<IEntityPropertyInfo, Object>()
+for(srChange in serviceRequest.OrderedHistory index i) {
+  for(changeFieldSet in changedFields) {
+    var fieldChanged = Coercions.makePBooleanFrom(srChange.getFieldValue(changeFieldSet.valueChangedChangeProp))
+    //The change indicates that this field was modified, we will validate that it actually was.
+    if(fieldChanged) {
+      //We don't validate the first change, since it records all initial values as changes.
+      if(i != 0) {
+        //Check to make sure the field actually changed.
+        if(currentHistoryValueByProperty[changeFieldSet.newValueChangeProp] == srChange.getFieldValue(changeFieldSet.newValueChangeProp)) {
+          serviceRequest.rejectSubField(srChange, changeFieldSet.newValueChangeProp.Name, TC_LOADSAVE,
+            DisplayKey.get("Rules.Validation.ServiceRequest.FalseChange", changeFieldSet.serviceRequestProp.DisplayName), null, null)
+        }
+      }
+      //Store what the value changed to.
+      currentHistoryValueByProperty[changeFieldSet.newValueChangeProp] = srChange.getFieldValue(changeFieldSet.newValueChangeProp)
+    }
+  }
+}
+
+for(changeFieldSet in changedFields) {
+  if(currentHistoryValueByProperty[changeFieldSet.newValueChangeProp] != serviceRequest.getFieldValue(changeFieldSet.serviceRequestProp)) {
+    //The latest change value does not match the ServiceRequest's current value.
+    serviceRequest.rejectField(changeFieldSet.serviceRequestProp as String, TC_LOADSAVE,
+    DisplayKey.get("Rules.Validation.ServiceRequest.MissingChange", changeFieldSet.serviceRequestProp.DisplayName), null, null)
+  }
+} 
+/*end00rule*/
+  }
+}

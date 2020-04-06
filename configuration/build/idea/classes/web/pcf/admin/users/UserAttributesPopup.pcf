@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    id="UserAttributesPopup"
+    returnType="Attribute[]"
+    title="DisplayKey.get(&quot;JSP.AttributeSearch.Title&quot;)">
+    <Screen
+      id="UserAttributesPopupScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="UserAttributesPopup_CancelButton"
+          label="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          shortcut="L"/>
+      </Toolbar>
+      <SearchPanel
+        criteriaName="SearchCriteria"
+        resultsName="SearchResult"
+        search="SearchCriteria.performSearch() as gw.api.database.IQueryBeanResult&lt;Attribute&gt;"
+        searchCriteria="new gw.api.admin.AttributeSearchCriteria()"
+        searchCriteriaType="gw.api.admin.AttributeSearchCriteria"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;Attribute&gt;">
+        <PanelRef
+          def="UserAttributesSearchDV(SearchCriteria)"/>
+        <PanelRef
+          def="UserAttributesSearchLV(SearchResult)">
+          <Toolbar>
+            <CheckedValuesToolbarButton
+              id="UserAttributesPopup_SelectButton"
+              iterator="UserAttributesSearchLV.UserAttributesSearchLV"
+              label="DisplayKey.get(&quot;Button.Select&quot;)"
+              pickValue="CheckedValues"/>
+          </Toolbar>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Popup>
+</PCF>

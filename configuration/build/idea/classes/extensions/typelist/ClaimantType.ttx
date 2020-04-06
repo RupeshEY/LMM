@@ -1,0 +1,186 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Categorizes claimant relative to the policyholder"
+  name="ClaimantType">
+  <typecode
+    code="insured"
+    desc="Insured"
+    name="Insured"
+    priority="1">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+    <category
+      code="TRAV"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="householdmember"
+    desc="Member of the insured's household"
+    name="Member of the insured's household"
+    priority="2">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="TRAV"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="veh_ins_driver"
+    desc="Driver of insured's vehicle (not insured or household member)"
+    name="Driver of insured's vehicle (not insured or household member)"
+    priority="3">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="veh_other_owner"
+    desc="Owner of other vehicle"
+    name="Owner of other vehicle"
+    priority="4">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="veh_other_driver"
+    desc="Driver of other vehicle"
+    name="Driver of other vehicle"
+    priority="5">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="veh_ins_occupant"
+    desc="Occupant of insured's vehicle"
+    name="Occupant of insured's vehicle"
+    priority="6">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="veh_other_occ"
+    desc="Occupant of other vehicle"
+    name="Occupant of other vehicle"
+    priority="7">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="bystander"
+    desc="Pedestrian or bystander"
+    name="Pedestrian or bystander"
+    priority="8">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="propertyowner"
+    desc="Owner of the lost/damaged property"
+    name="Owner of the lost/damaged property"
+    priority="9">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="customer"
+    desc="Customer"
+    name="Customer"
+    priority="10">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="employee"
+    desc="Employee"
+    name="Employee"
+    priority="11">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="contractor"
+    desc="Contractor"
+    name="Contractor"
+    priority="12">
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="subcontractor"
+    desc="Subcontractor"
+    name="Subcontractor"
+    priority="13">
+    <category
+      code="WC"
+      typelist="LossType"/>
+  </typecode>
+  <typecode
+    code="other"
+    desc="Other third party"
+    name="Other third party"
+    priority="14">
+    <category
+      code="AUTO"
+      typelist="LossType"/>
+    <category
+      code="PR"
+      typelist="LossType"/>
+    <category
+      code="GL"
+      typelist="LossType"/>
+    <category
+      code="WC"
+      typelist="LossType"/>
+    <category
+      code="TRAV"
+      typelist="LossType"/>
+  </typecode>
+</typelistextension>

@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Activity.reviewassignment and perm.System.viewdesktop"
+    id="DesktopAwaitingAssignment"
+    title="DisplayKey.get(&quot;Web.DesktopAwaitingAssignment&quot;)">
+    <LocationEntryPoint
+      signature="DesktopAwaitingAssignment()"/>
+    <Variable
+      initialValue="Activity.finder.getAllActivityAwaitingAssignmentViews()"
+      name="ActivityUnassignedViewList"
+      recalculateOnRefresh="true"
+      type="gw.api.database.IQueryBeanResult&lt;entity.ActivityUnassignedView&gt;"/>
+    <Variable
+      initialValue="&quot;DesktopAwaitingAssignmentLV&quot;"
+      name="PrintTargetLV"
+      type="String"/>
+    <Screen
+      id="DesktopAwaitingAssignmentScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.DesktopAwaitingAssignment&quot;)"/>
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="gw.api.assignment.AssignmentUtil.assignUnassignedViews(CurrentLocation, CheckedValues)"
+          default="true"
+          flags="any ActivityUnassignedView"
+          id="DesktopAwaitingAssignment_AssignButton"
+          iterator="DesktopAwaitingAssignmentLV.DesktopAwaitingAssignmentLV"
+          label="DisplayKey.get(&quot;Web.DesktopAwaitingAssignment.Toolbar.Assign&quot;)"
+          shortcut="G"/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="AssignActivitiesPopup.push(new gw.api.activity.ActivityAssignmentPopup(CheckedValues))"
+          flags="any ActivityUnassignedView"
+          id="DesktopAwaitingAssignment_ReassignButton"
+          iterator="DesktopAwaitingAssignmentLV.DesktopAwaitingAssignmentLV"
+          label="DisplayKey.get(&quot;Web.DesktopAwaitingAssignment.Toolbar.Reassign&quot;)"
+          shortcut="Y"/>
+        <ToolbarDivider/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="gw.api.print.ListViewPrintOptionPopupAction.printListViewWithOptions(PrintTargetLV)"
+          available="perm.User.printlistviews"
+          id="DesktopAwaitingAssignment_PrintButton"
+          label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="DesktopAwaitingAssignmentLV(ActivityUnassignedViewList)"/>
+    </Screen>
+  </Page>
+</PCF>

@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    id="RuleExportAllConfirmationPopup"
+    title="DisplayKey.get('BizRules.RuleExportAllConfirmationPopup.Title')">
+    <LocationEntryPoint
+      signature="RuleExportAllConfirmationPopup(helper: gw.bizrules.pcf.RuleExportPageHelper)"/>
+    <Variable
+      name="helper"
+      type="gw.bizrules.pcf.RuleExportPageHelper"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="helper.exportAllRulesToFileNoConfirm()"
+          id="Continue"
+          label="DisplayKey.get('BizRules.RuleExportAllConfirmationPopup.ContinueExport')"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="Cancel"
+          label="DisplayKey.get('Button.Cancel')"/>
+      </Toolbar>
+      <PanelRef
+        def="ExportExclusionsPanelSet(helper.NavigationSupport, helper.NoDeployedDrafts, DisplayKey.get('BizRules.RuleExportAllConfirmationPopup.NoDeployedDraftsTitle'), false, false)"
+        id="NoDeployedDrafts">
+        <Toolbar/>
+      </PanelRef>
+      <PanelRef
+        def="ExportExclusionsPanelSet(helper.NavigationSupport, helper.PreviouslyDeployedDrafts, DisplayKey.get('BizRules.RuleExportAllConfirmationPopup.PreviouslyDeployedDraftsTitle'), true, true)"
+        id="PreviouslyDeployedDrafts">
+        <Toolbar/>
+      </PanelRef>
+      <PanelRef
+        def="ExportExclusionsPanelSet(helper.NavigationSupport, helper.DraftsWithDeploymentUncertainty, DisplayKey.get('BizRules.RuleExportAllConfirmationPopup.DraftsWithDeploymentUncertaintyTitle'), true, false)"
+        id="DraftsWithDeploymentUncertainty">
+        <Toolbar/>
+      </PanelRef>
+    </Screen>
+  </Popup>
+</PCF>

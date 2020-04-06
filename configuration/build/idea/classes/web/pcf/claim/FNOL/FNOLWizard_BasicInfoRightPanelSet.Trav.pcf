@@ -1,0 +1,110 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="FNOLWizard_BasicInfoRightPanelSet"
+    mode="Trav">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Variable
+      initialValue="Claim.Policy.RiskUnits.whereTypeIs(TripRU)"
+      name="Trips"
+      recalculateOnRefresh="true"
+      type="entity.TripRU[]"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <Label
+          label="DisplayKey.get(&quot;Web.BasicInfoScreen.TripPanelColumn.InvolvedTripLabel&quot;)"/>
+        <Label
+          id="NoTripsFound"
+          label="DisplayKey.get(&quot;Web.BasicInfoScreen.TripPanelColumn.NoTripsFound&quot;)"
+          visible="Trips.length &lt; 1"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <PanelSet>
+      <Layout
+        columns="1"
+        type="table"/>
+      <PanelIterator
+        elementName="Trip"
+        id="TripIterator"
+        value="Claim.Policy.RiskUnits.whereTypeIs(TripRU)"
+        valueType="entity.TripRU[]">
+        <IteratorSort
+          sortBy="Trip.StartDate"
+          sortOrder="1"/>
+        <DetailViewPanel
+          id="TripIncidentDV"
+          inline="true"
+          visible="Trips.length &gt; 0">
+          <InputColumn>
+            <TextInput
+              boldValue="true"
+              id="Trip"
+              labelAbove="true"
+              value="Trip.DisplayName"/>
+            <TypeKeyInput
+              id="GeographicalRegion"
+              label="DisplayKey.get(&quot;Web.BasicInfoScreen.TripPanelColumn.GeographicalRegion&quot;)"
+              value="Trip.GeographicalRegion"
+              valueType="typekey.GeographicalRegion"
+              visible="Trip.GeographicalRegion != null"/>
+            <Label
+              label="DisplayKey.get(&quot;Web.BasicInfoScreen.TripPanelColumn.TripCoverages&quot;)"
+              visible="Trip.Coverages.length &gt; 0"/>
+            <ListViewInput
+              id="TripCoveragesInput"
+              labelAbove="true"
+              visible="Trip.Coverages.length &gt; 0">
+              <Toolbar/>
+              <ListViewPanel
+                id="TripCoveragesLV">
+                <RowIterator
+                  editable="false"
+                  elementName="anRUCoverage"
+                  value="Trip.Coverages"
+                  valueType="entity.RUCoverage[]">
+                  <Row>
+                    <TextCell
+                      id="CoverageType"
+                      value="anRUCoverage.Type"
+                      valueType="typekey.CoverageType"
+                      wrap="true"/>
+                    <TextCell
+                      id="CoverageDetails"
+                      value="anRUCoverage.DetailsSummary"
+                      wrap="true"/>
+                  </Row>
+                </RowIterator>
+              </ListViewPanel>
+            </ListViewInput>
+          </InputColumn>
+        </DetailViewPanel>
+        <PanelDivider
+          visible="Trips.length &gt; 1"/>
+      </PanelIterator>
+    </PanelSet>
+    <DetailViewPanel
+      visible="Claim.Policy.Coverages.length &gt; 0">
+      <InputColumn>
+        <Label
+          label="DisplayKey.get(&quot;Web.BasicInfoScreen.TripPanelColumn.PolicyCoverages&quot;)"/>
+        <InputIterator
+          elementName="coverage"
+          value="Claim.Policy.Coverages.sortBy(\ coverage -&gt; coverage.Type)"
+          valueType="entity.PolicyCoverage[]">
+          <Label/>
+          <TextInput
+            id="CoverageDetails"
+            label="coverage.Type"
+            value="coverage.DetailsSummary"/>
+        </InputIterator>
+      </InputColumn>
+    </DetailViewPanel>
+  </PanelSet>
+</PCF>

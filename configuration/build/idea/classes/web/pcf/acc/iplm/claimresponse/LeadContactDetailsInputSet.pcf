@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    editable="true"
+    id="LeadContactDetailsInputSet">
+    <Require
+      name="claimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <Label
+      id="referenceMessageLabel"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.LeadContactDetailsTitle&quot;)"/>
+    <TextInput
+      editable="true"
+      id="PersonName"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.LeadPersonName&quot;)"
+      maxChars="30"
+      required="true"
+      value="claimResponseRq.ContactName"/>
+    <TextInput
+      editable="true"
+      formatType="phoneNumber"
+      id="Telephone"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.LeadTelephone&quot;)"
+      maxChars="15"
+      regex="gw.acc.iplm.validation.util.ECFValidationConstants.PHONE_REGEX"
+      required="true"
+      value="claimResponseRq.ContactTelephone"/>
+    <TextInput
+      editable="true"
+      formatType="email"
+      id="Email"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.LeadEmail&quot;)"
+      maxChars="60"
+      regex="gw.acc.iplm.validation.util.ECFValidationConstants.EMAIL_REGEX"
+      required="false"
+      value="claimResponseRq.ContactEmail"
+      visible="claimResponseRq.BureauType != ECFBureauType_Ext.TC_LIRMA"/>
+  </InputSet>
+</PCF>

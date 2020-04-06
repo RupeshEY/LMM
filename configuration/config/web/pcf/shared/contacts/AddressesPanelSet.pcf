@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    desc="Provides a reusable panel displaying a Contact's Addresses in a ListDetailPanel."
+    id="AddressesPanelSet">
+    <!-- NOTE: This shared section requires a gw.api.contact.ContactHandle, rather than a Contact, because it's
+    possible for some actions on a contact detail screen to fundamentally change the contact. In particular, syncing
+    a contact that leads to a downcast of that contact to a more specific subtype causes the original contact to
+    become invalid. To protect against this, contacts on shared sections should be wrapped in a ContactHandle. If the
+    contact is fundamentally changed, then only the handle needs to be updated, and all existing references will see
+    the new contact.
+
+    As a shortcut for "contactHandle.Contact", this shared section defines a read-only property which can be used to
+    access the most current value of the contact. -->
+    <Require
+      name="contactHandle"
+      type="gw.api.contact.ContactHandle"/>
+    <ListDetailPanel
+      selectionName="selectedAddress"
+      selectionType="Address">
+      <PanelRef
+        def="AddressesLV(contactHandle)">
+        <Toolbar>
+          <IteratorButtons
+            iterator="AddressesLV.AddressesLV"/>
+        </Toolbar>
+      </PanelRef>
+      <CardViewPanel>
+        <Card
+          id="AddressDetailCard"
+          title="DisplayKey.get(&quot;Web.Contact.AddressDetail.Title&quot;)">
+          <DetailViewPanel>
+            <InputColumn>
+              <Label
+                label="DisplayKey.get(&quot;Web.Contact.AddressDetail.Title&quot;)"/>
+              <InputSetRef
+                def="CCAddressInputSet(new gw.api.address.AddressAddressOwner(selectedAddress){ :AlwaysShowSeparateFields = true })"/>
+            </InputColumn>
+          </DetailViewPanel>
+        </Card>
+      </CardViewPanel>
+    </ListDetailPanel>
+  </PanelSet>
+</PCF>

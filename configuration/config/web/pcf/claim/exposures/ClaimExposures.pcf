@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="Claim.ExposureListChangeable and perm.Claim.view(Claim) and perm.System.viewexposures and (Claim.State != ClaimState.TC_DRAFT)"
+    id="ClaimExposures"
+    title="DisplayKey.get(&quot;Web.Claim.ClaimExposures&quot;)">
+    <LocationEntryPoint
+      signature="ClaimExposures(Claim : Claim)"/>
+    <Variable
+      initialValue="new gw.api.exposure.ClaimExposuresHelper()"
+      name="PageHelper"
+      type="gw.api.exposure.ClaimExposuresHelper"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="&quot;ExposuresLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="createPrintSettings()"
+      name="PrintSettings"
+      type="gw.api.print.PrintSettings"/>
+    <Variable
+      initialValue="DisplayKey.get(&quot;Web.PrintOut.ClaimNumber&quot;, Claim.ClaimNumber)"
+      name="PrintClaimNumber"
+      type="String"/>
+    <Variable
+      initialValue="libraries.ISO.showSubmitInfoMessage()"
+      name="messageShown"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Screen
+      id="ClaimExposuresScreen">
+      <Toolbar>
+        <ToolbarDivider/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="AssignExposuresPopup.push(new gw.api.exposure.ExposureAssignmentPopup(CheckedValues))"
+          flags="all CanAssignExposure"
+          id="ClaimExposures_Assign"
+          iterator="ExposuresLV.ExposuresLV"
+          label="DisplayKey.get(&quot;Web.ClaimExposuresLV.Assign&quot;)"
+          shortcut="G"
+          visible="perm.Exposure.genericassign"/>
+        <ToolbarButton
+          action="null"
+          id="ClaimExposures_Refresh"
+          label="DisplayKey.get(&quot;Web.ClaimExposuresLV.Refresh&quot;)"
+          shortcut="F"/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="CloseExposurePopup.push(CheckedValues[0])"
+          flags="one CanCloseExposure"
+          id="ClaimExposures_CloseExposure"
+          iterator="ExposuresLV.ExposuresLV"
+          label="DisplayKey.get(&quot;Web.ClaimExposuresLV.CloseExposure&quot;)"
+          shortcut="P"
+          visible="perm.Claim.closeexposure(Claim)"/>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="NewReserveSet.go(Claim, CheckedValues[0], true)"
+          flags="one CanCreateReserve"
+          id="ClaimExposures_CreateReserve"
+          iterator="ExposuresLV.ExposuresLV"
+          label="DisplayKey.get(&quot;Web.ClaimExposuresLV.CreateReserve&quot;)"
+          shortcut="S"
+          visible="perm.Claim.createreserve(Claim)"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="gw.api.print.ListViewPrintOptionPopupAction.printListViewWithOptions(PrintTargetLV, PrintSettings)"
+          available="perm.User.printlistviews and perm.Claim.print(Claim)"
+          id="ClaimExposures_Print"
+          label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="ExposuresLV(Claim, PageHelper, Claim.Exposures)"/>
+    </Screen>
+    <Code><![CDATA[
+function createPrintSettings() : gw.api.print.PrintSettings {
+      var newPrintSettings = new gw.api.print.PrintSettings();
+      var claimNumberLabel = DisplayKey.get("Web.PrintOut.ClaimNumber", Claim.ClaimNumber);
+      newPrintSettings.setHeaderLabel(claimNumberLabel);
+      return newPrintSettings;
+      }
+    ]]></Code>
+  </Page>
+</PCF>

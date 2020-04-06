@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="CompensabilityDecision">
+  <typecode
+    code="accepted"
+    desc="Accepted"
+    name="Accepted"
+    priority="1"/>
+  <typecode
+    code="partialdenial"
+    desc="Accepted - with partial denial"
+    name="Accepted - with partial denial"
+    priority="2"/>
+  <typecode
+    code="denied"
+    desc="Denied"
+    name="Denied"
+    priority="3"/>
+  <typecode
+    code="pending"
+    desc="Pending"
+    name="Pending"
+    priority="4"/>
+  <typecode
+    code="disputed"
+    desc="Disputed"
+    name="Disputed"
+    priority="5"/>
+</typelistextension>

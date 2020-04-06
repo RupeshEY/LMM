@@ -1,0 +1,71 @@
+package rules.Postsetup.ClaimPostsetup_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.geocode.GeocodeScriptHelper
+uses gw.api.util.Logger
+uses gw.vendormanagement.SpecialistServiceCodeConstants
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("CPS01000 - Add Auto-body Shop")
+internal class CPS01000AddAutobodyShop {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return gw.api.contact.ProximitySearchPageHelper.useGeocodeUILocally()
+        and (claim.LossType == TC_AUTO)
+and (claim.LossLocation != null)
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+Logger.logDebug(DisplayKey.get("Rules.PostSetup.Claim.SearchForPrefRepairShopByProximityToLossLoc", claim.LossLocation))
+
+/* Parameters:
+ *   "AutoRepairShop" - contact subtype as a String
+ *   claim.LossLocation - the address to use as the search center  
+ *   true - indicates a distance based search within a given radius (10 miles, as noted below)
+ *          false would indicate a "nearest 10" search
+ *   10 - This indicates the radius for a distance search.
+ *        It would be the number of results for an ordinal search 
+ *   "Mile" - For distance-based searches only, indicates whether the number indicates miles.
+ *            for both distance OR ordinal searches, this indicates whether result distances 
+ *            should be in miles or kilometers 
+ *            This is a value from the UnitOfDistance typelist
+ */
+var criteria = GeocodeScriptHelper.setupContactCenterProximitySearch(
+        "AutoRepairShop", claim.LossLocation, true, 10, TC_MILE)
+      
+// You can specify any normal contact search criteria in combination with the Proximity search
+criteria.PreferredVendors = true
+
+// It is STRONGLY recommended that you cap your results, rather than getting all results
+try { 
+  var cwtis = GeocodeScriptHelper.getResultsFromContactCenter(criteria, 20)
+  if (cwtis.length > 0) {
+    var internalRepairShop = GeocodeScriptHelper.makeLocalContact(cwtis[0], claim)
+
+    /*
+     * Note that an autobody repair ServiceRequest may already have also been created by the
+     * user in the FNOL Wizard.
+     * The FNOL Wizard may automatically instruct this ServiceRequest.
+     */
+    var serviceRequest = claim.newServiceRequest(claim.claimant, null)
+    serviceRequest.Instruction.addServiceFoundByCode(SpecialistServiceCodeConstants.AUTOBODYREPAIR)
+    serviceRequest.Kind = ServiceRequestKind.TC_QUOTEANDSERVICE
+    serviceRequest.Specialist = internalRepairShop
+    serviceRequest.finishSetup()
+    Logger.logDebug(DisplayKey.get("Rules.PostSetup.Claim.AddedRepairShop", cwtis[0]))
+  } else {
+    Logger.logDebug(DisplayKey.get("Rules.PostSetup.Claim.NoPrefRepairShopWithinNMiles", "10"))
+  }
+} catch (e:java.lang.Exception) {
+    Logger.logDebug(DisplayKey.get("Rules.PostSetup.Claim.AddressCouldNotBeUsedForProximitySearch", 
+                        claim.LossLocation, e.getMessage()))
+}
+/*end00rule*/
+
+  }
+}

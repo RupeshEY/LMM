@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Exposure Workload Classification"
+  entity="ExposureWorkloadClassification"
+  final="false"
+  priority="1"
+  supertype="WorkloadClassification">
+  <implementsInterface
+    iface="gw.api.assignment.workload.classifications.WorkloadClassificationMethods"
+    impl="gw.assignment.workload.classifications.ExposureWorkloadClassificationMethodsImpl"/>
+</subtype>

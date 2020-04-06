@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="ApplicabilityCriteriaInputSet">
+    <Require
+      name="listBundle"
+      type="gw.bizrules.ActivityRulePanelSetHelper.ShuttleListBundle"/>
+    <Variable
+      initialValue="new gw.bizrules.ActivityRulePanelSetHelper.SelectorState(listBundle)"
+      name="selectorState"
+      type="gw.bizrules.ActivityRulePanelSetHelper.SelectorState"/>
+    <Variable
+      initialValue="listBundle.initSelectorState(selectorState)"
+      name="selectorStateInitialized"
+      recalculateOnRefresh="true"
+      type="Boolean"/>
+    <BooleanRadioInput
+      editable="true"
+      falseLabel="DisplayKey.get('Web.ActivityRules.Rule.ApplicabilityCriteria.Selected')"
+      id="AnyOrSelection"
+      label="listBundle.Label"
+      trueLabel="DisplayKey.get('Web.ActivityRules.Rule.ApplicabilityCriteria.All')"
+      value="listBundle.SelectorState"
+      visible="listBundle.SelectorVisible">
+      <PostOnChange
+        target="InputWidget"/>
+    </BooleanRadioInput>
+    <RangeInput
+      align="left"
+      editable="true"
+      id="InputWidget"
+      label="listBundle.ShuttleLabel"
+      multiSelect="true"
+      shuttleList="true"
+      value="listBundle.Selected"
+      valueRange="listBundle.Range"
+      valueType="gw.entity.TypeKey[]"
+      visible="not listBundle.SelectorState">
+      <PostOnChange
+        target="DATA_ONLY"/>
+    </RangeInput>
+  </InputSet>
+</PCF>

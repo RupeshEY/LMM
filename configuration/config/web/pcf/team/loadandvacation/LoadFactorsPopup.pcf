@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="perm.Group.viewloadfactors"
+    id="LoadFactorsPopup"
+    parent="Desktop()"
+    title="DisplayKey.get(&quot;Web.LoadAndVacation&quot;)">
+    <Variable
+      initialValue="findLoadFactorGroupList()"
+      name="LoadFactorGroupList"
+      recalculateOnRefresh="true"
+      type="gw.api.database.IQueryBeanResult&lt;Group&gt;"/>
+    <Screen
+      editable="true"
+      id="LoadFactorsScreen">
+      <Toolbar/>
+      <ListDetailPanel
+        lockWhileEditing="true"
+        selectionName="SelectedGroup"
+        selectionType="Group">
+        <ListViewPanel
+          editable="true"
+          id="GroupSelectionLV">
+          <RowIterator
+            editable="false"
+            elementName="Group"
+            value="LoadFactorGroupList"
+            valueType="gw.api.database.IQueryBeanResult&lt;entity.Group&gt;">
+            <Row>
+              <GroupCell
+                id="GroupName"
+                label="DisplayKey.get(&quot;Web.LoadAndVacation.GroupName&quot;)"
+                sortBy="Group.Name"
+                value="Group"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+        <CardViewPanel>
+          <Card
+            id="GroupDetailsCard"
+            title="DisplayKey.get(&quot;Web.LoadAndVacation.GroupDetails.Title&quot;, SelectedGroup.Name)">
+            <PanelRef
+              def="LoadFactorDV(SelectedGroup)"
+              editable="perm.Group.manageloadfactors(SelectedGroup)">
+              <Toolbar
+                visible="perm.Group.manageloadfactors(SelectedGroup)">
+                <EditButtons/>
+              </Toolbar>
+            </PanelRef>
+          </Card>
+        </CardViewPanel>
+      </ListDetailPanel>
+    </Screen>
+    <Code><![CDATA[
+      function findLoadFactorGroupList() : gw.api.database.IQueryBeanResult<Group> {
+        return Group.finder.findLoadFactorGroupsByUser(User.util.CurrentUser) as gw.api.database.IQueryBeanResult<Group>;
+      }
+    ]]></Code>
+  </Popup>
+</PCF>

@@ -1,0 +1,23 @@
+package rules.Assignment.DefaultGroupActivityAssignmentRules_dir
+
+@gw.rules.RuleName("DGA01000 - SI Assign claim review activity to supervisor")
+internal class DGA01000SIAssignclaimreviewactivitytosupervisor {
+  static function doCondition(activity : entity.Activity) : boolean {
+    
+/*start00rule*/
+return activity.ActivityPattern.Code=="SI_review"
+/*end00rule*/
+
+  }
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+
+/*start00rule*/
+var assignedGroup = activity.Claim.AssignedGroup
+if (activity.CurrentAssignment.assign(assignedGroup, assignedGroup.Supervisor)) {
+   actions.exit()
+}
+/*end00rule*/
+
+  }
+}

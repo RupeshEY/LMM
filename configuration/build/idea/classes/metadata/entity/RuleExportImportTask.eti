@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  desc="The task to export/import business rules."
+  entity="RuleExportImportTask"
+  extendable="false"
+  final="false"
+  loadable="false"
+  platform="true"
+  table="bizruleeximtask"
+  type="versionable">
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.RuleExportImportTaskDomainMethods"
+    impl="com.guidewire.bizrules.domain.RuleExportImportTaskImpl"/>
+  <column
+    desc="The time this task started."
+    name="StartTime"
+    nullok="false"
+    type="datetime"/>
+  <foreignkey
+    desc="The user who started the task."
+    fkentity="User"
+    name="StartedBy"
+    nullok="false"/>
+  <typekey
+    name="RuleVersionType"
+    nullok="false"
+    typelist="RuleVersion"/>
+  <column
+    desc="The date the batch process processed the task."
+    name="BatchProcessCompleted"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The date this task requested to terminate."
+    name="TerminationRequested"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The batch process that processes this task."
+    getterScriptability="hidden"
+    name="BatchProcessID"
+    nullok="true"
+    setterScriptability="hidden"
+    type="softentityreference"/>
+  <foreignkey
+    desc="The serialized rules"
+    fkentity="RuleData"
+    getterScriptability="doesNotExist"
+    name="RuleData"
+    nullok="true"
+    setterScriptability="doesNotExist"/>
+</entity>

@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AddressBookPersonContactInfoInputSet">
+    <Require
+      name="person"
+      type="Person"/>
+    <Require
+      name="claimContact"
+      type="ClaimContact"/>
+    <InputDivider/>
+    <Label
+      label="DisplayKey.get(&quot;Web.ContactDetail.Phone&quot;)"/>
+    <InputSet
+      visible="claimContact != null">
+      <BooleanRadioInput
+        editable="true"
+        id="ContactProhibited"
+        label="DisplayKey.get(&quot;Web.ContactDetail.ContactProhibited&quot;)"
+        value="claimContact.ContactProhibited"
+        visible="claimContact.isClaimant()"/>
+    </InputSet>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(person, Contact#WorkPhone), DisplayKey.get(&quot;Web.ContactDetail.Phone.Work&quot;), false))"
+      editable="true"
+      id="Work"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(person, Contact#HomePhone), DisplayKey.get(&quot;Web.ContactDetail.Phone.Home&quot;), false))"
+      editable="true"
+      id="Home"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(person, person#CellPhone), DisplayKey.get(&quot;Web.ContactDetail.Phone.Cell&quot;), false))"
+      editable="true"
+      id="Cell"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(person, Contact#FaxPhone), DisplayKey.get(&quot;Web.ContactDetail.Phone.Fax&quot;), false))"
+      editable="true"
+      id="Fax"/>
+    <TypeKeyInput
+      editable="true"
+      id="PrimaryPhone"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Phone.PrimaryPhone&quot;)"
+      validationExpression="(person.PrimaryPhone == null or (person.PrimaryPhone == TC_WORK and person.WorkPhone != null) or (person.PrimaryPhone == TC_HOME and person.HomePhone != null) or (person.PrimaryPhone == TC_MOBILE and person.CellPhone != null)) ? null : DisplayKey.get(&quot;Web.ContactDetail.Phone.PrimaryPhone.Error&quot;)"
+      value="person.PrimaryPhone"
+      valueType="typekey.PrimaryPhoneType"/>
+    <InputDivider/>
+    <Label
+      label="DisplayKey.get(&quot;Web.ContactDetail.Email&quot;)"/>
+    <TextInput
+      editable="true"
+      formatType="email"
+      id="Primary"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Email.Primary&quot;)"
+      value="person.EmailAddress1"/>
+    <TextInput
+      editable="true"
+      formatType="email"
+      id="Secondary"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Email.Secondary&quot;)"
+      value="person.EmailAddress2"/>
+    <Code><![CDATA[/**
+ * Sets the new primary phone value, based on the phone number inputs. If the current
+ * primary phone value is blank, and there is exactly one non-blank phone number input,
+ * then the primary phone value corresponding to that non-blank input is returned.
+ */
+function setPrimaryPhoneType(phoneNum : String, numType : PrimaryPhoneType) {
+  
+  var phoneNums = {person.WorkPhone, person.HomePhone, person.CellPhone}
+  phoneNums.removeWhere(\ s -> s == null)
+  
+  if (phoneNums.Count == 1 and phoneNums.single() == phoneNum) {
+    person.PrimaryPhone = numType
+  }
+}]]></Code>
+  </InputSet>
+</PCF>

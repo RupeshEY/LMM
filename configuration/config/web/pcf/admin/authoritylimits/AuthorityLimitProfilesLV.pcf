@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_admin.xml -->
+  <ListViewPanel
+    id="AuthorityLimitProfilesLV">
+    <ExposeIterator
+      flags="AuthorityLimitProfile"
+      valueType="entity.AuthorityLimitProfile"
+      widget="AuthorityLimitProfilesLV"/>
+    <Require
+      name="AuthorityLimitProfileList"
+      type="gw.api.database.IQueryBeanResult&lt;AuthorityLimitProfile&gt;"/>
+    <RowIterator
+      editable="false"
+      elementName="AuthorityLimitProfile"
+      hasCheckBoxes="true"
+      value="AuthorityLimitProfileList"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.AuthorityLimitProfile&gt;">
+      <ToolbarFlag
+        name="AuthorityLimitProfile"/>
+      <Row>
+        <TextCell
+          action="AuthorityLimitProfileDetailPage.go(AuthorityLimitProfile)"
+          id="Name"
+          label="DisplayKey.get(&quot;LV.Admin.AuthorityLimitProfiles.Name&quot;)"
+          sortOrder="1"
+          value="AuthorityLimitProfile.Name"/>
+        <TextCell
+          id="Description"
+          label="DisplayKey.get(&quot;LV.Admin.AuthorityLimitProfiles.Description&quot;)"
+          sortOrder="2"
+          value="AuthorityLimitProfile.Description"
+          width="500"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

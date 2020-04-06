@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Summary information about a vehicle on a policy summary."
+  entity="PolicySummaryVehicle"
+  supertype="PolicySummaryRiskUnit">
+  <implementsInterface
+    iface="gw.cc.policy.entity.PolicySummaryVehicle"
+    impl="com.guidewire.cc.domain.policy.impl.PolicySummaryVehicleImpl"/>
+  <column
+    desc="Number of the vehicle on the policy."
+    name="VehicleNumber"
+    nullok="false"
+    type="integer"/>
+  <column
+    desc="License plate of the vehicle."
+    name="LicensePlate"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <column
+    desc="Make of the vehicle."
+    name="Make"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <column
+    desc="Model of the vehicle."
+    name="Model"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <column
+    desc="Color of the vehicle."
+    name="Color"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="40"/>
+  </column>
+  <column
+    desc="VIN of the vehicle."
+    name="Vin"
+    nullok="true"
+    type="vin"/>
+  <typekey
+    desc="State (Jurisdiction) in which the vehicle is registered. The Jurisdiction must be associated with JurisdictionType.TC_VEHICLE_REG."
+    name="State"
+    nullok="true"
+    typelist="Jurisdiction"/>
+  <column
+    desc="Serial number; only use if VIN is not appropriate (e.g. for boats)."
+    name="SerialNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="20"/>
+  </column>
+</subtype>

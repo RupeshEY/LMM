@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <Page
+    id="FinancialsSummaryTitlePrint"
+    parent="ClaimFinancialsGroup(Claim)"
+    title="perm.Claim.viewnettotalincurred(Claim) ? DisplayKey.get(&quot;JSP.ClaimFinancials.Financials.Incurred&quot;, gw.api.util.CurrencyUtil.renderAsCurrency(gw.api.util.Math.Nz(gw.api.financials.FinancialsCalculations.getTotalIncurredNet().withClaim(Claim).Amount.Amount), Claim.Currency), DisplayKey.get(&quot;Web.Financials.Summary.Summary&quot;)) : DisplayKey.get(&quot;JSP.ClaimFinancials.Financials.NoIncurred&quot;, DisplayKey.get(&quot;Web.Financials.Summary.Summary&quot;))">
+    <LocationEntryPoint
+      signature="FinancialsSummaryTitlePrint(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="FinancialsSummaryTitleScreen"/>
+  </Page>
+</PCF>

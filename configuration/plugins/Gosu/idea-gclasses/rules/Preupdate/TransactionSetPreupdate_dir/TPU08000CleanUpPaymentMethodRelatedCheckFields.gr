@@ -1,0 +1,22 @@
+package rules.Preupdate.TransactionSetPreupdate_dir
+
+@gw.rules.RuleName("TPU08000 - Clean Up Payment Method Related Check Fields")
+internal class TPU08000CleanUpPaymentMethodRelatedCheckFields {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return transactionSet.Subtype == TC_CHECKSET
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+for (check in (transactionSet as CheckSet).Checks) {
+  check.removeUnusedPaymentMethodRelatedFields()
+}
+/*end00rule*/
+
+  }
+}

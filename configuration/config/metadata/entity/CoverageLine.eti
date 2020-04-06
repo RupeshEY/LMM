@@ -1,0 +1,89 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A representation of a coverage based on the coverage's subtype, type, and any associated exposure unit."
+  entity="CoverageLine"
+  exportable="true"
+  table="coverageline"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.CoverageLineImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.aggregatelimit.impl.CoverageLineInternal"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.CoverageLineImpl"/>
+  <implementsInterface
+    iface="gw.cc.aggregatelimit.entity.CoverageLine"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.CoverageLineImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.aggregatelimit.CoverageSpecification"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.CoverageLineImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.CoverageLineImpl"/>
+  <foreignkey
+    columnName="PolicyPeriodID"
+    desc="PolicyPeriod with which this CoverageLine is associated. It should be the same PolicyPeriod that is referred to by the AggregateLimits that are linked to this CoverageLine (through CoverageLineLimit entities)."
+    fkentity="PolicyPeriod"
+    name="PolicyPeriod"
+    nullok="false"/>
+  <array
+    arrayentity="CoverageLineLimit"
+    desc="Coverage line limits that join this coverage line to an aggregate limit. A single coverage line can be shared by more than one aggregate limit"
+    exportable="false"
+    name="CoverageLineLimits"
+    setterScriptability="hidden"/>
+  <typekey
+    desc="Coverage type."
+    name="CoverageType"
+    nullok="false"
+    typelist="CoverageType"/>
+  <typekey
+    desc="The CoverageSubtype (from the LOB) that an exposure must have in order to match this CoverageLine"
+    name="LOBCoverageSubtype"
+    nullok="true"
+    typelist="CoverageSubtype"/>
+  <typekey
+    desc="The subclass type of the Coverage, e.g., PolicyCoverage, VehicleCoverage, or PropertyCoverage. This is unrelated to the CoverageSubtype typelist."
+    name="CoverageSubtype"
+    nullok="true"
+    typelist="Coverage"/>
+  <column
+    desc="Identifier for the covered risk unit in an external policy system.  Only applies to those CoverageLines which point to a VehicleCoverage, or PropertyCoverage, or any coverage which extends from RUCoverage and therefore has a RiskUnit with (possibly) a policySystemID."
+    name="RUPolicySystemId"
+    nullok="true"
+    type="policysystemid"/>
+  <column
+    desc="Number of the risk unit for the coverage on the policy."
+    name="ExposureUnitNumber"
+    nullok="true"
+    type="integer"/>
+  <index
+    desc="Index to ensure there is only one CoverageLine per unique combination of PolicyPeriod, LOBCoverageSubtype, CoverageSubtype, CoverageType, ExposureUnitNumber and RUPolicySystemId"
+    name="coveragelineu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="PolicyPeriodID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="CoverageType"/>
+    <indexcol
+      keyposition="4"
+      name="LOBCoverageSubtype"/>
+    <indexcol
+      keyposition="5"
+      name="CoverageSubtype"/>
+    <indexcol
+      keyposition="6"
+      name="ExposureUnitNumber"/>
+    <indexcol
+      keyposition="7"
+      name="RUPolicySystemId"/>
+  </index>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.aggregatelimit.dbchecks.CoverageLineDBCheckBuilder"/>
+</entity>

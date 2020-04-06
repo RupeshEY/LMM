@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <xsd:element name="SecurityMapping">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="Mapping" minOccurs="1" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="Mapping">
+    <xsd:complexType>
+      <xsd:attribute name="permission" type="xsd:NMTOKEN" use="required"/>
+      <xsd:attribute name="mappedUser" type="xsd:NMTOKEN" use="required"/>
+      <xsd:attribute name="password"   type="xsd:NMTOKEN" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+
+</xsd:schema>

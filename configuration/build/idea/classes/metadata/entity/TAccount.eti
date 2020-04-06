@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents the value of financial transactions in a certain lifecycle state"
+  entity="TAccount"
+  exportable="false"
+  extendable="false"
+  final="true"
+  ignoreForEvents="true"
+  overwrittenInStagingTable="true"
+  platform="false"
+  setterScriptability="hidden"
+  table="taccount"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.impl.TAccountInternal"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.TAccount"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.TAccountDelegateAdapter"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="TAccountDelegate"/>
+  <fulldescription><![CDATA[TAccounts are used in ClaimCenter to provide a rolled-up view of all financials transactions
+    entered into the system.  Each Reserve Line (unique combination of Claim, Exposure, Cost Type and Cost Category) has
+    22 distinct TAccounts that together represent every possible life cycle state for each of the four transaction subtypes
+    (Payment, Reserve, Recovery and Recovery Reserve).  The Taccounts occur in pairs; a debit account (example: ReservesXX,
+    which holds the amount of a reserve) and a matching credit account (example: Cash Out). Every life cycle state transition
+    for a transaction (e.g., from pending-approval to awaiting-submission) affects one debit and one credit T-account equally
+    (example: a payment debits ReservesXX and credits Cash Out).  ClaimCenter provides useful calculated values by combining
+    the balances of various TAccounts as appropriate.
+  ]]></fulldescription>
+  <column
+    desc="The balance of the reserving currency debit side of this t-account's ledger."
+    getterScriptability="hidden"
+    loadedByCallback="true"
+    name="DebitReservingBalance"
+    nullok="false"
+    setterScriptability="doesNotExist"
+    type="money"/>
+  <column
+    desc="The balance of the reserving currency credit side of this t-account's ledger."
+    getterScriptability="hidden"
+    loadedByCallback="true"
+    name="CreditReservingBalance"
+    nullok="false"
+    setterScriptability="doesNotExist"
+    type="money"/>
+  <array
+    arrayentity="TAccountLineItem"
+    desc="Set of TAccountLineItems that contribute to this T-Account."
+    getterScriptability="hidden"
+    name="Entries"
+    owner="true"
+    setterScriptability="doesNotExist"/>
+  <foreignkey
+    columnName="ReserveLineID"
+    desc="FK to the ReserveLine that this TAccount is associated with."
+    fkentity="ReserveLine"
+    getterScriptability="hidden"
+    name="ReserveLine"
+    nullok="false"
+    setterScriptability="hidden"/>
+  <index
+    desc="Every nonretired ReserveLine should have at most one TAccount of a given type."
+    name="taccountu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ReserveLineID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="TAccountType"/>
+  </index>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.financials.dbchecks.TAccountDBCheckBuilder"/>
+</entity>

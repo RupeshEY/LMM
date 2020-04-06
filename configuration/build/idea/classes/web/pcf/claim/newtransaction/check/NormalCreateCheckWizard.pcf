@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Wizard
+    afterCancel="goWhenDone()"
+    afterFinish="wizard.performAfterFinish(); goWhenDone()"
+    beforeCancel="wizard.closeCheckDuplicatesWorksheets()"
+    beforeCommit="if (serviceRequestInvoice != null) {serviceRequestInvoice.pay()} gw.api.system.bundle.BundleCommitCondition.verify(claim); wizard.performBeforeFinish()"
+    canVisit="perm.Claim.createpayment(claim) and (claim.State != ClaimState.TC_DRAFT)"
+    cancelWarning="DisplayKey.get(&quot;Wizard.NewCheckWizard.CancelWarning&quot;)"
+    id="NormalCreateCheckWizard"
+    onResume="gw.api.system.bundle.BundleCommitCondition.verify(claim)"
+    parent="NormalCreateCheckWizardForward(claim)">
+    <LocationEntryPoint
+      signature="NormalCreateCheckWizard(claim : Claim)"/>
+    <LocationEntryPoint
+      signature="NormalCreateCheckWizard(claim : Claim, serviceRequestInvoice : ServiceRequestInvoice)"/>
+    <LocationEntryPoint
+      signature="NormalCreateCheckWizard(claim : Claim, exposure : Exposure, costType : CostType, costCategory : CostCategory, reservingCurrency : Currency, setReserveLine : boolean)"/>
+    <Variable
+      initialValue="new gw.api.financials.NormalCreateCheckWizardInfo()"
+      name="wizard"
+      type="gw.api.financials.NormalCreateCheckWizardInfo"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="null"
+      name="serviceRequestInvoice"
+      type="ServiceRequestInvoice"/>
+    <Variable
+      initialValue="null"
+      name="exposure"
+      type="Exposure"/>
+    <Variable
+      initialValue="null"
+      name="costType"
+      type="CostType"/>
+    <Variable
+      initialValue="null"
+      name="costCategory"
+      type="CostCategory"/>
+    <Variable
+      initialValue="false"
+      name="setReserveLine"
+      type="boolean"/>
+    <Variable
+      name="reservingCurrency"
+      type="Currency"/>
+    <WizardStep
+      allowFinish="false"
+      id="NewCheckPayees"
+      label="DisplayKey.get(&quot;Wizard.NewCheckWizard.NewCheckPayees.Label&quot;)"
+      onExit="wizard.validateAllCheckPayees(); wizard.createNewCheckPortionsIfNecessary(); wizard.refreshBundle()"
+      onFirstEnter="claim.freezeCurrency(); wizard.setupCheckWizardInfo(claim, exposure, costType, costCategory, reservingCurrency, setReserveLine); if (serviceRequestInvoice != null) {wizard.setupForServiceRequestInvoice(serviceRequestInvoice)}"
+      screen="CheckWizard_CheckPayeesScreen(claim, wizard)"
+      title="DisplayKey.get(&quot;Wizard.NewCheckWizard.NewCheckPayees.Step&quot;, wizard.CurrentStepNumber, wizard.TotalNumberOfSteps)"/>
+    <WizardStep
+      id="NewCheckPayments"
+      label="DisplayKey.get(&quot;Wizard.NewCheckWizard.NewCheckPayments.Label&quot;)"
+      onExit="wizard.validatePayments(); wizard.DeductionWarningNeeded = false"
+      onFirstEnter="wizard.PreferredCurrency = serviceRequestInvoice != null ? serviceRequestInvoice.ServiceRequest.Currency : wizard.PreferredCurrencyByPayees"
+      screen="CheckWizard_CheckPaymentsScreen(claim, wizard)"
+      title="DisplayKey.get(&quot;Wizard.NewCheckWizard.NewCheckPayments.Step&quot;, wizard.CurrentStepNumber,  wizard.TotalNumberOfSteps)"/>
+    <WizardStep
+      id="NewCheckInstructions"
+      label="DisplayKey.get(&quot;Wizard.NewCheckWizard.NewCheckInstructions.Label&quot;)"
+      onEnter="wizard.doFinalChecksAndSetup()"
+      onExit="if (wizard.getCheck().hasExposureWithServicePeriod()) {wizard.searchForDuplicates(true)}"
+      screen="CheckWizard_CheckInstructionsScreen(claim, wizard)"
+      title="DisplayKey.get(&quot;Wizard.NewCheckWizard.NewCheckInstructions.Step&quot;,  wizard.CurrentStepNumber ,  wizard.TotalNumberOfSteps)"/>
+    <Code><![CDATA[function goWhenDone() {
+  if (serviceRequestInvoice != null) {
+    pcf.ClaimServiceRequests.go(claim, serviceRequestInvoice.ServiceRequest, serviceRequestInvoice)
+  } else {
+    ClaimFinancialsChecks.go(claim)
+  }
+}]]></Code>
+  </Wizard>
+</PCF>

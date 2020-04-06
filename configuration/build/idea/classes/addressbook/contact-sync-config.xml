@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ContactSyncConfigFile
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="contact-sync-config.xsd">
+
+  <!--
+    Configuration controlling behavior of syncing from Address Book. Use this file to specify which exportable
+    properties are to be ignored when syncing. By default, all exportable properties are synced. Properties that exist
+    in this application's definition of Contact but not in the Address Book should be specified here.
+
+    This file also controls which Contact relationships are included from the Address Book. By default, no relationships
+    are included. Care should be taken when including relationships here, particularly with zero-or-more relationships.
+    Since such relationships can grow in an unbounded way, there is the potential to pull down many Contacts from the
+    Address Book.
+
+    Generally, those Contact relationships included from the Address Book are those that are reflected on the
+    Contact "Basics" detail screen in the UI. So, it usually makes sense for the relationships configured here to match
+    those that are explicitly shown on the main Contact UI.
+
+    Logging category: Application.AddressBook.Config
+    Deprecated since 8.0 Use ContactMapper and RelationshipSyncConfig to define ignored properties and syncable relationships
+  -->
+
+  <!-- WARNING! - Editing or removing the following exclusions for Address WILL have undesirable consequences.  -->
+  <!-- WARNING! - These Geocoding related fields are updated "transparently" by ContactManager, and should not   -->
+  <!-- WARNING! - be considered by other Guidewire applications when determining sync status. Disabling these   -->
+  <!-- WARNING! - exclusions can result in Contacts "mysteriously" going out of sync when no actual change has  -->
+  <!-- WARNING! - been made.                                                                                    -->
+  <ContactSyncEntityConfig entity="Address">
+    <IgnoreProperty name="GeocodeStatus"/>
+    <IgnoreProperty name="SpatialPoint"/>
+  </ContactSyncEntityConfig>
+
+  <ContactSyncEntityConfig entity="Adjudicator">
+    <IncludeRelationship contactBidiRelCode="employer"/>
+  </ContactSyncEntityConfig>
+
+  <ContactSyncEntityConfig entity="Contact">
+    <IgnoreProperty name="AutoSync"/>
+    <IgnoreProperty name="CategoryScores"/>
+    <IgnoreProperty name="OfficialIDs"/>
+    <IgnoreProperty name="OrganizationType"/>
+    <IncludeRelationship contactBidiRelCode="primarycontact"/>
+    <IgnoreProperty name="PolicySystemId"/>
+    <IgnoreProperty name="PrimaryLanguage"/>
+    <IgnoreProperty name="PrimaryLocale" />
+    <IgnoreProperty name="Reviews"/>
+    <IgnoreProperty name="SpecialtyType"/>
+    <IgnoreProperty name="ValidationLevel"/>
+  </ContactSyncEntityConfig>
+
+  <!--<ContactSyncEntityConfig entity="ContactCategoryScore">-->
+    <!--<IgnoreProperty name="ReviewCategory"/>-->
+    <!--<IgnoreProperty name="Score"/>-->
+  <!--</ContactSyncEntityConfig>-->
+
+  <ContactSyncEntityConfig entity="Person">
+    <IncludeRelationship contactBidiRelCode="employer" appliesToSubtypes="false"/>
+    <IncludeRelationship contactBidiRelCode="guardian" appliesToSubtypes="false"/>
+    <ExcludeRelationship contactBidiRelCode="primarycontact" appliesToSubtypes="false"/>
+  </ContactSyncEntityConfig>
+
+  <ContactSyncEntityConfig entity="UserContact">
+    <ExcludeRelationship contactBidiRelCode="primarycontact"/>
+  </ContactSyncEntityConfig>
+
+</ContactSyncConfigFile>

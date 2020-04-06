@@ -1,0 +1,219 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="MetroReportDetailsScreen">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="metroReport"
+      type="MetroReport"/>
+    <Toolbar>
+      <EditButtons
+        editVisible="metroReport.Status == TC_NEW or metroReport.Status == TC_INSUFFICIENTDATA"
+        pickValue="metroReport"
+        updateVisible="true"/>
+    </Toolbar>
+    <DetailViewPanel
+      id="MetroReportDetailsDV">
+      <InputColumn>
+        <Label
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Summary&quot;)"/>
+        <TypeKeyInput
+          editable=" metroReport.Status == TC_NEW or metroReport.Status == TC_INSUFFICIENTDATA"
+          id="MetroReportType"
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Summary.Type&quot;)"
+          required="true"
+          value="metroReport.MetroReportType"
+          valueType="typekey.MetroReportType">
+          <PostOnChange
+            onChange="if( metroReport.MetroReportType == TC_E or metroReport.MetroReportType == TC_H ) {                                 if (metroReport.LossType ==TC_WC) {                                   metroReport.DeceasedContact = claim.claimant;                                 } else {                                   metroReport.DeceasedContact = claim.Insured;                                 }                           } else {                                 metroReport.DeceasedContact = null;                   }"/>
+        </TypeKeyInput>
+        <TextInput
+          id="MetroOrderBy"
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Summary.OrderBy&quot;)"
+          value="metroReport.CreateUser"
+          valueType="entity.User"/>
+        <BooleanRadioInput
+          editable="true"
+          id="ForceDuplicate"
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Summary.ForceDuplicate&quot;)"
+          value="metroReport.ForceDuplicate"/>
+        <DateInput
+          id="MetroDateSent"
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Summary.SentDate&quot;)"
+          value="metroReport.CreateTime"
+          visible="metroReport.Status != TC_NEW"/>
+        <DateInput
+          id="MetroDateReceived"
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Summary.ReceivedDate&quot;)"
+          value="metroReport.ReceivedDate"
+          visible="metroReport.Status != TC_NEW"/>
+        <TextInput
+          id="MetroFailedReason"
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Summary.FailedReason&quot;)"
+          value="metroReport.ErrorMessage"
+          visible="metroReport.ErrorMessage != null and metroReport.ErrorMessage != &quot;&quot;"/>
+        <TypeKeyInput
+          id="MetroStatus"
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Summary.Status&quot;)"
+          value="metroReport.Status"
+          valueType="typekey.MetroReportStatus"/>
+        <ContentInput
+          id="DeferralReason"
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Summary.DeferralReason&quot;)"
+          visible="metroReport.DelayMemoURL != null">
+          <Link
+            action="MetroURL.push(metroReport.DelayMemoURL)"
+            id="DeferralReasonLink"
+            label="DisplayKey.get(&quot;Web.MetroReportDV.Summary.DeferralReasonLink&quot;)"/>
+        </ContentInput>
+        <ContentInput
+          id="HoldReason"
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Summary.HoldReason&quot;)"
+          visible="metroReport.InformationURL != null">
+          <Link
+            action="MetroURL.push(metroReport.InformationURL)"
+            id="HoldReasonLink"
+            label="DisplayKey.get(&quot;Web.MetroReportDV.Summary.HoldReasonLink&quot;)"/>
+        </ContentInput>
+        <InputDivider/>
+        <Label
+          label="DisplayKey.get(&quot;Web.MetroReportDV.ReportInformation&quot;)"/>
+        <InputSet
+          visible="metroReport.MetroReportType == TC_E or metroReport.MetroReportType == TC_H">
+          <ClaimContactInput
+            claim="claim"
+            editable="metroReport.Status == TC_NEW or metroReport.Status == TC_INSUFFICIENTDATA"
+            id="MetroDeceased"
+            label="DisplayKey.get(&quot;Web.MetroReportDV.ReportInformation.deceased&quot;)"
+            newContactMenu="ClaimNewPersonOnlyPickerMenuItemSet"
+            required="metroReport.MetroReportType == TC_E or metroReport.MetroReportType == TC_H"
+            value="metroReport.DeceasedContact"
+            valueRange="claim.RelatedPersonArray"/>
+          <DateInput
+            dateFormat="short"
+            editable="metroReport.Status == TC_NEW or metroReport.Status == TC_INSUFFICIENTDATA"
+            id="MetroDeceasedDOD"
+            label="DisplayKey.get(&quot;Web.MetroReportDV.ReportInformation.deceased.DateOfDeath&quot;)"
+            required="metroReport.MetroReportType == TC_E or metroReport.MetroReportType == TC_H"
+            value="metroReport.DateOfDeath"/>
+        </InputSet>
+        <TextAreaInput
+          editable="metroReport.Status == TC_NEW or metroReport.Status == TC_INSUFFICIENTDATA"
+          id="MetroLossDescription"
+          label="DisplayKey.get(&quot;Web.MetroReportDV.ReportInformation.LossDescription&quot;)"
+          numCols="40"
+          numRows="4"
+          required="metroReport.MetroReportType == TC_O"
+          value="metroReport.LossDescription"/>
+        <InputDivider/>
+        <Label
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Investigating&quot;)"/>
+        <TextInput
+          editable="metroReport.Status == TC_NEW or metroReport.Status == TC_INSUFFICIENTDATA"
+          id="MetroInvestAgency_Name"
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Investigating.AgencyName&quot;)"
+          value="metroReport.AgentName"/>
+        <TypeKeyInput
+          editable="metroReport.Status == TC_NEW or metroReport.Status == TC_INSUFFICIENTDATA"
+          id="MetroInvestAgency_Type"
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Investigating.AgencyType&quot;)"
+          value="metroReport.MetroAgency"
+          valueType="typekey.MetroAgencyType"/>
+        <TextInput
+          editable="metroReport.Status == TC_NEW or metroReport.Status == TC_INSUFFICIENTDATA"
+          id="MetroInvestAgency_Precinct"
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Investigate.Precinct&quot;)"
+          value="metroReport.Precinct"/>
+        <TextInput
+          editable="metroReport.Status == TC_NEW or metroReport.Status == TC_INSUFFICIENTDATA"
+          id="MetroInvestAgency_ReportNumber"
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Investigate.ReportNumber&quot;)"
+          value="metroReport.ReportNumber"/>
+        <TextInput
+          editable="metroReport.Status == TC_NEW or metroReport.Status == TC_INSUFFICIENTDATA"
+          id="MetroInvestAgency_OfficerNumber"
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Investigate.Officer&quot;)"
+          value="metroReport.OfficerName"/>
+        <DateInput
+          editable="metroReport.Status == TC_NEW or metroReport.Status == TC_INSUFFICIENTDATA"
+          id="MetroInvestAgency_DateReported"
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Investigate.ReportDate&quot;)"
+          value="metroReport.DateReported"/>
+        <TextInput
+          editable="metroReport.Status == TC_NEW or metroReport.Status == TC_INSUFFICIENTDATA"
+          id="MetroInvestAgencyCity"
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Investigate.AgencyCity&quot;)"
+          required="true"
+          value="metroReport.AgentCity"/>
+        <TypeKeyInput
+          editable="metroReport.Status == TC_NEW or metroReport.Status == TC_INSUFFICIENTDATA"
+          id="MetroInvestAgencyState"
+          label="DisplayKey.get(&quot;Web.MetroReportDV.Investigate.AgencyState&quot;)"
+          required="true"
+          value="metroReport.AgentState"
+          valueType="typekey.State"/>
+        <InputDivider/>
+        <InputSet
+          visible="metroReport.LossType ==TC_AUTO">
+          <Label
+            label="DisplayKey.get(&quot;Web.MetroReportDV.Vehicle&quot;)"/>
+          <RangeInput
+            editable="metroReport.Status == TC_NEW or metroReport.Status == TC_INSUFFICIENTDATA"
+            id="InsuredVehicle"
+            label="DisplayKey.get(&quot;Web.MetroReportDV.Vehicle.Insured&quot;)"
+            required="metroReport.MetroReportType == TC_A or metroReport.MetroReportType == TC_M or                                   metroReport.MetroReportType == TC_D or metroReport.MetroReportType == TC_R or                                   metroReport.MetroReportType == TC_S"
+            value="metroReport.VehicleIncident"
+            valueRange="claim.VehicleIncidentsOnly"
+            valueType="entity.VehicleIncident"/>
+          <TextInput
+            id="InsuredDriverName"
+            label="DisplayKey.get(&quot;Web.MetroReportDV.Vehicle.Insured.DriverName&quot;)"
+            value="metroReport.VehicleIncident.driver"
+            valueType="entity.Person">
+            <Reflect
+              triggerIds="InsuredVehicle"
+              value="VALUE.driver"/>
+          </TextInput>
+          <TextInput
+            id="InsuredDriverAddress"
+            label="DisplayKey.get(&quot;Web.MetroReportDV.Vehicle.Insured.DriverAddress&quot;)"
+            value="metroReport.VehicleIncident.driver.PrimaryAddressDisplayValue">
+            <Reflect
+              triggerIds="InsuredVehicle"
+              value="VALUE.driver.PrimaryAddressDisplayValue"/>
+          </TextInput>
+          <InputDivider/>
+          <RangeInput
+            editable="metroReport.Status == TC_NEW  or metroReport.Status == TC_INSUFFICIENTDATA"
+            id="ThirdPartyVehicle"
+            label="DisplayKey.get(&quot;Web.MetroReportDV.Vehicle.ThirdParty&quot;)"
+            required="metroReport.MetroReportType == TC_M"
+            value="metroReport.ThirdPartyVehicle"
+            valueRange="claim.VehicleIncidentsOnly"
+            valueType="entity.VehicleIncident"/>
+          <TextInput
+            id="ThirdPartyDriverName"
+            label="DisplayKey.get(&quot;Web.MetroReportDV.Vehicle.ThirdParty.DriverName&quot;)"
+            value="metroReport.ThirdPartyVehicle.driver"
+            valueType="entity.Person">
+            <Reflect
+              triggerIds="ThirdPartyVehicle"
+              value="VALUE.driver"/>
+          </TextInput>
+          <TextInput
+            id="ThirdPartyDriverAddress"
+            label="DisplayKey.get(&quot;Web.MetroReportDV.Vehicle.ThirdParty.DriverAddress&quot;)"
+            value="metroReport.ThirdPartyVehicle.driver.PrimaryAddressDisplayValue">
+            <Reflect
+              triggerIds="ThirdPartyVehicle"
+              value="VALUE.driver.PrimaryAddressDisplayValue"/>
+          </TextInput>
+        </InputSet>
+      </InputColumn>
+    </DetailViewPanel>
+  </Screen>
+</PCF>

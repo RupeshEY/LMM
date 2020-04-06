@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RepositoryOperationRq
+	xmlns="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0" xmlns:rlc="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/2005-2"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0 Acord-Repository_v-1-2-0.xsd">
+
+	<MsgId>b1a13a11-ca02-cee1-a063-993011231113</MsgId>
+	<CreationDtTime>2015-01-22T15:16:30+01:00</CreationDtTime>
+	<RepositoryOperationTypeCd>RepositorySearch</RepositoryOperationTypeCd>
+	<Sender>
+		<PartyId>urn:lloyds:0001</PartyId>
+     	<PartyRoleCd>Insurer</PartyRoleCd>
+      	<PartyName>writeback-carrier</PartyName>
+	</Sender>
+	<Receiver>
+		<PartyId>urn:duns:23619681</PartyId>
+		<PartyRoleCd>ServiceProvider</PartyRoleCd>
+		<PartyName>Xchanging</PartyName>
+	</Receiver>
+	<Application>
+      <ApplicationCd>Jv-Ins-Reinsurance</ApplicationCd>
+      <SchemaVersion>http://www.ACORD.org/standards/Jv-Ins-Reinsurance/2005-2</SchemaVersion>
+   </Application>
+	<DocumentList>
+		<HierarchySortIndicator>false</HierarchySortIndicator>		
+		<DocumentItem>
+			<rlc:ReferredObjects>
+				<rlc:Contract>
+					<rlc:BrokerReference>B00011912UMR1</rlc:BrokerReference>
+				</rlc:Contract>
+				<rlc:Claim>
+					<rlc:BrokerReference>B00011912UCR1</rlc:BrokerReference>
+				</rlc:Claim>
+				<rlc:ClaimEntry>
+					<rlc:BrokerReference>B00011912TR1</rlc:BrokerReference>
+				</rlc:ClaimEntry>
+			</rlc:ReferredObjects>
+		</DocumentItem>
+	</DocumentList>
+	<SearchCriteria>
+		<SearchLimit>0</SearchLimit>
+		<SearchStart>0</SearchStart>
+		<SearchStartDtTime>2015-01-22T15:16:30+01:00</SearchStartDtTime>
+		<SearchEndDtTime>2015-01-25T15:16:30+01:00</SearchEndDtTime>
+		<DocumentTypeList>document_slip document_cover_note</DocumentTypeList>
+	</SearchCriteria>
+</RepositoryOperationRq>

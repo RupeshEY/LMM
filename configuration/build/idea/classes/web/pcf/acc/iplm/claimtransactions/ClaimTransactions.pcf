@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    id="ClaimTransactions"
+    title="DisplayKey.get(&quot;Accelerator.IPLM.Transactions.Title&quot;)">
+    <LocationEntryPoint
+      signature="ClaimTransactions(claim:Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <ScreenRef
+      def="ClaimTransactionsScreen(claim)"/>
+  </Page>
+</PCF>

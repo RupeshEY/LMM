@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="vehIncident.TotalLossCalculatorPreUpdate(); vehIncident.Claim.cleanAndFinishServiceRequests(unusedServiceRequests); vehIncident.Claim.instructNewServiceRequests()"
+    canEdit="true"
+    canVisit="vehIncident != null and perm.Incident.edit(vehIncident)"
+    id="EditVehicleIncidentPopup"
+    infoBar="ClaimInfoBar(vehIncident.Claim)"
+    startInEditMode="startInEditMode"
+    title="DisplayKey.get(&quot;Web.EditVehicleIncident.Title&quot;)">
+    <LocationEntryPoint
+      signature="EditVehicleIncidentPopup(vehIncident : VehicleIncident, startInEditMode : boolean)"/>
+    <LocationEntryPoint
+      signature="EditVehicleIncidentPopup(vehIncident : VehicleIncident)"/>
+    <Variable
+      name="vehIncident"
+      type="VehicleIncident"/>
+    <Variable
+      initialValue="true"
+      name="startInEditMode"
+      type="boolean"/>
+    <Variable
+      initialValue="new java.util.HashSet&lt;ServiceRequest&gt;()"
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Variable
+      initialValue="findExistingRentalSR()"
+      name="existingRentalSR"
+      type="entity.ServiceRequest"/>
+    <Screen
+      id="EditVehicleIncidentScreen">
+      <TitleBar
+        icon="vehIncident.HeaderIcon"/>
+      <Toolbar>
+        <EditButtons
+          showUpdateConfirmMessage="rentalFieldsChangedOnUneditableServiceRequest()"
+          updateConfirmMessage="DisplayKey.get(&quot;Web.VehicleIncidentDV.RentalFieldsChangedConfirm&quot;)"/>
+        <ToolbarDivider/>
+        <PrintToolbarButton
+          hideIfEditable="true"
+          id="VehicleIncident_PrintButton"
+          label="DisplayKey.get(&quot;Button.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="VehIncidentDetailDV(vehIncident, unusedServiceRequests)"/>
+    </Screen>
+    <Code><![CDATA[
+
+function rentalFieldsChangedOnUneditableServiceRequest() : boolean {
+  var incidentRentalFieldChanged = vehIncident.isFieldChanged(VehicleIncident#RentalBeginDate)
+      or vehIncident.isFieldChanged(VehicleIncident#RentalEndDate)
+      or vehIncident.isFieldChanged(VehicleIncident#RentalDailyRate)
+      or vehIncident.isFieldChanged(VehicleIncident#RentalReserveNo)
+  
+  return existingRentalSR != null and not existingRentalSR.IsEditableInUI and incidentRentalFieldChanged
+}
+
+function findExistingRentalSR() : ServiceRequest {
+  // this will be the same rental SR that's found for the VehicleIncidentDV's RentalServiceInputSet
+  return vehIncident.ServiceRequests.firstWhere(\ sr -> sr.Instruction.Services.Count == 1
+      and sr.Instruction.Services.single().Service.Code == gw.vendormanagement.SpecialistServiceCodeConstants.AUTORENTAL)
+}]]></Code>
+  </Popup>
+</PCF>

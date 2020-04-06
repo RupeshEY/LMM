@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_claim.xml -->
+  <ListViewPanel
+    id="EditableNegotiationsLV">
+    <ExposeIterator
+      flags="Deletable"
+      valueType="entity.Negotiation"
+      widget="EditableNegotiationsLV"/>
+    <Require
+      name="NegotiationList"
+      type="Negotiation[]"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <RowIterator
+      editable="false"
+      elementName="Negotiation"
+      toRemove="claim.removeFromNegotiations(Negotiation)"
+      value="NegotiationList"
+      valueType="entity.Negotiation[]">
+      <ToolbarFlag
+        condition="perm.Evaluation.edit(claim)"
+        name="Deletable"/>
+      <Row>
+        <TextCell
+          id="Name"
+          label="DisplayKey.get(&quot;LV.Claim.EditableNegotiations.Name&quot;)"
+          sortOrder="1"
+          value="Negotiation.Name"/>
+        <DateCell
+          dateFormat="short"
+          id="CreateTime"
+          label="DisplayKey.get(&quot;LV.Claim.EditableNegotiations.CreateTime&quot;)"
+          timeFormat="short"
+          value="Negotiation.CreateTime"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

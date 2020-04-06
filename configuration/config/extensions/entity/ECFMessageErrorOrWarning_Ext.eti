@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<entity
+  desc="A error or warning on a ClaimNotifyRq"
+  exportable="true"
+  final="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageErrorOrWarning_Ext"
+  table="ecfmessageerror_ext"
+  type="retireable">
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Coded identification of the error or warning"
+    name="ErrorCode"
+    nullok="false"
+    type="shorttext"/>
+  <typekey
+    desc="The type of ErrorOrWarning on a ClaimNotifyRq"
+    name="ErrorType"
+    nullok="false"
+    typelist="ECFErrorType_Ext"/>
+  <column
+    desc="Description of the error or the warning"
+    name="Description"
+    nullok="false"
+    type="shorttext"/>
+  <foreignkey
+    fkentity="ECFMessage_Ext"
+    name="ECFMessage"
+    nullok="false"/>
+  <column
+    desc="UUID for the owner mesage which contains the ErrorsOrWarnings Tags"
+    name="ReferenceMessageUUID"
+    nullok="true"
+    type="shorttext"/>
+</entity>

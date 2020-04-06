@@ -1,0 +1,86 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Contact">
+  <typekey
+    desc="Type of organization"
+    name="OrganizationType"
+    nullok="true"
+    typelist="OrganizationType">
+    <keyfilters>
+      <keyfilter
+        name="VendorType"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="Specialty of the doctor"
+    name="SpecialtyType"
+    nullok="true"
+    typelist="SpecialtyType"/>
+  <column
+    default="false"
+    desc="Has W-9 form been received"
+    name="W9Received"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="W-9 form received date"
+    name="W9ReceivedDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="W-9 valid start date"
+    name="W9ValidFrom"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="W-9 valid to date"
+    name="W9ValidTo"
+    nullok="true"
+    type="datetime"/>
+  <array
+    arrayentity="Review"
+    desc="Reviews for Service Provider Management"
+    name="Reviews"
+    triggersValidation="true"/>
+  <column-override
+    name="EmailAddress1">
+    <columnParam
+      name="validator"
+      value="Email"/>
+  </column-override>
+  <column-override
+    name="EmailAddress2">
+    <columnParam
+      name="validator"
+      value="Email"/>
+  </column-override>
+  <column-override
+    name="TaxID">
+    <columnParam
+      name="encryption"
+      value="true"/>
+  </column-override>
+  <array arrayentity="EFTData" arrayfield="Contact" desc="Electronic Funds Transfer data for the contact" name="EFTRecords"/>
+
+  <!-- KanjiIndexDefinition: Uncomment if you use kanji name fields for Japanese.
+  <index
+    desc="Covering index for search by name; need subtype to know whether name is relevant"
+    name="CompanyNameK1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="NameKanji"/>
+    <indexcol
+      keyposition="2"
+      name="Subtype"/>
+    <indexcol
+      keyposition="3"
+      name="Retired"/>
+    <indexcol
+      keyposition="4"
+      name="ID"/>
+  </index>
+  -->
+  
+</extension>

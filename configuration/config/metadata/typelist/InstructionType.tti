@@ -1,0 +1,94 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="InstructionType"
+  name="InstructionType">
+  <typecode
+    code="instructionsforsetup"
+    desc="New claim setup instructions "
+    name="Instructions for Setup">
+    <category
+      code="newclaim"
+      typelist="InstructionCategory"/>
+  </typecode>
+  <typecode
+    code="other"
+    desc="Other new claim instructions"
+    name="Other">
+    <category
+      code="newclaim"
+      typelist="InstructionCategory"/>
+    <category
+      code="other"
+      typelist="InstructionCategory"/>
+    <category
+      code="sla"
+      typelist="InstructionCategory"/>
+    <category
+      code="settlement"
+      typelist="InstructionCategory"/>
+    <category
+      code="litigation"
+      typelist="InstructionCategory"/>
+    <category
+      code="denial"
+      typelist="InstructionCategory"/>
+    <category
+      code="other"
+      typelist="InstructionCategory"/>
+    <category
+      code="assignment"
+      typelist="InstructionCategory"/>
+  </typecode>
+  <typecode
+    code="authorization"
+    desc="Authorization"
+    name="Authorization">
+    <category
+      code="Denial"
+      typelist="InstructionCategory"/>
+    <category
+      code="settlement"
+      typelist="InstructionCategory"/>
+  </typecode>
+  <typecode
+    code="internal"
+    desc="Assignment instructions"
+    name="Internal">
+    <category
+      code="assignment"
+      typelist="InstructionCategory"/>
+  </typecode>
+  <typecode
+    code="vendors"
+    desc="Vendors instructions"
+    name="Vendors">
+    <category
+      code="assignment"
+      typelist="InstructionCategory"/>
+  </typecode>
+  <typecode
+    code="lawfirms"
+    desc="Law Firms instructions"
+    name="Law Firms">
+    <category
+      code="assignment"
+      typelist="InstructionCategory"/>
+  </typecode>
+  <typecode
+    code="timefirstpayment"
+    desc="Time for first payment"
+    name="Time for first payment">
+    <category
+      code="sla"
+      typelist="InstructionCategory"/>
+  </typecode>
+  <typecode
+    code="timeclose"
+    desc="Time to close"
+    name="Time to close">
+    <category
+      code="sla"
+      typelist="InstructionCategory"/>
+  </typecode>
+</typelist>

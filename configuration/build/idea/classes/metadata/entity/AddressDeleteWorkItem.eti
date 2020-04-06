@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Queue of Addresses to be checked for deletion. This is a system-internal entity."
+  entity="AddressDeleteWorkItem"
+  ignoreForEvents="true"
+  loadable="false"
+  table="addressdeleteworkitem"
+  type="keyable">
+  <implementsEntity
+    name="WorkItem"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.workqueue.WorkItemPublicMethods"
+    impl="com.guidewire.cc.domain.contact.impl.AddressDeleteWorkItemImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.workqueue.impl.WorkItemInternalMethods"
+    impl="com.guidewire.cc.domain.contact.impl.AddressDeleteWorkItemImpl"/>
+  <fulldescription><![CDATA[Notes an Address that is potentially orphaned and may be deleted if so. Work items are recorded with the PublicID value of (ClaimCenter) Address entities. This is a system-internal entity.
+    ]]></fulldescription>
+  <column
+    desc="The public ID of the Address we want to delete."
+    name="AddressPublicID"
+    nullok="false"
+    type="publicid"/>
+</entity>

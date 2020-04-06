@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_matter.xml -->
+  <ListViewPanel
+    id="ClaimSummaryMattersLV">
+    <Require
+      name="MatterList"
+      type="Matter[]"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <RowIterator
+      editable="false"
+      elementName="Matter"
+      value="MatterList"
+      valueType="entity.Matter[]">
+      <Row>
+        <TextCell
+          action="MatterDetailForward.drilldown(Claim, Matter)"
+          id="Name"
+          label="DisplayKey.get(&quot;LV.Matter.Matters.Name&quot;)"
+          sortOrder="2"
+          value="Matter.Name"/>
+        <TextCell
+          action="MatterDetailForward.drilldown(Claim, Matter)"
+          id="CaseNumber"
+          label="DisplayKey.get(&quot;LV.Matter.Matters.CaseNumber&quot;)"
+          value="Matter.CaseNumber"
+          width="100"/>
+        <CurrencyCell
+          formatType="currency"
+          id="EstSettleCost"
+          label="DisplayKey.get(&quot;LV.Matter.Matters.EstSettleCost&quot;)"
+          value="Matter.FinalSettleCost"
+          width="115"/>
+        <DateCell
+          dateFormat="short"
+          id="TrialDate"
+          label="DisplayKey.get(&quot;LV.Matter.Matters.TrialDate&quot;)"
+          sortOrder="1"
+          timeFormat="short"
+          value="Matter.TrialDate"
+          width="150"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

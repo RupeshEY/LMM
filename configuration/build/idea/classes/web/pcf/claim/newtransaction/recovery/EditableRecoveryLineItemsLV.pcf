@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_financials.xml -->
+  <ListViewPanel
+    id="EditableRecoveryLineItemsLV">
+    <ExposeIterator
+      valueType="entity.TransactionLineItem"
+      widget="EditableRecoveryLineItemsLV"/>
+    <Require
+      name="Transaction"
+      type="Transaction"/>
+    <RowIterator
+      editable="true"
+      elementName="TransactionLineItem"
+      toAdd="Transaction.addToLineItems(TransactionLineItem)"
+      toRemove="Transaction.removeFromLineItemsIfEditable(TransactionLineItem)"
+      value="Transaction.LineItems"
+      valueType="entity.TransactionLineItem[]">
+      <Row>
+        <TypeKeyCell
+          editable="true"
+          filter="TransactionLineItem.ValidLineCategories.contains(VALUE)"
+          id="LineCategory"
+          label="DisplayKey.get(&quot;LV.Financials.EditableRecoveryLineItems.RecoveryLineItem.LineCategory&quot;)"
+          required="false"
+          value="TransactionLineItem.LineCategory"
+          valueType="typekey.LineCategory"/>
+        <TextCell
+          editable="true"
+          id="Comments"
+          label="DisplayKey.get(&quot;LV.Financials.EditableRecoveryLineItems.RecoveryLineItem.Comments&quot;)"
+          value="TransactionLineItem.Comments"/>
+        <CurrencyCell
+          editable="true"
+          footerSumValue="TransactionLineItem.TransactionAmountReservingAmountPair"
+          formatType="currency"
+          id="Amount"
+          label="DisplayKey.get(&quot;LV.Financials.EditableRecoveryLineItems.RecoveryLineItem.Amount&quot;)"
+          required="true"
+          value="TransactionLineItem.TransactionAmountReservingAmountPair"
+          valueType="gw.api.financials.IPairedMoney"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="User">
+  <column
+    name="OffsetStatsUpdateTime"
+    nullok="true"
+    type="datetime"/>
+  <column
+    name="NewlyAssignedActivities"
+    nullok="true"
+    type="integer"/>
+  <!-- <column
+    xmlns=""
+    default="12"
+    desc="integer extension; default value of '12'"
+    name="IntegerExt"
+    nullok="true"
+    type="integer"/> -->
+  <typekey
+    desc="High level claim type (for example, Auto or Property)."
+    name="LossType"
+    nullok="true"
+    typelist="LossType"/>
+  <typekey
+    desc="High level policy type (for example, Auto or Property)."
+    name="PolicyType"
+    nullok="true"
+    typelist="PolicyType"/>
+  <typekey
+    desc="Default quick claim values categorized by LossType."
+    name="QuickClaim"
+    nullok="true"
+    typelist="QuickClaimDefault">
+    <keyfilters>
+      <keyfilter
+        name="LossType"/>
+    </keyfilters>
+  </typekey>
+</extension>

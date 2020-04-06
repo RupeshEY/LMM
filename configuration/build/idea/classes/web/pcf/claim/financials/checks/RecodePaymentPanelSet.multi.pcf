@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="RecodePaymentPanelSet"
+    mode="multi">
+    <Require
+      name="OriginalPayment"
+      type="Payment"/>
+    <Require
+      name="OnsetPayments"
+      type="java.util.ArrayList&lt;Payment&gt;"/>
+    <Require
+      name="reserveLineInputSetHelper"
+      type="gw.api.financials.ReserveLineInputSetHelper"/>
+    <ExposeIterator
+      valueType="entity.Payment"
+      widget="NewOnsetPaymentsLV.NewOnsetPaymentsLV"/>
+    <ListDetailPanel
+      selectionName="Payment"
+      selectionType="Payment">
+      <PanelRef
+        def="NewOnsetPaymentsLV(OriginalPayment, OnsetPayments)"/>
+      <CardViewPanel>
+        <Card
+          id="PaymentDetailsCard"
+          title="DisplayKey.get(&quot;NVV.Financials.Check.PaymentDetails&quot;)">
+          <PanelRef
+            def="RecodePaymentDV(Payment, reserveLineInputSetHelper)"/>
+        </Card>
+      </CardViewPanel>
+    </ListDetailPanel>
+  </PanelSet>
+</PCF>

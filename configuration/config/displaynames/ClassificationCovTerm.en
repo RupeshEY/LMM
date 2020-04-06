@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<Entity
+  name="ClassificationCovTerm">
+  <Columns>
+    <Column
+      beanPath="ClassificationCovTerm.Description"
+      name="description"/>
+  </Columns>
+  <DisplayName><![CDATA[uses java.lang.StringBuilder
+
+var sb = new StringBuilder()
+if(description!=null) {
+  sb.append(description)
+}
+return sb.toString()]]></DisplayName>
+</Entity>

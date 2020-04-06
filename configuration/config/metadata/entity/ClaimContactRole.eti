@@ -1,0 +1,208 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Join table linking claimcontacts with their roles."
+  entity="ClaimContactRole"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="claimcontactrole"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.domain.persistence.core.KeyableBeanPublicMethods"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimContactRoleImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.impl.ClaimContactRoleInternal"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimContactRoleImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.RemoveCallback"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimContactRoleImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimContactRoleImpl"/>
+  <implementsInterface
+    iface="gw.cc.claim.entity.ClaimContactRole"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimContactRoleImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimContactRoleImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.ClaimContactRoleOwnerProvider"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimContactRoleOwnerProviderImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.impl.ClaimContactRoleOwnerProviderInternal"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimContactRoleOwnerProviderImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Links claim contacts with a role on the claim. The ClaimContactRole tracks which Incident and Exposure (if any)
+        corresponds with the contact.
+      
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimContactID"
+    desc="The claimcontact with the given role."
+    exportable="false"
+    fkentity="ClaimContact"
+    name="ClaimContact"
+    nullok="false"
+    triggersValidation="true"/>
+  <foreignkey
+    columnName="EvaluationID"
+    desc="The evaluation with which the contact is associated, if any."
+    exportable="true"
+    fkentity="Evaluation"
+    ignoreforevents="true"
+    name="Evaluation"
+    nullok="true"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="The exposure with which the contact is associated, if any."
+    exportable="true"
+    fkentity="Exposure"
+    ignoreforevents="true"
+    name="Exposure"
+    nullok="true"/>
+  <foreignkey
+    columnName="MatterID"
+    desc="The legal matter with which the contact is associated, if any."
+    exportable="true"
+    fkentity="Matter"
+    ignoreforevents="true"
+    name="Matter"
+    nullok="true"/>
+  <foreignkey
+    columnName="NegotiationID"
+    desc="The negotiation with which the contact is associated, if any."
+    exportable="true"
+    fkentity="Negotiation"
+    ignoreforevents="true"
+    name="Negotiation"
+    nullok="true"/>
+  <foreignkey
+    columnName="PolicyID"
+    desc="The policy with which the contact is associated, if any."
+    exportable="true"
+    fkentity="Policy"
+    ignoreforevents="true"
+    name="Policy"
+    nullok="true"/>
+  <foreignkey
+    columnName="IncidentID"
+    desc="The incident with which the contact is associated, if any."
+    exportable="true"
+    fkentity="Incident"
+    ignoreforevents="true"
+    name="Incident"
+    nullok="true"/>
+  <typekey
+    desc="The role of the contact in relation to the claim, exposure, or matter."
+    name="Role"
+    nullok="false"
+    typelist="contactrole"/>
+  <column
+    default="true"
+    desc="True if this contact is still active in its role for this claim or exposure."
+    name="Active"
+    nullok="false"
+    type="bit"/>
+  <column
+    desc="Comments about this role on the claimcontact."
+    name="Comments"
+    nullok="true"
+    type="shorttext"/>
+  <!-- Extra fields for certain roles  coveredparty and excludedparty -->
+  <column
+    desc="Number of the party in the list of parties."
+    name="PartyNumber"
+    nullok="true"
+    type="integer"/>
+  <!-- coveredparty -->
+  <typekey
+    desc="The type of covered party."
+    name="CoveredPartyType"
+    nullok="true"
+    typelist="CoveredPartyType"/>
+  <!-- witness -->
+  <typekey
+    desc="Indicator for whether witness gave statement or not"
+    name="WitnessStatementInd"
+    nullok="true"
+    typefilter="YesNoOnly"
+    typelist="YesNo"/>
+  <typekey
+    desc="Where was the witness when the accident happened?"
+    name="WitnessPosition"
+    nullok="true"
+    typelist="WitnessPosition"/>
+  <column
+    desc="WitnessPerspective"
+    name="WitnessPerspective"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="100"/>
+  </column>
+  <events/>
+  <index
+    desc="Enforce uniqueness, a particular role can only appear once on a particular owner"
+    name="claimcontactroleu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimContactID"/>
+    <indexcol
+      keyposition="2"
+      name="Role"/>
+    <indexcol
+      keyposition="3"
+      name="Retired"/>
+    <indexcol
+      keyposition="4"
+      name="ExposureID"/>
+    <indexcol
+      keyposition="5"
+      name="MatterID"/>
+    <indexcol
+      keyposition="6"
+      name="PolicyID"/>
+    <indexcol
+      keyposition="7"
+      name="EvaluationID"/>
+    <indexcol
+      keyposition="8"
+      name="NegotiationID"/>
+    <indexcol
+      keyposition="9"
+      name="IncidentID"/>
+  </index>
+  <index
+    desc="Index used for claim exception query that finds all modified claim contact roles"
+    name="claimcontactrole2"
+    trackUsage="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimContactID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="UpdateTime"/>
+  </index>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.ClaimContactRoleMutexOwnerDBCheckBuilder"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.ExclusiveRolesDBCheckBuilder"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.ProhibitedRolesDBCheckBuilder"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.AllContactSubtypesDBCheckBuilder"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.DenormalizedRolesDBCheckBuilder"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.ConsistentClaimContactRolePolicyDBCheckBuilder"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.ClaimContactRoleNoCrossClaimsDBCheckBuilder"/>
+</entity>

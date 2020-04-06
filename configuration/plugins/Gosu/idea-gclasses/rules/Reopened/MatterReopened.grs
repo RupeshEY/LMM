@@ -1,0 +1,13 @@
+package rules.Reopened
+
+@gw.rules.RuleName("Matter Reopened")
+@gw.rules.RuleSetDescription("This is the Matter Reopened rule set. These rules execute after a matter has been reopened, after Matter Reopened Validation rules but before preupdate and validation rules, in order to take automated actions on reopening.")
+class MatterReopened extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Matter) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Matter) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Matter Reopened", MatterReopened )
+  }
+}

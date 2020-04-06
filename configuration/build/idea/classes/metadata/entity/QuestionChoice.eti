@@ -1,0 +1,63 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="One choice in the set of choices for a question of type Choice"
+  entity="QuestionChoice"
+  exportable="true"
+  extendable="false"
+  ignoreForEvents="true"
+  platform="false"
+  readOnly="false"
+  table="questionchoice"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.question.entity.QuestionChoice"
+    impl="com.guidewire.cc.domain.question.impl.QuestionChoiceImpl"/>
+  <foreignkey
+    columnName="QuestionID"
+    desc="Question for which this is a possible answer"
+    fkentity="Question"
+    name="Question"
+    nullok="false"/>
+  <column
+    name="Code"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="1024"/>
+  </column>
+  <column
+    name="Name"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="1024"/>
+    <localization
+      nullok="true"
+      tableName="qchoicename_l10n"/>
+  </column>
+  <column
+    name="Description"
+    nullok="false"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="1024"/>
+    <localization
+      nullok="true"
+      tableName="qchoicedesc_l10n"/>
+  </column>
+  <column
+    desc="What &quot;score&quot; to give answers that use this choice.  What the score signifies, if anything, depends on how the QuestionSet is used."
+    name="Score"
+    nullok="true"
+    type="nonnegativeinteger"/>
+  <column
+    default="-1"
+    desc="Sort order priority"
+    name="Priority"
+    nullok="true"
+    type="integer"/>
+</entity>

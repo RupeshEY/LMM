@@ -1,0 +1,22 @@
+package rules.EventMessage.EventFired_dir.SolrDestFilter_dir.Claim_dir
+
+@gw.rules.RuleName("ClaimRemoved")
+internal class ClaimRemoved {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return messageContext.EventName == "ClaimRemoved"
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+gw.solr.CCSolrMessageTransportPlugin.handleClaimRemovedEvent(messageContext)
+
+/*end00rule*/
+
+  }
+}

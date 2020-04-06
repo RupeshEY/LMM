@@ -1,0 +1,79 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="TAccountDelegate">
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.TAccountDelegate"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountDelegateImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.impl.TAccountDelegateInternal"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountDelegateImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.TAccountDelegateAdapter"/>
+  <fulldescription><![CDATA[The delegate for TAccount and RITAccount.
+    TAccounts are used in ClaimCenter to provide a rolled-up view of all financials transactions
+    entered into the system.  Each Reserve Line (unique combination of Claim, Exposure, Cost Type and Cost Category) has
+    22 distinct TAccounts that together represent every possible life cycle state for each of the four transaction subtypes
+    (Payment, Reserve, Recovery and Recovery Reserve).  The Taccounts occur in pairs; a debit account (example: ReservesXX,
+    which holds the amount of a reserve) and a matching credit account (example: Cash Out). Every life cycle state transition
+    for a transaction (e.g., from pending-approval to awaiting-submission) affects one debit and one credit T-account equally
+    (example: a payment debits ReservesXX and credits Cash Out).  ClaimCenter provides useful calculated values by combining
+    the balances of various TAccounts as appropriate.
+  ]]></fulldescription>
+  <typekey
+    desc="The type of this t-account, i.e., the transaction subtype(s) and lifecycle state that it reflects."
+    getterScriptability="hidden"
+    name="TAccountType"
+    nullok="false"
+    setterScriptability="hidden"
+    typelist="taccounttype"/>
+  <typekey
+    desc="Indicates whether this t-account's normal balance is 'credit normal' or 'debit normal'."
+    getterScriptability="hidden"
+    name="NormalBalance"
+    nullok="false"
+    setterScriptability="hidden"
+    typelist="ledgerside"/>
+  <column
+    default="0"
+    desc="The balance of the claim currency debit side of this t-account's ledger."
+    getterScriptability="hidden"
+    loadedByCallback="true"
+    name="DebitBalance"
+    nullok="false"
+    setterScriptability="doesNotExist"
+    type="money"/>
+  <column
+    default="0"
+    desc="The balance of the claim currency credit side of this t-account's ledger."
+    getterScriptability="hidden"
+    loadedByCallback="true"
+    name="CreditBalance"
+    nullok="false"
+    setterScriptability="doesNotExist"
+    type="money"/>
+  <column
+    desc="The balance of the reporting currency debit side of this t-account's ledger."
+    getterScriptability="hidden"
+    loadedByCallback="true"
+    name="DebitRptBalance"
+    nullok="false"
+    setterScriptability="doesNotExist"
+    type="money"/>
+  <column
+    desc="The balance of the reporting currency credit side of this t-account's ledger."
+    getterScriptability="hidden"
+    loadedByCallback="true"
+    name="CreditRptBalance"
+    nullok="false"
+    setterScriptability="doesNotExist"
+    type="money"/>
+  <column
+    desc="Stores a denormalized counter of the number of financial transactions currently contributing to this taccount's net balance"
+    getterScriptability="hidden"
+    loadedByCallback="true"
+    name="NumContributingTxns"
+    nullok="false"
+    setterScriptability="hidden"
+    type="nonnegativeinteger"/>
+</delegate>

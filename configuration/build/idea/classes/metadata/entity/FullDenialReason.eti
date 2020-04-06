@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Compensability Full Denial Reason Codes"
+  entity="FullDenialReason"
+  exportable="true"
+  table="fulldenialreason"
+  type="retireable">
+  <foreignkey
+    columnName="ClaimWorkerCompID"
+    desc="Associated Workers Comp Claim Info"
+    fkentity="ClaimWorkComp"
+    name="ClaimWorkComp"
+    nullok="false"/>
+  <typekey
+    columnName="FullDenialReasonCode"
+    desc="Denial reason code for the compensability decision"
+    name="FullDenialReasonCode"
+    nullok="false"
+    typelist="FullDenialReason"/>
+  <implementsEntity
+    name="Extractable"/>
+</entity>

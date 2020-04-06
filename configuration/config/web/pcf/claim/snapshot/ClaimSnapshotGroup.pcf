@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="gw.api.snapshot.ClaimSnapshotUtil.hasSnapshot(Claim) and perm.Claim.view(Claim) and perm.System.viewsnapshot and (perm.System.viewclaimbasics or perm.System.viewclaimparties or perm.System.viewpolicy or perm.System.viewexposures or perm.System.viewclaimnotes or perm.System.viewdocs)"
+    id="ClaimSnapshotGroup"
+    title="&quot;&quot;">
+    <LocationEntryPoint
+      signature="ClaimSnapshotGroup(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.LossDetails&quot;)"
+      location="ClaimSnapshotLossDetails(Claim)"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.PeopleInvolved&quot;)"
+      location="ClaimSnapshotPartiesInvolved(Claim)"
+      shortcut="I"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Policy&quot;)"
+      location="ClaimSnapshotPolicy(Claim)"
+      shortcut="L"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Exposures&quot;)"
+      location="ClaimSnapshotExposures(Claim)"
+      shortcut="E"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Notes&quot;)"
+      location="ClaimSnapshotNotes(Claim)"
+      shortcut="S"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.Documents&quot;)"
+      location="ClaimSnapshotDocuments(Claim)"
+      shortcut="T"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimSnapshot.Navigation.ExtraFields&quot;)"
+      location="ClaimSnapshotExtraFields(Claim)"
+      shortcut="F"/>
+  </LocationGroup>
+</PCF>

@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <xsd:element name="EntityRoleConstraintsConfig">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ContactRoleTypeConstraint" minOccurs="0" maxOccurs="unbounded"/>
+        <xsd:element ref="EntityRoleConstraint" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="ContactRoleTypeConstraint">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="ExceptionConstraint" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="contactRoleCode" type="xsd:NMTOKEN" use="required"/>
+      <xsd:attribute name="contactSubtype" type="xsd:NMTOKEN" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="ExceptionConstraint">
+    <xsd:complexType>
+      <xsd:attribute name="entityRef" type="xsd:NMTOKEN" use="required"/>
+      <xsd:attribute name="contactSubtype" type="xsd:NMTOKEN" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="EntityRoleConstraint">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="EntityRef" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="EntityRef">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="RoleRef" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="entityType" type="xsd:NMTOKEN" use="required"/>
+      <xsd:attribute name="superType" type="xsd:NMTOKEN" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="RoleRef">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="RoleConstraint" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="contactRoleCode" type="xsd:NMTOKEN" use="required"/>
+      <xsd:attribute name="generateProperty" type="xsd:NMTOKEN" use="optional"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="RoleConstraint">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="AdditionalInfo" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="constraintType" type="xsd:NMTOKEN" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="AdditionalInfo">
+    <xsd:complexType>
+      <xsd:attribute name="propertyName" type="xsd:NMTOKEN" use="required"/>
+      <xsd:attribute name="value" type="xsd:NMTOKEN" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+</xsd:schema>

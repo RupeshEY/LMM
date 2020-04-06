@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    editable="true"
+    id="InsurerTransactionReferenceInputSet">
+    <Require
+    name="claimResponseRq"
+    type="ECFMessageClaimResponseRq_Ext"/>
+    <TextInput
+      desc="passed in wb:ClaimResponseRq/wb:InsurerTransactionReference"
+      editable="true"
+      id="insurerTransactionRef"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.InsurerTransactionReference&quot;)"
+      maxChars="36"
+      required="true"
+      value="claimResponseRq.InsurerTransactionReference"/>
+  </InputSet>
+</PCF>

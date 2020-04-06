@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Lists all the claim and exposure metric limits for a particular policy type"
+  entity="PolicyTypeMetricLimits"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="policytypemetriclimits"
+  type="editable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.metric.impl.PolicyTypeMetricLimitsInternal"
+    impl="com.guidewire.cc.domain.metric.impl.PolicyTypeMetricLimitsImpl"/>
+  <implementsInterface
+    iface="gw.cc.metric.entity.PolicyTypeMetricLimits"
+    impl="com.guidewire.cc.domain.metric.impl.PolicyTypeMetricLimitsImpl"/>
+  <column
+    default="0"
+    desc="Generation number, used to identify when metric limits were created or retired"
+    exportable="false"
+    name="Generation"
+    nullok="false"
+    setterScriptability="hidden"
+    type="integer"/>
+  <typekey
+    desc="Policy type for the limits."
+    name="PolicyType"
+    nullok="false"
+    typelist="PolicyType"/>
+  <array
+    arrayentity="ClaimMetricLimit"
+    desc="Claim metric limits for this policy type."
+    exportable="false"
+    ignoreforevents="true"
+    name="ClaimMetricLimits"
+    triggersValidation="false"/>
+  <array
+    arrayentity="ExposureMetricLimit"
+    desc="Exposure metric limits for this policy type."
+    exportable="false"
+    ignoreforevents="true"
+    name="ExposureMetricLimits"
+    triggersValidation="false"/>
+  <index
+    desc="Index that ensures there is only one limits object per policy type"
+    name="limitsu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="PolicyType"/>
+  </index>
+</entity>

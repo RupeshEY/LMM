@@ -1,0 +1,201 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Second column of Contributing factors array"
+  name="SecContributingFactors">
+  <!-- Environment Conditions -->
+  <typecode
+    code="Weather"
+    desc="Weather conditions"
+    name="Weather conditions">
+    <category
+      code="Environment"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <typecode
+    code="RoadSurface"
+    desc="Road surface condition"
+    name="Road surface condition">
+    <category
+      code="Environment"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <typecode
+    code="LightCond"
+    desc="Light conditions"
+    name="Light conditions">
+    <category
+      code="Environment"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Visibility"
+    desc="Visibility"
+    name="Visibility">
+    <category
+      code="Environment"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <typecode
+    code="HwyType"
+    desc="Highway type"
+    name="Highway type">
+    <category
+      code="Environment"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <!-- Driver Factors -->
+  <typecode
+    code="HoursOnDuty"
+    desc="Hours on duty"
+    name="Hours on duty">
+    <category
+      code="DriverFactors"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <typecode
+    code="DaysOnDuty"
+    desc="Days on duty"
+    name="Days on duty">
+    <category
+      code="DriverFactors"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Milesph"
+    desc="MPH over limit"
+    name="MPH over limit">
+    <category
+      code="DriverFactors"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <!-- Environment Property Conditions -->
+  <typecode
+    code="Housekeeping"
+    desc="Housekeeping"
+    name="Housekeeping">
+    <category
+      code="Enviro"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Storage"
+    desc="Storage"
+    name="Storage">
+    <category
+      code="Enviro"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <!-- Human Involvement Property Conditions -->
+  <typecode
+    code="PhysFeatures"
+    desc="Physical features"
+    name="Physical features">
+    <category
+      code="ProtectFactors"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <!-- Protection Factors Property Conditions -->
+  <typecode
+    code="Discovery"
+    desc="Discovery"
+    name="Discovery">
+    <category
+      code="HumanInvolve"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <!-- Communication GL -->
+  <typecode
+    code="Instructions"
+    desc="Instructions"
+    name="Instructions">
+    <category
+      code="Commun"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <typecode
+    code="MarketingSales"
+    desc="Marketing/sales"
+    name="Marketing/sales">
+    <category
+      code="Commun"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Warnings"
+    desc="Warnings"
+    name="Warnings">
+    <category
+      code="Commun"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <!-- Defect GL -->
+  <typecode
+    code="NonFood"
+    desc="Non-food"
+    name="Non-food">
+    <category
+      code="Defect"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <typecode
+    code="Food"
+    desc="Food"
+    name="Food">
+    <category
+      code="Defect"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <!-- Environment GL -->
+  <typecode
+    code="SurfaceArea"
+    desc="Surface area"
+    name="Surface area">
+    <category
+      code="EnviroGL"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <typecode
+    code="ObjectSub"
+    desc="Object Substance"
+    name="Object Substance">
+    <category
+      code="EnviroGL"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <typecode
+    code="ProtectFact"
+    desc="Protection factors"
+    name="Protection factors">
+    <category
+      code="EnviroGL"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <!-- Human Involvement - GL -->
+  <typecode
+    code="UseApp"
+    desc="Use/application"
+    name="Use/application">
+    <category
+      code="HumanInvolveGL"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <!-- Not applicable -->
+  <typecode
+    code="NotApplic"
+    desc="Not applicable"
+    name="Not applicable">
+    <category
+      code="notapplic"
+      typelist="PriContributingFactors"/>
+  </typecode>
+  <!-- Contacts -->
+  <typecode
+    code="LegalOblig"
+    desc="Legal obligations"
+    name="Legal obligations">
+    <category
+      code="contacts"
+      typelist="PriContributingFactors"/>
+  </typecode>
+</typelistextension>

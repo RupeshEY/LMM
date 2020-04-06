@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="View for efficiently getting the claimants associated with an exposure."
+  entity="ExposureClaimantView"
+  exportable="false"
+  primaryEntity="Exposure">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.ExposureClaimantView"
+    impl="com.guidewire.cc.domain.exposure.impl.ExposureClaimantViewImpl"/>
+  <viewEntityName
+    name="ClaimantName"
+    path="ClaimantDenorm"/>
+  <viewEntityColumn
+    name="ClaimID"
+    path="Claim"/>
+</viewEntity>

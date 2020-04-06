@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ExitPoint
+    id="ViewPolicy"
+    popup="true"
+    url="{policySystemURL}/PolicyAsLossDate.do">
+    <LocationEntryPoint
+      signature="ViewPolicy(policySystemURL : String, policyNumber : String, lossDate : java.util.Date)"/>
+    <ExitPointParameter
+      locationParam="policySystemURL"
+      type="String"
+      urlParam="policySystemURL"/>
+    <ExitPointParameter
+      locationParam="policyNumber"
+      type="String"
+      urlParam="policyNumber"/>
+    <ExitPointParameter
+      locationParam="lossDate"
+      type="java.util.Date"
+      urlParam="asOfDate"/>
+  </ExitPoint>
+</PCF>

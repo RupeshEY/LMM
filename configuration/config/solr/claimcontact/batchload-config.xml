@@ -1,0 +1,258 @@
+<?xml version="1.0"?>
+
+<document
+        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xsi:noNamespaceSchemaLocation="solr-batchload-config.xsd"
+        version="1">
+
+    <param name="appPrefix" value="cc"/>
+
+    <!--
+    If the debug param is set to true, then all intermediate files in the WorkDir are not deleted.
+    See the logging.properties file to modify the general logging level.
+    -->
+    <param name="debug" value="false"/>
+
+    <!--
+    If the Solr Batch Loader is run from within the Guidewire app (ClaimCenter,
+    PolicyCenter, etc.), the location of the solrServerConfigFile
+    param is taken from the Guidewire app, not from the parameter below and the
+    value for the absolutePathToWorkDir param is determined from the contents of
+    that file, not from the parameter below.
+    -->
+    <param name="solrServerConfigFile" value="/opt/gwsolr/cc/solr/claimcontact_active/conf/solrserver-config.xml"/>
+    <param name="absolutePathToWorkDir" value="/opt/gwsolr/cc/solr/claimcontact_active/workDir"/>
+
+    <!--
+    The parameter absolutePathToSortExe specifies what sort facility the
+    SolrBatchLoader should use. You can either specify the literal "internalSort"
+    or an absolute path to an external sort utility:
+
+    1.) internalSort : this will cause the SolrBatchLoader to use an in-memory
+    Java-based sort facility. This option should be used only in development/demo
+    mode where the number of entity rows to be fetched by the batch loader is less
+    than 10000 (if you exceed 10000 rows, the batch loader will throw an exception).
+
+    2.) <abolute_path_to_an_external_sort_utility> : this will cause the
+    SolrBatchLoader to use an external, high-performance sort utility. This option
+    should be used in production mode. On Unix/Linux the sort utility is typically
+    located at /usr/bin/sort. On Windows, Guidewire only supports the Cygwin sort
+    utility (you must download and install Cygwin). Typically, the Cygwin sort
+    utility is located at c:\cygwin\bin\sort.exe. Be sure to include the .exe
+    extension in the value of absolutePathToSortExe if you are specifying the
+    location of the sort utility on Windows.
+    -->
+    <param name="absolutePathToSortExe" value="internalSort"/>
+    <param name="sortType" value="numeric"/>
+
+    <!--
+    The three parameters, sortFieldArgStyle, entitySortMemSize, and absolutePathToSortTmpDir, are enabled
+    only if you are using an external sort utility. The parameters entitySortMemSize and absolutePathToSortTmpDir
+    are also only enabled for the entity. That is, the sorts for mvFields just get the default values, which should
+    be adequate for their smaller sizes.
+    -->
+    <param name="sortFieldArgStyle" value="posix"/>
+    <param name="entitySortMemSize" value="2G"/>
+    <param name="absolutePathToSortTmpDir" value="/opt/gwsolr/cc/solr/claimcontact_active/workDir/sortTmpDir"/>
+
+    <!--
+    The list of transforms (as defined in the <transformer> elements; see below)
+    gets applied to the stream of documents coming out of the last joiner. The
+    application of these transforms to any one document is independent of their application
+    to all other documents. So, the stream of documents can be partitioned and the list of
+    transforms can be applied in parallel to each partition. The following parameter
+    specifies how many partitions and separate threads should be created to do the
+    transforming. In order to run multiple transformer threads, ALL TRANSFORMER CLASSES
+    MUST BE THREAD SAFE. In particular, since the input line and the transformed
+    output line are in XML and XML parsing and formatting are not thread safe, you must
+    allocate separate parsers and formatters for each instance of a transformer. In other
+    words, your transformer should not share static resources unless you are sure they
+    are read-only/immutable. Serializing access to shared static resources will just degrade
+    performance. The maximum number of transform threads is 10.
+    -->
+    <param name="numTransformThreads" value="3"/>
+
+    <!--
+    If the Solr Batch Loader is run from within the Guidewire app (ClaimCenter,
+    PolicyCenter, etc.), the settings in the following <dataSource> element are
+    overridden by the settings in the <database> element in config.xml or
+    config-override.xml.
+    -->
+    <dataSource name="ds_h2" driver="org.h2.Driver" url="jdbc:h2:file:/tmp/guidewire/emerald/cc;MODE=Oracle;user=;password="/>
+    <!--
+    <dataSource name="ds_orcl" driver="oracle.jdbc.OracleDriver" url="jdbc:oracle:thin:USER/PASSWORD@//HOST:PORT/SERVICENAME"/>
+    <dataSource name="ds_sqlserver" driver="com.microsoft.sqlserver.jdbc.SQLServerDriver" url="jdbc:sqlserver://HOST:PORT;databaseName=DATABASENAME;user=USER;password=PASSWORD"/>
+    -->
+
+    <!-- The following entity definition should be used with Oracle and H2 -->
+
+    <entity
+            name="claimcontact"
+            query="
+      select
+        cc.id as claimContactId,
+        cl.id as claimId,
+        'claimPublicID=' || cl.publicid || '&amp;contactPublicID=' || co.publicid as urn,
+        cl.claimnumber as claimNumber,
+        pol.policynumber as policyNumber,
+        cast(cl.lossdate as Timestamp) as lossDate,
+        cast(cl.reporteddate as Timestamp) as reportedDate,
+        cast(cl.closedate as Timestamp) as closeDate,
+        cast(cl.createtime as Timestamp) as createTime,
+        co.firstname as firstName,
+        co.lastname as lastName,
+        (case when co.firstname is not null then co.firstname else '' end) ||
+        (case when co.lastname is not null then ' ' || co.lastname else '' end) ||
+        (case when co.name is not null then co.name else '' end) as fullname,
+        co.name as businessName,
+        (case when a.addressLine1 is not null then a.addressLine1 else '' end) ||
+        (case when a.addressLine2 is not null then ', ' || a.addressLine2 else '' end) ||
+        (case when a.addressLine3 is not null then ', ' || a.addressLine3 else '' end) as address,
+        a.city as city,
+        st.typecode as state,
+        a.postalcode as postalCode,
+        co.licensenumber as licenseNumber
+      from
+        cc_contact co
+        inner join cc_claimcontact cc on cc.contactid = co.id
+        inner join cc_claim cl on cc.claimid = cl.id
+        left outer join cc_address a on co.primaryaddressid = a.id
+        left outer join cctl_state st on st.id = a.state
+        inner join cctl_contact cot on cot.id = co.subtype
+        inner join cc_policy pol on cl.policyid = pol.id"
+            keys="claimContactId,claimId"
+            />
+
+    <!-- End Oracle, H2 entity definition -->
+
+    <!-- The following entity definition should be used with SQLServer -->
+
+    <!--
+    <entity
+            name="claimcontact"
+            query="
+      select
+        cc.id as claimContactId,
+        cl.id as claimId,
+        'claimPublicID=' + cl.publicid + '&amp;contactPublicID=' + co.publicid as urn,
+        cl.claimnumber as claimNumber,
+        pol.policynumber as policyNumber,
+        cast(cl.lossdate as Date) as lossDate,
+        cast(cl.reporteddate as Date) as reportedDate,
+        cast(cl.closedate as Date) as closeDate,
+        cast(cl.createtime as Date) as createTime,
+        co.firstname as firstName,
+        co.lastname as lastName,
+        (case when co.firstname is not null then co.firstname else '' end) +
+        (case when co.lastname is not null then ' ' + co.lastname else '' end) +
+        (case when co.name is not null then co.name else '' end) as fullname,
+        co.name as businessName,
+        (case when a.addressLine1 is not null then a.addressLine1 else '' end) +
+        (case when a.addressLine2 is not null then ', ' + a.addressLine2 else '' end) +
+        (case when a.addressLine3 is not null then ', ' + a.addressLine3 else '' end) as address,
+        a.city as city,
+        st.typecode as state,
+        a.postalcode as postalCode,
+        co.licensenumber as licenseNumber
+      from
+        cc_contact co
+        inner join cc_claimcontact cc on cc.contactid = co.id
+        inner join cc_claim cl on cc.claimid = cl.id
+        left outer join cc_address a on co.primaryaddressid = a.id
+        left outer join cctl_state st on st.id = a.state
+        inner join cctl_contact cot on cot.id = co.subtype
+        inner join cc_policy pol on cl.policyid = pol.id"
+            keys="claimContactId,claimId"
+            />
+     -->
+    <!-- End SQLServer entity definition -->
+
+    <mvField
+            name="phone"
+            query="
+        select
+          cc.id as claimContactId,
+          co.homephone as phone
+        from
+          cc_contact co,
+          cc_claimcontact cc
+        where
+          co.homephone is not null and
+          cc.contactid = co.id
+      union
+        select
+          cc.id as claimContactId,
+          co.cellphone as phone
+        from
+          cc_contact co,
+          cc_claimcontact cc
+        where
+          co.cellphone is not null and
+          cc.contactid = co.id
+      union
+        select
+          cc.id as claimContactId,
+          co.workphone as phone
+        from
+          cc_contact co,
+          cc_claimcontact cc
+        where
+          co.workphone is not null and
+          cc.contactid = co.id"
+            entityKey="claimContactId"
+            keys="claimContactId"
+            />
+
+    <mvField
+            name="role"
+            query="select ccr.claimcontactid as claimContactId, r.name as role from cctl_contactrole r, cc_claimcontactrole ccr where r.id = ccr.role"
+            entityKey="claimContactId"
+            keys="claimContactId"
+            />
+
+    <mvField
+            name="userId"
+            query="select ca.claimid as claimId, ca.userid as userId from cc_claimaccess ca where ca.permission = 10002 and ca.userid is not null"
+            entityKey="claimId"
+            keys="claimId"
+            />
+
+    <mvField
+            name="groupId"
+            query="select ca.claimid as claimId, ca.groupid as groupId from cc_claimaccess ca where ca.permission = 10002 and ca.groupid is not null"
+            entityKey="claimId"
+            keys="claimId"
+            />
+
+    <mvField
+            name="securityZoneId"
+            query="select ca.claimid as claimId, ca.securityzoneid as securityZoneId from cc_claimaccess ca where ca.permission = 10002 and ca.securityzoneid is not null"
+            entityKey="claimId"
+            keys="claimId"
+            />
+
+    <mvField
+            name="anyone"
+            query="select ca.claimid as claimId, ca.anyone as anyone from cc_claimaccess ca where ca.permission = 10002 and ca.anyone != 0"
+            entityKey="claimId"
+            keys="claimId"
+            />
+
+    <!-- Uncomment the following element to add digests to claim contact records but be sure to update BuildURN and
+         claimcontact-search-config.xml to support digests as well. -->
+    <!--
+      <transformer
+        name="digestTransformer"
+        class="com.guidewire.solr.batchload.xform.DigestTransformer"
+        algorithm="SHA"
+      />
+      -->
+
+    <!-- Uncomment the following element to run a post-processor.-->
+    <!--
+      <postprocessor
+        name="postProcessor"
+        absolutePathToPostprocessorExe="/opt/gwsolr/cc/postprocess.sh"
+      />
+      -->
+</document>

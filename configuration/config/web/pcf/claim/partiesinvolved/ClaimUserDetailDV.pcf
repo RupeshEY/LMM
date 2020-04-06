@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- The details portion of the Parties Involved: Users screen.
+  This file automatically generated from nvv_claim.xml -->
+  <DetailViewPanel
+    id="ClaimUserDetailDV">
+    <Require
+      name="ClaimUserModel"
+      type="ClaimUserModel"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <InputColumn>
+      <ListViewInput
+        def="ClaimUserAssignmentsLV(ClaimUserModel.BeansAssignedToUser)"
+        editable="false"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimUserDetail.Assignments&quot;)">
+        <Toolbar/>
+      </ListViewInput>
+      <InputDivider/>
+      <ListViewInput
+        def="EditableClaimUserRolesLV(ClaimUserModel, Claim)"
+        editable="true"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimUserDetail.Roles&quot;)"
+        validationExpression="ClaimUserModel.validateAll().formatUserMessage()">
+        <Toolbar>
+          <IteratorButtons
+            iterator="EditableClaimUserRolesLV.EditableClaimUserRolesLV"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

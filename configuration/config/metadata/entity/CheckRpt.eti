@@ -1,0 +1,64 @@
+<?xml version="1.0"?>
+<!-- ********************************************************************************************************************
+    Denormalized financial calculation tables
+  ******************************************************************************************************************** -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Calculated amounts for a check."
+  entity="CheckRpt"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="checkrpt"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.financials.check.entity.CheckRpt"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckRptImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.check.impl.CheckRptInternal"
+    impl="com.guidewire.cc.domain.financials.check.impl.CheckRptImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="The gross amount of the check in the transaction currency."
+    name="GrossAmount"
+    nullok="false"
+    type="money"/>
+  <typekey
+    desc="The transaction currency of the Check."
+    name="Currency"
+    nullok="false"
+    typelist="Currency"/>
+  <column
+    desc="The gross amount of the check in the claim currency."
+    name="GrossClaimAmount"
+    nullok="false"
+    type="money"/>
+  <typekey
+    desc="The reserving currency of the Check."
+    name="ReservingCurrency"
+    nullok="false"
+    typelist="Currency"/>
+  <column
+    desc="The gross amount of the check in the reserving currency."
+    name="GrossReservingAmount"
+    nullok="false"
+    type="money"/>
+  <foreignkey
+    columnName="CheckID"
+    desc="The check that the calculations are on."
+    fkentity="Check"
+    name="Check"
+    nullok="false"/>
+  <!-- Unique index on CheckID -->
+  <index
+    desc="One and only one checkrpt is associated with a given check."
+    name="checkrptu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="CheckID"/>
+  </index>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.financials.dbchecks.CheckRptDBCheckBuilder"/>
+</entity>

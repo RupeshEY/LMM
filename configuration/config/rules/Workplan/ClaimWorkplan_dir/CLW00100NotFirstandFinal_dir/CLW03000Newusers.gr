@@ -1,0 +1,21 @@
+package rules.Workplan.ClaimWorkplan_dir.CLW00100NotFirstandFinal_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("CLW03000 - New users")
+internal class CLW03000Newusers {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.AssignedUser.ExperienceLevel == TC_LOW
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* execute child rules */
+/*end00rule*/
+
+  }
+}

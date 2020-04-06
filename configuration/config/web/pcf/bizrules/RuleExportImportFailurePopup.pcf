@@ -1,0 +1,32 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    id="RuleExportImportFailurePopup"
+    title="DisplayKey.get('BizRules.RuleExportImportFailurePopup.Title')">
+    <LocationEntryPoint
+      signature="RuleExportImportFailurePopup(reason: String)"/>
+    <Variable
+      name="reason"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="new com.google.common.io.LineReader(new java.io.StringReader(reason)).readLine()"
+      name="message"
+      type="String"/>
+    <Screen>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            id="Message"
+            labelAbove="true"
+            value="message"/>
+          <TextInput
+            id="Note"
+            labelAbove="true"
+            value="DisplayKey.get('BizRules.RuleExportImportFailurePopup.Note')"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

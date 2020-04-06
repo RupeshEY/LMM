@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="IPLMMessageXMLContentDV"
+    mode="responserejected">
+    <Require
+      name="message"
+      type="LMMessage_Ext"/>
+    <Variable
+      initialValue="message as ECFMessageClaimResponseRq_Ext"
+      name="claimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <Variable
+      initialValue="claimResponseRq?.Activities?.where(\act -&gt; act.ECFApproval and act.Rejected).orderBy(\act -&gt; act.CloseDate).last()"
+      name="lastRejectedActivity"
+      type="Activity"/>
+    <InputColumn>
+      <TextAreaInput
+        id="XMLContent"
+        align="left"
+        labelAbove="true"
+        numRows="120"
+        numCols="120"
+        value="DisplayKey.get(&quot;Accelerator.IPLM.Admin.MessageLog.XmlContent.Rejected&quot;, lastRejectedActivity.CloseUser)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

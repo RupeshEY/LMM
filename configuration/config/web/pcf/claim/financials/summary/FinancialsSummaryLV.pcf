@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="FinancialsSummaryLV">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="financialsSummaryBridge"
+      type="gw.api.financials.summary.FinancialSummaryBridge"/>
+    <Variable
+      initialValue="financialsSummaryBridge.SummaryRows"
+      name="summaryRows"
+      recalculateOnRefresh="true"
+      type="List&lt;gw.api.financials.summary.FSRow&gt;"/>
+    <Variable
+      initialValue="getRowTreeRoots()"
+      name="root"
+      recalculateOnRefresh="true"
+      type="gw.api.tree.RowTreeRootNode"/>
+    <RowTree
+      contentType="gw.api.financials.summary.FSRow"
+      elementName="FSRow"
+      id="FinancialsSummaryRowTree"
+      value="root">
+      <Row
+        id="FSRow"
+        useSubHeaderStyle="!FSRow.Leaf">
+        <TextCell
+          hideChildrenIfReadOnly="false"
+          id="FinancialsSummaryLabel"
+          value="FSRow.Label"/>
+        <TextCell
+          available="true"
+          hideChildrenIfReadOnly="false"
+          id="ts"
+          value="&quot;&quot;"
+          valueType="String"
+          visible="true"
+          width="30">
+          <MenuItem
+            action="NewReserveSet.go(FSRow.Claim, FSRow.Exposure.orNull(),FSRow.CostType, FSRow.CostCategory, FSRow.ReservingCurrency)"
+            available="FSRow.canCreateReserve()"
+            id="QuickMenu_EditReserve"
+            label="DisplayKey.get(&quot;Java.Financials.Summary.Create.Reserve&quot;)"
+            visible="FSRow.Leaf"/>
+          <MenuItem
+            action="QuickCreateCheckWizardForward.go( FSRow.Claim, FSRow.Exposure.orNull(), FSRow.CostType, FSRow.CostCategory, FSRow.ReservingCurrency, true)"
+            available="FSRow.canCreatePayment(financialsSummaryBridge)"
+            id="QuickMenu_QuickCheck"
+            label="DisplayKey.get(&quot;Java.Financials.Summary.Create.QuickCheck&quot;)"
+            visible="FSRow.Leaf"/>
+          <MenuItem
+            action="NormalCreateCheckWizardForward.go( FSRow.Claim, FSRow.Exposure.orNull(), FSRow.CostType, FSRow.CostCategory, FSRow.ReservingCurrency, true)"
+            available="FSRow.canCreatePayment(financialsSummaryBridge)"
+            id="QuickMenu_CreateCheck"
+            label="DisplayKey.get(&quot;Java.Financials.Summary.Create.Check&quot;)"
+            visible="FSRow.Leaf"/>
+        </TextCell>
+        <TextCell
+          action="gw.api.financials.FinancialsUtil.updateCustomTransactionIdsForClaim(Claim, gw.api.financials.FinancialsCalculationUtil.OpenRecoveryReservesExpression, FSRow.TAccountOwnerDelegates); ClaimFinancialsTransactions.go(Claim)"
+          available="FSRow.getValue(gw.api.financials.summary.FinancialsSummaryColumnConstants.OPEN_RECOVERY_RESERVES) != null"
+          enableSort="false"
+          formatType="currency"
+          id="OpenRecoveryReserves"
+          label="DisplayKey.get(&quot;Java.Financials.Summary.OpenRecoveryReserves&quot;)"
+          value="FSRow.getValue(gw.api.financials.summary.FinancialsSummaryColumnConstants.OPEN_RECOVERY_RESERVES)"
+          valueType="gw.api.financials.CurrencyAmount"
+          visible="gw.api.system.CCConfigParameters.UseRecoveryReserves.Value and perm.Claim.viewrecoveryreserves(Claim) and perm.Claim.viewrecoveries(Claim)"
+          wrapLabel="true"/>
+        <TextCell
+          action="gw.api.financials.FinancialsUtil.updateCustomTransactionIdsForClaim(Claim, gw.api.financials.FinancialsCalculationUtil.RemainingReservesExpression, FSRow.TAccountOwnerDelegates); ClaimFinancialsTransactions.go(Claim)"
+          available="FSRow.getValue(gw.api.financials.summary.FinancialsSummaryColumnConstants.REMAINING_RESERVES) != null"
+          enableSort="false"
+          formatType="currency"
+          id="RemainingReserves"
+          label="DisplayKey.get(&quot;Java.Financials.Summary.RemainingReserves&quot;)"
+          value="FSRow.getValue(gw.api.financials.summary.FinancialsSummaryColumnConstants.REMAINING_RESERVES)"
+          valueType="gw.api.financials.CurrencyAmount"
+          visible="perm.Claim.viewreserves(Claim) and perm.Claim.viewpayments(Claim)"
+          wrapLabel="true"/>
+        <TextCell
+          action="gw.api.financials.FinancialsUtil.updateCustomTransactionIdsForClaim(Claim, gw.api.financials.FinancialsCalculationUtil.FuturePaymentsExpression, FSRow.TAccountOwnerDelegates); ClaimFinancialsTransactions.go(Claim)"
+          available="FSRow.getValue(gw.api.financials.summary.FinancialsSummaryColumnConstants.FUTURE_PAYMENTS) != null"
+          enableSort="false"
+          formatType="currency"
+          id="FuturePayments"
+          label="DisplayKey.get(&quot;Java.Financials.Summary.FuturePayments&quot;)"
+          value="FSRow.getValue(gw.api.financials.summary.FinancialsSummaryColumnConstants.FUTURE_PAYMENTS)"
+          valueType="gw.api.financials.CurrencyAmount"
+          visible="perm.Claim.viewpayments(Claim)"
+          wrapLabel="true"/>
+        <TextCell
+          action="gw.api.financials.FinancialsUtil.updateCustomTransactionIdsForClaim(Claim, gw.api.financials.FinancialsCalculationUtil.TotalPaymentsExpression, FSRow.TAccountOwnerDelegates); ClaimFinancialsTransactions.go(Claim)"
+          available="FSRow.getValue(gw.api.financials.summary.FinancialsSummaryColumnConstants.TOTAL_PAYMENTS) != null"
+          enableSort="false"
+          formatType="currency"
+          id="TotalPayments"
+          label="DisplayKey.get(&quot;Java.Financials.Summary.TotalPayments&quot;)"
+          value="FSRow.getValue(gw.api.financials.summary.FinancialsSummaryColumnConstants.TOTAL_PAYMENTS)"
+          valueType="gw.api.financials.CurrencyAmount"
+          visible="perm.Claim.viewpayments(Claim)"
+          wrapLabel="true"/>
+        <TextCell
+          action="gw.api.financials.FinancialsUtil.updateCustomTransactionIdsForClaim(Claim, gw.api.financials.FinancialsCalculationUtil.TotalRecoveriesExpression, FSRow.TAccountOwnerDelegates); ClaimFinancialsTransactions.go(Claim)"
+          available="FSRow.getValue(gw.api.financials.summary.FinancialsSummaryColumnConstants.TOTAL_RECOVERIES) != null"
+          enableSort="false"
+          formatType="currency"
+          id="TotalRecoveries"
+          label="DisplayKey.get(&quot;Java.Financials.Summary.TotalRecoveries&quot;)"
+          value="FSRow.getValue(gw.api.financials.summary.FinancialsSummaryColumnConstants.TOTAL_RECOVERIES)"
+          valueType="gw.api.financials.CurrencyAmount"
+          visible="perm.Claim.viewrecoveries(Claim)"
+          wrapLabel="true"/>
+        <TextCell
+          action="gw.api.financials.FinancialsUtil.updateCustomTransactionIdsForClaim(Claim, gw.api.financials.FinancialsCalculationUtil.TotalIncurredNetRecoveriesExpression, FSRow.TAccountOwnerDelegates); ClaimFinancialsTransactions.go(Claim)"
+          available="FSRow.getValue(gw.api.financials.summary.FinancialsSummaryColumnConstants.TOTAL_INCURRED_NET_RECOVERIES) != null"
+          enableSort="false"
+          formatType="currency"
+          id="TotalIncurredNet"
+          label="DisplayKey.get(&quot;Java.Financials.Summary.TotalIncurredNet&quot;)"
+          value="FSRow.getValue(gw.api.financials.summary.FinancialsSummaryColumnConstants.TOTAL_INCURRED_NET_RECOVERIES)"
+          valueType="gw.api.financials.CurrencyAmount"
+          visible="perm.Claim.viewnettotalincurred(Claim)"
+          wrapLabel="true"/>
+      </Row>
+    </RowTree>
+    <Code><![CDATA[uses gw.api.financials.summary.FSRow
+
+function getRowTreeRoots() : gw.api.tree.RowTreeRootNode {
+  return new gw.api.tree.RowTreeRootNode(financialsSummaryBridge.RootRows, \r ->((r as FSRow).Children), \b -> true)
+}]]></Code>
+  </ListViewPanel>
+</PCF>

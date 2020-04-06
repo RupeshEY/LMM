@@ -1,0 +1,62 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Stores XML snapshots of claim data."
+  entity="ClaimSnapshot"
+  loadable="false"
+  platform="false"
+  table="claimsnapshot"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.ClaimSnapshot"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimSnapshotImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Captures the first notice of loss (FNOL) data for a Claim. A ClaimSnapshot stores all the data for an FNOL as text string.
+        This text contains an XML description. The format of the XML is version-dependent -- meaning there may be XML structure
+        differences between ClaimCenter versions.
+      
+    ]]></fulldescription>
+  <column
+    desc="The ClaimData object, stored as XML."
+    name="ClaimData"
+    nullok="true"
+    type="text">
+    <columnParam
+      name="logicalSize"
+      value="10000000"/>
+  </column>
+  <column
+    desc="Date on which this snapshot was created."
+    name="SnapshotDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    default="0"
+    desc="The version of encryption"
+    name="EncryptionVersion"
+    nullok="false"
+    type="integer"/>
+  <!-- <column
+    xmlns=""
+    desc="Version of the ClaimData object stored"
+    name="DataVersion"
+    type="integer"/>  <typekey
+    xmlns=""
+    desc="Source of the snapshot data"
+    name="SnapshotSource"
+    typelist="SnapshotType"/> -->
+  <foreignkey
+    columnName="ClaimID"
+    desc="Main Claim object whose snapshot is being stored."
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <column
+    default="false"
+    desc="Indicates whether or not the claim data is compressed."
+    name="Compressed"
+    nullok="true"
+    type="bit"/>
+</entity>

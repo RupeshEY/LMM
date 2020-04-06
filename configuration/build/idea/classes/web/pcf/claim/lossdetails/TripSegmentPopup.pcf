@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="true"
+    id="TripSegmentPopup"
+    returnType="TripSegment"
+    startInEditMode="startEditable"
+    title="DisplayKey.get(&quot;Web.TripIncidentScreen&quot;)">
+    <LocationEntryPoint
+      signature="TripSegmentPopup(aTripSegmentParam : TripSegment, aTripIncident : TripIncident, startEditable : Boolean)"/>
+    <Variable
+      name="aTripSegmentParam"
+      type="TripSegment"/>
+    <Variable
+      name="aTripIncident"
+      type="TripIncident"/>
+    <Variable
+      initialValue="aTripSegmentParam == null ? initTripSegment() : aTripSegmentParam"
+      name="aTripSegment"
+      type="TripSegment"/>
+    <Variable
+      name="startEditable"
+      type="Boolean"/>
+    <Variable
+      name="cancellationOnly"
+      recalculateOnRefresh="true"
+      type="Boolean"/>
+    <Variable
+      initialValue="aTripSegment.AddnlTripSegments.length &gt; 0 ? aTripSegment.AddnlTripSegments.first() : null"
+      name="anAddnlTripSegment"
+      recalculateOnRefresh="true"
+      type="AddnlTripSegment"/>
+    <Screen>
+      <PanelRef
+        def="ClaimTripSegmentDetailDV(aTripSegment, aTripIncident)"
+        id="ClaimTripSegmentDetailDV">
+        <Toolbar>
+          <EditButtons
+            pickValue="aTripSegment"
+            updateLabel="aTripSegmentParam == null ? DisplayKey.get(&quot;Button.OK&quot;) : DisplayKey.get(&quot;Button.Update&quot;)"/>
+        </Toolbar>
+      </PanelRef>
+      <CardViewPanel
+        hideTabIfSingle="true">
+        <Card
+          id="RebookedTransportationCard"
+          title="&quot;&quot;"
+          visible="not aTripSegment.CancelOnly">
+          <DetailViewPanel>
+            <InputColumn>
+              <Label
+                label="DisplayKey.get(&quot;Web.TripIncidentScreen.TripCard.AddnlTripSegments&quot;)"/>
+            </InputColumn>
+          </DetailViewPanel>
+          <PanelRef
+            def="AdditionalTripSegmentLV(aTripSegment)">
+            <Toolbar>
+              <IteratorButtons
+                iterator="AdditionalTripSegmentLV.TripSegmentIterator"/>
+              <ToolbarDivider/>
+              <CheckedValuesToolbarButton
+                checkedRowAction="CheckedValue.Assessment = TC_APPROVE"
+                flags="no approve_add_trav, any row_add_trav"
+                hideIfReadOnly="true"
+                id="SegmentApprovalButton"
+                iterator="AdditionalTripSegmentLV.TripSegmentIterator"
+                label="DisplayKey.get(&quot;Web.TripIncidentScreen.Approve&quot;)"
+                shortcut="A"/>
+              <CheckedValuesToolbarButton
+                checkedRowAction="CheckedValue.Assessment = TC_REVIEW"
+                flags="no review_add_trav, any row_add_trav"
+                hideIfReadOnly="true"
+                id="SegmentReviewlButton"
+                iterator="AdditionalTripSegmentLV.TripSegmentIterator"
+                label="DisplayKey.get(&quot;Web.TripIncidentScreen.Review&quot;)"
+                shortcut="R"/>
+              <CheckedValuesToolbarButton
+                checkedRowAction="CheckedValue.Assessment = TC_DENY"
+                flags="no deny_add_trav, any row_add_trav"
+                hideIfReadOnly="true"
+                id="SegmentDenyButton"
+                iterator="AdditionalTripSegmentLV.TripSegmentIterator"
+                label="DisplayKey.get(&quot;Web.TripIncidentScreen.Deny&quot;)"
+                shortcut="N"/>
+              <CheckedValuesToolbarButton
+                checkedRowAction="CheckedValue.Assessment = null"
+                flags="any row_add_trav, no clear_add_trav"
+                hideIfReadOnly="true"
+                id="SegmentClearButton"
+                iterator="AdditionalTripSegmentLV.TripSegmentIterator"
+                label="DisplayKey.get(&quot;Web.TripIncidentScreen.TripCard.Clear&quot;)"
+                shortcut="L"/>
+            </Toolbar>
+          </PanelRef>
+        </Card>
+      </CardViewPanel>
+    </Screen>
+    <Code><![CDATA[function initTripSegment() : TripSegment {
+  var result = new TripSegment()
+  result.TripIncident = aTripIncident
+  return result 
+}]]></Code>
+  </Popup>
+</PCF>

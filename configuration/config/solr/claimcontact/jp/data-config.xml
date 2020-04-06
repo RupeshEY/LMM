@@ -1,0 +1,33 @@
+<dataConfig>
+    <dataSource type="FileDataSource" encoding="UTF-8"/>
+    <document>
+        <entity name="claimcontact" processor="XPathEntityProcessor" forEach="/CONTAINER_ELEM/CLAIMCONTACT" url="${solr.core.instanceDir}/workDir/claimcontact.xml" stream="true">
+            <field column="urn" xpath="/CONTAINER_ELEM/CLAIMCONTACT/URN"/>
+            <field column="claimNumber" xpath="/CONTAINER_ELEM/CLAIMCONTACT/CLAIMNUMBER"/>
+            <field column="policyNumber" xpath="/CONTAINER_ELEM/CLAIMCONTACT/POLICYNUMBER"/>
+            <field column="lossDate" xpath="/CONTAINER_ELEM/CLAIMCONTACT/LOSSDATE"/>
+            <field column="reportedDate" xpath="/CONTAINER_ELEM/CLAIMCONTACT/REPORTEDDATE"/>
+            <field column="closeDate" xpath="/CONTAINER_ELEM/CLAIMCONTACT/CLOSEDATE"/>
+            <field column="createTime" xpath="/CONTAINER_ELEM/CLAIMCONTACT/CREATETIME"/>
+            <field column="kanjiFirstName" xpath="/CONTAINER_ELEM/CLAIMCONTACT/KANJIFIRSTNAME"/>
+            <field column="kanjiLastName" xpath="/CONTAINER_ELEM/CLAIMCONTACT/KANJILASTNAME"/>
+            <field column="kanjiBusinessName" xpath="/CONTAINER_ELEM/CLAIMCONTACT/KANJIBUSINESSNAME"/>
+            <field column="kanjiFullName" xpath="/CONTAINER_ELEM/CLAIMCONTACT/KANJIFULLNAME"/>
+            <field column="furiganaFirstName" xpath="/CONTAINER_ELEM/CLAIMCONTACT/FURIGANAFIRSTNAME"/>
+            <field column="furiganaLastName" xpath="/CONTAINER_ELEM/CLAIMCONTACT/FURIGANALASTNAME"/>
+            <field column="furiganaBusinessName" xpath="/CONTAINER_ELEM/CLAIMCONTACT/FURIGANABUSINESSNAME"/>
+            <field column="furiganaFullName" xpath="/CONTAINER_ELEM/CLAIMCONTACT/FURIGANAFULLNAME"/>
+            <field column="address" xpath="/CONTAINER_ELEM/CLAIMCONTACT/ADDRESS"/>
+            <field column="city" xpath="/CONTAINER_ELEM/CLAIMCONTACT/CITY"/>
+            <field column="state" xpath="/CONTAINER_ELEM/CLAIMCONTACT/STATE"/>
+            <field column="postalCode" xpath="/CONTAINER_ELEM/CLAIMCONTACT/POSTALCODE"/>
+            <field column="licenseNumber" xpath="/CONTAINER_ELEM/CLAIMCONTACT/LICENSENUMBER"/>
+            <field column="phones" xpath="/CONTAINER_ELEM/CLAIMCONTACT/PHONE"/>
+            <field column="roles" xpath="/CONTAINER_ELEM/CLAIMCONTACT/ROLE"/>
+            <field column="userIds" xpath="/CONTAINER_ELEM/CLAIMCONTACT/USERID"/>
+            <field column="groupIds" xpath="/CONTAINER_ELEM/CLAIMCONTACT/GROUPID"/>
+            <field column="securityZoneIds" xpath="/CONTAINER_ELEM/CLAIMCONTACT/SECURITYZONEID"/>
+            <field column="anyone" xpath="/CONTAINER_ELEM/CLAIMCONTACT/ANYONE"/>
+        </entity>
+    </document>
+</dataConfig>

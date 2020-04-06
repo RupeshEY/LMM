@@ -1,0 +1,118 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="RecoveryDetailDV">
+    <Require
+      name="recovery"
+      type="Recovery"/>
+    <Require
+      name="reserveLineInputSetHelper"
+      type="gw.api.financials.ReserveLineInputSetHelper"/>
+    <Require
+      name="recoveryHelper"
+      type="gw.api.financials.RecoveryHelper"/>
+    <InputColumn>
+      <ClaimContactInput
+        claim="recovery.Claim"
+        editable="true"
+        id="Payer"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoveryDetail.Recovery.Payer&quot;)"
+        onPick="recoveryHelper.autoSetRecoveryCurrency()"
+        required="true"
+        value="recovery.Payer"
+        valueRange="recovery.Claim.RelatedContacts">
+        <PostOnChange
+          onChange="recoveryHelper.autoSetRecoveryCurrency()"/>
+      </ClaimContactInput>
+      <InputSetRef
+        def="ReserveLineInputSet(recovery, reserveLineInputSetHelper)"/>
+      <InputDivider/>
+      <TypeKeyInput
+        editable="true"
+        id="RecoveryCategory"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoveryDetail.Recovery.RecoveryCategory&quot;)"
+        value="recovery.RecoveryCategory"
+        valueType="typekey.RecoveryCategory">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <TypeKeyInput
+        editable="true"
+        id="Currency"
+        label="DisplayKey.get(&quot;Financials.Multicurrency.Currency&quot;)"
+        value="recoveryHelper.RecoveryCurrency"
+        valueType="typekey.Currency"
+        visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <InputSetRef
+        def="TransactionExchangeRateInputSet(recovery)"/>
+    </InputColumn>
+    <InputColumn>
+      <ClaimContactInput
+        claim="recovery.Claim"
+        editable="true"
+        id="OnBehalfOf"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoveryDetail.Recovery.OnBehalfOf&quot;)"
+        value="recovery.OnBehalfOf"
+        valueRange="recovery.Claim.RelatedContacts"
+        visible="recovery.RecoveryCategory == RecoveryCategory.TC_SUBRO">
+        <PostOnChange/>
+      </ClaimContactInput>
+      <TextInput
+        editable="true"
+        id="Comments"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoveryDetail.Recovery.Comments&quot;)"
+        numCols="14"
+        value="recovery.Comments"/>
+      <CurrencyInput
+        formatType="currency"
+        id="OpenRecoveryReserves"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoveryDetail.Recovery.OpenRecoveryReserves&quot;)"
+        value="gw.api.financials.FinancialsCalculationsForEditedTransaction.getOpenRecoveryReserves(recovery).ReservingAmount"
+        valueType="gw.api.financials.IMoney"
+        visible="shouldShowCalculation() &amp;&amp; recovery.isUseRecoveryReserves() &amp;&amp; perm.Claim.viewrecoveryreserves(recovery.Claim)"/>
+      <CurrencyInput
+        formatType="currency"
+        id="Payments"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoveryDetail.Recovery.Payments&quot;)"
+        value="gw.api.financials.FinancialsCalculationsForEditedTransaction.getTotalPayments(recovery).ReservingAmount"
+        valueType="gw.api.financials.IMoney"
+        visible="shouldShowCalculation() &amp;&amp; perm.Claim.viewpayments(recovery.Claim)"/>
+      <CurrencyInput
+        formatType="currency"
+        id="PastRecoveries"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoveryDetail.Recovery.PastRecoveries&quot;)"
+        value="gw.api.financials.FinancialsCalculationsForEditedTransaction.getTotalRecoveries(recovery).ReservingAmount"
+        valueType="gw.api.financials.IMoney"
+        visible="shouldShowCalculation() &amp;&amp; perm.Claim.viewrecoveries(recovery.Claim)"/>
+    </InputColumn>
+    <InputFooterSection>
+      <ListViewInput
+        boldLabel="true"
+        def="EditableRecoveryLineItemsLV(recovery)"
+        editable="recovery.ReserveLine != null"
+        label="DisplayKey.get(&quot;NVV.Financials.RecoveryDetail.Recovery.LineItems&quot;)"
+        labelAbove="true">
+        <Toolbar>
+          <IteratorButtons
+            addLabel="DisplayKey.get(&quot;Java.Financials.TransactionLineItem.AddItem&quot;)"
+            addShortcut="I"
+            addVisible="gw.api.financials.FinancialsUtil.isAllowMultipleLineItems()"
+            iterator="EditableRecoveryLineItemsLV.EditableRecoveryLineItemsLV"
+            removeVisible="gw.api.financials.FinancialsUtil.isAllowMultipleLineItems()"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputFooterSection>
+    <Code><![CDATA[function shouldShowCalculation() : boolean {
+  var reserveLine = recovery.ReserveLine
+  if (reserveLine == null) {
+    return false
+  } else if (reserveLine.New) {
+    return recovery.CostType != null && recovery.CostCategory != null && recovery.ReservingCurrency != null
+  }
+  return true
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

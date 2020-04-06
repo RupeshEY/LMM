@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents the relationship between a transaction and its offset."
+  entity="TransactionOffset"
+  exportable="true"
+  overwrittenInStagingTable="false"
+  platform="false"
+  table="transactionoffset"
+  type="joinarray">
+  <implementsInterface
+    iface="gw.cc.financials.entity.TransactionOffset"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionOffsetImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[A TransactionOffset relates a transaction to its offsetting transaction (if any).
+    It contains two links, one to the original transaction and one to its offsetting transaction.
+    A TransactionOffset is created whenever a user recodes or transfers a payment in ClaimCenter,
+    and also when a user voids/stops a payment.  In the case of a recode or transfer the Offsetting
+    transaction is just a negative copy of the original payment.
+  ]]></fulldescription>
+  <foreignkey
+    columnName="TransactionID"
+    createbackingindex="false"
+    desc="The transaction being offset."
+    exportable="true"
+    fkentity="Transaction"
+    importableagainstexistingobject="false"
+    name="Transaction"
+    nullok="false"/>
+  <foreignkey
+    columnName="OffsetID"
+    desc="The offset transaction, to negate the original transaction."
+    exportable="true"
+    fkentity="Transaction"
+    importableagainstexistingobject="false"
+    name="Offset"
+    nullok="false"
+    triggersValidation="true"/>
+  <!-- The transaction and offset must be different transactions. -->
+  <index
+    desc="Enforce uniqueness of the Transaction/Offset pair"
+    name="transactionoffseu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="TransactionID"/>
+    <indexcol
+      keyposition="2"
+      name="OffsetID"/>
+  </index>
+  <index
+    desc="A transaction can have at most one offset pair."
+    name="transactionoffseu2"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="TransactionID"/>
+  </index>
+  <index
+    desc="A transaction can be the offset transaction to only one transaction."
+    name="transactionoffseu3"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="OffsetID"/>
+  </index>
+</entity>

@@ -1,0 +1,50 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table for upgrade to taccounts."
+  entity="TmpTAccountCreditDebit"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="tmptaccountcreditdebit"
+  temporary="true"
+  type="keyable">
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.TmpTAccountCreditDebit"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TmpTAccountCreditDebitImpl"/>
+  <column
+    desc="Temp credit balance for claim amount"
+    name="TmpCreditBalance"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Temp debit balance for claim amount"
+    name="TmpDebitBalance"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Temp credit balance for reserving amount"
+    name="TmpCreditBalanceReserving"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Temp debit balance for reserving amount"
+    name="TmpDebitBalanceReserving"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Temp credit balance for reporting amount"
+    name="TmpCreditBalanceReporting"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="Temp debit balance for reporting amount"
+    name="TmpDebitBalanceReporting"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="temp field for the number of contributing transactions"
+    name="TmpNumContributingTxns"
+    nullok="true"
+    type="nonnegativeinteger"/>
+</entity>

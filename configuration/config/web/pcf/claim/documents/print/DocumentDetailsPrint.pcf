@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    id="DocumentDetailsPrint"
+    parent="ClaimPrintout(Claim)"
+    title="DisplayKey.get(&quot;Web.DocumentDetails.Title&quot;)">
+    <LocationEntryPoint
+      signature="DocumentDetailsPrint(Claim : Claim, DocumentParam : Document)"/>
+    <Variable
+      name="DocumentParam"
+      type="Document"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="DocumentDetailsPrintScreen">
+      <Toolbar/>
+      <DetailViewPanel>
+        <Layout
+          columns="1"
+          type="table"/>
+        <InputSetRef
+          def="DocumentDetailsEditInputSet(new gw.document.DocumentDetailsCCHelper(DocumentParam, false, \docLink -&gt; docLink.Unlinkable), false)"
+          mode="DocumentParam.Type"/>
+        <InputSetRef
+          def="DocumentDetailsEditSupplementalInputSet(DocumentParam)"
+          mode="DocumentParam.Type"/>
+      </DetailViewPanel>
+    </Screen>
+  </Page>
+</PCF>

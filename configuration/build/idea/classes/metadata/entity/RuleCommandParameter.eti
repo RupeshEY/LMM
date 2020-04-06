@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="false"
+  desc="Definition of one parameter in a RuleCommandDefinition"
+  entity="RuleCommandParameter"
+  exportable="false"
+  extendable="false"
+  final="true"
+  loadable="false"
+  platform="true"
+  table="bizrulecommparam"
+  type="versionable">
+  <implementsEntity
+    name="RuleVersionDependent"/>
+  <implementsInterface
+    iface="gw.bizrules.domain.RuleVersionDependent"
+    impl="com.guidewire.bizrules.domain.RuleCommandParameterImpl"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.codegenerator.GosuTextBuilder"
+    impl="com.guidewire.bizrules.codegenerator.RuleCommandParameterGosuTextBuilder"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.RuleCommandParameterDomainMethods"
+    impl="com.guidewire.bizrules.codegenerator.RuleCommandParameterGosuTextBuilder"/>
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.RulesCascadingRemovable"
+    impl="com.guidewire.bizrules.domain.RuleCommandParameterImpl"/>
+  <foreignkey
+    fkentity="RuleCommandDefinition"
+    name="RuleCommandDefinition"
+    nullok="false"/>
+  <column
+    name="ParameterName"
+    nullok="false"
+    type="shorttext"/>
+  <foreignkey
+    fkentity="ExpressionFragment"
+    name="Expression"
+    nullok="false"/>
+</entity>

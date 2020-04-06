@@ -1,0 +1,582 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="ClaimSnapshotGeneralPRPanelSet"
+    mode="Homeowners">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="snapshot"
+      type="dynamic.Dynamic"/>
+    <DetailViewPanel
+      id="LossDetailsDV">
+      <InputColumn>
+        <TextAreaInput
+          id="Description"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.General&quot;)"
+          numCols="35"
+          numRows="3"
+          value="snapshot.Description"
+          valueType="dynamic.Dynamic"/>
+        <DateInput
+          dateFormat="short"
+          id="LossDate"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.LossDate&quot;)"
+          timeFormat="short"
+          value="snapshot.LossDate"
+          valueType="dynamic.Dynamic"/>
+        <TextInput
+          id="LossCause"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.LossCause&quot;)"
+          value="snapshot.LossCause"
+          valueType="dynamic.Dynamic"/>
+        <TextInput
+          id="LocationOfTheft"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.LocationOfTheft&quot;)"
+          value="snapshot.LocationOfTheft"
+          valueType="dynamic.Dynamic"
+          visible="snapshot.LossCause.Code == &quot;burglary&quot;"/>
+        <BooleanRadioInput
+          id="IncidentReport"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.IncidentReport&quot;)"
+          value="snapshot.IncidentReport"
+          valueType="dynamic.Dynamic"/>
+        <Label
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.DamageType&quot;)"/>
+        <Label/>
+        <InputIterator
+          elementName="damage"
+          id="DamageTypeChooser"
+          value="gw.api.claim.HomeownersHelper.getDamages(claim).where( \ d -&gt; snapshot[d.ClaimProperty.Name] != null)"
+          valueType="gw.api.claim.HomeownersHelper.DamageManager[]">
+          <CheckBoxInput
+            id="DamageTypeChecked"
+            value="true"
+            valueLabel="damage.Name"
+            valueType="boolean"/>
+        </InputIterator>
+      </InputColumn>
+      <InputColumn>
+        <Label
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.LossLocation&quot;)"/>
+        <TextInput
+          id="LossLocation"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.LossLocation&quot;)"
+          value="snapshot.LossLocation.DisplayName"
+          valueType="dynamic.Dynamic"/>
+        <TextInput
+          id="CatastropheNumber"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.CatastropheNumber&quot;)"
+          value="snapshot.Catastrophe.DisplayName"
+          valueType="dynamic.Dynamic"/>
+        <BooleanRadioInput
+          id="WeatherRelated"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.WeatherRelated&quot;)"
+          value="snapshot.WeatherRelated"
+          valueType="dynamic.Dynamic"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <PanelRef
+      id="FireDamageQuestions"
+      visible="snapshot.PropertyFireDamage != null">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.FireDamage.Title&quot;)"/>
+      <DetailViewPanel>
+        <InputColumn>
+          <BooleanRadioInput
+            id="ArsonInvolved"
+            label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.FireDamage.ArsonInvolved&quot;)"
+            value="snapshot.PropertyFireDamage.Arson"
+            valueType="dynamic.Dynamic"/>
+          <TextAreaInput
+            id="FireSource"
+            label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.FireDamage.SourceOfFire&quot;)"
+            numRows="2"
+            value="snapshot.PropertyFireDamage.FireSource"
+            valueType="dynamic.Dynamic"/>
+          <TextAreaInput
+            id="HowWasFireDiscovered"
+            label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.FireDamage.FireFirstDiscovered&quot;)"
+            numRows="2"
+            value="snapshot.PropertyFireDamage.HowWasFireDiscovered"
+            valueType="dynamic.Dynamic"/>
+          <BooleanRadioInput
+            id="FireDeptResponded"
+            label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.FireDamage.FireDeptResponded&quot;)"
+            value="snapshot.PropertyFireDamage.FireDeptResponded"
+            valueType="dynamic.Dynamic"/>
+        </InputColumn>
+        <InputColumn>
+          <BooleanRadioInput
+            id="IsAnyoneInjured"
+            label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.FireDamage.AnyoneInjured&quot;)"
+            value="snapshot.PropertyFireDamage.IsAnyoneInjured"
+            valueType="dynamic.Dynamic"/>
+          <BooleanRadioInput
+            id="SmokeDamageOnly"
+            label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.FireDamage.SmokeDamageOnly&quot;)"
+            value="snapshot.PropertyFireDamage.SmokeDamageOnly"
+            valueType="dynamic.Dynamic"/>
+          <BooleanRadioInput
+            id="IsHomeHabitable"
+            label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.FireDamage.HomeHabitable&quot;)"
+            value="snapshot.PropertyFireDamage.IsHomeHabitable"
+            valueType="dynamic.Dynamic"/>
+          <BooleanRadioInput
+            id="IsHomeSecure"
+            label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.FireDamage.HomeSecure&quot;)"
+            value="snapshot.PropertyFireDamage.IsHomeSecure"
+            valueType="dynamic.Dynamic"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </PanelRef>
+    <PanelRef
+      id="WaterDamageQuestions"
+      visible="snapshot.PropertyWaterDamage != null">
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.WaterQuestions.Title&quot;)"/>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            id="WaterSource"
+            label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.WaterQuestions.WaterSource&quot;)"
+            value="snapshot.PropertyWaterDamage.WaterSource"
+            valueType="dynamic.Dynamic"/>
+        </InputColumn>
+        <InputColumn>
+          <BooleanRadioInput
+            id="HasWaterBeenTurnedOff"
+            label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.WaterQuestions.WaterTurnedOff&quot;)"
+            value="snapshot.PropertyWaterDamage.HasWaterBeenTurnedOff"
+            valueType="dynamic.Dynamic"/>
+          <BooleanRadioInput
+            id="IsRoofCovered"
+            label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.WaterQuestions.RoofDamagedCovered&quot;)"
+            value="snapshot.PropertyWaterDamage.IsRoofProtected"
+            valueType="dynamic.Dynamic"
+            visible="snapshot.PropertyWaterDamage.WaterSource.Code == WaterSource.TC_ROOF.Code"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </PanelRef>
+    <PanelRef>
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Property.Title&quot;)"/>
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSet
+            id="DwellingInputSet"
+            visible="hasIncidentType(entity.DwellingIncident)">
+            <Variable
+              initialValue="(util.Snapshot.filterBeansOfType(snapshot.Incidents, &quot;DwellingIncident&quot;)).firstWhere(\ o -&gt; onExposure(o) == false)"
+              name="dwellingIncident"
+              type="dynamic.Dynamic"/>
+            <Label
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Dwelling.Title&quot;)"/>
+            <TextInput
+              formatType="currency"
+              id="DwellingLimit"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Incidents.Limit&quot;)"
+              value="getIncidentCoverageLimit(CoverageType.TC_HODW_DWELLING_COV_HOE)"/>
+            <TextAreaInput
+              id="DwellingDamageDescription"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Dwelling.DamageDescription&quot;)"
+              numRows="2"
+              value="dwellingIncident.Description"
+              valueType="dynamic.Dynamic"/>
+            <TextAreaInput
+              helpText="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Dwelling.MaterialsDamagedTooltip&quot;)"
+              id="DwellingMaterialsDamaged"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Dwelling.MaterialsDamaged&quot;)"
+              numRows="2"
+              value="dwellingIncident.MaterialsDamaged"
+              valueType="dynamic.Dynamic"/>
+            <ListViewInput
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Dwelling.RoomsDamaged&quot;)">
+              <Toolbar/>
+              <ListViewPanel>
+                <RowIterator
+                  editable="true"
+                  elementName="roomDamage"
+                  value="dwellingIncident.DwellingRoomDamages"
+                  valueType="dynamic.Dynamic">
+                  <Row>
+                    <TextCell
+                      enableSort="false"
+                      id="NumberOfRooms"
+                      label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.EditableRooms.NumberOfRooms&quot;)"
+                      numCols="2"
+                      value="roomDamage.NumberOfRooms"
+                      valueType="dynamic.Dynamic"
+                      wrapLabel="true"/>
+                    <TextCell
+                      id="RoomType"
+                      label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.EditableRooms.RoomType&quot;)"
+                      sortOrder="1"
+                      value="roomDamage.RoomType"
+                      valueType="dynamic.Dynamic"/>
+                  </Row>
+                </RowIterator>
+              </ListViewPanel>
+            </ListViewInput>
+            <BooleanRadioInput
+              id="DwellingEstimateReceived"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Dwelling.EstimateReceived&quot;)"
+              value="dwellingIncident.EstimatesReceivedBoolean"
+              valueType="dynamic.Dynamic"/>
+            <BooleanRadioInput
+              id="DwellingAlreadyRepaired"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Dwelling.AlreadyRepaired&quot;)"
+              value="dwellingIncident.AlreadyRepaired"
+              valueType="dynamic.Dynamic"/>
+          </InputSet>
+          <InputSet
+            id="OtherStructureInputSet"
+            visible="hasIncidentType(entity.OtherStructureIncident)">
+            <Variable
+              initialValue="(util.Snapshot.filterBeansOfType(snapshot.Incidents, &quot;OtherStructureIncident&quot;)).firstWhere(\ o -&gt; onExposure(o) == false)"
+              name="otherStructureIncident"
+              type="dynamic.Dynamic"/>
+            <Label
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.OtherStructures.Title&quot;)"/>
+            <TextInput
+              formatType="currency"
+              id="OtherStructureLimit"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Incidents.Limit&quot;)"
+              value="getIncidentCoverageLimit(CoverageType.TC_HODW_OTHER_STRUCTURES_HOE)"/>
+            <TextAreaInput
+              id="OtherStructureDamageDescription"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.OtherStructures.DamageDescription&quot;)"
+              numRows="2"
+              value="otherStructureIncident.Description"
+              valueType="dynamic.Dynamic"/>
+            <BooleanRadioInput
+              id="OtherStructureEstimateReceived"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.OtherStructures.EstimateReceived&quot;)"
+              value="otherStructureIncident.EstimatesReceivedBoolean"
+              valueType="dynamic.Dynamic"/>
+            <BooleanRadioInput
+              id="OtherStructureAlreadyRepaired"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.OtherStructures.AlreadyRepaired&quot;)"
+              value="otherStructureIncident.AlreadyRepaired"
+              valueType="dynamic.Dynamic"/>
+            <BooleanRadioInput
+              id="OtherStructureFencesDamaged"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.OtherStructures.FencesDamaged&quot;)"
+              value="otherStructureIncident.FencesDamaged"
+              valueType="dynamic.Dynamic"/>
+          </InputSet>
+        </InputColumn>
+        <InputColumn>
+          <InputSet
+            id="PropertyContentsInputSet"
+            visible="hasIncidentType(entity.PropertyContentsIncident)">
+            <Variable
+              initialValue="(util.Snapshot.filterBeansOfType(snapshot.Incidents, &quot;PropertyContentsIncident&quot;)).firstWhere(\ o -&gt; onExposure(o) == false)"
+              name="propertyContentsIncident"
+              type="dynamic.Dynamic"/>
+            <Label
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.PersonalProperty.Title&quot;)"/>
+            <TextInput
+              formatType="currency"
+              id="PropertyContentsLimit"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Incidents.Limit&quot;)"
+              value="getIncidentCoverageLimit(CoverageType.TC_HODW_PERSONAL_PROPERTY_HOE)"/>
+            <TextAreaInput
+              id="PropertyContentsDamageDescription"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.PersonalProperty.DamageDescription&quot;)"
+              numRows="2"
+              value="propertyContentsIncident.Description"
+              valueType="dynamic.Dynamic"/>
+          </InputSet>
+          <InputSet
+            id="LivingExpensesInputSet"
+            visible="hasIncidentType(entity.LivingExpensesIncident)">
+            <Variable
+              initialValue="(util.Snapshot.filterBeansOfType(snapshot.Incidents, &quot;LivingExpensesIncident&quot;)).firstWhere(\ o -&gt; onExposure(o) == false)"
+              name="livingExpensesIncident"
+              type="dynamic.Dynamic"/>
+            <Label
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.LivingExpenses.Title&quot;)"/>
+            <TextInput
+              formatType="currency"
+              id="LossOfUseLimit"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Incidents.Limit&quot;)"
+              value="getIncidentCoverageLimit(CoverageType.TC_HODW_LOSS_OF_USE_HOE)"/>
+            <TextAreaInput
+              id="LivingExpensesDescription"
+              label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.LivingExpenses.Description&quot;)"
+              numRows="2"
+              value="livingExpensesIncident.Description"
+              valueType="dynamic.Dynamic"/>
+          </InputSet>
+        </InputColumn>
+      </DetailViewPanel>
+    </PanelRef>
+    <PanelRef>
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Liability.Title&quot;)"/>
+      <PanelSet
+        id="OtherIncidentsPanelSet">
+        <Layout
+          columns="4"
+          type="table"/>
+        <PanelIterator
+          elementName="injuryIncident"
+          id="InjuryIncidentIterator"
+          type="dynamic.Dynamic"
+          value="util.Snapshot.filterBeansOfType(snapshot.Incidents, &quot;InjuryIncident&quot;)"
+          valueType="java.lang.Object[]">
+          <DetailViewPanel
+            id="InjuryIncidentDV"
+            inline="true">
+            <InputColumn
+              width="75">
+              <BooleanRadioInput
+                icon="gw.api.claim.IncidentIconSet.INJURY.DefaultPanelIcon"
+                id="PedestrianIcon"
+                labelAbove="true"
+                value="true"
+                valueType="boolean"/>
+            </InputColumn>
+            <InputColumn>
+              <TextInput
+                action="ClaimSnapshotInjuredInjuryIncidentPopup.push(claim, injuryIncident)"
+                id="InjuredName"
+                labelAbove="true"
+                value="getInjuredName(injuryIncident)"/>
+              <TextInput
+                id="InjuryIncidentDescription"
+                labelAbove="true"
+                value="injuryIncident.Description"
+                valueType="dynamic.Dynamic"/>
+            </InputColumn>
+          </DetailViewPanel>
+        </PanelIterator>
+        <PanelIterator
+          elementName="propertyIncident"
+          id="PropertyIncidentIterator"
+          type="dynamic.Dynamic"
+          value="util.Snapshot.filterBeansOfType(snapshot.Incidents, &quot;FixedPropertyIncident&quot;)"
+          valueType="java.lang.Object[]">
+          <DetailViewPanel
+            id="PropertyIncidentDV"
+            inline="true">
+            <InputColumn
+              width="75">
+              <BooleanRadioInput
+                icon="gw.api.claim.IncidentIconSet.PROPERTY_LIABILITY.DefaultPanelIcon"
+                id="PropertyIcon"
+                labelAbove="true"
+                value="true"
+                valueType="boolean"/>
+            </InputColumn>
+            <InputColumn>
+              <TextInput
+                action="ClaimSnapshotFixedPropertyIncidentPopup.push(claim, propertyIncident)"
+                id="PropertyName"
+                labelAbove="true"
+                value="propertyIncident.DisplayName == &quot;&quot; ? DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Property.Unknown&quot;) : propertyIncident.DisplayName"
+                valueType="dynamic.Dynamic"/>
+              <TextInput
+                id="PropertyIncidentDescription"
+                labelAbove="true"
+                value="propertyIncident.Description"
+                valueType="dynamic.Dynamic"/>
+            </InputColumn>
+          </DetailViewPanel>
+        </PanelIterator>
+        <DetailViewPanel>
+          <InputColumn>
+            <TextInput
+              id="EmptyInputColumn"
+              value="&quot;&quot;"/>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelSet>
+    </PanelRef>
+    <PanelRef>
+      <TitleBar
+        title="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.AdditionalInformation.Title&quot;)"/>
+      <DetailViewPanel>
+        <InputColumn>
+          <ListViewInput
+            boldLabel="true"
+            label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.AnyWitnesses&quot;)"
+            labelAbove="true">
+            <Toolbar/>
+            <ListViewPanel
+              id="WitnessesLV">
+              <RowIterator
+                editable="false"
+                elementName="witness"
+                value="util.Snapshot.getClaimContactRolesByRole(snapshot, &quot;Witness&quot;)"
+                valueType="dynamic.Dynamic">
+                <Row>
+                  <TextCell
+                    id="Contact"
+                    label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.EditableExcludedParties.Contact&quot;)"
+                    value="util.Snapshot.renderValue(witness.Contact)"/>
+                  <TextCell
+                    id="WitnessStatement"
+                    label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.EditableWitnesses.WitnessStatementInd&quot;)"
+                    value="witness.WitnessStatementInd"
+                    valueType="dynamic.Dynamic"/>
+                  <TextCell
+                    id="WitnessPerspective"
+                    label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.EditableWitnesses.WitnessPerspective&quot;)"
+                    value="witness.WitnessPerspective"
+                    valueType="dynamic.Dynamic"/>
+                </Row>
+              </RowIterator>
+            </ListViewPanel>
+          </ListViewInput>
+          <ListViewInput
+            boldLabel="true"
+            label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Officials&quot;)"
+            labelAbove="true">
+            <Toolbar/>
+            <ListViewPanel
+              id="OfficialsLV">
+              <RowIterator
+                editable="false"
+                elementName="Official"
+                value="snapshot.Officials"
+                valueType="dynamic.Dynamic">
+                <Row>
+                  <TextCell
+                    id="Type"
+                    label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Type&quot;)"
+                    value="Official.OfficialType"
+                    valueType="dynamic.Dynamic"/>
+                  <TextCell
+                    id="Name"
+                    label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Name&quot;)"
+                    value="Official.Name"
+                    valueType="dynamic.Dynamic"/>
+                  <TextCell
+                    id="ReportNumber"
+                    label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.ReportNumber&quot;)"
+                    value="Official.ReportNumber"
+                    valueType="dynamic.Dynamic"/>
+                </Row>
+              </RowIterator>
+            </ListViewPanel>
+          </ListViewInput>
+          <ListViewInput
+            boldLabel="true"
+            label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.MetroReportStatus&quot;)"
+            labelAbove="true">
+            <Toolbar/>
+            <ListViewPanel
+              id="MetroReportsLV">
+              <RowIterator
+                editable="false"
+                elementName="MetroReport"
+                value="snapshot.MetroReports"
+                valueType="dynamic.Dynamic">
+                <Row>
+                  <TextCell
+                    id="MetroReportType"
+                    label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.MetroReportType&quot;)"
+                    value="MetroReport.MetroReportType"
+                    valueType="dynamic.Dynamic"/>
+                  <TextCell
+                    id="MetroReportStatus"
+                    label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.MetroReportStatus&quot;)"
+                    value="MetroReport.Status"
+                    valueType="dynamic.Dynamic"/>
+                  <TextCell
+                    id="MetroReportOrderDate"
+                    label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.MetroReportOrderDate&quot;)"
+                    value="MetroReport.CreateTime"
+                    valueType="dynamic.Dynamic"/>
+                </Row>
+              </RowIterator>
+            </ListViewPanel>
+          </ListViewInput>
+          <InputDivider/>
+          <Label
+            label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Categorization&quot;)"/>
+          <TextInput
+            id="Notification_Fault"
+            label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.Notification.Fault&quot;)"
+            value="snapshot.FaultRating"
+            valueType="dynamic.Dynamic">
+            <PostOnChange/>
+          </TextInput>
+          <TextInput
+            id="ClaimPermissionRequired"
+            label="DisplayKey.get(&quot;Web.ClaimSnapshotGeneralDV.Homeowners.PermissionRequired&quot;)"
+            value="snapshot.PermissionRequired"
+            valueType="dynamic.Dynamic"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </PanelRef>
+    <Code><![CDATA[function hasIncidentType( incident : Type ) : boolean {
+  if (incident == OtherStructureIncident) {
+    return hasIncidentNotOnExposure("OtherStructureIncident")
+  } else if (incident == PropertyContentsIncident) {
+    return hasIncidentNotOnExposure("PropertyContentsIncident")
+  } else if (incident == InjuryIncident) {
+    return hasIncidentNotOnExposure("InjuryIncident")
+  } else if (incident == DwellingIncident) {
+    return hasIncidentNotOnExposure("DwellingIncident")
+  } else if (incident == FixedPropertyIncident) {
+    return hasIncidentNotOnExposure("FixedPropertyIncident")
+  } else if (incident == LivingExpensesIncident) {
+    return hasIncidentNotOnExposure("LivingExpensesIncident")
+  }
+  return false
+}
+
+function hasIncidentNotOnExposure(incidentTypeName : String): boolean {
+  return !((util.Snapshot.filterBeansOfType(snapshot.Incidents, incidentTypeName)).where(\ o -> onExposure(o) == false).IsEmpty) ? true : false
+}
+
+function onExposure(incident : dynamic.Dynamic) : boolean {
+  var exposures : dynamic.Dynamic = snapshot.Exposures
+  for(exposure in exposures) {
+    if(exposure.Incident == incident) {
+      return true
+    }
+  }
+  return false
+}
+
+//Return the injured party's name or display key
+function getInjuredName(incident:dynamic.Dynamic) : String {
+  if(incident.injured!=null and incident.injured.DisplayName.HasContent)
+    return incident.injured.DisplayName as String
+  else
+    return DisplayKey.get("Web.ClaimSnapshotGeneralDV.Homeowners.Injured.Unknown")
+}
+
+function getIncidentCoverageLimit(coverageType : CoverageType) : String {
+  var coverages = getPrimaryLocationCoverages()
+  if (coverages != null) {
+    var coverage = coverages.firstWhere(\ c -> c.Type.Code == coverageType.Code)
+    return coverage.ExposureLimit as String 
+  } else {
+    return null
+  }
+}
+
+function getPrimaryLocationCoverages() : dynamic.Dynamic {
+  var result = new Object[0]
+  var policy = snapshot.Policy
+  var location = policy.PrimaryLocation
+  if (location != null) {
+    var riskUnits = policy.RiskUnits
+    for (ru in riskUnits) {
+      if (ru.PolicyLocation == location) {
+        result = util.Snapshot.filterBeansOfType(ru.Coverages, "PropertyCoverage")
+      }
+    }
+  }
+  return result
+}]]></Code>
+  </PanelSet>
+</PCF>

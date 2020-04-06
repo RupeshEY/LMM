@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<!-- MatterExposure -->
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Links an exposure to a legal matter."
+  entity="MatterExposure"
+  exportable="true"
+  platform="false"
+  table="matterexposure"
+  type="joinarray">
+  <implementsInterface
+    iface="gw.cc.matter.entity.MatterExposure"
+    impl="com.guidewire.cc.domain.matter.impl.MatterExposureImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+            Links an Exposure entity with a Matter entity.
+            
+    ]]></fulldescription>
+  <foreignkey
+    columnName="MatterID"
+    desc="Related matter."
+    exportable="false"
+    fkentity="Matter"
+    name="Matter"
+    nullok="false"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="Related exposure."
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="false"/>
+  <index
+    desc="Enforce uniqueness, a particular exposure can only appear once per matter"
+    name="matterexposureu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="MatterID"/>
+    <indexcol
+      keyposition="2"
+      name="ExposureID"/>
+  </index>
+</entity>

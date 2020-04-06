@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="SIinfoInputSet">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <TextInput
+      boldLabel="true"
+      id="SIinfo_SIscore"
+      label="DisplayKey.get(&quot;NVV.Claim.SubView.SIinfo.SIscore&quot;)"
+      value="Claim.SIScore"
+      valueType="java.lang.Integer"/>
+    <InputDivider/>
+  </InputSet>
+</PCF>

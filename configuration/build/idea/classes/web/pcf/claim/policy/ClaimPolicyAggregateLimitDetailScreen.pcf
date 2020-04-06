@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Screen
+    id="ClaimPolicyAggregateLimitDetailScreen">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="AggregateLimit"
+      type="AggregateLimit"/>
+    <Require
+      name="AggregateLimitHelper"
+      type="gw.api.admin.AggregateLimitHelper"/>
+    <Toolbar>
+      <EditButtons
+        editVisible="false"
+        updateDefault="true"/>
+      <ToolbarButton
+        action="AggregateLimitHelper.initializeCoverageLineList(AggregateLimit, Claim.Policy); CurrentLocation.startEditing()"
+        hideIfEditable="true"
+        id="ClaimPolicyAggregateLimitDetailScreen_EditButton"
+        label="DisplayKey.get(&quot;Button.Edit&quot;)"
+        shortcut="E"
+        visible="perm.Policy.edit(Claim)"/>
+    </Toolbar>
+    <PanelRef
+      def="AggregateLimitDetailDV(AggregateLimit, Claim.Policy, AggregateLimitHelper)"/>
+  </Screen>
+</PCF>

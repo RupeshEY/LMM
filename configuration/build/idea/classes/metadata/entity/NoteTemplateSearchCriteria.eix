@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="NoteTemplateSearchCriteria">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.note.impl.NoteTemplateSearchCriteriaCoreExtMethods"
+    impl="com.guidewire.cc.domain.note.impl.NoteTemplateSearchCriteriaCoreExtMethodsImpl"/>
+  <description><![CDATA[
+            Non-persistent set of criteria to use in searching for a specific note based on a note
+            template. (ClaimCenter automatically fills in some of the fields in notes created from a
+            particular note template.)
+    ]]></description>
+  <typekey
+    desc="The type of the Loss (Auto, Property, .. etc)"
+    name="Lob"
+    nullok="true"
+    typelist="LossType"/>
+</internalExtension>

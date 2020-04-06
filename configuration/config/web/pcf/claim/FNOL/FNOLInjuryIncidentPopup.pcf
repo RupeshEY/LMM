@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    afterEnter="initializeVariables()"
+    canEdit="true"
+    id="FNOLInjuryIncidentPopup"
+    returnType="InjuryIncident"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.FNOLInjuryIncidentPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="FNOLInjuryIncidentPopup(Claim: Claim, injuryIncident: InjuryIncident)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="injuryIncident"
+      type="InjuryIncident"/>
+    <Variable
+      name="contactPerson"
+      type="Person"/>
+    <Variable
+      name="newPerson"
+      type="Person"/>
+    <Variable
+      name="originalPerson"
+      type="Person"/>
+    <Screen
+      id="FNOLInjuryIncidentScreen">
+      <TitleBar
+        icon="injuryIncident.HeaderIcon"/>
+      <Toolbar>
+        <EditButtons
+          pickValue="injuryIncident"/>
+      </Toolbar>
+      <DetailViewPanel
+        id="ContactDV">
+        <InputColumn>
+          <RangeInput
+            editable="true"
+            id="ClaimContactPerson"
+            label="DisplayKey.get(&quot;Web.FNOLContactPopup.ContactDV.Person.Label&quot;)"
+            optionLabel="VALUE == newPerson ? DisplayKey.get(&quot;Web.FNOLContactPopup.ContactDV.NewPerson.Value&quot;) : VALUE.DisplayName"
+            required="true"
+            value="contactPerson"
+            valueRange="getContactPersonValueRange()"
+            valueType="entity.Person">
+            <PostOnChange
+              onChange="assignContact()"/>
+          </RangeInput>
+          <InputSetRef
+            def="FNOLContactInputSet( contactPerson, ContactRole.TC_INJURED, injuryIncident )"/>
+        </InputColumn>
+        <InputColumn>
+          <Label
+            id="Injury"
+            label="DisplayKey.get(&quot;Web.FNOLContactPopup.ContactDV.InjuryLabel&quot;)"/>
+          <InputSetRef
+            def="InjuryIncidentInputSet(injuryIncident)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[function getContactPersonValueRange() : java.util.List<Contact> {
+  var existingContacts = Claim.getRelatedContacts( Person ) 
+  var result = (existingContacts?.toList())
+  if ((newPerson != null) &&
+      (not result.contains(newPerson))) {
+    result.add(newPerson)
+  }
+  if ((originalPerson != null) &&
+      (not result.contains(originalPerson))) {
+    result.add(originalPerson)
+  }
+  return result
+}
+
+function initializeVariables() {
+  if (injuryIncident == null) {
+    injuryIncident = new InjuryIncident();
+    Claim.addToIncidents( injuryIncident );
+  }  
+  
+  newPerson = new Person()
+  if (injuryIncident.injured == null) {
+    injuryIncident.injured = newPerson
+  } else {
+    originalPerson = injuryIncident.injured
+  }
+
+  contactPerson = injuryIncident.injured
+}
+
+function assignContact() {
+  injuryIncident.injured = contactPerson
+}]]></Code>
+  </Popup>
+</PCF>

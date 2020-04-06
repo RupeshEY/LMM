@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Classification condition filter by Jurisdiction"
+  entity="JurisdictionConditionFilter"
+  priority="1"
+  supertype="ConditionFilter">
+  <typekey
+    desc="Classification condition filter by Jurisdiction. The Jurisdiction must be associated with JurisdictionType.TC_INSURANCE."
+    name="Jurisdiction"
+    nullok="false"
+    typelist="Jurisdiction"/>
+  <index
+    desc="Prevents duplicate condition filters"
+    name="jur_cond_index_1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ClassificationConditionID"/>
+    <indexcol
+      keyposition="2"
+      name="Jurisdiction"/>
+  </index>
+</subtype>

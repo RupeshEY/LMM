@@ -1,0 +1,249 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    editable="true"
+    id="WCBenefitParameterSetDV">
+    <Require
+      name="WCBenefitParameterSet"
+      type="WCBenefitParameterSet"/>
+    <InputColumn>
+      <Label
+        id="General"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.General&quot;)"/>
+      <TypeKeyInput
+        editable="true"
+        filter="VALUE.hasCategory(JurisdictionType.TC_INSURANCE)"
+        id="Jurisdiction"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.JurisdictionState&quot;)"
+        required="true"
+        value="WCBenefitParameterSet.JurisdictionState"
+        valueType="typekey.Jurisdiction"/>
+      <DateInput
+        editable="true"
+        id="StartDate"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.StartDate&quot;)"
+        required="true"
+        validationExpression="validateThisDate()"
+        value="WCBenefitParameterSet.StartDate"/>
+      <DateInput
+        editable="true"
+        id="EndDate"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.EndDate&quot;)"
+        required="true"
+        validationExpression="validateThisDate()"
+        value="WCBenefitParameterSet.EndDate"/>
+      <TextInput
+        editable="true"
+        id="RateCommentsw"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.RateComments&quot;)"
+        value="WCBenefitParameterSet.RateComments"/>
+      <InputDivider/>
+      <Label
+        id="TTD"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.TTD&quot;)"/>
+      <TextInput
+        editable="true"
+        id="TTDPercentOfWages"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.TTDPercentOfWages&quot;)"
+        value="WCBenefitParameterSet.TTDPercentOfWages"
+        valueType="java.math.BigDecimal"/>
+      <TextInput
+        editable="true"
+        id="TTDMax"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.TTDMax&quot;)"
+        validationExpression="validateTTDBenefit(WCBenefitParameterSet.TTDMin, WCBenefitParameterSet.TTDMax)"
+        value="WCBenefitParameterSet.TTDMax"
+        valueType="java.math.BigDecimal"/>
+      <TextInput
+        editable="true"
+        id="TTDMin"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.TTDMin&quot;)"
+        validationExpression="validateTTDBenefit(WCBenefitParameterSet.TTDMin, WCBenefitParameterSet.TTDMax)"
+        value="WCBenefitParameterSet.TTDMin"
+        valueType="java.math.BigDecimal"/>
+      <BooleanRadioInput
+        editable="true"
+        id="TTDMinAdjToAWW"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.TTDMinAdjToAWW&quot;)"
+        value="WCBenefitParameterSet.TTDMinAdjToAWW"/>
+      <InputDivider/>
+      <Label
+        id="TPD"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.TPD&quot;)"/>
+      <TextInput
+        editable="true"
+        id="TPDPercentOfWages"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.TPDPercentOfWages&quot;)"
+        value="WCBenefitParameterSet.TPDPercentOfWages"
+        valueType="java.math.BigDecimal"/>
+      <TextInput
+        editable="true"
+        id="TPDMax"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.TPDMax&quot;)"
+        validationExpression="validateTPDBenefit(WCBenefitParameterSet.TPDMin, WCBenefitParameterSet.TPDMax)"
+        value="WCBenefitParameterSet.TPDMax"
+        valueType="java.math.BigDecimal"/>
+      <TextInput
+        editable="true"
+        id="TPDMin"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.TPDMin&quot;)"
+        validationExpression="validateTPDBenefit(WCBenefitParameterSet.TPDMin, WCBenefitParameterSet.TPDMax)"
+        value="WCBenefitParameterSet.TPDMin"
+        valueType="java.math.BigDecimal"/>
+      <BooleanRadioInput
+        editable="true"
+        id="TPDMinAdjToAWW"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.TPDMinAdjToAWW&quot;)"
+        value="WCBenefitParameterSet.TPDMinAdjToAWW"/>
+      <InputDivider/>
+    </InputColumn>
+    <InputColumn>
+      <Label
+        id="WaitingPeriod"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.WaitingPeriod&quot;)"/>
+      <TextInput
+        editable="true"
+        id="WaitingPeriodDays"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.NumberOfDays&quot;)"
+        validationExpression="WCBenefitParameterSet.WaitingPeriodDays &lt; 0 ? DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.Message.NegativeNumberOfDays&quot;) : null"
+        value="WCBenefitParameterSet.WaitingPeriodDays"
+        valueType="java.lang.Integer"/>
+      <TextInput
+        editable="true"
+        id="RetroactivePeriod"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.RetroactivePeriod&quot;)"
+        validationExpression="WCBenefitParameterSet.RetroactivePeriod &lt; 0 ?  DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.Message.NegativeRetroactivePeriod&quot;) : null"
+        value="WCBenefitParameterSet.RetroactivePeriod"
+        valueType="java.lang.Integer"/>
+      <CheckBoxInput
+        editable="true"
+        id="WPNotAppliedToPTD"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.WPNotAppliedToPTD&quot;)"
+        value="WCBenefitParameterSet.WPNotAppliedToPTD"/>
+      <CheckBoxInput
+        editable="true"
+        id="WPNotAppliedToPPD"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.WPNotAppliedToPPD&quot;)"
+        value="WCBenefitParameterSet.WPNotAppliedToPPD"/>
+      <InputDivider/>
+      <Label
+        id="PTD"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.PTD&quot;)"/>
+      <TextInput
+        editable="true"
+        id="PTDPercentOfWages"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.PTDPercentOfWages&quot;)"
+        value="WCBenefitParameterSet.PTDPercentOfWages"
+        valueType="java.math.BigDecimal"/>
+      <TextInput
+        editable="true"
+        id="TPTDMax"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.PTDMax&quot;)"
+        validationExpression="validatePTDBenefit(WCBenefitParameterSet.PTDMin, WCBenefitParameterSet.PTDMax)"
+        value="WCBenefitParameterSet.PTDMax"
+        valueType="java.math.BigDecimal"/>
+      <TextInput
+        editable="true"
+        id="PTDMin"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.PTDMin&quot;)"
+        validationExpression="validatePTDBenefit(WCBenefitParameterSet.PTDMin, WCBenefitParameterSet.PTDMax)"
+        value="WCBenefitParameterSet.PTDMin"
+        valueType="java.math.BigDecimal"/>
+      <BooleanRadioInput
+        editable="true"
+        id="PTDMinAdjToAWW"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.PTDMinAdjToAWW&quot;)"
+        value="WCBenefitParameterSet.PTDMinAdjToAWW"/>
+      <InputDivider/>
+      <Label
+        id="PPD"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.PPD&quot;)"/>
+      <TextInput
+        editable="true"
+        id="PPDPercentOfWages"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.PPDPercentOfWages&quot;)"
+        value="WCBenefitParameterSet.PPDPercentOfWages"
+        valueType="java.math.BigDecimal"/>
+      <TextInput
+        editable="true"
+        id="PPDMax"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.PPDMax&quot;)"
+        validationExpression="validatePPDBenefit(WCBenefitParameterSet.PPDMin, WCBenefitParameterSet.PPDMax)"
+        value="WCBenefitParameterSet.PPDMax"
+        valueType="java.math.BigDecimal"/>
+      <TextInput
+        editable="true"
+        id="PPDMin"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.PPDMin&quot;)"
+        validationExpression="validatePPDBenefit(WCBenefitParameterSet.PPDMin, WCBenefitParameterSet.PPDMax)"
+        value="WCBenefitParameterSet.PPDMin"
+        valueType="java.math.BigDecimal"/>
+      <BooleanRadioInput
+        editable="true"
+        id="PPDMinAdjToAWW"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.PPDMinAdjToAWW&quot;)"
+        value="WCBenefitParameterSet.PPDMinAdjToAWW"/>
+    </InputColumn>
+    <InputFooterSection>
+      <ListViewInput
+        boldLabel="true"
+        def="WCBenefitFactorsLV(WCBenefitParameterSet)"
+        id="Factors"
+        label="DisplayKey.get(&quot;DV.Admin.WCBenefitParameterSet.OtherJurisdictionalFactors&quot;)"
+        labelAbove="true">
+        <Toolbar>
+          <IteratorButtons
+            iterator="Factors.WCBenefitFactor"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputFooterSection>
+    <Code><![CDATA[
+function validateThisDate() : String {
+  if (WCBenefitParameterSet.StartDate > WCBenefitParameterSet.EndDate ) {
+     return DisplayKey.get("Rules.Validation.Admin.EffDateGTExpiryDate")
+  } else {
+    return null
+  }
+}
+
+function validateTTDBenefit(min : java.math.BigDecimal, max : java.math.BigDecimal) : String {
+  if (testMinMax( min, max )) {
+    return DisplayKey.get("DV.Admin.WCBenefitParameterSet.TTD.MinMaxException")
+  } else {    
+    return null
+  }
+}
+
+function validateTPDBenefit(min : java.math.BigDecimal, max : java.math.BigDecimal) : String {
+  if (testMinMax( min, max )) {
+    return DisplayKey.get("DV.Admin.WCBenefitParameterSet.TPD.MinMaxException")
+  } else {
+    return null
+  }
+}
+
+function validatePTDBenefit(min : java.math.BigDecimal, max : java.math.BigDecimal) : String {
+  if (testMinMax( min, max )) {
+    return DisplayKey.get("DV.Admin.WCBenefitParameterSet.PTD.MinMaxException")
+  } else {
+    return null
+  }
+}
+
+function validatePPDBenefit(min : java.math.BigDecimal, max : java.math.BigDecimal) : String {
+  if (testMinMax( min, max )) {
+    return DisplayKey.get("DV.Admin.WCBenefitParameterSet.PPD.MinMaxException")
+  } else {
+    return null
+  }
+}
+
+private function testMinMax(min : java.math.BigDecimal, max : java.math.BigDecimal) : boolean {
+  return (min != null and max != null) and (min > max)  
+}
+      
+    ]]></Code>
+  </DetailViewPanel>
+</PCF>

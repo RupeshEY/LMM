@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<!-- Extension to claim table -->
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ClaimIndicator">
+  <index
+    desc="Index to speed up ClaimIndicator lookup in general"
+    name="claimindicatoru1"
+    trackUsage="true"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="Subtype"/>
+    <indexcol
+      keyposition="4"
+      name="IsOn"/>
+    <indexcol
+      keyposition="5"
+      name="ID"/>
+  </index>
+</extension>

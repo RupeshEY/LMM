@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Result object returned by the policy admin adapter's searchPolicies() method."
+  entity="PolicySearchResultSet"
+  supertype="SearchResult">
+  <implementsInterface
+    iface="gw.cc.policy.entity.PolicySearchResultSet"
+    impl="com.guidewire.cc.domain.policy.impl.PolicySearchResultSetImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.policy.impl.PolicySearchResultSetInternal"
+    impl="com.guidewire.cc.domain.policy.impl.PolicySearchResultSetImpl"/>
+  <fulldescription><![CDATA[
+Non-persistent result object returned by the policy admin adapter's
+searchPolicies() method. The result encapsulates an array of
+PolicySummary objects, as well as the fields in indicating whether or
+not the search results were capped and, if so, how many total results would have
+been returned had the results not been capped.
+    ]]></fulldescription>
+</subtype>

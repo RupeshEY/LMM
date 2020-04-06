@@ -1,0 +1,107 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents a change to a ServiceRequest. Instances of this entity are ordered by Sequence."
+  entity="ServiceRequestChange"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="servicerequestchange"
+  type="editable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestChangeImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestChangeImpl"/>
+  <implementsInterface
+    iface="gw.cc.vendormanagement.entity.ServiceRequestChange"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestChangeImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+    An instance of this type records a change to its service request. Properties with names following the "New_" and "_Chg"
+    naming conventions are populated automatically by ServiceRequest.recordChange.
+  ]]></fulldescription>
+  <foreignkey
+    columnName="ServiceRequestID"
+    desc="The related service request."
+    fkentity="ServiceRequest"
+    name="ServiceRequest"
+    nullok="false"
+    setterScriptability="hidden"/>
+  <column
+    desc="The sequence of this change on the ServiceRequest. ServiceRequestChanges are ordered consecutively starting with Sequence of 1."
+    name="Sequence"
+    nullok="false"
+    setterScriptability="hidden"
+    type="integer"/>
+  <column
+    desc="The time at which this change was applied. This timestamp is stored for informational purposes, but it may be possible for the relative timestamps of two instances to incorrectly or ambiguously indicate the relative order of two instances. For reliable ordering, use the Sequence property instead."
+    name="Timestamp"
+    nullok="false"
+    setterScriptability="hidden"
+    type="datetime"/>
+  <column
+    desc="An optional explanation for this change."
+    name="Description"
+    nullok="true"
+    type="longtext"/>
+  <typekey
+    desc="The operation performed during this change"
+    name="Operation"
+    nullok="true"
+    typelist="ServiceRequestOperation"/>
+  <foreignkey
+    columnName="InitiatorID"
+    desc="The user who initiated this change."
+    fkentity="Contact"
+    name="Initiator"
+    nullok="false"/>
+  <foreignkey
+    columnName="RelatedStatementID"
+    desc="The service request statement that is related to this change."
+    fkentity="ServiceRequestStatement"
+    name="RelatedStatement"
+    nullok="true"/>
+  <!-- A potentially-changing ServiceRequest property has two corresponding columns here.
+       The "_Chg" column indicates whether the property is changing. If the property is changing, the "New_"
+       column contains the new value, which may be null. If it is not changing, then the "New_" column always
+       contains null. The values of these columns are set automatically when the ServiceRequestChange is
+       created by ServiceRequest.recordChange. -->
+  <column
+    default="false"
+    desc="True if Progress is changing."
+    name="Progress_Chg"
+    nullok="false"
+    type="bit"/>
+  <typekey
+    desc="The new value of ServiceRequest.Progress, or null if Progress did not change."
+    name="New_Progress"
+    nullok="true"
+    typelist="ServiceRequestProgress"/>
+  <column
+    default="false"
+    desc="True if Quote Status is changing."
+    name="QuoteStatus_Chg"
+    nullok="false"
+    type="bit"/>
+  <typekey
+    desc="The new value of ServiceRequest.QuoteStatus, or null if Quote Status did not change."
+    name="New_QuoteStatus"
+    nullok="true"
+    typelist="ServiceRequestQuoteStatus"/>
+  <column
+    default="false"
+    desc="True if Instruction is changing."
+    name="Instruction_Chg"
+    nullok="false"
+    type="bit"/>
+  <foreignkey
+    columnName="NewInstructionID"
+    desc="The new value of ServiceRequest.Instruction, or null if Instruction did not change. Note that it is expected that ServiceRequest.Instruction will only start referring to a particular instruction once -- there should be at most one ServiceRequestChange on a ServiceRequest referring to a particular ServiceRequestInstruction with this foreign key."
+    fkentity="ServiceRequestInstruction"
+    name="New_Instruction"
+    nullok="true"/>
+</entity>

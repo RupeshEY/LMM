@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Whether a payment should be reported to the IRS as income"
+  final="false"
+  name="ReportabilityType">
+  <typecode
+    code="notreportable"
+    desc="Not reportable"
+    name="Not reportable"
+    priority="1"/>
+  <typecode
+    code="reportable"
+    desc="Reportable"
+    name="Reportable"
+    priority="2"/>
+</typelist>

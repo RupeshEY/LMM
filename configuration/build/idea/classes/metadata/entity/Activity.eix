@@ -1,0 +1,218 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Activity">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.activity.impl.ActivityCoreExtMethods"
+    impl="com.guidewire.cc.domain.activity.impl.ActivityCoreExtMethodsImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.activity.impl.ActivityCoreExtInternalMethods"
+    impl="com.guidewire.cc.domain.activity.impl.ActivityCoreExtMethodsImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="CCAssignable"/>
+  <implementsInterface
+    iface="gw.cc.assignment.entity.CCAssignable"
+    impl="com.guidewire.cc.domain.activity.impl.ActivityCoreExtMethodsImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.assignment.AssignablePublicMethods"
+    impl="com.guidewire.cc.domain.activity.impl.ActivityCoreExtMethodsImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.assignment.impl.AssignableInternalMethods"
+    impl="com.guidewire.cc.domain.activity.impl.ActivityCoreExtMethodsImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.entity.PermissionAssignableCheck"
+    impl="com.guidewire.cc.domain.activity.impl.ActivityCoreExtMethodsImpl"/>
+  <implementsInterface
+    iface="gw.api.assignment.CCAssignableMethods"
+    impl="gw.assignment.ActivityAssignableMethodsImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.email.CCEmailSupport"
+    impl="com.guidewire.cc.domain.activity.impl.ActivityCoreExtEmailSupportImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.relatedto.RelatedToBean"
+    impl="com.guidewire.cc.domain.relatedto.RelatedToBeanImpl"/>
+  <description><![CDATA[<p>Assigns work, reminds a user to complete a task, or provides notification of an event.
+      An activity is typically associated with a claim, but some activities may also be associated with Service Requests, Exposures or Contacts (claimants).
+      The Guidewire platform defines an ActivityBase entity that ClaimCenter can extend. Each activity is instantiated from an actvity template or pattern.</p>
+    ]]></description>
+  <array
+    arrayentity="ActivityDocument"
+    desc="Collection of documents linked to this activity."
+    exportable="true"
+    name="Documents"
+    owner="true"/>
+  <foreignkey
+    columnName="BulkInvoiceID"
+    desc="The associated bulk invoice, if there is one. This field should be set only for ApprovalActivities and ApprovalDeniedActivities for BulkInvoices."
+    exportable="false"
+    fkentity="BulkInvoice"
+    name="BulkInvoice"
+    nullok="true"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="Exposure with which this activity is associated."
+    exportable="false"
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="true"/>
+  <foreignkey
+    columnName="ServiceRequestID"
+    desc="ServiceRequest with which this activity is associated."
+    exportable="false"
+    fkentity="ServiceRequest"
+    name="ServiceRequest"
+    nullok="true"/>
+  <foreignkey
+    columnName="MatterID"
+    desc="Matter with which this activity is associated."
+    exportable="false"
+    fkentity="Matter"
+    name="Matter"
+    nullok="true"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Claim with which this activity is associated."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    columnName="ClaimContactID"
+    desc="Claimant with which this activity is associated."
+    exportable="false"
+    fkentity="ClaimContact"
+    name="ClaimContact"
+    nullok="true"
+    triggersValidation="true"/>
+  <foreignkey
+    columnName="ExternalOwnerCCID"
+    desc="External owner of this activity."
+    exportable="false"
+    fkentity="ClaimContact"
+    name="ExternalOwnerCC"
+    nullok="true"
+    triggersValidation="true"/>
+  <foreignkey
+    columnName="TransactionSetID"
+    desc="The associated transaction set, if there is one. This field should be set only for ApprovalActivities and ApprovalDeniedActivities for TransactionSets."
+    exportable="false"
+    fkentity="TransactionSet"
+    name="TransactionSet"
+    nullok="true"/>
+  <edgeForeignKey-override
+    extractable="true"
+    name="RelatedActivity"/>
+  <typekey
+    desc="The importance level of this activity."
+    name="Importance"
+    nullok="true"
+    typelist="ImportanceLevel"/>
+  <events/>
+  <checkconstraint
+    desc="An activity can be associated with a claimant or an exposure, but not both."
+    predicate="ClaimContactID IS NULL OR ExposureID IS NULL"/>
+  <dbcheckbuilder
+    className="com.guidewire.pl.domain.activity.dbchecks.ActivityDBCheckBuilder"/>
+  <index
+    desc="Compound index to speed ActivitySearchAssignedToMeXXX searches, Desktop pages and Login page.                    It also overrides FK backing index on AssignedUserID which was used in several activity related pages."
+    name="activityccu1"
+    trackUsage="true"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="AssignedUserId"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="Status"/>
+    <indexcol
+      keyposition="4"
+      name="AssignmentStatus"/>
+    <indexcol
+      keyposition="5"
+      name="Type"/>
+    <indexcol
+      keyposition="6"
+      name="TargetDate"/>
+    <indexcol
+      keyposition="7"
+      name="ID"/>
+    <indexcol
+      keyposition="8"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="9"
+      name="Priority"/>
+  </index>
+  <index
+    desc="Compound index to speed ActivitySearchAssignedToClosedLast7Days and CheckSearchApprovedByGroupLast30Days"
+    name="activityccu3"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="AssignedGroupId"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="CloseDate"/>
+    <indexcol
+      keyposition="4"
+      name="Type"/>
+    <indexcol
+      keyposition="5"
+      name="AssignmentStatus"/>
+    <indexcol
+      keyposition="6"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="7"
+      name="ID"/>
+  </index>
+  <index
+    desc="Compound index to speed the archive process"
+    name="activityccu5"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimId"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="BulkInvoiceID"/>
+    <indexcol
+      keyposition="4"
+      name="ID"/>
+  </index>
+  <index
+    desc="Compound index to speed activity escalation"
+    name="activityu0"
+    trackUsage="true"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Status"/>
+    <indexcol
+      keyposition="2"
+      name="Escalated"/>
+    <indexcol
+      keyposition="3"
+      name="ClaimID"/>
+    <indexcol
+      keyposition="4"
+      name="Retired"/>
+    <indexcol
+      keyposition="5"
+      name="EscalationDate"/>
+    <indexcol
+      keyposition="6"
+      name="ID"/>
+  </index>
+</internalExtension>

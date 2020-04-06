@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Permissions to restrict access to claims"
+  name="ClaimSecurityType">
+  <typecode
+    code="employeeclaim"
+    desc="Permission to see a claim involving an employee"
+    name="Employee claim"/>
+  <typecode
+    code="fraudriskclaim"
+    desc="Permission to see a claim with a high fraud risk"
+    name="Fraud risk"/>
+  <typecode
+    code="sensitiveclaim"
+    desc="Permission to see a sensitive claim"
+    name="Sensitive"/>
+  <typecode
+    code="underlitclaim"
+    desc="Permission to see a claim that is currently under litigation"
+    name="Under litigation"/>
+</typelistextension>

@@ -1,0 +1,61 @@
+package rules.Workplan.ClaimWorkplan_dir.CLW07000Workerscompclaims_dir
+uses gw.api.system.CCLoggerCategory
+
+@gw.rules.RuleName("CLW07400 - Initiate 3-Point Contact")
+internal class CLW07400Initiate3PointContact {
+  static function doCondition(claim   :   entity.Claim) : boolean {
+/*start00rule*/
+return true
+/*end00rule*/
+}
+
+  static function doAction(claim   :   entity.Claim, actions : gw.rules.Action) {
+/*start00rule*/
+// on WC claims, there is one and only one Medical Exposure
+final var medExposure = claim.Exposures.firstWhere( \ exp -> exp.CoverageSubType == CoverageSubtype.TC_WCWORKERSCOMPMED)
+// find Nurse Case Manager, if one is assigned that role
+final var userRoleAssignment = claim.getUserRoleAssignmentByRole(typekey.UserRole.TC_NURSECASEMGR)
+
+// create activities
+var employerActivity = claim.createActivityFromPattern(
+    null, ActivityPattern.finder.getActivityPatternByCode("three_point_contact_employer"))
+var employeeActivity = claim.createActivityFromPattern(
+    null, ActivityPattern.finder.getActivityPatternByCode("three_point_contact_employee"))
+var medProviderActivity = claim.createActivityFromPattern(
+    medExposure, ActivityPattern.finder.getActivityPatternByCode("three_point_contact_medical_provider"))
+
+// assign employer/employee 3-point contacts to Medical Exposure assignee
+// if this is not possible, assignment is retained by claim owner
+if (medExposure.AssignedGroup != null and medExposure.AssignedUser != null) {
+  if (not employerActivity.assign(medExposure.AssignedGroup, medExposure.AssignedUser)) {
+    CCLoggerCategory.RULES.warn("CLMW07400 - Unable to assign '" + employerActivity.DisplayName
+            + "' activity to '" + medExposure.AssignedUser.DisplayName + "'")
+  }
+
+  if (not employeeActivity.assign(medExposure.AssignedGroup, medExposure.AssignedUser)) {
+    CCLoggerCategory.RULES.warn("CLMW07400 - Unable to assign '" + employeeActivity.DisplayName
+            + "' activity to '" + medExposure.AssignedUser.DisplayName + "'")
+  }
+}
+
+// try to assign to the nurse case manager, if that fails assign to the medical details assignee
+// and if that fails defaults to claim owner
+if (userRoleAssignment != null and userRoleAssignment.Group != null and userRoleAssignment.User != null) {
+  // try to assign to nurse case manager
+  // if failed then assign to Med Details assignee...if this fails then claim assignee gets it.
+  if (not medProviderActivity.assign(userRoleAssignment.Group, userRoleAssignment.User)) {
+    CCLoggerCategory.RULES.warn("CLMW07400 - Unable to assign '" + medProviderActivity.DisplayName
+            + "' activity to '" + userRoleAssignment.User.DisplayName + "'")
+  }
+} else {
+  // no NCM? then assign to Med Details assignee...if this fails then claim assignee gets it.
+  if (medExposure.AssignedGroup != null and medExposure.AssignedUser != null) {
+    if (not medProviderActivity.assign(medExposure.AssignedGroup, medExposure.AssignedUser)) {
+      CCLoggerCategory.RULES.warn("CLMW07400 - Unable to assign '" + medProviderActivity.DisplayName
+              + "' activity to '" + medExposure.AssignedUser.DisplayName + "'")
+    }
+  }
+} 
+/*end00rule*/
+  }
+}

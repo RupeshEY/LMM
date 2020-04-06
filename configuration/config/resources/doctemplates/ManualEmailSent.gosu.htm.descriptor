@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DocumentTemplateDescriptor
+    id="ManualEmailSent.gosu.htm"
+    name="Gosu Sample Email Sent Record"
+    description="Record of an email being sent."
+    default-security-type="sensitive"
+    type="letter_sent"
+    lob="GLLine"
+    state="CA"
+    mime-type="text/html"
+    date-effective="2003-03-15"
+    date-expires="2009-03-15"
+    keywords="CA, email">
+  
+  <ContextObject name="Subject" type="string">
+    <DefaultObjectValue></DefaultObjectValue>
+  </ContextObject>
+
+  <ContextObject name="Body" type="text">
+    <DefaultObjectValue></DefaultObjectValue>
+  </ContextObject>
+
+  <ContextObject name="ToEmail" type="string">
+    <DefaultObjectValue></DefaultObjectValue>
+  </ContextObject>
+
+  <ContextObject name="CcEmail" type="string">
+    <DefaultObjectValue></DefaultObjectValue>
+  </ContextObject>
+
+  <ContextObject name="BccEmail" type="string">
+    <DefaultObjectValue></DefaultObjectValue>
+  </ContextObject>
+
+  <ContextObject name="FromEmail" type="string">
+    <DefaultObjectValue></DefaultObjectValue>
+  </ContextObject>
+
+  <ContextObject name="From" type="Contact">
+    <DefaultObjectValue>Claim.AssignedUser.Contact</DefaultObjectValue>
+    <PossibleObjectValues>Claim.getRelatedUserContacts()</PossibleObjectValues>
+  </ContextObject>
+
+  <ContextObject name="AttachmentNames" type="text">
+    <DefaultObjectValue></DefaultObjectValue>
+  </ContextObject>
+
+  <ContextObject name="DateSent" type="string">
+    <DefaultObjectValue></DefaultObjectValue>
+  </ContextObject>
+
+  <FormFieldGroup name="default">
+    <DisplayValues>
+      <NullDisplayValue>None</NullDisplayValue>
+    </DisplayValues>
+    <FormField name="ClaimNumber">Claim.ClaimNumber</FormField>
+    <FormField name="Subject">Subject</FormField>
+    <FormField name="ToEmailAddress">ToEmail</FormField>
+    <FormField name="CcEmailAddress">CcEmail</FormField>
+    <FormField name="BccEmailAddress">BccEmail</FormField>
+    <FormField name="FromEmailAddress">FromEmail</FormField>
+    <FormField name="RelatedToName">RelatedTo != null ? RelatedTo["DisplayName"] : null</FormField>
+    <FormField name="Body">Body</FormField>
+    <FormField name="AttachmentNames">AttachmentNames</FormField>
+    <FormField name="DateSent">DateSent</FormField>
+  </FormFieldGroup>
+
+</DocumentTemplateDescriptor>

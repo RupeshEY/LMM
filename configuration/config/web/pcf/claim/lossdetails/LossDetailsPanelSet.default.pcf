@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="LossDetailsPanelSet"
+    mode="default">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <CardViewPanel
+      id="LossDetailsCardCV">
+      <Card
+        id="Claim_DetailsCard"
+        title="DisplayKey.get(&quot;NVV.Claim.Auto.Details&quot;)">
+        <PanelRef
+          def="LossDetailsDV(Claim)"
+          mode="Claim.LossType"/>
+      </Card>
+      <Card
+        id="Claim_ISOCard"
+        title="DisplayKey.get(&quot;NVV.Claim.ISO&quot;)"
+        visible="Claim.ISOClaimLevelMessaging">
+        <PanelRef
+          def="ISODetailsDV(Claim)"/>
+      </Card>
+    </CardViewPanel>
+  </PanelSet>
+</PCF>

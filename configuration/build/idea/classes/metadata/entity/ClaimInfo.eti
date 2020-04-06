@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  consistentchildren="false"
+  desc="Claim Information"
+  entity="ClaimInfo"
+  exportable="true"
+  extendable="true"
+  lockable="false"
+  platform="false"
+  table="claiminfo"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.archiving.impl.ClaimInfoInternal"
+    impl="com.guidewire.cc.domain.claim.archiving.impl.ClaimInfoImpl"/>
+  <implementsInterface
+    iface="gw.cc.claim.archiving.entity.ClaimInfo"
+    impl="com.guidewire.cc.domain.claim.archiving.impl.ClaimInfoImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.purging.Purgeable"
+    impl="com.guidewire.cc.domain.claim.archiving.impl.ClaimInfoImpl"/>
+  <implementsEntity
+    name="RootInfo"/>
+  <implementsInterface
+    iface="gw.api.claim.PurgeClaimInfoMethods"
+    impl="gw.entity.PurgeClaimInfoMethodsImpl"/>
+  <fulldescription><![CDATA[
+The stub of the claim that is left behind after the claim is archived. It contains minimal (summary) information about the claim; for example, claim number and loss location. It is also included in claim searches. Because this table is not archived, it has the potential to grow very large; care must be taken not to put too much data in it (for example, a blob) when extending it.
+  ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Claim"
+    exportable="false"
+    fkentity="Claim"
+    ignoreforevents="true"
+    importableagainstexistingobject="false"
+    name="Claim"
+    nullok="true"
+    setterScriptability="hidden"/>
+  <column
+    desc="The public ID of the root."
+    name="RootPublicID"
+    nullok="false"
+    overwrittenInStagingTable="true"
+    soapnullok="true"
+    type="publicid"/>
+  <column
+    desc="The external identifier of the claim."
+    name="ClaimNumber"
+    nullok="false"
+    overwrittenInStagingTable="true"
+    soapnullok="true"
+    type="claimnumber"/>
+  <column
+    desc="Number of the policy (generally a string)."
+    loadable="false"
+    name="PolicyNumber"
+    nullok="true"
+    type="policynumber"/>
+  <column
+    desc="Cached LossDate on Claim"
+    exportable="false"
+    loadable="false"
+    name="LossDate"
+    nullok="true"
+    setterScriptability="hidden"
+    type="datetime"/>
+  <column
+    desc="Cached ReportedDate on Claim"
+    exportable="false"
+    loadable="false"
+    name="NoticeDate"
+    nullok="true"
+    setterScriptability="hidden"
+    type="datetime"/>
+  <column
+    desc="Date at which the claim should be purged. Configurations can use this field to decide when to mark the claim for purge, and there are sample Claim Closed and Claim Reopened rules to set it. It is not used by the internal purge logic."
+    name="PurgeDate"
+    nullok="true"
+    type="datetime"/>
+  <foreignkey
+    columnName="AssignedGroupID"
+    desc="Assigned group on Claim"
+    exportable="false"
+    fkentity="Group"
+    loadable="false"
+    name="AssignedGroup"
+    nullok="true"
+    setterScriptability="hidden"/>
+  <foreignkey
+    columnName="AdjusterID"
+    desc="Assigned user on Claim"
+    exportable="false"
+    fkentity="User"
+    loadable="false"
+    name="Adjuster"
+    nullok="true"
+    setterScriptability="hidden"/>
+  <typekey
+    desc="The state of jurisdiction. Denormed from claim.JurisdictionState"
+    loadable="false"
+    name="JurisdictionState"
+    nullok="true"
+    typelist="Jurisdiction"/>
+  <typekey
+    desc="The currency for the claim, copied from the claim when the claim is archived. Always null for active claims. May also be null for pre 8.0 archived claims"
+    name="Currency"
+    nullok="true"
+    setterScriptability="hidden"
+    soapnullok="true"
+    typelist="Currency"/>
+  <column
+    desc="Location Code denormed from claim.LossLocationCode"
+    loadable="false"
+    name="LossLocationCode"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="5"/>
+  </column>
+  <array
+    arrayentity="ContactInfo"
+    desc="all the cached contacts (insured and claimant) for the archived claim"
+    exportable="false"
+    name="Contacts"
+    owner="true"/>
+  <onetoone
+    desc="The loss location information for the archived claim."
+    exportable="false"
+    fkentity="LocationInfo"
+    ignoreforevents="true"
+    name="LossLocation"
+    nullok="true"
+    setterScriptability="doesNotExist"/>
+  <array
+    arrayentity="ClaimInAssociation"
+    desc="All the ClaimInAssociation entities for the Claim."
+    exportable="false"
+    name="ClaimInAssociations"
+    owner="true"/>
+  <array
+    arrayentity="PeriodPolicy"
+    desc="Array of PeriodPolicy beans associated with this ClaimInfo - only used internally for getting the PolicyPeriods off a Claim/Policy"
+    exportable="false"
+    getterScriptability="hidden"
+    name="PeriodPolicies"
+    owner="false"
+    setterScriptability="hidden"/>
+  <array
+    arrayentity="ClaimAggregateLimitRpt"
+    desc="Denormalized data for this claim per policyperiod."
+    exportable="false"
+    name="ClaimAggregateLimitRpts"
+    setterScriptability="hidden"/>
+  <array
+    arrayentity="ClaimInfoAccess"
+    desc="The access control objects for this claim info."
+    exportable="false"
+    ignoreforevents="true"
+    name="Access"
+    setterScriptability="doesNotExist"/>
+  <column
+    columnName="CoverageLineMatchDataInfoValid"
+    default="false"
+    desc="True for archived claims which have an accurate CoverageLineMatchDataInfo array, false otherwise"
+    name="CoverageLineMatchDataInfoValid"
+    nullok="false"
+    setterScriptability="hidden"
+    type="bit">
+    <fulldescription><![CDATA[
+True for archived claims which have an accurate CoverageLineMatchDataInfo array, false otherwise. Always false for active claims.
+Note that the CoverageLineMatchDataInfo array could be empty and still valid
+    ]]></fulldescription>
+  </column>
+  <array
+    arrayentity="CoverageLineMatchDataInfo"
+    desc="Contains the coverage specifications for which at least one transaction exists on the archived claim. This is used to prevent future aggregate limits from being applied to coverage specifications where an archived claim's transaction would contribute, since it would no longer be possible to calculate the contribution of the archived claim."
+    exportable="false"
+    ignoreforevents="true"
+    name="CoverageLineMatchData"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.archiving.schema.ClaimInfoSchema$ClaimInfoMapsToClaimDBCheckBuilder"/>
+  <events>
+    <event
+      description="ClaimInfo purged event."
+      name="ClaimInfoPurged"/>
+  </events>
+  <index
+    desc="Enforce claim number uniqueness and speed up search by claim number"
+    name="claimnumberkey"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimNumber"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+  </index>
+  <index
+    desc="Speed up claim search for archived claim by policy number"
+    name="policynumberkey"
+    unique="false">
+    <indexcol
+      keyposition="1"
+      name="PolicyNumber"/>
+  </index>
+  <index
+    desc="Covering index to speed up searching for claim info id by root public id"
+    name="claiminfou1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="RootPublicID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+    <indexcol
+      keyposition="3"
+      name="ID"/>
+  </index>
+  <index
+    desc="Enforce uniqueness, no two live claim info rows can have the same RootPublicID"
+    name="claiminfou2"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="RootPublicID"/>
+    <indexcol
+      keyposition="2"
+      name="Retired"/>
+  </index>
+  <index
+    desc="Index for querying archived claiminfo"
+    name="claiminfou3"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ArchiveState"/>
+    <indexcol
+      keyposition="2"
+      name="retired"/>
+    <indexcol
+      keyposition="3"
+      name="ID"/>
+  </index>
+</entity>

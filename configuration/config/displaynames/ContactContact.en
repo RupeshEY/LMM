@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<Entity
+  name="ContactContact">
+  <Columns>
+    <Column
+      beanPath="ContactContact.SourceContact"
+      displayName="true"
+      name="source"
+      sortOrder="0"/>
+    <Column
+      beanPath="ContactContact.Relationship"
+      name="relationship"
+      sortOrder="1"/>
+    <Column
+      beanPath="ContactContact.RelatedContact"
+      displayName="true"
+      name="related"
+      sortOrder="2"/>
+  </Columns>
+  <DisplayName><![CDATA[return gw.api.locale.DisplayKey.get("DisplayName.ContactContact", 
+          related == null ? "" : related,
+          relationship == null ? gw.api.locale.DisplayKey.get("entity.ContactContact") : relationship.DisplayName
+      );]]></DisplayName>
+</Entity>

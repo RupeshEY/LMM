@@ -1,0 +1,247 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="TotalLossCalculatorDV">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <InputColumn>
+      <TextInput
+        boldLabel="true"
+        id="TotalLossCalculator_NonAuto"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.NonAuto&quot;)"
+        value="null"
+        valueType="java.lang.Object"
+        visible=" Exposure.Claim.LossType != TC_AUTO "/>
+      <TextInput
+        boldLabel="true"
+        id="TotalLossCalculator_Vehicle"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.Vehicle&quot;)"
+        value="null"
+        valueType="java.lang.Object"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <TextInput
+        id="VehicleYear"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.VehicleYear&quot;)"
+        value="Exposure.VehicleIncident.Vehicle.Year"
+        valueType="java.lang.Integer"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <TextInput
+        id="VehicleMake"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.VehicleMake&quot;)"
+        value="Exposure.VehicleIncident.Vehicle.Make"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <TextInput
+        id="VehicleModel"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.VehicleModel&quot;)"
+        value="Exposure.VehicleIncident.Vehicle.Model"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <TypeKeyInput
+        id="VehicleStyle"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.VehicleStyle&quot;)"
+        value="Exposure.VehicleIncident.Vehicle.Style"
+        valueType="typekey.VehicleStyle"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <TextInput
+        id="VehicleColor"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.VehicleColor&quot;)"
+        value="Exposure.VehicleIncident.Vehicle.Color"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <TextInput
+        id="VehicleVin"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.VehicleVin&quot;)"
+        value="Exposure.VehicleIncident.Vehicle.Vin"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <TextInput
+        id="VehicleLicensePlate"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.VehicleLicensePlate&quot;)"
+        value="Exposure.VehicleIncident.Vehicle.LicensePlate"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <TypeKeyInput
+        filter="VALUE.hasCategory(JurisdictionType.TC_VEHICLE_REG)"
+        id="VehicleLicensePlateState"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.VehicleLicensePlateState&quot;)"
+        value="Exposure.VehicleIncident.Vehicle.State"
+        valueType="typekey.Jurisdiction"
+        visible="Exposure.Claim.LossType == TC_AUTO"/>
+      <InputDivider/>
+      <TextInput
+        boldLabel="true"
+        id="TotalLossPoints"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.TotalLossPoints&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.TotalLossPoints"
+        valueType="java.lang.Integer"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <BooleanRadioInput
+        boldLabel="true"
+        editable="Exposure.New"
+        id="VehicleTotalLoss"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.VehicleTotalLoss&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.TotalLoss"
+        visible=" Exposure.Claim.LossType == TC_AUTO ">
+        <PostOnChange/>
+      </BooleanRadioInput>
+      <InputDivider/>
+      <TextInput
+        boldLabel="true"
+        id="TotalLossCalculator_HowVehDamaged"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.HowVehDamaged&quot;)"
+        value="null"
+        valueType="java.lang.Object"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <BooleanRadioInput
+        editable="true"
+        id="VehicleAge5Years"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.VehicleAge5Years&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.VehicleAge5Years"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <BooleanRadioInput
+        editable="true"
+        id="VehicleAge10Years"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.VehicleAge10Years&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.VehicleAge10Years"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <BooleanRadioInput
+        editable="true"
+        id="Mileage100K"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.Mileage100K&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.Mileage100K"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <BooleanRadioInput
+        id="VehicleTowed"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.VehicleTowed&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.HasTowingServices"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <BooleanRadioInput
+        editable="true"
+        id="Extrication"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.Extrication&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.Extrication"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <InputDivider/>
+      <TextInput
+        boldLabel="true"
+        id="TotalLossCalculator_CollisionSection"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.CollisionSection&quot;)"
+        value="null"
+        valueType="java.lang.Object"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <BooleanRadioInput
+        id="VehicleAirbagsDeployed"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.VehicleAirbagsDeployed&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.AirbagsDeployed"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <BooleanRadioInput
+        editable="true"
+        id="VehicleRollOver"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.VehicleRollOver&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.VehicleRollOver"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <InputDivider/>
+      <TextInput
+        boldLabel="true"
+        id="TotalLossCalculator_FireSection"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.FireSection&quot;)"
+        value="null"
+        valueType="java.lang.Object"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <BooleanRadioInput
+        editable="true"
+        id="FireBurnDash"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.FireBurnDash&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.FireBurnDash"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <BooleanRadioInput
+        editable="true"
+        id="FireBurnEngine"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.FireBurnEngine&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.FireBurnEngine"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <BooleanRadioInput
+        editable="true"
+        id="FireBurnWindshield"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.FireBurnWindshield&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.FireBurnWindshield"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <InputDivider/>
+      <TextInput
+        boldLabel="true"
+        id="TotalLossCalculator_FloodSection"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.FloodSection&quot;)"
+        value="null"
+        valueType="java.lang.Object"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <BooleanRadioInput
+        editable="true"
+        id="VehicleSubmerged"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.VehicleSubmerged&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.VehicleSubmerged"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <BooleanRadioInput
+        editable="true"
+        id="WaterLevelDash"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.WaterLevelDash&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.WaterLevelDash"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <BooleanRadioInput
+        editable="true"
+        id="FloodSaltWater"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.FloodSaltWater&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.FloodSaltWater"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <BooleanRadioInput
+        editable="true"
+        id="WaterLevelSeats"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.WaterLevelSeats&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.WaterLevelSeats"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <InputDivider/>
+      <TextInput
+        boldLabel="true"
+        id="TotalLossCalculator_VandalTheftSection"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.VandalTheftSection&quot;)"
+        value="null"
+        valueType="java.lang.Object"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <BooleanRadioInput
+        editable="true"
+        id="ComponentsMissing"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.ComponentsMissing&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.ComponentsMissing"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <BooleanRadioInput
+        editable="true"
+        id="InteriorMissing"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.InteriorMissing&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.InteriorMissing"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+      <BooleanRadioInput
+        editable="true"
+        id="AirbagsMissing"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.TotalLossCalculator.AirbagsMissing&quot;)"
+        required="false"
+        value="Exposure.VehicleIncident.AirbagsMissing"
+        visible=" Exposure.Claim.LossType == TC_AUTO "/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

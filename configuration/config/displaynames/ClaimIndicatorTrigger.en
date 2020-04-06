@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<Entity
+  name="ClaimIndicatorTrigger">
+  <Columns>
+    <Column
+      beanPath="ClaimIndicatorTrigger.ClaimIndicator"
+      name="Indicator"
+      sortOrder="1"/>
+    <Column
+      beanPath="ClaimIndicatorTrigger.TriggeringValue"
+      name="TriggeringValue"
+      sortOrder="2"/>
+  </Columns>
+  <DisplayName><![CDATA[if (TriggeringValue) {
+  return gw.api.locale.DisplayKey.get("DisplayName.ClaimIndicatorTrigger", Indicator, gw.api.locale.DisplayKey.get("Web.Admin.AutomatedHandlerTrigger.ClaimIndicator.Event.TurnsOn"))
+} else {
+  return gw.api.locale.DisplayKey.get("DisplayName.ClaimIndicatorTrigger", Indicator, gw.api.locale.DisplayKey.get("Web.Admin.AutomatedHandlerTrigger.ClaimIndicator.Event.TurnsOff"))
+}
+]]></DisplayName>
+</Entity>

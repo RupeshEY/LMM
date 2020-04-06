@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Contains the lineitems created to credit/debit the proper t-accounts as the associated Transaction move through its lifecycle"
+  entity="TAccountTransaction"
+  extendable="false"
+  final="true"
+  ignoreForEvents="true"
+  overwrittenInStagingTable="true"
+  platform="false"
+  setterScriptability="hidden"
+  table="taccounttransaction"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountTransactionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountTransactionImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.TAccountTransaction"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountTransactionImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.impl.TAccountTransactionInternal"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountTransactionImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="TAccountTransactionDelegate"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.TAccountTransactionDelegateAdapter"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountTransactionDelegateAdapterNormalImpl"/>
+  <fulldescription><![CDATA[Contains the TAccountLineItems that change a pair of T-accounts to account for a transaction as it moves
+    through its LifeCycle States. For example, when a reserve becomes committed, it is debited (removed from) Pending Approval ReservesXX
+    T-Account and added (credited) to the ReservesXX T-Account.  Each TAccountTransaction has a link to its succeeding TAccountTransaction,
+    thus providing a history of the life of the associated transaction.
+  ]]></fulldescription>
+  <foreignkey
+    columnName="TransactionID"
+    desc="The higher-level financial transaction for which this t-account transaction was created."
+    fkentity="Transaction"
+    getterScriptability="hidden"
+    includeIdInIndex="true"
+    name="Transaction"
+    nullok="false"
+    setterScriptability="hidden"/>
+  <edgeForeignKey
+    desc="The t-account transaction that chronologically succeeds this one in a Transaction's lifecycle.  For the most recent TAccountTransaction, this will be NULL."
+    edgeTableName="taccttxnhistory"
+    extractable="true"
+    fkentity="TAccountTransaction"
+    getterScriptability="hidden"
+    name="NextTransaction"
+    nullok="true"
+    setterScriptability="hidden"/>
+  <array
+    arrayentity="TAccountLineItem"
+    arrayfield="CreditingTransaction"
+    desc="Set of TAccountLineItems that are used by this TAccountTransaction to credit a TAccount."
+    getterScriptability="hidden"
+    name="CreditingLineItems"
+    setterScriptability="hidden"/>
+  <array
+    arrayentity="TAccountLineItem"
+    arrayfield="DebitingTransaction"
+    desc="Set of TAccountLineItems that are used by this TAccountTransaction to debit a TAccount."
+    getterScriptability="hidden"
+    name="DebitingLineItems"
+    setterScriptability="hidden"/>
+</entity>

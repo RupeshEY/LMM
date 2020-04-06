@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <xsd:element name="PolicyPeriodConfig">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="PolicyPeriodDef" minOccurs="0" maxOccurs="unbounded"/>
+      </xsd:sequence>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="PolicyPeriodDef">
+    <xsd:complexType>
+      <xsd:sequence>
+        <xsd:element ref="PolicyTypeConfig" minOccurs="1" maxOccurs="unbounded"/>
+        <xsd:element ref="PolicyField" minOccurs="1" maxOccurs="unbounded"/>
+      </xsd:sequence>
+      <xsd:attribute name="type" type="PolicyPeriodType" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="PolicyTypeConfig">
+    <xsd:complexType>
+      <xsd:attribute name="code" type="xsd:NMTOKEN" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:element name="PolicyField">
+    <xsd:complexType>
+      <xsd:attribute name="fieldName" type="xsd:NMTOKEN" use="required"/>
+    </xsd:complexType>
+  </xsd:element>
+
+    <xsd:simpleType name="PolicyPeriodType">
+    <xsd:restriction base="xsd:string">
+      <xsd:enumeration value="account"/>
+      <xsd:enumeration value="policy"/>
+    </xsd:restriction>
+  </xsd:simpleType>
+</xsd:schema>

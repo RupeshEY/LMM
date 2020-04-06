@@ -1,0 +1,27 @@
+package rules.Validation.TransactionSetValidationRules_dir.TXV19000DisallowReservesandPaymentsUntilCompensabilityDetermination_dir
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("TXV19300 - Compensability Pending or Undetermined")
+internal class TXV19300CompensabilityPendingorUndetermined {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+/*start00rule*/
+return (transactionSet.Claim.Compensable == CompensabilityDecision.TC_PENDING or transactionSet.Claim.Compensable == null)
+/*end00rule*/
+}
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+/*start00rule*/
+
+var denialPeriodInEffect = WCDenialPeriod.findEffectiveDenialPeriod(transactionSet.Claim)
+
+if (denialPeriodInEffect != null) {
+  if (denialPeriodInEffect.BenefitPaymentAcceptance) {
+    transactionSet.reject(ValidationLevel.TC_PAYMENT, DisplayKey.get("Rules.Validation.Transaction.BenefitsPaymentImpliesClaimAcceptance", transactionSet.Claim.JurisdictionState.DisplayName), null, null)
+  } else {
+    transactionSet.reject(null, null, ValidationLevel.TC_PAYMENT, DisplayKey.get("Rules.Validation.Transaction.ClaimCompensabilityNotDetermined"))
+  }
+}
+
+/*end00rule*/
+  }
+}

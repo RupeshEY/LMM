@@ -1,0 +1,18 @@
+package rules.Preupdate.SubrogationPreupdate_dir
+
+
+@gw.rules.RuleName("SPU01000 - Changed Assigned User")
+internal class SPU01000ChangedAssignedUser {
+  static function doCondition(subrogation : entity.Subrogation) : boolean {
+/*start00rule*/
+return subrogation.isFieldChanged(Subrogation#AssignedUser)
+/*end00rule*/
+}
+
+  static function doAction(subrogation : entity.Subrogation, actions : gw.rules.Action) {
+/*start00rule*/
+  // Update the roles for the previous and the current AssignedUser
+  subrogation.handleSubrogationOwnerRole()
+/*end00rule*/
+  }
+}

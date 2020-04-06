@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="aBaggageIncident.updateLineItemsBeforeCommit(); aBaggageIncident.Claim.cleanAndFinishServiceRequests(unusedServiceRequests); aBaggageIncident.Claim.instructNewServiceRequests()"
+    canEdit="true"
+    canVisit="true"
+    id="BaggageIncidentPopup"
+    infoBar="ClaimInfoBar(aBaggageIncident.Claim)"
+    returnType="BaggageIncident"
+    startInEditMode="startInEditMode"
+    title="DisplayKey.get(&quot;Web.EditBaggageIncident.Title&quot;)">
+    <LocationEntryPoint
+      signature="BaggageIncidentPopup(baggageIncidentParam : BaggageIncident, startInEditMode : boolean)"/>
+    <LocationEntryPoint
+      signature="BaggageIncidentPopup(aClaim : Claim)"/>
+    <Variable
+      initialValue="baggageIncidentParam == null ? aClaim.newIncident(entity.BaggageIncident) as BaggageIncident : baggageIncidentParam"
+      name="aBaggageIncident"
+      type="BaggageIncident"/>
+    <Variable
+      initialValue="true"
+      name="startInEditMode"
+      type="boolean"/>
+    <Variable
+      name="aClaim"
+      type="Claim"/>
+    <Variable
+      name="baggageIncidentParam"
+      type="BaggageIncident"/>
+    <Variable
+      initialValue="new java.util.HashSet&lt;ServiceRequest&gt;()"
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Screen
+      id="EditBaggageIncidentScreen">
+      <TitleBar
+        icon="aBaggageIncident.HeaderIcon"/>
+      <Toolbar>
+        <EditButtons
+          pickValue="aBaggageIncident"/>
+        <ToolbarDivider/>
+        <PrintToolbarButton
+          hideIfEditable="true"
+          id="BaggageIncident_PrintButton"
+          label="DisplayKey.get(&quot;Button.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="BaggageIncidentDetailDV(aBaggageIncident, unusedServiceRequests)"/>
+    </Screen>
+  </Popup>
+</PCF>

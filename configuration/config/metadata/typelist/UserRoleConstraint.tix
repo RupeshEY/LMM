@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<internaltypelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Constraints that can be applied to UserRoles"
+  name="UserRoleConstraint">
+  <typecode
+    code="claimexclusive"
+    desc="Each claim may have at most one user assigned to this role."
+    name="ClaimExclusive"/>
+  <typecode
+    code="expexclusive"
+    desc="Each exposure may have at most one of this role assigned to it."
+    name="ExposureExclusive"/>
+</internaltypelistextension>

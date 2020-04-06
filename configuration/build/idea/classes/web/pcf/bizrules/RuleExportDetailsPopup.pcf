@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    id="RuleExportDetailsPopup"
+    title="DisplayKey.get('BizRules.RuleExportDetailsPopup.Title')">
+    <LocationEntryPoint
+      signature="RuleExportDetailsPopup(navigationSupport: gw.bizrules.pcf.BizRulesPageNavigationSupport, exportTask: RuleExportTask)"/>
+    <Variable
+      name="navigationSupport"
+      type="gw.bizrules.pcf.BizRulesPageNavigationSupport"/>
+    <Variable
+      name="exportTask"
+      type="RuleExportTask"/>
+    <Variable
+      initialValue="new gw.bizrules.pcf.RuleExportImportPageHelper(navigationSupport.VersionController.ExportImportController)"
+      name="pageHelper"
+      type="gw.bizrules.pcf.RuleExportImportPageHelper"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="navigationSupport.VersionController.ExportImportController.sendExportedRulesToWebClient(exportTask)"
+          download="true"
+          id="Download"
+          label="DisplayKey.get('Button.Download')"
+          visible="exportTask.hasData()"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <TextInput
+            id="StartedBy"
+            label="DisplayKey.get('BizRules.RuleExportImportStatusScreen.StartedBy')"
+            value="exportTask.StartedBy.DisplayName"/>
+          <DateInput
+            dateFormat="short"
+            id="Created"
+            label="DisplayKey.get('BizRules.RuleExportImportStatusScreen.StartTime')"
+            timeFormat="short"
+            value="exportTask.StartTime"/>
+        </InputColumn>
+        <InputColumn>
+          <TextInput
+            id="Status"
+            label="DisplayKey.get('BizRules.RuleExportImportStatusScreen.Status')"
+            value="gw.bizrules.management.RuleExportImportTaskStatus.of(navigationSupport.VersionController.ExportImportController, exportTask).Status.DisplayName"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="RuleListPanelSet(navigationSupport, pageHelper.getExportedRules(exportTask))"/>
+    </Screen>
+  </Popup>
+</PCF>

@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="ClaimSnapshotPolicyLocations500LV">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="SnapshotParam"
+      type="dynamic.Dynamic"/>
+    <Variable
+      initialValue="(SnapshotParam).Policy"
+      name="Policy"
+      type="dynamic.Dynamic"/>
+    <RowIterator
+      editable="false"
+      elementName="LocationBasedRU"
+      value="getProperties(Policy.RiskUnits)"
+      valueType="dynamic.Dynamic">
+      <Row>
+        <TextCell
+          id="PropertyNumber"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyLocations500LV.PropertyNumber&quot;)"
+          sortOrder="1"
+          value="(LocationBasedRU).RUNumber"
+          valueType="dynamic.Dynamic"/>
+        <TextCell
+          id="Location"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyLocations500LV.Location&quot;)"
+          value="(LocationBasedRU).Property.LocationNumber"
+          valueType="dynamic.Dynamic"/>
+        <TextCell
+          id="Building"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyLocations500LV.BuildingNumber&quot;)"
+          value="(LocationBasedRU).Building.BuildingNumber"
+          valueType="dynamic.Dynamic"/>
+        <TextCell
+          id="ClassCode"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyLocations500LV.ClassCode&quot;)"
+          value="(LocationBasedRU).ClassCode.Code"
+          valueType="dynamic.Dynamic"/>
+        <TextCell
+          id="Address"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyLocations500LV.Address&quot;)"
+          value="util.Snapshot.renderValue((LocationBasedRU).Property.Address)"/>
+        <TextCell
+          id="Notes"
+          label="DisplayKey.get(&quot;Web.ClaimSnapshotPolicyLocations500LV.Notes&quot;)"
+          value="(LocationBasedRU).Property.Notes"
+          valueType="dynamic.Dynamic"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[
+function getProperties(riskUnits : dynamic.Dynamic) : dynamic.Dynamic {
+  var list = new java.util.ArrayList();
+  for (ru in riskUnits) {
+    if ({"LocationBasedRU", "BuildingRU", "GeneralLiabilityRU", "InlandMarineRU", "PropertyRU"}.contains(ru.Subtype.Name)) {
+      list.add(ru);
+    }
+  }
+  return list.toArray()
+}
+      
+    ]]></Code>
+  </ListViewPanel>
+</PCF>

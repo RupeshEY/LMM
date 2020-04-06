@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="WCWaitingPeriod"
+  exportable="true"
+  platform="false"
+  table="wcwaitingperiod"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.WCWaitingPeriod"
+    impl="com.guidewire.cc.domain.claim.impl.WCWaitingPeriodImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        For WC Claims, this array captures the days comprising the waiting period on the claim including whether the
+        days withheld have been repaid.
+      
+    ]]></fulldescription>
+  <foreignkey
+    desc="Claim this diagnosis is related to"
+    fkentity="ClaimWorkComp"
+    name="ClaimWorkComp"
+    nullok="true"/>
+  <column
+    desc="The date this portion of the Waiting Period was started"
+    name="DateStarted"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The date this portion of the Waiting Period was ended"
+    name="DateEnded"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Number of days applied to Waiting Period"
+    name="WaitingDaysApplied"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="4"/>
+    <columnParam
+      name="precision"
+      value="20"/>
+  </column>
+  <column
+    desc="Number of days Waiting Days retroactiviey paid"
+    name="WaitingDaysRepaid"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="4"/>
+    <columnParam
+      name="precision"
+      value="20"/>
+  </column>
+  <column
+    desc="Comments"
+    name="Comments"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="250"/>
+  </column>
+</entity>

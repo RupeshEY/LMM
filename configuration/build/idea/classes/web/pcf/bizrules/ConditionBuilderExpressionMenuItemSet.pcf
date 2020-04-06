@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <MenuItemSet
+    id="ConditionBuilderExpressionMenuItemSet">
+    <Require
+      name="fragHolder"
+      type="gw.bizrules.pcf.ExpressionFragmentHolder"/>
+    <Require
+      name="lineHolder"
+      type="gw.bizrules.pcf.RuleConditionLineHolder"/>
+    <MenuItemIterator
+      elementName="mode"
+      type="gw.bizrules.pcf.ExpressionInputMode"
+      value="gw.bizrules.pcf.ExpressionInputMode.values()"
+      valueType="gw.bizrules.pcf.ExpressionInputMode[]"
+      visible="CurrentLocation.InEditMode and (lineHolder.SwitchableLineExpressionModes.size() > 1)">
+      <MenuItem
+        action="lineHolder.updateModeForFragment(fragHolder, mode)"
+        id="modeItem"
+        label="fragHolder.getMenuItemDisplayForMode(mode)"
+        visible="lineHolder.SwitchableLineExpressionModes.contains(mode)"/>
+    </MenuItemIterator>
+  </MenuItemSet>
+</PCF>

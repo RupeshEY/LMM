@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="false"
+    canVisit="perm.System.viewpolicy"
+    id="PolicySummaryInfoPopup"
+    title="DisplayKey.get(&quot;JSP.PolicyDetail.Policy&quot;)">
+    <LocationEntryPoint
+      signature="PolicySummaryInfoPopup(PolicySummary : PolicySummary)"/>
+    <Variable
+      name="PolicySummary"
+      type="PolicySummary"/>
+    <Variable
+      initialValue="gw.api.policy.PolicyTypeUtil.getLossTypeForPolicyType(PolicySummary.PolicyType)"
+      name="policyType"
+      type="LossType"/>
+    <Screen
+      id="PolicySummaryInfoScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="PolicySummaryInfoPopup_CloseButton"
+          label="DisplayKey.get(&quot;Button.Close&quot;)"
+          shortcut="C"/>
+      </Toolbar>
+      <PanelRef
+        def="PolicySummaryGeneralDV(PolicySummary)"
+        mode="policyType"/>
+      <PanelRef
+        def="PolicySummaryVehicleLV( PolicySummary, false, false )"
+        id="PolicySummaryRiskUnitPanel"
+        visible="PolicySummary.isVehiclePolicyType()">
+        <TitleBar
+          title="DisplayKey.get(&quot;LV.Policy.PolicyVehicles.Title&quot;)"/>
+        <Toolbar/>
+      </PanelRef>
+      <PanelRef
+        def="PolicySummaryPropertyLV( PolicySummary, false, false )"
+        id="PolicySummaryPropertyPanel"
+        visible="PolicySummary.isPropertyPolicyType()">
+        <TitleBar
+          title="DisplayKey.get(&quot;LV.Policy.PolicyProperties.Title&quot;)"/>
+        <Toolbar/>
+      </PanelRef>
+    </Screen>
+  </Popup>
+</PCF>

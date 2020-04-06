@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<entity
+  desc="The UCR of a Parallel Claim associated to this Claim Data."
+  exportable="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageClaimDataParallelClaimUCR_Ext"
+  table="ecfparallelclaimsucr_ext"
+  type="retireable">
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Parallel Unique Claim Reference"
+    name="PUCR"
+    nullok="true"
+    type="shorttext"/>
+  <foreignkey
+    fkentity="ECFMessageClaimData_Ext"
+    name="ECFMessageClaimData"
+    nullok="true"/>
+</entity>

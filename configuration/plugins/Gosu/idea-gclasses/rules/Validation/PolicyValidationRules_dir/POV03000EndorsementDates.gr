@@ -1,0 +1,29 @@
+package rules.Validation.PolicyValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("POV03000 - Endorsement Dates")
+internal class POV03000EndorsementDates {
+  static function doCondition(policy : entity.Policy) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(policy : entity.Policy, actions : gw.rules.Action) {
+
+/*start00rule*/
+for (e in policy.Endorsements) {
+  if (e.EffectiveDate != null 
+      and e.ExpirationDate != null 
+      and e.EffectiveDate > e.ExpirationDate) {
+      policy.reject(TC_NEWLOSS, 
+        DisplayKey.get("Rules.Validation.Policy.EndorsementExpirationLaterThanEffectiveDate"), null, null)
+  }
+}
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Used to track comments, notes, special exceptions related to the WCBenefitParameterSet"
+  entity="WCBenefitFactorDetail"
+  exportable="true"
+  loadable="true"
+  platform="false"
+  table="WCbenefitfactorDetail"
+  type="joinarray">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.WCBenefitFactorDetail"
+    impl="com.guidewire.cc.domain.exposure.impl.WCBenefitFactorDetailImpl"/>
+  <foreignkey
+    columnName="WCBenefitParameterSetID"
+    exportable="false"
+    fkentity="WCBenefitParameterSet"
+    name="WCBenefitParameterSet"
+    nullok="false"/>
+  <typekey
+    desc="Category of the factor: Duration, EE attribute, etc."
+    name="FactorCategory"
+    nullok="true"
+    typelist="WCBenefitFactorCategory"/>
+  <typekey
+    desc="Used to track notes, exceptions, etc. related to WC Benefits"
+    name="DetailedFactor"
+    nullok="true"
+    typelist="WCBenefitFactorType">
+    <keyfilters>
+      <keyfilter
+        name="FactorCategory"/>
+    </keyfilters>
+  </typekey>
+  <column
+    desc="If true, this footnote does not apply to TTD"
+    name="AppliesToTTD"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="If true, this footnote does not apply to TPD"
+    name="AppliesToTPD"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="If true, this footnote does not apply to PTD"
+    name="AppliesToPTD"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="If true, this footnote does not apply to PPD"
+    name="AppliesToPPD"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Tracks a value related to the Footnote"
+    name="FactorValue"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="scale"
+      value="4"/>
+    <columnParam
+      name="precision"
+      value="20"/>
+  </column>
+  <column
+    desc="Comment explaining the reasoning behind this event status line."
+    name="FactorComment"
+    nullok="true"
+    type="shorttext"/>
+</entity>

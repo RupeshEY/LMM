@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;AggregateLimits&quot;) and perm.Policy.view(Claim) and perm.System.viewpolicy"
+    id="ClaimPolicyAggregateLimits"
+    title="DisplayKey.get(&quot;JSP.ClaimPolicy.Policy.Navigation.AggregateLimits&quot;)">
+    <LocationEntryPoint
+      signature="ClaimPolicyAggregateLimits(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="not gw.api.claim.ClaimUtil.doesClaimHaveUnsavedWork()"
+      name="enableAdd"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Screen
+      id="ClaimPolicyAggregateLimitsScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="ClaimPolicyNewAggregateLimit.go(Claim)"
+          available="enableAdd"
+          default="true"
+          id="ClaimPolicyAggregateLimits_AddButton"
+          label="DisplayKey.get(&quot;Button.Add&quot;)"
+          tooltip="enableAdd ? null : DisplayKey.get(&quot;LV.Policy.AggregateLimits.AddDisabledTooltip&quot;)"
+          visible="perm.Policy.edit(Claim)"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="gw.api.admin.AggregateLimitUtil.removeLimit(CheckedValue)"
+          flags="any AggregateLimit"
+          id="ClaimPolicyAggregateLimits_DeleteButton"
+          iterator="AggregateLimitsLV.AggregateLimitsLV"
+          label="DisplayKey.get(&quot;Button.Delete&quot;)"
+          shortcut="E"
+          visible="perm.Policy.edit(Claim)"/>
+      </Toolbar>
+      <DetailViewPanel
+        visible="Claim.AggregateLimits.hasMatch(\ a -&gt; a.Valid == false)">
+        <InputColumn>
+          <Label
+            id="someInvalidLabelID"
+            label="DisplayKey.get(&quot;Java.AggregateLimit.SomeInvalid&quot;)"/>
+        </InputColumn>
+      </DetailViewPanel>
+      <PanelRef
+        def="AggregateLimitsLV(Claim.AggregateLimits, Claim)"
+        editable="false"/>
+    </Screen>
+  </Page>
+</PCF>

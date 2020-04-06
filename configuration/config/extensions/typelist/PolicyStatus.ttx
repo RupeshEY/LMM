@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="PolicyStatus">
+  <typecode
+    code="inforce"
+    desc="The policy is in force as of the requested effective date."
+    name="In force"/>
+  <typecode
+    code="expired"
+    desc="The policy term is expired as of the current date."
+    name="Expired"/>
+  <typecode
+    code="paymentpastdue"
+    desc="Payment past due"
+    name="Payment past due"
+    retired="true"/>
+  <typecode
+    code="archived"
+    desc="The policy has been archived by the policy system, so no details are available."
+    name="Archived"/>
+  <typecode
+    code="canceled"
+    desc="The policy is canceled as of the requested effective date."
+    name="Canceled"/>
+  <typecode
+    code="pending_cancellation"
+    desc="The policy is pending cancellation because of non-payment or some other underwriting reason."
+    name="Pending Cancellation"/>
+  <typecode
+    code="pending_confirmation"
+    desc="The policy term has been created in the policy system but is not yet considered binding, usually pending payment."
+    name="Pending Confirmation"/>
+</typelistextension>

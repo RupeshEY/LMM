@@ -1,0 +1,320 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="The relationship a contact has with the claim"
+  name="ContactRole">
+  <typecode
+    code="passenger"
+    desc="Passenger"
+    name="Passenger"
+    priority="6"/>
+  <typecode
+    code="witness"
+    desc="Witness"
+    name="Witness"
+    priority="7"/>
+  <typecode
+    code="attorney"
+    desc="Attorney"
+    name="Attorney"
+    priority="9"/>
+  <typecode
+    code="judges"
+    desc="Belongs to the pool of judges at a particular venue."
+    name="Judges"/>
+  <typecode
+    code="mattermanager"
+    desc="Legal Case Manager"
+    name="Legal Case Manager"/>
+  <typecode
+    code="codefendant"
+    desc="Co-defendant"
+    name="Co-defendant"/>
+  <typecode
+    code="defendant"
+    desc="Defendant"
+    name="Defendant"/>
+  <typecode
+    code="secdefattorney"
+    desc="Secondary Defense Attorney"
+    name="Secondary Defense Attorney"/>
+  <typecode
+    code="defensefirm"
+    desc="Primary Defense Law Firm"
+    name="Primary Defense Law Firm"/>
+  <typecode
+    code="secdefensefirm"
+    desc="Secondary Defense Law Firm"
+    name="Secondary Defense Law Firm"/>
+  <typecode
+    code="judge"
+    desc="Judge"
+    name="Judge"/>
+  <typecode
+    code="leadparalegal"
+    desc="Lead Paralegal"
+    name="Lead Paralegal"/>
+  <typecode
+    code="lienholder"
+    desc="Lienholder"
+    name="Lienholder"/>
+  <typecode
+    code="plaintiff"
+    desc="Plaintiff"
+    name="Plaintiff"/>
+  <typecode
+    code="plaintifffirm"
+    desc="Primary Plaintiff Law Firm"
+    name="Primary Plaintiff Law Firm"/>
+  <typecode
+    code="secplaintifffirm"
+    desc="Secondary Plaintiff Law Firm"
+    name="Secondary Plaintiff Law Firm"/>
+  <typecode
+    code="secplaintiffatt"
+    desc="Secondary Plaintiff's Attorney"
+    name="Secondary Plaintiff's Attorney"/>
+  <typecode
+    code="injured"
+    desc="Injured Party"
+    name="Injured Party"
+    priority="14"/>
+  <typecode
+    code="supervisor"
+    desc="Supervisor"
+    name="Supervisor"
+    priority="19"/>
+  <typecode
+    code="claimantdep"
+    desc="Claimant Dependent"
+    name="Claimant Dependent"/>
+  <typecode
+    code="altcontact"
+    desc="Alternate Contact"
+    name="Alternate Contact"
+    priority="8"/>
+  <typecode
+    code="casemgmtco"
+    desc="Case Management Company"
+    name="Case Management Company"/>
+  <typecode
+    code="casemgr"
+    desc="Case Manager"
+    name="Case Manager"/>
+  <typecode
+    code="doctor"
+    desc="Doctor"
+    name="Doctor"
+    priority="10"/>
+  <typecode
+    code="PrimaryDoctor"
+    desc="Primary Doctor"
+    name="Primary Doctor"/>
+  <typecode
+    code="FirstIntakeDoctor"
+    desc="First Intake Physician"
+    name="First Intake Doctor"/>
+  <typecode
+    code="OccTherapist"
+    desc="Occupational Therapist"
+    name="Occupational Therapist"/>
+  <typecode
+    code="PhysTherapist"
+    desc="Physical Therapist"
+    name="Physical Therapist"/>
+  <typecode
+    code="driver"
+    desc="Driver"
+    name="Driver"
+    priority="5"/>
+  <typecode
+    code="disbenprovider"
+    desc="Disability Benefits Provider"
+    name="Disability Benefits Provider"/>
+  <typecode
+    code="employer"
+    desc="Employer"
+    name="Employer"
+    priority="13"/>
+  <typecode
+    code="hospital"
+    desc="Hospital - Medical Center"
+    name="Hospital - Medical Center"
+    priority="11"/>
+  <typecode
+    code="maincontact"
+    desc="Main Contact"
+    name="Main Contact"
+    priority="3"/>
+  <typecode
+    code="nursecasemgr"
+    desc="Nurse Case Manager"
+    name="Nurse Case Manager"
+    priority="15"/>
+  <typecode
+    code="reporter"
+    desc="Reporter"
+    name="Reporter"
+    priority="4"/>
+  <typecode
+    code="rsbenprovider"
+    desc="Replacement Services Benefits Provider"
+    name="Replacement Services Benefits Provider"/>
+  <typecode
+    code="wccarrier"
+    desc="WC Carrier"
+    name="WC Carrier"
+    priority="18"/>
+  <typecode
+    code="repairshop"
+    desc="Repair Shop"
+    name="Repair Shop"
+    priority="19"/>
+  <typecode
+    code="recoveryagent"
+    desc="The agent of a recovery"
+    name="Recovery Agent"/>
+  <typecode
+    code="plaintiffs"
+    desc="Plaintiff's Attorney"
+    name="Plaintiff's Attorney"
+    priority="34"/>
+  <typecode
+    code="TowingAgcy"
+    desc="Towing Agency"
+    name="Towing Agency"/>
+  <typecode
+    code="InsuredRep"
+    desc="Insured Representative"
+    name="Insured Representative"/>
+  <typecode
+    code="LawEnfcAgcy"
+    desc="Law Enforcement Agency"
+    name="Law Enforcement Agency"/>
+  <typecode
+    code="salvageservice"
+    desc="Salvage service"
+    name="Salvage Service"/>
+  <typecode
+    code="salvagebuyer"
+    desc="Salvage buyer"
+    name="Salvage Buyer"/>
+  <typecode
+    code="assessor"
+    desc="Assessor"
+    name="Assessor"/>
+  <typecode
+    code="AppraisalSource"
+    desc="Assessor utilized at notice of claim"
+    name="Assessment Source"/>
+  <typecode
+    code="fnolassessor"
+    desc="Assessor utilized at notice of claim"
+    name="Primary Assessor"/>
+  <typecode
+    code="adverseparty"
+    desc="Responsible Party related to Subrogation"
+    name="Responsible Party"/>
+  <typecode
+    code="collection"
+    desc="Collection Agency"
+    name="Collection Agency"/>
+  <typecode
+    code="subrogator"
+    desc="External Subrogation Firm"
+    name="External Subrogation Firm"/>
+  <typecode
+    code="pedestrian"
+    desc="Pedestrian"
+    name="Pedestrian"/>
+  <typecode
+    code="arbitrator"
+    desc="Arbitrator"
+    name="Arbitrator"/>
+  <typecode
+    code="mediator"
+    desc="Mediator"
+    name="Mediator"/>
+  <typecode
+    code="arbitrationvenue"
+    desc="Authority which handles arbitration legal matters e.g., a hearing office."
+    name="Arbitration Venue"/>
+  <typecode
+    code="mediationvenue"
+    desc="Authority which handles mediation legal matters e.g., a conference office."
+    name="Mediation Venue"/>
+  <typecode
+    code="hearingjudge"
+    desc="Hearing Adjudicator"
+    name="Hearing Judge"/>
+  <typecode
+    code="hearingvenue"
+    desc="Authority which handles hearing legal matters e.g., a hearing office."
+    name="Hearing Venue"/>
+  <typecode
+    code="incidentowner"
+    desc="Owner of the Vehicle or Property.  Used for 3rd party incidents"
+    name="Owner"/>
+  <typecode
+    code="ems"
+    desc="Emergency Management Service"
+    name="Emergency Management Service"/>
+  <typecode
+    code="debrisremoval"
+    desc="Debris removal service "
+    name="Debris Removal"/>
+  <typecode
+    code="lodgingprovider"
+    desc="Lodging Provider"
+    name="Lodging Provider"/>
+  <typefilter
+    desc="Typecodes relevant to payee for tax reporting purposes"
+    name="payee">
+    <include
+      code="insured"/>
+    <include
+      code="claimant"/>
+    <include
+      code="vendor"/>
+    <include
+      code="other"/>
+  </typefilter>
+  <typefilter
+    desc="Typecodes to represent former policy roles"
+    name="formerpolicyrole">
+    <include
+      code="formeragent"/>
+    <include
+      code="formercoveredparty"/>
+    <include
+      code="formerdoingbusinessas"/>
+    <include
+      code="formerexcludedparty"/>
+    <include
+      code="formerinsured"/>
+    <include
+      code="formerpolicyholder"/>
+    <include
+      code="formerunderwriter"/>
+  </typefilter>
+  <typecode
+    code="servicerequestparticipant"
+    desc="Participant in a Service, such as the customer contact"
+    name="Service Participant"/>
+  <typecode
+    code="servicerequestspecialist"
+    desc="Vendor selected to perform the work for a Service"
+    name="Service Vendor"/>
+  <typefilter
+    desc="Typecodes relevant to special handling"
+    name="specialhandling">
+    <include
+      code="insured"/>
+    <include
+      code="maincontact"/>
+    <include
+      code="underwriter"/>
+    <include
+      code="agent"/>
+  </typefilter>
+</typelistextension>

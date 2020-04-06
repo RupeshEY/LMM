@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A set of questions"
+  entity="QuestionSet"
+  exportable="true"
+  extendable="false"
+  ignoreForEvents="true"
+  platform="false"
+  readOnly="false"
+  table="questionset"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.question.entity.QuestionSet"
+    impl="com.guidewire.cc.domain.question.impl.QuestionSetImpl"/>
+  <array
+    arrayentity="Question"
+    arrayfield="QuestionSet"
+    name="Questions"/>
+  <array
+    arrayentity="QuestionSetFilter"
+    arrayfield="QuestionSet"
+    name="QuestionSetFilters"/>
+  <typekey
+    name="QuestionSetType"
+    nullok="false"
+    typelist="QuestionSetType"/>
+  <column
+    name="Name"
+    nullok="false"
+    type="shorttext">
+    <localization
+      nullok="true"
+      tableName="qsetname_l10n"/>
+  </column>
+  <column
+    default="-1"
+    desc="Sort order priority"
+    name="Priority"
+    nullok="true"
+    type="integer"/>
+  <column
+    default="false"
+    desc="If set to true, will retire this question set during the import xml process."
+    name="ShouldRetireFromImportXML"
+    nullok="true"
+    type="bit"/>
+</entity>

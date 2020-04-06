@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.Catastrophe.view"
+    id="Catastrophes"
+    title="DisplayKey.get(&quot;Web.Admin.Catastrophes&quot;)">
+    <Variable
+      initialValue="gw.api.database.Query.make(entity.Catastrophe).select()"
+      name="Catastrophes"
+      type="gw.api.database.IQueryBeanResult&lt;Catastrophe&gt;"/>
+    <Screen
+      id="CatastrophesScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="ECFNewCatastrophePopup.push()"
+          id="Catastrophes_AddCatastropheButton"
+          label="DisplayKey.get(&quot;Web.Admin.AddCatastrophe&quot;)"
+          shortcut="P"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="CheckedValue.Active = false"
+          flags="all ActiveCatastrophe"
+          id="Catastrophes_DeactivateButton"
+          iterator="CatastropheAdminLV.CatastropheAdminLV"
+          label="DisplayKey.get(&quot;Button.Deactivate&quot;)"
+          visible="perm.Catastrophe.edit"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="CheckedValue.Active = true"
+          flags="all InactiveCatastrophe"
+          id="Catastrophes_ActivateButton"
+          iterator="CatastropheAdminLV.CatastropheAdminLV"
+          label="DisplayKey.get(&quot;Button.Activate&quot;)"
+          shortcut="V"
+          visible="perm.Catastrophe.edit"/>
+      </Toolbar>
+      <PanelRef
+        def="CatastropheAdminLV(Catastrophes)"/>
+    </Screen>
+  </Page>
+</PCF>

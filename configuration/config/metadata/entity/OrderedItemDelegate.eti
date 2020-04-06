@@ -1,0 +1,19 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  name="OrderedItemDelegate">
+  <implementsInterface
+    iface="gw.cc.ordereditem.entity.OrderedItemDelegate"
+    impl="com.guidewire.cc.domain.ordereditem.impl.OrderedItemDelegateImpl"/>
+  <fulldescription><![CDATA[
+        Used for array entities which need to maintain creation order, typically for display in the UI.
+        Should be used in conjunction with an index on the array owner foreign key and the retired field
+        to ensure that each item in the array has a unique order.
+      
+    ]]></fulldescription>
+  <column
+    desc="Used to order items in creation order, must be unique per incident"
+    name="ItemOrder"
+    nullok="false"
+    type="integer"/>
+</delegate>

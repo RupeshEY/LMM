@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="AvailableToRunInputSet">
+    <Require
+      name="version"
+      type="RuleVersion"/>
+    <BooleanRadioInput
+      editable="true"
+      id="Value"
+      label="DisplayKey.get('BizRules.RuleDetailsPage.AvailableToRun')"
+      value="version.Rule.AvailableToRun">
+      <PostOnChange/>
+    </BooleanRadioInput>
+    <TextInput
+      id="Note"
+      value="version.Rule.AvailableToRun ? DisplayKey.get('BizRules.RuleDetailsPage.AvailableToRun.Note.WillRun') : DisplayKey.get('BizRules.RuleDetailsPage.AvailableToRun.Note.WillNotRun')"
+      visible="CurrentLocation.InEditMode"/>
+  </InputSet>
+</PCF>

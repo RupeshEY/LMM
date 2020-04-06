@@ -1,0 +1,77 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    id="AssigneePickerPopup"
+    returnType="gw.api.assignment.Assignee"
+    title="DisplayKey.get(&quot;Web.AssigneePicker.Title&quot;)">
+    <LocationEntryPoint
+      signature="AssigneePickerPopup(AssigneePicker : gw.api.assignment.AssigneePicker)"/>
+    <LocationEntryPoint
+      signature="AssigneePickerPopup(AssigneePicker : gw.api.assignment.AssigneePicker, Claim : Claim)"/>
+    <Variable
+      name="AssigneePicker"
+      type="gw.api.assignment.AssigneePicker"/>
+    <Variable
+      initialValue="new gw.api.contact.CCProximitySearchPageHelper()"
+      name="PageHelper"
+      type="gw.api.contact.CCProximitySearchPageHelper"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="AssigneePickerScreen">
+      <SearchPanel
+        criteriaName="SearchCriteria"
+        resultsName="SearchResult"
+        search="SearchCriteria.performSearchByProximity(CurrentLocation, PageHelper)"
+        searchCriteria="createSearchCriteria(Claim)"
+        searchCriteriaType="gw.api.assignment.CCAssignmentSearchCriteria"
+        searchResultsType="gw.api.assignment.AssignmentProximitySearchResult">
+        <PanelRef
+          def="AssignmentSearchDV(gw.api.upgrade.Coercions.makeArray&lt;typekey.AssignmentSearchType&gt;(AssigneePicker.AllowedAssignmentSearchTypes), SearchCriteria, PageHelper, Claim)"/>
+        <PanelRef
+          def="AssignmentUserLV(SearchResult == null ? null : SearchResult.getUsers() as gw.api.database.IQueryBeanResult&lt;GroupUser&gt;, PageHelper, SearchCriteria.getUserCriteria().getContact())"
+          visible="SearchCriteria.SearchType == TC_USER">
+          <Toolbar>
+            <CheckedValuesToolbarButton
+              allCheckedRowsAction="PageHelper.getDrivingDirectionsCache().getSelectedDirections(CheckedValues, SearchCriteria.getUserCriteria().getContact());"
+              flags="any User"
+              id="RetrieveRequested"
+              iterator="AssignmentUserLV.AssignmentUserLV"
+              label="DisplayKey.get(&quot;Web.AddressBook.Search.Result.GetRequested&quot;)"
+              visible="SearchCriteria.SearchType == TC_USER and SearchCriteria.UserCriteria.Contact.isProximitySearch()"/>
+          </Toolbar>
+        </PanelRef>
+        <PanelRef
+          def="AssignmentGroupLV(SearchResult == null ? null : SearchResult.getGroups())"
+          visible="SearchCriteria.SearchType == TC_GROUP">
+          <Toolbar/>
+        </PanelRef>
+        <PanelRef
+          def="AssignmentQueueLV(SearchResult == null ? null : SearchResult.getQueues())"
+          visible="SearchCriteria.SearchType == TC_QUEUE">
+          <Toolbar/>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+    <Code><![CDATA[
+        function createSearchCriteria(aClaim: Claim) : gw.api.assignment.CCAssignmentSearchCriteria {
+          var criteria = new gw.api.assignment.CCAssignmentSearchCriteria();
+          if(aClaim != null) {
+            criteria.UserCriteria.Contact.initializeProximitySearch(aClaim.Addresses?.toList(), aClaim.LossLocation);
+          }
+
+          // If TC_USER is not allowed as a search type, then set the search type to something else
+          // as the CCAssignmentSearchCriteria defaults the search type to TC_USER
+          if(!AssigneePicker.AllowedAssignmentSearchTypes.isEmpty()
+              && !AssigneePicker.AllowedAssignmentSearchTypes.contains(AssignmentSearchType.TC_USER)) {
+            criteria.setSearchType(AssigneePicker.AllowedAssignmentSearchTypes.first() as AssignmentSearchType);
+          }
+          return criteria;
+        }
+      
+    ]]></Code>
+  </Popup>
+</PCF>

@@ -1,0 +1,68 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    editable="true"
+    id="ActivityRuleFilterCriteriaDV">
+    <Require
+      name="ActivityRuleFilterCriteria"
+      type="gw.bizrules.ActivityRuleFilterCriteria"/>
+    <InputColumn width="500">
+      <TextInput
+        id="TextFilter"
+        editable="true"
+        label="DisplayKey.get('Web.ActivityRules.Rule.RuleDetails.NameOrDescription')"
+        value="ActivityRuleFilterCriteria.NameOrDescription">
+      </TextInput>
+      <RangeInput
+        editable="true"
+        id="Status"
+        label="DisplayKey.get('Web.ActivityRules.Rule.RuleDetails.Status')"
+        optionLabel="VALUE.DisplayName"
+        required="true"
+        value="ActivityRuleFilterCriteria.Status"
+        valueRange="ActivityRuleFilterCriteria.AvailableStatuses"
+        valueType="gw.bizrules.management.RuleQueryFactory&lt;ActivityRule, ActivityRuleVersion, ActivityRuleHead&gt;"/>
+      <RangeInput
+        editable="true"
+        id="Availability"
+        label="DisplayKey.get('Web.ActivityRules.Rule.RuleDetails.Availability')"
+        noneSelectedLabel="DisplayKey.get('Web.ActivityRules.Rule.Any')"
+        value="ActivityRuleFilterCriteria.Availability"
+        valueRange="ActivityRuleFilterCriteria.AvailabilityVals"
+        valueType="String"/>
+    </InputColumn>
+    <InputColumn width="500">
+      <TypeKeyInput
+        id="LossTypeFilter"
+        label="DisplayKey.get('Web.ActivityRules.Rule.ApplicabilityCriteria.LossType')"
+        noneSelectedLabel="DisplayKey.get('Web.ActivityRules.Rule.Any')"
+        value="ActivityRuleFilterCriteria.LossType"
+        valueType="LossType"
+        editable="true">
+      </TypeKeyInput>
+      <TypeKeyInput
+        id="PolicyTypeFilter"
+        label="DisplayKey.get('Web.ActivityRules.Rule.ApplicabilityCriteria.PolicyType')"
+        noneSelectedLabel="DisplayKey.get('Web.ActivityRules.Rule.Any')"
+        value="ActivityRuleFilterCriteria.PolicyType"
+        valueType="PolicyType"
+        editable="true">
+      </TypeKeyInput>
+      <TypeKeyInput
+        id="JurisdictionFilter"
+        label="DisplayKey.get('Web.ActivityRules.Rule.ApplicabilityCriteria.Jurisdiction')"
+        noneSelectedLabel="DisplayKey.get('Web.ActivityRules.Rule.Any')"
+        value="ActivityRuleFilterCriteria.Jurisdiction"
+        valueType="Jurisdiction"
+        editable="true">
+      </TypeKeyInput>
+    </InputColumn>
+    <InputColumn width="500">
+      <InputSetRef
+        def="ActivityRuleFilterCriteriaRuleActionInputSet(ActivityRuleFilterCriteria)"
+        editable="true"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

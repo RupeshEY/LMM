@@ -1,0 +1,314 @@
+<?xml version="1.0"?>
+<ns3:ClaimNotifyEventRq Sender="serviceprovider" Receiver="insurer" xmlns:ns2="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/1" xmlns:ns3="http://www.xchanging.com/claimnotify/rq/1" xmlns:ns4="http://www.ACORD.org/Standards/AcordMsgSvc/1" xmlns:ns5="http://www.xchanging.com/wsdl/generated" xmlns:soap="http://schemas.xmlsoap.org/soap/envelope/" xmlns:soapenv="http://schemas.xmlsoap.org/soap/envelope/" xmlns:wsse="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-secext-1.0.xsd" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xh="http://www.xchanging.com/wsdl/ClaimService/">
+  <ns2:UUId>e81ef3ab-5201-43f0-bb80-bb418d6907f8</ns2:UUId>
+  <ns2:CreationDate>2017-05-11T16:32:19+01:00</ns2:CreationDate>
+  <ns3:ClaimMovement Sender="serviceprovider" Receiver="insurer">
+    <ns2:UUId>f391da1b-ad9c-4bac-9bd9-a39b020b755f</ns2:UUId>
+    <ns2:ServiceProviderReference>9e55d03e-cdc7-48b5-bd45-414fcbdd32fa</ns2:ServiceProviderReference>
+    <ns2:CreationDate>2017-05-11T16:32:19+01:00</ns2:CreationDate>
+    <ns2:Explanation>U</ns2:Explanation>
+    <ns2:ClaimAdviceInitialOrSubsequentIndicator>FirstAdvice</ns2:ClaimAdviceInitialOrSubsequentIndicator>
+    <ns2:Insurer>
+      <ns2:Party>
+        <ns2:Id Agency="lloyds">urn:lloyds:0623</ns2:Id>
+        <ns2:Name>Beazley 0623</ns2:Name>
+      </ns2:Party>
+    </ns2:Insurer>
+    <ns2:Broker>
+      <ns2:Party>
+        <ns2:Id Agency="lloyds">urn:lloyds:0001</ns2:Id>
+        <ns2:Name>Lloyd's Broker Rep</ns2:Name>
+      </ns2:Party>
+      <ns2:Contact>
+        <ns2:PersonName>Lloyd's Broker Rep</ns2:PersonName>
+        <ns2:Telephone>555-1234</ns2:Telephone>
+      </ns2:Contact>
+    </ns2:Broker>
+    <ns2:ServiceProvider>
+      <ns2:Party>
+        <ns2:Id Agency="DUNS_dun_and_bradstreet">urn:duns:236196817</ns2:Id>
+        <ns2:Name>Xchanging</ns2:Name>
+      </ns2:Party>
+      <ns2:Contact>
+        <ns2:PersonName>Xchanging Rep</ns2:PersonName>
+        <ns2:Telephone>555-2345</ns2:Telephone>
+      </ns2:Contact>
+    </ns2:ServiceProvider>
+    <ns2:Insured>
+      <ns2:Party>
+        <ns2:Name>Joe Bloggs Inc.</ns2:Name>
+      </ns2:Party>
+    </ns2:Insured>
+    <ns2:BureauLeadingInsurerOrReinsurer>
+      <ns2:Party>
+        <ns2:Name>Lloyd's Syndicate</ns2:Name>
+      </ns2:Party>
+    </ns2:BureauLeadingInsurerOrReinsurer>
+    <ns2:Contract>
+      <ns2:BrokerReference>UMR-May-222</ns2:BrokerReference>
+      <ns2:InsurerRiskReference>23-502012</ns2:InsurerRiskReference>
+    </ns2:Contract>
+    <ns2:ClaimEntry>
+      <ns2:BrokerReference>TR-May-888</ns2:BrokerReference>
+    </ns2:ClaimEntry>
+    <ns2:Claim>
+      <ns2:LossOrEventName>Factory Spillage</ns2:LossOrEventName>
+      <ns2:BrokerReference>UCR-May-0222</ns2:BrokerReference>
+      <ns2:CauseOfLoss>PRAB</ns2:CauseOfLoss>
+      <ns2:LossLocation>
+        <ns2:Location>
+          <ns2:Description>London SW1A 1AA, UK</ns2:Description>
+        </ns2:Location>
+      </ns2:LossLocation>
+      <ns2:AdjusterName>Lloyd's Claims Adjuster</ns2:AdjusterName>
+      <ns2:LawyerName>Clyde and Kennedys</ns2:LawyerName>
+    </ns2:Claim>
+    <ns2:ClaimOriginalPolicy>
+      <ns2:JvClassOfBusiness>M</ns2:JvClassOfBusiness>
+    </ns2:ClaimOriginalPolicy>
+    <ns3:MessageSequenceNumber>1494516739219</ns3:MessageSequenceNumber>
+    <ns3:AsOfDate>2017-05-11T16:32:19+01:00</ns3:AsOfDate>
+    <ns3:ActionParticipantType>C</ns3:ActionParticipantType>
+    <ns3:ActionParticipant>0623</ns3:ActionParticipant>
+    <ns3:ResponseCode>QUERY-RETURN</ns3:ResponseCode>
+    <ns3:Reinsured>
+      <ns2:Party>
+        <ns2:Name>AM AVIATION LTD</ns2:Name>
+      </ns2:Party>
+    </ns3:Reinsured>
+    <ns3:ContractSection>
+      <ns2:InsuredRiskOrInterestDescription>All agreement parties</ns2:InsuredRiskOrInterestDescription>
+      <ns2:ContractPeriod>
+        <ns2:StartDate>2015-06-30</ns2:StartDate>
+        <ns2:EndDate>2016-06-29</ns2:EndDate>
+      </ns2:ContractPeriod>
+      <ns2:ContractPeriodDescription>A commercial factory contract</ns2:ContractPeriodDescription>
+      <ns2:UnderwritingYear>2014</ns2:UnderwritingYear>
+      <ns2:InsurerSharePercentage>
+        <ns2:Rate RateUnit="Percentage">50.0000000</ns2:Rate>
+      </ns2:InsurerSharePercentage>
+    </ns3:ContractSection>
+    <ns3:LossDateNarrative>Bank Holiday Monday</ns3:LossDateNarrative>
+    <ns3:LossDetails>Factory spillage losing a lot of the year's product.</ns3:LossDetails>
+    <ns3:ClaimAmounts Ccy="USD">
+      <ns2:ClaimMovementAmtItem Type="loss_and_expense_incurred_for_contract_before_retention">
+        <ns2:Amt Ccy="USD" Share="hundred_percent" CcyIndic="reference_currency">100000.00</ns2:Amt>
+      </ns2:ClaimMovementAmtItem>
+      <ns2:ClaimMovementAmtItem Type="outstanding_loss_plus_expense_for_contract_before_retention">
+        <ns2:Amt Ccy="USD" Share="hundred_percent" CcyIndic="reference_currency">100000.00</ns2:Amt>
+      </ns2:ClaimMovementAmtItem>
+      <ns2:ClaimMovementAmtItem Type="100_percent_losses_and_expenses_paid_for_contract_before_retention">
+        <ns2:Amt Ccy="USD" Share="hundred_percent" CcyIndic="reference_currency">0.00</ns2:Amt>
+      </ns2:ClaimMovementAmtItem>
+      <ns2:ClaimMovementAmtItem Type="current_payment_losses_and_expenses_for_contract">
+        <ns2:Amt Ccy="USD" Share="hundred_percent" CcyIndic="reference_currency">0.00</ns2:Amt>
+      </ns2:ClaimMovementAmtItem>
+    </ns3:ClaimAmounts>
+    <ns3:ClaimAmounts Ccy="GBP">
+      <ns2:ClaimMovementAmtItem Type="loss_and_expense_incurred_for_contract_before_retention">
+        <ns2:Amt Ccy="GBP" Share="hundred_percent" CcyIndic="reference_currency">75000.00</ns2:Amt>
+      </ns2:ClaimMovementAmtItem>
+      <ns2:ClaimMovementAmtItem Type="outstanding_loss_plus_expense_for_contract_before_retention">
+        <ns2:Amt Ccy="GBP" Share="hundred_percent" CcyIndic="reference_currency">75000.00</ns2:Amt>
+      </ns2:ClaimMovementAmtItem>
+      <ns2:ClaimMovementAmtItem Type="100_percent_losses_and_expenses_paid_for_contract_before_retention">
+        <ns2:Amt Ccy="GBP" Share="hundred_percent" CcyIndic="reference_currency">0.00</ns2:Amt>
+      </ns2:ClaimMovementAmtItem>
+      <ns2:ClaimMovementAmtItem Type="current_payment_losses_and_expenses_for_contract">
+        <ns2:Amt Ccy="GBP" Share="hundred_percent" CcyIndic="reference_currency">0.00</ns2:Amt>
+      </ns2:ClaimMovementAmtItem>
+    </ns3:ClaimAmounts>
+    <ns3:ClaimAmounts Ccy="EUR">
+      <ns2:ClaimMovementAmtItem Type="loss_and_expense_incurred_for_contract_before_retention">
+        <ns2:Amt Ccy="EUR" Share="hundred_percent" CcyIndic="reference_currency">0.00</ns2:Amt>
+      </ns2:ClaimMovementAmtItem>
+      <ns2:ClaimMovementAmtItem Type="outstanding_loss_plus_expense_for_contract_before_retention">
+        <ns2:Amt Ccy="EUR" Share="hundred_percent" CcyIndic="reference_currency">0.00</ns2:Amt>
+      </ns2:ClaimMovementAmtItem>
+      <ns2:ClaimMovementAmtItem Type="100_percent_losses_and_expenses_paid_for_contract_before_retention">
+        <ns2:Amt Ccy="EUR" Share="hundred_percent" CcyIndic="reference_currency">0.00</ns2:Amt>
+      </ns2:ClaimMovementAmtItem>
+      <ns2:ClaimMovementAmtItem Type="current_payment_losses_and_expenses_for_contract">
+        <ns2:Amt Ccy="EUR" Share="hundred_percent" CcyIndic="reference_currency">0.00</ns2:Amt>
+      </ns2:ClaimMovementAmtItem>
+    </ns3:ClaimAmounts>
+    <ns3:Extension>
+      <ns3:Contract>
+        <ns2:RiskLocation>
+          <ns2:Location>
+            <ns2:Description>The factory premises.</ns2:Description>
+          </ns2:Location>
+        </ns2:RiskLocation>
+        <ns3:RiskCode>XT</ns3:RiskCode>
+        <ns3:SlipLeadName>
+          <ns2:Party>
+            <ns2:Name>Lloyd's Syndicate</ns2:Name>
+          </ns2:Party>
+        </ns3:SlipLeadName>
+        <ns3:ContractMarket Agency="lloyds">
+          <ns3:InsurerOrReinsurer>
+            <ns2:Party>
+              <ns2:Id Agency="lloyds">urn:lloyds:0623</ns2:Id>
+              <ns2:Name>Beazley 0623</ns2:Name>
+            </ns2:Party>
+            <ns2:Contact>
+              <ns2:PersonName>ACME Insurance</ns2:PersonName>
+            </ns2:Contact>
+            <ns2:InsurerSharePercentage>
+              <ns2:Rate RateUnit="Percentage">50.0000000</ns2:Rate>
+            </ns2:InsurerSharePercentage>
+            <ns3:InsurerOrReinsurerClaimReference1>Ref1234</ns3:InsurerOrReinsurerClaimReference1>
+            <ns3:InsurerOrReinsurerClaimReference2>Ref5678</ns3:InsurerOrReinsurerClaimReference2>
+            <ns3:ParticipantFunction>Lead</ns3:ParticipantFunction>
+            <ns3:ManagingAgentCode>1010E</ns3:ManagingAgentCode>
+            <ns3:ClaimLineNumber>1</ns3:ClaimLineNumber>
+          </ns3:InsurerOrReinsurer>
+          <ns3:InsurerOrReinsurer>
+                <ns2:Party>
+                  <ns2:Id Agency="lirma">GW2001</ns2:Id>
+                  <ns2:Name>Felix Insurance</ns2:Name>
+                </ns2:Party>
+                <ns2:InsurerSharePercentage>
+                  <ns2:Rate RateUnit="Percentage">50.0000000</ns2:Rate>
+                </ns2:InsurerSharePercentage>
+                <ns3:InsurerOrReinsurerClaimReference1>Ref1234</ns3:InsurerOrReinsurerClaimReference1>
+                <ns3:ParticipantFunction>Agreement Party</ns3:ParticipantFunction>
+                <ns3:ManagingAgentCode>1901D</ns3:ManagingAgentCode>
+                <ns3:ClaimLineNumber>2</ns3:ClaimLineNumber>
+            </ns3:InsurerOrReinsurer>
+            <ns3:InsurerOrReinsurer>
+                <ns2:Party>
+                  <ns2:Id Agency="lirma">GW2002</ns2:Id>
+                  <ns2:Name>Felix Insurance</ns2:Name>
+                </ns2:Party>
+                <ns2:InsurerSharePercentage>
+                  <ns2:Rate RateUnit="Percentage">50.0000000</ns2:Rate>
+                </ns2:InsurerSharePercentage>
+                <ns3:InsurerOrReinsurerClaimReference1>Ref1234</ns3:InsurerOrReinsurerClaimReference1>
+                <ns3:ParticipantFunction>Agreement Party</ns3:ParticipantFunction>
+                <ns3:ManagingAgentCode>1901D</ns3:ManagingAgentCode>
+                <ns3:ClaimLineNumber>2</ns3:ClaimLineNumber>
+            </ns3:InsurerOrReinsurer>
+        </ns3:ContractMarket>
+        <ns3:SlipOrder1>100.0000000</ns3:SlipOrder1>
+        <ns3:SlipOrder2>100.0000000</ns3:SlipOrder2>
+        <ns3:ContractCoverage CoverageType="NA">
+          <ns3:CoverageAmount>
+            <ns2:Amt Ccy="GBP" Share="hundred_percent" CcyIndic="reference_currency">100000.00</ns2:Amt>
+          </ns3:CoverageAmount>
+        </ns3:ContractCoverage>
+        <ns3:ContractValueInterest>
+          <ns3:ValueInterestAmount>
+            <ns2:Amt Ccy="GBP" Share="hundred_percent" CcyIndic="reference_currency">100000.00</ns2:Amt>
+          </ns3:ValueInterestAmount>
+        </ns3:ContractValueInterest>
+        <ns3:ContractDeductible>
+          <ns3:DeductibleAmount>
+            <ns2:Amt Ccy="GBP" Share="hundred_percent" CcyIndic="reference_currency">100000.00</ns2:Amt>
+          </ns3:DeductibleAmount>
+        </ns3:ContractDeductible>
+      </ns3:Contract>
+      <ns3:Claim>
+        <ns3:ClaimLineNumber>1</ns3:ClaimLineNumber>
+        <ns3:LeadClaimReference>Ref1234</ns3:LeadClaimReference>
+        <ns3:LeadClaimReference2>Ref5678</ns3:LeadClaimReference2>
+        <ns3:ClaimStatus>Open</ns3:ClaimStatus>
+        <ns3:LossPeriod>
+          <ns3:LossDateQualifier>L</ns3:LossDateQualifier>
+          <ns3:StartDate>2016-06-30</ns3:StartDate>
+        </ns3:LossPeriod>
+        <ns3:ClaimType>000</ns3:ClaimType>
+        <ns3:ClaimsScheme>2010</ns3:ClaimsScheme>
+        <ns3:ECFIndicator>Y</ns3:ECFIndicator>
+        <ns3:TriageCategory>Standard</ns3:TriageCategory>
+        <ns3:Indicators>
+          <ns3:ConflictOfInterestIndicator>Y</ns3:ConflictOfInterestIndicator>
+          <ns3:SimultaneousReinstatementRequired>N</ns3:SimultaneousReinstatementRequired>
+          <ns3:WarIndicator>N</ns3:WarIndicator>
+        </ns3:Indicators>
+        <ns3:BrokerClaimReference1>REF1</ns3:BrokerClaimReference1>
+      </ns3:Claim>
+      <ns3:ClaimEntry>
+        <ns3:TransactionSequence>001</ns3:TransactionSequence>
+        <ns3:AmendmentDetails>TransactionDescription</ns3:AmendmentDetails>
+        <ns3:LloydsStatus>10-AWAITING/QUERIED</ns3:LloydsStatus>
+        <ns3:AddedCirculatedOrAuthorisedDate>2015-10-28</ns3:AddedCirculatedOrAuthorisedDate>
+        <ns3:Comments>
+          <ns3:Broker>
+            <ns3:LineNumber>1</ns3:LineNumber>
+            <ns3:CommentDetails>New claim for a factory spillage.</ns3:CommentDetails>
+          </ns3:Broker>
+          <ns3:PrivateComments>
+            <ns3:Comment>
+              <ns3:LineNumber>1</ns3:LineNumber>
+              <ns3:CommentDetails>What is the extent of the spillage?</ns3:CommentDetails>
+            </ns3:Comment>
+            <ns3:Comment>
+              <ns3:LineNumber>2</ns3:LineNumber>
+              <ns3:CommentDetails>It seems to be quite extensive.</ns3:CommentDetails>
+            </ns3:Comment>
+          </ns3:PrivateComments>
+          <ns3:PublicComments>
+            <ns3:Comment>
+              <ns3:LineNumber>1</ns3:LineNumber>
+              <ns3:CommentDetails>How much of the 2017's product was lost?</ns3:CommentDetails>
+            </ns3:Comment>
+            <ns3:Comment>
+              <ns3:LineNumber>2</ns3:LineNumber>
+              <ns3:CommentDetails>It seems about one third.</ns3:CommentDetails>
+            </ns3:Comment>
+          </ns3:PublicComments>
+        </ns3:Comments>
+        <ns3:ClaimEntryFinancialAmounts Ccy="GBP">
+          <ns3:OutstandingAmountQualifier>S</ns3:OutstandingAmountQualifier>
+          <ns3:ServiceProviderOriginalSplitReference>2100405102016</ns3:ServiceProviderOriginalSplitReference>
+          <ns2:ClaimMovementAmtItem Type="Vat_Amount">
+            <ns2:Amt Ccy="GBP" Share="hundred_percent" CcyIndic="reference_currency">10000.00</ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="Lead_Reserve_Amount">
+            <ns2:Amt Ccy="GBP" Share="hundred_percent" CcyIndic="reference_currency">2005000.00</ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns2:ClaimMovementAmtItem Type="Lead_Reserve_Fees">
+            <ns2:Amt Ccy="GBP" Share="hundred_percent" CcyIndic="reference_currency">180500.00</ns2:Amt>
+          </ns2:ClaimMovementAmtItem>
+          <ns3:TargetCurrency>
+            <ns2:Ccy>GBP</ns2:Ccy>
+          </ns3:TargetCurrency>
+          <ns3:SettlementAmount>10000.00</ns3:SettlementAmount>
+          <ns3:ExchangeRate>1.00000</ns3:ExchangeRate>
+        </ns3:ClaimEntryFinancialAmounts>
+      </ns3:ClaimEntry>
+    </ns3:Extension>
+  </ns3:ClaimMovement>
+  <ns3:SupportingDocument>
+    <ns4:DocumentId>350dff07-536e-4fab-8e41-e52d29c251fa</ns4:DocumentId>
+    <ns4:DocumentVersion>1.0</ns4:DocumentVersion>
+    <ns4:DocumentVersionDtTime>2017-05-11T16:32:19+01:00</ns4:DocumentVersionDtTime>
+    <ns4:FileId>ClaimNotifyDocument1.docx</ns4:FileId>
+    <ns4:FileFormatCd>application/vnd.openxmlformats-officedocument.wordprocessingml.document</ns4:FileFormatCd>
+    <ns4:FileSize>
+      <ns4:NumUnits>135</ns4:NumUnits>
+      <ns4:UnitMeasurementCd>KB</ns4:UnitMeasurementCd>
+    </ns4:FileSize>
+    <ns4:DocumentTypeCd>document</ns4:DocumentTypeCd>
+    <ns3:ReferredObjects>
+      <ns2:ServiceProvider>
+        <ns2:Party>
+          <ns2:Name>Xchanging</ns2:Name>
+        </ns2:Party>
+        <ns2:Contact>
+          <ns2:Description>UCR-May-0222-UMR-May-222-TR-May-888</ns2:Description>
+        </ns2:Contact>
+      </ns2:ServiceProvider>
+      <ns3:Contract>
+        <ns2:BrokerReference>UMR-May-222</ns2:BrokerReference>
+      </ns3:Contract>
+      <ns3:Claim>
+        <ns2:BrokerReference>UCR-May-0222</ns2:BrokerReference>
+      </ns3:Claim>
+      <ns3:ClaimEntry>
+        <ns2:BrokerReference>TR-May-888</ns2:BrokerReference>
+      </ns3:ClaimEntry>
+    </ns3:ReferredObjects>
+  </ns3:SupportingDocument>
+</ns3:ClaimNotifyEventRq>

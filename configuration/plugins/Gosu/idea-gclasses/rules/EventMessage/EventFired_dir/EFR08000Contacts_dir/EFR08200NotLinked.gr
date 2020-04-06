@@ -1,0 +1,20 @@
+package rules.EventMessage.EventFired_dir.EFR08000Contacts_dir
+
+
+@gw.rules.RuleName("EFR08200 - Not Linked")
+internal class EFR08200NotLinked {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+/*start00rule*/
+return messageContext.Root typeis Contact
+and messageContext.Root.AddressBookUID == null
+and not (messageContext.Root typeis UserContact)
+and not gw.api.util.NewClaimWizardUtil.isInNewClaimWizardDraftSave()
+/*end00rule*/
+}
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+/*start00rule*/
+ 
+/*end00rule*/
+  }
+}

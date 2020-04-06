@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <PanelSet
+    id="FNOLWizard_BasicInfoRightPanelSet"
+    mode="Auto">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Variable
+      initialValue="getVehicles(Claim)"
+      name="Vehicles"
+      type="gw.api.claim.FnolNewVehicle[]"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <Label
+          label="DisplayKey.get(&quot;Web.BasicInfoScreen.VehiclePanelColumn.InvolvedVehicleLabel&quot;)"/>
+      </InputColumn>
+    </DetailViewPanel>
+    <PanelIterator
+      elementName="InsuredVehicle"
+      value="Vehicles"
+      valueType="gw.api.claim.FnolNewVehicle[]">
+      <DetailViewPanel
+        highlighted="true"
+        id="InsuredVehicleDV">
+        <InputColumn>
+          <InputGroup
+            childrenVisible="InsuredVehicle.Checked"
+            id="InsuredVehicleInputGroup"
+            label="InsuredVehicle.Vehicle.DisplayName"
+            onToggle="InsuredVehicle.Checked = !InsuredVehicle.Checked; Wizard.VehicleHelper.syncVehicleIncidents(Claim)">
+            <InputIterator
+              elementName="coverage"
+              value="InsuredVehicle.Coverages.sort(\ r, r2 -&gt; r.Type &lt; r2.Type)"
+              valueType="entity.RUCoverage[]">
+              <TextInput
+                id="coverage"
+                label="coverage.Type"
+                value="coverage.DetailsSummary"/>
+            </InputIterator>
+          </InputGroup>
+        </InputColumn>
+      </DetailViewPanel>
+    </PanelIterator>
+    <Code><![CDATA[function getVehicles(c : Claim) : gw.api.claim.FnolNewVehicle[] {
+  var vehicleList = Wizard.VehicleHelper.getVehicles(c)
+  if (countSelected(vehicleList) == 0 and !Wizard.VehicleHelper.AutoSelectedMarker) {
+    Wizard.VehicleHelper.AutoSelectedMarker = true
+    defaultCheckSelectedRiskUnits(vehicleList)
+  }
+  vehicleList.sort(\ f, f2 -> f.Vehicle.DisplayName < f2.Vehicle.DisplayName)
+  return vehicleList
+}
+
+function defaultCheckSelectedRiskUnits(vehicleList : gw.api.claim.FnolNewVehicle[]) {
+  if (allowAutoSelect()) {
+    vehicleList.each( \ v -> {v.Checked = true} )
+  }
+}
+
+function countSelected(vehicleList : gw.api.claim.FnolNewVehicle[]) : int {
+  var count = 0
+  vehicleList.each( \ v -> {if (v.Checked) { count = count + 1}} )
+  return count
+}
+
+function allowAutoSelect() : boolean {
+  return gw.api.policy.PolicyTabUtil.isTabAvailable(Claim, PolicyTab.TC_VEHICLES) 
+    and Claim.Policy.hasVehicleData()
+    and Claim.Policy.PolicyType == PolicyType.TC_BUSINESSAUTO
+}]]></Code>
+  </PanelSet>
+</PCF>

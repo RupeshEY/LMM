@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<!-- ****************************************************************************
+    Claim Search Typelists
+  **************************************************************************** -->
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="The search options for the name searches in claim search"
+  final="true"
+  name="ClaimSearchNameSearchType">
+  <typecode
+    code="insured"
+    desc="Find by insured claim contact role"
+    name="Insured">
+    <category
+      code="active"
+      typelist="ClaimSearchType"/>
+    <category
+      code="archived"
+      typelist="ClaimSearchType"/>
+  </typecode>
+  <typecode
+    code="claimant"
+    desc="Find by claimant claim contact role"
+    name="Claimant">
+    <category
+      code="active"
+      typelist="ClaimSearchType"/>
+    <category
+      code="archived"
+      typelist="ClaimSearchType"/>
+  </typecode>
+  <typecode
+    code="addinsured"
+    desc="Find by additional insured"
+    name="Additional Insured">
+    <category
+      code="active"
+      typelist="ClaimSearchType"/>
+  </typecode>
+  <typecode
+    code="any"
+    desc="Find by any claim contact"
+    name="Any Party Involved">
+    <category
+      code="active"
+      typelist="ClaimSearchType"/>
+  </typecode>
+</typelist>

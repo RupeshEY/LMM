@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<serialization
+   xmlns="http://guidewire.com/xml"
+   xmlns:tns="http://guidewire.com/xml"
+   xmlns:xsd="http://www.w3.org/1999/XMLSchema"
+   xmlns:xsi="http://www.w3.org/1999/XMLSchema-instance">
+  <script-parameters>
+    <ScriptParameterPack ParamName="InitialReserve_AutoMediumVehicleDamageInspection" ParamType="integer">
+      <ResourceContexts length="0"/>
+      <ParamValue>500</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack ParamName="InitialReserve_AutoMediumVehicleDamageBody" ParamType="integer">
+      <ResourceContexts length="0"/>
+      <ParamValue>2500</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack ParamName="InitialReserve_AutoMinorVehicleDamageBody" ParamType="integer">
+      <ResourceContexts length="0"/>
+      <ParamValue>1000</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack ParamName="InitialReserve_AutoMajorVehicleDamageBody" ParamType="integer">
+      <ResourceContexts length="0"/>
+      <ParamValue>10000</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack ParamName="InitialReserve_AutoMajorVehicleDamageInspection" ParamType="integer">
+      <ResourceContexts length="0"/>
+      <ParamValue>1000</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack ParamName="InitialReserve_AutoGlassVehicleDamage" ParamType="integer">
+      <ResourceContexts length="0"/>
+      <ParamValue>500</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack ParamName="SpecialInvestigation_CreateActivityForSupervisorThreshold" ParamType="integer">
+      <ResourceContexts length="1">
+        <item-0>si</item-0>
+      </ResourceContexts>
+      <ParamValue>5</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack ParamName="UtilizeMatterBudget" ParamType="bit">
+      <ResourceContexts length="0"/>
+      <ParamValue>1</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack ParamName="InitialReserve_TravelBaggageLoss" ParamType="integer">
+      <ResourceContexts length="0"/>
+      <ParamValue>2500</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack ParamName="ClaimNotify_EEvent_TimeOut_Hours" ParamType="integer">
+      <ResourceContexts length="0"/>
+      <ParamValue>12</ParamValue>
+    </ScriptParameterPack>
+    <ScriptParameterPack ParamName="ECFClaimReserveAmountThreshold" ParamType="positivemoney">
+      <ResourceContexts length="0"/>
+      <ParamValue>1000</ParamValue>
+    </ScriptParameterPack>
+  </script-parameters>
+</serialization>

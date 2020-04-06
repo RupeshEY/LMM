@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="NewClaimReplacementServicesDV">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <InputColumn/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Exposure.NewClaimReplacementServices.Compensation&quot;)"/>
+      <DateInput
+        editable="true"
+        id="LostWagesBenefits_BenefitsBeginDate"
+        label="DisplayKey.get(&quot;NVV.Exposure.NewClaimReplacementServices.LostWagesBenefits.BenefitsBeginDate&quot;)"
+        value="Exposure.RSBenefits.BenefitsBeginDate"/>
+      <DateInput
+        editable="true"
+        id="LostWagesBenefits_BenefitsEndDate"
+        label="DisplayKey.get(&quot;NVV.Exposure.NewClaimReplacementServices.LostWagesBenefits.BenefitsEndDate&quot;)"
+        validationExpression="!(Exposure.RSBenefits.BenefitsBeginDate &gt; Exposure.RSBenefits.BenefitsEndDate) ? null : DisplayKey.get(&quot;JSP.PIPDetail.PIP.Date.ValidationError&quot;)"
+        value="Exposure.RSBenefits.BenefitsEndDate"/>
+      <CurrencyInput
+        editable="true"
+        id="LostWagesBenefits_MaxCompRate"
+        label="DisplayKey.get(&quot;NVV.Exposure.NewClaimReplacementServices.LostWagesBenefits.MaxCompRate&quot;)"
+        value="Exposure.RSBenefits.MaxCompRate"/>
+      <Label
+        label="DisplayKey.get(&quot;NVV.Exposure.ReplacementServices.EditableListview&quot;)"/>
+      <ListViewInput
+        def="EditableServiceProviderLV(Exposure.getClaimContactRolesByRole(TC_RSBENPROVIDER), Exposure)"
+        editable="true"
+        label="DisplayKey.get(&quot;NVV.Exposure.ReplacementServices.EditableServiceProviders&quot;)">
+        <Toolbar>
+          <IteratorButtons
+            iterator="EditableServiceProviderLV.EditableServiceProviderLV"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

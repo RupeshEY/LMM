@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PanelSet
+    id="ECFClaimResponsePanelSet"
+    mode="default">
+  <Require
+    name="ecfClaimData"
+    type="ECFMessageClaimData_Ext"/>
+  <Require
+    name="claimResponseRq"
+    type="ECFMessageClaimResponseRq_Ext"/>
+    <DetailViewPanel>
+      <InputColumn>
+        <Label
+          id="ClaimResponseNotAllowed"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.ClaimResponseNotAllowed&quot;)"/>
+      </InputColumn>
+    </DetailViewPanel>
+  </PanelSet>
+</PCF>

@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Worksheet
+    canEdit="true"
+    canVisit="true"
+    id="ClaimNewDocumentFromTemplateWorksheet"
+    startInEditMode="true"
+    tabLabel="DisplayKey.get(&quot;Java.PageAction.NewDocument&quot;)"
+    title="DisplayKey.get(&quot;Java.PageAction.NewDocument&quot;)">
+    <LocationEntryPoint
+      signature="ClaimNewDocumentFromTemplateWorksheet(Claim : Claim)"/>
+    <LocationEntryPoint
+      signature="ClaimNewDocumentFromTemplateWorksheet(Claim : Claim, docInit : util.document.DocumentInitWrapper)"/>
+    <Scope
+      location="*"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="null"
+      name="docInit"
+      type="util.document.DocumentInitWrapper"/>
+    <ScreenRef
+      def="NewDocumentFromTemplateScreen(Claim, docInit, null, null)"/>
+  </Worksheet>
+</PCF>

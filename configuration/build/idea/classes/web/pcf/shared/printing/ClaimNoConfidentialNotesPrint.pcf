@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- For printing use only (specifically for ClaimPrintout use) -->
+  <Page
+    canEdit="false"
+    canVisit="perm.Claim.view(Claim) and perm.System.viewclaimnotes"
+    id="ClaimNoConfidentialNotesPrint"
+    parent="ClaimNotes(Claim)"
+    title="&quot;&quot;">
+    <LocationEntryPoint
+      signature="ClaimNoConfidentialNotesPrint(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="ClaimNoConfidentialNotesPrintScreen">
+      <PanelRef
+        def="NotesLV(Claim.NonconfidentialNotes)">
+        <TitleBar
+          appendListViewPaging="true"
+          title="DisplayKey.get(&quot;Web.ClaimSummary.NotesLV.Title&quot;)"/>
+        <Toolbar/>
+      </PanelRef>
+    </Screen>
+  </Page>
+</PCF>

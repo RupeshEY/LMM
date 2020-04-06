@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Service types list for Service Provider Management Reviews; generally, this will be extended by customers"
+  name="ReviewServiceType">
+  <typecode
+    code="body"
+    desc="Body"
+    name="Body">
+    <category
+      code="AutoRepairShop"
+      typelist="Contact"/>
+  </typecode>
+  <typecode
+    code="paint"
+    desc="Paint"
+    name="Paint">
+    <category
+      code="AutoRepairShop"
+      typelist="Contact"/>
+  </typecode>
+  <typecode
+    code="drivetrain"
+    desc="Transmission and Engine"
+    name="Transmission and Engine">
+    <category
+      code="AutoRepairShop"
+      typelist="Contact"/>
+  </typecode>
+  <typecode
+    code="brakes"
+    desc="Brakes"
+    name="Brakes">
+    <category
+      code="AutoRepairShop"
+      typelist="Contact"/>
+  </typecode>
+  <typecode
+    code="suspension"
+    desc="Suspension"
+    name="Suspension">
+    <category
+      code="AutoRepairShop"
+      typelist="Contact"/>
+  </typecode>
+  <typecode
+    code="other"
+    desc="Indicates that no more specific service type is applicable."
+    name="Other">
+    <category
+      code="AutoRepairShop"
+      typelist="Contact"/>
+  </typecode>
+</typelistextension>

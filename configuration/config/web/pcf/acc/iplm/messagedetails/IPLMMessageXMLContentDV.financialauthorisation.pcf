@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="IPLMMessageXMLContentDV"
+    mode="financialauthorisation">
+    <Require
+      name="message"
+      type="LMMessage_Ext"/>
+    <Variable
+      initialValue="message as ECFMessageClaimResponseRq_Ext"
+      name="claimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <InputColumn>
+      <TextAreaInput
+        id="XMLContent"
+        align="left"
+        labelAbove="true"
+        numRows="120"
+        numCols="120"
+        value="DisplayKey.get(&quot;Accelerator.IPLM.Admin.MessageLog.XmlContent.FinancialApproval&quot;, claimResponseRq.ApprovalActivity.AssignedUser)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

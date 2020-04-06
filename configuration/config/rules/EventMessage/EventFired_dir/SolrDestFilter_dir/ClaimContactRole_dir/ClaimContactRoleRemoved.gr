@@ -1,0 +1,23 @@
+package rules.EventMessage.EventFired_dir.SolrDestFilter_dir.ClaimContactRole_dir
+
+@gw.rules.RuleName("ClaimContactRoleRemoved")
+internal class ClaimContactRoleRemoved {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return messageContext.EventName == "ClaimContactRoleRemoved"
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+gw.solr.CCSolrMessageTransportPlugin.handleClaimContactRoleRemovedEvent(messageContext)
+
+
+/*end00rule*/
+
+  }
+}

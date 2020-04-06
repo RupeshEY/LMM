@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    afterCancel="ClaimFinancialsTransactionsDetail.go(Claim, Recovery)"
+    afterCommit="Recovery.logVoid() ; ClaimFinancialsTransactionsDetail.go(Claim, Recovery)"
+    beforeCommit="Recovery.voidRecovery()"
+    canEdit="true"
+    canVisit="perm.Claim.viewrecoveries(Claim)"
+    countsAsWork="false"
+    id="VoidRecovery"
+    parent="ClaimFinancialsTransactionsDetail(Claim, Recovery)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.VoidRecovery.Title&quot;)">
+    <LocationEntryPoint
+      signature="VoidRecovery(Claim : Claim, Recovery : Recovery)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Recovery"
+      type="Recovery"/>
+    <Screen
+      id="VoidRecoveryScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="CurrentLocation.commit()"
+          available="Recovery.Voidable and perm.Recovery.voidrec(Recovery)"
+          confirmMessage="DisplayKey.get(&quot;JSP.VoidRecovery.Confirm&quot;)"
+          id="VoidRecovery_VoidButton"
+          label="DisplayKey.get(&quot;Button.Recovery.Void&quot;)"
+          shortcut="I"
+          visible="perm.Recovery.voidrec(Recovery)"/>
+        <EditButtons
+          cancelLabel="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          editVisible="false"
+          updateVisible="false"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <InputSetRef
+            def="RecoveryBasicsInputSet(Recovery)"/>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Page>
+</PCF>

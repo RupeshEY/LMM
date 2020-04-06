@@ -1,0 +1,80 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="false"
+  desc="A unique combination of ReserveLine (Claim, Exposure, CostType and CostCategory) and RIAgreement, against which Reinsurance transactions are made."
+  entity="RICoding"
+  exportable="false"
+  extendable="true"
+  final="true"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  table="ricoding"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.financials.impl.RICodingImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.impl.RICodingInternal"
+    impl="com.guidewire.cc.domain.financials.impl.RICodingImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.entity.RICoding"
+    impl="com.guidewire.cc.domain.financials.impl.RICodingImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.financials.impl.RICodingImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="TAccountOwnerDelegate"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.TAccountOwnerDelegateAdapter"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountOwnerDelegateAdapterRICodingImpl"/>
+  <fulldescription><![CDATA[
+        Associates a Claim's Reinsurance Financial information with the appropriate RIAgreement and ReserveLine.
+        Every Reinsurance Transaction must have an RICoding, thereby relating the Transaction
+        with a specific RIAgreement (and hence Reinsurer) as well as an obligation on the Claim.
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    desc="The related claim."
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"
+    setterScriptability="hidden"/>
+  <foreignkey
+    columnName="ReserveLineID"
+    desc="The related ReserveLine."
+    fkentity="ReserveLine"
+    name="ReserveLine"
+    nullok="false"
+    setterScriptability="hidden"/>
+  <foreignkey
+    columnName="RIAgreementID"
+    desc="The related RIAgreement."
+    fkentity="RIAgreement"
+    name="RIAgreement"
+    nullok="false"
+    setterScriptability="hidden"/>
+  <array
+    arrayentity="RITAccount"
+    arrayfield="RICoding"
+    getterScriptability="hidden"
+    name="RITAccounts"
+    owner="true"
+    setterScriptability="hidden">
+    <link-association
+      hasGetter="false"
+      hasSetter="false">
+      <typelist-map
+        field="TAccountType"/>
+    </link-association>
+  </array>
+  <array
+    arrayentity="RITransaction"
+    desc="Set of transactions that coded to this RICoding."
+    getterScriptability="hidden"
+    name="Transactions"
+    setterScriptability="hidden"/>
+</entity>

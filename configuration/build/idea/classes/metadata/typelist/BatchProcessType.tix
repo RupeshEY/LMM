@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<internaltypelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Types of batch processes"
+  name="BatchProcessType">
+  <typecode
+    code="Statistics"
+    desc="Statistics calculator"
+    name="Statistics"/>
+  <typecode
+    code="ClaimException"
+    desc="Claim exception Monitor"
+    name="Claim Exception"/>
+  <typecode
+    code="IdleClaim"
+    desc="Idle open claim exception monitor"
+    name="Idle Open Claim Exception"/>
+  <typecode
+    code="IdleClosedClaim"
+    desc="Idle closed claim exception monitor"
+    name="Idle Closed Claim Exception"/>
+  <typecode
+    code="EncryptionUpgrade"
+    desc="Upgrades encryption for entity fields"
+    name="Encryption Upgrade"/>
+  <typecode
+    code="ExchangeRate"
+    desc="Creates a new ExchangeRateSet using ExchangeRateSetPlugin"
+    name="Exchange Rate"/>
+  <typecode
+    code="FinancialsEsc"
+    desc="Financials escalation monitor - escalates checks from Awaiting-submission status to Requesting status so that the downstream system will be alerted"
+    name="Financials Escalation"/>
+  <typecode
+    code="FinancialsCalc"
+    desc="Financials calculations"
+    name="Financials Calculations"/>
+  <typecode
+    code="BulkInvoiceEsc"
+    desc="Escalate Bulk Invoices from Awaiting-submission status to Requesting status"
+    name="Bulk Invoice Escalation"/>
+  <typecode
+    code="BulkInvoiceWF"
+    desc="Transitions invoices from PendingInvoiceItemValidation status to 'AwaitingSubmission' or 'InvalidInvoiceItems' status once the invoice is ready"
+    name="Bulk Invoice Workflow Monitor"/>
+  <typecode
+    code="TAccountEsc"
+    desc="TAccounts escalation monitor to transition payments and reserves from FutureDated state to Awaiting-submission state"
+    name="TAccounts Escalation"/>
+  <typecode
+    code="AggLimitCalc"
+    desc="Aggregate limit calculations"
+    name="Aggregate Limit Calculations"/>
+  <typecode
+    code="AggLimitLoaderCalc"
+    desc="Aggregate limit loader calculations"
+    name="Aggregate Limit Loader Calculations"
+    retired="true"/>
+  <typecode
+    code="ClaimContactsCalc"
+    desc="Claim contacts calculations"
+    name="Claim Contacts Calculations"/>
+  <typecode
+    code="DashboardStatistics"
+    desc="Statistics for the executive dashboard"
+    name="Dashboard Statistics"/>
+  <typecode
+    code="ReviewSync"
+    desc="Transmits completed reviews to ContactManager."
+    name="ClaimCenter (SPM) Completed Review Sync"/>
+  <typecode
+    code="ClaimHealthCalc"
+    desc="Calculates health indictators and metrics for all claims that do not have any metrics calculated"
+    name="Claim Health Calculations"/>
+  <typecode
+    code="RetiredPolicyGraphDisconnector"
+    desc="Disconnects claim graph objects from retired policy objects so that those claims can be archived"
+    name="Retired Policy Graph Disconnector"/>
+  <typecode
+    code="ClaimValidation"
+    desc="Bulk claim validation work queue writer.  Creates workitems to schedule loaded claims for validation. See ClaimAPI.bulkValidate()"
+    name="Bulk claim validation"/>
+  <typecode
+    code="CatastropheClaimFinder"
+    desc="Finds possible claims related to a catastrophe and creates a 'Review for Catastrophe' activity on the claim."
+    name="Catastrophe Related Claims Finder"/>
+  <typecode
+    code="RecalculateMetrics"
+    desc="Recalculates claim metrics for claims whose metric update time has passed."
+    name="Recalculate Claim Metrics"/>
+  <typecode
+    code="BulkInvoiceSubmission"
+    desc="Processes bulk invoice items for bulk invoice submission."
+    name="Bulk Invoice Submission"/>
+  <typecode
+    code="ContactRetire"
+    desc="Attempt to retire a Contacts marked as possibly retireable."
+    name="Contact Retire"/>
+  <typecode
+    code="PopulateUserDenormSearchColumn"
+    desc="Populates the denormalized search column User.SpatialPointDenorm from Address.SpatialPoint"
+    name="Populate Denormalized User Search Column SpatialPointDenorm">
+    <category
+      code="APIRunnable"
+      typelist="BatchProcessTypeUsage"/>
+  </typecode>
+  <typecode
+    code="AddressDelete"
+    desc="Attempt to retire a Address marked as possibly deletable."
+    name="Address Delete"/>
+  <typecode
+    code="BulkPurge"
+    desc="Purge records through table updates"
+    name="BulkPurge"/>
+  <typecode
+    code="PurgeMessageHistory"
+    desc="Purges old messages from the message history table"
+    name="Purge Message History"/>
+</internaltypelistextension>

@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ServiceRequestMetricLimit">
+  <typekey
+    desc="Units for this type of metric limit."
+    name="MetricUnit"
+    nullok="false"
+    typelist="MetricUnit"/>
+  <typekey
+    desc="Currency for this limit, for non-money based limits this is always the default currency"
+    name="Currency"
+    nullok="true"
+    typelist="Currency"/>
+  <typekey
+    desc="Calculation type for this limit"
+    name="LimitType"
+    nullok="false"
+    typelist="ServiceRequestMetricLimitType"/>
+  <typekey
+    desc="Service request tier to which this limit applies, or null if it applies to any tier"
+    name="ServiceRequestTier"
+    nullok="true"
+    typelist="ServiceRequestTier"/>
+  <foreignkey
+    columnName="CategoryServiceID"
+    desc="Category of service that this limit applies to, null if it applies to any category"
+    fkentity="SpecialistService"
+    name="ServiceCategory"
+    nullok="true"/>
+  <foreignkey
+    columnName="SpecialistServiceID"
+    desc="Fully-specified service that this limit applies to, null if it applies to any service"
+    fkentity="SpecialistService"
+    name="SpecialistService"
+    nullok="true"/>
+  <typekey
+    desc="Customer service tier that this limit applies to, null if it applies to any service tier"
+    name="CustomerServiceTier"
+    nullok="true"
+    typelist="CustomerServiceTier"/>
+  <index
+    desc="Index to ensure that is only one limit per combination of metric type, category, tier, limit type(coming later), and service tier"
+    name="svcreqmetrlimitu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ServiceRequestMetricType"/>
+    <indexcol
+      keyposition="2"
+      name="ServiceRequestTier"/>
+    <indexcol
+      keyposition="3"
+      name="CategoryServiceID"/>
+    <indexcol
+      keyposition="4"
+      name="SpecialistServiceID"/>
+    <indexcol
+      keyposition="5"
+      name="CustomerServiceTier"/>
+    <indexcol
+      keyposition="6"
+      name="Currency"/>
+  </index>
+</extension>

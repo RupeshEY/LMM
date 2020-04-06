@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../app-cc/pcf.xsd">
+  <PanelSet
+    id="DocumentDetailsEditDVPanelSet">
+    <Require
+      name="documentDetailsApplicationHelper"
+      type="gw.document.DocumentDetailsApplicationHelper"/>
+    <Require
+      name="fromTemplate"
+      type="boolean"/>
+    <DetailViewPanel>
+      <Layout
+        columns="documentDetailsApplicationHelper.AllowFieldsSubset ? 2 : 1"
+        type="table"/>
+      <InputSetRef
+        def="DocumentDetailsEditInputSet(documentDetailsApplicationHelper as gw.document.DocumentDetailsCCHelper, fromTemplate)"/>
+    </DetailViewPanel>
+  </PanelSet>
+</PCF>

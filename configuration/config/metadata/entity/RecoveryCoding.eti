@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A unique combination of ReserveLine (Claim, Exposure, CostType, CostCategory, and ReservingCurrency) and RecoveryCategory, against which Recovery and RecoveryReserve transactions are made."
+  entity="RecoveryCoding"
+  overwrittenInStagingTable="true"
+  table="recoverycoding"
+  type="versionable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.financials.impl.RecoveryCodingImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.impl.RecoveryCodingInternal"
+    impl="com.guidewire.cc.domain.financials.impl.RecoveryCodingImpl"/>
+  <fulldescription><![CDATA[
+A RecoveryCoding is a combination of RecoveryCategory and ReserveLine (which itself is a combination of Claim, Exposure, CostType, CostCategory, and ReservingCurrency).
+Neither the RecoveryCategory nor ReserveLine on a RecoveryCoding can be null; the "Unspecified" RecoveryCategory value is sometimes used as a default.
+A RecoveryCoding is used to categorize Recoveries and RecoveryReserves.
+Every Recovery and RecoveryReserve is associated with a RecoveryCoding.
+A Recovery or RecoveryReserve's ReserveLine must match its RecoveryCoding's ReserveLine.
+]]></fulldescription>
+  <typekey
+    columnName="RecoveryCategory"
+    desc="The RecoveryCategory to which all associated transactions should be coded."
+    exportable="false"
+    name="RecoveryCategory"
+    nullok="false"
+    overwrittenInStagingTable="true"
+    setterScriptability="hidden"
+    typelist="RecoveryCategory"/>
+  <foreignkey
+    columnName="ReserveLineID"
+    desc="The ReserveLine to which all associated transactions should be coded."
+    existingreferencesallowed="false"
+    exportable="false"
+    fkentity="ReserveLine"
+    importableagainstexistingobject="false"
+    name="ReserveLine"
+    nullok="false"
+    overwrittenInStagingTable="true"
+    setterScriptability="hidden"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="TAccountOwnerDelegate"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.TAccountOwnerDelegateAdapter"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountOwnerDelegateAdapterRecoveryCodingImpl"/>
+  <array
+    arrayentity="RecoveryTAccount"
+    arrayfield="RecoveryCoding"
+    exportable="false"
+    getterScriptability="hidden"
+    name="RecoveryTAccounts"
+    owner="true"
+    setterScriptability="hidden">
+    <link-association
+      hasGetter="false">
+      <typelist-map
+        field="TAccountType"/>
+    </link-association>
+  </array>
+  <array
+    arrayentity="Transaction"
+    desc="Set of transactions that coded to this RecoveryCoding."
+    exportable="false"
+    getterScriptability="hidden"
+    name="Transactions"
+    setterScriptability="doesNotExist"/>
+  <index
+    desc="ReserveLine/RecoveryCategory combination must be unique."
+    name="recoverycoding1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ReserveLineID"/>
+    <indexcol
+      keyposition="2"
+      name="RecoveryCategory"/>
+  </index>
+</entity>

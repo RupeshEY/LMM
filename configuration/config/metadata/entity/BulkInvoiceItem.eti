@@ -1,0 +1,144 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Individual item on a bulk invoice"
+  entity="BulkInvoiceItem"
+  exportable="true"
+  loadable="false"
+  table="bulkinvoiceitem"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.RemoveCallback"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceItemImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceItemImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceItemInternal"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceItemImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.bulkpay.entity.BulkInvoiceItem"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceItemImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceItemImpl"/>
+  <fulldescription><![CDATA[
+    Describes one item of the BulkInvoice, and corresponds to one line item of the original invoice.
+    It contains data fields that define the reserve line to which the item is to be coded, as well as the amount and the PaymentType.
+    ]]></fulldescription>
+  <column
+    desc="The amount of this invoice item."
+    name="Amount"
+    nullok="false"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="Currency"/>
+  </column>
+  <column
+    default="0"
+    desc="Order of the BulkInvoiceItem on the BulkInvoice."
+    name="BulkInvoiceOrder"
+    nullok="false"
+    type="integer"/>
+  <column
+    desc="Claim Number of the claim that this BulkInvoiceItem is related to."
+    name="ClaimNumber"
+    nullok="true"
+    type="claimnumber"/>
+  <column
+    desc="Date that the service was performed (if this check is for a service)."
+    name="DateOfService"
+    nullok="true"
+    type="datetime"/>
+  <column
+    default="0"
+    desc="The total amount of all deductions computed for the check associated with this bulk invoice item."
+    name="DeductionsAmount"
+    nullok="false"
+    setterScriptability="hidden"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="Currency"/>
+  </column>
+  <column
+    desc="A comment field for the invoice item.  The contents of this field will be copied to the memo of the place-holder check that is created for this BulkInvoiceItem in ClaimCenter."
+    name="Description"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    desc="Validation warnings / errors generated for this BulkInvoiceItem during final processing."
+    name="Explanation"
+    nullok="true"
+    type="mediumtext"/>
+  <column
+    default="false"
+    desc="Indicates whether the associated payment should erode reserves (false) or not (true)."
+    name="NonEroding"
+    nullok="false"
+    type="bit"/>
+  <column
+    desc="End date of the service period for the check."
+    name="ServicePdEnd"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Start date of the service period for the check."
+    name="ServicePdStart"
+    nullok="true"
+    type="datetime"/>
+  <column
+    default="false"
+    desc="Flag to indicate whether this item is waiting to be processed for invoice submission."
+    getterScriptability="hidden"
+    name="AwaitingProcessing"
+    nullok="false"
+    setterScriptability="hidden"
+    type="bit"/>
+  <foreignkey
+    columnName="BulkInvoiceID"
+    desc="The bulk invoice that contains this bulk invoice item."
+    exportasid="true"
+    fkentity="BulkInvoice"
+    name="BulkInvoice"
+    nullok="false"/>
+  <foreignkey
+    columnName="ClaimInfoID"
+    desc="The ClaimInfo for which this BulkInvoiceItem represents a payment."
+    exportable="false"
+    fkentity="ClaimInfo"
+    name="ClaimInfo"
+    nullok="true"/>
+  <onetoone
+    desc="Links a BulkInvoiceItem to its info. Returns null if the associated Claim is Archived."
+    fkentity="BulkInvoiceItemInfo"
+    name="BulkInvoiceItemInfo"
+    nullok="true"
+    setterScriptability="doesNotExist"/>
+  <typekey
+    desc="The CostCategory of the payment associated with this item."
+    name="CostCategory"
+    nullok="true"
+    typelist="CostCategory"/>
+  <typekey
+    desc="The CostType of the payment associated with this item."
+    name="CostType"
+    nullok="true"
+    typelist="CostType"/>
+  <typekey
+    desc="The PaymentType for the payment associated with this item."
+    name="PaymentType"
+    nullok="false"
+    typelist="PaymentType"/>
+  <typekey
+    desc="The current business status of this item."
+    name="Status"
+    nullok="false"
+    typelist="BulkInvoiceItemStatus"/>
+  <typekey
+    desc="The reserving currency of the payment associated with this item."
+    name="ReservingCurrency"
+    nullok="true"
+    typelist="Currency"/>
+</entity>

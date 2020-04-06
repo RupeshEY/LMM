@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.Claim.genericviewrecoveries and perm.System.viewsearch"
+    countsAsWork="false"
+    id="RecoverySearch"
+    title="DisplayKey.get(&quot;JSP.RecoverySearch.Search.RecoverySearch&quot;)">
+    <Variable
+      initialValue="&quot;RecoverySearchResultsLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <Variable
+      initialValue="false"
+      name="searchHasBeenRun"
+      type="boolean"/>
+    <Screen
+      id="RecoverySearchScreen">
+      <SearchPanel
+        criteriaName="RecoverySearchCriteria"
+        maxSearchResults="gw.api.search.MaxSearchResults.forRecoveries()"
+        resultsName="RecoverySearchViewList"
+        search="var searchResult = RecoverySearchCriteria.performSearch(); searchHasBeenRun = ((null != searchResult) ? true : false); return searchResult"
+        searchCriteria="new RecoverySearchCriteria()"
+        searchCriteriaType="entity.RecoverySearchCriteria"
+        searchOnRefresh="false"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;RecoverySearchView&gt;">
+        <PanelRef
+          def="RecoverySearchDV(RecoverySearchCriteria)"/>
+        <PanelRef
+          def="RecoverySearchResultsLV(RecoverySearchViewList, RecoverySearchCriteria)">
+          <TitleBar
+            appendListViewPaging="true"
+            title="DisplayKey.get(&quot;JSP.RecoverySearch.Search.Results&quot;)"/>
+          <Toolbar>
+            <ToolbarButton
+              action="gw.api.print.ListViewPrintOptionPopupAction.printListViewOnlyWithOptions(PrintTargetLV, DisplayKey.get(&quot;JSP.RecoverySearch.Search.Results&quot;), null)"
+              available="perm.User.printlistviews"
+              id="PrintButton"
+              label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"/>
+          </Toolbar>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Page>
+</PCF>

@@ -1,0 +1,65 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_matter.xml -->
+  <ListViewPanel
+    id="AddressBookContactMattersLV">
+    <Require
+      name="Contact"
+      type="Contact"/>
+    <Variable
+      initialValue="Matter.finder.findMattersForABContact(Contact.getAddressBookUID())"
+      name="MatterViewList"
+      type="gw.api.database.IQueryBeanResult&lt;gw.pl.persistence.core.Bean&gt;"/>
+    <Variable
+      initialValue="new gw.api.contact.ABContactMatterFilterSet()"
+      name="FilterSet"
+      type="gw.api.contact.ABContactMatterFilterSet"/>
+    <RowIterator
+      editable="false"
+      elementName="MatterView"
+      type="entity.MatterView"
+      value="MatterViewList"
+      valueType="gw.api.database.IQueryBeanResult&lt;gw.pl.persistence.core.Bean&gt;">
+      <ToolbarFilter
+        name="AddressBookContactMattersFilterSet">
+        <ToolbarFilterOption
+          filter="FilterSet.AllFilter"
+          label="DisplayKey.get(&quot;Java.ListView.Filter.All&quot;)"/>
+        <ToolbarFilterOption
+          filter="FilterSet.OpenFilter"
+          label="DisplayKey.get(&quot;Java.ToolBar.Matters.All.Open&quot;)"
+          selectOnEnter="true"/>
+      </ToolbarFilter>
+      <Row>
+        <TextCell
+          action="pcf.Claim.go(MatterView.MatterClaim)"
+          id="ClaimNumber"
+          label="DisplayKey.get(&quot;LV.Matter.ABContactMatters.ClaimNumber&quot;)"
+          sortOrder="1"
+          value="MatterView.ClaimNumber"/>
+        <TextCell
+          action="MatterDetailPage.go(MatterView.MatterClaim, MatterView.Matter)"
+          id="Name"
+          label="DisplayKey.get(&quot;LV.Matter.ABContactMatters.Name&quot;)"
+          value="MatterView.Name"/>
+        <TextCell
+          action="MatterDetailPage.go(MatterView.MatterClaim, MatterView.Matter)"
+          id="CaseNumber"
+          label="DisplayKey.get(&quot;LV.Matter.ABContactMatters.CaseNumber&quot;)"
+          value="MatterView.CaseNumber"/>
+        <CurrencyCell
+          formatType="currency"
+          id="EstSettleCost"
+          label="DisplayKey.get(&quot;LV.Matter.ABContactMatters.EstSettleCost&quot;)"
+          value="MatterView.FinalSettleCost"/>
+        <DateCell
+          id="TrialDate"
+          label="DisplayKey.get(&quot;LV.Matter.ABContactMatters.TrialDate&quot;)"
+          sortOrder="2"
+          value="MatterView.TrialDate"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

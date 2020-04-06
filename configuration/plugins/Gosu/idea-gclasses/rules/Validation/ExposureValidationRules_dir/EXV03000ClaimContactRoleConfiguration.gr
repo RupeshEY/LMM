@@ -1,0 +1,32 @@
+package rules.Validation.ExposureValidationRules_dir
+
+@gw.rules.RuleName("EXV03000 - ClaimContact Role Configuration")
+internal class EXV03000ClaimContactRoleConfiguration {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* if anything relevant has changed, check for invalid role configurations
+   at the exposure level and report each individually on the Contacts array
+   if they exist */
+var b = \ bean : KeyableBean -> typeof bean == entity.ClaimContact || typeof bean == entity.ClaimContactRole
+if (!exposure.isValid(TC_NEWLOSS)
+    || exposure.Bundle.InsertedBeans.toList().hasMatch(b)
+    || exposure.Bundle.UpdatedBeans.toList().hasMatch(b)
+    || exposure.Bundle.RemovedBeans.toList().hasMatch(b)) {
+  var failures = exposure.validateRoles()
+  for (failure in failures) {
+    exposure.reject(TC_NEWLOSS, failure.getMessage().localize(), null, null)
+  }
+}
+/*end00rule*/
+
+  }
+}

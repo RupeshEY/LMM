@@ -1,0 +1,72 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="PolicyLocationScreen">
+    <Require
+      name="PolicyLocationParam"
+      type="PolicyLocation"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="EditMode"
+      type="Boolean"/>
+    <Variable
+      initialValue="PolicyLocationParam == null ? Claim.Policy.createNewPolicyLocation() : PolicyLocationParam"
+      name="PolicyLocation"
+      type="PolicyLocation"/>
+    <Variable
+      initialValue="new gw.api.address.PolicyLocationAddressOwner(PolicyLocation)"
+      name="AddressOwner"
+      type="gw.api.address.CCAddressOwner"/>
+    <Toolbar>
+      <EditButtons
+        cancelVisible="!Claim.Policy.Verified and perm.Claim.edit(Claim) and perm.Policy.edit(Claim)"
+        editVisible="!Claim.Policy.Verified and perm.Claim.edit(Claim) and perm.Policy.edit(Claim)"
+        pickValue="PolicyLocation"/>
+    </Toolbar>
+    <DetailViewPanel>
+      <InputColumn>
+        <TextInput
+          editable="true"
+          id="LocationNumber"
+          label="DisplayKey.get(&quot;LV.Policy.Locations.Number&quot;)"
+          value="PolicyLocation.LocationNumber"/>
+        <InputSetRef
+          def="CCAddressInputSet(AddressOwner)"/>
+      </InputColumn>
+      <InputColumn>
+        <InputSet
+          visible="PolicyLocation.Policy.Claim.LossType != LossType.TC_WC">
+          <ListViewInput
+            def="EditablePropertyLienholdersLV(PolicyLocation, PolicyLocation.Policy.Claim)"
+            editable="true"
+            label="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.Lienholders&quot;)"
+            labelAbove="true">
+            <Toolbar>
+              <IteratorButtons
+                iterator="EditablePropertyLienholdersLV.EditablePropertyLienholdersLV"/>
+            </Toolbar>
+          </ListViewInput>
+          <InputDivider/>
+          <ListViewInput
+            def="EditableLocationItemsLV(PolicyLocation)"
+            editable="true"
+            label="DisplayKey.get(&quot;NVV.Policy.LocationDetail.Property.ListedItems&quot;)"
+            labelAbove="true">
+            <Toolbar>
+              <IteratorButtons
+                iterator="EditableLocationItemsLV.EditableLocationItemsLV"/>
+            </Toolbar>
+          </ListViewInput>
+        </InputSet>
+      </InputColumn>
+    </DetailViewPanel>
+    <PanelRef
+      def="PolicyLocationRiskDetailPanelSet(PolicyLocation, Claim.Policy)">
+      <Toolbar/>
+    </PanelRef>
+  </Screen>
+</PCF>

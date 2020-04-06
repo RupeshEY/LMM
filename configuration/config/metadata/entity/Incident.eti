@@ -1,0 +1,121 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Report of an incident related to a claim."
+  entity="Incident"
+  exportable="true"
+  extendable="true"
+  final="false"
+  platform="false"
+  table="incident"
+  type="retireable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.ClaimContactRoleOwner"
+    impl="com.guidewire.cc.domain.exposure.impl.IncidentImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.CommitCallback"
+    impl="com.guidewire.cc.domain.exposure.impl.IncidentImpl"/>
+  <implementsInterface
+    iface="gw.cc.exposure.entity.Incident"
+    impl="com.guidewire.cc.domain.exposure.impl.IncidentImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="ClaimContactRoleOwner"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Claim to which this incident is related."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <column
+    desc="General description of the incident."
+    name="Description"
+    nullok="true"
+    type="mediumtext"/>
+  <array
+    arrayentity="ClaimContactRole"
+    desc="The contacts and their roles associated with this incident."
+    name="Roles"
+    triggersValidation="true"/>
+  <!-- Assessment -->
+  <column
+    desc="The name or subject of this negotiation."
+    exportable="true"
+    name="AssessmentName"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="128"/>
+  </column>
+  <typekey
+    desc="AssessmentStatus"
+    name="AssessmentStatus"
+    nullok="true"
+    typelist="AssessmentStatus"/>
+  <typekey
+    desc="AssessmentType"
+    name="AssessmentType"
+    nullok="true"
+    typelist="AssessmentType"/>
+  <column
+    desc="Assessment Comment"
+    name="AssessmentComment"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Date when this Assessment is expected to be complete"
+    name="AssessmentTargetCloseDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date when this Assessment is complete"
+    name="AssessmentCloseDate"
+    nullok="true"
+    type="datetime"/>
+  <foreignkey
+    columnName="InternalUserID"
+    desc="Internal User"
+    exportable="false"
+    fkentity="User"
+    name="InternalUser"
+    nullok="true"/>
+  <array
+    arrayentity="AssessmentSource"
+    desc="A source for this assessment."
+    name="SourceLine"
+    triggersValidation="true"/>
+  <array
+    arrayentity="AssessmentItem"
+    desc="A list of line items for this assessment."
+    name="ItemLine"
+    triggersValidation="true"/>
+  <array
+    arrayentity="AssessmentContentItem"
+    desc="A list of line items for this assessment."
+    name="ContentItemLine"
+    triggersValidation="true"/>
+  <array
+    arrayentity="Exposure"
+    desc="A list of exposures for this incident"
+    name="Exposures"/>
+  <column
+    desc="Boolean field to indicate if assessmentitems are utilized"
+    name="IncludeLineItems"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Boolean field to indicate if assessmentcontentitems are utilized"
+    name="IncludeContentLineItems"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    desc="Severity of the loss."
+    name="Severity"
+    nullok="true"
+    typelist="SeverityType"/>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.claim.dbchecks.RequiredRolesDBCheckBuilder"/>
+</entity>

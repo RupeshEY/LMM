@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="RelatedToInputSet">
+    <Require
+      name="state"
+      type="gw.bizrules.ruleaction.behavioralcommandparam.relatedto.HasRelatedToRuleActionCommandDefinitionState"/>
+    <Require
+      name="commandDefinition"
+      type="gw.bizrules.pcf.RuleCommandDefinitionHolder"/>
+    <Require
+      name="relatedToConfig"
+      type="gw.bizrules.ruleaction.config.CCCommandParameterDefinition"/>
+    <RangeInput
+      editable="true"
+      id="RelatedToInput"
+      label="DisplayKey.get('Web.ActivityRules.Action.RelatedTo')"
+      optionLabel="VALUE.UIDisplayName"
+      required="false"
+      value="state.RelatedTo"
+      valueRange="state.getValueRange(relatedToConfig, commandDefinition, gw.bizrules.ruleaction.behavioralcommandparam.relatedto.ActivityRulesRelatedTo)"
+      valueType="gw.bizrules.ruleaction.behavioralcommandparam.relatedto.ActivityRulesRelatedTo">
+    <PostOnChange/>
+    </RangeInput>
+    <InputSetRef
+      def="ValidationErrorsInputSet(commandDefinition.getParameterHolder(relatedToConfig.Name).validate(),false)"
+      id="ValidationErrorsRelatedTo"/>
+  </InputSet>
+</PCF>

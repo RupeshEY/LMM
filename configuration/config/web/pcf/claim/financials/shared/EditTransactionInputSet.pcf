@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This InputSet is only appropriate for editing a Payment, in spite of its more generic name  This file automatically generated from nvv_financials.xml -->
+  <InputSet
+    id="EditTransactionInputSet">
+    <Require
+      name="payment"
+      type="Payment"/>
+    <Require
+      name="reserveLineInputSetHelper"
+      type="gw.api.financials.ReserveLineInputSetHelper"/>
+    <InputSetRef
+      def="ReserveLineInputSet(payment, reserveLineInputSetHelper)"/>
+    <TextInput
+      editable="true"
+      id="Comments"
+      label="DisplayKey.get(&quot;NVV.Financials.SubView.EditTransaction.Transaction.Comments&quot;)"
+      value="payment.Comments"/>
+  </InputSet>
+</PCF>

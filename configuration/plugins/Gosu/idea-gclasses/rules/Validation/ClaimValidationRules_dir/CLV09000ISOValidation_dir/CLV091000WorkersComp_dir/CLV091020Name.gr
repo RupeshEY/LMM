@@ -1,0 +1,30 @@
+package rules.Validation.ClaimValidationRules_dir.CLV09000ISOValidation_dir.CLV091000WorkersComp_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV091020 - Name")
+internal class CLV091020Name {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.ClaimantDenorm != null
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+var person = claim.ClaimantDenorm as Person
+if(person.FirstName == null || person.FirstName.length() == 0) {
+  claim.rejectField("claimant.FirstName", TC_ISO, 
+                    DisplayKey.get("Rules.Validation.Claim.ClaimantFirstNameNotEmpty"), null, null)
+}
+if(person.LastName == null || person.LastName.length() == 0) {
+  claim.rejectField("claimant.LastName", TC_ISO, 
+                    DisplayKey.get("Rules.Validation.Claim.ClaimantLastNameNotEmpty"), null, null)
+}
+/*end00rule*/
+
+  }
+}

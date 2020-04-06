@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<RepositoryOperationRq xmlns="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0" xmlns:rlc="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/2005-2" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.ACORD.org/Standards/AcordMsgSvc/1.4.0 Acord-Repository_v-1-2-0.xsd">
+   <MsgId>E972D91E-912C-42D4-A998-050D09CED856</MsgId>
+   <CreationDtTime>2014-11-21T16:32:00Z</CreationDtTime>
+   <RepositoryOperationTypeCd>RepositoryDownload</RepositoryOperationTypeCd>
+   <Sender>
+      <PartyId>urn:lloyds:2007</PartyId>
+      <PartyRoleCd>Insurer</PartyRoleCd>
+      <PartyName>Novae</PartyName>
+   </Sender>
+   <Receiver>
+      <PartyId>urn:duns:236196817</PartyId>
+      <PartyRoleCd>ServiceProvider</PartyRoleCd>
+      <PartyName>Xchanging</PartyName>
+   </Receiver>
+   <Application>
+      <ApplicationCd>Jv-Ins-Reinsurance</ApplicationCd>
+      <SchemaVersion>http://www.ACORD.org/standards/Jv-Ins-Reinsurance/2005-2</SchemaVersion>
+   </Application>
+   <DocumentList>
+      <HierarchySortIndicator>0</HierarchySortIndicator>
+      <DocumentItem>
+         <Document>
+            <DocumentId>e4b5c52a-c82d-4109-8f39-4e357a3ced55</DocumentId>
+            <DocumentVersion>1.0</DocumentVersion>
+            <DocumentVersionDtTime>2017-08-01T01:00:00+01:00</DocumentVersionDtTime>
+            <InheritIndicator>false</InheritIndicator>
+            <FileId>20170801dfAdjuster Report</FileId>
+            <FileFormatCd>application/msword</FileFormatCd>
+            <FileSize>
+               <NumUnits>340</NumUnits>
+               <UnitMeasurementCd>KB</UnitMeasurementCd>
+            </FileSize>
+            <DocumentTypeCd>report_adjuster</DocumentTypeCd>
+         </Document>
+         <rlc:ReferredObjects xmlns="http://www.ACORD.org/standards/Jv-Ins-Reinsurance/2005-2">
+            <rlc:ServiceProvider>
+               <rlc:Party>
+                  <rlc:Name>Xchanging</rlc:Name>
+               </rlc:Party>
+               <rlc:Contact>
+                  <rlc:Description>B0001UMR001-B0001UCR001-B0001TR0001</rlc:Description>
+               </rlc:Contact>
+            </rlc:ServiceProvider>
+         </rlc:ReferredObjects>
+      </DocumentItem>
+   </DocumentList>
+</RepositoryOperationRq>

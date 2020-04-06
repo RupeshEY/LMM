@@ -1,0 +1,21 @@
+package rules.EventMessage.EventFired_dir.EFR02000Metro_dir
+
+@gw.rules.RuleName("EFR02100 - MetroReport")
+internal class EFR02100MetroReport {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return messageContext.Root typeis MetroReport and
+messageContext.Root.isFieldChanged("Status")
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

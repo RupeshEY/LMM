@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    beforeCommit="AssignmentPopup.Picker.setSelection(pickedValue);AssignmentPopup.performAssignment()"
+    canEdit="true"
+    id="AssignClaimsPopup"
+    returnType="gw.api.assignment.Assignee"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Claim.Assign.Title&quot;)">
+    <LocationEntryPoint
+      signature="AssignClaimsPopup(AssignmentPopup : gw.api.claim.ClaimAssignmentPopup)"/>
+    <Variable
+      name="AssignmentPopup"
+      type="gw.api.claim.ClaimAssignmentPopup"/>
+    <ScreenRef
+      def="AssignmentPopupScreen(AssignmentPopup, AssignmentPopup.getClaim())"/>
+  </Popup>
+</PCF>

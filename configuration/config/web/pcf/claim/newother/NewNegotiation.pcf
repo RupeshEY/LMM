@@ -1,0 +1,36 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="ClaimNegotiationForward.go(claim)"
+    afterCommit="ClaimNegotiationForward.go(claim)"
+    canEdit="true"
+    canVisit="perm.Claim.createnegotiation(claim)"
+    id="NewNegotiation"
+    parent="Claim(claim)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ClaimPlanOfAction.Negotiations.NewNegotiation&quot;)">
+    <LocationEntryPoint
+      signature="NewNegotiation(claim : Claim)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      initialValue="claim.newNegotiation()"
+      name="Negotiation"
+      type="Negotiation"/>
+    <Screen
+      id="NewNegotiationScreen">
+      <Toolbar/>
+      <PanelRef
+        def="NewNegotiationDV(Negotiation)">
+        <Toolbar>
+          <EditButtons
+            cancelLabel="DisplayKey.get(&quot;Button.Cancel&quot;)"
+            updateLabel="DisplayKey.get(&quot;Button.Update&quot;)"/>
+        </Toolbar>
+      </PanelRef>
+    </Screen>
+  </Page>
+</PCF>

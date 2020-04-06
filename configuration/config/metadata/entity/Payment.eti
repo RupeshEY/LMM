@@ -1,0 +1,88 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="A payment transaction."
+  entity="Payment"
+  final="true"
+  supertype="Transaction">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.payment.impl.PaymentInternal"
+    impl="com.guidewire.cc.domain.financials.payment.impl.PaymentImpl"/>
+  <implementsInterface
+    iface="gw.cc.financials.payment.entity.Payment"
+    impl="com.guidewire.cc.domain.financials.payment.impl.PaymentImpl"/>
+  <implementsInterface
+    iface="gw.api.financials.PaymentMethods"
+    impl="gw.api.financials.PaymentMethodsImpl"/>
+  <implementsInterface
+    iface="gw.api.financials.PaymentTransferMethods"
+    impl="gw.api.financials.PaymentTransferMethodsImpl"/>
+  <fulldescription><![CDATA[
+    A subtype of Transaction that represents a payment of money. One or more Payments belong to a Check, which
+    delivers the money to a particular payee. Like all transactions, a Payment has a ReserveLine which categorizes
+    the payment. Usually, there must be sufficient reserves on a ReserveLine for a Payment on that ReserveLine to
+    be allowed.
+    <p>Payments can be eroding or non-eroding. Eroding payments deplete Reserves on the same ReserveLine. A payment
+    can be manually set to non-eroding so it does not deplete reserves. Some customers use non-eroding payments
+    exclusively. Others may not allow non-eroding payments at all, except for supplemental payments.
+    <p>Payments can be of three types: Partial, Final, and Supplemental. A partial payment is eroding. A Final payment
+    is eroding, and sets the reserves on its ReserveLine to zero when its send date is reached. A Supplemental payment
+    is made after the payment's Exposure or Claim has been closed, and is non-eroding.
+    ]]></fulldescription>
+  <column
+    default="false"
+    desc="If this transaction is a final payment, this indicates whether it should or did close its associated exposure."
+    exportable="false"
+    name="CloseExposure"
+    nullok="true"
+    type="bit"/>
+  <column
+    default="false"
+    desc="If this transaction is a final payment, this indicates whether it should or did close its associated claim."
+    exportable="false"
+    name="CloseClaim"
+    nullok="true"
+    type="bit"/>
+  <column
+    default="false"
+    desc="Indicates whether this payment should not erode reserves for its ReserveLine.  This field can only be set in the CheckWizard UI.  Otherwise, one of the setAsEroding() or setAsNonEroding() methods must be called from a rule to change whether a payment erodes reserves."
+    exportable="true"
+    name="DoesNotErodeReserves"
+    nullok="false"
+    setterScriptability="all"
+    type="bit"/>
+  <foreignkey
+    columnName="CheckID"
+    desc="Check that paid this payment."
+    exportable="false"
+    fkentity="Check"
+    importableagainstexistingobject="false"
+    name="Check"
+    nullok="false"
+    triggersValidation="true"/>
+  <typekey
+    desc="Type of the payment."
+    name="PaymentType"
+    nullok="false"
+    typelist="paymenttype"/>
+  <array
+    arrayentity="PaymentReserve"
+    desc="The reserve created to offset this payment, whether to zero reserves or keep reserves from becoming negative.  Should only be one."
+    exportable="false"
+    getterScriptability="hidden"
+    name="OffsettingReserves"
+    setterScriptability="doesNotExist"/>
+  <foreignkey
+    desc="Foreign key to Matter"
+    fkentity="Matter"
+    name="Matter"
+    nullok="true"/>
+  <events>
+    <event
+      description="Fired when the payment is added, and each time its status changes."
+      name="PaymentStatusChanged"/>
+    <event
+      description="Deprecated - use PaymentStatusChanged instead (fired when the this object is submitted)."
+      name="PaymentRecoded"/>
+  </events>
+</subtype>

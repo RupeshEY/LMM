@@ -1,0 +1,40 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- for viewing/editing activity details   This file automatically generated from nvv_activity.xml, but excluded during the development cycle -->
+  <DetailViewPanel
+    id="ActivityDV"
+    mode="default">
+    <Require
+      name="Activity"
+      type="Activity"/>
+    <InputColumn>
+      <InputSetRef
+        def="ActivityCompensableInputSet(Activity.Claim, Activity)"
+        visible="Activity.ActivityPattern.PublicID == &quot;default_data:10019&quot; /* claim_acceptance */"/>
+      <InputSetRef
+        def="ActivityDetailsInputSet(Activity)"/>
+      <InputDivider/>
+      <InputSetRef
+        def="ActivityOwnerInputSet(Activity)"/>
+    </InputColumn>
+    <InputColumn>
+      <InputSetRef
+        def="ActivityDocumentInputSet(Activity)"/>
+      <InputDivider/>
+      <InputSetRef
+        def="ActivityNoteInputSet(Activity)"
+        visible="CurrentLocation.InEditMode"/>
+      <InputDivider
+        visible="perm.Note.create"/>
+      <InputSetRef
+        def="ActivityBulkInvoiceWarningInputSet(Activity.BulkInvoice)"
+        visible="null != Activity.BulkInvoice"/>
+      <InputDivider
+        visible="null != Activity.BulkInvoice"/>
+      <InputSetRef
+        def="ActivityTrackingInputSet(Activity)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

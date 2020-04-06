@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="NotesLV">
+    <Require
+      name="NoteList"
+      type="gw.api.database.IQueryBeanResult&lt;Note&gt;"/>
+    <RowIterator
+      editable="false"
+      elementName="Note"
+      pageSize="5"
+      value="NoteList"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.Note&gt;">
+      <Row>
+        <FormatCell
+          id="col1"
+          wrap="true">
+          <ContentInput
+            labelAbove="true"
+            visible="Note.Confidential">
+            <Link
+              icon="&quot;alert.png&quot;"
+              id="ConfidentialIcon"/>
+            <Link
+              id="ConfidentialLabel"
+              label="DisplayKey.get(&quot;Java.Note.Confidential&quot;)"/>
+          </ContentInput>
+          <TextInput
+            boldValue="true"
+            id="Subject"
+            labelAbove="true"
+            value="Note.Subject"
+            visible="Note.Subject != null"/>
+          <NoteBodyInput
+            flatten="true"
+            id="Body"
+            labelAbove="true"
+            value="Note.Body"/>
+          <TextInput
+            align="left"
+            id="Author"
+            labelAbove="true"
+            value="DisplayKey.get(&quot;Web.Note.Author&quot;,  Note.Author, gw.api.util.StringUtil.formatDate(Note.AuthoringDate, &quot;short&quot;), gw.api.util.StringUtil.formatTime(Note.AuthoringDate, &quot;short&quot;))"
+            visible=""/>
+        </FormatCell>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

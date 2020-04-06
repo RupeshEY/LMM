@@ -1,0 +1,225 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Insurance sub-line (for stat coding)"
+  name="InsuranceSubLine">
+  <typecode
+    code="med_pay"
+    desc="Medical payments"
+    name="Medical payments">
+    <category
+      code="comm_auto_liab"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="uninsured"
+    desc="Uninsured motorists"
+    name="Uninsured motorists">
+    <category
+      code="comm_auto_liab"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="underinsured"
+    desc="Underinsured motorists"
+    name="Underinsured motorists">
+    <category
+      code="comm_auto_liab"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="auto_std"
+    desc="Auto standard"
+    name="Auto standard">
+    <category
+      code="comm_auto_phys"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="auto_non_std"
+    desc="Auto non-standard"
+    name="Auto non-standard">
+    <category
+      code="comm_auto_noflt"
+      typelist="InsuranceLine"/>
+    <category
+      code="comm_auto_phys"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="assigned_risk"
+    desc="Assigned risk"
+    name="Assigned risk">
+    <category
+      code="comm_auto_noflt"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="pers_auto_liab"
+    desc="Personal auto liability"
+    name="Personal auto liability">
+    <category
+      code="pers_auto_liab"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="pers_auto_noflt"
+    desc="Personal auto no-fault"
+    name="Personal auto no-fault">
+    <category
+      code="pers_auto_noflt"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="pers_auto_phys"
+    desc="Personal auto physical damage"
+    name="Personal auto physical damage">
+    <category
+      code="pers_auto_phys"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="bo_simplified"
+    desc="Businessowners - simplified"
+    name="Businessowners - simplified">
+    <category
+      code="businessowners"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="bo_nonsimplified"
+    desc="Businessowners - non simplified"
+    name="Businessowners - non simplified">
+    <category
+      code="businessowners"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="basic_1"
+    desc="Basic group 1 causes of loss"
+    name="Basic group 1 causes of loss">
+    <category
+      code="comm_property"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="basic_2"
+    desc="Basic group 2 causes of loss"
+    name="Basic group 2 causes of loss">
+    <category
+      code="comm_property"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="farmowners"
+    desc="Farmowners"
+    name="Farmowners">
+    <category
+      code="farmowners"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="premises"
+    desc="Premises/operations liability"
+    name="Premises/operations liability">
+    <category
+      code="general_liab"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="owners_contracts"
+    desc="Owners and contractors"
+    name="Owners and contractors">
+    <category
+      code="general_liab"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="prof_liability"
+    desc="Professional liability"
+    name="Professional liability">
+    <category
+      code="general_liab"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="gl_other"
+    desc="All other general liability"
+    name="All other general liability">
+    <category
+      code="general_liab"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="glass"
+    desc="Glass"
+    name="Glass">
+    <category
+      code="glass"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="homeowners"
+    desc="Homeowners"
+    name="Homeowners">
+    <category
+      code="homeowners"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="homeowners_rc"
+    desc="Homeowners with replacement cost"
+    name="Homeowners with replacement cost">
+    <category
+      code="homeowners"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="pers_liability"
+    desc="Personal liability"
+    name="Personal liability">
+    <category
+      code="pers_liab"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="mobile_homeowns"
+    desc="Mobile homeowners"
+    name="Mobile homeowners">
+    <category
+      code="mobile_homeowns"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="wc_std"
+    desc="Workers' compensation"
+    name="Workers' compensation">
+    <category
+      code="wc"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="fela"
+    desc="Federal Employers' Liability Act"
+    name="Federal Employers' Liability Act">
+    <category
+      code="wc"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="jones"
+    desc="Jones Act/Maritime"
+    name="Jones Act/Maritime">
+    <category
+      code="wc"
+      typelist="InsuranceLine"/>
+  </typecode>
+  <typecode
+    code="inland_marine"
+    desc="Inland marine"
+    name="Inland marine">
+    <category
+      code="inland_marine"
+      typelist="InsuranceLine"/>
+  </typecode>
+</typelistextension>

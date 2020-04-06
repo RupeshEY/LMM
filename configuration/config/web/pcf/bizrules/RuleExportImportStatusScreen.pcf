@@ -1,0 +1,174 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Screen
+    id="RuleExportImportStatusScreen">
+    <Require
+      name="navigationSupport"
+      type="gw.bizrules.pcf.BizRulesPageNavigationSupport"/>
+    <Toolbar>
+      <ToolbarButton
+        action="StartRuleImportPopup.push(navigationSupport)"
+        available="gw.bizrules.pcf.RulePermissionUIHelper.canImportRule()"
+        id="Import"
+        label="DisplayKey.get('BizRules.RuleExportImportMenuItemSet.ImportFromFile')"
+        tooltip="gw.bizrules.pcf.RulePermissionUIHelper.checkAndGetImportPermissionMsg()"/>
+      <ToolbarDivider/>
+      <ToolbarButton
+        action="null"
+        id="RefreshButton"
+        label="DisplayKey.get('Button.Refresh')"/>
+    </Toolbar>
+    <PanelRef>
+      <TitleBar
+        title="DisplayKey.get('BizRules.RuleExportImportStatusScreen.Imports')"/>
+      <Toolbar/>
+      <ListViewPanel
+        id="ImportsLV">
+        <RowIterator
+          editable="false"
+          elementName="importTask"
+          pageSize="10"
+          value="navigationSupport.VersionController.ExportImportController.createImportTasksQuery().select()"
+          valueType="gw.api.database.IQueryBeanResult&lt;RuleImportTask&gt;">
+          <Variable
+            initialValue="gw.bizrules.management.RuleExportImportTaskStatus.of(navigationSupport.VersionController.ExportImportController, importTask)"
+            name="taskStatus"
+            type="gw.bizrules.management.RuleExportImportTaskStatus"/>
+          <Row>
+            <TextCell
+              id="StartedBy"
+              label="DisplayKey.get('BizRules.RuleExportImportStatusScreen.StartedBy')"
+              sortBy="importTask.StartedBy"
+              value="importTask.StartedBy.DisplayName"/>
+            <DateCell
+              dateFormat="short"
+              id="Created"
+              label="DisplayKey.get('BizRules.RuleExportImportStatusScreen.StartTime')"
+              sortDirection="descending"
+              sortOrder="1"
+              timeFormat="short"
+              value="importTask.StartTime"
+              width="150"/>
+            <TextCell
+              id="SourceName"
+              label="DisplayKey.get('BizRules.RuleExportImportStatusScreen.SourceName')"
+              value="importTask.SourceName"
+              width="250"/>
+            <BarCell
+              id="Progress"
+              label="DisplayKey.get('BizRules.RuleExportImportStatusScreen.Progress')"
+              percentage="taskStatus.ProgressPercentage"
+              status="DisplayKey.get('BizRules.RuleExportImportStatusScreen.Progress.Status', taskStatus.ProgressPercentage)"
+              valueVisible="taskStatus.ProgressPercentage &gt;= 0"
+              width="100"/>
+            <TextCell
+              action="RuleExportImportFailurePopup.push(taskStatus.FailureReason)"
+              actionAvailable="taskStatus.FailureReason != null"
+              available="gw.bizrules.pcf.RulePermissionUIHelper.canImportRule()"
+              enableSort="false"
+              id="Status"
+              label="DisplayKey.get('BizRules.RuleExportImportStatusScreen.Status')"
+              value="taskStatus.Status.DisplayName"/>
+            <LinkCell
+              width="150">
+              <Link
+                action="navigationSupport.VersionController.ExportImportController.requestExportImportTaskTermination(importTask)"
+                available="gw.bizrules.pcf.RulePermissionUIHelper.canImportRule()"
+                confirmMessage="DisplayKey.get('BizRules.RuleExportImportStatusScreen.Import.CancelConfirmation', importTask.SourceName)"
+                id="Cancel"
+                label="DisplayKey.get('Button.Cancel')"
+                styleClass="miniButton"
+                visible="taskStatus.Status == gw.bizrules.management.RuleExportImportTaskStatus.StatusType.IN_PROGRESS"/>
+              <Link
+                action="RuleImportDetailsPopup.push(navigationSupport, importTask, taskStatus.Status == gw.bizrules.management.RuleExportImportTaskStatus.StatusType.COMPLETED)"
+                available="gw.bizrules.pcf.RulePermissionUIHelper.canImportRule()"
+                id="ImportDetails"
+                label="taskStatus.Status == gw.bizrules.management.RuleExportImportTaskStatus.StatusType.COMPLETED ? DisplayKey.get('BizRules.RuleExportImportStatusScreen.Review') : DisplayKey.get('BizRules.RuleExportImportStatusScreen.CompleteImport') "
+                styleClass="miniButton"
+                visible="importTask.BatchProcessCompleted != null"/>
+            </LinkCell>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </PanelRef>
+    <PanelRef
+      visible="gw.bizrules.pcf.RulePermissionUIHelper.canViewRule()">
+      <TitleBar
+        title="DisplayKey.get('BizRules.RuleExportImportStatusScreen.Exports')"/>
+      <Toolbar/>
+      <ListViewPanel
+        id="ExportsLV">
+        <RowIterator
+          editable="false"
+          elementName="exportTask"
+          pageSize="10"
+          value="navigationSupport.VersionController.ExportImportController.createExportTasksQuery().select()"
+          valueType="gw.api.database.IQueryBeanResult&lt;RuleExportTask&gt;">
+          <Variable
+            initialValue="gw.bizrules.management.RuleExportImportTaskStatus.of(navigationSupport.VersionController.ExportImportController, exportTask)"
+            name="taskStatus"
+            type="gw.bizrules.management.RuleExportImportTaskStatus"/>
+          <Variable
+            initialValue="navigationSupport.VersionController.ExportImportController.createExportTaskEntriesQuery(exportTask).select().Count as String"
+            name="exportedRulesCountAsString"
+            type="java.lang.String"/>
+          <Row>
+            <TextCell
+              id="StartedBy"
+              label="DisplayKey.get('BizRules.RuleExportImportStatusScreen.StartedBy')"
+              sortBy="exportTask.StartedBy"
+              value="exportTask.StartedBy.DisplayName"/>
+            <DateCell
+              dateFormat="short"
+              id="Created"
+              label="DisplayKey.get('BizRules.RuleExportImportStatusScreen.StartTime')"
+              sortDirection="descending"
+              sortOrder="1"
+              timeFormat="short"
+              value="exportTask.StartTime"
+              width="150"/>
+            <TextCell
+              action="RuleExportDetailsPopup.push(navigationSupport, exportTask)"
+              enableSort="false"
+              id="Rules"
+              label="DisplayKey.get('BizRules.RuleExportImportStatusScreen.Rules')"
+              value="exportedRulesCountAsString"/>
+            <BarCell
+              id="Progress"
+              label="DisplayKey.get('BizRules.RuleExportImportStatusScreen.Progress')"
+              percentage="taskStatus.ProgressPercentage"
+              status="DisplayKey.get('BizRules.RuleExportImportStatusScreen.Progress.Status', taskStatus.ProgressPercentage)"
+              valueVisible="taskStatus.ProgressPercentage &gt;= 0"
+              width="100"/>
+            <TextCell
+              action="RuleExportImportFailurePopup.push(taskStatus.FailureReason)"
+              actionAvailable="taskStatus.FailureReason != null"
+              enableSort="false"
+              id="Status"
+              label="DisplayKey.get('BizRules.RuleExportImportStatusScreen.Status')"
+              value="taskStatus.Status.DisplayName"/>
+            <LinkCell
+              width="100">
+              <Link
+                action="navigationSupport.VersionController.ExportImportController.requestExportImportTaskTermination(exportTask)"
+                confirmMessage="DisplayKey.get('BizRules.RuleExportImportStatusScreen.Export.CancelConfirmation', exportedRulesCountAsString)"
+                id="Cancel"
+                label="DisplayKey.get('Button.Cancel')"
+                styleClass="miniButton"
+                visible="taskStatus.Status == gw.bizrules.management.RuleExportImportTaskStatus.StatusType.IN_PROGRESS"/>
+              <Link
+                action="navigationSupport.VersionController.ExportImportController.sendExportedRulesToWebClient(exportTask)"
+                download="true"
+                id="Download"
+                label="DisplayKey.get('Button.Download')"
+                styleClass="miniButton"
+                visible="exportTask.hasData()"/>
+            </LinkCell>
+          </Row>
+        </RowIterator>
+      </ListViewPanel>
+    </PanelRef>
+  </Screen>
+</PCF>

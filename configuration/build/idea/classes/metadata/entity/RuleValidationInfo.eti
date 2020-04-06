@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Business Rule Validation Info"
+  entity="RuleValidationInfo"
+  extendable="false"
+  final="true"
+  loadable="false"
+  platform="true"
+  table="rulevalid"
+  type="versionable">
+  <implementsInterface
+    iface="com.guidewire.bizrules.domain.RuleValidationInfoInternalMethods"
+    impl="com.guidewire.bizrules.domain.RuleValidationInfoImpl"/>
+  <column
+    name="Valid"
+    nullok="false"
+    type="bit"/>
+  <foreignkey
+    columnName="BizRule"
+    fkentity="Rule"
+    name="Rule"
+    nullok="false"/>
+</entity>

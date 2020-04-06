@@ -1,0 +1,188 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="ExposureDetailInputSet">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <Require
+      name="isNewExposure"
+      type="boolean"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.Baggage.Exposure.Overall&quot;)"/>
+    <TypeKeyInput
+      id="LossParty"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.Baggage.Exposure.LossParty&quot;)"
+      required="true"
+      value="Exposure.LossParty"
+      valueType="typekey.LossPartyType"/>
+    <TypeKeyInput
+      editable="true"
+      filter="VALUE.hasCategory( Exposure.Incident.Subtype )"
+      id="GeneralDamage_Severity"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Severity&quot;)"
+      value="Exposure.Incident.Severity"
+      valueType="typekey.SeverityType"
+      visible="isNewExposure == false"/>
+    <DateInput
+      id="ClosedDate"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.Baggage.Exposure.ClosedDate&quot;)"
+      value="Exposure.CloseDate"
+      visible=" Exposure.State == TC_CLOSED "/>
+    <TypeKeyInput
+      id="PrimaryCoverage"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.PrimaryCoverage&quot;)"
+      value="Exposure.PrimaryCoverage"
+      valueType="typekey.CoverageType"/>
+    <TypeKeyInput
+      id="ClosedOutcome"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.ClosedOutcome&quot;)"
+      value="Exposure.ClosedOutcome"
+      valueType="typekey.ExposureClosedOutcomeType"
+      visible=" Exposure.State == TC_CLOSED "/>
+    <TypeKeyInput
+      id="CoverageSubType"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.CoverageSubType&quot;)"
+      value="Exposure.CoverageSubType"
+      valueType="typekey.CoverageSubtype"/>
+    <DateInput
+      dateFormat="short"
+      id="ReOpenDate"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.ReOpenDate&quot;)"
+      value="Exposure.ReOpenDate"
+      visible=" Exposure.ReOpenDate != null "/>
+    <RangeInput
+      editable="true"
+      helpText="DisplayKey.get(&quot;Exposure.Coverage.helpText&quot;)"
+      id="Coverage"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.Coverage&quot;)"
+      value="Exposure.Coverage"
+      valueRange="Exposure.Claim.Policy.getCoveragesByCoverageType(Exposure.PrimaryCoverage)"
+      valueType="entity.Coverage"/>
+    <TypeKeyInput
+      id="ReopenedReason"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.ReopenedReason&quot;)"
+      value="Exposure.ReopenedReason"
+      valueType="typekey.ExposureReopenedReason"
+      visible="Exposure.ReOpenDate != null "/>
+    <TextInput
+      action="UserContactDetailPopup.push(Exposure.AssignedUser)"
+      available="Exposure.AssignedUser.Contact != null"
+      id="AssignedUser_Name"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.AssignedUser.Name&quot;)"
+      value="Exposure.AssigneeDisplayString"
+      visible="isNewExposure == false"/>
+    <TextInput
+      id="AssignedGroup_Name"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.AssignedGroup.Name&quot;)"
+      value="Exposure.AssigneeGroupOnlyDisplayString"
+      visible="isNewExposure == false"/>
+    <TypeKeyInput
+      id="State"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.State&quot;)"
+      value="Exposure.State"
+      valueType="typekey.ExposureState"
+      visible="isNewExposure == false"/>
+    <DateInput
+      id="CreateTime"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.CreateTime&quot;)"
+      value="Exposure.CreateTime"
+      visible="isNewExposure == false"/>
+    <InputSet
+      visible="Exposure.Claim.Policy.StatCodingEnabled">
+      <PolicyStatCodePickerInput
+        action="ClaimPolicyStatCodePickerPopup.push(Exposure.Claim)"
+        editable="true"
+        id="StatLine"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.LivingExpenses.Exposure.StatLine&quot;)"
+        value="Exposure.StatLine"
+        valueRange="Exposure.Claim.Policy.CappedStatCodes"/>
+      <InputSet
+        hideIfReadOnly="true"
+        visible="true">
+        <TextInput
+          id="StatLine_Warning"
+          value="DisplayKey.get(&quot;Java.StatCodes.StatCodeListCappedWarning&quot;, Exposure.Claim.Policy.StatCodeListCap, Exposure.Claim.Policy.StatCodes.length)"
+          visible="Exposure.Claim.Policy.StatCodeListCapped"/>
+      </InputSet>
+    </InputSet>
+    <TypeKeyInput
+      id="ValidationLevel"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.ValidationLevel&quot;)"
+      value="Exposure.ValidationLevel"
+      valueType="typekey.ValidationLevel"
+      visible="isNewExposure == false"/>
+    <InputDivider/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.Claimant&quot;)"/>
+    <ClaimContactInput
+      claim="Exposure.Claim"
+      editable="true"
+      id="Claimant_Picker"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.Claimant.Picker&quot;)"
+      required="true"
+      value="Exposure.Claimant"
+      valueRange="Exposure.Claim.getRelatedContacts(Exposure.getContactType(TC_CLAIMANT))">
+      <Reflect
+        triggerIds="LossParty">
+        <ReflectCondition
+          condition="VALUE == TC_INSURED"
+          value="Exposure.Claim.Insured"/>
+        <ReflectCondition
+          condition="true"
+          value="&quot;&quot;"/>
+      </Reflect>
+    </ClaimContactInput>
+    <TypeKeyInput
+      editable="true"
+      id="Claimant_Type"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.Claimant.Type&quot;)"
+      required="true"
+      value="Exposure.ClaimantType"
+      valueType="typekey.ClaimantType">
+      <Reflect
+        triggerIds="Claimant_Picker">
+        <ReflectCondition
+          condition="Exposure.Claim.Insured==VALUE"
+          value="&quot;insured&quot;"/>
+        <ReflectCondition
+          condition="true"
+          value="&quot;&quot;"/>
+      </Reflect>
+    </TypeKeyInput>
+    <BooleanRadioInput
+      editable="true"
+      id="Claimant_ContactProhibited"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.Claimant.ContactProhibited&quot;)"
+      value="ContactProhibited"/>
+    <TextInput
+      id="Claimant_PrimaryPhone"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.Claimant.PrimaryPhone&quot;)"
+      value="Exposure.Claimant.PrimaryPhoneValue">
+      <Reflect
+        triggerIds="Claimant_Picker"
+        value="VALUE.PrimaryPhoneValue"/>
+    </TextInput>
+    <TextInput
+      id="Claimant_Address"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.GeneralDamage.Exposure.Claimant.Address&quot;)"
+      value="Exposure.Claimant.PrimaryAddressDisplayValue">
+      <Reflect
+        triggerIds="Claimant_Picker"
+        value="VALUE.PrimaryAddressDisplayValue"/>
+    </TextInput>
+    <InputDivider/>
+    <Code><![CDATA[
+property get ContactProhibited() : boolean {
+    return Exposure.Claim.getClaimContact(Exposure.Claimant).ContactProhibited
+}
+
+property set ContactProhibited(prohibited : boolean) {
+  var claimContact = Exposure.Claim.getClaimContact(Exposure.Claimant)
+  if (claimContact != null) claimContact.ContactProhibited = prohibited
+}
+    ]]></Code>
+  </InputSet>
+</PCF>

@@ -1,0 +1,49 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <CardViewPanel
+    id="NewExposureDV"
+    mode="Pipdamages">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Card
+      id="SummaryCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.NewPIPDamages.Pages.Summary&quot;)">
+      <PanelRef
+        def="NewPIPSummaryDV(Exposure)"/>
+    </Card>
+    <Card
+      id="WageBenefitsCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.NewPIPDamages.Pages.WageBenefits&quot;)"
+      visible="Exposure.Claim.Policy.coversPIPBasics(Exposure.PrimaryCoverage) or Exposure.Claim.Policy.coversPIPWageLoss(Exposure.PrimaryCoverage)">
+      <PanelRef
+        def="NewWageBenefitsDV(Exposure)"/>
+    </Card>
+    <Card
+      id="ReplacementServicesCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.NewPIPDamages.Pages.ReplacementServices&quot;)"
+      visible="Exposure.Claim.Policy.coversPIPBasics(Exposure.PrimaryCoverage) or Exposure.Claim.Policy.coversPIPAddlServices(Exposure.PrimaryCoverage)">
+      <PanelRef
+        def="NewReplacementServicesDV(Exposure)"/>
+    </Card>
+    <Card
+      id="VocationalBenefitsCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.NewPIPDamages.Pages.VocationalBenefits&quot;)"
+      visible="Exposure.Claim.Policy.coversPIPBasics(Exposure.PrimaryCoverage) or Exposure.Claim.Policy.coversPIPExtraMedical(Exposure.PrimaryCoverage)">
+      <PanelRef
+        def="NewPIPVocBenefitsDV(Exposure)"/>
+    </Card>
+    <Card
+      id="DeathBenefitsCard"
+      title="DisplayKey.get(&quot;NVV.Exposure.NewPIPDamages.Pages.DeathBenefits&quot;)"
+      visible="Exposure.Claim.Policy.coversPIPBasics(Exposure.PrimaryCoverage) or Exposure.Claim.Policy.coversPIPDeathBenefits(Exposure.PrimaryCoverage) or Exposure.Claim.Policy.coversPIPFuneralExpenses(Exposure.PrimaryCoverage)">
+      <PanelRef
+        def="NewPIPDeathBenefitsDV(Exposure)"/>
+    </Card>
+  </CardViewPanel>
+</PCF>

@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<Entity
+  name="RolePrivilege">
+  <Columns>
+    <!-- <DisplayNameColumn
+      beanPath="RolePrivilege.Role"
+      name="name"
+      sortOrder="1"/> -->
+    <Column
+      beanPath="RolePrivilege.Permission"
+      name="Permission"
+      sortOrder="1"/>
+  </Columns>
+  <DisplayName><![CDATA[var retString : String = gw.api.locale.DisplayKey.get("Web.Admin.RolePrivileges.Permission") + ": " + Permission.DisplayName + ", " +
+        gw.api.locale.DisplayKey.get("Web.Admin.RolePrivileges.Code") + ": " + Permission.Code + ", " +
+        gw.api.locale.DisplayKey.get("Web.Admin.RolePrivileges.Description") + ": " + Permission.Description;
+      return retString;]]></DisplayName>
+</Entity>

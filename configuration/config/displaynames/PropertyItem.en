@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<Entity
+  name="PropertyItem">
+  <Columns>
+    <Column
+      beanPath="PropertyItem.Description"
+      name="description"/>
+    <Column
+      beanPath="PropertyItem.AppraisedValue"
+      name="appraised"/>
+  </Columns>
+  <DisplayName><![CDATA[uses java.lang.StringBuilder
+
+var sb = new StringBuilder()
+if(description!=null) {
+  sb.append(description)
+} else {
+  sb.append(gw.api.locale.DisplayKey.get("entity.PropertyItem"))
+}
+if(appraised!=null) {
+  sb.append(" (")
+    .append(gw.api.locale.DisplayKey.get("DisplayName.PropertyItem.AppraisedValue"))
+    .append(": ")
+    .append(appraised).append(")")
+}
+return sb.toString()]]></DisplayName>
+</Entity>

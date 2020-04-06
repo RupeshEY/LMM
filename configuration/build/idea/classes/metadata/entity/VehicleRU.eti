@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="RiskUnit containing a vehicle."
+  entity="VehicleRU"
+  supertype="RiskUnit">
+  <implementsInterface
+    iface="gw.cc.policy.entity.VehicleRU"
+    impl="com.guidewire.cc.domain.policy.impl.VehicleRUImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.RemoveCallback"
+    impl="com.guidewire.cc.domain.policy.impl.VehicleRUImpl"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="VehicleID"
+    desc="Related vehicle."
+    fkentity="Vehicle"
+    name="Vehicle"
+    nullok="true"
+    triggersValidation="true"/>
+  <foreignkey
+    archivingOwner="source"
+    columnName="VehicleLocationID"
+    desc="The PolicyLocation associted with this Vehicle Risk Unit, if any."
+    fkentity="PolicyLocation"
+    name="VehicleLocation"
+    nullok="true"/>
+  <index
+    desc="Enforce uniqueness, ensuring that no vehicle is shared between policies"
+    name="policyvehicle1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="VehicleID"/>
+    <indexcol 
+      keyposition="2" 
+      name="Retired"/>
+  </index>
+</subtype>

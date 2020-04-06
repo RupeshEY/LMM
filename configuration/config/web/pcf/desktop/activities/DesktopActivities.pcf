@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="perm.Activity.own and perm.System.viewdesktop"
+    id="DesktopActivities"
+    title="DisplayKey.get(&quot;Web.DesktopActivities&quot;)">
+    <LocationEntryPoint
+      signature="DesktopActivities()"/>
+    <Variable
+      initialValue="Activity.finder.getActivityDesktopViewsAssignedToCurrentUser()"
+      name="ActivityDesktopViewList"
+      type="gw.api.database.IQueryBeanResult&lt;ActivityDesktopView&gt;"/>
+    <Variable
+      initialValue="&quot;DesktopActivitiesLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <Screen
+      id="DesktopActivitiesScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.DesktopActivities&quot;)"/>
+      <Toolbar>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="AssignActivitiesPopup.push(new gw.api.activity.ActivityAssignmentPopup(CheckedValues))"
+          flags="all CanAssignActivity"
+          id="DesktopActivities_AssignButton"
+          iterator="DesktopActivitiesLV.DesktopActivitiesLV"
+          label="DisplayKey.get(&quot;Web.DesktopActivities.Assign&quot;)"
+          shortcut="G"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="CheckedValue.Activity.skip()"
+          flags="all CanSkipActivity"
+          id="DesktopActivities_SkipButton"
+          iterator="DesktopActivitiesLV.DesktopActivitiesLV"
+          label="DisplayKey.get(&quot;Web.DesktopActivities.Skip&quot;)"
+          shortcut="S"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="CheckedValue.Activity.complete()"
+          flags="all CanCompleteActivity"
+          id="DesktopActivities_CompleteButton"
+          iterator="DesktopActivitiesLV.DesktopActivitiesLV"
+          label="DisplayKey.get(&quot;Web.DesktopActivities.Complete&quot;)"
+          shortcut="L"/>
+        <ToolbarDivider/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="CheckedValue.Activity.approve()"
+          flags="all CanApproveActivity"
+          id="DesktopActivities_ApproveButton"
+          iterator="DesktopActivitiesLV.DesktopActivitiesLV"
+          label="DisplayKey.get(&quot;Web.DesktopActivities.Approve&quot;)"
+          shortcut="E"/>
+        <CheckedValuesToolbarButton
+          checkedRowAction="CheckedValue.Activity.reject()"
+          flags="all CanApproveActivity"
+          id="DesktopActivities_RejectButton"
+          iterator="DesktopActivitiesLV.DesktopActivitiesLV"
+          label="DisplayKey.get(&quot;Web.DesktopActivities.Reject&quot;)"/>
+        <ToolbarDivider/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="gw.api.print.ListViewPrintOptionPopupAction.printListViewWithOptions(PrintTargetLV)"
+          available="perm.User.printlistviews"
+          id="DesktopActivities_PrintButton"
+          label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+          shortcut="N"/>
+      </Toolbar>
+      <PanelRef
+        def="DesktopActivitiesLV(ActivityDesktopViewList)"/>
+    </Screen>
+  </Page>
+</PCF>

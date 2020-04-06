@@ -1,0 +1,83 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="WorkStatusDV">
+    <Require
+      name="aWorkStatus"
+      type="WorkStatus"/>
+    <InputColumn>
+      <TypeKeyInput
+        editable="true"
+        id="Status"
+        label="DisplayKey.get(&quot;DV.Incident.WorkStatus.Status&quot;)"
+        required="true"
+        value="aWorkStatus.Status"
+        valueType="typekey.WorkCapacity">
+        <PostOnChange
+          target="Status_InputSet"/>
+      </TypeKeyInput>
+      <DateInput
+        editable="true"
+        id="StatusDate"
+        label="DisplayKey.get(&quot;DV.Incident.WorkStatus.Start&quot;)"
+        required="true"
+        validationExpression="(aWorkStatus.StatusDate &gt; aWorkStatus.StatusEndDate  ? DisplayKey.get(&quot;Rules.Validation.Claim.WorkStatus.StatusDateGTStatusEndDate&quot;) : null)"
+        value="aWorkStatus.StatusDate"/>
+      <DateInput
+        editable="true"
+        id="StatusEndDate"
+        label="DisplayKey.get(&quot;DV.Incident.WorkStatus.End&quot;)"
+        validationExpression="(aWorkStatus.StatusDate &gt; aWorkStatus.StatusEndDate  ? DisplayKey.get(&quot;Rules.Validation.Claim.WorkStatus.StatusDateGTStatusEndDate&quot;) : null)"
+        value="aWorkStatus.StatusEndDate"/>
+      <TextAreaInput
+        editable="true"
+        id="StatusComments"
+        label="DisplayKey.get(&quot;DV.Incident.WorkStatus.Comments&quot;)"
+        numCols="35"
+        numRows="3"
+        value="aWorkStatus.Comments"/>
+      <InputSet
+        id="Status_InputSet"
+        visible="aWorkStatus.Status == TC_STOPPED_WORK or aWorkStatus.Status == TC_RESTRICTED_WORK">
+        <InputSet
+          visible="aWorkStatus.Status == TC_STOPPED_WORK">
+          <InputDivider/>
+          <DateInput
+            editable="true"
+            id="LastWorkedDate"
+            label="DisplayKey.get(&quot;DV.Incident.WorkStatus.LastDayWorked&quot;)"
+            validationExpression="(  aWorkStatus.LastWorkedDate &gt; aWorkStatus.StatusDate  ? DisplayKey.get(&quot;Rules.Validation.WorkStatus.LastWorkedDate&quot;): null)"
+            value="aWorkStatus.LastWorkedDate"/>
+          <BooleanRadioInput
+            editable="true"
+            id="PaidFullForLastWorked"
+            label="DisplayKey.get(&quot;DV.Incident.WorkStatus.PaidForLastDay&quot;)"
+            value="aWorkStatus.PaidFullForLastWorked"/>
+        </InputSet>
+        <InputSet
+          visible="aWorkStatus.Status == TC_RESTRICTED_WORK">
+          <InputDivider/>
+          <TextInput
+            editable="true"
+            id="DaysWorked"
+            label="DisplayKey.get(&quot;DV.Incident.WorkStatus.DaysWorked&quot;)"
+            value="aWorkStatus.NumDaysWorked"
+            valueType="java.math.BigDecimal"/>
+          <TextInput
+            editable="true"
+            id="HoursWorked"
+            label="DisplayKey.get(&quot;DV.Incident.WorkStatus.HoursWorked&quot;)"
+            value="aWorkStatus.NumHoursWorked"
+            valueType="java.math.BigDecimal"/>
+          <CurrencyInput
+            editable="true"
+            id="WeeklyWage"
+            label="DisplayKey.get(&quot;DV.Incident.WorkStatus.WeeklyWage&quot;)"
+            value="aWorkStatus.WageAmountPostInjury"/>
+        </InputSet>
+      </InputSet>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

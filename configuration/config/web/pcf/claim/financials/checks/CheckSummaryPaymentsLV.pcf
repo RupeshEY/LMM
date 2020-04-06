@@ -1,0 +1,71 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_financials.xml -->
+  <ListViewPanel
+    id="CheckSummaryPaymentsLV">
+    <Require
+      name="PaymentList"
+      type="Payment[]"/>
+    <RowIterator
+      editable="false"
+      elementName="Payment"
+      pageSize="5"
+      value="PaymentList"
+      valueType="entity.Payment[]">
+      <Row>
+        <DateCell
+          id="Check_ScheduledSendDate"
+          label="DisplayKey.get(&quot;LV.Financials.Payments.Check.ScheduledSendDate&quot;)"
+          sortOrder="1"
+          value="Payment.Check.ScheduledSendDate"/>
+        <!-- Explicitly wrap column name once, set width = 75 -->
+        <CurrencyCell
+          action="ClaimFinancialsTransactionsDetail.goInMain(Payment.Claim, Payment)"
+          formatType="currency"
+          id="Amount"
+          label="DisplayKey.get(&quot;LV.Financials.Payments.Amount&quot;)"
+          value="Payment.TransactionAmountReservingAmountPair"
+          valueType="gw.api.financials.IPairedMoney"/>
+        <TextCell
+          id="Exposure"
+          label="DisplayKey.get(&quot;LV.Financials.Payments.Exposure&quot;)"
+          outputConversion="(null == VALUE) ? DisplayKey.get(&quot;LV.Financials.NewCheckPayments.Payments.Exposure.None&quot;) : VALUE as String"
+          value="Payment.Exposure.ClaimOrder"
+          valueType="java.lang.Integer"/>
+        <TypeKeyCell
+          id="CoverageType"
+          label="DisplayKey.get(&quot;LV.Financials.Payments.CoverageType&quot;)"
+          value="Payment.Exposure.PrimaryCoverage"
+          valueType="typekey.CoverageType"/>
+        <TypeKeyCell
+          id="CostType"
+          label="DisplayKey.get(&quot;LV.Financials.Payments.CostType&quot;)"
+          value="Payment.CostType"
+          valueType="typekey.CostType"/>
+        <TypeKeyCell
+          id="CostCategory"
+          label="DisplayKey.get(&quot;LV.Financials.Payments.CostCategory&quot;)"
+          value="Payment.CostCategory"
+          valueType="typekey.CostCategory"/>
+        <TypeKeyCell
+          id="ReservingCurrency"
+          label="DisplayKey.get(&quot;LV.Financials.Payments.ReservingCurrency&quot;)"
+          value="Payment.ReservingCurrency"
+          valueType="typekey.Currency"
+          visible="gw.util.CCConfigUtil.AllowExplicitReservingCurrency"/>
+        <TypeKeyCell
+          id="Status"
+          label="DisplayKey.get(&quot;LV.Financials.Payments.Status&quot;)"
+          value="Payment.Status"
+          valueType="typekey.TransactionStatus"/>
+        <TypeKeyCell
+          id="PaymentType"
+          label="DisplayKey.get(&quot;LV.Financials.Payments.PaymentType&quot;)"
+          value="Payment.PaymentType"
+          valueType="typekey.PaymentType"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

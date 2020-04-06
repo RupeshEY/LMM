@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="RuleComparisonCommandParametersInputSet"
+    mode="setfield">
+    <Require
+      name="controller"
+      type="gw.bizrules.pcf.RuleVersionComparisonController"/>
+    <Require
+      name="commandDefinitionDiff"
+      type="gw.bizrules.diff.RuleMatchableDiffPair&lt;RuleCommandDefinition&gt;"/>
+    <InputSetRef
+      id="only_if_null"
+      def="RuleComparisonRowBooleanInputSet(commandDefinitionDiff.getRowAsBoolean(gw.bizrules.ruleaction.setfield.config.SetFieldCommandParameterSet.Config.SET_ONLY_IF_NULL.Name))"/>
+    <InputSetRef
+      id="property"
+      def="RuleComparisonRowStringInputSet(commandDefinitionDiff.getRow(gw.bizrules.ruleaction.setfield.config.SetFieldCommandParameterSet.Config.PROPERTY.Name))"/>
+    <InputSetRef
+      id="value"
+      def="RuleComparisonRowStringInputSet(commandDefinitionDiff.getRow(gw.bizrules.ruleaction.setfield.config.SetFieldCommandParameterSet.Config.VALUE.Name))"/>
+    </InputSet>
+</PCF>

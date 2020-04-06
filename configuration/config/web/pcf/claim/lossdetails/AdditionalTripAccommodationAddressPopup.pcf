@@ -1,0 +1,54 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    canVisit="true"
+    id="AdditionalTripAccommodationAddressPopup"
+    returnType="AddnlTripAccommodation"
+    startInEditMode="isParentInEditMode"
+    title="DisplayKey.get(&quot;Web.TripIncident.AddnlTripAccommodationPopup&quot;)">
+    <LocationEntryPoint
+      signature="AdditionalTripAccommodationAddressPopup(anAddnlTripAccommodation : AddnlTripAccommodation, affectedTripAccommodation : TripAccommodation, isParentInEditMode : Boolean)"/>
+    <Variable
+      name="anAddnlTripAccommodation"
+      type="AddnlTripAccommodation"/>
+    <Variable
+      name="affectedTripAccommodation"
+      type="TripAccommodation"/>
+    <Variable
+      name="isParentInEditMode"
+      type="Boolean"/>
+    <Variable
+      initialValue="initIsNew()"
+      name="isNewAddnlTripAccommodation"
+      type="boolean"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          pickValue="anAddnlTripAccommodation"
+          updateLabel="isNewAddnlTripAccommodation ? DisplayKey.get(&quot;Button.OK&quot;) : DisplayKey.get(&quot;Button.Update&quot;)"/>
+      </Toolbar>
+      <PanelRef>
+        <DetailViewPanel>
+          <InputColumn>
+            <InputSetRef
+              def="AdditionalTripAccommodationInputSet(anAddnlTripAccommodation, affectedTripAccommodation.TripIncident)"/>
+          </InputColumn>
+        </DetailViewPanel>
+      </PanelRef>
+    </Screen>
+    <Code><![CDATA[
+function initIsNew() : boolean {
+  var result : boolean = false
+  if (anAddnlTripAccommodation.TripAccommodation == null) {
+    result = true
+    anAddnlTripAccommodation.TripAccommodation = affectedTripAccommodation
+  }
+  return result
+}
+      
+    ]]></Code>
+  </Popup>
+</PCF>

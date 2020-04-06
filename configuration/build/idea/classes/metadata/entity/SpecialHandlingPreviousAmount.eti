@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="SpecialHandlingPreviousAmount"
+  exportable="false"
+  extendable="true"
+  ignoreForEvents="true"
+  loadable="false"
+  table="shpreviousvalue"
+  type="versionable">
+  <implementsInterface
+    iface="gw.cc.specialhandling.entity.SpecialHandlingPreviousAmount"
+    impl="com.guidewire.cc.domain.specialhandling.impl.SpecialHandlingPreviousAmountImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+    Holds the previously calculated financial value for use by Special Handling triggered on Financial thresholds and should not be used beyond that context. This entity
+    stores the calculated amount for a claim used during a previous comparison against a financial threshold amount in order to avoid firing the trigger repeatedly once
+      the threshold has been reachedr.
+  ]]></fulldescription>
+  <foreignkey
+    columnName="shfinancialstateID"
+    desc="The special handling financial state entity that this is associated with."
+    fkentity="SpecialHandlingFinancialState"
+    name="SpecialHandlingFinancialState"
+    nullok="false"/>
+  <column
+    desc="Previous value used by special handling triggers"
+    name="PreviousAmount"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <typekey
+    name="FinancialThreshold"
+    nullok="true"
+    typelist="FinancialThreshold"/>
+  <index
+    desc="Enforce uniqueness of threshold per special handling state entity"
+    name="shprevamount"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="shfinancialstateID"/>
+    <indexcol
+      keyposition="2"
+      name="FinancialThreshold"/>
+  </index>
+</entity>

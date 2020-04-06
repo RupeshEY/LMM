@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Denotes period of time when employee received benefits."
+  entity="BenefitPeriod"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="benefitperiod"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.BenefitPeriod"
+    impl="com.guidewire.cc.domain.exposure.impl.BenefitPeriodImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Date when benefits start."
+    name="BenefitsBeginDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Additional information."
+    name="Description"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Monthly compensation rate. This calculation depends on the type of benefit."
+    name="MonthlyCompRate"
+    nullok="true"
+    type="positivecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Number of weeks benefits will be paid. This differs by state."
+    name="NumPaymentWeeks"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Percentage compensability."
+    name="PercentageComp"
+    nullok="true"
+    type="percentage"/>
+  <column
+    desc="Weekly wages post-injury."
+    name="PostInjryWklyWgs"
+    nullok="true"
+    type="positivecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Weekly compensation rate. This calculation depends on type of benefit."
+    name="WeeklyCompRate"
+    nullok="true"
+    type="positivecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <typekey
+    desc="Type of lost wages benefit."
+    name="BenefitType"
+    nullok="true"
+    typelist="LostWagesBenefitType"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="The related exposure."
+    exportable="false"
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="false"/>
+</entity>

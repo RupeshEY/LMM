@@ -1,0 +1,93 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="VehicleType">
+  <typecode
+    code="listed"
+    desc="Listed on policy"
+    name="Listed on policy"
+    priority="1">
+    <category
+      code="insured"
+      typelist="LossPartyType"/>
+  </typecode>
+  <typecode
+    code="new"
+    desc="Newly acquired"
+    name="Newly acquired"
+    priority="2">
+    <category
+      code="insured"
+      typelist="LossPartyType"/>
+  </typecode>
+  <typecode
+    code="rental"
+    desc="Rented / hired"
+    name="Rented / hired"
+    priority="3">
+    <category
+      code="insured"
+      typelist="LossPartyType"/>
+    <category
+      code="third_party"
+      typelist="LossPartyType"/>
+  </typecode>
+  <typecode
+    code="temp"
+    desc="Temporary substitute vehicle"
+    name="Temporary substitute vehicle"
+    priority="4">
+    <category
+      code="insured"
+      typelist="LossPartyType"/>
+  </typecode>
+  <typecode
+    code="other_owned"
+    desc="Other owned"
+    name="Other owned"
+    priority="5">
+    <category
+      code="insured"
+      typelist="LossPartyType"/>
+  </typecode>
+  <typecode
+    code="other_non_owned"
+    desc="Other non-owned"
+    name="Other non-owned"
+    priority="6">
+    <category
+      code="insured"
+      typelist="LossPartyType"/>
+    <category
+      code="third_party"
+      typelist="LossPartyType"/>
+  </typecode>
+  <typecode
+    code="leased"
+    desc="Leased"
+    name="Leased"
+    priority="3">
+    <category
+      code="insured"
+      typelist="LossPartyType"/>
+  </typecode>
+  <typecode
+    code="tow"
+    desc="Vehicle in tow"
+    name="Vehicle in tow"
+    priority="4">
+    <category
+      code="insured"
+      typelist="LossPartyType"/>
+  </typecode>
+  <typecode
+    code="owned"
+    desc="Owned"
+    name="Owned"
+    priority="2">
+    <category
+      code="third_party"
+      typelist="LossPartyType"/>
+  </typecode>
+</typelistextension>

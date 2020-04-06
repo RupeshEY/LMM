@@ -1,0 +1,22 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Special Handling Notification Type"
+  name="NotificationType"
+  tableName="shnotificationtype">
+  <typecode
+    code="email"
+    desc="Notify a single email recipient"
+    name="Single email recipient"
+    priority="1"/>
+  <typecode
+    code="multi_email"
+    desc="Notify multiple email recipients"
+    name="Multiple email recipients"
+    priority="2"/>
+  <typecode
+    code="contactrole"
+    desc="Notify a contact based on his/her role"
+    name="Contact based on claim role"
+    priority="3"/>
+</typelist>

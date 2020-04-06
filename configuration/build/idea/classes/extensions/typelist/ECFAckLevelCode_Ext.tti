@@ -1,0 +1,98 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="ECFAckLevelCode_Ext" desc="">
+  <typecode
+    code="Success"
+    desc="Success"
+    name="Success"/>
+  <typecode
+    code="RequestQueued"
+    desc="Request has been queued"
+    name="Request has been queued"/>
+  <typecode
+    code="Unknown"
+    name="Unknown"/>
+  <typecode
+    code="PartialResponseIMR"
+    desc="Partial Response - IMR Unavailable/Unable to retrieve IMR data"
+    name="Partial Response - IMR Unavailable/Unable to retrieve IMR data"/>
+  <typecode
+    code="PartialResponseCLASS"
+    desc="Partial Response - CLASS Unavailable/Unable to retrieve CLASS data"
+    name="Partial Response - CLASS Unavailable/Unable to retrieve CLASS data"/>
+  <typecode
+    code="Unavailable"
+    desc="Central Systems Unavailable"
+    name="Central Systems Unavailable"/>
+  <typecode
+    code="RequestInvalid"
+    desc="Fail - Request Invalid"
+    name="Fail - Request Invalid"/>
+  <typecode
+    code="NotRegistered"
+    desc="Carrier not registered to invoke the service"
+    name="Carrier not registered to invoke the service"/>
+  <typecode
+    code="SenderInvalid"
+    desc="Fail - Sender Claim Combination Invalid"
+    name="Fail - Sender Claim Combination Invalid"/>
+  <typecode
+    code="ClaimNotFound"
+    desc="Fail - Claim Not Found"
+    name="Fail - Claim Not Found"/>
+  <typecode
+    code="UnableToRetrieveClaim"
+    desc="Fail - Unable to Retrieve Claim Transaction"
+    name="Fail - Unable to Retrieve Claim Transaction"/>
+  <typecode
+    code="OrgConflicted"
+    desc="Fail - Your organisation is conflicted on this UCR"
+    name="Fail - Your organisation is conflicted on this UCR"/>
+  <typefilter
+    desc="Acknowledgements which indicate that no Claim data was returned in this message"
+    name="NoClaimData">
+    <include
+      code="PartialResponseCLASS"/>
+    <include
+      code="Unavailable"/>
+    <include
+      code="RequestInvalid"/>
+    <include
+      code="NotRegistered"/>
+    <include
+      code="SenderInvalid"/>
+    <include
+      code="ClaimNotFound"/>
+    <include
+      code="UnableToRetrieveClaim"/>
+    <include
+      code="OrgConflicted"/>
+  </typefilter>
+  <typefilter
+    desc="Request was acknowledged by ECF system"
+    name="acknowledged">
+    <include
+      code="Success"/>
+    <include
+      code="Unavailable"/>
+    <include
+      code="PartialResponseCLASS"/>
+    <include
+      code="PartialResponseIMR"/>
+  </typefilter>
+  <typefilter
+    desc="Request was rejected by ECF system"
+    name="rejected">
+    <include
+      code="RequestInvalid"/>
+    <include
+      code="NotRegistered"/>
+    <include
+      code="SenderInvalid"/>
+    <include
+      code="ClaimNotFound"/>
+    <include
+      code="UnableToRetrieveClaim"/>
+    <include
+      code="OrgConflicted"/>
+  </typefilter>
+</typelist>

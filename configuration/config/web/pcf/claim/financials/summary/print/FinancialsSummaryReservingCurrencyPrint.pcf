@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <Page
+    id="FinancialsSummaryReservingCurrencyPrint"
+    parent="ClaimFinancialsGroup(Claim)"
+    title="DisplayKey.get(&quot;Web.Financials.Summary.ReservingCurrency&quot;)">
+    <LocationEntryPoint
+      signature="FinancialsSummaryReservingCurrencyPrint(Claim : Claim, useFloatingFinancials : boolean)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="useFloatingFinancials"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.api.financials.summary.FinancialSummaryBridge(Claim, &quot;ReservingCurrency&quot;)"
+      name="financialsSummaryBridge"
+      type="gw.api.financials.summary.FinancialSummaryBridge"/>
+    <Screen
+      id="FinancialsSummaryReservingCurrencyPrintScreen">
+      <PanelRef
+        def="FinancialsSummaryLV(Claim, financialsSummaryBridge)">
+        <Toolbar/>
+      </PanelRef>
+    </Screen>
+  </Page>
+</PCF>

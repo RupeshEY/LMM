@@ -1,0 +1,30 @@
+package rules.Preupdate.ClaimPreupdate_dir.CPU30000WorkloadAssignmentBalancing_dir
+
+@gw.rules.RuleName("CPU30100 - Claim Closed")
+internal class CPU30100ClaimClosed {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+/*
+ * Condition: The claim state has been changed to "closed"
+ */
+return claim.isFieldChanged("State") and claim.State == ClaimState.TC_CLOSED
+
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+// Logging of this rule will be categorized under "Assignment"
+var logger = gw.api.system.CCLoggerCategory.ASSIGNMENT_WEIGHTED_WORKLOAD
+if (logger.DebugEnabled) {
+  logger.debug(actions.getRule().DisplayName + " - Claim '" + claim.ClaimNumber + "' closed - updating user workload")
+}
+gw.assignment.workload.rules.ClaimWorkloadPreupdateRuleActions.updateUserWorkloadOnClaimClose(claim)
+
+/*end00rule*/
+
+  }
+}

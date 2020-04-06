@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="ExpCloseReopenInfo"
+  final="false"
+  supertype="CloseReopenInfo">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.ExpCloseReopenInfo"
+    impl="com.guidewire.cc.domain.exposure.impl.ExpCloseReopenInfoImpl"/>
+  <fulldescription><![CDATA[
+      Holds transitional internal state information during all exposure close or
+      reopen operations. This acts as a abstract base entity for CloseExposureInfo and
+      ReopenExposureInfo.
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ExposureID"
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="true"/>
+</subtype>

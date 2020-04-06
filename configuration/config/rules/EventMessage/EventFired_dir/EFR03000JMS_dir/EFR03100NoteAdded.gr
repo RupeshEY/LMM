@@ -1,0 +1,22 @@
+package rules.EventMessage.EventFired_dir.EFR03000JMS_dir
+
+@gw.rules.RuleName("EFR03100 - NoteAdded")
+internal class EFR03100NoteAdded {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return messageContext.Root typeis Note and
+messageContext.EventName == "NoteAdded"
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+var note = messageContext.Root as Note
+messageContext.createMessage(note.Body)
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <LocationGroup
+    id="TeamGroupPendingGroup"
+    parent="Team()"
+    title="DisplayKey.get(&quot;Web.TabBar.Team&quot;)">
+    <LocationEntryPoint
+      signature="TeamGroupPendingGroup(Group : Group)"/>
+    <Variable
+      name="Group"
+      type="Group"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.GroupClaimsTab&quot;)"
+      location="TeamGroupPendingClaims(Group)"
+      shortcut="L"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.GroupExposuresTab&quot;)"
+      location="TeamGroupPendingExposures(Group)"
+      shortcut="X"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.GroupActivitiesTab&quot;)"
+      location="TeamGroupPendingActivities(Group)"
+      shortcut="E"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.GroupMattersTab&quot;)"
+      location="TeamGroupPendingMatters(Group)"
+      shortcut="R"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;Web.Team.Subrogations&quot;)"
+      location="TeamGroupPendingSubrogations(Group)"/>
+  </LocationGroup>
+</PCF>

@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="Amount invoiced as a percentage of the amount estimated"
+  entity="InvoiceVarianceVsQuoteServiceRequestMetric"
+  final="false"
+  priority="4"
+  supertype="PercentServiceRequestMetric">
+  <implementsInterface
+    iface="gw.api.metric.MetricMethods"
+    impl="gw.vendormanagement.metric.InvoiceVarianceVsQuoteServiceRequestMetricMethodsImpl"/>
+  <implementsInterface
+    iface="gw.api.metric.CalculatedLimitMethods"
+    impl="gw.vendormanagement.metric.InvoiceVarianceVsQuoteServiceRequestMetricMethodsImpl"/>
+</subtype>

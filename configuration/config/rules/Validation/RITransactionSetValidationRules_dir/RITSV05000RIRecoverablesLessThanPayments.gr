@@ -1,0 +1,63 @@
+package rules.Validation.RITransactionSetValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.financials.FinancialsCalculations
+uses gw.api.util.CurrencyUtil
+uses java.util.HashSet
+
+@gw.rules.RuleName("RITSV05000 - RI Recoverables Less Than Payments")
+internal class RITSV05000RIRecoverablesLessThanPayments {
+  static function doCondition(rITransactionSet : entity.RITransactionSet) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(rITransactionSet : entity.RITransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+var claims = new HashSet<Claim>()
+
+for (rITransaction in rITransactionSet.RITransactions) {
+  if (rITransaction typeis RIRecoverable) {
+    claims.add(rITransaction.Claim)
+  }
+}
+
+for (claim in claims) {
+  var currency = claim.Currency
+
+  var riRecoverablesCalculated = FinancialsCalculations.getRITotalRecoverablesNonAdjustments()
+        .withClaim(claim)
+        .noNulls()
+        .Amount
+
+  var riRecoverablesTotal = FinancialsCalculations.getRITotalRecoverables()
+        .withClaim(claim)
+        .noNulls()
+        .Amount
+  var netPaid = FinancialsCalculations.getSubmittedNetPayments()
+        .withClaim(claim)
+        .noNulls()
+        .Amount
+
+  if(riRecoverablesCalculated.Amount > 0 and riRecoverablesCalculated > netPaid) {
+    var message = DisplayKey.get("Rules.Validation.RITransaction.CalculatedRIRecoverablesMustBeLessThanNetPaid", 
+          CurrencyUtil.renderAsCurrency(riRecoverablesCalculated), 
+	  CurrencyUtil.renderAsCurrency(netPaid, currency))
+    rITransactionSet.warnOrCreateActivity(message)
+  }
+  
+  if(riRecoverablesTotal.Amount > 0 and riRecoverablesTotal > netPaid) {
+    var message = DisplayKey.get("Rules.Validation.RITransaction.TotalRIRecoverablesMustBeLessThanNetPaid", 
+	  CurrencyUtil.renderAsCurrency(riRecoverablesTotal, currency), 
+	  CurrencyUtil.renderAsCurrency(netPaid, currency))
+    rITransactionSet.warnOrCreateActivity(message)
+  }
+}
+/*end00rule*/
+
+  }
+}

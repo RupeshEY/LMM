@@ -1,0 +1,87 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    editable="true"
+    id="EditableTripCoveragesLV">
+    <ExposeIterator
+      valueType="entity.RUCoverage"
+      widget="EditableTripCoveragesLV"/>
+    <Require
+      name="aTripRU"
+      type="TripRU"/>
+    <RowIterator
+      editable="true"
+      elementName="TripCoverage"
+      hideCheckBoxesIfReadOnly="true"
+      toAdd="aTripRU.addToCoverages(TripCoverage)"
+      toRemove="aTripRU.removeFromCoverages(TripCoverage)"
+      value="aTripRU.Coverages"
+      valueType="entity.RUCoverage[]">
+      <Row>
+        <TypeKeyCell
+          editable="true"
+          id="CoverageType"
+          label="DisplayKey.get(&quot;LV.Policy.EditableTripCoverages.CoverageType&quot;)"
+          required="true"
+          sortOrder="1"
+          value="TripCoverage.Type"
+          valueType="typekey.CoverageType">
+          <PostOnChange/>
+        </TypeKeyCell>
+        <TypeKeyCell
+          editable="TripCoverage.allowCurrencyChange()"
+          id="Currency"
+          label="DisplayKey.get(&quot;LV.Policy.EditableTripCoverages.Currency&quot;)"
+          required="true"
+          sortOrder="2"
+          value="TripCoverage.Currency"
+          valueType="typekey.Currency"
+          visible="gw.api.util.CurrencyUtil.MultiCurrencyMode">
+          <PostOnChange/>
+        </TypeKeyCell>
+        <CurrencyCell
+          editable="true"
+          formatType="currency"
+          id="Deductible"
+          label="DisplayKey.get(&quot;LV.Policy.EditableTripCoverages.Deductible&quot;)"
+          value="TripCoverage.Deductible"/>
+        <CurrencyCell
+          editable="true"
+          formatType="currency"
+          id="ExposureLimit"
+          label="DisplayKey.get(&quot;LV.Policy.EditableTripCoverages.ExposureLimit&quot;)"
+          value="TripCoverage.ExposureLimit"/>
+        <CurrencyCell
+          editable="true"
+          formatType="currency"
+          id="IncidentLimit"
+          label="DisplayKey.get(&quot;LV.Policy.EditableTripCoverages.IncidentLimit&quot;)"
+          value="TripCoverage.IncidentLimit"/>
+        <TypeKeyCell
+          editable="true"
+          id="LimitsIndicator"
+          label="DisplayKey.get(&quot;LV.Policy.EditableTripCoverages.LimitsIndicator&quot;)"
+          value="TripCoverage.LimitsIndicator"
+          valueType="typekey.LimitsIndicator"/>
+        <TextCell
+          editable="true"
+          id="Notes"
+          label="DisplayKey.get(&quot;LV.Policy.EditableTripCoverages.Notes&quot;)"
+          value="TripCoverage.Notes"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[
+/*
+function getTripRU(selectedRow : Bean) : TripRU
+{
+  if(selectedRow typeis TripAccommodation)
+      return (selectedRow as TripAccommodation).TripRiskUnit
+  if(selectedRow typeis TripSegment)
+      return (selectedRow as TripSegment).TripRiskUnit
+    return new TripRU()
+}*/
+    ]]></Code>
+  </ListViewPanel>
+</PCF>

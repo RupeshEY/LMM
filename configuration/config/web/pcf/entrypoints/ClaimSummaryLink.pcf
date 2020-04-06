@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <EntryPoint
+    authenticationRequired="true"
+    desc="Go to claim summary page for the specific claim number"
+    id="ClaimSummaryLink"
+    location="ClaimSummaryLink(claimNumber)">
+    <EntryPointParameter
+      locationParam="claimNumber"
+      type="String"/>
+  </EntryPoint>
+</PCF>

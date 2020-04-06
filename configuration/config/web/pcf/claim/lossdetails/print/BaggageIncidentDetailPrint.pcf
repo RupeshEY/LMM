@@ -1,0 +1,25 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="false"
+    canVisit="true"
+    id="BaggageIncidentDetailPrint"
+    parent="ClaimPrintout(aClaim)"
+    title="DisplayKey.get(&quot;Web.EditBaggageIncident.Title&quot;)">
+    <LocationEntryPoint
+      signature="BaggageIncidentDetailPrint(aClaim : Claim, aBaggageIncident : BaggageIncident)"/>
+    <Variable
+      name="aBaggageIncident"
+      type="BaggageIncident"/>
+    <Variable
+      name="aClaim"
+      type="Claim"/>
+    <Screen
+      id="EditBaggageIncidentScreen">
+      <PanelRef
+        def="BaggageIncidentDetailDV(aBaggageIncident, new java.util.HashSet&lt;ServiceRequest&gt;())"/>
+    </Screen>
+  </Page>
+</PCF>

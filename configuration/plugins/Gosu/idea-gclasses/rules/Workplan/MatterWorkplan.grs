@@ -1,0 +1,13 @@
+package rules.Workplan
+
+@gw.rules.RuleName("Matter Workplan")
+@gw.rules.RuleSetDescription("This is the Initial Matter Workplan generation rule set.    Initial matter workplan rules add initial activities to the    matter as a checklist of work that various people need to do    on the matter.")
+class MatterWorkplan extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Matter) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Matter) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Matter Workplan", MatterWorkplan )
+  }
+}

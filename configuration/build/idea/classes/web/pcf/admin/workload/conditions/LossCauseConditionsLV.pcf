@@ -1,0 +1,43 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="LossCauseConditionsLV">
+    <Require
+      name="classification"
+      type="WorkloadClassification"/>
+    <ExposeIterator
+      valueType="LossCauseConditionFilter"
+      widget="LossCauseConditionsLV"/>
+    <RowIterator
+      editable="true"
+      elementName="losscause"
+      hideCheckBoxesIfReadOnly="true"
+      toAdd="classification.LossCauseCondition.addToConditionFilters(losscause)"
+      toRemove="classification.LossCauseCondition.removeFromConditionFilters(losscause)"
+      value="classification.LossCauseCondition.ConditionFilters"
+      valueType="entity.LossCauseConditionFilter[]">
+      <Row>
+        <RangeCell
+          editable="true"
+          id="LossCause"
+          label="DisplayKey.get(&quot;Web.Admin.Workload.WorkloadClassification.ClaimLossCausesLV.LossCause&quot;)"
+          required="true"
+          value="losscause.LossCause"
+          valueRange="getValidLossCauseRange(classification.ClaimLossType)"
+          valueType="typekey.LossCause">
+          <PostOnChange/>
+        </RangeCell>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[function getValidLossCauseRange(lossType : LossType) : java.util.List<LossCause> {
+  var allLossCauses = typekey.LossCause.getTypeKeys(false)
+  if (lossType != null) {
+    return allLossCauses.where(\ t -> t.hasCategory(lossType))
+  }
+  
+  return allLossCauses
+}]]></Code>
+  </ListViewPanel>
+</PCF>

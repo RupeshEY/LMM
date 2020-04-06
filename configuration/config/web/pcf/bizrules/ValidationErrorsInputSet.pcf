@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InputSet
+    id="ValidationErrorsInputSet">
+    <Require
+      name="errors"
+      type="java.lang.String[]"/>
+    <Require
+      name="labelAbove"
+      type="boolean"/>
+    <Variable
+      name="firstError"
+      recalculateOnRefresh="true"
+      type="java.lang.String"
+      initialValue="errors.HasElements ? errors[0] : null"/>
+    <Variable
+      name="otherErrors"
+      recalculateOnRefresh="true"
+      type="java.lang.String[]"
+      initialValue="errors.length &lt; 2 ? {} : errors.fastList().subList(1, errors.length).toTypedArray()"/>
+    <ContentInput
+      align="left"
+      labelAbove="labelAbove"
+      visible="firstError != null">
+      <Link
+        icon="&quot;alert.png&quot;"
+        id="ValidationErrorIcon"/>
+      <Link
+        icon="&quot;trans_pixel.png&quot;"
+        id="Space1"/>
+      <Link
+        icon="&quot;trans_pixel.png&quot;"
+        id="Space2"/>
+      <Link
+        id="Label"
+        label="firstError"/>
+    </ContentInput>
+    <InputIterator
+      elementName="error"
+      type="java.lang.String"
+      value="otherErrors"
+      valueType="java.lang.String[]">
+      <TextInput
+        align="left"
+        id="ValidationError"
+        labelAbove="labelAbove"
+        value="error"/>
+    </InputIterator>
+    <ContentInput
+      visible="firstError != null &amp;&amp; !otherErrors.HasElements">
+      <Link
+        icon="&quot;trans_pixel.png&quot;"
+        id="Space3"/>
+    </ContentInput>
+  </InputSet>
+</PCF>

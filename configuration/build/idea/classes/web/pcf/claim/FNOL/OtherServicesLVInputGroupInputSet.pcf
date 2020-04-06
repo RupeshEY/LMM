@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="pcf.xsd">
+  <InputSet
+    id="OtherServicesLVInputGroupInputSet">
+    <Require
+      name="claim"
+      type="Claim"/>
+    <Require
+      name="incident"
+      type="Incident"/>
+    <Require
+      name="otherServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Require
+      name="alsoAddAndRemove"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;entity.ServiceRequest&gt;"/>
+    <Require
+      name="incidentsToExclude"
+      type="java.util.Collection&lt;Incident&gt;"/>
+    <Variable
+      initialValue="otherServiceRequests.HasElements and not unusedServiceRequests.containsAll(otherServiceRequests)"
+      name="otherServicesSelected"
+      type="boolean"/>
+    <InputGroup
+      allowToggle="areAllOtherRequestsEditable()"
+      childrenVisible="otherServicesSelected"
+      id="OtherServicesInputGroup"
+      label="DisplayKey.get(&quot;Web.ServicesScreen.OtherServices&quot;)"
+      onToggle="toggleOtherServiceRequests(VALUE)">
+      <InputSetRef
+        def="OtherServicesLVInputSet(claim, incident, otherServiceRequests, alsoAddAndRemove, incidentsToExclude)"/>
+    </InputGroup>
+    <Code><![CDATA[function areAllOtherRequestsEditable() : boolean {
+  return otherServiceRequests.allMatch( \ sr -> sr.IsEditableInUI)
+}
+
+function toggleOtherServiceRequests(checkboxValue: boolean) {
+  if (not checkboxValue) {
+    unusedServiceRequests.addAll(otherServiceRequests)
+  } else {
+    unusedServiceRequests.removeAll(otherServiceRequests)
+  }
+  otherServicesSelected = checkboxValue
+}]]></Code>
+  </InputSet>
+</PCF>

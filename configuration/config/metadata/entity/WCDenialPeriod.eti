@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="WCDenialPeriod"
+  exportable="true"
+  table="wcdenialperiod"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.WCDenialPeriod"
+    impl="com.guidewire.cc.domain.claim.impl.WCDenialPeriodImpl"/>
+  <fulldescription><![CDATA[This reference table contains the information necessary to determine the jurisdictional deadline to accept or
+        deny a claim.  Each claim based upon the LossDate and the JurisdictionState should have at most one
+        corresponding record in this table.
+    ]]></fulldescription>
+  <typekey
+    desc="Jurisdiction State. The Jurisdiction must be associated with JurisdictionType.TC_INSURANCE."
+    name="JurisdictionState"
+    nullok="true"
+    typelist="Jurisdiction"/>
+  <column
+    desc="Effective Date"
+    name="EffectiveDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="End or Expiration Date"
+    name="ExpiryDate"
+    nullok="true"
+    type="datetime"/>
+  <typekey
+    desc="Which formula including which days to include in calculating the TargetDate."
+    name="DueDateFormula"
+    nullok="true"
+    typefilter="DenialDueDate"
+    typelist="JurisdictionalFormula"/>
+  <column
+    desc="If Date of Loss is a factor per DueDateFormula, used in conjunction with TargetIncludedDays to calculate the DueDate of the activity."
+    name="TargetDaysFromLoss"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="If Date of Notice is a factor per DueDateFormula, used in conjunction with TargetIncludedDays to calculate the DueDate of the activity."
+    name="TargetDaysFromNotice"
+    nullok="true"
+    type="integer"/>
+  <typekey
+    desc="Which days to include in calculating the TargetDate."
+    name="TargetIncludeDays"
+    nullok="true"
+    typelist="IncludeDaysType"/>
+  <column
+    desc="The id of an associated document template. The id gets passed to IDocumentTemplateSource to retrieve the DocumentTemplateDescriptor."
+    name="AcceptDocumentTemplate"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    default="false"
+    desc="Payment of indemnity benefits implies acceptance of claim"
+    name="BenefitPaymentAcceptance"
+    nullok="false"
+    type="bit"/>
+  <column
+    desc="The id of an associated document template. The id gets passed to IDocumentTemplateSource to retrieve the DocumentTemplateDescriptor."
+    name="RejectDocumentTemplate"
+    nullok="true"
+    type="shorttext"/>
+</entity>

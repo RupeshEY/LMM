@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    id="CovTermTypeDetailsInputSet"
+    mode="Financial">
+    <Require
+      name="CovTerm"
+      type="CovTerm"/>
+    <Variable
+      initialValue="CovTerm as FinancialCovTerm"
+      name="FinancialCovTerm"
+      type="FinancialCovTerm"/>
+    <CurrencyInput
+      editable="true"
+      id="FinancialAmount"
+      label="DisplayKey.get(&quot;Web.ClaimPolicy.CovTerm.Amount&quot;)"
+      value="FinancialCovTerm.FinancialAmount"/>
+  </InputSet>
+</PCF>

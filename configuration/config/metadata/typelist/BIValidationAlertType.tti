@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Types of validation failures for a BulkInvoice."
+  final="false"
+  name="BIValidationAlertType">
+  <typecode
+    code="unspecified"
+    desc="Unspecified"
+    name="Unspecified"
+    priority="1"/>
+  <typecode
+    code="itemwitharchivedclaim"
+    desc="One of the Bulk Invoice Items has been configured with an archived claim. The claim must be retrieved before it can be used."
+    name="Item claim is archived"
+    priority="2"/>
+</typelist>

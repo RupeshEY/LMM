@@ -1,0 +1,20 @@
+package rules.Validation.ExposureClosedValidationRules_dir
+
+@gw.rules.RuleName("ECV03000 - Vehicle damage-specific checks")
+internal class ECV03000Vehicledamagespecificchecks {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ExposureType == TC_VEHICLEDAMAGE
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* Child rules, if any, will be specific checks for vehicle damage exposures */
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,66 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_claim.xml -->
+  <ListViewPanel
+    id="SyncStatusLV">
+    <ExposeIterator
+      flags="DestinationSelected"
+      valueType="gw.api.admin.DestinationMessageStatistics"
+      widget="SyncStatusLV"/>
+    <Require
+      name="DestinationMessageStatisticsList"
+      type="gw.api.admin.DestinationMessageStatistics[]"/>
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <RowIterator
+      editable="false"
+      elementName="DestinationMessageStatistics"
+      hasCheckBoxes="true"
+      value="DestinationMessageStatisticsList"
+      valueType="gw.api.admin.DestinationMessageStatistics[]">
+      <ToolbarFlag
+        name="DestinationSelected"/>
+      <Row>
+        <TextCell
+          id="Destination"
+          label="DisplayKey.get(&quot;LV.Claim.SyncStatus.Destination&quot;)"
+          value="DestinationMessageStatistics.DestinationName"/>
+        <LinkCell
+          align="center"
+          id="Status"
+          label="DisplayKey.get(&quot;LV.Claim.SyncStatus.Status&quot;)">
+          <Link
+            action="null"
+            icon="&quot;sync_green.png&quot;"
+            id="ClaimSyncIcon_green"
+            tooltip="DisplayKey.get(&quot;LV.Claim.SyncStatus.Status.MessagesSent&quot;)"
+            visible="DestinationMessageStatistics.TotalUnsent == 0"/>
+          <Link
+            action="null"
+            icon="&quot;sync_yellow.png&quot;"
+            id="ClaimSyncIcon_yellow"
+            tooltip="DisplayKey.get(&quot;LV.Claim.SyncStatus.Status.MessagesPending&quot;)"
+            visible="DestinationMessageStatistics.TotalUnsent != 0 and DestinationMessageStatistics.TotalFailed == 0"/>
+          <Link
+            action="null"
+            icon="&quot;sync_red.png&quot;"
+            id="ClaimSyncIcon_red"
+            tooltip="DisplayKey.get(&quot;LV.Claim.SyncStatus.Status.MessagesFailed&quot;)"
+            visible="DestinationMessageStatistics.TotalFailed &gt; 0"/>
+        </LinkCell>
+        <TextCell
+          id="Unsent"
+          label="DisplayKey.get(&quot;LV.Claim.SyncStatus.Unsent&quot;)"
+          value="DestinationMessageStatistics.TotalUnsent"
+          valueType="java.lang.Integer"/>
+        <TextCell
+          id="Error"
+          label="DisplayKey.get(&quot;LV.Claim.SyncStatus.Error&quot;)"
+          value="gw.api.claim.ClaimSyncUtil.getErrorDescription(DestinationMessageStatistics)"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

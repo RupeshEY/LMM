@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="NoClaimDV">
+    <InputColumn>
+      <Label
+        id="Header"
+        label="DisplayKey.get(&quot;Web.NoClaim.Header&quot;)"/>
+      <Label
+        id="YouCan"
+        label="DisplayKey.get(&quot;Web.NoClaim.YouCan&quot;)"/>
+      <BulletPointTextInput
+        action="ClaimSearch.go()"
+        id="SearchForClaim"
+        labelAbove="true"
+        value="DisplayKey.get(&quot;Web.NoClaim.SearchForClaim&quot;)"/>
+      <BulletPointTextInput
+        action="FNOLWizard.go()"
+        id="CreateNewClaim"
+        labelAbove="true"
+        value="DisplayKey.get(&quot;Web.NoClaim.CreateNewClaim&quot;)"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

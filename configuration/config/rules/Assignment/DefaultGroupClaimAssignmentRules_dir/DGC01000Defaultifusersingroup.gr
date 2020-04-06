@@ -1,0 +1,40 @@
+package rules.Assignment.DefaultGroupClaimAssignmentRules_dir
+
+uses gw.api.locale.DisplayKey
+uses gw.api.util.Logger
+
+@gw.rules.RuleName("DGC01000 - Default - if users in group")
+internal class DGC01000Defaultifusersingroup {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.CurrentAssignment.AssignedGroup.Users.toList().hasMatch(\ aUser -> true)
+/* As long as the group contains at least 1 user */
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+if (claim.CurrentAssignment.assignUserByRoundRobin(false, claim.CurrentAssignment.AssignedGroup)) {
+  Logger.logDebug(DisplayKey.get("Rules.Assignment.DefaultGroup.Claim", actions.ShortRuleName))
+  Logger.logDebug(DisplayKey.get("Rules.Assignment.AssignedUserIs", claim.AssignedUser))
+  actions.exit()
+}
+
+// another option, using a "seniority" attribute 
+//
+//uses gw.api.assignment.examples.AttributeAssignmentBySeniority
+//
+//  var assignment = new AttributeAssignmentBySeniority()
+//  if (assignment.assignByComplexityAndSeniority(Claim, Claim.CurrentAssignment.AssignedGroup)) {
+//    // log message here, if desired
+//	Logger.logDebug("##### This is the Default Group Claim rule " + actions.ShortRuleName)
+//	Logger.logDebug(DisplayKey.get("Rules.Assignment.AssignedUserIs", Claim.AssignedUser))
+//    actions.exit()
+//  }
+/*end00rule*/
+
+  }
+}

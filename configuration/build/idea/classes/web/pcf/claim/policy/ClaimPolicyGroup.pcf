@@ -1,0 +1,42 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <LocationGroup
+    canVisit="perm.Claim.view(Claim) and perm.Policy.view(Claim) and perm.System.viewpolicy and (Claim.State != ClaimState.TC_DRAFT)"
+    id="ClaimPolicyGroup"
+    title="DisplayKey.get(&quot;JSP.ClaimPageLinks.PageLink.Policy&quot;)">
+    <LocationEntryPoint
+      signature="ClaimPolicyGroup(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPolicy.Policy.Navigation.General&quot;)"
+      location="ClaimPolicyGeneral(Claim)"
+      shortcut="G"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPolicy.Policy.Navigation.Vehicles&quot;)"
+      location="ClaimPolicyVehicles(Claim)"
+      shortcut="I"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPolicy.Policy.Navigation.Trips&quot;)"
+      location="ClaimPolicyTrips(Claim)"
+      shortcut="I"/>
+    <LocationRef
+      label="gw.api.policy.PolicyTabUtil.hasTab(Claim, &quot;Classcodes&quot;) ? DisplayKey.get(&quot;JSP.ClaimPolicy.Policy.Navigation.WCLocations&quot;) : DisplayKey.get(&quot;JSP.ClaimPolicy.Policy.Navigation.Locations&quot;)"
+      location="ClaimPolicyLocations(Claim)"
+      shortcut="I"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPolicy.Policy.Navigation.Endorsements&quot;)"
+      location="ClaimPolicyEndorsements(Claim)"
+      shortcut="N"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPolicy.Policy.Navigation.Statcodes&quot;)"
+      location="ClaimPolicyStatCodes(Claim)"/>
+    <LocationRef
+      label="DisplayKey.get(&quot;JSP.ClaimPolicy.Policy.Navigation.AggregateLimits&quot;)"
+      location="ClaimPolicyAggregateLimits(Claim)"
+      shortcut="S"/>
+  </LocationGroup>
+</PCF>

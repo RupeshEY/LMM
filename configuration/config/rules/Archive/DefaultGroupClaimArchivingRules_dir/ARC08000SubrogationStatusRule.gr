@@ -1,0 +1,25 @@
+package rules.Archive.DefaultGroupClaimArchivingRules_dir
+
+uses gw.api.database.Queries
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("ARC08000 - Subrogation Status Rule")
+internal class ARC08000SubrogationStatusRule {
+  static function doCondition(claim: entity.Claim): boolean {
+/*start00rule*/
+    return claim.SubrogationSummary != null and
+        Queries
+            .createQuery(Subrogation)
+            .compare(Subrogation#SubrogationSummary, Equals, claim.SubrogationSummary)
+            .compare(Subrogation#Status, NotEquals, SubrogationStatus.TC_CLOSED)
+            .select()
+            .Count > 0
+/*end00rule*/
+  }
+
+  static function doAction(claim: entity.Claim, actions: gw.rules.Action) {
+/*start00rule*/
+    claim.skipFromArchiving(DisplayKey.get("Rules.Archive.IncompleteSubrogation"))
+/*end00rule*/
+  }
+}

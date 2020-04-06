@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<Entity
+  name="AddnlTripAccommodation">
+  <Columns>
+    <Column
+      beanPath="AddnlTripAccommodation.PropertyName"
+      name="PropertyName"/>
+    <Column
+      beanPath="AddnlTripAccommodation.Address.City"
+      name="City"/>
+    <Column
+      beanPath="AddnlTripAccommodation.Address.Country"
+      name="Country"/>
+  </Columns>
+  <DisplayName><![CDATA[
+var sb = new java.lang.StringBuffer();
+      if (PropertyName != null and PropertyName.length() > 0) {
+        sb.append(PropertyName);
+      }
+      if (City != null and City.length() > 0) {
+        if (sb.length() > 0) sb.append(", ");
+        sb.append(City);
+      }
+      if (Country != null and City.length() > 0) {
+        if (sb.length() > 0) sb.append(", ");
+        sb.append(Country);
+      }
+
+      var retString = sb.toString();
+      if (retString.length() == 0) {
+        retString = gw.api.locale.DisplayKey.get("DisplayName.AddnlTripAccommodation.Unnamed");
+      }
+      return retString;
+  ]]></DisplayName>
+</Entity>

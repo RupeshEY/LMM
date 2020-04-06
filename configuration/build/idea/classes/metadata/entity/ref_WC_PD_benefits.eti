@@ -1,0 +1,41 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Ref table for PD monetary benefit by disability percentage band"
+  entity="ref_WC_PD_benefits"
+  platform="false"
+  table="ref_WC_PD_benefits"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.ref_WC_PD_benefits"
+    impl="com.guidewire.cc.domain.exposure.impl.ref_WC_PD_benefitsImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.exposure.impl.ref_WC_PD_benefitsInternal"
+    impl="com.guidewire.cc.domain.exposure.impl.ref_WC_PD_benefitsImpl"/>
+  <implementsEntity
+    name="WC_PD_LimitsDelegate"/>
+  <fulldescription><![CDATA[
+      Reference table tracking state-specific permanent disability minimum and maximum
+      monetary benefits by PD percent ranges for particular date ranges.
+    ]]></fulldescription>
+  <column
+    desc="Minimum PD Disability Percentage"
+    name="Min_DisabilityPercent"
+    nullok="true"
+    type="percentagedec"/>
+  <column
+    desc="Maximum PD Disability Percentage"
+    name="Max_DisabilityPercent"
+    nullok="true"
+    type="percentagedec"/>
+  <column
+    desc="State PD Benefit Minimum"
+    name="PD_MinBenefit"
+    nullok="true"
+    type="money"/>
+  <column
+    desc="State PD Benefit Maximum"
+    name="PD_MaxBenefit"
+    nullok="true"
+    type="money"/>
+</entity>

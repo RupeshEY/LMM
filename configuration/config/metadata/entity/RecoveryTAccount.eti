@@ -1,0 +1,74 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Represents the value of Recovery and RecoveryReserve transactions in a certain lifecycle state."
+  entity="RecoveryTAccount"
+  extendable="false"
+  ignoreForEvents="true"
+  overwrittenInStagingTable="true"
+  setterScriptability="hidden"
+  table="recoverytaccount"
+  type="editable">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.impl.RecoveryTAccountInternal"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.RecoveryTAccountImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.TAccountDelegateAdapter"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.RecoveryTAccountImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="TAccountDelegate"/>
+  <column
+    desc="The balance of the reserving currency debit side of this t-account's ledger."
+    exportable="false"
+    getterScriptability="doesNotExist"
+    name="DebitReservingBalance"
+    nullok="false"
+    overwrittenInStagingTable="true"
+    setterScriptability="doesNotExist"
+    type="money"/>
+  <column
+    desc="The balance of the reserving currency credit side of this t-account's ledger."
+    exportable="false"
+    getterScriptability="doesNotExist"
+    name="CreditReservingBalance"
+    nullok="false"
+    overwrittenInStagingTable="true"
+    setterScriptability="doesNotExist"
+    type="money"/>
+  <foreignkey
+    columnName="RecoveryCodingID"
+    desc="FK to the RecoveryCoding that this TAccount is assoicated with."
+    existingreferencesallowed="false"
+    exportable="false"
+    fkentity="RecoveryCoding"
+    getterScriptability="hidden"
+    importableagainstexistingobject="false"
+    name="RecoveryCoding"
+    nullok="false"
+    overwrittenInStagingTable="true"
+    setterScriptability="hidden"/>
+  <array
+    arrayentity="RecoveryTAccountLineItem"
+    arrayfield="RecoveryTAccount"
+    desc="Line items for this RecoveryTAccount."
+    exportable="false"
+    getterScriptability="hidden"
+    name="RecoveryTAccountLineItems"
+    owner="true"
+    setterScriptability="hidden"/>
+  <index
+    desc="Every RecoveryCoding should have at most one TAccount of a given type."
+    name="recoverytaccountu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="RecoveryCodingID"/>
+    <indexcol
+      keyposition="2"
+      name="TAccountType"/>
+  </index>
+  <dbcheckbuilder
+    className="com.guidewire.cc.domain.financials.dbchecks.RecoveryTAccountDBCheckBuilder"/>
+</entity>

@@ -1,0 +1,116 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="ContactBasicsDV"
+    mode="Company|CompanyVendor|MedicalCareOrg|AutoRepairShop|LawFirm|AutoTowingAgcy">
+    <!-- NOTE: This shared section requires a gw.api.contact.ContactHandle, rather than a Contact, because it's
+    possible for some actions on a contact detail screen to fundamentally change the contact. In particular, syncing
+    a contact that leads to a downcast of that contact to a more specific subtype causes the original contact to
+    become invalid. To protect against this, contacts on shared sections should be wrapped in a ContactHandle. If the
+    contact is fundamentally changed, then only the handle needs to be updated, and all existing references will see
+    the new contact.
+
+    As a shortcut for "contactHandle.Contact", this shared section defines a read-only property which can be used to
+    access the most current value of the contact.
+
+    Note also that claimContact may be null, so fields which depend on reference it should only be available for setting if it is not. -->
+    <Require
+      name="contactHandle"
+      type="gw.api.contact.ContactHandle"/>
+    <Require
+      name="showRoles"
+      type="boolean"/>
+    <Require
+      name="linkStatus"
+      type="gw.api.contact.ContactSystemLinkStatus"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <InputHeaderSection>
+      <InputSetRef
+        def="ContactBasicsHeaderInputSet(contactHandle, ClaimContact, showRoles, linkStatus)"/>
+    </InputHeaderSection>
+    <InputColumn>
+      <Label
+        label="Company.Subtype.DisplayName"/>
+      <InputSetRef
+        def="GlobalContactNameInputSet(new gw.api.name.ContactNameOwner(new gw.api.name.CCContactHandleContactNameDelegate(contactHandle)))"
+        id="OrganizationName"
+        mode="gw.api.name.NameLocaleSettings.PCFMode"/>
+      <InputDivider/>
+      <InputSetRef
+        def="PrimaryAddressInputSet(contactHandle)"/>
+    </InputColumn>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.ContactDetail.AdditionalInfo&quot;)"/>
+      <InputSet
+        visible="Company typeis CompanyVendor">
+        <InputSetRef
+          def="CompanyVendorAdditionalInfoInputSet(contactHandle)"
+          mode="Company typeis CompanyVendor ? &quot;CompanyVendor&quot; : null"/>
+        <DateInput
+          available="ClaimContact != null"
+          editable="true"
+          id="CompanyVendorValidFrom"
+          label="DisplayKey.get(&quot;Web.ContactBasicsDV.Company.CompanyVendor.ValidFrom&quot;)"
+          value="ClaimContact.ContactValidFrom"/>
+        <DateInput
+          available="ClaimContact != null"
+          editable="true"
+          id="CompanyVendorValidTo"
+          label="DisplayKey.get(&quot;Web.ContactBasicsDV.Company.CompanyVendor.ValidTo&quot;)"
+          value="ClaimContact.ContactValidTo"/>
+      </InputSet>
+      <TypeKeyInput
+        editable="true"
+        id="Currency"
+        label="DisplayKey.get(&quot;Financials.Multicurrency.PreferredCurrency&quot;)"
+        value="Company.PreferredCurrency"
+        valueType="typekey.Currency"
+        visible="gw.api.util.CurrencyUtil.isMultiCurrencyMode()"/>
+      <InputSetRef
+        def="BusinessContactInfoInputSet(contactHandle, ClaimContact, claim)"/>
+      <InputSet>
+        <InputDivider/>
+        <Label
+          label="DisplayKey.get(&quot;Web.ContactDetail.TaxInfo&quot;)"/>
+        <PrivacyInput
+          editable="true"
+          encryptionExpression="Company.maskTaxId(VALUE)"
+          id="V_EIN"
+          label="DisplayKey.get(&quot;Web.ContactDetail.Name.TaxID.EIN&quot;)"
+          value="Company.TaxID"/>
+        <InputSetRef
+          def="VendorW9InfoInputSet(contactHandle)"
+          visible="Company typeis CompanyVendor and gw.api.admin.BaseAdminUtil.getDefaultCountry() == Country.TC_US "/>
+      </InputSet>
+      <InputDivider/>
+      <TextAreaInput
+        boldLabel="true"
+        editable="true"
+        id="Notes"
+        label="DisplayKey.get(&quot;Web.ContactDetail.Notes&quot;)"
+        numRows="3"
+        value="Company.Notes"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputDivider/>
+      <ListViewInput
+        boldLabel="true"
+        def="ContactEFTLV(contactHandle.Contact)"
+        label="DisplayKey.get(&quot;Web.ContactBasicsDV.BankData&quot;)"
+        labelAbove="true">
+        <Toolbar>
+          <IteratorButtons
+            iterator="ContactEFTLV.ContactEFTLV"/>
+        </Toolbar>
+      </ListViewInput>
+    </InputFooterSection>
+    <Code><![CDATA[property get Company() : Company { return contactHandle.Contact as Company; }
+      
+property get ClaimContact() : ClaimContact { return contactHandle typeis ClaimContact ? (contactHandle) : null; }]]></Code>
+  </DetailViewPanel>
+</PCF>

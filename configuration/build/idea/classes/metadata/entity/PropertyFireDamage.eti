@@ -1,0 +1,73 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="PropertyFireDamage"
+  exportable="true"
+  extendable="true"
+  final="true"
+  platform="false"
+  table="propertyfiredamage"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.PropertyFireDamage"
+    impl="com.guidewire.cc.domain.claim.impl.PropertyFireDamageImpl"/>
+  <fulldescription><![CDATA[    Represents details about fire damage to a property
+  ]]></fulldescription>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Claim that owns this damage object."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <column
+    desc="Description of the source of the fire"
+    name="FireSource"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="250"/>
+  </column>
+  <column
+    desc="Description of how the fire was discovered"
+    name="HowWasFireDiscovered"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="250"/>
+  </column>
+  <column
+    desc="Did the fire department respond to the damage?"
+    name="FireDeptResponded"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Was anyone injured?"
+    name="IsAnyoneInjured"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Is the damage only from smoke and not fire?"
+    name="SmokeDamageOnly"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Can the insured live at home?"
+    name="IsHomeHabitable"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Is the home secure?"
+    name="IsHomeSecure"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Boolean field to indicate if a claim involves arson"
+    name="Arson"
+    nullok="true"
+    type="bit"/>
+</entity>

@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="perm.System.wcrefmanage"
+    canVisit="perm.System.wcrefview"
+    id="WCBenefitParameterSet"
+    title="DisplayKey.get(&quot;Web.Admin.WCBenefitParameterSet&quot;)">
+    <LocationEntryPoint
+      signature="WCBenefitParameterSet()"/>
+    <Variable
+      initialValue="gw.api.database.Query.make(entity.WCBenefitParameterSet).select()"
+      name="WCBenefitParameterSet"
+      type="gw.api.database.IQueryBeanResult&lt;WCBenefitParameterSet&gt;"/>
+    <Screen
+      id="WCBenefitParameterSetScreen">
+      <TitleBar
+        appendListViewPaging="true"
+        title="DisplayKey.get(&quot;Web.Admin.WCBenefitParameterSet&quot;)"/>
+      <Toolbar
+        visible="true">
+        <ToolbarButton
+          action="WCBenefitParameterSetPopup.push()"
+          id="AddWCBenefitParameterSet"
+          label="DisplayKey.get(&quot;Button.Add&quot;)"/>
+        <IteratorButtons
+          addVisible="false"
+          hideIfReadOnly="false"
+          iterator="WCBenefitParameterSetLV.WCBenefitParameterSetLV"
+          removeVisible="true"/>
+      </Toolbar>
+      <PanelRef
+        def="WCBenefitParameterSetLV(WCBenefitParameterSet)"/>
+    </Screen>
+  </Page>
+</PCF>

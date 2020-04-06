@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Possible statuses for BulkInvoiceItem entities"
+  final="true"
+  name="BulkInvoiceItemStatus">
+  <typecode
+    code="draft"
+    desc="Bulk invoice item is possibly committed to the database, but is not yet ready for validation"
+    name="Draft"/>
+  <typecode
+    code="approved"
+    desc="Bulk invoice item has passed the bulk invoice approval process"
+    name="Item approved"/>
+  <typecode
+    code="checkpendingapproval"
+    desc="Bulk invoice item has passed the bulk invoice approval process and is waiting for its check to be approved"
+    name="Check pending approval"/>
+  <typecode
+    code="awaitingsubmission"
+    desc="Bulk invoice item and its check have passed approval and is ready to be escalated once the bulk invoice is ready to be escalated"
+    name="Awaiting submission"/>
+  <typecode
+    code="rejected"
+    desc="Bulk invoice item was rejected by the bulk invoice approver"
+    name="Rejected"/>
+  <typecode
+    code="submitting"
+    desc="Bulk invoice item is being submitted to downsteam system"
+    name="Submitting"/>
+  <typecode
+    code="submitted"
+    desc="Bulk invoice item was submitted to the downstream system"
+    name="Submitted"/>
+  <typecode
+    code="notvalid"
+    desc="Payment/check associated with the bulk invoice item failed validation"
+    name="Not valid"/>
+  <typecode
+    code="inreview"
+    desc="Bulk invoice item requires action before it can be paid.  This value can be set when approving a bulk invoice."
+    name="In review"/>
+  <typecode
+    code="pendingvoid"
+    desc="Bulk invoice item was voided, and confirmation of void is pending"
+    name="Pending void"/>
+  <typecode
+    code="pendingstop"
+    desc="Bulk invoice item was stopped, and confirmation of stop is pending"
+    name="Pending stop"/>
+  <typecode
+    code="pendingtransfer"
+    desc="Check associated with bulk invoice item was transferred, and acknowledgement of the transfer event message is pending"
+    name="Pending transfer"/>
+  <typecode
+    code="voided"
+    desc="Bulk invoice item was voided"
+    name="Voided"/>
+  <typecode
+    code="stopped"
+    desc="Bulk invoice item was stopped"
+    name="Stopped"/>
+  <typecode
+    code="transferred"
+    desc="Check associated with bulk invoice item was transferred"
+    name="Transferred"/>
+</typelist>

@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<typelist xmlns="http://guidewire.com/typelists" name="ECFClaimResponseMode_Ext" desc="List of modes to open the respective ClaimResponse popup.">
+  <typecode
+    code="LirmaLead"
+    desc="Code to open Lirma's lead popup"
+    name="LIRMA Lead"/>
+  <typecode
+    code="LirmaAgreementParty"
+    desc="Code to open Lirma's agreement party popup"
+    name="LIRMA Agreement Party"/>
+  <typecode
+    code="LloydsLead"
+    desc="Code to open Lloyd's lead popup"
+    name="Lloyd's Lead"/>
+  <typecode
+    code="LloydsAgreementParty"
+    desc="Code to open Lloyd's agreement party popup"
+    name="Lloyd's Agreement Party"/>
+  <typecode
+    code="IluLead"
+    desc="Code to open ILU lead popup"
+    name="ILU Lead"/>
+  <typecode
+    code="IluAgreementParty"
+    desc="Code to open ILU agreement party popup"
+    name="ILU Agreement Party"/>
+  <typefilter
+    desc="Leaders are added here"
+    name="Lead">
+    <include
+      code="IluLead"/>
+    <include
+      code="LirmaLead"/>
+    <include
+      code="LloydsLead"/>
+  </typefilter>
+  <typefilter
+    desc="Second Agreement Partis are added here."
+    name="SAP">
+    <include
+      code="IluAgreementParty"/>
+    <include
+      code="LirmaAgreementParty"/>
+    <include
+      code="LloydsAgreementParty"/>
+  </typefilter>
+</typelist>

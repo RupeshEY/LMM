@@ -1,0 +1,38 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_claim.xml -->
+  <ListViewPanel
+    id="ClaimAssociationsSearchResultsLV">
+    <Require
+      name="ClaimAssociationList"
+      type="ClaimAssociation[]"/>
+    <RowIterator
+      editable="false"
+      elementName="ClaimAssociation"
+      pickValue="ClaimAssociation"
+      value="ClaimAssociationList"
+      valueType="entity.ClaimAssociation[]">
+      <Row>
+        <TextCell
+          id="Association"
+          label="DisplayKey.get(&quot;LV.Claim.ClaimAssociations.Association&quot;)"
+          sortOrder="1"
+          value="ClaimAssociation.Title"/>
+        <TypeKeyCell
+          id="Type"
+          label="DisplayKey.get(&quot;LV.Claim.ClaimAssociations.Type&quot;)"
+          value="ClaimAssociation.ClaimAssocType"
+          valueType="typekey.ClaimAssocType"/>
+        <ClaimAssociationsCell
+          enableSort="false"
+          id="Claims"
+          label="DisplayKey.get(&quot;LV.Claim.ClaimAssociations.Claims&quot;)"
+          value="ClaimAssociation.ClaimsInAssoc"
+          valueType="entity.ClaimInAssociation[]"
+          wrap="true"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,22 @@
+package rules.EventMessage.EventFired_dir.SolrDestFilter_dir.Claim_dir
+
+@gw.rules.RuleName("ClaimAdded")
+internal class ClaimAdded {
+  static function doCondition(messageContext : entity.MessageContext) : boolean {
+    
+/*start00rule*/
+return messageContext.EventName == "ClaimAdded"
+/*end00rule*/
+
+  }
+
+  static function doAction(messageContext : entity.MessageContext, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+gw.solr.CCSolrMessageTransportPlugin.handleClaimAddedEvent(messageContext)
+
+/*end00rule*/
+
+  }
+}

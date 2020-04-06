@@ -1,0 +1,49 @@
+package rules.TransactionApproval.TransactionApprovalRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("TAP01000 - PIP")
+internal class TAP01000PIP {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return transactionSet.Subtype == TC_CHECKSET and
+transactionSet.AllTransactions.toList().hasMatch(\ transaction -> transaction.CostType==TC_CLAIMCOST)
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+for (each in transactionSet.AllTransactions) {
+  var error : String = null
+  if (each.Exposure.IncidentLimitReached) {
+    error = DisplayKey.get("Rules.TransactionApproval.LimitExceeded.ExposureIncident")
+  } else if (each.Exposure.ExposureLimitReached) {
+    error = DisplayKey.get("Rules.TransactionApproval.LimitExceeded.ExposureExposure")
+  } else if (each.Exposure.PIPNonMedAggLimitReached) {
+    error = DisplayKey.get("Rules.TransactionApproval.LimitExceeded.PIPNonMedicalAggregate")
+  } else if (each.Exposure.PIPESSLimitReached) {
+    error = DisplayKey.get("Rules.TransactionApproval.LimitExceeded.PIPEssentialServicesAggregate")
+  } else if (each.Exposure.PIPPersonAggLimitReached) {
+    error = DisplayKey.get("Rules.TransactionApproval.LimitExceeded.PIPPerPersonAggregate")
+  } else if (each.Exposure.PIPClaimAggLimitReached) {
+    error = DisplayKey.get("Rules.TransactionApproval.LimitExceeded.PIPClaimAggregate")
+  }
+  if (error != null) {
+    // Make sure supervisor has not already approved this TransactionSet
+    if (not transactionSet.Claim.Activities.toList().hasMatch(\ act -> (act.TransactionSet == transactionSet
+                  and act.ActivityPattern.Code == "approve_payment"
+                  and act.Approved 
+                  and act.AssignedUser == each.Exposure.AssignedGroup.Supervisor))) {
+      if (transactionSet.requireApproval(error)) {
+        actions.exit()
+      }
+    }
+  }
+}
+/*end00rule*/
+
+  }
+}

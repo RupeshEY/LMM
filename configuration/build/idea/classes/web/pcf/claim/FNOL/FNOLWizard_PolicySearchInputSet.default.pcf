@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="FNOLWizard_PolicySearchInputSet"
+    mode="default">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <Require
+      name="PolicySearch"
+      type="PolicySearchCriteria"/>
+    <Variable
+      initialValue="new gw.api.address.PolicySearchAddressOwner(PolicySearch)"
+      name="addressOwner"
+      recalculateOnRefresh="true"
+      type="gw.api.address.CCAddressOwner"/>
+    <TextInput
+      editable="true"
+      id="ssn"
+      label="DisplayKey.get(&quot;Web.SearchFindPolicyPanelSet.SearchPanel.SSNTaxID.Label&quot;)"
+      value="PolicySearch.TaxIdString"/>
+    <InputSetRef
+      def="CCAddressInputSet(addressOwner)"/>
+    <TextInput
+      actionAvailable=""
+      available=""
+      editable="true"
+      id="vin"
+      label="DisplayKey.get(&quot;NVV.Policy.PolicySearch.Policy.Vin&quot;)"
+      value="PolicySearch.Vin"/>
+  </InputSet>
+</PCF>

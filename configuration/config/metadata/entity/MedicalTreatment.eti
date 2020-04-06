@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="MedicalTreatment"
+  exportable="true"
+  table="medicaltreatment"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.MedicalTreatment"
+    impl="com.guidewire.cc.domain.claim.impl.MedicalTreatmentImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Tracks treatments related to a Workmen's Compensation claim. The MedicalTreatment entity tracks treatment by
+        internal classification of diseases (ICD) codes, quantity, and contact delivering the treatment.
+      
+    ]]></fulldescription>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Foreign key to Claim entity."
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <foreignkey
+    columnName="ClaimContactID"
+    desc="Foreign key to ClaimContact entity."
+    fkentity="ClaimContact"
+    name="ClaimContact"
+    nullok="false"/>
+  <column
+    desc="Date of the medical action."
+    name="ActionDate"
+    nullok="false"
+    type="datetime"/>
+  <typekey
+    desc="Approved treatment for injury."
+    name="ApprovedTreatment"
+    nullok="false"
+    typelist="ApprovedTreatment"/>
+  <column
+    desc="Quantity of treatments approved."
+    name="TreatmentQuantity"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="ICD-1."
+    name="ICD1"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="8"/>
+  </column>
+  <column
+    desc="ICD-2."
+    name="ICD2"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="8"/>
+  </column>
+  <column
+    desc="ICD-3."
+    name="ICD3"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="8"/>
+  </column>
+  <column
+    desc="ICD-4."
+    name="ICD4"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="8"/>
+  </column>
+</entity>

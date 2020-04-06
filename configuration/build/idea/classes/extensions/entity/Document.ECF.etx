@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Document">
+  <column
+    desc="The IMR Document Version."
+    name="IMRDocumentVersion"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="32"/>
+  </column>
+  <column
+    desc="The DateTime of the IMR Document Version."
+    name="IMRDocumentVersionDtTime"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="The File Size Number of the IMR Document."
+    name="IMRFileSizeNum"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="precision"
+      value="14"/>
+    <columnParam
+      name="scale"
+      value="0"/>
+  </column>
+  <column
+    desc="The File Size Unit of the IMR Document."
+    name="IMRFileSizeUnit"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="64"/>
+  </column>
+  <column
+    desc="The IMR Document Inherit Indicator."
+    name="IMRInheritIndicator"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="The Latest Transaction Reference related to this document."
+    name="TR"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="64"/>
+  </column>
+  <typekey
+    default="ON_DMS"
+    name="ECFStatus"
+    nullok="false"
+    typelist="ECFDocumentStatus_Ext"/>
+  <column
+    desc="The UUID provided by the IMR Service"
+    name="IMRDocumentId"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    default="document"
+    desc="The IMR Document Type."
+    name="IMRDocumentType"
+    nullok="true"
+    type="shorttext"/>
+</extension>

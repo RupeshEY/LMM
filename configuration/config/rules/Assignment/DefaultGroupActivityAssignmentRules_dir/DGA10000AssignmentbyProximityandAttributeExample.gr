@@ -1,0 +1,50 @@
+package rules.Assignment.DefaultGroupActivityAssignmentRules_dir
+uses gw.api.locale.DisplayKey
+uses gw.api.system.CCLoggerCategory
+uses gw.api.geocode.CCGeocodeScriptHelper
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("DGA10000 - Assignment by Proximity and Attribute Example")
+internal class DGA10000AssignmentbyProximityandAttributeExample {
+  static function doCondition(activity : entity.Activity) : boolean {
+    
+/*start00rule*/
+return gw.api.contact.ProximitySearchPageHelper.useGeocodeUILocally() 
+and activity.Claimant.PrimaryAddress != null
+/*end00rule*/
+
+  }
+
+  static function doAction(activity : entity.Activity, actions : gw.rules.Action) {
+
+/*start00rule*/
+CCLoggerCategory.ASSIGNMENT.debug(
+  DisplayKey.get("Rules.Assignment.AttemptingByProximityToClaimantAddress", activity.Claimant.PrimaryAddress))
+CCLoggerCategory.ASSIGNMENT.debug(
+  DisplayKey.get("Rules.Assignment.AndWithAttribute", DisplayKey.get("Rules.Assignment.Attribute.French")))
+  
+var asc = CCGeocodeScriptHelper.setupAssignmentProximitySearch(
+              activity.Claimant.PrimaryAddress, false, 10, TC_MILE)
+
+// NOTE:  make sure to set up your custom attribute in the administration page and 
+// add it to the appropriate users. 
+asc.CCUserSearchCriteria.AttributeName = "French"
+asc.CCUserSearchCriteria.AttributeValue = 1
+
+// Pass the user search criteria to the assignUserByProximityWithSearchCriteria function.
+// This assignment will take into account the proximity as well as the user attribute.
+if (activity.CurrentAssignment.assignUserByProximityWithSearchCriteria(
+      asc.CCUserSearchCriteria, -1, true, activity.CurrentAssignment.AssignedGroup)) {
+  CCLoggerCategory.ASSIGNMENT.debug(
+    DisplayKey.get("Rules.Assignment.ProximityToClaimantAddress", activity.Claimant.PrimaryAddress))
+  CCLoggerCategory.ASSIGNMENT.debug(
+    DisplayKey.get("Rules.Assignment.AssignedUserIs", activity.AssignedUser))
+  actions.exit()
+} else {
+  CCLoggerCategory.ASSIGNMENT.debug(
+    DisplayKey.get("Rules.Assignment.ProximityToClaimantAddress.Failed", activity.Claimant.PrimaryAddress))
+}
+/*end00rule*/
+
+  }
+}

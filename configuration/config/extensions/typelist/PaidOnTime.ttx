@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="PaidOnTime">
+  <typecode
+    code="notapplicable"
+    desc="Not applicable"
+    name="Not applicable"
+    priority="1"/>
+  <typecode
+    code="ontime"
+    desc="First TTD payment on time"
+    name="First TTD payment on time"
+    priority="1"/>
+  <typecode
+    code="payafterdelay"
+    desc="First payment after claim in delay/deny status"
+    name="First payment after claim in delay/deny status"
+    priority="1"/>
+  <typecode
+    code="moconvert"
+    desc="First payment after claim converting from MO to Indemnity"
+    name="First payment after claim converting from MO to Indemnity"
+    priority="1"/>
+  <typecode
+    code="payaward"
+    desc="Payment for award"
+    name="Payment for award"
+    priority="1"/>
+  <typecode
+    code="payedd"
+    desc="Payment to EDD"
+    name="Payment to EDD"
+    priority="1"/>
+  <typecode
+    code="attendexam"
+    desc="Payment to attend exam"
+    name="Payment to attend exam"
+    priority="1"/>
+  <typecode
+    code="latenotice"
+    desc="Late because of late notice"
+    name="Late because of late notice"
+    priority="1"/>
+  <typecode
+    code="latetechnical"
+    desc="Late because of technical processing"
+    name="Late because of technical processing"
+    priority="1"/>
+</typelistextension>

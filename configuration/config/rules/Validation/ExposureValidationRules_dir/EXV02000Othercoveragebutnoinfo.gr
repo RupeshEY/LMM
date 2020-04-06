@@ -1,0 +1,28 @@
+package rules.Validation.ExposureValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("EXV02000 - Other coverage but no info")
+internal class EXV02000Othercoveragebutnoinfo {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.OtherCoverage and exposure.OtherCoverageDet.length == 0
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+/* This rule causes ClaimCenter to enforce that exposures
+   fill in "other coverage" data during validation.
+*/
+exposure.rejectField("OtherCoverage",
+  TC_NEWLOSS, DisplayKey.get("Rules.Validation.ProvideClaimantsOtherCoverage"),
+  null, null)
+/*end00rule*/
+
+  }
+}

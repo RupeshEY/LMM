@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="ClaimDocumentSearchDV">
+    <Require
+      name="DocumentSearchCriteria"
+      type="DocumentSearchCriteria"/>
+    <InputColumn>
+      <RangeInput
+        editable="true"
+        id="RelatedTo"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimDocumentsFilter.RelatedTo&quot;)"
+        optionGroupLabel="gw.pcf.RelatedToUtil.getOptionGroupLabel(VALUE as KeyableBean)"
+        optionLabel="gw.pcf.RelatedToUtil.getOptionLabel(VALUE as KeyableBean)"
+        required="true"
+        sortValueRange="false"
+        value="DocumentSearchCriteria.RelatedTo"
+        valueRange="DocumentSearchCriteria.Claim.RelatedToCandidates"
+        valueType="gw.pl.persistence.core.Bean"/>
+      <TypeKeyInput
+        editable="true"
+        id="Section"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimDocumentsFilter.Section&quot;)"
+        noneSelectedLabel="DisplayKey.get(&quot;NVV.Claim.ClaimDocumentsFilter.Any&quot;)"
+        value="DocumentSearchCriteria.Section"
+        valueType="typekey.DocumentSection"/>
+      <TextInput
+        editable="true"
+        id="NameOrID"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimDocumentsFilter.NameOrID&quot;)"
+        value="DocumentSearchCriteria.NameOrID"/>
+      <TypeKeyInput
+        editable="true"
+        id="Language"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimDocumentsFilter.Language&quot;)"
+        noneSelectedLabel="DisplayKey.get(&quot;NVV.Claim.ClaimDocumentsFilter.Any&quot;)"
+        value="DocumentSearchCriteria.Language"
+        valueType="typekey.LanguageType"
+        visible="LanguageType.getTypeKeys( false ).Count &gt; 1"/>
+    </InputColumn>
+    <InputColumn>
+      <TypeKeyInput
+        editable="true"
+        id="Status"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimDocumentsFilter.Status&quot;)"
+        noneSelectedLabel="DisplayKey.get(&quot;NVV.Claim.ClaimDocumentsFilter.Any&quot;)"
+        value="DocumentSearchCriteria.Status"
+        valueType="typekey.DocumentStatusType"/>
+      <TextInput
+        editable="true"
+        id="Author"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimDocumentsFilter.Author&quot;)"
+        value="DocumentSearchCriteria.Author"/>
+      <BooleanRadioInput
+        editable="true"
+        id="IncludeObsoletes"
+        label="DisplayKey.get(&quot;NVV.Claim.ClaimDocumentsFilter.IncludeObsoletes&quot;)"
+        value="DocumentSearchCriteria.IncludeObsoletes"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputSetRef
+        def="SearchAndResetInputSet()"/>
+    </InputFooterSection>
+  </DetailViewPanel>
+</PCF>

@@ -1,0 +1,24 @@
+package rules.Workplan.ExposureWorkplan_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("EXW01000 - Contact claimant")
+internal class EXW01000Contactclaimant {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ClaimantType != TC_INSURED 
+and !exposure.Claim.FirstAndFinal
+and exposure.Claim.LossType != LossType.TC_WC
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+exposure.Claim.createActivityFromPattern(
+    exposure, ActivityPattern.finder.getActivityPatternByCode("contact_claimant"))
+/*end00rule*/
+
+  }
+}

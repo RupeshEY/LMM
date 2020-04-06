@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Links coverages to aggregate limits."
+  entity="CoverageLineLimit"
+  exportable="true"
+  platform="false"
+  table="coveragelimit"
+  type="joinarray">
+  <implementsInterface
+    iface="gw.cc.aggregatelimit.entity.CoverageLineLimit"
+    impl="com.guidewire.cc.domain.aggregatelimit.impl.CoverageLineLimitImpl"/>
+  <foreignkey
+    columnName="CoverageLineID"
+    desc="The associated coverage line."
+    fkentity="CoverageLine"
+    name="CoverageLine"
+    nullok="false"/>
+  <foreignkey
+    columnName="AggregateLimitID"
+    desc="The associated aggregate limit."
+    exportable="false"
+    fkentity="AggregateLimit"
+    name="AggregateLimit"
+    nullok="false"/>
+  <index
+    desc="The link between a Coverage and an AggregateLimit should exist only once."
+    name="coveragelimitu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="CoverageLineID"/>
+    <indexcol
+      keyposition="2"
+      name="AggregateLimitID"/>
+  </index>
+</entity>

@@ -1,0 +1,127 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Contains simplified information about a Policy.  This object is returned during a Policy search (IPolicySearchAdapter.searchPolicies())"
+  entity="PolicySummary"
+  exportable="true">
+  <implementsInterface
+    iface="gw.cc.policy.entity.PolicySummary"
+    impl="com.guidewire.cc.domain.policy.impl.PolicySummaryImpl"/>
+  <fulldescription><![CDATA[
+Non-persistent entity containing simplified information about a Policy. This
+object is returned in the result set during a Policy search
+(IPolicySearchAdapter.searchPolicies()), giving the user some context with which
+to select the desired policy for full retrieval.
+    ]]></fulldescription>
+  <column
+    name="InsuredName"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    deprecated="true"
+    desc="Deprecated, please use AddressLine1, AddressLine2 instead"
+    name="Address"
+    nullok="true"
+    type="addressline"/>
+  <column
+    name="City"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+  <column
+    name="PostalCode"
+    nullok="true"
+    type="postalcode"/>
+  <typekey
+    name="State"
+    nullok="true"
+    typelist="State"/>
+  <column
+    name="PolicyNumber"
+    nullok="true"
+    type="policynumber"/>
+  <typekey
+    desc="Type of policy."
+    name="PolicyType"
+    nullok="true"
+    typelist="PolicyType"/>
+  <typekey
+    name="Status"
+    nullok="true"
+    typelist="PolicyStatus"/>
+  <column
+    desc="Agency that sold the policy."
+    name="ProducerCode"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Date on which the policy is effective."
+    name="EffectiveDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Date on which the policy expires."
+    name="ExpirationDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Loss date on the Claim for which the summary was retrieved. Useful in some policy systems to determine what policy version this summary represents."
+    name="LossDate"
+    nullok="true"
+    type="datetime"/>
+  <array
+    arrayentity="PolicySummaryVehicle"
+    desc="List of vehicles (in summary form) covered by the policy."
+    name="Vehicles"
+    owner="true"
+    triggersValidation="true"/>
+  <array
+    arrayentity="PolicySummaryProperty"
+    desc="List of properties (in summary form) covered by the policy."
+    name="Properties"
+    owner="true"
+    triggersValidation="true"/>
+  <!-- The list of properties here is information to be used while retrieving the Policy from the Summary, as opposed
+          to summary information about the Policy -->
+  <foreignkey
+    desc="If non-null, only this vehicle is required for the Claim; others should be omitted from the returned Policy"
+    fkentity="PolicySummaryVehicle"
+    name="VehicleInvolved"
+    nullok="true"/>
+  <foreignkey
+    desc="If non-null, only this property is required for the Claim; others should be omitted from the returned Policy"
+    fkentity="PolicySummaryProperty"
+    name="PropertyInvolved"
+    nullok="true"/>
+  <column
+    name="AddressLine1"
+    nullok="true"
+    type="addressline"/>
+  <column
+    name="AddressLine1Kanji"
+    nullok="true"
+    type="addressline"/>
+  <column
+    name="AddressLine2"
+    nullok="true"
+    type="addressline"/>
+  <column
+    name="AddressLine2Kanji"
+    nullok="true"
+    type="addressline"/>
+  <column
+    name="CityKanji"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="60"/>
+  </column>
+</nonPersistentEntity>

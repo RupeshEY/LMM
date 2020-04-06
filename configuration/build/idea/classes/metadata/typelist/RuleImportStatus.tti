@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Rule Import Status"
+  final="true"
+  name="RuleImportStatus"
+  platform="true">
+  <typecode
+    code="New"
+    desc="The rule is new"
+    name="New Rule"/>
+  <typecode
+    code="NoConflict"
+    desc="The rule was modified only on remote system"
+    name="New Version"/>
+  <typecode
+    code="Conflict"
+    desc="The rule was modified on both systems"
+    name="Versions Conflict"/>
+  <typecode
+    code="ResolvedConflict"
+    desc="The rule was modified on both systems and the conflict has been resolved"
+    name="Versions Conflict"/>
+  <typecode
+    code="NoAction"
+    desc="No action is required because the imported rule version already exists"
+    name="No Change"/>
+  <typecode
+    code="Deployed"
+    desc="The rule was deployed on a different system"
+    name="Rule Deployment"/>
+  <typecode
+    code="ImportedNew"
+    desc="The new rule was imported"
+    name="Imported New Rule"/>
+  <typecode
+    code="Imported"
+    desc="The new rule version was imported"
+    name="Replaced with New Version"/>
+  <typecode
+    code="ImportedConflict"
+    desc="The rule was modified on both systems, the conflict was resolved and the rule was imported"
+    name="Replaced with Importing Version"/>
+  <typecode
+    code="ImportedDeployed"
+    desc="The rule was deployed on a different system and imported to this system"
+    name="Existing Version Deployed"/>
+  <typecode
+    code="Discarded"
+    desc="The import was discarded"
+    name="Discarded"/>
+  <typefilter
+    desc="The status is final and cannot be modified"
+    name="FinalStatus">
+    <include
+      code="NoAction"/>
+    <include
+      code="ImportedNew"/>
+    <include
+      code="Imported"/>
+    <include
+      code="ImportedConflict"/>
+    <include
+      code="ImportedDeployed"/>
+    <include
+      code="Discarded"/>
+    <include
+      code="ExistingConflict"/>
+    <include
+      code="ImportedEditedConflict"/>
+  </typefilter>
+  <typecode
+    code="ExistingConflict"
+    desc="The rule was modified on both systems, the conflict was resolved and the rule was kept the same"
+    name="Kept Existing Version"/>
+  <typecode
+    code="ImportedEditedConflict"
+    desc="The rule was modified on both systems, the conflict was resolved and a new draft was imported for resolution"
+    name="Applied Edited Version"/>
+  <typecode
+    code="EditedResolvedConflict"
+    desc="The rule was modified on both systems, and a new edited version was created"
+    name="Edited Version"/>
+</typelist>

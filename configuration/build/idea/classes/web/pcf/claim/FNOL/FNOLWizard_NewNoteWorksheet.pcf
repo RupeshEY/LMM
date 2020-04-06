@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Worksheet
+    canEdit="true"
+    canVisit="perm.Claim.create"
+    id="FNOLWizard_NewNoteWorksheet"
+    parent="FNOLWizard(Wizard.Claim)"
+    startEditing="Note.setInitialValues()"
+    startInEditMode="true"
+    tabLabel="DisplayKey.get(&quot;JSP.WorkspaceTabBar.NewNote&quot;)"
+    title="DisplayKey.get(&quot;JSP.NewClaimNote.Add.AddNote&quot;)">
+    <LocationEntryPoint
+      signature="FNOLWizard_NewNoteWorksheet(Wizard : gw.api.claim.NewClaimWizardInfo)"/>
+    <Scope
+      location="FNOLWizard(Wizard.Claim)"/>
+    <Variable
+      initialValue="new gw.api.note.NewClaimNotesPageHelper()"
+      name="PageHelper"
+      type="gw.api.note.NewClaimNotesPageHelper"/>
+    <Variable
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <Variable
+      initialValue="PageHelper.initialize(Wizard)"
+      name="Note"
+      type="Note"/>
+    <Screen
+      id="FNOLWizard_NewNoteScreen">
+      <Toolbar>
+        <ToolbarButton
+          action="submitWorksheet()"
+          id="NewClaimWizard_NewNoteWorksheet_UpdateButton"
+          label="DisplayKey.get(&quot;Button.Update&quot;)"
+          shortcut="U"/>
+        <ToolbarButton
+          action="cancelWorksheet()"
+          id="NewClaimWizard_NewNoteWorksheet_CancelButton"
+          label="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          shortcut="L"/>
+        <ToolbarDivider/>
+      </Toolbar>
+      <PanelRef
+        def="DocumentNoteDV(Note)"/>
+    </Screen>
+    <Code><![CDATA[function submitWorksheet() {
+  if (Note.Body.HasContent) {
+    PageHelper.commitNote()
+    CurrentLocation.cancel()
+  } else {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("JSP.NewClaimNote.Add.NoteBodyRequired"))
+  }
+}
+
+function cancelWorksheet() {
+  PageHelper.cancelNote()
+  CurrentLocation.cancel()
+}]]></Code>
+  </Worksheet>
+</PCF>

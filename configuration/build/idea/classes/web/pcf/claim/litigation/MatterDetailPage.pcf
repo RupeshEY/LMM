@@ -1,0 +1,119 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canEdit="perm.Matter.edit(Matter)"
+    canVisit="perm.Matter.view(Matter)"
+    id="MatterDetailPage"
+    parent="ClaimMatters(Claim)"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.ClaimMatters.Matter&quot;,  Matter)">
+    <LocationEntryPoint
+      signature="MatterDetailPage(Claim : Claim, Matter : Matter)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Matter"
+      type="Matter"/>
+    <Screen
+      id="MatterDetailScreen">
+      <Toolbar>
+        <EditButtons
+          editVisible="perm.Matter.edit(Matter)"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="AssignMattersPopup.push(new gw.api.matter.MatterAssignmentPopup(Matter))"
+          hideIfEditable="true"
+          id="MatterDetailPage_AssignButton"
+          label="DisplayKey.get(&quot;Web.ClaimMatters.Assign&quot;)"
+          shortcut="G"
+          visible="perm.Matter.genericassign"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="CloseMatterPopup.push(Matter)"
+          hideIfEditable="true"
+          id="MatterDetailPage_CloseMatterButton"
+          label="DisplayKey.get(&quot;Web.ClaimMatters.CloseMatter&quot;)"
+          shortcut="S"
+          visible="!Matter.Closed and perm.Claim.closematter(Claim)"/>
+        <ToolbarButton
+          action="if (gw.api.claim.ReopenUtil.requireExplanation(entity.Matter)) {ReopenMatterPopup.push(Matter);} else {gw.api.claim.ReopenUtil.reopenMatterWithoutExplanation(Matter);}"
+          hideIfEditable="true"
+          id="MatterDetailPage_ReopenMatterButton"
+          label="DisplayKey.get(&quot;Web.ClaimMatters.ReopenMatter&quot;)"
+          visible="Matter.Closed and perm.Claim.reopenmatter(Claim)"/>
+        <ToolbarDivider/>
+        <ToolbarButton
+          action="ClaimMatterCalendar.go(Claim, Matter)"
+          id="MatterDetailPage_CalendarButton"
+          label="DisplayKey.get(&quot;JSP.LitigationCalendar.General.Tab&quot;)"
+          shortcut="Y"
+          visible="!Matter.Closed"/>
+        <ToolbarButton
+          action="SupervisorClaimMatterCalendar.go(Claim, Matter)"
+          id="MatterDetailPage_SupervisorCalendarButton"
+          label="DisplayKey.get(&quot;JSP.LitigationCalendar.Supervisor.Tab&quot;)"
+          shortcut="V"
+          visible="return !Matter.Closed and perm.System.viewsupcalendar"/>
+      </Toolbar>
+      <!-- Begin Matter BudgetLine changes -->
+      <CardViewPanel>
+        <Card
+          id="MatterDetailCardDV"
+          title="DisplayKey.get(&quot;Matter.Details&quot;)">
+          <!-- End Matter BudgetLine changes -->
+          <PanelRow>
+            <PanelColumn>
+              <PanelRef
+                def="MatterDetailsDV(Matter)"
+                editable="perm.Matter.edit(Matter)"/>
+            </PanelColumn>
+          </PanelRow>
+          <PanelRow>
+            <PanelColumn>
+              <PanelRef
+                def="MatterActivitiesLV(Matter.Activities, Claim)"
+                editable="false">
+                <TitleBar
+                  title="DisplayKey.get(&quot;JSP.ClaimSummary.Activities.Title&quot;)"/>
+                <Toolbar/>
+              </PanelRef>
+            </PanelColumn>
+            <PanelColumn>
+              <PanelRef
+                def="NotesLV(Matter.Notes)"
+                editable="false">
+                <TitleBar
+                  title="DisplayKey.get(&quot;JSP.ClaimSummary.Notes.Title&quot;)"/>
+                <Toolbar/>
+              </PanelRef>
+            </PanelColumn>
+          </PanelRow>
+        </Card>
+        <!-- Begin Matter BudgetLine changes -->
+        <Card
+          id="BudgetLineCardDV"
+          title="DisplayKey.get(&quot;Matter.BudgetLine&quot;)"
+          visible="ScriptParameters.UtilizeMatterBudget">
+          <PanelRef
+            def="EditableBudgetLinesLV(Claim, Matter)"
+            editable="true"
+            id="BudgetLinesLV">
+            <Toolbar>
+              <ToolbarButton
+                action="Matter.createAllBudgetLines()"
+                hideIfReadOnly="true"
+                id="AddAllBudgetLines"
+                label="DisplayKey.get(&quot;Web.ClaimMatters.Button.AddAllBudgetLines&quot;)"
+                visible="Matter.BudgetLines.length==0"/>
+              <IteratorButtons
+                iterator="BudgetLinesLV.EditableBudgetLinesLV"/>
+            </Toolbar>
+          </PanelRef>
+        </Card>
+      </CardViewPanel>
+    </Screen>
+  </Page>
+</PCF>

@@ -1,0 +1,52 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Describes a settlement with the employee."
+  entity="Settlement"
+  exportable="true"
+  extendable="true"
+  platform="false"
+  table="settlement"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.Settlement"
+    impl="com.guidewire.cc.domain.exposure.impl.SettlementImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="Additional information."
+    name="Description"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Settlement amount."
+    name="SettleAmount"
+    nullok="true"
+    type="positivecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Date of settlement."
+    name="SettleDate"
+    nullok="true"
+    type="datetime"/>
+  <typekey
+    desc="Type of lost wages benefit."
+    name="BenefitType"
+    nullok="true"
+    typelist="LostWagesBenefitType"/>
+  <typekey
+    desc="Method of settlement."
+    name="SettleMethod"
+    nullok="true"
+    typelist="SettleMethod"/>
+  <foreignkey
+    columnName="ExposureID"
+    desc="The related exposure."
+    exportable="false"
+    fkentity="Exposure"
+    name="Exposure"
+    nullok="false"/>
+</entity>

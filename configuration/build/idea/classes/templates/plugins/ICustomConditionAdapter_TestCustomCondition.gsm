@@ -1,0 +1,6 @@
+## This is a sample property file like format for a CustomCondition template
+ClaimNumber=<%=Claim.ClaimNumber%>
+LossType=<%=Claim.LossType%>
+LossCause=<%=Claim.LossCause%>
+LossDate=<%=Claim.LossDate.toString()%>
+JurisdictionState=<%=Claim.JurisdictionState != null ? Claim.JurisdictionState.Code : ""%>

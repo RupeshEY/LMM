@@ -1,0 +1,42 @@
+package rules.Validation.ClaimValidationRules_dir.CLV10000Catastrophe_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV10200 - Check Loss Date and Zone")
+internal class CLV10200CheckLossDateandZone {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+var dateMatch =
+   claim.Catastrophe.CatastropheValidFrom == null
+   or claim.Catastrophe.CatastropheValidTo == null
+   or (claim.Catastrophe.CatastropheValidFrom <= claim.LossDate
+       and claim.Catastrophe.CatastropheValidTo >= claim.LossDate)
+
+var zoneMatch = claim.Catastrophe.CatastropheZones.length == 0
+  or claim.getCatastropheMatchesByZoneOnly().contains(claim.Catastrophe)
+
+if (!dateMatch or !zoneMatch) {
+  var ruleName = gw.api.util.StringUtil.substring(actions.getRule().DisplayName, 0,8)
+  var mainMessage : String
+  if (!dateMatch and !zoneMatch) {
+    mainMessage = DisplayKey.get("Warning.Catastrophe.LossDateStateNotConsistent", ruleName)
+  } else if (!zoneMatch) {
+    mainMessage = DisplayKey.get("Warning.Catastrophe.ZoneNotConsistant", ruleName,claim.LossLocation)
+  } else if (!dateMatch) {
+    mainMessage = DisplayKey.get("Warning.Catastrophe.LossDateNotConsistent", ruleName)
+  }
+  claim.reject(TC_NEWLOSS, mainMessage , null, null)
+}
+/*end00rule*/
+
+  }
+}

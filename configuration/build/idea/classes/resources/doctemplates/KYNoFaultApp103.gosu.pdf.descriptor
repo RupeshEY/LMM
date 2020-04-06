@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DocumentTemplateDescriptor
+  	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	  xsi:noNamespaceSchemaLocation="http://www.guidewire.com/schema/claimcenter/document-template.xsd"   
+    
+    id="KYNoFaultApp103.gosu.pdf"
+    name="KY No Fault App 1-03 - FCCI"
+    description="PIP - FCCI"
+    type="Statement"
+    section="Medical"
+    lob="PersonalAutoLine"
+    state="KY"
+    mime-type="application/pdf"
+    date-effective="2006-01-01"
+    date-expires="2050-01-01"
+    keywords="KY, No Fault">
+ 
+  <ContextObject name="Insured" type="Contact">
+    <DefaultObjectValue>null as Contact</DefaultObjectValue>
+    <PossibleObjectValues>Claim.getRelatedContacts()</PossibleObjectValues>
+  </ContextObject>
+
+  <ContextObject name="Adjuster" type="Contact">
+    <DefaultObjectValue>Claim.AssignedUser.Contact</DefaultObjectValue>
+    <PossibleObjectValues>Claim.getRelatedUserContacts()</PossibleObjectValues>
+  </ContextObject>
+
+  <FormFieldGroup name="main">
+    <DisplayValues>
+      <DateFormat>MM/dd/yy</DateFormat>      
+    </DisplayValues>
+    <FormField name="a">gw.api.util.DateUtil.currentDate()</FormField>
+    <FormField name="b">Insured.DisplayName</FormField>
+    <FormField name="c">Claim.LossDate</FormField>
+    <FormField name="d">Claim.ClaimNumber</FormField>
+    <FormField name="e">Adjuster.DisplayName</FormField>
+    <FormField name="f">User.util.CurrentUser.Organization.DisplayName</FormField>
+	<FormField name="1">""</FormField>
+	<FormField name="1a">""</FormField>
+	<FormField name="1b">""</FormField>
+	<FormField name="2a">""</FormField>
+	<FormField name="2b">""</FormField>
+	<FormField name="2">""</FormField>
+	<FormField name="3">""</FormField>
+	<FormField name="5b">""</FormField>
+	<FormField name="4">""</FormField>
+	<FormField name="8b">""</FormField>
+	<FormField name="9b">""</FormField>
+	<FormField name="5c">""</FormField>
+	<FormField name="11c">""</FormField>
+	<FormField name="11b">""</FormField>
+	<FormField name="12a">""</FormField>
+	<FormField name="12">""</FormField>
+	<FormField name="13b">""</FormField>
+	<FormField name="14">""</FormField>
+	<FormField name="14a">""</FormField>
+	<FormField name="14b">""</FormField>
+	<FormField name="7">""</FormField>
+	<FormField name="15b">""</FormField>
+	<FormField name="3c">""</FormField>
+	<FormField name="10">""</FormField>
+  </FormFieldGroup>
+
+  </DocumentTemplateDescriptor>

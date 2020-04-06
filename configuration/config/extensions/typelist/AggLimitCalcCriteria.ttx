@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="AggLimitCalcCriteria defines the choices for limiting which costtypes and/or cost categories count towards aggregate limits.  Configured via aggregatelimitused-config.xml"
+  name="AggLimitCalcCriteria">
+  <typecode
+    code="costTypesExcludingExpenses"
+    desc="All incurred costs except expenses"
+    name="All incurred costs except expenses"
+    priority="2"/>
+  <typecode
+    code="costTypesExcludingLegalExpenses"
+    desc="All incurred costs except legal expenses"
+    name="All incurred costs except legal expenses"
+    priority="3"/>
+</typelistextension>

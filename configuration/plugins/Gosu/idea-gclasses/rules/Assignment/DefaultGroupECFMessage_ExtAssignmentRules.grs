@@ -1,0 +1,13 @@
+package rules.Assignment
+
+@gw.rules.RuleName("DefaultGroupECFMessage_ExtAssignmentRules")
+@gw.rules.RuleSetDescription("Group Assignment Rule for ECFMEssage_Ext entities")
+class DefaultGroupECFMessage_ExtAssignmentRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.ECFMessage_Ext) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.ECFMessage_Ext) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "DefaultGroupECFMessage_ExtAssignmentRules", DefaultGroupECFMessage_ExtAssignmentRules )
+  }
+}

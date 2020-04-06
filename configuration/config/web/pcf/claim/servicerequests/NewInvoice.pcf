@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="pcf.ClaimServiceRequests.go(serviceRequest.Claim, serviceRequest)"
+    afterCommit="pcf.ClaimServiceRequests.go(serviceRequest.Claim, serviceRequest, invoice)"
+    beforeCommit="invoice.finishSetup(false)"
+    canEdit="true"
+    id="NewInvoice"
+    parent="Claim(serviceRequest.Claim)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ServiceRequest.StateTransition.AddInvoicePopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewInvoice(serviceRequest: ServiceRequest)"/>
+    <Variable
+      initialValue="initializeInvoice()"
+      name="invoice"
+      type="ServiceRequestInvoice"/>
+    <Variable
+      name="serviceRequest"
+      type="ServiceRequest"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <Screen>
+      <Toolbar
+        visible="true">
+        <EditButtons
+          showUpdateConfirmMessage="false"/>
+      </Toolbar>
+      <AlertBar
+        id="IDCSDisabledAlert"
+        label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.ContentPlugin.Disabled&quot;)"
+        visible="not documentsActionsHelper.ContentSourceEnabled"/>
+      <AlertBar
+        id="IDCSUnavailableAlert"
+        label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.ContentPlugin.Unavailable&quot;)"
+        visible="documentsActionsHelper.ShowContentServerDownWarning"/>
+      <AlertBar
+        id="IDMSUnavailableAlert"
+        label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.MetadataPlugin.Unavailable&quot;)"
+        visible="documentsActionsHelper.ShowMetadataServerDownWarning"/>
+      <PanelRef
+        def="StatementDV(invoice, null, true)"
+        mode="&quot;invoice&quot;"/>
+      <DetailViewPanel>
+        <InputColumn>
+          <ListViewInput
+            def="StatementDocumentsLV(invoice, true)"
+            label="DisplayKey.get(&quot;Web.ServiceRequest.Invoice.Documents&quot;)"
+            labelAbove="true">
+            <Toolbar>
+              <PickerToolbarButton
+                action="PickExistingDocumentPopup.push(serviceRequest.Claim)"
+                available="documentsActionsHelper.DocumentMetadataActionsAvailable"
+                id="Link"
+                label="DisplayKey.get(&quot;Web.ServiceRequest.Statement.LinkDocument&quot;)"
+                onPick="invoice.linkDocumentForUI(PickedValue, false)"
+                visible="perm.System.viewdocs"/>
+              <ToolbarButton
+                action="AttachStatementDocumentsPopup.push(invoice)"
+                available="documentsActionsHelper.DocumentMetadataActionsAvailable and documentsActionsHelper.DocumentContentActionsAvailable"
+                id="AttachDocument"
+                label="DisplayKey.get(&quot;Web.ServiceRequest.Statement.AttachDocument&quot;)"/>
+            </Toolbar>
+          </ListViewInput>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+    <Code><![CDATA[function initializeInvoice() : ServiceRequestInvoice{
+  var statement = new ServiceRequestInvoice() {
+    :ServiceRequest = serviceRequest,
+    :Source = StatementSource.TC_MANUAL
+  }
+  return statement
+}
+]]></Code>
+  </Page>
+</PCF>

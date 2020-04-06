@@ -1,0 +1,124 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="BusinessContactInfoInputSet">
+    <!-- NOTE: This shared section requires a gw.api.contact.ContactHandle, rather than a Contact, because it's
+    possible for some actions on a contact detail screen to fundamentally change the contact. In particular, syncing
+    a contact that leads to a downcast of that contact to a more specific subtype causes the original contact to
+    become invalid. To protect against this, contacts on shared sections should be wrapped in a ContactHandle. If the
+    contact is fundamentally changed, then only the handle needs to be updated, and all existing references will see
+    the new contact.
+
+    As a shortcut for "contactHandle.Contact", this shared section defines a read-only property which can be used to
+    access the most current value of the contact. -->
+    <Require
+      name="contactHandle"
+      type="gw.api.contact.ContactHandle"/>
+    <Require
+      name="claimContact"
+      type="ClaimContact"/>
+    <Require
+      name="claim"
+      type="Claim"/>
+    <InputDivider/>
+    <Label
+      label="topLabel()"/>
+    <InputSet
+      visible="claimContact != null">
+      <BooleanRadioInput
+        editable="true"
+        id="ContactProhibited"
+        label="DisplayKey.get(&quot;Web.ContactDetail.ContactProhibited&quot;)"
+        value="claimContact.ContactProhibited"
+        visible="claimContact.isClaimant()"/>
+    </InputSet>
+    <ClaimContactInput
+      claim="claim"
+      editable="true"
+      forceContactSubtype="entity.Person.Type"
+      id="PrimaryContact"
+      label="DisplayKey.get(&quot;Web.ContactDetail.PrimaryContact&quot;)"
+      newContactMenu="ClaimNewPersonOnlyPickerMenuItemSet"
+      parentContact="Contact"
+      value="Contact.PrimaryContact"
+      valueRange="claim.RelatedContacts"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(contactHandle, Contact#WorkPhone), DisplayKey.get(&quot;Web.ContactDetail.Phone.Work&quot;), false))"
+      editable="true"
+      id="Work"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(contactHandle, Contact#HomePhone), DisplayKey.get(&quot;Web.ContactDetail.Phone.Home&quot;), false))"
+      editable="true"
+      id="Home"
+      visible="Contact typeis Person"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(createCellPhoneDelegate(), DisplayKey.get(&quot;Web.ContactDetail.Phone.Cell&quot;), false))"
+      editable="true"
+      id="Cell"
+      visible="Contact typeis Person"/>
+    <InputSetRef
+      def="GlobalPhoneInputSet(new gw.api.phone.StandardPhoneOwner(new gw.api.phone.ContactPhoneDelegate(contactHandle, Contact#FaxPhone), DisplayKey.get(&quot;Web.ContactDetail.Phone.Fax&quot;), false))"
+      editable="true"
+      id="Fax"/>
+    <TypeKeyInput
+      editable="true"
+      id="PrimaryPhone"
+      label="DisplayKey.get(&quot;Web.ContactDetail.Phone.PrimaryPhone&quot;)"
+      validationExpression="(Contact.PrimaryPhone == null or (Contact.PrimaryPhone == TC_WORK and Contact.WorkPhone != null) or  (Contact.PrimaryPhone == TC_HOME and Contact.HomePhone != null) or (Contact.PrimaryPhone == TC_MOBILE and (Contact as Person).CellPhone != null)) ? null : DisplayKey.get(&quot;Web.ContactDetail.Phone.PrimaryPhone.Error&quot;)"
+      value="(Contact as Person).PrimaryPhone"
+      valueType="typekey.PrimaryPhoneType"
+      visible="Contact typeis Person"/>
+    <InputDivider
+      visible="Contact typeis Person"/>
+    <Label
+      label="DisplayKey.get(&quot;Web.ContactDetail.Email&quot;)"
+      visible="Contact typeis Person"/>
+    <TextInput
+      editable="true"
+      formatType="email"
+      id="Email1"
+      label="mainEmailLabel()"
+      value="Contact.EmailAddress1"/>
+    <TextInput
+      editable="true"
+      formatType="email"
+      id="Email2"
+      label="alternateEmailLabel()"
+      value="Contact.EmailAddress2"/>
+    <Code><![CDATA[property get Contact() : Contact { return contactHandle.Contact; }
+
+function createCellPhoneDelegate() : gw.api.phone.ContactPhoneDelegate {
+  if (Contact typeis Person) {
+    return new gw.api.phone.ContactPhoneDelegate(contactHandle, Contact#CellPhone)
+  } else {
+    return null
+  }
+}
+
+function topLabel() : String {
+  if (Contact typeis Person) {
+    return DisplayKey.get("Web.ContactDetail.Phone")
+  } else {
+    return DisplayKey.get("Web.ContactDetail.ContactInfo")
+  }
+}
+
+function mainEmailLabel() : String {
+  if (Contact typeis Person) {
+    return DisplayKey.get("Web.ContactDetail.Email.Primary")
+  } else {
+    return DisplayKey.get("Web.ContactDetail.PrimaryContact.Email1")
+  }
+}
+
+function alternateEmailLabel() : String {
+  if (Contact typeis Person) {
+    return DisplayKey.get("Web.ContactDetail.Email.Secondary")
+  } else {
+    return DisplayKey.get("Web.ContactDetail.PrimaryContact.Email2")
+  }
+}]]></Code>
+  </InputSet>
+</PCF>

@@ -1,0 +1,13 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Aggregates the information needed to display a Reserve using the Reserve filter of the Financials Transactions page. Subtype of TransactionView."
+  entity="ReserveView"
+  exportable="false"
+  final="false"
+  primaryEntity="Reserve"
+  supertypeEntity="TransactionView">
+  <implementsInterface
+    iface="gw.cc.financials.entity.ReserveView"
+    impl="com.guidewire.cc.domain.financials.impl.ReserveViewImpl"/>
+</viewEntity>

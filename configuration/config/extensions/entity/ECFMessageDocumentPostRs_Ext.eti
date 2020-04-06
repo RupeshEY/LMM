@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageDocumentPostRs_Ext"
+  desc="Receipt message received after sending an IMR request message"
+  supertype="ECFDocumentMessage_Ext">
+  <column
+    desc="The UUID for the Document Message this response is for"
+    name="ReferredUUID"
+    nullok="true"
+  type="varchar">
+    <columnParam
+      name="size"
+      value="36"/>
+  </column>
+  <typekey
+    desc="Operation's status"
+    name="OperationStatus"
+    nullok="true"
+    typelist="ECFDocumentMsgStatus_Ext"/>
+</subtype>

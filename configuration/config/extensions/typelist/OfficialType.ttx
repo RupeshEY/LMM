@@ -1,0 +1,143 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Type of official: police, fire, and so on"
+  name="OfficialType">
+  <typecode
+    code="police"
+    desc="Police"
+    name="Police"
+    priority="1">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+    <category
+      code="PR"
+      typelist="losstype"/>
+    <category
+      code="GL"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="seriff"
+    desc="Sheriff"
+    name="Sheriff"
+    priority="1"/>
+  <typecode
+    code="trooper"
+    desc="State trooper"
+    name="State trooper"
+    priority="1"/>
+  <typecode
+    code="security"
+    desc="Security officer"
+    name="Security officer"
+    priority="1"/>
+  <typecode
+    code="coroner"
+    desc="Coroner"
+    name="Coroner"
+    priority="1"/>
+  <typecode
+    code="fire"
+    desc="Fire"
+    name="Fire"
+    priority="2">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+    <category
+      code="PR"
+      typelist="losstype"/>
+    <category
+      code="GL"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="ambulance"
+    desc="Ambulance"
+    name="Ambulance"
+    priority="1">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+    <category
+      code="GL"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="depttrans"
+    desc="Dept. of Transportation"
+    name="Dept. of Transportation"
+    priority="1">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+    <category
+      code="GL"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="regagency"
+    desc="Regulatory agency"
+    name="Regulatory agency"
+    priority="2">
+    <category
+      code="AUTO"
+      typelist="losstype"/>
+    <category
+      code="PR"
+      typelist="losstype"/>
+    <category
+      code="GL"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="healthdept"
+    desc="Health department"
+    name="Health department"
+    priority="2">
+    <category
+      code="PR"
+      typelist="losstype"/>
+    <category
+      code="GL"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="civilagen"
+    desc="Civil agency"
+    name="Civil agency"
+    priority="2">
+    <category
+      code="PR"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="utilservprov"
+    desc="Utility service provider"
+    name="Utility service provider"
+    priority="2">
+    <category
+      code="PR"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="fema"
+    desc="FEMA"
+    name="FEMA"
+    priority="2">
+    <category
+      code="PR"
+      typelist="losstype"/>
+  </typecode>
+  <typecode
+    code="other"
+    desc="Other"
+    name="Other"
+    priority="3">
+    <category
+      code="GL"
+      typelist="losstype"/>
+  </typecode>
+</typelistextension>

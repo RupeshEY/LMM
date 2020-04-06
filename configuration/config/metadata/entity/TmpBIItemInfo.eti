@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temp table for upgrade to BulkInvoiceItemInfo."
+  entity="TmpBIItemInfo"
+  exportable="false"
+  loadable="false"
+  platform="false"
+  table="tmpbiiteminfo"
+  temporary="true"
+  type="keyable">
+  <implementsInterface
+    iface="gw.cc.financials.bulkpay.entity.TmpBIItemInfo"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.TmpBIItemInfoImpl"/>
+  <column
+    desc="Temp BulkInvoiceItemInfo ClaimID Total Amount."
+    exportable="false"
+    name="TmpClaimID"
+    nullok="true"
+    type="softentityreference"/>
+</entity>

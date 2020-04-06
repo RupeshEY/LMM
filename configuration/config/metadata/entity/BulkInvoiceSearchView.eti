@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Aggregates the information needed to display a Bulk Invoice on the Bulk Invoice Search page."
+  entity="BulkInvoiceSearchView"
+  exportable="false"
+  primaryEntity="BulkInvoice">
+  <implementsInterface
+    iface="gw.cc.financials.bulkpay.entity.BulkInvoiceSearchView"
+    impl="com.guidewire.cc.domain.financials.bulkpay.impl.BulkInvoiceSearchViewImpl"/>
+  <viewEntityLink
+    name="BulkInvoice"
+    path="ID"/>
+  <viewEntityColumn
+    name="InvoiceNumber"
+    path="InvoiceNumber"/>
+  <viewEntityColumn
+    name="CheckNumber"
+    path="CheckNumber"/>
+  <viewEntityTypekey
+    name="Currency"
+    path="Currency"/>
+  <viewEntityColumn
+    name="BulkInvoiceTotal"
+    path="BulkInvoiceTotal"/>
+  <viewEntityColumn
+    name="TotalReportingAmount"
+    path="TotalReportingAmount"/>
+  <viewEntityColumn
+    name="TotalTransactionAmount"
+    path="TotalTransactionAmount"/>
+  <viewEntityColumn
+    name="ApprovedReportingAmount"
+    path="ApprovedReportingAmount"/>
+  <viewEntityColumn
+    name="ApprovedTransactionAmount"
+    path="ApprovedTransactionAmount"/>
+  <viewEntityColumn
+    name="PayTo"
+    path="PayTo"/>
+  <viewEntityColumn
+    name="ScheduledSendDate"
+    path="ScheduledSendDate"/>
+  <viewEntityColumn
+    name="ReceivedDate"
+    path="ReceivedDate"/>
+</viewEntity>

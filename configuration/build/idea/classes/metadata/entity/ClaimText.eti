@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Text fields related to claims"
+  entity="ClaimText"
+  exportable="true"
+  platform="false"
+  table="claimtext"
+  type="versionable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.ClaimText"
+    impl="com.guidewire.cc.domain.claim.impl.ClaimTextImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Stores long text descriptions associated with a Claim. For example, a medical diagnosis for a Workmen's Compensation
+        claim is type of ClaimText. Changes to these text descriptions triggers validation.
+      
+    ]]></fulldescription>
+  <column
+    desc="Text field contents"
+    name="Text"
+    nullok="true"
+    type="mediumtext"/>
+  <typekey
+    desc="Meaning of the text field."
+    name="TextType"
+    nullok="true"
+    typelist="ClaimTextType"/>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Related claim."
+    exportable="false"
+    fkentity="Claim"
+    name="Claim"
+    nullok="false"/>
+  <index
+    desc="Enforce uniqueness, only one text entry of a particular type per claim"
+    name="claimtextu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="ClaimId"/>
+    <indexcol
+      keyposition="2"
+      name="TextType"/>
+  </index>
+</entity>

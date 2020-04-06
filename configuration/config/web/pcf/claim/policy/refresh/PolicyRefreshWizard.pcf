@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <PolicyRefreshWizard
+    afterCancel="ClaimPolicyGeneral.go(claim)"
+    afterFinish="ClaimPolicyGeneral.go(claim)"
+    id="PolicyRefreshWizard"
+    infoBar="ClaimInfoBar(claim)"
+    parent="Claim(claim)"
+    title="DisplayKey.get(&quot;Web.PolicyRefresh.PolicyRefreshWizard&quot;)">
+    <LocationEntryPoint
+      signature="PolicyRefreshWizard(claim : Claim, policyFetcher : gw.api.policy.refresh.RefreshPolicyFetcher)"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <Variable
+      name="policyFetcher"
+      type="gw.api.policy.refresh.RefreshPolicyFetcher"/>
+    <Variable
+      initialValue="createWizardAlgorithm(claim.Policy, policyFetcher)"
+      name="wizard"
+      type="gw.api.policy.refresh.PolicyRefreshAlgorithm"/>
+    <WizardStep
+      id="SelectVehiclesStep"
+      label="DisplayKey.get(&quot;Web.PolicyRefresh.InvolvedVehicles&quot;)"
+      onExit="onRiskUnitSelectExit()"
+      screen="PolicyRefresh_PickVehicleRiskUnitsScreen(wizard, claim, wizard.PolicySummary)"
+      title="DisplayKey.get(&quot;Web.PolicyRefresh.SelectInvolvedPolicyVehicles&quot;)"
+      visible="wizard.allowRiskUnitSelection() and not wizard.PolicySummary.Vehicles.IsEmpty"/>
+    <WizardStep
+      id="SelectPropertiesStep"
+      label="DisplayKey.get(&quot;Web.PolicyRefresh.InvolvedProperties&quot;)"
+      onExit="onRiskUnitSelectExit()"
+      screen="PolicyRefresh_PickPropertyRiskUnitsScreen(wizard, claim, wizard.PolicySummary)"
+      title="DisplayKey.get(&quot;Web.PolicyRefresh.SelectInvolvedPolicyProperties&quot;)"
+      visible="wizard.allowRiskUnitSelection() and not wizard.PolicySummary.Properties.IsEmpty"/>
+    <WizardStep
+      allowFinish="not wizard.Messages?.containsMessageOfType(ERROR)"
+      id="PolicyDiffStep"
+      screen="PolicyComparisonScreen(wizard, claim)"
+      title="DisplayKey.get(&quot;Web.PolicyRefresh.PolicyComparison&quot;)"/>
+    <Code><![CDATA[uses gw.api.policy.refresh.PolicyRefreshAlgorithm
+uses gw.api.policy.refresh.RefreshPolicyFetcher
+uses gw.api.policy.refresh.ui.PolicyRefreshWebUI
+
+function createWizardAlgorithm(policy : Policy, refreshPolicyFetcher : RefreshPolicyFetcher) : PolicyRefreshAlgorithm {
+  var result = new PolicyRefreshAlgorithm(policy, refreshPolicyFetcher)
+  PolicyRefreshWebUI.setAlgorithm(CurrentLocation, result, {
+          "SelectVehiclesStep" ->PICKED_RISK_UNITS,
+          "SelectPropertiesStep" ->PICKED_RISK_UNITS,
+          "PolicyDiffStep" ->COMPARED
+  })
+  return result
+}
+
+function onRiskUnitSelectExit() {
+  // Validate at least one risk unit has been selected.
+  if (wizard.PolicySummary.VehiclePolicyType) {
+    validateMinimumRiskUnitsSelected(wizard.PolicySummary.Vehicles)
+  } else {
+    validateMinimumRiskUnitsSelected(wizard.PolicySummary.Properties)
+  }
+}
+
+function validateMinimumRiskUnitsSelected(ru : PolicySummaryRiskUnit[]) {
+  foreach(r in ru) {
+    if (r.Selected) {
+      return
+    }
+  }
+  throw new gw.api.util.DisplayableException(DisplayKey.get("Web.PolicyRefresh.SelectValidation"))
+}]]></Code>
+  </PolicyRefreshWizard>
+</PCF>

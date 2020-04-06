@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <InputSet
+    editable="true"
+    id="ResponseInputSet">
+    <Require
+      name="claimResponseRq"
+      type="ECFMessageClaimResponseRq_Ext"/>
+    <Require
+      name="enablePostOnChange"
+      type="Boolean"/>
+    <RangeInput
+      editable="true"
+      id="response"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ClaimResponse.Response&quot;)"
+      required="true"
+      value="claimResponseRq.ResponseCode"
+      valueRange="claimResponseRq.AvailableResponseCodes"
+      valueType="ECFResponseCode_Ext">
+      <PostOnChange
+        disablePostOnEnter="not enablePostOnChange"/>
+    </RangeInput>
+  </InputSet>
+</PCF>

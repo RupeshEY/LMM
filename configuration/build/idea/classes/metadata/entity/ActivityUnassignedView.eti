@@ -1,0 +1,47 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Displays activities efficiently in the awaiting assignment page."
+  entity="ActivityUnassignedView"
+  exportable="false"
+  primaryEntity="Activity"
+  supertypeEntity="ActivityDesktopView">
+  <implementsInterface
+    iface="gw.cc.activity.entity.ActivityUnassignedView"
+    impl="com.guidewire.cc.domain.activity.impl.ActivityUnassignedViewImpl"/>
+  <fulldescription><![CDATA[<p>Aggregates the information needed to display one activity row in the awaiting assignment page (subtype of ActivityView).</p>
+    ]]></fulldescription>
+  <viewEntityColumn
+    name="ClaimAssignedUserContactID"
+    path="Claim.AssignedUser.Contact"/>
+  <viewEntityColumn
+    name="ExposureAssignedUserContactID"
+    path="Exposure.AssignedUser.Contact"/>
+  <viewEntityColumn
+    name="MatterAssignedUserContactID"
+    path="Matter.AssignedUser.Contact"/>
+  <viewEntityColumn
+    name="ServiceRequestAssignedUserContactID"
+    path="ServiceRequest.AssignedUser.Contact"/>
+  <viewEntityColumn
+    name="RelActAssignedUserContactID"
+    path="RelatedActivity.AssignedUser.Contact"/>
+  <viewEntityName
+    name="ClaimAssignedUserName"
+    path="Claim.AssignedUser"/>
+  <viewEntityName
+    name="ExposureAssignedUserName"
+    path="Exposure.AssignedUser"/>
+  <viewEntityName
+    name="MatterAssignedUserName"
+    path="Matter.AssignedUser"/>
+  <viewEntityName
+    name="ServiceRequestAssignedUserName"
+    path="ServiceRequest.AssignedUser"/>
+  <viewEntityName
+    name="RelActAssignedUserName"
+    path="RelatedActivity.AssignedUser"/>
+  <viewEntityName
+    name="AssignedUserName"
+    path="AssignedUser"/>
+</viewEntity>

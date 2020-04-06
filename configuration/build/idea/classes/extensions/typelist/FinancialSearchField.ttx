@@ -1,0 +1,75 @@
+<?xml version="1.0"?>
+<!-- Legal values for this type list are included but commented out.
+Adding values to this list that arent in the legal list will cause them to show up in the UI, but when
+the search button is hit the app will blow up -->
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="The search field for financial searches"
+  name="FinancialSearchField">
+  <!-- <typecode
+    xmlns=""
+    code="openReserve"
+    desc="Open reserve"
+    name="Open Reserve">
+    <category
+      code="claim"
+      typelist="SearchObjectType"/>
+  </typecode> -->
+  <typecode
+    code="remainingReserve"
+    desc="Remaining reserve"
+    name="Remaining Reserve">
+    <category
+      code="claim"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="totalIncurredNet"
+    desc="Net total incurred"
+    name="Net Total Incurred">
+    <category
+      code="claim"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <!-- <typecode
+    xmlns=""
+    code="totalIncurredNetMinusOpenRecoveryReserves"
+    desc="Net Total Incurred Minus Open Recovery Reserves"
+    name="Net Total Incurred Minus Open Recovery Reserves">
+    <category
+      code="claim"
+      typelist="SearchObjectType"/>
+  </typecode> -->
+  <typecode
+    code="totalPaid"
+    desc="Total paid"
+    name="Total Paid">
+    <category
+      code="claim"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="futurePaid"
+    desc="Future paid"
+    name="Future Paid">
+    <category
+      code="claim"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="grossCheckAmount"
+    desc="Gross amount"
+    name="Gross Amount">
+    <category
+      code="payment"
+      typelist="SearchObjectType"/>
+  </typecode>
+  <typecode
+    code="Amount"
+    desc="Amount"
+    name="Amount">
+    <category
+      code="recovery"
+      typelist="SearchObjectType"/>
+  </typecode>
+</typelistextension>

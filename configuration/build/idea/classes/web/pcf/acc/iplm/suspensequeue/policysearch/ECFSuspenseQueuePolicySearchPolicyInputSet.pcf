@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../../pcf.xsd">
+  <InputSet
+    id="ECFSuspenseQueuePolicySearchPolicyInputSet">
+    <Require
+      name="PolicySearchCriteria"
+      type="PolicySearchCriteria"/>
+    <Label
+      label="DisplayKey.get(&quot;NVV.Policy.PolicySearch.Policy&quot;)"/>
+    <TextInput
+      editable="true"
+      id="PolicyNumber"
+      label="DisplayKey.get(&quot;NVV.Policy.PolicySearch.Policy.PolicyNumber&quot;)"
+      value="PolicySearchCriteria.PolicyNumber"/>
+    <TypeKeyInput
+      editable="true"
+      id="LossType"
+      label="DisplayKey.get(&quot;NVV.Policy.PolicySearch.Policy.LossType&quot;)"
+      required="false"
+      value="PolicySearchCriteria.LossType"
+      valueType="typekey.LossType">
+      <PostOnChange
+        target="ECFSuspenseQueuePolicySearchPolicyInputSet"/>
+    </TypeKeyInput>
+    <RangeInput
+      editable="true"
+      id="PolicyType"
+      label="DisplayKey.get(&quot;NVV.Policy.PolicySearch.Policy.PolicyType&quot;)"
+      value="PolicySearchCriteria.PolicyType"
+      valueRange="gw.api.policy.PolicyTypeUtil.getPolicyTypes(PolicySearchCriteria)"
+      valueType="typekey.PolicyType"
+      visible="PolicySearchCriteria.LossType != null"/>
+    <DateInput
+      editable="true"
+      id="LossDate"
+      label="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.ApplyToPolicy.Search.LossDateFrom&quot;)"
+      value="PolicySearchCriteria.LossDate"/>
+    <TextInput
+      editable="true"
+      id="Vin"
+      label="DisplayKey.get(&quot;NVV.Policy.PolicySearch.Policy.Vin&quot;)"
+      value="PolicySearchCriteria.Vin"
+      visible="PolicySearchCriteria.LossType == TC_AUTO"/>
+    <TextInput
+      editable="true"
+      id="PropertyCity"
+      label="DisplayKey.get(&quot;NVV.Policy.PolicySearch.Policy.PropertyCity&quot;)"
+      value="PolicySearchCriteria.PropertyAddress.City"
+      visible="PolicySearchCriteria.LossType == TC_PR || PolicySearchCriteria.LossType == TC_GL || PolicySearchCriteria.LossType == TC_WC"/>
+    <TypeKeyInput
+      editable="true"
+      id="PropertyState"
+      label="PolicySearchCriteria.PropertyAddress.Country == Country.TC_CA ? DisplayKey.get(&quot;Web.Address.Default.Province&quot;) : DisplayKey.get(&quot;Web.Address.Default.State&quot;)"
+      required="false"
+      value="PolicySearchCriteria.PropertyAddress.State"
+      valueType="typekey.State"
+      visible="(PolicySearchCriteria.LossType == TC_PR || PolicySearchCriteria.LossType == TC_GL || PolicySearchCriteria.LossType == TC_WC)"/>
+    <CheckBoxInput
+      editable="true"
+      id="IncludeArchivedPolicies"
+      label="DisplayKey.get(&quot;NVV.Policy.PolicySearch.Policy.IncludeArchivedPolicies&quot;)"
+      value="PolicySearchCriteria.IncludeArchived"
+      visible="gw.api.system.CCConfigParameters.PolicySystemArchivingEnabled.Value"/>
+  </InputSet>
+</PCF>

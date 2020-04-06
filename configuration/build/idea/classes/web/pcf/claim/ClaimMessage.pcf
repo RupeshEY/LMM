@@ -1,0 +1,15 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <!-- Location group used for pages that display messages related to claims but don't want to display all
+    the usual claim related menu links, actions etc. Using this group will highlight the claim tab but
+    will not display any menu links, menu actions or an info bar -->
+  <LocationGroup
+    id="ClaimMessage"
+    parent="ClaimTabForward()"
+    title="&quot;&quot;">
+    <LocationEntryPoint
+      signature="ClaimMessage()"/>
+  </LocationGroup>
+</PCF>

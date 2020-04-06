@@ -1,0 +1,17 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- A popup that picks a ClaimSearchView or a ClaimInfoSearchView -->
+  <Popup
+    afterEnter="gw.api.claim.ClaimUtil.ensureClaimSearchCriteriaHasActiveDatabaseSelected()"
+    autosaveable="false"
+    canVisit="perm.Claim.genericviewclaim and perm.System.viewsearch"
+    countsAsWork="false"
+    id="ClaimSearchPopup"
+    returnType="Object"
+    title="DisplayKey.get(&quot;JSP.ClaimSearch.Search.ClaimSearch&quot;)">
+    <ScreenRef
+      def="ClaimSearchScreen(false)"/>
+  </Popup>
+</PCF>

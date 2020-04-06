@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    id="RuleEditPopupToolbarButtonSet">
+    <ToolbarButton
+      action="CurrentLocation.commit()"
+      confirmMessage="DisplayKey.get(&quot;BizRules.Import.Comparison.Edit.Update.Confirmation&quot;)"
+      hideIfReadOnly="true"
+      id="Update"
+      label="DisplayKey.get(&quot;BizRules.Import.Comparison.Edit.Update&quot;)"/>
+    <ToolbarButton
+      action="CurrentLocation.cancel()"
+      id="Cancel"
+      label="DisplayKey.get(&quot;Button.Cancel&quot;)"/>
+  </ToolbarButtonSet>
+</PCF>

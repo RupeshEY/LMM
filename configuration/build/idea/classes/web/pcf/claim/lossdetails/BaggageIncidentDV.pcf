@@ -1,0 +1,318 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="BaggageIncidentDV">
+    <Require
+      name="aBaggageIncident"
+      type="BaggageIncident"/>
+    <Require
+      name="unusedServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <Variable
+      initialValue="aBaggageIncident.Claim"
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      initialValue="CurrentLocation.InEditMode"
+      name="inEditMode"
+      recalculateOnRefresh="true"
+      type="boolean"/>
+    <Variable
+      initialValue="gw.api.util.DateUtil.currentDate()"
+      name="currDate"
+      type="java.util.Date"/>
+    <Variable
+      initialValue="gw.vendormanagement.SpecialistServiceCodeConstants.CONTENTSINSPECTAPPRAISAL"
+      name="appraisalIncidentCode"
+      type="String"/>
+    <Variable
+      initialValue="createOtherServiceRequests()"
+      name="otherServiceRequests"
+      type="java.util.Set&lt;ServiceRequest&gt;"/>
+    <InputColumn>
+      <TypeKeyInput
+        editable="true"
+        id="BaggageType"
+        label="DisplayKey.get(&quot;Web.BaggageIncident.BaggageType&quot;)"
+        required="true"
+        value="aBaggageIncident.BaggageType"
+        valueType="typekey.BaggageType">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <TextAreaInput
+        editable="true"
+        id="PropertyDescription"
+        label="DisplayKey.get(&quot;Web.BaggageIncident.PropertyDescription&quot;)"
+        numRows="3"
+        required="aBaggageIncident.BaggageType == TC_OTHER "
+        value="aBaggageIncident.PropertyDesc"/>
+      <RangeInput
+        editable="true"
+        id="RelatedToTrip"
+        label="DisplayKey.get(&quot;Web.BaggageIncident.RelatedTo&quot;)"
+        value="aBaggageIncident.RelatedTripRU"
+        valueRange="aBaggageIncident.Claim.Policy.RiskUnits.whereTypeIs(TripRU)"
+        valueType="entity.TripRU"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.BaggageIncident.Damage&quot;)"/>
+      <BooleanRadioInput
+        editable="true"
+        id="DelayOnly"
+        label="DisplayKey.get(&quot;Web.BaggageIncident.DelayOnly&quot;)"
+        value="aBaggageIncident.DelayOnly">
+        <PostOnChange/>
+      </BooleanRadioInput>
+      <DateInput
+        dateFormat="short"
+        editable="true"
+        id="BaggageMissingFrom"
+        label="DisplayKey.get(&quot;Web.BaggageIncident.BaggageMissingFrom&quot;)"
+        timeFormat="short"
+        validationExpression="aBaggageIncident.BaggageMissingFrom &gt; gw.api.util.DateUtil.currentDate() or aBaggageIncident.BaggageMissingFrom &gt; aBaggageIncident.BaggageRecoveredOn ? DisplayKey.get(&quot;Web.BaggageIncident.BaggageMissingFrom.Validation&quot;) : null"
+        value="aBaggageIncident.BaggageMissingFrom"/>
+      <DateInput
+        dateFormat="short"
+        editable="true"
+        id="BaggageRecoveredOn"
+        label="DisplayKey.get(&quot;Web.BaggageIncident.BaggageRecoveredOn&quot;)"
+        timeFormat="short"
+        validationExpression="aBaggageIncident.BaggageRecoveredOn &gt; gw.api.util.DateUtil.currentDate() ? DisplayKey.get(&quot;Web.BaggageIncident.BaggageRecoveredOn.Validation&quot;) : null"
+        value="aBaggageIncident.BaggageRecoveredOn"/>
+      <TextAreaInput
+        editable="true"
+        id="Description"
+        label="aBaggageIncident.DelayOnly == true ? DisplayKey.get(&quot;Web.BaggageIncident.DelayDescription&quot;) : DisplayKey.get(&quot;Web.BaggageIncident.DamageDescription&quot;)"
+        numCols="30"
+        numRows="3"
+        required="true"
+        value="aBaggageIncident.Description"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.BaggageIncident.LossLocation&quot;)"/>
+      <InputSetRef
+        def="CCAddressInputSet(aBaggageIncident.AddressOwner)"/>
+    </InputColumn>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.BaggageIncident.Compensated&quot;)"/>
+      <BooleanRadioInput
+        editable="true"
+        id="CarrierCompensated"
+        label="DisplayKey.get(&quot;Web.BaggageIncident.CarrierCompensated&quot;)"
+        value="aBaggageIncident.CarrierCompensated">
+        <PostOnChange/>
+      </BooleanRadioInput>
+      <CurrencyInput
+        editable="true"
+        id="CarrierCompensatedAmount"
+        label="DisplayKey.get(&quot;Web.BaggageIncident.CarrierCompensatedAmount&quot;)"
+        value="aBaggageIncident.CarrierCompensatedAmount"
+        visible="aBaggageIncident.CarrierCompensated == true"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.BaggageIncident.Repairs&quot;)"/>
+      <TypeKeyInput
+        editable="true"
+        id="EstimatedReceived"
+        label="DisplayKey.get(&quot;Web.BaggageIncident.EstimatedReceived&quot;)"
+        value="aBaggageIncident.EstimatesReceived"
+        valueType="typekey.YesNo">
+        <PostOnChange/>
+      </TypeKeyInput>
+      <CurrencyInput
+        editable="true"
+        id="EstimateCost"
+        label="DisplayKey.get(&quot;Web.BaggageIncident.EstimateCost&quot;)"
+        value="aBaggageIncident.EstRepairCost"
+        visible="aBaggageIncident.EstimatesReceived == TC_YES"/>
+      <TextInput
+        editable="true"
+        id="EstimateTime"
+        label="DisplayKey.get(&quot;Web.BaggageIncident.EstimateTime&quot;)"
+        value="aBaggageIncident.EstRepairTime"
+        visible="aBaggageIncident.EstimatesReceived == TC_YES"/>
+      <InputDivider/>
+      <Label
+        label="DisplayKey.get(&quot;Web.ServicesScreen.ServiceRequest.ServiceToPerform&quot;)"/>
+      <TextInput
+        id="ServiceRequestSubmitMessageFNOL"
+        labelAbove="true"
+        value="DisplayKey.get(&quot;Web.ServiceRequest.FNOL.SubmitMessage&quot;)"
+        visible="Claim.DraftClaim"/>
+      <TextInput
+        id="ServiceRequestSubmitMessage"
+        labelAbove="true"
+        value="DisplayKey.get(&quot;Web.ServiceRequest.SubmitMessage&quot;)"
+        visible="not Claim.DraftClaim and CurrentLocation.InEditMode"/>
+      <InputSetRef
+        def="AppraisalServiceInputSet(AppraisalServiceRequest, aBaggageIncident, unusedServiceRequests, appraisalIncidentCode)"
+        id="AppraisalServiceInputSet"/>
+      <InputSetRef
+        def="OtherServicesLVInputGroupInputSet(Claim, aBaggageIncident, otherServiceRequests, otherServiceRequests, unusedServiceRequests, {})"/>
+    </InputColumn>
+    <InputFooterSection>
+      <InputDivider/>
+      <ListViewInput
+        boldLabel="true"
+        id="BaggageContentsLineItemsLVInput"
+        label="DisplayKey.get(&quot;Web.BaggageIncident.ContentItem&quot;)"
+        labelAbove="true">
+        <Toolbar>
+          <IteratorButtons
+            iterator="ContentsLineItems"/>
+          <ToolbarButton
+            action="gw.api.print.ListViewPrintOptionPopupAction.printListViewOnlyWithOptions(&quot;BaggageContentsLineItemsLV&quot;)"
+            available="perm.User.printlistviews"
+            hideIfEditable="true"
+            id="DesktopActivities_PrintButton"
+            label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+            shortcut="N"/>
+        </Toolbar>
+        <ListViewPanel
+          editable="true"
+          id="BaggageContentsLineItemsLV">
+          <RowIterator
+            editable="true"
+            elementName="item"
+            hideCheckBoxesIfReadOnly="true"
+            id="ContentsLineItems"
+            toCreateAndAdd="aBaggageIncident.createTravelContentItemLine()"
+            toRemove="aBaggageIncident.removeFromContentItemLine( item )"
+            value="aBaggageIncident.TravelContentItemLines"
+            valueType="entity.AssessmentContentItem[]">
+            <Row>
+              <TextCell
+                editable="true"
+                footerLabel="DisplayKey.get(&quot;Web.PropertyContentsIncident.LineItemTotal&quot;)"
+                formatType="exactNumber"
+                id="LineItemQuantity"
+                label="DisplayKey.get(&quot;Web.BaggageIncident.ContentItem.NumberOfItems&quot;)"
+                numCols="4"
+                printWidth="0.4"
+                requestValidationExpression="return (VALUE != null and VALUE &lt; 1) ? DisplayKey.get(&quot;Web.PropertyContentsIncident.LineItemQuantityIllegal&quot;) : null"
+                value="item.NumberOfItems"
+                valueType="java.lang.Integer"/>
+              <TextCell
+                editable="true"
+                id="LineItemDescription"
+                label="DisplayKey.get(&quot;Web.BaggageIncident.ContentItem.Description&quot;)"
+                numCols="20"
+                printWidth="2"
+                value="item.Description"/>
+              <TypeKeyCell
+                editable="true"
+                id="LineItemCategory"
+                label="DisplayKey.get(&quot;Web.BaggageIncident.ContentItem.Category&quot;)"
+                printWidth="1.5"
+                value="item.ContentCategory"
+                valueType="typekey.ContentLineItemCategory"/>
+              <CurrencyCell
+                editable="true"
+                enableSort="false"
+                id="LineItemOriginalCost"
+                label="DisplayKey.get(&quot;Web.BaggageIncident.ContentItem.PurchaseCost&quot;)"
+                numCols="9"
+                printWidth="0.3"
+                value="item.PurchaseCost"
+                visible="inEditMode"
+                wrapLabel="true"/>
+              <DateCell
+                editable="true"
+                id="LineItemPurchaseDate"
+                label="DisplayKey.get(&quot;Web.BaggageIncident.ContentItem.DateAcquired&quot;)"
+                requestValidationExpression="VALUE &gt; (item.Incident.Claim.LossDate != null ? item.Incident.Claim.LossDate : java.util.Date.Today) ? DisplayKey.get(&quot;Web.PropertyContentsIncident.LineItemPurchaseDateError&quot;) : null"
+                value="item.DateAcquired"
+                visible="inEditMode">
+                <PostOnChange
+                  target="DATA_ONLY"/>
+              </DateCell>
+              <TextCell
+                id="LineItemAge"
+                label="DisplayKey.get(&quot;Web.BaggageIncident.ContentItem.Age&quot;)"
+                numCols="4"
+                printWidth="0.3"
+                value="item.Age"
+                valueType="java.math.BigDecimal"
+                visible="inEditMode"/>
+              <TextCell
+                editable="true"
+                enableSort="false"
+                id="LineItemDepreciationPercentage"
+                label="DisplayKey.get(&quot;Web.BaggageIncident.ContentItem.DepreciationPercentage&quot;)"
+                numCols="4"
+                printWidth="0.3"
+                value="item.DepreciationPercentage"
+                valueType="java.math.BigDecimal"
+                visible="inEditMode"
+                wrapLabel="true">
+                <PostOnChange
+                  target="DATA_ONLY"/>
+              </TextCell>
+              <CurrencyCell
+                editable="true"
+                enableSort="false"
+                footerSumValue="item.ReplacementValue"
+                id="LineItemReplacementValue"
+                label="DisplayKey.get(&quot;Web.BaggageIncident.ContentItem.ReplacementValue&quot;)"
+                numCols="9"
+                value="item.ReplacementValue"
+                wrapLabel="true">
+                <PostOnChange
+                  target="DATA_ONLY"/>
+              </CurrencyCell>
+              <CurrencyCell
+                enableSort="false"
+                footerSumValue="item.ActualCashValue"
+                formatType="currency"
+                id="LineItemTotalACV"
+                label="DisplayKey.get(&quot;Web.BaggageIncident.ContentItem.ACV&quot;)"
+                numCols="9"
+                value="item.ActualCashValue"
+                wrapLabel="true"/>
+              <CurrencyCell
+                editable="true"
+                enableSort="false"
+                footerSumValue="item.AmountAfterLimit"
+                id="LineItemAmountAfterLimit"
+                label="DisplayKey.get(&quot;Web.BaggageIncident.ContentItem.LimitAmount&quot;)"
+                numCols="9"
+                value="item.AmountAfterLimit"
+                wrapLabel="true"/>
+              <BooleanRadioCell
+                editable="true"
+                id="LineItemProofOfOwnershipProvided"
+                label="DisplayKey.get(&quot;Web.BaggageIncident.ContentItem.ProofOfOwnershipProvided&quot;)"
+                value="item.ProofOfOwnershipProvided"/>
+              <TextCell
+                id="LineItemNotes"
+                label="DisplayKey.get(&quot;Web.BaggageIncident.ContentItem.Notes&quot;)"
+                printWidth="3.5"
+                value="item.ItemComment"
+                visible="!inEditMode || (gw.api.print.PrintUtil.isPrintingPDF() || gw.api.print.PrintUtil.isPrintingCSV())"/>
+            </Row>
+          </RowIterator>
+        </ListViewPanel>
+      </ListViewInput>
+    </InputFooterSection>
+    <Code><![CDATA[uses java.util.Set
+
+function findServiceRequest(serviceCode : String) : ServiceRequest {
+  return aBaggageIncident.ServiceRequests.firstWhere(\ sr ->
+      sr.Instruction.Services.Count == 1
+          and sr.Instruction.Services.single().Service.Code == serviceCode
+          and (otherServiceRequests == null or not otherServiceRequests.contains(sr))
+  )
+}
+
+property get AppraisalServiceRequest() : ServiceRequest {
+  return findServiceRequest(appraisalIncidentCode)
+}
+
+function createOtherServiceRequests() :  Set<ServiceRequest> {
+  return aBaggageIncident.ServiceRequests.where(\sr -> sr != AppraisalServiceRequest).toSet()
+}]]></Code>
+  </DetailViewPanel>
+</PCF>

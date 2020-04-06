@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <CardViewPanel
+    hideTabIfSingle="true"
+    id="ClaimPolicyCovTermsCV">
+    <Require
+      name="Coverage"
+      type="Coverage"/>
+    <Card
+      id="CovTerms"
+      title="&quot;&quot;"
+      visible="Coverage != null">
+      <PanelRef
+        def="ClaimPolicyCovTermsLV(Coverage)"
+        editable="true">
+        <TitleBar
+          title="DisplayKey.get(&quot;LV.Policy.CovTerms&quot;)"/>
+        <Toolbar>
+          <ToolbarButton
+            hideIfReadOnly="true"
+            id="AddCovTerm"
+            label="DisplayKey.get(&quot;LV.Policy.CovTerms.Add&quot;)"
+            showConfirmMessage="false">
+            <MenuItemIterator
+              elementName="CovTermType"
+              value="typekey.CovTerm.getTypeKeys(false).where(\ c -&gt; c != typekey.CovTerm.TC_COVTERM)"
+              valueType="java.util.List&lt;typekey.CovTerm&gt;">
+              <MenuItem
+                action="CovTermPopup.push(Coverage, CovTermType, true)"
+                id="CovTermMenuItem"
+                label="CovTermType"/>
+            </MenuItemIterator>
+          </ToolbarButton>
+          <IteratorButtons
+            addVisible="false"
+            iterator="ClaimPolicyCovTermsLV.ClaimPolicyCovTermsLV"
+            removeConfirmMessage="DisplayKey.get(&quot;LV.Policy.CovTerms.Remove.Confirm&quot;)"
+            showAddConfirmMessage="false"/>
+        </Toolbar>
+      </PanelRef>
+    </Card>
+  </CardViewPanel>
+</PCF>

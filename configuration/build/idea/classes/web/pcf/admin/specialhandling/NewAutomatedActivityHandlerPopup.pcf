@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    alwaysInEditMode="false"
+    beforeCommit="verifyNotADuplicate()"
+    canEdit="true"
+    id="NewAutomatedActivityHandlerPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.Admin.NewAutomatedActivityHandlerPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewAutomatedActivityHandlerPopup(specialHandling : SpecialHandling, handlerSubtype : gw.entity.IEntityType)"/>
+    <Variable
+      name="specialHandling"
+      type="SpecialHandling"/>
+    <Variable
+      name="handlerSubtype"
+      type="gw.entity.IEntityType"/>
+    <Variable
+      initialValue="specialHandling.createNewAutomatedHandler(handlerSubtype) as AutomatedActivityHandler"
+      name="newHandler"
+      type="AutomatedActivityHandler"/>
+    <Screen>
+      <Toolbar>
+        <EditButtons
+          showUpdateConfirmMessage="false"/>
+      </Toolbar>
+      <PanelRef
+        def="NewAutomatedHandlerDV(newHandler, &quot;activity&quot;)"
+        editable="true"/>
+    </Screen>
+    <Code><![CDATA[function verifyNotADuplicate() {
+  if (newHandler.isDuplicateOfExistingHandler()) {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Web.Admin.NewAutomatedActivityHandlerPopup.DuplicateAutomatedActivity"))
+  }
+}]]></Code>
+  </Popup>
+</PCF>

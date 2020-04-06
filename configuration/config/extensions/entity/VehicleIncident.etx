@@ -1,0 +1,477 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="VehicleIncident">
+  <column
+    desc="Whether the vehicle was driven with the owner's permission."
+    name="OwnersPermission"
+    nullok="true"
+    type="bit"/>
+  <column
+    deprecated="true"
+    desc="Vehicle Rental Agency. Deprecated: No longer used in the base configuration.  The equivalent of this field in 8.0 is the Specialist of a ServiceRequest with the 'Auto - Other - Car rental' service."
+    name="RentalAgency"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="25"/>
+  </column>
+  <column
+    desc="Date the vehical rental begins"
+    name="RentalBeginDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Vehicle Rental Daily Rate"
+    name="RentalDailyRate"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="date the vehicle rental ends"
+    name="RentalEndDate"
+    nullok="true"
+    type="datetime"/>
+  <column
+    deprecated="true"
+    desc="Indicator for vehicle rental requirement.  Deprecated: No longer used in the base configuration.  The equivalent of a true value for this field in 8.0 is the presence of a ServiceRequest with the 'Auto - Other - Car rental' service."
+    name="RentalRequired"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Vehicle rental Reservation Number"
+    name="RentalReserveNo"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="15"/>
+  </column>
+  <column
+    desc="Speed of vehicle at impact, in MPH."
+    name="Speed"
+    nullok="true"
+    type="speed"/>
+  <column
+    desc="Current location of the vehicle."
+    name="VehicleLocation"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Indicator to state if a vehicle is operable or not"
+    name="VehicleOperable"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    desc="Point of first impact."
+    name="CollisionPoint"
+    nullok="true"
+    typelist="CollisionPoint"/>
+  <typekey
+    desc="Relationship of the driver to the insured. This is redundant for a first-party loss."
+    name="DriverRelation"
+    nullok="true"
+    typefilter="driver"
+    typelist="PersonRelationType"/>
+  <typekey
+    desc="Relationship of the driver to the vehicle's owner. This is redundant for a first-party loss."
+    name="DriverRelToOwner"
+    nullok="true"
+    typefilter="driver"
+    typelist="PersonRelationType"/>
+  <typekey
+    desc="Direction the vehicle was traveling at impact."
+    name="VehicleDirection"
+    nullok="true"
+    typelist="VehicleDirection"/>
+  <typekey
+    desc="The loss party; generally either first- or third-party loss."
+    name="VehicleLossParty"
+    nullok="true"
+    typelist="LossPartyType"/>
+  <column
+    desc="Was the vehicle parked at the time of the loss?"
+    name="VehicleParked"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    desc="Reason for vehicle use"
+    name="VehicleUseReason"
+    nullok="true"
+    typelist="ReasonForUse"/>
+  <typekey
+    desc="Policy Status of Vehicle"
+    name="VehiclePolStatus"
+    nullok="true"
+    typelist="VehiclePolicyStatus"/>
+  <typekey
+    desc="How the vehicle is related to the insured"
+    name="VehicleType"
+    nullok="true"
+    typelist="VehicleType">
+    <keyfilters>
+      <keyfilter
+        name="VehicleLossParty"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="Did the vehicle involved in the accident violate traffic?"
+    name="TrafficViolation"
+    nullok="true"
+    typefilter="YesNoOnly"
+    typelist="YesNo"/>
+  <typekey
+    desc="An indicator if there are citations."
+    name="CitationIssued"
+    nullok="true"
+    typefilter="YesNoOnly"
+    typelist="YesNo"/>
+  <array
+    arrayentity="Citation"
+    exportable="true"
+    name="Citations"
+    owner="true"/>
+  <column
+    desc="Indicator for Appraisal"
+    name="Appraisal"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Indicator for Body Shop information"
+    name="BodyShopSelected"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Whether or not equipment failure was involved in the accident"
+    name="EquipmentFailure"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Whether permission to move the vehicle has been received"
+    name="MovePermission"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    desc=""
+    name="VehicleTitleReqd"
+    nullok="true"
+    typelist="YesNo"/>
+  <typekey
+    desc=""
+    name="VehicleTitleRecvd"
+    nullok="true"
+    typelist="YesNo"/>
+  <!-- BEGIN Minor Driver -->
+  <typekey
+    desc="If the driver involved in accident is a minor, is he/she listed in the policy?"
+    name="MinorOnPolicy"
+    nullok="true"
+    typefilter="YesNoOnly"
+    typelist="YesNo"/>
+  <typekey
+    desc="% of time vehicle used by the minor"
+    name="PercentageDrivenByMinor"
+    nullok="true"
+    typelist="PercentageDriven"/>
+  <!-- END Minor Driver   Begin Total Loss Calculation -->
+  <column
+    desc="Vehicle Driveable?"
+    name="VehicleDriveable"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Whether or not airbags deployed"
+    name="AirbagsDeployed"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Vehicle Five Years Old?"
+    name="VehicleAge5Years"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Vehicle Ten Years Old?"
+    name="VehicleAge10Years"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Mileage over 100K?"
+    name="Mileage100K"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Extrication Required?"
+    name="Extrication"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Vehicle Roll Over?"
+    name="VehicleRollOver"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Fire Burn the Dash?"
+    name="FireBurnDash"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Fire Burn the Engine?"
+    name="FireBurnEngine"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Fire Burn the Windshield?"
+    name="FireBurnWindshield"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Vehicle Fully Submerged?"
+    name="VehicleSubmerged"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Water Level Reach Dash?"
+    name="WaterLevelDash"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Flood Occur Salt Water?"
+    name="FloodSaltWater"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Water Level Reach Seats?"
+    name="WaterLevelSeats"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Major Components Missing?"
+    name="ComponentsMissing"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Any Of The Interior Missing?"
+    name="InteriorMissing"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Airbags Missing?"
+    name="AirbagsMissing"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Total Loss Calculated Points"
+    name="TotalLossPoints"
+    nullok="true"
+    type="integer"/>
+  <column
+    desc="Whether the the vehicle is a total loss."
+    name="TotalLoss"
+    nullok="true"
+    type="bit"/>
+  <!-- End Total Loss Calculation  Begin Towing & Storage -->
+  <typekey
+    desc=""
+    name="VehCondType"
+    nullok="true"
+    typelist="VehCondType"/>
+  <column
+    deprecated="true"
+    desc="Deprecated: No longer used in the base configuration.  The equivalent of a true value for this field in 8.0 is the presence of a ServiceRequest with the 'Auto - Other - Towing service'."
+    name="VehTowedInd"
+    nullok="true"
+    type="bit"/>
+  <column
+    deprecated="true"
+    desc="Repaired where disabled indicator.  Deprecated: No longer used in the base configuration.  The equivalent of a true value for this field in 8.0 is the presence of a ServiceRequest with the 'Auto - Inspect / Repair - Auto body' service."
+    name="RepWhereDisInd"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Whether vehicle was involved in a collision?"
+    name="Collision"
+    nullok="true"
+    type="bit"/>
+  <column
+    deprecated="true"
+    desc="Whether vehicle location is different from insured's address?  Deprecated: No longer used in the base configuration.  The equivalent of this field in 8.0 is the ServiceAddress of a ServiceRequestInstruction with the 'Auto - Inspect / Repair - Auto body' service."
+    name="LocationInd"
+    nullok="true"
+    type="bit"/>
+  <typekey
+    desc=""
+    name="StorageAccrInd"
+    nullok="true"
+    typelist="YesNo"/>
+  <column
+    desc=""
+    name="StorageFeeAmt"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc=""
+    name="StorageFclty"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="30"/>
+  </column>
+  <column
+    desc="Vehicle's actual cash value"
+    name="VehicleACV"
+    nullok="true"
+    type="nonnegativecurrencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <!-- End Towing & Storage  Begin Salvage -->
+  <column
+    desc=""
+    name="SalvageCompany"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="30"/>
+  </column>
+  <column
+    desc=""
+    name="LotNumber"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="20"/>
+  </column>
+  <column
+    desc="Date assignment made to salvage team"
+    name="DateSalvageAssigned"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Whether vehicle has been recovered"
+    name="DateVehicleRecovered"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Whether vehicle has been sold"
+    name="DateVehicleSold"
+    nullok="true"
+    type="datetime"/>
+  <column
+    desc="Amount vehicle was sold for"
+    name="SalvageProceeds"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Towing fee"
+    name="SalvageTow"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Salvage storage"
+    name="SalvageStorage"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Net salvage recovery"
+    name="SalvageNet"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Vehicle prep fees"
+    name="SalvagePrep"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <column
+    desc="Title fees"
+    name="SalvageTitle"
+    nullok="true"
+    type="currencyamount">
+    <columnParam
+      name="currencyProperty"
+      value="ClaimCurrency"/>
+  </column>
+  <!-- End Salvage  Begin Theft -->
+  <column
+    desc="Vehicle stolen Indicator"
+    name="VehStolenInd"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Vehicle locked Indicator"
+    name="VehLockInd"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Vehicle equipped with anti-theft device Indicator"
+    name="AntiThftInd"
+    nullok="true"
+    type="bit"/>
+  <column
+    desc="Odometer reading"
+    name="OdomRead"
+    nullok="true"
+    type="nonnegativeinteger"/>
+  <typekey
+    desc="Affidavit completed Indicator"
+    name="AffdvCmplInd"
+    nullok="true"
+    typelist="YesNo"/>
+  <typekey
+    default="No"
+    desc="Recovery Indicator"
+    name="RecovInd"
+    nullok="true"
+    typelist="YesNo"/>
+  <column
+    desc="Date the vehicle was recovered"
+    name="RecovDate"
+    nullok="true"
+    type="datetime"/>
+  <typekey
+    desc="State (aka Territory) where the vehicle upon recovery"
+    name="RecovState"
+    nullok="true"
+    typelist="State"/>
+  <typekey
+    desc="Describes which general condition of vehicle upon recovery"
+    name="RecovCondType"
+    nullok="true"
+    typelist="RecovCondType"/>
+  <typekey
+    desc="Describes which parts or recovered vehicle were stripped"
+    name="RecovClassType"
+    nullok="true"
+    typelist="RecovClassType"/>
+</extension>

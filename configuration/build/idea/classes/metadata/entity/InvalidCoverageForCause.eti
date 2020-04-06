@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Allows insurer to determine which coverages are invalid based upon Loss Cause. .  For example, a Comprehensive coverage typically is not applicable if the cause of loss is Collision with other Vehicle"
+  entity="InvalidCoverageForCause"
+  exportable="true"
+  platform="false"
+  table="InvalidCoverageForCause"
+  type="versionable">
+  <implementsInterface
+    iface="gw.cc.exposure.entity.InvalidCoverageForCause"
+    impl="com.guidewire.cc.domain.exposure.impl.InvalidCoverageForCauseImpl"/>
+  <typekey
+    desc="High level claim type (for example, Auto or Property)."
+    name="LossType"
+    nullok="false"
+    typelist="LossType"/>
+  <typekey
+    desc="General cause of loss; dependent on loss type."
+    name="LossCause"
+    nullok="true"
+    typelist="LossCause">
+    <keyfilters>
+      <keyfilter
+        name="LossType"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="A coverage for an exposure that may not be appropriate for addition to the claim"
+    name="PrimaryCoverage"
+    nullok="false"
+    typelist="CoverageType">
+    <keyfilters>
+      <keyfilter
+        name="PolicyType"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="Line of Business code"
+    name="LOBCode"
+    nullok="true"
+    typelist="LobCode">
+    <keyfilters>
+      <keyfilter
+        name="LossType"/>
+    </keyfilters>
+  </typekey>
+  <typekey
+    desc="Type of policy."
+    name="PolicyType"
+    nullok="false"
+    typelist="PolicyType">
+    <keyfilters>
+      <keyfilter
+        name="LOBCode"/>
+    </keyfilters>
+  </typekey>
+  <index
+    desc="Ensure uniqueness of lines within InvalidCoverageForCause lookup table"
+    name="ICFCIndex"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="LossType"/>
+    <indexcol
+      keyposition="2"
+      name="LOBCode"/>
+    <indexcol
+      keyposition="3"
+      name="PolicyType"/>
+    <indexcol
+      keyposition="4"
+      name="LossCause"/>
+    <indexcol
+      keyposition="5"
+      name="PrimaryCoverage"/>
+  </index>
+</entity>

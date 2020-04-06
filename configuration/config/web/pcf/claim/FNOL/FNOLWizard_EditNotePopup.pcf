@@ -1,0 +1,21 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Popup
+    canEdit="true"
+    id="FNOLWizard_EditNotePopup"
+    startInEditMode="true"
+    title="null">
+    <LocationEntryPoint
+      signature="FNOLWizard_EditNotePopup(note : Note, claim: Claim)"/>
+    <Variable
+      name="note"
+      type="Note"/>
+    <Variable
+      name="claim"
+      type="Claim"/>
+    <ScreenRef
+      def="FNOLWizard_EditNoteScreen(note, claim)"/>
+  </Popup>
+</PCF>

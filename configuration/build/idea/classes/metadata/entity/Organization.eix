@@ -1,0 +1,11 @@
+<?xml version="1.0"?>
+<!-- Organization -->
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="Organization">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.community.impl.OrganizationCoreExtMethods"
+    impl="com.guidewire.cc.domain.community.impl.OrganizationCoreExtMethodsImpl"/>
+  <description><![CDATA[Defines an organization that has a hierarchy of groups]]></description>
+  <events/>
+</internalExtension>

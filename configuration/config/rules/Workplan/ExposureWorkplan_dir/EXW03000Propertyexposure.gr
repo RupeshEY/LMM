@@ -1,0 +1,20 @@
+package rules.Workplan.ExposureWorkplan_dir
+
+@gw.rules.RuleName("EXW03000 - Property exposure")
+internal class EXW03000Propertyexposure {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+    
+/*start00rule*/
+return exposure.ExposureType == TC_PROPERTYDAMAGE
+/*end00rule*/
+
+  }
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

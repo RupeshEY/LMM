@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    canVisit="perm.Payment.genericview and perm.System.viewsearch"
+    countsAsWork="false"
+    id="PaymentSearch"
+    title="DisplayKey.get(&quot;JSP.PaymentSearch.Search.CheckSearch&quot;)">
+    <Variable
+      initialValue="&quot;CheckSearchResultsLV&quot;"
+      name="PrintTargetLV"
+      type="java.lang.String"/>
+    <Screen
+      id="PaymentSearchScreen">
+      <SearchPanel
+        criteriaName="PaymentSearchCriteria"
+        maxSearchResults="gw.api.search.MaxSearchResults.forChecks()"
+        resultsName="CheckSearchViewList"
+        search="PaymentSearchCriteria.performSearch()"
+        searchCriteria="new PaymentSearchCriteria()"
+        searchCriteriaType="entity.PaymentSearchCriteria"
+        searchOnRefresh="false"
+        searchResultsType="gw.api.database.IQueryBeanResult&lt;CheckSearchView&gt;">
+        <PanelRef
+          def="PaymentSearchDV(PaymentSearchCriteria)"/>
+        <PanelRef
+          def="CheckSearchResultsLV(CheckSearchViewList, PaymentSearchCriteria)">
+          <TitleBar
+            appendListViewPaging="true"
+            title="DisplayKey.get(&quot;JSP.PaymentSearch.Search.Results&quot;)"/>
+          <Toolbar>
+            <ToolbarButton
+              action="gw.api.print.ListViewPrintOptionPopupAction.printListViewOnlyWithOptions(PrintTargetLV, DisplayKey.get(&quot;JSP.PaymentSearch.Search.Results&quot;), null)"
+              available="perm.User.printlistviews"
+              id="PaymentSearch_PrintButton"
+              label="DisplayKey.get(&quot;Java.ListView.Print&quot;)"
+              shortcut="N"/>
+          </Toolbar>
+        </PanelRef>
+      </SearchPanel>
+    </Screen>
+  </Page>
+</PCF>

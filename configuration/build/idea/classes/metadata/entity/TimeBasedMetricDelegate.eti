@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="TimeBasedMetricDelegate">
+  <implementsInterface
+    iface="gw.cc.metric.entity.TimeBasedMetricDelegate"
+    impl="com.guidewire.cc.domain.metric.impl.TimeBasedMetricDelegateImpl"/>
+  <fulldescription><![CDATA[Delegate used by time based claim, service request, and exposure metrics to store a start time and an open flag
+    ]]></fulldescription>
+  <implementsEntity
+    name="IntegerMetricDelegate"/>
+  <column
+    desc="Starting time of the metric."
+    name="StartTime"
+    nullok="true"
+    type="datetime"/>
+  <column
+    default="true"
+    desc="The value of an open time based metric is now - start time, once closed it has a fixed integer value"
+    name="IsOpen"
+    nullok="true"
+    type="bit"/>
+  <column
+    default="false"
+    desc="True if the metric is closed because the normal closing event was skipped."
+    name="Skipped"
+    nullok="true"
+    type="bit"/>
+</delegate>

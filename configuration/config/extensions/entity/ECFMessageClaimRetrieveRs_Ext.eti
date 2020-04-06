@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFMessageClaimRetrieveRs_Ext"
+  desc="Claim Retrieve Response subtype for ECF messages"
+  supertype="ECFMessageClaimData_Ext">
+  <column
+    desc="ReferredUUId - Unique Universal Identifier of the message identifies RetrieveClaimRq"
+    name="ClaimRetrieveReqReferredUUId"
+    nullok="true"
+    type="varchar">
+    <columnParam
+      name="size"
+      value="36"/>
+  </column>
+</subtype>

@@ -1,0 +1,16 @@
+<?xml version="1.0"?>
+<delegate
+  xmlns="http://guidewire.com/datamodel"
+  extendable="true"
+  name="DecimalMetricDelegate">
+  <implementsInterface
+    iface="gw.cc.metric.entity.DecimalMetricDelegate"
+    impl="com.guidewire.cc.domain.metric.impl.DecimalMetricDelegateImpl"/>
+  <fulldescription><![CDATA[Delegate used by decimal claim, exposure, and service request metrics to store a decimal value
+    ]]></fulldescription>
+  <column
+    desc="Decimal field to store the value."
+    name="DecimalValue"
+    nullok="true"
+    type="decimalmetric"/>
+</delegate>

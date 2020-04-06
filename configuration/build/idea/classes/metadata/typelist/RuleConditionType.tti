@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<typelist
+  xmlns="http://guidewire.com/typelists"
+  desc="Type of rule condition"
+  name="RuleConditionType"
+  platform="true"
+  final="true">
+  <typecode
+    code="AlwaysTrue"
+    desc="AlwaysTrue"
+    name="None"
+    priority="0"/>
+  <typecode
+    code="AllAnd"
+    desc="AllAnd"
+    name="All of the following criteria must be true (AND)"
+    priority="1"/>
+  <typecode
+    code="AllOr"
+    desc="AllOr"
+    name="At least one of the following criteria must be true (OR)"
+    priority="2"/>
+  <typecode
+    code="Advanced"
+    desc="Advanced"
+    name="The following combination of criteria must evaluate to true (AND/OR)"
+    priority="3"/>
+</typelist>

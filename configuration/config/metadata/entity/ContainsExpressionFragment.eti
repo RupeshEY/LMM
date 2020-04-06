@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<subtype
+  xmlns="http://guidewire.com/datamodel"
+  desc="ExpressionFragment to express a CONTAINS operation, which detects whether or not a list contains a element matching a nested condition"
+  entity="ContainsExpressionFragment"
+  final="true"
+  platform="true"
+  supertype="ConditionExpressionFragment">
+  <implementsInterface
+    iface="com.guidewire.bizrules.codegenerator.GosuTextBuilder"
+    impl="com.guidewire.bizrules.codegenerator.ContainsExpressionFragmentGosuTextBuilder"/>
+</subtype>

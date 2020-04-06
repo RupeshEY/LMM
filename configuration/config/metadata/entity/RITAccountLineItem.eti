@@ -1,0 +1,58 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="A specific amount of money, contained with a transaction and belonging to a t-account"
+  entity="RITAccountLineItem"
+  extendable="false"
+  final="true"
+  ignoreForEvents="true"
+  loadable="false"
+  platform="false"
+  setterScriptability="hidden"
+  table="ritaccountlineitem"
+  type="editable">
+  <implementsInterface
+    iface="gw.cc.financials.taccount.entity.RITAccountLineItem"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.RITAccountLineItemImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <implementsEntity
+    name="TAccountLineItemDelegate"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.financials.taccount.TAccountLineItemDelegateAdapter"
+    impl="com.guidewire.cc.domain.financials.taccount.impl.TAccountLineItemDelegateAdapterRIImpl"/>
+  <fulldescription><![CDATA[The entry of a specific amount of money, either crediting or debiting one T-account. A TaccountTransaction will contain a pair of balancing TAccountLineItems - a debit to one
+    T-account and an equal credit to another.
+  ]]></fulldescription>
+  <foreignkey
+    columnName="CreditingTransactionID"
+    desc="The TAccountTransaction for which this lineitem credits a t-account."
+    fkentity="RITAccountTransaction"
+    getterScriptability="hidden"
+    name="CreditingTransaction"
+    nullok="true"
+    setterScriptability="hidden"/>
+  <foreignkey
+    columnName="DebitingTransactionID"
+    desc="The TAccountTransaction for which this lineitem debits a t-account."
+    fkentity="RITAccountTransaction"
+    getterScriptability="hidden"
+    name="DebitingTransaction"
+    nullok="true"
+    setterScriptability="hidden"/>
+  <foreignkey
+    columnName="DenormTransactionID"
+    desc="Denormalized FK to TAccountTransaction table in order to speed up certain queries.  If both CreditingTransactionID and DebitingTransactionID are not null, then this field is NULL, otherwise this field will have same value as the non-null FK.  This allows us to query against this field only when looking for TAccountTransactions that are currently contributing to a TAccount."
+    fkentity="RITAccountTransaction"
+    getterScriptability="hidden"
+    name="DenormTransaction"
+    nullok="true"
+    setterScriptability="hidden"/>
+  <foreignkey
+    columnName="TAccountID"
+    fkentity="RITAccount"
+    getterScriptability="hidden"
+    name="TAccount"
+    nullok="false"
+    setterScriptability="hidden"/>
+</entity>

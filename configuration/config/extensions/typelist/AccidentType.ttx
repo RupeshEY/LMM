@@ -1,0 +1,672 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc=""
+  name="AccidentType">
+  <typecode
+    code="01"
+    desc="Contact with chemicals"
+    name="Contact with chemicals"
+    priority="1">
+    <category
+      code="burn_scald"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="02"
+    desc="Contact with hot objects or substances"
+    name="Contact with hot objects or substances"
+    priority="2">
+    <category
+      code="burn_scald"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="03"
+    desc="Contact with temperature extremes"
+    name="Contact with temperature extremes"
+    priority="3">
+    <category
+      code="burn_scald"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="04"
+    desc="Contact with fire or flame"
+    name="Contact with fire or flame"
+    priority="4">
+    <category
+      code="burn_scald"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="05"
+    desc="Contact with steam or hot fluids"
+    name="Contact with steam or hot fluids"
+    priority="5">
+    <category
+      code="burn_scald"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="06"
+    desc="Contact with dust, gases, fumes, or vapors"
+    name="Contact with dust, gases, fumes, or vapors"
+    priority="6">
+    <category
+      code="burn_scald"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="07"
+    desc="Contact with welding operation"
+    name="Contact with welding operation"
+    priority="7">
+    <category
+      code="burn_scald"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="09"
+    desc="Contact with radiation"
+    name="Contact with radiation"
+    priority="8">
+    <category
+      code="burn_scald"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="11"
+    desc="Contact with miscellaneous"
+    name="Contact with miscellaneous"
+    priority="9">
+    <category
+      code="burn_scald"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="14"
+    desc="Contact with abnormal air pressure"
+    name="Contact with abnormal air pressure"
+    priority="10">
+    <category
+      code="burn_scald"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="84"
+    desc="Contact with electrical current"
+    name="Contact with electrical current"
+    priority="11">
+    <category
+      code="burn_scald"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="10"
+    desc="Caught in, under, or between machine or machinery"
+    name="Caught in, under, or between machine or machinery"
+    priority="12">
+    <category
+      code="caught_in"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="12"
+    desc="Caught in, under, or between object handled"
+    name="Caught in, under, or between object handled"
+    priority="13">
+    <category
+      code="caught_in"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="13"
+    desc="Caught in, under, or between miscellaneous"
+    name="Caught in, under, or between miscellaneous"
+    priority="14">
+    <category
+      code="caught_in"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="20"
+    desc="Caught in, under, or between collapsing materials (slides of earth) - either man made or natural"
+    name="Caught in, under, or between collapsing materials (slides of earth)"
+    priority="15">
+    <category
+      code="caught_in"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="15"
+    desc="Cut, puncture, scrape, injured by broken glass"
+    name="Cut, puncture, scrape, injured by broken glass"
+    priority="16">
+    <category
+      code="cut"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="16"
+    desc="Cut, puncture, scrape, injured by hand tool, utensil; not powered"
+    name="Cut, puncture, scrape, injured by hand tool, utensil; not powered"
+    priority="17">
+    <category
+      code="cut"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="17"
+    desc="Cut, puncture, scrape, injured by object being lifted or handled"
+    name="Cut, puncture, scrape, injured by object being lifted or handled"
+    priority="18">
+    <category
+      code="cut"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="18"
+    desc="Cut, puncture, scrape, injured by powered hand tool, appliance"
+    name="Cut, puncture, scrape, injured by powered hand tool, appliance"
+    priority="19">
+    <category
+      code="cut"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="19"
+    desc="Cut, puncture, scrape, injured by miscellaneous"
+    name="Cut, puncture, scrape, injured by miscellaneous"
+    priority="20">
+    <category
+      code="cut"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="25"
+    desc="Fall, slip or trip injury from different level (elevation) - off wall, catwalk, bridge, etc."
+    name="Fall, slip, or trip injury from different level (elevation)"
+    priority="21">
+    <category
+      code="fall"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="26"
+    desc="Fall, slip, or trip injury from ladder or scaffolding"
+    name="Fall, slip, or trip injury from ladder or scaffolding"
+    priority="22">
+    <category
+      code="fall"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="27"
+    desc="Fall, slip, or trip injury from liquid or grease spills"
+    name="Fall, slip, or trip injury from liquid or grease spills"
+    priority="23">
+    <category
+      code="fall"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="28"
+    desc="Fall, slip, or trip injury into openings (shafts, excavations, floor openings, etc.)"
+    name="Fall, slip, or trip injury into openings"
+    priority="24">
+    <category
+      code="fall"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="29"
+    desc="Fall, slip, or trip injury on same level"
+    name="Fall, slip, or trip injury on same level"
+    priority="25">
+    <category
+      code="fall"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="30"
+    desc="Fall, slip or trip injury from ladder or scaffolding"
+    name="Slipped, do not fall"
+    priority="26">
+    <category
+      code="fall"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="31"
+    desc="Fall, slip, or trip injury, miscellaneous"
+    name="Fall, slip, or trip injury, miscellaneous"
+    priority="27">
+    <category
+      code="fall"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="32"
+    desc="Fall, slip, or trip injury on ice or snow"
+    name="Fall, slip, or trip injury on ice or snow"
+    priority="28">
+    <category
+      code="fall"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="33"
+    desc="Fall, slip, or trip injury on stairs"
+    name="Fall, slip, or trip injury on stairs"
+    priority="29">
+    <category
+      code="fall"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="40"
+    desc="Crash of water vehicle"
+    name="Crash of water vehicle"
+    priority="30">
+    <category
+      code="motorvehicle"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="41"
+    desc="Crash of rail vehicle"
+    name="Crash of rail vehicle"
+    priority="31">
+    <category
+      code="motorvehicle"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="45"
+    desc="Collision or sideswipe with another vehicle (both vehicles in motion)"
+    name="Collision or sideswipe with another vehicle"
+    priority="32">
+    <category
+      code="motorvehicle"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="46"
+    desc="Collision with a fixed object (standing vehicle or stationary object)"
+    name="Collision with a fixed object"
+    priority="33">
+    <category
+      code="motorvehicle"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="47"
+    desc="Crash of airplane"
+    name="Crash of airplane"
+    priority="34">
+    <category
+      code="motorvehicle"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="48"
+    desc="Vehicle upset (overturned or jackknifed)"
+    name="Vehicle upset"
+    priority="35">
+    <category
+      code="motorvehicle"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="50"
+    desc="Motor vehicle, miscellaneous"
+    name="Motor vehicle, miscellaneous"
+    priority="36">
+    <category
+      code="motorvehicle"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="52"
+    desc="Strain or injury by continual noise"
+    name="Strain or injury by continual noise"
+    priority="37">
+    <category
+      code="strain"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="53"
+    desc="Strain or injury by twisting"
+    name="Strain or injury by twisting"
+    priority="38">
+    <category
+      code="strain"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="54"
+    desc="Strain or injury by jumping"
+    name="Strain or injury by jumping"
+    priority="39">
+    <category
+      code="strain"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="55"
+    desc="Strain or injury by holding or carrying"
+    name="Strain or injury by holding or carrying"
+    priority="40">
+    <category
+      code="strain"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="56"
+    desc="Strain or injury by lifting"
+    name="Strain or injury by lifting"
+    priority="41">
+    <category
+      code="strain"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="57"
+    desc="Strain or injury by pushing or pulling"
+    name="Strain or injury by pushing or pulling"
+    priority="42">
+    <category
+      code="strain"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="58"
+    desc="Strain or injury by Reaching"
+    name="Strain or injury by reaching"
+    priority="43">
+    <category
+      code="strain"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="59"
+    desc="Strain or injury by using tool or machinery"
+    name="Strain or injury by using tool or machinery"
+    priority="44">
+    <category
+      code="strain"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="60"
+    desc="Strain or injury by miscellaneous"
+    name="Strain or injury by miscellaneous"
+    priority="45">
+    <category
+      code="strain"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="61"
+    desc="Strain or injury by wielding or throwing"
+    name="Strain or injury by wielding or throwing"
+    priority="46">
+    <category
+      code="strain"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="97"
+    desc="Strain or injury by repetitive motion (carpal tunnel syndrome)"
+    name="Strain or injury by repetitive motion"
+    priority="47">
+    <category
+      code="strain"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="65"
+    desc="Striking against or stepping on moving part of machine"
+    name="Striking against or stepping on moving part of machine"
+    priority="48">
+    <category
+      code="striking"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="66"
+    desc="Striking against or stepping on object being lifted or handled"
+    name="Striking against or stepping on object being lifted or handled"
+    priority="49">
+    <category
+      code="striking"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="67"
+    desc="Striking against or stepping on sanding, scraping, cleaning operation"
+    name="Striking against or stepping on sanding, scraping, cleaning operation"
+    priority="50">
+    <category
+      code="striking"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="68"
+    desc="Striking against or stepping on stationary object"
+    name="Striking against or stepping on stationary object"
+    priority="51">
+    <category
+      code="striking"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="69"
+    desc="Stepping on sharp object"
+    name="Stepping on sharp object"
+    priority="52">
+    <category
+      code="striking"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="70"
+    desc="Striking against or stepping on miscellaneous"
+    name="Striking against or stepping on miscellaneous"
+    priority="53">
+    <category
+      code="striking"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="74"
+    desc="Struck or injured by fellow worker; patient (not in act of a crime)"
+    name="Struck or injured by fellow worker; patient"
+    priority="54">
+    <category
+      code="struck"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="75"
+    desc="Struck or injured by falling or flying object"
+    name="Struck or injured by falling or flying object"
+    priority="55">
+    <category
+      code="struck"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="76"
+    desc="Struck or injured by hand tool or machine in use"
+    name="Struck or injured by hand tool or machine in use"
+    priority="56">
+    <category
+      code="struck"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="77"
+    desc="Struck or injured by motor vehicle"
+    name="Struck or injured by motor vehicle"
+    priority="57">
+    <category
+      code="struck"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="78"
+    desc="Struck or injured by moving parts of machine"
+    name="Struck or injured by moving parts of machine"
+    priority="58">
+    <category
+      code="struck"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="79"
+    desc="Struck or injured by object being lifted or handled"
+    name="Struck or injured by object being lifted or handled"
+    priority="59">
+    <category
+      code="struck"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="80"
+    desc="Struck or injured by object handled by others"
+    name="Struck or injured by object handled by others"
+    priority="60">
+    <category
+      code="struck"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="81"
+    desc="Struck or injured, miscellaneous (includes kicked, stabbed, bit, etc.)"
+    name="Struck or injured, miscellaneous"
+    priority="61">
+    <category
+      code="struck"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="85"
+    desc="Struck or injured by animal or insect"
+    name="Struck or injured by animal or insect"
+    priority="62">
+    <category
+      code="struck"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="86"
+    desc="Struck or injured by explosion or flare back"
+    name="Struck or injured by explosion or flare back"
+    priority="63">
+    <category
+      code="struck"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="94"
+    desc="Rubbed or abraded by repetitive motion (callous, blister, etc.)"
+    name="Rubbed or abraded by repetitive motion"
+    priority="64">
+    <category
+      code="rubbed"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="95"
+    desc="Rubbed or abraded, miscellaneous"
+    name="Rubbed or abraded, miscellaneous"
+    priority="65">
+    <category
+      code="rubbed"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="82"
+    desc="Absorption, ingestion, or inhalation, miscellaneous"
+    name="Absorption, ingestion, or inhalation, miscellaneous"
+    priority="66">
+    <category
+      code="miscellaneous"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="87"
+    desc="Foreign matter (body) in eye(s)"
+    name="Foreign matter (body) in eye(s)"
+    priority="67">
+    <category
+      code="miscellaneous"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="88"
+    desc="Natural disasters (earthquake, hurricane, tornado, etc.)"
+    name="Natural disasters"
+    priority="68">
+    <category
+      code="miscellaneous"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="89"
+    desc="Person in act of a crime (robbery or criminal assault)"
+    name="Person in act of a crime"
+    priority="69">
+    <category
+      code="miscellaneous"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="90"
+    desc="Miscellaneous - other than physical cause of injury"
+    name="Miscellaneous - other than physical cause of injury"
+    priority="70">
+    <category
+      code="miscellaneous"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="91"
+    desc="Mold"
+    name="Mold"
+    priority="71">
+    <category
+      code="miscellaneous"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="96"
+    desc="Terrorism"
+    name="Terrorism"
+    priority="72">
+    <category
+      code="miscellaneous"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="98"
+    desc="Miscellaneous - cumulative, miscellaneous (all other)"
+    name="Miscellaneous - cumulative, miscellaneous"
+    priority="73">
+    <category
+      code="miscellaneous"
+      typelist="losscause"/>
+  </typecode>
+  <typecode
+    code="99"
+    desc="Miscellaneous - other"
+    name="Miscellaneous - other"
+    priority="74">
+    <category
+      code="miscellaneous"
+      typelist="losscause"/>
+  </typecode>
+</typelistextension>

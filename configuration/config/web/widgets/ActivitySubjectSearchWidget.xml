@@ -1,0 +1,22 @@
+<WidgetTemplate name="ActivitySubjectSearchWidget" inputWidgetName="ActivitySubjectSearchInput">
+
+  <Choice option="&quot;activitypattern&quot;" value="#{value}.SubjectSearchType"
+          valueType="typekey.ActivitySubjectSearchType"
+          id="#{id}PatternChoiceRadioButton">
+    <RangeInput id="#{id}PatternValueWidget" value="#{value}.Pattern"
+                valueType="entity.ActivityPattern"
+                valueRange="#{value}.AllActivityPatterns" editable="true" sortValueRange="true"
+                optionLabel="VALUE.Subject.HasContent ? VALUE.Subject : DisplayKey.get('Java.NewActivity.NoSubject')"
+                available="#{value}.SubjectSearchType == TC_ACTIVITYPATTERN" labelAbove="true"/>
+  </Choice>
+  <BR/> <!-- needed otherwise, inputs are rendered beside each other -->
+  <Choice option="&quot;contains&quot;" value="#{value}.SubjectSearchType"
+          valueType="typekey.ActivitySubjectSearchType"
+          id="#{id}SubjectChoiceWidget">
+    <!--labelAbove is required for removing spacing between radio and value -->  
+    <TextInput labelAbove="true" format="DisplayKey.get('Java.ActivitySearch.Contains') + &quot; #&quot;" id="#{id}SubjectWidget" value="#{value}.Subject"
+               valueType="java.lang.String"
+               editable="true" available="#{value}.SubjectSearchType == TC_CONTAINS"/>
+  </Choice>
+
+</WidgetTemplate>

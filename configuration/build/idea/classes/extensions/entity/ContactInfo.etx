@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<extension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="ContactInfo">
+  <column-override
+    name="TaxID">
+    <columnParam
+      name="encryption"
+      value="true"/>
+  </column-override>
+  <!-- <index
+    xmlns=""
+    desc="Speed up search for archived claim by contact name"
+    name="CompanyNameK3"
+    trackUsage="true">
+    <indexcol
+      keyposition="1"
+      name="NameKanji"/>
+    <indexcol
+      keyposition="2"
+      name="Role"/>
+    <indexcol
+      keyposition="3"
+      name="ClaimInfoID"/>
+  </index> -->
+  <!-- <index
+    xmlns=""
+    desc="Speed up search for archived claim by person first and last name"
+    name="PersonNamesK"
+    trackUsage="true">
+    <indexcol
+      keyposition="1"
+      name="LastNameKanji"/>
+    <indexcol
+      keyposition="2"
+      name="FirstNameKanji"/>
+    <indexcol
+      keyposition="3"
+      name="Role"/>
+    <indexcol
+      keyposition="4"
+      name="ClaimInfoID"/>
+  </index> -->
+</extension>

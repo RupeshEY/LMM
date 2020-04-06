@@ -1,0 +1,70 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Associates a Service Request to a Document. Use ServiceRequest.linkDocument and unlinkDocument to create links between ServiceRequests and documents."
+  entity="ServiceRequestDocumentLink"
+  exportable="true"
+  extendable="true"
+  loadable="false"
+  platform="false"
+  table="servicerequestdocumentlink"
+  type="joinarray">
+  <implementsInterface
+    iface="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestDocumentLinkInternal"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestDocumentLinkImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.CommitCallback"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestDocumentLinkImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.RemoveCallback"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestDocumentLinkImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.UpdateCallback"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestDocumentLinkImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.document.DocumentJoiningBean"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestDocumentLinkImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.InsertCallback"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestDocumentLinkImpl"/>
+  <implementsInterface
+    iface="gw.cc.vendormanagement.entity.ServiceRequestDocumentLink"
+    impl="com.guidewire.cc.domain.vendormanagement.impl.ServiceRequestDocumentLinkImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="ServiceRequestID"
+    desc="Service Request the document is linked to."
+    fkentity="ServiceRequest"
+    name="ServiceRequest"
+    nullok="false"
+    setterScriptability="hidden"/>
+  <foreignkey
+    columnName="DocumentID"
+    desc="Associated Document. Warning: even though there is always a Document associated with this entity, this field may be null when the IDocumentMetadataSource plugin is enabled. To reliably get the associated Document, use the LinkedDocument property."
+    fkentity="Document"
+    name="Document"
+    nullok="true"/>
+  <column
+    default="false"
+    desc="Whether this document should be visible to the specialist."
+    name="VisibleToSpecialist"
+    nullok="false"
+    type="bit"/>
+  <column
+    desc="The date that the specialist was notified about the linked document, or null if the specialist has not been notified."
+    name="DateSpecialistNotified"
+    nullok="true"
+    type="datetime"/>
+  <array
+    arrayentity="ServiceRequestStatementDocumentLink"
+    cascadeDelete="true"
+    desc="The join entity that holds the information for statements associated with this document"
+    name="StatementDocumentLinks"
+    setterScriptability="hidden"/>
+  <events>
+    <event
+      description="A new document sent from the Adjuster to Vendor"
+      name="ServiceRequestDocumentToVendorAdded"/>
+  </events>
+</entity>

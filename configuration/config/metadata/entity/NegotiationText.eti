@@ -1,0 +1,48 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Arguments, Settlement details, etc."
+  entity="NegotiationText"
+  exportable="true"
+  platform="false"
+  table="negotiationtext"
+  type="versionable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.NegotiationText"
+    impl="com.guidewire.cc.domain.claim.impl.NegotiationTextImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <fulldescription><![CDATA[
+        Stores long text descriptions associated with a Negotiation. Changes to these text descriptions trigger
+        validation.
+      
+    ]]></fulldescription>
+  <column
+    desc="The text corresponding to a negotiation related subject."
+    name="Text"
+    nullok="true"
+    type="longtext"/>
+  <foreignkey
+    columnName="NegotiationID"
+    desc="Related negotiation."
+    exportable="false"
+    fkentity="Negotiation"
+    name="Negotiation"
+    nullok="false"/>
+  <typekey
+    desc="Type of negotiation text."
+    name="Type"
+    nullok="true"
+    typelist="MatterTextType"/>
+  <index
+    desc="Enforce uniqueness, only one text entry of a particular type per negotation"
+    name="negotiationtextu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="NegotiationID"/>
+    <indexcol
+      keyposition="2"
+      name="Type"/>
+  </index>
+</entity>

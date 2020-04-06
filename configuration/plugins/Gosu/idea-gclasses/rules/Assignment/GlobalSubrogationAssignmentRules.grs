@@ -1,0 +1,13 @@
+package rules.Assignment
+
+@gw.rules.RuleName("GlobalSubrogationAssignmentRules")
+@gw.rules.RuleSetDescription("This is the Global Subrogation Assignment rule set. These rules are used to make the first assignment decision for subrogation")
+class GlobalSubrogationAssignmentRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Subrogation) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Subrogation) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "GlobalSubrogationAssignmentRules", GlobalSubrogationAssignmentRules)
+  }
+}

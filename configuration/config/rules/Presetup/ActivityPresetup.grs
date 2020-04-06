@@ -1,0 +1,13 @@
+package rules.Presetup
+
+@gw.rules.RuleName("Activity Pre-setup")
+@gw.rules.RuleSetDescription("This is the Activity Pre-setup rule set. These rules run at    the beginning of the automated setup process to handle any    actions that should be taken prior to starting segmentation.")
+class ActivityPresetup extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.Activity) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.Activity) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "Activity Pre-setup", ActivityPresetup )
+  }
+}

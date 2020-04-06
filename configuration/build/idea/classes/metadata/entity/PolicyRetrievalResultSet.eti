@@ -1,0 +1,27 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Results of a policy retrieval."
+  entity="PolicyRetrievalResultSet"
+  exportable="true"
+  extendable="true">
+  <implementsInterface
+    iface="gw.cc.policy.entity.PolicyRetrievalResultSet"
+    impl="com.guidewire.cc.domain.policy.impl.PolicyRetrievalResultSetImpl"/>
+  <fulldescription><![CDATA[
+Results of a policy retrieval. The possible outcomes of a policy retrieval are:
+  <ul><li>Successful - Retrieval parameters map to a single, unique policy.</li>
+  <li>Unsuccessful - Retrieval parameters don't map to any policies.</li>
+  <li>Unsuccessful - Retrieval parameters map to multiple policies.</li></ul>
+    ]]></fulldescription>
+  <column
+    desc="True if the retrieval parameters map to multiple policies; false otherwise."
+    name="NotUnique"
+    nullok="false"
+    type="bit"/>
+  <foreignkey
+    desc="Detailed information about the policy. This is valid only if exactly one policy is retrieved. If zero or multiple policies match the retrieval parameters, then this is null."
+    fkentity="Policy"
+    name="Result"
+    nullok="true"/>
+</nonPersistentEntity>

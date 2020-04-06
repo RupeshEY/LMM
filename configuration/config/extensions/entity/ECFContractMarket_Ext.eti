@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<entity
+  exportable="true"
+  xmlns="http://guidewire.com/datamodel"
+  entity="ECFContractMarket_Ext"
+  desc="This entity holds ContractMarket Party information and their role in the claim"
+  table="ecfcontractmarket_ext"
+  type="retireable">
+  <column
+    desc="Coded identification of a reinsurer/insurer on the claim."
+    name="PartyID"
+    nullok="true"
+    type="shorttext"/>
+  <column
+    desc="Party Name of a reinsurer/insurer on the claim."
+    name="PartyName"
+    nullok="true"
+    type="shorttext"/>
+  <typekey
+    desc="Bureau type of the insurer/reinsurer"
+    name="Bureau"
+    nullok="true"
+    typelist="ECFBureauType_Ext"/>
+  <typekey
+    desc="The ParticipantFunction(a role) of the insurer or reinsurer on the claim"
+    name="ParticipantFunction"
+    nullok="true"
+    typelist="ECFParticipantFunction_Ext"/>
+  <column
+    default="false"
+    desc="Specify a primary role in current Claim Notify message."
+    name="IsPrimaryRole"
+    nullok="false"
+    type="bit"/>
+  <foreignkey
+    fkentity="ECFMessageClaimData_Ext"
+    name="ECFMessageClaimData_Ext"
+    nullok="false"/>
+  <implementsEntity
+    name="Extractable"/>
+  <column
+    desc="The percentage share this insurer holds in this message. Relates to financials in the message"
+    name="InsurerSharePercentage"
+    nullok="true"
+    type="decimal">
+    <columnParam
+      name="precision"
+      value="10"/>
+    <columnParam
+      name="scale"
+      value="7"/>
+  </column>
+</entity>

@@ -1,0 +1,81 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- CUSTOMIZATION WARNING: You cannot add new columns to this ListView, or change the data displayed in
+       an existing column. Removing columns should be safe, however.   This file automatically generated from lv_policy.xml -->
+  <ListViewPanel
+    id="PolicySearchResultLV">
+    <Require
+      name="PolicySummaryList"
+      type="gw.api.database.IQueryBeanResult&lt;PolicySummary&gt;"/>
+    <Require
+      name="IncludeArchived"
+      type="Boolean"/>
+    <RowIterator
+      editable="false"
+      elementName="PolicySummary"
+      pickValue="verifySelectability(PolicySummary)"
+      value="PolicySummaryList"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.PolicySummary&gt;">
+      <Row>
+        <TextCell
+          action="PolicySummaryInfoPopup.push(PolicySummary)"
+          id="PolicyNumber"
+          label="DisplayKey.get(&quot;LV.Policy.PolicySearchResult.PolicySearch.PolicyNumber&quot;)"
+          value="PolicySummary.PolicyNumber"/>
+        <TextCell
+          id="Insured"
+          label="DisplayKey.get(&quot;LV.Policy.PolicySearchResult.PolicySearch.Insured&quot;)"
+          value="PolicySummary.InsuredName"/>
+        <TextCell
+          id="Address"
+          label="DisplayKey.get(&quot;Web.Address.Default.Address&quot;)"
+          sortBy="PolicySummary.AddressLine1"
+          value="PolicySummary.DisplayAddress"/>
+        <TextCell
+          id="City"
+          label="DisplayKey.get(&quot;Web.Address.Default.City&quot;)"
+          sortBy="PolicySummary.City"
+          value="PolicySummary.DisplayCity"/>
+        <TypeKeyCell
+          id="State"
+          label="DisplayKey.get(&quot;Web.Address.Default.State&quot;)"
+          value="PolicySummary.State"
+          valueType="typekey.State"/>
+        <TextCell
+          id="Zip"
+          label="DisplayKey.get(&quot;Web.Address.Default.ZIP&quot;)"
+          value="PolicySummary.PostalCode"/>
+        <DateCell
+          id="Effective"
+          label="DisplayKey.get(&quot;LV.Policy.PolicySearchResult.PolicySearch.Effective&quot;)"
+          value="PolicySummary.EffectiveDate"/>
+        <DateCell
+          id="Expiration"
+          label="DisplayKey.get(&quot;LV.Policy.PolicySearchResult.PolicySearch.Expiration&quot;)"
+          value="PolicySummary.ExpirationDate"/>
+        <TypeKeyCell
+          id="Type"
+          label="DisplayKey.get(&quot;LV.Policy.PolicySearchResult.PolicySearch.Type&quot;)"
+          value="PolicySummary.PolicyType"
+          valueType="typekey.PolicyType"/>
+        <TypeKeyCell
+          id="Status"
+          label="DisplayKey.get(&quot;LV.Policy.PolicySearchResult.PolicySearch.Status&quot;)"
+          value="PolicySummary.Status"
+          valueType="typekey.PolicyStatus"
+          visible="IncludeArchived == true"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[uses gw.api.util.DisplayableException
+
+function verifySelectability(policySummary : PolicySummary) : PolicySummary {
+    if(policySummary.Status.equals(PolicyStatus.TC_ARCHIVED)) {
+      throw new DisplayableException(DisplayKey.get("LV.Policy.PolicySearchResult.PolicySearch.SelectedArchivedPolicy"))
+    }
+
+    return policySummary
+  }]]></Code>
+  </ListViewPanel>
+</PCF>

@@ -1,0 +1,44 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="ReinsuranceCoverage"
+  exportable="true"
+  platform="false"
+  table="reinsurancecoverage"
+  type="retireable">
+  <implementsInterface
+    iface="gw.cc.claim.entity.ReinsuranceCoverage"
+    impl="com.guidewire.cc.domain.claim.impl.ReinsuranceCoverageImpl"/>
+  <fulldescription><![CDATA[
+      This reference table contains the coverage type that is related to a Reinsurance Threshold.
+      
+    ]]></fulldescription>
+  <typekey
+    desc="Coverage Type of the coverage on this Reinsurance Threshold."
+    name="Coverage"
+    nullok="false"
+    typelist="CoverageType">
+    <keyfilters>
+      <keyfilter
+        name="ReinsuranceThreshold.PolicyType"/>
+    </keyfilters>
+  </typekey>
+  <foreignkey
+    columnName="ReinsuranceThresholdID"
+    desc="Related reinsurance threshold."
+    exportable="false"
+    fkentity="ReinsuranceThreshold"
+    name="ReinsuranceThreshold"
+    nullok="false"/>
+  <index
+    desc="Ensure uniqueness of lines within ReinsuranceCoverage lookup table"
+    name="RCIndex"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="Coverage"/>
+    <indexcol
+      keyposition="2"
+      name="ReinsuranceThresholdID"/>
+  </index>
+</entity>

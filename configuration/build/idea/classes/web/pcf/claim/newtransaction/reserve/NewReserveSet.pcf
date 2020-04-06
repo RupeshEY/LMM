@@ -1,0 +1,136 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <!-- Note that "Editing a Reserve", in the underlying data model, translates into "Create one or more new
+        Reserve objects such that the total reserve amount matches the user's desired amount". Therefore
+        this location is used for all instances of reserve creating and editing. -->
+  <Page
+    afterCancel="ClaimFinancialsTransactions.go(Claim, gw.api.financials.ClaimFinancialsTransactionsOption.RESERVE)"
+    afterCommit="ClaimFinancialsTransactions.go(Claim, gw.api.financials.ClaimFinancialsTransactionsOption.RESERVE)"
+    afterEnter="afterEnter()"
+    alwaysInEditMode="true"
+    beforeCommit="beforeCommit()"
+    canEdit="true"
+    canVisit="perm.Claim.createreserve(Claim) and perm.Claim.viewreserves(Claim) and (Claim.State != ClaimState.TC_DRAFT)"
+    id="NewReserveSet"
+    onResume="gw.api.system.bundle.BundleCommitCondition.verify(Claim)"
+    parent="Claim(Claim)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;JSP.NewReserveSet.SetReserves.Title&quot;)">
+    <LocationEntryPoint
+      signature="NewReserveSet(Claim : Claim)"/>
+    <LocationEntryPoint
+      signature="NewReserveSet(Claim : Claim, Reserve : Reserve, Exposure : Exposure)"/>
+    <LocationEntryPoint
+      signature="NewReserveSet(Claim : Claim, Exposure : Exposure, addNew : Boolean)"/>
+    <LocationEntryPoint
+      signature="NewReserveSet(Claim : Claim, Exposure : Exposure, CostType : CostType, CostCategory : CostCategory, ReservingCurrency : Currency)"/>
+    <Variable
+      initialValue="gw.api.financials.ReserveWizardHelper.createReserveWizardHelper()"
+      name="PageHelper"
+      type="gw.api.financials.ReserveWizardHelper"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Variable
+      name="Reserve"
+      type="Reserve"/>
+    <Variable
+      name="Exposure"
+      type="Exposure"/>
+    <Variable
+      name="CostType"
+      type="CostType"/>
+    <Variable
+      name="CostCategory"
+      type="CostCategory"/>
+    <Variable
+      name="ReservingCurrency"
+      type="Currency"/>
+    <Variable
+      initialValue="false"
+      name="addNew"
+      type="Boolean"/>
+    <Variable
+      initialValue="new gw.document.DocumentsActionsUIHelper()"
+      name="documentsActionsHelper"
+      type="gw.document.DocumentsActionsUIHelper"/>
+    <Screen
+      id="NewReserveSetScreen">
+      <Toolbar>
+        <EditButtons
+          cancelLabel="DisplayKey.get(&quot;Button.Cancel&quot;)"
+          cancelVisible="true"
+          editVisible="false"
+          updateLabel="DisplayKey.get(&quot;Button.Save&quot;)"
+          updateVisible="true"/>
+        <IteratorButtons
+          iterator="ReservesSummaryDV.EditableReservesLV"
+          removeFlags="all Removeable"/>
+        <ToolbarButton
+          action="PageHelper.showGroup()"
+          available="PageHelper.ShowGroupButtonVisible"
+          id="NewReserveSet_ShowGroupedReservesButton"
+          label="DisplayKey.get(&quot;Button.Reserve.ShowGroupedReserves&quot;)"
+          tooltip="DisplayKey.get(&quot;JSP.NewReserveSet.Tooltip.ShowGroup&quot;)"/>
+        <!-- or (PageHelper.ShowGroupTooltip != null) -->
+        <ToolbarButton
+          action="PageHelper.showAll()"
+          available="PageHelper.ShowAllButtonVisible"
+          id="NewReserveSet_ShowAllReservesButton"
+          label="DisplayKey.get(&quot;Button.Reserve.ShowAllReserves&quot;)"
+          tooltip="DisplayKey.get(&quot;JSP.NewReserveSet.Tooltip.ShowAll&quot;)"/>
+        <ToolbarDivider/>
+        <PickerToolbarButton
+          action="PickExistingDocumentPopup.push(Claim)"
+          available="documentsActionsHelper.DocumentMetadataActionsAvailable"
+          id="Button_Reserve_LinkDocument"
+          label="DisplayKey.get(&quot;Button.Reserve.LinkDocument&quot;)"
+          onPick="PageHelper.addLinkedDocument(PickedValue)"
+          shortcut="E"
+          visible="perm.System.viewdocs"/>
+      </Toolbar>
+      <Verbatim
+        label="(PageHelper.getReservesUIMode() == gw.api.financials.ReserveWizardHelper.UIMODE_SETBYNEWTOTALINCURRED) ? DisplayKey.get(&quot;JSP.NewReserveSet.Helper.TotalIncurred&quot;) : DisplayKey.get(&quot;JSP.NewReserveSet.Helper&quot;) as java.lang.String"/>
+      <AlertBar
+        id="IDCSDisabledAlert"
+        label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.ContentPlugin.Disabled&quot;)"
+        visible="not documentsActionsHelper.ContentSourceEnabled"/>
+      <AlertBar
+        id="IDCSUnavailableAlert"
+        label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.ContentPlugin.Unavailable&quot;)"
+        visible="documentsActionsHelper.ShowContentServerDownWarning"/>
+      <AlertBar
+        id="IDMSUnavailableAlert"
+        label="DisplayKey.get(&quot;Web.Documents.DocumentManagementSystem.MetadataPlugin.Unavailable&quot;)"
+        visible="documentsActionsHelper.ShowMetadataServerDownWarning"/>
+      <PanelRef
+        def="ReservesSummaryDV(PageHelper, Exposure, addNew)"/>
+    </Screen>
+    <Code><![CDATA[/**
+ * Get the new copy of Exposure in the bundle, the original having been
+ * kicked out of bundle by ReserveWizardHelper.beforeCommit().
+ */
+function refreshExposure( bean : Exposure) : Exposure {
+  if (bean == null) {
+    return bean;
+  }
+  return gw.transaction.Transaction.getCurrent().loadBean( bean.ID ) as Exposure
+}
+
+function afterEnter() {
+  if (PageHelper.getTransactionWrappers().length == 0) {     
+    PageHelper.initializeTransactionSet(Claim);                     
+  }
+  PageHelper.updateTransactionSet(Claim, Reserve, Exposure, CostType, CostCategory, ReservingCurrency);   
+  Claim.freezeCurrency();
+}
+
+function beforeCommit() {
+  gw.api.system.bundle.BundleCommitCondition.verify(Claim)
+  PageHelper.beforeCommit()
+  Exposure = refreshExposure(Exposure)
+}]]></Code>
+  </Page>
+</PCF>

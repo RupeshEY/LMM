@@ -1,0 +1,24 @@
+package rules.Validation.ClaimValidationRules_dir.CLV09000ISOValidation_dir.CLV091000WorkersComp_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV091030 - Injury Description")
+internal class CLV091030InjuryDescription {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.ClaimInjuryIncident.Description == null 
+or claim.ClaimInjuryIncident.Description.length() == 0
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.rejectSubField(claim.ClaimInjuryIncident, "Description", TC_ISO, 
+                     DisplayKey.get("Rules.Validation.Claim.ClaimantInjuryDescriptionNotEmpty"), null, null)
+/*end00rule*/
+
+  }
+}

@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  abstract="true"
+  entity="BaseCriterionConfig"
+  exportable="true"
+  final="false"
+  lockable="true"
+  table="criterion"
+  type="editable">
+  <implementsInterface
+    iface="com.guidewire.cc.system.dynaction.config.CriterionOperatorRestriction"
+    impl="com.guidewire.cc.system.dynaction.config.CriterionOperatorRestrictionDelegate"/>
+  <column
+    name="BeanPath"
+    nullok="false"
+    type="mediumtext"/>
+  <typekey
+    name="Operator"
+    nullok="false"
+    typelist="CriterionOperator"/>
+  <foreignkey
+    fkentity="DynamicActionConfig"
+    name="Owner"
+    nullok="false"/>
+</entity>

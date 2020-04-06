@@ -1,0 +1,13 @@
+package rules.BulkInvoiceApproval
+
+@gw.rules.RuleName("BulkInvoice Approval Rules")
+@gw.rules.RuleSetDescription("This is the BulkInvoice Approval rule set.  These rules set the approval requirements for BulkInvoices.  These rules are run for each BulkInvoice to determine whether the BulkInvoice requires approval.")
+class BulkInvoiceApprovalRules extends gw.rules.RuleSetBase {
+  static function invoke(bean : entity.BulkInvoice) : gw.rules.ExecutionSession {
+    return invoke( new gw.rules.ExecutionSession(), bean )
+  }
+
+  static function invoke(exeSession : gw.rules.ExecutionSession, bean : entity.BulkInvoice) : gw.rules.ExecutionSession {
+    return _invoke( exeSession, bean, "BulkInvoice Approval Rules", BulkInvoiceApprovalRules )
+  }
+}

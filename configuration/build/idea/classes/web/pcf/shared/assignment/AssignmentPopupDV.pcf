@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="AssignmentPopupDV">
+    <Require
+      name="AssignmentPopup"
+      type="gw.api.assignment.AssignmentPopup"/>
+    <Require
+      name="SearchResult"
+      type="gw.api.assignment.AssignmentProximitySearchResult"/>
+    <Require
+      name="SearchCriteria"
+      type="gw.api.assignment.CCAssignmentSearchCriteria"/>
+    <Variable
+      initialValue="new gw.api.contact.CCProximitySearchPageHelper()"
+      name="proximitySearchPageHelper"
+      type="gw.api.contact.CCProximitySearchPageHelper"/>
+    <InputColumn>
+      <Label
+        label="DisplayKey.get(&quot;Web.Assignment.Popup.SelectMethod&quot;)"/>
+      <Choice
+        id="FromList"
+        option="&quot;FromList&quot;"
+        value="AssignmentPopup.SelectionType"
+        valueType="typekey.AssignmentSelectionType">
+        <RangeInput
+          available="AssignmentPopup.SelectionType == TC_FROMLIST"
+          editable="true"
+          id="SelectFromList"
+          label="DisplayKey.get(&quot;Web.Assignment.Popup.SelectFromList&quot;)"
+          required="AssignmentPopup.SelectionType == TC_FROMLIST"
+          sortValueRange="false"
+          value="AssignmentPopup.SelectedFromList"
+          valueRange="AssignmentPopup.SuggestedAssignees"
+          valueType="gw.api.assignment.Assignee"/>
+        <ButtonInput
+          action="if(AssignmentPopup.performAssignment()) CurrentLocation.cancel()"
+          id="AssignmentPopupScreen_ButtonButton"
+          shortcut="G"
+          value="DisplayKey.get(&quot;Web.Assignment.Popup.Button&quot;)"/>
+      </Choice>
+      <!-- <InputDivider/> -->
+      <Choice
+        id="FromSearch"
+        option="&quot;FromSearch&quot;"
+        value="AssignmentPopup.SelectionType"
+        valueType="typekey.AssignmentSelectionType">
+        <TextInput
+          id="SelectFromSearch"
+          label="AssignmentPopup.SelectFromSearchLabel"
+          value="AssignmentPopup.Picker.Selection"
+          valueType="gw.api.assignment.Assignee"/>
+      </Choice>
+      <!-- <InputSetRef
+        def="AssignmentSearchInputSet(AssignmentPopup.Picker.AllowedAssignmentSearchTypes, SearchResult, SearchCriteria)"/> -->
+      <InputDivider/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

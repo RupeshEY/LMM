@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Associates a Document to a TransactionSet."
+  entity="TransactionSetDocument"
+  exportable="true"
+  platform="false"
+  table="transsetdocument"
+  type="joinarray">
+  <implementsInterface
+    iface="gw.cc.financials.entity.TransactionSetDocument"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionSetDocumentImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.system.bundle.CommitCallback"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionSetDocumentImpl"/>
+  <implementsInterface
+    iface="com.guidewire.pl.domain.document.DocumentJoiningBean"
+    impl="com.guidewire.cc.domain.financials.impl.TransactionSetDocumentImpl"/>
+  <implementsEntity
+    name="Extractable"/>
+  <foreignkey
+    columnName="TransactionSetID"
+    desc="TransactionSet the document is linked to."
+    exportable="false"
+    fkentity="TransactionSet"
+    name="TransactionSet"
+    nullok="false"/>
+  <foreignkey
+    columnName="DocumentID"
+    desc="Associated Document."
+    fkentity="Document"
+    name="Document"
+    nullok="false"/>
+  <index
+    desc="The link between a Document and a TransactionSet should exist only once."
+    name="transsetdocu1"
+    unique="true">
+    <indexcol
+      keyposition="1"
+      name="TransactionSetID"/>
+    <indexcol
+      keyposition="2"
+      name="DocumentID"/>
+  </index>
+</entity>

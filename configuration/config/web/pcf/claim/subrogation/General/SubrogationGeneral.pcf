@@ -1,0 +1,37 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Page
+    canEdit="perm.Claim.edit(Claim)and perm.System.editsubrodetails"
+    canVisit="perm.Claim.view(Claim) and perm.System.viewsubrodetails"
+    id="SubrogationGeneral"
+    title="DisplayKey.get(&quot;Web.Claim.Subro&quot;)"
+    validationParameter="Claim">
+    <LocationEntryPoint
+      signature="SubrogationGeneral(Claim : Claim)"/>
+    <Variable
+      name="Claim"
+      type="Claim"/>
+    <Screen
+      id="ClaimSubroSummaryScreen">
+      <Toolbar>
+        <EditButtons/>
+        <ToolbarButton
+          action="ReferSubrogationPopup.push(Claim)"
+          available="perm.System.editsubrodetails"
+          id="ReferForSubrogation"
+          label="DisplayKey.get(&quot;NVV.Claim.Subrogation.Main.EscalateSubro&quot;)"
+          visible="(gw.api.print.PrintUtil.isPrintingPDF() or not CurrentLocation.InEditMode) and not Claim.SubrogationSummary.EscalateSubro and Claim.SubrogationStatus != SubrogationStatus.TC_CLOSED"/>
+        <ToolbarButton
+          action="AssignSubrogationPopup.push(new gw.api.subrogation.SubrogationAssignmentPopup(Claim.SubrogationSummary))"
+          available="perm.System.editsubrodetails"
+          id="AssignClaimLevelSubrogation"
+          label="DisplayKey.get(&quot;NVV.Claim.Subrogation.Main.Assign.Title&quot;)"
+          visible="(gw.api.print.PrintUtil.isPrintingPDF() or not CurrentLocation.InEditMode) and Claim.SubrogationSummary.EscalateSubro and not Claim.SubrogationSummary.SubrogateIndividualExposures"/>
+      </Toolbar>
+      <PanelRef
+        def="SubrogationMainPanelSet(Claim)"/>
+    </Screen>
+  </Page>
+</PCF>

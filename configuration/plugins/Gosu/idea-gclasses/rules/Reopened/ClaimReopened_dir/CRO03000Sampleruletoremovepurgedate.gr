@@ -1,0 +1,22 @@
+package rules.Reopened.ClaimReopened_dir
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("CRO03000 - Sample rule to remove purge date")
+internal class CRO03000Sampleruletoremovepurgedate {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return true
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.PurgeDate = null
+claim.ClaimInfo.PurgeDate = null
+/*end00rule*/
+
+  }
+}

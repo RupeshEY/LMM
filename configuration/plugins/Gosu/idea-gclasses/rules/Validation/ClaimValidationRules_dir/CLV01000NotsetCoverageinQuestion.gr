@@ -1,0 +1,24 @@
+package rules.Validation.ClaimValidationRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("CLV01000 - Not set: Coverage in Question")
+internal class CLV01000NotsetCoverageinQuestion {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.CoverageInQuestion == null
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+claim.rejectField("CoverageInQuestion", TC_NEWLOSS,
+   DisplayKey.get("Rules.Validation.Claim.IndicateCoverageInQuestion"), null, null)
+/*end00rule*/
+
+  }
+}

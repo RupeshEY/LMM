@@ -1,0 +1,46 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <Popup
+    afterCommit="aDocument.uploadToIMR(partySet)"
+    alwaysInEditMode="true"
+    canEdit="true"
+    canVisit="true"
+    id="ECFUploadDocumentACLPopup"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFUploadDocumentACLPopup.Title&quot;)">
+    <LocationEntryPoint
+      signature="ECFUploadDocumentACLPopup(aDocument : Document)"/>
+    <Variable
+      initialValue="new gw.acc.iplm.entitymapper.imr.docupload.DocumentUploadRqAccessPartyMapper().createUploadAccessParties(aDocument)"
+      name="partySet"
+      type="java.util.List&lt;ECFMessageDocumentUploadAccessParty_Ext&gt;"/>
+    <Variable
+      name="aDocument"
+      type="entity.Document"/>
+    <Screen>
+      <Toolbar>
+        <ToolbarButton
+          action="CurrentLocation.commit()"
+          id="ToolbarButton"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFUploadDocumentACLPopup.Toolbar.UploadToIMRButton&quot;)"/>
+        <ToolbarButton
+          action="CurrentLocation.cancel()"
+          id="cancelButton"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFUploadDocumentACLPopup.Toolbar.CancelButton&quot;)"/>
+      </Toolbar>
+      <DetailViewPanel>
+        <InputColumn>
+          <ListViewInput
+            boldLabel="true"
+            def="ECFACLPartyLV(partySet)"
+            label="DisplayKey.get(&quot;Accelerator.IPLM.Web.ECFUploadDocumentACLPopup.Note&quot;)"
+            labelAbove="true">
+            <Toolbar/>
+          </ListViewInput>
+        </InputColumn>
+      </DetailViewPanel>
+    </Screen>
+  </Popup>
+</PCF>

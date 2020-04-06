@@ -1,0 +1,28 @@
+<?xml version="1.0"?>
+<internalExtension
+  xmlns="http://guidewire.com/datamodel"
+  entityName="MessageHistory">
+  <implementsInterface
+    iface="com.guidewire.pl.domain.messaging.MessageHistoryPublicMethods"
+    impl="com.guidewire.cc.domain.messaging.impl.MessageHistoryCoreExtMethodsImpl"/>
+  <description><![CDATA[
+A completed message     
+    ]]></description>
+  <foreignkey
+    columnName="ClaimID"
+    desc="Associated claim, if applicable.  If null, then the associated object is a cross-claim object."
+    fkentity="Claim"
+    name="Claim"
+    nullok="true"/>
+  <column
+    columnName="ContactID"
+    desc="Associated contact, if applicable."
+    name="Contact"
+    nullok="true"
+    type="softentityreference"/>
+  <typekey
+    desc="Defines the type of message being sent to ISO"
+    name="ISOMessageType"
+    nullok="true"
+    typelist="ISOMessageType"/>
+</internalExtension>

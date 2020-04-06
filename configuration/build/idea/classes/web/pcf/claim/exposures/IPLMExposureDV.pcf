@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <DetailViewPanel
+    id="IPLMExposureDV">
+    <Require
+      name="exposure"
+      type="Exposure"/>
+    <InputColumn>
+      <TextInput
+        id="ECFExposureId"
+        label="DisplayKey.get(&quot;Accelerator.IPLM.Exposure.ECFExposureId&quot;)"
+        value="exposure.ECFExposureId_Ext"
+      visible="exposure.ECFExposureId_Ext != null"/>
+      <TextInput
+        id="OCR_Ext"
+        label="DisplayKey.get(&quot;Accelerator.IPLM.Exposure.OCR&quot;)"
+        value="exposure.OCR_Ext"
+        visible="exposure.OCR_Ext != null"/>
+    </InputColumn>
+  </DetailViewPanel>
+</PCF>

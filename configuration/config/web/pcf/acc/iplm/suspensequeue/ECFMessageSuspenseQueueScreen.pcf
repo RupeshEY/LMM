@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../../pcf.xsd">
+  <Screen
+    id="ECFMessageSuspenseQueueScreen">
+    <Require
+      name="wasChildPopupCommitted"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.acc.iplm.controller.ECFSuspenseQueueController()"
+      name="ecfSuspenseQueueController"
+      type="gw.acc.iplm.controller.ECFSuspenseQueueController"/>
+    <Variable
+      initialValue="new gw.acc.iplm.controller.LMSuspenseQueueController()"
+      name="lmSuspenseQueueController"
+      type="gw.acc.iplm.controller.LMSuspenseQueueController"/>
+    <Variable
+      name="alertBarMessage"
+      type="block(LMMessage_Ext):String"/>
+    <Variable
+      name="alertBarMessageEntity"
+      type="LMMessage_Ext"/>
+    <AlertBar
+      id="AlertBar"
+      label="alertBarMessage(alertBarMessageEntity)"
+      visible="wasChildPopupCommitted and alertBarMessage != null"/>
+    <CardViewPanel>
+      <Card
+        id="ECF"
+        title="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.ECF.Title&quot;, ecfSuspenseQueueController.getNumberSuspendedMessagesForUser(User.util.CurrentUser))">
+    <PanelRef
+        def="ClaimDataSuspenseQueueLV(ecfSuspenseQueueController.getClaimDataMessagesForUser(User.util.CurrentUser))">
+      <Toolbar>
+        <ToolbarDivider/>
+        <CheckedValuesToolbarButton
+              checkedRowAction="ECFSuspenseQueuePolicySearchPopup.push(CheckedValue); alertBarMessageEntity = CheckedValue; alertBarMessage = gw.acc.iplm.controller.ECFSuspenseQueueController.MESSAGE_APPLY_TO_POLICY"
+          flags="one MessageSelected,one CanBeAppliedToPolicy"
+          id="ApplyToPolicyButton"
+              iterator="ClaimDataSuspenseQueueLV.ECFMessageSuspenseQueueRowIterator"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.ApplyToPolicy&quot;)"/>
+        <CheckedValuesToolbarButton
+              checkedRowAction="ECFSuspenseQueueClaimSearchPopup.push(CheckedValue); alertBarMessageEntity = CheckedValue; alertBarMessage = gw.acc.iplm.controller.ECFSuspenseQueueController.MESSAGE_APPLY_TO_CLAIM"
+          flags="one MessageSelected,one CanBeAppliedToClaim"
+          id="ApplyToClaimButton"
+              iterator="ClaimDataSuspenseQueueLV.ECFMessageSuspenseQueueRowIterator"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.ApplyToClaim&quot;)"/>
+        <CheckedValuesToolbarButton
+              allCheckedRowsAction="AssignLMMessagesPopup.push(new gw.acc.iplm.utils.pcf.suspensequeue.LMMessageAssignmentPopup(CheckedValues))"
+          id="ReassignButton"
+              iterator="ClaimDataSuspenseQueueLV.ECFMessageSuspenseQueueRowIterator"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.Assign&quot;)"/>
+        <CheckedValuesToolbarButton
+          id="Delete"
+              iterator="ClaimDataSuspenseQueueLV.ECFMessageSuspenseQueueRowIterator"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.Delete&quot;)">
+          <CheckedValuesMenuItem
+            allCheckedRowsAction="ecfSuspenseQueueController.deleteECFMessages(CheckedValues)"
+            confirmMessage="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.DeleteConfirmMessage&quot;)"
+            id="DeleteSelected"
+            label="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.DeleteSelected&quot;)"/>
+          <CheckedValuesMenuItem
+            allCheckedRowsAction="ecfSuspenseQueueController.validateBeforeDeleteAdditionalMessages(CheckedValues); ECFMessageSuspenseQueueDeleteAdditionalMessagePopup.push(CheckedValues[0])"
+            id="Available"
+            label="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.RelatedMessages&quot;)"/>
+        </CheckedValuesToolbarButton>
+        <CheckedValuesToolbarButton
+          allCheckedRowsAction="ecfSuspenseQueueController.resubmitECFMessages(CheckedValues); ECFAdminClaimRetrievePage.push()"
+          confirmMessage="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.Resubmit.Confirm&quot;)"
+          flags="one CanBeResubmitted"
+          id="ResubmitButton"
+          iterator="ClaimDataSuspenseQueueLV.ECFMessageSuspenseQueueRowIterator"
+          label="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.Resubmit&quot;)"/>
+      </Toolbar>
+    </PanelRef>
+      </Card>
+      <Card
+        id="LondonMarket"
+        title="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.LM.Title&quot;, lmSuspenseQueueController.getNumberSuspendedMessagesForUser(User.util.CurrentUser))">
+        <PanelRef
+          def="LMSuspenseQueueLV(lmSuspenseQueueController.getMessagesForUser(User.util.CurrentUser))">
+          <Toolbar>
+            <CheckedValuesToolbarButton
+              checkedRowAction="LMSuspenseQueuePolicySearchPopup.push(CheckedValue); alertBarMessageEntity = CheckedValue; alertBarMessage = gw.acc.iplm.controller.LMSuspenseQueueController.MESSAGE_APPLY_TO_POLICY"
+              flags="one MessageSelected,one CanBeAppliedToPolicy"
+              id="ApplyToPolicyButton"
+              iterator="LMSuspenseQueueLV.RowIterator"
+              label="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.ApplyToPolicy&quot;)"/>
+            <CheckedValuesToolbarButton
+              allCheckedRowsAction="AssignLMMessagesPopup.push(new gw.acc.iplm.utils.pcf.suspensequeue.LMMessageAssignmentPopup(CheckedValues))"
+              id="ReassignButton"
+              iterator="LMSuspenseQueueLV.RowIterator"
+              label="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.Assign&quot;)"/>
+            <CheckedValuesToolbarButton
+              allCheckedRowsAction="lmSuspenseQueueController.deleteMessages(CheckedValues)"
+              confirmMessage="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.DeleteConfirmMessage&quot;)"
+              id="Delete"
+              iterator="LMSuspenseQueueLV.RowIterator"
+              label="DisplayKey.get(&quot;Accelerator.IPLM.Web.MessageSuspenseQueue.Delete&quot;)">
+            </CheckedValuesToolbarButton>
+          </Toolbar>
+        </PanelRef>
+      </Card>
+    </CardViewPanel>
+  </Screen>
+</PCF>

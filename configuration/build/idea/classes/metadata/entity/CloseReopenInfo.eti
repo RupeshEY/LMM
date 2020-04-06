@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<nonPersistentEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Temporary entity that holds transitional internal state information during all close or reopen operations."
+  entity="CloseReopenInfo"
+  extendable="true"
+  final="false">
+  <implementsInterface
+    iface="gw.cc.claim.entity.CloseReopenInfo"
+    impl="com.guidewire.cc.domain.claim.impl.CloseReopenInfoImpl"/>
+  <implementsInterface
+    iface="com.guidewire.cc.domain.claim.impl.CloseReopenInfoInternal"
+    impl="com.guidewire.cc.domain.claim.impl.CloseReopenInfoImpl"/>
+  <fulldescription><![CDATA[
+        Temporary entity that holds transitional internal state information during all close or reopen operations.
+        This acts as a abstract base entity for ClaimCloseReopenInfo, MatterCloseReopenInfo, and ExpCloseReopenInfo.
+      
+    ]]></fulldescription>
+  <column
+    desc="Comments on the action taken."
+    name="note"
+    nullok="true"
+    type="mediumtext"/>
+</nonPersistentEntity>

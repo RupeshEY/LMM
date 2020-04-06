@@ -1,0 +1,25 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+@gw.rules.RuleName("CPU30000 - Workload Assignment Balancing")
+internal class CPU30000WorkloadAssignmentBalancing {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return
+/**
+ * These rules are activated only if the weighted workload assignment feature is enabled in configuration.
+ */
+gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value
+
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+
+/*end00rule*/
+
+  }
+}

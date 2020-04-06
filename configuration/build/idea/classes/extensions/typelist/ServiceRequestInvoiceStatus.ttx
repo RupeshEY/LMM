@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<typelistextension
+  xmlns="http://guidewire.com/typelists"
+  desc="Status of a service invoice"
+  name="ServiceRequestInvoiceStatus">
+  <typecode
+    code="waitingforapproval"
+    desc="Invoice received, waiting for approval"
+    name="Waiting for Approval"
+    priority="1"/>
+  <typecode
+    code="approved"
+    desc="Invoice has been approved but not yet paid"
+    name="Approved"
+    priority="2"/>
+  <typecode
+    code="rejected"
+    desc="Invoice was rejected"
+    name="Rejected"
+    priority="4"/>
+  <typecode
+    code="checkcreated"
+    desc="Check was created and associated with the invoice"
+    name="Check Created"
+    priority="3"/>
+  <typecode
+    code="withdrawn"
+    desc="Invoice was withdrawn"
+    name="Withdrawn"
+    priority="5"/>
+</typelistextension>

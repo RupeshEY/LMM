@@ -1,0 +1,78 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    afterCancel="pcf.ClaimServiceRequests.go(originalServiceRequest.Claim, originalServiceRequest)"
+    afterCommit="pcf.ClaimServiceRequests.go(newServiceRequest.Claim, newServiceRequest)"
+    beforeCommit="newServiceRequest.finishSetupForPromotedServiceRequest()"
+    canEdit="true"
+    canVisit="true"
+    id="PromoteQuoteOnly"
+    parent="ClaimServiceRequests(originalServiceRequest.Claim, originalServiceRequest)"
+    startInEditMode="true"
+    title="DisplayKey.get(&quot;Web.ServiceRequest.QuoteOnly.InstructServiceFromQuote.Title&quot;)">
+    <LocationEntryPoint
+      signature="PromoteQuoteOnly(originalServiceRequest: ServiceRequest)"/>
+    <Variable
+      initialValue="new java.util.ArrayList&lt;ServiceRequestInstructionService&gt;()"
+      name="removedServiceTypes"
+      type="List&lt;ServiceRequestInstructionService&gt;"/>
+    <Variable
+      initialValue="originalServiceRequest.createPromotionFromQuoteOnlyServiceRequest(removedServiceTypes)"
+      name="newServiceRequest"
+      type="ServiceRequest"/>
+    <Variable
+      name="originalServiceRequest"
+      type="ServiceRequest"/>
+    <Screen>
+      <Toolbar
+        visible="true">
+        <EditButtons
+          showUpdateConfirmMessage="false"/>
+      </Toolbar>
+      <AlertBar
+        id="RemovedServiceTypes"
+        label="DisplayKey.get(&quot;Web.ServiceRequest.QuoteAndService.RemovedServiceTypesAlert&quot;, ServiceRequestKind.TC_QUOTEANDSERVICE.DisplayName, ServiceRequestInstruction.sortInstructionServices(removedServiceTypes)*.ServiceString.map(\ s -&gt; &quot;'&quot; + s + &quot;'&quot;).join(&quot;, &quot;))"
+        visible="removedServiceTypes.HasElements"/>
+      <PanelRow>
+        <PanelColumn>
+          <PanelRef
+            def="NewServiceRequestDV(newServiceRequest, false, {})"
+            id="NewServiceRequestDV"/>
+        </PanelColumn>
+        <PanelColumn>
+          <DetailViewPanel>
+            <InputColumn>
+              <TextInput
+                boldLabel="true"
+                id="QuoteLabel"
+                label="DisplayKey.get(&quot;Web.ServiceRequest.Quote.LatestLabel&quot;)"
+                value="&quot;&quot;"
+                visible="true"/>
+            </InputColumn>
+          </DetailViewPanel>
+          <PanelRef
+            def="StatementDV(newServiceRequest.LatestQuote, null, false)"
+            editable="false"
+            mode="&quot;quote&quot;"
+            visible="true"/>
+          <DetailViewPanel>
+            <InputColumn>
+              <ListViewInput
+                def="StatementDocumentsLV(newServiceRequest.LatestQuote, false)"
+                editable="false"
+                id="QuoteDocumentsLV"
+                label="DisplayKey.get(&quot;Web.ServiceRequest.Quote.Documents&quot;)"
+                labelAbove="true"
+                visible="newServiceRequest.LatestQuote != null">
+                <Toolbar
+                  visible="false"/>
+              </ListViewInput>
+            </InputColumn>
+          </DetailViewPanel>
+        </PanelColumn>
+      </PanelRow>
+    </Screen>
+  </Page>
+</PCF>

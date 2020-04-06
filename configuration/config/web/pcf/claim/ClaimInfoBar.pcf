@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../pcf.xsd">
+  <InfoBar
+    id="ClaimInfoBar">
+    <Require
+      name="Claim"
+      type="Claim"/>
+    <InfoBarElement
+      icon="Claim.Closed ? &quot;icon_claimClosed_infobar.png&quot; : &quot;icon_claimOpen_infobar.png&quot;"
+      id="ClaimOpenCloseIcon"
+      tooltip="Claim.State.DisplayName"/>
+    <InfoBarElement
+      icon="Claim.LitigationClaimIndicator.Icon"
+      id="LitigationClaimIndicator"
+      tooltip="Claim.LitigationClaimIndicator.HoverText"
+      visible="Claim.LitigationClaimIndicator.IsOn"/>
+    <InfoBarElement
+      icon="Claim.FatalityClaimIndicator.Icon"
+      id="FatalityClaimIndicator"
+      tooltip="Claim.FatalityClaimIndicator.HoverText"
+      visible="Claim.FatalityClaimIndicator.IsOn"/>
+    <InfoBarElement
+      icon="Claim.LargeLossClaimIndicator.Icon"
+      id="LargeLossClaimIndicator"
+      tooltip="Claim.LargeLossClaimIndicator.HoverText"
+      visible="Claim.LargeLossClaimIndicator.IsOn"/>
+    <InfoBarElement
+      icon="Claim.CoverageInQuestionClaimIndicator.Icon"
+      id="CoverageInQuestionClaimIndicator"
+      tooltip="Claim.CoverageInQuestionClaimIndicator.HoverText"
+      visible="Claim.CoverageInQuestionClaimIndicator.IsOn"/>
+    <InfoBarElement
+      icon="Claim.SIUClaimIndicator.Icon"
+      id="SIUClaimIndicator"
+      tooltip="Claim.SIUClaimIndicator.HoverText"
+      visible="Claim.SIUClaimIndicator.IsOn"/>
+    <InfoBarElement
+      icon="&quot;infobar_claim_flag.png&quot;"
+      id="FlagClaimIndicator"
+      tooltip="Claim.FlagClaimIndicator.HoverText"
+      visible="Claim.FlagClaimIndicator.IsOn"/>
+    <InfoBarElement
+      icon="&quot;indicator_icon_subrogation_24.png&quot;"
+      id="SubrogationClaimIndicator"
+      tooltip="Claim.SubrogationClaimIndicator.HoverText"
+      visible="Claim.SubrogationClaimIndicator.IsOn"/>
+    <InfoBarElement
+      icon="getClaimPolicyTypeIcon(Claim)"
+      id="PolicyNumber"
+      label="DisplayKey.get(&quot;Web.ClaimInfoBar.PolicyNumber&quot;)"
+      tooltip="Claim.Policy.PolicyType == null ? &quot;&quot; : Claim.Policy.PolicyType.DisplayName"
+      value="Claim.Policy.PolicyNumber"/>
+    <InfoBarElement
+      id="Insured"
+      label="DisplayKey.get(&quot;Web.ClaimInfoBar.Insured&quot;)"
+      value="Claim.InsuredDenorm.DisplayName"/>
+    <InfoBarElement
+      id="Claimant"
+      label="DisplayKey.get(&quot;Web.ClaimInfoBar.Claimant&quot;)"
+      value="Claim.ClaimantDenorm.DisplayName"
+      visible="Claim.LossType == TC_WC"/>
+    <InfoBarElement
+      id="LossDate"
+      label="DisplayKey.get(&quot;Web.ClaimInfoBar.LossDate&quot;)"
+      value="gw.api.util.StringUtil.formatDate( Claim.LossDate, &quot;short&quot; ) "/>
+    <InfoBarElement
+      id="State"
+      label="DisplayKey.get(&quot;Web.ClaimInfoBar.Status&quot;)"
+      value="Claim.State"/>
+    <InfoBarElement
+      id="Adjuster"
+      label="DisplayKey.get(&quot;Web.ClaimInfoBar.Adjuster&quot;)"
+      value="Claim.AssigneeAndGroupDisplayString"
+      visible="Claim.State != TC_DRAFT"/>
+    <Code><![CDATA[uses java.util.Map
+
+var policyType2IconFileMap : Map<PolicyType,String> = {
+    PolicyType.TC_PERSONALAUTO -> "infobar_personalAuto.png",
+    PolicyType.TC_BUSINESSAUTO -> "infobar_commercialAuto.png",
+    PolicyType.TC_WORKERSCOMP -> "infobar_wc.png",
+    PolicyType.TC_GENERALLIABILITY -> "infobar_gl.png",
+    PolicyType.TC_COMMERCIALPROPERTY -> "infobar_cp.png",
+    PolicyType.TC_INLANDMARINE -> "infobar_cp.png",
+    PolicyType.TC_COMMERCIALPACKAGE -> "infobar_cp.png",
+    PolicyType.TC_HOMEOWNERS -> "infobar_homeowners.png",
+    PolicyType.TC_PERSONALUMBRELLA -> "infobar_homeowners.png",
+    PolicyType.TC_TRAVEL_PER -> "infobar_travel.png"
+}
+
+function getClaimPolicyTypeIcon(c : Claim) : String {
+  //if there is no claim in scope, such as during new claim wizard before a claim is established, return null
+  //so that no icon is used.
+  if (c.Policy.PolicyType == null) {
+    return null
+  }
+  var res = policyType2IconFileMap.get(c.Policy.PolicyType)
+  //in case policy type is not mapped to any icon, use the gl icon
+  if (res == null) {
+    res = policyType2IconFileMap.get(PolicyType.TC_GENERALLIABILITY)
+  }
+  return res
+}]]></Code>
+  </InfoBar>
+</PCF>

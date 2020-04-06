@@ -1,0 +1,45 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ListViewPanel
+    id="PolicyTripLV">
+    <ExposeIterator
+      valueType="entity.TripRU"
+      widget="PolicyTripLV"/>
+    <Require
+      name="aClaim"
+      type="Claim"/>
+    <Require
+      name="Wizard"
+      type="gw.api.claim.NewClaimWizardInfo"/>
+    <RowIterator
+      editable="false"
+      elementName="aTripRU"
+      pickLocation="TripRUPopup.push(aClaim)"
+      pickValue="aTripRU"
+      value="aClaim.Policy.RiskUnits.whereTypeIs(TripRU)"
+      valueType="entity.TripRU[]">
+      <Row>
+        <TextCell
+          action="TripRUPopup.push( aClaim, aTripRU , CurrentLocation.InEditMode)"
+          id="TripRU_DisplayName"
+          value="aTripRU"
+          valueType="entity.TripRU"/>
+        <TypeKeyCell
+          id="GeographicalRegion"
+          label="DisplayKey.get(&quot;Web.ClaimPolicy.Trips.GeographicalRegion&quot;)"
+          value="aTripRU.GeographicalRegion"
+          valueType="typekey.GeographicalRegion"/>
+        <DateCell
+          id="StartDate"
+          label="DisplayKey.get(&quot;Web.ClaimPolicy.Trips.StartDate&quot;)"
+          value="aTripRU.StartDate"/>
+        <DateCell
+          id="EndDate"
+          label="DisplayKey.get(&quot;Web.ClaimPolicy.Trips.EndDate&quot;)"
+          value="aTripRU.EndDate"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

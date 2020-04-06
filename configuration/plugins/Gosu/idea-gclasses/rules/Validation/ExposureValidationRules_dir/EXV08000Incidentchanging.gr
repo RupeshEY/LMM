@@ -1,0 +1,19 @@
+package rules.Validation.ExposureValidationRules_dir
+uses gw.api.locale.DisplayKey
+/* Prevent changing the incident in an Exposure if it has ServiceRequests related to it. */
+@gw.rules.RuleName("EXV08000 - Incident changing")
+internal class EXV08000Incidentchanging {
+  static function doCondition(exposure : entity.Exposure) : boolean {
+/*start00rule*/
+return !exposure.New and exposure.isFieldChanged(Exposure#Incident) and exposure.ServiceRequests.HasElements
+/*end00rule*/
+}
+
+  static function doAction(exposure : entity.Exposure, actions : gw.rules.Action) {
+/*start00rule*/
+   exposure.reject(TC_NEWLOSS,
+                DisplayKey.get("Rules.Validation.Exposure.ChangedIncidentRelatedToServiceRequest", exposure, exposure.Incident)
+                , null, null)
+/*end00rule*/
+  }
+}

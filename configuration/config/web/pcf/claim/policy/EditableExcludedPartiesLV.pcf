@@ -1,0 +1,55 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_policy.xml -->
+  <ListViewPanel
+    id="EditableExcludedPartiesLV">
+    <ExposeIterator
+      valueType="entity.ClaimContactRole"
+      widget="EditableExcludedPartiesLV"/>
+    <Require
+      name="ClaimContactRoleList"
+      type="ClaimContactRole[]"/>
+    <Require
+      name="ClaimContactRoleOwner"
+      type="gw.api.contact.ClaimContactRoleOwner"/>
+    <Require
+      name="role"
+      type="ContactRole"/>
+    <RowIterator
+      editable="true"
+      elementName="ClaimContactRole"
+      hideCheckBoxesIfReadOnly="true"
+      pageSize="3"
+      toCreateAndAdd="ClaimContactRoleOwner.addEmptyRole(role)"
+      toRemove="ClaimContactRoleOwner.removeRole(ClaimContactRole)"
+      value="ClaimContactRoleList"
+      valueType="entity.ClaimContactRole[]">
+      <Row>
+        <TextCell
+          id="Number"
+          label="DisplayKey.get(&quot;LV.Policy.EditableExcludedParties.Number&quot;)"
+          printWidth="0.1"
+          sortOrder="1"
+          value="ClaimContactRole.PartyNumber"
+          valueType="java.lang.Integer"
+          width="60"/>
+        <ClaimContactCell
+          claim="ClaimContactRole.ClaimContact.Claim"
+          editable="true"
+          forceContactSubtype="ClaimContactRoleOwner.getMostSpecificContactType(role)"
+          id="Contact"
+          label="DisplayKey.get(&quot;LV.Policy.EditableExcludedParties.Contact&quot;)"
+          required="true"
+          sortValueRange="false"
+          unique="true"
+          validationExpression="ClaimContactRole.Contact == null ? DisplayKey.get(&quot;LV.Policy.EditableExcludedParties.Contact.ContactRequired&quot;) : null"
+          value="ClaimContactRole.Contact"
+          valueRange="ClaimContactRoleOwner.Claim.getRelatedContacts(ClaimContactRoleOwner.getContactTypes(role))"
+          width="200"
+          wrapLabel="true"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

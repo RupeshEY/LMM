@@ -1,0 +1,32 @@
+package rules.TransactionApproval.TransactionApprovalRules_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("TAP03000 - Sample - Custom Calculation")
+internal class TAP03000SampleCustomCalculation {
+  static function doCondition(transactionSet : entity.TransactionSet) : boolean {
+    
+/*start00rule*/
+return transactionSet.Subtype == TC_CHECKSET
+/*end00rule*/
+
+  }
+
+  static function doAction(transactionSet : entity.TransactionSet, actions : gw.rules.Action) {
+
+/*start00rule*/
+// for this sample rule we simply want to utilize our custom 
+// defined Total Incurred Value (see the util.financials.CustomCalcs 
+// Gosu class for more details)
+var totalIncurredAmt = util.financials.CustomCalcs.MyTotalIncurredNet.getAmount(transactionSet.Claim)
+var exceedAmount = new gw.api.financials.CurrencyAmount(20000, totalIncurredAmt.Currency)
+if (totalIncurredAmt > exceedAmount) {
+  transactionSet.requireApproval(
+          DisplayKey.get("Rules.TransactionApproval.LimitExceeded.TotalIncurredOnClaimExceedsN", 
+                                      gw.api.util.CurrencyUtil.renderAsCurrency(exceedAmount)))
+}
+/*end00rule*/
+
+  }
+}

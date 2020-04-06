@@ -1,0 +1,106 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_claim.xml -->
+  <ListViewPanel
+    id="DocumentTemplateSearchResultLV">
+    <Require
+      name="DocTemplateSearchResultsList"
+      type="DocumentTemplateSearchResults[]"/>
+    <RowIterator
+      editable="false"
+      elementName="DocTemplateSearchResults"
+      pickValue="DocTemplateSearchResults.loadDescriptor()"
+      value="DocTemplateSearchResultsList"
+      valueType="entity.DocumentTemplateSearchResults[]">
+      <Row>
+        <TextCell
+          id="Template"
+          label="DisplayKey.get(&quot;LV.Claim.DocumentTemplateSearch.DocumentTemplateDescriptor.Template&quot;)"
+          sortOrder="1"
+          value="DocTemplateSearchResults.Name"/>
+        <TypeKeyCell
+          id="Type"
+          label="DisplayKey.get(&quot;LV.Claim.DocumentTemplateSearch.DocumentTemplateDescriptor.Type&quot;)"
+          value="DocTemplateSearchResults.Type"
+          valueType="typekey.DocumentType"/>
+        <TextCell
+          id="LossType"
+          label="DisplayKey.get(&quot;LV.Claim.DocumentTemplateSearch.DocumentTemplateDescriptor.LossType&quot;)"
+          sortBy="DocTemplateSearchResults.Lob"
+          value="formatLOB(DocTemplateSearchResults)"/>
+        <TextCell
+          id="JurisdictionState"
+          label="DisplayKey.get(&quot;LV.Claim.DocumentTemplateSearch.DocumentTemplateDescriptor.JurisdictionState&quot;)"
+          sortBy="DocTemplateSearchResults.State"
+          value="formatState(DocTemplateSearchResults)"/>
+        <DateCell
+          id="DateModified"
+          label="DisplayKey.get(&quot;LV.Claim.DocumentTemplateSearch.DocumentTemplateDescriptor.DateModified&quot;)"
+          value="DocTemplateSearchResults.DateModified"/>
+        <DateCell
+          id="Effective"
+          label="DisplayKey.get(&quot;LV.Claim.DocumentTemplateSearch.DocumentTemplateDescriptor.Effective&quot;)"
+          value="DocTemplateSearchResults.DateEffective"/>
+        <DateCell
+          id="Expires"
+          label="DisplayKey.get(&quot;LV.Claim.DocumentTemplateSearch.DocumentTemplateDescriptor.Expires&quot;)"
+          value="DocTemplateSearchResults.DateExpires"/>
+        <TextCell
+          id="Section"
+          label="DisplayKey.get(&quot;LV.Claim.DocumentTemplateSearch.DocumentTemplateDescriptor.Section&quot;)"
+          sortBy="DocTemplateSearchResults.Section"
+          value="formatDocSection(DocTemplateSearchResults)"
+          visible="DocumentSection.getTypeKeys( false ).Count &gt; 1"/>
+        <TextCell
+          id="Identifier"
+          label="DisplayKey.get(&quot;LV.Claim.DocumentTemplateSearch.DocumentTemplateDescriptor.Identifier&quot;)"
+          value="DocTemplateSearchResults.Identifier"/>
+        <TypeKeyCell
+          id="Language"
+          label="DisplayKey.get(&quot;LV.Claim.DocumentTemplateSearch.DocumentTemplateDescriptor.Language&quot;)"
+          value="DocTemplateSearchResults.Language"
+          valueType="typekey.LanguageType"
+          visible="LanguageType.getTypeKeys( false ).Count &gt; 1"/>
+      </Row>
+    </RowIterator>
+    <Code><![CDATA[uses gw.api.system.CCLoggerCategory
+
+function formatLOB(result : DocumentTemplateSearchResults) : String {
+  if (result.Lob == null) {
+    return null
+  }
+  try {
+    return result.Lob.split( ",\\s*" ).map( \ s -> (typekey.LOBCode.get(s)).DisplayName).join(", ")
+  } catch (e : java.lang.Throwable) {
+    CCLoggerCategory.DOCUMENT.error(DisplayKey.get("LV.Claim.DocumentTemplateSearch.DocumentTemplateDescriptor.LOB.error",  result.TemplateID, e.Message))
+    return result.Lob
+  }
+}
+
+function formatState(result : DocumentTemplateSearchResults) : String {
+  if (result.State == null) {
+    return null
+  }
+  try {
+   return result.State.split( ",\\s*" ).map( \ s -> (typekey.Jurisdiction.get(s) ).DisplayName).join(", ")
+  } catch (e : java.lang.Throwable) {
+    CCLoggerCategory.DOCUMENT.error(DisplayKey.get("LV.Claim.DocumentTemplateSearch.DocumentTemplateDescriptor.JurisdictionState.error",  result.TemplateID, e.Message))
+    return result.State
+  }
+}
+
+function formatDocSection(result : DocumentTemplateSearchResults) : String {
+  if (result.Section == null) {
+    return null
+  }
+  try {
+   return (typekey.DocumentSection.get(result.Section)).DisplayName
+  } catch (e : java.lang.Throwable) {
+    CCLoggerCategory.DOCUMENT.error(DisplayKey.get("LV.Claim.DocumentTemplateSearch.DocumentTemplateDescriptor.Section.error", result.TemplateID,e.Message))
+    return result.Section
+  }
+}]]></Code>
+  </ListViewPanel>
+</PCF>

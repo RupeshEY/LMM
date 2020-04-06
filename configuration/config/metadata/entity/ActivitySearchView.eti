@@ -1,0 +1,24 @@
+<?xml version="1.0"?>
+<viewEntity
+  xmlns="http://guidewire.com/datamodel"
+  desc="Displays activities efficiently in the search and claim summary pages."
+  entity="ActivitySearchView"
+  exportable="false"
+  final="false"
+  primaryEntity="Activity"
+  supertypeEntity="ActivityView">
+  <implementsInterface
+    iface="gw.cc.activity.entity.ActivitySearchView"
+    impl="com.guidewire.cc.domain.activity.impl.ActivitySearchViewImpl"/>
+  <fulldescription><![CDATA[<p>Aggregates the information needed to display one activity row in the search and claim summary pages (subtype of ActivityView).</p>
+    ]]></fulldescription>
+  <viewEntityName
+    name="AssignedQueueName"
+    path="AssignedQueue"/>
+  <viewEntityName
+    name="ExternalOwnerCCName"
+    path="ExternalOwnerCC.Contact"/>
+  <viewEntityName
+    name="AssignedUserName"
+    path="AssignedUser"/>
+</viewEntity>

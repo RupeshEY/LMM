@@ -1,0 +1,30 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <InputSet
+    id="NewClaimIncidentInputSet"
+    mode="Dwelling">
+    <Require
+      name="Exposure"
+      type="Exposure"/>
+    <RangeInput
+      editable="true"
+      hideChildrenIfReadOnly="false"
+      id="Dwelling_Incident"
+      label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimDwelling.Exposure.DwellingIncident&quot;)"
+      required="true"
+      value="Exposure.DwellingIncident"
+      valueRange="Exposure.Claim.DwellingIncidentsOnly"
+      valueType="entity.DwellingIncident">
+      <MenuItem
+        action="NewDwellingIncidentPopup.push(Exposure.Claim)"
+        id="NewClaimDwellingDV_NewIncidentMenuItem"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimDwelling.Exposure.NewIncident&quot;)"/>
+      <MenuItem
+        action="EditDwellingIncidentPopup.push(Exposure.DwellingIncident, true)"
+        id="NewClaimDwellingDV_EditIncidentMenuItem"
+        label="DisplayKey.get(&quot;NVV.Exposure.SubView.NewClaimDwelling.Exposure.EditIncident&quot;)"/>
+    </RangeInput>
+  </InputSet>
+</PCF>

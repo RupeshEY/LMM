@@ -1,0 +1,76 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <!-- This file automatically generated from lv_financials.xml -->
+  <ListViewPanel
+    id="RecoverySearchResultsLV">
+    <Require
+      name="RecoverySearchViewList"
+      type="gw.api.database.IQueryBeanResult&lt;RecoverySearchView&gt;"/>
+    <Require
+      name="criteria"
+      type="RecoverySearchCriteria"/>
+    <RowIterator
+      editable="false"
+      elementName="RecoverySearchView"
+      value="RecoverySearchViewList"
+      valueType="gw.api.database.IQueryBeanResult&lt;entity.RecoverySearchView&gt;">
+      <Row>
+        <DateCell
+          footerLabel="criteria.ShowSumRowForLastSearch ? DisplayKey.get(&quot;LV.Financials.RecoverySearchResults.Total&quot;) : null"
+          id="CreateDate"
+          label="DisplayKey.get(&quot;LV.Financials.RecoverySearchResults.CreateDate&quot;)"
+          printWidth="0.15"
+          value="RecoverySearchView.CreateTime"/>
+        <TextCell
+          action="ClaimContactDetailPopup.push(RecoverySearchView.ClaimContact, RecoverySearchView.Claim)"
+          id="Payer"
+          label="DisplayKey.get(&quot;LV.Financials.RecoverySearchResults.Payer&quot;)"
+          printWidth="0.15"
+          value="RecoverySearchView.ClaimContactName"/>
+        <CurrencyCell
+          action="ClaimFinancialsTransactionsDetail.go(RecoverySearchView.Claim, RecoverySearchView.Recovery)"
+          align="right"
+          footerSumFormat="gw.api.util.CCCurrencyUtil.getCurrencyFormatExpressionForRender(criteria.CurrencyForLastSearch)"
+          footerSumValue="RecoverySearchView.Amount"
+          formatType="currency"
+          id="Amount"
+          label="DisplayKey.get(&quot;LV.Financials.RecoverySearchResults.Amount&quot;)"
+          printWidth="0.1"
+          sortBy="RecoverySearchView.Amount"
+          value="RecoverySearchView.CurrencyAmount"
+          valueType="gw.api.financials.IMoney"/>
+        <TextCell
+          action="pcf.Claim.go(RecoverySearchView.Claim)"
+          id="Claim"
+          label="DisplayKey.get(&quot;LV.Financials.RecoverySearchResults.Claim&quot;)"
+          printWidth="0.15"
+          value="RecoverySearchView.ClaimNumber"/>
+        <TypeKeyCell
+          id="Status"
+          label="DisplayKey.get(&quot;LV.Financials.RecoverySearchResults.Status&quot;)"
+          printWidth="0.15"
+          value="RecoverySearchView.Status"
+          valueType="typekey.TransactionStatus"/>
+        <TypeKeyCell
+          id="CostType"
+          label="DisplayKey.get(&quot;LV.Financials.RecoverySearchResults.CostType&quot;)"
+          printWidth="0"
+          value="RecoverySearchView.CostType"
+          valueType="typekey.CostType"/>
+        <TypeKeyCell
+          id="RecoveryCategory"
+          label="DisplayKey.get(&quot;LV.Financials.RecoverySearchResults.RecoveryCategory&quot;)"
+          printWidth="0.15"
+          value="RecoverySearchView.RecoveryCategory"
+          valueType="typekey.RecoveryCategory"/>
+        <TextCell
+          id="CreateUser"
+          label="DisplayKey.get(&quot;LV.Financials.RecoverySearchResults.CreateUser&quot;)"
+          printWidth="0.15"
+          value="RecoverySearchView.CreateUser"/>
+      </Row>
+    </RowIterator>
+  </ListViewPanel>
+</PCF>

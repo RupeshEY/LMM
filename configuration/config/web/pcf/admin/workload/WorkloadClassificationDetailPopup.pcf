@@ -1,0 +1,39 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <Page
+    beforeCommit="validate(classification); clean(classification)"
+    canEdit="gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value and perm.System.wwlcmanage"
+    canVisit="gw.api.system.CCConfigParameters.WeightedAssignmentEnabled.Value and perm.System.wwlcview"
+    id="WorkloadClassificationDetailPopup"
+    parent="WorkloadClassifications()"
+    showUpLink="true"
+    title="DisplayKey.get(&quot;Web.Admin.Workload.EditWeightedWorkloadAssignmentTitle&quot;, classification.Name, (typeof classification).TypeInfo.DisplayName)">
+    <LocationEntryPoint
+      signature="WorkloadClassificationDetailPopup(classification : entity.WorkloadClassification )"/>
+    <Variable
+      name="classification"
+      type="WorkloadClassification"/>
+    <ScreenRef
+      def="WorkloadClassificationDetailScreen(classification)"/>
+    <Code><![CDATA[function validate(cls : WorkloadClassification) {
+  if (not gw.api.database.Query.make(WorkloadClassification)
+          .compare("Priority", Equals, cls.Priority)
+          .compare("Subtype", Equals, cls.Subtype)
+          .compare("ID", NotEquals, cls.ID)
+          .select().Empty) {
+    throw new gw.api.util.DisplayableException(DisplayKey.get("Web.Admin.Workload.WorkloadClassification.NewClassification.AlreadyExistsException", cls.Subtype.DisplayName, cls.Priority))
+  }
+}
+
+function clean(cls : WorkloadClassification) {
+   // Clean out extraneous Condition Filters if "All" option is selected 
+  for (condition in cls.Conditions) {
+    if (condition.IncludeAll) {
+      condition.clearFilters()
+    }
+  }
+}]]></Code>
+  </Page>
+</PCF>

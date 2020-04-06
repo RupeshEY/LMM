@@ -1,0 +1,29 @@
+package rules.Validation.ClaimValidationRules_dir.CLV09000ISOValidation_dir.CLV091000WorkersComp_dir
+
+uses gw.api.locale.DisplayKey
+
+@gw.rules.RuleName("CLV091030 - Body Part")
+internal class CLV091030BodyPart {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return claim.ClaimInjuryIncident.BodyParts.length == 0
+or claim.ClaimInjuryIncident.FirstBodyPart.DetailedBodyPart == null
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+if (claim.ClaimInjuryIncident.BodyParts.length == 0) {
+  claim.rejectSubField(claim.ClaimInjuryIncident, "BodyParts", TC_ISO, 
+                       DisplayKey.get("Rules.Validation.Claim.ClaimMustHaveBodyPartWithDetailedValue"), null, null)
+} else {
+  claim.rejectSubField(claim.ClaimInjuryIncident.FirstBodyPart, "DetailedBodyPart", TC_ISO, 
+                       DisplayKey.get("Rules.Validation.Claim.ClaimBodyPartsListFirstRowMustHaveDetailedValue"), null, null)
+}
+/*end00rule*/
+
+  }
+}

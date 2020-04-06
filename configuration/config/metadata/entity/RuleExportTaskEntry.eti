@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<entity
+  xmlns="http://guidewire.com/datamodel"
+  entity="RuleExportTaskEntry"
+  extendable="false"
+  final="true"
+  loadable="false"
+  platform="true"
+  table="bizruleimtaskitem"
+  type="joinarray">
+  <foreignkey
+    desc="The exported rule version"
+    fkentity="RuleVersion"
+    name="RuleVersion"
+    nullok="false"/>
+  <foreignkey
+    fkentity="RuleExportTask"
+    name="Task"
+    nullok="false"/>
+</entity>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<xsd:schema xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+
+  <xsd:element name="ItemFieldMap">
+    <xsd:complexType>
+      <xsd:choice minOccurs="0" maxOccurs="unbounded">
+        <xsd:element ref="LVItemMap"/>
+        <xsd:element ref="NVVItemMap"/>
+      </xsd:choice>
+    </xsd:complexType>
+  </xsd:element>
+
+  <xsd:complexType name="ItemMap">
+    <xsd:attribute name="name" type="xsd:string" use="optional"/>
+    <xsd:attribute name="value" type="xsd:string" use="optional"/>
+    <xsd:attribute name="entity" type="xsd:string" use="required"/>
+    <xsd:attribute name="field" type="xsd:string" use="required"/>
+  </xsd:complexType>
+
+  <xsd:element name="LVItemMap" type="ItemMap"/>
+  <xsd:element name="NVVItemMap" type="ItemMap"/>
+
+</xsd:schema>

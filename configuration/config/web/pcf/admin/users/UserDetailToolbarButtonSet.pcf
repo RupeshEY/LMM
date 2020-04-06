@@ -1,0 +1,35 @@
+<?xml version="1.0"?>
+<PCF
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:noNamespaceSchemaLocation="../../../../../../pcf.xsd">
+  <ToolbarButtonSet
+    id="UserDetailToolbarButtonSet">
+    <Require
+      name="user"
+      type="User"/>
+    <Require
+      name="linkStatus"
+      type="gw.api.contact.ContactSystemLinkStatus"/>
+    <Require
+      name="allowEditInAddressBook"
+      type="boolean"/>
+    <Variable
+      initialValue="new gw.api.admin.UserContactHandle(user)"
+      name="contactHandle"
+      type="gw.api.admin.UserContactHandle"/>
+    <EditButtons/>
+    <ToolbarButton
+      action="gw.api.admin.AdminUtil.deleteUser(user); AdminWelcome.go();"
+      confirmMessage="DisplayKey.get(&quot;Web.Admin.UserDetail.DeleteConfirm&quot;)"
+      hideIfEditable="true"
+      id="UserDetailToolbarButtons_DeleteUserButton"
+      label="DisplayKey.get(&quot;Button.DeleteUser&quot;)"
+      visible=" user.SafeToDelete and perm.User.delete"/>
+    <ToolbarDivider/>
+    <ToolbarButtonSetRef
+      toolbarButtonSet="LinkContactToolbarButtonSet(contactHandle, linkStatus)"
+      visible="false"/>
+    <ToolbarButtonSetRef
+      toolbarButtonSet="ViewAddressBookToolbarButtonSet(contactHandle, linkStatus, allowEditInAddressBook)"/>
+  </ToolbarButtonSet>
+</PCF>

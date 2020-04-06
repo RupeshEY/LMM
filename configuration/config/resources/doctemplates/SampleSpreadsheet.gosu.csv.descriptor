@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DocumentTemplateDescriptor
+    id="SampleSpreadsheet.gosu.csv"
+    name="Gosu CSV Sample"
+    description="A sample csv template"
+    type="statement"
+    lob="GLLine, PersonalAutoLine, BusinessAutoLine"
+    state="ca, mi"
+    mime-type="application/csv"
+    date-effective="2003-04-03"
+    date-expires="2009-04-03"
+    keywords="sample">
+
+  <ContextObject name="To" type="Contact">
+    <DefaultObjectValue>Claim.maincontact</DefaultObjectValue>
+    <PossibleObjectValues>Claim.getRelatedContacts()</PossibleObjectValues>
+  </ContextObject>
+  <ContextObject name="From" type="Contact">
+    <DefaultObjectValue>Claim.AssignedUser.Contact</DefaultObjectValue>
+    <PossibleObjectValues>Claim.getRelatedUserContacts()</PossibleObjectValues>
+  </ContextObject>
+  <ContextObject name="CC" type="Contact">
+    <DefaultObjectValue>Claim.reporter</DefaultObjectValue>
+    <PossibleObjectValues>Claim.getRelatedContacts()</PossibleObjectValues>
+  </ContextObject>
+
+  <FormFieldGroup name="main">
+    <FormField name="ClaimNumber">Claim.ClaimNumber</FormField>
+    <FormField name="InsuredName">To.DisplayName</FormField>
+    <FormField name="InsuredAddress1">To.PrimaryAddress.AddressLine1</FormField>
+  </FormFieldGroup>  
+
+</DocumentTemplateDescriptor>

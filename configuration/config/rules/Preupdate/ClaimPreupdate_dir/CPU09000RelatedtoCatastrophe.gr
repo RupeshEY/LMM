@@ -1,0 +1,36 @@
+package rules.Preupdate.ClaimPreupdate_dir
+
+uses gw.api.upgrade.Coercions
+
+@gw.rules.RuleDisabled
+@gw.rules.RuleName("CPU09000 - Related to Catastrophe")
+internal class CPU09000RelatedtoCatastrophe {
+  static function doCondition(claim : entity.Claim) : boolean {
+    
+/*start00rule*/
+return (claim.Catastrophe == null) and
+// If Cat is null AND a key field has changed AND the activity doesn't already exist                          
+((claim.getOriginalValue("Catastrophe") != null) or
+ (claim.LossCause != claim.getOriginalValue("LossCause")) or 
+ (claim.LossType != claim.getOriginalValue("LossType")) or
+ (claim.LossDate != Coercions.makeDateFrom(claim.getOriginalValue("LossDate"))) or 
+ (claim.LossLocation != null ? (claim.LossLocation.Changed) : false))
+and not (claim.Activities).toList().hasMatch(\ act -> (act.ActivityPattern == 
+                          ActivityPattern.finder.getActivityPatternByCode("catastrophe_review")))
+
+
+/*end00rule*/
+
+  }
+
+  static function doAction(claim : entity.Claim, actions : gw.rules.Action) {
+
+/*start00rule*/
+var numMatches = claim.getCatastropheMatchesByZone().length
+if (numMatches > 0) { 
+  claim.createActivityFromPattern(null, ActivityPattern.finder.getActivityPatternByCode("catastrophe_review"))
+}
+/*end00rule*/
+
+  }
+}
